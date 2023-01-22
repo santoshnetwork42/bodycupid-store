@@ -47,7 +47,7 @@ function HomePage() {
             </Helmet>
 
 
-            <h1 className="d-none">Wow Life Science - Home</h1>
+            <h1 className="d-none">Wow Life Science - Homepage</h1>
 
             <div className="page-content">
                 <div className="intro-section">
