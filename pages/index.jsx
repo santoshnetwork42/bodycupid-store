@@ -43,11 +43,11 @@ function HomePage() {
     return (
         <div className="main home">
             <Helmet>
-                <title>Wow React eCommerce Template - Home</title>
+                <title>Wow Life Science - Home</title>
             </Helmet>
 
 
-            <h1 className="d-none">Wow React eCommerce Template - Home</h1>
+            <h1 className="d-none">Wow Life Science - Home</h1>
 
             <div className="page-content">
                 <div className="intro-section">
