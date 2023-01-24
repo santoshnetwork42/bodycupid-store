@@ -3,8 +3,6 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import Modal from 'react-modal';
 
 import ALink from '~/components/features/custom-link';
-import "@aws-amplify/ui-react/styles.css";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 
 const customStyles = {
     overlay: {
@@ -17,7 +15,7 @@ let index = 0;
 
 Modal.setAppElement( "#__next" );
 
-function LoginModal({ signOut, user }) {
+function LoginModal() {
     const [ open, setOpen ] = useState( false );
 
     function closeModal() {
@@ -55,14 +53,77 @@ function LoginModal({ signOut, user }) {
                         id="login-modal"
                     >
                         <div className="form-box">
+                            <div className="tab tab-nav-simple tab-nav-boxed form-tab">
+                                <Tabs selectedTabClassName="active" selectedTabPanelClassName="active" defaultIndex={ index }>
+                                    <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5">
+                                        <Tab className="nav-item">
+                                            <span className="nav-link border-no lh-1 ls-normal">Sign in</span>
+                                        </Tab>
+                                        <li className="delimiter">or</li>
+                                        <Tab className="nav-item">
+                                            <span className="nav-link border-no lh-1 ls-normal">Register</span>
+                                        </Tab>
+                                    </TabList>
 
-                        <div style={{ padding: 50 }}>
-                            <h1>Logged in as {user.username}.</h1>
-                            <div>
-                            <button onClick={signOut}>Sign out</button>
+                                    <div className="tab-content">
+                                        <TabPanel className="tab-pane">
+                                            <form action="#">
+                                                <div className="form-group mb-3">
+                                                    <input type="text" className="form-control" id="singin-email" name="singin-email" placeholder="Username or Email Address *" required />
+                                                </div>
+                                                <div className="form-group">
+                                                    <input type="password" className="form-control" id="singin-password" placeholder="Password *" name="singin-password" required />
+                                                </div>
+                                                <div className="form-footer">
+                                                    <div className="form-checkbox">
+                                                        <input type="checkbox" className="custom-checkbox" id="signin-remember" name="signin-remember" />
+                                                        <label className="form-control-label" htmlFor="signin-remember">Remember me</label>
+                                                    </div>
+                                                    <ALink href="#" className="lost-link">Lost your password?</ALink>
+                                                </div>
+                                                <button className="btn btn-dark btn-block btn-rounded" type="submit">Login</button>
+                                            </form>
+                                            <div className="form-choice text-center">
+                                                <label className="ls-m">or Login With</label>
+                                                <div className="social-links">
+                                                    <ALink href="#" className="social-link social-google fab fa-google border-no"></ALink>
+                                                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f border-no"></ALink>
+                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter border-no"></ALink>
+                                                </div>
+                                            </div>
+                                        </TabPanel>
+
+                                        <TabPanel className="tab-pane">
+                                            <form action="#">
+                                                <div className="form-group">
+                                                    <label htmlFor="singin-email">Your email address:</label>
+                                                    <input type="email" className="form-control" id="register-email" name="register-email" placeholder="Your Email address *" required />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="singin-password">Password:</label>
+                                                    <input type="password" className="form-control" id="register-password" name="register-password" placeholder="Password *" required />
+                                                </div>
+                                                <div className="form-footer">
+                                                    <div className="form-checkbox">
+                                                        <input type="checkbox" className="custom-checkbox" id="register-agree" name="register-agree"
+                                                            required />
+                                                        <label className="form-control-label" htmlFor="register-agree">I agree to the privacy policy</label>
+                                                    </div>
+                                                </div>
+                                                <button className="btn btn-dark btn-block btn-rounded" type="submit">Register</button>
+                                            </form>
+                                            <div className="form-choice text-center">
+                                                <label className="ls-m">or Register With</label>
+                                                <div className="social-links">
+                                                    <ALink href="#" className="social-link social-google fab fa-google border-no"></ALink>
+                                                    <ALink href="#" className="social-link social-facebook fab fa-facebook-f border-no"></ALink>
+                                                    <ALink href="#" className="social-link social-twitter fab fa-twitter border-no"></ALink>
+                                                </div>
+                                            </div>
+                                        </TabPanel>
+                                    </div>
+                                </Tabs>
                             </div>
-                        </div>
-
                         </div>
 
                         <button title="Close (Esc)" type="button" className="mfp-close" onClick={ closeModal }><span>×</span></button>
@@ -72,4 +133,4 @@ function LoginModal({ signOut, user }) {
     )
 }
 
-export default withAuthenticator(LoginModal);
+export default ( LoginModal );
