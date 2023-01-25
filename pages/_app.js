@@ -9,8 +9,14 @@ import Layout from '~/components/layout';
 import { demoActions } from '~/store/demo';
 
 import { currentDemo } from '~/server/queries';
+import { Amplify } from "aws-amplify";
+import awsExports from "~/aws-exports";
+
 
 import "~/public/sass/style.scss";
+
+Amplify.configure({ ...awsExports, ssr: true });
+
 
 const App = ({ Component, pageProps }) => {
     const store = useStore();
