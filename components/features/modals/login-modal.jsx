@@ -52,6 +52,7 @@ function LoginModal() {
                 }
             });
             console.log(user);
+            setOpen(false);
         } catch (error) {
             console.log('error signing up:', error);
         }
