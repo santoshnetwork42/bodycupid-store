@@ -22,7 +22,7 @@ Modal.setAppElement( "#__next" );
 function LoginModal() {
     const [ open, setOpen ] = useState( false );
 
-    const [register, setRegister] = useState({username:"", given_name:"", password:"", middle_name:"", email:"", phone_number:"",});
+    const [register, setRegister] = useState({given_name:"", password:"", middle_name:"", email:"", phone_number:"",});
 
 
     const registerHandleSubmit = (e) =>{
@@ -43,7 +43,7 @@ function LoginModal() {
                     // email,          // optional
                     // phone_number,   // optional - E.164 number convention
                     // other custom attributes 
-                    name: register.username,
+                    name: register.phone_number,
                     given_name: register. given_name,
                     middle_name: register.middle_name,
                 },
@@ -137,15 +137,11 @@ function LoginModal() {
                                         <TabPanel className="tab-pane">
                                             <form action="#">
                                                 <div className="form-group">
-                                                    <label htmlFor="singin-name">Your User Name:</label>
-                                                    <input type="text" className="form-control" id="register-name" name="register-name" placeholder="Your Name *" value={register.username} onChange={(e)=>setRegister({...register, username: e.target.value})} required />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="singin-gname">Your Given Name:</label>
+                                                    <label htmlFor="singin-gname">Your First Name:</label>
                                                     <input type="text" className="form-control" id="register-gname" name="register-gname" placeholder="Your Given Name *" value={register.given_name} onChange={(e)=>setRegister({...register, given_name: e.target.value})} required />
                                                 </div>
                                                 <div className="form-group">
-                                                    <label htmlFor="singin-mname">Your Middle Name:</label>
+                                                    <label htmlFor="singin-mname">Your Last Name:</label>
                                                     <input type="text" className="form-control" id="register-mname" name="register-mname" placeholder="Your Middle Name *" value={register.middle_name} onChange={(e)=>setRegister({...register, middle_name: e.target.value})} required />
                                                 </div>
                                                 <div className="form-group">
