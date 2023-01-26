@@ -18,7 +18,7 @@ import awsconfig from "~/aws-exports";
 
 import "~/public/sass/style.scss";
 
-Amplify.configure({ ...awsconfig, ssr: false })
+Amplify.configure({ ...awsconfig, ssr: true })
 
 const App = ({ Component, pageProps }) => {
     const store = useStore();
