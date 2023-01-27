@@ -44,7 +44,7 @@ function ProductEight(props) {
     return (
         <div className={`product product-list ${adClass} ${product.variants && product.variants.length > 0 ? 'product-variable' : ''}`}>
             <figure className="product-media">
-                <ALink href={`/product/default/${product.slug}`}>
+                <ALink href={`/product/default/${product.id}`}>
                     <LazyLoadImage
                         alt="product"
                         src={product.large_pictures[0].url}
@@ -130,7 +130,7 @@ function ProductEight(props) {
                 <div className="product-action">
                     {
                         product.variants && product.variants.length > 0 ?
-                            <ALink href={`/product/default/${product.slug}`} className="btn-product btn-cart" title="Go to product">
+                            <ALink href={`/product/default/${product.id}`} className="btn-product btn-cart" title="Go to product">
                                 <span>Select Options</span>
                             </ALink> :
                             <a href="#" className="btn-product btn-cart" title="Add to cart" onClick={addToCartHandler}>

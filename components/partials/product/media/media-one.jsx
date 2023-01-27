@@ -16,7 +16,8 @@ export default function MediaOne(props) {
     const [isOpen, setOpenState] = useState(false);
     const [mediaRef, setMediaRef] = useState(null);
 
-    let lgImages = product.large_pictures;
+    // let lgImages = product.large_pictures;
+    let lgImages = product.images.items
 
     useEffect(() => {
         setIndex(0);
@@ -90,12 +91,12 @@ export default function MediaOne(props) {
                     events={events}
                 >
                     {
-                        lgImages.map((image, index) =>
-                            <div key={image + '-' + index}>
+                        lgImages.map((image) =>
+                            <div key={image.id}>
                                 <Magnifier
-                                    imageSrc={image.url}
+                                    imageSrc={image.src}
                                     imageAlt="magnifier"
-                                    largeImageSrc={image.url}
+                                    largeImageSrc={image.src}
                                     dragToMove={false}
                                     mouseActivation="hover"
                                     cursorStyleActive="crosshair"

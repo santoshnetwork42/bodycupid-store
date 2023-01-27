@@ -16,10 +16,10 @@ function ProductTwo(props) {
 
     // decide if the product is wishlisted
     let isWishlisted;
-    isWishlisted = wishlist.findIndex(item => item.slug === product.slug) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex(item => item.id === product.id) > -1 ? true : false;
 
     const showQuickviewHandler = () => {
-        openQuickview(product.slug);
+        openQuickview(product.id);
     }
 
     const wishlistHandler = (e) => {
@@ -44,7 +44,7 @@ function ProductTwo(props) {
     return (
         <div className={`product text-left ${adClass}`}>
             <figure className="product-media">
-                <ALink href={`/product/default/${product.slug}`}>
+                <ALink href={`/product/default/${product.id}`}>
                     <LazyLoadImage
                         alt="product"
                         // ! critical we should add this.
