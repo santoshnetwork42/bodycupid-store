@@ -56,10 +56,10 @@ function ProductDefault() {
   return (
     <main className="main mt-6 single-product">
       <Helmet>
-        <title>Wow React eCommerce Template | Product Default</title>
+        <title>{product?.title}</title>
       </Helmet>
 
-      <h1 className="d-none">Wow React eCommerce Template - Product Default</h1>
+      <h1 className="d-none">{product?.title}</h1>
 
       {!!product && (
         <div className={`page-content mb-10 pb-6`}>

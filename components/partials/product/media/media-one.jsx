@@ -65,6 +65,13 @@ export default function MediaOne(props) {
     },
   };
 
+  const discount = !!(product.listingPrice && product.price)
+    ? parseInt(
+        ((product.listingPrice - product.price) * 100) / product.listingPrice,
+        10
+      )
+    : 0;
+
   return (
     <>
       <div
@@ -78,19 +85,19 @@ export default function MediaOne(props) {
             ""
           )}
 
-          {product.is_top ? (
+          {product.isFeatured ? (
             <label className="product-label label-top">top</label>
           ) : (
             ""
           )}
 
-          {product.is_new ? (
+          {product.isFeatured ? (
             <label className="product-label label-new">new</label>
           ) : (
             ""
           )}
 
-          {product.discount ? (
+          {!!discount ? (
             <label className="product-label label-sale">sale</label>
           ) : (
             ""
