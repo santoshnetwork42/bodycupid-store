@@ -1,118 +1,147 @@
-import { useState, useEffect } from 'react';
-import { Magnifier } from 'react-image-magnifiers';
+import { useState, useEffect } from "react";
+import { Magnifier } from "react-image-magnifiers";
 
-import ALink from '~/components/features/custom-link';
-import OwlCarousel from '~/components/features/owl-carousel';
+import ALink from "~/components/features/custom-link";
+import OwlCarousel from "~/components/features/owl-carousel";
 
-import ThumbOne from '~/components/partials/product/thumb/thumb-one';
-import ThumbTwo from '~/components/partials/product/thumb/thumb-two';
-import MediaLightBox from '~/components/partials/product/light-box';
+import ThumbOne from "~/components/partials/product/thumb/thumb-one";
+import ThumbTwo from "~/components/partials/product/thumb/thumb-two";
+import MediaLightBox from "~/components/partials/product/light-box";
 
-import { mainSlider3 } from '~/utils/data/carousel';
+import { mainSlider3 } from "~/utils/data/carousel";
 
 export default function MediaOne(props) {
-    const { product } = props;
-    const [index, setIndex] = useState(0);
-    const [isOpen, setOpenState] = useState(false);
-    const [mediaRef, setMediaRef] = useState(null);
+  const { product } = props;
+  const [index, setIndex] = useState(0);
+  const [isOpen, setOpenState] = useState(false);
+  const [mediaRef, setMediaRef] = useState(null);
 
-    // let lgImages = product.large_pictures;
-    let lgImages = product.images.items
+  // let lgImages = product.large_pictures;
+  let lgImages = product.images.items;
 
-    useEffect(() => {
-        setIndex(0);
-    }, [window.location.pathname])
+  useEffect(() => {
+    setIndex(0);
+  }, [window.location.pathname]);
 
-    useEffect(() => {
-        if (mediaRef !== null && mediaRef.current !== null && index >= 0) {
-            mediaRef.current.$car.to(index, 300, true);
-        }
-    }, [index])
-
-    const setIndexHandler = (mediaIndex) => {
-        if (mediaIndex !== index) {
-            setIndex(mediaIndex);
-        }
+  useEffect(() => {
+    if (mediaRef !== null && mediaRef.current !== null && index >= 0) {
+      mediaRef.current.$car.to(index, 300, true);
     }
+  }, [index]);
 
-    const changeRefHandler = (carRef) => {
-        if (carRef.current !== undefined) {
-            setMediaRef(carRef);
-        }
+  const setIndexHandler = (mediaIndex) => {
+    if (mediaIndex !== index) {
+      setIndex(mediaIndex);
     }
+  };
 
-    const changeOpenState = openState => {
-        setOpenState(openState);
+  const changeRefHandler = (carRef) => {
+    if (carRef.current !== undefined) {
+      setMediaRef(carRef);
     }
+  };
 
-    const openLightBox = () => {
-        setOpenState(true);
-    }
+  const changeOpenState = (openState) => {
+    setOpenState(openState);
+  };
 
-    let events = {
-        onTranslate: function (e) {
-            if (!e.target) return;
-            if (document.querySelector('.product-thumbs')) {
-                document.querySelector('.product-thumbs').querySelector('.product-thumb.active').classList.remove('active');
-                document.querySelector('.product-thumbs').querySelectorAll('.product-thumb')[e.item.index].classList.add('active');
-            }
-        }
-    }
+  const openLightBox = () => {
+    setOpenState(true);
+  };
 
-    return (
-        <>
-            <div className="product-gallery pg-vertical media-default" style={{ top: "88px" }}>
-                <div className="product-label-group">
-                    {
-                        product.stock === 0 ?
-                            <label className="product-label label-out">out</label> : ""
-                    }
+  let events = {
+    onTranslate: function (e) {
+      if (!e.target) return;
+      if (document.querySelector(".product-thumbs")) {
+        document
+          .querySelector(".product-thumbs")
+          .querySelector(".product-thumb.active")
+          .classList.remove("active");
+        document
+          .querySelector(".product-thumbs")
+          .querySelectorAll(".product-thumb")
+          [e.item.index].classList.add("active");
+      }
+    },
+  };
 
-                    {
-                        product.is_top ?
-                            <label className="product-label label-top">top</label> : ""
-                    }
+  return (
+    <>
+      <div
+        className="product-gallery pg-vertical media-default"
+        style={{ top: "88px" }}
+      >
+        <div className="product-label-group">
+          {product.stock === 0 ? (
+            <label className="product-label label-out">out</label>
+          ) : (
+            ""
+          )}
 
-                    {
-                        product.is_new ?
-                            <label className="product-label label-new">new</label> : ""
-                    }
+          {product.is_top ? (
+            <label className="product-label label-top">top</label>
+          ) : (
+            ""
+          )}
 
-                    {
-                        product.discount ?
-                            <label className="product-label label-sale">sale</label> : ""
-                    }
-                </div>
+          {product.is_new ? (
+            <label className="product-label label-new">new</label>
+          ) : (
+            ""
+          )}
 
-                <OwlCarousel adClass="product-single-carousel owl-theme owl-nav-inner"
-                    options={mainSlider3}
-                    onChangeIndex={setIndexHandler}
-                    onChangeRef={changeRefHandler}
-                    events={events}
-                >
-                    {
-                        lgImages.map((image) =>
-                            <div key={image.id}>
-                                <Magnifier
-                                    imageSrc={image.src}
-                                    imageAlt="magnifier"
-                                    largeImageSrc={image.src}
-                                    dragToMove={false}
-                                    mouseActivation="hover"
-                                    cursorStyleActive="crosshair"
-                                    className="product-image large-image"
-                                />
-                            </div>
-                        )}
-                </OwlCarousel>
+          {product.discount ? (
+            <label className="product-label label-sale">sale</label>
+          ) : (
+            ""
+          )}
+        </div>
 
-                <ALink href="#" className="product-image-full" onClick={openLightBox}><i className="d-icon-zoom"></i></ALink>
-
-                <ThumbOne product={product} index={index} onChangeIndex={setIndexHandler} />
-                <ThumbTwo product={product} index={index} onChangeIndex={setIndexHandler} />
+        <OwlCarousel
+          adClass="product-single-carousel owl-theme owl-nav-inner"
+          options={mainSlider3}
+          onChangeIndex={setIndexHandler}
+          onChangeRef={changeRefHandler}
+          events={events}
+        >
+          {lgImages.map((image) => (
+            <div key={image.id}>
+              <Magnifier
+                imageSrc={image.src}
+                imageAlt="magnifier"
+                largeImageSrc={image.src}
+                dragToMove={false}
+                mouseActivation="hover"
+                cursorStyleActive="crosshair"
+                className="product-image large-image"
+              />
             </div>
+          ))}
+        </OwlCarousel>
 
-            <MediaLightBox images={lgImages} isOpen={isOpen} changeOpenState={changeOpenState} index={index} product={product} />
-        </>
-    )
+        <ALink href="#" className="product-image-full" onClick={openLightBox}>
+          <i className="d-icon-zoom"></i>
+        </ALink>
+
+        <ThumbOne
+          product={product}
+          index={index}
+          onChangeIndex={setIndexHandler}
+        />
+        <ThumbTwo
+          product={product}
+          index={index}
+          onChangeIndex={setIndexHandler}
+        />
+      </div>
+
+      <MediaLightBox
+        images={lgImages}
+        isOpen={isOpen}
+        changeOpenState={changeOpenState}
+        index={index}
+        product={product}
+      />
+    </>
+  );
 }
