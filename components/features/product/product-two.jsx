@@ -50,6 +50,13 @@ function ProductTwo(props) {
     addToCart({ ...product, qty: 1, price: product.price });
   };
 
+  const discount = !!(product.listingPrice && product.price)
+    ? parseInt(
+        ((product.listingPrice - product.price) * 100) / product.listingPrice,
+        10
+      )
+    : 0;
+
   return (
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
@@ -81,20 +88,20 @@ function ProductTwo(props) {
         </ALink>
 
         <div className="product-label-group">
-          {product.is_new ? (
+          {product.isFeatured ? (
             <label className="product-label label-new">New</label>
           ) : (
             ""
           )}
-          {product.is_top ? (
+          {product.isFeatured ? (
             <label className="product-label label-top">Top</label>
           ) : (
             ""
           )}
-          {product.discount > 0 ? (
-            product.variants && product.variants.length === 0 ? (
+          {discount > 0 ? (
+            product.variants?.items?.length === 0 ? (
               <label className="product-label label-sale">
-                {product.discount}% OFF
+                {discount}% OFF
               </label>
             ) : (
               <label className="product-label label-sale">Sale</label>
@@ -105,7 +112,7 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action-vertical">
-          {product.variants && product.variants.length > 0 ? (
+          {product.variants?.items?.length > 0 ? (
             <ALink
               href={`/product/default/${product.id}`}
               className="btn-product-icon btn-cart"
@@ -187,7 +194,7 @@ function ProductTwo(props) {
                             : <ins className="new-price">${toDecimal(product.price[0])}</ins>
                     } */}
           {/* <ins className="new-price">${toDecimal(product.price)}</ins> */}
-          <ins className="new-price">${toDecimal(40)}</ins>
+          <ins className="new-price">${toDecimal(product.price || 0)}</ins>
         </div>
 
         <div className="ratings-container">
@@ -195,8 +202,13 @@ function ProductTwo(props) {
             {/* // TODO  we have to consider about this */}
             {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
                         <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
-            <span className="ratings" style={{ width: 20 * 3.4 + "%" }}></span>
-            <span className="tooltiptext tooltip-top">{toDecimal(3.4)}</span>
+            <span
+              className="ratings"
+              style={{ width: 20 * product.rating + "%" }}
+            ></span>
+            <span className="tooltiptext tooltip-top">
+              {toDecimal(product.rating)}
+            </span>
           </div>
 
           {/* <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
@@ -204,7 +216,7 @@ function ProductTwo(props) {
             href={`/product/default/${product.id}`}
             className="rating-reviews"
           >
-            ( {3000} reviews )
+            ( {product.reviews?.items?.length} reviews )
           </ALink>
         </div>
       </div>
