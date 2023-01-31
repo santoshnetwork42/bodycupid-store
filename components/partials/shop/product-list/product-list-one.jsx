@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/react-hooks';
+// import { useLazyQuery } from '@apollo/react-hooks';
 
 import ToolBox from '~/components/partials/shop/toolbox';
 import ProductTwo from '~/components/features/product/product-two';
 import ProductEight from '~/components/features/product/product-eight';
 import Pagination from '~/components/features/pagination';
 
-import withApollo from '~/server/apollo';
-import { GET_PRODUCTS } from '~/server/queries';
+// import withApollo from '~/server/apollo';
+// import { GET_PRODUCTS } from '~/server/queries';
 
-import Api, { baseUrl } from '~/api';
+// import Api, { baseUrl } from '~/api';
+
+import { API, graphqlOperation } from "aws-amplify";
+import { listProducts } from '~/graphql/queries';
 
 function ProductListOne(props) {
     const [products, setProducts] = useState(null);
@@ -33,18 +36,34 @@ function ProductListOne(props) {
     const page = query.page ? query.page : 1;
     const gridType = query.type ? query.type : 'grid';
 
+
+
     useEffect(() => {
-        Api.get(`${baseUrl}/api/category/products`, {
-            params: {
-                category: query.category
-            }
-        })
-            .then(response => {
-                let data = response.data;
-                setProducts(data.products);
-                setTotalPage(parseInt(data.products.total / perPage) + (data.products.total % perPage ? 1 : 0));
-                setLoading(false);
+        // Api.get(`${baseUrl}/api/category/products`, {
+        //     params: {
+        //         category: query.category
+        //     }
+        // })
+        //     .then(response => {
+        //         let data = response.data;
+        //         setProducts(data.products);
+        //         setTotalPage(parseInt(data.products.total / perPage) + (data.products.total % perPage ? 1 : 0));
+        //         setLoading(false);
+        //     })
+
+            API.graphql(graphqlOperation(listProducts)).then(
+                response =>{
+                    let data = response.data;
+                    console.log(data.listProducts);
+                    setProducts(data.listProducts.items);
+                    // setTotalPage(parseInt(data.listProducts.items.total / perPage) + (data.listProducts.items.total % perPage ? 1 : 0));
+                    setLoading(false);
+                }
+            )
+            .catch(err => {
+                console.log(err);
             })
+            
     }, [query])
 
     return (
@@ -75,7 +94,7 @@ function ProductListOne(props) {
                 gridType === 'grid' ?
                     <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
                         {products && products.map(item =>
-                            <div className="product-wrap" key={'shop-' + item.slug}>
+                            <div className="product-wrap" key={'shop-' + item.id}>
                                 <ProductTwo product={item} adClass="" />
                             </div>
                         )}
@@ -83,7 +102,7 @@ function ProductListOne(props) {
                     :
                     <div className="product-lists product-wrapper">
                         {products && products.map(item =>
-                            <ProductEight product={item} key={'shop-list-' + item.slug} />
+                            <ProductEight product={item} key={'shop-list-' + item.id} />
                         )}
                     </div>
             }
@@ -107,4 +126,4 @@ function ProductListOne(props) {
     )
 }
 
-export default withApollo({ ssr: typeof window === 'undefined' })(ProductListOne);
+export default ProductListOne;

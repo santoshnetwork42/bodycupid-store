@@ -1,10 +1,12 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
 import ALink from '~/components/features/custom-link';
 
-function Account() {
+function Account({user, signOut}) {
     return (
         <main className="main account">
             <Helmet>
@@ -44,13 +46,13 @@ function Account() {
                                 <a className="nav-link">Account details</a>
                             </Tab>
                             <Tab className="nav-item">
-                                <ALink className="nav-link" href="/">Logout</ALink>
+                                <ALink className="nav-link" href="/" onClick={signOut}>Logout</ALink>
                             </Tab>
                         </TabList>
                         <div className="tab-content col-lg-9 col-md-8">
                             <TabPanel className="tab-pane dashboard">
                                 <p className="mb-0">
-                                    Hello <span>User</span> (not <span>User</span>? <ALink href="/" className="text-primary">Log out</ALink>)
+                                    Hello <span>{user.username}</span> (not <span>User</span>? <ALink href="/" className="text-primary" onClick={()=>{signOut}}>Log out</ALink>)
                                 </p>
                                 <p className="mb-8">
                                     From your account dashboard you can view your <ALink href="#" className="link-to-tab text-primary">recent orders</ALink>, manage your shipping and billing
@@ -192,4 +194,4 @@ function Account() {
 
 }
 
-export default React.memo(Account);
+export default withAuthenticator(React.memo(Account));

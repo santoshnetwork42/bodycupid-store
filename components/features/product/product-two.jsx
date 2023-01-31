@@ -16,10 +16,10 @@ function ProductTwo(props) {
 
     // decide if the product is wishlisted
     let isWishlisted;
-    isWishlisted = wishlist.findIndex(item => item.slug === product.slug) > -1 ? true : false;
+    isWishlisted = wishlist.findIndex(item => item.id === product.id) > -1 ? true : false;
 
     const showQuickviewHandler = () => {
-        openQuickview(product.slug);
+        openQuickview(product.id);
     }
 
     const wishlistHandler = (e) => {
@@ -44,17 +44,19 @@ function ProductTwo(props) {
     return (
         <div className={`product text-left ${adClass}`}>
             <figure className="product-media">
-                <ALink href={`/product/default/${product.slug}`}>
+                <ALink href={`/product/default/${product.id}`}>
                     <LazyLoadImage
                         alt="product"
-                        src={product.large_pictures[0].url}
+                        // ! critical we should add this.
+                        // src={product.large_pictures[0].url}
                         threshold={500}
                         effect="opacity"
                         width="1024"
                         height="1024"
                     />
+                        {/* // ! critical we should add this. */}
 
-                    {
+                    {/* {
                         product.large_pictures.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
@@ -66,7 +68,7 @@ function ProductTwo(props) {
                                 wrapperClassName="product-image-hover"
                             />
                             : ""
-                    }
+                    } */}
                 </ALink>
 
                 <div className="product-label-group">
@@ -84,7 +86,7 @@ function ProductTwo(props) {
                 <div className="product-action-vertical">
                     {
                         product.variants && product.variants.length > 0 ?
-                            <ALink href={`/product/default/${product.slug}`} className="btn-product-icon btn-cart" title="Go to product">
+                            <ALink href={`/product/default/${product.id}`} className="btn-product-icon btn-cart" title="Go to product">
                                 <i className="d-icon-arrow-right"></i>
                             </ALink> :
                             <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={addToCartHandler}>
@@ -120,7 +122,7 @@ function ProductTwo(props) {
                 }
 
                 <h3 className="product-name">
-                    <ALink href={`/product/default/${product.slug}`}>{product.name}</ALink>
+                    <ALink href={`/product/default/${product.id}`}>{product.title}</ALink>
                 </h3>
 
                 <div className="product-price">
@@ -135,16 +137,23 @@ function ProductTwo(props) {
                                 < del className="new-price">${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}</del>
                             : <ins className="new-price">${toDecimal(product.price[0])}</ins>
                     } */}
-                    <ins className="new-price">${toDecimal(product.price)}</ins>
+                    {/* <ins className="new-price">${toDecimal(product.price)}</ins> */}
+                    <ins className="new-price">${toDecimal(40)}</ins>
+
                 </div>
 
                 <div className="ratings-container">
                     <div className="ratings-full">
-                        <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
-                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span>
+                        {/* // TODO  we have to consider about this */}
+                        {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
+                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
+                        <span className="ratings" style={{ width: 20 * 3.4 + '%' }}></span>
+                        <span className="tooltiptext tooltip-top">{toDecimal(3.4)}</span>
                     </div>
 
-                    <ALink href={`/product/default/${product.slug}`} className="rating-reviews">( {product.reviews} reviews )</ALink>
+                    {/* <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
+                    <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {3000} reviews )</ALink>
+
                 </div>
             </div>
         </div>

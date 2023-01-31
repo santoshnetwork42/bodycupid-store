@@ -64,7 +64,8 @@ function DescOne(props) {
                         </Tab> : ''
                 }
                 <Tab className="nav-item">
-                    <span className="nav-link">Reviews ({product.reviews})</span>
+                    {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
+                    <span className="nav-link">Reviews ({3000})</span>
                 </Tab>
             </TabList>
 

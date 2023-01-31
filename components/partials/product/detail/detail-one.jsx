@@ -23,7 +23,7 @@ function DetailOne(props) {
     const [curIndex, setCurIndex] = useState(-1);
     const [cartActive, setCartActive] = useState(false);
     const [quantity, setQauntity] = useState(1);
-    let product = data && data.product;
+    let product = data && data.getProduct;
 
     // decide if the product is wishlisted
     let isWishlisted, colors = [], sizes = [];
@@ -97,7 +97,7 @@ function DetailOne(props) {
     const addToCartHandler = () => {
         if (product.stock > 0 && cartActive) {
             if (product.variants && product.variants.length > 0) {
-                let tmpName = product.name, tmpPrice;
+                let tmpName = product.title, tmpPrice;
                 tmpName += curColor !== 'null' ? '-' + curColor : '';
                 tmpName += curSize !== 'null' ? '-' + curSize : '';
 
@@ -155,10 +155,10 @@ function DetailOne(props) {
                     </div> : ''
             }
 
-            <h2 className="product-name">{product.name}</h2>
+            <h2 className="product-name">{product.title}</h2>
 
             <div className='product-meta'>
-                SKU: <span className='product-sku'>{product.sku}</span>
+                {/* SKU: <span className='product-sku'>{product.sku}</span>
                 CATEGORIES: <span className='product-brand'>
                     {
                         product.product_categories.map((item, index) =>
@@ -169,7 +169,7 @@ function DetailOne(props) {
                                 {index < product.product_categories.length - 1 ? ', ' : ''}
                             </React.Fragment>
                         )}
-                </span>
+                </span> */}
             </div>
 
             <div className="product-price mb-2">
@@ -194,11 +194,15 @@ function DetailOne(props) {
 
             <div className="ratings-container">
                 <div className="ratings-full">
-                    <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
-                    <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span>
+                    {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
+                    <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
+                    <span className="ratings" style={{ width: 20 * 4.5 + '%' }}></span>
+                    <span className="tooltiptext tooltip-top">{toDecimal(4.5)}</span>
                 </div>
 
-                <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink>
+                {/* <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink> */}
+                <ALink href="#" className="rating-reviews">( {3000} reviews )</ALink>
+
             </div>
 
             <p className="product-short-desc">{product.short_description}</p>
@@ -284,13 +288,13 @@ function DetailOne(props) {
                         <div className="container">
                             <div className="sticky-product-details">
                                 <figure className="product-image">
-                                    <ALink href={'/product/default/' + product.slug}>
-                                        <img src={process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[0].url} width="90" height="90"
+                                    <ALink href={'/product/default/' + product.id}>
+                                        <img src={process.env.NEXT_PUBLIC_ASSET_URI + product.images.items[0].src} width="90" height="90"
                                             alt="Product" />
                                     </ALink>
                                 </figure>
                                 <div>
-                                    <h4 className="product-title"><ALink href={'/product/default/' + product.slug}>{product.name}</ALink></h4>
+                                    <h4 className="product-title"><ALink href={'/product/default/' + product.id}>{product.title}</ALink></h4>
                                     <div className="product-info">
                                         <div className="product-price mb-0">
                                             <ins className="new-price">${toDecimal(product.price)}</ins>

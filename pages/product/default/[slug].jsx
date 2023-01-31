@@ -14,7 +14,9 @@ import RelatedProducts from '~/components/partials/product/related-products';
 
 import { mainSlider17 } from '~/utils/data/carousel';
 
-import Api, { baseUrl } from '~/api';
+// import Api, { baseUrl } from '~/api';
+import { API, graphqlOperation } from "aws-amplify";
+import { getProduct } from '~/graphql/queries';
 
 function ProductDefault() {
     const slug = useRouter().query.slug;
@@ -26,14 +28,28 @@ function ProductDefault() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        Api.get(`${baseUrl}/api/product/${slug}`)
-            .then(response => {
-                let responseData = response.data;
-                setData(responseData);
-                setProduct(responseData.product);
-                setRelated(responseData.relatedProducts);
-                setLoading(false);
-            })
+        // Api.get(`${baseUrl}/api/product/${slug}`)
+        //     .then(response => {
+        //         let responseData = response.data;
+        //         setData(responseData);
+        //         setProduct(responseData.product);
+        //         setRelated(responseData.relatedProducts);
+        //         setLoading(false);
+        //     })
+            const id = slug
+            API.graphql(graphqlOperation(getProduct, { id })).then(
+                response =>{
+                    let data = response.data;
+                    console.log(data);
+                    // console.log(data.listProducts);
+                    setData(data);
+                    setProduct(data.getProduct);
+                    setRelated(data.getProduct.variants.items);
+
+                    // setTotalPage(parseInt(data.listProducts.items.total / perPage) + (data.listProducts.items.total % perPage ? 1 : 0));
+                    setLoading(false);
+                }
+            )
     }, [])
 
     useEffect(() => {
