@@ -1,62 +1,71 @@
-import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { connect } from 'react-redux';
+import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { connect } from "react-redux";
 
-import ALink from '~/components/features/custom-link';
+import ALink from "~/components/features/custom-link";
 
-import { cartActions } from '~/store/cart';
-import { modalActions } from '~/store/modal';
-import { wishlistActions } from '~/store/wishlist';
+import { cartActions } from "~/store/cart";
+import { modalActions } from "~/store/modal";
+import { wishlistActions } from "~/store/wishlist";
 
-import { toDecimal } from '~/utils';
+import { toDecimal } from "~/utils";
 
 function ProductTwo(props) {
-    const { product, adClass = 'text-center', toggleWishlist, wishlist, addToCart, openQuickview, isCategory = true } = props;
-    console.log("product two price is", product);
+  const {
+    product,
+    adClass = "text-center",
+    toggleWishlist,
+    wishlist,
+    addToCart,
+    openQuickview,
+    isCategory = true,
+  } = props;
+  console.log("product two price is", product);
 
-    // decide if the product is wishlisted
-    let isWishlisted;
-    isWishlisted = wishlist.findIndex(item => item.id === product.id) > -1 ? true : false;
+  // decide if the product is wishlisted
+  let isWishlisted;
+  isWishlisted =
+    wishlist.findIndex((item) => item.id === product.id) > -1 ? true : false;
 
-    const showQuickviewHandler = () => {
-        openQuickview(product.id);
+  const showQuickviewHandler = () => {
+    openQuickview(product.id);
+  };
+
+  const wishlistHandler = (e) => {
+    if (toggleWishlist) {
+      toggleWishlist(product);
     }
 
-    const wishlistHandler = (e) => {
-        if (toggleWishlist) {
-            toggleWishlist(product);
-        }
+    e.preventDefault();
+    let currentTarget = e.currentTarget;
+    currentTarget.classList.add("load-more-overlay", "loading");
 
-        e.preventDefault();
-        let currentTarget = e.currentTarget;
-        currentTarget.classList.add('load-more-overlay', 'loading');
+    setTimeout(() => {
+      currentTarget.classList.remove("load-more-overlay", "loading");
+    }, 1000);
+  };
 
-        setTimeout(() => {
-            currentTarget.classList.remove('load-more-overlay', 'loading');
-        }, 1000);
-    }
+  const addToCartHandler = (e) => {
+    e.preventDefault();
+    addToCart({ ...product, qty: 1, price: product.price });
+  };
 
-    const addToCartHandler = (e) => {
-        e.preventDefault();
-        addToCart({ ...product, qty: 1, price: product.price });
-    }
+  return (
+    <div className={`product text-left ${adClass}`}>
+      <figure className="product-media">
+        <ALink href={`/product/default/${product.id}`}>
+          <LazyLoadImage
+            alt="product"
+            // ! critical we should add this.
+            // src={product.large_pictures[0].url}
+            threshold={500}
+            effect="opacity"
+            width="1024"
+            height="1024"
+          />
+          {/* // ! critical we should add this. */}
 
-    return (
-        <div className={`product text-left ${adClass}`}>
-            <figure className="product-media">
-                <ALink href={`/product/default/${product.id}`}>
-                    <LazyLoadImage
-                        alt="product"
-                        // ! critical we should add this.
-                        // src={product.large_pictures[0].url}
-                        threshold={500}
-                        effect="opacity"
-                        width="1024"
-                        height="1024"
-                    />
-                        {/* // ! critical we should add this. */}
-
-                    {/* {
+          {/* {
                         product.large_pictures.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
@@ -69,64 +78,104 @@ function ProductTwo(props) {
                             />
                             : ""
                     } */}
-                </ALink>
+        </ALink>
 
-                <div className="product-label-group">
-                    {product.is_new ? <label className="product-label label-new">New</label> : ''}
-                    {product.is_top ? <label className="product-label label-top">Top</label> : ''}
-                    {
-                        product.discount > 0 ?
-                            product.variants && product.variants.length === 0 ?
-                                <label className="product-label label-sale">{product.discount}% OFF</label>
-                                : <label className="product-label label-sale">Sale</label>
-                            : ''
-                    }
-                </div>
+        <div className="product-label-group">
+          {product.is_new ? (
+            <label className="product-label label-new">New</label>
+          ) : (
+            ""
+          )}
+          {product.is_top ? (
+            <label className="product-label label-top">Top</label>
+          ) : (
+            ""
+          )}
+          {product.discount > 0 ? (
+            product.variants && product.variants.length === 0 ? (
+              <label className="product-label label-sale">
+                {product.discount}% OFF
+              </label>
+            ) : (
+              <label className="product-label label-sale">Sale</label>
+            )
+          ) : (
+            ""
+          )}
+        </div>
 
-                <div className="product-action-vertical">
-                    {
-                        product.variants && product.variants.length > 0 ?
-                            <ALink href={`/product/default/${product.id}`} className="btn-product-icon btn-cart" title="Go to product">
-                                <i className="d-icon-arrow-right"></i>
-                            </ALink> :
-                            <a href="#" className="btn-product-icon btn-cart" title="Add to cart" onClick={addToCartHandler}>
-                                <i className="d-icon-bag"></i>
-                            </a>
-                    }
-                    <a href="#" className="btn-product-icon btn-wishlist" title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'} onClick={wishlistHandler}>
-                        <i className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}></i>
-                    </a>
-                </div>
+        <div className="product-action-vertical">
+          {product.variants && product.variants.length > 0 ? (
+            <ALink
+              href={`/product/default/${product.id}`}
+              className="btn-product-icon btn-cart"
+              title="Go to product"
+            >
+              <i className="d-icon-arrow-right"></i>
+            </ALink>
+          ) : (
+            <a
+              href="#"
+              className="btn-product-icon btn-cart"
+              title="Add to cart"
+              onClick={addToCartHandler}
+            >
+              <i className="d-icon-bag"></i>
+            </a>
+          )}
+          <a
+            href="#"
+            className="btn-product-icon btn-wishlist"
+            title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            onClick={wishlistHandler}
+          >
+            <i
+              className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
+            ></i>
+          </a>
+        </div>
 
-                <div className="product-action">
-                    <ALink href="#" className="btn-product btn-quickview" title="Quick View" onClick={showQuickviewHandler}>Quick View</ALink>
-                </div>
-            </figure>
+        <div className="product-action">
+          <ALink
+            href="#"
+            className="btn-product btn-quickview"
+            title="Quick View"
+            onClick={showQuickviewHandler}
+          >
+            Quick View
+          </ALink>
+        </div>
+      </figure>
 
-            <div className="product-details">
-                {
-                    isCategory ?
-                        <div className="product-cat">
-                            {
-                                product.categories ?
-                                    product.categories.map((item, index) => (
-                                        <React.Fragment key={item.name + '-' + index}>
-                                            <ALink href={{ pathname: '/shop', query: { category: item.slug } }}>
-                                                {item.name}
-                                                {index < product.categories.length - 1 ? ', ' : ""}
-                                            </ALink>
-                                        </React.Fragment>
-                                    )) : ""
-                            }
-                        </div> : ""
-                }
+      <div className="product-details">
+        {isCategory ? (
+          <div className="product-cat">
+            {product.categories
+              ? product.categories.map((item, index) => (
+                  <React.Fragment key={item.name + "-" + index}>
+                    <ALink
+                      href={{
+                        pathname: "/shop",
+                        query: { category: item.slug },
+                      }}
+                    >
+                      {item.name}
+                      {index < product.categories.length - 1 ? ", " : ""}
+                    </ALink>
+                  </React.Fragment>
+                ))
+              : ""}
+          </div>
+        ) : (
+          ""
+        )}
 
-                <h3 className="product-name">
-                    <ALink href={`/product/default/${product.id}`}>{product.title}</ALink>
-                </h3>
+        <h3 className="product-name">
+          <ALink href={`/product/default/${product.id}`}>{product.title}</ALink>
+        </h3>
 
-                <div className="product-price">
-                    {/* {
+        <div className="product-price">
+          {/* {
                         product.price[0] !== product.price[1] ?
                             product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
                                 <>
@@ -137,33 +186,40 @@ function ProductTwo(props) {
                                 < del className="new-price">${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}</del>
                             : <ins className="new-price">${toDecimal(product.price[0])}</ins>
                     } */}
-                    {/* <ins className="new-price">${toDecimal(product.price)}</ins> */}
-                    <ins className="new-price">${toDecimal(40)}</ins>
-
-                </div>
-
-                <div className="ratings-container">
-                    <div className="ratings-full">
-                        {/* // TODO  we have to consider about this */}
-                        {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
-                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
-                        <span className="ratings" style={{ width: 20 * 3.4 + '%' }}></span>
-                        <span className="tooltiptext tooltip-top">{toDecimal(3.4)}</span>
-                    </div>
-
-                    {/* <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
-                    <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {3000} reviews )</ALink>
-
-                </div>
-            </div>
+          {/* <ins className="new-price">${toDecimal(product.price)}</ins> */}
+          <ins className="new-price">${toDecimal(40)}</ins>
         </div>
-    )
+
+        <div className="ratings-container">
+          <div className="ratings-full">
+            {/* // TODO  we have to consider about this */}
+            {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
+                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
+            <span className="ratings" style={{ width: 20 * 3.4 + "%" }}></span>
+            <span className="tooltiptext tooltip-top">{toDecimal(3.4)}</span>
+          </div>
+
+          {/* <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
+          <ALink
+            href={`/product/default/${product.id}`}
+            className="rating-reviews"
+          >
+            ( {3000} reviews )
+          </ALink>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function mapStateToProps(state) {
-    return {
-        wishlist: state.wishlist.data ? state.wishlist.data : []
-    }
+  return {
+    wishlist: state.wishlist.data ? state.wishlist.data : [],
+  };
 }
 
-export default connect(mapStateToProps, { toggleWishlist: wishlistActions.toggleWishlist, addToCart: cartActions.addToCart, ...modalActions })(ProductTwo);
+export default connect(mapStateToProps, {
+  toggleWishlist: wishlistActions.toggleWishlist,
+  addToCart: cartActions.addToCart,
+  ...modalActions,
+})(ProductTwo);
