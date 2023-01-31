@@ -60,6 +60,9 @@ function ProductListOne(props) {
                     setLoading(false);
                 }
             )
+            .catch(err => {
+                console.log(err);
+            })
             
     }, [query])
 

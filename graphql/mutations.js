@@ -10,9 +10,8 @@ export const createCouponCode = /* GraphQL */ `
       id
       code
       discount
-      expiration_date
-      created_at
-      updated_at
+      expirationSate
+      isActive
       createdAt
       updatedAt
     }
@@ -27,9 +26,8 @@ export const updateCouponCode = /* GraphQL */ `
       id
       code
       discount
-      expiration_date
-      created_at
-      updated_at
+      expirationSate
+      isActive
       createdAt
       updatedAt
     }
@@ -44,9 +42,8 @@ export const deleteCouponCode = /* GraphQL */ `
       id
       code
       discount
-      expiration_date
-      created_at
-      updated_at
+      expirationSate
+      isActive
       createdAt
       updatedAt
     }
@@ -62,7 +59,6 @@ export const createUser = /* GraphQL */ `
       owner
       firstName
       lastName
-      middleName
       email
       phone
       gender
@@ -77,14 +73,122 @@ export const createUser = /* GraphQL */ `
       area
       isActive
       authProvider
+      totalOrders
+      totalSpent
+      walletBalance
+      walletSpent
+      totalStoreCredit
       isAdmin
       profilePhotoUrl
       wishlists {
         items {
           id
-          user_id
-          created_at
-          updated_at
+          userId
+          wishlistProducts {
+            items {
+              id
+              wishlistId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              quantity
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -93,9 +197,112 @@ export const createUser = /* GraphQL */ `
       shopingcarts {
         items {
           id
-          user_id
-          created_at
-          updated_at
+          userId
+          shoppingcartProducts {
+            items {
+              id
+              shoppingcartId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              quantity
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -104,12 +311,446 @@ export const createUser = /* GraphQL */ `
       reviews {
         items {
           id
-          user_id
-          product_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
           rating
           comment
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
@@ -118,13 +759,489 @@ export const createUser = /* GraphQL */ `
       orders {
         items {
           id
-          user_id
-          shipping_address
-          total
+          code
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          channelName
+          shippingAddress {
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+          }
+          BillingAddress {
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+          }
+          totalStoreCredit
+          CouponCodeId
+          totalCashOnDeliveryCharges
+          totalDiscount
+          totalGiftCharges
+          totalPrepaidAmount
+          totalShippingCharges
+          taxExempted
+          cFormProvided
+          thirdPartyShipping
+          sla
+          priority
           orderDate
           status
-          created_at
-          updated_at
+          products {
+            items {
+              id
+              orderId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              sku
+              returnReason
+              returnDate
+              returnAWB
+              returnShippingProvider
+              title
+              shippingMethodCode
+              cashOnDeliveryCharges
+              sellingPrice
+              shippingCharges
+              discount
+              totalPrice
+              currency
+              onHold
+              facilityCode
+              gstin
+              additionalInfo
+              centralGstPercentage
+              compensationCessPercentage
+              integratedGstPercentage
+              stateGstPercentage
+              taxRate
+              unionTerritoryGstPercentage
+              deliveryPartner
+              dispatchDate
+              invoiceDate
+              invoiceNumber
+              tentativeDeliveryDate
+              trackingId
+              quantity
+              price
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          payments {
+            items {
+              id
+              userId
+              user {
+                id
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              orderId
+              method
+              amount
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -133,12 +1250,264 @@ export const createUser = /* GraphQL */ `
       payments {
         items {
           id
-          user_id
-          order_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          orderId
           method
           amount
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
@@ -159,7 +1528,6 @@ export const updateUser = /* GraphQL */ `
       owner
       firstName
       lastName
-      middleName
       email
       phone
       gender
@@ -174,14 +1542,122 @@ export const updateUser = /* GraphQL */ `
       area
       isActive
       authProvider
+      totalOrders
+      totalSpent
+      walletBalance
+      walletSpent
+      totalStoreCredit
       isAdmin
       profilePhotoUrl
       wishlists {
         items {
           id
-          user_id
-          created_at
-          updated_at
+          userId
+          wishlistProducts {
+            items {
+              id
+              wishlistId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              quantity
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -190,9 +1666,112 @@ export const updateUser = /* GraphQL */ `
       shopingcarts {
         items {
           id
-          user_id
-          created_at
-          updated_at
+          userId
+          shoppingcartProducts {
+            items {
+              id
+              shoppingcartId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              quantity
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -201,12 +1780,446 @@ export const updateUser = /* GraphQL */ `
       reviews {
         items {
           id
-          user_id
-          product_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
           rating
           comment
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
@@ -215,13 +2228,489 @@ export const updateUser = /* GraphQL */ `
       orders {
         items {
           id
-          user_id
-          shipping_address
-          total
+          code
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          channelName
+          shippingAddress {
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+          }
+          BillingAddress {
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+          }
+          totalStoreCredit
+          CouponCodeId
+          totalCashOnDeliveryCharges
+          totalDiscount
+          totalGiftCharges
+          totalPrepaidAmount
+          totalShippingCharges
+          taxExempted
+          cFormProvided
+          thirdPartyShipping
+          sla
+          priority
           orderDate
           status
-          created_at
-          updated_at
+          products {
+            items {
+              id
+              orderId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              sku
+              returnReason
+              returnDate
+              returnAWB
+              returnShippingProvider
+              title
+              shippingMethodCode
+              cashOnDeliveryCharges
+              sellingPrice
+              shippingCharges
+              discount
+              totalPrice
+              currency
+              onHold
+              facilityCode
+              gstin
+              additionalInfo
+              centralGstPercentage
+              compensationCessPercentage
+              integratedGstPercentage
+              stateGstPercentage
+              taxRate
+              unionTerritoryGstPercentage
+              deliveryPartner
+              dispatchDate
+              invoiceDate
+              invoiceNumber
+              tentativeDeliveryDate
+              trackingId
+              quantity
+              price
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          payments {
+            items {
+              id
+              userId
+              user {
+                id
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              orderId
+              method
+              amount
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -230,12 +2719,264 @@ export const updateUser = /* GraphQL */ `
       payments {
         items {
           id
-          user_id
-          order_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          orderId
           method
           amount
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
@@ -256,7 +2997,6 @@ export const deleteUser = /* GraphQL */ `
       owner
       firstName
       lastName
-      middleName
       email
       phone
       gender
@@ -271,14 +3011,122 @@ export const deleteUser = /* GraphQL */ `
       area
       isActive
       authProvider
+      totalOrders
+      totalSpent
+      walletBalance
+      walletSpent
+      totalStoreCredit
       isAdmin
       profilePhotoUrl
       wishlists {
         items {
           id
-          user_id
-          created_at
-          updated_at
+          userId
+          wishlistProducts {
+            items {
+              id
+              wishlistId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              quantity
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -287,9 +3135,112 @@ export const deleteUser = /* GraphQL */ `
       shopingcarts {
         items {
           id
-          user_id
-          created_at
-          updated_at
+          userId
+          shoppingcartProducts {
+            items {
+              id
+              shoppingcartId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              quantity
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -298,12 +3249,446 @@ export const deleteUser = /* GraphQL */ `
       reviews {
         items {
           id
-          user_id
-          product_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
           rating
           comment
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
@@ -312,13 +3697,489 @@ export const deleteUser = /* GraphQL */ `
       orders {
         items {
           id
-          user_id
-          shipping_address
-          total
+          code
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          channelName
+          shippingAddress {
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+          }
+          BillingAddress {
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+          }
+          totalStoreCredit
+          CouponCodeId
+          totalCashOnDeliveryCharges
+          totalDiscount
+          totalGiftCharges
+          totalPrepaidAmount
+          totalShippingCharges
+          taxExempted
+          cFormProvided
+          thirdPartyShipping
+          sla
+          priority
           orderDate
           status
-          created_at
-          updated_at
+          products {
+            items {
+              id
+              orderId
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  description
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              variantId
+              variant {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              sku
+              returnReason
+              returnDate
+              returnAWB
+              returnShippingProvider
+              title
+              shippingMethodCode
+              cashOnDeliveryCharges
+              sellingPrice
+              shippingCharges
+              discount
+              totalPrice
+              currency
+              onHold
+              facilityCode
+              gstin
+              additionalInfo
+              centralGstPercentage
+              compensationCessPercentage
+              integratedGstPercentage
+              stateGstPercentage
+              taxRate
+              unionTerritoryGstPercentage
+              deliveryPartner
+              dispatchDate
+              invoiceDate
+              invoiceNumber
+              tentativeDeliveryDate
+              trackingId
+              quantity
+              price
+              status
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          payments {
+            items {
+              id
+              userId
+              user {
+                id
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              orderId
+              method
+              amount
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -327,12 +4188,264 @@ export const deleteUser = /* GraphQL */ `
       payments {
         items {
           id
-          user_id
-          order_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          orderId
           method
           amount
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
@@ -351,8 +4464,11 @@ export const createProductCategory = /* GraphQL */ `
     createProductCategory(input: $input, condition: $condition) {
       id
       name
-      created_at
-      updated_at
+      description
+      isFeatured
+      totalProducts
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
@@ -366,8 +4482,11 @@ export const updateProductCategory = /* GraphQL */ `
     updateProductCategory(input: $input, condition: $condition) {
       id
       name
-      created_at
-      updated_at
+      description
+      isFeatured
+      totalProducts
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
@@ -381,8 +4500,170 @@ export const deleteProductCategory = /* GraphQL */ `
     deleteProductCategory(input: $input, condition: $condition) {
       id
       name
-      created_at
-      updated_at
+      description
+      isFeatured
+      totalProducts
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createStore = /* GraphQL */ `
+  mutation CreateStore(
+    $input: CreateStoreInput!
+    $condition: ModelStoreConditionInput
+  ) {
+    createStore(input: $input, condition: $condition) {
+      id
+      name
+      description
+      address
+      totalProducts
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStore = /* GraphQL */ `
+  mutation UpdateStore(
+    $input: UpdateStoreInput!
+    $condition: ModelStoreConditionInput
+  ) {
+    updateStore(input: $input, condition: $condition) {
+      id
+      name
+      description
+      address
+      totalProducts
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteStore = /* GraphQL */ `
+  mutation DeleteStore(
+    $input: DeleteStoreInput!
+    $condition: ModelStoreConditionInput
+  ) {
+    deleteStore(input: $input, condition: $condition) {
+      id
+      name
+      description
+      address
+      totalProducts
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createWarehouse = /* GraphQL */ `
+  mutation CreateWarehouse(
+    $input: CreateWarehouseInput!
+    $condition: ModelWarehouseConditionInput
+  ) {
+    createWarehouse(input: $input, condition: $condition) {
+      id
+      facilityCode
+      name
+      description
+      address
+      totalProducts
+      totalQuantity
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWarehouse = /* GraphQL */ `
+  mutation UpdateWarehouse(
+    $input: UpdateWarehouseInput!
+    $condition: ModelWarehouseConditionInput
+  ) {
+    updateWarehouse(input: $input, condition: $condition) {
+      id
+      facilityCode
+      name
+      description
+      address
+      totalProducts
+      totalQuantity
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWarehouse = /* GraphQL */ `
+  mutation DeleteWarehouse(
+    $input: DeleteWarehouseInput!
+    $condition: ModelWarehouseConditionInput
+  ) {
+    deleteWarehouse(input: $input, condition: $condition) {
+      id
+      facilityCode
+      name
+      description
+      address
+      totalProducts
+      totalQuantity
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createProductInventory = /* GraphQL */ `
+  mutation CreateProductInventory(
+    $input: CreateProductInventoryInput!
+    $condition: ModelProductInventoryConditionInput
+  ) {
+    createProductInventory(input: $input, condition: $condition) {
+      id
+      warehouseId
+      productID
+      currentQuantity
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProductInventory = /* GraphQL */ `
+  mutation UpdateProductInventory(
+    $input: UpdateProductInventoryInput!
+    $condition: ModelProductInventoryConditionInput
+  ) {
+    updateProductInventory(input: $input, condition: $condition) {
+      id
+      warehouseId
+      productID
+      currentQuantity
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProductInventory = /* GraphQL */ `
+  mutation DeleteProductInventory(
+    $input: DeleteProductInventoryInput!
+    $condition: ModelProductInventoryConditionInput
+  ) {
+    deleteProductInventory(input: $input, condition: $condition) {
+      id
+      warehouseId
+      productID
+      currentQuantity
       createdAt
       updatedAt
     }
@@ -396,109 +4677,552 @@ export const createProduct = /* GraphQL */ `
     createProduct(input: $input, condition: $condition) {
       id
       title
-      body_html
+      brand
       vendor
-      category_id
-      category {
+      categoryId
+      storeId
+      store {
         id
         name
-        created_at
-        updated_at
+        description
+        isFeatured
+        totalProducts
+        priority
+        imageUrl
         createdAt
         updatedAt
       }
-      product_type
-      created_at
-      handle
-      updated_at
-      published_at
-      template_suffix
+      isFeatured
+      category {
+        id
+        name
+        description
+        isFeatured
+        totalProducts
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      productType
+      createdAt
+      slug
+      productDescription
+      longDescription
+      updatedAt
+      publishedAt
+      price
+      sku
+      size
+      color
       status
-      published_scope
+      position
+      currency
+      costPrice
+      listingPrice
+      taxable
+      barcode
       tags
+      weight
+      weightUnit
+      inventory
+      blockedInventory
       rating
-      total_orders
-      admin_graphql_api_id
+      totalOrders
+      additionalInfo
+      thumbImages
+      isTaxEnabled
+      isInventoryEnabled
+      hasVarient
       variants {
         items {
           id
-          product_id
+          productId
           title
           price
           sku
+          size
+          color
+          status
           position
-          inventory_policy
-          compare_at_price
-          fulfillment_service
-          inventory_management
-          option1
-          option2
-          option3
-          created_at
-          updated_at
+          currency
+          costPrice
+          listingPrice
+          createdAt
+          updatedAt
           taxable
           barcode
-          grams
-          image_id
+          imageUrl
           weight
-          weight_unit
-          inventory_item_id
-          inventory_quantity
-          old_inventory_quantity
-          requires_shipping
-          admin_graphql_api_id
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      options {
-        items {
-          id
-          product_id
-          name
-          position
-          values
-          createdAt
-          updatedAt
+          weightUnit
+          inventory
+          blockedInventory
         }
         nextToken
       }
       images {
         items {
           id
-          product_id
+          productId
           position
-          created_at
-          updated_at
+          createdAt
+          updatedAt
           alt
           width
           height
-          src
-          variant_ids
-          is_thumb
-          admin_graphql_api_id
-          createdAt
-          updatedAt
+          imageKey
+          isThumb
         }
         nextToken
       }
       reviews {
         items {
           id
-          user_id
-          product_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
           rating
           comment
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -510,109 +5234,552 @@ export const updateProduct = /* GraphQL */ `
     updateProduct(input: $input, condition: $condition) {
       id
       title
-      body_html
+      brand
       vendor
-      category_id
-      category {
+      categoryId
+      storeId
+      store {
         id
         name
-        created_at
-        updated_at
+        description
+        isFeatured
+        totalProducts
+        priority
+        imageUrl
         createdAt
         updatedAt
       }
-      product_type
-      created_at
-      handle
-      updated_at
-      published_at
-      template_suffix
+      isFeatured
+      category {
+        id
+        name
+        description
+        isFeatured
+        totalProducts
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      productType
+      createdAt
+      slug
+      productDescription
+      longDescription
+      updatedAt
+      publishedAt
+      price
+      sku
+      size
+      color
       status
-      published_scope
+      position
+      currency
+      costPrice
+      listingPrice
+      taxable
+      barcode
       tags
+      weight
+      weightUnit
+      inventory
+      blockedInventory
       rating
-      total_orders
-      admin_graphql_api_id
+      totalOrders
+      additionalInfo
+      thumbImages
+      isTaxEnabled
+      isInventoryEnabled
+      hasVarient
       variants {
         items {
           id
-          product_id
+          productId
           title
           price
           sku
+          size
+          color
+          status
           position
-          inventory_policy
-          compare_at_price
-          fulfillment_service
-          inventory_management
-          option1
-          option2
-          option3
-          created_at
-          updated_at
+          currency
+          costPrice
+          listingPrice
+          createdAt
+          updatedAt
           taxable
           barcode
-          grams
-          image_id
+          imageUrl
           weight
-          weight_unit
-          inventory_item_id
-          inventory_quantity
-          old_inventory_quantity
-          requires_shipping
-          admin_graphql_api_id
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      options {
-        items {
-          id
-          product_id
-          name
-          position
-          values
-          createdAt
-          updatedAt
+          weightUnit
+          inventory
+          blockedInventory
         }
         nextToken
       }
       images {
         items {
           id
-          product_id
+          productId
           position
-          created_at
-          updated_at
+          createdAt
+          updatedAt
           alt
           width
           height
-          src
-          variant_ids
-          is_thumb
-          admin_graphql_api_id
-          createdAt
-          updatedAt
+          imageKey
+          isThumb
         }
         nextToken
       }
       reviews {
         items {
           id
-          user_id
-          product_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
           rating
           comment
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -624,109 +5791,552 @@ export const deleteProduct = /* GraphQL */ `
     deleteProduct(input: $input, condition: $condition) {
       id
       title
-      body_html
+      brand
       vendor
-      category_id
-      category {
+      categoryId
+      storeId
+      store {
         id
         name
-        created_at
-        updated_at
+        description
+        isFeatured
+        totalProducts
+        priority
+        imageUrl
         createdAt
         updatedAt
       }
-      product_type
-      created_at
-      handle
-      updated_at
-      published_at
-      template_suffix
+      isFeatured
+      category {
+        id
+        name
+        description
+        isFeatured
+        totalProducts
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      productType
+      createdAt
+      slug
+      productDescription
+      longDescription
+      updatedAt
+      publishedAt
+      price
+      sku
+      size
+      color
       status
-      published_scope
+      position
+      currency
+      costPrice
+      listingPrice
+      taxable
+      barcode
       tags
+      weight
+      weightUnit
+      inventory
+      blockedInventory
       rating
-      total_orders
-      admin_graphql_api_id
+      totalOrders
+      additionalInfo
+      thumbImages
+      isTaxEnabled
+      isInventoryEnabled
+      hasVarient
       variants {
         items {
           id
-          product_id
+          productId
           title
           price
           sku
+          size
+          color
+          status
           position
-          inventory_policy
-          compare_at_price
-          fulfillment_service
-          inventory_management
-          option1
-          option2
-          option3
-          created_at
-          updated_at
+          currency
+          costPrice
+          listingPrice
+          createdAt
+          updatedAt
           taxable
           barcode
-          grams
-          image_id
+          imageUrl
           weight
-          weight_unit
-          inventory_item_id
-          inventory_quantity
-          old_inventory_quantity
-          requires_shipping
-          admin_graphql_api_id
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      options {
-        items {
-          id
-          product_id
-          name
-          position
-          values
-          createdAt
-          updatedAt
+          weightUnit
+          inventory
+          blockedInventory
         }
         nextToken
       }
       images {
         items {
           id
-          product_id
+          productId
           position
-          created_at
-          updated_at
+          createdAt
+          updatedAt
           alt
           width
           height
-          src
-          variant_ids
-          is_thumb
-          admin_graphql_api_id
-          createdAt
-          updatedAt
+          imageKey
+          isThumb
         }
         nextToken
       }
       reviews {
         items {
           id
-          user_id
-          product_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
           rating
           comment
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -737,33 +6347,26 @@ export const createVariant = /* GraphQL */ `
   ) {
     createVariant(input: $input, condition: $condition) {
       id
-      product_id
+      productId
       title
       price
       sku
+      size
+      color
+      status
       position
-      inventory_policy
-      compare_at_price
-      fulfillment_service
-      inventory_management
-      option1
-      option2
-      option3
-      created_at
-      updated_at
-      taxable
-      barcode
-      grams
-      image_id
-      weight
-      weight_unit
-      inventory_item_id
-      inventory_quantity
-      old_inventory_quantity
-      requires_shipping
-      admin_graphql_api_id
+      currency
+      costPrice
+      listingPrice
       createdAt
       updatedAt
+      taxable
+      barcode
+      imageUrl
+      weight
+      weightUnit
+      inventory
+      blockedInventory
     }
   }
 `;
@@ -774,33 +6377,26 @@ export const updateVariant = /* GraphQL */ `
   ) {
     updateVariant(input: $input, condition: $condition) {
       id
-      product_id
+      productId
       title
       price
       sku
+      size
+      color
+      status
       position
-      inventory_policy
-      compare_at_price
-      fulfillment_service
-      inventory_management
-      option1
-      option2
-      option3
-      created_at
-      updated_at
-      taxable
-      barcode
-      grams
-      image_id
-      weight
-      weight_unit
-      inventory_item_id
-      inventory_quantity
-      old_inventory_quantity
-      requires_shipping
-      admin_graphql_api_id
+      currency
+      costPrice
+      listingPrice
       createdAt
       updatedAt
+      taxable
+      barcode
+      imageUrl
+      weight
+      weightUnit
+      inventory
+      blockedInventory
     }
   }
 `;
@@ -811,81 +6407,26 @@ export const deleteVariant = /* GraphQL */ `
   ) {
     deleteVariant(input: $input, condition: $condition) {
       id
-      product_id
+      productId
       title
       price
       sku
+      size
+      color
+      status
       position
-      inventory_policy
-      compare_at_price
-      fulfillment_service
-      inventory_management
-      option1
-      option2
-      option3
-      created_at
-      updated_at
+      currency
+      costPrice
+      listingPrice
+      createdAt
+      updatedAt
       taxable
       barcode
-      grams
-      image_id
+      imageUrl
       weight
-      weight_unit
-      inventory_item_id
-      inventory_quantity
-      old_inventory_quantity
-      requires_shipping
-      admin_graphql_api_id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createProductOption = /* GraphQL */ `
-  mutation CreateProductOption(
-    $input: CreateProductOptionInput!
-    $condition: ModelProductOptionConditionInput
-  ) {
-    createProductOption(input: $input, condition: $condition) {
-      id
-      product_id
-      name
-      position
-      values
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateProductOption = /* GraphQL */ `
-  mutation UpdateProductOption(
-    $input: UpdateProductOptionInput!
-    $condition: ModelProductOptionConditionInput
-  ) {
-    updateProductOption(input: $input, condition: $condition) {
-      id
-      product_id
-      name
-      position
-      values
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteProductOption = /* GraphQL */ `
-  mutation DeleteProductOption(
-    $input: DeleteProductOptionInput!
-    $condition: ModelProductOptionConditionInput
-  ) {
-    deleteProductOption(input: $input, condition: $condition) {
-      id
-      product_id
-      name
-      position
-      values
-      createdAt
-      updatedAt
+      weightUnit
+      inventory
+      blockedInventory
     }
   }
 `;
@@ -896,19 +6437,15 @@ export const createProductImage = /* GraphQL */ `
   ) {
     createProductImage(input: $input, condition: $condition) {
       id
-      product_id
+      productId
       position
-      created_at
-      updated_at
+      createdAt
+      updatedAt
       alt
       width
       height
-      src
-      variant_ids
-      is_thumb
-      admin_graphql_api_id
-      createdAt
-      updatedAt
+      imageKey
+      isThumb
     }
   }
 `;
@@ -919,19 +6456,15 @@ export const updateProductImage = /* GraphQL */ `
   ) {
     updateProductImage(input: $input, condition: $condition) {
       id
-      product_id
+      productId
       position
-      created_at
-      updated_at
+      createdAt
+      updatedAt
       alt
       width
       height
-      src
-      variant_ids
-      is_thumb
-      admin_graphql_api_id
-      createdAt
-      updatedAt
+      imageKey
+      isThumb
     }
   }
 `;
@@ -942,19 +6475,15 @@ export const deleteProductImage = /* GraphQL */ `
   ) {
     deleteProductImage(input: $input, condition: $condition) {
       id
-      product_id
+      productId
       position
-      created_at
-      updated_at
+      createdAt
+      updatedAt
       alt
       width
       height
-      src
-      variant_ids
-      is_thumb
-      admin_graphql_api_id
-      createdAt
-      updatedAt
+      imageKey
+      isThumb
     }
   }
 `;
@@ -965,13 +6494,13 @@ export const createOrder = /* GraphQL */ `
   ) {
     createOrder(input: $input, condition: $condition) {
       id
-      user_id
+      code
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -986,41 +6515,1077 @@ export const createOrder = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      shipping_address
-      total
+      channelName
+      shippingAddress {
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      BillingAddress {
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      totalStoreCredit
+      CouponCodeId
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      sla
+      priority
       orderDate
       status
       products {
         items {
           id
-          order_id
-          product_id
-          variant_id
-          option_id
+          orderId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          sku
+          returnReason
+          returnDate
+          returnAWB
+          returnShippingProvider
+          title
+          shippingMethodCode
+          cashOnDeliveryCharges
+          sellingPrice
+          shippingCharges
+          discount
+          totalPrice
+          currency
+          onHold
+          facilityCode
+          gstin
+          additionalInfo
+          centralGstPercentage
+          compensationCessPercentage
+          integratedGstPercentage
+          stateGstPercentage
+          taxRate
+          unionTerritoryGstPercentage
+          deliveryPartner
+          dispatchDate
+          invoiceDate
+          invoiceNumber
+          tentativeDeliveryDate
+          trackingId
           quantity
           price
-          created_at
-          updated_at
+          status
           createdAt
           updatedAt
         }
@@ -1029,19 +7594,269 @@ export const createOrder = /* GraphQL */ `
       payments {
         items {
           id
-          user_id
-          order_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          orderId
           method
           amount
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1054,13 +7869,13 @@ export const updateOrder = /* GraphQL */ `
   ) {
     updateOrder(input: $input, condition: $condition) {
       id
-      user_id
+      code
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1075,41 +7890,1077 @@ export const updateOrder = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      shipping_address
-      total
+      channelName
+      shippingAddress {
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      BillingAddress {
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      totalStoreCredit
+      CouponCodeId
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      sla
+      priority
       orderDate
       status
       products {
         items {
           id
-          order_id
-          product_id
-          variant_id
-          option_id
+          orderId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          sku
+          returnReason
+          returnDate
+          returnAWB
+          returnShippingProvider
+          title
+          shippingMethodCode
+          cashOnDeliveryCharges
+          sellingPrice
+          shippingCharges
+          discount
+          totalPrice
+          currency
+          onHold
+          facilityCode
+          gstin
+          additionalInfo
+          centralGstPercentage
+          compensationCessPercentage
+          integratedGstPercentage
+          stateGstPercentage
+          taxRate
+          unionTerritoryGstPercentage
+          deliveryPartner
+          dispatchDate
+          invoiceDate
+          invoiceNumber
+          tentativeDeliveryDate
+          trackingId
           quantity
           price
-          created_at
-          updated_at
+          status
           createdAt
           updatedAt
         }
@@ -1118,19 +8969,269 @@ export const updateOrder = /* GraphQL */ `
       payments {
         items {
           id
-          user_id
-          order_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          orderId
           method
           amount
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1143,13 +9244,13 @@ export const deleteOrder = /* GraphQL */ `
   ) {
     deleteOrder(input: $input, condition: $condition) {
       id
-      user_id
+      code
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1164,41 +9265,1077 @@ export const deleteOrder = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      shipping_address
-      total
+      channelName
+      shippingAddress {
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      BillingAddress {
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      totalStoreCredit
+      CouponCodeId
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      sla
+      priority
       orderDate
       status
       products {
         items {
           id
-          order_id
-          product_id
-          variant_id
-          option_id
+          orderId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          sku
+          returnReason
+          returnDate
+          returnAWB
+          returnShippingProvider
+          title
+          shippingMethodCode
+          cashOnDeliveryCharges
+          sellingPrice
+          shippingCharges
+          discount
+          totalPrice
+          currency
+          onHold
+          facilityCode
+          gstin
+          additionalInfo
+          centralGstPercentage
+          compensationCessPercentage
+          integratedGstPercentage
+          stateGstPercentage
+          taxRate
+          unionTerritoryGstPercentage
+          deliveryPartner
+          dispatchDate
+          invoiceDate
+          invoiceNumber
+          tentativeDeliveryDate
+          trackingId
           quantity
           price
-          created_at
-          updated_at
+          status
           createdAt
           updatedAt
         }
@@ -1207,19 +10344,269 @@ export const deleteOrder = /* GraphQL */ `
       payments {
         items {
           id
-          user_id
-          order_id
+          userId
+          user {
+            id
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                BillingAddress {
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                CouponCodeId
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          orderId
           method
           amount
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1232,94 +10619,388 @@ export const createOrderProduct = /* GraphQL */ `
   ) {
     createOrderProduct(input: $input, condition: $condition) {
       id
-      order_id
-      product_id
+      orderId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
-      }
+      sku
+      returnReason
+      returnDate
+      returnAWB
+      returnShippingProvider
+      title
+      shippingMethodCode
+      cashOnDeliveryCharges
+      sellingPrice
+      shippingCharges
+      discount
+      totalPrice
+      currency
+      onHold
+      facilityCode
+      gstin
+      additionalInfo
+      centralGstPercentage
+      compensationCessPercentage
+      integratedGstPercentage
+      stateGstPercentage
+      taxRate
+      unionTerritoryGstPercentage
+      deliveryPartner
+      dispatchDate
+      invoiceDate
+      invoiceNumber
+      tentativeDeliveryDate
+      trackingId
       quantity
       price
-      created_at
-      updated_at
+      status
       createdAt
       updatedAt
     }
@@ -1332,94 +11013,388 @@ export const updateOrderProduct = /* GraphQL */ `
   ) {
     updateOrderProduct(input: $input, condition: $condition) {
       id
-      order_id
-      product_id
+      orderId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
-      }
+      sku
+      returnReason
+      returnDate
+      returnAWB
+      returnShippingProvider
+      title
+      shippingMethodCode
+      cashOnDeliveryCharges
+      sellingPrice
+      shippingCharges
+      discount
+      totalPrice
+      currency
+      onHold
+      facilityCode
+      gstin
+      additionalInfo
+      centralGstPercentage
+      compensationCessPercentage
+      integratedGstPercentage
+      stateGstPercentage
+      taxRate
+      unionTerritoryGstPercentage
+      deliveryPartner
+      dispatchDate
+      invoiceDate
+      invoiceNumber
+      tentativeDeliveryDate
+      trackingId
       quantity
       price
-      created_at
-      updated_at
+      status
       createdAt
       updatedAt
     }
@@ -1432,142 +11407,388 @@ export const deleteOrderProduct = /* GraphQL */ `
   ) {
     deleteOrderProduct(input: $input, condition: $condition) {
       id
-      order_id
-      product_id
+      orderId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
-      }
+      sku
+      returnReason
+      returnDate
+      returnAWB
+      returnShippingProvider
+      title
+      shippingMethodCode
+      cashOnDeliveryCharges
+      sellingPrice
+      shippingCharges
+      discount
+      totalPrice
+      currency
+      onHold
+      facilityCode
+      gstin
+      additionalInfo
+      centralGstPercentage
+      compensationCessPercentage
+      integratedGstPercentage
+      stateGstPercentage
+      taxRate
+      unionTerritoryGstPercentage
+      deliveryPartner
+      dispatchDate
+      invoiceDate
+      invoiceNumber
+      tentativeDeliveryDate
+      trackingId
       quantity
       price
-      created_at
-      updated_at
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createDeliveryStatus = /* GraphQL */ `
-  mutation CreateDeliveryStatus(
-    $input: CreateDeliveryStatusInput!
-    $condition: ModelDeliveryStatusConditionInput
-  ) {
-    createDeliveryStatus(input: $input, condition: $condition) {
-      id
-      orderId
       status
-      created_at
-      updated_at
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateDeliveryStatus = /* GraphQL */ `
-  mutation UpdateDeliveryStatus(
-    $input: UpdateDeliveryStatusInput!
-    $condition: ModelDeliveryStatusConditionInput
-  ) {
-    updateDeliveryStatus(input: $input, condition: $condition) {
-      id
-      orderId
-      status
-      created_at
-      updated_at
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteDeliveryStatus = /* GraphQL */ `
-  mutation DeleteDeliveryStatus(
-    $input: DeleteDeliveryStatusInput!
-    $condition: ModelDeliveryStatusConditionInput
-  ) {
-    deleteDeliveryStatus(input: $input, condition: $condition) {
-      id
-      orderId
-      status
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1580,13 +11801,12 @@ export const createPayment = /* GraphQL */ `
   ) {
     createPayment(input: $input, condition: $condition) {
       id
-      user_id
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1601,31 +11821,802 @@ export const createPayment = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      order_id
+      orderId
       method
       amount
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1638,13 +12629,12 @@ export const updatePayment = /* GraphQL */ `
   ) {
     updatePayment(input: $input, condition: $condition) {
       id
-      user_id
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1659,31 +12649,802 @@ export const updatePayment = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      order_id
+      orderId
       method
       amount
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1696,13 +13457,12 @@ export const deletePayment = /* GraphQL */ `
   ) {
     deletePayment(input: $input, condition: $condition) {
       id
-      user_id
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1717,31 +13477,802 @@ export const deletePayment = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      order_id
+      orderId
       method
       amount
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1754,13 +14285,12 @@ export const createReview = /* GraphQL */ `
   ) {
     createReview(input: $input, condition: $condition) {
       id
-      user_id
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1775,72 +14305,1126 @@ export const createReview = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      product_id
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       rating
       comment
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1853,13 +15437,12 @@ export const updateReview = /* GraphQL */ `
   ) {
     updateReview(input: $input, condition: $condition) {
       id
-      user_id
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1874,72 +15457,1126 @@ export const updateReview = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      product_id
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       rating
       comment
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -1952,13 +16589,12 @@ export const deleteReview = /* GraphQL */ `
   ) {
     deleteReview(input: $input, condition: $condition) {
       id
-      user_id
+      userId
       user {
         id
         owner
         firstName
         lastName
-        middleName
         email
         phone
         gender
@@ -1973,72 +16609,1126 @@ export const deleteReview = /* GraphQL */ `
         area
         isActive
         authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
         isAdmin
         profilePhotoUrl
         wishlists {
+          items {
+            id
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         shopingcarts {
+          items {
+            id
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         orders {
+          items {
+            id
+            code
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         payments {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
         updatedAt
       }
-      product_id
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
       rating
       comment
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2051,23 +17741,224 @@ export const createWishlist = /* GraphQL */ `
   ) {
     createWishlist(input: $input, condition: $condition) {
       id
-      user_id
-      wishlist_products {
+      userId
+      wishlistProducts {
         items {
           id
-          wishlist_id
-          product_id
-          variant_id
-          option_id
-          created_at
-          updated_at
+          wishlistId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          quantity
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2080,23 +17971,224 @@ export const updateWishlist = /* GraphQL */ `
   ) {
     updateWishlist(input: $input, condition: $condition) {
       id
-      user_id
-      wishlist_products {
+      userId
+      wishlistProducts {
         items {
           id
-          wishlist_id
-          product_id
-          variant_id
-          option_id
-          created_at
-          updated_at
+          wishlistId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          quantity
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2109,23 +18201,224 @@ export const deleteWishlist = /* GraphQL */ `
   ) {
     deleteWishlist(input: $input, condition: $condition) {
       id
-      user_id
-      wishlist_products {
+      userId
+      wishlistProducts {
         items {
           id
-          wishlist_id
-          product_id
-          variant_id
-          option_id
-          created_at
-          updated_at
+          wishlistId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          quantity
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2138,92 +18431,357 @@ export const createWishlistProduct = /* GraphQL */ `
   ) {
     createWishlistProduct(input: $input, condition: $condition) {
       id
-      wishlist_id
-      product_id
+      wishlistId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
-      }
-      created_at
-      updated_at
+      quantity
       createdAt
       updatedAt
     }
@@ -2236,92 +18794,357 @@ export const updateWishlistProduct = /* GraphQL */ `
   ) {
     updateWishlistProduct(input: $input, condition: $condition) {
       id
-      wishlist_id
-      product_id
+      wishlistId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
-      }
-      created_at
-      updated_at
+      quantity
       createdAt
       updatedAt
     }
@@ -2334,92 +19157,357 @@ export const deleteWishlistProduct = /* GraphQL */ `
   ) {
     deleteWishlistProduct(input: $input, condition: $condition) {
       id
-      wishlist_id
-      product_id
+      wishlistId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
-      }
-      created_at
-      updated_at
+      quantity
       createdAt
       updatedAt
     }
@@ -2432,24 +19520,224 @@ export const createShoppingCart = /* GraphQL */ `
   ) {
     createShoppingCart(input: $input, condition: $condition) {
       id
-      user_id
-      shoppingcart_products {
+      userId
+      shoppingcartProducts {
         items {
           id
-          shoppingcart_id
-          product_id
-          variant_id
-          option_id
+          shoppingcartId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           quantity
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2462,24 +19750,224 @@ export const updateShoppingCart = /* GraphQL */ `
   ) {
     updateShoppingCart(input: $input, condition: $condition) {
       id
-      user_id
-      shoppingcart_products {
+      userId
+      shoppingcartProducts {
         items {
           id
-          shoppingcart_id
-          product_id
-          variant_id
-          option_id
+          shoppingcartId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           quantity
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2492,24 +19980,224 @@ export const deleteShoppingCart = /* GraphQL */ `
   ) {
     deleteShoppingCart(input: $input, condition: $condition) {
       id
-      user_id
-      shoppingcart_products {
+      userId
+      shoppingcartProducts {
         items {
           id
-          shoppingcart_id
-          product_id
-          variant_id
-          option_id
+          shoppingcartId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            storeId
+            store {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              description
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           quantity
-          created_at
-          updated_at
           createdAt
           updatedAt
         }
         nextToken
       }
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2522,93 +20210,357 @@ export const createShoppingCartProduct = /* GraphQL */ `
   ) {
     createShoppingCartProduct(input: $input, condition: $condition) {
       id
-      shoppingcart_id
-      product_id
+      shoppingcartId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
-      }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
       quantity
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2621,93 +20573,357 @@ export const updateShoppingCartProduct = /* GraphQL */ `
   ) {
     updateShoppingCartProduct(input: $input, condition: $condition) {
       id
-      shoppingcart_id
-      product_id
+      shoppingcartId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
-      }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
       quantity
-      created_at
-      updated_at
       createdAt
       updatedAt
     }
@@ -2720,93 +20936,357 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
   ) {
     deleteShoppingCartProduct(input: $input, condition: $condition) {
       id
-      shoppingcart_id
-      product_id
+      shoppingcartId
+      productId
       product {
         id
         title
-        body_html
+        brand
         vendor
-        category_id
-        category {
+        categoryId
+        storeId
+        store {
           id
           name
-          created_at
-          updated_at
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
           createdAt
           updatedAt
         }
-        product_type
-        created_at
-        handle
-        updated_at
-        published_at
-        template_suffix
-        status
-        published_scope
-        tags
-        rating
-        total_orders
-        admin_graphql_api_id
-        variants {
-          nextToken
+        isFeatured
+        category {
+          id
+          name
+          description
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          createdAt
+          updatedAt
         }
-        options {
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
           nextToken
         }
         images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
           nextToken
         }
         reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              storeId
+              store {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                description
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
           nextToken
         }
-        createdAt
-        updatedAt
       }
-      variant_id
+      variantId
       variant {
         id
-        product_id
+        productId
         title
         price
         sku
+        size
+        color
+        status
         position
-        inventory_policy
-        compare_at_price
-        fulfillment_service
-        inventory_management
-        option1
-        option2
-        option3
-        created_at
-        updated_at
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
         taxable
         barcode
-        grams
-        image_id
+        imageUrl
         weight
-        weight_unit
-        inventory_item_id
-        inventory_quantity
-        old_inventory_quantity
-        requires_shipping
-        admin_graphql_api_id
-        createdAt
-        updatedAt
-      }
-      option_id
-      option {
-        id
-        product_id
-        name
-        position
-        values
-        createdAt
-        updatedAt
+        weightUnit
+        inventory
+        blockedInventory
       }
       quantity
-      created_at
-      updated_at
       createdAt
       updatedAt
     }

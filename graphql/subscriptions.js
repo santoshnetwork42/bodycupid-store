@@ -9,9 +9,8 @@ export const onCreateCouponCode = /* GraphQL */ `
       id
       code
       discount
-      expiration_date
-      created_at
-      updated_at
+      expirationSate
+      isActive
       createdAt
       updatedAt
     }
@@ -25,9 +24,8 @@ export const onUpdateCouponCode = /* GraphQL */ `
       id
       code
       discount
-      expiration_date
-      created_at
-      updated_at
+      expirationSate
+      isActive
       createdAt
       updatedAt
     }
@@ -41,9 +39,8 @@ export const onDeleteCouponCode = /* GraphQL */ `
       id
       code
       discount
-      expiration_date
-      created_at
-      updated_at
+      expirationSate
+      isActive
       createdAt
       updatedAt
     }
