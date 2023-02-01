@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function ThumbOne(props) {
   const { index, product } = props;
@@ -254,8 +255,8 @@ export default function ThumbOne(props) {
             onClick={(e) => activeHandler(e, index)}
           >
             <img
-              src={item.src}
-              alt="product thumbnail"
+              src={getPublicImageURL(item.imageKey)}
+              alt={item.alt}
               width="109"
               height="122"
             />

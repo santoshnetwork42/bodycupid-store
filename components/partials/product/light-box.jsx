@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function MediaLightBox(props) {
   const { images, product } = props;
@@ -31,15 +32,13 @@ function MediaLightBox(props) {
     <>
       {isOpen ? (
         <Lightbox
-          mainSrc={process.env.NEXT_PUBLIC_ASSET_URI + images[index].url}
-          nextSrc={
-            process.env.NEXT_PUBLIC_ASSET_URI +
-            images[(index + 1) % images.length].url
-          }
-          prevSrc={
-            process.env.NEXT_PUBLIC_ASSET_URI +
+          mainSrc={getPublicImageURL(images[index].imageKey)}
+          nextSrc={getPublicImageURL(
+            images[(index + 1) % images.length].imageKey
+          )}
+          prevSrc={getPublicImageURL(
             images[(index + images.length - 1) % images.length].url
-          }
+          )}
           onCloseRequest={closeLightBox}
           onMovePrevRequest={setPrevHandler}
           onMoveNextRequest={setNextHandler}
