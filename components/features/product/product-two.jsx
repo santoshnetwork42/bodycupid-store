@@ -9,6 +9,7 @@ import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function ProductTwo(props) {
   const {
@@ -57,14 +58,16 @@ function ProductTwo(props) {
       )
     : 0;
 
+  const thumbImage =
+    product.images.items.find((i) => i.isThumb) || product.images.items[0];
+
   return (
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
         <ALink href={`/product/default/${product.id}`}>
           <LazyLoadImage
-            alt="product"
-            // ! critical we should add this.
-            // src={product.large_pictures[0].url}
+            alt={thumbImage?.alt}
+            src={getPublicImageURL(thumbImage?.imageKey)}
             threshold={500}
             effect="opacity"
             width="1024"
