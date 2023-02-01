@@ -9,6 +9,7 @@ import ThumbTwo from "~/components/partials/product/thumb/thumb-two";
 import MediaLightBox from "~/components/partials/product/light-box";
 
 import { mainSlider3 } from "~/utils/data/carousel";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function MediaOne(props) {
   const { product } = props;
@@ -114,9 +115,9 @@ export default function MediaOne(props) {
           {lgImages.map((image) => (
             <div key={image.id}>
               <Magnifier
-                imageSrc={image.src}
-                imageAlt="magnifier"
-                largeImageSrc={image.src}
+                imageSrc={getPublicImageURL(image.imageKey)}
+                imageAlt={image.alt}
+                largeImageSrc={getPublicImageURL(image.imageKey)}
                 dragToMove={false}
                 mouseActivation="hover"
                 cursorStyleActive="crosshair"

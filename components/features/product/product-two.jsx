@@ -73,21 +73,20 @@ function ProductTwo(props) {
             width="1024"
             height="1024"
           />
-          {/* // ! critical we should add this. */}
 
-          {/* {
-                        product.large_pictures.length >= 2 ?
-                            <LazyLoadImage
-                                alt="product"
-                                src={product.large_pictures[1].url}
-                                threshold={500}
-                                width="1024"
-                                height="1024"
-                                effect="opacity"
-                                wrapperClassName="product-image-hover"
-                            />
-                            : ""
-                    } */}
+          {product.images.items.length > 1 ? (
+            <LazyLoadImage
+              alt={product.images.items[1].alt}
+              src={getPublicImageURL(product.images.items[1].imageKey)}
+              threshold={500}
+              width="1024"
+              height="1024"
+              effect="opacity"
+              wrapperClassName="product-image-hover"
+            />
+          ) : (
+            ""
+          )}
         </ALink>
 
         <div className="product-label-group">

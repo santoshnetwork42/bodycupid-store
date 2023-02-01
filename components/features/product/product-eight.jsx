@@ -9,6 +9,7 @@ import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function ProductEight(props) {
   const {
@@ -58,6 +59,9 @@ function ProductEight(props) {
       )
     : 0;
 
+  const thumbImage =
+    product.images.items.find((i) => i.isThumb) || product.images.items[0];
+
   return (
     <div
       className={`product product-list ${adClass} ${
@@ -69,8 +73,8 @@ function ProductEight(props) {
       <figure className="product-media">
         <ALink href={`/product/default/${product.id}`}>
           <LazyLoadImage
-            alt="product"
-            src={product.images.items[0]}
+            alt={thumbImage?.alt}
+            src={getPublicImageURL(thumbImage?.imageKey)}
             threshold={500}
             effect="opacity"
             width="300"
@@ -79,8 +83,8 @@ function ProductEight(props) {
 
           {product.images.items.length >= 2 ? (
             <LazyLoadImage
-              alt="product"
-              src={product.images.items[1]}
+              alt={product.images.items[1].alt}
+              src={getPublicImageURL(product.images.items[1].imageKey)}
               threshold={500}
               width="300"
               height="338"
