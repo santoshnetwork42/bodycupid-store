@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
-
 import { Auth } from "aws-amplify";
-
-Modal.setAppElement("#__next");
 
 function LoginModal() {
   const [auth, setAuth] = useState(false);
