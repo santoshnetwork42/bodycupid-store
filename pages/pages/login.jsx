@@ -183,7 +183,7 @@ function Login() {
                               }
                             />
                           </div>
-                          {/* <div className="form-footer">
+                          <div className="form-footer">
                             <div className="form-checkbox">
                               <input
                                 type="checkbox"
@@ -198,10 +198,10 @@ function Login() {
                                 Remember me
                               </label>
                             </div>
-                            <ALink href="#" className="lost-link">
+                            <ALink href="/pages/forgot-password" className="lost-link">
                               Lost your password?
                             </ALink>
-                          </div> */}
+                          </div>
                           <button
                             className="btn btn-dark btn-block btn-rounded"
                             type="submit"
