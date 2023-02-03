@@ -7,6 +7,7 @@ import { cartActions } from "~/store/cart";
 import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function Wishlist(props) {
   const { wishlist, addToCart, removeFromWishlist } = props;
@@ -65,10 +66,12 @@ function Wishlist(props) {
                         <ALink href={"/product/default/" + item.id}>
                           <figure>
                             <img
-                              src={item.images.items[0]}
+                              src={getPublicImageURL(
+                                item.images.items[0]?.imageKey
+                              )}
                               width="100"
                               height="100"
-                              alt="product"
+                              alt={item.images.items[0]?.alt}
                             />
                           </figure>
                         </ALink>
@@ -81,15 +84,15 @@ function Wishlist(props) {
                       <td className="product-price">
                         {/* {
                                                             item.price[0] !== item.price[1] ?
-                                                                < span className="amount">${toDecimal(item.price[0])} – ${toDecimal(item.price[1])}</span>
+                                                                < span className="amount">₹{toDecimal(item.price[0])} – ₹{toDecimal(item.price[1])}</span>
                                                                 : item.discount > 0 && item.variants.length > 0 ?
                                                                     <>
-                                                                        <span className="amount">${toDecimal(item.salePrice)}</span>
-                                                                        <span className="amount">${toDecimal(item.price)}</span>
+                                                                        <span className="amount">₹{toDecimal(item.salePrice)}</span>
+                                                                        <span className="amount">₹{toDecimal(item.price)}</span>
                                                                     </>
-                                                                    : <span className="amount">${toDecimal(item.price[0])}</span>
+                                                                    : <span className="amount">₹{toDecimal(item.price[0])}</span>
                                                         } */}
-                        <span className="amount">${toDecimal(item.price)}</span>
+                        <span className="amount">₹{toDecimal(item.price)}</span>
                       </td>
                       <td className="product-stock-status">
                         <span

@@ -178,16 +178,16 @@ function ProductFive(props) {
               product.variants.length > 0 &&
               !product.variants[0].price) ? (
               <>
-                <ins className="new-price">${toDecimal(product.price[0])}</ins>
-                <del className="old-price">${toDecimal(product.price[1])}</del>
+                <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
+                <del className="old-price">₹{toDecimal(product.price[1])}</del>
               </>
             ) : (
               <del className="new-price">
-                ${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}
+                ₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}
               </del>
             )
           ) : (
-            <ins className="new-price">${toDecimal(product.price[0])}</ins>
+            <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
           )}
         </div>
 

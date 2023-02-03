@@ -7,6 +7,7 @@ import Quantity from "~/components/features/quantity";
 import { cartActions } from "~/store/cart";
 
 import { toDecimal, getTotalPrice } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function Cart(props) {
   const { cartList, removeFromCart, updateCart } = props;
@@ -81,10 +82,10 @@ function Cart(props) {
                             <figure>
                               <ALink href={"/product/default/" + item.id}>
                                 <img
-                                  src={item.images.items[0]}
+                                  src={getPublicImageURL(item.images.items[0]?.imageKey)}
                                   width="100"
                                   height="100"
-                                  alt="product"
+                                  alt={item.images.items[0]?.alt}
                                 />
                               </ALink>
                             </figure>
@@ -98,7 +99,7 @@ function Cart(props) {
                           </td>
                           <td className="product-subtotal">
                             <span className="amount">
-                              ${toDecimal(item.price)}
+                              ₹{toDecimal(item.price)}
                             </span>
                           </td>
 
@@ -111,7 +112,7 @@ function Cart(props) {
                           </td>
                           <td className="product-price">
                             <span className="amount">
-                              ${toDecimal(item.price * item.qty)}
+                              ₹{toDecimal(item.price * item.qty)}
                             </span>
                           </td>
                           <td className="product-close">
@@ -179,7 +180,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-subtotal-price">
-                                ${toDecimal(getTotalPrice(cartItems))}
+                                ₹{toDecimal(getTotalPrice(cartItems))}
                               </p>
                             </td>
                           </tr>
@@ -299,7 +300,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ${toDecimal(getTotalPrice(cartItems))}
+                                ₹{toDecimal(getTotalPrice(cartItems))}
                               </p>
                             </td>
                           </tr>

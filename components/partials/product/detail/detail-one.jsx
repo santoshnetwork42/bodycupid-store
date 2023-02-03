@@ -225,17 +225,17 @@ function DetailOne(props) {
       </div>
 
       <div className="product-price mb-2">
-        <ins className="new-price">${toDecimal(product.price || 0)}</ins>
+        <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         {/* {
                     product.price[0] !== product.price[1] ?
                         product.variants.length === 0 || (product.variants.length > 0 && !product.variants[0].price) ?
                             <>
-                                <ins className="new-price">${toDecimal(product.price[0])}</ins>
-                                <del className="old-price">${toDecimal(product.price[1])}</del>
+                                <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
+                                <del className="old-price">₹{toDecimal(product.price[1])}</del>
                             </>
                             :
-                            < del className="new-price">${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}</del>
-                        : <ins className="new-price">${toDecimal(product.price[0])}</ins>
+                            < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
+                        : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
                 } */}
       </div>
 
@@ -344,7 +344,7 @@ function DetailOne(props) {
                       product.variants.items[curIndex].listingPrice ? (
                         <div className="product-price mb-0">
                           <ins className="new-price">
-                            ${toDecimal(product.variants.items[curIndex].price)}
+                            ₹{toDecimal(product.variants.items[curIndex].price)}
                           </ins>
                           <del className="old-price">
                             $
@@ -356,7 +356,7 @@ function DetailOne(props) {
                       ) : (
                         <div className="product-price mb-0">
                           <ins className="new-price">
-                            ${toDecimal(product.variants.items[curIndex].price)}
+                            ₹{toDecimal(product.variants.items[curIndex].price)}
                           </ins>
                         </div>
                       )
@@ -403,31 +403,31 @@ function DetailOne(props) {
                 <div className="product-info">
                   <div className="product-price mb-0">
                     <ins className="new-price">
-                      ${toDecimal(product.price || 0)}
+                      ₹{toDecimal(product.price || 0)}
                     </ins>
                     {/* {
                                                 curIndex > -1 && product.variants[0] ?
                                                     product.variants[curIndex].price ?
                                                         product.variants[curIndex].sale_price ?
                                                             <>
-                                                                <ins className="new-price">${toDecimal(product.variants[curIndex].sale_price)}</ins>
-                                                                <del className="old-price">${toDecimal(product.variants[curIndex].price)}</del>
+                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].sale_price)}</ins>
+                                                                <del className="old-price">₹{toDecimal(product.variants[curIndex].price)}</del>
                                                             </>
                                                             :
                                                             <>
-                                                                <ins className="new-price">${toDecimal(product.variants[curIndex].price)}</ins>
+                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].price)}</ins>
                                                             </>
                                                         : ""
                                                     :
                                                     product.price[0] !== product.price[1] ?
                                                         product.variants.length === 0 ?
                                                             <>
-                                                                <ins className="new-price">${toDecimal(product.price[0])}</ins>
-                                                                <del className="old-price">${toDecimal(product.price[1])}</del>
+                                                                <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
+                                                                <del className="old-price">₹{toDecimal(product.price[1])}</del>
                                                             </>
                                                             :
-                                                            < del className="new-price">${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}</del>
-                                                        : <ins className="new-price">${toDecimal(product.price[0])}</ins>
+                                                            < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
+                                                        : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
                                             } */}
                   </div>
 

@@ -7,6 +7,7 @@ import ALink from "~/components/features/custom-link";
 import { cartActions } from "~/store/cart";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CartMenu(props) {
   const { cartList, removeFromCart } = props;
@@ -40,7 +41,7 @@ function CartMenu(props) {
         <div className="cart-label d-lg-show">
           <span className="cart-name">Shopping Cart:</span>
           <span className="cart-price">
-            ${toDecimal(getTotalPrice(cartList))}
+            ₹{toDecimal(getTotalPrice(cartList))}
           </span>
         </div>
         <i className="d-icon-bag">
@@ -71,8 +72,8 @@ function CartMenu(props) {
                   <figure className="product-media pure-media">
                     <ALink href={"/product/default/" + item.slug}>
                       <img
-                        src={item.images.items[0]}
-                        alt="product"
+                        src={getPublicImageURL(item.images.items[0]?.imageKey)}
+                        alt={item.images.items[0]?.alt}
                         width="80"
                         height="88"
                       />
@@ -97,7 +98,7 @@ function CartMenu(props) {
                     <div className="price-box">
                       <span className="product-quantity">{item.qty}</span>
                       <span className="product-price">
-                        ${toDecimal(item.price)}
+                        ₹{toDecimal(item.price)}
                       </span>
                     </div>
                   </div>
@@ -108,7 +109,7 @@ function CartMenu(props) {
             <div className="cart-total">
               <label>Subtotal:</label>
               <span className="price">
-                ${toDecimal(getTotalPrice(cartList))}
+                ₹{toDecimal(getTotalPrice(cartList))}
               </span>
             </div>
 

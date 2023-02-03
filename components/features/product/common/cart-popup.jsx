@@ -3,6 +3,7 @@ import React from "react";
 import ALink from "~/components/features/custom-link";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function CartPopup(props) {
   const { product } = props;
@@ -16,8 +17,8 @@ export default function CartPopup(props) {
           <figure className="product-media pure-media">
             <ALink href={`/product/default/${product.id}`}>
               <img
-                src={product.images.items[0]}
-                alt="product"
+                src={getPublicImageURL(product.images.items[0]?.imageKey)}
+                alt={product.images.items[0]?.alt}
                 width="90"
                 height="90"
               />
@@ -32,7 +33,7 @@ export default function CartPopup(props) {
             </ALink>
             <span className="price-box">
               <span className="product-quantity">{product.qty}</span>
-              <span className="product-price">${toDecimal(product.price)}</span>
+              <span className="product-price">₹{toDecimal(product.price)}</span>
             </span>
           </div>
         </div>

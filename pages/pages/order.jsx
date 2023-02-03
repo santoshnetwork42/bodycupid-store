@@ -63,7 +63,7 @@ function Order(props) {
                         </div>
                         <div className="overview-item">
                             <span>Total:</span>
-                            <strong>${toDecimal(getTotalPrice(cartList))}</strong>
+                            <strong>₹{toDecimal(getTotalPrice(cartList))}</strong>
                         </div>
                         <div className="overview-item">
                             <span>Payment method:</span>
@@ -87,14 +87,14 @@ function Order(props) {
                                     cartList.map(item =>
                                         <tr key={'order-' + item.name}>
                                             <td className="product-name">{item.name} <span> <i className="fas fa-times"></i> {item.qty}</span></td>
-                                            <td className="product-price">${toDecimal(item.qty * item.price)}</td>
+                                            <td className="product-price">₹{toDecimal(item.qty * item.price)}</td>
                                         </tr>
                                     )}
                                 <tr className="summary-subtotal">
                                     <td>
                                         <h4 className="summary-subtitle">Subtotal:</h4>
                                     </td>
-                                    <td className="summary-subtotal-price">${toDecimal(getTotalPrice(cartList))}</td>
+                                    <td className="summary-subtotal-price">₹{toDecimal(getTotalPrice(cartList))}</td>
                                 </tr>
                                 <tr className="summary-subtotal">
                                     <td>
@@ -113,7 +113,7 @@ function Order(props) {
                                         <h4 className="summary-subtitle">Total:</h4>
                                     </td>
                                     <td>
-                                        <p className="summary-total-price">${toDecimal(getTotalPrice(cartList))}</p>
+                                        <p className="summary-total-price">₹{toDecimal(getTotalPrice(cartList))}</p>
                                     </td>
                                 </tr>
                             </tbody>

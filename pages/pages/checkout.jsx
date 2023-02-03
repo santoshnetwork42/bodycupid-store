@@ -244,7 +244,7 @@ function Checkout(props) {
                                                                     <tr key={'checkout-' + item.name}>
                                                                         <td className="product-name">{item.name} <span
                                                                             className="product-quantity">×&nbsp;{item.qty}</span></td>
-                                                                        <td className="product-total text-body">${toDecimal(item.price * item.qty)}</td>
+                                                                        <td className="product-total text-body">₹{toDecimal(item.price * item.qty)}</td>
                                                                     </tr>
                                                                 )
                                                             }
@@ -253,7 +253,7 @@ function Checkout(props) {
                                                                 <td>
                                                                     <h4 className="summary-subtitle">Subtotal</h4>
                                                                 </td>
-                                                                <td className="summary-subtotal-price pb-0 pt-0">${toDecimal(getTotalPrice(cartList))}
+                                                                <td className="summary-subtotal-price pb-0 pt-0">₹{toDecimal(getTotalPrice(cartList))}
                                                                 </td>
                                                             </tr>
                                                             <tr className="sumnary-shipping shipping-row-last">
@@ -294,7 +294,7 @@ function Checkout(props) {
                                                                     <h4 className="summary-subtitle">Total</h4>
                                                                 </td>
                                                                 <td className=" pt-0 pb-0">
-                                                                    <p className="summary-total-price ls-s text-primary">${toDecimal(getTotalPrice(cartList))}</p>
+                                                                    <p className="summary-total-price ls-s text-primary">₹{toDecimal(getTotalPrice(cartList))}</p>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
