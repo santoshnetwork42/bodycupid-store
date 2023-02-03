@@ -37,21 +37,7 @@ function ProductListOne(props) {
   const gridType = query.type ? query.type : "grid";
 
   useEffect(() => {
-    // Api.get(`${baseUrl}/api/category/products`, {
-    //     params: {
-    //         category: query.category
-    //     }
-    // })
-    //     .then(response => {
-    //         let data = response.data;
-    //         setProducts(data.products);
-    //         setTotalPage(parseInt(data.products.total / perPage) + (data.products.total % perPage ? 1 : 0));
-    //         setLoading(false);
-    //     })
-
-    API.graphql(
-      graphqlOperation(listProducts, { filter: { hasVarient: { eq: true } } })
-    )
+    API.graphql(graphqlOperation(listProducts))
       .then((response) => {
         let data = response.data;
         console.log(data.listProducts);

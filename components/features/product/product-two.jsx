@@ -202,11 +202,11 @@ function ProductTwo(props) {
         <div className="ratings-container">
           <div className="ratings-full">
             {/* // TODO  we have to consider about this */}
-            {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
+            {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
                         <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
             <span
               className="ratings"
-              style={{ width: 20 * product.rating + "%" }}
+              style={{ width: Math.min(20 * product.rating, 100) + "%" }}
             ></span>
             <span className="tooltiptext tooltip-top">
               {toDecimal(product.rating)}
