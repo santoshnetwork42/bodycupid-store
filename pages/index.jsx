@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { API, graphqlOperation } from "aws-amplify";
 
 // import Home Components
-import NewsletterModal from "~/components/features/modals/newsletter-modal";
+// import NewsletterModal from "~/components/features/modals/newsletter-modal";
 import IntroSection from "~/components/partials/home/intro-section";
 import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
@@ -66,7 +66,7 @@ function HomePage() {
           loading={loading}
         />
       </div>
-      <NewsletterModal />
+      {/* <NewsletterModal /> */}
     </div>
   );
 }

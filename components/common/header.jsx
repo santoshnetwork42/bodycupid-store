@@ -30,10 +30,10 @@ export default function Header(props) {
             <div className="header-top">
                 <div className="container">
                     <div className="header-left">
-                        <p className="welcome-msg">Welcome to Wow store message or remove it!</p>
+                        {/* <p className="welcome-msg">Welcome to Wow store message or remove it!</p> */}
                     </div>
                     <div className="header-right">
-                        <div className="dropdown">
+                        {/* <div className="dropdown">
                             <ALink href="#">USD</ALink>
                             <ul className="dropdown-box">
                                 <li><ALink href="#">USD</ALink></li>
@@ -51,7 +51,7 @@ export default function Header(props) {
                                     <ALink href="#">FRH</ALink>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
                         <span className="divider"></span>
                         <ALink href="/pages/contact-us" className="contact d-lg-show"><i className="d-icon-map"></i>Contact</ALink>
