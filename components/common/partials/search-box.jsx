@@ -116,12 +116,12 @@ function SearchForm() {
                                     product.price[0] !== product.price[1] ?
                                         product.variants && product.variants.length === 0 ?
                                             <>
-                                                <span className="new-price mr-1">${toDecimal(product.price[0])}</span>
-                                                <span className="old-price">${toDecimal(product.price[1])}</span>
+                                                <span className="new-price mr-1">₹{toDecimal(product.price[0])}</span>
+                                                <span className="old-price">₹{toDecimal(product.price[1])}</span>
                                             </>
                                             :
-                                            < span className="new-price">${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}</span>
-                                        : <span className="new-price">${toDecimal(product.price[0])}</span>
+                                            < span className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</span>
+                                        : <span className="new-price">₹{toDecimal(product.price[0])}</span>
                                 }
                             </span>
                         </ALink>

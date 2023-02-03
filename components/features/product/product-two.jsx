@@ -188,15 +188,15 @@ function ProductTwo(props) {
                         product.price[0] !== product.price[1] ?
                             product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
                                 <>
-                                    <ins className="new-price">${toDecimal(product.price[0])}</ins>
-                                    <del className="old-price">${toDecimal(product.price[1])}</del>
+                                    <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
+                                    <del className="old-price">₹{toDecimal(product.price[1])}</del>
                                 </>
                                 :
-                                < del className="new-price">${toDecimal(product.price[0])} – ${toDecimal(product.price[1])}</del>
-                            : <ins className="new-price">${toDecimal(product.price[0])}</ins>
+                                < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
+                            : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
                     } */}
-          {/* <ins className="new-price">${toDecimal(product.price)}</ins> */}
-          <ins className="new-price">${toDecimal(product.price || 0)}</ins>
+          {/* <ins className="new-price">₹{toDecimal(product.price)}</ins> */}
+          <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
         <div className="ratings-container">
