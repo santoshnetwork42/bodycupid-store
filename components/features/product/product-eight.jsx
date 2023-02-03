@@ -81,7 +81,7 @@ function ProductEight(props) {
             height="338"
           />
 
-          {product.images.items.length >= 2 ? (
+          {product.images.items.length >= 2 && (
             <LazyLoadImage
               alt={product.images.items[1].alt}
               src={getPublicImageURL(product.images.items[1].imageKey)}
@@ -91,8 +91,6 @@ function ProductEight(props) {
               effect="opacity"
               wrapperClassName="product-image-hover"
             />
-          ) : (
-            ""
           )}
         </ALink>
 
@@ -160,7 +158,7 @@ function ProductEight(props) {
           <div className="ratings-full">
             <span
               className="ratings"
-              style={{ width: 20 * product.ratings + "%" }}
+              style={{ width: Math.min(20 * product.rating, 100) + "%" }}
             ></span>
             <span className="tooltiptext tooltip-top">
               {toDecimal(product.ratings)}

@@ -246,11 +246,11 @@ function DetailOne(props) {
 
       <div className="ratings-container">
         <div className="ratings-full">
-          {/* <span className="ratings" style={{ width: 20 * product.ratings + '%' }}></span>
+          {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
                     <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
           <span
             className="ratings"
-            style={{ width: 20 * product.rating + "%" }}
+            style={{ width: Math.min(20 * product.rating, 100) + "%" }}
           ></span>
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}
@@ -435,7 +435,9 @@ function DetailOne(props) {
                     <div className="ratings-full">
                       <span
                         className="ratings"
-                        style={{ width: 20 * product.ratings + "%" }}
+                        style={{
+                          width: Math.min(20 * product.rating, 100) + "%",
+                        }}
                       ></span>
                       <span className="tooltiptext tooltip-top">
                         {toDecimal(product.ratings)}
