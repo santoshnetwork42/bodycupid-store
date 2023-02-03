@@ -15,11 +15,12 @@ import BrandSection from "~/components/partials/home/brand-section";
 import BlogSection from "~/components/partials/home/blog-section";
 import SmallCollection from "~/components/partials/product/small-collection";
 
-import { listProducts } from "~/graphql/queries";
+import { listProducts, listProductCategories } from "~/graphql/queries";
 
 function HomePage() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const bestSelling = [...products];
   const featured = [...products];
   const latest = [...products];
@@ -27,14 +28,25 @@ function HomePage() {
   const posts = [];
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listProducts))
-      .then((response) => {
-        setProducts(response.data.listProducts.items);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    (async function () {
+      await Promise.all([
+        API.graphql(graphqlOperation(listProducts))
+          .then((response) => {
+            setProducts(response.data.listProducts.items);
+          })
+          .catch((err) => {
+            console.log(err);
+          }),
+        API.graphql(graphqlOperation(listProductCategories, { limit: 4 }))
+          .then((response) => {
+            setCategories(response.data.listProductCategories.items);
+          })
+          .catch((err) => {
+            console.log(err);
+          }),
+      ]);
+      setLoading(false);
+    })();
   }, []);
 
   return (
@@ -51,7 +63,7 @@ function HomePage() {
           <ServiceBox />
         </div>
 
-        <CategorySection />
+        <CategorySection categories={categories} />
         <BestCollection products={bestSelling} loading={loading} />
         <DealSection />
         <FeaturedCollection products={featured} loading={loading} />

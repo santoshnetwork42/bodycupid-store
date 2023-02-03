@@ -1,103 +1,52 @@
-import React from 'react';
+import React from "react";
 import Reveal from "react-awesome-reveal";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import ALink from '~/components/features/custom-link';
+import ALink from "~/components/features/custom-link";
 
-import { fadeIn } from '~/utils/data/keyframes';
+import { fadeIn } from "~/utils/data/keyframes";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-function CategorySection() {
-    return (
-        <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
-            <section className="pt-10 mt-7">
-                <div className="container">
-                    <h2 className="title title-center mb-5">Browse Our Categories</h2>
+function CategorySection({ categories = [] }) {
+  return (
+    <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
+      <section className="pt-10 mt-7">
+        <div className="container">
+          <h2 className="title title-center mb-5">Browse Our Categories</h2>
 
-                    <div className="row">
-                        <div className="col-xs-6 col-lg-3 mb-4">
-                            <div className="category category-default1 category-absolute banner-radius overlay-zoom">
-                                <ALink href={{ pathname: '/shop', query: { category: 'immunity-care' } }}>
-                                    <figure className="category-media">
-                                        <LazyLoadImage
-                                            src="/images/home/categories/category1.jpg"
-                                            alt="Intro Slider"
-                                            effect="opacity; transform"
-                                            width={280}
-                                            height={280}
-                                        />
-                                    </figure>
+          <div className="row">
+            {categories.map((category) => (
+              <div className="col-xs-6 col-lg-3 mb-4" key={category.id}>
+                <div className="category category-default1 category-absolute banner-radius overlay-zoom">
+                  <ALink
+                    href={{
+                      pathname: `/shop/${category.id}`,
+                    }}
+                  >
+                    <figure className="category-media">
+                      <LazyLoadImage
+                        src={getPublicImageURL(category.imageUrl)}
+                        alt={category.name}
+                        effect="opacity; transform"
+                        width="auto"
+                        height={280}
+                      />
+                    </figure>
 
-                                    <div className="category-content">
-                                        <h4 className="category-name font-weight-bold ls-l">Immunity Care</h4>
-                                    </div>
-                                </ALink>
-                            </div>
-                        </div>
-
-                        <div className="col-xs-6 col-lg-3 mb-4">
-                            <div className="category category-default1 category-absolute banner-radius overlay-zoom">
-                                <ALink href={{ pathname: '/shop', query: { category: 'nutrition-and-health' } }}>
-                                    <figure className="category-media">
-                                        <LazyLoadImage
-                                            src="/images/home/categories/category2.jpg"
-                                            alt="Intro Slider"
-                                            effect="opacity; transform"
-                                            width={280}
-                                            height={280}
-                                        />
-                                    </figure>
-
-                                    <div className="category-content">
-                                        <h4 className="category-name font-weight-bold ls-l">Nutrition</h4>
-                                    </div>
-                                </ALink>
-                            </div>
-                        </div>
-
-                        <div className="col-xs-6 col-lg-3 mb-4">
-                            <div className="category category-default1 category-absolute banner-radius overlay-zoom">
-                                <ALink href={{ pathname: '/shop', query: { category: 'specialty-supplements' } }}>
-                                    <figure className="category-media">
-                                        <LazyLoadImage
-                                            src="/images/home/categories/category3.jpg"
-                                            alt="Intro Slider"
-                                            effect="opacity; transform"
-                                            width={280}
-                                            height={280}
-                                        />
-                                    </figure>
-
-                                    <div className="category-content">
-                                        <h4 className="category-name font-weight-bold ls-l">Other Supplements</h4>
-                                    </div>
-                                </ALink>
-                            </div>
-                        </div>
-
-                        <div className="col-xs-6 col-lg-3 mb-4">
-                            <div className="category category-default1 category-absolute banner-radius overlay-zoom">
-                                <ALink href={{ pathname: '/shop', query: { category: 'weight-management' } }}>
-                                    <figure className="category-media">
-                                        <LazyLoadImage
-                                            src="/images/home/categories/category4.jpg"
-                                            alt="Intro Slider"
-                                            effect="opacity; transform"
-                                            width={280}
-                                            height={280}
-                                        />
-                                    </figure>
-
-                                    <div className="category-content">
-                                        <h4 className="category-name font-weight-bold ls-l">Weight Management</h4>
-                                    </div>
-                                </ALink>
-                            </div>
-                        </div>
+                    <div className="category-content">
+                      <h4 className="category-name font-weight-bold ls-l">
+                        {category.name}
+                      </h4>
                     </div>
+                  </ALink>
                 </div>
-            </section>
-        </Reveal>
-    )
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </Reveal>
+  );
 }
 
 export default React.memo(CategorySection);
