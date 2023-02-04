@@ -102,27 +102,7 @@ function Login() {
 
   return (
     <main className="main">
-      <Helmet>
-        <title>Wow React eCommerce Template | Login</title>
-      </Helmet>
-
-      <h1 className="d-none">Wow React eCommerce Template - Login</h1>
-      <nav className="breadcrumb-nav">
-        <div className="container">
-          <ul className="breadcrumb">
-            <li>
-              <ALink href="/">
-                <i className="d-icon-home"></i>
-              </ALink>
-            </li>
-            <li>
-              <ALink href="/shop">Wow Shop</ALink>
-            </li>
-            <li>My Account</li>
-          </ul>
-        </div>
-      </nav>
-      <div className="page-content mt-6 pb-2 mb-10">
+      <div className="page-content mt-6 pb-2 mb-2">
         <div className="container">
           <div className="login-popup">
             <div className="form-box">
@@ -198,7 +178,10 @@ function Login() {
                                 Remember me
                               </label>
                             </div>
-                            <ALink href="/pages/forgot-password" className="lost-link">
+                            <ALink
+                              href="/pages/forgot-password"
+                              className="lost-link"
+                            >
                               Lost your password?
                             </ALink>
                           </div>
