@@ -17,16 +17,9 @@ const initialState = {
 }
 
 function cartReducer(state = initialState, action) {
-    console.log('action', action);
     switch (action.type) {
         case actionTypes.ADD_TO_CART:
             let tmpProduct = { ...action.payload.product };
-
-            console.dir({
-                xcart: state.data,
-                tmpProduct,
-                index: state.data.findIndex(item => item.id === action.payload.product.id),
-            })
             if (state.data.findIndex(item => item.id === action.payload.product.id) > -1) {
                 let tmpData = state.data.reduce((acc, cur) => {
                     if (cur.id === tmpProduct.id) {
@@ -57,7 +50,7 @@ function cartReducer(state = initialState, action) {
             return { ...state, data: cart };
 
         case actionTypes.UPDATE_CART:
-            return { ...state, data: action.payload.products };
+            return { ...state, data: action.payload.products || [] };
 
         case actionTypes.REFRESH_STORE:
             return initialState;

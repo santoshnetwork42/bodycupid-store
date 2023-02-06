@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import Helmet from "react-helmet";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
@@ -6,19 +6,25 @@ import { useRouter } from "next/router";
 import "@aws-amplify/ui-react/styles.css";
 
 import ALink from "~/components/features/custom-link";
+import { connect } from "react-redux";
 
-function Account() {
+function Account({ user }) {
   const router = useRouter();
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     (async function () {
       try {
-        setUser(await Auth.currentAuthenticatedUser());
+        await Auth.currentAuthenticatedUser();
       } catch {
         router.push("/pages/login");
       }
     })();
+  }, []);
+
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut();
+    router.push("/");
+    return true;
   }, []);
 
   if (!user) return <></>;
@@ -74,7 +80,7 @@ function Account() {
                 <a className="nav-link">Account details</a>
               </Tab>
               <Tab className="nav-item">
-                <ALink className="nav-link" href="/" onClick={Auth.signOut}>
+                <ALink className="nav-link" href="/" onClick={handleLogout}>
                   Logout
                 </ALink>
               </Tab>
@@ -86,7 +92,7 @@ function Account() {
                   <ALink
                     href="/"
                     className="text-primary"
-                    onClick={Auth.signOut}
+                    onClick={handleLogout}
                   >
                     Log out
                   </ALink>
@@ -391,4 +397,10 @@ function Account() {
   );
 }
 
-export default React.memo(Account);
+function mapStateToProps(state) {
+  return {
+    user: state.user.data,
+  };
+}
+
+export default connect(mapStateToProps)(Account);

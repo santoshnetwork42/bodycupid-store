@@ -184,7 +184,7 @@ function Cart(props) {
                               </p>
                             </td>
                           </tr>
-                          <tr className="sumnary-shipping shipping-row-last">
+                          {/* <tr className="sumnary-shipping shipping-row-last">
                             <td colSpan="2">
                               <h4 className="summary-subtitle">
                                 Calculate Shipping
@@ -242,10 +242,10 @@ function Cart(props) {
                                 </li>
                               </ul>
                             </td>
-                          </tr>
+                          </tr> */}
                         </tbody>
                       </table>
-                      <div className="shipping-address">
+                      {/* <div className="shipping-address">
                         <label>
                           Shipping to <strong>CA.</strong>
                         </label>
@@ -291,7 +291,7 @@ function Cart(props) {
                         >
                           Update totals
                         </ALink>
-                      </div>
+                      </div> */}
                       <table className="total">
                         <tbody>
                           <tr className="summary-subtotal">

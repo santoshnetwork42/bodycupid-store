@@ -284,7 +284,7 @@ export const videoHandler = (e) => {
 /**
  * utils to get total Price of products in cart.
  */
-export const getTotalPrice = cartItems => {
+export const getTotalPrice = (cartItems = []) => {
     let total = 0;
     if (cartItems) {
         for (let i = 0; i < cartItems.length; i++) {
@@ -295,9 +295,23 @@ export const getTotalPrice = cartItems => {
 }
 
 /**
+ * utils to get total Price of products in cart.
+ */
+export const getOrderTotal = (cartItems = []) => {
+    let total = 0;
+    if (cartItems) {
+        for (let i = 0; i < cartItems.length; i++) {
+            total += cartItems[i].price * parseInt(cartItems[i].quantity, 10);
+        }
+    }
+    return total;
+}
+
+
+/**
  * utils to get number of products in cart
  */
-export const getCartCount = cartItems => {
+export const getCartCount = (cartItems = []) => {
     let total = 0;
 
     for (let i = 0; i < cartItems.length; i++) {

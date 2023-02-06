@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import Helmet from "react-helmet";
+import { Auth, Hub } from "aws-amplify";
 
 import { wrapper } from "../store/index.js";
 import Layout from '~/components/layout';
 
 import { demoActions } from '~/store/demo';
+import { userActions } from '~/store/user';
 
 import { currentDemo } from '~/server/queries';
 
@@ -27,7 +29,29 @@ const App = ({ Component, pageProps }) => {
         if (store.getState().demo.current !== currentDemo) {
             store.dispatch(demoActions.refreshStore(currentDemo));
         }
-    }, [])
+    }, []);
+
+    const setUser = useCallback(async () => {
+        try {
+            const user = await Auth.currentAuthenticatedUser();
+            store.dispatch(userActions.setUser(user));
+        } catch {
+            store.dispatch(userActions.removeUser());
+        }
+    }, [store]);
+
+    useEffect(() => {
+        const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
+        Hub.listen('auth', async (authEvent) => {
+            const { payload: { event } } = authEvent;
+            if (event === "signOut") {
+                store.dispatch(userActions.removeUser());
+            } else if (loggedInEvents.includes(event)) {
+                setUser();
+            }
+        });
+        setUser();
+    }, []);
 
     return (
         <Provider store={store}>
