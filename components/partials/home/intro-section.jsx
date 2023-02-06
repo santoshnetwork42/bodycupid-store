@@ -4,6 +4,7 @@ import Reveal from "react-awesome-reveal";
 
 // import Custom Components
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "~/components/features/optimized-image";
 import OwlCarousel from "~/components/features/owl-carousel";
 
 import { introSlider } from "~/utils/data/carousel";
@@ -29,22 +30,12 @@ function IntroSection({ data }) {
       style={{ backgroundColor: "#dddee0" }}
     >
       <figure>
-        <img
-          src={heroImagePlaceholder}
+        <OptimizedImage
+          placeholder={heroImagePlaceholder}
+          url="/images/home/slides/wow.jpg"
           height={630}
-          width="auto"
           alt="Intro Slider"
         />
-        {/* <img
-          src="/images/home/slides/wow.jpg"
-          height={630}
-          width="auto"
-          alt="Intro Slider"
-          style={{
-            position: "absolute",
-            top: 0,
-          }}
-        /> */}
       </figure>
 
       {/* <div className="container">

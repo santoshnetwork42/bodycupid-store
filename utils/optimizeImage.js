@@ -18,7 +18,7 @@ const optimizeImage = async ({ src, type = "url" }) => {
       const webpBuffer = await sharp(imageBuffer)
         .resize(400)
         .webp({
-          quality: 10,
+          quality: 15,
         })
         .blur(1)
         .toBuffer();
