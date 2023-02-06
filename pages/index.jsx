@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import { API, graphqlOperation } from "aws-amplify";
+import { cwd } from "process";
+import path from "path";
+
+import React from "react";
+import Head from "next/head";
 
 // import Home Components
 // import NewsletterModal from "~/components/features/modals/newsletter-modal";
@@ -15,67 +17,45 @@ import BrandSection from "~/components/partials/home/brand-section";
 import BlogSection from "~/components/partials/home/blog-section";
 import SmallCollection from "~/components/partials/product/small-collection";
 
-import { listProducts, listProductCategories } from "~/graphql/queries";
+import {
+  listProducts as listProductsGql,
+  listProductCategories as listProductCategoriesGql,
+} from "~/graphql/queries";
 
-function HomePage() {
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const bestSelling = [...products];
-  const featured = [...products];
-  const latest = [...products];
-  const onSale = [...products];
-  const posts = [];
+import awsmobile from "~/aws-exports";
+import optimizeImage from "~/utils/optimizeImage";
 
-  useEffect(() => {
-    (async function () {
-      await Promise.all([
-        API.graphql(graphqlOperation(listProducts))
-          .then((response) => {
-            setProducts(response.data.listProducts.items);
-          })
-          .catch((err) => {
-            console.log(err);
-          }),
-        API.graphql(graphqlOperation(listProductCategories, { limit: 4 }))
-          .then((response) => {
-            setCategories(response.data.listProductCategories.items);
-          })
-          .catch((err) => {
-            console.log(err);
-          }),
-      ]);
-      setLoading(false);
-    })();
-  }, []);
-
+function HomePage({ products, categories, heroImagePlaceholder }) {
   return (
     <div className="main home">
-      <Helmet>
+      <Head>
         <title>Wow Life Science - Home</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow Life Science - Homepage</h1>
 
       <div className="page-content">
         <div className="intro-section">
-          <IntroSection />
+          <IntroSection
+            data={{
+              heroImagePlaceholder,
+            }}
+          />
           <ServiceBox />
         </div>
 
         <CategorySection categories={categories} />
-        <BestCollection products={bestSelling} loading={loading} />
+        <BestCollection products={products} />
         <DealSection />
-        <FeaturedCollection products={featured} loading={loading} />
+        <FeaturedCollection products={products} />
         <CtaSection />
-        <BlogSection posts={posts} />
+        <BlogSection posts={[]} />
         <BrandSection />
         <SmallCollection
-          featured={featured}
-          latest={latest}
-          bestSelling={bestSelling}
-          onSale={onSale}
-          loading={loading}
+          featured={products}
+          latest={products}
+          bestSelling={products}
+          onSale={products}
         />
       </div>
       {/* <NewsletterModal /> */}
@@ -83,4 +63,55 @@ function HomePage() {
   );
 }
 
-export default React.memo(HomePage);
+export const getStaticProps = async () => {
+  try {
+    const fetchData = async (query = "", variables = {}) => {
+      const response = await fetch(awsmobile.aws_appsync_graphqlEndpoint, {
+        method: "POST",
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+        headers: {
+          "x-api-key": awsmobile.aws_appsync_apiKey,
+          accept: "*/*",
+          "content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      const data = await response.json();
+
+      return data.data;
+    };
+
+    const { listProducts } = await fetchData(listProductsGql);
+    const { listProductCategories } = await fetchData(listProductCategoriesGql);
+
+    const heroImagePath = path.join(
+      cwd(),
+      "public/images/home/slides/wow-min.jpg"
+    );
+    const { placeholder } = await optimizeImage({
+      src: heroImagePath,
+      type: "path",
+    });
+
+    return {
+      props: {
+        products: listProducts.items,
+        categories: listProductCategories.items,
+        heroImagePlaceholder: placeholder,
+      },
+      revalidate: 15,
+    };
+  } catch (e) {
+    console.log("error >>", e);
+
+    return {
+      props: {},
+      revalidate: 1,
+    };
+  }
+};
+
+export default HomePage;

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Helmet from "react-helmet";
+import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 
@@ -20,9 +20,9 @@ function Wishlist(props) {
 
   return (
     <main className="main">
-      <Helmet>
+      <Head>
         <title>Wow React eCommerce Template | Wishlist</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow React eCommerce Template - Wishlist</h1>
       <nav className="breadcrumb-nav">
