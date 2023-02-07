@@ -10,27 +10,29 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
 import AuthView from "~/pages/pages/login";
-import { createOrder, createOrderProduct } from "~/graphql/mutations";
+import {
+  createOrder,
+  createOrderProduct,
+  createPayment,
+} from "~/graphql/mutations";
 
-import { toDecimal, getTotalPrice } from "~/utils";
+import {
+  toDecimal,
+  getTotalPrice,
+  getShippingPrice,
+  getFinalPrice,
+} from "~/utils";
 import { cartActions } from "~/store/cart";
 
 function Checkout(props) {
   const { cartList, user, emptyCart } = props;
   const router = useRouter();
   const [isFirst, setFirst] = useState(false);
-  const [billingShipping, setBS] = useState(false);
   const [billingAddress, setBillingAddress] = useSetState({
-    country: "in",
-    state: "",
-    city: "",
-    pinCode: "",
-    landmark: "",
-    address: "",
-    location: "",
-    area: "",
-  });
-  const [shippingAddress, setShippingAddress] = useSetState({
+    firstName: user?.attributes?.name,
+    lastName: user?.attributes?.given_name,
+    phone: user?.attributes?.phone_number,
+    email: user?.attributes?.email,
     country: "in",
     state: "",
     city: "",
@@ -44,6 +46,8 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+      const { firstName, lastName, ...restAddress } = billingAddress;
       const {
         data: {
           createOrder: { id: orderId },
@@ -52,19 +56,34 @@ function Checkout(props) {
         query: createOrder,
         variables: {
           input: {
-            userId: user.username,
-            shippingAddress: billingShipping ? shippingAddress : billingAddress,
-            BillingAddress: billingAddress,
+            userId: user?.username,
+            shippingAddress: {
+              name: firstName + " " + lastName,
+              ...restAddress,
+            },
             CouponCodeId: null,
+            totalShippingCharges: getShippingPrice(cartList),
             // orderDate,
             status: "PROCESSING",
           },
         },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+        authMode,
       });
 
-      await Promise.all(
-        cartList.map((p) =>
+      const promise = [
+        API.graphql({
+          query: createPayment,
+          variables: {
+            input: {
+              userId: user?.username,
+              orderId,
+              method: isFirst ? "ONLINE" : "COD",
+              amount: getFinalPrice(cartList),
+            },
+          },
+          authMode,
+        }),
+        ...cartList.map((p) =>
           API.graphql({
             query: createOrderProduct,
             variables: {
@@ -75,16 +94,18 @@ function Checkout(props) {
                 price: p.price,
               },
             },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
+            authMode,
           })
-        )
-      );
+        ),
+      ];
 
-      await emptyCart();
+      await Promise.all(promise);
+
       router.push(`/order/${orderId}`);
+      await emptyCart();
       return false;
     },
-    [billingAddress, shippingAddress, billingShipping, cartList]
+    [billingAddress, cartList, user, isFirst]
   );
 
   return (
@@ -160,9 +181,9 @@ function Checkout(props) {
                 <div className="row">
                   <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
                     <h3 className="title title-simple text-left text-uppercase">
-                      Billing Details
+                      Shipping Address
                     </h3>
-                    {/* <div className="row">
+                    <div className="row">
                       <div className="col-xs-6">
                         <label>First Name *</label>
                         <input
@@ -170,26 +191,52 @@ function Checkout(props) {
                           className="form-control"
                           name="first-name"
                           required
-                          value={bill}
+                          value={billingAddress.firstName}
+                          onChange={(e) =>
+                            setBillingAddress({ firstName: e.target.value })
+                          }
                         />
                       </div>
                       <div className="col-xs-6">
                         <label>Last Name *</label>
                         <input
                           type="text"
-                          className="form-control"  
+                          className="form-control"
                           name="last-name"
                           required
+                          value={billingAddress.lastName}
+                          onChange={(e) =>
+                            setBillingAddress({ lastName: e.target.value })
+                          }
                         />
                       </div>
-                    </div> */}
-                    {/* <label>Company Name (Optional)</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="company-name"
-                      required
-                    /> */}
+                      <div className="col-xs-6">
+                        <label>Phone *</label>
+                        <input
+                          type="tel"
+                          className="form-control"
+                          name="phone"
+                          required
+                          value={billingAddress.phone}
+                          onChange={(e) =>
+                            setBillingAddress({ phone: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="col-xs-6">
+                        <label>Email Address *</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          name="email-address"
+                          required
+                          value={billingAddress.email}
+                          onChange={(e) =>
+                            setBillingAddress({ email: e.target.value })
+                          }
+                        />
+                      </div>
+                    </div>
                     <label>Country / Region *</label>
                     <div className="select-box">
                       <select
@@ -260,11 +307,11 @@ function Checkout(props) {
                     </div>
                     <div className="row">
                       <div className="col-xs-6">
-                        <label>ZIP *</label>
+                        <label>Pincode *</label>
                         <input
                           type="text"
                           className="form-control"
-                          name="zip"
+                          name="pincode"
                           required
                           value={billingAddress.pinCode}
                           onChange={(e) =>
@@ -272,257 +319,7 @@ function Checkout(props) {
                           }
                         />
                       </div>
-                      {/* <div className="col-xs-6">
-                        <label>Phone *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="phone"
-                          required
-                        />
-                      </div> */}
                     </div>
-                    {/* <label>Email Address *</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="email-address"
-                      required
-                    /> */}
-
-                    {/* <SlideToggle duration={300} collapsed>
-                      {({ onToggle, setCollapsibleElement }) => (
-                        <div className="form-checkbox mb-0 pt-0">
-                          <input
-                            type="checkbox"
-                            className="custom-checkbox"
-                            id="create-account"
-                            name="create-account"
-                            onChange={onToggle}
-                          />
-                          <label
-                            className="form-control-label ls-s"
-                            htmlFor="create-account"
-                          >
-                            Create an account?
-                          </label>
-
-                          <div
-                            ref={setCollapsibleElement}
-                            style={{ overflow: "hidden" }}
-                          >
-                            <label htmlFor="account_username" className="pt-4">
-                              Account username&nbsp;
-                              <abbr className="required" title="required">
-                                *
-                              </abbr>
-                            </label>
-
-                            <input
-                              type="text"
-                              className="form-control"
-                              name="account_username"
-                              id="account_username"
-                              placeholder="Username"
-                              rows="5"
-                            />
-
-                            <label htmlFor="account_password">
-                              Create account password&nbsp;
-                              <abbr className="required" title="required">
-                                *
-                              </abbr>
-                            </label>
-
-                            <input
-                              type="password"
-                              className="form-control mb-3"
-                              name="account_password"
-                              id="account_password"
-                              placeholder="Password"
-                              rows="5"
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </SlideToggle> */}
-
-                    <SlideToggle duration={300} collapsed>
-                      {({ onToggle, setCollapsibleElement }) => (
-                        <div className="form-checkbox mb-6">
-                          <input
-                            type="checkbox"
-                            className="custom-checkbox"
-                            id="different-address"
-                            name="different-address"
-                            onChange={(e) => {
-                              onToggle(e);
-                              setBS(e.target.checked);
-                            }}
-                          />
-                          <label
-                            className="form-control-label ls-s"
-                            htmlFor="different-address"
-                          >
-                            Ship to a different address?
-                          </label>
-
-                          <div
-                            ref={setCollapsibleElement}
-                            style={{ overflow: "hidden" }}
-                          >
-                            {billingShipping && (
-                              <div className="mt-4">
-                                {/* <div className="row pt-4">
-                              <div className="col-xs-6">
-                                <label>First Name *</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="first-name"
-                                  required
-                                />
-                              </div>
-                              <div className="col-xs-6">
-                                <label>Last Name *</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="last-name"
-                                  required
-                                />
-                              </div>
-                            </div> */}
-                                {/* <label>Company Name (Optional)</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              name="company-name"
-                              required
-                            /> */}
-                                <label>Country / Region *</label>
-                                <div className="select-box">
-                                  <select
-                                    name="country"
-                                    className="form-control"
-                                    defaultValue="us"
-                                    value={shippingAddress.country}
-                                    onChange={(e) =>
-                                      setShippingAddress({
-                                        country: e.target.value,
-                                      })
-                                    }
-                                  >
-                                    <option value="in">India</option>
-                                    <option value="us">
-                                      United States (US)
-                                    </option>
-                                    <option value="uk"> United Kingdom</option>
-                                    <option value="fr">France</option>
-                                    <option value="aus">Austria</option>
-                                  </select>
-                                </div>
-                                <label>Street Address *</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="address1"
-                                  required
-                                  placeholder="House number and street name"
-                                  value={shippingAddress.address}
-                                  onChange={(e) =>
-                                    setShippingAddress({
-                                      address: e.target.value,
-                                    })
-                                  }
-                                />
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="address2"
-                                  placeholder="Apartment, suite, unit, etc. (optional)"
-                                  value={shippingAddress.location}
-                                  onChange={(e) =>
-                                    setShippingAddress({
-                                      location: e.target.value,
-                                    })
-                                  }
-                                />
-                                <div className="row">
-                                  <div className="col-xs-6">
-                                    <label>Town / City *</label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      name="city"
-                                      required
-                                      value={shippingAddress.city}
-                                      onChange={(e) =>
-                                        setShippingAddress({
-                                          city: e.target.value,
-                                        })
-                                      }
-                                    />
-                                  </div>
-                                  <div className="col-xs-6">
-                                    <label>State *</label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      name="state"
-                                      required
-                                      value={shippingAddress.state}
-                                      onChange={(e) =>
-                                        setShippingAddress({
-                                          state: e.target.value,
-                                        })
-                                      }
-                                    />
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-xs-6">
-                                    <label>ZIP *</label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      name="zip"
-                                      required
-                                      value={shippingAddress.pinCode}
-                                      onChange={(e) =>
-                                        setShippingAddress({
-                                          pinCode: e.target.value,
-                                        })
-                                      }
-                                    />
-                                  </div>
-                                  {/* <div className="col-xs-6">
-                                <label>Phone *</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  name="phone"
-                                  required
-                                />
-                              </div> */}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </SlideToggle>
-
-                    {/* <h2 className="title title-simple text-uppercase text-left mt-6">
-                      Additional Information
-                    </h2>
-                    <label>Order Notes (Optional)</label>
-                    <textarea
-                      className="form-control pb-2 pt-2 mb-0"
-                      cols="30"
-                      rows="5"
-                      placeholder="Notes about your order, e.g. special notes for delivery"
-                    ></textarea> */}
                   </div>
 
                   <aside className="col-lg-5 sticky-sidebar-wrapper">
@@ -564,64 +361,14 @@ function Checkout(props) {
                                 ₹{toDecimal(getTotalPrice(cartList))}
                               </td>
                             </tr>
-                            <tr className="sumnary-shipping shipping-row-last">
-                              <td colSpan="2">
-                                <h4 className="summary-subtitle">
-                                  Calculate Shipping
-                                </h4>
-                                <ul>
-                                  <li>
-                                    <div className="custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="flat_rate"
-                                        name="shipping"
-                                        className="custom-control-input"
-                                        defaultChecked
-                                      />
-                                      <label
-                                        className="custom-control-label"
-                                        htmlFor="flat_rate"
-                                      >
-                                        Flat rate
-                                      </label>
-                                    </div>
-                                  </li>
-
-                                  <li>
-                                    <div className="custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="free-shipping"
-                                        name="shipping"
-                                        className="custom-control-input"
-                                      />
-                                      <label
-                                        className="custom-control-label"
-                                        htmlFor="free-shipping"
-                                      >
-                                        Free shipping
-                                      </label>
-                                    </div>
-                                  </li>
-
-                                  <li>
-                                    <div className="custom-radio">
-                                      <input
-                                        type="radio"
-                                        id="local_pickup"
-                                        name="shipping"
-                                        className="custom-control-input"
-                                      />
-                                      <label
-                                        className="custom-control-label"
-                                        htmlFor="local_pickup"
-                                      >
-                                        Local pickup
-                                      </label>
-                                    </div>
-                                  </li>
-                                </ul>
+                            <tr className="summary-subtotal">
+                              <td>
+                                <h4 className="summary-subtitle">Shipping</h4>
+                              </td>
+                              <td className="summary-subtotal-price pb-0 pt-0">
+                                {getShippingPrice(cartList)
+                                  ? `₹${toDecimal(getShippingPrice(cartList))}`
+                                  : "Free"}
                               </td>
                             </tr>
                             <tr className="summary-total">
@@ -630,7 +377,7 @@ function Checkout(props) {
                               </td>
                               <td className=" pt-0 pb-0">
                                 <p className="summary-total-price ls-s text-primary">
-                                  ₹{toDecimal(getTotalPrice(cartList))}
+                                  ₹{toDecimal(getFinalPrice(cartList))}
                                 </p>
                               </td>
                             </tr>
@@ -652,16 +399,15 @@ function Checkout(props) {
                                   !isFirst && setFirst(!isFirst);
                                 }}
                               >
-                                Check payments
+                                Pay Online
                               </ALink>
                             </div>
 
                             <Collapse in={isFirst}>
                               <div className="card-wrapper">
                                 <div className="card-body ls-m overflow-hidden">
-                                  Please send a check to Store Name, Store
-                                  Street, Store Town, Store State / County,
-                                  Store Postcode.
+                                  Use credit/debit card, net-banking, UPI,
+                                  wallets to complete the payment.
                                 </div>
                               </div>
                             </Collapse>
@@ -683,9 +429,8 @@ function Checkout(props) {
                             <Collapse in={!isFirst}>
                               <div className="card-wrapper">
                                 <div className="card-body ls-m overflow-hidden">
-                                  Please send a check to Store Name, Store
-                                  Street, Store Town, Store State / County,
-                                  Store Postcode.
+                                  Pay in cash or pay in person at the time of
+                                  delivery with GPay/PayTM/PhonePe.
                                 </div>
                               </div>
                             </Collapse>
@@ -697,6 +442,7 @@ function Checkout(props) {
                             className="custom-checkbox"
                             id="terms-condition"
                             name="terms-condition"
+                            required
                           />
                           <label
                             className="form-control-label"

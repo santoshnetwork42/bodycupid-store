@@ -6,11 +6,11 @@ import { API } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { getOrder } from "~/graphql/queries";
 
-import { toDecimal, getOrderTotal } from "~/utils";
+import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 import { useEffect, useState } from "react";
 
 function Order(props) {
-  const { cartList } = props;
+  const { user } = props;
   const [order, setOrder] = useState(null);
 
   const router = useRouter();
@@ -22,12 +22,12 @@ function Order(props) {
       const response = await API.graphql({
         query: getOrder,
         variables: { id: orderId },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
       console.log(response.data.getOrder);
       setOrder(response.data.getOrder);
     })();
-  }, [orderId]);
+  }, [orderId, user]);
 
   return (
     <main className="main order">
@@ -107,21 +107,23 @@ function Order(props) {
             </div>
             <div className="overview-item">
               <span>Date:</span>
-              <strong>{order?.createdAt}</strong>
+              <strong>{formateDate(order?.createdAt)}</strong>
             </div>
             <div className="overview-item">
               <span>Email:</span>
-              <strong>{order?.user?.email}</strong>
+              <strong>{order?.shippingAddress?.email}</strong>
             </div>
             <div className="overview-item">
               <span>Total:</span>
-              <strong>
-                ₹{toDecimal(getOrderTotal(order?.products?.items))}
-              </strong>
+              <strong>₹{toDecimal(order?.payments?.items[0].amount)}</strong>
             </div>
             <div className="overview-item">
               <span>Payment method:</span>
-              <strong>Cash on delivery</strong>
+              <strong>
+                {order?.payments?.items[0].method === "COD"
+                  ? "Cash on delivery"
+                  : "Online"}
+              </strong>
             </div>
           </div>
 
@@ -165,13 +167,21 @@ function Order(props) {
                   <td>
                     <h4 className="summary-subtitle">Shipping:</h4>
                   </td>
-                  <td className="summary-subtotal-price">Free shipping</td>
+                  <td className="summary-subtotal-price">
+                    {order?.totalShippingCharges
+                      ? `₹${toDecimal(order?.totalShippingCharges)}`
+                      : "Free shipping"}
+                  </td>
                 </tr>
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Payment method:</h4>
                   </td>
-                  <td className="summary-subtotal-price">Cash on delivery</td>
+                  <td className="summary-subtotal-price">
+                    {order?.payments?.items[0].method === "COD"
+                      ? "Cash on delivery"
+                      : "Online"}
+                  </td>
                 </tr>
                 <tr className="summary-subtotal">
                   <td>
@@ -179,7 +189,7 @@ function Order(props) {
                   </td>
                   <td>
                     <p className="summary-total-price">
-                      ₹{toDecimal(getOrderTotal(order?.products?.items))}
+                      ₹{toDecimal(order?.payments?.items[0].amount)}
                     </p>
                   </td>
                 </tr>
@@ -187,30 +197,34 @@ function Order(props) {
             </table>
           </div>
           <h2 className="title title-simple text-left pt-10 mb-2">
-            Billing Address
+            Shipping Address
           </h2>
           <div className="address-info pb-8 mb-6">
             <p className="address-detail pb-2">
-              {order?.user?.firstName + " " + order?.user?.lastName}
+              {order?.shippingAddress?.name}
               <br />
-              {order?.BillingAddress?.address}
-              {!!order?.BillingAddress?.location && (
+              {order?.shippingAddress?.address}
+              {!!order?.shippingAddress?.location && (
                 <>
                   <br />
-                  {order?.BillingAddress?.location}
+                  {order?.shippingAddress?.location}
                 </>
               )}
               <br />
               {
-                (order?.BillingAddress?.city + ", ",
-                order?.BillingAddress?.state +
+                (order?.shippingAddress?.city + ", ",
+                order?.shippingAddress?.state +
                   ", " +
-                  order?.BillingAddress?.country)
+                  order?.shippingAddress?.country)
               }
               <br />
-              {order?.BillingAddress?.pinCode}
+              {order?.shippingAddress?.pinCode}
             </p>
-            <p className="email">{order?.user?.email}</p>
+            <p className="email">
+              {order?.shippingAddress?.email}
+              <br />
+              {order?.shippingAddress?.phone}
+            </p>
           </div>
 
           <ALink
@@ -227,7 +241,7 @@ function Order(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data ? state.cart.data : [],
+    user: state.user.data,
   };
 }
 

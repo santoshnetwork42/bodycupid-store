@@ -297,8 +297,25 @@ export const getTotalPrice = (cartItems = []) => {
 /**
  * utils to get total Price of products in cart.
  */
-export const getOrderTotal = (cartItems = []) => {
-    let total = 0;
+export const getShippingPrice = (cartItems = []) => {
+    const total = getTotalPrice(cartItems);
+    return total > 399 ? 0 : 51;
+}
+
+/**
+ * utils to get total Price of products in cart with shipping.
+ */
+export const getFinalPrice = (cartItems = []) => {
+    const total = getTotalPrice(cartItems);
+    const shipping = getShippingPrice(cartItems);
+    return total + shipping;
+}
+
+/**
+ * utils to get total Price of products in cart.
+ */
+export const getOrderTotal = (cartItems = [], ...restAmount) => {
+    let total = restAmount.reduce((a, b) => a + b, 0);
     if (cartItems) {
         for (let i = 0; i < cartItems.length; i++) {
             total += cartItems[i].price * parseInt(cartItems[i].quantity, 10);
@@ -326,4 +343,12 @@ export const getCartCount = (cartItems = []) => {
  */
 export const toDecimal = (price, fixedCount = 2) => {
     return parseFloat(price || 0).toLocaleString(undefined, { minimumFractionDigits: fixedCount, maximumFractionDigits: fixedCount });
+}
+
+/**
+ * utils to formate date
+ */
+export const formateDate = (date) => {
+    const dt = date ? new Date(date) : new Date();
+    return dt.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 }
