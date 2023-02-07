@@ -19,9 +19,11 @@ const OptimizedImage = ({ optimizedData, alt, ...props }) => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   fetchImage();
-    // }, 1200);
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        fetchImage();
+      }, 400);
+    });
   }, []);
 
   return (
