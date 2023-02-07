@@ -90,6 +90,7 @@ export default function Header({ navbar }) {
                     width: 153,
                     height: 44,
                   }}
+                  loading="eager"
                   alt="logo"
                 />
               ) : (

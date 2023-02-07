@@ -30,7 +30,11 @@ function IntroSection({ data }) {
       style={{ backgroundColor: "#dddee0" }}
     >
       <figure>
-        <OptimizedImage optimizedData={banner} alt="Intro Slider" />
+        <OptimizedImage
+          optimizedData={banner}
+          loading="eager"
+          alt="Intro Slider"
+        />
       </figure>
 
       {/* <div className="container">

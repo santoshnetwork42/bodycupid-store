@@ -18,6 +18,7 @@ export default function Footer({ footer }) {
                       width: 154,
                       height: 43,
                     }}
+                    loading="lazy"
                     alt="Footer logo"
                   />
                 ) : (

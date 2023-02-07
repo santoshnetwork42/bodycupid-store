@@ -155,7 +155,7 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: 15,
+      revalidate: 60,
     };
   } catch (e) {
     return {

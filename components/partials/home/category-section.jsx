@@ -26,6 +26,7 @@ function CategorySection({ categories = [] }) {
                       <OptimizedImage
                         optimizedData={category.image}
                         alt={category.name}
+                        loading="lazy"
                       />
                     </figure>
 
