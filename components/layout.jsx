@@ -73,16 +73,16 @@ function Layout({ children, navbar, footer, closeQuickview }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900;SegoeScript:700&display=swap"
         />
-        <link
+        {/* <link
           rel="stylesheet"
           type="text/css"
           href="/vendor/riode-fonts/riode-fonts.css"
-        />
-        <link
+        /> */}
+        {/* <link
           rel="stylesheet"
           type="text/css"
           href="/vendor/fontawesome-free/css/all.min.css"
-        />
+        /> */}
       </Head>
       <div className="page-wrapper">
         <Header navbar={navbar} />
