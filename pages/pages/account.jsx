@@ -3,7 +3,6 @@ import Helmet from "react-helmet";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
-import "@aws-amplify/ui-react/styles.css";
 
 import ALink from "~/components/features/custom-link";
 import { connect } from "react-redux";
