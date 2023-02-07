@@ -19,9 +19,9 @@ const OptimizedImage = ({ optimizedData, alt, ...props }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchImage();
-    }, 1200);
+    // setTimeout(() => {
+    //   fetchImage();
+    // }, 1200);
   }, []);
 
   return (
