@@ -1,11 +1,10 @@
 import React from "react";
 import Reveal from "react-awesome-reveal";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "~/components/features/optimized-image";
 
 import { fadeIn } from "~/utils/data/keyframes";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CategorySection({ categories = [] }) {
   return (
@@ -24,12 +23,9 @@ function CategorySection({ categories = [] }) {
                     }}
                   >
                     <figure className="category-media">
-                      <LazyLoadImage
-                        src={getPublicImageURL(category.imageUrl)}
+                      <OptimizedImage
+                        optimizedData={category.image}
                         alt={category.name}
-                        effect="opacity; transform"
-                        width="auto"
-                        height={280}
                       />
                     </figure>
 

@@ -21,6 +21,7 @@ Amplify.configure({ ...awsconfig, ssr: true });
 
 const App = ({ Component, pageProps }) => {
   const store = useStore();
+  const { navbar, footer } = pageProps;
 
   useEffect(() => {
     if (store.getState().demo.current !== currentDemo) {
@@ -58,7 +59,7 @@ const App = ({ Component, pageProps }) => {
           <meta name="author" content="D-THEMES" />
         </Head>
 
-        <Layout>
+        <Layout navbar={navbar} footer={footer}>
           <Component {...pageProps} />
         </Layout>
       </PersistGate>

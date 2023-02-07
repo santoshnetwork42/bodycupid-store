@@ -17,7 +17,7 @@ import {
 } from "~/utils/data/keyframes";
 
 function IntroSection({ data }) {
-  const { heroImagePlaceholder } = data;
+  const { banner } = data;
 
   return (
     // <OwlCarousel
@@ -30,12 +30,7 @@ function IntroSection({ data }) {
       style={{ backgroundColor: "#dddee0" }}
     >
       <figure>
-        <OptimizedImage
-          placeholder={heroImagePlaceholder}
-          url="/images/home/slides/wow.jpg"
-          height={630}
-          alt="Intro Slider"
-        />
+        <OptimizedImage optimizedData={banner} alt="Intro Slider" />
       </figure>
 
       {/* <div className="container">

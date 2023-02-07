@@ -1,8 +1,15 @@
-import sharp from "sharp";
+import path from "path";
 import fs from "fs/promises";
+import { cwd } from "process";
+import sharp from "sharp";
 
-const optimizeImage = async ({ src, type = "url" }) => {
+const optimizeImage = async ({ src, type = "url", options = {} }) => {
   let output = "";
+  const { quality = 15, resize = 400, blur = 1 } = options;
+
+  const returnValues = {
+    originalUrl: src,
+  };
 
   try {
     let imageBuffer = null;
@@ -10,25 +17,34 @@ const optimizeImage = async ({ src, type = "url" }) => {
     if (type === "url") {
       const fetchImageResponse = await fetch(src);
       imageBuffer = Buffer.from(await fetchImageResponse.arrayBuffer());
-    } else if (type === "path") {
-      imageBuffer = await fs.readFile(src);
+    } else if (type === "self-hosted") {
+      const fullPath = path.join(cwd(), "public", src);
+
+      imageBuffer = await fs.readFile(fullPath);
     }
 
     if (imageBuffer) {
-      const webpBuffer = await sharp(imageBuffer)
-        .resize(400)
+      const sharpInstance = sharp(imageBuffer);
+      const imageMetaData = await sharpInstance.metadata();
+
+      const webpBuffer = await sharpInstance
+        .resize(resize)
         .webp({
-          quality: 15,
+          quality,
         })
-        .blur(1)
+        .blur(blur)
         .toBuffer();
       output = `data:image/webp;base64,${webpBuffer.toString("base64")}`;
+
+      returnValues.placeholder = output;
+      returnValues.width = imageMetaData.width;
+      returnValues.height = imageMetaData.height;
     }
   } catch (e) {}
 
-  return {
-    placeholder: output,
-  };
+  return returnValues;
+
+  return {};
 };
 
 export default optimizeImage;

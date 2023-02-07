@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 
-const OptimizedImage = ({ placeholder, url, ...props }) => {
+const OptimizedImage = ({ optimizedData, alt, ...props }) => {
+  const { originalUrl, placeholder, width, height } = optimizedData;
   const imageRef = useRef(null);
 
   const fetchImage = async () => {
     const image = new Image();
-    image.src = url;
+    image.src = originalUrl;
+
+    image.width = width;
+    image.height = height;
 
     image.addEventListener("load", (e) => {
       if (!imageRef.current) return;
-
       imageRef.current.innerHTML = "";
       imageRef.current.replaceWith(image);
     });
@@ -18,10 +21,19 @@ const OptimizedImage = ({ placeholder, url, ...props }) => {
   useEffect(() => {
     setTimeout(() => {
       fetchImage();
-    }, 400);
+    }, 1200);
   }, []);
 
-  return <img {...props} src={placeholder} ref={imageRef} alt="" />;
+  return (
+    <img
+      {...props}
+      src={placeholder}
+      ref={imageRef}
+      width={width}
+      height={height}
+      alt={alt}
+    />
+  );
 };
 
 export default OptimizedImage;

@@ -26,7 +26,7 @@ import {
   resizeHandler,
 } from "~/utils";
 
-function Layout({ children, closeQuickview }) {
+function Layout({ children, navbar, footer, closeQuickview }) {
   const router = useRouter();
 
   useLayoutEffect(() => {
@@ -85,11 +85,11 @@ function Layout({ children, closeQuickview }) {
         />
       </Head>
       <div className="page-wrapper">
-        <Header />
+        <Header navbar={navbar} />
 
         {children}
 
-        <Footer />
+        <Footer footer={footer} />
 
         <StickyFooter />
       </div>

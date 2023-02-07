@@ -24,8 +24,9 @@ import {
 
 import awsmobile from "~/aws-exports";
 import optimizeImage from "~/utils/optimizeImage";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-function HomePage({ products, categories, heroImagePlaceholder }) {
+function HomePage({ hero, products, categories, brands }) {
   return (
     <div className="main home">
       <Head>
@@ -36,11 +37,7 @@ function HomePage({ products, categories, heroImagePlaceholder }) {
 
       <div className="page-content">
         <div className="intro-section">
-          <IntroSection
-            data={{
-              heroImagePlaceholder,
-            }}
-          />
+          <IntroSection data={hero} />
           <ServiceBox />
         </div>
 
@@ -50,7 +47,7 @@ function HomePage({ products, categories, heroImagePlaceholder }) {
         <FeaturedCollection products={products} />
         <CtaSection />
         <BlogSection posts={[]} />
-        <BrandSection />
+        <BrandSection brands={brands} />
         <SmallCollection
           featured={products}
           latest={products}
@@ -84,31 +81,85 @@ export const getStaticProps = async () => {
       return data.data;
     };
 
+    const optimizedLogoImage = await optimizeImage({
+      src: "/images/logo.png",
+      options: {
+        resize: 150,
+        blur: 2,
+      },
+      type: "self-hosted",
+    });
+    const optimizedFooterImage = await optimizeImage({
+      src: "/images/logo-footer.png",
+      options: {
+        resize: 150,
+        blur: 2,
+      },
+      type: "self-hosted",
+    });
+
+    const optimizedHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow.jpg",
+      type: "self-hosted",
+    });
+
     const { listProducts } = await fetchData(listProductsGql);
     const { listProductCategories } = await fetchData(listProductCategoriesGql);
 
-    const heroImagePath = path.join(
-      cwd(),
-      "public/images/home/slides/wow-min.jpg"
-    );
-    const { placeholder } = await optimizeImage({
-      src: heroImagePath,
-      type: "path",
-    });
+    for (const category of listProductCategories.items) {
+      const imageUrl = getPublicImageURL(category.imageUrl);
+      const optimizedCategoryImage = await optimizeImage({
+        src: imageUrl,
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
+
+      delete category.imageUrl;
+      category.image = optimizedCategoryImage;
+    }
+
+    const brands = [
+      "/images/brands/1.png",
+      "/images/brands/2.png",
+      "/images/brands/3.png",
+      "/images/brands/4.png",
+      "/images/brands/5.png",
+      "/images/brands/6.png",
+    ];
+    for (const brand in brands) {
+      const optimizedBrand = await optimizeImage({
+        src: brands[brand],
+        type: "self-hosted",
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
+      brands[brand] = optimizedBrand;
+    }
 
     return {
       props: {
+        navbar: {
+          logo: optimizedLogoImage,
+        },
+        hero: {
+          banner: optimizedHeroImage,
+        },
         products: listProducts.items,
         categories: listProductCategories.items,
-        heroImagePlaceholder: placeholder,
+        brands,
+        footer: {
+          logo: optimizedFooterImage,
+        },
       },
       revalidate: 15,
     };
   } catch (e) {
-    console.log("error >>", e);
-
     return {
-      props: {},
+      notFound: true,
       revalidate: 1,
     };
   }
