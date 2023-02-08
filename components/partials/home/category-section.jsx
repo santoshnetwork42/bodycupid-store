@@ -31,9 +31,9 @@ function CategorySection({ categories = [] }) {
                     </figure>
 
                     <div className="category-content">
-                      <h4 className="category-name font-weight-bold ls-l">
+                      <h3 className="category-name font-weight-bold ls-l">
                         {category.name}
-                      </h4>
+                      </h3>
                     </div>
                   </ALink>
                 </div>

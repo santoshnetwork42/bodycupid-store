@@ -13,6 +13,7 @@ const OptimizedImage = ({ optimizedData, alt, spanAttributes, ...props }) => {
 
     image.width = width;
     image.height = height;
+    image.alt = alt;
 
     image.addEventListener("load", (e) => {
       if (!imageRef.current) return;
