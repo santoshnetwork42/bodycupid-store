@@ -358,5 +358,5 @@ export const toDecimal = (price, fixedCount = 2) => {
  */
 export const formateDate = (date) => {
     const dt = date ? new Date(date) : new Date();
-    return dt.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    return dt.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
 }
