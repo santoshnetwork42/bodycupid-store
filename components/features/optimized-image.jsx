@@ -1,10 +1,13 @@
 import React, { useEffect, useMemo, useRef } from "react";
 
-const OptimizedImage = ({ optimizedData, alt, ...props }) => {
+const OptimizedImage = ({ optimizedData, alt, spanAttributes, ...props }) => {
   const { originalUrl, placeholder, width, height } = optimizedData;
   const imageRef = useRef(null);
 
   const fetchImage = async () => {
+    console.log("aaaa called");
+
+    window.imagesReplaced = true;
     const image = new Image();
     image.src = originalUrl;
 
@@ -19,22 +22,28 @@ const OptimizedImage = ({ optimizedData, alt, ...props }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        fetchImage();
-      }, 400);
-    });
+    if (document.readyState === "loading") {
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          fetchImage();
+        }, 400);
+      });
+    } else {
+      fetchImage();
+    }
   }, []);
 
   return (
-    <img
-      {...props}
-      src={placeholder}
-      ref={imageRef}
-      width={width}
-      height={height}
-      alt={alt}
-    />
+    <span {...spanAttributes}>
+      <img
+        {...props}
+        src={placeholder}
+        ref={imageRef}
+        width={width}
+        height={height}
+        alt={alt}
+      />
+    </span>
   );
 };
 

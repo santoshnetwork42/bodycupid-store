@@ -16,7 +16,7 @@ function BrandSection({ brands }) {
         <div className="container">
           <OwlCarousel adClass="owl-theme brand-carousel" options={brandSlider}>
             {brands.map((brand) => (
-              <figure>
+              <figure key={brand.originalUrl}>
                 <OptimizedImage optimizedData={brand} alt="Brand" />
               </figure>
             ))}

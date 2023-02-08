@@ -1,6 +1,3 @@
-import { cwd } from "process";
-import path from "path";
-
 import React from "react";
 import Head from "next/head";
 
@@ -27,6 +24,8 @@ import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function HomePage({ hero, products, categories, brands }) {
+  console.log("products >>", products);
+
   return (
     <div className="main home">
       <Head>
@@ -118,6 +117,34 @@ export const getStaticProps = async () => {
 
       delete category.imageUrl;
       category.image = optimizedCategoryImage;
+    }
+    for (const product of listProducts.items) {
+      for (const image in product.images.items) {
+        const imageUrl = getPublicImageURL(
+          product.images.items[image].imageKey
+        );
+
+        const optimizedProductImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
+
+        product.images.items[image].image = optimizedProductImage;
+      }
+
+      const imageUrl = getPublicImageURL(product.thumbImages);
+      const optimizedProductImage = await optimizeImage({
+        src: imageUrl,
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
+
+      product.image = optimizedProductImage;
     }
 
     const brands = [
