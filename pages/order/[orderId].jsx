@@ -173,6 +173,16 @@ function Order(props) {
                       : "Free shipping"}
                   </td>
                 </tr>
+                {!!order?.totalDiscount && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Discount:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      ₹{toDecimal(order?.totalDiscount)}
+                    </td>
+                  </tr>
+                )}
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Payment method:</h4>

@@ -21,11 +21,12 @@ import {
   getTotalPrice,
   getShippingPrice,
   getFinalPrice,
+  getCouponTotal,
 } from "~/utils";
 import { cartActions } from "~/store/cart";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart } = props;
+  const { cartList, user, emptyCart, coupons } = props;
   const router = useRouter();
   const [isFirst, setFirst] = useState(false);
   const [billingAddress, setBillingAddress] = useSetState({
@@ -61,9 +62,9 @@ function Checkout(props) {
               name: firstName + " " + lastName,
               ...restAddress,
             },
-            CouponCodeId: null,
+            CouponCodeId: coupons[0]?.id,
             totalShippingCharges: getShippingPrice(cartList),
-            // orderDate,
+            totalDiscount: getCouponTotal(coupons),
             status: "PROCESSING",
           },
         },
@@ -78,7 +79,7 @@ function Checkout(props) {
               userId: user?.username,
               orderId,
               method: isFirst ? "ONLINE" : "COD",
-              amount: getFinalPrice(cartList),
+              amount: getFinalPrice(cartList, coupons),
             },
           },
           authMode,
@@ -105,7 +106,7 @@ function Checkout(props) {
       await emptyCart();
       return false;
     },
-    [billingAddress, cartList, user, isFirst]
+    [billingAddress, cartList, user, isFirst, coupons]
   );
 
   return (
@@ -371,13 +372,32 @@ function Checkout(props) {
                                   : "Free"}
                               </td>
                             </tr>
+                            {!!coupons?.length && (
+                              <tr className="summary-subtotal">
+                                <td>
+                                  <h4 className="summary-subtitle">Coupons</h4>
+                                  <p>
+                                    {coupons.map((c) => (
+                                      <div style={{ display: "flex" }}>
+                                        <span className="mr-1">{c.code}</span>
+                                      </div>
+                                    ))}
+                                  </p>
+                                </td>
+                                <td>
+                                  <p className="summary-subtotal-price">
+                                    {`₹${toDecimal(getCouponTotal(coupons))}`}
+                                  </p>
+                                </td>
+                              </tr>
+                            )}
                             <tr className="summary-total">
                               <td className="pb-0">
                                 <h4 className="summary-subtitle">Total</h4>
                               </td>
                               <td className=" pt-0 pb-0">
                                 <p className="summary-total-price ls-s text-primary">
-                                  ₹{toDecimal(getFinalPrice(cartList))}
+                                  ₹{toDecimal(getFinalPrice(cartList, coupons))}
                                 </p>
                               </td>
                             </tr>
@@ -488,9 +508,10 @@ function mapStateToProps(state) {
   return {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
+    coupons: state.cart.coupons || [],
   };
 }
 
 export default connect(mapStateToProps, {
-  emptyCart: () => cartActions.updateCart([]),
+  emptyCart: () => cartActions.emptyCart(),
 })(Checkout);

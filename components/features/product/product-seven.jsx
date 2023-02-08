@@ -47,7 +47,7 @@ function ProductSeven(props) {
 
   const addToCartHandler = (e) => {
     e.preventDefault();
-    if (product.stock > 0) {
+    if (product.inventory > 0) {
       let qty = e.currentTarget
         .closest(".product-with-qty")
         .querySelector(".product-quantity .quantity").value;
@@ -177,7 +177,7 @@ function ProductSeven(props) {
           ) : (
             <>
               <Quantity
-                max={product.stock}
+                max={product.inventory}
                 product={product}
                 adClass="product-quantity"
               />

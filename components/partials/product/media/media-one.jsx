@@ -80,7 +80,7 @@ export default function MediaOne(props) {
         style={{ top: "88px" }}
       >
         <div className="product-label-group">
-          {product.stock === 0 ? (
+          {product.inventory === 0 ? (
             <label className="product-label label-out">out</label>
           ) : (
             ""

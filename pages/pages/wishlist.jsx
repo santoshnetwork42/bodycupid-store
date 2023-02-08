@@ -97,18 +97,18 @@ function Wishlist(props) {
                       <td className="product-stock-status">
                         <span
                           className={
-                            !item.isInventoryEnabled || item.stock > 0
+                            !item.isInventoryEnabled || item.inventory > 0
                               ? "wishlist-in-stock"
                               : "wishlist-out-stock"
                           }
                         >
-                          {!item.isInventoryEnabled || item.stock > 0
+                          {!item.isInventoryEnabled || item.inventory > 0
                             ? "In Stock"
                             : "Out of Stock"}
                         </span>
                       </td>
                       <td className="product-add-to-cart">
-                        {(!item.isInventoryEnabled || item.stock > 0) && (
+                        {(!item.isInventoryEnabled || item.inventory > 0) && (
                           // item.variants.length > 0 ?
                           //     <ALink href={'/product/default/' + item.slug} className="btn-product btn-primary"><span>Select options</span></ALink>
                           //     :

@@ -303,12 +303,20 @@ export const getShippingPrice = (cartItems = []) => {
 }
 
 /**
+ * utils to get total coupon amount in cart.
+ */
+export const getCouponTotal = (coupons = []) => {
+    return coupons.reduce((a, b) => a + b.discount, 0);
+}
+
+/**
  * utils to get total Price of products in cart with shipping.
  */
-export const getFinalPrice = (cartItems = []) => {
+export const getFinalPrice = (cartItems = [], coupons = []) => {
     const total = getTotalPrice(cartItems);
+    const discount = getCouponTotal(coupons);
     const shipping = getShippingPrice(cartItems);
-    return total + shipping;
+    return total + shipping - discount;
 }
 
 /**

@@ -3,9 +3,11 @@ import Helmet from "react-helmet";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
+import { connect } from "react-redux";
+import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { connect } from "react-redux";
+import { listOrders } from "~/graphql/queries";
 
 function Account({ user }) {
   const router = useRouter();
