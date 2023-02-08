@@ -15,7 +15,7 @@ import {
   getCouponTotal,
 } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getCouponCode } from "~/graphql/queries";
+import { applyCoupn } from "~/graphql/queries";
 
 function Cart(props) {
   const {
@@ -58,13 +58,15 @@ function Cart(props) {
 
   const applyCouponCode = useCallback(async () => {
     const response = await API.graphql({
-      query: getCouponCode,
-      variables: { id: coupon },
-      authMode: "API_KEY",
+      query: applyCoupn,
+      variables: { code: coupon },
+      authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
     });
 
-    setCoupon("");
-    applyCoupon(response.data.getCouponCode);
+    if (response.data.applyCoupn) {
+      setCoupon("");
+      applyCoupon(response.data.applyCoupn);
+    }
   }, [coupon, user]);
 
   return (

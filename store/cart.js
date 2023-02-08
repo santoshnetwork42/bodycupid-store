@@ -60,7 +60,10 @@ function cartReducer(state = initialState, action) {
             return initialState;
 
         case actionTypes.APPLY_COUPONS:
-            return { ...state, coupons: [action.payload.coupon] };
+            if (action.payload.coupon) {
+                return { ...state, coupons: [action.payload.coupon] };
+            }
+            return state;
 
         case actionTypes.REMOVE_COUPON:
             const coupons = state.coupons.filter(coupon => coupon.id !== action.payload.coupon);

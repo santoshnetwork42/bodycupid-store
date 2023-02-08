@@ -3,19 +3,11 @@ import { useStore, Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 import Helmet from "react-helmet";
 import { Auth, Hub } from "aws-amplify";
+import { Amplify } from 'aws-amplify';
 
 import { wrapper } from "../store/index.js";
 import Layout from '~/components/layout';
-
-import { demoActions } from '~/store/demo';
 import { userActions } from '~/store/user';
-
-import { currentDemo } from '~/server/queries';
-
-
-import { Amplify } from 'aws-amplify';
-
-
 import awsconfig from "~/aws-exports";
 
 import "~/public/sass/style.scss";
@@ -24,12 +16,6 @@ Amplify.configure({ ...awsconfig, ssr: true })
 
 const App = ({ Component, pageProps }) => {
     const store = useStore();
-
-    useEffect(() => {
-        if (store.getState().demo.current !== currentDemo) {
-            store.dispatch(demoActions.refreshStore(currentDemo));
-        }
-    }, []);
 
     const setUser = useCallback(async () => {
         try {
