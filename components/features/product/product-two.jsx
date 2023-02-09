@@ -71,7 +71,9 @@ function ProductTwo(props) {
               alt={thumbImage.alt}
             />
           ) : (
-            <img src={getPublicImageURL(thumbImage?.imageKey)} />
+            <span>
+              <img src={getPublicImageURL(thumbImage?.imageKey)} />
+            </span>
           )}
 
           {product.images.items.length > 1 ? (
@@ -85,11 +87,12 @@ function ProductTwo(props) {
                   }}
                 />
               ) : (
-                <img
-                  src={getPublicImageURL(product.images.items[1].imageKey)}
-                  alt={product.images.items[1].alt}
-                  className="product-image-hover"
-                />
+                <span className="product-image-hover">
+                  <img
+                    src={getPublicImageURL(product.images.items[1].imageKey)}
+                    alt={product.images.items[1].alt}
+                  />
+                </span>
               )}
             </>
           ) : null}
