@@ -40,7 +40,6 @@ function ProductListOne(props) {
     API.graphql(graphqlOperation(listProducts))
       .then((response) => {
         let data = response.data;
-        console.log(data.listProducts);
         setProducts(data.listProducts.items);
         // setTotalPage(parseInt(data.listProducts.items.total / perPage) + (data.listProducts.items.total % perPage ? 1 : 0));
         setLoading(false);
