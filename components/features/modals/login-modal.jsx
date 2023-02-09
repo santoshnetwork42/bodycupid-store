@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Auth, Hub } from "aws-amplify";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import Modal from "react-modal";
+
 import ALink from "~/components/features/custom-link";
 
 import AuthView from "../../../pages/pages/login";
 
-const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
 const modalStyles = {
   content: {
     position: "relative",
@@ -18,24 +18,8 @@ const modalStyles = {
   },
 };
 
-function LoginModal() {
-  const [auth, setAuth] = useState(false);
+function LoginModal({ auth }) {
   const [showLogin, setShowLogin] = useState(false);
-
-  useEffect(() => {
-    (async function () {
-      const session = await Auth.currentAuthenticatedUser().catch(() => null);
-      setAuth(!!session);
-    })();
-
-    Hub.listen("auth", ({ payload: { event } }) => {
-      if (event === "signOut") {
-        setAuth(false);
-      } else if (loggedInEvents.includes(event)) {
-        setAuth(true);
-      }
-    });
-  }, []);
 
   if (auth) {
     return (
@@ -85,4 +69,10 @@ function LoginModal() {
   );
 }
 
-export default LoginModal;
+function mapStateToProps(state) {
+  return {
+    auth: !!state.user.data,
+  };
+}
+
+export default connect(mapStateToProps, {})(LoginModal);

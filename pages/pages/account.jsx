@@ -1,25 +1,99 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
-import "@aws-amplify/ui-react/styles.css";
+import { connect } from "react-redux";
+import { API } from "aws-amplify";
+import { useSetState } from "react-use";
 
 import ALink from "~/components/features/custom-link";
+import { listOrders, listUserAddresses, getUser } from "~/graphql/queries";
+import { updateUser as updateUserMutation } from "~/graphql/mutations";
+import { formateDate, toDecimal } from "~/utils/index";
 
-function Account() {
+function Account({ user }) {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [addresses, setAddresses] = useState([]);
+  const [userDetail, setUser] = useSetState({ ...user });
+
+  const getOrders = useCallback(async () => {
+    const {
+      data: { listOrders: listOrdersResponse },
+    } = await API.graphql({
+      query: listOrders,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+
+    setOrders(listOrdersResponse.items);
+  }, []);
+
+  const getUserAddress = useCallback(async () => {
+    const {
+      data: { listUserAddresses: userAddresses },
+    } = await API.graphql({
+      query: listUserAddresses,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+
+    setAddresses(userAddresses.items);
+  }, []);
+
+  const getUserDetails = useCallback(async () => {
+    const {
+      data: { getUser: getUserResponse },
+    } = await API.graphql({
+      query: getUser,
+      variables: { id: user.username },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+
+    setUser(getUserResponse);
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      getOrders();
+      getUserAddress();
+      getUserDetails();
+    }
+  }, [!!user]);
 
   useEffect(() => {
     (async function () {
       try {
-        setUser(await Auth.currentAuthenticatedUser());
+        await Auth.currentAuthenticatedUser();
       } catch {
         router.push("/pages/login");
       }
     })();
   }, []);
+
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut();
+    router.push("/");
+    return true;
+  }, []);
+
+  const updateUser = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await API.graphql({
+        query: updateUserMutation,
+        variables: {
+          input: {
+            id: user.username,
+            firstName: userDetail.firstName,
+            lastName: userDetail.lastName,
+          },
+        },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+      return false;
+    },
+    [userDetail, user]
+  );
 
   if (!user) return <></>;
 
@@ -65,16 +139,13 @@ function Account() {
                 <a className="nav-link">Orders</a>
               </Tab>
               <Tab className="nav-item">
-                <a className="nav-link">Downloads</a>
-              </Tab>
-              <Tab className="nav-item">
                 <a className="nav-link">Address</a>
               </Tab>
               <Tab className="nav-item">
                 <a className="nav-link">Account details</a>
               </Tab>
               <Tab className="nav-item">
-                <ALink className="nav-link" href="/" onClick={Auth.signOut}>
+                <ALink className="nav-link" href="/" onClick={handleLogout}>
                   Logout
                 </ALink>
               </Tab>
@@ -86,7 +157,7 @@ function Account() {
                   <ALink
                     href="/"
                     className="text-primary"
-                    onClick={Auth.signOut}
+                    onClick={handleLogout}
                   >
                     Log out
                   </ALink>
@@ -105,7 +176,7 @@ function Account() {
                   Go To Shop<i className="d-icon-arrow-right"></i>
                 </ALink>
               </TabPanel>
-              <TabPanel className="tab-pane">
+              <TabPanel className="tab-pane orders">
                 <table className="order-table">
                   <thead>
                     <tr>
@@ -117,200 +188,76 @@ function Account() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="order-number">
-                        <ALink href="#">#3596</ALink>
-                      </td>
-                      <td className="order-date">
-                        <time>February 24, 2021</time>
-                      </td>
-                      <td className="order-status">
-                        <span>On hold</span>
-                      </td>
-                      <td className="order-total">
-                        <span>$900.00 for 5 items</span>
-                      </td>
-                      <td className="order-action">
-                        <ALink
-                          href="#"
-                          className="btn btn-primary btn-link btn-underline"
-                        >
-                          View
-                        </ALink>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="order-number">
-                        <ALink href="#">#3593</ALink>
-                      </td>
-                      <td className="order-date">
-                        <time>February 21, 2021</time>
-                      </td>
-                      <td className="order-status">
-                        <span>On hold</span>
-                      </td>
-                      <td className="order-total">
-                        <span>$290.00 for 2 items</span>
-                      </td>
-                      <td className="order-action">
-                        <ALink
-                          href="#"
-                          className="btn btn-primary btn-link btn-underline"
-                        >
-                          View
-                        </ALink>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="order-number">
-                        <ALink href="#">#2547</ALink>
-                      </td>
-                      <td className="order-date">
-                        <time>January 4, 2021</time>
-                      </td>
-                      <td className="order-status">
-                        <span>On hold</span>
-                      </td>
-                      <td className="order-total">
-                        <span>$480.00 for 8 items</span>
-                      </td>
-                      <td className="order-action">
-                        <ALink
-                          href="#"
-                          className="btn btn-primary btn-link btn-underline"
-                        >
-                          View
-                        </ALink>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="order-number">
-                        <ALink href="#">#2549</ALink>
-                      </td>
-                      <td className="order-date">
-                        <time>January 19, 2021</time>
-                      </td>
-                      <td className="order-status">
-                        <span>On hold</span>
-                      </td>
-                      <td className="order-total">
-                        <span>$680.00 for 5 items</span>
-                      </td>
-                      <td className="order-action">
-                        <ALink
-                          href="#"
-                          className="btn btn-primary btn-link btn-underline"
-                        >
-                          View
-                        </ALink>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="order-number">
-                        <ALink href="#">#4523</ALink>
-                      </td>
-                      <td className="order-date">
-                        <time>Jun 6, 2021</time>
-                      </td>
-                      <td className="order-status">
-                        <span>On hold</span>
-                      </td>
-                      <td className="order-total">
-                        <span>$564.00 for 3 items</span>
-                      </td>
-                      <td className="order-action">
-                        <ALink
-                          href="#"
-                          className="btn btn-primary btn-link btn-underline"
-                        >
-                          View
-                        </ALink>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="order-number">
-                        <ALink href="#">#4526</ALink>
-                      </td>
-                      <td className="order-date">
-                        <time>Jun 19, 2021</time>
-                      </td>
-                      <td className="order-status">
-                        <span>On hold</span>
-                      </td>
-                      <td className="order-total">
-                        <span>$123.00 for 8 items</span>
-                      </td>
-                      <td className="order-action">
-                        <ALink
-                          href="#"
-                          className="btn btn-primary btn-link btn-underline"
-                        >
-                          View
-                        </ALink>
-                      </td>
-                    </tr>
+                    {orders.map((order) => (
+                      <tr key={order.id}>
+                        <td className="order-number">
+                          <ALink href="#">#{order.code}</ALink>
+                        </td>
+                        <td className="order-date">
+                          <time>{formateDate(order.createdAt)}</time>
+                        </td>
+                        <td className="order-status">
+                          <span>{order.status}</span>
+                        </td>
+                        <td className="order-total">
+                          <span>
+                            ₹{toDecimal(order.payments.items[0]?.amount)}
+                          </span>
+                        </td>
+                        <td className="order-action">
+                          <ALink
+                            href={`/order/${order.id}`}
+                            className="btn btn-primary btn-link btn-underline"
+                          >
+                            View
+                          </ALink>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </TabPanel>
-              <TabPanel className="tab-pane downloads">
-                <p className="mb-4 text-body">No downloads available yet.</p>
-                <ALink
-                  href="/shop"
-                  className="btn btn-primary btn-link btn-underline"
-                >
-                  Browser Products<i className="d-icon-arrow-right"></i>
-                </ALink>
-              </TabPanel>
-              <TabPanel className="tab-pane">
+              <TabPanel className="tab-pane addresses">
                 <p className="mb-2">
-                  The following addresses will be used on the checkout page by
-                  default.
+                  The following addresses can be used on the checkout page.
                 </p>
                 <div className="row">
-                  <div className="col-sm-6 mb-4">
-                    <div className="card card-address">
-                      <div className="card-body">
-                        <h5 className="card-title text-uppercase">
-                          Billing Address
-                        </h5>
-                        <p>
-                          John Doe
-                          <br />
-                          Wow Company
-                          <br />
-                          Steven street
-                          <br />
-                          El Carjon, CA 92020
-                        </p>
-                        <ALink
-                          href="#"
-                          className="btn btn-link btn-secondary btn-underline"
-                        >
-                          Edit <i className="far fa-edit"></i>
-                        </ALink>
+                  {addresses.map((address) => (
+                    <div className="col-sm-6 mb-4" key={address.id}>
+                      <div className="card card-address">
+                        <div className="card-body">
+                          <h5 className="card-title text-uppercase">
+                            {address.name}
+                          </h5>
+                          <p>
+                            {address.email}
+                            <br />
+                            {address.phone}
+                            <br />
+                            {address.address}
+                            <br />
+                            {address.location}
+                            <br />
+                            {address.city +
+                              ", " +
+                              address.state +
+                              ", " +
+                              address.pinCode}
+                          </p>
+                          <ALink
+                            href="#"
+                            className="btn btn-link btn-secondary btn-underline"
+                          >
+                            Edit <i className="far fa-edit"></i>
+                          </ALink>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-sm-6 mb-4">
-                    <div className="card card-address">
-                      <div className="card-body">
-                        <h5 className="card-title text-uppercase">
-                          Shipping Address
-                        </h5>
-                        <p>You have not set up this type of address yet.</p>
-                        <ALink
-                          href="#"
-                          className="btn btn-link btn-secondary btn-underline"
-                        >
-                          Edit <i className="far fa-edit"></i>
-                        </ALink>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </TabPanel>
-              <TabPanel className="tab-pane">
-                <form action="#" className="form">
+              <TabPanel className="tab-pane account">
+                <form onSubmit={updateUser} className="form">
                   <div className="row">
                     <div className="col-sm-6">
                       <label>First Name *</label>
@@ -319,6 +266,8 @@ function Account() {
                         className="form-control"
                         name="first_name"
                         required
+                        value={userDetail.firstName}
+                        onChange={(e) => setUser({ firstName: e.target.value })}
                       />
                     </div>
                     <div className="col-sm-6">
@@ -328,11 +277,13 @@ function Account() {
                         className="form-control"
                         name="last_name"
                         required
+                        value={userDetail.lastName}
+                        onChange={(e) => setUser({ lastName: e.target.value })}
                       />
                     </div>
                   </div>
 
-                  <label>Display Name *</label>
+                  {/* <label>Display Name *</label>
                   <input
                     type="text"
                     className="form-control mb-0"
@@ -342,7 +293,7 @@ function Account() {
                   <small className="d-block form-text mb-7">
                     This will be how your name will be displayed in the account
                     section and in reviews
-                  </small>
+                  </small> */}
 
                   <label>Email Address *</label>
                   <input
@@ -350,8 +301,21 @@ function Account() {
                     className="form-control"
                     name="email"
                     required
+                    value={userDetail.email}
+                    onChange={(e) => setUser({ email: e.target.value })}
+                    disabled
                   />
-                  <fieldset>
+                  <label>Phone *</label>
+                  <input
+                    type="tel"
+                    className="form-control"
+                    name="phone"
+                    required
+                    value={userDetail.phone}
+                    onChange={(e) => setUser({ phone: e.target.value })}
+                    disabled
+                  />
+                  {/* <fieldset>
                     <legend>Password Change</legend>
                     <label>
                       Current password (leave blank to leave unchanged)
@@ -375,7 +339,7 @@ function Account() {
                       className="form-control"
                       name="confirm_password"
                     />
-                  </fieldset>
+                  </fieldset> */}
 
                   <button type="submit" className="btn btn-primary">
                     SAVE CHANGES
@@ -391,4 +355,10 @@ function Account() {
   );
 }
 
-export default React.memo(Account);
+function mapStateToProps(state) {
+  return {
+    user: state.user.data,
+  };
+}
+
+export default connect(mapStateToProps)(Account);

@@ -1,12 +1,33 @@
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
+import { useRouter } from "next/router";
+import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
+import { getOrder } from "~/graphql/queries";
 
-import { toDecimal, getTotalPrice } from "~/utils";
+import { toDecimal, getOrderTotal, formateDate } from "~/utils";
+import { useEffect, useState } from "react";
 
 function Order(props) {
-  const { cartList } = props;
+  const { user } = props;
+  const [order, setOrder] = useState(null);
+
+  const router = useRouter();
+  const { query } = router;
+  const { orderId } = query;
+
+  useEffect(() => {
+    (async function () {
+      const response = await API.graphql({
+        query: getOrder,
+        variables: { id: orderId },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+      });
+      console.log(response.data.getOrder);
+      setOrder(response.data.getOrder);
+    })();
+  }, [orderId, user]);
 
   return (
     <main className="main order">
@@ -78,27 +99,31 @@ function Order(props) {
           <div className="order-results">
             <div className="overview-item">
               <span>Order number:</span>
-              <strong>4935</strong>
+              <strong>{order?.id}</strong>
             </div>
             <div className="overview-item">
               <span>Status:</span>
-              <strong>Processing</strong>
+              <strong>{order?.status}</strong>
             </div>
             <div className="overview-item">
               <span>Date:</span>
-              <strong>November 20, 2020</strong>
+              <strong>{formateDate(order?.createdAt)}</strong>
             </div>
             <div className="overview-item">
               <span>Email:</span>
-              <strong>12345@gmail.com</strong>
+              <strong>{order?.shippingAddress?.email}</strong>
             </div>
             <div className="overview-item">
               <span>Total:</span>
-              <strong>₹{toDecimal(getTotalPrice(cartList))}</strong>
+              <strong>₹{toDecimal(order?.payments?.items[0].amount)}</strong>
             </div>
             <div className="overview-item">
               <span>Payment method:</span>
-              <strong>Cash on delivery</strong>
+              <strong>
+                {order?.payments?.items[0].method === "COD"
+                  ? "Cash on delivery"
+                  : "Online"}
+              </strong>
             </div>
           </div>
 
@@ -116,17 +141,17 @@ function Order(props) {
                 </tr>
               </thead>
               <tbody>
-                {cartList.map((item) => (
-                  <tr key={"order-" + item.name}>
+                {order?.products?.items?.map((item) => (
+                  <tr key={"order-" + item.id}>
                     <td className="product-name">
-                      {item.name}{" "}
+                      {item.product.title}{" "}
                       <span>
                         {" "}
-                        <i className="fas fa-times"></i> {item.qty}
+                        <i className="fas fa-times"></i> {item.quantity}
                       </span>
                     </td>
                     <td className="product-price">
-                      ₹{toDecimal(item.qty * item.price)}
+                      ₹{toDecimal(item.quantity * item.price)}
                     </td>
                   </tr>
                 ))}
@@ -135,20 +160,38 @@ function Order(props) {
                     <h4 className="summary-subtitle">Subtotal:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                    ₹{toDecimal(getTotalPrice(cartList))}
+                    ₹{toDecimal(getOrderTotal(order?.products?.items))}
                   </td>
                 </tr>
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Shipping:</h4>
                   </td>
-                  <td className="summary-subtotal-price">Free shipping</td>
+                  <td className="summary-subtotal-price">
+                    {order?.totalShippingCharges
+                      ? `₹${toDecimal(order?.totalShippingCharges)}`
+                      : "Free shipping"}
+                  </td>
                 </tr>
+                {!!order?.totalDiscount && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Discount:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      ₹{toDecimal(order?.totalDiscount)}
+                    </td>
+                  </tr>
+                )}
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Payment method:</h4>
                   </td>
-                  <td className="summary-subtotal-price">Cash on delivery</td>
+                  <td className="summary-subtotal-price">
+                    {order?.payments?.items[0].method === "COD"
+                      ? "Cash on delivery"
+                      : "Online"}
+                  </td>
                 </tr>
                 <tr className="summary-subtotal">
                   <td>
@@ -156,7 +199,7 @@ function Order(props) {
                   </td>
                   <td>
                     <p className="summary-total-price">
-                      ₹{toDecimal(getTotalPrice(cartList))}
+                      ₹{toDecimal(order?.payments?.items[0].amount)}
                     </p>
                   </td>
                 </tr>
@@ -164,21 +207,34 @@ function Order(props) {
             </table>
           </div>
           <h2 className="title title-simple text-left pt-10 mb-2">
-            Billing Address
+            Shipping Address
           </h2>
           <div className="address-info pb-8 mb-6">
             <p className="address-detail pb-2">
-              John Doe
+              {order?.shippingAddress?.name}
               <br />
-              Wow Company
+              {order?.shippingAddress?.address}
+              {!!order?.shippingAddress?.location && (
+                <>
+                  <br />
+                  {order?.shippingAddress?.location}
+                </>
+              )}
               <br />
-              Steven street
+              {
+                (order?.shippingAddress?.city + ", ",
+                order?.shippingAddress?.state +
+                  ", " +
+                  order?.shippingAddress?.country)
+              }
               <br />
-              El Carjon, CA 92020
-              <br />
-              123456789
+              {order?.shippingAddress?.pinCode}
             </p>
-            <p className="email">mail@riode.com</p>
+            <p className="email">
+              {order?.shippingAddress?.email}
+              <br />
+              {order?.shippingAddress?.phone}
+            </p>
           </div>
 
           <ALink
@@ -195,7 +251,7 @@ function Order(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data ? state.cart.data : [],
+    user: state.user.data,
   };
 }
 

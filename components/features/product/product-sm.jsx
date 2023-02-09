@@ -47,17 +47,6 @@ function SmallProduct(props) {
         </h3>
 
         <div className="product-price">
-          {/* {
-                        product.price[0] !== product.price[1] ?
-                            product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
-                                <>
-                                    <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                    <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                </>
-                                :
-                                < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                            : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                    } */}
           <ins className="new-price">₹{toDecimal(product.price)}</ins>
         </div>
 
@@ -77,7 +66,7 @@ function SmallProduct(props) {
               href={`/product/default/${product.slug}`}
               className="rating-reviews"
             >
-              ( {product.reviews} reviews )
+              ( {product.reviews.items.length} reviews )
             </ALink>
           ) : (
             ""

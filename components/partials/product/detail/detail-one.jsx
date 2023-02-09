@@ -87,7 +87,7 @@ function DetailOne(props) {
       setCartActive(true);
     }
 
-    if (product.isInventoryEnabled && product.stock === 0) {
+    if (product.isInventoryEnabled && product.inventory === 0) {
       setCartActive(false);
     }
   }, [curColor, curSize, product]);
@@ -118,7 +118,7 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
-    if ((!product.isInventoryEnabled || product.stock > 0) && cartActive) {
+    if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
@@ -455,7 +455,7 @@ function DetailOne(props) {
               <label className="d-none">QTY:</label>
               <div className="product-form-group">
                 <Quantity
-                  max={product.stock}
+                  max={product.inventory}
                   product={product}
                   onChangeQty={changeQty}
                 />
@@ -476,7 +476,7 @@ function DetailOne(props) {
           <label className="d-none">QTY:</label>
           <div className="product-form-group">
             <Quantity
-              max={product.stock}
+              max={product.inventory}
               product={product}
               onChangeQty={changeQty}
             />

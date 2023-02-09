@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Helmet from "react-helmet";
+import { connect } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { toast } from "react-toastify";
@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
 
-function Login() {
+function Login({ auth, redirect = true }) {
   const router = useRouter();
   const [state, setState] = useState({
     name: "",
@@ -55,7 +55,9 @@ function Login() {
       try {
         await Auth.confirmSignUp(state.phone, state.confirmationCode);
         if (confirmSignUp === "SIGNUP") {
-          router.push("/");
+          if (redirect) {
+            router.push("/");
+          }
         } else {
           setConfirmSignUp(null);
         }
@@ -65,7 +67,7 @@ function Login() {
       }
       return false;
     },
-    [state, confirmSignUp]
+    [state, confirmSignUp, redirect]
   );
 
   const handleSignIn = useCallback(
@@ -76,7 +78,9 @@ function Login() {
           username: state.phone,
           password: state.password,
         });
-        router.push("/");
+        if (redirect) {
+          router.push("/");
+        }
       } catch (error) {
         console.log("error signin:", error);
         if (error.code === "UserNotConfirmedException") {
@@ -88,17 +92,14 @@ function Login() {
       }
       return false;
     },
-    [state]
+    [state, redirect]
   );
 
   useEffect(() => {
-    (async function () {
-      const session = await Auth.currentAuthenticatedUser().catch(() => null);
-      if (session) {
-        router.push("/");
-      }
-    })();
-  }, []);
+    if (auth) {
+      router.push("/");
+    }
+  }, [auth]);
 
   return (
     <main className="main">
@@ -378,4 +379,10 @@ function Login() {
   );
 }
 
-export default React.memo(Login);
+function mapStateToProps(state) {
+  return {
+    auth: !!state.user.data,
+  };
+}
+
+export default connect(mapStateToProps)(Login);
