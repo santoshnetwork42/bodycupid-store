@@ -15,7 +15,7 @@ function SmallProduct(props) {
   return (
     <div className={`product product-list-sm ${adClass}`}>
       <figure className="product-media">
-        <ALink href={`/product/default/${product.id}`}>
+        <ALink href={`/product/${product.slug}`}>
           <LazyLoadImage
             alt={thumbImage?.alt}
             src={getPublicImageURL(thumbImage?.imageKey)}
@@ -41,9 +41,7 @@ function SmallProduct(props) {
 
       <div className="product-details">
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.slug}`}>
-            {product.name}
-          </ALink>
+          <ALink href={`/product/${product.slug}`}>{product.name}</ALink>
         </h3>
 
         <div className="product-price">
@@ -62,10 +60,7 @@ function SmallProduct(props) {
           </div>
 
           {isReviewCount ? (
-            <ALink
-              href={`/product/default/${product.slug}`}
-              className="rating-reviews"
-            >
+            <ALink href={`/product/${product.slug}`} className="rating-reviews">
               ( {product.reviews.items.length} reviews )
             </ALink>
           ) : (

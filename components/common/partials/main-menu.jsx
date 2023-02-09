@@ -1,37 +1,50 @@
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { API, graphqlOperation } from "aws-amplify";
 
-import ALink from '~/components/features/custom-link';
-
-import { mainMenu } from '~/utils/data/menu';
+import ALink from "~/components/features/custom-link";
+import { listProductCategories } from "~/graphql/queries";
 
 function MainMenu() {
-    const pathname = useRouter().pathname;
+  const { pathname } = useRouter();
+  const [categories, setCategories] = useState([]);
 
-    return (
-        <nav className="main-nav">
-            <ul className="menu">
-                <li id="menu-home" className={pathname === '/' ? 'active' : ''}>
-                    <ALink href='/'>Home</ALink>
-                </li>
+  useEffect(() => {
+    API.graphql(graphqlOperation(listProductCategories, { limit: 4 })).then(
+      ({
+        data: {
+          listProductCategories: { items },
+        },
+      }) => {
+        setCategories(items);
+      }
+    );
+  }, []);
 
-                <li className={`${pathname.includes('/shop?category=active') ? 'active' : ''}`}>
-                    <ALink href='/shop?category=nutrition-and-health'>Nutrition & Health</ALink>
-                </li>
+  return (
+    <nav className="main-nav">
+      <ul className="menu">
+        <li id="menu-home" className={pathname === "/" ? "active" : ""}>
+          <ALink href="/">Home</ALink>
+        </li>
 
-                <li className={`${pathname.includes('/shop?category=gut-health') ? 'active' : ''}`}>
-                    <ALink href='/shop?category=gut-health'>Gut Health</ALink>
-                </li>
+        {categories.map((category) => (
+          <li
+            key={category.id}
+            className={
+              pathname.includes(`/categories/${category.slug}`) ? "active" : ""
+            }
+          >
+            <ALink href={`/categories/${category.slug}`}>{category.name}</ALink>
+          </li>
+        ))}
 
-                <li className={`${pathname.includes('/shop/category=specialty-supplements') ? 'active' : ''}`}>
-                    <ALink href='/shop?category=specialty-supplements'>Special Supplements</ALink>
-                </li>
-
-                <li>
-                    <ALink href="/contact">Contact</ALink>
-                </li>
-            </ul>
-        </nav>
-    )
+        <li>
+          <ALink href="/contact">Contact</ALink>
+        </li>
+      </ul>
+    </nav>
+  );
 }
 
 export default MainMenu;

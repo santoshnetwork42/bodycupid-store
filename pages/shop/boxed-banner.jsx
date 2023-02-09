@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet';
 
 import ALink from '~/components/features/custom-link';
 
-import SidebarFilterOne from '~/components/partials/shop/sidebar/sidebar-filter-one'
-import ProductListOne from '~/components/partials/shop/product-list/product-list-one';
+import SidebarFilterOne from '~/components/partials/categories/sidebar/sidebar-filter-one'
+import ProductListOne from '~/components/partials/categories/product-list/product-list-one';
 
 function ShopBoxedBanner() {
     return (
@@ -26,7 +26,7 @@ function ShopBoxedBanner() {
 
             <div className="page-content mb-10 pb-3">
                 <div className="container">
-                    <div className="shop-boxed-banner banner mb-lg-6" style={{ backgroundImage: "url('/images/shop/banner2.jpg')", backgroundColor: "#f2f2f3" }}>
+                    <div className="shop-boxed-banner banner mb-lg-6" style={{ backgroundImage: "url('/images/categories/banner2.jpg')", backgroundColor: "#f2f2f3" }}>
                         <div className="banner-content">
                             <h4 className="banner-subtitle font-weight-bold ls-normal text-uppercase text-white">Wow Shop</h4>
                             <h1 className="banner-title font-weight-bold text-white">Boxed Banner Style</h1>
