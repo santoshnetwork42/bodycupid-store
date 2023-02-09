@@ -71,7 +71,7 @@ function ProductEight(props) {
       }`}
     >
       <figure className="product-media">
-        <ALink href={`/product/default/${product.id}`}>
+        <ALink href={`/product/${product.slug}`}>
           <LazyLoadImage
             alt={thumbImage?.alt}
             src={getPublicImageURL(thumbImage?.imageKey)}
@@ -136,7 +136,7 @@ function ProductEight(props) {
         </div>
 
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.id}`}>{product.title}</ALink>
+          <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
         <div className="product-price">
@@ -165,10 +165,7 @@ function ProductEight(props) {
             </span>
           </div>
 
-          <ALink
-            href={`/product/default/${product.id}`}
-            className="rating-reviews"
-          >
+          <ALink href={`/product/${product.slug}`} className="rating-reviews">
             ( {product.reviews.items.length} reviews )
           </ALink>
         </div>
@@ -178,7 +175,7 @@ function ProductEight(props) {
         <div className="product-action">
           {product.variants && product.variants.items.length > 0 ? (
             <ALink
-              href={`/product/default/${product.id}`}
+              href={`/product/${product.slug}`}
               className="btn-product btn-cart"
               title="Go to product"
             >

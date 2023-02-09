@@ -1,57 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Helmet from "react-helmet";
-import imagesLoaded from "imagesloaded";
+import { API, graphqlOperation } from "aws-amplify";
 
 import withApollo from "~/server/apollo";
-
 import OwlCarousel from "~/components/features/owl-carousel";
-
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
-
 import { mainSlider17 } from "~/utils/data/carousel";
-
-// import Api, { baseUrl } from '~/api';
-import { API, graphqlOperation } from "aws-amplify";
-import { getProduct } from "~/graphql/queries";
+import { byslugProduct } from "~/graphql/queries";
 
 function ProductDefault() {
   const slug = useRouter().query.slug;
-  // const { data, loading, error } = useQuery(GET_PRODUCT, { variables: { slug } });
-  const [loaded, setLoadingState] = useState(false);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
-  const [data, setData] = useState(null);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(getProduct, { id: slug })).then((response) => {
-      let data = response.data;
-      console.log(data);
-      // console.log(data.listProducts);
-      setData(data);
-      setProduct(data.getProduct);
-      setRelated(data.getProduct.variants.items);
-
-      // setTotalPage(parseInt(data.listProducts.items.total / perPage) + (data.listProducts.items.total % perPage ? 1 : 0));
+    API.graphql(graphqlOperation(byslugProduct, { slug })).then((response) => {
+      let [product] = response.data.byslugProduct.items;
+      setProduct(product);
+      setRelated(product?.variants.items);
       setLoading(false);
     });
   }, []);
-
-  useEffect(() => {
-    if (!loading && product)
-      imagesLoaded("main")
-        .on("done", function () {
-          setLoadingState(true);
-        })
-        .on("progress", function () {
-          setLoadingState(false);
-        });
-    if (loading) setLoadingState(false);
-  }, [loading, product]);
 
   return (
     <main className="main mt-6 single-product">
@@ -70,7 +44,7 @@ function ProductDefault() {
               </div>
 
               <div className="col-md-6">
-                <DetailOne data={data} isNav={true} />
+                <DetailOne data={product} isNav={true} />
               </div>
             </div>
 

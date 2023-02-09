@@ -159,11 +159,11 @@ function MobileMenu(props) {
             </Card>
           </li>
 
-          <li>
+          {/* <li>
             <Card
               title="Products"
               type="mobile"
-              url="/product/default/fashionable-leather-satchel"
+              url="/product/fashionable-leather-satchel"
             >
               <ul>
                 <li>
@@ -205,7 +205,7 @@ function MobileMenu(props) {
                 </li>
               </ul>
             </Card>
-          </li>
+          </li> */}
 
           <li>
             <Card title="Pages" type="mobile" url="/pages/about-us">

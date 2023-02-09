@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { API, graphqlOperation } from "aws-amplify";
 // import { useLazyQuery } from '@apollo/react-hooks';
 
 import ToolBox from "~/components/partials/shop/toolbox";
@@ -12,8 +13,7 @@ import Pagination from "~/components/features/pagination";
 
 // import Api, { baseUrl } from '~/api';
 
-import { API, graphqlOperation } from "aws-amplify";
-import { listProducts } from "~/graphql/queries";
+import { byslugProductCategory } from "~/graphql/queries";
 
 function ProductListOne(props) {
   const [products, setProducts] = useState(null);
@@ -37,13 +37,21 @@ function ProductListOne(props) {
   const gridType = query.type ? query.type : "grid";
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listProducts))
-      .then((response) => {
-        let data = response.data;
-        setProducts(data.listProducts.items);
-        // setTotalPage(parseInt(data.listProducts.items.total / perPage) + (data.listProducts.items.total % perPage ? 1 : 0));
-        setLoading(false);
-      })
+    API.graphql(
+      graphqlOperation(byslugProductCategory, { slug: query.category })
+    )
+      .then(
+        ({
+          data: {
+            byslugProductCategory: {
+              items: [category],
+            },
+          },
+        }) => {
+          setProducts(category.products.items);
+          setLoading(false);
+        }
+      )
       .catch((err) => {
         console.log(err);
       });

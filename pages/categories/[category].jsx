@@ -1,11 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-import ShopBanner from "~/components/partials/categories/shop-banner";
-import SidebarFilterOne from "~/components/partials/categories/sidebar/sidebar-filter-one";
-import ProductListOne from "~/components/partials/categories/product-list/product-list-one";
+import ShopBanner from "~/components/partials/shop/shop-banner";
+import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
+import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 
-function Shop() {
+function Categories() {
   return (
     <main className="main">
       <Helmet>
@@ -31,4 +31,4 @@ function Shop() {
   );
 }
 
-export default React.memo(Shop);
+export default React.memo(Categories);

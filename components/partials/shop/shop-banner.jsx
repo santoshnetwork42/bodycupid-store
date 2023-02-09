@@ -4,7 +4,7 @@ export default function ShopBanner(props) {
     const { subTitle = '', title = "Wow Shop", current = "Wow Shop" } = props;
 
     return (
-        <div className="page-header" style={{ backgroundImage: `url( /images/shop/page-header-back.jpg )`, backgroundColor: "#3C63A4" }}>
+        <div className="page-header" style={{ backgroundImage: `url( /images/categories/page-header-back.jpg )`, backgroundColor: "#3C63A4" }}>
             {
                 subTitle ? <h3 className="page-subtitle">{subTitle}</h3> : ''
             }

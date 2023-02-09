@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
-import Countdown from "~/components/features/countdown";
 import Quantity from "~/components/features/quantity";
 
 import ProductNav from "~/components/partials/product/product-nav";
@@ -13,17 +12,22 @@ import { wishlistActions } from "~/store/wishlist";
 import { cartActions } from "~/store/cart";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function DetailOne(props) {
   let router = useRouter();
-  const { data, isStickyCart = false, adClass = "", isNav = true } = props;
+  const {
+    data: product,
+    isStickyCart = false,
+    adClass = "",
+    isNav = true,
+  } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curColor, setCurColor] = useState("null");
   const [curSize, setCurSize] = useState("null");
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQauntity] = useState(1);
-  let product = data && data.getProduct;
 
   // decide if the product is wishlisted
   let isWishlisted,
@@ -382,21 +386,18 @@ function DetailOne(props) {
           <div className="container">
             <div className="sticky-product-details">
               <figure className="product-image">
-                <ALink href={"/product/default/" + product.id}>
+                <ALink href={"/product/" + product.slug}>
                   <img
-                    src={
-                      process.env.NEXT_PUBLIC_ASSET_URI +
-                      product.images.items[0].src
-                    }
+                    src={getPublicImageURL(product.images.items[0]?.imageKey)}
                     width="90"
                     height="90"
-                    alt="Product"
+                    alt={product.images.items[0]?.alt}
                   />
                 </ALink>
               </figure>
               <div>
                 <h4 className="product-title">
-                  <ALink href={"/product/default/" + product.id}>
+                  <ALink href={"/product/" + product.slug}>
                     {product.title}
                   </ALink>
                 </h4>
