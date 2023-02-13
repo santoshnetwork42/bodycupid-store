@@ -20,7 +20,10 @@ const App = ({ Component, pageProps }) => {
     const setUser = useCallback(async () => {
         try {
             const user = await Auth.currentAuthenticatedUser();
-            store.dispatch(userActions.setUser(user));
+            store.dispatch(userActions.setUser({
+                username: user.username,
+                attributes: user.attributes,
+            }));
         } catch {
             store.dispatch(userActions.removeUser());
         }

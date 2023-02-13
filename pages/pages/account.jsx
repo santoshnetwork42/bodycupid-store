@@ -8,14 +8,14 @@ import { API } from "aws-amplify";
 import { useSetState } from "react-use";
 
 import ALink from "~/components/features/custom-link";
-import { listOrders, listUserAddresses, getUser } from "~/graphql/queries";
+import Addresses from "~/components/common/addresses";
+import { listOrders, getUser } from "~/graphql/queries";
 import { updateUser as updateUserMutation } from "~/graphql/mutations";
 import { formateDate, toDecimal } from "~/utils/index";
 
 function Account({ user }) {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
-  const [addresses, setAddresses] = useState([]);
   const [userDetail, setUser] = useSetState({ ...user });
 
   const getOrders = useCallback(async () => {
@@ -27,17 +27,6 @@ function Account({ user }) {
     });
 
     setOrders(listOrdersResponse.items);
-  }, []);
-
-  const getUserAddress = useCallback(async () => {
-    const {
-      data: { listUserAddresses: userAddresses },
-    } = await API.graphql({
-      query: listUserAddresses,
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-
-    setAddresses(userAddresses.items);
   }, []);
 
   const getUserDetails = useCallback(async () => {
@@ -55,7 +44,6 @@ function Account({ user }) {
   useEffect(() => {
     if (user) {
       getOrders();
-      getUserAddress();
       getUserDetails();
     }
   }, [!!user]);
@@ -221,40 +209,7 @@ function Account({ user }) {
                 <p className="mb-2">
                   The following addresses can be used on the checkout page.
                 </p>
-                <div className="row">
-                  {addresses.map((address) => (
-                    <div className="col-sm-6 mb-4" key={address.id}>
-                      <div className="card card-address">
-                        <div className="card-body">
-                          <h5 className="card-title text-uppercase">
-                            {address.name}
-                          </h5>
-                          <p>
-                            {address.email}
-                            <br />
-                            {address.phone}
-                            <br />
-                            {address.address}
-                            <br />
-                            {address.location}
-                            <br />
-                            {address.city +
-                              ", " +
-                              address.state +
-                              ", " +
-                              address.pinCode}
-                          </p>
-                          <ALink
-                            href="#"
-                            className="btn btn-link btn-secondary btn-underline"
-                          >
-                            Edit <i className="far fa-edit"></i>
-                          </ALink>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <Addresses />
               </TabPanel>
               <TabPanel className="tab-pane account">
                 <form onSubmit={updateUser} className="form">
