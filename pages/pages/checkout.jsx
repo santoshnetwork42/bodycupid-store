@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
-import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
@@ -10,9 +9,8 @@ import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
 import AuthView from "~/pages/pages/login";
 import {
-  createOrder,
-  createOrderProduct,
   createPayment,
+  updateOrder,
 } from "~/graphql/mutations";
 
 import {
@@ -26,89 +24,53 @@ import { cartActions } from "~/store/cart";
 import Addresses from "~/components/common/addresses";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, coupons, order } = props;
+  const { cartList, user, emptyCart, coupons, order, updateCartOrder } = props;
   const router = useRouter();
   const [isFirst, setFirst] = useState(false);
-  const [billingAddress, setBillingAddress] = useSetState({
-    firstName: user?.attributes?.name,
-    lastName: user?.attributes?.given_name,
-    phone: user?.attributes?.phone_number,
-    email: user?.attributes?.email,
-    country: "in",
-    state: "",
-    city: "",
-    pinCode: "",
-    landmark: "",
-    address: "",
-    location: "",
-    area: "",
-  });
 
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      await emptyCart();
-      return false;
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
-      const { firstName, lastName, ...restAddress } = billingAddress;
-      const {
-        data: {
-          createOrder: { id: orderId },
-        },
-      } = await API.graphql({
-        query: createOrder,
+      await API.graphql({
+        query: createPayment,
         variables: {
           input: {
-            userId: user?.username,
-            shippingAddress: {
-              name: firstName + " " + lastName,
-              ...restAddress,
-            },
-            CouponCodeId: coupons[0]?.id,
-            totalShippingCharges: getShippingPrice(cartList),
-            totalDiscount: getCouponTotal(coupons),
-            status: "PROCESSING",
+            userId: user?.username || null,
+            orderId: order?.id,
+            method: isFirst ? "ONLINE" : "COD",
+            amount: getFinalPrice(cartList, coupons),
           },
         },
         authMode,
       });
-
-      const promise = [
-        API.graphql({
-          query: createPayment,
-          variables: {
-            input: {
-              userId: user?.username,
-              orderId,
-              method: isFirst ? "ONLINE" : "COD",
-              amount: getFinalPrice(cartList, coupons),
-            },
-          },
-          authMode,
-        }),
-        ...cartList.map((p) =>
-          API.graphql({
-            query: createOrderProduct,
-            variables: {
-              input: {
-                orderId,
-                productId: p.id,
-                quantity: p.qty,
-                price: p.price,
-              },
-            },
-            authMode,
-          })
-        ),
-      ];
-
-      await Promise.all(promise);
-
-      router.push(`/order/${orderId}`);
+      router.push(`/order/${order?.id}`);
       await emptyCart();
       return false;
     },
-    [billingAddress, cartList, user, isFirst, coupons]
+    [order, user, isFirst, coupons]
+  );
+
+  const updateShippingAddress = useCallback(
+    async (address) => {
+      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+      const { id, ...restAddress } = address;
+      const {
+        data: { updateOrder: response },
+      } = await API.graphql({
+        query: updateOrder,
+        variables: {
+          input: {
+            id: order?.id,
+            userId: user?.username,
+            shippingAddress: restAddress,
+          },
+        },
+        authMode,
+      });
+      updateCartOrder({ ...response, shippingAddressId: id });
+    },
+    [order, user]
   );
 
   return (
@@ -150,7 +112,7 @@ function Checkout(props) {
                   </Card>
                 </div>
               )}
-              <div className="card accordion">
+              {/* <div className="card accordion">
                 <Card
                   title="
                                             <div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
@@ -179,176 +141,179 @@ function Checkout(props) {
                     </form>
                   </div>
                 </Card>
-              </div>
-              <form className="form" onSubmit={placeOrder}>
-                <div className="row">
-                  <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
-                    <h3 className="title title-simple text-left text-uppercase">
-                      Shipping Address
-                    </h3>
-                    <Addresses hideControls />
-                  </div>
+              </div> */}
+              {/* <form className="form" onSubmit={placeOrder}> */}
+              <div className="row">
+                <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
+                  <h3 className="title title-simple text-left text-uppercase">
+                    Shipping Address
+                  </h3>
+                  <Addresses
+                    selected={order?.shippingAddressId}
+                    onSelect={updateShippingAddress}
+                  />
+                </div>
 
-                  <aside className="col-lg-5 sticky-sidebar-wrapper">
-                    <div
-                      className="sticky-sidebar mt-1"
-                      data-sticky-options="{'bottom': 50}"
-                    >
-                      <div className="summary pt-5">
-                        <h3 className="title title-simple text-left text-uppercase">
-                          Your Order
-                        </h3>
-                        <table className="order-table">
-                          <thead>
-                            <tr>
-                              <th>Product</th>
-                              <th></th>
+                <aside className="col-lg-5 sticky-sidebar-wrapper">
+                  <div
+                    className="sticky-sidebar mt-1"
+                    data-sticky-options="{'bottom': 50}"
+                  >
+                    <div className="summary pt-5">
+                      <h3 className="title title-simple text-left text-uppercase">
+                        Your Order
+                      </h3>
+                      <table className="order-table">
+                        <thead>
+                          <tr>
+                            <th>Product</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {cartList.map((item) => (
+                            <tr key={"checkout-" + item.title}>
+                              <td className="product-name">
+                                {item.title}{" "}
+                                <span className="product-quantity">
+                                  ×&nbsp;{item.qty}
+                                </span>
+                              </td>
+                              <td className="product-total text-body">
+                                ₹{toDecimal(item.price * item.qty)}
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {cartList.map((item) => (
-                              <tr key={"checkout-" + item.title}>
-                                <td className="product-name">
-                                  {item.title}{" "}
-                                  <span className="product-quantity">
-                                    ×&nbsp;{item.qty}
-                                  </span>
-                                </td>
-                                <td className="product-total text-body">
-                                  ₹{toDecimal(item.price * item.qty)}
-                                </td>
-                              </tr>
-                            ))}
+                          ))}
 
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Subtotal</h4>
+                            </td>
+                            <td className="summary-subtotal-price pb-0 pt-0">
+                              ₹{toDecimal(getTotalPrice(cartList))}
+                            </td>
+                          </tr>
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Shipping</h4>
+                            </td>
+                            <td className="summary-subtotal-price pb-0 pt-0">
+                              {getShippingPrice(cartList)
+                                ? `₹${toDecimal(getShippingPrice(cartList))}`
+                                : "Free"}
+                            </td>
+                          </tr>
+                          {!!coupons?.length && (
                             <tr className="summary-subtotal">
                               <td>
-                                <h4 className="summary-subtitle">Subtotal</h4>
+                                <h4 className="summary-subtitle">Coupons</h4>
+                                <p>
+                                  {coupons.map((c) => (
+                                    <div style={{ display: "flex" }}>
+                                      <span className="mr-1">{c.code}</span>
+                                    </div>
+                                  ))}
+                                </p>
                               </td>
-                              <td className="summary-subtotal-price pb-0 pt-0">
-                                ₹{toDecimal(getTotalPrice(cartList))}
-                              </td>
-                            </tr>
-                            <tr className="summary-subtotal">
                               <td>
-                                <h4 className="summary-subtitle">Shipping</h4>
-                              </td>
-                              <td className="summary-subtotal-price pb-0 pt-0">
-                                {getShippingPrice(cartList)
-                                  ? `₹${toDecimal(getShippingPrice(cartList))}`
-                                  : "Free"}
-                              </td>
-                            </tr>
-                            {!!coupons?.length && (
-                              <tr className="summary-subtotal">
-                                <td>
-                                  <h4 className="summary-subtitle">Coupons</h4>
-                                  <p>
-                                    {coupons.map((c) => (
-                                      <div style={{ display: "flex" }}>
-                                        <span className="mr-1">{c.code}</span>
-                                      </div>
-                                    ))}
-                                  </p>
-                                </td>
-                                <td>
-                                  <p className="summary-subtotal-price">
-                                    {`₹${toDecimal(getCouponTotal(coupons))}`}
-                                  </p>
-                                </td>
-                              </tr>
-                            )}
-                            <tr className="summary-total">
-                              <td className="pb-0">
-                                <h4 className="summary-subtitle">Total</h4>
-                              </td>
-                              <td className=" pt-0 pb-0">
-                                <p className="summary-total-price ls-s text-primary">
-                                  ₹{toDecimal(getFinalPrice(cartList, coupons))}
+                                <p className="summary-subtotal-price">
+                                  {`₹${toDecimal(getCouponTotal(coupons))}`}
                                 </p>
                               </td>
                             </tr>
-                          </tbody>
-                        </table>
-                        <div className="payment accordion radio-type">
-                          <h4 className="summary-subtitle ls-m pb-3">
-                            Payment Methods
-                          </h4>
+                          )}
+                          <tr className="summary-total">
+                            <td className="pb-0">
+                              <h4 className="summary-subtitle">Total</h4>
+                            </td>
+                            <td className=" pt-0 pb-0">
+                              <p className="summary-total-price ls-s text-primary">
+                                ₹{toDecimal(getFinalPrice(cartList, coupons))}
+                              </p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div className="payment accordion radio-type">
+                        <h4 className="summary-subtitle ls-m pb-3">
+                          Payment Methods
+                        </h4>
 
-                          <div className="checkbox-group">
-                            <div className="card-header">
-                              <ALink
-                                href="#"
-                                className={`text-body text-normal ls-m ${
-                                  isFirst ? "collapse" : ""
-                                }`}
-                                onClick={() => {
-                                  !isFirst && setFirst(!isFirst);
-                                }}
-                              >
-                                Pay Online
-                              </ALink>
-                            </div>
-
-                            <Collapse in={isFirst}>
-                              <div className="card-wrapper">
-                                <div className="card-body ls-m overflow-hidden">
-                                  Use credit/debit card, net-banking, UPI,
-                                  wallets to complete the payment.
-                                </div>
-                              </div>
-                            </Collapse>
-
-                            <div className="card-header">
-                              <ALink
-                                href="#"
-                                className={`text-body text-normal ls-m ${
-                                  !isFirst ? "collapse" : ""
-                                }`}
-                                onClick={() => {
-                                  isFirst && setFirst(!isFirst);
-                                }}
-                              >
-                                Cash on delivery
-                              </ALink>
-                            </div>
-
-                            <Collapse in={!isFirst}>
-                              <div className="card-wrapper">
-                                <div className="card-body ls-m overflow-hidden">
-                                  Pay in cash or pay in person at the time of
-                                  delivery with GPay/PayTM/PhonePe.
-                                </div>
-                              </div>
-                            </Collapse>
+                        <div className="checkbox-group">
+                          <div className="card-header">
+                            <ALink
+                              href="#"
+                              className={`text-body text-normal ls-m ${
+                                isFirst ? "collapse" : ""
+                              }`}
+                              onClick={() => {
+                                !isFirst && setFirst(!isFirst);
+                              }}
+                            >
+                              Pay Online
+                            </ALink>
                           </div>
+
+                          <Collapse in={isFirst}>
+                            <div className="card-wrapper">
+                              <div className="card-body ls-m overflow-hidden">
+                                Use credit/debit card, net-banking, UPI, wallets
+                                to complete the payment.
+                              </div>
+                            </div>
+                          </Collapse>
+
+                          <div className="card-header">
+                            <ALink
+                              href="#"
+                              className={`text-body text-normal ls-m ${
+                                !isFirst ? "collapse" : ""
+                              }`}
+                              onClick={() => {
+                                isFirst && setFirst(!isFirst);
+                              }}
+                            >
+                              Cash on delivery
+                            </ALink>
+                          </div>
+
+                          <Collapse in={!isFirst}>
+                            <div className="card-wrapper">
+                              <div className="card-body ls-m overflow-hidden">
+                                Pay in cash or pay in person at the time of
+                                delivery with GPay/PayTM/PhonePe.
+                              </div>
+                            </div>
+                          </Collapse>
                         </div>
-                        <div className="form-checkbox mt-4 mb-5">
-                          <input
-                            type="checkbox"
-                            className="custom-checkbox"
-                            id="terms-condition"
-                            name="terms-condition"
-                            required
-                          />
-                          <label
-                            className="form-control-label"
-                            htmlFor="terms-condition"
-                          >
-                            I have read and agree to the website{" "}
-                            <ALink href="#">terms and conditions </ALink>*
-                          </label>
-                        </div>
-                        <button
-                          type="submit"
-                          className="btn btn-dark btn-rounded btn-order"
-                        >
-                          Place Order
-                        </button>
                       </div>
+                      {/* <div className="form-checkbox mt-4 mb-5">
+                        <input
+                          type="checkbox"
+                          className="custom-checkbox"
+                          id="terms-condition"
+                          name="terms-condition"
+                          required
+                        />
+                        <label
+                          className="form-control-label"
+                          htmlFor="terms-condition"
+                        >
+                          I have read and agree to the website{" "}
+                          <ALink href="#">terms and conditions </ALink>*
+                        </label>
+                      </div> */}
+                      <button
+                        onClick={placeOrder}
+                        className="btn btn-dark btn-rounded btn-order"
+                      >
+                        Place Order
+                      </button>
                     </div>
-                  </aside>
-                </div>
-              </form>
+                  </div>
+                </aside>
+              </div>
+              {/* </form> */}
             </>
           ) : (
             <div className="empty-cart text-center">
@@ -380,5 +345,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  emptyCart: () => cartActions.emptyCart(),
+  emptyCart: cartActions.emptyCart,
+  updateCartOrder: cartActions.updateOrder,
 })(Checkout);

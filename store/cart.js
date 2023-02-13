@@ -80,7 +80,8 @@ export const cartActions = {
     updateCart: products => ({ type: actionTypes.UPDATE_CART, payload: { products } }),
     applyCoupon: coupon => ({ type: actionTypes.APPLY_COUPONS, payload: { coupon } }),
     removeCoupon: couponId => ({ type: actionTypes.REMOVE_COUPON, payload: { coupon: couponId } }),
-    emptyCart: () => ({ type: actionTypes.REFRESH_STORE })
+    emptyCart: () => ({ type: actionTypes.REFRESH_STORE }),
+    updateOrder: order => ({ type: actionTypes.UPDATE_ORDER, payload: { ...order } }),
 };
 
 
@@ -107,21 +108,12 @@ export function* cartSaga() {
         const { product: currProduct } = e.payload;
 
         if (!order || order.status !== 'PENDING') {
-            const { data: { createOrder: response } } = yield call([API, API.graphql], {
+            ({ data: { createOrder: order } } = yield call([API, API.graphql], {
                 query: createOrder,
                 variables: { input: { userId: data?.username, status: "PENDING" }, },
-            });
-            order = {
-                userId: response.userId,
-                id: response.id,
-                CouponCodeId: null,
-                code: response.code,
-                products: [],
-                shippingAddress: null,
-                status: "PENDING",
-                totalDiscount: 0,
-            };
-            yield put({ type: actionTypes.SET_ORDER, payload: { order: response } });
+            }));
+            order.products = [];
+            yield put({ type: actionTypes.SET_ORDER, payload: { order } });
         }
 
         const { products = [], id } = order;

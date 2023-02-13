@@ -98,8 +98,10 @@ function Addresses({ user, selected, onSelect }) {
           } else {
             setAddresses([...addAddress, response]);
           }
+          onAddressClick(response);
         } else {
           setAddresses([{ ...address }]);
+          onAddressClick({ ...address });
         }
       } catch (error) {
         console.log(error);
@@ -107,7 +109,7 @@ function Addresses({ user, selected, onSelect }) {
       setOpen(false);
       return false;
     },
-    [address, user, addresses]
+    [address, user, addresses, onAddressClick]
   );
 
   const removeAddress = useCallback(
@@ -122,11 +124,37 @@ function Addresses({ user, selected, onSelect }) {
     [addresses]
   );
 
+  const onAddressClick = useCallback(
+    (adr) => {
+      if (onSelect) {
+        onSelect({
+          id: adr.id,
+          name: adr.name,
+          phone: adr.phone,
+          email: adr.email,
+          country: adr.country,
+          state: adr.state,
+          city: adr.city,
+          pinCode: adr.pinCode,
+          landmark: adr.landmark,
+          address: adr.address,
+          location: adr.location,
+          area: adr.area,
+        });
+      }
+    },
+    [onSelect]
+  );
+
   return (
     <div>
       <div className="row mt-4">
         {addresses.map((adr) => (
-          <div className="col-sm-6 mb-4 accordion-border" key={adr.id}>
+          <div
+            className="col-sm-6 mb-4 accordion-border"
+            key={adr.id}
+            onClick={() => onAddressClick(adr)}
+          >
             <div
               className={`card card-address ${
                 adr.id === selected ? "selected" : ""
