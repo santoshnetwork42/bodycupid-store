@@ -39,19 +39,17 @@ function DetailOne(props) {
       : false;
 
   if (product && product.variants && product.variants.items.length > 0) {
-    if (product.variants.items[0].size)
-      product.variants.items.forEach((item) => {
-        if (sizes.findIndex((size) => size.name === item.size.name) === -1) {
-          sizes.push({ name: item.size.name, value: item.size.size });
-        }
-      });
+    // if (product.variants.items[0].size)
+    product.variants.items.forEach((item) => {
+      sizes.push({ name: `${item.weight} ${item.weightUnit}`, value: item.id });
+    });
 
-    if (product.variants.items[0].color) {
-      product.variants.items.forEach((item) => {
-        if (colors.findIndex((color) => color.name === item.color.name) === -1)
-          colors.push({ name: item.color.name, value: item.color.color });
-      });
-    }
+    // if (product.variants.items[0].color) {
+    //   product.variants.items.forEach((item) => {
+    //     if (colors.findIndex((color) => color.name === item.color.name) === -1)
+    //       colors.push({ name: item.color.name, value: item.color.color });
+    //   });
+    // }
   }
 
   useEffect(() => {
@@ -271,7 +269,7 @@ function DetailOne(props) {
 
       {product.variants.items.length > 0 ? (
         <>
-          {product.variants.items[0].color ? (
+          {/* {product.variants.items[0].color ? (
             <div className="product-form product-variations product-color">
               <label>Color:</label>
               <div className="select-box">
@@ -296,48 +294,40 @@ function DetailOne(props) {
             </div>
           ) : (
             ""
-          )}
+          )} */}
 
-          {product.variants.items[0]?.size ? (
-            <div className="product-form product-variations product-size mb-0 pb-2">
-              <label>Size:</label>
-              <div className="product-form-group">
-                <div className="select-box">
-                  <select
-                    name="size"
-                    className="form-control select-size"
-                    onChange={setSizeHandler}
-                    value={curSize}
-                  >
-                    <option value="null">Choose an option</option>
-                    {sizes.map((item) =>
-                      !isDisabled(curColor, item.name) ? (
-                        <option value={item.name} key={"size-" + item.name}>
-                          {item.name}
-                        </option>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </select>
-                </div>
-
-                <Collapse in={"null" !== curColor || "null" !== curSize}>
-                  <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
-                    <ALink
-                      href="#"
-                      className="product-variation-clean"
-                      onClick={resetValueHandler}
-                    >
-                      Clean All
-                    </ALink>
-                  </div>
-                </Collapse>
+          <div className="product-form product-variations product-size mb-0 pb-2">
+            <label>Size:</label>
+            <div className="product-form-group">
+              <div className="select-box">
+                <select
+                  name="size"
+                  className="form-control select-size"
+                  onChange={setSizeHandler}
+                  value={curSize}
+                >
+                  <option value="null">Choose an option</option>
+                  {sizes.map((item) => (
+                    <option value={item.name} key={"size-" + item.name}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* <Collapse in={"null" !== curColor || "null" !== curSize}>
+                <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
+                  <ALink
+                    href="#"
+                    className="product-variation-clean"
+                    onClick={resetValueHandler}
+                  >
+                    Clean All
+                  </ALink>
+                </div>
+              </Collapse> */}
             </div>
-          ) : (
-            ""
-          )}
+          </div>
 
           <div className="product-variation-price">
             <Collapse in={cartActive && curIndex > -1}>
