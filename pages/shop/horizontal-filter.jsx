@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import ALink from '~/components/features/custom-link';
 
-import ShopBanner from '~/components/partials/categories/shop-banner';
-import ToolBox from '~/components/partials/categories/toolbox';
-import ProductListOne from '~/components/partials/categories/product-list/product-list-one';
+import ShopBanner from '~/components/partials/shop/shop-banner';
+import ToolBox from '~/components/partials/shop/toolbox';
+import ProductListOne from '~/components/partials/shop/product-list/product-list-one';
 
 import filterData from '~/utils/data/shop';
 

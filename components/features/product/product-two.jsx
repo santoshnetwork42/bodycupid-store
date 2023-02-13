@@ -21,6 +21,7 @@ function ProductTwo(props) {
     openQuickview,
     isCategory = true,
   } = props;
+  console.log(product);
 
   // decide if the product is wishlisted
   let isWishlisted;
@@ -57,8 +58,8 @@ function ProductTwo(props) {
       )
     : 0;
 
-  const thumbImage =
-    product.images.items.find((i) => i.isThumb) || product.images.items[0];
+  const thumbImage = product.images?.items.find((i) => i.isThumb) ||
+    product.images?.items[0] || { imageKey: product.imageUrl };
 
   return (
     <div className={`product text-left ${adClass}`}>
@@ -73,7 +74,7 @@ function ProductTwo(props) {
             height="1024"
           />
 
-          {product.images.items.length > 1 ? (
+          {product.images?.items.length > 1 ? (
             <LazyLoadImage
               alt={product.images.items[1].alt}
               src={getPublicImageURL(product.images.items[1].imageKey)}

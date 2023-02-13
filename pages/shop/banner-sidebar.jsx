@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet';
 
 import ALink from '~/components/features/custom-link';
 
-import SidebarFilterOne from '~/components/partials/categories/sidebar/sidebar-filter-one'
-import ProductListOne from '~/components/partials/categories/product-list/product-list-one';
+import SidebarFilterOne from '~/components/partials/shop/sidebar/sidebar-filter-one'
+import ProductListOne from '~/components/partials/shop/product-list/product-list-one';
 
 function ShopBannerSidebar() {
     return (
