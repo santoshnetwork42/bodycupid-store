@@ -8,10 +8,7 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
 import AuthView from "~/pages/pages/login";
-import {
-  createPayment,
-  updateOrder,
-} from "~/graphql/mutations";
+import { createPayment, updateOrder } from "~/graphql/mutations";
 
 import {
   toDecimal,
@@ -32,18 +29,31 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
-      await API.graphql({
-        query: createPayment,
-        variables: {
-          input: {
-            userId: user?.username || null,
-            orderId: order?.id,
-            method: isFirst ? "ONLINE" : "COD",
-            amount: getFinalPrice(cartList, coupons),
+      await Promise.all([
+        API.graphql({
+          query: updateOrder,
+          variables: {
+            input: {
+              id: order?.id,
+              userId: user?.username,
+              status: "PROCESSING",
+            },
           },
-        },
-        authMode,
-      });
+          authMode,
+        }),
+        API.graphql({
+          query: createPayment,
+          variables: {
+            input: {
+              userId: user?.username || null,
+              orderId: order?.id,
+              method: isFirst ? "ONLINE" : "COD",
+              amount: getFinalPrice(cartList, coupons),
+            },
+          },
+          authMode,
+        }),
+      ]);
       router.push(`/order/${order?.id}`);
       await emptyCart();
       return false;
