@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-import ShopBanner from '~/components/partials/categories/shop-banner';
-import SidebarFilterOne from '~/components/partials/categories/sidebar/sidebar-filter-one'
-import ProductListTwo from '~/components/partials/categories/product-list/product-list-two';
+import ShopBanner from '~/components/partials/shop/shop-banner';
+import SidebarFilterOne from '~/components/partials/shop/sidebar/sidebar-filter-one'
+import ProductListTwo from '~/components/partials/shop/product-list/product-list-two';
 
 function InfiniteScroll() {
     return (

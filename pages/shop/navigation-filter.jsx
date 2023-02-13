@@ -2,10 +2,10 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 
-import ShopBanner from '~/components/partials/categories/shop-banner';
-import SidebarFilterTwo from '~/components/partials/categories/sidebar/sidebar-filter-two'
-import ProductListOne from '~/components/partials/categories/product-list/product-list-one';
-import ToolBox from '~/components/partials/categories/toolbox';
+import ShopBanner from '~/components/partials/shop/shop-banner';
+import SidebarFilterTwo from '~/components/partials/shop/sidebar/sidebar-filter-two'
+import ProductListOne from '~/components/partials/shop/product-list/product-list-one';
+import ToolBox from '~/components/partials/shop/toolbox';
 
 import SlideToggle from 'react-slide-toggle';
 
