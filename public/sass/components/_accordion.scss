@@ -160,6 +160,10 @@
 		&:last-child {
 			border-bottom: 1px solid $border-color;
 		}
+
+		&.selected {
+			border-color: $primary-color;
+		}
 	}
 } 
 

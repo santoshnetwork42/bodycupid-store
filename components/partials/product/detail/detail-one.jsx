@@ -66,10 +66,10 @@ function DetailOne(props) {
       if (
         (curSize !== "null" && curColor !== "null") ||
         (curSize === "null" &&
-          product.variants[0].size === null &&
+          product.variants.items[0].size === null &&
           curColor !== "null") ||
         (curColor === "null" &&
-          product.variants[0].color === null &&
+          product.variants.items[0].color === null &&
           curSize !== "null")
       ) {
         setCartActive(true);

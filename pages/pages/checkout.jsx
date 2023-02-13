@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
-import SlideToggle from "react-slide-toggle";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 
@@ -24,9 +23,10 @@ import {
   getCouponTotal,
 } from "~/utils";
 import { cartActions } from "~/store/cart";
+import Addresses from "~/components/common/addresses";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, coupons } = props;
+  const { cartList, user, emptyCart, coupons, order } = props;
   const router = useRouter();
   const [isFirst, setFirst] = useState(false);
   const [billingAddress, setBillingAddress] = useSetState({
@@ -47,6 +47,8 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+      await emptyCart();
+      return false;
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
       const { firstName, lastName, ...restAddress } = billingAddress;
       const {
@@ -132,7 +134,7 @@ function Checkout(props) {
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
         <div className="container mt-7">
-          {cartList.length > 0 ? (
+          {cartList.length > 0 && order ? (
             <>
               {!user && (
                 <div className="card accordion">
@@ -184,143 +186,7 @@ function Checkout(props) {
                     <h3 className="title title-simple text-left text-uppercase">
                       Shipping Address
                     </h3>
-                    <div className="row">
-                      <div className="col-xs-6">
-                        <label>First Name *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="first-name"
-                          required
-                          value={billingAddress.firstName}
-                          onChange={(e) =>
-                            setBillingAddress({ firstName: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="col-xs-6">
-                        <label>Last Name *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="last-name"
-                          required
-                          value={billingAddress.lastName}
-                          onChange={(e) =>
-                            setBillingAddress({ lastName: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="col-xs-6">
-                        <label>Phone *</label>
-                        <input
-                          type="tel"
-                          className="form-control"
-                          name="phone"
-                          required
-                          value={billingAddress.phone}
-                          onChange={(e) =>
-                            setBillingAddress({ phone: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="col-xs-6">
-                        <label>Email Address *</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email-address"
-                          required
-                          value={billingAddress.email}
-                          onChange={(e) =>
-                            setBillingAddress({ email: e.target.value })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <label>Country / Region *</label>
-                    <div className="select-box">
-                      <select
-                        name="country"
-                        className="form-control"
-                        defaultValue="in"
-                        value={billingAddress.country}
-                        onChange={(e) =>
-                          setBillingAddress({ country: e.target.value })
-                        }
-                      >
-                        <option value="in">India</option>
-                        <option value="us">United States (US)</option>
-                        <option value="uk"> United Kingdom</option>
-                        <option value="fr">France</option>
-                        <option value="aus">Austria</option>
-                      </select>
-                    </div>
-                    <label>Street Address *</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="address1"
-                      required
-                      placeholder="House number and street name"
-                      value={billingAddress.address}
-                      onChange={(e) =>
-                        setBillingAddress({ address: e.target.value })
-                      }
-                    />
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="address2"
-                      placeholder="Apartment, suite, unit, etc. (optional)"
-                      value={billingAddress.location}
-                      onChange={(e) =>
-                        setBillingAddress({ location: e.target.value })
-                      }
-                    />
-                    <div className="row">
-                      <div className="col-xs-6">
-                        <label>Town / City *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="city"
-                          required
-                          value={billingAddress.city}
-                          onChange={(e) =>
-                            setBillingAddress({ city: e.target.value })
-                          }
-                        />
-                      </div>
-                      <div className="col-xs-6">
-                        <label>State *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="state"
-                          required
-                          value={billingAddress.state}
-                          onChange={(e) =>
-                            setBillingAddress({ state: e.target.value })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-xs-6">
-                        <label>Pincode *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="pincode"
-                          required
-                          value={billingAddress.pinCode}
-                          onChange={(e) =>
-                            setBillingAddress({ pinCode: e.target.value })
-                          }
-                        />
-                      </div>
-                    </div>
+                    <Addresses hideControls />
                   </div>
 
                   <aside className="col-lg-5 sticky-sidebar-wrapper">
@@ -506,6 +372,7 @@ function Checkout(props) {
 
 function mapStateToProps(state) {
   return {
+    order: state.cart.order,
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     coupons: state.cart.coupons || [],
