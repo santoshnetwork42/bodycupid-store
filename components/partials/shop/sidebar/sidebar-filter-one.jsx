@@ -255,8 +255,9 @@ function SidebarFilterOne(props) {
                             <>
                               <ALink
                                 href={{
-                                  pathname: `${router.pathname}/${item.slug}`,
+                                  pathname: `${router.pathname}`,
                                   query: {
+                                    category: item.slug,
                                     grid: query.grid,
                                     type: router.query.type
                                       ? router.query.type
@@ -292,8 +293,9 @@ function SidebarFilterOne(props) {
                                           <ALink
                                             scroll={false}
                                             href={{
-                                              pathname: `${router.pathname}/${subItem.slug}`,
+                                              pathname: `${router.pathname}`,
                                               query: {
+                                                category: subItem.slug,
                                                 grid: query.grid,
                                                 type: router.query.type
                                                   ? router.query.type
@@ -320,8 +322,9 @@ function SidebarFilterOne(props) {
                       >
                         <ALink
                           href={{
-                            pathname: `${router.pathname}/${item.slug}`,
+                            pathname: `${router.pathname}`,
                             query: {
+                              slug: item.slug,
                               grid: query.grid,
                               type: router.query.type
                                 ? router.query.type

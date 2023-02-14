@@ -13,9 +13,10 @@ import Pagination from "~/components/features/pagination";
 
 // import Api, { baseUrl } from '~/api';
 
-import { byslugProductCategory } from "~/graphql/queries";
+import { byslugProductSubCategory, listProducts } from "~/graphql/queries";
 
 function ProductListOne(props) {
+  const [category, setCategory] = useState(null);
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(1);
@@ -38,16 +39,17 @@ function ProductListOne(props) {
 
   useEffect(() => {
     API.graphql(
-      graphqlOperation(byslugProductCategory, { slug: query.category })
+      graphqlOperation(byslugProductSubCategory, { slug: query.category })
     )
       .then(
         ({
           data: {
-            byslugProductCategory: {
+            byslugProductSubCategory: {
               items: [category],
             },
           },
         }) => {
+          setCategory(category);
           setProducts(category.products.items);
           setLoading(false);
         }
@@ -55,6 +57,26 @@ function ProductListOne(props) {
       .catch((err) => {
         console.log(err);
       });
+  }, []);
+
+  useEffect(() => {
+    if (category) {
+      API.graphql(
+        graphqlOperation(listProducts, { subCategoryId: category.id })
+      )
+        .then(
+          ({
+            data: {
+              listProducts: { items: response },
+            },
+          }) => {
+            setProducts(response);
+          }
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [query]);
 
   return (

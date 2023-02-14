@@ -31,11 +31,25 @@ function MainMenu() {
         {categories.map((category) => (
           <li
             key={category.id}
-            className={
-              pathname.includes(`/categories/${category.slug}`) ? "active" : ""
-            }
+            className={`
+              ${
+                pathname.includes(`/categories/${category.slug}`)
+                  ? "active"
+                  : ""
+              }
+              ${category?.subCategory?.items?.length ? "d-xl-show submenu" : ""}
+            `}
           >
             <ALink href={`/categories/${category.slug}`}>{category.name}</ALink>
+            {!!category?.subCategory?.items?.length && (
+              <ul>
+                {category.subCategory.items.map((item) => (
+                  <li key={`sub-categories-${item.id}`}>
+                    <ALink href={"/categories/" + item.slug}>{item.name}</ALink>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
 

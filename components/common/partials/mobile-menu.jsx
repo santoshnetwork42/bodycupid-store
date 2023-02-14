@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Auth, Hub } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-
+import { listProductCategories } from "~/graphql/queries";
 import { mainMenu } from "~/utils/data/menu";
 
-const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
-
-function MobileMenu(props) {
+function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
-  const [auth, setAuth] = useState(false);
   const router = useRouter();
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    (async function () {
-      const session = await Auth.currentAuthenticatedUser().catch(() => null);
-      setAuth(!!session);
-    })();
-
-    Hub.listen("auth", ({ payload: { event } }) => {
-      if (event === "signOut") {
-        setAuth(false);
-      } else if (loggedInEvents.includes(event)) {
-        setAuth(true);
+    API.graphql(graphqlOperation(listProductCategories, { limit: 4 })).then(
+      ({
+        data: {
+          listProductCategories: { items },
+        },
+      }) => {
+        setCategories(items);
       }
-    });
+    );
   }, []);
 
   useEffect(() => {
@@ -75,7 +71,7 @@ function MobileMenu(props) {
   function onSubmitSearchForm(e) {
     e.preventDefault();
     router.push({
-      pathname: "/shop",
+      pathname: "/categories",
       query: {
         search: search,
       },
@@ -117,44 +113,35 @@ function MobileMenu(props) {
           </li>
 
           <li>
-            <Card title="categories" type="mobile" url="/shop">
+            <Card title="categories" type="mobile" url="/categories">
               <ul>
-                <li>
-                  <Card title="Variations 1" type="mobile">
-                    <ul>
-                      {mainMenu.shop.variation1.map((item, index) => (
-                        <li key={`shop-${item.title}`}>
-                          <ALink href={"/" + item.url}>
-                            {item.title}
-                            {item.hot ? (
-                              <span className="tip tip-hot">Hot</span>
-                            ) : (
-                              ""
-                            )}
-                          </ALink>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </li>
-                <li>
-                  <Card title="Variations 2" type="mobile">
-                    <ul>
-                      {mainMenu.shop.variation2.map((item, index) => (
-                        <li key={`shop-${item.title}`}>
-                          <ALink href={"/" + item.url}>
-                            {item.title}
-                            {item.new ? (
-                              <span className="tip tip-new">New</span>
-                            ) : (
-                              ""
-                            )}
-                          </ALink>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </li>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    {!category.subCategory.items.length && (
+                      <ALink href={"/categories/" + category.slug}>
+                        {category.name}
+                      </ALink>
+                    )}
+                    {category.subCategory.items.length > 0 && (
+                      <Card title={category.name} type="mobile">
+                        <ul>
+                          {category.subCategory.items.map((item) => (
+                            <li key={item.id}>
+                              <ALink href={"/categories/" + item.slug}>
+                                {item.name}
+                                {/* {item.hot ? (
+                                  <span className="tip tip-hot">Hot</span>
+                                ) : (
+                                  ""
+                                )} */}
+                              </ALink>
+                            </li>
+                          ))}
+                        </ul>
+                      </Card>
+                    )}
+                  </li>
+                ))}
               </ul>
             </Card>
           </li>
@@ -207,7 +194,7 @@ function MobileMenu(props) {
             </Card>
           </li> */}
 
-          <li>
+          {/* <li>
             <Card title="Pages" type="mobile" url="/pages/about-us">
               <ul>
                 {mainMenu.other.map((item, index) => (
@@ -265,18 +252,18 @@ function MobileMenu(props) {
                 ))}
               </ul>
             </Card>
-          </li>
+          </li> */}
 
-          <li className="mb-4 border-no">
+          {/* <li className="mb-4 border-no">
             <a href="https://d-themes.com/buynow/riodereact">Buy Wow!</a>
-          </li>
+          </li> */}
 
-          {!auth && (
+          {!user && (
             <li>
               <ALink href={"/pages/login"}>Login</ALink>
             </li>
           )}
-          {auth && (
+          {!!user && (
             <li>
               <ALink href={"/pages/account"}>Account</ALink>
             </li>
@@ -293,4 +280,10 @@ function MobileMenu(props) {
   );
 }
 
-export default React.memo(MobileMenu);
+function mapStateToProps(state) {
+  return {
+    user: state.user.data,
+  };
+}
+
+export default connect(mapStateToProps)(MobileMenu);
