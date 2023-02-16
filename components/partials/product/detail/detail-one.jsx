@@ -47,6 +47,7 @@ function DetailOne(props) {
       });
 
     // if (product.variants.items[0].color) {
+    //
     //   product.variants.items.forEach((item) => {
     //     if (colors.findIndex((color) => color.name === item.color.name) === -1)
     //       colors.push({ name: item.color.name, value: item.color.color });
