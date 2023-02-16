@@ -1,14 +1,10 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import Head from "next/head";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
-
-import { demoActions } from "~/store/demo";
-
-import { currentDemo } from "~/server/queries";
 
 import { Amplify } from "aws-amplify";
 

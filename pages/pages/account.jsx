@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
 import React, { useCallback, useEffect, useState } from "react";
+import Head from "next/head";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";

@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -8,9 +8,9 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 function Categories() {
   return (
     <main className="main">
-      <Helmet>
+      <Head>
         <title>Wow React eCommerce Template - Shop Page</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow React eCommerce Template - Shop Page</h1>
 
