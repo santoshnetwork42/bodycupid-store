@@ -21,7 +21,6 @@ function ProductTwo(props) {
     openQuickview,
     isCategory = true,
   } = props;
-  console.log(product);
 
   // decide if the product is wishlisted
   let isWishlisted;

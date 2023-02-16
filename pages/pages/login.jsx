@@ -33,6 +33,7 @@ function Login({ auth, redirect = true }) {
             given_name: state.name,
             middle_name: state.name,
             email: state.email,
+            phone_number: state.phone,
           },
           autoSignIn: {
             // optional - enables auto sign in after user is confirmed

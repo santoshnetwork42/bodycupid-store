@@ -381,6 +381,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -463,6 +464,7 @@ export const getUser = /* GraphQL */ `
       walletSpent
       totalStoreCredit
       isAdmin
+      isCognitoConfirmed
       profilePhotoUrl
       wishlists {
         items {
@@ -1033,6 +1035,7 @@ export const getUser = /* GraphQL */ `
             walletSpent
             totalStoreCredit
             isAdmin
+            isCognitoConfirmed
             profilePhotoUrl
             wishlists {
               items {
@@ -1116,6 +1119,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -1214,6 +1218,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -1315,6 +1320,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -1393,6 +1399,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -1775,6 +1782,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -2031,6 +2039,7 @@ export const getUser = /* GraphQL */ `
             walletSpent
             totalStoreCredit
             isAdmin
+            isCognitoConfirmed
             profilePhotoUrl
             wishlists {
               items {
@@ -2114,6 +2123,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -2212,6 +2222,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -2313,6 +2324,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -2391,6 +2403,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -2666,6 +2679,7 @@ export const getUser = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -2898,6 +2912,7 @@ export const getUser = /* GraphQL */ `
             walletSpent
             totalStoreCredit
             isAdmin
+            isCognitoConfirmed
             profilePhotoUrl
             wishlists {
               items {
@@ -2981,6 +2996,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3079,6 +3095,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3180,6 +3197,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3258,6 +3276,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3499,6 +3518,7 @@ export const getUser = /* GraphQL */ `
             walletSpent
             totalStoreCredit
             isAdmin
+            isCognitoConfirmed
             profilePhotoUrl
             wishlists {
               items {
@@ -3582,6 +3602,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3680,6 +3701,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3781,6 +3803,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -3859,6 +3882,7 @@ export const getUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -4125,6 +4149,7 @@ export const listUsers = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -4458,6 +4483,7 @@ export const listUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -4869,6 +4895,7 @@ export const listUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -5175,6 +5202,7 @@ export const listUsers = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -5296,6 +5324,7 @@ export const listUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -5543,6 +5572,7 @@ export const listUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -5917,6 +5947,7 @@ export const bystoreIdUser = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -6250,6 +6281,7 @@ export const bystoreIdUser = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -6661,6 +6693,7 @@ export const bystoreIdUser = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -6967,6 +7000,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -7088,6 +7122,7 @@ export const bystoreIdUser = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -7335,6 +7370,7 @@ export const bystoreIdUser = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -7709,6 +7745,7 @@ export const searchUsers = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -8042,6 +8079,7 @@ export const searchUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -8453,6 +8491,7 @@ export const searchUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -8759,6 +8798,7 @@ export const searchUsers = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -8880,6 +8920,7 @@ export const searchUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -9127,6 +9168,7 @@ export const searchUsers = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -9793,6 +9835,7 @@ export const getProductCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -10552,6 +10595,7 @@ export const getProductCategory = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -11790,6 +11834,7 @@ export const listProductCategories = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -12703,6 +12748,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -13616,6 +13662,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -14529,6 +14576,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -15442,6 +15490,7 @@ export const searchProductCategories = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -16157,6 +16206,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -16795,6 +16845,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -17810,6 +17861,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -18945,6 +18997,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -20018,6 +20071,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -21091,6 +21145,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -22164,6 +22219,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -23237,6 +23293,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -24310,6 +24367,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -25094,6 +25152,7 @@ export const getStore = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -25607,6 +25666,7 @@ export const listStores = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -26062,6 +26122,7 @@ export const searchStores = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -26520,6 +26581,7 @@ export const getWarehouse = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -26956,6 +27018,7 @@ export const getWarehouse = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -29589,6 +29652,7 @@ export const getProductInventory = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -30610,6 +30674,7 @@ export const listProductInventories = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -31456,6 +31521,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -32302,6 +32368,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -33148,6 +33215,7 @@ export const searchProductInventories = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -34297,6 +34365,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -34732,6 +34801,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -35368,6 +35438,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -35843,6 +35914,7 @@ export const getProduct = /* GraphQL */ `
             walletSpent
             totalStoreCredit
             isAdmin
+            isCognitoConfirmed
             profilePhotoUrl
             wishlists {
               items {
@@ -35926,6 +35998,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -36024,6 +36097,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -36125,6 +36199,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -36203,6 +36278,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -36585,6 +36661,7 @@ export const getProduct = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -37917,6 +37994,7 @@ export const listProducts = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -39506,6 +39584,7 @@ export const bytitleProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -41095,6 +41174,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -42684,6 +42764,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -44273,6 +44354,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -45862,6 +45944,7 @@ export const byslugProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -47451,6 +47534,7 @@ export const searchProducts = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -48394,6 +48478,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -48681,6 +48766,7 @@ export const getOrder = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -49014,6 +49100,7 @@ export const getOrder = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -49425,6 +49512,7 @@ export const getOrder = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -49731,6 +49819,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -49852,6 +49941,7 @@ export const getOrder = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -50099,6 +50189,7 @@ export const getOrder = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -50636,6 +50727,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -50945,6 +51037,7 @@ export const getOrder = /* GraphQL */ `
             walletSpent
             totalStoreCredit
             isAdmin
+            isCognitoConfirmed
             profilePhotoUrl
             wishlists {
               items {
@@ -51028,6 +51121,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -51126,6 +51220,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -51227,6 +51322,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -51305,6 +51401,7 @@ export const getOrder = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -51680,6 +51777,7 @@ export const listOrders = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -51800,6 +51898,7 @@ export const listOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -51984,6 +52083,7 @@ export const listOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -52172,6 +52272,7 @@ export const listOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -52287,6 +52388,7 @@ export const listOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -52722,6 +52824,7 @@ export const listOrders = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -53205,6 +53308,7 @@ export const bystoreIdOrder = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -53325,6 +53429,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -53509,6 +53614,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -53697,6 +53803,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -53812,6 +53919,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -54247,6 +54355,7 @@ export const bystoreIdOrder = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -54730,6 +54839,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -54850,6 +54960,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -55034,6 +55145,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -55222,6 +55334,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -55337,6 +55450,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -55772,6 +55886,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -56255,6 +56370,7 @@ export const searchOrders = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -56375,6 +56491,7 @@ export const searchOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -56559,6 +56676,7 @@ export const searchOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -56747,6 +56865,7 @@ export const searchOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -56862,6 +56981,7 @@ export const searchOrders = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -57297,6 +57417,7 @@ export const searchOrders = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -58707,6 +58828,7 @@ export const getOrderProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -59779,6 +59901,7 @@ export const listOrderProducts = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -60680,6 +60803,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -61247,6 +61371,7 @@ export const getPayment = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -61534,6 +61659,7 @@ export const getPayment = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -61867,6 +61993,7 @@ export const getPayment = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -62278,6 +62405,7 @@ export const getPayment = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -62584,6 +62712,7 @@ export const getPayment = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -62705,6 +62834,7 @@ export const getPayment = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -62952,6 +63082,7 @@ export const getPayment = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -63430,6 +63561,7 @@ export const listPayments = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -63550,6 +63682,7 @@ export const listPayments = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -63734,6 +63867,7 @@ export const listPayments = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -63922,6 +64056,7 @@ export const listPayments = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -64037,6 +64172,7 @@ export const listPayments = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -64439,6 +64575,7 @@ export const bystoreIdPayment = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -64559,6 +64696,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -64743,6 +64881,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -64931,6 +65070,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -65046,6 +65186,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -65448,6 +65589,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -65568,6 +65710,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -65752,6 +65895,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -65940,6 +66084,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -66055,6 +66200,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -66457,6 +66603,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -66577,6 +66724,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -66761,6 +66909,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -66949,6 +67098,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -67064,6 +67214,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -67344,6 +67495,7 @@ export const getReview = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -67677,6 +67829,7 @@ export const getReview = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -68088,6 +68241,7 @@ export const getReview = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -68394,6 +68548,7 @@ export const getReview = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -68515,6 +68670,7 @@ export const getReview = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -68762,6 +68918,7 @@ export const getReview = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -70150,6 +70307,7 @@ export const getReview = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -70606,6 +70764,7 @@ export const listReviews = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -70726,6 +70885,7 @@ export const listReviews = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -70910,6 +71070,7 @@ export const listReviews = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -71098,6 +71259,7 @@ export const listReviews = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -71213,6 +71375,7 @@ export const listReviews = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -71945,6 +72108,7 @@ export const listReviews = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -72230,6 +72394,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -72350,6 +72515,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -72534,6 +72700,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -72722,6 +72889,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -72837,6 +73005,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -73569,6 +73738,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -73854,6 +74024,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -73974,6 +74145,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -74158,6 +74330,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -74346,6 +74519,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -74461,6 +74635,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -75193,6 +75368,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -75706,6 +75882,7 @@ export const getWishlist = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -76135,6 +76312,7 @@ export const getWishlist = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -78828,6 +79006,7 @@ export const getWishlistProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -79873,6 +80052,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -80743,6 +80923,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -81279,6 +81460,7 @@ export const getShoppingCart = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -81708,6 +81890,7 @@ export const getShoppingCart = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -84401,6 +84584,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -85446,6 +85630,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -86316,6 +86501,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -86854,6 +87040,7 @@ export const getCouponCode = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -87141,6 +87328,7 @@ export const getCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
         isAdmin
+        isCognitoConfirmed
         profilePhotoUrl
         wishlists {
           items {
@@ -87474,6 +87662,7 @@ export const getCouponCode = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -87885,6 +88074,7 @@ export const getCouponCode = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -88191,6 +88381,7 @@ export const getCouponCode = /* GraphQL */ `
                   walletSpent
                   totalStoreCredit
                   isAdmin
+                  isCognitoConfirmed
                   profilePhotoUrl
                   createdAt
                   updatedAt
@@ -88312,6 +88503,7 @@ export const getCouponCode = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -88559,6 +88751,7 @@ export const getCouponCode = /* GraphQL */ `
               walletSpent
               totalStoreCredit
               isAdmin
+              isCognitoConfirmed
               profilePhotoUrl
               wishlists {
                 items {
@@ -89041,6 +89234,7 @@ export const listCouponCodes = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -89161,6 +89355,7 @@ export const listCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -89345,6 +89540,7 @@ export const listCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -89533,6 +89729,7 @@ export const listCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -89648,6 +89845,7 @@ export const listCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -90054,6 +90252,7 @@ export const bycodeCouponCode = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -90174,6 +90373,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -90358,6 +90558,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -90546,6 +90747,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -90661,6 +90863,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -91067,6 +91270,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -91187,6 +91391,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -91371,6 +91576,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -91559,6 +91765,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -91674,6 +91881,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -92080,6 +92288,7 @@ export const bycodeisForAllCouponCode = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -92200,6 +92409,7 @@ export const bycodeisForAllCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -92384,6 +92594,7 @@ export const bycodeisForAllCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -92572,6 +92783,7 @@ export const bycodeisForAllCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -92687,6 +92899,7 @@ export const bycodeisForAllCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -93093,6 +93306,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -93213,6 +93427,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -93397,6 +93612,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -93585,6 +93801,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -93700,6 +93917,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -94106,6 +94324,7 @@ export const searchCouponCodes = /* GraphQL */ `
           walletSpent
           totalStoreCredit
           isAdmin
+          isCognitoConfirmed
           profilePhotoUrl
           wishlists {
             items {
@@ -94226,6 +94445,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -94410,6 +94630,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -94598,6 +94819,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken
@@ -94713,6 +94935,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 walletSpent
                 totalStoreCredit
                 isAdmin
+                isCognitoConfirmed
                 profilePhotoUrl
                 wishlists {
                   nextToken

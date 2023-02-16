@@ -3,17 +3,17 @@ import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { listProductCategories } from "~/graphql/queries";
+import { getMenuCategories } from "~/graphql/api";
 
 function MainMenu() {
   const { pathname } = useRouter();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listProductCategories, { limit: 4 })).then(
+    API.graphql(graphqlOperation(getMenuCategories)).then(
       ({
         data: {
-          listProductCategories: { items },
+          searchProductCategories: { items },
         },
       }) => {
         setCategories(items);

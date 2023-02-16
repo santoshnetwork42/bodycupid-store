@@ -214,6 +214,7 @@ function SidebarFilterOne(props) {
                   href={{
                     pathname: router.pathname,
                     query: {
+                      category: query.category,
                       grid: query.grid,
                       type: router.query.type ? router.query.type : null,
                     },

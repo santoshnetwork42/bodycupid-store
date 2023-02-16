@@ -40,9 +40,11 @@ function DetailOne(props) {
 
   if (product && product.variants && product.variants.items.length > 0) {
     // if (product.variants.items[0].size)
-    product.variants.items.forEach((item) => {
-      sizes.push({ name: `${item.weight} ${item.weightUnit}`, value: item.id });
-    });
+    product.variants.items
+      .sort((a, b) => a.position - b.position)
+      .forEach((item) => {
+        sizes.push({ name: item.title, value: item.id });
+      });
 
     // if (product.variants.items[0].color) {
     //   product.variants.items.forEach((item) => {
@@ -308,7 +310,7 @@ function DetailOne(props) {
                 >
                   <option value="null">Choose an option</option>
                   {sizes.map((item) => (
-                    <option value={item.name} key={"size-" + item.name}>
+                    <option value={item.value} key={item.value}>
                       {item.name}
                     </option>
                   ))}

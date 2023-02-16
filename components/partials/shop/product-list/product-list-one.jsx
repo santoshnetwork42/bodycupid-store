@@ -13,7 +13,7 @@ import Pagination from "~/components/features/pagination";
 
 // import Api, { baseUrl } from '~/api';
 
-import { byslugProductSubCategory, listProducts } from "~/graphql/queries";
+import { byslugProductSubCategory, searchProducts } from "~/graphql/queries";
 
 function ProductListOne(props) {
   const [category, setCategory] = useState(null);
@@ -57,20 +57,41 @@ function ProductListOne(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [query.category]);
 
   useEffect(() => {
     if (category) {
-      API.graphql(
-        graphqlOperation(listProducts, { subCategoryId: category.id })
-      )
+      setLoading(true);
+      const filter = { categoryId: { eq: category.id } };
+      if (
+        !Number.isNaN(Number(query.min_price)) &&
+        !Number.isNaN(Number(query.max_price)) &&
+        Number(query.min_price)
+      ) {
+        filter.price = {
+          range: [Number(query.min_price), Number(query.max_price)],
+        };
+      } else if (
+        !Number.isNaN(Number(query.min_price)) &&
+        Number(query.min_price)
+      ) {
+        filter.price = { gte: Number(query.min_price) };
+      } else if (
+        !Number.isNaN(Number(query.max_price)) &&
+        Number(query.max_price)
+      ) {
+        filter.price = { lte: Number(query.max_price) };
+      }
+
+      API.graphql(graphqlOperation(searchProducts, { filter }))
         .then(
           ({
             data: {
-              listProducts: { items: response },
+              searchProducts: { items: response },
             },
           }) => {
             setProducts(response);
+            setLoading(false);
           }
         )
         .catch((err) => {

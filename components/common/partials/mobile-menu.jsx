@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-import { listProductCategories } from "~/graphql/queries";
-import { mainMenu } from "~/utils/data/menu";
+import { getMenuCategories } from "~/graphql/api";
 
 function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
@@ -14,10 +13,10 @@ function MobileMenu({ user }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listProductCategories, { limit: 4 })).then(
+    API.graphql(graphqlOperation(getMenuCategories)).then(
       ({
         data: {
-          listProductCategories: { items },
+          searchProductCategories: { items },
         },
       }) => {
         setCategories(items);
