@@ -14,18 +14,13 @@ import BrandSection from "~/components/partials/home/brand-section";
 import BlogSection from "~/components/partials/home/blog-section";
 import SmallCollection from "~/components/partials/product/small-collection";
 
-import {
-  listProducts as listProductsGql,
-  listProductCategories as listProductCategoriesGql,
-} from "~/graphql/queries";
+import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
 
 import awsmobile from "~/aws-exports";
 import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function HomePage({ hero, products, categories, brands }) {
-  console.log("products >>", products);
-
   return (
     <div className="main home">
       <Head>
@@ -102,10 +97,12 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
-    const { listProducts } = await fetchData(listProductsGql);
-    const { listProductCategories } = await fetchData(listProductCategoriesGql);
+    const { searchProducts } = await fetchData(getHomePageProducts);
+    const { searchProductSubCategories } = await fetchData(
+      getHomePageCategories
+    );
 
-    for (const category of listProductCategories.items) {
+    for (const category of searchProductSubCategories.items) {
       const imageUrl = getPublicImageURL(category.imageUrl);
       const optimizedCategoryImage = await optimizeImage({
         src: imageUrl,
@@ -118,7 +115,7 @@ export const getStaticProps = async () => {
       delete category.imageUrl;
       category.image = optimizedCategoryImage;
     }
-    for (const product of listProducts.items) {
+    for (const product of searchProducts.items) {
       for (const image in product.images.items) {
         const imageUrl = getPublicImageURL(
           product.images.items[image].imageKey
@@ -175,8 +172,8 @@ export const getStaticProps = async () => {
         hero: {
           banner: optimizedHeroImage,
         },
-        products: listProducts.items,
-        categories: listProductCategories.items,
+        products: searchProducts.items,
+        categories: searchProductSubCategories.items,
         brands,
         footer: {
           logo: optimizedFooterImage,

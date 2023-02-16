@@ -59,7 +59,7 @@ function ProductThree(props) {
       }`}
     >
       <figure className="product-media">
-        <ALink href={`/product/default/${product.slug}`}>
+        <ALink href={`/product/${product.slug}`}>
           <LazyLoadImage
             alt="product"
             src={product.large_pictures[0].url}
@@ -126,9 +126,7 @@ function ProductThree(props) {
         </div>
 
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.slug}`}>
-            {product.name}
-          </ALink>
+          <ALink href={`/product/${product.slug}`}>{product.name}</ALink>
         </h3>
 
         <div className="product-price">
@@ -162,10 +160,7 @@ function ProductThree(props) {
             </span>
           </div>
 
-          <ALink
-            href={`/product/default/${product.slug}`}
-            className="rating-reviews"
-          >
+          <ALink href={`/product/${product.slug}`} className="rating-reviews">
             ( {product.reviews} reviews )
           </ALink>
         </div>
@@ -173,7 +168,7 @@ function ProductThree(props) {
         <div className="product-action">
           {product.variants && product.variants.length > 0 ? (
             <ALink
-              href={`/product/default/${product.slug}`}
+              href={`/product/${product.slug}`}
               className="btn-product btn-cart"
               title="Go to product"
             >

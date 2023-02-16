@@ -1,26 +1,43 @@
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 
 import { cartActions } from "~/store/cart";
 
-import { toDecimal, getTotalPrice } from "~/utils";
+import {
+  toDecimal,
+  getTotalPrice,
+  getShippingPrice,
+  getFinalPrice,
+  getCouponTotal,
+} from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { applyCoupon as applyCouponMutation } from "~/graphql/queries";
 
 function Cart(props) {
-  const { cartList, removeFromCart, updateCart } = props;
+  const {
+    cartList,
+    user,
+    coupons,
+    removeFromCart,
+    updateCart,
+    applyCoupon,
+    removeCoupon,
+  } = props;
   const [cartItems, setCartItems] = useState([]);
+  const [coupon, setCoupon] = useState("");
 
   useEffect(() => {
     setCartItems([...cartList]);
   }, [cartList]);
 
-  const onChangeQty = (name, qty) => {
+  const onChangeQty = (id, qty) => {
     setCartItems(
       cartItems.map((item) => {
-        return item.title === name ? { ...item, qty: qty } : item;
+        return item.id === id ? { ...item, qty: qty } : item;
       })
     );
   };
@@ -38,6 +55,23 @@ function Cart(props) {
   const update = () => {
     updateCart(cartItems);
   };
+
+  const applyCouponCode = useCallback(async () => {
+    const response = await API.graphql({
+      query: applyCouponMutation,
+      variables: { code: coupon },
+      authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+    });
+
+    if (response.data.applyCoupn) {
+      const couponResponse = JSON.parse(response.data.applyCoupn);
+      const { statusCode, code, id, discount } = couponResponse;
+      if (statusCode === 200 && code && id && discount) {
+        setCoupon("");
+        applyCoupon(couponResponse);
+      }
+    }
+  }, [coupon, user]);
 
   return (
     <div className="main cart">
@@ -80,9 +114,11 @@ function Cart(props) {
                         <tr key={"cart" + item.title}>
                           <td className="product-thumbnail">
                             <figure>
-                              <ALink href={"/product/default/" + item.id}>
+                              <ALink href={"/product/" + item.slug}>
                                 <img
-                                  src={getPublicImageURL(item.images.items[0]?.imageKey)}
+                                  src={getPublicImageURL(
+                                    item.images.items[0]?.imageKey
+                                  )}
                                   width="100"
                                   height="100"
                                   alt={item.images.items[0]?.alt}
@@ -92,7 +128,7 @@ function Cart(props) {
                           </td>
                           <td className="product-name">
                             <div className="product-name-section">
-                              <ALink href={"/product/default/" + item.id}>
+                              <ALink href={"/product/" + item.slug}>
                                 {item.title}
                               </ALink>
                             </div>
@@ -105,9 +141,10 @@ function Cart(props) {
 
                           <td className="product-quantity">
                             <Quantity
+                              product={item}
                               qty={item.qty}
-                              max={item.stock}
-                              onChangeQty={(qty) => onChangeQty(item.name, qty)}
+                              max={item.inventory}
+                              onChangeQty={(qty) => onChangeQty(item.id, qty)}
                             />
                           </td>
                           <td className="product-price">
@@ -156,9 +193,11 @@ function Cart(props) {
                       className="input-text form-control text-grey ls-m mb-4"
                       id="coupon_code"
                       placeholder="Enter coupon code here..."
+                      value={coupon}
+                      onChange={(e) => setCoupon(e.target.value)}
                     />
                     <button
-                      type="submit"
+                      onClick={applyCouponCode}
                       className="btn btn-md btn-dark btn-rounded btn-outline"
                     >
                       Apply Coupon
@@ -184,114 +223,48 @@ function Cart(props) {
                               </p>
                             </td>
                           </tr>
-                          <tr className="sumnary-shipping shipping-row-last">
-                            <td colSpan="2">
-                              <h4 className="summary-subtitle">
-                                Calculate Shipping
-                              </h4>
-                              <ul>
-                                <li>
-                                  <div className="custom-radio">
-                                    <input
-                                      type="radio"
-                                      id="flat_rate"
-                                      name="shipping"
-                                      className="custom-control-input"
-                                      defaultChecked
-                                    />
-                                    <label
-                                      className="custom-control-label"
-                                      htmlFor="flat_rate"
-                                    >
-                                      Flat rate
-                                    </label>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div className="custom-radio">
-                                    <input
-                                      type="radio"
-                                      id="free-shipping"
-                                      name="shipping"
-                                      className="custom-control-input"
-                                    />
-                                    <label
-                                      className="custom-control-label"
-                                      htmlFor="free-shipping"
-                                    >
-                                      Free shipping
-                                    </label>
-                                  </div>
-                                </li>
-
-                                <li>
-                                  <div className="custom-radio">
-                                    <input
-                                      type="radio"
-                                      id="local_pickup"
-                                      name="shipping"
-                                      className="custom-control-input"
-                                    />
-                                    <label
-                                      className="custom-control-label"
-                                      htmlFor="local_pickup"
-                                    >
-                                      Local pickup
-                                    </label>
-                                  </div>
-                                </li>
-                              </ul>
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Shipping</h4>
+                            </td>
+                            <td>
+                              <p className="summary-subtotal-price">
+                                {getShippingPrice(cartItems)
+                                  ? `₹${toDecimal(getShippingPrice(cartItems))}`
+                                  : "FREE"}
+                              </p>
                             </td>
                           </tr>
+                          {!!coupons?.length && (
+                            <tr className="summary-subtotal">
+                              <td>
+                                <h4 className="summary-subtitle">Coupons</h4>
+                                <p>
+                                  {coupons.map((c) => (
+                                    <div style={{ display: "flex" }}>
+                                      <span className="mr-1">{c.code}</span>
+                                      <ALink
+                                        key={c.id}
+                                        href="#"
+                                        className="product-remove"
+                                        title="Remove coupon"
+                                        onClick={() => removeCoupon(c.id)}
+                                      >
+                                        <i className="fas fa-times"></i>
+                                      </ALink>
+                                    </div>
+                                  ))}
+                                </p>
+                              </td>
+                              <td>
+                                <p className="summary-subtotal-price">
+                                  {`₹${toDecimal(getCouponTotal(coupons))}`}
+                                </p>
+                              </td>
+                            </tr>
+                          )}
                         </tbody>
                       </table>
-                      <div className="shipping-address">
-                        <label>
-                          Shipping to <strong>CA.</strong>
-                        </label>
-                        <div className="select-box">
-                          <select
-                            name="country"
-                            className="form-control"
-                            defaultValue="us"
-                          >
-                            <option value="us">United States (US)</option>
-                            <option value="uk"> United Kingdom</option>
-                            <option value="fr">France</option>
-                            <option value="aus">Austria</option>
-                          </select>
-                        </div>
-                        <div className="select-box">
-                          <select
-                            name="country"
-                            className="form-control"
-                            defaultValue="us"
-                          >
-                            <option value="us">California</option>
-                            <option value="uk">Alaska</option>
-                            <option value="fr">Delaware</option>
-                            <option value="aus">Hawaii</option>
-                          </select>
-                        </div>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="code"
-                          placeholder="Town / City"
-                        />
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="code"
-                          placeholder="ZIP"
-                        />
-                        <ALink
-                          href="#"
-                          className="btn btn-md btn-dark btn-rounded btn-outline"
-                        >
-                          Update totals
-                        </ALink>
-                      </div>
                       <table className="total">
                         <tbody>
                           <tr className="summary-subtotal">
@@ -300,7 +273,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(getTotalPrice(cartItems))}
+                                ₹{toDecimal(getFinalPrice(cartItems, coupons))}
                               </p>
                             </td>
                           </tr>
@@ -340,10 +313,14 @@ function Cart(props) {
 function mapStateToProps(state) {
   return {
     cartList: state.cart.data ? state.cart.data : [],
+    user: state.user.data,
+    coupons: state.cart.coupons || [],
   };
 }
 
 export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
+  applyCoupon: cartActions.applyCoupon,
+  removeCoupon: cartActions.removeCoupon,
 })(Cart);

@@ -70,7 +70,7 @@ function CartMenu(props) {
                   key={"cart-menu-product-" + index}
                 >
                   <figure className="product-media pure-media">
-                    <ALink href={"/product/default/" + item.slug}>
+                    <ALink href={"/product/" + item.slug}>
                       <img
                         src={getPublicImageURL(item.images.items[0]?.imageKey)}
                         alt={item.images.items[0]?.alt}
@@ -90,7 +90,7 @@ function CartMenu(props) {
                   </figure>
                   <div className="product-detail">
                     <ALink
-                      href={"/product/default/" + item.slug}
+                      href={"/product/" + item.slug}
                       className="product-name"
                     >
                       {item.name}
@@ -142,7 +142,7 @@ function CartMenu(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data,
+    cartList: state.cart.data || [],
   };
 }
 

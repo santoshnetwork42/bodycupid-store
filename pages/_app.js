@@ -23,10 +23,33 @@ const App = ({ Component, pageProps }) => {
   const store = useStore();
   const { navbar, footer } = pageProps;
 
-  useEffect(() => {
-    if (store.getState().demo.current !== currentDemo) {
-      store.dispatch(demoActions.refreshStore(currentDemo));
+  const setUser = useCallback(async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      store.dispatch(
+        userActions.setUser({
+          username: user.username,
+          attributes: user.attributes,
+        })
+      );
+    } catch {
+      store.dispatch(userActions.removeUser());
     }
+  }, [store]);
+
+  useEffect(() => {
+    const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
+    Hub.listen("auth", async (authEvent) => {
+      const {
+        payload: { event },
+      } = authEvent;
+      if (event === "signOut") {
+        store.dispatch(userActions.removeUser());
+      } else if (loggedInEvents.includes(event)) {
+        setUser();
+      }
+    });
+    setUser();
   }, []);
 
   return (

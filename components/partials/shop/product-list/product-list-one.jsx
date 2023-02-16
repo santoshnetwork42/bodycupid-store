@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { API, graphqlOperation } from "aws-amplify";
 // import { useLazyQuery } from '@apollo/react-hooks';
 
 import ToolBox from "~/components/partials/shop/toolbox";
@@ -12,10 +13,10 @@ import Pagination from "~/components/features/pagination";
 
 // import Api, { baseUrl } from '~/api';
 
-import { API, graphqlOperation } from "aws-amplify";
-import { listProducts } from "~/graphql/queries";
+import { byslugProductSubCategory, searchProducts } from "~/graphql/queries";
 
 function ProductListOne(props) {
+  const [category, setCategory] = useState(null);
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(1);
@@ -37,17 +38,66 @@ function ProductListOne(props) {
   const gridType = query.type ? query.type : "grid";
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listProducts))
-      .then((response) => {
-        let data = response.data;
-        console.log(data.listProducts);
-        setProducts(data.listProducts.items);
-        // setTotalPage(parseInt(data.listProducts.items.total / perPage) + (data.listProducts.items.total % perPage ? 1 : 0));
-        setLoading(false);
-      })
+    API.graphql(
+      graphqlOperation(byslugProductSubCategory, { slug: query.category })
+    )
+      .then(
+        ({
+          data: {
+            byslugProductSubCategory: {
+              items: [category],
+            },
+          },
+        }) => {
+          setCategory(category);
+          setProducts(category.products.items);
+          setLoading(false);
+        }
+      )
       .catch((err) => {
         console.log(err);
       });
+  }, [query.category]);
+
+  useEffect(() => {
+    if (category) {
+      setLoading(true);
+      const filter = { categoryId: { eq: category.id } };
+      if (
+        !Number.isNaN(Number(query.min_price)) &&
+        !Number.isNaN(Number(query.max_price)) &&
+        Number(query.min_price)
+      ) {
+        filter.price = {
+          range: [Number(query.min_price), Number(query.max_price)],
+        };
+      } else if (
+        !Number.isNaN(Number(query.min_price)) &&
+        Number(query.min_price)
+      ) {
+        filter.price = { gte: Number(query.min_price) };
+      } else if (
+        !Number.isNaN(Number(query.max_price)) &&
+        Number(query.max_price)
+      ) {
+        filter.price = { lte: Number(query.max_price) };
+      }
+
+      API.graphql(graphqlOperation(searchProducts, { filter }))
+        .then(
+          ({
+            data: {
+              searchProducts: { items: response },
+            },
+          }) => {
+            setProducts(response);
+            setLoading(false);
+          }
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [query]);
 
   return (

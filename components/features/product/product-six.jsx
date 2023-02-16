@@ -59,7 +59,7 @@ function ProductSix(props) {
       } text-center shadow-media cart-full ${adClass}`}
     >
       <figure className="product-media">
-        <ALink href={`/product/default/${product.slug}`}>
+        <ALink href={`/product/${product.slug}`}>
           <LazyLoadImage
             alt="product"
             src={product.large_pictures[0].url}
@@ -135,9 +135,7 @@ function ProductSix(props) {
 
       <div className="product-details">
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.slug}`}>
-            {product.name}
-          </ALink>
+          <ALink href={`/product/${product.slug}`}>{product.name}</ALink>
         </h3>
 
         <div className="product-price">
@@ -162,7 +160,7 @@ function ProductSix(props) {
 
         {product.variants && product.variants.length > 0 ? (
           <ALink
-            href={`/product/default/${product.slug}`}
+            href={`/product/${product.slug}`}
             className="btn-product btn-cart"
             title="Go to product"
           >

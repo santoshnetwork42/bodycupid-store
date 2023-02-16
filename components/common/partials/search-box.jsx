@@ -139,7 +139,7 @@ function SearchForm() {
             data &&
             data.products.data.map((product, index) => (
               <ALink
-                href={`/product/default/${product.slug}`}
+                href={`/product/${product.slug}`}
                 className="autocomplete-suggestion"
                 key={`search-result-${index}`}
               >

@@ -63,7 +63,7 @@ function Wishlist(props) {
                   {wishlist.map((item) => (
                     <tr key={"wishlist-" + item.title}>
                       <td className="product-thumbnail">
-                        <ALink href={"/product/default/" + item.id}>
+                        <ALink href={"/product/" + item.slug}>
                           <figure>
                             <img
                               src={getPublicImageURL(
@@ -77,7 +77,7 @@ function Wishlist(props) {
                         </ALink>
                       </td>
                       <td className="product-name">
-                        <ALink href={"/product/default/" + item.id}>
+                        <ALink href={"/product/" + item.slug}>
                           {item.name}
                         </ALink>
                       </td>
@@ -97,23 +97,18 @@ function Wishlist(props) {
                       <td className="product-stock-status">
                         <span
                           className={
-                            !item.isInventoryEnabled || item.stock > 0
+                            !item.isInventoryEnabled || item.inventory > 0
                               ? "wishlist-in-stock"
                               : "wishlist-out-stock"
                           }
                         >
-                          {!item.isInventoryEnabled || item.stock > 0
+                          {!item.isInventoryEnabled || item.inventory > 0
                             ? "In Stock"
                             : "Out of Stock"}
                         </span>
                       </td>
                       <td className="product-add-to-cart">
-                        {(!item.isInventoryEnabled || item.stock > 0) && (
-                          // item.variants.length > 0 ?
-                          //     <ALink href={'/product/default/' + item.slug} className="btn-product btn-primary"><span>Select options</span></ALink>
-                          //     :
-                          //     <a href="#" className="btn-product btn-primary" onClick={(e) => moveToCart(e, item)}><span>Add to Cart</span></a>
-                          // : ""
+                        {(!item.isInventoryEnabled || item.inventory > 0) && (
                           <a
                             href="#"
                             className="btn-product btn-primary"

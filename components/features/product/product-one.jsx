@@ -53,7 +53,7 @@ function ProductOne(props) {
   return (
     <div className={`product shadow-media ${adClass}`}>
       <figure className="product-media">
-        <ALink href={`/product/default/${product.slug}`}>
+        <ALink href={`/product/${product.slug}`}>
           <LazyLoadImage
             alt="product"
             src={product.large_pictures[0].url}
@@ -104,7 +104,7 @@ function ProductOne(props) {
         <div className="product-action-vertical">
           {product.variants && product.variants.length > 0 ? (
             <ALink
-              href={`/product/default/${product.slug}`}
+              href={`/product/${product.slug}`}
               className="btn-product-icon btn-cart"
               title="Go to product"
             >
@@ -162,9 +162,7 @@ function ProductOne(props) {
         </div>
 
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.slug}`}>
-            {product.name}
-          </ALink>
+          <ALink href={`/product/${product.slug}`}>{product.name}</ALink>
         </h3>
 
         <div className="product-price">
@@ -198,10 +196,7 @@ function ProductOne(props) {
             </span>
           </div>
 
-          <ALink
-            href={`/product/default/${product.slug}`}
-            className="rating-reviews"
-          >
+          <ALink href={`/product/${product.slug}`} className="rating-reviews">
             ( {product.reviews} reviews )
           </ALink>
         </div>

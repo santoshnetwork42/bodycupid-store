@@ -15,7 +15,7 @@ function SmallProduct(props) {
   return (
     <div className={`product product-list-sm ${adClass}`}>
       <figure className="product-media">
-        <ALink href={`/product/default/${product.id}`}>
+        <ALink href={`/product/${product.id}`}>
           {thumbImage?.image ? (
             <OptimizedImage
               optimizedData={thumbImage.image}
@@ -52,23 +52,10 @@ function SmallProduct(props) {
 
       <div className="product-details">
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.slug}`}>
-            {product.name}
-          </ALink>
+          <ALink href={`/product/${product.slug}`}>{product.name}</ALink>
         </h3>
 
         <div className="product-price">
-          {/* {
-                        product.price[0] !== product.price[1] ?
-                            product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
-                                <>
-                                    <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                    <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                </>
-                                :
-                                < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                            : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                    } */}
           <ins className="new-price">₹{toDecimal(product.price)}</ins>
         </div>
 
@@ -84,11 +71,8 @@ function SmallProduct(props) {
           </div>
 
           {isReviewCount ? (
-            <ALink
-              href={`/product/default/${product.slug}`}
-              className="rating-reviews"
-            >
-              ( {product.reviews} reviews )
+            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+              ( {product.reviews.items.length} reviews )
             </ALink>
           ) : (
             ""

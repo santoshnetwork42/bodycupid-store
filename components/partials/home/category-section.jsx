@@ -19,7 +19,7 @@ function CategorySection({ categories = [] }) {
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
                   <ALink
                     href={{
-                      pathname: `/shop/${category.id}`,
+                      pathname: `/categories/${category.slug}`,
                     }}
                   >
                     <figure className="category-media">

@@ -3,7 +3,7 @@ import ALink from '~/components/features/custom-link';
 export default function Breadcrumb(props) {
     return (
         <div className="page-header"
-            style={{ backgroundImage: `url( /images/shop/page-header-back.jpg )`, backgroundColor: "#3C63A4" }}>
+            style={{ backgroundImage: `url( /images/categories/page-header-back.jpg )`, backgroundColor: "#3C63A4" }}>
             <h3 className="page-subtitle">{props.subTitle}</h3>
             <h1 className="page-title">{props.title}</h1>
             <ul className="breadcrumb">

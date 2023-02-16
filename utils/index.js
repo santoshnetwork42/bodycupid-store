@@ -284,7 +284,7 @@ export const videoHandler = (e) => {
 /**
  * utils to get total Price of products in cart.
  */
-export const getTotalPrice = cartItems => {
+export const getTotalPrice = (cartItems = []) => {
     let total = 0;
     if (cartItems) {
         for (let i = 0; i < cartItems.length; i++) {
@@ -295,9 +295,48 @@ export const getTotalPrice = cartItems => {
 }
 
 /**
+ * utils to get total Price of products in cart.
+ */
+export const getShippingPrice = (cartItems = []) => {
+    const total = getTotalPrice(cartItems);
+    return total > 399 ? 0 : 51;
+}
+
+/**
+ * utils to get total coupon amount in cart.
+ */
+export const getCouponTotal = (coupons = []) => {
+    return coupons.reduce((a, b) => a + b.discount, 0);
+}
+
+/**
+ * utils to get total Price of products in cart with shipping.
+ */
+export const getFinalPrice = (cartItems = [], coupons = []) => {
+    const total = getTotalPrice(cartItems);
+    const discount = getCouponTotal(coupons);
+    const shipping = getShippingPrice(cartItems);
+    return total + shipping - discount;
+}
+
+/**
+ * utils to get total Price of products in cart.
+ */
+export const getOrderTotal = (cartItems = [], ...restAmount) => {
+    let total = restAmount.reduce((a, b) => a + b, 0);
+    if (cartItems) {
+        for (let i = 0; i < cartItems.length; i++) {
+            total += cartItems[i].price * parseInt(cartItems[i].quantity, 10);
+        }
+    }
+    return total;
+}
+
+
+/**
  * utils to get number of products in cart
  */
-export const getCartCount = cartItems => {
+export const getCartCount = (cartItems = []) => {
     let total = 0;
 
     for (let i = 0; i < cartItems.length; i++) {
@@ -312,4 +351,12 @@ export const getCartCount = cartItems => {
  */
 export const toDecimal = (price, fixedCount = 2) => {
     return parseFloat(price || 0).toLocaleString(undefined, { minimumFractionDigits: fixedCount, maximumFractionDigits: fixedCount });
+}
+
+/**
+ * utils to formate date
+ */
+export const formateDate = (date) => {
+    const dt = date ? new Date(date) : new Date();
+    return dt.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
 }

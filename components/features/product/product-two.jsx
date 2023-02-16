@@ -29,7 +29,7 @@ function ProductTwo(props) {
     wishlist.findIndex((item) => item.id === product.id) > -1 ? true : false;
 
   const showQuickviewHandler = () => {
-    openQuickview(product.id);
+    openQuickview(product.slug);
   };
 
   const wishlistHandler = (e) => {
@@ -58,13 +58,13 @@ function ProductTwo(props) {
       )
     : 0;
 
-  const thumbImage =
-    product.images.items.find((i) => i.isThumb) || product.images.items[0];
+  const thumbImage = product.images?.items.find((i) => i.isThumb) ||
+    product.images?.items[0] || { imageKey: product.imageUrl };
 
   return (
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
-        <ALink href={`/product/default/${product.id}`}>
+        <ALink href={`/product/${product.id}`}>
           {thumbImage?.image ? (
             <OptimizedImage
               optimizedData={thumbImage.image}
@@ -125,7 +125,7 @@ function ProductTwo(props) {
         <div className="product-action-vertical">
           {product.variants?.items?.length > 0 ? (
             <ALink
-              href={`/product/default/${product.id}`}
+              href={`/product/${product.slug}`}
               className="btn-product-icon btn-cart"
               title="Go to product"
             >
@@ -189,7 +189,7 @@ function ProductTwo(props) {
         )}
 
         <h3 className="product-name">
-          <ALink href={`/product/default/${product.id}`}>{product.title}</ALink>
+          <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
         <div className="product-price">
@@ -222,11 +222,8 @@ function ProductTwo(props) {
             </span>
           </div>
 
-          {/* <ALink href={`/product/default/${product.id}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
-          <ALink
-            href={`/product/default/${product.id}`}
-            className="rating-reviews"
-          >
+          {/* <ALink href={`/product/${product.slug}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
+          <ALink href={`/product/${product.slug}`} className="rating-reviews">
             ( {product.reviews?.items?.length} reviews )
           </ALink>
         </div>

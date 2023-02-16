@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
-import Countdown from "~/components/features/countdown";
 import Quantity from "~/components/features/quantity";
 
 import ProductNav from "~/components/partials/product/product-nav";
@@ -13,17 +12,22 @@ import { wishlistActions } from "~/store/wishlist";
 import { cartActions } from "~/store/cart";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function DetailOne(props) {
   let router = useRouter();
-  const { data, isStickyCart = false, adClass = "", isNav = true } = props;
+  const {
+    data: product,
+    isStickyCart = false,
+    adClass = "",
+    isNav = true,
+  } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curColor, setCurColor] = useState("null");
   const [curSize, setCurSize] = useState("null");
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQauntity] = useState(1);
-  let product = data && data.getProduct;
 
   // decide if the product is wishlisted
   let isWishlisted,
@@ -35,19 +39,19 @@ function DetailOne(props) {
       : false;
 
   if (product && product.variants && product.variants.items.length > 0) {
-    if (product.variants.items[0].size)
-      product.variants.items.forEach((item) => {
-        if (sizes.findIndex((size) => size.name === item.size.name) === -1) {
-          sizes.push({ name: item.size.name, value: item.size.size });
-        }
+    // if (product.variants.items[0].size)
+    product.variants.items
+      .sort((a, b) => a.position - b.position)
+      .forEach((item) => {
+        sizes.push({ name: item.title, value: item.id });
       });
 
-    if (product.variants.items[0].color) {
-      product.variants.items.forEach((item) => {
-        if (colors.findIndex((color) => color.name === item.color.name) === -1)
-          colors.push({ name: item.color.name, value: item.color.color });
-      });
-    }
+    // if (product.variants.items[0].color) {
+    //   product.variants.items.forEach((item) => {
+    //     if (colors.findIndex((color) => color.name === item.color.name) === -1)
+    //       colors.push({ name: item.color.name, value: item.color.color });
+    //   });
+    // }
   }
 
   useEffect(() => {
@@ -62,10 +66,10 @@ function DetailOne(props) {
       if (
         (curSize !== "null" && curColor !== "null") ||
         (curSize === "null" &&
-          product.variants[0].size === null &&
+          product.variants.items[0].size === null &&
           curColor !== "null") ||
         (curColor === "null" &&
-          product.variants[0].color === null &&
+          product.variants.items[0].color === null &&
           curSize !== "null")
       ) {
         setCartActive(true);
@@ -87,7 +91,7 @@ function DetailOne(props) {
       setCartActive(true);
     }
 
-    if (product.isInventoryEnabled && product.stock === 0) {
+    if (product.isInventoryEnabled && product.inventory === 0) {
       setCartActive(false);
     }
   }, [curColor, curSize, product]);
@@ -118,7 +122,7 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
-    if ((!product.isInventoryEnabled || product.stock > 0) && cartActive) {
+    if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
@@ -267,7 +271,7 @@ function DetailOne(props) {
 
       {product.variants.items.length > 0 ? (
         <>
-          {product.variants.items[0].color ? (
+          {/* {product.variants.items[0].color ? (
             <div className="product-form product-variations product-color">
               <label>Color:</label>
               <div className="select-box">
@@ -292,48 +296,40 @@ function DetailOne(props) {
             </div>
           ) : (
             ""
-          )}
+          )} */}
 
-          {product.variants.items[0]?.size ? (
-            <div className="product-form product-variations product-size mb-0 pb-2">
-              <label>Size:</label>
-              <div className="product-form-group">
-                <div className="select-box">
-                  <select
-                    name="size"
-                    className="form-control select-size"
-                    onChange={setSizeHandler}
-                    value={curSize}
-                  >
-                    <option value="null">Choose an option</option>
-                    {sizes.map((item) =>
-                      !isDisabled(curColor, item.name) ? (
-                        <option value={item.name} key={"size-" + item.name}>
-                          {item.name}
-                        </option>
-                      ) : (
-                        ""
-                      )
-                    )}
-                  </select>
-                </div>
-
-                <Collapse in={"null" !== curColor || "null" !== curSize}>
-                  <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
-                    <ALink
-                      href="#"
-                      className="product-variation-clean"
-                      onClick={resetValueHandler}
-                    >
-                      Clean All
-                    </ALink>
-                  </div>
-                </Collapse>
+          <div className="product-form product-variations product-size mb-0 pb-2">
+            <label>Size:</label>
+            <div className="product-form-group">
+              <div className="select-box">
+                <select
+                  name="size"
+                  className="form-control select-size"
+                  onChange={setSizeHandler}
+                  value={curSize}
+                >
+                  <option value="null">Choose an option</option>
+                  {sizes.map((item) => (
+                    <option value={item.value} key={item.value}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* <Collapse in={"null" !== curColor || "null" !== curSize}>
+                <div className="card-wrapper overflow-hidden reset-value-button w-100 mb-0">
+                  <ALink
+                    href="#"
+                    className="product-variation-clean"
+                    onClick={resetValueHandler}
+                  >
+                    Clean All
+                  </ALink>
+                </div>
+              </Collapse> */}
             </div>
-          ) : (
-            ""
-          )}
+          </div>
 
           <div className="product-variation-price">
             <Collapse in={cartActive && curIndex > -1}>
@@ -382,21 +378,18 @@ function DetailOne(props) {
           <div className="container">
             <div className="sticky-product-details">
               <figure className="product-image">
-                <ALink href={"/product/default/" + product.id}>
+                <ALink href={"/product/" + product.slug}>
                   <img
-                    src={
-                      process.env.NEXT_PUBLIC_ASSET_URI +
-                      product.images.items[0].src
-                    }
+                    src={getPublicImageURL(product.images.items[0]?.imageKey)}
                     width="90"
                     height="90"
-                    alt="Product"
+                    alt={product.images.items[0]?.alt}
                   />
                 </ALink>
               </figure>
               <div>
                 <h4 className="product-title">
-                  <ALink href={"/product/default/" + product.id}>
+                  <ALink href={"/product/" + product.slug}>
                     {product.title}
                   </ALink>
                 </h4>
@@ -455,7 +448,7 @@ function DetailOne(props) {
               <label className="d-none">QTY:</label>
               <div className="product-form-group">
                 <Quantity
-                  max={product.stock}
+                  max={product.inventory}
                   product={product}
                   onChangeQty={changeQty}
                 />
@@ -476,7 +469,7 @@ function DetailOne(props) {
           <label className="d-none">QTY:</label>
           <div className="product-form-group">
             <Quantity
-              max={product.stock}
+              max={product.inventory}
               product={product}
               onChangeQty={changeQty}
             />
