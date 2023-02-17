@@ -1,5 +1,5 @@
 module.exports = {
   // basePath: '/react/riode/demo-1',
-  // distDir: 'build',
+  // distDir: 'build1',
   reactStrictMode: true,
 };
