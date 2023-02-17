@@ -10,7 +10,7 @@ import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import { mainSlider17 } from "~/utils/data/carousel";
-import { byslugProduct } from "~/graphql/queries";
+import { getProductBySlug } from "~/graphql/api";
 
 function ProductDefault() {
   const slug = useRouter().query.slug;
@@ -19,7 +19,7 @@ function ProductDefault() {
   const [related, setRelated] = useState(null);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(byslugProduct, { slug })).then((response) => {
+    API.graphql(graphqlOperation(getProductBySlug, { slug })).then((response) => {
       let [product] = response.data.byslugProduct.items;
       setProduct(product);
       setRelated(product?.variants.items);

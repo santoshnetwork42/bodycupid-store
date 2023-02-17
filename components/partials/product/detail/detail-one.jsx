@@ -215,18 +215,25 @@ function DetailOne(props) {
       <h2 className="product-name">{product.title}</h2>
 
       <div className="product-meta">
-        {/* SKU: <span className='product-sku'>{product.sku}</span>
-                CATEGORIES: <span className='product-brand'>
-                    {
-                        product.product_categories.map((item, index) =>
-                            <React.Fragment key={item.name + '-' + index}>
-                                <ALink href={{ pathname: '/shop', query: { category: item.slug } }}>
-                                    {item.name}
-                                </ALink>
-                                {index < product.product_categories.length - 1 ? ', ' : ''}
-                            </React.Fragment>
-                        )}
-                </span> */}
+        SKU: <span className="product-sku">{product.sku}</span>
+        {product.category && (
+          <>
+            CATEGORIES:{" "}
+            <span className="product-brand">
+              <React.Fragment key={product.category.id}>
+                <ALink
+                  href={{
+                    pathname: "/categories",
+                    query: { category: product.category.slug },
+                  }}
+                >
+                  {product.category.name}
+                </ALink>
+                {/* {index < product.product_categories.length - 1 ? ", " : ""} */}
+              </React.Fragment>
+            </span>
+          </>
+        )}
       </div>
 
       <div className="product-price mb-2">
