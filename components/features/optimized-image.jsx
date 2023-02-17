@@ -5,8 +5,6 @@ const OptimizedImage = ({ optimizedData, alt, spanAttributes, ...props }) => {
   const imageRef = useRef(null);
 
   const fetchImage = async () => {
-    console.log("aaaa called");
-
     window.imagesReplaced = true;
     const image = new Image();
     image.src = originalUrl;

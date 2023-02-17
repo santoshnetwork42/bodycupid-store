@@ -7,6 +7,12 @@ import OptimizedImage from "~/components/features/optimized-image";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function CategorySection({ categories = [] }) {
+  const categoriesWithImage = categories.filter((category) => category.image);
+
+  if (categoriesWithImage.length === 0) {
+    return null;
+  }
+
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
       <section className="pt-10 mt-7">
@@ -14,7 +20,7 @@ function CategorySection({ categories = [] }) {
           <h2 className="title title-center mb-5">Browse Our Categories</h2>
 
           <div className="row">
-            {categories.map((category) => (
+            {categoriesWithImage.map((category) => (
               <div className="col-xs-6 col-lg-3 mb-4" key={category.id}>
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
                   <ALink

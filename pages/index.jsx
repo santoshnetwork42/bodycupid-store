@@ -103,18 +103,22 @@ export const getStaticProps = async () => {
     );
 
     for (const category of searchProductSubCategories.items) {
-      const imageUrl = getPublicImageURL(category.imageUrl);
-      const optimizedCategoryImage = await optimizeImage({
-        src: imageUrl,
-        options: {
-          resize: 200,
-          blur: 3,
-        },
-      });
+      if (category.imageUrl) {
+        const imageUrl = getPublicImageURL(category.imageUrl);
 
-      delete category.imageUrl;
-      category.image = optimizedCategoryImage;
+        const optimizedCategoryImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
+
+        delete category.imageUrl;
+        category.image = optimizedCategoryImage;
+      }
     }
+
     for (const product of searchProducts.items) {
       for (const image in product.images.items) {
         const imageUrl = getPublicImageURL(
@@ -179,7 +183,7 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: 60,
+      revalidate: 900,
     };
   } catch (e) {
     return {
