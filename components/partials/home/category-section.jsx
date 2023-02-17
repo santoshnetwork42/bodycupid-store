@@ -1,13 +1,18 @@
 import React from "react";
 import Reveal from "react-awesome-reveal";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "~/components/features/optimized-image";
 
 import { fadeIn } from "~/utils/data/keyframes";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CategorySection({ categories = [] }) {
+  const categoriesWithImage = categories.filter((category) => category.image);
+
+  if (categoriesWithImage.length === 0) {
+    return null;
+  }
+
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
       <section className="pt-10 mt-7">
@@ -15,7 +20,7 @@ function CategorySection({ categories = [] }) {
           <h2 className="title title-center mb-5">Browse Our Categories</h2>
 
           <div className="row">
-            {categories.map((category) => (
+            {categoriesWithImage.map((category) => (
               <div className="col-xs-6 col-lg-3 mb-4" key={category.id}>
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
                   <ALink
@@ -24,19 +29,17 @@ function CategorySection({ categories = [] }) {
                     }}
                   >
                     <figure className="category-media">
-                      <LazyLoadImage
-                        src={getPublicImageURL(category.imageUrl)}
+                      <OptimizedImage
+                        optimizedData={category.image}
                         alt={category.name}
-                        effect="opacity"
-                        width="auto"
-                        height={280}
+                        loading="lazy"
                       />
                     </figure>
 
                     <div className="category-content">
-                      <h4 className="category-name font-weight-bold ls-l">
+                      <h3 className="category-name font-weight-bold ls-l">
                         {category.name}
-                      </h4>
+                      </h3>
                     </div>
                   </ALink>
                 </div>

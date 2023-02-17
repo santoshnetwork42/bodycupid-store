@@ -1,56 +1,67 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import Head from "next/head";
 
+import ShopBanner from "~/components/partials/shop/shop-banner";
+import SidebarFilterTwo from "~/components/partials/shop/sidebar/sidebar-filter-two";
+import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
+import ToolBox from "~/components/partials/shop/toolbox";
 
-import ShopBanner from '~/components/partials/shop/shop-banner';
-import SidebarFilterTwo from '~/components/partials/shop/sidebar/sidebar-filter-two'
-import ProductListOne from '~/components/partials/shop/product-list/product-list-one';
-import ToolBox from '~/components/partials/shop/toolbox';
-
-import SlideToggle from 'react-slide-toggle';
+import SlideToggle from "react-slide-toggle";
 
 function ShopNavigationFilter() {
-    let expanded = false;
+  let expanded = false;
 
-    return (
-        <main className="main navigation-filter">
-            <Helmet>
-                <title>Wow React eCommerce Template - Shop Navigation Filter</title>
-            </Helmet>
+  return (
+    <main className="main navigation-filter">
+      <Head>
+        <title>Wow React eCommerce Template - Shop Navigation Filter</title>
+      </Head>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop Navigation Filter</h1>
+      <h1 className="d-none">
+        Wow React eCommerce Template - Shop Navigation Filter
+      </h1>
 
-            <ShopBanner subTitle="categories" title="Navigation Filter" current="Navigation Filter" />
+      <ShopBanner
+        subTitle="categories"
+        title="Navigation Filter"
+        current="Navigation Filter"
+      />
 
-            <div className="page-content mb-0 mb-lg-10 pb-0 pb-lg-6">
-                <div className="container">
-                    <div className="toolbox-wrap">
-                        <SlideToggle collapsed={expanded ? false : true} >
-                            {({ onToggle, setCollapsibleElement, toggleState }) => (
-                                <div className={`card navigation-card ${toggleState.toLowerCase()}`}>
-                                    <div className="card-header" onClick={onToggle} >
-                                        <span className="toggle">
-                                            <span className="navigation-toggle-btn d-none">toggle button</span>
-                                        </span>
-                                    </div>
+      <div className="page-content mb-0 mb-lg-10 pb-0 pb-lg-6">
+        <div className="container">
+          <div className="toolbox-wrap">
+            <SlideToggle collapsed={expanded ? false : true}>
+              {({ onToggle, setCollapsibleElement, toggleState }) => (
+                <div
+                  className={`card navigation-card ${toggleState.toLowerCase()}`}
+                >
+                  <div className="card-header" onClick={onToggle}>
+                    <span className="toggle">
+                      <span className="navigation-toggle-btn d-none">
+                        toggle button
+                      </span>
+                    </span>
+                  </div>
 
-                                    <div ref={setCollapsibleElement}>
-                                        <div className={`card-body p-0 ${toggleState.toLowerCase()}`}>
-                                            <SidebarFilterTwo />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </SlideToggle >
-
-                        <ToolBox type="navigation" />
+                  <div ref={setCollapsibleElement}>
+                    <div
+                      className={`card-body p-0 ${toggleState.toLowerCase()}`}
+                    >
+                      <SidebarFilterTwo />
                     </div>
-
-                    <ProductListOne isToolbox={false} itemsPerRow={4} />
+                  </div>
                 </div>
-            </div>
-        </main >
-    )
+              )}
+            </SlideToggle>
+
+            <ToolBox type="navigation" />
+          </div>
+
+          <ProductListOne isToolbox={false} itemsPerRow={4} />
+        </div>
+      </div>
+    </main>
+  );
 }
 
 export default React.memo(ShopNavigationFilter);

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import { API, graphqlOperation } from "aws-amplify";
+import React from "react";
+import Head from "next/head";
 
 // import Home Components
 // import NewsletterModal from "~/components/features/modals/newsletter-modal";
@@ -17,65 +16,37 @@ import SmallCollection from "~/components/partials/product/small-collection";
 
 import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
 
-function HomePage() {
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const bestSelling = [...products];
-  const featured = [...products];
-  const latest = [...products];
-  const onSale = [...products];
-  const posts = [];
+import awsmobile from "~/aws-exports";
+import optimizeImage from "~/utils/optimizeImage";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-  useEffect(() => {
-    (async function () {
-      await Promise.all([
-        API.graphql(graphqlOperation(getHomePageProducts, { limit: 10 }))
-          .then((response) => {
-            setProducts(response.data.searchProducts.items);
-          })
-          .catch((err) => {
-            console.log(err);
-          }),
-        API.graphql(graphqlOperation(getHomePageCategories, { limit: 4 }))
-          .then((response) => {
-            setCategories(response.data.searchProductSubCategories.items);
-          })
-          .catch((err) => {
-            console.log(err);
-          }),
-      ]);
-      setLoading(false);
-    })();
-  }, []);
-
+function HomePage({ hero, products, categories, brands }) {
   return (
     <div className="main home">
-      <Helmet>
+      <Head>
         <title>Wow Life Science - Home</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow Life Science - Homepage</h1>
 
       <div className="page-content">
         <div className="intro-section">
-          <IntroSection />
+          <IntroSection data={hero} />
           <ServiceBox />
         </div>
 
         <CategorySection categories={categories} />
-        <BestCollection products={bestSelling} loading={loading} />
+        <BestCollection products={products} />
         <DealSection />
-        <FeaturedCollection products={featured} loading={loading} />
+        <FeaturedCollection products={products} />
         <CtaSection />
-        <BlogSection posts={posts} />
-        <BrandSection />
+        <BlogSection posts={[]} />
+        <BrandSection brands={brands} />
         <SmallCollection
-          featured={featured}
-          latest={latest}
-          bestSelling={bestSelling}
-          onSale={onSale}
-          loading={loading}
+          featured={products}
+          latest={products}
+          bestSelling={products}
+          onSale={products}
         />
       </div>
       {/* <NewsletterModal /> */}
@@ -83,4 +54,143 @@ function HomePage() {
   );
 }
 
-export default React.memo(HomePage);
+export const getStaticProps = async () => {
+  try {
+    const fetchData = async (query = "", variables = {}) => {
+      const response = await fetch(awsmobile.aws_appsync_graphqlEndpoint, {
+        method: "POST",
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+        headers: {
+          "x-api-key": awsmobile.aws_appsync_apiKey,
+          accept: "*/*",
+          "content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      const data = await response.json();
+
+      return data.data;
+    };
+
+    const optimizedLogoImage = await optimizeImage({
+      src: "/images/logo.png",
+      options: {
+        resize: 150,
+        blur: 2,
+      },
+      type: "self-hosted",
+    });
+    const optimizedFooterImage = await optimizeImage({
+      src: "/images/logo-footer.png",
+      options: {
+        resize: 150,
+        blur: 2,
+      },
+      type: "self-hosted",
+    });
+
+    const optimizedHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow.jpg",
+      type: "self-hosted",
+    });
+
+    const { searchProducts } = await fetchData(getHomePageProducts);
+    const { searchProductSubCategories } = await fetchData(
+      getHomePageCategories
+    );
+
+    for (const category of searchProductSubCategories.items) {
+      if (category.imageUrl) {
+        const imageUrl = getPublicImageURL(category.imageUrl);
+
+        const optimizedCategoryImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
+
+        delete category.imageUrl;
+        category.image = optimizedCategoryImage;
+      }
+    }
+
+    for (const product of searchProducts.items) {
+      for (const image in product.images.items) {
+        const imageUrl = getPublicImageURL(
+          product.images.items[image].imageKey
+        );
+
+        const optimizedProductImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
+
+        product.images.items[image].image = optimizedProductImage;
+      }
+
+      const imageUrl = getPublicImageURL(product.thumbImages);
+      const optimizedProductImage = await optimizeImage({
+        src: imageUrl,
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
+
+      product.image = optimizedProductImage;
+    }
+
+    const brands = [
+      "/images/brands/1.png",
+      "/images/brands/2.png",
+      "/images/brands/3.png",
+      "/images/brands/4.png",
+      "/images/brands/5.png",
+      "/images/brands/6.png",
+    ];
+    for (const brand in brands) {
+      const optimizedBrand = await optimizeImage({
+        src: brands[brand],
+        type: "self-hosted",
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
+      brands[brand] = optimizedBrand;
+    }
+
+    return {
+      props: {
+        navbar: {
+          logo: optimizedLogoImage,
+        },
+        hero: {
+          banner: optimizedHeroImage,
+        },
+        products: searchProducts.items,
+        categories: searchProductSubCategories.items,
+        brands,
+        footer: {
+          logo: optimizedFooterImage,
+        },
+      },
+      revalidate: 900,
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+      revalidate: 1,
+    };
+  }
+};
+
+export default HomePage;

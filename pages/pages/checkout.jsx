@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { connect } from "react-redux";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { API } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
@@ -85,9 +85,9 @@ function Checkout(props) {
 
   return (
     <main className="main checkout">
-      <Helmet>
+      <Head>
         <title>Wow React eCommerce Template | Checkout</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow React eCommerce Template - Checkout</h1>
 

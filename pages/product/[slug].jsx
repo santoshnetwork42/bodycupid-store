@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
 
 import withApollo from "~/server/apollo";
@@ -29,9 +29,9 @@ function ProductDefault() {
 
   return (
     <main className="main mt-6 single-product">
-      <Helmet>
+      <Head>
         <title>{product?.title}</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">{product?.title}</h1>
 

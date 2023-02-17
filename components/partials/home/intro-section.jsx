@@ -1,9 +1,10 @@
 import React from "react";
 import Reveal from "react-awesome-reveal";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // import Custom Components
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "~/components/features/optimized-image";
 import OwlCarousel from "~/components/features/owl-carousel";
 
 import { introSlider } from "~/utils/data/carousel";
@@ -15,28 +16,28 @@ import {
   fadeInRight,
 } from "~/utils/data/keyframes";
 
-function IntroSection(props) {
+function IntroSection({ data }) {
+  const { banner } = data;
+
   return (
     // <OwlCarousel
     //   adClass="owl-theme owl-dot-inner owl-dot-white intro-slider animation-slider"
     //   options={introSlider}
     // >
-      <ALink
-        href="/shop"
-        className="banner banner-fixed intro-slide2"
-        style={{ backgroundColor: "#dddee0" }}
-      >
-        <figure>
-          <LazyLoadImage
-            src="/images/home/slides/wow.jpg"
-            alt="Intro Slider"
-            effect="opacity"
-            width="auto"
-            height={630}
-          />
-        </figure>
+    <ALink
+      href="/shop"
+      className="banner banner-fixed intro-slide2"
+      style={{ backgroundColor: "#dddee0" }}
+    >
+      <figure>
+        <OptimizedImage
+          optimizedData={banner}
+          loading="eager"
+          alt="Intro Slider"
+        />
+      </figure>
 
-        {/* <div className="container">
+      {/* <div className="container">
           <div className="banner-content y-50 ml-auto text-right">
             <Reveal keyframes={fadeInUpShorter} delay={1000} duration={1200}>
               <p className="font-primary ls-s text-dark mb-4">
@@ -54,7 +55,7 @@ function IntroSection(props) {
             </Reveal>
           </div>
         </div> */}
-      </ALink>
+    </ALink>
 
     //   {/* <div
     //     className="banner banner-fixed intro-slide1"

@@ -7,10 +7,11 @@ import CartMenu from "~/components/common/partials/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
 import LoginModal from "~/components/features/modals/login-modal";
+import OptimizedImage from "~/components/features/optimized-image";
 
 import { headerBorderRemoveList } from "~/utils/data/menu";
 
-export default function Header(props) {
+export default function Header({ navbar }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -82,7 +83,24 @@ export default function Header(props) {
             </ALink>
 
             <ALink href="/" className="logo">
-              <img src="/images/logo.png" alt="logo" width="153" height="44" />
+              {navbar?.logo ? (
+                <OptimizedImage
+                  optimizedData={{
+                    ...navbar.logo,
+                    width: 153,
+                    height: 44,
+                  }}
+                  loading="eager"
+                  alt="logo"
+                />
+              ) : (
+                <img
+                  src="/images/logo.png"
+                  alt="logo"
+                  width="153"
+                  height="44"
+                />
+              )}
             </ALink>
 
             <SearchBox />

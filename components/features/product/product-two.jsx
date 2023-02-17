@@ -1,5 +1,5 @@
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -10,6 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
   const {
@@ -78,7 +79,7 @@ function ProductTwo(props) {
 
           {images?.length > 1 ? (
             <LazyLoadImage
-              alt={product.images.items[1].alt}
+              alt={images[1].alt}
               src={getPublicImageURL(images[1].imageKey)}
               threshold={500}
               width="1024"
@@ -87,8 +88,31 @@ function ProductTwo(props) {
               wrapperClassName="product-image-hover"
             />
           ) : (
-            ""
+            <span>
+              <img src={getPublicImageURL(thumbImage?.imageKey)} />
+            </span>
           )}
+
+          {product.images.items.length > 1 ? (
+            <>
+              {product.images.items[1].image ? (
+                <OptimizedImage
+                  optimizedData={product.images.items[1].image}
+                  alt={product.images.items[1].alt}
+                  spanAttributes={{
+                    className: "product-image-hover",
+                  }}
+                />
+              ) : (
+                <span className="product-image-hover">
+                  <img
+                    src={getPublicImageURL(product.images.items[1].imageKey)}
+                    alt={product.images.items[1].alt}
+                  />
+                </span>
+              )}
+            </>
+          ) : null}
         </ALink>
 
         <div className="product-label-group">
