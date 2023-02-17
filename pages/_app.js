@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 
-import { Amplify } from "aws-amplify";
+import { Amplify, Hub } from "aws-amplify";
 
 import awsconfig from "~/aws-exports";
 
