@@ -57,8 +57,10 @@ function ProductTwo(props) {
       )
     : 0;
 
-  const thumbImage = product.images?.items.find((i) => i.isThumb) ||
-    product.images?.items[0] || { imageKey: product.imageUrl };
+  const images = product?.images.items.sort((a, b) => a.position - b.position);
+
+  const thumbImage = images?.find((i) => i.isThumb) ||
+    images[0] || { imageKey: product.imageUrl };
 
   return (
     <div className={`product text-left ${adClass}`}>
@@ -73,10 +75,10 @@ function ProductTwo(props) {
             height="1024"
           />
 
-          {product.images?.items.length > 1 ? (
+          {images?.length > 1 ? (
             <LazyLoadImage
               alt={product.images.items[1].alt}
-              src={getPublicImageURL(product.images.items[1].imageKey)}
+              src={getPublicImageURL(images[1].imageKey)}
               threshold={500}
               width="1024"
               height="1024"
