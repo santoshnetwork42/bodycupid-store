@@ -57,9 +57,10 @@ function ProductTwo(props) {
       )
     : 0;
 
-  const images = product?.images.items.sort((a, b) => a.position - b.position);
+  const images =
+    product?.images?.items.sort((a, b) => a.position - b.position) || [];
 
-  const thumbImage = images?.find((i) => i.isThumb) ||
+  const thumbImage = images.find((i) => i.isThumb) ||
     images[0] || { imageKey: product.imageUrl };
 
   return (

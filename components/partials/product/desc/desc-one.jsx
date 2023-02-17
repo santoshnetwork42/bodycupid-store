@@ -11,23 +11,13 @@ import { toDecimal } from "~/utils";
 function DescOne(props) {
   const { product, isGuide = true, isDivider = true, openModal } = props;
 
-  let colors = [],
-    sizes = [];
+  let sizes = [];
 
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
       product.variants.items.forEach((item) => {
-        if (sizes.findIndex((size) => size.name === item.size.name) === -1) {
-          sizes.push({ name: item.size.name, value: item.size.size });
-        }
+        sizes.push({ name: item.title, value: item.id });
       });
-
-    if (product.variants.items[0].color) {
-      product.variants.items.forEach((item) => {
-        if (colors.findIndex((color) => color.name === item.color.name) === -1)
-          colors.push({ name: item.color.name, value: item.color.color });
-      });
-    }
   }
 
   const setRating = (e) => {
