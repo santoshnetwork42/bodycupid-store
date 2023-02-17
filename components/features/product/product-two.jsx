@@ -58,17 +58,33 @@ function ProductTwo(props) {
       )
     : 0;
 
-  const thumbImage = product.images?.items.find((i) => i.isThumb) ||
-    product.images?.items[0] || { imageKey: product.imageUrl };
+  const images = product?.images.items.sort((a, b) => a.position - b.position);
+
+  const thumbImage = images?.find((i) => i.isThumb) ||
+    images[0] || { imageKey: product.imageUrl };
 
   return (
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
-        <ALink href={`/product/${product.id}`}>
-          {thumbImage?.image ? (
-            <OptimizedImage
-              optimizedData={thumbImage.image}
-              alt={thumbImage.alt}
+        <ALink href={`/product/${product.slug}`}>
+          <LazyLoadImage
+            alt={thumbImage?.alt}
+            src={getPublicImageURL(thumbImage?.imageKey)}
+            threshold={500}
+            effect="opacity"
+            width="1024"
+            height="1024"
+          />
+
+          {images?.length > 1 ? (
+            <LazyLoadImage
+              alt={images[1].alt}
+              src={getPublicImageURL(images[1].imageKey)}
+              threshold={500}
+              width="1024"
+              height="1024"
+              effect="opacity"
+              wrapperClassName="product-image-hover"
             />
           ) : (
             <span>
