@@ -51,71 +51,42 @@ export const getHomePageProducts = /* GraphQL */ `
       items {
         id
         title
-        brand
-        vendor
         isFeatured
         productType
         slug
-        productDescription
         price
-        sku
-        size
         status
         position
         currency
-        costPrice
         listingPrice
         taxable
-        barcode
         tags
-        weight
-        weightUnit
         inventory
         blockedInventory
         rating
         thumbImages
         isTaxEnabled
         isInventoryEnabled
-        hasVarient
         variants {
           items {
             id
-            productId
-            title
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
-            imageUrl
-            weight
-            weightUnit
-            inventory
-            blockedInventory
+          }
+        }
+        reviews {
+          items {
+            id
           }
         }
         images {
           items {
             id
-            productId
             position
-            createdAt
-            updatedAt
             alt
             width
             height
             imageKey
             isThumb
           }
-          nextToken
         }
       }
     }
