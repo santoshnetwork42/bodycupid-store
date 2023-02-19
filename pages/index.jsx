@@ -119,6 +119,7 @@ export const getStaticProps = async () => {
       }
     }
 
+    searchProducts.items = searchProducts.items.slice(0, 5);
     for (const product of searchProducts.items) {
       for (const image in product.images.items) {
         const imageUrl = getPublicImageURL(
@@ -183,12 +184,10 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: 900,
     };
   } catch (e) {
     return {
       notFound: true,
-      revalidate: 1,
     };
   }
 };
