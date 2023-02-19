@@ -1,9 +1,16 @@
-import path from "path";
-import fs from "fs/promises";
-import { cwd } from "process";
-import sharp from "sharp";
+// import path from "path";
+// import fs from "fs/promises";
+// import { cwd } from "process";
+// import sharp from "sharp";
 
 const optimizeImage = async ({ src, type = "url", options = {} }) => {
+  return {
+    originalUrl: src,
+    width: 0,
+    height: 0,
+    placeholder: "",
+  };
+
   let output = "";
   const { quality = 15, resize = 400, blur = 1 } = options;
 
@@ -43,8 +50,6 @@ const optimizeImage = async ({ src, type = "url", options = {} }) => {
   } catch (e) {}
 
   return returnValues;
-
-  return {};
 };
 
 export default optimizeImage;
