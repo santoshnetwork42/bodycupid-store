@@ -70,13 +70,13 @@ function HomePage() {
         <CtaSection />
         <BlogSection posts={posts} />
         <BrandSection />
-        <SmallCollection
+        {/* <SmallCollection
           featured={featured}
           latest={latest}
           bestSelling={bestSelling}
           onSale={onSale}
           loading={loading}
-        />
+        /> */}
       </div>
       {/* <NewsletterModal /> */}
     </div>
