@@ -5,6 +5,7 @@ import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
+import { addPhonePrefix } from "~/utils/helper";
 
 function ForgotPassword() {
   const router = useRouter();
@@ -25,7 +26,7 @@ function ForgotPassword() {
           setShowOTP(true);
         } else {
           await Auth.forgotPasswordSubmit(
-            state.phone,
+            addPhonePrefix(state.phone),
             state.confirmationCode,
             state.password
           );
@@ -82,21 +83,26 @@ function ForgotPassword() {
                     <TabPanel className="tab-pane">
                       <form onSubmit={handleSubmit}>
                         <div className="form-group mb-3">
-                          <input
-                            type="tel"
-                            className="form-control"
-                            id="singin-phone-2"
-                            name="singin-phone"
-                            placeholder="Username or Phone number *"
-                            required
-                            value={state.phone}
-                            onChange={(e) =>
-                              setState({
-                                ...state,
-                                phone: e.target.value,
-                              })
-                            }
-                          />
+                          <div className="input-tel">
+                            <div className="prefix">
+                              +91
+                            </div>
+                            <input
+                              type="tel"
+                              className="form-control"
+                              id="singin-phone-2"
+                              name="singin-phone"
+                              placeholder="Phone number *"
+                              required
+                              value={state.phone}
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  phone: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
                         </div>
                         {!!showOTP && (
                           <>

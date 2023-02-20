@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
 import ALink from "~/components/features/custom-link";
-
+import { useRouter } from "next/router";
 import AuthView from "../../../pages/pages/login";
 
 const modalStyles = {
@@ -20,6 +20,12 @@ const modalStyles = {
 
 function LoginModal({ auth }) {
   const [showLogin, setShowLogin] = useState(false);
+  const { pathname } = useRouter();
+  useEffect(() => {
+    if (pathname === "/pages/forgot-password" && showLogin) {
+      setShowLogin(false)
+    }
+  }, [pathname])
 
   if (auth) {
     return (

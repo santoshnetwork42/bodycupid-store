@@ -156,9 +156,8 @@ function Addresses({ user, selected, onSelect }) {
             onClick={() => onAddressClick(adr)}
           >
             <div
-              className={`card card-address ${
-                adr.id === selected ? "selected" : ""
-              }`}
+              className={`card card-address ${adr.id === selected ? "selected" : ""
+                }`}
             >
               <div className="card-body pr-4 pl-4 pt-3">
                 <h5 className="card-title text-uppercase">{adr.name}</h5>
@@ -230,14 +229,19 @@ function Addresses({ user, selected, onSelect }) {
                 </div>
                 <div className="col-xs-6">
                   <label>Phone *</label>
-                  <input
-                    type="tel"
-                    className="form-control"
-                    name="phone"
-                    required
-                    value={address.phone}
-                    onChange={(e) => setAddress({ phone: e.target.value })}
-                  />
+                  <div className="input-tel">
+                    <div className="prefix">
+                      +91
+                    </div>
+                    <input
+                      type="tel"
+                      className="form-control"
+                      name="phone"
+                      required
+                      value={address.phone}
+                      onChange={(e) => setAddress({ phone: e.target.value })}
+                    />
+                  </div>
                 </div>
                 <div className="col-xs-6">
                   <label>Email Address *</label>

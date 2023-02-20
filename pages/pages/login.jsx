@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
+import { addPhonePrefix } from "~/utils/helper";
 
 function Login({ auth, redirect = true }) {
   const router = useRouter();
@@ -22,18 +23,19 @@ function Login({ auth, redirect = true }) {
   const handleSignup = useCallback(
     async (e) => {
       e.preventDefault();
+     
       try {
         await Auth.signUp({
-          username: state.phone,
+          username: addPhonePrefix(state.phone),
           password: state.password,
-          phone_number: state.phone,
+          phone_number: addPhonePrefix(state.phone),
           email: state.email,
           attributes: {
             name: state.name,
             given_name: state.name,
             middle_name: state.name,
             email: state.email,
-            phone_number: state.phone,
+            phone_number: addPhonePrefix(state.phone),
           },
           autoSignIn: {
             // optional - enables auto sign in after user is confirmed
@@ -54,7 +56,7 @@ function Login({ auth, redirect = true }) {
     async (e) => {
       e.preventDefault();
       try {
-        await Auth.confirmSignUp(state.phone, state.confirmationCode);
+        await Auth.confirmSignUp(addPhonePrefix(state.phone), state.confirmationCode);
         if (confirmSignUp === "SIGNUP") {
           if (redirect) {
             router.push("/");
@@ -70,13 +72,12 @@ function Login({ auth, redirect = true }) {
     },
     [state, confirmSignUp, redirect]
   );
-
   const handleSignIn = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         await Auth.signIn({
-          username: state.phone,
+          username: addPhonePrefix(state.phone),
           password: state.password,
         });
         if (redirect) {
@@ -85,7 +86,7 @@ function Login({ auth, redirect = true }) {
       } catch (error) {
         console.log("error signin:", error);
         if (error.code === "UserNotConfirmedException") {
-          await Auth.resendSignUp(state.phone);
+          await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
         } else {
           toast.error(error.message);
@@ -132,21 +133,27 @@ function Login({ auth, redirect = true }) {
                       {!confirmSignUp && (
                         <form onSubmit={handleSignIn}>
                           <div className="form-group mb-3">
-                            <input
-                              type="tel"
-                              className="form-control"
-                              id="singin-phone-2"
-                              name="singin-phone"
-                              placeholder="Username or Phone number *"
-                              required
-                              value={state.phone}
-                              onChange={(e) =>
-                                setState({
-                                  ...state,
-                                  phone: e.target.value,
-                                })
-                              }
-                            />
+                            <div className="input-tel">
+                              <div className="prefix">
+                                +91
+                              </div>
+                              <input
+                                type="tel"
+                                className="form-control"
+                                id="singin-phone-2"
+                                name="singin-phone"
+                                placeholder="Phone number *"
+                                required
+                                value={state.phone}
+                                onChange={(e) =>
+                                  setState({
+                                    ...state,
+                                    phone: e.target.value,
+                                  })
+                                }
+                              />
+                            </div>
+
                           </div>
                           <div className="form-group">
                             <input
@@ -239,21 +246,27 @@ function Login({ auth, redirect = true }) {
                             <label htmlFor="register-phone-2">
                               Your phone number:
                             </label>
-                            <input
-                              type="tel"
-                              className="form-control"
-                              id="register-phone-2"
-                              name="register-phone"
-                              placeholder="Your phone number *"
-                              required
-                              value={state.phone}
-                              onChange={(e) =>
-                                setState({
-                                  ...state,
-                                  phone: e.target.value,
-                                })
-                              }
-                            />
+                            <div className="input-tel">
+                              <div className="prefix">
+                                +91
+                              </div>
+                              <input
+                                type="tel"
+                                className="form-control"
+                                id="register-phone-2"
+                                name="register-phone"
+                                placeholder="Your phone number *"
+                                required
+                                value={state.phone}
+                                onChange={(e) =>
+                                  setState({
+                                    ...state,
+                                    phone: e.target.value,
+                                  })
+                                }
+                              />
+                            </div>
+
                           </div>
                           <div className="form-group">
                             <label htmlFor="register-email-2">
