@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { API, graphqlOperation } from "aws-amplify";
 
-// import Home Components
-// import NewsletterModal from "~/components/features/modals/newsletter-modal";
 import IntroSection from "~/components/partials/home/intro-section";
 import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
@@ -12,8 +10,7 @@ import DealSection from "~/components/partials/home/deal-section";
 import FeaturedCollection from "~/components/partials/home/featured-collection";
 import CtaSection from "~/components/partials/home/cta-section";
 import BrandSection from "~/components/partials/home/brand-section";
-import BlogSection from "~/components/partials/home/blog-section";
-import SmallCollection from "~/components/partials/product/small-collection";
+// import BlogSection from "~/components/partials/home/blog-section";
 
 import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
 
@@ -23,9 +20,6 @@ function HomePage() {
   const [categories, setCategories] = useState([]);
   const bestSelling = [...products];
   const featured = [...products];
-  const latest = [...products];
-  const onSale = [...products];
-  const posts = [];
 
   useEffect(() => {
     (async function () {
@@ -68,7 +62,7 @@ function HomePage() {
         <DealSection />
         <FeaturedCollection products={featured} loading={loading} />
         <CtaSection />
-        <BlogSection posts={posts} />
+        {/* <BlogSection /> */}
         <BrandSection />
         {/* <SmallCollection
           featured={featured}
