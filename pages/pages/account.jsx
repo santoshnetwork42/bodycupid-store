@@ -12,6 +12,7 @@ import Addresses from "~/components/common/addresses";
 import { listOrders, getUser } from "~/graphql/queries";
 import { updateUser as updateUserMutation } from "~/graphql/mutations";
 import { formateDate, toDecimal } from "~/utils/index";
+import { removePhonePrefix } from "~/utils/helper";
 
 function Account({ user }) {
   const router = useRouter();
@@ -261,15 +262,18 @@ function Account({ user }) {
                     disabled
                   />
                   <label>Phone *</label>
-                  <input
-                    type="tel"
-                    className="form-control"
-                    name="phone"
-                    required
-                    value={userDetail.phone}
-                    onChange={(e) => setUser({ phone: e.target.value })}
-                    disabled
-                  />
+                  <div className="input-tel form-control">
+                    <div className="prefix">+91</div>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      value={removePhonePrefix(userDetail.phone)}
+                      onChange={(e) => setUser({ phone: e.target.value })}
+                      disabled
+                    />
+                  </div>
+
                   {/* <fieldset>
                     <legend>Password Change</legend>
                     <label>
