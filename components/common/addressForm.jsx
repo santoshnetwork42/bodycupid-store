@@ -45,9 +45,8 @@ const AddressForm = ({
             variables: { input: address },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
-          onAddress(address.id,response);
+          onAddress(address.id, response);
 
-         
           onAddressClick(response);
         } else {
           setAddresses([{ ...address }]);
@@ -90,8 +89,8 @@ const AddressForm = ({
                     type="tel"
                     className="form-control mb-0"
                     name="phone"
+                    value={removePhonePrefix(address.phone)}
                     required
-                    value={address.phone}
                     onChange={(e) => setAddress({ phone: e.target.value })}
                   />
                 </div>

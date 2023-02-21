@@ -5,7 +5,7 @@ import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { addPhonePrefix } from "~/utils/helper";
+import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 
 function ForgotPassword() {
   const router = useRouter();
@@ -94,7 +94,7 @@ function ForgotPassword() {
                               name="singin-phone"
                               placeholder="Phone number *"
                               required
-                              value={state.phone}
+                              value={removePhonePrefix(state.phone)}
                               onChange={(e) =>
                                 setState({
                                   ...state,
