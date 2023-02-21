@@ -12,17 +12,34 @@ import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function MediaOne(props) {
-  const { product } = props;
+  const { product, variantId } = props;
   const [index, setIndex] = useState(0);
   const [isOpen, setOpenState] = useState(false);
   const [mediaRef, setMediaRef] = useState(null);
 
-  // let lgImages = product.large_pictures;
   let lgImages = product.images.items;
+  if (product.variants.items.length > 1) {
+    lgImages.push(
+      ...product.variants.items.map((i) => ({
+        variantId: i.id,
+        imageKey: i.imageUrl,
+        alt: i.alt || i.title,
+      }))
+    );
+  }
 
   useEffect(() => {
     setIndex(0);
   }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (variantId) {
+      const i = lgImages.findIndex((img) => img.variantId === variantId);
+      if (i > -1) {
+        setIndex(i);
+      }
+    }
+  }, [variantId]);
 
   useEffect(() => {
     if (mediaRef !== null && mediaRef.current !== null && index >= 0) {
@@ -80,28 +97,20 @@ export default function MediaOne(props) {
         style={{ top: "88px" }}
       >
         <div className="product-label-group">
-          {product.inventory === 0 ? (
+          {product.inventory === 0 && (
             <label className="product-label label-out">out</label>
-          ) : (
-            ""
           )}
 
-          {product.isFeatured ? (
+          {product.isFeatured && (
             <label className="product-label label-top">top</label>
-          ) : (
-            ""
           )}
 
-          {product.isFeatured ? (
+          {product.isFeatured && (
             <label className="product-label label-new">new</label>
-          ) : (
-            ""
           )}
 
-          {!!discount ? (
+          {!!discount && (
             <label className="product-label label-sale">sale</label>
-          ) : (
-            ""
           )}
         </div>
 

@@ -249,17 +249,17 @@ export const getProductBySlug = /* GraphQL */ `
         brand
         vendor
         isFeatured
+        categoryId
+        subCategoryId
         category {
           id
           name
           slug
-          subCategory {
-            items {
-              id
-              name
-              slug
-            }
-          }
+        }
+        subCategory {
+          id
+          name
+          slug
         }
         productType
         createdAt
@@ -586,7 +586,6 @@ export const getOrder = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        nextToken
       }
       createdAt
       updatedAt

@@ -47,7 +47,11 @@ function ProductTwo(props) {
 
   const addToCartHandler = (e) => {
     e.preventDefault();
-    addToCart({ ...product, qty: 1, price: product.price });
+    addToCart({
+      ...product,
+      qty: 1,
+      price: product.price,
+    });
   };
 
   const discount = !!(product.listingPrice && product.price)
@@ -103,7 +107,7 @@ function ProductTwo(props) {
             ""
           )}
           {discount > 0 ? (
-            product.variants?.items?.length === 0 ? (
+            product.variants?.items?.length < 2 ? (
               <label className="product-label label-sale">
                 {discount}% OFF
               </label>
@@ -116,7 +120,7 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action-vertical">
-          {product.variants?.items?.length > 0 ? (
+          {product.variants?.items?.length > 1 ? (
             <ALink
               href={`/product/${product.slug}`}
               className="btn-product-icon btn-cart"

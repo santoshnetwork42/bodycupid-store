@@ -86,6 +86,7 @@ function DescOne(props) {
                   />
                 </>
               )}
+              <br />
               <h5 className="description-title mb-3 font-weight-semi-bold ls-m">
                 Specifications
               </h5>

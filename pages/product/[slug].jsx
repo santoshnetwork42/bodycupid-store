@@ -3,29 +3,47 @@ import { useRouter } from "next/router";
 import Helmet from "react-helmet";
 import { API, graphqlOperation } from "aws-amplify";
 
-import withApollo from "~/server/apollo";
 import OwlCarousel from "~/components/features/owl-carousel";
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import { mainSlider17 } from "~/utils/data/carousel";
-import { getProductBySlug } from "~/graphql/api";
+import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 
 function ProductDefault() {
-  const slug = useRouter().query.slug;
+  const { slug, variantId } = useRouter().query;
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
+  const [selectedVaraint, setVariant] = useState(variantId);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(getProductBySlug, { slug })).then((response) => {
-      let [product] = response.data.byslugProduct.items;
-      setProduct(product);
-      setRelated(product?.variants.items);
-      setLoading(false);
-    });
-  }, []);
+    API.graphql(graphqlOperation(getProductBySlug, { slug })).then(
+      (response) => {
+        let [product] = response.data.byslugProduct.items;
+        setProduct(product);
+        setLoading(false);
+      }
+    );
+  }, [slug]);
+
+  useEffect(() => {
+    if (product?.subCategoryId || product?.subCategoryId) {
+      const filter = { id: { ne: product.id } };
+      if (product?.subCategoryId) {
+        filter.subCategoryId = { eq: product.subCategoryId };
+      } else {
+        filter.categoryId = { eq: product.categoryId };
+      }
+
+      API.graphql(
+        graphqlOperation(getHomePageProducts, { filter, limit: 4 })
+      ).then((response) => {
+        setRelated(response.data.searchProducts.items);
+      });
+    }
+  }, [product?.id]);
 
   return (
     <main className="main mt-6 single-product">
@@ -40,11 +58,16 @@ function ProductDefault() {
           <div className="container vertical">
             <div className="product product-single row mb-7">
               <div className="col-md-6 sticky-sidebar-wrapper">
-                <MediaOne product={product} />
+                <MediaOne product={product} variantId={selectedVaraint} />
               </div>
 
               <div className="col-md-6">
-                <DetailOne data={product} isNav={true} />
+                <DetailOne
+                  data={product}
+                  variantId={selectedVaraint}
+                  setVariant={setVariant}
+                  isNav={true}
+                />
               </div>
             </div>
 
@@ -90,6 +113,4 @@ function ProductDefault() {
   );
 }
 
-export default withApollo({ ssr: typeof window === "undefined" })(
-  ProductDefault
-);
+export default ProductDefault;
