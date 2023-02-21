@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { addPhonePrefix } from "~/utils/helper";
+import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 
 function Login({ auth, redirect = true }) {
   const router = useRouter();
@@ -144,7 +144,7 @@ function Login({ auth, redirect = true }) {
                                 name="singin-phone"
                                 placeholder="Phone number *"
                                 required
-                                value={state.phone}
+                                value={removePhonePrefix(state.phone)}
                                 onChange={(e) =>
                                   setState({
                                     ...state,
@@ -257,7 +257,7 @@ function Login({ auth, redirect = true }) {
                                 name="register-phone"
                                 placeholder="Your phone number *"
                                 required
-                                value={state.phone}
+                                value={removePhonePrefix(state.phone)}
                                 onChange={(e) =>
                                   setState({
                                     ...state,
