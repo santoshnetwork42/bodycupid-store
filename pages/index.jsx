@@ -14,25 +14,13 @@ import BrandSection from "~/components/partials/home/brand-section";
 import BlogSection from "~/components/partials/home/blog-section";
 import SmallCollection from "~/components/partials/product/small-collection";
 
-// import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
+import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
 
-// import awsmobile from "~/aws-exports";
-// import optimizeImage from "~/utils/optimizeImage";
-// import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import awsmobile from "~/aws-exports";
+import optimizeImage from "~/utils/optimizeImage";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-function HomePage({
-  hero = {
-    banner: {
-      originalUrl: "",
-      placeholder: "",
-      height: 0,
-      width: 0,
-    },
-  },
-  products = [],
-  categories = [],
-  brands = [],
-}) {
+function HomePage({ hero, products, categories, brands }) {
   return (
     <div className="main home">
       <Head>
@@ -66,142 +54,141 @@ function HomePage({
   );
 }
 
-// export const getStaticProps = async () => {
-//   try {
-//     const fetchData = async (query = "", variables = {}) => {
-//       const response = await fetch(awsmobile.aws_appsync_graphqlEndpoint, {
-//         method: "POST",
-//         body: JSON.stringify({
-//           query,
-//           variables,
-//         }),
-//         headers: {
-//           "x-api-key": awsmobile.aws_appsync_apiKey,
-//           accept: "*/*",
-//           "content-type": "application/json; charset=UTF-8",
-//         },
-//       });
+export const getStaticProps = async () => {
+  try {
+    const fetchData = async (query = "", variables = {}) => {
+      const response = await fetch(awsmobile.aws_appsync_graphqlEndpoint, {
+        method: "POST",
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+        headers: {
+          "x-api-key": awsmobile.aws_appsync_apiKey,
+          accept: "*/*",
+          "content-type": "application/json; charset=UTF-8",
+        },
+      });
 
-//       const data = await response.json();
+      const data = await response.json();
 
-//       return data.data;
-//     };
+      return data.data;
+    };
 
-//     const optimizedLogoImage = await optimizeImage({
-//       src: "/images/logo.png",
-//       options: {
-//         resize: 150,
-//         blur: 2,
-//       },
-//       type: "self-hosted",
-//     });
-//     const optimizedFooterImage = await optimizeImage({
-//       src: "/images/logo-footer.png",
-//       options: {
-//         resize: 150,
-//         blur: 2,
-//       },
-//       type: "self-hosted",
-//     });
+    const optimizedLogoImage = await optimizeImage({
+      src: "/images/logo.png",
+      options: {
+        resize: 150,
+        blur: 2,
+      },
+      type: "self-hosted",
+    });
+    const optimizedFooterImage = await optimizeImage({
+      src: "/images/logo-footer.png",
+      options: {
+        resize: 150,
+        blur: 2,
+      },
+      type: "self-hosted",
+    });
 
-//     const optimizedHeroImage = await optimizeImage({
-//       src: "/images/home/slides/wow.jpg",
-//       type: "self-hosted",
-//     });
+    const optimizedHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow.jpg",
+      type: "self-hosted",
+    });
 
-//     const { searchProducts } = await fetchData(getHomePageProducts);
-//     const { searchProductSubCategories } = await fetchData(
-//       getHomePageCategories
-//     );
+    const { searchProducts } = await fetchData(getHomePageProducts);
+    const { searchProductSubCategories } = await fetchData(
+      getHomePageCategories
+    );
 
-//     for (const category of searchProductSubCategories.items) {
-//       if (category.imageUrl) {
-//         const imageUrl = getPublicImageURL(category.imageUrl);
+    for (const category of searchProductSubCategories.items) {
+      if (category.imageUrl) {
+        const imageUrl = getPublicImageURL(category.imageUrl);
 
-//         const optimizedCategoryImage = await optimizeImage({
-//           src: imageUrl,
-//           options: {
-//             resize: 200,
-//             blur: 3,
-//           },
-//         });
+        const optimizedCategoryImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
 
-//         delete category.imageUrl;
-//         category.image = optimizedCategoryImage;
-//       }
-//     }
+        delete category.imageUrl;
+        category.image = optimizedCategoryImage;
+      }
+    }
 
-//     searchProducts.items = searchProducts.items.slice(0, 5);
-//     for (const product of searchProducts.items) {
-//       for (const image in product.images.items) {
-//         const imageUrl = getPublicImageURL(
-//           product.images.items[image].imageKey
-//         );
+    for (const product of searchProducts.items) {
+      for (const image in product.images.items) {
+        const imageUrl = getPublicImageURL(
+          product.images.items[image].imageKey
+        );
 
-//         const optimizedProductImage = await optimizeImage({
-//           src: imageUrl,
-//           options: {
-//             resize: 200,
-//             blur: 3,
-//           },
-//         });
+        const optimizedProductImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
 
-//         product.images.items[image].image = optimizedProductImage;
-//       }
+        product.images.items[image].image = optimizedProductImage;
+      }
 
-//       const imageUrl = getPublicImageURL(product.thumbImages);
-//       const optimizedProductImage = await optimizeImage({
-//         src: imageUrl,
-//         options: {
-//           resize: 200,
-//           blur: 3,
-//         },
-//       });
+      const imageUrl = getPublicImageURL(product.thumbImages);
+      const optimizedProductImage = await optimizeImage({
+        src: imageUrl,
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
 
-//       product.image = optimizedProductImage;
-//     }
+      product.image = optimizedProductImage;
+    }
 
-//     const brands = [
-//       "/images/brands/1.png",
-//       "/images/brands/2.png",
-//       "/images/brands/3.png",
-//       "/images/brands/4.png",
-//       "/images/brands/5.png",
-//       "/images/brands/6.png",
-//     ];
-//     for (const brand in brands) {
-//       const optimizedBrand = await optimizeImage({
-//         src: brands[brand],
-//         type: "self-hosted",
-//         options: {
-//           resize: 200,
-//           blur: 3,
-//         },
-//       });
-//       brands[brand] = optimizedBrand;
-//     }
+    const brands = [
+      "/images/brands/1.png",
+      "/images/brands/2.png",
+      "/images/brands/3.png",
+      "/images/brands/4.png",
+      "/images/brands/5.png",
+      "/images/brands/6.png",
+    ];
+    for (const brand in brands) {
+      const optimizedBrand = await optimizeImage({
+        src: brands[brand],
+        type: "self-hosted",
+        options: {
+          resize: 200,
+          blur: 3,
+        },
+      });
+      brands[brand] = optimizedBrand;
+    }
 
-//     return {
-//       props: {
-//         navbar: {
-//           logo: optimizedLogoImage,
-//         },
-//         hero: {
-//           banner: optimizedHeroImage,
-//         },
-//         products: searchProducts.items,
-//         categories: searchProductSubCategories.items,
-//         brands,
-//         footer: {
-//           logo: optimizedFooterImage,
-//         },
-//       },
-//     };
-//   } catch (e) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-// };
+    return {
+      props: {
+        navbar: {
+          logo: optimizedLogoImage,
+        },
+        hero: {
+          banner: optimizedHeroImage,
+        },
+        products: searchProducts.items,
+        categories: searchProductSubCategories.items,
+        brands,
+        footer: {
+          logo: optimizedFooterImage,
+        },
+      },
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
+};
 
 export default HomePage;
