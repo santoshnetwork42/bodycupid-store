@@ -9,6 +9,7 @@ import {
 } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import { getCouponTotal, toDecimal } from "~/utils";
+import ALink from "~/components/features/custom-link";
 
 const modalStyles = {
   content: {
@@ -96,13 +97,15 @@ function Coupon(props) {
           >{`${featured?.length} Offers >`}</a>
         )}
         {!!appliedCoupon && (
-          <a
-            className="coupon-offer"
-            type="button"
+          <ALink
+            key={appliedCoupon.id}
+            href="#"
+            className="product-remove"
+            title="Remove coupon"
             onClick={() => removeCoupon()}
           >
-            Remove Coupon
-          </a>
+            <i className="fas fa-times"></i>
+          </ALink>
         )}
       </div>
       <Modal

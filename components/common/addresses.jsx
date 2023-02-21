@@ -2,15 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { API } from "aws-amplify";
 import Modal from "react-modal";
 import { connect } from "react-redux";
-import { useSetState } from "react-use";
 
 import ALink from "~/components/features/custom-link";
 import { listUserAddresses } from "~/graphql/queries";
-import {
-  createUserAddress,
-  updateUserAddress,
-  deleteUserAddress,
-} from "~/graphql/mutations";
+import { deleteUserAddress } from "~/graphql/mutations";
 import AddressForm from "./addressForm";
 
 const modalStyles = {
@@ -48,7 +43,8 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
     if (!newSelected && autoSelect && addresses.length) {
       setSelected(addresses[0]?.id);
     }
-  }, [newSelected]);
+  }, [addresses]);
+
   const getUserAddress = useCallback(async () => {
     const {
       data: { listUserAddresses: userAddresses },
@@ -77,7 +73,7 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
     },
     [addresses]
   );
-  const onAddress = (id,response) => {
+  const onAddress = (id, response) => {
     if (id) {
       setAddresses(addresses.map((a) => (a.id === id ? response : a)));
     } else {
@@ -87,6 +83,7 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
 
   const onAddressClick = useCallback(
     (adr) => {
+      setSelected(adr.id);
       if (onSelect) {
         onSelect({
           id: adr.id,
