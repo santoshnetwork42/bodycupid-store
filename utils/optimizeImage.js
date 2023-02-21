@@ -43,8 +43,6 @@ const optimizeImage = async ({ src, type = "url", options = {} }) => {
   } catch (e) {}
 
   return returnValues;
-
-  return {};
 };
 
 export default optimizeImage;

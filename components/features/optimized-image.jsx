@@ -8,11 +8,9 @@ const OptimizedImage = ({ optimizedData, alt, spanAttributes, ...props }) => {
     window.imagesReplaced = true;
     const image = new Image();
     image.src = originalUrl;
-
     image.width = width;
     image.height = height;
     image.alt = alt;
-
     image.addEventListener("load", (e) => {
       if (!imageRef.current) return;
       imageRef.current.innerHTML = "";

@@ -67,24 +67,10 @@ function ProductTwo(props) {
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
         <ALink href={`/product/${product.slug}`}>
-          <LazyLoadImage
-            alt={thumbImage?.alt}
-            src={getPublicImageURL(thumbImage?.imageKey)}
-            threshold={500}
-            effect="opacity"
-            width="1024"
-            height="1024"
-          />
-
-          {images?.length > 1 ? (
-            <LazyLoadImage
-              alt={images[1].alt}
-              src={getPublicImageURL(images[1].imageKey)}
-              threshold={500}
-              width="1024"
-              height="1024"
-              effect="opacity"
-              wrapperClassName="product-image-hover"
+          {thumbImage?.image ? (
+            <OptimizedImage
+              optimizedData={thumbImage.image}
+              alt={thumbImage.alt}
             />
           ) : (
             <span>
