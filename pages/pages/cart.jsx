@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
-import { API } from "aws-amplify";
+import { useEffect, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
+import Coupons from "~/components/features/coupon";
 
 import { cartActions } from "~/store/cart";
 
@@ -15,20 +15,11 @@ import {
   getCouponTotal,
 } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { applyCoupon as applyCouponMutation } from "~/graphql/queries";
 
 function Cart(props) {
-  const {
-    cartList,
-    user,
-    coupons,
-    removeFromCart,
-    updateCart,
-    applyCoupon,
-    removeCoupon,
-  } = props;
+  const { cartList, removeFromCart, updateCart, appliedCoupon, removeCoupon } =
+    props;
   const [cartItems, setCartItems] = useState([]);
-  const [coupon, setCoupon] = useState("");
 
   useEffect(() => {
     setCartItems([...cartList]);
@@ -55,23 +46,6 @@ function Cart(props) {
   const update = () => {
     updateCart(cartItems);
   };
-
-  const applyCouponCode = useCallback(async () => {
-    const response = await API.graphql({
-      query: applyCouponMutation,
-      variables: { code: coupon },
-      authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-    });
-
-    if (response.data.applyCoupn) {
-      const couponResponse = JSON.parse(response.data.applyCoupn);
-      const { statusCode, code, id, discount } = couponResponse;
-      if (statusCode === 200 && code && id && discount) {
-        setCoupon("");
-        applyCoupon(couponResponse);
-      }
-    }
-  }, [coupon, user]);
 
   return (
     <div className="main cart">
@@ -183,32 +157,13 @@ function Cart(props) {
                       Update Cart
                     </button>
                   </div>
-                  <div className="cart-coupon-box mb-8">
-                    <h4 className="title coupon-title text-uppercase ls-m">
-                      Coupon Discount
-                    </h4>
-                    <input
-                      type="text"
-                      name="coupon_code"
-                      className="input-text form-control text-grey ls-m mb-4"
-                      id="coupon_code"
-                      placeholder="Enter coupon code here..."
-                      value={coupon}
-                      onChange={(e) => setCoupon(e.target.value)}
-                    />
-                    <button
-                      onClick={applyCouponCode}
-                      className="btn btn-md btn-dark btn-rounded btn-outline"
-                    >
-                      Apply Coupon
-                    </button>
-                  </div>
                 </div>
                 <aside className="col-lg-4 sticky-sidebar-wrapper">
                   <div
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
+                    <Coupons />
                     <div className="summary mb-4">
                       <h3 className="summary-title text-left">Cart Totals</h3>
                       <table className="shipping">
@@ -235,30 +190,32 @@ function Cart(props) {
                               </p>
                             </td>
                           </tr>
-                          {!!coupons?.length && (
+                          {!!appliedCoupon && (
                             <tr className="summary-subtotal">
                               <td>
                                 <h4 className="summary-subtitle">Coupons</h4>
                                 <p>
-                                  {coupons.map((c) => (
-                                    <div style={{ display: "flex" }}>
-                                      <span className="mr-1">{c.code}</span>
-                                      <ALink
-                                        key={c.id}
-                                        href="#"
-                                        className="product-remove"
-                                        title="Remove coupon"
-                                        onClick={() => removeCoupon(c.id)}
-                                      >
-                                        <i className="fas fa-times"></i>
-                                      </ALink>
-                                    </div>
-                                  ))}
+                                  <div style={{ display: "flex" }}>
+                                    <span className="mr-1">
+                                      {appliedCoupon.code}
+                                    </span>
+                                    <ALink
+                                      key={appliedCoupon.id}
+                                      href="#"
+                                      className="product-remove"
+                                      title="Remove coupon"
+                                      onClick={() => removeCoupon()}
+                                    >
+                                      <i className="fas fa-times"></i>
+                                    </ALink>
+                                  </div>
                                 </p>
                               </td>
                               <td>
                                 <p className="summary-subtotal-price">
-                                  {`₹${toDecimal(getCouponTotal(coupons))}`}
+                                  {`₹${toDecimal(
+                                    getCouponTotal(appliedCoupon, cartItems)
+                                  )}`}
                                 </p>
                               </td>
                             </tr>
@@ -273,7 +230,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(getFinalPrice(cartItems, coupons))}
+                                ₹{toDecimal(getFinalPrice(cartItems, appliedCoupon))}
                               </p>
                             </td>
                           </tr>
@@ -314,13 +271,12 @@ function mapStateToProps(state) {
   return {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
-    coupons: state.cart.coupons || [],
+    appliedCoupon: state.cart.coupon,
   };
 }
 
 export default connect(mapStateToProps, {
+  removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
-  applyCoupon: cartActions.applyCoupon,
-  removeCoupon: cartActions.removeCoupon,
 })(Cart);

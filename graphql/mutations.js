@@ -1360,7 +1360,6 @@ export const deleteUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -1412,6 +1411,12 @@ export const deleteUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -2364,7 +2369,6 @@ export const deleteUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -2416,6 +2420,12 @@ export const deleteUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -3237,7 +3247,6 @@ export const deleteUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -3289,6 +3298,12 @@ export const deleteUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -3329,7 +3344,6 @@ export const deleteUser = /* GraphQL */ `
         items {
           id
           code
-          isForAll
           storeId
           store {
             id
@@ -3843,7 +3857,6 @@ export const deleteUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -3895,6 +3908,12 @@ export const deleteUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -3908,6 +3927,12 @@ export const deleteUser = /* GraphQL */ `
           maxUse
           totalUsed
           isActive
+          isFeatured
+          couponType
+          minOrderValue
+          maxDiscount
+          description
+          paymentMethod
           createdAt
           updatedAt
         }
@@ -5277,7 +5302,6 @@ export const createUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -5329,6 +5353,12 @@ export const createUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -6281,7 +6311,6 @@ export const createUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -6333,6 +6362,12 @@ export const createUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -7154,7 +7189,6 @@ export const createUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -7206,6 +7240,12 @@ export const createUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -7246,7 +7286,6 @@ export const createUser = /* GraphQL */ `
         items {
           id
           code
-          isForAll
           storeId
           store {
             id
@@ -7760,7 +7799,6 @@ export const createUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -7812,6 +7850,12 @@ export const createUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -7825,6 +7869,12 @@ export const createUser = /* GraphQL */ `
           maxUse
           totalUsed
           isActive
+          isFeatured
+          couponType
+          minOrderValue
+          maxDiscount
+          description
+          paymentMethod
           createdAt
           updatedAt
         }
@@ -9194,7 +9244,6 @@ export const updateUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -9246,6 +9295,12 @@ export const updateUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -10198,7 +10253,6 @@ export const updateUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -10250,6 +10304,12 @@ export const updateUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -11071,7 +11131,6 @@ export const updateUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -11123,6 +11182,12 @@ export const updateUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -11163,7 +11228,6 @@ export const updateUser = /* GraphQL */ `
         items {
           id
           code
-          isForAll
           storeId
           store {
             id
@@ -11677,7 +11741,6 @@ export const updateUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -11729,6 +11792,12 @@ export const updateUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -11742,6 +11811,12 @@ export const updateUser = /* GraphQL */ `
           maxUse
           totalUsed
           isActive
+          isFeatured
+          couponType
+          minOrderValue
+          maxDiscount
+          description
+          paymentMethod
           createdAt
           updatedAt
         }
@@ -30271,7 +30346,6 @@ export const createProductInventory = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -30279,6 +30353,12 @@ export const createProductInventory = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -31855,7 +31935,6 @@ export const updateProductInventory = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -31863,6 +31942,12 @@ export const updateProductInventory = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -33439,7 +33524,6 @@ export const deleteProductInventory = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -33447,6 +33531,12 @@ export const deleteProductInventory = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -36531,7 +36621,6 @@ export const createProduct = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -36583,6 +36672,12 @@ export const createProduct = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -39897,7 +39992,6 @@ export const updateProduct = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -39949,6 +40043,12 @@ export const updateProduct = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -43263,7 +43363,6 @@ export const deleteProduct = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -43315,6 +43414,12 @@ export const deleteProduct = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -45004,7 +45109,6 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -45012,6 +45116,12 @@ export const createOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -45416,7 +45526,6 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -45424,6 +45533,12 @@ export const createOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -45845,7 +45960,6 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -45853,6 +45967,12 @@ export const createOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -45893,7 +46013,6 @@ export const createOrder = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -46093,7 +46212,6 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -46101,6 +46219,12 @@ export const createOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -46114,6 +46238,12 @@ export const createOrder = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -47165,7 +47295,6 @@ export const createOrder = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -47217,6 +47346,12 @@ export const createOrder = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -48342,7 +48477,6 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -48350,6 +48484,12 @@ export const updateOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -48754,7 +48894,6 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -48762,6 +48901,12 @@ export const updateOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -49183,7 +49328,6 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -49191,6 +49335,12 @@ export const updateOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -49231,7 +49381,6 @@ export const updateOrder = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -49431,7 +49580,6 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -49439,6 +49587,12 @@ export const updateOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -49452,6 +49606,12 @@ export const updateOrder = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -50503,7 +50663,6 @@ export const updateOrder = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -50555,6 +50714,12 @@ export const updateOrder = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -51680,7 +51845,6 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -51688,6 +51852,12 @@ export const deleteOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -52092,7 +52262,6 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -52100,6 +52269,12 @@ export const deleteOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -52521,7 +52696,6 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -52529,6 +52703,12 @@ export const deleteOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -52569,7 +52749,6 @@ export const deleteOrder = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -52769,7 +52948,6 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -52777,6 +52955,12 @@ export const deleteOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -52790,6 +52974,12 @@ export const deleteOrder = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -53841,7 +54031,6 @@ export const deleteOrder = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -53893,6 +54082,12 @@ export const deleteOrder = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -55282,7 +55477,6 @@ export const createOrderProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -55290,6 +55484,12 @@ export const createOrderProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -56921,7 +57121,6 @@ export const updateOrderProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -56929,6 +57128,12 @@ export const updateOrderProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -58560,7 +58765,6 @@ export const deleteOrderProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -58568,6 +58772,12 @@ export const deleteOrderProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -59934,7 +60144,6 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -59942,6 +60151,12 @@ export const createPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -60346,7 +60561,6 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -60354,6 +60568,12 @@ export const createPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -60775,7 +60995,6 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -60783,6 +61002,12 @@ export const createPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -60823,7 +61048,6 @@ export const createPayment = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -61023,7 +61247,6 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -61031,6 +61254,12 @@ export const createPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -61044,6 +61273,12 @@ export const createPayment = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -62163,7 +62398,6 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -62171,6 +62405,12 @@ export const updatePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -62575,7 +62815,6 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -62583,6 +62822,12 @@ export const updatePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -63004,7 +63249,6 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -63012,6 +63256,12 @@ export const updatePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -63052,7 +63302,6 @@ export const updatePayment = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -63252,7 +63501,6 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -63260,6 +63508,12 @@ export const updatePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -63273,6 +63527,12 @@ export const updatePayment = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -64392,7 +64652,6 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -64400,6 +64659,12 @@ export const deletePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -64804,7 +65069,6 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -64812,6 +65076,12 @@ export const deletePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -65233,7 +65503,6 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -65241,6 +65510,12 @@ export const deletePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -65281,7 +65556,6 @@ export const deletePayment = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -65481,7 +65755,6 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -65489,6 +65762,12 @@ export const deletePayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -65502,6 +65781,12 @@ export const deletePayment = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -66185,7 +66470,6 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -66193,6 +66477,12 @@ export const createReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -66597,7 +66887,6 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -66605,6 +66894,12 @@ export const createReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -67026,7 +67321,6 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -67034,6 +67328,12 @@ export const createReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -67074,7 +67374,6 @@ export const createReview = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -67274,7 +67573,6 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -67282,6 +67580,12 @@ export const createReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -67295,6 +67599,12 @@ export const createReview = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -68663,7 +68973,6 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -68671,6 +68980,12 @@ export const createReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -69547,7 +69862,6 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -69555,6 +69869,12 @@ export const updateReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -69959,7 +70279,6 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -69967,6 +70286,12 @@ export const updateReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -70388,7 +70713,6 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -70396,6 +70720,12 @@ export const updateReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -70436,7 +70766,6 @@ export const updateReview = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -70636,7 +70965,6 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -70644,6 +70972,12 @@ export const updateReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -70657,6 +70991,12 @@ export const updateReview = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -72025,7 +72365,6 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -72033,6 +72372,12 @@ export const updateReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -72909,7 +73254,6 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -72917,6 +73261,12 @@ export const deleteReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -73321,7 +73671,6 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -73329,6 +73678,12 @@ export const deleteReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -73750,7 +74105,6 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -73758,6 +74112,12 @@ export const deleteReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -73798,7 +74158,6 @@ export const deleteReview = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -73998,7 +74357,6 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -74006,6 +74364,12 @@ export const deleteReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -74019,6 +74383,12 @@ export const deleteReview = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -75387,7 +75757,6 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -75395,6 +75764,12 @@ export const deleteReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -79681,7 +80056,6 @@ export const createWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -79689,6 +80063,12 @@ export const createWishlistProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -81289,7 +81669,6 @@ export const updateWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -81297,6 +81676,12 @@ export const updateWishlistProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -82897,7 +83282,6 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -82905,6 +83289,12 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -87214,7 +87604,6 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -87222,6 +87611,12 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -88822,7 +89217,6 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -88830,6 +89224,12 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -90430,7 +90830,6 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -90438,6 +90837,12 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -90678,7 +91083,6 @@ export const createCouponCode = /* GraphQL */ `
     createCouponCode(input: $input, condition: $condition) {
       id
       code
-      isForAll
       storeId
       store {
         id
@@ -91775,7 +92179,6 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -91783,6 +92186,12 @@ export const createCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -92187,7 +92596,6 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -92195,6 +92603,12 @@ export const createCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -92616,7 +93030,6 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -92624,6 +93037,12 @@ export const createCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -92664,7 +93083,6 @@ export const createCouponCode = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -92864,7 +93282,6 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -92872,6 +93289,12 @@ export const createCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -92885,6 +93308,12 @@ export const createCouponCode = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -92898,6 +93327,12 @@ export const createCouponCode = /* GraphQL */ `
       maxUse
       totalUsed
       isActive
+      isFeatured
+      couponType
+      minOrderValue
+      maxDiscount
+      description
+      paymentMethod
       createdAt
       updatedAt
     }
@@ -92911,7 +93346,6 @@ export const updateCouponCode = /* GraphQL */ `
     updateCouponCode(input: $input, condition: $condition) {
       id
       code
-      isForAll
       storeId
       store {
         id
@@ -94008,7 +94442,6 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -94016,6 +94449,12 @@ export const updateCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -94420,7 +94859,6 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -94428,6 +94866,12 @@ export const updateCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -94849,7 +95293,6 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -94857,6 +95300,12 @@ export const updateCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -94897,7 +95346,6 @@ export const updateCouponCode = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -95097,7 +95545,6 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -95105,6 +95552,12 @@ export const updateCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -95118,6 +95571,12 @@ export const updateCouponCode = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -95131,6 +95590,12 @@ export const updateCouponCode = /* GraphQL */ `
       maxUse
       totalUsed
       isActive
+      isFeatured
+      couponType
+      minOrderValue
+      maxDiscount
+      description
+      paymentMethod
       createdAt
       updatedAt
     }
@@ -95144,7 +95609,6 @@ export const deleteCouponCode = /* GraphQL */ `
     deleteCouponCode(input: $input, condition: $condition) {
       id
       code
-      isForAll
       storeId
       store {
         id
@@ -96241,7 +96705,6 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -96249,6 +96712,12 @@ export const deleteCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -96653,7 +97122,6 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -96661,6 +97129,12 @@ export const deleteCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -97082,7 +97556,6 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -97090,6 +97563,12 @@ export const deleteCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -97130,7 +97609,6 @@ export const deleteCouponCode = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -97330,7 +97808,6 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -97338,6 +97815,12 @@ export const deleteCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -97351,6 +97834,12 @@ export const deleteCouponCode = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -97364,6 +97853,2272 @@ export const deleteCouponCode = /* GraphQL */ `
       maxUse
       totalUsed
       isActive
+      isFeatured
+      couponType
+      minOrderValue
+      maxDiscount
+      description
+      paymentMethod
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const applyCoupon = /* GraphQL */ `
+  mutation ApplyCoupon($code: String!) {
+    applyCoupon(code: $code) {
+      id
+      code
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        appId
+        host
+        priority
+        imageUrl
+        products {
+          items {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      user {
+        id
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        shopingcarts {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            BillingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            CouponCodeId
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  productId
+                  rating
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  CouponCodeId
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      discount
+      expirationDate
+      maxUse
+      totalUsed
+      isActive
+      isFeatured
+      couponType
+      minOrderValue
+      maxDiscount
+      description
+      paymentMethod
       createdAt
       updatedAt
     }

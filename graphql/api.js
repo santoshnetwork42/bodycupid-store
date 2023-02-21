@@ -355,3 +355,241 @@ export const getProductBySlug = /* GraphQL */ `
     }
   }
 `;
+
+export const getFeaturedCoupon = /* GraphQL */ `
+  query SearchCouponCodes(
+    $filter: SearchableCouponCodeFilterInput
+    $sort: [SearchableCouponCodeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCouponCodeAggregationInput]
+  ) {
+    searchCouponCodes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        code
+        discount
+        isActive
+        isFeatured
+        couponType
+        minOrderValue
+        maxDiscount
+        description
+        paymentMethod
+      }
+    }
+  }
+`;
+
+export const applyCoupon = /* GraphQL */ `
+  mutation ApplyCoupon($code: String!) {
+    applyCoupon(code: $code) {
+      id
+      code
+      discount
+      couponType
+      minOrderValue
+      maxDiscount
+      description
+      paymentMethod
+    }
+  }
+`;
+
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      code
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+      }
+      channelName
+      shippingAddress {
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      BillingAddress {
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+      }
+      totalStoreCredit
+      CouponCodeId
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      currency
+      sla
+      priority
+      orderDate
+      status
+      products {
+        items {
+          id
+          orderId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          sku
+          returnReason
+          returnDate
+          returnAWB
+          returnShippingProvider
+          title
+          shippingMethodCode
+          cashOnDeliveryCharges
+          sellingPrice
+          shippingCharges
+          discount
+          totalPrice
+          currency
+          onHold
+          facilityCode
+          gstin
+          additionalInfo
+          centralGstPercentage
+          compensationCessPercentage
+          integratedGstPercentage
+          stateGstPercentage
+          taxRate
+          unionTerritoryGstPercentage
+          deliveryPartner
+          dispatchDate
+          invoiceDate
+          invoiceNumber
+          tentativeDeliveryDate
+          trackingId
+          quantity
+          price
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      payments {
+        items {
+          id
+          orderId
+          method
+          amount
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

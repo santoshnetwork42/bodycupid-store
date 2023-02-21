@@ -1357,7 +1357,6 @@ export const getUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -1409,6 +1408,12 @@ export const getUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -2361,7 +2366,6 @@ export const getUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -2413,6 +2417,12 @@ export const getUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -3234,7 +3244,6 @@ export const getUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -3286,6 +3295,12 @@ export const getUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -3326,7 +3341,6 @@ export const getUser = /* GraphQL */ `
         items {
           id
           code
-          isForAll
           storeId
           store {
             id
@@ -3840,7 +3854,6 @@ export const getUser = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -3892,6 +3905,12 @@ export const getUser = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -3905,6 +3924,12 @@ export const getUser = /* GraphQL */ `
           maxUse
           totalUsed
           isActive
+          isFeatured
+          couponType
+          minOrderValue
+          maxDiscount
+          description
+          paymentMethod
           createdAt
           updatedAt
         }
@@ -4581,7 +4606,6 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -4589,6 +4613,12 @@ export const listUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -4993,7 +5023,6 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -5001,6 +5030,12 @@ export const listUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -5422,7 +5457,6 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -5430,6 +5464,12 @@ export const listUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -5470,7 +5510,6 @@ export const listUsers = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -5670,7 +5709,6 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -5678,6 +5716,12 @@ export const listUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -5691,6 +5735,12 @@ export const listUsers = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -6379,7 +6429,6 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -6387,6 +6436,12 @@ export const bystoreIdUser = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -6791,7 +6846,6 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -6799,6 +6853,12 @@ export const bystoreIdUser = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -7220,7 +7280,6 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -7228,6 +7287,12 @@ export const bystoreIdUser = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -7268,7 +7333,6 @@ export const bystoreIdUser = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -7468,7 +7532,6 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -7476,6 +7539,12 @@ export const bystoreIdUser = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -7489,6 +7558,12 @@ export const bystoreIdUser = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -8177,7 +8252,6 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -8185,6 +8259,12 @@ export const searchUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -8589,7 +8669,6 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -8597,6 +8676,12 @@ export const searchUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -9018,7 +9103,6 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -9026,6 +9110,12 @@ export const searchUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -9066,7 +9156,6 @@ export const searchUsers = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -9266,7 +9355,6 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -9274,6 +9362,12 @@ export const searchUsers = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -9287,6 +9381,12 @@ export const searchUsers = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -29750,7 +29850,6 @@ export const getProductInventory = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -29758,6 +29857,12 @@ export const getProductInventory = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -36236,7 +36341,6 @@ export const getProduct = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -36288,6 +36392,12 @@ export const getProduct = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -38092,7 +38202,6 @@ export const listProducts = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -38100,6 +38209,12 @@ export const listProducts = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -39682,7 +39797,6 @@ export const bytitleProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -39690,6 +39804,12 @@ export const bytitleProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -41272,7 +41392,6 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -41280,6 +41399,12 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -42862,7 +42987,6 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -42870,6 +42994,12 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -44452,7 +44582,6 @@ export const bystoreIdProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -44460,6 +44589,12 @@ export const bystoreIdProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -46042,7 +46177,6 @@ export const byslugProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -46050,6 +46184,12 @@ export const byslugProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -47632,7 +47772,6 @@ export const searchProducts = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -47640,6 +47779,12 @@ export const searchProducts = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -49198,7 +49343,6 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -49206,6 +49350,12 @@ export const getOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -49610,7 +49760,6 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -49618,6 +49767,12 @@ export const getOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -50039,7 +50194,6 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -50047,6 +50201,12 @@ export const getOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -50087,7 +50247,6 @@ export const getOrder = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -50287,7 +50446,6 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -50295,6 +50453,12 @@ export const getOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -50308,6 +50472,12 @@ export const getOrder = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -51359,7 +51529,6 @@ export const getOrder = /* GraphQL */ `
               items {
                 id
                 code
-                isForAll
                 storeId
                 store {
                   id
@@ -51411,6 +51580,12 @@ export const getOrder = /* GraphQL */ `
                 maxUse
                 totalUsed
                 isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
                 createdAt
                 updatedAt
               }
@@ -52330,7 +52505,6 @@ export const listOrders = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -52419,6 +52593,12 @@ export const listOrders = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -52922,7 +53102,6 @@ export const listOrders = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -52930,6 +53109,12 @@ export const listOrders = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -53861,7 +54046,6 @@ export const bystoreIdOrder = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -53950,6 +54134,12 @@ export const bystoreIdOrder = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -54453,7 +54643,6 @@ export const bystoreIdOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -54461,6 +54650,12 @@ export const bystoreIdOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -55392,7 +55587,6 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -55481,6 +55675,12 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -55984,7 +56184,6 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -55992,6 +56191,12 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -56923,7 +57128,6 @@ export const searchOrders = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -57012,6 +57216,12 @@ export const searchOrders = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -57515,7 +57725,6 @@ export const searchOrders = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -57523,6 +57732,12 @@ export const searchOrders = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -58926,7 +59141,6 @@ export const getOrderProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -58934,6 +59148,12 @@ export const getOrderProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -62091,7 +62311,6 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -62099,6 +62318,12 @@ export const getPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -62503,7 +62728,6 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -62511,6 +62735,12 @@ export const getPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -62932,7 +63162,6 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -62940,6 +63169,12 @@ export const getPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -62980,7 +63215,6 @@ export const getPayment = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -63180,7 +63414,6 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -63188,6 +63421,12 @@ export const getPayment = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -63201,6 +63440,12 @@ export const getPayment = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -64114,7 +64359,6 @@ export const listPayments = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -64203,6 +64447,12 @@ export const listPayments = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -65128,7 +65378,6 @@ export const bystoreIdPayment = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -65217,6 +65466,12 @@ export const bystoreIdPayment = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -66142,7 +66397,6 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -66231,6 +66485,12 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -67156,7 +67416,6 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -67245,6 +67504,12 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -67927,7 +68192,6 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -67935,6 +68199,12 @@ export const getReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -68339,7 +68609,6 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -68347,6 +68616,12 @@ export const getReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -68768,7 +69043,6 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -68776,6 +69050,12 @@ export const getReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -68816,7 +69096,6 @@ export const getReview = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -69016,7 +69295,6 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -69024,6 +69302,12 @@ export const getReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -69037,6 +69321,12 @@ export const getReview = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -70405,7 +70695,6 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -70413,6 +70702,12 @@ export const getReview = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -71317,7 +71612,6 @@ export const listReviews = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -71406,6 +71700,12 @@ export const listReviews = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -72947,7 +73247,6 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -73036,6 +73335,12 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -74577,7 +74882,6 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -74666,6 +74970,12 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -79104,7 +79414,6 @@ export const getWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -79112,6 +79421,12 @@ export const getWishlistProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -84682,7 +84997,6 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -84690,6 +85004,12 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -86663,7 +86983,6 @@ export const getCouponCode = /* GraphQL */ `
     getCouponCode(id: $id) {
       id
       code
-      isForAll
       storeId
       store {
         id
@@ -87760,7 +88079,6 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -87768,6 +88086,12 @@ export const getCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -88172,7 +88496,6 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -88180,6 +88503,12 @@ export const getCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -88601,7 +88930,6 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -88609,6 +88937,12 @@ export const getCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -88649,7 +88983,6 @@ export const getCouponCode = /* GraphQL */ `
           items {
             id
             code
-            isForAll
             storeId
             store {
               id
@@ -88849,7 +89182,6 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   code
-                  isForAll
                   storeId
                   userId
                   discount
@@ -88857,6 +89189,12 @@ export const getCouponCode = /* GraphQL */ `
                   maxUse
                   totalUsed
                   isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
                   createdAt
                   updatedAt
                 }
@@ -88870,6 +89208,12 @@ export const getCouponCode = /* GraphQL */ `
             maxUse
             totalUsed
             isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
             createdAt
             updatedAt
           }
@@ -88883,6 +89227,12 @@ export const getCouponCode = /* GraphQL */ `
       maxUse
       totalUsed
       isActive
+      isFeatured
+      couponType
+      minOrderValue
+      maxDiscount
+      description
+      paymentMethod
       createdAt
       updatedAt
     }
@@ -88898,7 +89248,6 @@ export const listCouponCodes = /* GraphQL */ `
       items {
         id
         code
-        isForAll
         storeId
         store {
           id
@@ -89787,7 +90136,6 @@ export const listCouponCodes = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -89876,6 +90224,12 @@ export const listCouponCodes = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -89889,6 +90243,12 @@ export const listCouponCodes = /* GraphQL */ `
         maxUse
         totalUsed
         isActive
+        isFeatured
+        couponType
+        minOrderValue
+        maxDiscount
+        description
+        paymentMethod
         createdAt
         updatedAt
       }
@@ -89916,7 +90276,6 @@ export const bycodeCouponCode = /* GraphQL */ `
       items {
         id
         code
-        isForAll
         storeId
         store {
           id
@@ -90805,7 +91164,6 @@ export const bycodeCouponCode = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -90894,6 +91252,12 @@ export const bycodeCouponCode = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -90907,6 +91271,12 @@ export const bycodeCouponCode = /* GraphQL */ `
         maxUse
         totalUsed
         isActive
+        isFeatured
+        couponType
+        minOrderValue
+        maxDiscount
+        description
+        paymentMethod
         createdAt
         updatedAt
       }
@@ -90934,7 +91304,6 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
       items {
         id
         code
-        isForAll
         storeId
         store {
           id
@@ -91823,7 +92192,6 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -91912,1024 +92280,12 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const bycodeisForAllCouponCode = /* GraphQL */ `
-  query BycodeisForAllCouponCode(
-    $code: String!
-    $isForAll: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCouponCodeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bycodeisForAllCouponCode(
-      code: $code
-      isForAll: $isForAll
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        code
-        isForAll
-        storeId
-        store {
-          id
-          name
-          description
-          isActive
-          webUrl
-          appId
-          host
-          priority
-          imageUrl
-          products {
-            items {
-              id
-              title
-              brand
-              vendor
-              categoryId
-              subCategoryId
-              subCategory {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                name
-                description
-                categoryID
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
               isFeatured
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              productType
-              createdAt
-              slug
-              productDescription
-              longDescription
-              updatedAt
-              isPublished
-              publishedAt
-              price
-              sku
-              size
-              color
-              status
-              position
-              currency
-              costPrice
-              listingPrice
-              taxable
-              barcode
-              tags
-              weight
-              weightUnit
-              inventory
-              blockedInventory
-              rating
-              totalOrders
-              additionalInfo
-              thumbImages
-              isTaxEnabled
-              isInventoryEnabled
-              hasVarient
-              variants {
-                items {
-                  id
-                  productId
-                  title
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  createdAt
-                  updatedAt
-                  taxable
-                  barcode
-                  imageUrl
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                }
-                nextToken
-              }
-              images {
-                items {
-                  id
-                  productId
-                  position
-                  createdAt
-                  updatedAt
-                  alt
-                  width
-                  height
-                  imageKey
-                  isThumb
-                }
-                nextToken
-              }
-              reviews {
-                items {
-                  id
-                  userId
-                  productId
-                  rating
-                  comment
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-        userId
-        user {
-          id
-          storeId
-          store {
-            id
-            name
-            description
-            isActive
-            webUrl
-            appId
-            host
-            priority
-            imageUrl
-            products {
-              items {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner
-          firstName
-          lastName
-          email
-          phone
-          gender
-          dob
-          country
-          state
-          city
-          pinCode
-          landmark
-          address
-          location
-          area
-          isActive
-          authProvider
-          totalOrders
-          totalSpent
-          walletBalance
-          walletSpent
-          totalStoreCredit
-          isAdmin
-          isCognitoConfirmed
-          profilePhotoUrl
-          wishlists {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              wishlistProducts {
-                items {
-                  id
-                  wishlistId
-                  productId
-                  variantId
-                  quantity
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          shopingcarts {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              shoppingcartProducts {
-                items {
-                  id
-                  shoppingcartId
-                  productId
-                  variantId
-                  quantity
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          reviews {
-            items {
-              id
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              productId
-              product {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              rating
-              comment
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          orders {
-            items {
-              id
-              code
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              channelName
-              shippingAddress {
-                name
-                phone
-                email
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-              }
-              BillingAddress {
-                name
-                phone
-                email
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-              }
-              totalStoreCredit
-              CouponCodeId
-              totalCashOnDeliveryCharges
-              totalDiscount
-              totalGiftCharges
-              totalPrepaidAmount
-              totalShippingCharges
-              taxExempted
-              cFormProvided
-              thirdPartyShipping
-              currency
-              sla
-              priority
-              orderDate
-              status
-              products {
-                items {
-                  id
-                  orderId
-                  productId
-                  variantId
-                  sku
-                  returnReason
-                  returnDate
-                  returnAWB
-                  returnShippingProvider
-                  title
-                  shippingMethodCode
-                  cashOnDeliveryCharges
-                  sellingPrice
-                  shippingCharges
-                  discount
-                  totalPrice
-                  currency
-                  onHold
-                  facilityCode
-                  gstin
-                  additionalInfo
-                  centralGstPercentage
-                  compensationCessPercentage
-                  integratedGstPercentage
-                  stateGstPercentage
-                  taxRate
-                  unionTerritoryGstPercentage
-                  deliveryPartner
-                  dispatchDate
-                  invoiceDate
-                  invoiceNumber
-                  tentativeDeliveryDate
-                  trackingId
-                  quantity
-                  price
-                  status
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              payments {
-                items {
-                  id
-                  storeId
-                  userId
-                  orderId
-                  method
-                  amount
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          payments {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              orderId
-              method
-              amount
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          userAddress {
-            items {
-              id
-              userID
-              name
-              phone
-              email
-              country
-              state
-              city
-              pinCode
-              landmark
-              address
-              location
-              area
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          couponCodes {
-            items {
-              id
-              code
-              isForAll
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              discount
-              expirationDate
-              maxUse
-              totalUsed
-              isActive
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -92943,6 +92299,12 @@ export const bycodeisForAllCouponCode = /* GraphQL */ `
         maxUse
         totalUsed
         isActive
+        isFeatured
+        couponType
+        minOrderValue
+        maxDiscount
+        description
+        paymentMethod
         createdAt
         updatedAt
       }
@@ -92970,7 +92332,6 @@ export const byuserIdCouponCode = /* GraphQL */ `
       items {
         id
         code
-        isForAll
         storeId
         store {
           id
@@ -93859,7 +93220,6 @@ export const byuserIdCouponCode = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -93948,6 +93308,12 @@ export const byuserIdCouponCode = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -93961,6 +93327,12 @@ export const byuserIdCouponCode = /* GraphQL */ `
         maxUse
         totalUsed
         isActive
+        isFeatured
+        couponType
+        minOrderValue
+        maxDiscount
+        description
+        paymentMethod
         createdAt
         updatedAt
       }
@@ -93988,7 +93360,6 @@ export const searchCouponCodes = /* GraphQL */ `
       items {
         id
         code
-        isForAll
         storeId
         store {
           id
@@ -94877,7 +94248,6 @@ export const searchCouponCodes = /* GraphQL */ `
             items {
               id
               code
-              isForAll
               storeId
               store {
                 id
@@ -94966,6 +94336,12 @@ export const searchCouponCodes = /* GraphQL */ `
               maxUse
               totalUsed
               isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
               createdAt
               updatedAt
             }
@@ -94979,6 +94355,12 @@ export const searchCouponCodes = /* GraphQL */ `
         maxUse
         totalUsed
         isActive
+        isFeatured
+        couponType
+        minOrderValue
+        maxDiscount
+        description
+        paymentMethod
         createdAt
         updatedAt
       }
@@ -94999,10 +94381,5 @@ export const searchCouponCodes = /* GraphQL */ `
         }
       }
     }
-  }
-`;
-export const applyCoupon = /* GraphQL */ `
-  query ApplyCoupon($code: String) {
-    applyCoupon(code: $code)
   }
 `;

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { API } from "aws-amplify";
@@ -21,9 +21,10 @@ import { cartActions } from "~/store/cart";
 import Addresses from "~/components/common/addresses";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, coupons, order, updateCartOrder } = props;
+  const { cartList, user, emptyCart, appliedCoupon, order, updateCartOrder } =
+    props;
   const router = useRouter();
-  const [isFirst, setFirst] = useState(false);
+  const [isFirst, setFirst] = useState(true);
 
   const placeOrder = useCallback(
     async (e) => {
@@ -36,7 +37,10 @@ function Checkout(props) {
             input: {
               id: order?.id,
               userId: user?.username,
-              status: "PROCESSING",
+              status: "CONFIRMED",
+              totalDiscount: getCouponTotal(appliedCoupon),
+              totalShippingCharges: getShippingPrice(cartList),
+              orderDate: new Date().toISOString(),
             },
           },
           authMode,
@@ -48,7 +52,7 @@ function Checkout(props) {
               userId: user?.username || null,
               orderId: order?.id,
               method: isFirst ? "ONLINE" : "COD",
-              amount: getFinalPrice(cartList, coupons),
+              amount: getFinalPrice(cartList, appliedCoupon),
             },
           },
           authMode,
@@ -58,7 +62,7 @@ function Checkout(props) {
       await emptyCart();
       return false;
     },
-    [order, user, isFirst, coupons]
+    [order, user, isFirst, appliedCoupon]
   );
 
   const updateShippingAddress = useCallback(
@@ -81,6 +85,10 @@ function Checkout(props) {
       updateCartOrder({ ...response, shippingAddressId: id });
     },
     [order, user]
+  );
+
+  const codDisabled = useMemo(
+    () => appliedCoupon?.couponType === "ONLINE"[appliedCoupon]
   );
 
   return (
@@ -213,21 +221,23 @@ function Checkout(props) {
                                 : "Free"}
                             </td>
                           </tr>
-                          {!!coupons?.length && (
+                          {!!appliedCoupon && (
                             <tr className="summary-subtotal">
                               <td>
                                 <h4 className="summary-subtitle">Coupons</h4>
                                 <p>
-                                  {coupons.map((c) => (
-                                    <div style={{ display: "flex" }}>
-                                      <span className="mr-1">{c.code}</span>
-                                    </div>
-                                  ))}
+                                  <div style={{ display: "flex" }}>
+                                    <span className="mr-1">
+                                      {appliedCoupon.code}
+                                    </span>
+                                  </div>
                                 </p>
                               </td>
                               <td>
                                 <p className="summary-subtotal-price">
-                                  {`₹${toDecimal(getCouponTotal(coupons))}`}
+                                  {`₹${toDecimal(
+                                    getCouponTotal(appliedCoupon)
+                                  )}`}
                                 </p>
                               </td>
                             </tr>
@@ -238,7 +248,10 @@ function Checkout(props) {
                             </td>
                             <td className=" pt-0 pb-0">
                               <p className="summary-total-price ls-s text-primary">
-                                ₹{toDecimal(getFinalPrice(cartList, coupons))}
+                                ₹
+                                {toDecimal(
+                                  getFinalPrice(cartList, appliedCoupon)
+                                )}
                               </p>
                             </td>
                           </tr>
@@ -276,11 +289,11 @@ function Checkout(props) {
                           <div className="card-header">
                             <ALink
                               href="#"
-                              className={`text-body text-normal ls-m ${
+                              className={`text-body text-normal ls-m${
                                 !isFirst ? "collapse" : ""
                               }`}
                               onClick={() => {
-                                isFirst && setFirst(!isFirst);
+                                !codDisabled && isFirst && setFirst(!isFirst);
                               }}
                             >
                               Cash on delivery
@@ -350,7 +363,7 @@ function mapStateToProps(state) {
     order: state.cart.order,
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
-    coupons: state.cart.coupons || [],
+    appliedCoupon: state.cart.coupon,
   };
 }
 
