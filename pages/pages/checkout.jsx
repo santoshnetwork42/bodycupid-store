@@ -160,6 +160,7 @@ function Checkout(props) {
                   </h3>
                   <Addresses
                     selected={order?.shippingAddressId}
+                    autoSelect
                     onSelect={updateShippingAddress}
                   />
                 </div>

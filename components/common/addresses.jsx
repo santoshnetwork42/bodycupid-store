@@ -11,6 +11,7 @@ import {
   updateUserAddress,
   deleteUserAddress,
 } from "~/graphql/mutations";
+import AddressForm from "./addressForm";
 
 const modalStyles = {
   content: {
@@ -24,10 +25,11 @@ const modalStyles = {
   },
 };
 
-function Addresses({ user, selected, onSelect }) {
+function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
+  const [selected, setSelected] = useState(newSelected);
   const [addresses, setAddresses] = useState([]);
   const [isOpen, setOpen] = useState(false);
-  const [address, setAddress] = useSetState({
+  const [defaultAddress, setDefaultAddress] = useState({
     userID: user?.username,
     name: user?.attributes?.name,
     phone: user?.attributes?.phone_number,
@@ -42,6 +44,11 @@ function Addresses({ user, selected, onSelect }) {
     area: "",
   });
 
+  useEffect(() => {
+    if (!newSelected && autoSelect && addresses.length) {
+      setSelected(addresses[0]?.id);
+    }
+  }, [newSelected]);
   const getUserAddress = useCallback(async () => {
     const {
       data: { listUserAddresses: userAddresses },
@@ -54,63 +61,10 @@ function Addresses({ user, selected, onSelect }) {
   }, []);
 
   useEffect(() => {
-    if (!isOpen) {
-      setAddress({
-        userID: user?.username,
-        name: user?.attributes?.name,
-        phone: user?.attributes?.phone_number,
-        email: user?.attributes?.email,
-        country: "in",
-        state: "",
-        city: "",
-        pinCode: "",
-        landmark: "",
-        address: "",
-        location: "",
-        area: "",
-      });
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
     if (user) {
       getUserAddress();
     }
   }, [user]);
-
-  const addAddress = useCallback(
-    async (e) => {
-      e.preventDefault();
-      try {
-        if (user) {
-          const key = address.id ? "updateUserAddress" : "createUserAddress";
-          const {
-            data: { [key]: response },
-          } = await API.graphql({
-            query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: address },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
-          });
-          if (address.id) {
-            setAddresses(
-              addresses.map((a) => (a.id === address.id ? response : a))
-            );
-          } else {
-            setAddresses([...addAddress, response]);
-          }
-          onAddressClick(response);
-        } else {
-          setAddresses([{ ...address }]);
-          onAddressClick({ ...address });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-      setOpen(false);
-      return false;
-    },
-    [address, user, addresses, onAddressClick]
-  );
 
   const removeAddress = useCallback(
     async (id) => {
@@ -123,6 +77,13 @@ function Addresses({ user, selected, onSelect }) {
     },
     [addresses]
   );
+  const onAddress = (id,response) => {
+    if (id) {
+      setAddresses(addresses.map((a) => (a.id === id ? response : a)));
+    } else {
+      setAddresses([...addresses, response]);
+    }
+  };
 
   const onAddressClick = useCallback(
     (adr) => {
@@ -156,10 +117,11 @@ function Addresses({ user, selected, onSelect }) {
             onClick={() => onAddressClick(adr)}
           >
             <div
-              className={`card card-address ${adr.id === selected ? "selected" : ""
-                }`}
+              className={`card card-address ${
+                adr.id === selected ? "selected" : ""
+              }`}
             >
-              <div className="card-body pr-4 pl-4 pt-3">
+              <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">
                 <h5 className="card-title text-uppercase">{adr.name}</h5>
                 <p>
                   {adr.email}
@@ -178,7 +140,7 @@ function Addresses({ user, selected, onSelect }) {
                   href="#"
                   className="btn btn-link btn-secondary btn-underline"
                   onClick={() => {
-                    setAddress({ ...adr });
+                    setDefaultAddress({ ...adr });
                     setOpen(true);
                   }}
                 >
@@ -196,10 +158,19 @@ function Addresses({ user, selected, onSelect }) {
           </div>
         ))}
       </div>
-
-      <button onClick={() => setOpen(true)} className="btn btn-primary">
-        ADD NEW ADDRESS
-      </button>
+      {addresses.length > 0 ? (
+        <button onClick={() => setOpen(true)} className="btn btn-primary">
+          ADD NEW ADDRESS
+        </button>
+      ) : (
+        <AddressForm
+          setAddresses={setAddresses}
+          addresses={addresses}
+          user={user}
+          onAddressClick={onAddressClick}
+          onAddress={onAddress}
+        />
+      )}
 
       <Modal
         isOpen={isOpen}
@@ -209,154 +180,16 @@ function Addresses({ user, selected, onSelect }) {
         overlayClassName="address-modal-overlay"
         className="address-popup bg-img"
       >
-        <form className="form" onSubmit={addAddress}>
-          <div className="row">
-            <div className="col-lg-12  mb-6 mb-lg-0 pr-lg-4">
-              <h3 className="title title-simple text-left text-uppercase">
-                Shipping Address
-              </h3>
-              <div className="row">
-                <div className="col-xs-12">
-                  <label>Name *</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    required
-                    value={address.name}
-                    onChange={(e) => setAddress({ name: e.target.value })}
-                  />
-                </div>
-                <div className="col-xs-6">
-                  <label>Phone *</label>
-                  <div className="input-tel">
-                    <div className="prefix">
-                      +91
-                    </div>
-                    <input
-                      type="tel"
-                      className="form-control"
-                      name="phone"
-                      required
-                      value={address.phone}
-                      onChange={(e) => setAddress({ phone: e.target.value })}
-                    />
-                  </div>
-                </div>
-                <div className="col-xs-6">
-                  <label>Email Address *</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email-address"
-                    required
-                    value={address.email}
-                    onChange={(e) => setAddress({ email: e.target.value })}
-                  />
-                </div>
-                {/* <div className="col-xs-12">
-                  <label>Country / Region *</label>
-                  <div className="select-box">
-                    <select
-                      name="country"
-                      className="form-control"
-                      defaultValue="in"
-                      value={address.country}
-                      onChange={(e) =>
-                        setAddress({ country: e.target.value })
-                      }
-                    >
-                      <option value="in">India</option>
-                      <option value="us">United States (US)</option>
-                      <option value="uk"> United Kingdom</option>
-                      <option value="fr">France</option>
-                      <option value="aus">Austria</option>
-                    </select>
-                  </div>
-                </div> */}
-              </div>
-
-              <label>Street Address *</label>
-              <input
-                type="text"
-                className="form-control"
-                name="address1"
-                required
-                placeholder="House number and street name"
-                value={address.address}
-                onChange={(e) => setAddress({ address: e.target.value })}
-              />
-              <div className="row">
-                <div className="col-xs-6">
-                  <label>Landmark (Optional)</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="landmark"
-                    placeholder="Landmark (optional)"
-                    value={address.landmark}
-                    onChange={(e) => setAddress({ landmark: e.target.value })}
-                  />
-                </div>
-                <div className="col-xs-6">
-                  <label>Area (Optional)</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="address2"
-                    placeholder="Area (optional)"
-                    value={address.area}
-                    onChange={(e) => setAddress({ area: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-xs-6">
-                  <label>Town / City *</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="city"
-                    required
-                    value={address.city}
-                    onChange={(e) => setAddress({ city: e.target.value })}
-                  />
-                </div>
-                <div className="col-xs-6">
-                  <label>State *</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="state"
-                    required
-                    value={address.state}
-                    onChange={(e) => setAddress({ state: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-xs-6">
-                  <label>Pincode *</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="pincode"
-                    required
-                    value={address.pinCode}
-                    onChange={(e) => setAddress({ pinCode: e.target.value })}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="btn btn-dark btn-rounded btn-order"
-            >
-              Add Address
-            </button>
-          </div>
-        </form>
+        <AddressForm
+          defaultAddress={defaultAddress}
+          setOpen={setOpen}
+          setAddresses={setAddresses}
+          addresses={addresses}
+          user={user}
+          isOpen={isOpen}
+          onAddressClick={onAddressClick}
+          onAddress={onAddress}
+        />
       </Modal>
     </div>
   );
