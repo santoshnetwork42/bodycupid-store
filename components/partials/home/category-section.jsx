@@ -27,7 +27,7 @@ function CategorySection({ categories = [] }) {
                       <LazyLoadImage
                         src={getPublicImageURL(category.imageUrl)}
                         alt={category.name}
-                        effect="opacity; transform"
+                        effect="opacity"
                         width="auto"
                         height={280}
                       />

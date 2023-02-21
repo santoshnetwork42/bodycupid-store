@@ -348,6 +348,10 @@
     &::after {
         content: none !important;
     }
+
+    &.btn-link {
+        background-color: transparent !important;
+    }
 }
 .btn {
     &.btn-rounded {

@@ -15,7 +15,7 @@ import BrandSection from "~/components/partials/home/brand-section";
 import BlogSection from "~/components/partials/home/blog-section";
 import SmallCollection from "~/components/partials/product/small-collection";
 
-import { listProducts, listProductCategories } from "~/graphql/queries";
+import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
 
 function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -30,16 +30,16 @@ function HomePage() {
   useEffect(() => {
     (async function () {
       await Promise.all([
-        API.graphql(graphqlOperation(listProducts))
+        API.graphql(graphqlOperation(getHomePageProducts, { limit: 10 }))
           .then((response) => {
-            setProducts(response.data.listProducts.items);
+            setProducts(response.data.searchProducts.items);
           })
           .catch((err) => {
             console.log(err);
           }),
-        API.graphql(graphqlOperation(listProductCategories, { limit: 4 }))
+        API.graphql(graphqlOperation(getHomePageCategories, { limit: 4 }))
           .then((response) => {
-            setCategories(response.data.listProductCategories.items);
+            setCategories(response.data.searchProductSubCategories.items);
           })
           .catch((err) => {
             console.log(err);

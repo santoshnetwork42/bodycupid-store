@@ -6,7 +6,16 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "find:unused": "next-unused"
+  },
+  "next-unused": {
+    "alias": {},
+    "include": [
+      "component"
+    ],
+    "exclude": [],
+    "entrypoints": []
   },
   "dependencies": {
     "@apollo/client": "^3.4.0",
@@ -30,6 +39,7 @@
     "next-apollo": "^5.0.4",
     "next-redux-saga": "^4.1.2",
     "next-redux-wrapper": "^7.0.5",
+    "next-unused": "0.0.6",
     "node-fetch": "^3.0.0",
     "react": "^16.14.0",
     "react-awesome-reveal": "^3.8.1",

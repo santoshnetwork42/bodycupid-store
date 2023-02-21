@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import imagesLoaded from "imagesloaded";
 import { API, graphqlOperation } from "aws-amplify";
 
-import { byslugProduct } from "~/graphql/queries";
+import { getQuickViewProduct } from "~/graphql/api";
 import OwlCarousel from "~/components/features/owl-carousel";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import { modalActions } from "~/store/modal";
@@ -44,7 +44,7 @@ function Quickview(props) {
               items: [response],
             },
           },
-        } = await API.graphql(graphqlOperation(byslugProduct, { slug }));
+        } = await API.graphql(graphqlOperation(getQuickViewProduct, { slug }));
         setProduct(response);
       })();
     }
@@ -77,7 +77,7 @@ function Quickview(props) {
     }, 330);
   };
 
-  const discount = !!(product.listingPrice && product.price)
+  const discount = !!(product && product.listingPrice && product.price)
     ? parseInt(
         ((product.listingPrice - product.price) * 100) / product.listingPrice,
         10
@@ -99,34 +99,27 @@ function Quickview(props) {
           <div className="col-md-6">
             <div className="product-gallery mb-md-0 pb-0">
               <div className="product-label-group">
-                {product.isNew ? (
+                {product?.isNew && (
                   <label className="product-label label-new">New</label>
-                ) : (
-                  ""
                 )}
-                {product.isFeatured ? (
+                {product?.isFeatured && (
                   <label className="product-label label-top">Top</label>
-                ) : (
-                  ""
                 )}
-                {discount > 0 ? (
-                  product.variants.items.length === 0 ? (
+                {discount > 0 &&
+                  (product?.variants.items.length === 0 ? (
                     <label className="product-label label-sale">
                       {discount}% OFF
                     </label>
                   ) : (
                     <label className="product-label label-sale">Sale</label>
-                  )
-                ) : (
-                  ""
-                )}
+                  ))}
               </div>
 
               <OwlCarousel
                 adClass="product-single-carousel owl-theme owl-nav-inner"
                 options={mainSlider3}
               >
-                {product.images.items.map((item) => (
+                {product?.images.items.map((item) => (
                   <Magnifier
                     key={item.id}
                     imageSrc={getPublicImageURL(item.imageKey)}
@@ -143,7 +136,13 @@ function Quickview(props) {
           </div>
 
           <div className="col-md-6">
-            <DetailOne data={product} adClass="scrollable pr-3" isNav={false} />
+            {product && (
+              <DetailOne
+                data={product}
+                adClass="scrollable pr-3"
+                isNav={false}
+              />
+            )}
           </div>
         </div>
 

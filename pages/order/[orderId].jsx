@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { getOrder } from "~/graphql/queries";
+import { getOrder } from "~/graphql/api";
 
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
-import { useEffect, useState } from "react";
 
 function Order(props) {
   const { user } = props;
@@ -99,7 +99,7 @@ function Order(props) {
           <div className="order-results">
             <div className="overview-item">
               <span>Order number:</span>
-              <strong>{order?.id}</strong>
+              <strong>{order?.code || order?.id }</strong>
             </div>
             <div className="overview-item">
               <span>Status:</span>

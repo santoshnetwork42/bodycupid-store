@@ -305,16 +305,35 @@ export const getShippingPrice = (cartItems = []) => {
 /**
  * utils to get total coupon amount in cart.
  */
-export const getCouponTotal = (coupons = []) => {
-    return coupons.reduce((a, b) => a + b.discount, 0);
+export const getCouponTotal = (coupon, cartItems = []) => {
+    if (coupon) {
+        const total = getTotalPrice(cartItems);
+        const { couponType, discount, minOrderValue, maxDiscount } = coupon;
+        if (!minOrderValue || minOrderValue > total) {
+            let amount = discount;
+            if (couponType === "PERCENTAGE") {
+                amount = total * discount / 100;
+            } else if (couponType === "BOGO") {
+                amount = 0;
+                if (cartItems.length > 1) {
+                    amount = cartItems.reduce((a, b) => {
+                        if (!a) return b.price;
+                        return Math.min(a, b.price);
+                    }, 0);
+                }
+            }
+            return maxDiscount ? Math.min(amount, maxDiscount) : amount;
+        }
+    }
+    return 0;
 }
 
 /**
  * utils to get total Price of products in cart with shipping.
  */
-export const getFinalPrice = (cartItems = [], coupons = []) => {
+export const getFinalPrice = (cartItems = [], coupon) => {
     const total = getTotalPrice(cartItems);
-    const discount = getCouponTotal(coupons);
+    const discount = getCouponTotal(coupon, cartItems);
     const shipping = getShippingPrice(cartItems);
     return total + shipping - discount;
 }

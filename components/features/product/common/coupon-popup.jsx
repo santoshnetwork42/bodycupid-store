@@ -6,7 +6,7 @@ export default function CouponPopup(props) {
   return (
     <div className="minipopup-area">
       <div className="minipopup-box show" style={{ top: "0" }}>
-        <p className="minipopup-title">{coupon.code} Successfully added.</p>
+        <p className="minipopup-title">{coupon.code} successfully applied.</p>
       </div>
     </div>
   );

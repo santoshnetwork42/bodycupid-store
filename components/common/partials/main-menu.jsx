@@ -3,17 +3,17 @@ import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { listProductCategories } from "~/graphql/queries";
+import { getMenuCategories } from "~/graphql/api";
 
 function MainMenu() {
   const { pathname } = useRouter();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listProductCategories, { limit: 4 })).then(
+    API.graphql(graphqlOperation(getMenuCategories)).then(
       ({
         data: {
-          listProductCategories: { items },
+          searchProductCategories: { items },
         },
       }) => {
         setCategories(items);
@@ -31,11 +31,25 @@ function MainMenu() {
         {categories.map((category) => (
           <li
             key={category.id}
-            className={
-              pathname.includes(`/categories/${category.slug}`) ? "active" : ""
-            }
+            className={`
+              ${
+                pathname.includes(`/categories/${category.slug}`)
+                  ? "active"
+                  : ""
+              }
+              ${category?.subCategory?.items?.length ? "d-xl-show submenu" : ""}
+            `}
           >
             <ALink href={`/categories/${category.slug}`}>{category.name}</ALink>
+            {!!category?.subCategory?.items?.length && (
+              <ul>
+                {category.subCategory.items.map((item) => (
+                  <li key={`sub-categories-${item.id}`}>
+                    <ALink href={"/categories/" + item.slug}>{item.name}</ALink>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
 

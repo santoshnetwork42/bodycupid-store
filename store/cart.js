@@ -22,6 +22,7 @@ const actionTypes = {
 const initialState = {
     order: null,
     data: [],
+    coupon: null,
 }
 
 function cartReducer(state = initialState, action) {
@@ -69,6 +70,12 @@ function cartReducer(state = initialState, action) {
         case actionTypes.UPDATE_ORDER:
             return { ...state, order: { ...state.order, ...action.payload } };
 
+        case actionTypes.APPLY_COUPONS:
+            return { ...state, coupon: action.payload.coupon };
+
+        case actionTypes.REMOVE_COUPON:
+            return { ...state, coupon: null };
+
         default:
             return state;
     }
@@ -79,7 +86,7 @@ export const cartActions = {
     removeFromCart: product => ({ type: actionTypes.REMOVE_FROM_CART, payload: { product } }),
     updateCart: products => ({ type: actionTypes.UPDATE_CART, payload: { products } }),
     applyCoupon: coupon => ({ type: actionTypes.APPLY_COUPONS, payload: { coupon } }),
-    removeCoupon: couponId => ({ type: actionTypes.REMOVE_COUPON, payload: { coupon: couponId } }),
+    removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
     emptyCart: () => ({ type: actionTypes.REFRESH_STORE }),
     updateOrder: order => ({ type: actionTypes.UPDATE_ORDER, payload: { ...order } }),
 };
@@ -98,6 +105,18 @@ export function* cartSaga() {
             },
         });
         yield put({ type: actionTypes.UPDATE_ORDER, payload: { CouponCodeId: id } });
+    })
+
+    yield takeEvery(actionTypes.REMOVE_COUPON, function* saga() {
+        const { cart } = yield select();
+        const { order } = cart;
+        yield call([API, API.graphql], {
+            query: updateOrder,
+            variables: {
+                input: { id: order.id, CouponCodeId: null },
+            },
+        });
+        yield put({ type: actionTypes.UPDATE_ORDER, payload: { CouponCodeId: null } });
     })
 
     yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {

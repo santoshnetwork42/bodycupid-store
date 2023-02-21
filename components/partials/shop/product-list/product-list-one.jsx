@@ -13,9 +13,10 @@ import Pagination from "~/components/features/pagination";
 
 // import Api, { baseUrl } from '~/api';
 
-import { byslugProductCategory } from "~/graphql/queries";
+import { byslugProductSubCategory, searchProducts } from "~/graphql/queries";
 
 function ProductListOne(props) {
+  const [category, setCategory] = useState(null);
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(1);
@@ -38,16 +39,17 @@ function ProductListOne(props) {
 
   useEffect(() => {
     API.graphql(
-      graphqlOperation(byslugProductCategory, { slug: query.category })
+      graphqlOperation(byslugProductSubCategory, { slug: query.category })
     )
       .then(
         ({
           data: {
-            byslugProductCategory: {
+            byslugProductSubCategory: {
               items: [category],
             },
           },
         }) => {
+          setCategory(category);
           setProducts(category.products.items);
           setLoading(false);
         }
@@ -55,6 +57,47 @@ function ProductListOne(props) {
       .catch((err) => {
         console.log(err);
       });
+  }, [query.category]);
+
+  useEffect(() => {
+    if (category) {
+      setLoading(true);
+      const filter = { categoryId: { eq: category.id } };
+      if (
+        !Number.isNaN(Number(query.min_price)) &&
+        !Number.isNaN(Number(query.max_price)) &&
+        Number(query.min_price)
+      ) {
+        filter.price = {
+          range: [Number(query.min_price), Number(query.max_price)],
+        };
+      } else if (
+        !Number.isNaN(Number(query.min_price)) &&
+        Number(query.min_price)
+      ) {
+        filter.price = { gte: Number(query.min_price) };
+      } else if (
+        !Number.isNaN(Number(query.max_price)) &&
+        Number(query.max_price)
+      ) {
+        filter.price = { lte: Number(query.max_price) };
+      }
+
+      API.graphql(graphqlOperation(searchProducts, { filter }))
+        .then(
+          ({
+            data: {
+              searchProducts: { items: response },
+            },
+          }) => {
+            setProducts(response);
+            setLoading(false);
+          }
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [query]);
 
   return (

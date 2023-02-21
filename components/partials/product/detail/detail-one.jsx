@@ -40,9 +40,11 @@ function DetailOne(props) {
 
   if (product && product.variants && product.variants.items.length > 0) {
     // if (product.variants.items[0].size)
-    product.variants.items.forEach((item) => {
-      sizes.push({ name: `${item.weight} ${item.weightUnit}`, value: item.id });
-    });
+    product.variants.items
+      .sort((a, b) => a.position - b.position)
+      .forEach((item) => {
+        sizes.push({ name: item.title, value: item.id });
+      });
 
     // if (product.variants.items[0].color) {
     //   product.variants.items.forEach((item) => {
@@ -212,18 +214,25 @@ function DetailOne(props) {
       <h2 className="product-name">{product.title}</h2>
 
       <div className="product-meta">
-        {/* SKU: <span className='product-sku'>{product.sku}</span>
-                CATEGORIES: <span className='product-brand'>
-                    {
-                        product.product_categories.map((item, index) =>
-                            <React.Fragment key={item.name + '-' + index}>
-                                <ALink href={{ pathname: '/shop', query: { category: item.slug } }}>
-                                    {item.name}
-                                </ALink>
-                                {index < product.product_categories.length - 1 ? ', ' : ''}
-                            </React.Fragment>
-                        )}
-                </span> */}
+        SKU: <span className="product-sku">{product.sku}</span>
+        {product.category && (
+          <>
+            CATEGORIES:{" "}
+            <span className="product-brand">
+              <React.Fragment key={product.category.id}>
+                <ALink
+                  href={{
+                    pathname: "/categories",
+                    query: { category: product.category.slug },
+                  }}
+                >
+                  {product.category.name}
+                </ALink>
+                {/* {index < product.product_categories.length - 1 ? ", " : ""} */}
+              </React.Fragment>
+            </span>
+          </>
+        )}
       </div>
 
       <div className="product-price mb-2">
@@ -308,7 +317,7 @@ function DetailOne(props) {
                 >
                   <option value="null">Choose an option</option>
                   {sizes.map((item) => (
-                    <option value={item.name} key={"size-" + item.name}>
+                    <option value={item.value} key={item.value}>
                       {item.name}
                     </option>
                   ))}
