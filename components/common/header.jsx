@@ -35,7 +35,6 @@ export default function Header(props) {
       <div className="header-top">
         <div className="container">
           <div className="header-left">
-            <p className="welcome-msg">Welcome to Wow store!</p>
           </div>
           <div className="header-right">
             {/* <div className="dropdown">
