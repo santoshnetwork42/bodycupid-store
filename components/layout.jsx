@@ -75,7 +75,7 @@ function Layout({ children, closeQuickview, closeLogin }) {
 
         <Footer />
 
-        <StickyFooter />
+        <></>
       </div>
 
       <ALink
