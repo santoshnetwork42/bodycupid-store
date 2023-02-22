@@ -592,3 +592,226 @@ export const getOrder = /* GraphQL */ `
     }
   }
 `;
+export const searchProductSubCategories = /* GraphQL */ `
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
+  ) {
+    searchProductSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+
+        categoryID
+        category {
+          id
+          name
+          description
+          slug
+          subCategory {
+            items {
+              id
+              name
+              categoryID
+              category {
+                id
+                name
+                slug
+              }
+              slug
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        slug
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const getBasicSubCategory = /* GraphQL */ `
+  query ByslugProductSubCategory(
+    $slug: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductSubCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byslugProductSubCategory(
+      slug: $slug
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
+
+export const getBasicCategory = /* GraphQL */ `
+  query ByslugProductCategory(
+    $slug: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byslugProductCategory(
+      slug: $slug
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
+
+export const findProducts = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $sort: [SearchableProductSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductAggregationInput]
+  ) {
+    searchProducts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        title
+        brand
+        vendor
+        categoryId
+        subCategoryId
+        subCategory {
+          id
+          name
+          slug
+        }
+        isFeatured
+        category {
+          id
+          name
+          slug
+        }
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          nextToken
+        }
+        images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            rating
+          }
+        }
+      }
+      nextToken
+      total
+    }
+  }
+`;

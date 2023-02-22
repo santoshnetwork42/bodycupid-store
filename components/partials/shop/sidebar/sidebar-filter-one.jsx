@@ -75,14 +75,14 @@ function SidebarFilterOne(props) {
     e.preventDefault();
     let url = router.pathname.replace("[grid]", query.grid);
     let arr = [
-      `min_price=${filterPrice.min}`,
-      `max_price=${filterPrice.max}`,
+      `minprice=${filterPrice.min}`,
+      `maxprice=${filterPrice.max}`,
       "page=1",
     ];
     for (let key in query) {
       if (
-        key !== "min_price" &&
-        key !== "max_price" &&
+        key !== "minprice" &&
+        key !== "maxprice" &&
         key !== "page" &&
         key !== "grid"
       )
@@ -380,7 +380,7 @@ function SidebarFilterOne(props) {
               </Card>
             </div>
 
-            <div className="widget widget-collapsible">
+            {/* <div className="widget widget-collapsible">
               <Card
                 title="<h3 class='widget-title'>Size<span class='toggle-btn p-0 parse-content'></span></h3>"
                 type="parse"
@@ -412,7 +412,7 @@ function SidebarFilterOne(props) {
                   ))}
                 </ul>
               </Card>
-            </div>
+            </div> */}
 
             {/* <div className="widget widget-collapsible">
               <Card

@@ -7,89 +7,101 @@ import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import Pagination from "~/components/features/pagination";
+import {
+  getBasicCategory,
+  getBasicSubCategory,
+  findProducts,
+} from "~/graphql/api";
 
-// import withApollo from '~/server/apollo';
-// import { GET_PRODUCTS } from '~/server/queries';
-
-// import Api, { baseUrl } from '~/api';
-
-import { byslugProductSubCategory, searchProducts } from "~/graphql/queries";
+const gridClasses = {
+  3: "cols-2 cols-sm-3",
+  4: "cols-2 cols-sm-3 cols-md-4",
+  5: "cols-2 cols-sm-3 cols-md-4 cols-xl-5",
+  6: "cols-2 cols-sm-3 cols-md-4 cols-xl-6",
+  7: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-7",
+  8: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-8",
+};
 
 function ProductListOne(props) {
   const [category, setCategory] = useState(null);
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState();
   const [totalPage, setTotalPage] = useState(1);
   const { itemsPerRow = 3, type = "left", isToolbox = true } = props;
   const router = useRouter();
   const query = router.query;
-  // const [ getProducts, { data, loading, error } ] = useLazyQuery( GET_PRODUCTS );
-  const gridClasses = {
-    3: "cols-2 cols-sm-3",
-    4: "cols-2 cols-sm-3 cols-md-4",
-    5: "cols-2 cols-sm-3 cols-md-4 cols-xl-5",
-    6: "cols-2 cols-sm-3 cols-md-4 cols-xl-6",
-    7: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-7",
-    8: "cols-2 cols-sm-3 cols-md-4 cols-lg-5 cols-xl-8",
-  };
-  const perPage = query.per_page ? parseInt(query.per_page) : 12;
-  // const totalPage = data ? parseInt(data.products.total / perPage) + (data.products.total % perPage ? 1 : 0) : 1;
+  const { limit, minprice, maxprice } = query;
+
+  const perPage = limit ? parseInt(limit) : 12;
   const page = query.page ? query.page : 1;
   const gridType = query.type ? query.type : "grid";
 
   useEffect(() => {
+    setLoading(true);
+    const api = query.subcategory ? getBasicSubCategory : getBasicCategory;
+    const apiSearch = query.subcategory
+      ? "byslugProductSubCategory"
+      : "byslugProductCategory";
     API.graphql(
-      graphqlOperation(byslugProductSubCategory, { slug: query.category })
+      graphqlOperation(api, {
+        slug: query.subcategory || query.category,
+      })
     )
       .then(
         ({
           data: {
-            byslugProductSubCategory: {
+            [apiSearch]: {
               items: [category],
             },
           },
         }) => {
           setCategory(category);
-          setProducts(category.products.items);
-          setLoading(false);
         }
       )
       .catch((err) => {
-        console.log(err);
+        console.log("err", err);
       });
-  }, [query.category]);
+  }, [query.category, query.subcategory]);
+
+  useEffect(() => {
+    if (products && products.length) {
+      setTotalPage(Math.ceil(total / perPage));
+    }
+  }, [products]);
 
   useEffect(() => {
     if (category) {
-      setLoading(true);
-      const filter = { categoryId: { eq: category.id } };
+      const apiSearch = query.subcategory ? "subCategoryId" : "categoryId";
+      const filter = { [apiSearch]: { eq: category.id } };
       if (
-        !Number.isNaN(Number(query.min_price)) &&
-        !Number.isNaN(Number(query.max_price)) &&
-        Number(query.min_price)
+        !Number.isNaN(Number(query.minprice)) &&
+        !Number.isNaN(Number(query.maxprice)) &&
+        Number(query.minprice)
       ) {
         filter.price = {
-          range: [Number(query.min_price), Number(query.max_price)],
+          range: [Number(query.minprice), Number(query.maxprice)],
         };
       } else if (
-        !Number.isNaN(Number(query.min_price)) &&
-        Number(query.min_price)
+        !Number.isNaN(Number(query.minprice)) &&
+        Number(query.minprice)
       ) {
-        filter.price = { gte: Number(query.min_price) };
+        filter.price = { gte: Number(query.minprice) };
       } else if (
-        !Number.isNaN(Number(query.max_price)) &&
-        Number(query.max_price)
+        !Number.isNaN(Number(query.maxprice)) &&
+        Number(query.maxprice)
       ) {
-        filter.price = { lte: Number(query.max_price) };
+        filter.price = { lte: Number(query.maxprice) };
       }
 
-      API.graphql(graphqlOperation(searchProducts, { filter }))
+      API.graphql(graphqlOperation(findProducts, { filter, limit: perPage }))
         .then(
           ({
             data: {
-              searchProducts: { items: response },
+              searchProducts: { items: response, total },
             },
           }) => {
+            setTotal(total);
             setProducts(response);
             setLoading(false);
           }
@@ -98,7 +110,7 @@ function ProductListOne(props) {
           console.log(err);
         });
     }
-  }, [query]);
+  }, [category?.id, perPage, minprice, maxprice, limit]);
 
   return (
     <>
@@ -147,17 +159,24 @@ function ProductListOne(props) {
       ) : (
         ""
       )}
+      {products ? (
+        <div className="toolbox toolbox-pagination">
+          {products && (
+            <p className="show-info">
+              Showing{" "}
+              <span>
+                {perPage * (page - 1) + 1} - {Math.min(perPage * page, total)}{" "}
+                of {total}
+              </span>
+              Products
+            </p>
+          )}
 
-      {/* {
-                products ?
-                    <div className="toolbox toolbox-pagination">
-                        {
-                            products && <p className="show-info">Showing <span>{perPage * (page - 1) + 1} - {Math.min(perPage * page, data.products.total)} of {data.products.total}</span>Products</p>
-                        }
-
-                        <Pagination totalPage={totalPage} />
-                    </div> : ''
-            } */}
+          <Pagination totalPage={totalPage} />
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 }

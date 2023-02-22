@@ -4,7 +4,13 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 
 function Pagination(props) {
-  const { maxShowCounts = 7, totalPage = 1, distance = 2 } = props;
+  const {
+    maxShowCounts = 7,
+    totalPage = 1,
+    distance = 2,
+    onNextClick,
+    onPrevClick,
+  } = props;
 
   const router = useRouter();
   const query = router.query;
@@ -35,6 +41,7 @@ function Pagination(props) {
                   : "#"
               }
               scroll={false}
+              onClick={onPrevClick}
             >
               <i className="d-icon-arrow-left"></i>Prev
             </ALink>
@@ -122,6 +129,7 @@ function Pagination(props) {
                     }
                   : "#"
               }
+              onClick={onNextClick}
               scroll={false}
             >
               Next<i className="d-icon-arrow-right"></i>
