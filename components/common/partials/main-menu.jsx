@@ -28,6 +28,13 @@ function MainMenu() {
           <ALink href="/">Home</ALink>
         </li>
 
+        <li
+          id="all"
+          className={pathname === "/collections/all" ? "active" : ""}
+        >
+          <ALink href="/collections/all">All Products</ALink>
+        </li>
+
         {categories.map((category) => (
           <li
             key={category.id}
