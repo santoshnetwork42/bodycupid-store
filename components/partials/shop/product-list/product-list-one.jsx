@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 // import { useLazyQuery } from '@apollo/react-hooks';
@@ -6,7 +6,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
-import Pagination from "~/components/features/pagination";
+import Pagination from "~/components/features/token-pagination";
 import {
   getBasicCategory,
   getBasicSubCategory,
@@ -23,100 +23,116 @@ const gridClasses = {
 };
 
 function ProductListOne(props) {
+  const { itemsPerRow = 3, type = "left", isToolbox = true } = props;
+
+  const [token, setToken] = useState(null);
   const [category, setCategory] = useState(null);
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState();
-  const [totalPage, setTotalPage] = useState(1);
-  const { itemsPerRow = 3, type = "left", isToolbox = true } = props;
   const router = useRouter();
-  const query = router.query;
-  const { limit, minprice, maxprice } = query;
 
+  const {
+    limit,
+    minprice,
+    maxprice,
+    type: gridType = "grid",
+    category: categorySlug,
+    subcategory: subCategorySlug,
+  } = router.query;
   const perPage = limit ? parseInt(limit) : 12;
-  const page = query.page ? query.page : 1;
-  const gridType = query.type ? query.type : "grid";
+
+  const filters = useMemo(() => {
+    if (category || categorySlug === "all") {
+      const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
+      const filter = category ? { [apiSearchKey]: { eq: category.id } } : {};
+      if (
+        !Number.isNaN(Number(minprice)) &&
+        !Number.isNaN(Number(maxprice)) &&
+        Number(minprice)
+      ) {
+        filter.price = {
+          range: [Number(minprice), Number(maxprice)],
+        };
+      } else if (!Number.isNaN(Number(minprice)) && Number(minprice)) {
+        filter.price = { gte: Number(minprice) };
+      } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
+        filter.price = { lte: Number(maxprice) };
+      }
+      return { filter, limit: perPage };
+    }
+    return null;
+  }, [perPage, maxprice, minprice, category?.id]);
 
   useEffect(() => {
     setLoading(true);
-    const api = query.subcategory ? getBasicSubCategory : getBasicCategory;
-    const apiSearch = query.subcategory
-      ? "byslugProductSubCategory"
-      : "byslugProductCategory";
-    API.graphql(
-      graphqlOperation(api, {
-        slug: query.subcategory || query.category,
-      })
-    )
-      .then(
-        ({
-          data: {
-            [apiSearch]: {
-              items: [category],
-            },
-          },
-        }) => {
-          setCategory(category);
-        }
+    if (categorySlug !== "all") {
+      const api = subCategorySlug ? getBasicSubCategory : getBasicCategory;
+      const apiSearch = subCategorySlug
+        ? "byslugProductSubCategory"
+        : "byslugProductCategory";
+      API.graphql(
+        graphqlOperation(api, { slug: subCategorySlug || categorySlug })
       )
-      .catch((err) => {
-        console.log("err", err);
-      });
-  }, [query.category, query.subcategory]);
-
-  useEffect(() => {
-    if (products && products.length) {
-      setTotalPage(Math.ceil(total / perPage));
-    }
-  }, [products]);
-
-  useEffect(() => {
-    if (category) {
-      const apiSearch = query.subcategory ? "subCategoryId" : "categoryId";
-      const filter = { [apiSearch]: { eq: category.id } };
-      if (
-        !Number.isNaN(Number(query.minprice)) &&
-        !Number.isNaN(Number(query.maxprice)) &&
-        Number(query.minprice)
-      ) {
-        filter.price = {
-          range: [Number(query.minprice), Number(query.maxprice)],
-        };
-      } else if (
-        !Number.isNaN(Number(query.minprice)) &&
-        Number(query.minprice)
-      ) {
-        filter.price = { gte: Number(query.minprice) };
-      } else if (
-        !Number.isNaN(Number(query.maxprice)) &&
-        Number(query.maxprice)
-      ) {
-        filter.price = { lte: Number(query.maxprice) };
-      }
-
-      API.graphql(graphqlOperation(findProducts, { filter, limit: perPage }))
         .then(
           ({
             data: {
-              searchProducts: { items: response, total },
+              [apiSearch]: {
+                items: [response],
+              },
             },
           }) => {
+            setCategory(response);
+          }
+        )
+        .catch((err) => {
+          console.log("err", err);
+        });
+    }
+  }, [categorySlug, subCategorySlug]);
+
+  const getProducts = useCallback(
+    (reset) => {
+      API.graphql(
+        graphqlOperation(findProducts, {
+          ...filters,
+          nextToken: reset ? null : token,
+        })
+      )
+        .then(
+          ({
+            data: {
+              searchProducts: { items: response, total, nextToken },
+            },
+          }) => {
+            if (reset) {
+              setProducts(response);
+            } else {
+              setProducts([...products, ...response]);
+            }
+            setToken(nextToken);
             setTotal(total);
-            setProducts(response);
             setLoading(false);
           }
         )
         .catch((err) => {
           console.log(err);
         });
-    }
-  }, [category?.id, perPage, minprice, maxprice, limit]);
+    },
+    [filters, products, token]
+  );
 
-  return (
-    <>
-      {isToolbox ? <ToolBox type={type} /> : ""}
-      {loading &&
-        (gridType === "grid" ? (
+  useEffect(() => {
+    if (filters) {
+      getProducts(true);
+    }
+  }, [filters]);
+
+  if (loading) {
+    return (
+      <>
+        <br />
+        {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
               <div
@@ -134,49 +150,41 @@ function ProductListOne(props) {
               ></div>
             ))}
           </div>
-        ))}
+        )}
+      </>
+    );
+  }
+
+  return (
+    <>
+      {isToolbox && <ToolBox type={type} />}
 
       {gridType === "grid" ? (
         <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
-          {products &&
-            products.map((item) => (
-              <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo product={item} adClass="" />
-              </div>
-            ))}
+          {products.map((item) => (
+            <div className="product-wrap" key={"shop-" + item.id}>
+              <ProductTwo product={item} adClass="" />
+            </div>
+          ))}
         </div>
       ) : (
         <div className="product-lists product-wrapper">
-          {products &&
-            products.map((item) => (
-              <ProductEight product={item} key={"shop-list-" + item.id} />
-            ))}
+          {products.map((item) => (
+            <ProductEight product={item} key={"shop-list-" + item.id} />
+          ))}
         </div>
       )}
 
-      {products && products.length === 0 ? (
+      {!total && (
         <p className="ml-1">No products were found matching your selection.</p>
-      ) : (
-        ""
       )}
-      {products ? (
-        <div className="toolbox toolbox-pagination">
-          {products && (
-            <p className="show-info">
-              Showing{" "}
-              <span>
-                {perPage * (page - 1) + 1} - {Math.min(perPage * page, total)}{" "}
-                of {total}
-              </span>
-              Products
-            </p>
-          )}
 
-          <Pagination totalPage={totalPage} />
-        </div>
-      ) : (
-        ""
-      )}
+      <Pagination
+        onPage={() => getProducts(false)}
+        total={total}
+        loaded={products?.length}
+        nextToken={token}
+      />
     </>
   );
 }

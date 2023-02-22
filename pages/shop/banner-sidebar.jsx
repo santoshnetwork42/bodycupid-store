@@ -31,7 +31,7 @@ function ShopBannerSidebar() {
                         <SidebarFilterOne type="banner" />
 
                         <div className="col-lg-9 main-content">
-                            <div className="shop-banner-default banner mb-1" style={{ backgroundImage: "url('/images/categories/banner.jpg')", backgroundColor: "#f2f2f3" }}>
+                            <div className="shop-banner-default banner mb-1" style={{ backgroundImage: "url('/images/shop/banner.jpg')", backgroundColor: "#f2f2f3" }}>
                                 <div className="banner-content">
                                     <h4 className="banner-subtitle font-weight-bold ls-normal text-uppercase text-white">Wow Shop</h4>
                                     <h1 className="banner-title font-weight-bold text-white">Banner with Sidebar</h1>

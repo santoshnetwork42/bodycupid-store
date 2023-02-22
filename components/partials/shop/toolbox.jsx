@@ -25,10 +25,9 @@ export default function ToolBox(props) {
   const onChangeAttri = (e, attri) => {
     e.preventDefault();
     let url = router.pathname.replace("[grid]", query.grid);
-    let arr = [`${attri}=${e.target.value}`, "page=1"];
+    let arr = [`${attri}=${e.target.value}`];
     for (let key in query) {
-      if (key !== attri && key !== "page" && key !== "grid")
-        arr.push(key + "=" + query[key]);
+      if (key !== attri && key !== "grid") arr.push(key + "=" + query[key]);
     }
     url = url + "?" + arr.join("&");
     router.push(url);
@@ -125,7 +124,7 @@ export default function ToolBox(props) {
     >
       {type === "horizontal" ? <SidebarFilterThree /> : ""}
       <div className="toolbox-left">
-        {type === "left" ||
+        {/* {type === "left" ||
         type === "off-canvas" ||
         type === "navigation" ||
         type === "horizontal" ? (
@@ -178,7 +177,7 @@ export default function ToolBox(props) {
             <option value="price-high">Sort forward price high</option>
             <option value="">Clear custom sort</option>
           </select>
-        </div>
+        </div> */}
       </div>
       <div className="toolbox-right">
         <div className="toolbox-item toolbox-show select-box text-dark">

@@ -70,7 +70,7 @@ function MobileMenu({ user }) {
   function onSubmitSearchForm(e) {
     e.preventDefault();
     router.push({
-      pathname: "/categories",
+      pathname: "/collections",
       query: {
         search: search,
       },
@@ -112,12 +112,12 @@ function MobileMenu({ user }) {
           </li>
 
           <li>
-            <Card title="categories" type="mobile" url="/categories">
+            <Card title="categories" type="mobile" url="/collections/all">
               <ul>
                 {categories.map((category) => (
                   <li key={category.id}>
                     {!category.subCategory.items.length && (
-                      <ALink href={"/categories/" + category.slug}>
+                      <ALink href={"/collections/" + category.slug}>
                         {category.name}
                       </ALink>
                     )}
@@ -126,7 +126,14 @@ function MobileMenu({ user }) {
                         <ul>
                           {category.subCategory.items.map((item) => (
                             <li key={item.id}>
-                              <ALink href={"/categories/" + item.slug}>
+                              <ALink
+                                href={
+                                  "/collections/" +
+                                  category.slug +
+                                  "/" +
+                                  item.slug
+                                }
+                              >
                                 {item.name}
                                 {/* {item.hot ? (
                                   <span className="tip tip-hot">Hot</span>

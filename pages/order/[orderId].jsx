@@ -24,7 +24,6 @@ function Order(props) {
         variables: { id: orderId },
         authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
-      console.log(response.data.getOrder);
       setOrder(response.data.getOrder);
     })();
   }, [orderId, user]);

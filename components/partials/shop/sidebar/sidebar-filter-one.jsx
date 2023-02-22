@@ -6,46 +6,34 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-// import OwlCarousel from "~/components/features/owl-carousel";
-// import SmallProduct from "~/components/features/product/product-sm";
-import { listProductCategories } from "~/graphql/queries";
-import filterData from "~/utils/data/shop";
+import { getMenuCategories } from "~/graphql/api";
 import { scrollTopHandler } from "~/utils";
+import { cleanQuery } from "~/utils/helper";
 
 function SidebarFilterOne(props) {
   const { type = "left" } = props;
+
   const [sidebarData, setSidebarData] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
   const query = router.query;
+
   const [filterPrice, setPrice] = useState({
-    max: query.max_price ? parseInt(query.max_price) : 10000,
-    min: query.min_price ? parseInt(query.min_price) : 0,
+    max: query.maxprice ? parseInt(query.maxprice) : 3000,
+    min: query.minprice ? parseInt(query.minprice) : 0,
   });
   const [isFirst, setFirst] = useState(true);
   let timerId;
 
   useEffect(() => {
     (async function () {
-      const [
-        {
-          data: {
-            listProductCategories: { items: categories },
-          },
+      const {
+        data: {
+          searchProductCategories: { items: categories },
         },
-        // {
-        //   data: {
-        //     listProducts: { items: featured },
-        //   },
-        // },
-      ] = await Promise.all([
-        API.graphql(graphqlOperation(listProductCategories)),
-        // API.graphql(graphqlOperation(listProducts)),
-      ]);
-      setSidebarData({
-        categories,
-        // featured,
-      });
+      } = await API.graphql(graphqlOperation(getMenuCategories));
+      setSidebarData({ categories });
       setLoading(false);
     })();
   }, []);
@@ -61,8 +49,8 @@ function SidebarFilterOne(props) {
 
   useEffect(() => {
     setPrice({
-      max: query.max_price ? parseInt(query.max_price) : 10000,
-      min: query.min_price ? parseInt(query.min_price) : 0,
+      max: query.maxprice ? parseInt(query.maxprice) : 3000,
+      min: query.minprice ? parseInt(query.minprice) : 0,
     });
     if (isFirst) {
       setFirst(false);
@@ -74,35 +62,13 @@ function SidebarFilterOne(props) {
   const filterByPrice = (e) => {
     e.preventDefault();
     let url = router.pathname.replace("[grid]", query.grid);
-    let arr = [
-      `minprice=${filterPrice.min}`,
-      `maxprice=${filterPrice.max}`,
-      "page=1",
-    ];
+    let arr = [`minprice=${filterPrice.min}`, `maxprice=${filterPrice.max}`];
     for (let key in query) {
-      if (
-        key !== "minprice" &&
-        key !== "maxprice" &&
-        key !== "page" &&
-        key !== "grid"
-      )
+      if (key !== "minprice" && key !== "maxprice" && key !== "grid")
         arr.push(key + "=" + query[key]);
     }
     url = url + "?" + arr.join("&");
     router.push(url);
-  };
-
-  const containsAttrInUrl = (type, value) => {
-    const currentQueries = query[type] ? query[type].split(",") : [];
-    return currentQueries && currentQueries.includes(value);
-  };
-
-  const getUrlForAttrs = (type, value) => {
-    let currentQueries = query[type] ? query[type].split(",") : [];
-    currentQueries = containsAttrInUrl(type, value)
-      ? currentQueries.filter((item) => item !== value)
-      : [...currentQueries, value];
-    return currentQueries.join(",");
   };
 
   const onChangePrice = (value) => {
@@ -213,11 +179,12 @@ function SidebarFilterOne(props) {
                 <ALink
                   href={{
                     pathname: router.pathname,
-                    query: {
+                    query: cleanQuery({
+                      subcategory: query.subcategory || null,
                       category: query.category,
                       grid: query.grid,
                       type: router.query.type ? router.query.type : null,
-                    },
+                    }),
                   }}
                   scroll={false}
                   className="filter-clean"
@@ -241,7 +208,7 @@ function SidebarFilterOne(props) {
                         className={`with-ul overflow-hidden ${
                           item.slug === query.category ||
                           item.subCategory.items.findIndex(
-                            (subCat) => subCat.slug === query.category
+                            (subCat) => subCat.slug === query.subcategory
                           ) > -1
                             ? "show"
                             : ""
@@ -256,14 +223,12 @@ function SidebarFilterOne(props) {
                             <>
                               <ALink
                                 href={{
-                                  pathname: `${router.pathname}`,
-                                  query: {
+                                  pathname: "/collections/[category]",
+                                  query: cleanQuery({
                                     category: item.slug,
                                     grid: query.grid,
-                                    type: router.query.type
-                                      ? router.query.type
-                                      : null,
-                                  },
+                                    type: router.query.type || null,
+                                  }),
                                 }}
                                 scroll={false}
                               >
@@ -294,14 +259,14 @@ function SidebarFilterOne(props) {
                                           <ALink
                                             scroll={false}
                                             href={{
-                                              pathname: `${router.pathname}`,
-                                              query: {
-                                                category: subItem.slug,
+                                              pathname:
+                                                "/collections/[category]/[subcategory]",
+                                              query: cleanQuery({
+                                                category: item.slug,
+                                                subcategory: subItem.slug,
                                                 grid: query.grid,
-                                                type: router.query.type
-                                                  ? router.query.type
-                                                  : null,
-                                              },
+                                                type: router.query.type || null,
+                                              }),
                                             }}
                                           >
                                             {subItem.name}
@@ -323,14 +288,12 @@ function SidebarFilterOne(props) {
                       >
                         <ALink
                           href={{
-                            pathname: `${router.pathname}`,
-                            query: {
-                              slug: item.slug,
+                            pathname: "/collections/[category]",
+                            query: cleanQuery({
+                              category: item.slug,
                               grid: query.grid,
-                              type: router.query.type
-                                ? router.query.type
-                                : null,
-                            },
+                              type: router.query.type || null,
+                            }),
                           }}
                           scroll={false}
                         >
@@ -354,7 +317,7 @@ function SidebarFilterOne(props) {
                     <div className="filter-price-slider noUi-target noUi-ltr noUi-horizontal shop-input-range">
                       <InputRange
                         formatLabel={(value) => `$${value}`}
-                        maxValue={10000}
+                        maxValue={3000}
                         minValue={0}
                         step={50}
                         value={filterPrice}
@@ -515,4 +478,4 @@ function SidebarFilterOne(props) {
   );
 }
 
-export default SidebarFilterOne;
+export default React.memo(SidebarFilterOne);

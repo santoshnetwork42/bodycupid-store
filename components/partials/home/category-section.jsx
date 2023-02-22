@@ -18,11 +18,7 @@ function CategorySection({ categories = [] }) {
             {categories.map((category) => (
               <div className="col-xs-6 col-lg-3 mb-4" key={category.id}>
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
-                  <ALink
-                    href={{
-                      pathname: `/categories/${category.slug}`,
-                    }}
-                  >
+                  <ALink href={`/collections/${category.slug}`}>
                     <figure className="category-media">
                       <LazyLoadImage
                         src={getPublicImageURL(category.imageUrl)}

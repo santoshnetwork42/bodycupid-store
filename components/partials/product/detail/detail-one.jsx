@@ -141,7 +141,7 @@ function DetailOne(props) {
               </ALink>
             </li>
             <li>
-              <ALink href="/categories/all" className="active">
+              <ALink href="/collections/all" className="active">
                 Products
               </ALink>
             </li>
@@ -149,7 +149,7 @@ function DetailOne(props) {
               <li>
                 <ALink
                   href={{
-                    pathname: "/categories",
+                    pathname: "/collections/[category]",
                     query: { category: product.category.slug },
                   }}
                   className="active"
@@ -162,7 +162,7 @@ function DetailOne(props) {
               <li>
                 <ALink
                   href={{
-                    pathname: "/categories",
+                    pathname: "/collections/[category][subcategory]",
                     query: {
                       category: product.category.slug,
                       subcategory: product.subCategory.slug,
@@ -191,7 +191,7 @@ function DetailOne(props) {
               <React.Fragment key={product.category.id}>
                 <ALink
                   href={{
-                    pathname: "/categories",
+                    pathname: "/collections/[category]",
                     query: { category: product.category.slug },
                   }}
                 >
@@ -202,7 +202,7 @@ function DetailOne(props) {
                     {", "}
                     <ALink
                       href={{
-                        pathname: "/categories",
+                        pathname: "/collections/[category]/[subcategory]",
                         query: {
                           category: product.category.slug,
                           subcategory: product.subCategory.slug,
