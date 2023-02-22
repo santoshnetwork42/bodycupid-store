@@ -21,7 +21,11 @@ function CategorySection({ categories = [] }) {
                   <ALink href={`/collections/${category.slug}`}>
                     <figure className="category-media">
                       <LazyLoadImage
-                        src={getPublicImageURL(category.imageUrl)}
+                        src={
+                          category.imageUrl
+                            ? getPublicImageURL(category.imageUrl)
+                            : "/images/banners/banner2.jpg"
+                        }
                         alt={category.name}
                         effect="opacity"
                         width="auto"

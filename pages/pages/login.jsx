@@ -23,7 +23,7 @@ function Login({ auth, redirect = true }) {
   const handleSignup = useCallback(
     async (e) => {
       e.preventDefault();
-     
+
       try {
         await Auth.signUp({
           username: addPhonePrefix(state.phone),
@@ -31,9 +31,9 @@ function Login({ auth, redirect = true }) {
           phone_number: addPhonePrefix(state.phone),
           email: state.email,
           attributes: {
-            name: state.name,
-            given_name: state.name,
-            middle_name: state.name,
+            name: state.name?.split(" ")[0] || "",
+            given_name: state.name?.split(" ")[1] || "",
+            middle_name: "",
             email: state.email,
             phone_number: addPhonePrefix(state.phone),
           },
@@ -56,7 +56,10 @@ function Login({ auth, redirect = true }) {
     async (e) => {
       e.preventDefault();
       try {
-        await Auth.confirmSignUp(addPhonePrefix(state.phone), state.confirmationCode);
+        await Auth.confirmSignUp(
+          addPhonePrefix(state.phone),
+          state.confirmationCode
+        );
         if (confirmSignUp === "SIGNUP") {
           if (redirect) {
             router.push("/");
@@ -134,9 +137,7 @@ function Login({ auth, redirect = true }) {
                         <form onSubmit={handleSignIn}>
                           <div className="form-group mb-3">
                             <div className="input-tel">
-                              <div className="prefix">
-                                +91
-                              </div>
+                              <div className="prefix">+91</div>
                               <input
                                 type="tel"
                                 className="form-control"
@@ -153,7 +154,6 @@ function Login({ auth, redirect = true }) {
                                 }
                               />
                             </div>
-
                           </div>
                           <div className="form-group">
                             <input
@@ -247,9 +247,7 @@ function Login({ auth, redirect = true }) {
                               Your phone number:
                             </label>
                             <div className="input-tel">
-                              <div className="prefix">
-                                +91
-                              </div>
+                              <div className="prefix">+91</div>
                               <input
                                 type="tel"
                                 className="form-control"
@@ -266,7 +264,6 @@ function Login({ auth, redirect = true }) {
                                 }
                               />
                             </div>
-
                           </div>
                           <div className="form-group">
                             <label htmlFor="register-email-2">

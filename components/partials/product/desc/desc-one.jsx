@@ -9,7 +9,7 @@ import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 
 function DescOne(props) {
-  const { product, isGuide = true, isDivider = true, openModal } = props;
+  const { product, isDivider = true, openModal } = props;
 
   let sizes = [];
 

@@ -33,6 +33,7 @@ function Quickview(props) {
 
   const [loaded, setLoadingState] = useState(false);
   const [product, setProduct] = useState(null);
+  const [variant, setVariant] = useState(null);
 
   useEffect(() => {
     if (slug) {
@@ -46,6 +47,7 @@ function Quickview(props) {
           },
         } = await API.graphql(graphqlOperation(getQuickViewProduct, { slug }));
         setProduct(response);
+        setVariant(response.variants.items[0]?.id);
       })();
     }
   }, [slug]);
@@ -62,6 +64,9 @@ function Quickview(props) {
           })
           .on("progress", function () {
             setLoadingState(false);
+          })
+          .on("fail", function () {
+            setLoadingState(true);
           });
     }, 200);
   }, [product, isOpen]);
@@ -83,6 +88,17 @@ function Quickview(props) {
         10
       )
     : 0;
+
+  let lgImages = product?.images.items || [];
+  if (product?.variants.items.length > 1) {
+    lgImages.push(
+      ...product.variants.items.map((i) => ({
+        variantId: i.id,
+        imageKey: i.imageUrl,
+        alt: i.alt || i.title,
+      }))
+    );
+  }
 
   return (
     <Modal
@@ -119,7 +135,7 @@ function Quickview(props) {
                 adClass="product-single-carousel owl-theme owl-nav-inner"
                 options={mainSlider3}
               >
-                {product?.images.items.map((item) => (
+                {lgImages.map((item) => (
                   <Magnifier
                     key={item.id}
                     imageSrc={getPublicImageURL(item.imageKey)}
@@ -141,6 +157,8 @@ function Quickview(props) {
                 data={product}
                 adClass="scrollable pr-3"
                 isNav={false}
+                variantId={variant}
+                setVariant={setVariant}
               />
             )}
           </div>

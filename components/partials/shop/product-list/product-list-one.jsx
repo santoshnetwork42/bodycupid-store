@@ -39,6 +39,7 @@ function ProductListOne(props) {
     type: gridType = "grid",
     category: categorySlug,
     subcategory: subCategorySlug,
+    search,
   } = router.query;
   const perPage = limit ? parseInt(limit) : 12;
 
@@ -46,6 +47,11 @@ function ProductListOne(props) {
     if (category || categorySlug === "all") {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
       const filter = category ? { [apiSearchKey]: { eq: category.id } } : {};
+
+      if (search) {
+        filter.title = { wildcard: `*${search}*` };
+      }
+
       if (
         !Number.isNaN(Number(minprice)) &&
         !Number.isNaN(Number(maxprice)) &&
@@ -62,7 +68,7 @@ function ProductListOne(props) {
       return { filter, limit: perPage };
     }
     return null;
-  }, [perPage, maxprice, minprice, category?.id]);
+  }, [perPage, maxprice, minprice, category?.id, search]);
 
   useEffect(() => {
     setLoading(true);
@@ -83,6 +89,9 @@ function ProductListOne(props) {
             },
           }) => {
             setCategory(response);
+            if (!response) {
+              setLoading(false);
+            }
           }
         )
         .catch((err) => {

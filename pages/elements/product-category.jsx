@@ -42,7 +42,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category1.jpg"
+                        src="/images/categories/category1.jpg"
                         alt="category"
                         width="280"
                         height="280"
@@ -65,7 +65,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category2.jpg"
+                        src="/images/categories/category2.jpg"
                         alt="category"
                         width="280"
                         height="280"
@@ -88,7 +88,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category3.jpg"
+                        src="/images/categories/category3.jpg"
                         alt="category"
                         width="280"
                         height="280"
@@ -111,7 +111,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category4.jpg"
+                        src="/images/categories/category4.jpg"
                         alt="category"
                         width="280"
                         height="280"
@@ -143,7 +143,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category1.jpg"
+                      src="/images/categories/category1.jpg"
                       alt="category"
                       width="280"
                       height="280"
@@ -163,7 +163,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category2.jpg"
+                      src="/images/categories/category2.jpg"
                       alt="category"
                       width="280"
                       height="280"
@@ -183,7 +183,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category3.jpg"
+                      src="/images/categories/category3.jpg"
                       alt="category"
                       width="280"
                       height="280"
@@ -203,7 +203,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category4.jpg"
+                      src="/images/categories/category4.jpg"
                       alt="category"
                       width="280"
                       height="280"
@@ -314,7 +314,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <img
-                      src="images/shop/category1.png"
+                      src="images/categories/category1.png"
                       alt="Cateogry"
                       width="196"
                       height="196"
@@ -336,7 +336,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <img
-                      src="images/shop/category2.png"
+                      src="images/categories/category2.png"
                       alt="Cateogry"
                       width="196"
                       height="196"
@@ -358,7 +358,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <img
-                      src="images/shop/category3.png"
+                      src="images/categories/category3.png"
                       alt="Cateogry"
                       width="196"
                       height="196"
@@ -380,7 +380,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <img
-                      src="images/shop/category4.png"
+                      src="images/categories/category4.png"
                       alt="Cateogry"
                       width="196"
                       height="196"
@@ -402,7 +402,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <img
-                      src="images/shop/category5.png"
+                      src="images/categories/category5.png"
                       alt="Cateogry"
                       width="196"
                       height="196"
@@ -429,7 +429,7 @@ function Cta() {
               <div className="category category-absolute category-classic">
                 <figure className="category-media">
                   <img
-                    src="images/shop/category5.jpg"
+                    src="images/categories/category5.jpg"
                     alt="Cateogry"
                     width="280"
                     height="280"
@@ -443,7 +443,7 @@ function Cta() {
               <div className="category category-absolute category-classic">
                 <figure className="category-media">
                   <img
-                    src="images/shop/category6.jpg"
+                    src="images/categories/category6.jpg"
                     alt="Cateogry"
                     width="280"
                     height="280"
@@ -457,7 +457,7 @@ function Cta() {
               <div className="category category-absolute category-classic">
                 <figure className="category-media">
                   <img
-                    src="images/shop/category7.jpg"
+                    src="images/categories/category7.jpg"
                     alt="Cateogry"
                     width="280"
                     height="280"
@@ -471,7 +471,7 @@ function Cta() {
               <div className="category category-absolute category-classic">
                 <figure className="category-media">
                   <img
-                    src="images/shop/category8.jpg"
+                    src="images/categories/category8.jpg"
                     alt="Cateogry"
                     width="280"
                     height="280"
@@ -493,7 +493,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category13.jpg"
+                      src="/images/categories/category13.jpg"
                       alt="category"
                       width="190"
                       height="169"
@@ -529,7 +529,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category14.jpg"
+                      src="/images/categories/category14.jpg"
                       alt="category"
                       width="190"
                       height="169"
@@ -564,7 +564,7 @@ function Cta() {
                 <ALink href="#">
                   <figure className="category-media">
                     <LazyLoadImage
-                      src="/images/shop/category15.jpg"
+                      src="/images/categories/category15.jpg"
                       alt="category"
                       width="190"
                       height="169"
@@ -718,7 +718,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category9.jpg"
+                        src="/images/categories/category9.jpg"
                         alt="category"
                         width="585"
                         height="397"
@@ -744,7 +744,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category10.jpg"
+                        src="/images/categories/category10.jpg"
                         alt="category"
                         width="585"
                         height="205"
@@ -770,7 +770,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category11.jpg"
+                        src="/images/categories/category11.jpg"
                         alt="category"
                         width="585"
                         height="397"
@@ -796,7 +796,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category12.jpg"
+                        src="/images/categories/category12.jpg"
                         alt="category"
                         width="585"
                         height="205"
@@ -829,7 +829,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category16.jpg"
+                        src="/images/categories/category16.jpg"
                         alt="category"
                         width="585"
                         height="397"
@@ -852,7 +852,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category17.jpg"
+                        src="/images/categories/category17.jpg"
                         alt="category"
                         width="585"
                         height="205"
@@ -875,7 +875,7 @@ function Cta() {
                   <ALink href="#">
                     <figure className="category-media">
                       <LazyLoadImage
-                        src="/images/shop/category18.jpg"
+                        src="/images/categories/category18.jpg"
                         alt="category"
                         width="585"
                         height="397"
