@@ -10,7 +10,7 @@ function Icons() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Icons</title>
+                <title>Wow life science | Icons</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Icons</h1>

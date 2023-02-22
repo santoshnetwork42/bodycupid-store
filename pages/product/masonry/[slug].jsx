@@ -38,7 +38,7 @@ function ProductMasonry() {
     return (
         <main className="main mt-6 single-product product-layout-masonry">
             <Helmet>
-                <title>Wow React eCommerce Template | Product Masonry</title>
+                <title>Wow life science | Product Masonry</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product Masonry</h1>

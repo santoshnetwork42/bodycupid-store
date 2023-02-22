@@ -10,7 +10,7 @@ function ShopBannerSidebar() {
     return (
         <main className="main">
             <Helmet>
-                <title>Wow React eCommerce Template - Shop Banner Sidebar Page</title>
+                <title>Wow life science - Shop Banner Sidebar Page</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Shop Banner Sidebar Page</h1>

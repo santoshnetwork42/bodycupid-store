@@ -27,7 +27,7 @@ function Products() {
     return (
         <main className="skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Products</title>
+                <title>Wow life science | Products</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Products</h1>

@@ -66,7 +66,7 @@ function PostMasonrySidebar() {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog Masonry With Sidebar</title>
+                <title>Wow life science | Blog Masonry With Sidebar</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog Masonry With Sidebar</h1>

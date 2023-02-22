@@ -47,7 +47,7 @@ function Listing() {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog Listing</title>
+                <title>Wow life science | Blog Listing</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog Listing</h1>

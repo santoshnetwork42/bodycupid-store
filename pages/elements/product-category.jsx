@@ -19,7 +19,7 @@ function Cta() {
   return (
     <>
       <Helmet>
-        <title>Wow React eCommerce Template | Product Category</title>
+        <title>Wow life science | Product Category</title>
       </Helmet>
 
       <h1 className="d-none">

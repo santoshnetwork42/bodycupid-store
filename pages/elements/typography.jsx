@@ -9,7 +9,7 @@ function Typography() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Typography</title>
+                <title>Wow life science | Typography</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Typography</h1>

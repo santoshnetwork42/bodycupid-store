@@ -21,7 +21,7 @@ function ContactUs() {
     return (
         <main className="main contact-us">
             <Helmet>
-                <title>Wow React eCommerce Template | Contact Us</title>
+                <title>Wow life science | Contact Us</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Contact Us</h1>

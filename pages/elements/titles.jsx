@@ -9,7 +9,7 @@ function Titles() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Titles</title>
+                <title>Wow life science | Titles</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Titles</h1>

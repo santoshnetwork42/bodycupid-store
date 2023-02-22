@@ -21,7 +21,7 @@ function Cta() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Call To Action</title>
+                <title>Wow life science | Call To Action</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Call To Action</h1>

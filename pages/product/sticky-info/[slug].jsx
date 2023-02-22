@@ -39,7 +39,7 @@ function ProductStickyInfo() {
     return (
         <main className="main mt-6 single-product product-sticky-info">
             <Helmet>
-                <title>Wow React eCommerce Template | Product Sticky Info</title>
+                <title>Wow life science | Product Sticky Info</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product Sticky Info</h1>

@@ -103,7 +103,7 @@ function Checkout(props) {
   return (
     <main className="main checkout">
       <Helmet>
-        <title>Wow React eCommerce Template | Checkout</title>
+        <title>Wow life science | Checkout</title>
       </Helmet>
 
       <h1 className="d-none">Wow React eCommerce Template - Checkout</h1>

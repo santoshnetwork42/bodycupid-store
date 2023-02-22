@@ -12,7 +12,7 @@ function IconBoxes() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Icon Boxes</title>
+                <title>Wow life science | Icon Boxes</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Icon Boxes</h1>

@@ -14,7 +14,7 @@ function Shop() {
     return (
         <main className="main">
             <Helmet>
-                <title>Wow React eCommerce Template - Shop Page Grid {grid}</title>
+                <title>Wow life science - Shop Page Grid {grid}</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Shop Page Grid {grid}</h1>

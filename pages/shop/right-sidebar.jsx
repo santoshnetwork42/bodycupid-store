@@ -10,7 +10,7 @@ function ShopRightSidebar() {
     return (
         <main className="main">
             <Helmet>
-                <title>Wow React eCommerce Template - Shop With Right Sidebar</title>
+                <title>Wow life science - Shop With Right Sidebar</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Shop With Right Sidebar</h1>

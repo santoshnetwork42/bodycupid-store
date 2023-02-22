@@ -32,7 +32,7 @@ function PostSingle() {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog Single</title>
+                <title>Wow life science | Blog Single</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog Single</h1>

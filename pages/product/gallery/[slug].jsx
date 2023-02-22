@@ -42,7 +42,7 @@ function ProductGallery() {
     return (
         <main className="main single-product product-layout-gallery">
             <Helmet>
-                <title>Wow React eCommerce Template | Product Gallery</title>
+                <title>Wow life science | Product Gallery</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product Gallery</h1>
