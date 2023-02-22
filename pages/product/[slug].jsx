@@ -23,6 +23,9 @@ function ProductDefault() {
       (response) => {
         let [product] = response.data.byslugProduct.items;
         setProduct(product);
+        if (!selectedVaraint && product.variants.items.length) {
+          setVariant(product.variants.items[0].id);
+        }
         setLoading(false);
       }
     );

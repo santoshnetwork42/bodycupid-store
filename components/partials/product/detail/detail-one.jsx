@@ -279,7 +279,7 @@ function DetailOne(props) {
                             ₹{toDecimal(product.variants.items[curIndex].price)}
                           </ins>
                           <del className="old-price">
-                            $
+                            ₹
                             {toDecimal(
                               product.variants.items[curIndex].listingPrice
                             )}

@@ -98,7 +98,7 @@ function Order(props) {
           <div className="order-results">
             <div className="overview-item">
               <span>Order number:</span>
-              <strong>{order?.code || order?.id }</strong>
+              <strong>{order?.code || order?.id}</strong>
             </div>
             <div className="overview-item">
               <span>Status:</span>
@@ -148,6 +148,11 @@ function Order(props) {
                         {" "}
                         <i className="fas fa-times"></i> {item.quantity}
                       </span>
+                      {item.variant && (
+                        <p className="mb-0">
+                          <strong>{item.variant.title}</strong>
+                        </p>
+                      )}
                     </td>
                     <td className="product-price">
                       ₹{toDecimal(item.quantity * item.price)}

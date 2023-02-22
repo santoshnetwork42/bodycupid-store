@@ -36,7 +36,7 @@ function Checkout(props) {
         id: order?.id,
         userId: user?.username,
         status: "CONFIRMED",
-        totalDiscount: getCouponTotal(appliedCoupon),
+        totalDiscount: getCouponTotal(appliedCoupon, cartList),
         totalShippingCharges: getShippingPrice(cartList),
         orderDate: new Date().toISOString(),
       };
