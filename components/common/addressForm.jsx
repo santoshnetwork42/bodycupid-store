@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
+
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
+import { removePhonePrefix } from "~/utils/helper";
 
 const AddressForm = ({
   defaultAddress,
@@ -12,8 +14,11 @@ const AddressForm = ({
   onAddress = () => {},
   setOpen = () => {},
   isOpen,
+  onAddressChange,
+  hideSubmit = false,
 }) => {
   const [address, setAddress] = useSetState(defaultAddress);
+
   useEffect(() => {
     if (!isOpen) {
       setAddress({
@@ -32,6 +37,13 @@ const AddressForm = ({
       });
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (onAddressChange) {
+      onAddressChange(address);
+    }
+  }, [address]);
+
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
@@ -66,9 +78,6 @@ const AddressForm = ({
       <form className="form" onSubmit={addAddress}>
         <div className="row">
           <div className="col-lg-12  mb-6 mb-lg-0 pr-lg-4">
-            <h3 className="title title-simple text-left text-uppercase">
-              Shipping Address
-            </h3>
             <div className="row">
               <div className="col-xs-12">
                 <label>Name *</label>
@@ -201,9 +210,14 @@ const AddressForm = ({
             </div>
           </div>
 
-          <button type="submit" className="btn btn-dark btn-rounded btn-order">
-            Add Address
-          </button>
+          {!hideSubmit && (
+            <button
+              type="submit"
+              className="btn btn-dark btn-rounded btn-order"
+            >
+              Add Address
+            </button>
+          )}
         </div>
       </form>
     </div>

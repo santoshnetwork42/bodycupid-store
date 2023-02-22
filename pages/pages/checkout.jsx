@@ -19,29 +19,37 @@ import {
 } from "~/utils";
 import { cartActions } from "~/store/cart";
 import Addresses from "~/components/common/addresses";
+import AddressForm from "~/components/common/addressForm";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, order, updateCartOrder } =
     props;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
+  const [shippingAddress, setAddress] = useState(null);
 
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+      const payload = {
+        id: order?.id,
+        userId: user?.username,
+        status: "CONFIRMED",
+        totalDiscount: getCouponTotal(appliedCoupon),
+        totalShippingCharges: getShippingPrice(cartList),
+        orderDate: new Date().toISOString(),
+      };
+
+      if (shippingAddress) {
+        payload.shippingAddress = shippingAddress;
+      }
+
       await Promise.all([
         API.graphql({
           query: updateOrder,
           variables: {
-            input: {
-              id: order?.id,
-              userId: user?.username,
-              status: "CONFIRMED",
-              totalDiscount: getCouponTotal(appliedCoupon),
-              totalShippingCharges: getShippingPrice(cartList),
-              orderDate: new Date().toISOString(),
-            },
+            input: payload,
           },
           authMode,
         }),
@@ -62,7 +70,7 @@ function Checkout(props) {
       await emptyCart();
       return false;
     },
-    [order, user, isFirst, appliedCoupon]
+    [order, user, isFirst, appliedCoupon, shippingAddress]
   );
 
   const updateShippingAddress = useCallback(
@@ -88,7 +96,8 @@ function Checkout(props) {
   );
 
   const codDisabled = useMemo(
-    () => appliedCoupon?.couponType === "ONLINE"[appliedCoupon]
+    () => appliedCoupon?.couponType === "ONLINE",
+    [appliedCoupon]
   );
 
   return (
@@ -166,11 +175,16 @@ function Checkout(props) {
                   <h3 className="title title-simple text-left text-uppercase">
                     Shipping Address
                   </h3>
-                  <Addresses
-                    selected={order?.shippingAddressId}
-                    autoSelect
-                    onSelect={updateShippingAddress}
-                  />
+                  {!!user && (
+                    <Addresses
+                      selected={order?.shippingAddressId}
+                      autoSelect
+                      onSelect={updateShippingAddress}
+                    />
+                  )}
+                  {!user && (
+                    <AddressForm onAddressChange={setAddress} hideSubmit />
+                  )}
                 </div>
 
                 <aside className="col-lg-5 sticky-sidebar-wrapper">
@@ -237,7 +251,7 @@ function Checkout(props) {
                               <td>
                                 <p className="summary-subtotal-price">
                                   {`₹${toDecimal(
-                                    getCouponTotal(appliedCoupon)
+                                    getCouponTotal(appliedCoupon, cartList)
                                   )}`}
                                 </p>
                               </td>
@@ -290,7 +304,7 @@ function Checkout(props) {
                           <div className="card-header">
                             <ALink
                               href="#"
-                              className={`text-body text-normal ls-m${
+                              className={`text-body text-normal ls-m ${
                                 !isFirst ? "collapse" : ""
                               }`}
                               onClick={() => {

@@ -25,10 +25,12 @@ function Cart(props) {
     setCartItems([...cartList]);
   }, [cartList]);
 
-  const onChangeQty = (id, qty) => {
+  const onChangeQty = (id, variantId, qty) => {
     setCartItems(
       cartItems.map((item) => {
-        return item.id === id ? { ...item, qty: qty } : item;
+        return item.id === id && (!variantId || variantId === item.variantId)
+          ? { ...item, qty: qty }
+          : item;
       })
     );
   };
@@ -118,7 +120,9 @@ function Cart(props) {
                               product={item}
                               qty={item.qty}
                               max={item.inventory}
-                              onChangeQty={(qty) => onChangeQty(item.id, qty)}
+                              onChangeQty={(qty) =>
+                                onChangeQty(item.id, item.variantId, qty)
+                              }
                             />
                           </td>
                           <td className="product-price">
@@ -230,7 +234,10 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(getFinalPrice(cartItems, appliedCoupon))}
+                                ₹
+                                {toDecimal(
+                                  getFinalPrice(cartItems, appliedCoupon)
+                                )}
                               </p>
                             </td>
                           </tr>

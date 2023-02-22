@@ -33,19 +33,25 @@ function MainMenu() {
             key={category.id}
             className={`
               ${
-                pathname.includes(`/categories/${category.slug}`)
+                pathname.includes(`/collections/${category.slug}`)
                   ? "active"
                   : ""
               }
               ${category?.subCategory?.items?.length ? "d-xl-show submenu" : ""}
             `}
           >
-            <ALink href={`/categories/${category.slug}`}>{category.name}</ALink>
+            <ALink href={`/collections/${category.slug}`}>
+              {category.name}
+            </ALink>
             {!!category?.subCategory?.items?.length && (
               <ul>
                 {category.subCategory.items.map((item) => (
                   <li key={`sub-categories-${item.id}`}>
-                    <ALink href={"/categories/" + item.slug}>{item.name}</ALink>
+                    <ALink
+                      href={"/collections/" + category.slug + "/" + item.slug}
+                    >
+                      {item.name}
+                    </ALink>
                   </li>
                 ))}
               </ul>
