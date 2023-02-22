@@ -1,16 +1,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-
 import CartMenu from "~/components/common/partials/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
-import LoginModal from "~/components/features/modals/login-modal";
-
 import { headerBorderRemoveList } from "~/utils/data/menu";
+import { modalActions } from "~/store/modal";
 
-export default function Header(props) {
+function Header({ auth, openLogin }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -65,7 +64,23 @@ export default function Header(props) {
             <ALink href="#" className="help d-lg-show">
               <i className="d-icon-info"></i> Need Help
             </ALink>
-            <LoginModal />
+            {!!auth && (
+              <ALink href="/pages/account" className="help d-lg-show">
+                <i className="d-icon-user"></i>Account
+              </ALink>
+            )}
+            {!auth && (
+              <ALink
+                href="#"
+                className="login-link d-lg-show"
+                onClick={() => {
+                  openLogin();
+                  return false;
+                }}
+              >
+                <i className="d-icon-user"></i>Sign in
+              </ALink>
+            )}
           </div>
         </div>
       </div>
@@ -128,3 +143,13 @@ export default function Header(props) {
     </header>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    auth: !!state.user.data,
+  };
+}
+
+export default connect(mapStateToProps, {
+  openLogin: modalActions.openLoginModal,
+})(Header);

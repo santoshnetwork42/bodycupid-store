@@ -386,6 +386,11 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -1124,6 +1129,11 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -1441,6 +1451,11 @@ export const getUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -1811,6 +1826,11 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -2152,6 +2172,11 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -2628,6 +2653,7 @@ export const getUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -3286,6 +3312,11 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -3915,6 +3946,11 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -4450,6 +4486,7 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -4847,6 +4884,7 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -4940,6 +4978,11 @@ export const listUsers = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -5117,6 +5160,7 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -5264,6 +5308,7 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -5798,6 +5843,7 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -6050,6 +6096,7 @@ export const listUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -6373,6 +6420,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -6770,6 +6818,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -6863,6 +6912,11 @@ export const bystoreIdUser = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -7040,6 +7094,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -7187,6 +7242,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -7721,6 +7777,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -7973,6 +8030,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -8296,6 +8354,7 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -8693,6 +8752,7 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -8786,6 +8846,11 @@ export const searchUsers = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -8963,6 +9028,7 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -9110,6 +9176,7 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -9644,6 +9711,7 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -9896,6 +9964,7 @@ export const searchUsers = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -10553,6 +10622,11 @@ export const getProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -11334,6 +11408,11 @@ export const getProductCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -11939,6 +12018,7 @@ export const getProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -12162,6 +12242,7 @@ export const listProductCategories = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -12552,6 +12633,11 @@ export const listProductCategories = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -13076,6 +13162,7 @@ export const bynameProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -13466,6 +13553,11 @@ export const bynameProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -13990,6 +14082,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -14380,6 +14473,11 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -14904,6 +15002,7 @@ export const byslugProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -15294,6 +15393,11 @@ export const byslugProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -15818,6 +15922,7 @@ export const searchProductCategories = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -16208,6 +16313,11 @@ export const searchProductCategories = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -16924,6 +17034,11 @@ export const getProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -17173,6 +17288,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -17563,6 +17679,11 @@ export const getProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -18600,6 +18721,11 @@ export const getProductSubCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -18907,6 +19033,7 @@ export const listProductSubCategories = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -19217,6 +19344,7 @@ export const listProductSubCategories = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -19715,6 +19843,11 @@ export const listProductSubCategories = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -19981,6 +20114,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -20291,6 +20425,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -20789,6 +20924,11 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -21055,6 +21195,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -21365,6 +21506,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -21863,6 +22005,11 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -22129,6 +22276,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -22439,6 +22587,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -22937,6 +23086,11 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -23203,6 +23357,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -23513,6 +23668,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -24011,6 +24167,11 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -24277,6 +24438,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -24587,6 +24749,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -25085,6 +25248,11 @@ export const searchProductSubCategories = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -25891,6 +26059,11 @@ export const getStore = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -26384,6 +26557,11 @@ export const listStores = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -26840,6 +27018,11 @@ export const searchStores = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -27299,6 +27482,11 @@ export const getWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -27736,6 +27924,11 @@ export const getWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -27994,6 +28187,7 @@ export const listWarehouses = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -28197,6 +28391,7 @@ export const listWarehouses = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -28426,6 +28621,7 @@ export const bystoreIdwarehouse = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -28629,6 +28825,7 @@ export const bystoreIdwarehouse = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -28858,6 +29055,7 @@ export const searchWarehouses = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -29061,6 +29259,7 @@ export const searchWarehouses = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -29614,6 +29813,7 @@ export const getProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -29816,6 +30016,7 @@ export const getProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -30124,6 +30325,7 @@ export const getProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -30391,6 +30593,7 @@ export const getProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -30484,6 +30687,11 @@ export const getProductInventory = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -30661,6 +30869,7 @@ export const getProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -31418,6 +31627,11 @@ export const listProductInventories = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -32265,6 +32479,11 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -33112,6 +33331,11 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -33959,6 +34183,11 @@ export const searchProductInventories = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -34280,6 +34509,7 @@ export const getProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -34590,6 +34820,7 @@ export const getProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -35088,6 +35319,11 @@ export const getProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -35524,6 +35760,11 @@ export const getProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -35771,6 +36012,7 @@ export const getProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -36161,6 +36403,11 @@ export const getProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -36721,6 +36968,11 @@ export const getProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -37038,6 +37290,11 @@ export const getProduct = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -37408,6 +37665,11 @@ export const getProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -37985,6 +38247,7 @@ export const listProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -38187,6 +38450,7 @@ export const listProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -38495,6 +38759,7 @@ export const listProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -38762,6 +39027,7 @@ export const listProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -38855,6 +39121,11 @@ export const listProducts = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -39032,6 +39303,7 @@ export const listProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -39580,6 +39852,7 @@ export const bytitleProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -39782,6 +40055,7 @@ export const bytitleProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -40090,6 +40364,7 @@ export const bytitleProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -40357,6 +40632,7 @@ export const bytitleProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -40450,6 +40726,11 @@ export const bytitleProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -40627,6 +40908,7 @@ export const bytitleProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -41175,6 +41457,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -41377,6 +41660,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -41685,6 +41969,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -41952,6 +42237,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -42045,6 +42331,11 @@ export const bycategoryIdProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -42222,6 +42513,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -42770,6 +43062,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -42972,6 +43265,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -43280,6 +43574,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -43547,6 +43842,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -43640,6 +43936,11 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -43817,6 +44118,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -44365,6 +44667,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -44567,6 +44870,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -44875,6 +45179,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -45142,6 +45447,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -45235,6 +45541,11 @@ export const bystoreIdProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -45412,6 +45723,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -45960,6 +46272,7 @@ export const byslugProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46162,6 +46475,7 @@ export const byslugProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46470,6 +46784,7 @@ export const byslugProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46737,6 +47052,7 @@ export const byslugProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46830,6 +47146,11 @@ export const byslugProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -47007,6 +47328,7 @@ export const byslugProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -47555,6 +47877,7 @@ export const searchProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -47757,6 +48080,7 @@ export const searchProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -48065,6 +48389,7 @@ export const searchProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -48332,6 +48657,7 @@ export const searchProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -48425,6 +48751,11 @@ export const searchProducts = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -48602,6 +48933,7 @@ export const searchProducts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -49260,6 +49592,11 @@ export const getOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -49506,6 +49843,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -49903,6 +50241,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -49996,6 +50335,11 @@ export const getOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -50173,6 +50517,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -50320,6 +50665,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -50854,6 +51200,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -51106,6 +51453,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -51438,6 +51786,7 @@ export const getOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -51732,6 +52081,11 @@ export const getOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -52704,6 +53058,11 @@ export const getOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -53098,6 +53457,11 @@ export const getOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -53626,6 +53990,7 @@ export const listOrders = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -53920,6 +54285,11 @@ export const listOrders = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -54803,6 +55173,11 @@ export const listOrders = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -55328,6 +55703,7 @@ export const listOrders = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -55528,6 +55904,7 @@ export const listOrders = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -55844,6 +56221,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -56138,6 +56516,11 @@ export const bystoreIdOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -57021,6 +57404,11 @@ export const bystoreIdOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -57546,6 +57934,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -57746,6 +58135,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -58062,6 +58452,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -58356,6 +58747,11 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -59239,6 +59635,11 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -59764,6 +60165,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -59964,6 +60366,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -60280,6 +60683,7 @@ export const searchOrders = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -60574,6 +60978,11 @@ export const searchOrders = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -61457,6 +61866,11 @@ export const searchOrders = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -61982,6 +62396,7 @@ export const searchOrders = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -62182,6 +62597,7 @@ export const searchOrders = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -62821,6 +63237,7 @@ export const getOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63023,6 +63440,7 @@ export const getOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63331,6 +63749,7 @@ export const getOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63598,6 +64017,7 @@ export const getOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63691,6 +64111,11 @@ export const getOrderProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -63868,6 +64293,7 @@ export const getOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -64676,6 +65102,11 @@ export const listOrderProducts = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -65578,6 +66009,11 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -66125,6 +66561,11 @@ export const getPayment = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -66371,6 +66812,7 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -66768,6 +67210,7 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -66861,6 +67304,11 @@ export const getPayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -67038,6 +67486,7 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -67185,6 +67634,7 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -67719,6 +68169,7 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -67971,6 +68422,7 @@ export const getPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -68288,6 +68740,7 @@ export const listPayments = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -68582,6 +69035,11 @@ export const listPayments = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -69370,6 +69828,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -69664,6 +70123,11 @@ export const bystoreIdPayment = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -70452,6 +70916,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -70746,6 +71211,11 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -71534,6 +72004,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -71828,6 +72299,11 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -72604,6 +73080,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73001,6 +73478,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73094,6 +73572,11 @@ export const getReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -73271,6 +73754,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73418,6 +73902,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73952,6 +74437,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -74204,6 +74690,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -74316,6 +74803,11 @@ export const getReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      reviewer {
+        name
+        email
+      }
+      flagged
       productId
       product {
         id
@@ -74827,6 +75319,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75029,6 +75522,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75337,6 +75831,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75604,6 +76099,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75697,6 +76193,11 @@ export const getReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -75874,6 +76375,7 @@ export const getReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -76187,6 +76689,11 @@ export const listReviews = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -76758,6 +77265,11 @@ export const listReviews = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        reviewer {
+          name
+          email
+        }
+        flagged
         productId
         product {
           id
@@ -77478,6 +77990,11 @@ export const listReviews = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -77885,6 +78402,11 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -78456,6 +78978,11 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        reviewer {
+          name
+          email
+        }
+        flagged
         productId
         product {
           id
@@ -79176,6 +79703,11 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -79583,6 +80115,11 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -80154,6 +80691,11 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        reviewer {
+          name
+          email
+        }
+        flagged
         productId
         product {
           id
@@ -80874,6 +81416,11 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -81367,6 +81914,11 @@ export const getWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -81797,6 +82349,11 @@ export const getWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -82079,6 +82636,7 @@ export const listWishlists = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -82275,6 +82833,7 @@ export const listWishlists = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -82528,6 +83087,7 @@ export const bystoreIdWishlist = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -82724,6 +83284,7 @@ export const bystoreIdWishlist = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -82977,6 +83538,7 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -83173,6 +83735,7 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -83735,6 +84298,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -83937,6 +84501,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -84245,6 +84810,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -84512,6 +85078,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -84605,6 +85172,11 @@ export const getWishlistProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -84782,6 +85354,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -85563,6 +86136,11 @@ export const listWishlistProducts = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -86434,6 +87012,11 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -86950,6 +87533,11 @@ export const getShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -87380,6 +87968,11 @@ export const getShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -87662,6 +88255,7 @@ export const listShoppingCarts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -87858,6 +88452,7 @@ export const listShoppingCarts = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88111,6 +88706,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88307,6 +88903,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88560,6 +89157,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88756,6 +89354,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -89318,6 +89917,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -89520,6 +90120,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -89828,6 +90429,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -90095,6 +90697,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -90188,6 +90791,11 @@ export const getShoppingCartProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -90365,6 +90973,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -91146,6 +91755,11 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -92017,6 +92631,11 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -92534,6 +93153,11 @@ export const getCouponCode = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -92780,6 +93404,7 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -93177,6 +93802,7 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -93270,6 +93896,11 @@ export const getCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -93447,6 +94078,7 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -93594,6 +94226,7 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -94128,6 +94761,7 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -94380,6 +95014,7 @@ export const getCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -94706,6 +95341,7 @@ export const listCouponCodes = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -95000,6 +95636,11 @@ export const listCouponCodes = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -95797,6 +96438,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -96091,6 +96733,11 @@ export const bycodeCouponCode = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -96888,6 +97535,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -97182,6 +97830,11 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -97979,6 +98632,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -98273,6 +98927,11 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -99070,6 +99729,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -99364,6 +100024,11 @@ export const searchCouponCodes = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
