@@ -1,20 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 
-import { GET_PRODUCTS } from "~/server/queries";
-import withApollo from "~/server/apollo";
+import { searchProductsBasic } from "~/graphql/api";
 
 import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function SearchForm() {
   const router = useRouter();
   const [search, setSearch] = useState("");
-  const [searchProducts, { data }] = useLazyQuery(GET_PRODUCTS);
   const [timer, setTimer] = useState(null);
+  const [data, setData] = useState([]);
+
+  const searchProducts = useCallback(async (searchTerm) => {
+    const {
+      data: {
+        searchProducts: { items },
+      },
+    } = await API.graphql(
+      graphqlOperation(searchProductsBasic, {
+        filter: { title: { wildcard: `*${searchTerm}*` } },
+      })
+    );
+    setData(items);
+  }, []);
 
   useEffect(() => {
     document.querySelector("body").addEventListener("click", onBodyClick);
@@ -32,7 +46,7 @@ function SearchForm() {
     if (search.length > 2) {
       if (timer) clearTimeout(timer);
       let timerId = setTimeout(() => {
-        searchProducts({ variables: { search: search } });
+        searchProducts(search);
         setTimer(null);
       }, 500);
 
@@ -95,12 +109,12 @@ function SearchForm() {
 
   function onSubmitSearchForm(e) {
     e.preventDefault();
-    router.push({
-      pathname: "/shop",
-      query: {
-        search: search,
-      },
-    });
+    // router.push({
+    //   pathname: "/shop",
+    //   query: {
+    //     search: search,
+    //   },
+    // });
   }
 
   return (
@@ -136,55 +150,44 @@ function SearchForm() {
 
         <div className="live-search-list bg-white scrollable">
           {search.length > 2 &&
-            data &&
-            data.products.data.map((product, index) => (
-              <ALink
-                href={`/product/${product.slug}`}
-                className="autocomplete-suggestion"
-                key={`search-result-${index}`}
-              >
-                <LazyLoadImage
-                  effect="opacity"
-                  src={product.large_pictures[0].url}
-                  width={40}
-                  height={40}
-                  alt="product"
-                />
-                <div
-                  className="search-name"
-                  dangerouslySetInnerHTML={removeXSSAttacks(
-                    matchEmphasize(product.name)
-                  )}
-                ></div>
-                <span className="search-price">
-                  {product.price[0] !== product.price[1] ? (
-                    product.variants && product.variants.length === 0 ? (
-                      <>
-                        <span className="new-price mr-1">
-                          ₹{toDecimal(product.price[0])}
-                        </span>
-                        <span className="old-price">
-                          ₹{toDecimal(product.price[1])}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="new-price">
-                        ₹{toDecimal(product.price[0])} – ₹
-                        {toDecimal(product.price[1])}
-                      </span>
-                    )
-                  ) : (
+            data.map((product, index) => {
+              const images =
+                product.images?.items.sort((a, b) => a.position - b.position) ||
+                [];
+
+              const thumbImage = images.find((i) => i.isThumb) ||
+                images[0] || { imageKey: product.imageUrl };
+              return (
+                <ALink
+                  href={`/product/${product.slug}`}
+                  className="autocomplete-suggestion"
+                  key={`search-result-${index}`}
+                >
+                  <LazyLoadImage
+                    effect="opacity"
+                    src={getPublicImageURL(thumbImage.imageKey)}
+                    width={40}
+                    height={40}
+                    alt={thumbImage.alt}
+                  />
+                  <div
+                    className="search-name ml-1"
+                    dangerouslySetInnerHTML={removeXSSAttacks(
+                      matchEmphasize(product.title)
+                    )}
+                  ></div>
+                  <span className="search-price">
                     <span className="new-price">
-                      ₹{toDecimal(product.price[0])}
+                      ₹{toDecimal(product.price)}
                     </span>
-                  )}
-                </span>
-              </ALink>
-            ))}
+                  </span>
+                </ALink>
+              );
+            })}
         </div>
       </form>
     </div>
   );
 }
 
-export default withApollo({ ssr: typeof window === "undefined" })(SearchForm);
+export default React.memo(SearchForm);

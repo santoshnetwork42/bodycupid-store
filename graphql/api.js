@@ -815,3 +815,43 @@ export const findProducts = /* GraphQL */ `
     }
   }
 `;
+
+export const searchProductsBasic = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $sort: [SearchableProductSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductAggregationInput]
+  ) {
+    searchProducts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        title
+        slug
+        price
+        listingPrice
+        thumbImages
+        images {
+          items {
+            id
+            position
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+        }
+      }
+    }
+  }
+`;
