@@ -916,6 +916,9 @@
             display: none;
         }
     }
+    .logo{
+       width: 90px;
+    }
 }
 // Welcome message animation.
 @include mq(480px, max) {
@@ -929,7 +932,7 @@
         .logo {
             margin-right: 0; 
         }
-        .wishlist, .divider {
+        .divider {
             display: none;
         }
         .icon-box { margin-right: 1rem; }
