@@ -10,7 +10,7 @@ import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CartMenu(props) {
-  const { cartList, removeFromCart } = props;
+  const { cartList, removeFromCart, auth } = props;
   const router = useRouter();
 
   useEffect(() => {
@@ -32,10 +32,10 @@ function CartMenu(props) {
   };
 
   return (
-    <div className="dropdown cart-dropdown type2 cart-offcanvas mr-0 mr-lg-2">
+    <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
       <a
         href="#"
-        className="cart-toggle label-block link"
+        className="cart-toggle label-block link mr-2 p-relative"
         onClick={showCartMenu}
       >
         <div className="cart-label d-lg-show">
@@ -48,6 +48,24 @@ function CartMenu(props) {
           <span className="cart-count">{getCartCount(cartList)}</span>
         </i>
       </a>
+      <span className="divider"></span>
+      {!!auth && (
+          <ALink href="/pages/account" className="help label-block d-lg-show">
+          <span className="cart-name mr-1 mb-0">Account</span>  <i className="d-icon-user"></i>
+          </ALink>
+        )}
+        {!auth && (
+          <ALink
+            href="#"
+            className="login-link label-block d-lg-show"
+            onClick={() => {
+              openLogin();
+              return false;
+            }}
+          >
+            <span className="cart-name mr-1 mb-0">Sign in</span><i className="d-icon-user"></i>
+          </ALink>
+        )}
       <div className="cart-overlay" onClick={hideCartMenu}></div>
       <div className="dropdown-box">
         <div className="cart-header">
@@ -61,6 +79,7 @@ function CartMenu(props) {
             <span className="sr-only">Cart</span>
           </ALink>
         </div>
+       
         {cartList.length > 0 ? (
           <>
             <div className="products scrollable">
@@ -143,6 +162,8 @@ function CartMenu(props) {
 function mapStateToProps(state) {
   return {
     cartList: state.cart.data || [],
+
+    auth: !!state.user.data,
   };
 }
 
