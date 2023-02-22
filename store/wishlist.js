@@ -1,5 +1,8 @@
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
+import { toast } from 'react-toastify';
+import CartPopup from '~/components/features/product/common/cart-popup';
+
 
 const actionTypes = {
     TOGGLE_WISHLIST: 'TOGGLE_WISHLIST',
@@ -12,10 +15,13 @@ const initialState = {
 }
 
 function wishlistReducer(state = initialState, action) {
-    switch (action.type) {
-        case actionTypes.TOGGLE_WISHLIST:
-            let index = state.data.findIndex(item => item.id === action.payload.product.id);
-            let tmpData = [...state.data];
+  switch (action.type) {
+    case actionTypes.TOGGLE_WISHLIST:
+      action.payload.product?.notWishlisted && toast(<CartPopup isWishList product={action.payload.product} />);
+      let index = state.data.findIndex(
+        (item) => item.id === action.payload.product.id
+      );
+      let tmpData = [...state.data];
 
             if (index === -1) {
                 tmpData.push(action.payload.product);

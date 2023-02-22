@@ -6,7 +6,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function CartPopup(props) {
-  const { product } = props;
+  const { product, isWishList } = props;
 
   return (
     <div className="minipopup-area">
@@ -35,19 +35,21 @@ export default function CartPopup(props) {
           </div>
         </div>
 
-        <div className="action-group d-flex">
+        <div className="action-group justify-between d-flex">
           <ALink
-            href="/pages/cart"
+            href={`/pages/${isWishList ? "wishlist" : "Cart"}`}
             className="btn btn-sm btn-outline btn-primary btn-rounded"
           >
-            View Cart
+            View {isWishList ? "WishList" : "Cart"}
           </ALink>
-          <ALink
-            href="/pages/checkout"
-            className="btn btn-sm btn-primary btn-rounded"
-          >
-            Check Out
-          </ALink>
+          {!isWishList && (
+            <ALink
+              href="/pages/checkout"
+              className="btn btn-sm btn-primary btn-rounded"
+            >
+              Check Out
+            </ALink>
+          )}
         </div>
       </div>
     </div>

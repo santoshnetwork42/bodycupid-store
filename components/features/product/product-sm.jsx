@@ -24,7 +24,7 @@ function SmallProduct(props) {
             width="300"
             height="338"
           />
-
+ 
           {product.images.items.length >= 2 && (
             <LazyLoadImage
               alt={product.images.items[1].alt}
