@@ -1,5 +1,9 @@
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
+import { toast } from 'react-toastify';
+import { all, call, put, select, takeEvery } from 'redux-saga/effects';
+import WishListPopup from "~/components/features/product/common/wishlist-popup";
+
 
 const actionTypes = {
     TOGGLE_WISHLIST: 'TOGGLE_WISHLIST',
@@ -12,10 +16,13 @@ const initialState = {
 }
 
 function wishlistReducer(state = initialState, action) {
-    switch (action.type) {
-        case actionTypes.TOGGLE_WISHLIST:
-            let index = state.data.findIndex(item => item.id === action.payload.product.id);
-            let tmpData = [...state.data];
+  switch (action.type) {
+    case actionTypes.TOGGLE_WISHLIST:
+       
+        let index = state.data.findIndex(
+        (item) => item.id === action.payload.product.id
+      );
+      let tmpData = [...state.data];
 
             if (index === -1) {
                 tmpData.push(action.payload.product);
@@ -41,6 +48,13 @@ function wishlistReducer(state = initialState, action) {
         default:
     }
     return state;
+}
+export function* wishlistSaga() {
+    yield takeEvery(actionTypes.TOGGLE_WISHLIST, function* saga(e) {
+         e.payload.product?.notWishlisted &&
+         toast(<WishListPopup product={e.payload.product} />);
+    })
+
 }
 
 export const wishlistActions = {

@@ -33,7 +33,7 @@ function ProductTwo(props) {
 
   const wishlistHandler = (e) => {
     if (toggleWishlist) {
-      toggleWishlist(product);
+      toggleWishlist({ ...product, notWishlisted: !isWishlisted });
     }
 
     e.preventDefault();
