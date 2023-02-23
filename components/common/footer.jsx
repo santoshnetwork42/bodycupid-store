@@ -1,28 +1,6 @@
-import { useEffect, useState } from "react";
 import ALink from "~/components/features/custom-link";
-import { API, graphqlOperation } from "aws-amplify";
-import { searchProductSubCategories } from "~/graphql/api";
 
 export default function Footer() {
-  const [subCategaries, setSubCategaries] = useState([]);
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(searchProductSubCategories, {
-        filter: {
-          categoryID: { exists: true },
-        },
-        limit: 10,
-      })
-    ).then(
-      ({
-        data: {
-          searchProductSubCategories: { items },
-        },
-      }) => {
-        setSubCategaries(items);
-      }
-    );
-  }, []);
   return (
     <footer className="footer">
       <div className="container">
@@ -66,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-middle">
-          <div className="row">
+          <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-md-6">
               <div className="widget widget-info">
                 <h4 className="widget-title">Contact Info</h4>
@@ -95,41 +73,36 @@ export default function Footer() {
                 </ul>
               </div>
             </div>
+
             <div className="col-lg-3 col-md-6">
-              <div className="widget ml-lg-4">
-                <h4 className="widget-title">Shop</h4>
-                <ul className="widget-body">
-                  {!!subCategaries.length &&
-                    subCategaries.map((subCat, i) => (
-                      <li key={i}>
-                        <ALink
-                          href={`/collections/${subCat.category.slug}/${subCat.slug}`}
-                        >
-                          {subCat.name}
-                        </ALink>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6">
-              <div className="widget ml-lg-4">
-                <h4 className="widget-title">Contact Info</h4>
+              <div className="widget  ml-lg-4">
+                {/* <h4 className="widget-title">Contact Info</h4> */}
                 <ul className="widget-body">
                   <li>
-                    <ALink href="/pages/login">Sign in</ALink>
+                    <ALink href="/pages/about-us">About Us</ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/cart">View Cart</ALink>
+                    <ALink href="/policies/refund-policy">
+                      Return / Refund / Cancellation Policy
+                    </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/wishlist">My Wishlist</ALink>
+                    <ALink href="/policies/terms-of-service">
+                      Terms & Condition
+                    </ALink>
                   </li>
                   <li>
-                    <ALink href="#">Track My Order</ALink>
+                    <ALink href="/policies/privacy-policy">
+                      Privacy Policy
+                    </ALink>
                   </li>
                   <li>
-                    <ALink href="#">Help</ALink>
+                    <ALink href="/pages/shipping-and-delivery-policy">
+                      Shipping and Delivery Policy
+                    </ALink>
+                  </li>
+                  <li>
+                    <ALink href="/pages/contacts">Contact</ALink>
                   </li>
                 </ul>
               </div>

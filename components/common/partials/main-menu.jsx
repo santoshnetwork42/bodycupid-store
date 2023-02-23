@@ -66,9 +66,7 @@ function MainMenu() {
           </li>
         ))}
 
-        <li>
-          <ALink href="/contact">Contact</ALink>
-        </li>
+     
       </ul>
     </nav>
   );

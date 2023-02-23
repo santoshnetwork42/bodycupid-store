@@ -88,6 +88,7 @@ const AddressForm = ({
                   required
                   value={address.name}
                   onChange={(e) => setAddress({ name: e.target.value })}
+                  onBlur={(e) => setAddress({ name: e.target.value.trim() })}
                 />
               </div>
               <div className="col-xs-6">
@@ -101,6 +102,7 @@ const AddressForm = ({
                     value={removePhonePrefix(address.phone)}
                     required
                     onChange={(e) => setAddress({ phone: e.target.value })}
+                    onBlur={(e) => setAddress({ phone: e.target.value.trim() })}
                   />
                 </div>
               </div>
@@ -113,6 +115,7 @@ const AddressForm = ({
                   required
                   value={address.email}
                   onChange={(e) => setAddress({ email: e.target.value })}
+                  onBlur={(e) => setAddress({ email: e.target.value.trim() })}
                 />
               </div>
               {/* <div className="col-xs-12">
@@ -146,6 +149,7 @@ const AddressForm = ({
               placeholder="House number and street name"
               value={address.address}
               onChange={(e) => setAddress({ address: e.target.value })}
+              onBlur={(e) => setAddress({ address: e.target.value.trim() })}
             />
             <div className="row">
               <div className="col-xs-6">
@@ -157,6 +161,9 @@ const AddressForm = ({
                   placeholder="Landmark (optional)"
                   value={address.landmark}
                   onChange={(e) => setAddress({ landmark: e.target.value })}
+                  onBlur={(e) =>
+                    setAddress({ landmark: e.target.value.trim() })
+                  }
                 />
               </div>
               <div className="col-xs-6">
@@ -168,6 +175,7 @@ const AddressForm = ({
                   placeholder="Area (optional)"
                   value={address.area}
                   onChange={(e) => setAddress({ area: e.target.value })}
+                  onBlur={(e) => setAddress({ area: e.target.value.trim() })}
                 />
               </div>
             </div>
@@ -181,6 +189,7 @@ const AddressForm = ({
                   required
                   value={address.city}
                   onChange={(e) => setAddress({ city: e.target.value })}
+                  onBlur={(e) => setAddress({ city: e.target.value.trim() })}
                 />
               </div>
               <div className="col-xs-6">
@@ -192,6 +201,7 @@ const AddressForm = ({
                   required
                   value={address.state}
                   onChange={(e) => setAddress({ state: e.target.value })}
+                  onBlur={(e) => setAddress({ state: e.target.value.trim() })}
                 />
               </div>
             </div>
@@ -205,6 +215,7 @@ const AddressForm = ({
                   required
                   value={address.pinCode}
                   onChange={(e) => setAddress({ pinCode: e.target.value })}
+                  onBlur={(e) => setAddress({ pinCode: e.target.value.trim() })}
                 />
               </div>
             </div>
