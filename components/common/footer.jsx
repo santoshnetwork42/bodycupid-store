@@ -31,7 +31,7 @@ export default function Footer() {
             <div className="col-lg-3">
               <ALink href="/" className="logo-footer">
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo-footer.png"
                   alt="logo-footer"
                   width="154"
                   height="43"

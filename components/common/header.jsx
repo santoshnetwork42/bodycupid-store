@@ -31,8 +31,6 @@ function Header({ auth, openLogin }) {
 
   return (
     <header className="header header-border">
-        
-
       <div className="header-middle sticky-header fix-top sticky-content">
         <div className="container">
           <div className="header-left">
@@ -76,13 +74,6 @@ function Header({ auth, openLogin }) {
         <div className="container">
           <div className="header-left">
             <MainMenu />
-          </div>
-
-          <div className="header-right">
-            <ALink href="#">
-              <i className="d-icon-card"></i>Special Offers
-            </ALink>
-           
           </div>
         </div>
       </div>

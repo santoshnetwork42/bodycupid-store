@@ -127,7 +127,7 @@
         color: inherit;
         transition: color .3s;
         &:hover {
-            color: $primary-color;
+            opacity: 70%;
         }
     }
     :focus {
