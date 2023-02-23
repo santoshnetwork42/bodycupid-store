@@ -22,7 +22,7 @@ function DetailOne(props) {
     adClass = "",
     isNav = true,
     variantId: selectedVaraint,
-    setVariant,
+    setVariant = () => {},
   } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
