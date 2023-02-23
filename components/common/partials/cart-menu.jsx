@@ -8,9 +8,11 @@ import { cartActions } from "~/store/cart";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { modalActions } from "~/store/modal";
+
 
 function CartMenu(props) {
-  const { cartList, removeFromCart, auth } = props;
+  const { cartList, removeFromCart, auth,openLogin } = props;
   const router = useRouter();
 
   useEffect(() => {
@@ -169,4 +171,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
+  openLogin: modalActions.openLoginModal,
 })(CartMenu);

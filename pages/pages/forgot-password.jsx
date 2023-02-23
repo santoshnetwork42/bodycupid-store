@@ -22,7 +22,7 @@ function ForgotPassword() {
       e.preventDefault();
       try {
         if (!showOTP) {
-          await Auth.forgotPassword(state.phone);
+          await Auth.forgotPassword(addPhonePrefix(state.phone));
           setShowOTP(true);
         } else {
           await Auth.forgotPasswordSubmit(
