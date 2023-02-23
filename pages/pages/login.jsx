@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
-import ErrorPopup from "~/components/features/product/common/error-popup";
+import AlertPopup from "~/components/features/product/common/alert-popup";
 
 function Login({ auth, redirect = true, closeLogin }) {
   const router = useRouter();
@@ -47,7 +47,7 @@ function Login({ auth, redirect = true, closeLogin }) {
         setConfirmSignUp("SIGNUP");
       } catch (error) {
         console.log("error signing up:", error);
-        toast(<ErrorPopup message={error.message} />);
+        toast(<AlertPopup message={error.message} status="error" />);
       }
       return false;
     },
@@ -72,7 +72,7 @@ function Login({ auth, redirect = true, closeLogin }) {
         }
       } catch (error) {
         console.log("error signup confirm:", error);
-        toast(<ErrorPopup message={error.message} />);
+        toast(<AlertPopup message={error.message} status="error" />);
       }
       return false;
     },
@@ -97,7 +97,7 @@ function Login({ auth, redirect = true, closeLogin }) {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
         } else {
-          toast(<ErrorPopup message={error.message} />);
+          toast(<AlertPopup message={error.message} status="success" />);
         }
       }
       return false;
