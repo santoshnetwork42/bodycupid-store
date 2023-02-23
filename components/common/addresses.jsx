@@ -7,6 +7,7 @@ import ALink from "~/components/features/custom-link";
 import { listUserAddresses } from "~/graphql/queries";
 import { deleteUserAddress } from "~/graphql/mutations";
 import AddressForm from "./addressForm";
+import { findUserAddresses } from "~/graphql/api";
 
 const modalStyles = {
   content: {
@@ -38,7 +39,6 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
     location: "",
     area: "",
   });
-
   useEffect(() => {
     if (!newSelected && autoSelect && addresses.length) {
       setSelected(addresses[0]?.id);
@@ -47,9 +47,12 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
 
   const getUserAddress = useCallback(async () => {
     const {
-      data: { listUserAddresses: userAddresses },
+      data: { searchUserAddresses: userAddresses },
     } = await API.graphql({
-      query: listUserAddresses,
+      query: findUserAddresses,
+      variables: {
+        filter: { userID: { eq: user.username } },
+      },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
