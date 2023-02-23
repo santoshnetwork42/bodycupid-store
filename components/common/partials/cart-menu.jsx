@@ -10,9 +10,8 @@ import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { modalActions } from "~/store/modal";
 
-
 function CartMenu(props) {
-  const { cartList, removeFromCart, auth,openLogin } = props;
+  const { cartList, removeFromCart, auth, openLogin } = props;
   const router = useRouter();
 
   useEffect(() => {
@@ -52,22 +51,24 @@ function CartMenu(props) {
       </a>
       <span className="divider"></span>
       {!!auth && (
-          <ALink href="/pages/account" className="help label-block d-lg-show">
-          <span className="cart-name mr-1 mb-0">Account</span>  <i className="d-icon-user"></i>
-          </ALink>
-        )}
-        {!auth && (
-          <ALink
-            href="#"
-            className="login-link label-block d-lg-show"
-            onClick={() => {
-              openLogin();
-              return false;
-            }}
-          >
-            <span className="cart-name mr-1 mb-0">Sign in</span><i className="d-icon-user"></i>
-          </ALink>
-        )}
+        <ALink href="/pages/account" className="help label-block d-lg-show">
+          <span className="cart-name mr-1 mb-0">Account</span>{" "}
+          <i className="d-icon-user"></i>
+        </ALink>
+      )}
+      {!auth && (
+        <ALink
+          href="#"
+          className="login-link label-block d-lg-show"
+          onClick={() => {
+            openLogin();
+            return false;
+          }}
+        >
+          <span className="cart-name mr-1 mb-0">Sign in</span>
+          <i className="d-icon-user"></i>
+        </ALink>
+      )}
       <div className="cart-overlay" onClick={hideCartMenu}></div>
       <div className="dropdown-box">
         <div className="cart-header">
@@ -81,7 +82,7 @@ function CartMenu(props) {
             <span className="sr-only">Cart</span>
           </ALink>
         </div>
-       
+
         {cartList.length > 0 ? (
           <>
             <div className="products scrollable">
