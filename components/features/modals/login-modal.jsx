@@ -34,6 +34,14 @@ function LoginModal({ isOpen, redirect = true, closeLoginModal }) {
       className="auth-popup bg-img"
     >
       <AuthView redirect={redirect} />
+      <button
+        title="Close (Esc)"
+        type="button"
+        className="mfp-close"
+        onClick={() => closeLoginModal()}
+      >
+        <span>×</span>
+      </button>
     </Modal>
   );
 }

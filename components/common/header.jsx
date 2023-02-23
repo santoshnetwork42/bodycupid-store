@@ -90,12 +90,6 @@ function Header({ auth, openLogin }) {
           <div className="header-left">
             <MainMenu />
           </div>
-
-          <div className="header-right">
-            <ALink href="#">
-              <i className="d-icon-card"></i>Special Offers
-            </ALink>
-          </div>
         </div>
       </div>
     </header>

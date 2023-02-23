@@ -21,7 +21,7 @@ function CtaSection() {
                 <div className="container">
                     <div className="banner-content">
                         <h4 className="banner-subtitle text-white font-weight-bold ls-l">
-                            Extra<span className="d-inline-block label-star bg-dark text-primary ml-4 mr-2">30% Off</span>Online
+                            Extra<span className="d-inline-block label-star bg-dark  ml-4 mr-2">30% Off</span>Online
                         </h4>
 
                         <h3 className="banner-title font-weight-bold text-white">Summer Season Sale</h3>

@@ -181,6 +181,12 @@
         display: inline-block;
         margin: 0 .8rem 0 0 ;
     }
+    &.error-height{
+        width: 500px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+    }
     p { 
         display: inline;
     }
