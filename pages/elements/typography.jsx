@@ -12,7 +12,7 @@ function Typography() {
                 <title>Wow life science | Typography</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Typography</h1>
+            <h1 className="d-none">Wow life science - Typography</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Typography" parentUrl="/elements" />
 

@@ -92,7 +92,7 @@ function Account({ user }) {
         <title>Wow life science | Account</title>
       </Helmet>
 
-      <h1 className="d-none">Wow React eCommerce Template - Account</h1>
+      <h1 className="d-none">Wow life science - Account</h1>
 
       <nav className="breadcrumb-nav">
         <div className="container">

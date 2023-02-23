@@ -20,7 +20,7 @@ const modalStyles = {
 
 Modal.setAppElement("#__next");
 
-function LoginModal({ isOpen, closeLoginModal }) {
+function LoginModal({ isOpen, redirect = true, closeLoginModal }) {
   console.log(isOpen);
   if (!isOpen) return <></>;
 
@@ -33,7 +33,7 @@ function LoginModal({ isOpen, closeLoginModal }) {
       overlayClassName="auth-modal-overlay"
       className="auth-popup bg-img"
     >
-      <AuthView />
+      <AuthView redirect={redirect} />
     </Modal>
   );
 }
@@ -42,6 +42,7 @@ function mapStateToProps(state) {
   return {
     auth: !!state.user.data,
     isOpen: state.modal.login,
+    redirect: state.modal.loginRedirect,
   };
 }
 

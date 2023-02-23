@@ -15,7 +15,7 @@ function ComingSoon() {
                 <title>Wow life science | FAQs</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - FAQs</h1>
+            <h1 className="d-none">Wow life science - FAQs</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

@@ -6,10 +6,7 @@ import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import Card from "~/components/features/accordion/card";
-import AuthView from "~/pages/pages/login";
-import { createPayment, updateOrder } from "~/graphql/mutations";
-
+import { createPayment, createOrder, createOrderProduct } from "~/graphql/api";
 import {
   toDecimal,
   getTotalPrice,
@@ -18,12 +15,14 @@ import {
   getCouponTotal,
 } from "~/utils";
 import { cartActions } from "~/store/cart";
+import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import AddressForm from "~/components/common/addressForm";
+import Coupons from "~/components/features/coupon";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, appliedCoupon, order, updateCartOrder } =
-    props;
+  const { cartList, user, emptyCart, appliedCoupon, openLogin } = props;
+
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
@@ -33,66 +32,63 @@ function Checkout(props) {
       e.preventDefault();
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
       const payload = {
-        id: order?.id,
         userId: user?.username,
         status: "CONFIRMED",
+        totalAmount: getFinalPrice(cartList, appliedCoupon),
         totalDiscount: getCouponTotal(appliedCoupon, cartList),
         totalShippingCharges: getShippingPrice(cartList),
         orderDate: new Date().toISOString(),
+        shippingAddress,
       };
 
-      if (shippingAddress) {
-        payload.shippingAddress = shippingAddress;
-      }
+      const {
+        data: {
+          createOrder: { id: orderId },
+        },
+      } = await API.graphql({
+        query: createOrder,
+        variables: { input: payload },
+        authMode,
+      });
 
-      await Promise.all([
-        API.graphql({
-          query: updateOrder,
-          variables: {
-            input: payload,
-          },
-          authMode,
-        }),
+      const promise = [
         API.graphql({
           query: createPayment,
           variables: {
             input: {
-              userId: user?.username || null,
-              orderId: order?.id,
+              userId: user?.username,
+              orderId,
               method: isFirst ? "ONLINE" : "COD",
               amount: getFinalPrice(cartList, appliedCoupon),
             },
           },
           authMode,
         }),
-      ]);
-      router.push(`/order/${order?.id}`);
+        ...cartList.map((p) =>
+          API.graphql({
+            query: createOrderProduct,
+            variables: {
+              input: {
+                orderId,
+                productId: p.id,
+                variantId: p.variantId,
+                quantity: p.qty,
+                price: p.price,
+                title: p.title,
+                totalPrice: parseInt(p.qty) * parseInt(p.price),
+              },
+            },
+            authMode,
+          })
+        ),
+      ];
+
+      await Promise.all(promise);
+      await router.push(`/order/${orderId}`);
       await emptyCart();
       return false;
     },
-    [order, user, isFirst, appliedCoupon, shippingAddress]
-  );
-
-  const updateShippingAddress = useCallback(
-    async (address) => {
-      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
-      const { id, ...restAddress } = address;
-      const {
-        data: { updateOrder: response },
-      } = await API.graphql({
-        query: updateOrder,
-        variables: {
-          input: {
-            id: order?.id,
-            userId: user?.username,
-            shippingAddress: restAddress,
-          },
-        },
-        authMode,
-      });
-      updateCartOrder({ ...response, shippingAddressId: id });
-    },
-    [order, user]
+    [user, isFirst, appliedCoupon, shippingAddress, cartList]
   );
 
   const codDisabled = useMemo(
@@ -106,7 +102,7 @@ function Checkout(props) {
         <title>Wow life science | Checkout</title>
       </Helmet>
 
-      <h1 className="d-none">Wow React eCommerce Template - Checkout</h1>
+      <h1 className="d-none">Wow life science - Checkout</h1>
 
       <div
         className={`page-content pt-7 pb-10 ${
@@ -123,65 +119,31 @@ function Checkout(props) {
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
         <div className="container mt-7">
-          {cartList.length > 0 && order ? (
+          {cartList.length > 0 ? (
             <>
               {!user && (
                 <div className="card accordion">
-                  <Card
-                    type="parse"
-                    title="<div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
-                            <i class='fas fa-exclamation-circle'></i> <span class='text-body'>Returning customer?</span> <a href='#' class='text-primary collapse'>Click here to login</a>
-                        </div>"
-                  >
-                    <div className="alert-body collapsed">
-                      <AuthView redirect={false} />
-                    </div>
-                  </Card>
+                  <div className="alert alert-light alert-primary alert-icon mb-4 card-header">
+                    <i className="fas fa-exclamation-circle"></i>{" "}
+                    <span className="text-body">Returning customer?</span>{" "}
+                    <ALink
+                      href="#"
+                      onClick={() => openLogin(false)}
+                      className="text-primary collapse"
+                    >
+                      Click here to login
+                    </ALink>
+                  </div>
                 </div>
               )}
-              {/* <div className="card accordion">
-                <Card
-                  title="
-                                            <div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
-                                                <i class='fas fa-exclamation-circle'></i>
-                                                <span class='text-body'>Have a coupon?</span>
-                                                <a href='#' class='text-primary'>Click here to enter your code</a>
-                                            </div>"
-                  type="parse"
-                >
-                  <div className="alert-body mb-4 collapsed">
-                    <p>If you have a coupon code, please apply it below.</p>
-                    <form className="check-coupon-box d-flex">
-                      <input
-                        type="text"
-                        name="coupon_code"
-                        className="input-text form-control text-grey ls-m mr-4"
-                        id="coupon_code"
-                        placeholder="Coupon code"
-                      />
-                      <button
-                        type="submit"
-                        className="btn btn-dark btn-rounded btn-outline"
-                      >
-                        Apply Coupon
-                      </button>
-                    </form>
-                  </div>
-                </Card>
-              </div> */}
+              <Coupons layout="checkout" />
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
                   <h3 className="title title-simple text-left text-uppercase">
                     Shipping Address
                   </h3>
-                  {!!user && (
-                    <Addresses
-                      selected={order?.shippingAddressId}
-                      autoSelect
-                      onSelect={updateShippingAddress}
-                    />
-                  )}
+                  {!!user && <Addresses autoSelect onSelect={setAddress} />}
                   {!user && (
                     <AddressForm onAddressChange={setAddress} hideSubmit />
                   )}
@@ -375,7 +337,6 @@ function Checkout(props) {
 
 function mapStateToProps(state) {
   return {
-    order: state.cart.order,
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
@@ -384,5 +345,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
-  updateCartOrder: cartActions.updateOrder,
+  openLogin: modalActions.openLoginModal,
 })(Checkout);

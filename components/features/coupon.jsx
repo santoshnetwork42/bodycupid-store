@@ -24,7 +24,14 @@ const modalStyles = {
 };
 
 function Coupon(props) {
-  const { user, cartList, applyCoupon, removeCoupon, appliedCoupon } = props;
+  const {
+    user,
+    cartList,
+    applyCoupon,
+    removeCoupon,
+    appliedCoupon,
+    layout = "cart",
+  } = props;
   const [coupon, setCoupon] = useState("");
   const [featured, setFeatured] = useState([]);
   const [isOpen, setOpen] = useState(false);
@@ -73,41 +80,58 @@ function Coupon(props) {
 
   return (
     <>
-      <div className="cart-coupon-box mb-4">
-        <div>
-          <h4 className="title coupon-title text-uppercase ls-m">
-            Coupon Discount
-          </h4>
-          {!appliedCoupon && (
-            <span className="coupon-subtitle">
-              Save more with coupon and offers
-            </span>
+      {layout === "cart" && (
+        <div className="cart-coupon-box mb-4">
+          <div>
+            <h4 className="title coupon-title text-uppercase ls-m">
+              Coupon Discount
+            </h4>
+            {!appliedCoupon && (
+              <span className="coupon-subtitle">
+                Save more with coupon and offers
+              </span>
+            )}
+            {!!appliedCoupon && (
+              <span className="coupon-subtitle">
+                {appliedCoupon.code} applied
+              </span>
+            )}
+          </div>
+          {!!featured?.length && !appliedCoupon && (
+            <a
+              className="coupon-offer"
+              type="button"
+              onClick={() => setOpen(true)}
+            >{`${featured?.length} Offers >`}</a>
           )}
           {!!appliedCoupon && (
-            <span className="coupon-subtitle">
-              {appliedCoupon.code} applied
-            </span>
+            <ALink
+              key={appliedCoupon.id}
+              href="#"
+              className="product-remove"
+              title="Remove coupon"
+              onClick={() => removeCoupon()}
+            >
+              <i className="fas fa-times"></i>
+            </ALink>
           )}
         </div>
-        {!!featured?.length && !appliedCoupon && (
-          <a
-            className="coupon-offer"
-            type="button"
-            onClick={() => setOpen(true)}
-          >{`${featured?.length} Offers >`}</a>
-        )}
-        {!!appliedCoupon && (
-          <ALink
-            key={appliedCoupon.id}
-            href="#"
-            className="product-remove"
-            title="Remove coupon"
-            onClick={() => removeCoupon()}
-          >
-            <i className="fas fa-times"></i>
-          </ALink>
-        )}
-      </div>
+      )}
+      {layout === "checkout" && (
+        <div className="card accordion">
+          <div className="alert alert-light alert-primary alert-icon mb-4 card-header">
+            <i className="d-icon-percent"></i>
+            <span className="text-body">Have a coupon?</span>{" "}
+            <ALink
+              href="#"
+              onClick={() => setOpen(true)}
+              className="text-primary collapse"
+            >
+              Click here to apply
+            </ALink>
+          </div>
+        </div>
+      )}
       <Modal
         isOpen={isOpen}
         style={modalStyles}
@@ -186,7 +210,6 @@ function mapStateToProps(state) {
   return {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
-    order: state.cart.order,
     appliedCoupon: state.cart.coupon,
   };
 }

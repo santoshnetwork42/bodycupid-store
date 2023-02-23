@@ -69,7 +69,7 @@ function PostMasonrySidebar() {
                 <title>Wow life science | Blog Masonry With Sidebar</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog Masonry With Sidebar</h1>
+            <h1 className="d-none">Wow life science - Blog Masonry With Sidebar</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

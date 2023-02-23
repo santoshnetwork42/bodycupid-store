@@ -48,7 +48,7 @@ function ShopHorizontalFilter() {
                 <title>Wow life science - Shop Horizontal Filter</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop Horizontal Filter</h1>
+            <h1 className="d-none">Wow life science - Shop Horizontal Filter</h1>
 
             <ShopBanner subTitle="Categories" title="Horizontal Filter" current="Horizontal Filter" />
 

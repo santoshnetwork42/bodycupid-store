@@ -13,7 +13,7 @@ function ShopRightSidebar() {
                 <title>Wow life science - Shop With Right Sidebar</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop With Right Sidebar</h1>
+            <h1 className="d-none">Wow life science - Shop With Right Sidebar</h1>
 
             <ShopBanner subTitle="Categories" title="With Right Sidebar" current="With Right Sidebar" />
 

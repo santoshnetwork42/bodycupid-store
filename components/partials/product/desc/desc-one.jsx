@@ -9,14 +9,16 @@ import { modalActions } from "~/store/modal";
 import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
 
+const reviewDefault = {
+  rating: 1,
+  comment: "",
+  name: "",
+  email: "",
+};
+
 function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
-  const [reviewState, setReview] = useSetState({
-    rating: 1,
-    comment: "",
-    name: "",
-    email: "",
-  });
+  const [reviewState, setReview] = useSetState({ ...reviewDefault });
 
   let sizes = [];
   if (product.variants.items.length > 0) {
@@ -63,6 +65,7 @@ function DescOne(props) {
             },
           },
         });
+        setReview({ ...reviewDefault });
       } catch (err) {
         console.log(err);
       }
@@ -203,59 +206,7 @@ function DescOne(props) {
         </TabPanel>
 
         <TabPanel className="tab-pane product-tab-reviews">
-          {product.reviews.items.length === 0 ? (
-            <div className="comments mb-2 pt-2 pb-2 border-no">
-              There are no reviews yet.
-            </div>
-          ) : (
-            <div className="comments mb-8 pt-2 pb-2 border-no">
-              <ul>
-                {product.reviews.items.map((review) => (
-                  <li key={review.id}>
-                    <div className="comment">
-                      {/* <figure className="comment-media">
-                        <ALink href="#">
-                          <img
-                            src="/images/blog/comments/1.jpg"
-                            alt="avatar"
-                            width="100"
-                            height="100"
-                          />
-                        </ALink>
-                      </figure> */}
-                      <div className="comment-body">
-                        <div className="comment-rating ratings-container mb-0">
-                          <div className="ratings-full">
-                            <span
-                              className="ratings"
-                              style={{ width: review.rating * 20 + "%" }}
-                            ></span>
-                            <span className="tooltiptext tooltip-top">
-                              {toDecimal(review.rating)}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="comment-user">
-                          <span className="comment-date text-body">
-                            {formateDate(review.createdAt)}
-                          </span>
-                          <h4>
-                            <ALink href="#">{review.reviewer.name}</ALink>
-                          </h4>
-                        </div>
-
-                        <div className="comment-content">
-                          <p>{review.comment}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="reply">
+          <div className="reply mt-8 mb-8">
             <div className="title-wrapper text-left">
               <h3 className="title title-simple text-left text-normal">
                 {product.reviews > 0
@@ -329,6 +280,57 @@ function DescOne(props) {
               </button>
             </form>
           </div>
+          {product.reviews.items.length === 0 ? (
+            <div className="comments mb-2 pt-2 pb-2 border-no">
+              There are no reviews yet.
+            </div>
+          ) : (
+            <div className="comments mb-8 pt-2 pb-2 border-no">
+              <ul>
+                {product.reviews.items.map((review) => (
+                  <li key={review.id}>
+                    <div className="comment">
+                      {/* <figure className="comment-media">
+                        <ALink href="#">
+                          <img
+                            src="/images/blog/comments/1.jpg"
+                            alt="avatar"
+                            width="100"
+                            height="100"
+                          />
+                        </ALink>
+                      </figure> */}
+                      <div className="comment-body">
+                        <div className="comment-rating ratings-container mb-0">
+                          <div className="ratings-full">
+                            <span
+                              className="ratings"
+                              style={{ width: review.rating * 20 + "%" }}
+                            ></span>
+                            <span className="tooltiptext tooltip-top">
+                              {toDecimal(review.rating)}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="comment-user">
+                          <span className="comment-date text-body">
+                            {formateDate(review.createdAt)}
+                          </span>
+                          <h4>
+                            <ALink href="#">{review.reviewer.name}</ALink>
+                          </h4>
+                        </div>
+
+                        <div className="comment-content">
+                          <p>{review.comment}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </TabPanel>
       </div>
     </Tabs>

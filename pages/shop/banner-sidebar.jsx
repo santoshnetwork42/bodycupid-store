@@ -13,7 +13,7 @@ function ShopBannerSidebar() {
                 <title>Wow life science - Shop Banner Sidebar Page</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop Banner Sidebar Page</h1>
+            <h1 className="d-none">Wow life science - Shop Banner Sidebar Page</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

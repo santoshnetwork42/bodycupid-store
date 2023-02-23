@@ -44,7 +44,7 @@ function ProductRightSidebar() {
                 <title>Wow life science | Product With Right Sidebar</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product With Right Sidebar</h1>
+            <h1 className="d-none">Wow life science - Product With Right Sidebar</h1>
 
             {
                 product !== undefined ?

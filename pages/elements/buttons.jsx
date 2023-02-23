@@ -23,7 +23,7 @@ function Buttons() {
                 <title>Wow life science | Buttons</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Buttons</h1>
+            <h1 className="d-none">Wow life science - Buttons</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Buttons" parentUrl="/elements" />
 

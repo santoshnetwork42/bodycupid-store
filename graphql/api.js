@@ -863,3 +863,107 @@ export const createReview = /* GraphQL */ `
     }
   }
 `;
+
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    createOrder(input: $input, condition: $condition) {
+      id
+    }
+  }
+`;
+
+export const createPayment = /* GraphQL */ `
+  mutation CreatePayment(
+    $input: CreatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    createPayment(input: $input, condition: $condition) {
+      id
+    }
+  }
+`;
+
+export const createOrderProduct = /* GraphQL */ `
+  mutation CreateOrderProduct(
+    $input: CreateOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    createOrderProduct(input: $input, condition: $condition) {
+      id
+    }
+  }
+`;
+
+export const createShoppingCartProduct = /* GraphQL */ `
+  mutation CreateShoppingCartProduct(
+    $input: CreateShoppingCartProductInput!
+    $condition: ModelShoppingCartProductConditionInput
+  ) {
+    createShoppingCartProduct(input: $input, condition: $condition) {
+      id
+      shoppingcartId
+      productId
+      variantId
+      quantity
+    }
+  }
+`;
+export const updateShoppingCartProduct = /* GraphQL */ `
+  mutation UpdateShoppingCartProduct(
+    $input: UpdateShoppingCartProductInput!
+    $condition: ModelShoppingCartProductConditionInput
+  ) {
+    updateShoppingCartProduct(input: $input, condition: $condition) {
+      id
+      shoppingcartId
+      productId
+      variantId
+      quantity
+    }
+  }
+`;
+export const deleteShoppingCartProduct = /* GraphQL */ `
+  mutation DeleteShoppingCartProduct(
+    $input: DeleteShoppingCartProductInput!
+    $condition: ModelShoppingCartProductConditionInput
+  ) {
+    deleteShoppingCartProduct(input: $input, condition: $condition) {
+      id
+      shoppingcartId
+      productId
+      variantId
+      quantity
+      updatedAt
+    }
+  }
+`;
+
+export const createShoppingCart = /* GraphQL */ `
+  mutation CreateShoppingCart(
+    $input: CreateShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    createShoppingCart(input: $input, condition: $condition) {
+      id
+      storeId
+      userId
+      couponCodeId
+    }
+  }
+`;
+export const updateShoppingCart = /* GraphQL */ `
+  mutation UpdateShoppingCart(
+    $input: UpdateShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    updateShoppingCart(input: $input, condition: $condition) {
+      id
+      storeId
+      userId
+      couponCodeId
+    }
+  }
+`;

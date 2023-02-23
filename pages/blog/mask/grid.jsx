@@ -51,7 +51,7 @@ function PostMaskGrid({ router }) {
                 <title>Wow life science | Blog Mask Grid</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog Mask Grid</h1>
+            <h1 className="d-none">Wow life science - Blog Mask Grid</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

@@ -14,7 +14,7 @@ function Alert(props) {
                 <title>Wow life science | Alert &amp; Notification</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Alert &amp; Notification</h1>
+            <h1 className="d-none">Wow life science - Alert &amp; Notification</h1>
 
             <BreadCrumb
                 subTitle="Elements"

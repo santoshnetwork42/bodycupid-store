@@ -51,7 +51,7 @@ function PostGrid({ router }) {
                 <title>Wow life science | Blog Grid {column}</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog Grid {column}</h1>
+            <h1 className="d-none">Wow life science - Blog Grid {column}</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

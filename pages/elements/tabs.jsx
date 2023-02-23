@@ -13,7 +13,7 @@ function ElementTabs() {
                 <title>Wow life science | Tabs</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Tabs</h1>
+            <h1 className="d-none">Wow life science - Tabs</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Tabs" parentUrl="/elements" />
 

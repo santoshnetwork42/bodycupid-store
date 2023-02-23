@@ -12,7 +12,7 @@ function InfiniteScroll() {
                 <title>Wow life science - Shop Ajax Infinite Scroll</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop Ajax Infinite Scroll</h1>
+            <h1 className="d-none">Wow life science - Shop Ajax Infinite Scroll</h1>
 
             <ShopBanner />
 

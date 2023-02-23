@@ -72,7 +72,7 @@ function PostMasonry({ router }) {
                 <title>Wow life science | Blog Mask Masonry</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog Mask Masonry</h1>
+            <h1 className="d-none">Wow life science - Blog Mask Masonry</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

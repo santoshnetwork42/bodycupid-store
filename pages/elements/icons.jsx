@@ -13,7 +13,7 @@ function Icons() {
                 <title>Wow life science | Icons</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Icons</h1>
+            <h1 className="d-none">Wow life science - Icons</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Icons" parentUrl="/elements" />
 

@@ -32,7 +32,7 @@ function BlogPosts() {
                 <title>Wow life science | Blog</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog</h1>
+            <h1 className="d-none">Wow life science - Blog</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Blog" parentUrl="/elements" />
 

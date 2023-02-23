@@ -30,7 +30,7 @@ function Products() {
                 <title>Wow life science | Products</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Products</h1>
+            <h1 className="d-none">Wow life science - Products</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Products" parentUrl="/elements" />
 

@@ -14,7 +14,7 @@ function Order(props) {
         <title>Wow life science | Order</title>
       </Helmet>
 
-      <h1 className="d-none">Wow React eCommerce Template - Order</h1>
+      <h1 className="d-none">Wow life science - Order</h1>
 
       <div className="page-content pt-7 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">

@@ -12,7 +12,7 @@ function ShopOffCanvas() {
                 <title>Wow life science - Shop Off-Canvas Filter</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop Off-Canvas Filter</h1>
+            <h1 className="d-none">Wow life science - Shop Off-Canvas Filter</h1>
 
             <ShopBanner subTitle="Categories" title="Off-Canvas Filter" current="Product Tag - off-canvas filter" />
 

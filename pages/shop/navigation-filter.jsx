@@ -18,7 +18,7 @@ function ShopNavigationFilter() {
                 <title>Wow life science - Shop Navigation Filter</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Shop Navigation Filter</h1>
+            <h1 className="d-none">Wow life science - Shop Navigation Filter</h1>
 
             <ShopBanner subTitle="categories" title="Navigation Filter" current="Navigation Filter" />
 

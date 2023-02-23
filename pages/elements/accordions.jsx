@@ -14,7 +14,7 @@ function Accordions() {
                 <title>Wow life science | Accordions</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Accordions</h1>
+            <h1 className="d-none">Wow life science - Accordions</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Accordions" parentUrl="/elements" />
 

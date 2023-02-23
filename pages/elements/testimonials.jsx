@@ -25,7 +25,7 @@ function ElementTabs() {
                 <title>Wow life science | Testimonials</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Testimonials</h1>
+            <h1 className="d-none">Wow life science - Testimonials</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Tabs" parentUrl="/elements" />
 

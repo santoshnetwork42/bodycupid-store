@@ -24,7 +24,7 @@ function Wishlist(props) {
         <title>Wow life science | Wishlist</title>
       </Helmet>
 
-      <h1 className="d-none">Wow React eCommerce Template - Wishlist</h1>
+      <h1 className="d-none">Wow life science - Wishlist</h1>
       <nav className="breadcrumb-nav">
         <div className="container">
           <ul className="breadcrumb">

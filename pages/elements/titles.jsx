@@ -12,7 +12,7 @@ function Titles() {
                 <title>Wow life science | Titles</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Titles</h1>
+            <h1 className="d-none">Wow life science - Titles</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Titles" parentUrl="/elements" />
 

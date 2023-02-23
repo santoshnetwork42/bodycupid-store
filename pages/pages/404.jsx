@@ -20,7 +20,7 @@ function Error404() {
                 <title>Wow life science | 404</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - 404</h1>
+            <h1 className="d-none">Wow life science - 404</h1>
 
             <div className="page-content">
                 <section

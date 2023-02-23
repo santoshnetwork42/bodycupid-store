@@ -17,7 +17,7 @@ function Instagrams() {
                 <title>Wow life science | Instagrams</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Instagrams</h1>
+            <h1 className="d-none">Wow life science - Instagrams</h1>
 
             <Breadcrumb subTitle="Elements" title="Element Instagram" parentUrl="/elements" />
 

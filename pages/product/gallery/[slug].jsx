@@ -45,7 +45,7 @@ function ProductGallery() {
                 <title>Wow life science | Product Gallery</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product Gallery</h1>
+            <h1 className="d-none">Wow life science - Product Gallery</h1>
 
             {
                 product !== undefined ?

@@ -46,7 +46,10 @@ function Cart(props) {
   };
 
   const update = () => {
-    updateCart(cartItems);
+    if (!compareItems()) {
+      updateCart(cartItems);
+    }
+    return true;
   };
 
   return (
@@ -151,15 +154,6 @@ function Cart(props) {
                     >
                       <i className="d-icon-arrow-left"></i>Continue Shopping
                     </ALink>
-                    <button
-                      type="submit"
-                      className={`btn btn-outline btn-dark btn-md btn-rounded ${
-                        compareItems() ? " btn-disabled" : ""
-                      }`}
-                      onClick={update}
-                    >
-                      Update Cart
-                    </button>
                   </div>
                 </div>
                 <aside className="col-lg-4 sticky-sidebar-wrapper">
@@ -244,6 +238,7 @@ function Cart(props) {
                         </tbody>
                       </table>
                       <ALink
+                        onClick={update}
                         href="/pages/checkout"
                         className="btn btn-dark btn-rounded btn-checkout"
                       >

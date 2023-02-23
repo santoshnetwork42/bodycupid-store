@@ -16,7 +16,8 @@ const initialState = {
     openModal: false,
     quickview: false,
     login: false,
-    singleSlug: ''
+    singleSlug: '',
+    loginRedirect: true,
 }
 
 function modalReducer(state = initialState, action) {
@@ -35,7 +36,6 @@ function modalReducer(state = initialState, action) {
             }
 
         case actionTypes.OPEN_MODAL:
-            console.log("open modal");
             return {
                 ...state,
                 singleSlug: action.payload.slug,
@@ -49,10 +49,10 @@ function modalReducer(state = initialState, action) {
             }
 
         case actionTypes.OPEN_LOGIN:
-            return { ...state, login: true };
+            return { ...state, login: true, loginRedirect: action.payload.loginRedirect };
 
         case actionTypes.CLOSE_LOGIN:
-            return { ...state, login: false };
+            return { ...state, login: false, loginRedirect: true };
 
         case actionTypes.REFRESH_STORE:
             return initialState;
@@ -67,7 +67,7 @@ export const modalActions = {
     closeModal: modalType => ({ type: actionTypes.CLOSE_MODAL, payload: { modalType } }),
     openQuickview: slug => ({ type: actionTypes.OPEN_QUICKVIEW, payload: { slug } }),
     closeQuickview: () => ({ type: actionTypes.CLOSE_QUICKVIEW }),
-    openLoginModal: () => ({ type: actionTypes.OPEN_LOGIN }),
+    openLoginModal: (redirect = true) => ({ type: actionTypes.OPEN_LOGIN, payload: { redirect } }),
     closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN })
 };
 

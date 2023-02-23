@@ -37,7 +37,7 @@ export default function CartPopup(props) {
 
         <div className="action-group justify-between d-flex">
           <ALink
-            href={`/pages/Cart`}
+            href="/pages/cart"
             className="btn btn-sm btn-outline btn-primary btn-rounded"
           >
             View Cart

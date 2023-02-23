@@ -38,7 +38,6 @@ function SidebarFilterOne(props) {
     })();
   }, []);
 
-  console.log(sidebarData);
   useEffect(() => {
     window.addEventListener("resize", hideSidebar);
 

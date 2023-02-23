@@ -24,7 +24,7 @@ function ContactUs() {
                 <title>Wow life science | Contact Us</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Contact Us</h1>
+            <h1 className="d-none">Wow life science - Contact Us</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

@@ -38,7 +38,7 @@ function AboutUs() {
                 <title>Wow life science | About Us</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - About Us</h1>
+            <h1 className="d-none">Wow life science - About Us</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

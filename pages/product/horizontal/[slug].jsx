@@ -43,7 +43,7 @@ function ProductHorizontal() {
                 <title>Wow life science | Product Default</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product Default</h1>
+            <h1 className="d-none">Wow life science - Product Default</h1>
 
             {
                 product !== undefined ?

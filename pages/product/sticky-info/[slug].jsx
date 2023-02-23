@@ -42,7 +42,7 @@ function ProductStickyInfo() {
                 <title>Wow life science | Product Sticky Info</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product Sticky Info</h1>
+            <h1 className="d-none">Wow life science - Product Sticky Info</h1>
 
             {
                 product !== undefined ?

@@ -46,7 +46,7 @@ function ProductStickyBoth() {
                 <title>Wow life science | Product Sticky Both</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product Sticky Both</h1>
+            <h1 className="d-none">Wow life science - Product Sticky Both</h1>
 
             {
                 product !== undefined ?

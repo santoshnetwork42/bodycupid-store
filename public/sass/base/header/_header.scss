@@ -290,7 +290,7 @@
             @include print_css( header, help, icon );
         }
     }
-    .login-link, .register-link {
+    .login-link, .register-link, .account {
         i {
             @include print_css( header, top, login, icon );
         }
@@ -788,6 +788,16 @@
 
 .wishlist {
     margin-right: 1.5rem;
+    i {
+        @include print_css( header, wishlist, icon );
+        cursor: pointer;
+    }
+    &:hover {
+        @include css( color, header, _link-active-color );
+    }
+}
+
+.account {
     i {
         @include print_css( header, wishlist, icon );
         cursor: pointer;

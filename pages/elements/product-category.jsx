@@ -23,7 +23,7 @@ function Cta() {
       </Helmet>
 
       <h1 className="d-none">
-        Wow React eCommerce Template - Product Category
+        Wow life science - Product Category
       </h1>
 
       <Breadcrumb

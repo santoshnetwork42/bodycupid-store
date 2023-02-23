@@ -46,7 +46,7 @@ function PostGridSidebar() {
                 <title>Wow life science | Blog Grid Sidebar</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog Grid Sidebar</h1>
+            <h1 className="d-none">Wow life science - Blog Grid Sidebar</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

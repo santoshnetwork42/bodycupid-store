@@ -46,7 +46,7 @@ function ForgotPassword() {
         <title>Wow life science | Login</title>
       </Helmet>
 
-      <h1 className="d-none">Wow React eCommerce Template - Login</h1>
+      <h1 className="d-none">Wow life science - Login</h1>
       <nav className="breadcrumb-nav">
         <div className="container">
           <ul className="breadcrumb">

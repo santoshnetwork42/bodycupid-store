@@ -14,7 +14,7 @@ function ShopBoxedBanner() {
       </Helmet>
 
       <h1 className="d-none">
-        Wow React eCommerce Template - Shop Boxed Banner Page
+        Wow life science - Shop Boxed Banner Page
       </h1>
 
       <nav className="breadcrumb-nav">

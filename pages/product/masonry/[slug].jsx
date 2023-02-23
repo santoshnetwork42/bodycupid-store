@@ -41,7 +41,7 @@ function ProductMasonry() {
                 <title>Wow life science | Product Masonry</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product Masonry</h1>
+            <h1 className="d-none">Wow life science - Product Masonry</h1>
 
             {
                 product !== undefined ?

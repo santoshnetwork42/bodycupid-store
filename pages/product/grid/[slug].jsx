@@ -43,7 +43,7 @@ function ProductGrid() {
                 <title>Wow life science | Product Grid</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Product Grid</h1>
+            <h1 className="d-none">Wow life science - Product Grid</h1>
 
             {
                 product !== undefined ?

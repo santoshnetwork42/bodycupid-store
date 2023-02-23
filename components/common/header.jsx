@@ -31,8 +31,6 @@ function Header({ auth, openLogin }) {
 
   return (
     <header className="header header-border">
-        
-
       <div className="header-middle sticky-header fix-top sticky-content">
         <div className="container">
           <div className="header-left">
@@ -68,6 +66,21 @@ function Header({ auth, openLogin }) {
             <span className="divider"></span>
 
             <CartMenu />
+            <span className="divider"></span>
+            {!!auth && (
+              <ALink href="/pages/account" className="account d-lg-show">
+                <i className="d-icon-user"></i>
+              </ALink>
+            )}
+            {!auth && (
+              <ALink
+                href="#"
+                className="login-link label-block d-lg-show"
+                onClick={() => openLogin()}
+              >
+                <i className="d-icon-user"></i>
+              </ALink>
+            )}
           </div>
         </div>
       </div>
@@ -82,7 +95,6 @@ function Header({ auth, openLogin }) {
             <ALink href="#">
               <i className="d-icon-card"></i>Special Offers
             </ALink>
-           
           </div>
         </div>
       </div>

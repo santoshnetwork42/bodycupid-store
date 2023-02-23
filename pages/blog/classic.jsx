@@ -50,7 +50,7 @@ function Classic() {
                 <title>Wow life science | Blog Classic</title>
             </Helmet>
 
-            <h1 className="d-none">Wow React eCommerce Template - Blog Classic</h1>
+            <h1 className="d-none">Wow life science - Blog Classic</h1>
 
             <nav className="breadcrumb-nav">
                 <div className="container">

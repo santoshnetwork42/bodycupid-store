@@ -67,14 +67,15 @@ function MobileMenu({ user }) {
         .classList.remove("show-results");
   }
 
-  function onSubmitSearchForm(e) {
+  async function onSubmitSearchForm(e) {
     e.preventDefault();
-    router.push({
-      pathname: "/collections",
+    await router.push({
+      pathname: "/collections/all",
       query: {
         search: search,
       },
     });
+    hideMobileMenu();
   }
 
   return (
