@@ -6,7 +6,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function CartPopup(props) {
-  const { product, isWishList } = props;
+  const { product } = props;
 
   return (
     <div className="minipopup-area">
@@ -42,12 +42,12 @@ export default function CartPopup(props) {
           >
             View Cart
           </ALink>
-            <ALink
-              href="/pages/checkout"
-              className="btn btn-sm btn-primary btn-rounded"
-            >
-              Check Out
-            </ALink>
+          <ALink
+            href="/pages/checkout"
+            className="btn btn-sm btn-primary btn-rounded"
+          >
+            Check Out
+          </ALink>
         </div>
       </div>
     </div>
