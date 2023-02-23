@@ -29,7 +29,7 @@ function BlogPosts() {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog</title>
+                <title>Wow life science | Blog</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog</h1>

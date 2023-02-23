@@ -10,7 +10,7 @@ function ShopBoxedBanner() {
   return (
     <main className="main">
       <Helmet>
-        <title>Wow React eCommerce Template - Shop Boxed Banner Page</title>
+        <title>Wow life science - Shop Boxed Banner Page</title>
       </Helmet>
 
       <h1 className="d-none">

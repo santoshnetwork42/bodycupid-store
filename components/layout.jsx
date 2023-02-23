@@ -1,94 +1,115 @@
-import { useEffect, useLayoutEffect } from 'react';
-import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import { useRouter } from 'next/router';
-import 'react-toastify/dist/ReactToastify.min.css';
-import 'react-image-lightbox/style.css';
-import 'react-input-range/lib/css/index.css';
+import { useEffect, useLayoutEffect } from "react";
+import { connect } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
+import "react-toastify/dist/ReactToastify.min.css";
+import "react-image-lightbox/style.css";
+import "react-input-range/lib/css/index.css";
 
-import ALink from '~/components/features/custom-link';
+import ALink from "~/components/features/custom-link";
 
-import Header from '~/components/common/header';
-import Footer from '~/components/common/footer';
-import StickyFooter from '~/components/common/sticky-footer';
-import Quickview from '~/components/features/product/common/quickview-modal';
-import VideoModal from '~/components/features/modals/video-modal';
-import MobileMenu from '~/components/common/partials/mobile-menu';
+import Header from "~/components/common/header";
+import Footer from "~/components/common/footer";
+import StickyFooter from "~/components/common/sticky-footer";
+import Quickview from "~/components/features/product/common/quickview-modal";
+import LoginModal from "~/components/features/modals/login-modal";
+import VideoModal from "~/components/features/modals/video-modal";
+import MobileMenu from "~/components/common/partials/mobile-menu";
 
-import { modalActions } from '~/store/modal';
+import { modalActions } from "~/store/modal";
 
-import { showScrollTopHandler, scrollTopHandler, stickyHeaderHandler, stickyFooterHandler, resizeHandler } from '~/utils';
+import {
+  showScrollTopHandler,
+  scrollTopHandler,
+  stickyHeaderHandler,
+  stickyFooterHandler,
+  resizeHandler,
+} from "~/utils";
 
-function Layout( { children, closeQuickview } ) {
-    const router = useRouter();
+function Layout({ children, closeQuickview, closeLogin }) {
+  const router = useRouter();
 
-    useLayoutEffect( () => {
-        document.querySelector( 'body' ) && document.querySelector( 'body' ).classList.remove( 'loaded' );
-    }, [ router.pathname ] )
+  useLayoutEffect(() => {
+    document.querySelector("body") &&
+      document.querySelector("body").classList.remove("loaded");
+  }, [router.pathname]);
 
-    useEffect( () => {
-        window.addEventListener( 'scroll', showScrollTopHandler, true );
-        window.addEventListener( 'scroll', stickyHeaderHandler, true );
-        window.addEventListener( 'scroll', stickyFooterHandler, true );
-        window.addEventListener( 'resize', stickyHeaderHandler );
-        window.addEventListener( 'resize', stickyFooterHandler );
-        window.addEventListener( 'resize', resizeHandler );
+  useEffect(() => {
+    window.addEventListener("scroll", showScrollTopHandler, true);
+    window.addEventListener("scroll", stickyHeaderHandler, true);
+    window.addEventListener("scroll", stickyFooterHandler, true);
+    window.addEventListener("resize", stickyHeaderHandler);
+    window.addEventListener("resize", stickyFooterHandler);
+    window.addEventListener("resize", resizeHandler);
 
-        return () => {
-            window.removeEventListener( 'scroll', showScrollTopHandler, true );
-            window.removeEventListener( 'scroll', stickyHeaderHandler, true );
-            window.removeEventListener( 'scroll', stickyFooterHandler, true );
-            window.removeEventListener( 'resize', stickyHeaderHandler );
-            window.removeEventListener( 'resize', stickyFooterHandler );
-            window.removeEventListener( 'resize', resizeHandler );
-        }
-    }, [] )
+    return () => {
+      window.removeEventListener("scroll", showScrollTopHandler, true);
+      window.removeEventListener("scroll", stickyHeaderHandler, true);
+      window.removeEventListener("scroll", stickyFooterHandler, true);
+      window.removeEventListener("resize", stickyHeaderHandler);
+      window.removeEventListener("resize", stickyFooterHandler);
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
 
-    useEffect( () => {
-        closeQuickview();
+  useEffect(() => {
+    closeQuickview();
+    closeLogin();
 
-        let bodyClasses = [ ...document.querySelector( "body" ).classList ];
-        for ( let i = 0; i < bodyClasses.length; i++ ) {
-            document.querySelector( 'body' ).classList.remove( bodyClasses[ i ] );
-        }
+    let bodyClasses = [...document.querySelector("body").classList];
+    for (let i = 0; i < bodyClasses.length; i++) {
+      document.querySelector("body").classList.remove(bodyClasses[i]);
+    }
 
-        setTimeout( () => {
-            document.querySelector( 'body' ).classList.add( 'loaded' );
-        }, 50 );
-    }, [ router.pathname ] )
+    setTimeout(() => {
+      document.querySelector("body").classList.add("loaded");
+    }, 50);
+  }, [router.pathname]);
 
-    return (
-        <>
-            <div className="page-wrapper">
-                <Header />
+  return (
+    <>
+      <div className="page-wrapper">
+        <Header />
 
-                { children }
+        {children}
 
-                <Footer />
+        <Footer />
 
-                <StickyFooter />
-            </div>
+        <></>
+      </div>
 
-            <ALink id="scroll-top" href="#" title="Top" role="button" className="scroll-top" onClick={ () => scrollTopHandler( false ) }><i className="d-icon-arrow-up"></i></ALink>
+      <ALink
+        id="scroll-top"
+        href="#"
+        title="Top"
+        role="button"
+        className="scroll-top"
+        onClick={() => scrollTopHandler(false)}
+      >
+        <i className="d-icon-arrow-up"></i>
+      </ALink>
 
-            <MobileMenu />
+      <MobileMenu />
 
-            <ToastContainer
-                autoClose={ 3000 }
-                duration={ 300 }
-                newestOnTo={ true }
-                className="toast-container"
-                position="bottom-left"
-                closeButton={ false }
-                hideProgressBar={ true }
-                newestOnTop={ true }
-            />
+      <ToastContainer
+        autoClose={3000}
+        duration={300}
+        newestOnTo={true}
+        className="toast-container"
+        position="bottom-left"
+        closeButton={false}
+        hideProgressBar={true}
+        newestOnTop={true}
+      />
 
-            <Quickview />
-
-            <VideoModal />
-        </>
-    )
+      <Quickview />
+      <LoginModal />
+      <VideoModal />
+    </>
+  );
 }
 
-export default connect( null, { closeQuickview: modalActions.closeQuickview } )( Layout );
+export default connect(null, {
+  closeQuickview: modalActions.closeQuickview,
+  closeLogin: modalActions.closeLoginModal,
+})(Layout);

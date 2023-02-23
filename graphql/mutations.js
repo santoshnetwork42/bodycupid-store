@@ -389,6 +389,11 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -1127,6 +1132,11 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -1444,6 +1454,11 @@ export const deleteUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -1814,6 +1829,11 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -2155,6 +2175,11 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -2631,6 +2656,7 @@ export const deleteUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -3289,6 +3315,11 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -3918,6 +3949,11 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -4644,6 +4680,11 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -5382,6 +5423,11 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -5699,6 +5745,11 @@ export const createUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -6069,6 +6120,11 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -6410,6 +6466,11 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -6886,6 +6947,7 @@ export const createUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -7544,6 +7606,11 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -8173,6 +8240,11 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -8899,6 +8971,11 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -9637,6 +9714,11 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -9954,6 +10036,11 @@ export const updateUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -10324,6 +10411,11 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -10665,6 +10757,11 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -11141,6 +11238,7 @@ export const updateUser = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -11799,6 +11897,11 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -12428,6 +12531,11 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -13227,6 +13335,11 @@ export const createProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -14008,6 +14121,11 @@ export const createProductCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -14613,6 +14731,7 @@ export const createProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -15023,6 +15142,11 @@ export const updateProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -15804,6 +15928,11 @@ export const updateProductCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -16409,6 +16538,7 @@ export const updateProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -16819,6 +16949,11 @@ export const deleteProductCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -17600,6 +17735,11 @@ export const deleteProductCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -18205,6 +18345,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -18614,6 +18755,11 @@ export const createProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -18863,6 +19009,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -19253,6 +19400,11 @@ export const createProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -20290,6 +20442,11 @@ export const createProductSubCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -20784,6 +20941,11 @@ export const updateProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -21033,6 +21195,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -21423,6 +21586,11 @@ export const updateProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -22460,6 +22628,11 @@ export const updateProductSubCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -22954,6 +23127,11 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -23203,6 +23381,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -23593,6 +23772,11 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -24630,6 +24814,11 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -25471,6 +25660,11 @@ export const createStore = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -26312,6 +26506,11 @@ export const updateStore = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -27153,6 +27352,11 @@ export const deleteStore = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -27647,6 +27851,11 @@ export const createWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -28084,6 +28293,11 @@ export const createWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -28533,6 +28747,11 @@ export const updateWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -28970,6 +29189,11 @@ export const updateWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -29419,6 +29643,11 @@ export const deleteWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -29856,6 +30085,11 @@ export const deleteWarehouse = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -30436,6 +30670,7 @@ export const createProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -30638,6 +30873,7 @@ export const createProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -30946,6 +31182,7 @@ export const createProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -31213,6 +31450,7 @@ export const createProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -31306,6 +31544,11 @@ export const createProductInventory = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -31483,6 +31726,7 @@ export const createProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -32025,6 +32269,7 @@ export const updateProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -32227,6 +32472,7 @@ export const updateProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -32535,6 +32781,7 @@ export const updateProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -32802,6 +33049,7 @@ export const updateProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -32895,6 +33143,11 @@ export const updateProductInventory = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -33072,6 +33325,7 @@ export const updateProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -33614,6 +33868,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -33816,6 +34071,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -34124,6 +34380,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -34391,6 +34648,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -34484,6 +34742,11 @@ export const deleteProductInventory = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -34661,6 +34924,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -34886,6 +35150,7 @@ export const createProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -35196,6 +35461,7 @@ export const createProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -35694,6 +35960,11 @@ export const createProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -36130,6 +36401,11 @@ export const createProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -36377,6 +36653,7 @@ export const createProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -36767,6 +37044,11 @@ export const createProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -37327,6 +37609,11 @@ export const createProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -37644,6 +37931,11 @@ export const createProduct = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -38014,6 +38306,11 @@ export const createProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -38276,6 +38573,7 @@ export const updateProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -38586,6 +38884,7 @@ export const updateProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -39084,6 +39383,11 @@ export const updateProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -39520,6 +39824,11 @@ export const updateProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -39767,6 +40076,7 @@ export const updateProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -40157,6 +40467,11 @@ export const updateProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -40717,6 +41032,11 @@ export const updateProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -41034,6 +41354,11 @@ export const updateProduct = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -41404,6 +41729,11 @@ export const updateProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -41666,6 +41996,7 @@ export const deleteProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -41976,6 +42307,7 @@ export const deleteProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -42474,6 +42806,11 @@ export const deleteProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -42910,6 +43247,11 @@ export const deleteProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -43157,6 +43499,7 @@ export const deleteProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -43547,6 +43890,11 @@ export const deleteProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -44107,6 +44455,11 @@ export const deleteProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -44424,6 +44777,11 @@ export const deleteProduct = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          reviewer {
+            name
+            email
+          }
+          flagged
           productId
           product {
             id
@@ -44794,6 +45152,11 @@ export const deleteProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -45390,6 +45753,11 @@ export const createOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -45636,6 +46004,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46033,6 +46402,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46126,6 +46496,11 @@ export const createOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -46303,6 +46678,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46450,6 +46826,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -46984,6 +47361,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -47236,6 +47614,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -47568,6 +47947,7 @@ export const createOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -47862,6 +48242,11 @@ export const createOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -48834,6 +49219,11 @@ export const createOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -49228,6 +49618,11 @@ export const createOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -49947,6 +50342,11 @@ export const updateOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -50193,6 +50593,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -50590,6 +50991,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -50683,6 +51085,11 @@ export const updateOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -50860,6 +51267,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -51007,6 +51415,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -51541,6 +51950,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -51793,6 +52203,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -52125,6 +52536,7 @@ export const updateOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -52419,6 +52831,11 @@ export const updateOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -53391,6 +53808,11 @@ export const updateOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -53785,6 +54207,11 @@ export const updateOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -54504,6 +54931,11 @@ export const deleteOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -54750,6 +55182,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -55147,6 +55580,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -55240,6 +55674,11 @@ export const deleteOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -55417,6 +55856,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -55564,6 +56004,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -56098,6 +56539,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -56350,6 +56792,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -56682,6 +57125,7 @@ export const deleteOrder = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -56976,6 +57420,11 @@ export const deleteOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              reviewer {
+                name
+                email
+              }
+              flagged
               productId
               product {
                 id
@@ -57948,6 +58397,11 @@ export const deleteOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -58342,6 +58796,11 @@ export const deleteOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -59191,6 +59650,7 @@ export const createOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -59393,6 +59853,7 @@ export const createOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -59701,6 +60162,7 @@ export const createOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -59968,6 +60430,7 @@ export const createOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -60061,6 +60524,11 @@ export const createOrderProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -60238,6 +60706,7 @@ export const createOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -60835,6 +61304,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -61037,6 +61507,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -61345,6 +61816,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -61612,6 +62084,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -61705,6 +62178,11 @@ export const updateOrderProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -61882,6 +62360,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -62479,6 +62958,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -62681,6 +63161,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -62989,6 +63470,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63256,6 +63738,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63349,6 +63832,11 @@ export const deleteOrderProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -63526,6 +64014,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -63992,6 +64481,11 @@ export const createPayment = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -64238,6 +64732,7 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -64635,6 +65130,7 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -64728,6 +65224,11 @@ export const createPayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -64905,6 +65406,7 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -65052,6 +65554,7 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -65586,6 +66089,7 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -65838,6 +66342,7 @@ export const createPayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -66346,6 +66851,11 @@ export const updatePayment = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -66592,6 +67102,7 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -66989,6 +67500,7 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -67082,6 +67594,11 @@ export const updatePayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -67259,6 +67776,7 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -67406,6 +67924,7 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -67940,6 +68459,7 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -68192,6 +68712,7 @@ export const updatePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -68700,6 +69221,11 @@ export const deletePayment = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -68946,6 +69472,7 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -69343,6 +69870,7 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -69436,6 +69964,11 @@ export const deletePayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -69613,6 +70146,7 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -69760,6 +70294,7 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -70294,6 +70829,7 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -70546,6 +71082,7 @@ export const deletePayment = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -70864,6 +71401,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -71261,6 +71799,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -71354,6 +71893,11 @@ export const createReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -71531,6 +72075,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -71678,6 +72223,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -72212,6 +72758,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -72464,6 +73011,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -72576,6 +73124,11 @@ export const createReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      reviewer {
+        name
+        email
+      }
+      flagged
       productId
       product {
         id
@@ -73087,6 +73640,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73289,6 +73843,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73597,6 +74152,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73864,6 +74420,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -73957,6 +74514,11 @@ export const createReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -74134,6 +74696,7 @@ export const createReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -74356,6 +74919,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -74753,6 +75317,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -74846,6 +75411,11 @@ export const updateReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -75023,6 +75593,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75170,6 +75741,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75704,6 +76276,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -75956,6 +76529,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -76068,6 +76642,11 @@ export const updateReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      reviewer {
+        name
+        email
+      }
+      flagged
       productId
       product {
         id
@@ -76579,6 +77158,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -76781,6 +77361,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -77089,6 +77670,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -77356,6 +77938,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -77449,6 +78032,11 @@ export const updateReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -77626,6 +78214,7 @@ export const updateReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -77848,6 +78437,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -78245,6 +78835,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -78338,6 +78929,11 @@ export const deleteReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -78515,6 +79111,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -78662,6 +79259,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -79196,6 +79794,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -79448,6 +80047,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -79560,6 +80160,11 @@ export const deleteReview = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      reviewer {
+        name
+        email
+      }
+      flagged
       productId
       product {
         id
@@ -80071,6 +80676,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -80273,6 +80879,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -80581,6 +81188,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -80848,6 +81456,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -80941,6 +81550,11 @@ export const deleteReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -81118,6 +81732,7 @@ export const deleteReview = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -81530,6 +82145,11 @@ export const createWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -81960,6 +82580,11 @@ export const createWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -82433,6 +83058,11 @@ export const updateWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -82863,6 +83493,11 @@ export const updateWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -83336,6 +83971,11 @@ export const deleteWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -83766,6 +84406,11 @@ export const deleteWishlist = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -84370,6 +85015,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -84572,6 +85218,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -84880,6 +85527,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -85147,6 +85795,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -85240,6 +85889,11 @@ export const createWishlistProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -85417,6 +86071,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -85983,6 +86638,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -86185,6 +86841,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -86493,6 +87150,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -86760,6 +87418,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -86853,6 +87512,11 @@ export const updateWishlistProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -87030,6 +87694,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -87596,6 +88261,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -87798,6 +88464,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88106,6 +88773,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88373,6 +89041,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -88466,6 +89135,11 @@ export const deleteWishlistProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -88643,6 +89317,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -89078,6 +89753,11 @@ export const createShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -89508,6 +90188,11 @@ export const createShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -89981,6 +90666,11 @@ export const updateShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -90411,6 +91101,11 @@ export const updateShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -90884,6 +91579,11 @@ export const deleteShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -91314,6 +92014,11 @@ export const deleteShoppingCart = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -91918,6 +92623,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -92120,6 +92826,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -92428,6 +93135,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -92695,6 +93403,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -92788,6 +93497,11 @@ export const createShoppingCartProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -92965,6 +93679,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -93531,6 +94246,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -93733,6 +94449,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -94041,6 +94758,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -94308,6 +95026,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -94401,6 +95120,11 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -94578,6 +95302,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -95144,6 +95869,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -95346,6 +96072,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -95654,6 +96381,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -95921,6 +96649,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -96014,6 +96743,11 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -96191,6 +96925,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -96627,6 +97362,11 @@ export const createCouponCode = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -96873,6 +97613,7 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -97270,6 +98011,7 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -97363,6 +98105,11 @@ export const createCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -97540,6 +98287,7 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -97687,6 +98435,7 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -98221,6 +98970,7 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -98473,6 +99223,7 @@ export const createCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -98990,6 +99741,11 @@ export const updateCouponCode = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -99236,6 +99992,7 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -99633,6 +100390,7 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -99726,6 +100484,11 @@ export const updateCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -99903,6 +100666,7 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -100050,6 +100814,7 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -100584,6 +101349,7 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -100836,6 +101602,7 @@ export const updateCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -101353,6 +102120,11 @@ export const deleteCouponCode = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -101599,6 +102371,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -101996,6 +102769,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -102089,6 +102863,11 @@ export const deleteCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -102266,6 +103045,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -102413,6 +103193,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -102947,6 +103728,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -103199,6 +103981,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -103713,6 +104496,11 @@ export const applyCoupon = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
                 productId
                 product {
                   id
@@ -103959,6 +104747,7 @@ export const applyCoupon = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -104356,6 +105145,7 @@ export const applyCoupon = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -104449,6 +105239,11 @@ export const applyCoupon = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            reviewer {
+              name
+              email
+            }
+            flagged
             productId
             product {
               id
@@ -104626,6 +105421,7 @@ export const applyCoupon = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -104773,6 +105569,7 @@ export const applyCoupon = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -105307,6 +106104,7 @@ export const applyCoupon = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment
@@ -105559,6 +106357,7 @@ export const applyCoupon = /* GraphQL */ `
                 items {
                   id
                   userId
+                  flagged
                   productId
                   rating
                   comment

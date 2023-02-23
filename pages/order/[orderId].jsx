@@ -31,7 +31,7 @@ function Order(props) {
   return (
     <main className="main order">
       <Helmet>
-        <title>Wow React eCommerce Template | Order</title>
+        <title>Wow life science | Order</title>
       </Helmet>
 
       <h1 className="d-none">Wow React eCommerce Template - Order</h1>

@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
+import { useSetState } from "react-use";
+import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-
 import { modalActions } from "~/store/modal";
-
-import { toDecimal } from "~/utils";
+import { formateDate, toDecimal } from "~/utils";
+import { createReview } from "~/graphql/api";
 
 function DescOne(props) {
-  const { product, isGuide = true, isDivider = true, openModal } = props;
+  const { product, isDivider = true, openModal, user } = props;
+  const [reviewState, setReview] = useSetState({
+    rating: 1,
+    comment: "",
+    name: "",
+    email: "",
+  });
 
   let sizes = [];
-
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
       product.variants.items.forEach((item) => {
@@ -37,6 +43,33 @@ function DescOne(props) {
     let link = e.currentTarget.closest(".btn-play").getAttribute("data");
     openModal(link);
   };
+
+  const submitReview = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        await API.graphql({
+          query: createReview,
+          variables: {
+            input: {
+              rating: reviewState.rating,
+              comment: reviewState.comment,
+              reviewer: {
+                name: reviewState.name,
+                email: reviewState.email,
+              },
+              userId: user?.id,
+              productId: product?.id,
+            },
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      return false;
+    },
+    [reviewState, user?.id, product?.id]
+  );
 
   return (
     <Tabs
@@ -169,135 +202,6 @@ function DescOne(props) {
           </div>
         </TabPanel>
 
-        {/* {
-                    product && product.brands.length > 0 || colors.length > 0 || sizes.length > 0 ?
-                        <TabPanel className="tab-pane product-tab-additional">
-                            <ul className="list-none">
-                                {
-                                    product.categories.length > 0 ?
-                                        <li><label>Categories:</label>
-                                            <p>
-                                                {product.categories.map((item, index) => (
-                                                    <React.Fragment key={item.name + '-' + index}>
-                                                        {item.name}
-                                                        {index < product.categories.length - 1 ? ', ' : ""}
-                                                    </React.Fragment>
-                                                ))}
-                                            </p>
-                                        </li> : ""
-                                }
-
-                                {
-                                    product.brands.length > 0 ?
-                                        <li><label>Brands:</label>
-                                            <p>
-                                                {product.brands.map((item, index) => (
-                                                    <React.Fragment key={item.name + '-' + index}>
-                                                        {item.name}
-                                                        {index < product.brands.length - 1 ? ', ' : ""}
-                                                    </React.Fragment>
-                                                ))}
-                                            </p>
-                                        </li> : ""
-                                }
-
-                                {
-                                    colors.length > 0 ?
-                                        <li><label>Color:</label>
-                                            <p>
-                                                {colors.map((item, index) => (
-                                                    <React.Fragment key={item.name + '-' + index}>
-                                                        {item.name}
-                                                        {index < colors.length - 1 ? ', ' : ""}
-                                                    </React.Fragment>
-                                                ))}
-                                            </p>
-                                        </li> : ""
-                                }
-
-                                {
-                                    sizes.length > 0 ?
-                                        <li><label>Size:</label>
-                                            <p>
-                                                {
-                                                    sizes.map((item, index) => (
-                                                        <React.Fragment key={item.name + '-' + index}>
-                                                            {item.name}
-                                                            {index < sizes.length - 1 ? ', ' : ""}
-                                                        </React.Fragment>
-                                                    ))}
-                                            </p>
-                                        </li> : ""
-                                }
-                            </ul>
-                        </TabPanel>
-                        : ''
-                } */}
-        {/* {isGuide ? (
-          <TabPanel className="tab-pane product-tab-size-guide">
-            <figure className="size-image mt-4 mb-4">
-              <img
-                src="/images/size_guide.png"
-                alt="Size Guide Image"
-                width="217"
-                height="398"
-              />
-            </figure>
-            <figure className="size-table mt-4 mb-4">
-              <table>
-                <thead>
-                  <tr>
-                    <th>SIZE</th>
-                    <th>CHEST(IN.)</th>
-                    <th>WEIST(IN.)</th>
-                    <th>HIPS(IN.)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>XS</th>
-                    <td>34-36</td>
-                    <td>27-29</td>
-                    <td>34.5-36.5</td>
-                  </tr>
-                  <tr>
-                    <th>S</th>
-                    <td>36-38</td>
-                    <td>29-31</td>
-                    <td>36.5-38.5</td>
-                  </tr>
-                  <tr>
-                    <th>M</th>
-                    <td>38-40</td>
-                    <td>31-33</td>
-                    <td>38.5-40.5</td>
-                  </tr>
-                  <tr>
-                    <th>L</th>
-                    <td>40-42</td>
-                    <td>33-36</td>
-                    <td>40.5-43.5</td>
-                  </tr>
-                  <tr>
-                    <th>XL</th>
-                    <td>42-45</td>
-                    <td>36-40</td>
-                    <td>43.5-47.5</td>
-                  </tr>
-                  <tr>
-                    <th>XXL</th>
-                    <td>45-48</td>
-                    <td>40-44</td>
-                    <td>47.5-51.5</td>
-                  </tr>
-                </tbody>
-              </table>
-            </figure>
-          </TabPanel>
-        ) : (
-          ""
-        )} */}
-
         <TabPanel className="tab-pane product-tab-reviews">
           {product.reviews.items.length === 0 ? (
             <div className="comments mb-2 pt-2 pb-2 border-no">
@@ -306,93 +210,47 @@ function DescOne(props) {
           ) : (
             <div className="comments mb-8 pt-2 pb-2 border-no">
               <ul>
-                <li>
-                  <div className="comment">
-                    <figure className="comment-media">
-                      <ALink href="#">
-                        <img
-                          src="/images/blog/comments/1.jpg"
-                          alt="avatar"
-                          width="100"
-                          height="100"
-                        />
-                      </ALink>
-                    </figure>
-                    <div className="comment-body">
-                      <div className="comment-rating ratings-container mb-0">
-                        <div className="ratings-full">
-                          <span
-                            className="ratings"
-                            style={{ width: product.ratings * 20 + "%" }}
-                          ></span>
-                          <span className="tooltiptext tooltip-top">
-                            {toDecimal(product.ratings)}
+                {product.reviews.items.map((review) => (
+                  <li key={review.id}>
+                    <div className="comment">
+                      {/* <figure className="comment-media">
+                        <ALink href="#">
+                          <img
+                            src="/images/blog/comments/1.jpg"
+                            alt="avatar"
+                            width="100"
+                            height="100"
+                          />
+                        </ALink>
+                      </figure> */}
+                      <div className="comment-body">
+                        <div className="comment-rating ratings-container mb-0">
+                          <div className="ratings-full">
+                            <span
+                              className="ratings"
+                              style={{ width: review.rating * 20 + "%" }}
+                            ></span>
+                            <span className="tooltiptext tooltip-top">
+                              {toDecimal(review.rating)}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="comment-user">
+                          <span className="comment-date text-body">
+                            {formateDate(review.createdAt)}
                           </span>
+                          <h4>
+                            <ALink href="#">{review.reviewer.name}</ALink>
+                          </h4>
+                        </div>
+
+                        <div className="comment-content">
+                          <p>{review.comment}</p>
                         </div>
                       </div>
-                      <div className="comment-user">
-                        <span className="comment-date text-body">
-                          September 22, 2020 at 9:42 pm
-                        </span>
-                        <h4>
-                          <ALink href="#">John Doe</ALink>
-                        </h4>
-                      </div>
-
-                      <div className="comment-content">
-                        <p>
-                          Sed pretium, ligula sollicitudin laoreet viverra,
-                          tortor libero sodales leo, eget blandit nunc tortor eu
-                          nibh. Nullam mollis. Ut justo. Suspendisse potenti.
-                          Sed egestas, ante et vulputate volutpat, eros pede
-                          semper est, vitae luctus metus libero eu augue.
-                        </p>
-                      </div>
                     </div>
-                  </div>
-                </li>
-
-                {/* {
-                                        product.reviews > 1 ?
-                                            <li>
-                                                <div className="comment">
-                                                    <figure className="comment-media">
-                                                        <ALink href="#">
-                                                            <img src="/images/blog/comments/2.jpg" alt="avatar" width="100" height="100" />
-                                                        </ALink>
-                                                    </figure>
-
-                                                    <div className="comment-body">
-                                                        <div className="comment-rating ratings-container mb-0">
-                                                            <div className="ratings-full">
-                                                                <span className="ratings" style={{ width: product.ratings * 20 + '%' }}></span>
-                                                                <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div className="comment-user">
-                                                            <span className="comment-date text-body">September 22, 2020 at 9:42
-                                                                pm</span>
-                                                            <h4><ALink href="#">John Doe</ALink></h4>
-                                                        </div>
-
-                                                        <div className="comment-content">
-                                                            <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor
-                                                                libero sodales leo, eget blandit nunc tortor eu nibh. Nullam
-                                                                mollis.
-                                                                Ut justo. Suspendisse potenti. Sed egestas, ante et
-                                                                vulputate volutpat,
-                                                                eros pede semper est, vitae luctus metus libero eu augue.
-                                                                Morbi purus libero,
-                                                                faucibus adipiscing, commodo quis, avida id, est. Sed
-                                                                lectus. Praesent elementum
-                                                                hendrerit tortor. Sed semper lorem at felis. Vestibulum
-                                                                volutpat.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            : ""
-                                    } */}
+                  </li>
+                ))}
               </ul>
             </div>
           )}
@@ -416,31 +274,20 @@ function DescOne(props) {
               <span className="rating-stars selected">
                 {[1, 2, 3, 4, 5].map((num, index) => (
                   <a
-                    className={`star-${num}`}
+                    className={`star-${num} ${!index && "active"}`}
                     href="#"
-                    onClick={setRating}
+                    onClick={(e) => {
+                      setRating(e);
+                      setReview({ rating: num });
+                    }}
                     key={"star-" + index}
                   >
                     {num}
                   </a>
                 ))}
               </span>
-
-              <select
-                name="rating"
-                id="rating"
-                required=""
-                style={{ display: "none" }}
-              >
-                <option value="">Rate…</option>
-                <option value="5">Perfect</option>
-                <option value="4">Good</option>
-                <option value="3">Average</option>
-                <option value="2">Not that bad</option>
-                <option value="1">Very poor</option>
-              </select>
             </div>
-            <form action="#">
+            <form action="#" onSubmit={submitReview}>
               <textarea
                 id="reply-message"
                 cols="30"
@@ -448,6 +295,8 @@ function DescOne(props) {
                 className="form-control mb-4"
                 placeholder="Comment *"
                 required
+                value={reviewState.comment}
+                onChange={(e) => setReview({ comment: e.target.value })}
               ></textarea>
               <div className="row">
                 <div className="col-md-6 mb-5">
@@ -458,6 +307,8 @@ function DescOne(props) {
                     name="reply-name"
                     placeholder="Name *"
                     required
+                    value={reviewState.name}
+                    onChange={(e) => setReview({ name: e.target.value })}
                   />
                 </div>
                 <div className="col-md-6 mb-5">
@@ -468,20 +319,10 @@ function DescOne(props) {
                     name="reply-email"
                     placeholder="Email *"
                     required
+                    value={reviewState.email}
+                    onChange={(e) => setReview({ email: e.target.value })}
                   />
                 </div>
-              </div>
-              <div className="form-checkbox mb-4">
-                <input
-                  type="checkbox"
-                  className="custom-checkbox"
-                  id="signin-remember"
-                  name="signin-remember"
-                />
-                <label className="form-control-label" htmlFor="signin-remember">
-                  Save my name, email, and website in this browser for the next
-                  time I comment.
-                </label>
               </div>
               <button type="submit" className="btn btn-primary btn-rounded">
                 Submit<i className="d-icon-arrow-right"></i>
@@ -494,4 +335,12 @@ function DescOne(props) {
   );
 }
 
-export default connect("", { openModal: modalActions.openModal })(DescOne);
+function mapStateToProps(state) {
+  return {
+    user: state.user.data,
+  };
+}
+
+export default connect(mapStateToProps, { openModal: modalActions.openModal })(
+  DescOne
+);

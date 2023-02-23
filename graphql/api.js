@@ -335,12 +335,9 @@ export const getProductBySlug = /* GraphQL */ `
         reviews {
           items {
             id
-            userId
-            user {
-              id
-              owner
-              firstName
-              lastName
+            reviewer {
+              name
+              email
             }
             productId
             rating
@@ -852,6 +849,17 @@ export const searchProductsBasic = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+
+export const createReview = /* GraphQL */ `
+  mutation CreateReview(
+    $input: CreateReviewInput!
+    $condition: ModelReviewConditionInput
+  ) {
+    createReview(input: $input, condition: $condition) {
+      id
     }
   }
 `;

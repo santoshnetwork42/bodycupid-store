@@ -109,12 +109,13 @@ function SearchForm() {
 
   function onSubmitSearchForm(e) {
     e.preventDefault();
-    // router.push({
-    //   pathname: "/shop",
-    //   query: {
-    //     search: search,
-    //   },
-    // });
+    router.push({
+      pathname: "/collections/[category]",
+      query: {
+        category: "all",
+        search: search,
+      },
+    });
   }
 
   return (

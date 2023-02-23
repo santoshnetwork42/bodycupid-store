@@ -41,7 +41,7 @@ function ProductLeftSidebar() {
     return (
         <main className="main single-product">
             <Helmet>
-                <title>Wow React eCommerce Template | Product With Left Sidebar</title>
+                <title>Wow life science | Product With Left Sidebar</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product With Left Sidebar</h1>

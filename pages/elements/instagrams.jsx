@@ -14,7 +14,7 @@ function Instagrams() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Instagrams</title>
+                <title>Wow life science | Instagrams</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Instagrams</h1>

@@ -21,7 +21,7 @@ function Wishlist(props) {
   return (
     <main className="main">
       <Helmet>
-        <title>Wow React eCommerce Template | Wishlist</title>
+        <title>Wow life science | Wishlist</title>
       </Helmet>
 
       <h1 className="d-none">Wow React eCommerce Template - Wishlist</h1>

@@ -6,6 +6,8 @@ const actionTypes = {
     CLOSE_MODAL: 'CLOSE_MODAL',
     OPEN_QUICKVIEW: 'OPEN_QUICKVIEW',
     CLOSE_QUICKVIEW: 'CLOSE_QUICKVIEW',
+    OPEN_LOGIN: 'OPEN_LOGIN',
+    CLOSE_LOGIN: 'CLOSE_LOGIN',
     REFRESH_STORE: 'REFRESH_STORE'
 }
 
@@ -13,6 +15,7 @@ const initialState = {
     type: 'video',
     openModal: false,
     quickview: false,
+    login: false,
     singleSlug: ''
 }
 
@@ -45,6 +48,12 @@ function modalReducer(state = initialState, action) {
                 openModal: false
             }
 
+        case actionTypes.OPEN_LOGIN:
+            return { ...state, login: true };
+
+        case actionTypes.CLOSE_LOGIN:
+            return { ...state, login: false };
+
         case actionTypes.REFRESH_STORE:
             return initialState;
 
@@ -57,7 +66,9 @@ export const modalActions = {
     openModal: slug => ({ type: actionTypes.OPEN_MODAL, payload: { slug } }),
     closeModal: modalType => ({ type: actionTypes.CLOSE_MODAL, payload: { modalType } }),
     openQuickview: slug => ({ type: actionTypes.OPEN_QUICKVIEW, payload: { slug } }),
-    closeQuickview: () => ({ type: actionTypes.CLOSE_QUICKVIEW })
+    closeQuickview: () => ({ type: actionTypes.CLOSE_QUICKVIEW }),
+    openLoginModal: () => ({ type: actionTypes.OPEN_LOGIN }),
+    closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN })
 };
 
 const persistConfig = {

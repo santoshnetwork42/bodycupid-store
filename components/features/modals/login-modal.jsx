@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 
-import ALink from "~/components/features/custom-link";
-import { useRouter } from "next/router";
+import { modalActions } from "~/store/modal";
+
 import AuthView from "../../../pages/pages/login";
 
 const modalStyles = {
@@ -18,67 +18,33 @@ const modalStyles = {
   },
 };
 
-function LoginModal({ auth }) {
-  const [showLogin, setShowLogin] = useState(false);
-  const { pathname } = useRouter();
-  useEffect(() => {
-    if (pathname === "/pages/forgot-password" && showLogin) {
-      setShowLogin(false)
-    }
-  }, [pathname])
+Modal.setAppElement("#__next");
 
-  if (auth) {
-    return (
-      <>
-        <a className="login-link d-lg-show" href="/pages/account">
-          <i className="d-icon-user"></i>Account
-        </a>
-      </>
-    );
-  }
+function LoginModal({ isOpen, closeLoginModal }) {
+  console.log(isOpen);
+  if (!isOpen) return <></>;
 
   return (
-    <>
-      <ALink
-        href="#"
-        className="login-link d-lg-show"
-        onClick={() => {
-          setShowLogin(true);
-          return false;
-        }}
-      >
-        <i className="d-icon-user"></i>Sign in
-      </ALink>
-      <span className="delimiter">/</span>
-      <ALink
-        href="#"
-        className="register-link ml-0"
-        onClick={() => {
-          setShowLogin(true);
-          return false;
-        }}
-      >
-        Register
-      </ALink>
-
-      <Modal
-        isOpen={showLogin}
-        style={modalStyles}
-        onRequestClose={() => setShowLogin(false)}
-        shouldReturnFocusAfterClose={false}
-        overlayClassName="auth-modal-overlay"
-        className="auth-popup bg-img"
-      >
-        <AuthView />
-      </Modal>
-    </>
+    <Modal
+      isOpen={isOpen}
+      style={modalStyles}
+      onRequestClose={() => closeLoginModal()}
+      shouldReturnFocusAfterClose={false}
+      overlayClassName="auth-modal-overlay"
+      className="auth-popup bg-img"
+    >
+      <AuthView />
+    </Modal>
   );
 }
 
 function mapStateToProps(state) {
   return {
     auth: !!state.user.data,
+    isOpen: state.modal.login,
   };
 }
 
-export default connect(mapStateToProps, {})(LoginModal);
+export default connect(mapStateToProps, {
+  closeLoginModal: modalActions.closeLoginModal,
+})(LoginModal);

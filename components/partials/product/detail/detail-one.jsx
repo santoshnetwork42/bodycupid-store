@@ -22,7 +22,7 @@ function DetailOne(props) {
     adClass = "",
     isNav = true,
     variantId: selectedVaraint,
-    setVariant,
+    setVariant = () => {},
   } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
@@ -183,7 +183,6 @@ function DetailOne(props) {
       <h2 className="product-name">{product.title}</h2>
 
       <div className="product-meta">
-        SKU: <span className="product-sku">{product.sku}</span>
         {product.category && (
           <>
             CATEGORIES:{" "}
@@ -219,8 +218,35 @@ function DetailOne(props) {
         )}
       </div>
 
-      <div className="product-price mb-2">
-        <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
+      <div className="product-variation-price">
+        <Collapse in={cartActive && curIndex > -1}>
+          <div className="card-wrapper">
+            {curIndex > -1 && (
+              <div className="single-product-price">
+                {product.variants.items[curIndex].price &&
+                  (product.variants.items[curIndex].listingPrice ? (
+                    <div className="product-price mb-0">
+                      <del className="old-price mr-2">
+                        ₹
+                        {toDecimal(
+                          product.variants.items[curIndex].listingPrice
+                        )}
+                      </del>{" "}
+                      <ins className="new-price">
+                        ₹{toDecimal(product.variants.items[curIndex].price)}
+                      </ins>
+                    </div>
+                  ) : (
+                    <div className="product-price mb-0">
+                      <ins className="new-price">
+                        ₹{toDecimal(product.variants.items[curIndex].price)}
+                      </ins>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+        </Collapse>
       </div>
 
       <div className="ratings-container">
@@ -265,37 +291,6 @@ function DetailOne(props) {
                 </select>
               </div>
             </div>
-          </div>
-
-          <div className="product-variation-price">
-            <Collapse in={cartActive && curIndex > -1}>
-              <div className="card-wrapper">
-                {curIndex > -1 && (
-                  <div className="single-product-price">
-                    {product.variants.items[curIndex].price &&
-                      (product.variants.items[curIndex].listingPrice ? (
-                        <div className="product-price mb-0">
-                          <ins className="new-price">
-                            ₹{toDecimal(product.variants.items[curIndex].price)}
-                          </ins>
-                          <del className="old-price">
-                            ₹
-                            {toDecimal(
-                              product.variants.items[curIndex].listingPrice
-                            )}
-                          </del>
-                        </div>
-                      ) : (
-                        <div className="product-price mb-0">
-                          <ins className="new-price">
-                            ₹{toDecimal(product.variants.items[curIndex].price)}
-                          </ins>
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-            </Collapse>
           </div>
         </>
       )}

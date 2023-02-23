@@ -43,7 +43,7 @@ function ProductStickyBoth() {
     return (
         <main className="main single-product product-sticky-both">
             <Helmet>
-                <title>Wow React eCommerce Template | Product Sticky Both</title>
+                <title>Wow life science | Product Sticky Both</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product Sticky Both</h1>

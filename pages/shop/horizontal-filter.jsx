@@ -45,7 +45,7 @@ function ShopHorizontalFilter() {
     return (
         <main className="main">
             <Helmet>
-                <title>Wow React eCommerce Template - Shop Horizontal Filter</title>
+                <title>Wow life science - Shop Horizontal Filter</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Shop Horizontal Filter</h1>
