@@ -16,13 +16,13 @@ const initialState = {
 }
 
 function wishlistReducer(state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.TOGGLE_WISHLIST:
-       
-        let index = state.data.findIndex(
-        (item) => item.id === action.payload.product.id
-      );
-      let tmpData = [...state.data];
+    switch (action.type) {
+        case actionTypes.TOGGLE_WISHLIST:
+
+            let index = state.data.findIndex(
+                (item) => item.id === action.payload.product.id
+            );
+            let tmpData = [...state.data];
 
             if (index === -1) {
                 tmpData.push(action.payload.product);
@@ -51,8 +51,8 @@ function wishlistReducer(state = initialState, action) {
 }
 export function* wishlistSaga() {
     yield takeEvery(actionTypes.TOGGLE_WISHLIST, function* saga(e) {
-         e.payload.product?.notWishlisted &&
-         toast(<WishListPopup product={e.payload.product} />);
+        e.payload.product?.notWishlisted &&
+            toast(<WishListPopup product={e.payload.product} />);
     })
 
 }

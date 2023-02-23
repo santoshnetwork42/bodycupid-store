@@ -704,7 +704,6 @@ export const deleteUser = /* GraphQL */ `
                 inventory
                 blockedInventory
               }
-              quantity
               createdAt
               updatedAt
             }
@@ -951,6 +950,7 @@ export const deleteUser = /* GraphQL */ `
             }
             nextToken
           }
+          couponCodeId
           createdAt
           updatedAt
         }
@@ -1092,6 +1092,7 @@ export const deleteUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -1284,6 +1285,7 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -2135,6 +2137,7 @@ export const deleteUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -2327,6 +2330,7 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -2647,6 +2651,7 @@ export const deleteUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -2674,6 +2679,7 @@ export const deleteUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -2764,6 +2770,7 @@ export const deleteUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          totalAmount
           totalCashOnDeliveryCharges
           totalDiscount
           totalGiftCharges
@@ -3275,6 +3282,7 @@ export const deleteUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -3467,6 +3475,7 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -3909,6 +3918,7 @@ export const deleteUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -4101,6 +4111,7 @@ export const deleteUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -4995,7 +5006,6 @@ export const createUser = /* GraphQL */ `
                 inventory
                 blockedInventory
               }
-              quantity
               createdAt
               updatedAt
             }
@@ -5242,6 +5252,7 @@ export const createUser = /* GraphQL */ `
             }
             nextToken
           }
+          couponCodeId
           createdAt
           updatedAt
         }
@@ -5383,6 +5394,7 @@ export const createUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -5575,6 +5587,7 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -6426,6 +6439,7 @@ export const createUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -6618,6 +6632,7 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -6938,6 +6953,7 @@ export const createUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -6965,6 +6981,7 @@ export const createUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -7055,6 +7072,7 @@ export const createUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          totalAmount
           totalCashOnDeliveryCharges
           totalDiscount
           totalGiftCharges
@@ -7566,6 +7584,7 @@ export const createUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -7758,6 +7777,7 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -8200,6 +8220,7 @@ export const createUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -8392,6 +8413,7 @@ export const createUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -9286,7 +9308,6 @@ export const updateUser = /* GraphQL */ `
                 inventory
                 blockedInventory
               }
-              quantity
               createdAt
               updatedAt
             }
@@ -9533,6 +9554,7 @@ export const updateUser = /* GraphQL */ `
             }
             nextToken
           }
+          couponCodeId
           createdAt
           updatedAt
         }
@@ -9674,6 +9696,7 @@ export const updateUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -9866,6 +9889,7 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -10717,6 +10741,7 @@ export const updateUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -10909,6 +10934,7 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -11229,6 +11255,7 @@ export const updateUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -11256,6 +11283,7 @@ export const updateUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -11346,6 +11374,7 @@ export const updateUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          totalAmount
           totalCashOnDeliveryCharges
           totalDiscount
           totalGiftCharges
@@ -11857,6 +11886,7 @@ export const updateUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -12049,6 +12079,7 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -12491,6 +12522,7 @@ export const updateUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -12683,6 +12715,7 @@ export const updateUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -31441,6 +31474,7 @@ export const createProductInventory = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -31468,6 +31502,7 @@ export const createProductInventory = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -33040,6 +33075,7 @@ export const updateProductInventory = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -33067,6 +33103,7 @@ export const updateProductInventory = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -34639,6 +34676,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -34666,6 +34704,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -37569,6 +37608,7 @@ export const createProduct = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -37761,6 +37801,7 @@ export const createProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -40992,6 +41033,7 @@ export const updateProduct = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -41184,6 +41226,7 @@ export const updateProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -44415,6 +44458,7 @@ export const deleteProduct = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -44607,6 +44651,7 @@ export const deleteProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -46176,7 +46221,6 @@ export const createOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -46325,6 +46369,7 @@ export const createOrder = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -46393,6 +46438,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -46420,6 +46466,7 @@ export const createOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -46817,6 +46864,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -46844,6 +46892,7 @@ export const createOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -47049,6 +47098,7 @@ export const createOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -47352,6 +47402,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -47379,6 +47430,7 @@ export const createOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -47605,6 +47657,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -47632,6 +47685,7 @@ export const createOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -48124,7 +48178,6 @@ export const createOrder = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -48168,6 +48221,7 @@ export const createOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -48524,6 +48578,7 @@ export const createOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -48832,6 +48887,7 @@ export const createOrder = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
       totalGiftCharges
@@ -49578,6 +49634,7 @@ export const createOrder = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -49770,6 +49827,7 @@ export const createOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -50765,7 +50823,6 @@ export const updateOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -50914,6 +50971,7 @@ export const updateOrder = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -50982,6 +51040,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -51009,6 +51068,7 @@ export const updateOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -51406,6 +51466,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -51433,6 +51494,7 @@ export const updateOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -51638,6 +51700,7 @@ export const updateOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -51941,6 +52004,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -51968,6 +52032,7 @@ export const updateOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -52194,6 +52259,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -52221,6 +52287,7 @@ export const updateOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -52713,7 +52780,6 @@ export const updateOrder = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -52757,6 +52823,7 @@ export const updateOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -53113,6 +53180,7 @@ export const updateOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -53421,6 +53489,7 @@ export const updateOrder = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
       totalGiftCharges
@@ -54167,6 +54236,7 @@ export const updateOrder = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -54359,6 +54429,7 @@ export const updateOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -55354,7 +55425,6 @@ export const deleteOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -55503,6 +55573,7 @@ export const deleteOrder = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -55571,6 +55642,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -55598,6 +55670,7 @@ export const deleteOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -55995,6 +56068,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -56022,6 +56096,7 @@ export const deleteOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -56227,6 +56302,7 @@ export const deleteOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -56530,6 +56606,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -56557,6 +56634,7 @@ export const deleteOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -56783,6 +56861,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -56810,6 +56889,7 @@ export const deleteOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -57302,7 +57382,6 @@ export const deleteOrder = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -57346,6 +57425,7 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -57702,6 +57782,7 @@ export const deleteOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -58010,6 +58091,7 @@ export const deleteOrder = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
       totalGiftCharges
@@ -58756,6 +58838,7 @@ export const deleteOrder = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -58948,6 +59031,7 @@ export const deleteOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -60421,6 +60505,7 @@ export const createOrderProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -60448,6 +60533,7 @@ export const createOrderProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -62075,6 +62161,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -62102,6 +62189,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -63729,6 +63817,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -63756,6 +63845,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -64904,7 +64994,6 @@ export const createPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -65053,6 +65142,7 @@ export const createPayment = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -65121,6 +65211,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -65148,6 +65239,7 @@ export const createPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -65545,6 +65637,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -65572,6 +65665,7 @@ export const createPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -65777,6 +65871,7 @@ export const createPayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -66080,6 +66175,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -66107,6 +66203,7 @@ export const createPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -66333,6 +66430,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -66360,6 +66458,7 @@ export const createPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -67274,7 +67373,6 @@ export const updatePayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -67423,6 +67521,7 @@ export const updatePayment = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -67491,6 +67590,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -67518,6 +67618,7 @@ export const updatePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -67915,6 +68016,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -67942,6 +68044,7 @@ export const updatePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -68147,6 +68250,7 @@ export const updatePayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -68450,6 +68554,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -68477,6 +68582,7 @@ export const updatePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -68703,6 +68809,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -68730,6 +68837,7 @@ export const updatePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -69644,7 +69752,6 @@ export const deletePayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -69793,6 +69900,7 @@ export const deletePayment = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -69861,6 +69969,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -69888,6 +69997,7 @@ export const deletePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -70285,6 +70395,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -70312,6 +70423,7 @@ export const deletePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -70517,6 +70629,7 @@ export const deletePayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -70820,6 +70933,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -70847,6 +70961,7 @@ export const deletePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -71073,6 +71188,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -71100,6 +71216,7 @@ export const deletePayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -71573,7 +71690,6 @@ export const createReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -71722,6 +71838,7 @@ export const createReview = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -71790,6 +71907,7 @@ export const createReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -71817,6 +71935,7 @@ export const createReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -72214,6 +72333,7 @@ export const createReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -72241,6 +72361,7 @@ export const createReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -72446,6 +72567,7 @@ export const createReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -72749,6 +72871,7 @@ export const createReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -72776,6 +72899,7 @@ export const createReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -73002,6 +73126,7 @@ export const createReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -73029,6 +73154,7 @@ export const createReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -74411,6 +74537,7 @@ export const createReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -74438,6 +74565,7 @@ export const createReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -75091,7 +75219,6 @@ export const updateReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -75240,6 +75367,7 @@ export const updateReview = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -75308,6 +75436,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -75335,6 +75464,7 @@ export const updateReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -75732,6 +75862,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -75759,6 +75890,7 @@ export const updateReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -75964,6 +76096,7 @@ export const updateReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -76267,6 +76400,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -76294,6 +76428,7 @@ export const updateReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -76520,6 +76655,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -76547,6 +76683,7 @@ export const updateReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -77929,6 +78066,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -77956,6 +78094,7 @@ export const updateReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -78609,7 +78748,6 @@ export const deleteReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -78758,6 +78896,7 @@ export const deleteReview = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -78826,6 +78965,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -78853,6 +78993,7 @@ export const deleteReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -79250,6 +79391,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -79277,6 +79419,7 @@ export const deleteReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -79482,6 +79625,7 @@ export const deleteReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -79785,6 +79929,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -79812,6 +79957,7 @@ export const deleteReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -80038,6 +80184,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -80065,6 +80212,7 @@ export const deleteReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -81447,6 +81595,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -81474,6 +81623,7 @@ export const deleteReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -82659,7 +82809,6 @@ export const createWishlist = /* GraphQL */ `
             inventory
             blockedInventory
           }
-          quantity
           createdAt
           updatedAt
         }
@@ -83572,7 +83721,6 @@ export const updateWishlist = /* GraphQL */ `
             inventory
             blockedInventory
           }
-          quantity
           createdAt
           updatedAt
         }
@@ -84485,7 +84633,6 @@ export const deleteWishlist = /* GraphQL */ `
             inventory
             blockedInventory
           }
-          quantity
           createdAt
           updatedAt
         }
@@ -85786,6 +85933,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -85813,6 +85961,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -86113,7 +86262,6 @@ export const createWishlistProduct = /* GraphQL */ `
         inventory
         blockedInventory
       }
-      quantity
       createdAt
       updatedAt
     }
@@ -87409,6 +87557,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -87436,6 +87585,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -87736,7 +87886,6 @@ export const updateWishlistProduct = /* GraphQL */ `
         inventory
         blockedInventory
       }
-      quantity
       createdAt
       updatedAt
     }
@@ -89032,6 +89181,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -89059,6 +89209,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -89359,7 +89510,6 @@ export const deleteWishlistProduct = /* GraphQL */ `
         inventory
         blockedInventory
       }
-      quantity
       createdAt
       updatedAt
     }
@@ -90273,6 +90423,7 @@ export const createShoppingCart = /* GraphQL */ `
         }
         nextToken
       }
+      couponCodeId
       createdAt
       updatedAt
     }
@@ -91186,6 +91337,7 @@ export const updateShoppingCart = /* GraphQL */ `
         }
         nextToken
       }
+      couponCodeId
       createdAt
       updatedAt
     }
@@ -92099,6 +92251,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         }
         nextToken
       }
+      couponCodeId
       createdAt
       updatedAt
     }
@@ -93394,6 +93547,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -93421,6 +93575,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -95017,6 +95172,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -95044,6 +95200,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -96640,6 +96797,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -96667,6 +96825,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -97785,7 +97944,6 @@ export const createCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -97934,6 +98092,7 @@ export const createCouponCode = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -98002,6 +98161,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -98029,6 +98189,7 @@ export const createCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -98426,6 +98587,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -98453,6 +98615,7 @@ export const createCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -98658,6 +98821,7 @@ export const createCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -98961,6 +99125,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -98988,6 +99153,7 @@ export const createCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -99214,6 +99380,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -99241,6 +99408,7 @@ export const createCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -100164,7 +100332,6 @@ export const updateCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -100313,6 +100480,7 @@ export const updateCouponCode = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -100381,6 +100549,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -100408,6 +100577,7 @@ export const updateCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -100805,6 +100975,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -100832,6 +101003,7 @@ export const updateCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -101037,6 +101209,7 @@ export const updateCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -101340,6 +101513,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -101367,6 +101541,7 @@ export const updateCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -101593,6 +101768,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -101620,6 +101796,7 @@ export const updateCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -102543,7 +102720,6 @@ export const deleteCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -102692,6 +102868,7 @@ export const deleteCouponCode = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -102760,6 +102937,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -102787,6 +102965,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -103184,6 +103363,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -103211,6 +103391,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -103416,6 +103597,7 @@ export const deleteCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -103719,6 +103901,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -103746,6 +103929,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -103972,6 +104156,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -103999,6 +104184,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -104919,7 +105105,6 @@ export const applyCoupon = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -105068,6 +105253,7 @@ export const applyCoupon = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -105136,6 +105322,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -105163,6 +105350,7 @@ export const applyCoupon = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -105560,6 +105748,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -105587,6 +105776,7 @@ export const applyCoupon = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -105792,6 +105982,7 @@ export const applyCoupon = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -106095,6 +106286,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -106122,6 +106314,7 @@ export const applyCoupon = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -106348,6 +106541,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -106375,6 +106569,7 @@ export const applyCoupon = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges

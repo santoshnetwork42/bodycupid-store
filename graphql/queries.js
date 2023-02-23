@@ -701,7 +701,6 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
               }
-              quantity
               createdAt
               updatedAt
             }
@@ -948,6 +947,7 @@ export const getUser = /* GraphQL */ `
             }
             nextToken
           }
+          couponCodeId
           createdAt
           updatedAt
         }
@@ -1089,6 +1089,7 @@ export const getUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -1281,6 +1282,7 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -2132,6 +2134,7 @@ export const getUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -2324,6 +2327,7 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -2644,6 +2648,7 @@ export const getUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -2671,6 +2676,7 @@ export const getUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -2761,6 +2767,7 @@ export const getUser = /* GraphQL */ `
             createdAt
             updatedAt
           }
+          totalAmount
           totalCashOnDeliveryCharges
           totalDiscount
           totalGiftCharges
@@ -3272,6 +3279,7 @@ export const getUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -3464,6 +3472,7 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -3906,6 +3915,7 @@ export const getUser = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -4098,6 +4108,7 @@ export const getUser = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -4658,7 +4669,6 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -4807,6 +4817,7 @@ export const listUsers = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -4875,6 +4886,7 @@ export const listUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -4902,6 +4914,7 @@ export const listUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -5299,6 +5312,7 @@ export const listUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -5326,6 +5340,7 @@ export const listUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -5531,6 +5546,7 @@ export const listUsers = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -5834,6 +5850,7 @@ export const listUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -5861,6 +5878,7 @@ export const listUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -6087,6 +6105,7 @@ export const listUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -6114,6 +6133,7 @@ export const listUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -6592,7 +6612,6 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -6741,6 +6760,7 @@ export const bystoreIdUser = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -6809,6 +6829,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -6836,6 +6857,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -7233,6 +7255,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -7260,6 +7283,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -7465,6 +7489,7 @@ export const bystoreIdUser = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -7768,6 +7793,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -7795,6 +7821,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -8021,6 +8048,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -8048,6 +8076,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -8526,7 +8555,6 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -8675,6 +8703,7 @@ export const searchUsers = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -8743,6 +8772,7 @@ export const searchUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -8770,6 +8800,7 @@ export const searchUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -9167,6 +9198,7 @@ export const searchUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -9194,6 +9226,7 @@ export const searchUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -9399,6 +9432,7 @@ export const searchUsers = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -9702,6 +9736,7 @@ export const searchUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -9729,6 +9764,7 @@ export const searchUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -9955,6 +9991,7 @@ export const searchUsers = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -9982,6 +10019,7 @@ export const searchUsers = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -30584,6 +30622,7 @@ export const getProductInventory = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -30611,6 +30650,7 @@ export const getProductInventory = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -36928,6 +36968,7 @@ export const getProduct = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -37120,6 +37161,7 @@ export const getProduct = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -39018,6 +39060,7 @@ export const listProducts = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -39045,6 +39088,7 @@ export const listProducts = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -40623,6 +40667,7 @@ export const bytitleProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -40650,6 +40695,7 @@ export const bytitleProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -42228,6 +42274,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -42255,6 +42302,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -43833,6 +43881,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -43860,6 +43909,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -45438,6 +45488,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -45465,6 +45516,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -47043,6 +47095,7 @@ export const byslugProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -47070,6 +47123,7 @@ export const byslugProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -48648,6 +48702,7 @@ export const searchProducts = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -48675,6 +48730,7 @@ export const searchProducts = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -50015,7 +50071,6 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -50164,6 +50219,7 @@ export const getOrder = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -50232,6 +50288,7 @@ export const getOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -50259,6 +50316,7 @@ export const getOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -50656,6 +50714,7 @@ export const getOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -50683,6 +50742,7 @@ export const getOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -50888,6 +50948,7 @@ export const getOrder = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -51191,6 +51252,7 @@ export const getOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -51218,6 +51280,7 @@ export const getOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -51444,6 +51507,7 @@ export const getOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -51471,6 +51535,7 @@ export const getOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -51963,7 +52028,6 @@ export const getOrder = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -52007,6 +52071,7 @@ export const getOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -52363,6 +52428,7 @@ export const getOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -52671,6 +52737,7 @@ export const getOrder = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
       totalGiftCharges
@@ -53417,6 +53484,7 @@ export const getOrder = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -53609,6 +53677,7 @@ export const getOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -54167,7 +54236,6 @@ export const listOrders = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -54211,6 +54279,7 @@ export const listOrders = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -54567,6 +54636,7 @@ export const listOrders = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -55133,6 +55203,7 @@ export const listOrders = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -55325,6 +55396,7 @@ export const listOrders = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -55509,6 +55581,7 @@ export const listOrders = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
         totalGiftCharges
@@ -55895,6 +55968,7 @@ export const listOrders = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -55922,6 +55996,7 @@ export const listOrders = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -56398,7 +56473,6 @@ export const bystoreIdOrder = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -56442,6 +56516,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -56798,6 +56873,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -57364,6 +57440,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -57556,6 +57633,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -57740,6 +57818,7 @@ export const bystoreIdOrder = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
         totalGiftCharges
@@ -58126,6 +58205,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -58153,6 +58233,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -58629,7 +58710,6 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -58673,6 +58753,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -59029,6 +59110,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -59595,6 +59677,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -59787,6 +59870,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -59971,6 +60055,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
         totalGiftCharges
@@ -60357,6 +60442,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -60384,6 +60470,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -60860,7 +60947,6 @@ export const searchOrders = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -60904,6 +60990,7 @@ export const searchOrders = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -61260,6 +61347,7 @@ export const searchOrders = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -61826,6 +61914,7 @@ export const searchOrders = /* GraphQL */ `
                 shoppingcartProducts {
                   nextToken
                 }
+                couponCodeId
                 createdAt
                 updatedAt
               }
@@ -62018,6 +62107,7 @@ export const searchOrders = /* GraphQL */ `
                   createdAt
                   updatedAt
                 }
+                totalAmount
                 totalCashOnDeliveryCharges
                 totalDiscount
                 totalGiftCharges
@@ -62202,6 +62292,7 @@ export const searchOrders = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
         totalGiftCharges
@@ -62588,6 +62679,7 @@ export const searchOrders = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -62615,6 +62707,7 @@ export const searchOrders = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -64008,6 +64101,7 @@ export const getOrderProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -64035,6 +64129,7 @@ export const getOrderProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -66176,6 +66271,928 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
     }
   }
 `;
+export const searchOrderProducts = /* GraphQL */ `
+  query SearchOrderProducts(
+    $filter: SearchableOrderProductFilterInput
+    $sort: [SearchableOrderProductSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableOrderProductAggregationInput]
+  ) {
+    searchOrderProducts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        orderId
+        productId
+        product {
+          id
+          title
+          brand
+          vendor
+          categoryId
+          subCategoryId
+          subCategory {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            name
+            description
+            categoryID
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            slug
+            isFeatured
+            totalProducts
+            priority
+            imageUrl
+            products {
+              items {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          storeId
+          store {
+            id
+            name
+            description
+            isActive
+            webUrl
+            appId
+            host
+            priority
+            imageUrl
+            products {
+              items {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          isFeatured
+          category {
+            id
+            name
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            description
+            slug
+            isFeatured
+            totalProducts
+            priority
+            imageUrl
+            products {
+              items {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              nextToken
+            }
+            subCategory {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          productType
+          createdAt
+          slug
+          productDescription
+          longDescription
+          updatedAt
+          isPublished
+          publishedAt
+          price
+          sku
+          size
+          color
+          status
+          position
+          currency
+          costPrice
+          listingPrice
+          taxable
+          barcode
+          tags
+          weight
+          weightUnit
+          inventory
+          blockedInventory
+          rating
+          totalOrders
+          additionalInfo
+          thumbImages
+          isTaxEnabled
+          isInventoryEnabled
+          hasVarient
+          variants {
+            items {
+              id
+              productId
+              title
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              createdAt
+              updatedAt
+              taxable
+              barcode
+              imageUrl
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+            }
+            nextToken
+          }
+          images {
+            items {
+              id
+              productId
+              position
+              createdAt
+              updatedAt
+              alt
+              width
+              height
+              imageKey
+              isThumb
+            }
+            nextToken
+          }
+          reviews {
+            items {
+              id
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              reviewer {
+                name
+                email
+              }
+              flagged
+              productId
+              product {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              rating
+              comment
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+        variantId
+        variant {
+          id
+          productId
+          title
+          price
+          sku
+          size
+          color
+          status
+          position
+          currency
+          costPrice
+          listingPrice
+          createdAt
+          updatedAt
+          taxable
+          barcode
+          imageUrl
+          weight
+          weightUnit
+          inventory
+          blockedInventory
+        }
+        sku
+        returnReason
+        returnDate
+        returnAWB
+        returnShippingProvider
+        title
+        shippingMethodCode
+        cashOnDeliveryCharges
+        sellingPrice
+        shippingCharges
+        discount
+        totalPrice
+        currency
+        onHold
+        facilityCode
+        gstin
+        additionalInfo
+        centralGstPercentage
+        compensationCessPercentage
+        integratedGstPercentage
+        stateGstPercentage
+        taxRate
+        unionTerritoryGstPercentage
+        deliveryPartner
+        dispatchDate
+        invoiceDate
+        invoiceNumber
+        tentativeDeliveryDate
+        trackingId
+        quantity
+        price
+        status
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getPayment = /* GraphQL */ `
   query GetPayment($id: ID!) {
     getPayment(id: $id) {
@@ -66984,7 +68001,6 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -67133,6 +68149,7 @@ export const getPayment = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -67201,6 +68218,7 @@ export const getPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -67228,6 +68246,7 @@ export const getPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -67625,6 +68644,7 @@ export const getPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -67652,6 +68672,7 @@ export const getPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -67857,6 +68878,7 @@ export const getPayment = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -68160,6 +69182,7 @@ export const getPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -68187,6 +69210,7 @@ export const getPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -68413,6 +69437,7 @@ export const getPayment = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -68440,6 +69465,7 @@ export const getPayment = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -68917,7 +69943,6 @@ export const listPayments = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -68961,6 +69986,7 @@ export const listPayments = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -69317,6 +70343,7 @@ export const listPayments = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -70005,7 +71032,6 @@ export const bystoreIdPayment = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -70049,6 +71075,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -70405,6 +71432,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -71093,7 +72121,6 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -71137,6 +72164,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -71493,6 +72521,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -72181,7 +73210,6 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -72225,6 +73253,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -72581,6 +73610,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -73252,7 +74282,6 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -73401,6 +74430,7 @@ export const getReview = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -73469,6 +74499,7 @@ export const getReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -73496,6 +74527,7 @@ export const getReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -73893,6 +74925,7 @@ export const getReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -73920,6 +74953,7 @@ export const getReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -74125,6 +75159,7 @@ export const getReview = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -74428,6 +75463,7 @@ export const getReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -74455,6 +75491,7 @@ export const getReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -74681,6 +75718,7 @@ export const getReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -74708,6 +75746,7 @@ export const getReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -76090,6 +77129,7 @@ export const getReview = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -76117,6 +77157,7 @@ export const getReview = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -76571,7 +77612,6 @@ export const listReviews = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -76615,6 +77655,7 @@ export const listReviews = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -76971,6 +78012,7 @@ export const listReviews = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -78284,7 +79326,6 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -78328,6 +79369,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -78684,6 +79726,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -79997,7 +81040,6 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -80041,6 +81083,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -80397,6 +81440,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -82428,7 +83472,6 @@ export const getWishlist = /* GraphQL */ `
             inventory
             blockedInventory
           }
-          quantity
           createdAt
           updatedAt
         }
@@ -82867,7 +83910,6 @@ export const listWishlists = /* GraphQL */ `
               inventory
               blockedInventory
             }
-            quantity
             createdAt
             updatedAt
           }
@@ -83318,7 +84360,6 @@ export const bystoreIdWishlist = /* GraphQL */ `
               inventory
               blockedInventory
             }
-            quantity
             createdAt
             updatedAt
           }
@@ -83769,7 +84810,6 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
               inventory
               blockedInventory
             }
-            quantity
             createdAt
             updatedAt
           }
@@ -85069,6 +86109,7 @@ export const getWishlistProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -85096,6 +86137,7 @@ export const getWishlistProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -85396,7 +86438,6 @@ export const getWishlistProduct = /* GraphQL */ `
         inventory
         blockedInventory
       }
-      quantity
       createdAt
       updatedAt
     }
@@ -86264,7 +87305,6 @@ export const listWishlistProducts = /* GraphQL */ `
           inventory
           blockedInventory
         }
-        quantity
         createdAt
         updatedAt
       }
@@ -87140,7 +88180,6 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
           inventory
           blockedInventory
         }
-        quantity
         createdAt
         updatedAt
       }
@@ -88053,6 +89092,7 @@ export const getShoppingCart = /* GraphQL */ `
         }
         nextToken
       }
+      couponCodeId
       createdAt
       updatedAt
     }
@@ -88492,6 +89532,7 @@ export const listShoppingCarts = /* GraphQL */ `
           }
           nextToken
         }
+        couponCodeId
         createdAt
         updatedAt
       }
@@ -88943,6 +89984,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
           }
           nextToken
         }
+        couponCodeId
         createdAt
         updatedAt
       }
@@ -89394,6 +90436,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
           }
           nextToken
         }
+        couponCodeId
         createdAt
         updatedAt
       }
@@ -90688,6 +91731,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -90715,6 +91759,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -93576,7 +94621,6 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                 }
-                quantity
                 createdAt
                 updatedAt
               }
@@ -93725,6 +94769,7 @@ export const getCouponCode = /* GraphQL */ `
               }
               nextToken
             }
+            couponCodeId
             createdAt
             updatedAt
           }
@@ -93793,6 +94838,7 @@ export const getCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -93820,6 +94866,7 @@ export const getCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -94217,6 +95264,7 @@ export const getCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -94244,6 +95292,7 @@ export const getCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -94449,6 +95498,7 @@ export const getCouponCode = /* GraphQL */ `
               createdAt
               updatedAt
             }
+            totalAmount
             totalCashOnDeliveryCharges
             totalDiscount
             totalGiftCharges
@@ -94752,6 +95802,7 @@ export const getCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -94779,6 +95830,7 @@ export const getCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -95005,6 +96057,7 @@ export const getCouponCode = /* GraphQL */ `
                   id
                   storeId
                   userId
+                  couponCodeId
                   createdAt
                   updatedAt
                 }
@@ -95032,6 +96085,7 @@ export const getCouponCode = /* GraphQL */ `
                   channelName
                   totalStoreCredit
                   CouponCodeId
+                  totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
                   totalGiftCharges
@@ -95518,7 +96572,6 @@ export const listCouponCodes = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -95562,6 +96615,7 @@ export const listCouponCodes = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -95918,6 +96972,7 @@ export const listCouponCodes = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -96615,7 +97670,6 @@ export const bycodeCouponCode = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -96659,6 +97713,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -97015,6 +98070,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -97712,7 +98768,6 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -97756,6 +98811,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -98112,6 +99168,7 @@ export const bycodeUserIdCouponCode = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -98809,7 +99866,6 @@ export const byuserIdCouponCode = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -98853,6 +99909,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -99209,6 +100266,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges
@@ -99906,7 +100964,6 @@ export const searchCouponCodes = /* GraphQL */ `
                   wishlistId
                   productId
                   variantId
-                  quantity
                   createdAt
                   updatedAt
                 }
@@ -99950,6 +101007,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 }
                 nextToken
               }
+              couponCodeId
               createdAt
               updatedAt
             }
@@ -100306,6 +101364,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 createdAt
                 updatedAt
               }
+              totalAmount
               totalCashOnDeliveryCharges
               totalDiscount
               totalGiftCharges

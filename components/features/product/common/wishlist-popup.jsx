@@ -33,7 +33,7 @@ export default function WishListPopup(props) {
               <span className="product-price">₹{toDecimal(product.price)}</span>
             </span>
           </div>
-        </div>  
+        </div>
 
         <div className="action-group justify-between d-flex">
           <ALink
@@ -42,7 +42,6 @@ export default function WishListPopup(props) {
           >
             View Wishlist
           </ALink>
-         
         </div>
       </div>
     </div>
