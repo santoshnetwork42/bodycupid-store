@@ -7,8 +7,9 @@ import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
+import { modalActions } from "~/store/modal";
 
-function Login({ auth, redirect = true }) {
+function Login({ auth, redirect = true, closeLogin }) {
   const router = useRouter();
   const [state, setState] = useState({
     name: "",
@@ -61,6 +62,7 @@ function Login({ auth, redirect = true }) {
           state.confirmationCode
         );
         if (confirmSignUp === "SIGNUP") {
+          closeLogin();
           if (redirect) {
             router.push("/");
           }
@@ -75,6 +77,7 @@ function Login({ auth, redirect = true }) {
     },
     [state, confirmSignUp, redirect]
   );
+
   const handleSignIn = useCallback(
     async (e) => {
       e.preventDefault();
@@ -83,6 +86,7 @@ function Login({ auth, redirect = true }) {
           username: addPhonePrefix(state.phone),
           password: state.password,
         });
+        closeLogin();
         if (redirect) {
           router.push("/");
         }
@@ -396,4 +400,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, {
+  closeLogin: modalActions.closeLoginModal,
+})(Login);
