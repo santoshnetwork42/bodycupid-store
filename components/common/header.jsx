@@ -31,59 +31,7 @@ function Header({ auth, openLogin }) {
 
   return (
     <header className="header header-border">
-      <div className="header-top">
-        <div className="container">
-          <div className="header-left">
-            <p className="welcome-msg">Welcome to Wow store!</p>
-          </div>
-          <div className="header-right">
-            {/* <div className="dropdown">
-                            <ALink href="#">USD</ALink>
-                            <ul className="dropdown-box">
-                                <li><ALink href="#">USD</ALink></li>
-                                <li><ALink href="#">EUR</ALink></li>
-                            </ul>
-                        </div>
-
-                        <div className="dropdown ml-5">
-                            <ALink href="#">ENG</ALink>
-                            <ul className="dropdown-box">
-                                <li>
-                                    <ALink href="#">ENG</ALink>
-                                </li>
-                                <li>
-                                    <ALink href="#">FRH</ALink>
-                                </li>
-                            </ul>
-                        </div> */}
-
-            <span className="divider"></span>
-            <ALink href="/pages/contact-us" className="contact d-lg-show">
-              <i className="d-icon-map"></i>Contact
-            </ALink>
-            <ALink href="#" className="help d-lg-show">
-              <i className="d-icon-info"></i> Need Help
-            </ALink>
-            {!!auth && (
-              <ALink href="/pages/account" className="help d-lg-show">
-                <i className="d-icon-user"></i>Account
-              </ALink>
-            )}
-            {!auth && (
-              <ALink
-                href="#"
-                className="login-link d-lg-show"
-                onClick={() => {
-                  openLogin();
-                  return false;
-                }}
-              >
-                <i className="d-icon-user"></i>Sign in
-              </ALink>
-            )}
-          </div>
-        </div>
-      </div>
+        
 
       <div className="header-middle sticky-header fix-top sticky-content">
         <div className="container">
