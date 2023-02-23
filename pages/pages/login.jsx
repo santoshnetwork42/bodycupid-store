@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
+import AlertPopup from "~/components/features/product/common/alert-popup";
 
 function Login({ auth, redirect = true, closeLogin }) {
   const router = useRouter();
@@ -46,7 +47,7 @@ function Login({ auth, redirect = true, closeLogin }) {
         setConfirmSignUp("SIGNUP");
       } catch (error) {
         console.log("error signing up:", error);
-        toast.error(error.message);
+        toast(<AlertPopup message={error.message} status="error" />);
       }
       return false;
     },
@@ -71,7 +72,7 @@ function Login({ auth, redirect = true, closeLogin }) {
         }
       } catch (error) {
         console.log("error signup confirm:", error);
-        toast.error(error.message);
+        toast(<AlertPopup message={error.message} status="error" />);
       }
       return false;
     },
@@ -96,7 +97,7 @@ function Login({ auth, redirect = true, closeLogin }) {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
         } else {
-          toast.error(error.message);
+          toast(<AlertPopup message={error.message} status="success" />);
         }
       }
       return false;
@@ -177,20 +178,6 @@ function Login({ auth, redirect = true, closeLogin }) {
                             />
                           </div>
                           <div className="form-footer">
-                            <div className="form-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-checkbox"
-                                id="signin-remember-2"
-                                name="signin-remember"
-                              />
-                              <label
-                                className="form-control-label"
-                                htmlFor="signin-remember-2"
-                              >
-                                Remember me
-                              </label>
-                            </div>
                             <ALink
                               href="/pages/forgot-password"
                               className="lost-link"
