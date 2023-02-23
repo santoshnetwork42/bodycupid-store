@@ -863,3 +863,41 @@ export const createReview = /* GraphQL */ `
     }
   }
 `;
+export const findUserAddresses = /* GraphQL */ `
+  query SearchUserAddresses(
+    $filter: SearchableUserAddressFilterInput
+    $sort: [SearchableUserAddressSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableUserAddressAggregationInput]
+  ) {
+    searchUserAddresses(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        userID
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        createdAt
+        updatedAt
+      }
+      total
+    }
+  }
+`;
