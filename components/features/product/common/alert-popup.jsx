@@ -1,69 +1,30 @@
 import React from "react";
 import SlideToggle from "react-slide-toggle";
 
+const className = {
+  error: "alert-danger",
+  success: "alert-success",
+  warning: "alert-warning",
+  info: "alert-primary",
+};
+
 export default function AlertPopup(props) {
   const { message, status } = props;
-  switch (status) {
-    case "error":
-      return (
-        <SlideToggle expanded={true}>
-          {({ onToggle, setCollapsibleElement }) => (
-            <div ref={setCollapsibleElement} className="overflow-hidden">
-              <div className="alert alert-danger alert-dark alert-round alert-inline error-height">
-                <h4 className="alert-title">{message}</h4>
+  return (
+    <SlideToggle expanded={true}>
+      {({ onToggle, setCollapsibleElement }) => (
+        <div ref={setCollapsibleElement} className="overflow-hidden">
+          <div
+            className={`alert ${className[status]} alert-dark alert-round alert-inline error-height`}
+          >
+            <h4 className="alert-title">{message}</h4>
 
-                <button type="button" className="btn btn-link btn-close">
-                  <i className="d-icon-times" onClick={onToggle}></i>
-                </button>
-              </div>
-            </div>
-          )}
-        </SlideToggle>
-      );
-    case "success":
-      return (
-        <SlideToggle expanded={true}>
-          {({ onToggle, setCollapsibleElement }) => (
-            <div ref={setCollapsibleElement} className="overflow-hidden">
-              <div className="alert alert-success alert-dark alert-round alert-inline error-height">
-                <h4 className="alert-title">{message}</h4>
-                <button type="button" className="btn btn-link btn-close">
-                  <i className="d-icon-times" onClick={onToggle}></i>
-                </button>
-              </div>
-            </div>
-          )}
-        </SlideToggle>
-      );
-    case "warning":
-      return (
-        <SlideToggle expanded={true}>
-          {({ onToggle, setCollapsibleElement }) => (
-            <div ref={setCollapsibleElement} className="overflow-hidden">
-              <div className="alert alert-warning alert-dark alert-round alert-inline error-height">
-                <h4 className="alert-title">{message}</h4>
-                <button type="button" className="btn btn-link btn-close">
-                  <i className="d-icon-times" onClick={onToggle}></i>
-                </button>
-              </div>
-            </div>
-          )}
-        </SlideToggle>
-      );
-    case "info":
-      return (
-        <SlideToggle expanded={true}>
-          {({ onToggle, setCollapsibleElement }) => (
-            <div ref={setCollapsibleElement} className="overflow-hidden">
-              <div className="alert alert-primary alert-dark alert-round alert-inline error-height">
-                <h4 className="alert-title">{message}</h4>
-                <button type="button" className="btn btn-link btn-close">
-                  <i className="d-icon-times" onClick={onToggle}></i>
-                </button>
-              </div>
-            </div>
-          )}
-        </SlideToggle>
-      );
-  }
+            <button type="button" className="btn btn-link btn-close">
+              <i className="d-icon-times" onClick={onToggle}></i>
+            </button>
+          </div>
+        </div>
+      )}
+    </SlideToggle>
+  );
 }

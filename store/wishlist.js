@@ -1,9 +1,9 @@
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import { toast } from 'react-toastify';
-import { all, call, put, select, takeEvery } from 'redux-saga/effects';
-import WishListPopup from "~/components/features/product/common/wishlist-popup";
+import { takeEvery } from 'redux-saga/effects';
 
+import WishListPopup from "~/components/features/product/common/wishlist-popup";
 
 const actionTypes = {
     TOGGLE_WISHLIST: 'TOGGLE_WISHLIST',

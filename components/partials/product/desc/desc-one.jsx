@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
+import { toast } from "react-toastify";
 
 import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
 import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
+import AlertPopup from "~/components/features/product/common/alert-popup";
 
 const reviewDefault = {
   rating: 1,
@@ -66,7 +68,14 @@ function DescOne(props) {
           },
         });
         setReview({ ...reviewDefault });
-      } catch (err) {
+        toast(
+          <AlertPopup
+            message="Review submitted successfully"
+            status="success"
+          />
+        );
+      } catch (error) {
+        toast(<AlertPopup message={error.message} status="error" />);
         console.log(err);
       }
       return false;

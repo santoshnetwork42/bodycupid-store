@@ -2,16 +2,15 @@ import React from "react";
 
 import ALink from "~/components/features/custom-link";
 
-import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function WishListPopup(props) {
-  const { product, isWishList } = props;
+  const { product } = props;
 
   return (
     <div className="minipopup-area">
       <div className="minipopup-box show" style={{ top: "0" }}>
-        <p className="minipopup-title">Successfully added.</p>
+        <p className="minipopup-title">Added to wishlist.</p>
 
         <div className="product product-purchased  product-cart mb-0">
           <figure className="product-media pure-media">
@@ -28,17 +27,14 @@ export default function WishListPopup(props) {
             <ALink href={`/product/${product.slug}`} className="product-name">
               {product.title}
             </ALink>
-            <span className="price-box">
-              <span className="product-quantity">{product.qty}</span>
-              <span className="product-price">₹{toDecimal(product.price)}</span>
-            </span>
           </div>
         </div>
 
-        <div className="action-group justify-between d-flex">
+        <div className="action-group justify-content-end d-flex">
+          <div />
           <ALink
             href={`/pages/wishlist`}
-            className="btn btn-sm btn-outline btn-primary btn-rounded"
+            className="btn btn-sm btn-primary btn-rounded"
           >
             View Wishlist
           </ALink>
