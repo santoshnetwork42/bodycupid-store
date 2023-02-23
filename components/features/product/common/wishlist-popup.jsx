@@ -5,8 +5,8 @@ import ALink from "~/components/features/custom-link";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-export default function CartPopup(props) {
-  const { product } = props;
+export default function WishListPopup(props) {
+  const { product, isWishList } = props;
 
   return (
     <div className="minipopup-area">
@@ -33,21 +33,16 @@ export default function CartPopup(props) {
               <span className="product-price">₹{toDecimal(product.price)}</span>
             </span>
           </div>
-        </div>
+        </div>  
 
         <div className="action-group justify-between d-flex">
           <ALink
-            href={`/pages/Cart`}
+            href={`/pages/wishlist`}
             className="btn btn-sm btn-outline btn-primary btn-rounded"
           >
-            View Cart
+            View Wishlist
           </ALink>
-          <ALink
-            href="/pages/checkout"
-            className="btn btn-sm btn-primary btn-rounded"
-          >
-            Check Out
-          </ALink>
+         
         </div>
       </div>
     </div>
