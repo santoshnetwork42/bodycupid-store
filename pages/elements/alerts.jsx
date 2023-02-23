@@ -11,7 +11,7 @@ function Alert(props) {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Alert &amp; Notification</title>
+                <title>Wow life science | Alert &amp; Notification</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Alert &amp; Notification</h1>

@@ -83,7 +83,7 @@ function ProductDefault() {
     return (
         <main className="main mt-6 single-product">
             <Helmet>
-                <title>Wow React eCommerce Template | Product Default</title>
+                <title>Wow life science | Product Default</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product Default</h1>

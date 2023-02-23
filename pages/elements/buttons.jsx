@@ -20,7 +20,7 @@ function Buttons() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Buttons</title>
+                <title>Wow life science | Buttons</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Buttons</h1>

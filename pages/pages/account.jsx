@@ -89,7 +89,7 @@ function Account({ user }) {
   return (
     <main className="main account">
       <Helmet>
-        <title>Wow React eCommerce Template | Account</title>
+        <title>Wow life science | Account</title>
       </Helmet>
 
       <h1 className="d-none">Wow React eCommerce Template - Account</h1>

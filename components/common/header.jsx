@@ -82,9 +82,7 @@ function Header({ auth, openLogin }) {
             <ALink href="#">
               <i className="d-icon-card"></i>Special Offers
             </ALink>
-            <a href="https://d-themes.com/buynow/riodereact" className="ml-6">
-              Buy Wow!
-            </a>
+           
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ function PostMasonry({ router }) {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog Masonry {column}</title>
+                <title>Wow life science | Blog Masonry {column}</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog Masonry {column}</h1>

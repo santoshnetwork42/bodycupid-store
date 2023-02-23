@@ -35,7 +35,7 @@ function AboutUs() {
     return (
         <main className="main about-us">
             <Helmet>
-                <title>Wow React eCommerce Template | About Us</title>
+                <title>Wow life science | About Us</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - About Us</h1>

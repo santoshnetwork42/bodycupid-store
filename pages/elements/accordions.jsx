@@ -11,7 +11,7 @@ function Accordions() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Accordions</title>
+                <title>Wow life science | Accordions</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Accordions</h1>

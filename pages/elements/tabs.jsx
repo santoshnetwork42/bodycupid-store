@@ -10,7 +10,7 @@ function ElementTabs() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Tabs</title>
+                <title>Wow life science | Tabs</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Tabs</h1>

@@ -43,7 +43,7 @@ function ForgotPassword() {
   return (
     <main className="main">
       <Helmet>
-        <title>Wow React eCommerce Template | Login</title>
+        <title>Wow life science | Login</title>
       </Helmet>
 
       <h1 className="d-none">Wow React eCommerce Template - Login</h1>

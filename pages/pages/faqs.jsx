@@ -12,7 +12,7 @@ function ComingSoon() {
     return (
         <main className="main faq">
             <Helmet>
-                <title>Wow React eCommerce Template | FAQs</title>
+                <title>Wow life science | FAQs</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - FAQs</h1>

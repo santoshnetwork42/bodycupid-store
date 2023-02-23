@@ -48,7 +48,7 @@ function PostGrid({ router }) {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog Grid {column}</title>
+                <title>Wow life science | Blog Grid {column}</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog Grid {column}</h1>

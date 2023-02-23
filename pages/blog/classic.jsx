@@ -47,7 +47,7 @@ function Classic() {
     return (
         <main className="main skeleton-body">
             <Helmet>
-                <title>Wow React eCommerce Template | Blog Classic</title>
+                <title>Wow life science | Blog Classic</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Blog Classic</h1>

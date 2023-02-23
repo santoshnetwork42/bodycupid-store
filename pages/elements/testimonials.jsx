@@ -22,7 +22,7 @@ function ElementTabs() {
     return (
         <>
             <Helmet>
-                <title>Wow React eCommerce Template | Testimonials</title>
+                <title>Wow life science | Testimonials</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Testimonials</h1>

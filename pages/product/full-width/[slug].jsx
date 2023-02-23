@@ -42,7 +42,7 @@ function ProductFullWidth() {
     return (
         <main className="main single-product">
             <Helmet>
-                <title>Wow React eCommerce Template | Product Fullwidth</title>
+                <title>Wow life science | Product Fullwidth</title>
             </Helmet>
 
             <h1 className="d-none">Wow React eCommerce Template - Product Fullwidth</h1>
