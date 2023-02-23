@@ -34,6 +34,15 @@ function LoginModal({ isOpen, closeLoginModal }) {
       className="auth-popup bg-img"
     >
       <AuthView />
+
+      <button
+        title="Close (Esc)"
+        type="button"
+        className="mfp-close"
+        onClick={() => closeLoginModal()}
+      >
+        <span>×</span>
+      </button>
     </Modal>
   );
 }

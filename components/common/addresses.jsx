@@ -187,6 +187,14 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
           onAddressClick={onAddressClick}
           onAddress={onAddress}
         />
+        <button
+          title="Close (Esc)"
+          type="button"
+          className="mfp-close"
+          onClick={() => setOpen(false)}
+        >
+          <span>×</span>
+        </button>
       </Modal>
     </div>
   );
