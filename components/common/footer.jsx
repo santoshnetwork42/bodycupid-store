@@ -82,25 +82,27 @@ export default function Footer() {
                     <ALink href="/pages/about-us">About Us</ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/refund-policy">
+                    <ALink href="/policies/refund-policy">
                       Return / Refund / Cancellation Policy
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/terms-of-services">
+                    <ALink href="/policies/terms-of-service">
                       Terms & Condition
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/privacy-policy">Privacy Policy</ALink>
+                    <ALink href="/policies/privacy-policy">
+                      Privacy Policy
+                    </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/shipping">
+                    <ALink href="/pages/shipping-and-delivery-policy">
                       Shipping and Delivery Policy
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/contact">contact</ALink>
+                    <ALink href="/pages/contacts">Contact</ALink>
                   </li>
                 </ul>
               </div>
