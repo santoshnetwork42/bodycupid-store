@@ -24,14 +24,20 @@ function HomePage() {
   useEffect(() => {
     (async function () {
       await Promise.all([
-        API.graphql(graphqlOperation(getHomePageProducts, { limit: 10 }))
+        API.graphql(graphqlOperation(getHomePageProducts, { limit: 8 }))
           .then((response) => {
             setProducts(response.data.searchProducts.items);
           })
           .catch((err) => {
             console.log(err);
           }),
-        API.graphql(graphqlOperation(getHomePageCategories, { limit: 4 }))
+        API.graphql(
+          graphqlOperation(getHomePageCategories, {
+            limit: 4,
+            filter: { isFeatured: { eq: true } },
+            sort: [{ field: "priority", direction: "asc" }],
+          })
+        )
           .then((response) => {
             setCategories(response.data.searchProductSubCategories.items);
           })

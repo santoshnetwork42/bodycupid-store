@@ -126,9 +126,9 @@
         text-decoration: none;
         color: inherit;
         transition: color .3s;
-        &:hover {
-            opacity: 70%;
-        }
+        // &:hover {
+        //     opacity: 70%;
+        // }
     }
     :focus {
         outline: 0;

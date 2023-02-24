@@ -10,8 +10,8 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <base href="/react/riode/demo-1/"></base>
-                    <title>Wow - React eCommerce Template</title>
+                    <base href="/"></base>
+                    <title>WOW Life Science</title>
                     <link rel="icon" href="images/icons/favicon.png" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900;SegoeScript:700" />
                     <link rel="stylesheet" type="text/css" href="/vendor/riode-fonts/riode-fonts.css" />

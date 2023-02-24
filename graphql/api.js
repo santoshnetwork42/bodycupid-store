@@ -115,6 +115,7 @@ export const getHomePageCategories = /* GraphQL */ `
         name
         slug
         imageUrl
+        priority
       }
     }
   }
@@ -964,6 +965,17 @@ export const updateShoppingCart = /* GraphQL */ `
       storeId
       userId
       couponCodeId
+    }
+  }
+`;
+
+export const deleteShoppingCart = /* GraphQL */ `
+  mutation DeleteShoppingCart(
+    $input: DeleteShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    deleteShoppingCart(input: $input, condition: $condition) {
+      id
     }
   }
 `;

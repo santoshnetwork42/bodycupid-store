@@ -48,8 +48,8 @@ function ProductListOne(props) {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
       const filter = category ? { [apiSearchKey]: { eq: category.id } } : {};
 
-      if (search) {
-        filter.title = { wildcard: `*${search}*` };
+      if (!!search?.trim()) {
+        filter.title = { matchPhrasePrefix: search };
       }
 
       if (

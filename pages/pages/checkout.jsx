@@ -30,6 +30,7 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+      const { id: ignoreId, ...restAddress } = shippingAddress;
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
       const payload = {
         userId: user?.username,
@@ -38,7 +39,7 @@ function Checkout(props) {
         totalDiscount: getCouponTotal(appliedCoupon, cartList),
         totalShippingCharges: getShippingPrice(cartList),
         orderDate: new Date().toISOString(),
-        shippingAddress,
+        shippingAddress: restAddress,
       };
 
       const {

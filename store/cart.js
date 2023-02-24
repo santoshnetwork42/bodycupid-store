@@ -7,10 +7,11 @@ import { API } from 'aws-amplify';
 import CartPopup from '~/components/features/product/common/cart-popup';
 import CouponPopup from '~/components/features/product/common/coupon-popup';
 import {
-    createShoppingCartProduct,
     createShoppingCart,
-    updateShoppingCartProduct,
     updateShoppingCart,
+    deleteShoppingCart,
+    createShoppingCartProduct,
+    updateShoppingCartProduct,
     deleteShoppingCartProduct
 } from '~/graphql/api';
 
@@ -22,6 +23,7 @@ const actionTypes = {
     APPLY_COUPONS: 'APPLY_COUPONS',
     REMOVE_COUPON: 'REMOVE_COUPON',
     SET_CART: 'SET_CART',
+    EMPTY_CART: 'EMPTY_CART',
 }
 
 const initialState = {
@@ -89,7 +91,7 @@ export const cartActions = {
     updateCart: products => ({ type: actionTypes.UPDATE_CART, payload: { products } }),
     applyCoupon: coupon => ({ type: actionTypes.APPLY_COUPONS, payload: { coupon } }),
     removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
-    emptyCart: () => ({ type: actionTypes.REFRESH_STORE }),
+    emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
     setCart: cart => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
 };
 
@@ -240,6 +242,40 @@ export function* cartSaga() {
         yield all(promise);
         yield put({ type: actionTypes.SET_CART, payload: { products: updatedProducts } });
     });
+
+    yield takeEvery(actionTypes.EMPTY_CART, function* saga(e) {
+        const { cart } = yield select();
+        const { cart: cartResponse } = cart;
+        if (cartResponse) {
+            const { products = [], id } = cartResponse;
+
+            const promise = [];
+            if (id) {
+                promise.push(
+                    call([API, API.graphql], {
+                        query: deleteShoppingCart,
+                        variables: {
+                            input: { id, },
+                        },
+                    })
+                );
+            }
+
+            if (Array.isArray(products)) {
+                products.forEach(product => promise.push(
+                    call([API, API.graphql], {
+                        query: deleteShoppingCartProduct,
+                        variables: {
+                            input: { id: product.id },
+                        },
+                    })
+                ))
+            }
+
+            yield all(promise);
+        }
+        yield put({ type: actionTypes.REFRESH_STORE });
+    })
 
 }
 

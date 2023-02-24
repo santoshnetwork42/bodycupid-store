@@ -23,7 +23,7 @@ function SearchForm() {
       },
     } = await API.graphql(
       graphqlOperation(searchProductsBasic, {
-        filter: { title: { wildcard: `*${searchTerm}*` } },
+        filter: { title: { matchPhrasePrefix: searchTerm } },
       })
     );
     setData(items);
