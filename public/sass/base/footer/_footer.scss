@@ -459,3 +459,15 @@
         margin-bottom: 1rem;
     }
 }
+@include mq(sm, max) {
+    .footer-top {
+        padding: 6rem 0;
+        .input-wrapper {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+    }
+}

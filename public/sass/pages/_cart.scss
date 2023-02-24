@@ -269,7 +269,12 @@
     .cart .cart-coupon-box {
         display: block;
     }
-
+    .cart .cart-actions {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+  
     .cart .shop-table  {
         .product-subtotal, .product-thumbnail, .product-quantity { 
             margin-bottom: .5rem; 

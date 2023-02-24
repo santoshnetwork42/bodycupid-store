@@ -22,7 +22,7 @@ export default function Footer() {
                   <h4 className="widget-title">Subscribe to our Newsletter</h4>
                   <p>Get all the latest information, Sales and Offers.</p>
                 </div>
-                <form action="#" className="input-wrapper input-wrapper-inline">
+                <form action="#" className="input-wrapper footer-email input-wrapper-inline">
                   <input
                     type="email"
                     className="form-control"

@@ -68,7 +68,7 @@ function Header({ auth, openLogin }) {
             <CartMenu />
             <span className="divider"></span>
             {!!auth && (
-              <ALink href="/pages/account" className="account d-lg-show">
+              <ALink href="/pages/account" className="account">
                 <i className="d-icon-user"></i>
               </ALink>
             )}
