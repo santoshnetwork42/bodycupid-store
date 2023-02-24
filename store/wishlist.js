@@ -59,8 +59,7 @@ export function* wishlistSaga() {
 
 export const wishlistActions = {
     toggleWishlist: product => ({ type: actionTypes.TOGGLE_WISHLIST, payload: { product } }),
-    removeFromWishlist: product => ({ type: actionTypes.REMOVE_FROM_WISHLIST, payload: { product } }),
-    emptyWishlist: () => ({ type: actionTypes.REFRESH_STORE })
+    removeFromWishlist: product => ({ type: actionTypes.REMOVE_FROM_WISHLIST, payload: { product } })
 };
 
 const persistConfig = {
