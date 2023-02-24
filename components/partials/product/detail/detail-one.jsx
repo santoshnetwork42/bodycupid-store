@@ -87,7 +87,18 @@ function DetailOne(props) {
       router.push("/pages/wishlist");
     }
   };
-
+  const getSavePercent = () => {
+    if (curIndex === -1) {
+      return Math.round((product.listingPrice / product.price - 1) * 100);
+    } else {
+      return Math.round(
+        (product.variants.items[curIndex].listingPrice /
+          product.variants.items[curIndex].price -
+          1) *
+          100
+      );
+    }
+  };
   const setVariantHandler = (e) => {
     if (setVariant) {
       if (e.target.value === "null") {
@@ -129,7 +140,17 @@ function DetailOne(props) {
   function changeQty(qty) {
     setQauntity(qty);
   }
-
+  const notSameListing = () => {
+    if (curIndex === -1) {
+      return product.listingPrice !== product.price;
+    } else {
+      return (
+        product.variants.items[curIndex].listingPrice !==
+        product.variants.items[curIndex].price
+      );
+    }
+  };
+  const notSame = notSameListing();
   return (
     <div className={"product-details " + adClass}>
       {isNav && (
@@ -219,6 +240,13 @@ function DetailOne(props) {
       </div>
 
       <div className="product-variation-price">
+        {curIndex === -1 && (
+          <div className="product-price mb-2">
+            <del className="old-price mr-2">₹{product.listingPrice}</del>
+            <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
+          </div>
+        )}
+
         <Collapse in={cartActive && curIndex > -1}>
           <div className="card-wrapper">
             {curIndex > -1 && (
@@ -266,6 +294,9 @@ function DetailOne(props) {
         <ALink href="#" className="rating-reviews">
           ( {product.reviews.items.length} reviews )
         </ALink>
+        {notSame && (
+          <div className="product-save ml-2">{getSavePercent()}% Save</div>
+        )}
       </div>
 
       <p className="product-short-desc">{product.productDescription}</p>

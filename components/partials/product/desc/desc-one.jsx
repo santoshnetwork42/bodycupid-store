@@ -234,7 +234,7 @@ function DescOne(props) {
               <span className="rating-stars selected">
                 {[1, 2, 3, 4, 5].map((num, index) => (
                   <a
-                    className={`star-${num} ${!index && "active"}`}
+                    className={`star-${num} active`}
                     href="#"
                     onClick={(e) => {
                       setRating(e);
