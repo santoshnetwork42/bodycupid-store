@@ -107,9 +107,9 @@ function DescOne(props) {
         ) : (
           ""
         )} */}
-        <Tab className="nav-item">
+        <Tab className="nav-item" >
           {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
-          <span className="nav-link">
+          <span className="nav-link" id='product-review'>
             Reviews ({product.reviews.items.length})
           </span>
         </Tab>
@@ -257,6 +257,7 @@ function DescOne(props) {
                 required
                 value={reviewState.comment}
                 onChange={(e) => setReview({ comment: e.target.value })}
+                onBlur={(e) => setReview({ comment: e.target.value.trim() })}
               ></textarea>
               <div className="row">
                 <div className="col-md-6 mb-5">
@@ -269,6 +270,8 @@ function DescOne(props) {
                     required
                     value={reviewState.name}
                     onChange={(e) => setReview({ name: e.target.value })}
+                    onBlur={(e) => setReview({ name: e.target.value.trim() })}
+
                   />
                 </div>
                 <div className="col-md-6 mb-5">
@@ -281,6 +284,8 @@ function DescOne(props) {
                     required
                     value={reviewState.email}
                     onChange={(e) => setReview({ email: e.target.value })}
+                    onBlur={(e) => setReview({ email: e.target.value.trim() })}
+
                   />
                 </div>
               </div>
