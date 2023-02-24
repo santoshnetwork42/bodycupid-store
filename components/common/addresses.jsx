@@ -20,18 +20,12 @@ const modalStyles = {
   },
 };
 
-function Addresses({ user, selected: newSelected, onAddressChange }) {
+function Addresses({ user, onAddressChange }) {
   const [loading, setLoading] = useState(!!user);
-  const [selected, setSelected] = useState(newSelected);
+  const [selected, setSelected] = useState(null);
   const [addresses, setAddresses] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [defaultAddress, setDefaultAddress] = useState({});
-
-  useEffect(() => {
-    if (!newSelected && addresses?.length) {
-      setSelected(addresses[0].id);
-    }
-  }, [addresses]);
 
   const getUserAddress = useCallback(async () => {
     const {
@@ -46,7 +40,8 @@ function Addresses({ user, selected: newSelected, onAddressChange }) {
 
     setAddresses(userAddresses.items);
     setLoading(false);
-  }, []);
+    setSelected(userAddresses.items[0]?.id);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -73,8 +68,10 @@ function Addresses({ user, selected: newSelected, onAddressChange }) {
       );
     } else {
       setAddresses([...addresses, response]);
-      selected(response.id);
+      setSelected(response.id);
     }
+    setOpen(false);
+    setDefaultAddress(null);
   };
 
   useEffect(() => {
@@ -111,7 +108,7 @@ function Addresses({ user, selected: newSelected, onAddressChange }) {
               >
                 <div
                   className={`card card-address ${
-                    adr.id === selected ? "selected" : ""
+                    adr.id === selected && !!onAddressChange ? "selected" : ""
                   }`}
                 >
                   <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">

@@ -13,7 +13,7 @@ const AddressForm = ({
   onSubmit,
   saveAddress,
 }) => {
-  const [address, setAddress] = useSetState(defaultAddress);
+  const [address, setAddress] = useSetState(defaultAddress || {});
 
   useEffect(() => {
     if (onAddress) {

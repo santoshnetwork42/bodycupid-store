@@ -21,7 +21,8 @@ import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, appliedCoupon, openLogin } = props;
+  const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
+    props;
 
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -211,10 +212,19 @@ function Checkout(props) {
                               <td>
                                 <h4 className="summary-subtitle">Coupons</h4>
                                 <p>
-                                  <div style={{ display: "flex" }}>
+                                  <div className="d-flex">
                                     <span className="mr-1">
                                       {appliedCoupon.code}
                                     </span>
+                                    <ALink
+                                      key={appliedCoupon.id}
+                                      href="#"
+                                      className="product-remove"
+                                      title="Remove coupon"
+                                      onClick={() => removeCoupon()}
+                                    >
+                                      <i className="fas fa-times"></i>
+                                    </ALink>
                                   </div>
                                 </p>
                               </td>
@@ -354,4 +364,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openLoginModal,
+  removeCoupon: cartActions.removeCoupon,
 })(Checkout);
