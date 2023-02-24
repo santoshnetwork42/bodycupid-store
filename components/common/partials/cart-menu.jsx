@@ -8,14 +8,12 @@ import { cartActions } from "~/store/cart";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import Quantity from "~/components/features/quantity";
 
 function CartMenu(props) {
-  const { cartList, removeFromCart } = props;
+  const { cartList, removeFromCart, updateCart } = props;
   const router = useRouter();
-
-  useEffect(() => {
-    hideCartMenu();
-  }, [router.asPath]);
+  useEffect(() => {}, [router.asPath]);
 
   const showCartMenu = (e) => {
     e.preventDefault();
@@ -31,6 +29,16 @@ function CartMenu(props) {
     removeFromCart(item);
   };
 
+
+  const onChangeQty = (id, variantId, qty) => {
+    updateCart(
+      cartList.map((item) => {
+        return item.id === id && (!variantId || variantId === item.variantId)
+          ? { ...item, qty: qty }
+          : item;
+      })
+    );
+  };
   return (
     <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
       <a
@@ -66,44 +74,58 @@ function CartMenu(props) {
           <>
             <div className="products scrollable">
               {cartList.map((item, index) => (
-                <div
-                  className="product product-cart"
-                  key={"cart-menu-product-" + index}
-                >
-                  <figure className="product-media pure-media">
-                    <ALink href={"/product/" + item.slug}>
-                      <img
-                        src={getPublicImageURL(item.images.items[0]?.imageKey)}
-                        alt={item.images.items[0]?.alt}
-                        width="80"
-                        height="88"
-                      />
-                    </ALink>
-                    <button
-                      className="btn btn-link btn-close"
-                      onClick={() => {
-                        removeCart(item);
-                      }}
-                    >
-                      <i className="fas fa-times"></i>
-                      <span className="sr-only">Close</span>
-                    </button>
-                  </figure>
-                  <div className="product-detail">
-                    <ALink
-                      href={"/product/" + item.slug}
-                      className="product-name"
-                    >
-                      {item.name}
-                    </ALink>
-                    <div className="price-box">
-                      <span className="product-quantity">{item.qty}</span>
-                      <span className="product-price">
-                        ₹{toDecimal(item.price)}
-                      </span>
+                <>
+                  <div
+                    className="product product-cart"
+                    key={"cart-menu-product-" + index}
+                  >
+                    <figure className="product-media pure-media">
+                      <ALink href={"/product/" + item.slug}>
+                        <img
+                          src={getPublicImageURL(
+                            item.images.items[0]?.imageKey
+                          )}
+                          alt={item.images.items[0]?.alt}
+                          width="80"
+                          height="88"
+                        />
+                      </ALink>
+                      <button
+                        className="btn btn-link btn-close"
+                        onClick={() => {
+                          removeCart(item);
+                        }}
+                      >
+                        <i className="fas fa-times"></i>
+                        <span className="sr-only">Close</span>
+                      </button>
+                    </figure>
+                    <div className="product-detail">
+                      <ALink
+                        href={"/product/" + item.slug}
+                        className="product-name"
+                      >
+                        {item.name}
+                      </ALink>
+                      <div className="price-box">
+                        <span className="product-quantity">{item.qty}</span>
+                        <span className="product-price">
+                          ₹{toDecimal(item.price)}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <div className="w-full text-center">
+                    <Quantity
+                      product={item}
+                      qty={item.qty}
+                      max={item.inventory}
+                      onChangeQty={(qty) =>
+                        onChangeQty(item.id, item.variantId, qty)
+                      }
+                    />
+                  </div>
+                </>
               ))}
             </div>
 
@@ -149,4 +171,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
+  updateCart: cartActions.updateCart,
 })(CartMenu);

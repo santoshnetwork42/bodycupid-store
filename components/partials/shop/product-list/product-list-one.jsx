@@ -179,7 +179,7 @@ function ProductListOne(props) {
       ) : (
         <div className="product-lists product-wrapper">
           {products.map((item) => (
-            <ProductEight product={item} key={"shop-list-" + item.id} />
+            <ProductEight products={products} product={item} key={"shop-list-" + item.id} />
           ))}
         </div>
       )}

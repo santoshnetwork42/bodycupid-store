@@ -120,24 +120,14 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action-vertical">
-          {product.variants?.items?.length > 1 ? (
-            <ALink
-              href={`/product/${product.slug}`}
-              className="btn-product-icon btn-cart"
-              title="Go to product"
-            >
-              <i className="d-icon-arrow-right"></i>
-            </ALink>
-          ) : (
-            <a
-              href="#"
-              className="btn-product-icon btn-cart"
-              title="Add to cart"
-              onClick={addToCartHandler}
-            >
-              <i className="d-icon-bag"></i>
-            </a>
-          )}
+          <a
+            href="#"
+            className="btn-product-icon btn-cart"
+            title="Add to cart"
+            onClick={addToCartHandler}
+          >
+            <i className="d-icon-bag"></i>
+          </a>
           <a
             href="#"
             className="btn-product-icon btn-wishlist"
