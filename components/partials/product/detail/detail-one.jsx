@@ -87,18 +87,7 @@ function DetailOne(props) {
       router.push("/pages/wishlist");
     }
   };
-  const getSavePercent = () => {
-    if (curIndex === -1) {
-      return Math.round((product.listingPrice / product.price - 1) * 100);
-    } else {
-      return Math.round(
-        (product.variants.items[curIndex].listingPrice /
-          product.variants.items[curIndex].price -
-          1) *
-          100
-      );
-    }
-  };
+
   const setVariantHandler = (e) => {
     if (setVariant) {
       if (e.target.value === "null") {
@@ -140,17 +129,29 @@ function DetailOne(props) {
   function changeQty(qty) {
     setQauntity(qty);
   }
-  const notSameListing = () => {
-    if (curIndex === -1) {
-      return product.listingPrice !== product.price;
-    } else {
-      return (
-        product.variants.items[curIndex].listingPrice !==
-        product.variants.items[curIndex].price
-      );
+
+  const { price, listingPrice, save } = useMemo(() => {
+    const {
+      price,
+      listingPrice,
+      variants: { items },
+    } = product;
+    if (curIndex > -1 && Array.isArray(items)) {
+      const { price: p, listingPrice: lp } = items[curIndex];
+      return {
+        price: p,
+        listingPrice: lp,
+        save: Math.round(((lp - p) * 100) / lp),
+      };
     }
-  };
-  const notSame = notSameListing();
+
+    return {
+      price,
+      listingPrice,
+      save: Math.round(((listingPrice - price) * 100) / listingPrice),
+    };
+  }, [product, curIndex]);
+
   return (
     <div className={"product-details " + adClass}>
       {isNav && (
@@ -240,10 +241,15 @@ function DetailOne(props) {
       </div>
 
       <div className="product-variation-price">
-        {curIndex === -1 && (
-          <div className="product-price mb-2">
-            <del className="old-price mr-2">₹{product.listingPrice}</del>
-            <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
+        {curIndex < 0 && (
+          <div className="product-price mb-2 d-flex">
+            {listingPrice > price && (
+              <>
+                <del className="old-price mr-2">₹{listingPrice}</del>{" "}
+              </>
+            )}
+            <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
+            {!!save && <ins className="product-save">(Save {save}%)</ins>}
           </div>
         )}
 
@@ -251,26 +257,17 @@ function DetailOne(props) {
           <div className="card-wrapper">
             {curIndex > -1 && (
               <div className="single-product-price">
-                {product.variants.items[curIndex].price &&
-                  (product.variants.items[curIndex].listingPrice ? (
-                    <div className="product-price mb-0">
+                <div className="product-price mb-0 d-flex">
+                  {listingPrice > price && (
+                    <>
                       <del className="old-price mr-2">
-                        ₹
-                        {toDecimal(
-                          product.variants.items[curIndex].listingPrice
-                        )}
+                        ₹{toDecimal(listingPrice)}
                       </del>{" "}
-                      <ins className="new-price">
-                        ₹{toDecimal(product.variants.items[curIndex].price)}
-                      </ins>
-                    </div>
-                  ) : (
-                    <div className="product-price mb-0">
-                      <ins className="new-price">
-                        ₹{toDecimal(product.variants.items[curIndex].price)}
-                      </ins>
-                    </div>
-                  ))}
+                    </>
+                  )}
+                  <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
+                  {!!save && <ins className="product-save">(Save {save}%)</ins>}
+                </div>
               </div>
             )}
           </div>
@@ -294,9 +291,6 @@ function DetailOne(props) {
         <ALink href="#" className="rating-reviews">
           ( {product.reviews.items.length} reviews )
         </ALink>
-        {notSame && (
-          <div className="product-save ml-2">{getSavePercent()}% Save</div>
-        )}
       </div>
 
       <p className="product-short-desc">{product.productDescription}</p>
