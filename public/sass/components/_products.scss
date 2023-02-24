@@ -462,7 +462,7 @@
     .old-price {
         color: #aaa;
     }
-    .new-price {
+    .new-price, .product-save {
         text-decoration: none;
     }
 }
@@ -470,7 +470,7 @@
 // Product Rating
 .ratings-container {
     display: flex;
-    align-items: center;
+    align-items: center; 
     margin-left: 1px;
     line-height: 1.1;
     @include print_css( product, rating );
