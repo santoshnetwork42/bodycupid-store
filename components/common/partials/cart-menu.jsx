@@ -13,7 +13,9 @@ import Quantity from "~/components/features/quantity";
 function CartMenu(props) {
   const { cartList, removeFromCart, updateCart } = props;
   const router = useRouter();
-  useEffect(() => {}, [router.asPath]);
+  useEffect(() => {
+    hideCartMenu();
+  }, [router.asPath]);
 
   const showCartMenu = (e) => {
     e.preventDefault();
@@ -28,7 +30,6 @@ function CartMenu(props) {
   const removeCart = (item) => {
     removeFromCart(item);
   };
-
 
   const onChangeQty = (id, variantId, qty) => {
     updateCart(

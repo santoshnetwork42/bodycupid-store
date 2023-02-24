@@ -56,7 +56,6 @@ function ProductEight(props) {
   };
 
   const onChangeQty = (id, variantId, qty) => {
-    
     setProducts(
       products.map((item) => {
         return item.id === id && (!variantId || variantId === item.variantId)
