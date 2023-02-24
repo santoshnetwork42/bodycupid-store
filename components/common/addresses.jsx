@@ -4,9 +4,8 @@ import Modal from "react-modal";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { listUserAddresses } from "~/graphql/queries";
-import { deleteUserAddress } from "~/graphql/mutations";
 import AddressForm from "./addressForm";
+import { deleteUserAddress } from "~/graphql/mutations";
 import { findUserAddresses } from "~/graphql/api";
 
 const modalStyles = {
@@ -21,27 +20,16 @@ const modalStyles = {
   },
 };
 
-function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
+function Addresses({ user, selected: newSelected, onAddressChange }) {
+  const [loading, setLoading] = useState(!!user);
   const [selected, setSelected] = useState(newSelected);
   const [addresses, setAddresses] = useState([]);
   const [isOpen, setOpen] = useState(false);
-  const [defaultAddress, setDefaultAddress] = useState({
-    userID: user?.username,
-    name: user?.attributes?.name,
-    phone: user?.attributes?.phone_number,
-    email: user?.attributes?.email,
-    country: "in",
-    state: "",
-    city: "",
-    pinCode: "",
-    landmark: "",
-    address: "",
-    location: "",
-    area: "",
-  });
+  const [defaultAddress, setDefaultAddress] = useState({});
+
   useEffect(() => {
-    if (!newSelected && autoSelect && addresses.length) {
-      setSelected(addresses[0]?.id);
+    if (!newSelected && addresses?.length) {
+      setSelected(addresses[0].id);
     }
   }, [addresses]);
 
@@ -57,6 +45,7 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
     });
 
     setAddresses(userAddresses.items);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -76,99 +65,101 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
     },
     [addresses]
   );
-  const onAddress = (id, response) => {
-    if (id) {
-      setAddresses(addresses.map((a) => (a.id === id ? response : a)));
+
+  const onAddress = (response) => {
+    if (defaultAddress?.id) {
+      setAddresses(
+        addresses.map((a) => (a.id === defaultAddress.id ? response : a))
+      );
     } else {
       setAddresses([...addresses, response]);
+      selected(response.id);
     }
   };
 
-  const onAddressClick = useCallback(
-    (adr) => {
-      setSelected(adr.id);
-      if (onSelect) {
-        onSelect({
-          id: adr.id,
-          name: adr.name,
-          phone: adr.phone,
-          email: adr.email,
-          country: adr.country,
-          state: adr.state,
-          city: adr.city,
-          pinCode: adr.pinCode,
-          landmark: adr.landmark,
-          address: adr.address,
-          location: adr.location,
-          area: adr.area,
-        });
-      }
-    },
-    [onSelect]
-  );
+  useEffect(() => {
+    if (onAddressChange && selected) {
+      const adr = addresses.find((a) => a.id === selected);
+      onAddressChange({
+        name: adr.name,
+        phone: adr.phone,
+        email: adr.email,
+        country: adr.country,
+        state: adr.state,
+        city: adr.city,
+        pinCode: adr.pinCode,
+        landmark: adr.landmark,
+        address: adr.address,
+        location: adr.location,
+        area: adr.area,
+      });
+    }
+  }, [selected]);
+
+  if (loading) return <></>;
 
   return (
     <div>
-      <div className="row mt-4">
-        {addresses.map((adr) => (
-          <div
-            className="col-sm-6 mb-4 accordion-border"
-            key={adr.id}
-            onClick={() => onAddressClick(adr)}
-          >
-            <div
-              className={`card card-address ${
-                adr.id === selected ? "selected" : ""
-              }`}
-            >
-              <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">
-                <h5 className="card-title text-uppercase">{adr.name}</h5>
-                <p>
-                  {adr.email}
-                  <br />
-                  {adr.phone}
-                  <br />
-                  {adr.address}
-                  <br />
-                  {adr.area}
-                  <br />
-                  {adr.landmark}
-                  <br />
-                  {adr.city + ", " + adr.state + ", " + adr.pinCode}
-                </p>
-                <ALink
-                  href="#"
-                  className="btn btn-link btn-secondary btn-underline"
-                  onClick={() => {
-                    setDefaultAddress({ ...adr });
-                    setOpen(true);
-                  }}
-                >
-                  Edit <i className="far fa-edit"></i>
-                </ALink>
-                <ALink
-                  href="#"
-                  className="btn btn-link btn-secondary btn-underline ml-3"
-                  onClick={() => removeAddress(adr.id)}
-                >
-                  Delete <i className="far fa-trash-alt"></i>
-                </ALink>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
       {addresses.length > 0 ? (
-        <button onClick={() => setOpen(true)} className="btn btn-primary">
-          ADD NEW ADDRESS
-        </button>
+        <>
+          <div className="row mt-4">
+            {addresses.map((adr) => (
+              <div
+                className="col-sm-6 mb-4 accordion-border"
+                key={adr.id}
+                onClick={() => setSelected(adr.id)}
+              >
+                <div
+                  className={`card card-address ${
+                    adr.id === selected ? "selected" : ""
+                  }`}
+                >
+                  <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">
+                    <h5 className="card-title text-uppercase">{adr.name}</h5>
+                    <p>
+                      {adr.email}
+                      <br />
+                      {adr.phone}
+                      <br />
+                      {adr.address}
+                      <br />
+                      {adr.area}
+                      <br />
+                      {adr.landmark}
+                      <br />
+                      {adr.city + ", " + adr.state + ", " + adr.pinCode}
+                    </p>
+                    <ALink
+                      href="#"
+                      className="btn btn-link btn-secondary btn-underline"
+                      onClick={() => {
+                        setDefaultAddress({ ...adr });
+                        setOpen(true);
+                      }}
+                    >
+                      Edit <i className="far fa-edit"></i>
+                    </ALink>
+                    <ALink
+                      href="#"
+                      className="btn btn-link btn-secondary btn-underline ml-3"
+                      onClick={() => removeAddress(adr.id)}
+                    >
+                      Delete <i className="far fa-trash-alt"></i>
+                    </ALink>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button onClick={() => setOpen(true)} className="btn btn-primary">
+            ADD NEW ADDRESS
+          </button>
+        </>
       ) : (
         <AddressForm
-          setAddresses={setAddresses}
-          addresses={addresses}
-          user={user}
-          onAddressClick={onAddressClick}
-          onAddress={onAddress}
+          onSubmit={onAddress}
+          onAddress={onAddressChange}
+          saveAddress={!!user && !!onAddressChange}
         />
       )}
 
@@ -180,16 +171,7 @@ function Addresses({ user, selected: newSelected, onSelect, autoSelect }) {
         overlayClassName="address-modal-overlay"
         className="address-popup bg-img"
       >
-        <AddressForm
-          defaultAddress={defaultAddress}
-          setOpen={setOpen}
-          setAddresses={setAddresses}
-          addresses={addresses}
-          user={user}
-          isOpen={isOpen}
-          onAddressClick={onAddressClick}
-          onAddress={onAddress}
-        />
+        <AddressForm defaultAddress={defaultAddress} onSubmit={onAddress} />
         <button
           title="Close (Esc)"
           type="button"

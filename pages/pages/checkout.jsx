@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
 import { createPayment, createOrder, createOrderProduct } from "~/graphql/api";
+import { createUserAddress } from "~/graphql/mutations";
 import {
   toDecimal,
   getTotalPrice,
@@ -17,7 +18,6 @@ import {
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
-import AddressForm from "~/components/common/addressForm";
 import Coupons from "~/components/features/coupon";
 
 function Checkout(props) {
@@ -30,7 +30,7 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      const { id: ignoreId, ...restAddress } = shippingAddress;
+      const { id: ignoreId, saveAddress, ...restAddress } = shippingAddress;
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
       const payload = {
         userId: user?.username,
@@ -83,6 +83,16 @@ function Checkout(props) {
           })
         ),
       ];
+
+      if (saveAddress && user) {
+        promise.push(
+          API.graphql({
+            query: createUserAddress,
+            variables: { input: { ...restAddress, userID: user.username } },
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+          })
+        );
+      }
 
       await Promise.all(promise);
       await router.push(`/order/${orderId}`);
@@ -137,17 +147,14 @@ function Checkout(props) {
                   </div>
                 </div>
               )}
-              <Coupons layout="checkout" />
+              {!appliedCoupon && <Coupons layout="checkout" />}
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
                   <h3 className="title title-simple text-left text-uppercase">
                     Shipping Address
                   </h3>
-                  {!!user && <Addresses autoSelect onSelect={setAddress} />}
-                  {!user && (
-                    <AddressForm onAddressChange={setAddress} hideSubmit />
-                  )}
+                  <Addresses onAddressChange={setAddress} />
                 </div>
 
                 <aside className="col-lg-5 sticky-sidebar-wrapper">

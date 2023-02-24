@@ -243,24 +243,13 @@ export function* cartSaga() {
         yield put({ type: actionTypes.SET_CART, payload: { products: updatedProducts } });
     });
 
-    yield takeEvery(actionTypes.EMPTY_CART, function* saga(e) {
+    yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
         const { cart } = yield select();
         const { cart: cartResponse } = cart;
         if (cartResponse) {
-            const { products = [], id } = cartResponse;
+            const { products = [] } = cartResponse;
 
             const promise = [];
-            if (id) {
-                promise.push(
-                    call([API, API.graphql], {
-                        query: deleteShoppingCart,
-                        variables: {
-                            input: { id, },
-                        },
-                    })
-                );
-            }
-
             if (Array.isArray(products)) {
                 products.forEach(product => promise.push(
                     call([API, API.graphql], {

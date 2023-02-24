@@ -1,46 +1,23 @@
 import React, { useCallback, useEffect } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
+import { connect } from "react-redux";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { removePhonePrefix } from "~/utils/helper";
 
 const AddressForm = ({
   defaultAddress,
-  setAddresses,
-  addresses,
   user,
-  onAddressClick = () => {},
-  onAddress = () => {},
-  setOpen = () => {},
-  isOpen,
-  onAddressChange,
-  hideSubmit = false,
+  onAddress,
+  onSubmit,
+  saveAddress,
 }) => {
   const [address, setAddress] = useSetState(defaultAddress);
 
   useEffect(() => {
-    if (!isOpen) {
-      setAddress({
-        userID: user?.username,
-        name: user?.attributes?.name,
-        phone: user?.attributes?.phone_number,
-        email: user?.attributes?.email,
-        country: "in",
-        state: "",
-        city: "",
-        pinCode: "",
-        landmark: "",
-        address: "",
-        location: "",
-        area: "",
-      });
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (onAddressChange) {
-      onAddressChange(address);
+    if (onAddress) {
+      onAddress(address);
     }
   }, [address]);
 
@@ -54,23 +31,19 @@ const AddressForm = ({
             data: { [key]: response },
           } = await API.graphql({
             query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: address },
+            variables: { input: { ...address, userID: user.username } },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
-          onAddress(address.id, response);
-
-          onAddressClick(response);
+          onSubmit(response);
         } else {
-          setAddresses([{ ...address }]);
-          onAddressClick({ ...address });
+          onSubmit(address);
         }
       } catch (error) {
         console.log(error);
       }
-      setOpen(false);
       return false;
     },
-    [address, user, addresses, onAddressClick]
+    [address, user, onSubmit]
   );
 
   return (
@@ -221,7 +194,23 @@ const AddressForm = ({
             </div>
           </div>
 
-          {!hideSubmit && (
+          {!!saveAddress && (
+            <div className="form-checkbox mb-5">
+              <input
+                type="checkbox"
+                className="custom-checkbox"
+                id="terms-condition"
+                name="terms-condition"
+                required
+                onChange={(e) => setAddress({ saveAddress: e.target.checked })}
+              />
+              <label className="form-control-label" htmlFor="terms-condition">
+                Save address for faster checkout
+              </label>
+            </div>
+          )}
+
+          {!onAddress && (
             <button
               type="submit"
               className="btn btn-dark btn-rounded btn-order"
@@ -235,4 +224,10 @@ const AddressForm = ({
   );
 };
 
-export default AddressForm;
+function mapStateToProps(state) {
+  return {
+    user: state.user.data,
+  };
+}
+
+export default connect(mapStateToProps)(AddressForm);

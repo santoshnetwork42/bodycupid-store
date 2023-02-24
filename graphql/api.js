@@ -1018,3 +1018,137 @@ export const findUserAddresses = /* GraphQL */ `
     }
   }
 `;
+
+export const searchOrders = /* GraphQL */ `
+  query SearchOrders(
+    $filter: SearchableOrderFilterInput
+    $sort: [SearchableOrderSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableOrderAggregationInput]
+  ) {
+    searchOrders(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        code
+        channelName
+        shippingAddress {
+          name
+          phone
+          email
+          country
+          state
+          city
+          pinCode
+          landmark
+          address
+          location
+          area
+        }
+        totalAmount
+        totalCashOnDeliveryCharges
+        totalDiscount
+        totalGiftCharges
+        totalPrepaidAmount
+        totalShippingCharges
+        taxExempted
+        cFormProvided
+        thirdPartyShipping
+        currency
+        sla
+        priority
+        orderDate
+        status
+        payments {
+          items {
+            id
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
+        }
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      owner
+      firstName
+      lastName
+      email
+      phone
+      gender
+      dob
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      isActive
+      totalOrders
+      totalSpent
+      walletBalance
+      walletSpent
+      totalStoreCredit
+      isCognitoConfirmed
+      profilePhotoUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      owner
+      firstName
+      lastName
+      email
+      phone
+      gender
+      dob
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      isActive
+      totalOrders
+      totalSpent
+      walletBalance
+      walletSpent
+      totalStoreCredit
+      isCognitoConfirmed
+      profilePhotoUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;

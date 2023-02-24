@@ -9,8 +9,11 @@ import { useSetState } from "react-use";
 
 import ALink from "~/components/features/custom-link";
 import Addresses from "~/components/common/addresses";
-import { listOrders, getUser } from "~/graphql/queries";
-import { updateUser as updateUserMutation } from "~/graphql/mutations";
+import {
+  searchOrders,
+  getUser,
+  updateUser as updateUserMutation,
+} from "~/graphql/api";
 import { formateDate, toDecimal } from "~/utils/index";
 import { removePhonePrefix } from "~/utils/helper";
 
@@ -20,9 +23,9 @@ function Account({ user }) {
   const [userDetail, setUser] = useSetState({ ...user });
   const getOrders = useCallback(async () => {
     const {
-      data: { listOrders: listOrdersResponse },
+      data: { searchOrders: listOrdersResponse },
     } = await API.graphql({
-      query: listOrders,
+      query: searchOrders,
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
