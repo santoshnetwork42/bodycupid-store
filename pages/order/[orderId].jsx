@@ -98,7 +98,7 @@ function Order(props) {
           <div className="order-results">
             <div className="overview-item">
               <span>Order number:</span>
-              <strong>{order?.code || order?.id}</strong>
+              <strong>#{order?.code || order?.id}</strong>
             </div>
             <div className="overview-item">
               <span>Status:</span>
@@ -114,16 +114,18 @@ function Order(props) {
             </div>
             <div className="overview-item">
               <span>Total:</span>
-              <strong>₹{toDecimal(order?.payments?.items[0].amount)}</strong>
+              <strong>₹{toDecimal(order?.totalAmount)}</strong>
             </div>
-            <div className="overview-item">
-              <span>Payment method:</span>
-              <strong>
-                {order?.payments?.items[0].method === "COD"
-                  ? "Cash on delivery"
-                  : "Online"}
-              </strong>
-            </div>
+            {order?.payments.items[0] && (
+              <div className="overview-item">
+                <span>Payment method:</span>
+                <strong>
+                  {order?.payments?.items[0]?.method === "COD"
+                    ? "Cash on delivery"
+                    : "Online"}
+                </strong>
+              </div>
+            )}
           </div>
 
           <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
@@ -187,23 +189,25 @@ function Order(props) {
                     </td>
                   </tr>
                 )}
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Payment method:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {order?.payments?.items[0].method === "COD"
-                      ? "Cash on delivery"
-                      : "Online"}
-                  </td>
-                </tr>
+                {order?.payments?.items[0] && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Payment method:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      {order?.payments?.items[0]?.method === "COD"
+                        ? "Cash on delivery"
+                        : "Online"}
+                    </td>
+                  </tr>
+                )}
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Total:</h4>
                   </td>
                   <td>
                     <p className="summary-total-price">
-                      ₹{toDecimal(order?.payments?.items[0].amount)}
+                      ₹{toDecimal(order?.totalAmount)}
                     </p>
                   </td>
                 </tr>

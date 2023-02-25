@@ -8,6 +8,7 @@ import { Amplify } from 'aws-amplify';
 import { wrapper } from "../store/index.js";
 import Layout from '~/components/layout';
 import { rootActions } from '~/store';
+import { userActions } from '~/store/user';
 
 import awsconfig from "~/aws-exports";
 

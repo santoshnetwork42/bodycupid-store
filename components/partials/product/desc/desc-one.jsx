@@ -94,12 +94,9 @@ function DescOne(props) {
         <Tab className="nav-item">
           <span className="nav-link">Description</span>
         </Tab>
-        {/* {
-                    product && product.brands.length > 0 || colors.length > 0 || sizes.length > 0 ?
-                        <Tab className="nav-item">
-                            <span className="nav-link">Additional information</span>
-                        </Tab> : ''
-                } */}
+        <Tab className="nav-item">
+          <span className="nav-link">Specifications</span>
+        </Tab>
         {/* {isGuide ? (
           <Tab className="nav-item">
             <span className="nav-link">Size Guide</span>
@@ -107,9 +104,9 @@ function DescOne(props) {
         ) : (
           ""
         )} */}
-        <Tab className="nav-item" >
+        <Tab className="nav-item">
           {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
-          <span className="nav-link" id='product-review'>
+          <span className="nav-link" id="product-review">
             Reviews ({product.reviews.items.length})
           </span>
         </Tab>
@@ -118,7 +115,7 @@ function DescOne(props) {
       <div className="tab-content">
         <TabPanel className="tab-pane product-tab-description">
           <div className="row mt-6">
-            <div className="col-md-6">
+            <div className="col-md-12">
               {!!product.longDescription && (
                 <>
                   <h5 className="description-title mb-4 font-weight-semi-bold ls-m">
@@ -131,14 +128,46 @@ function DescOne(props) {
                   />
                 </>
               )}
-              <br />
+            </div>
+          </div>
+        </TabPanel>
+
+        <TabPanel className="tab-pane product-tab-specifications">
+          <div className="row mt-6">
+            <div className="col-md-6 pl-md-6 pt-4 pt-md-0">
+              <div className="icon-box-wrap d-flex flex-wrap">
+                <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4 mr-10">
+                  <div className="icon-box-icon">
+                    <i className="d-icon-lock"></i>
+                  </div>
+                  <div className="icon-box-content">
+                    <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">
+                      2 year warranty
+                    </h4>
+                    <p>Guarantee with no doubt</p>
+                  </div>
+                </div>
+                {isDivider && <div className="divider d-xl-show mr-10"></div>}
+                <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4">
+                  <div className="icon-box-icon">
+                    <i className="d-icon-truck"></i>
+                  </div>
+                  <div className="icon-box-content">
+                    <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">
+                      Free shipping
+                    </h4>
+                    <p>On orders over ₹399</p>
+                  </div>
+                </div>
+              </div>
+              <hr className="product-divider"></hr>
               <h5 className="description-title mb-3 font-weight-semi-bold ls-m">
                 Specifications
               </h5>
               <table className="table">
                 <tbody>
                   <tr>
-                    <th className="font-weight-semi-bold text-dark pl-0">
+                    <th className="font-weight-semi-bold text-dark pl-0 text-left">
                       Brand
                     </th>
                     <td className="pl-4">{product.brand || product.vendor}</td>
@@ -181,35 +210,6 @@ function DescOne(props) {
                   </figure>
                 </>
               )}
-              <div className="icon-box-wrap d-flex flex-wrap">
-                <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4 mr-10">
-                  <div className="icon-box-icon">
-                    <i className="d-icon-lock"></i>
-                  </div>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">
-                      2 year warranty
-                    </h4>
-                    <p>Guarantee with no doubt</p>
-                  </div>
-                </div>
-                {isDivider ? (
-                  <div className="divider d-xl-show mr-10"></div>
-                ) : (
-                  ""
-                )}
-                <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4">
-                  <div className="icon-box-icon">
-                    <i className="d-icon-truck"></i>
-                  </div>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">
-                      Free shipping
-                    </h4>
-                    <p>On orders over $50.00</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </TabPanel>
@@ -271,7 +271,6 @@ function DescOne(props) {
                     value={reviewState.name}
                     onChange={(e) => setReview({ name: e.target.value })}
                     onBlur={(e) => setReview({ name: e.target.value.trim() })}
-
                   />
                 </div>
                 <div className="col-md-6 mb-5">
@@ -285,7 +284,6 @@ function DescOne(props) {
                     value={reviewState.email}
                     onChange={(e) => setReview({ email: e.target.value })}
                     onBlur={(e) => setReview({ email: e.target.value.trim() })}
-
                   />
                 </div>
               </div>

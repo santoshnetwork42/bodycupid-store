@@ -49,7 +49,7 @@ function modalReducer(state = initialState, action) {
             }
 
         case actionTypes.OPEN_LOGIN:
-            return { ...state, login: true, loginRedirect: action.payload.loginRedirect };
+            return { ...state, login: true, loginRedirect: action.payload.redirect };
 
         case actionTypes.CLOSE_LOGIN:
             return { ...state, login: false, loginRedirect: true };
