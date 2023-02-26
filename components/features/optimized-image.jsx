@@ -34,7 +34,7 @@ const OptimizedImage = ({ optimizedData, alt, spanAttributes, ...props }) => {
     <span {...spanAttributes}>
       <img
         {...props}
-        src={placeholder}
+        src={placeholder || originalUrl}
         ref={imageRef}
         width={width}
         height={height}
