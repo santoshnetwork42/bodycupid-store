@@ -13,7 +13,7 @@ const optimizeImage = async ({ src, type = "url", options = {} }) => {
     originalUrl: src,
   };
 
-  if (["prod", "production"].includes(NODE_ENV) && false) {
+  if (["prod", "production"].includes(NODE_ENV)) {
     try {
       let imageBuffer = null;
 
