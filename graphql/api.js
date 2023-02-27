@@ -70,6 +70,26 @@ export const getHomePageProducts = /* GraphQL */ `
         variants {
           items {
             id
+            productId
+            title
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
           }
         }
         reviews {

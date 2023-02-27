@@ -1,277 +1,342 @@
 import { persistReducer } from "redux-persist";
-import storage from 'redux-persist/lib/storage';
-import { toast } from 'react-toastify';
-import { all, call, put, select, takeEvery } from 'redux-saga/effects';
-import { API } from 'aws-amplify';
+import storage from "redux-persist/lib/storage";
+import { toast } from "react-toastify";
+import { all, call, put, select, takeEvery } from "redux-saga/effects";
+import { API } from "aws-amplify";
 
-import CartPopup from '~/components/features/product/common/cart-popup';
-import CouponPopup from '~/components/features/product/common/coupon-popup';
+import CartPopup from "~/components/features/product/common/cart-popup";
+import CouponPopup from "~/components/features/product/common/coupon-popup";
 import {
-    createShoppingCart,
-    updateShoppingCart,
-    deleteShoppingCart,
-    createShoppingCartProduct,
-    updateShoppingCartProduct,
-    deleteShoppingCartProduct
-} from '~/graphql/api';
+  createShoppingCart,
+  updateShoppingCart,
+  createShoppingCartProduct,
+  updateShoppingCartProduct,
+  deleteShoppingCartProduct,
+} from "~/graphql/api";
 
 const actionTypes = {
-    ADD_TO_CART: 'ADD_TO_CART',
-    REMOVE_FROM_CART: 'REMOVE_FROM_CART',
-    UPDATE_CART: 'UPDATE_CART',
-    REFRESH_STORE: 'REFRESH_STORE',
-    APPLY_COUPONS: 'APPLY_COUPONS',
-    REMOVE_COUPON: 'REMOVE_COUPON',
-    SET_CART: 'SET_CART',
-    EMPTY_CART: 'EMPTY_CART',
-}
+  ADD_TO_CART: "ADD_TO_CART",
+  REMOVE_FROM_CART: "REMOVE_FROM_CART",
+  UPDATE_CART: "UPDATE_CART",
+  REFRESH_STORE: "REFRESH_STORE",
+  APPLY_COUPONS: "APPLY_COUPONS",
+  REMOVE_COUPON: "REMOVE_COUPON",
+  SET_CART: "SET_CART",
+  EMPTY_CART: "EMPTY_CART",
+};
 
 const initialState = {
-    cart: null,
-    data: [],
-    coupon: null,
-}
+  cart: null,
+  data: [],
+  coupon: null,
+};
 
 function cartReducer(state = initialState, action) {
-    switch (action.type) {
-        case actionTypes.ADD_TO_CART:
-            let tmpProduct = { ...action.payload.product };
-            if (state.data.some(item => item.id === tmpProduct.id && (!tmpProduct.variantId || item.variantId === tmpProduct.variantId))) {
-                let tmpData = state.data.reduce((acc, cur) => {
-                    if (cur.id === tmpProduct.id && (!tmpProduct.variantId || cur.variantId === tmpProduct.variantId)) {
-                        acc.push({
-                            ...cur,
-                            qty: parseInt(cur.qty) + parseInt(tmpProduct.qty)
-                        });
-                    } else {
-                        acc.push(cur);
-                    }
+  switch (action.type) {
+    case actionTypes.ADD_TO_CART:
+      let tmpProduct = { ...action.payload.product };
+      if (!tmpProduct.variantId && tmpProduct.variants.items.length) {
+        let variants = (tmpProduct?.variants?.items || []).sort(
+          (a, b) => a.position - b.position
+        );
+        tmpProduct = {
+          ...tmpProduct,
+          variantId: variants[0].id,
+        };
+      }
+      if (
+        state.data.some(
+          (item) =>
+            item.id === tmpProduct.id &&
+            ((!tmpProduct.variantId && !item.variantId) ||
+              item.variantId === tmpProduct.variantId)
+        )
+      ) {
+        let tmpData = state.data.reduce((acc, cur) => {
+          if (
+            cur.id === tmpProduct.id &&
+            (!tmpProduct.variantId || cur.variantId === tmpProduct.variantId)
+          ) {
+            acc.push({
+              ...cur,
+              qty: parseInt(cur.qty) + parseInt(tmpProduct.qty),
+            });
+          } else {
+            acc.push(cur);
+          }
 
-                    return acc;
-                }, [])
+          return acc;
+        }, []);
 
-                return { ...state, data: tmpData };
-            } else {
-                return { ...state, data: [...state.data, tmpProduct] };
-            }
+        return { ...state, data: tmpData };
+      } else {
+        return { ...state, data: [...state.data, tmpProduct] };
+      }
 
-        case actionTypes.REMOVE_FROM_CART:
-            let cart = state.data.reduce((cartAcc, product) => {
-                if (product.id !== action.payload.product.id && (!product.variantId || product.variantId !== action.payload.product.variantId)) {
-                    cartAcc.push(product);
-                }
-                return cartAcc;
-            }, []);
+    case actionTypes.REMOVE_FROM_CART:
+      let cart = state.data.reduce((cartAcc, product) => {
+        if (product.id !== action.payload.product.id) {
+          cartAcc.push(product);
+        } else {
+          if (
+            product.variantId &&
+            product.variantId !== action.payload.product.variantId
+          ) {
+            cartAcc.push(product);
+          }
+        }
 
-            return { ...state, data: cart };
+        return cartAcc;
+      }, []);
 
-        case actionTypes.UPDATE_CART:
-            return { ...state, data: action.payload.products || [] };
+      return { ...state, data: cart };
 
-        case actionTypes.REFRESH_STORE:
-            return initialState;
+    case actionTypes.UPDATE_CART:
+      return { ...state, data: action.payload.products || [] };
 
-        case actionTypes.SET_CART:
-            return { ...state, cart: { ...state.cart, ...action.payload } };
+    case actionTypes.REFRESH_STORE:
+      return initialState;
 
-        case actionTypes.APPLY_COUPONS:
-            return { ...state, coupon: action.payload.coupon };
+    case actionTypes.SET_CART:
+      return { ...state, cart: { ...state.cart, ...action.payload } };
 
-        case actionTypes.REMOVE_COUPON:
-            return { ...state, coupon: null };
+    case actionTypes.APPLY_COUPONS:
+      return { ...state, coupon: action.payload.coupon };
 
-        default:
-            return state;
-    }
+    case actionTypes.REMOVE_COUPON:
+      return { ...state, coupon: null };
+
+    default:
+      return state;
+  }
 }
 
 export const cartActions = {
-    addToCart: product => ({ type: actionTypes.ADD_TO_CART, payload: { product } }),
-    removeFromCart: product => ({ type: actionTypes.REMOVE_FROM_CART, payload: { product } }),
-    updateCart: products => ({ type: actionTypes.UPDATE_CART, payload: { products } }),
-    applyCoupon: coupon => ({ type: actionTypes.APPLY_COUPONS, payload: { coupon } }),
-    removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
-    emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
-    setCart: cart => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
+  addToCart: (product) => ({
+    type: actionTypes.ADD_TO_CART,
+    payload: { product },
+  }),
+  removeFromCart: (product) => ({
+    type: actionTypes.REMOVE_FROM_CART,
+    payload: { product },
+  }),
+  updateCart: (products) => ({
+    type: actionTypes.UPDATE_CART,
+    payload: { products },
+  }),
+  applyCoupon: (coupon) => ({
+    type: actionTypes.APPLY_COUPONS,
+    payload: { coupon },
+  }),
+  removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
+  emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
+  setCart: (cart) => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
 };
 
-
 export function* cartSaga() {
-    yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
-        toast(<CouponPopup coupon={e.payload.coupon} />);
-        const { cart } = yield select();
-        const { cart: cartResponse } = cart;
-        const { id } = e.payload.coupon;
-        yield call([API, API.graphql], {
-            query: updateShoppingCart,
-            variables: {
-                input: { id: cartResponse.id, couponCodeId: id },
-            },
-        });
-        yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: id } });
-    })
+  yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
+    toast(<CouponPopup coupon={e.payload.coupon} />);
+    const { cart } = yield select();
+    const { cart: cartResponse } = cart;
+    const { id } = e.payload.coupon;
+    yield call([API, API.graphql], {
+      query: updateShoppingCart,
+      variables: {
+        input: { id: cartResponse.id, couponCodeId: id },
+      },
+    });
+    yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: id } });
+  });
 
-    yield takeEvery(actionTypes.REMOVE_COUPON, function* saga() {
-        const { cart } = yield select();
-        const { cart: cartResponse } = cart;
-        yield call([API, API.graphql], {
-            query: updateShoppingCart,
-            variables: {
-                input: { id: cartResponse.id, couponCodeId: null },
-            },
-        });
-        yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: null } });
-    })
+  yield takeEvery(actionTypes.REMOVE_COUPON, function* saga() {
+    const { cart } = yield select();
+    const { cart: cartResponse } = cart;
+    yield call([API, API.graphql], {
+      query: updateShoppingCart,
+      variables: {
+        input: { id: cartResponse.id, couponCodeId: null },
+      },
+    });
+    yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: null } });
+  });
 
-    yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
-        toast(<CartPopup product={e.payload.product} />);
-        const { user, cart } = yield select();
-        let { cart: cartResponse } = cart;
-        const { data } = user;
-        const { product: currProduct } = e.payload;
+  yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
+    toast(<CartPopup product={e.payload.product} />);
+    const { user, cart } = yield select();
+    let { cart: cartResponse } = cart;
+    const { data } = user;
+    const { product: currProduct } = e.payload;
 
-        if (!cartResponse) {
-            ({ data: { createShoppingCart: cartResponse } } = yield call([API, API.graphql], {
-                query: createShoppingCart,
-                variables: { input: { userId: data?.username }, },
-            }));
-            cartResponse.products = [];
-            yield put({ type: actionTypes.SET_CART, payload: { ...cartResponse } });
-        }
+    if (!cartResponse) {
+      ({
+        data: { createShoppingCart: cartResponse },
+      } = yield call([API, API.graphql], {
+        query: createShoppingCart,
+        variables: { input: { userId: data?.username } },
+      }));
+      cartResponse.products = [];
+      yield put({ type: actionTypes.SET_CART, payload: { ...cartResponse } });
+    }
 
-        const { products = [], id } = cartResponse;
+    const { products = [], id } = cartResponse;
 
-        let product = products.find(
-            p => p.productId === currProduct.id &&
-                (!currProduct.variantId || currProduct.variantId === p.variantId) &&
-                p.shoppingcartId === id
-        );
+    let product = products.find(
+      (p) =>
+        p.productId === currProduct.id &&
+        (!currProduct.variantId || currProduct.variantId === p.variantId) &&
+        p.shoppingcartId === id
+    );
 
-        if (!product) {
-            const { data: { createShoppingCartProduct: response } } = yield call([API, API.graphql], {
-                query: createShoppingCartProduct,
-                variables: {
-                    input: {
-                        shoppingcartId: id,
-                        productId: currProduct.id,
-                        variantId: currProduct.variantId,
-                        quantity: currProduct.qty,
-                    },
-                },
-            });
+    if (!product) {
+      const {
+        data: { createShoppingCartProduct: response },
+      } = yield call([API, API.graphql], {
+        query: createShoppingCartProduct,
+        variables: {
+          input: {
+            shoppingcartId: id,
+            productId: currProduct.id,
+            variantId: currProduct.variantId,
+            quantity: currProduct.qty,
+          },
+        },
+      });
 
-            products.push({
-                id: response.id,
-                shoppingcartId: id,
-                productId: response.productId,
-                variantId: response.variantId,
-                quantity: response.quantity,
-            });
+      products.push({
+        id: response.id,
+        shoppingcartId: id,
+        productId: response.productId,
+        variantId: response.variantId,
+        quantity: response.quantity,
+      });
 
-            yield put({ type: actionTypes.SET_CART, payload: { products } });
+      yield put({ type: actionTypes.SET_CART, payload: { products } });
+    } else {
+      const {
+        data: { updateShoppingCartProduct: response },
+      } = yield call([API, API.graphql], {
+        query: updateShoppingCartProduct,
+        variables: {
+          input: {
+            id: product.id,
+            quantity: product.quantity + parseInt(currProduct.qty),
+          },
+        },
+      });
 
-        } else {
-            const { data: { updateShoppingCartProduct: response } } = yield call([API, API.graphql], {
-                query: updateShoppingCartProduct,
-                variables: {
-                    input: {
-                        id: product.id,
-                        quantity: product.quantity + parseInt(currProduct.qty),
-                    },
-                },
-            });
-
-            const updatedProducts = products.map(p => p.id === product.id ? ({
-                id: response.id,
-                shoppingcartId: id,
-                productId: response.productId,
-                variantId: response.variantId,
-                quantity: response.quantity,
-            }) : p);
-
-            yield put({ type: actionTypes.SET_CART, payload: { products: updatedProducts } });
-        }
-    })
-
-    yield takeEvery(actionTypes.REMOVE_FROM_CART, function* saga(e) {
-        const { cart } = yield select();
-        const { cart: cartResponse } = cart;
-        const { products } = cartResponse;
-        const { id, variantId } = e.payload.product;
-
-        const product = products.find(p => p.productId === id && (!variantId || variantId === p.variantId));
-
-        yield call([API, API.graphql], {
-            query: deleteShoppingCartProduct,
-            variables: {
-                input: { id: product.id },
-            },
-        });
-
-        const updatedProducts = products.filter(p => p.id !== product.id && (!variantId || variantId === p.variantId));
-
-        yield put({ type: actionTypes.SET_CART, payload: { products: updatedProducts } });
-    })
-
-    yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
-        const { cart } = yield select();
-        const { cart: cartResponse } = cart;
-        const { products } = cartResponse;
-        const { products: currProducts } = e.payload;
-
-        const promise = [];
-        const updatedProducts = currProducts.map((p) => {
-            const product = products.find(prd => prd.productId === p.id && (!p.variantId || p.variantId === prd.variantId));
-
-            if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
-                product.quantity = parseInt(p.qty);
-                promise.push(
-                    call([API, API.graphql], {
-                        query: updateShoppingCartProduct,
-                        variables: {
-                            input: {
-                                id: product.id,
-                                quantity: parseInt(p.qty),
-                            },
-                        },
-                    })
-                );
+      const updatedProducts = products.map((p) =>
+        p.id === product.id
+          ? {
+              id: response.id,
+              shoppingcartId: id,
+              productId: response.productId,
+              variantId: response.variantId,
+              quantity: response.quantity,
             }
-            return product;
-        });
-        yield all(promise);
-        yield put({ type: actionTypes.SET_CART, payload: { products: updatedProducts } });
+          : p
+      );
+
+      yield put({
+        type: actionTypes.SET_CART,
+        payload: { products: updatedProducts },
+      });
+    }
+  });
+
+  yield takeEvery(actionTypes.REMOVE_FROM_CART, function* saga(e) {
+    const { cart } = yield select();
+    const { cart: cartResponse } = cart;
+    const { products } = cartResponse;
+    const { id, variantId } = e.payload.product;
+
+    const product = products.find(
+      (p) => p.productId === id && (!variantId || variantId === p.variantId)
+    );
+
+    yield call([API, API.graphql], {
+      query: deleteShoppingCartProduct,
+      variables: {
+        input: { id: product.id },
+      },
     });
 
-    yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
-        const { cart } = yield select();
-        const { cart: cartResponse } = cart;
-        if (cartResponse) {
-            const { products = [] } = cartResponse;
+    const updatedProducts = products.filter(
+      (p) => p.id !== product.id && (!variantId || variantId === p.variantId)
+    );
 
-            const promise = [];
-            if (Array.isArray(products)) {
-                products.forEach(product => promise.push(
-                    call([API, API.graphql], {
-                        query: deleteShoppingCartProduct,
-                        variables: {
-                            input: { id: product.id },
-                        },
-                    })
-                ))
-            }
+    yield put({
+      type: actionTypes.SET_CART,
+      payload: { products: updatedProducts },
+    });
+  });
 
-            yield all(promise);
-        }
-        yield put({ type: actionTypes.REFRESH_STORE });
-    })
+  yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
+    const { cart } = yield select();
+    const { cart: cartResponse = {} } = cart;
+    const { products = [] } = cartResponse;
+    const { products: currProducts } = e.payload;
 
+    const promise = [];
+    const updatedProducts = currProducts.map((p) => {
+      const product = products.find(
+        (prd) =>
+          prd.productId === p.id &&
+          (!p.variantId || p.variantId === prd.variantId)
+      );
+
+      if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
+        product.quantity = parseInt(p.qty);
+        promise.push(
+          call([API, API.graphql], {
+            query: updateShoppingCartProduct,
+            variables: {
+              input: {
+                id: product.id,
+                quantity: parseInt(p.qty),
+              },
+            },
+          })
+        );
+      }
+      return product;
+    });
+    yield all(promise);
+    yield put({
+      type: actionTypes.SET_CART,
+      payload: { products: updatedProducts },
+    });
+  });
+
+  yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
+    const { cart } = yield select();
+    const { cart: cartResponse } = cart;
+    if (cartResponse) {
+      const { products = [] } = cartResponse;
+
+      const promise = [];
+      if (Array.isArray(products)) {
+        products.forEach((product) =>
+          promise.push(
+            call([API, API.graphql], {
+              query: deleteShoppingCartProduct,
+              variables: {
+                input: { id: product.id },
+              },
+            })
+          )
+        );
+      }
+
+      yield all(promise);
+    }
+    yield put({ type: actionTypes.REFRESH_STORE });
+  });
 }
 
 const persistConfig = {
-    keyPrefix: "riode-",
-    key: "cart",
-    storage
-}
+  keyPrefix: "riode-",
+  key: "cart",
+  storage,
+};
 
 export default persistReducer(persistConfig, cartReducer);

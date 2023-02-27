@@ -20,7 +20,6 @@ function ProductEight(props) {
     addToCart,
     openQuickview,
   } = props;
-
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -173,25 +172,16 @@ function ProductEight(props) {
         <p className="product-short-desc">{product.productDescription}</p>
 
         <div className="product-action">
-          {product.variants && product.variants.items.length > 0 ? (
-            <ALink
-              href={`/product/${product.slug}`}
-              className="btn-product btn-cart"
-              title="Go to product"
-            >
-              <span>Select Options</span>
-            </ALink>
-          ) : (
-            <a
-              href="#"
-              className="btn-product btn-cart"
-              title="Add to cart"
-              onClick={addToCartHandler}
-            >
-              <i className="d-icon-bag"></i>
-              <span>Add to cart</span>
-            </a>
-          )}
+        
+          <a
+            href="#"
+            className="btn-product btn-cart"
+            title="Add to cart"
+            onClick={addToCartHandler}
+          >
+            <i className="d-icon-bag"></i>
+            <span>Add to cart</span>
+          </a>
           <a
             href="#"
             className="btn-product-icon btn-wishlist"

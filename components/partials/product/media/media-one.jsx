@@ -18,7 +18,7 @@ export default function MediaOne(props) {
   const [mediaRef, setMediaRef] = useState(null);
 
   let lgImages = product.images.items;
-  if (product.variants.items.length > 1) {
+  if (product.variants.items.length > 0) {
     lgImages.push(
       ...product.variants.items.map((i) => ({
         variantId: i.id,
