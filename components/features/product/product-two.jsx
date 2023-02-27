@@ -1,5 +1,4 @@
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";

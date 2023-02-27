@@ -13,6 +13,7 @@ import {
   updateShoppingCartProduct,
   deleteShoppingCartProduct,
 } from "~/graphql/api";
+import { getFirstVariantId } from "~/utils/products";
 
 const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -35,15 +36,10 @@ function cartReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
       let tmpProduct = { ...action.payload.product };
-      if (!tmpProduct.variantId && tmpProduct.variants.items.length) {
-        let variants = (tmpProduct?.variants?.items || []).sort(
-          (a, b) => a.position - b.position
-        );
-        tmpProduct = {
-          ...tmpProduct,
-          variantId: variants[0].id,
-        };
+      if (!tmpProduct.variantId) {
+        tmpProduct.variantId = getFirstVariantId(tmpProduct);
       }
+
       if (
         state.data.some(
           (item) =>
@@ -78,10 +74,7 @@ function cartReducer(state = initialState, action) {
         if (product.id !== action.payload.product.id) {
           cartAcc.push(product);
         } else {
-          if (
-            product.variantId &&
-            product.variantId !== action.payload.product.variantId
-          ) {
+          if (product.variantId && (product.variantId !== action.payload.product.variantId)) {
             cartAcc.push(product);
           }
         }
@@ -166,6 +159,9 @@ export function* cartSaga() {
     let { cart: cartResponse } = cart;
     const { data } = user;
     const { product: currProduct } = e.payload;
+    if (!currProduct.variantId) {
+      currProduct.variantId = getFirstVariantId(currProduct);
+    }
 
     if (!cartResponse) {
       ({
@@ -227,12 +223,12 @@ export function* cartSaga() {
       const updatedProducts = products.map((p) =>
         p.id === product.id
           ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+            id: response.id,
+            shoppingcartId: id,
+            productId: response.productId,
+            variantId: response.variantId,
+            quantity: response.quantity,
+          }
           : p
       );
 
@@ -250,7 +246,7 @@ export function* cartSaga() {
     const { id, variantId } = e.payload.product;
 
     const product = products.find(
-      (p) => p.productId === id && (!variantId || variantId === p.variantId)
+      (p) => p.productId === id && (!p.variantId || variantId === p.variantId)
     );
 
     yield call([API, API.graphql], {
@@ -260,9 +256,16 @@ export function* cartSaga() {
       },
     });
 
-    const updatedProducts = products.filter(
-      (p) => p.id !== product.id && (!variantId || variantId === p.variantId)
-    );
+    const updatedProducts = products.reduce((cartAcc, product) => {
+      if (product.id !== id) {
+        cartAcc.push(product);
+      } else {
+        if (product.variantId && (product.variantId !== variantId)) {
+          cartAcc.push(product);
+        }
+      }
+      return cartAcc;
+    }, []);
 
     yield put({
       type: actionTypes.SET_CART,
@@ -273,38 +276,40 @@ export function* cartSaga() {
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
     const { cart } = yield select();
     const { cart: cartResponse = {} } = cart;
-    const { products = [] } = cartResponse;
+    const { products = [] } = cartResponse || {};
     const { products: currProducts } = e.payload;
 
-    const promise = [];
-    const updatedProducts = currProducts.map((p) => {
-      const product = products.find(
-        (prd) =>
-          prd.productId === p.id &&
-          (!p.variantId || p.variantId === prd.variantId)
-      );
-
-      if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
-        product.quantity = parseInt(p.qty);
-        promise.push(
-          call([API, API.graphql], {
-            query: updateShoppingCartProduct,
-            variables: {
-              input: {
-                id: product.id,
-                quantity: parseInt(p.qty),
-              },
-            },
-          })
+    if (Array.isArray(products) && products.length) {
+      const promise = [];
+      const updatedProducts = currProducts.map((p) => {
+        const product = products.find(
+          (prd) =>
+            prd.productId === p.id &&
+            (!prd.variantId || p.variantId === prd.variantId)
         );
-      }
-      return product;
-    });
-    yield all(promise);
-    yield put({
-      type: actionTypes.SET_CART,
-      payload: { products: updatedProducts },
-    });
+
+        if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
+          product.quantity = parseInt(p.qty);
+          promise.push(
+            call([API, API.graphql], {
+              query: updateShoppingCartProduct,
+              variables: {
+                input: {
+                  id: product.id,
+                  quantity: parseInt(p.qty),
+                },
+              },
+            })
+          );
+        }
+        return product;
+      });
+      yield all(promise);
+      yield put({
+        type: actionTypes.SET_CART,
+        payload: { products: updatedProducts },
+      });
+    }
   });
 
   yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
