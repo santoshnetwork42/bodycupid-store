@@ -52,7 +52,7 @@ function DetailOne(props) {
   }, [product]);
 
   useEffect(() => {
-    if (product.variants.items.length > 1) {
+    if (product.variants.items.length > 0) {
       if (selectedVaraint) {
         setCartActive(true);
         setCurIndex(
@@ -100,7 +100,7 @@ function DetailOne(props) {
 
   const addToCartHandler = () => {
     if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
-      if (product.variants.items.length > 1) {
+      if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
         if (curIndex > -1) {

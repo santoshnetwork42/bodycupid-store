@@ -30,7 +30,6 @@ function CartMenu(props) {
   const removeCart = (item) => {
     removeFromCart(item);
   };
-
   const onChangeQty = (id, variantId, qty) => {
     updateCart(
       cartList.map((item) => {
