@@ -78,6 +78,7 @@ function Checkout(props) {
                 price: p.price,
                 title: p.title,
                 totalPrice: parseInt(p.qty) * parseInt(p.price),
+                sku: p.sku,
               },
             },
             authMode,
