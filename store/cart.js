@@ -313,7 +313,7 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
-    const { cart } = yield select();
+    const { cart = {} } = yield select() || {};
     const { cart: cartResponse } = cart;
     if (cartResponse) {
       const { products = [] } = cartResponse;
