@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
@@ -10,21 +10,16 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import Quantity from "../quantity";
 
 function ProductEight(props) {
   const {
     product,
-    products: defProducts,
     adClass,
     toggleWishlist,
     wishlist,
     addToCart,
     openQuickview,
-    updateCart,
   } = props;
-  const [products, setProducts] = useState(defProducts);
-
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -35,6 +30,7 @@ function ProductEight(props) {
   const showQuickviewHandler = () => {
     openQuickview(product.slug);
   };
+
   const wishlistHandler = (e) => {
     if (toggleWishlist) {
       toggleWishlist(product);
@@ -51,18 +47,8 @@ function ProductEight(props) {
 
   const addToCartHandler = (e) => {
     e.preventDefault();
-    let {qty} = products.find((p) => p.id === product.id);
-    addToCart({ ...product, qty: qty, price: product.price });
-  };
-
-  const onChangeQty = (id, variantId, qty) => {
-    setProducts(
-      products.map((item) => {
-        return item.id === id && (!variantId || variantId === item.variantId)
-          ? { ...item, qty: qty }
-          : item;
-      })
-    );
+    // addToCart({ ...product, qty: 1, price: product.price[0] });
+    addToCart({ ...product, qty: 1, price: product.price });
   };
 
   const discount = !!(product.listingPrice && product.price)
@@ -186,14 +172,7 @@ function ProductEight(props) {
         <p className="product-short-desc">{product.productDescription}</p>
 
         <div className="product-action">
-          <Quantity
-            product={product}
-            qty={product.qty}
-            max={product.inventory}
-            onChangeQty={(qty) =>
-              onChangeQty(product.id, product.variantId, qty)
-            }
-          />
+        
           <a
             href="#"
             className="btn-product btn-cart"
@@ -237,6 +216,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
-  updateCart: cartActions.updateCart,
   ...modalActions,
 })(ProductEight);
