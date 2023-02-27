@@ -21,7 +21,6 @@ function CartMenu(props) {
     e.preventDefault();
     e.currentTarget.closest(".cart-dropdown").classList.add("opened");
   };
-
   const hideCartMenu = () => {
     if (document.querySelector(".cart-dropdown").classList.contains("opened"))
       document.querySelector(".cart-dropdown").classList.remove("opened");
@@ -74,10 +73,10 @@ function CartMenu(props) {
           <>
             <div className="products scrollable">
               {cartList.map((item, index) => (
-                <>
+                <div   key={"cart-menu-product-" + index}>
                   <div
                     className="product product-cart"
-                    key={"cart-menu-product-" + index}
+                  
                   >
                     <figure className="product-media pure-media">
                       <ALink href={"/product/" + item.slug}>
@@ -105,7 +104,7 @@ function CartMenu(props) {
                         href={"/product/" + item.slug}
                         className="product-name"
                       >
-                        {item.name}
+                        {item.title}
                       </ALink>
                       <div className="price-box">
                         <span className="product-quantity">{item.qty}</span>
@@ -125,7 +124,7 @@ function CartMenu(props) {
                       }
                     />
                   </div>
-                </>
+                </div>
               ))}
             </div>
 

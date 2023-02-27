@@ -19,6 +19,7 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
+import { getProperAddress } from "~/utils/helper";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
@@ -31,74 +32,79 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      const { id: ignoreId, saveAddress, ...restAddress } = shippingAddress;
-      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
-      const payload = {
-        userId: user?.username,
-        status: "CONFIRMED",
-        totalAmount: getFinalPrice(cartList, appliedCoupon),
-        totalDiscount: getCouponTotal(appliedCoupon, cartList),
-        totalShippingCharges: getShippingPrice(cartList),
-        orderDate: new Date().toISOString(),
-        shippingAddress: restAddress,
-      };
+      try {
+        const { id: ignoreId, saveAddress, ...restAddress } = shippingAddress;
+        const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+        const payload = {
+          userId: user?.username,
+          status: "CONFIRMED",
+          totalAmount: getFinalPrice(cartList, appliedCoupon),
+          totalDiscount: getCouponTotal(appliedCoupon, cartList),
+          totalShippingCharges: getShippingPrice(cartList),
+          orderDate: new Date().toISOString(),
+          shippingAddress: restAddress,
+        };
 
-      const {
-        data: {
-          createOrder: { id: orderId },
-        },
-      } = await API.graphql({
-        query: createOrder,
-        variables: { input: payload },
-        authMode,
-      });
-
-      const promise = [
-        API.graphql({
-          query: createPayment,
-          variables: {
-            input: {
-              userId: user?.username,
-              orderId,
-              method: isFirst ? "ONLINE" : "COD",
-              amount: getFinalPrice(cartList, appliedCoupon),
-            },
+        const {
+          data: {
+            createOrder: { id: orderId },
           },
+        } = await API.graphql({
+          query: createOrder,
+          variables: { input: payload },
           authMode,
-        }),
-        ...cartList.map((p) =>
+        });
+
+        const promise = [
           API.graphql({
-            query: createOrderProduct,
+            query: createPayment,
             variables: {
               input: {
+                userId: user?.username,
                 orderId,
-                productId: p.id,
-                variantId: p.variantId,
-                quantity: p.qty,
-                price: p.price,
-                title: p.title,
-                totalPrice: parseInt(p.qty) * parseInt(p.price),
-                sku: p.sku,
+                method: isFirst ? "ONLINE" : "COD",
+                amount: getFinalPrice(cartList, appliedCoupon),
               },
             },
             authMode,
-          })
-        ),
-      ];
+          }),
+          ...cartList.map((p) =>
+            API.graphql({
+              query: createOrderProduct,
+              variables: {
+                input: {
+                  orderId,
+                  productId: p.id,
+                  variantId: p.variantId,
+                  quantity: p.qty,
+                  price: p.price,
+                  title: p.title,
+                  totalPrice: parseInt(p.qty) * parseInt(p.price),
+                  sku: p.sku,
+                },
+              },
+              authMode,
+            })
+          ),
+        ];
 
-      if (saveAddress && user) {
-        promise.push(
-          API.graphql({
-            query: createUserAddress,
-            variables: { input: { ...restAddress, userID: user.username } },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
-          })
-        );
+        if (saveAddress && user) {
+          promise.push(
+            API.graphql({
+              query: createUserAddress,
+              variables: { input: { ...restAddress, userID: user.username } },
+              authMode: "AMAZON_COGNITO_USER_POOLS",
+            })
+          );
+        }
+        
+        await Promise.all(promise);
+        await emptyCart();
+        await router.push(`/order/${orderId}`);
+      } catch (e) {
+        console.log("e", e);
       }
 
-      await Promise.all(promise);
-      await router.push(`/order/${orderId}`);
-      await emptyCart();
       return false;
     },
     [user, isFirst, appliedCoupon, shippingAddress, cartList]

@@ -4,7 +4,7 @@ import { API } from "aws-amplify";
 import { connect } from "react-redux";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
-import { removePhonePrefix } from "~/utils/helper";
+import { getProperAddress, removePhonePrefix } from "~/utils/helper";
 
 const AddressForm = ({
   defaultAddress,
@@ -14,29 +14,39 @@ const AddressForm = ({
   saveAddress,
 }) => {
   const [address, setAddress] = useSetState(defaultAddress || {});
-
   useEffect(() => {
     if (onAddress) {
-      onAddress(address);
+      let tempAddress = getProperAddress(address);
+      onAddress(tempAddress);
     }
   }, [address]);
+  useEffect(() => {
+    if (defaultAddress) {
+      setAddress({
+        ...defaultAddress,
+        firstName: defaultAddress.name.split(" ")[0],
+        lastName: defaultAddress.name.split(" ")[1],
+      });
+    }
+  }, [defaultAddress]);
 
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
       try {
         if (user) {
+          let tempAddress = getProperAddress(address);
           const key = address.id ? "updateUserAddress" : "createUserAddress";
           const {
             data: { [key]: response },
           } = await API.graphql({
             query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: { ...address, userID: user.username } },
+            variables: { input: { ...tempAddress, userID: user.username } },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
           onSubmit(response);
         } else {
-          onSubmit(address);
+          onSubmit(tempAddress);
         }
       } catch (error) {
         console.log(error);
@@ -45,23 +55,36 @@ const AddressForm = ({
     },
     [address, user, onSubmit]
   );
-
   return (
     <div>
       <form className="form" onSubmit={addAddress}>
         <div className="row">
           <div className="col-lg-12  mb-6 mb-lg-0 pr-lg-4">
             <div className="row">
-              <div className="col-xs-12">
-                <label>Name *</label>
+              <div className="col-xs-6">
+                <label>First Name *</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="name"
+                  name="firstName"
                   required
-                  value={address.name}
-                  onChange={(e) => setAddress({ name: e.target.value })}
-                  onBlur={(e) => setAddress({ name: e.target.value.trim() })}
+                  value={address?.firstName}
+                  onChange={(e) =>
+                    setAddress({ firstName: e.target.value.trim() })
+                  }
+                />
+              </div>{" "}
+              <div className="col-xs-6">
+                <label>Last Name *</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                  required
+                  value={address?.lastName}
+                  onChange={(e) =>
+                    setAddress({ lastName: e.target.value.trim() })
+                  }
                 />
               </div>
               <div className="col-xs-6">

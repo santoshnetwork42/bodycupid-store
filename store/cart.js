@@ -271,9 +271,9 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
-    const { cart } = yield select();
-    const { cart: cartResponse = {} } = cart;
-    const { products = [] } = cartResponse;
+    const { cart = {} } = yield select();
+    const { cart: cartResponse } = cart;
+    const { products = [] } = cartResponse || {};
     const { products: currProducts } = e.payload;
 
     const promise = [];
@@ -308,7 +308,7 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
-    const { cart } = yield select();
+    const { cart = {} } = yield select() || {};
     const { cart: cartResponse } = cart;
     if (cartResponse) {
       const { products = [] } = cartResponse;
