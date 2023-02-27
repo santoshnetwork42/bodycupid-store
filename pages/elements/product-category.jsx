@@ -1,6 +1,6 @@
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Helmet from "react-helmet";
+import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 import Breadcrumb from "~/components/features/breadcrumb";
@@ -18,9 +18,9 @@ import {
 function Cta() {
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Wow life science | Product Category</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">
         Wow life science - Product Category

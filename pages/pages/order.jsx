@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Helmet from "react-helmet";
+import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 
@@ -10,9 +10,9 @@ function Order(props) {
 
   return (
     <main className="main order">
-      <Helmet>
+      <Head>
         <title>Wow life science | Order</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow life science - Order</h1>
 

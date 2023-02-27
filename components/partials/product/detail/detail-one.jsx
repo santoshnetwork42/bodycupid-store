@@ -42,7 +42,6 @@ function DetailOne(props) {
     () => wishlist.some((i) => i.id === product?.id),
     [wishlist, product?.id]
   );
-  curIndex;
 
   useEffect(() => {
     return () => {
@@ -283,12 +282,11 @@ function DetailOne(props) {
       </div>
 
       <div className="ratings-container">
-        <div className="ratings-full" onClick={onReviewClick} >
+        <div className="ratings-full" onClick={onReviewClick}>
           {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
                     <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
           <span
             className="ratings"
-            
             style={{ width: Math.min(20 * product.rating, 100) + "%" }}
           ></span>
           <span className="tooltiptext tooltip-top">
@@ -297,7 +295,7 @@ function DetailOne(props) {
         </div>
 
         {/* <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink> */}
-        <div  onClick={onReviewClick} className="rating-reviews cursor-pointer">
+        <div onClick={onReviewClick} className="rating-reviews cursor-pointer">
           ( {product.reviews.items.length} reviews )
         </div>
       </div>

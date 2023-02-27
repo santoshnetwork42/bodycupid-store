@@ -1,18 +1,22 @@
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "~/components/features/optimized-image";
 
-function IntroSection() {
+function IntroSection({ data }) {
+  const { banner } = data;
+
   return (
-    <ALink href="/collections/all" className="banner banner-fixed intro-slide2">
+    <ALink
+      href="/collections/all"
+      className="banner banner-fixed intro-slide2"
+      style={{ backgroundColor: "#dddee0" }}
+    >
       <figure>
-        <LazyLoadImage
-          src="/images/home/slides/wow.jpg"
+        <OptimizedImage
+          optimizedData={banner}
+          loading="eager"
           alt="Intro Slider"
-          effect="opacity"
-          width="auto"
-          height={630}
         />
       </figure>
     </ALink>

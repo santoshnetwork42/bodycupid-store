@@ -9,7 +9,7 @@ import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
 
-function Header({ auth, openLogin }) {
+function Header({ navbar, auth, openLogin }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -43,7 +43,24 @@ function Header({ auth, openLogin }) {
             </ALink>
 
             <ALink href="/" className="logo">
-              <img src="/images/logo.png" alt="logo" width="153" height="44" />
+              {navbar?.logo ? (
+                <OptimizedImage
+                  optimizedData={{
+                    ...navbar.logo,
+                    width: 153,
+                    height: 44,
+                  }}
+                  loading="eager"
+                  alt="logo"
+                />
+              ) : (
+                <img
+                  src="/images/logo.png"
+                  alt="logo"
+                  width="153"
+                  height="44"
+                />
+              )}
             </ALink>
 
             <SearchBox />

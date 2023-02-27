@@ -144,7 +144,7 @@ function SearchForm() {
           required
         />
 
-        <button className="btn btn-search" type="submit">
+        <button className="btn btn-search" type="submit" aria-label="search">
           <i className="d-icon-search"></i>
         </button>
 

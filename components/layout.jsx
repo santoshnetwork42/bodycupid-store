@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import "react-toastify/dist/ReactToastify.min.css";
 import "react-image-lightbox/style.css";
 import "react-input-range/lib/css/index.css";
@@ -26,7 +27,7 @@ import {
   resizeHandler,
 } from "~/utils";
 
-function Layout({ children, closeQuickview, closeLogin }) {
+function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
   const router = useRouter();
 
   useLayoutEffect(() => {
@@ -35,17 +36,17 @@ function Layout({ children, closeQuickview, closeLogin }) {
   }, [router.pathname]);
 
   useEffect(() => {
-    window.addEventListener("scroll", showScrollTopHandler, true);
-    window.addEventListener("scroll", stickyHeaderHandler, true);
-    window.addEventListener("scroll", stickyFooterHandler, true);
+    window.addEventListener("scroll", showScrollTopHandler, { passive: true });
+    window.addEventListener("scroll", stickyHeaderHandler, { passive: true });
+    window.addEventListener("scroll", stickyFooterHandler, { passive: true });
     window.addEventListener("resize", stickyHeaderHandler);
     window.addEventListener("resize", stickyFooterHandler);
     window.addEventListener("resize", resizeHandler);
 
     return () => {
-      window.removeEventListener("scroll", showScrollTopHandler, true);
-      window.removeEventListener("scroll", stickyHeaderHandler, true);
-      window.removeEventListener("scroll", stickyFooterHandler, true);
+      window.removeEventListener("scroll", showScrollTopHandler);
+      window.removeEventListener("scroll", stickyHeaderHandler);
+      window.removeEventListener("scroll", stickyFooterHandler);
       window.removeEventListener("resize", stickyHeaderHandler);
       window.removeEventListener("resize", stickyFooterHandler);
       window.removeEventListener("resize", resizeHandler);
@@ -68,14 +69,31 @@ function Layout({ children, closeQuickview, closeLogin }) {
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="images/icons/favicon.png" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900;SegoeScript:700&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="/vendor/riode-fonts/riode-fonts.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="/vendor/fontawesome-free/css/all.min.css"
+        />
+      </Head>
       <div className="page-wrapper">
-        <Header />
+        <Header navbar={navbar} />
 
         {children}
 
-        <Footer />
+        <Footer footer={footer} />
 
-        <></>
+        <StickyFooter />
       </div>
 
       <ALink
