@@ -438,6 +438,8 @@ export const deleteUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -1182,6 +1184,8 @@ export const deleteUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -1880,6 +1884,8 @@ export const deleteUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -1888,6 +1894,8 @@ export const deleteUser = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -2227,6 +2235,8 @@ export const deleteUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -2665,6 +2675,8 @@ export const deleteUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -3372,6 +3384,8 @@ export const deleteUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -4008,6 +4022,8 @@ export const deleteUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -4740,6 +4756,8 @@ export const createUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -5484,6 +5502,8 @@ export const createUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -6182,6 +6202,8 @@ export const createUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -6190,6 +6212,8 @@ export const createUser = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -6529,6 +6553,8 @@ export const createUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -6967,6 +6993,8 @@ export const createUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -7674,6 +7702,8 @@ export const createUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -8310,6 +8340,8 @@ export const createUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -9042,6 +9074,8 @@ export const updateUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -9786,6 +9820,8 @@ export const updateUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -10484,6 +10520,8 @@ export const updateUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -10492,6 +10530,8 @@ export const updateUser = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -10831,6 +10871,8 @@ export const updateUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -11269,6 +11311,8 @@ export const updateUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -11976,6 +12020,8 @@ export const updateUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -12612,6 +12658,8 @@ export const updateUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -13417,6 +13465,8 @@ export const createProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -14252,6 +14302,8 @@ export const createProductCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -14768,6 +14820,8 @@ export const createProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -15224,6 +15278,8 @@ export const updateProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -16059,6 +16115,8 @@ export const updateProductCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -16575,6 +16633,8 @@ export const updateProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -17031,6 +17091,8 @@ export const deleteProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -17866,6 +17928,8 @@ export const deleteProductCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -18382,6 +18446,8 @@ export const deleteProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -18837,6 +18903,8 @@ export const createProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -19046,6 +19114,8 @@ export const createProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -19482,6 +19552,8 @@ export const createProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -20573,6 +20645,8 @@ export const createProductSubCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -21023,6 +21097,8 @@ export const updateProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -21232,6 +21308,8 @@ export const updateProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -21668,6 +21746,8 @@ export const updateProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -22759,6 +22839,8 @@ export const updateProductSubCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -23209,6 +23291,8 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -23418,6 +23502,8 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -23854,6 +23940,8 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -24945,6 +25033,8 @@ export const deleteProductSubCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -25791,6 +25881,8 @@ export const createStore = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -26637,6 +26729,8 @@ export const updateStore = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -27483,6 +27577,8 @@ export const deleteStore = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -27933,6 +28029,8 @@ export const createWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -28375,6 +28473,8 @@ export const createWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -28829,6 +28929,8 @@ export const updateWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -29271,6 +29373,8 @@ export const updateWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -29725,6 +29829,8 @@ export const deleteWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -30167,6 +30273,8 @@ export const deleteWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -30707,6 +30815,8 @@ export const createProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -30910,6 +31020,8 @@ export const createProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -31219,6 +31331,8 @@ export const createProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -31488,6 +31602,8 @@ export const createProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -31765,6 +31881,8 @@ export const createProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -31773,6 +31891,8 @@ export const createProductInventory = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -32308,6 +32428,8 @@ export const updateProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -32511,6 +32633,8 @@ export const updateProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -32820,6 +32944,8 @@ export const updateProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -33089,6 +33215,8 @@ export const updateProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -33366,6 +33494,8 @@ export const updateProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -33374,6 +33504,8 @@ export const updateProductInventory = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -33909,6 +34041,8 @@ export const deleteProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -34112,6 +34246,8 @@ export const deleteProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -34421,6 +34557,8 @@ export const deleteProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -34690,6 +34828,8 @@ export const deleteProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -34967,6 +35107,8 @@ export const deleteProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -34975,6 +35117,8 @@ export const deleteProductInventory = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -35193,6 +35337,8 @@ export const createProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -35504,6 +35650,8 @@ export const createProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -36048,6 +36196,8 @@ export const createProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -36489,6 +36639,8 @@ export const createProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -36696,6 +36848,8 @@ export const createProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -37132,6 +37286,8 @@ export const createProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -37698,6 +37854,8 @@ export const createProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -38396,6 +38554,8 @@ export const createProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -38404,6 +38564,8 @@ export const createProduct = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -38618,6 +38780,8 @@ export const updateProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -38929,6 +39093,8 @@ export const updateProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -39473,6 +39639,8 @@ export const updateProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -39914,6 +40082,8 @@ export const updateProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -40121,6 +40291,8 @@ export const updateProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -40557,6 +40729,8 @@ export const updateProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -41123,6 +41297,8 @@ export const updateProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -41821,6 +41997,8 @@ export const updateProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -41829,6 +42007,8 @@ export const updateProduct = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -42043,6 +42223,8 @@ export const deleteProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -42354,6 +42536,8 @@ export const deleteProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -42898,6 +43082,8 @@ export const deleteProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -43339,6 +43525,8 @@ export const deleteProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -43546,6 +43734,8 @@ export const deleteProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -43982,6 +44172,8 @@ export const deleteProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -44548,6 +44740,8 @@ export const deleteProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -45246,6 +45440,8 @@ export const deleteProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -45254,6 +45450,8 @@ export const deleteProduct = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -45847,6 +46045,8 @@ export const createOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -46053,6 +46253,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -46452,6 +46654,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -46729,6 +46933,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -46737,6 +46943,8 @@ export const createOrder = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -46878,6 +47086,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -47416,6 +47626,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -47671,6 +47883,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -48005,6 +48219,8 @@ export const createOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -48394,6 +48610,8 @@ export const createOrder = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -49324,6 +49542,8 @@ export const createOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -49724,6 +49944,8 @@ export const createOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -50449,6 +50671,8 @@ export const updateOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -50655,6 +50879,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -51054,6 +51280,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -51331,6 +51559,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -51339,6 +51569,8 @@ export const updateOrder = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -51480,6 +51712,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -52018,6 +52252,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -52273,6 +52509,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -52607,6 +52845,8 @@ export const updateOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -52996,6 +53236,8 @@ export const updateOrder = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -53926,6 +54168,8 @@ export const updateOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -54326,6 +54570,8 @@ export const updateOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -55051,6 +55297,8 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -55257,6 +55505,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -55656,6 +55906,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -55933,6 +56185,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -55941,6 +56195,8 @@ export const deleteOrder = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -56082,6 +56338,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -56620,6 +56878,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -56875,6 +57135,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -57209,6 +57471,8 @@ export const deleteOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -57598,6 +57862,8 @@ export const deleteOrder = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -58528,6 +58794,8 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -58928,6 +59196,8 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -59738,6 +60008,8 @@ export const createOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -59941,6 +60213,8 @@ export const createOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -60250,6 +60524,8 @@ export const createOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -60519,6 +60795,8 @@ export const createOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -60796,6 +61074,8 @@ export const createOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -60804,6 +61084,8 @@ export const createOrderProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -61394,6 +61676,8 @@ export const updateOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -61597,6 +61881,8 @@ export const updateOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -61906,6 +62192,8 @@ export const updateOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -62175,6 +62463,8 @@ export const updateOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -62452,6 +62742,8 @@ export const updateOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -62460,6 +62752,8 @@ export const updateOrderProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -63050,6 +63344,8 @@ export const deleteOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -63253,6 +63549,8 @@ export const deleteOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -63562,6 +63860,8 @@ export const deleteOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -63831,6 +64131,8 @@ export const deleteOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -64108,6 +64410,8 @@ export const deleteOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -64116,6 +64420,8 @@ export const deleteOrderProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -64620,6 +64926,8 @@ export const createPayment = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -64826,6 +65134,8 @@ export const createPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -65225,6 +65535,8 @@ export const createPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -65502,6 +65814,8 @@ export const createPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -65510,6 +65824,8 @@ export const createPayment = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -65651,6 +65967,8 @@ export const createPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -66189,6 +66507,8 @@ export const createPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -66444,6 +66764,8 @@ export const createPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -66999,6 +67321,8 @@ export const updatePayment = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -67205,6 +67529,8 @@ export const updatePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -67604,6 +67930,8 @@ export const updatePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -67881,6 +68209,8 @@ export const updatePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -67889,6 +68219,8 @@ export const updatePayment = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -68030,6 +68362,8 @@ export const updatePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -68568,6 +68902,8 @@ export const updatePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -68823,6 +69159,8 @@ export const updatePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -69378,6 +69716,8 @@ export const deletePayment = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -69584,6 +69924,8 @@ export const deletePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -69983,6 +70325,8 @@ export const deletePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -70260,6 +70604,8 @@ export const deletePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -70268,6 +70614,8 @@ export const deletePayment = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -70409,6 +70757,8 @@ export const deletePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -70947,6 +71297,8 @@ export const deletePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -71202,6 +71554,8 @@ export const deletePayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -71522,6 +71876,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -71921,6 +72277,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -72198,6 +72556,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -72206,6 +72566,8 @@ export const createReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -72347,6 +72709,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -72885,6 +73249,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -73140,6 +73506,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -73770,6 +74138,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -73973,6 +74343,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74282,6 +74654,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74551,6 +74925,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74828,6 +75204,8 @@ export const createReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74836,6 +75214,8 @@ export const createReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -74844,6 +75224,8 @@ export const createReview = /* GraphQL */ `
       }
       rating
       comment
+      title
+      images
       createdAt
       updatedAt
     }
@@ -75051,6 +75433,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -75450,6 +75834,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -75727,6 +76113,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -75735,6 +76123,8 @@ export const updateReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -75876,6 +76266,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -76414,6 +76806,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -76669,6 +77063,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -77299,6 +77695,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -77502,6 +77900,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -77811,6 +78211,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -78080,6 +78482,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -78357,6 +78761,8 @@ export const updateReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -78365,6 +78771,8 @@ export const updateReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -78373,6 +78781,8 @@ export const updateReview = /* GraphQL */ `
       }
       rating
       comment
+      title
+      images
       createdAt
       updatedAt
     }
@@ -78580,6 +78990,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -78979,6 +79391,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -79256,6 +79670,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -79264,6 +79680,8 @@ export const deleteReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -79405,6 +79823,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -79943,6 +80363,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -80198,6 +80620,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -80828,6 +81252,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -81031,6 +81457,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -81340,6 +81768,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -81609,6 +82039,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -81886,6 +82318,8 @@ export const deleteReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -81894,6 +82328,8 @@ export const deleteReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -81902,6 +82338,8 @@ export const deleteReview = /* GraphQL */ `
       }
       rating
       comment
+      title
+      images
       createdAt
       updatedAt
     }
@@ -82344,6 +82782,8 @@ export const createWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -82779,6 +83219,8 @@ export const createWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -83256,6 +83698,8 @@ export const updateWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -83691,6 +84135,8 @@ export const updateWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -84168,6 +84614,8 @@ export const deleteWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -84603,6 +85051,8 @@ export const deleteWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -85166,6 +85616,8 @@ export const createWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -85369,6 +85821,8 @@ export const createWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -85678,6 +86132,8 @@ export const createWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -85947,6 +86403,8 @@ export const createWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -86224,6 +86682,8 @@ export const createWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -86232,6 +86692,8 @@ export const createWishlistProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -86790,6 +87252,8 @@ export const updateWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -86993,6 +87457,8 @@ export const updateWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -87302,6 +87768,8 @@ export const updateWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -87571,6 +88039,8 @@ export const updateWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -87848,6 +88318,8 @@ export const updateWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -87856,6 +88328,8 @@ export const updateWishlistProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -88414,6 +88888,8 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -88617,6 +89093,8 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -88926,6 +89404,8 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -89195,6 +89675,8 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -89472,6 +89954,8 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -89480,6 +89964,8 @@ export const deleteWishlistProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -89952,6 +90438,8 @@ export const createShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -90387,6 +90875,8 @@ export const createShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -90866,6 +91356,8 @@ export const updateShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -91301,6 +91793,8 @@ export const updateShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -91780,6 +92274,8 @@ export const deleteShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -92215,6 +92711,8 @@ export const deleteShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -92780,6 +93278,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -92983,6 +93483,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -93292,6 +93794,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -93561,6 +94065,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -93838,6 +94344,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -93846,6 +94354,8 @@ export const createShoppingCartProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -94405,6 +94915,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -94608,6 +95120,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -94917,6 +95431,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -95186,6 +95702,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -95463,6 +95981,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -95471,6 +95991,8 @@ export const updateShoppingCartProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -96030,6 +96552,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -96233,6 +96757,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -96542,6 +97068,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -96811,6 +97339,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -97088,6 +97618,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -97096,6 +97628,8 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -97570,6 +98104,8 @@ export const createCouponCode = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -97776,6 +98312,8 @@ export const createCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -98175,6 +98713,8 @@ export const createCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -98452,6 +98992,8 @@ export const createCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -98460,6 +99002,8 @@ export const createCouponCode = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -98601,6 +99145,8 @@ export const createCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -99139,6 +99685,8 @@ export const createCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -99394,6 +99942,8 @@ export const createCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -99958,6 +100508,8 @@ export const updateCouponCode = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -100164,6 +100716,8 @@ export const updateCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -100563,6 +101117,8 @@ export const updateCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -100840,6 +101396,8 @@ export const updateCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -100848,6 +101406,8 @@ export const updateCouponCode = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -100989,6 +101549,8 @@ export const updateCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -101527,6 +102089,8 @@ export const updateCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -101782,6 +102346,8 @@ export const updateCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -102346,6 +102912,8 @@ export const deleteCouponCode = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -102552,6 +103120,8 @@ export const deleteCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -102951,6 +103521,8 @@ export const deleteCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -103228,6 +103800,8 @@ export const deleteCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -103236,6 +103810,8 @@ export const deleteCouponCode = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -103377,6 +103953,8 @@ export const deleteCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -103915,6 +104493,8 @@ export const deleteCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -104170,6 +104750,8 @@ export const deleteCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -104291,6 +104873,51 @@ export const deleteCouponCode = /* GraphQL */ `
       maxDiscount
       description
       paymentMethod
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createConfiguration = /* GraphQL */ `
+  mutation CreateConfiguration(
+    $input: CreateConfigurationInput!
+    $condition: ModelConfigurationConditionInput
+  ) {
+    createConfiguration(input: $input, condition: $condition) {
+      id
+      storeId
+      key
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateConfiguration = /* GraphQL */ `
+  mutation UpdateConfiguration(
+    $input: UpdateConfigurationInput!
+    $condition: ModelConfigurationConditionInput
+  ) {
+    updateConfiguration(input: $input, condition: $condition) {
+      id
+      storeId
+      key
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteConfiguration = /* GraphQL */ `
+  mutation DeleteConfiguration(
+    $input: DeleteConfigurationInput!
+    $condition: ModelConfigurationConditionInput
+  ) {
+    deleteConfiguration(input: $input, condition: $condition) {
+      id
+      storeId
+      key
+      value
       createdAt
       updatedAt
     }
@@ -104731,6 +105358,8 @@ export const applyCoupon = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -104937,6 +105566,8 @@ export const applyCoupon = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -105336,6 +105967,8 @@ export const applyCoupon = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -105613,6 +106246,8 @@ export const applyCoupon = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -105621,6 +106256,8 @@ export const applyCoupon = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -105762,6 +106399,8 @@ export const applyCoupon = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -106300,6 +106939,8 @@ export const applyCoupon = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -106555,6 +107196,8 @@ export const applyCoupon = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }

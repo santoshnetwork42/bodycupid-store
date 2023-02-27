@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
@@ -9,8 +8,7 @@ import { getOrder } from "~/graphql/api";
 
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 
-function Order(props) {
-  const { user } = props;
+function Order() {
   const [order, setOrder] = useState(null);
 
   const router = useRouter();
@@ -22,11 +20,10 @@ function Order(props) {
       const response = await API.graphql({
         query: getOrder,
         variables: { id: orderId },
-        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
       setOrder(response.data.getOrder);
     })();
-  }, [orderId, user]);
+  }, [orderId]);
 
   return (
     <main className="main order">
@@ -257,10 +254,4 @@ function Order(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.data,
-  };
-}
-
-export default connect(mapStateToProps)(Order);
+export default React.memo(Order);
