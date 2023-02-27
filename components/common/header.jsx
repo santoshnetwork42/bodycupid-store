@@ -8,6 +8,7 @@ import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
+import OptimizedImage from "~/components/features/optimized-image";
 
 function Header({ navbar, auth, openLogin }) {
   const router = useRouter();

@@ -23,7 +23,7 @@ function CategorySection({ categories = [] }) {
             {categoriesWithImage.map((category) => (
               <div className="col-xs-6 col-lg-3 mb-4" key={category.id}>
                 <div className="category category-default1 category-absolute banner-radius overlay-zoom">
-                  <ALink href={`/collections/${category.slug}`}>
+                  <ALink href={`/collections/${category.category.slug}/${category.slug}`}>
                     <figure className="category-media">
                       <OptimizedImage
                         optimizedData={category.image}

@@ -1,6 +1,8 @@
 import ALink from "~/components/features/custom-link";
 
-export default function Footer() {
+import OptimizedImage from "~/components/features/optimized-image";
+
+export default function Footer({ footer }) {
   return (
     <footer className="footer">
       <div className="container">

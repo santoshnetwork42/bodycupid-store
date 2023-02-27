@@ -314,7 +314,6 @@ function DetailOne(props) {
                   onChange={setVariantHandler}
                   value={selectedVaraint}
                 >
-                  <option value={"null"}>Choose an option</option>
                   {sizes.map((item) => (
                     <option value={item.value} key={item.value}>
                       {item.name}
