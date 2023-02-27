@@ -463,6 +463,7 @@ export const getOrder = /* GraphQL */ `
       }
       totalStoreCredit
       CouponCodeId
+      totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
       totalGiftCharges

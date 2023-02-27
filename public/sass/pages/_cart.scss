@@ -246,6 +246,17 @@
     }
 }
 
+@include mq(sm, max) {
+    .cart .cart-actions {
+        width: 100%;
+        text-align: center;
+        display: block;
+        .btn-outline {
+            margin-right: 2rem !important; ;
+        }
+    }
+}
+
 @include mq(md, max) {
     .summary {
         padding-left: 2rem;
@@ -269,11 +280,7 @@
     .cart .cart-coupon-box {
         display: block;
     }
-    .cart .cart-actions {
-        width: 100%;
-        text-align: center;
-        display: block;
-    }
+   
   
     .cart .shop-table  {
         .product-subtotal, .product-thumbnail, .product-quantity { 

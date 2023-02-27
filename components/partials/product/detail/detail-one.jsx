@@ -126,6 +126,14 @@ function DetailOne(props) {
     setVariant(null);
   };
 
+  const onReviewClick = () => {
+    const ele = document.getElementById("product-review");
+    if (ele) {
+      ele.scrollIntoView({ behavior: "smooth" });
+      ele.click();
+    }
+  };
+
   function changeQty(qty) {
     setQauntity(qty);
   }
@@ -275,11 +283,12 @@ function DetailOne(props) {
       </div>
 
       <div className="ratings-container">
-        <div className="ratings-full">
+        <div className="ratings-full" onClick={onReviewClick} >
           {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
                     <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
           <span
             className="ratings"
+            
             style={{ width: Math.min(20 * product.rating, 100) + "%" }}
           ></span>
           <span className="tooltiptext tooltip-top">
@@ -288,9 +297,9 @@ function DetailOne(props) {
         </div>
 
         {/* <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink> */}
-        <ALink href="#" className="rating-reviews">
+        <div  onClick={onReviewClick} className="rating-reviews cursor-pointer">
           ( {product.reviews.items.length} reviews )
-        </ALink>
+        </div>
       </div>
 
       <p className="product-short-desc">{product.productDescription}</p>

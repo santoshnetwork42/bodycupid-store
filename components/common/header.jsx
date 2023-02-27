@@ -76,7 +76,7 @@ function Header({ auth, openLogin }) {
               <ALink
                 href="#"
                 className="login-link label-block d-lg-show"
-                onClick={() => openLogin()}
+                onClick={() => openLogin(false)}
               >
                 <i className="d-icon-user"></i>
               </ALink>

@@ -435,6 +435,8 @@ export const getUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -1179,6 +1181,8 @@ export const getUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -1877,6 +1881,8 @@ export const getUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -1885,6 +1891,8 @@ export const getUser = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -2224,6 +2232,8 @@ export const getUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -2662,6 +2672,8 @@ export const getUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -3369,6 +3381,8 @@ export const getUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -4005,6 +4019,8 @@ export const getUser = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -4501,6 +4517,8 @@ export const listUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -4900,6 +4918,8 @@ export const listUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -5177,6 +5197,8 @@ export const listUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -5185,6 +5207,8 @@ export const listUsers = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -5326,6 +5350,8 @@ export const listUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -5864,6 +5890,8 @@ export const listUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -6119,6 +6147,8 @@ export const listUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -6444,6 +6474,8 @@ export const bystoreIdUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -6843,6 +6875,8 @@ export const bystoreIdUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -7120,6 +7154,8 @@ export const bystoreIdUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -7128,6 +7164,8 @@ export const bystoreIdUser = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -7269,6 +7307,8 @@ export const bystoreIdUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -7807,6 +7847,8 @@ export const bystoreIdUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -8062,6 +8104,8 @@ export const bystoreIdUser = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -8387,6 +8431,8 @@ export const searchUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -8786,6 +8832,8 @@ export const searchUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -9063,6 +9111,8 @@ export const searchUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -9071,6 +9121,8 @@ export const searchUsers = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -9212,6 +9264,8 @@ export const searchUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -9750,6 +9804,8 @@ export const searchUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -10005,6 +10061,8 @@ export const searchUsers = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -10709,6 +10767,8 @@ export const getProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -11544,6 +11604,8 @@ export const getProductCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -12060,6 +12122,8 @@ export const getProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -12284,6 +12348,8 @@ export const listProductCategories = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -12720,6 +12786,8 @@ export const listProductCategories = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -13204,6 +13272,8 @@ export const bynameProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -13640,6 +13710,8 @@ export const bynameProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -14124,6 +14196,8 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -14560,6 +14634,8 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -15044,6 +15120,8 @@ export const byslugProductCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -15480,6 +15558,8 @@ export const byslugProductCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -15964,6 +16044,8 @@ export const searchProductCategories = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -16400,6 +16482,8 @@ export const searchProductCategories = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -17121,6 +17205,8 @@ export const getProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -17330,6 +17416,8 @@ export const getProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -17766,6 +17854,8 @@ export const getProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -18857,6 +18947,8 @@ export const getProductSubCategory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -19075,6 +19167,8 @@ export const listProductSubCategories = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -19386,6 +19480,8 @@ export const listProductSubCategories = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -19930,6 +20026,8 @@ export const listProductSubCategories = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -20156,6 +20254,8 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -20467,6 +20567,8 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -21011,6 +21113,8 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -21237,6 +21341,8 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -21548,6 +21654,8 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -22092,6 +22200,8 @@ export const bynameProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -22318,6 +22428,8 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -22629,6 +22741,8 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -23173,6 +23287,8 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -23399,6 +23515,8 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -23710,6 +23828,8 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -24254,6 +24374,8 @@ export const byslugProductSubCategory = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -24480,6 +24602,8 @@ export const searchProductSubCategories = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -24791,6 +24915,8 @@ export const searchProductSubCategories = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -25335,6 +25461,8 @@ export const searchProductSubCategories = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -26195,6 +26323,8 @@ export const getStore = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -26644,6 +26774,8 @@ export const listStores = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -27105,6 +27237,8 @@ export const searchStores = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -27569,6 +27703,8 @@ export const getWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -28011,6 +28147,8 @@ export const getWarehouse = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -28229,6 +28367,8 @@ export const listWarehouses = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -28433,6 +28573,8 @@ export const listWarehouses = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -28663,6 +28805,8 @@ export const bystoreIdwarehouse = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -28867,6 +29011,8 @@ export const bystoreIdwarehouse = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -29097,6 +29243,8 @@ export const searchWarehouses = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -29301,6 +29449,8 @@ export const searchWarehouses = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -29855,6 +30005,8 @@ export const getProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -30058,6 +30210,8 @@ export const getProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -30367,6 +30521,8 @@ export const getProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -30636,6 +30792,8 @@ export const getProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -30913,6 +31071,8 @@ export const getProductInventory = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -30921,6 +31081,8 @@ export const getProductInventory = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -31765,6 +31927,8 @@ export const listProductInventories = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -32617,6 +32781,8 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -33469,6 +33635,8 @@ export const byproductIdProductInventory = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -34321,6 +34489,8 @@ export const searchProductInventories = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -34553,6 +34723,8 @@ export const getProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -34864,6 +35036,8 @@ export const getProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -35408,6 +35582,8 @@ export const getProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -35849,6 +36025,8 @@ export const getProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -36056,6 +36234,8 @@ export const getProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -36492,6 +36672,8 @@ export const getProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -37058,6 +37240,8 @@ export const getProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -37756,6 +37940,8 @@ export const getProduct = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -37764,6 +37950,8 @@ export const getProduct = /* GraphQL */ `
           }
           rating
           comment
+          title
+          images
           createdAt
           updatedAt
         }
@@ -38293,6 +38481,8 @@ export const listProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -38496,6 +38686,8 @@ export const listProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -38805,6 +38997,8 @@ export const listProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -39074,6 +39268,8 @@ export const listProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -39351,6 +39547,8 @@ export const listProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -39359,6 +39557,8 @@ export const listProducts = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -39900,6 +40100,8 @@ export const bytitleProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -40103,6 +40305,8 @@ export const bytitleProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -40412,6 +40616,8 @@ export const bytitleProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -40681,6 +40887,8 @@ export const bytitleProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -40958,6 +41166,8 @@ export const bytitleProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -40966,6 +41176,8 @@ export const bytitleProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -41507,6 +41719,8 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -41710,6 +41924,8 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -42019,6 +42235,8 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -42288,6 +42506,8 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -42565,6 +42785,8 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -42573,6 +42795,8 @@ export const bycategoryIdProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -43114,6 +43338,8 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -43317,6 +43543,8 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -43626,6 +43854,8 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -43895,6 +44125,8 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -44172,6 +44404,8 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -44180,6 +44414,8 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -44721,6 +44957,8 @@ export const bystoreIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -44924,6 +45162,8 @@ export const bystoreIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -45233,6 +45473,8 @@ export const bystoreIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -45502,6 +45744,8 @@ export const bystoreIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -45779,6 +46023,8 @@ export const bystoreIdProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -45787,6 +46033,8 @@ export const bystoreIdProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -46328,6 +46576,8 @@ export const byslugProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -46531,6 +46781,8 @@ export const byslugProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -46840,6 +47092,8 @@ export const byslugProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -47109,6 +47363,8 @@ export const byslugProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -47386,6 +47642,8 @@ export const byslugProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -47394,6 +47652,8 @@ export const byslugProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -47935,6 +48195,8 @@ export const searchProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -48138,6 +48400,8 @@ export const searchProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -48447,6 +48711,8 @@ export const searchProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -48716,6 +48982,8 @@ export const searchProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -48993,6 +49261,8 @@ export const searchProducts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -49001,6 +49271,8 @@ export const searchProducts = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -49697,6 +49969,8 @@ export const getOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -49903,6 +50177,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -50302,6 +50578,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -50579,6 +50857,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -50587,6 +50867,8 @@ export const getOrder = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -50728,6 +51010,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -51266,6 +51550,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -51521,6 +51807,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -51855,6 +52143,8 @@ export const getOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -52244,6 +52534,8 @@ export const getOrder = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -53174,6 +53466,8 @@ export const getOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -53574,6 +53868,8 @@ export const getOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -54063,6 +54359,8 @@ export const listOrders = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -54452,6 +54750,8 @@ export const listOrders = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -55293,6 +55593,8 @@ export const listOrders = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -55780,6 +56082,8 @@ export const listOrders = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -55982,6 +56286,8 @@ export const listOrders = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -56300,6 +56606,8 @@ export const bystoreIdOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -56689,6 +56997,8 @@ export const bystoreIdOrder = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -57530,6 +57840,8 @@ export const bystoreIdOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -58017,6 +58329,8 @@ export const bystoreIdOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -58219,6 +58533,8 @@ export const bystoreIdOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -58537,6 +58853,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -58926,6 +59244,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -59767,6 +60087,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -60254,6 +60576,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -60456,6 +60780,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -60774,6 +61100,8 @@ export const searchOrders = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -61163,6 +61491,8 @@ export const searchOrders = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -62004,6 +62334,8 @@ export const searchOrders = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -62491,6 +62823,8 @@ export const searchOrders = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -62693,6 +63027,8 @@ export const searchOrders = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -63334,6 +63670,8 @@ export const getOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -63537,6 +63875,8 @@ export const getOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -63846,6 +64186,8 @@ export const getOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -64115,6 +64457,8 @@ export const getOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -64392,6 +64736,8 @@ export const getOrderProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -64400,6 +64746,8 @@ export const getOrderProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -65295,6 +65643,8 @@ export const listOrderProducts = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -66202,6 +66552,8 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -67109,6 +67461,8 @@ export const searchOrderProducts = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -67627,6 +67981,8 @@ export const getPayment = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -67833,6 +68189,8 @@ export const getPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -68232,6 +68590,8 @@ export const getPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -68509,6 +68869,8 @@ export const getPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -68517,6 +68879,8 @@ export const getPayment = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -68658,6 +69022,8 @@ export const getPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -69196,6 +69562,8 @@ export const getPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -69451,6 +69819,8 @@ export const getPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -69770,6 +70140,8 @@ export const listPayments = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -70159,6 +70531,8 @@ export const listPayments = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -70859,6 +71233,8 @@ export const bystoreIdPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -71248,6 +71624,8 @@ export const bystoreIdPayment = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -71948,6 +72326,8 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -72337,6 +72717,8 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -73037,6 +73419,8 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -73426,6 +73810,8 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -74114,6 +74500,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74513,6 +74901,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74790,6 +75180,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -74798,6 +75190,8 @@ export const getReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -74939,6 +75333,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -75477,6 +75873,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -75732,6 +76130,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -76362,6 +76762,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -76565,6 +76967,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -76874,6 +77278,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -77143,6 +77549,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -77420,6 +77828,8 @@ export const getReview = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -77428,6 +77838,8 @@ export const getReview = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -77436,6 +77848,8 @@ export const getReview = /* GraphQL */ `
       }
       rating
       comment
+      title
+      images
       createdAt
       updatedAt
     }
@@ -77828,6 +78242,8 @@ export const listReviews = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -79130,6 +79546,8 @@ export const listReviews = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -79138,6 +79556,8 @@ export const listReviews = /* GraphQL */ `
         }
         rating
         comment
+        title
+        images
         createdAt
         updatedAt
       }
@@ -79542,6 +79962,8 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -80844,6 +81266,8 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -80852,6 +81276,8 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
         }
         rating
         comment
+        title
+        images
         createdAt
         updatedAt
       }
@@ -81256,6 +81682,8 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -82558,6 +82986,8 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -82566,6 +82996,8 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
         }
         rating
         comment
+        title
+        images
         createdAt
         updatedAt
       }
@@ -83007,6 +83439,8 @@ export const getWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -83442,6 +83876,8 @@ export const getWishlist = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -83683,6 +84119,8 @@ export const listWishlists = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -83880,6 +84318,8 @@ export const listWishlists = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -84133,6 +84573,8 @@ export const bystoreIdWishlist = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -84330,6 +84772,8 @@ export const bystoreIdWishlist = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -84583,6 +85027,8 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -84780,6 +85226,8 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -85342,6 +85790,8 @@ export const getWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -85545,6 +85995,8 @@ export const getWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -85854,6 +86306,8 @@ export const getWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -86123,6 +86577,8 @@ export const getWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -86400,6 +86856,8 @@ export const getWishlistProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -86408,6 +86866,8 @@ export const getWishlistProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -87275,6 +87735,8 @@ export const listWishlistProducts = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -88150,6 +88612,8 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -88621,6 +89085,8 @@ export const getShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -89056,6 +89522,8 @@ export const getShoppingCart = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -89299,6 +89767,8 @@ export const listShoppingCarts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -89496,6 +89966,8 @@ export const listShoppingCarts = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -89751,6 +90223,8 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -89948,6 +90422,8 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -90203,6 +90679,8 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -90400,6 +90878,8 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -90964,6 +91444,8 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -91167,6 +91649,8 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -91476,6 +91960,8 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -91745,6 +92231,8 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -92022,6 +92510,8 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -92030,6 +92520,8 @@ export const getShoppingCartProduct = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -92898,6 +93390,8 @@ export const listShoppingCartProducts = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -93774,6 +94268,8 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -94247,6 +94743,8 @@ export const getCouponCode = /* GraphQL */ `
                 }
                 rating
                 comment
+                title
+                images
                 createdAt
                 updatedAt
               }
@@ -94453,6 +94951,8 @@ export const getCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -94852,6 +95352,8 @@ export const getCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -95129,6 +95631,8 @@ export const getCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -95137,6 +95641,8 @@ export const getCouponCode = /* GraphQL */ `
             }
             rating
             comment
+            title
+            images
             createdAt
             updatedAt
           }
@@ -95278,6 +95784,8 @@ export const getCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -95816,6 +96324,8 @@ export const getCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -96071,6 +96581,8 @@ export const getCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -96399,6 +96911,8 @@ export const listCouponCodes = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -96788,6 +97302,8 @@ export const listCouponCodes = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -97497,6 +98013,8 @@ export const bycodeCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -97886,1104 +98404,8 @@ export const bycodeCouponCode = /* GraphQL */ `
               }
               rating
               comment
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          orders {
-            items {
-              id
-              code
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              channelName
-              shippingAddress {
-                name
-                phone
-                email
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-              }
-              BillingAddress {
-                name
-                phone
-                email
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-              }
-              totalStoreCredit
-              CouponCodeId
-              coupon {
-                id
-                code
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                discount
-                expirationDate
-                maxUse
-                totalUsed
-                isActive
-                isFeatured
-                couponType
-                minOrderValue
-                maxDiscount
-                description
-                paymentMethod
-                createdAt
-                updatedAt
-              }
-              totalAmount
-              totalCashOnDeliveryCharges
-              totalDiscount
-              totalGiftCharges
-              totalPrepaidAmount
-              totalShippingCharges
-              taxExempted
-              cFormProvided
-              thirdPartyShipping
-              currency
-              sla
-              priority
-              orderDate
-              status
-              products {
-                items {
-                  id
-                  orderId
-                  productId
-                  variantId
-                  sku
-                  returnReason
-                  returnDate
-                  returnAWB
-                  returnShippingProvider
-                  title
-                  shippingMethodCode
-                  cashOnDeliveryCharges
-                  sellingPrice
-                  shippingCharges
-                  discount
-                  totalPrice
-                  currency
-                  onHold
-                  facilityCode
-                  gstin
-                  additionalInfo
-                  centralGstPercentage
-                  compensationCessPercentage
-                  integratedGstPercentage
-                  stateGstPercentage
-                  taxRate
-                  unionTerritoryGstPercentage
-                  deliveryPartner
-                  dispatchDate
-                  invoiceDate
-                  invoiceNumber
-                  tentativeDeliveryDate
-                  trackingId
-                  quantity
-                  price
-                  status
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              payments {
-                items {
-                  id
-                  storeId
-                  userId
-                  orderId
-                  method
-                  amount
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          payments {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              orderId
-              method
-              amount
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          userAddress {
-            items {
-              id
-              userID
-              name
-              phone
-              email
-              country
-              state
-              city
-              pinCode
-              landmark
-              address
-              location
-              area
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          couponCodes {
-            items {
-              id
-              code
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              discount
-              expirationDate
-              maxUse
-              totalUsed
-              isActive
-              isFeatured
-              couponType
-              minOrderValue
-              maxDiscount
-              description
-              paymentMethod
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
-        couponType
-        minOrderValue
-        maxDiscount
-        description
-        paymentMethod
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const bycodeUserIdCouponCode = /* GraphQL */ `
-  query BycodeUserIdCouponCode(
-    $code: String!
-    $userId: ModelIDKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCouponCodeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bycodeUserIdCouponCode(
-      code: $code
-      userId: $userId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        code
-        storeId
-        store {
-          id
-          name
-          description
-          isActive
-          webUrl
-          appId
-          host
-          priority
-          imageUrl
-          products {
-            items {
-              id
               title
-              brand
-              vendor
-              categoryId
-              subCategoryId
-              subCategory {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                name
-                description
-                categoryID
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              isFeatured
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              productType
-              createdAt
-              slug
-              productDescription
-              longDescription
-              updatedAt
-              isPublished
-              publishedAt
-              price
-              sku
-              size
-              color
-              status
-              position
-              currency
-              costPrice
-              listingPrice
-              taxable
-              barcode
-              tags
-              weight
-              weightUnit
-              inventory
-              blockedInventory
-              rating
-              totalOrders
-              additionalInfo
-              thumbImages
-              isTaxEnabled
-              isInventoryEnabled
-              hasVarient
-              variants {
-                items {
-                  id
-                  productId
-                  title
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  createdAt
-                  updatedAt
-                  taxable
-                  barcode
-                  imageUrl
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                }
-                nextToken
-              }
-              images {
-                items {
-                  id
-                  productId
-                  position
-                  createdAt
-                  updatedAt
-                  alt
-                  width
-                  height
-                  imageKey
-                  isThumb
-                }
-                nextToken
-              }
-              reviews {
-                items {
-                  id
-                  userId
-                  flagged
-                  productId
-                  rating
-                  comment
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-        userId
-        user {
-          id
-          storeId
-          store {
-            id
-            name
-            description
-            isActive
-            webUrl
-            appId
-            host
-            priority
-            imageUrl
-            products {
-              items {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner
-          firstName
-          lastName
-          email
-          phone
-          gender
-          dob
-          country
-          state
-          city
-          pinCode
-          landmark
-          address
-          location
-          area
-          isActive
-          authProvider
-          totalOrders
-          totalSpent
-          walletBalance
-          walletSpent
-          totalStoreCredit
-          isAdmin
-          isCognitoConfirmed
-          profilePhotoUrl
-          wishlists {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              wishlistProducts {
-                items {
-                  id
-                  wishlistId
-                  productId
-                  variantId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          shopingcarts {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              userId
-              shoppingcartProducts {
-                items {
-                  id
-                  shoppingcartId
-                  productId
-                  variantId
-                  quantity
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              couponCodeId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          reviews {
-            items {
-              id
-              userId
-              user {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                owner
-                firstName
-                lastName
-                email
-                phone
-                gender
-                dob
-                country
-                state
-                city
-                pinCode
-                landmark
-                address
-                location
-                area
-                isActive
-                authProvider
-                totalOrders
-                totalSpent
-                walletBalance
-                walletSpent
-                totalStoreCredit
-                isAdmin
-                isCognitoConfirmed
-                profilePhotoUrl
-                wishlists {
-                  nextToken
-                }
-                shopingcarts {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-                orders {
-                  nextToken
-                }
-                payments {
-                  nextToken
-                }
-                userAddress {
-                  nextToken
-                }
-                couponCodes {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              reviewer {
-                name
-                email
-              }
-              flagged
-              productId
-              product {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              rating
-              comment
+              images
               createdAt
               updatedAt
             }
@@ -99693,6 +99115,8 @@ export const byuserIdCouponCode = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -100082,6 +99506,8 @@ export const byuserIdCouponCode = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -100791,6 +100217,8 @@ export const searchCouponCodes = /* GraphQL */ `
                   productId
                   rating
                   comment
+                  title
+                  images
                   createdAt
                   updatedAt
                 }
@@ -101180,6 +100608,8 @@ export const searchCouponCodes = /* GraphQL */ `
               }
               rating
               comment
+              title
+              images
               createdAt
               updatedAt
             }
@@ -101670,6 +101100,108 @@ export const searchCouponCodes = /* GraphQL */ `
         maxDiscount
         description
         paymentMethod
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const getConfiguration = /* GraphQL */ `
+  query GetConfiguration($id: ID!) {
+    getConfiguration(id: $id) {
+      id
+      storeId
+      key
+      value
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listConfigurations = /* GraphQL */ `
+  query ListConfigurations(
+    $filter: ModelConfigurationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listConfigurations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const configurationByKey = /* GraphQL */ `
+  query ConfigurationByKey(
+    $key: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelConfigurationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    configurationByKey(
+      key: $key
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchConfigurations = /* GraphQL */ `
+  query SearchConfigurations(
+    $filter: SearchableConfigurationFilterInput
+    $sort: [SearchableConfigurationSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableConfigurationAggregationInput]
+  ) {
+    searchConfigurations(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        key
+        value
         createdAt
         updatedAt
       }

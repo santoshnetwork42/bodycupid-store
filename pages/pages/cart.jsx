@@ -193,7 +193,7 @@ function Cart(props) {
                               <td>
                                 <h4 className="summary-subtitle">Coupons</h4>
                                 <p>
-                                  <div style={{ display: "flex" }}>
+                                  <div className="d-flex">
                                     <span className="mr-1">
                                       {appliedCoupon.code}
                                     </span>

@@ -21,7 +21,6 @@ const modalStyles = {
 Modal.setAppElement("#__next");
 
 function LoginModal({ isOpen, redirect = true, closeLoginModal }) {
-  console.log(isOpen);
   if (!isOpen) return <></>;
 
   return (

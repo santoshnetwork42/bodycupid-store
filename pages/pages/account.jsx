@@ -26,11 +26,15 @@ function Account({ user }) {
       data: { searchOrders: listOrdersResponse },
     } = await API.graphql({
       query: searchOrders,
+      variables: {
+        filter: { userId: { eq: user.username } },
+        sort: [{ field: "orderDate", direction: "desc" }],
+      },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
     setOrders(listOrdersResponse.items);
-  }, []);
+  }, [user]);
 
   const getUserDetails = useCallback(async () => {
     const {
@@ -42,7 +46,7 @@ function Account({ user }) {
     });
 
     setUser(getUserResponse);
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (user) {

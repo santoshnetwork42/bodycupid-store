@@ -7,7 +7,9 @@ import { Amplify } from 'aws-amplify';
 
 import { wrapper } from "../store/index.js";
 import Layout from '~/components/layout';
+import { rootActions } from '~/store';
 import { userActions } from '~/store/user';
+
 import awsconfig from "~/aws-exports";
 
 import "~/public/sass/style.scss";
@@ -25,7 +27,7 @@ const App = ({ Component, pageProps }) => {
                 attributes: user.attributes,
             }));
         } catch {
-            store.dispatch(userActions.removeUser());
+            store.dispatch(rootActions.destroySession());
         }
     }, [store]);
 
@@ -34,7 +36,7 @@ const App = ({ Component, pageProps }) => {
         Hub.listen('auth', async (authEvent) => {
             const { payload: { event } } = authEvent;
             if (event === "signOut") {
-                store.dispatch(userActions.removeUser());
+                store.dispatch(rootActions.destroySession());
             } else if (loggedInEvents.includes(event)) {
                 setUser();
             }
