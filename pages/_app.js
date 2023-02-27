@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { Amplify, Hub } from "aws-amplify";
+import { Amplify, Hub, Auth } from "aws-amplify";
 import Head from "next/head";
 
 import { wrapper } from "../store/index.js";
@@ -27,7 +27,8 @@ const App = ({ Component, pageProps }) => {
         username: user.username,
         attributes: user.attributes,
       }));
-    } catch {
+    } catch (error) {
+      console.log(error);
       store.dispatch(rootActions.destroySession());
     }
   }, [store]);

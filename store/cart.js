@@ -257,7 +257,7 @@ export function* cartSaga() {
     });
 
     const updatedProducts = products.reduce((cartAcc, product) => {
-      if (product.id !== id) {
+      if (product.productId !== id) {
         cartAcc.push(product);
       } else {
         if (product.variantId && (product.variantId !== variantId)) {
