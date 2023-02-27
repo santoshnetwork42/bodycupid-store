@@ -148,7 +148,13 @@ function Addresses({ user, onAddressChange }) {
               </div>
             ))}
           </div>
-          <button onClick={() => setOpen(true)} className="btn btn-primary">
+          <button
+            onClick={() => {
+              setOpen(true);
+              setDefaultAddress(null);
+            }}
+            className="btn btn-primary"
+          >
             ADD NEW ADDRESS
           </button>
         </>

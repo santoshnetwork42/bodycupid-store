@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 
@@ -9,9 +9,9 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 function ShopBoxedBanner() {
   return (
     <main className="main">
-      <Helmet>
+      <Head>
         <title>Wow life science - Shop Boxed Banner Page</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">
         Wow life science - Shop Boxed Banner Page

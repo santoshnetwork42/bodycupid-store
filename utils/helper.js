@@ -15,13 +15,16 @@ export const cleanQuery = (data) => {
   }, {});
 };
 export const getProperAddress = (address) => {
-  let tempAddress = {
-    ...address,
-    name: address.firstName + " " + address.lastName,
-    country: "IN",
-    phone: addPhonePrefix(address.phone),
-  };
-  delete tempAddress.firstName;
-  delete tempAddress.lastName;
-  return tempAddress;
+  if (address.firstName || address.lastName) {
+    let tempAddress = {
+      ...address,
+      name: address.firstName + " " + address.lastName,
+      country: "IN",
+      phone: addPhonePrefix(address.phone),
+    };
+    delete tempAddress.firstName;
+    delete tempAddress.lastName;
+    return tempAddress;
+  }
+  return address;
 };

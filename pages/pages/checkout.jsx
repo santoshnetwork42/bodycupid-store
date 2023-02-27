@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { connect } from "react-redux";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { API } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
@@ -117,9 +117,9 @@ function Checkout(props) {
 
   return (
     <main className="main checkout">
-      <Helmet>
+      <Head>
         <title>Wow life science | Checkout</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow life science - Checkout</h1>
 

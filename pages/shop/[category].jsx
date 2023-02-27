@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import Head from "next/head";
 
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -8,9 +8,9 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 function Shop() {
   return (
     <main className="main">
-      <Helmet>
+      <Head>
         <title>Wow life science - Shop Page</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow life science - Shop Page</h1>
 

@@ -1,12 +1,12 @@
 import React from "react";
-import Helmet from "react-helmet";
+import Head from "next/head";
 
 function Shiiping() {
   return (
     <main className="main about-us">
-      <Helmet>
+      <Head>
         <title>Wow life science | Titles</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">
         SHIPPING AND DELIVERY POLICY - WOW Life Science

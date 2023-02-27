@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 
@@ -27,9 +27,9 @@ function Order() {
 
   return (
     <main className="main order">
-      <Helmet>
+      <Head>
         <title>Wow life science | Order</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow life science - Order</h1>
 

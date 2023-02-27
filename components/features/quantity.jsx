@@ -6,10 +6,10 @@ export default function Quantity({ qty = 1, ...props }) {
 
   useEffect(() => {
     setQuantity(qty);
-  }, [props.product]);
+  }, [qty]);
 
   useEffect(() => {
-    props.onChangeQty && props.onChangeQty(quantity);
+    props.onChangeQty && qty !== quantity && props.onChangeQty(quantity);
   }, [quantity]);
 
   function minusQuantity() {

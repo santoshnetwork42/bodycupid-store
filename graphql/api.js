@@ -136,6 +136,9 @@ export const getHomePageCategories = /* GraphQL */ `
         slug
         imageUrl
         priority
+        category {
+          slug
+        }
       }
     }
   }

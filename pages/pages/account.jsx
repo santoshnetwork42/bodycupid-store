@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -94,9 +94,9 @@ function Account({ user }) {
 
   return (
     <main className="main account">
-      <Helmet>
+      <Head>
         <title>Wow life science | Account</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow life science - Account</h1>
 

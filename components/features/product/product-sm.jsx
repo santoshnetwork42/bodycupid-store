@@ -1,7 +1,7 @@
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "../optimized-image";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -16,25 +16,36 @@ function SmallProduct(props) {
     <div className={`product product-list-sm ${adClass}`}>
       <figure className="product-media">
         <ALink href={`/product/${product.slug}`}>
-          <LazyLoadImage
-            alt={thumbImage?.alt}
-            src={getPublicImageURL(thumbImage?.imageKey)}
-            threshold={500}
-            effect="opacity"
-            width="300"
-            height="338"
-          />
- 
-          {product.images.items.length >= 2 && (
-            <LazyLoadImage
-              alt={product.images.items[1].alt}
-              src={getPublicImageURL(product.images.items[1].imageKey)}
-              threshold={500}
-              width="300"
-              height="338"
-              effect="opacity"
-              wrapperClassName="product-image-hover"
+          {thumbImage?.image ? (
+            <OptimizedImage
+              optimizedData={thumbImage.image}
+              alt={thumbImage.alt}
             />
+          ) : (
+            <span>
+              <img src={getPublicImageURL(thumbImage?.imageKey)} />
+            </span>
+          )}
+
+          {product.images.items.length >= 2 && (
+            <>
+              {product.images.items[1].image ? (
+                <OptimizedImage
+                  optimizedData={product.images.items[1].image}
+                  alt={product.images.items[1].alt}
+                  spanAttributes={{
+                    className: "product-image-hover",
+                  }}
+                />
+              ) : (
+                <span className="product-image-hover">
+                  <img
+                    src={getPublicImageURL(product.images.items[1].imageKey)}
+                    alt={product.images.items[1].alt}
+                  />
+                </span>
+              )}
+            </>
           )}
         </ALink>
       </figure>

@@ -21,7 +21,7 @@ const AddressForm = ({
     }
   }, [address]);
   useEffect(() => {
-    if (defaultAddress) {
+    if (defaultAddress && defaultAddress.name) {
       setAddress({
         ...defaultAddress,
         firstName: defaultAddress.name.split(" ")[0],
@@ -29,7 +29,6 @@ const AddressForm = ({
       });
     }
   }, [defaultAddress]);
-
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();

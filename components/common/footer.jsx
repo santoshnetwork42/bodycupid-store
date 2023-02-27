@@ -1,6 +1,8 @@
 import ALink from "~/components/features/custom-link";
 
-export default function Footer() {
+import OptimizedImage from "~/components/features/optimized-image";
+
+export default function Footer({ footer }) {
   return (
     <footer className="footer">
       <div className="container">
@@ -8,12 +10,24 @@ export default function Footer() {
           <div className="row align-items-center">
             <div className="col-lg-3">
               <ALink href="/" className="logo-footer">
-                <img
-                  src="/images/logo-footer.png"
-                  alt="logo-footer"
-                  width="154"
-                  height="43"
-                />
+                {footer?.logo ? (
+                  <OptimizedImage
+                    optimizedData={{
+                      ...footer.logo,
+                      width: 154,
+                      height: 43,
+                    }}
+                    loading="lazy"
+                    alt="Footer logo"
+                  />
+                ) : (
+                  <img
+                    src="/images/logo-footer.png"
+                    alt="logo-footer"
+                    width="154"
+                    height="43"
+                  />
+                )}
               </ALink>
             </div>
             <div className="col-lg-9">

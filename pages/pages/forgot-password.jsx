@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import Helmet from "react-helmet";
+import Head from "next/head";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -42,9 +42,9 @@ function ForgotPassword() {
 
   return (
     <main className="main">
-      <Helmet>
+      <Head>
         <title>Wow life science | Login</title>
-      </Helmet>
+      </Head>
 
       <h1 className="d-none">Wow life science - Login</h1>
       <nav className="breadcrumb-nav">
