@@ -9,6 +9,7 @@ import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { scrollTopHandler } from "~/utils";
 import { cleanQuery } from "~/utils/helper";
+import { useDebounce } from "~/utils/hooks/useDebounce";
 
 function SidebarFilterOne(props) {
   const { type = "left" } = props;
@@ -25,6 +26,9 @@ function SidebarFilterOne(props) {
   });
   const [isFirst, setFirst] = useState(true);
   let timerId;
+  useDebounce(filterPrice, 1000, () => {
+    filterByPrice();
+  });
 
   useEffect(() => {
     (async function () {
@@ -58,8 +62,7 @@ function SidebarFilterOne(props) {
     }
   }, [query]);
 
-  const filterByPrice = (e) => {
-    e.preventDefault();
+  const filterByPrice = () => {
     let url = router.pathname.replace("[grid]", query.grid);
     let arr = [`minprice=${filterPrice.min}`, `maxprice=${filterPrice.max}`];
     for (let key in query) {
@@ -329,13 +332,6 @@ function SidebarFilterOne(props) {
                         Price: ₹{filterPrice.min} - ₹{filterPrice.max}
                         <span className="filter-price-range"></span>
                       </div>
-
-                      <button
-                        className="btn btn-dark btn-filter btn-rounded"
-                        onClick={filterByPrice}
-                      >
-                        Filter
-                      </button>
                     </div>
                   </form>
                 </div>
