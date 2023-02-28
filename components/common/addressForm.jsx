@@ -193,7 +193,7 @@ const AddressForm = ({
               <div className="col-xs-6">
                 <label>State *</label>
                 <select
-                  name="country"
+                  name="state"
                   className="form-control"
                   required
                   value={address.state}

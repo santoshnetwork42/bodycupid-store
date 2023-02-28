@@ -55,6 +55,7 @@ export const getHomePageProducts = /* GraphQL */ `
         productType
         slug
         price
+        sku
         status
         position
         currency
@@ -860,6 +861,7 @@ export const searchProductsBasic = /* GraphQL */ `
         title
         slug
         price
+        sku
         listingPrice
         thumbImages
         images {
