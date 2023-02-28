@@ -19,7 +19,6 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
-import { getProperAddress } from "~/utils/helper";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
@@ -33,7 +32,7 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { id: ignoreId, saveAddress, ...restAddress } = shippingAddress;
+        const { id: ignoreId, ...restAddress } = shippingAddress;
         const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
         const payload = {
           userId: user?.username,
@@ -43,6 +42,8 @@ function Checkout(props) {
           totalShippingCharges: getShippingPrice(cartList),
           orderDate: new Date().toISOString(),
           shippingAddress: restAddress,
+          billingAddress: restAddress,
+          couponCodeId: appliedCoupon?.id,
         };
 
         const {
@@ -88,7 +89,7 @@ function Checkout(props) {
           ),
         ];
 
-        if (saveAddress && user) {
+        if (user) {
           promise.push(
             API.graphql({
               query: createUserAddress,
@@ -97,7 +98,7 @@ function Checkout(props) {
             })
           );
         }
-        
+
         await Promise.all(promise);
         await emptyCart();
         await router.push(`/order/${orderId}`);

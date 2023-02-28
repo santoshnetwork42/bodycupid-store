@@ -116,6 +116,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -174,6 +175,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -248,6 +250,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -302,6 +305,7 @@ export const deleteUser = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -318,6 +322,7 @@ export const deleteUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -424,6 +429,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -440,6 +446,7 @@ export const deleteUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -560,6 +567,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -661,6 +669,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -687,6 +696,7 @@ export const deleteUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -800,6 +810,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -901,6 +912,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -927,6 +939,7 @@ export const deleteUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -1005,6 +1018,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -1170,6 +1184,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -1186,6 +1201,7 @@ export const deleteUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -1255,7 +1271,7 @@ export const deleteUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -1269,7 +1285,7 @@ export const deleteUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -1562,6 +1578,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -1620,6 +1637,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -1694,6 +1712,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -1748,6 +1767,7 @@ export const deleteUser = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -1764,6 +1784,7 @@ export const deleteUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -1870,6 +1891,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -1886,6 +1908,7 @@ export const deleteUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -1896,6 +1919,7 @@ export const deleteUser = /* GraphQL */ `
           comment
           title
           images
+          verified
           createdAt
           updatedAt
         }
@@ -1986,6 +2010,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -2056,6 +2081,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -2221,6 +2247,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -2237,6 +2264,7 @@ export const deleteUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -2306,7 +2334,7 @@ export const deleteUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -2320,7 +2348,7 @@ export const deleteUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -2525,7 +2553,7 @@ export const deleteUser = /* GraphQL */ `
             location
             area
           }
-          BillingAddress {
+          billingAddress {
             name
             phone
             email
@@ -2539,7 +2567,7 @@ export const deleteUser = /* GraphQL */ `
             area
           }
           totalStoreCredit
-          CouponCodeId
+          couponCodeId
           coupon {
             id
             code
@@ -2584,6 +2612,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -2677,6 +2706,7 @@ export const deleteUser = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -2690,7 +2720,7 @@ export const deleteUser = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -2870,6 +2900,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -2896,6 +2927,7 @@ export const deleteUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -3135,6 +3167,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -3205,6 +3238,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -3370,6 +3404,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -3386,6 +3421,7 @@ export const deleteUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -3455,7 +3491,7 @@ export const deleteUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -3469,7 +3505,7 @@ export const deleteUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -3773,6 +3809,7 @@ export const deleteUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -3843,6 +3880,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -4008,6 +4046,7 @@ export const deleteUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -4024,6 +4063,7 @@ export const deleteUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -4093,7 +4133,7 @@ export const deleteUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -4107,7 +4147,7 @@ export const deleteUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -4319,6 +4359,1979 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const updateOrderComments = /* GraphQL */ `
+  mutation UpdateOrderComments(
+    $input: UpdateOrderCommentsInput!
+    $condition: ModelOrderCommentsConditionInput
+  ) {
+    updateOrderComments(input: $input, condition: $condition) {
+      id
+      orderId
+      userId
+      user {
+        id
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        shopingcarts {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodeId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            reviewer {
+              name
+              email
+            }
+            flagged
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            title
+            images
+            verified
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            billingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            couponCodeId
+            coupon {
+              id
+              code
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              discount
+              expirationDate
+              maxUse
+              totalUsed
+              isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
+              createdAt
+              updatedAt
+            }
+            totalAmount
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -4434,6 +6447,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -4492,6 +6506,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -4566,6 +6581,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -4620,6 +6636,7 @@ export const createUser = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -4636,6 +6653,7 @@ export const createUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -4742,6 +6760,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -4758,6 +6777,7 @@ export const createUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -4878,6 +6898,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -4979,6 +7000,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -5005,6 +7027,7 @@ export const createUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -5118,6 +7141,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -5219,6 +7243,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -5245,6 +7270,7 @@ export const createUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -5323,6 +7349,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -5488,6 +7515,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -5504,6 +7532,7 @@ export const createUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -5573,7 +7602,7 @@ export const createUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -5587,7 +7616,7 @@ export const createUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -5880,6 +7909,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -5938,6 +7968,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -6012,6 +8043,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -6066,6 +8098,7 @@ export const createUser = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -6082,6 +8115,7 @@ export const createUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -6188,6 +8222,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -6204,6 +8239,7 @@ export const createUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -6214,6 +8250,7 @@ export const createUser = /* GraphQL */ `
           comment
           title
           images
+          verified
           createdAt
           updatedAt
         }
@@ -6304,6 +8341,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -6374,6 +8412,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -6539,6 +8578,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -6555,6 +8595,7 @@ export const createUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -6624,7 +8665,7 @@ export const createUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -6638,7 +8679,7 @@ export const createUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -6843,7 +8884,7 @@ export const createUser = /* GraphQL */ `
             location
             area
           }
-          BillingAddress {
+          billingAddress {
             name
             phone
             email
@@ -6857,7 +8898,7 @@ export const createUser = /* GraphQL */ `
             area
           }
           totalStoreCredit
-          CouponCodeId
+          couponCodeId
           coupon {
             id
             code
@@ -6902,6 +8943,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -6995,6 +9037,7 @@ export const createUser = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -7008,7 +9051,7 @@ export const createUser = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -7188,6 +9231,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -7214,6 +9258,7 @@ export const createUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -7453,6 +9498,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -7523,6 +9569,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -7688,6 +9735,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -7704,6 +9752,7 @@ export const createUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -7773,7 +9822,7 @@ export const createUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -7787,7 +9836,7 @@ export const createUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -8091,6 +10140,7 @@ export const createUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -8161,6 +10211,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -8326,6 +10377,7 @@ export const createUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -8342,6 +10394,7 @@ export const createUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -8411,7 +10464,7 @@ export const createUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -8425,7 +10478,7 @@ export const createUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -8752,6 +10805,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -8810,6 +10864,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -8884,6 +10939,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -8938,6 +10994,7 @@ export const updateUser = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -8954,6 +11011,7 @@ export const updateUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -9060,6 +11118,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -9076,6 +11135,7 @@ export const updateUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -9196,6 +11256,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -9297,6 +11358,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -9323,6 +11385,7 @@ export const updateUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -9436,6 +11499,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -9537,6 +11601,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -9563,6 +11628,7 @@ export const updateUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -9641,6 +11707,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -9806,6 +11873,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -9822,6 +11890,7 @@ export const updateUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -9891,7 +11960,7 @@ export const updateUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -9905,7 +11974,7 @@ export const updateUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -10198,6 +12267,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -10256,6 +12326,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -10330,6 +12401,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -10384,6 +12456,7 @@ export const updateUser = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -10400,6 +12473,7 @@ export const updateUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -10506,6 +12580,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -10522,6 +12597,7 @@ export const updateUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -10532,6 +12608,7 @@ export const updateUser = /* GraphQL */ `
           comment
           title
           images
+          verified
           createdAt
           updatedAt
         }
@@ -10622,6 +12699,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -10692,6 +12770,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -10857,6 +12936,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -10873,6 +12953,7 @@ export const updateUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -10942,7 +13023,7 @@ export const updateUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -10956,7 +13037,7 @@ export const updateUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -11161,7 +13242,7 @@ export const updateUser = /* GraphQL */ `
             location
             area
           }
-          BillingAddress {
+          billingAddress {
             name
             phone
             email
@@ -11175,7 +13256,7 @@ export const updateUser = /* GraphQL */ `
             area
           }
           totalStoreCredit
-          CouponCodeId
+          couponCodeId
           coupon {
             id
             code
@@ -11220,6 +13301,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -11313,6 +13395,7 @@ export const updateUser = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -11326,7 +13409,7 @@ export const updateUser = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -11506,6 +13589,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -11532,6 +13616,7 @@ export const updateUser = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -11771,6 +13856,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -11841,6 +13927,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -12006,6 +14093,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -12022,6 +14110,7 @@ export const updateUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -12091,7 +14180,7 @@ export const updateUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -12105,7 +14194,7 @@ export const updateUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -12409,6 +14498,7 @@ export const updateUser = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -12479,6 +14569,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -12644,6 +14735,7 @@ export const updateUser = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -12660,6 +14752,7 @@ export const updateUser = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -12729,7 +14822,7 @@ export const updateUser = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -12743,7 +14836,7 @@ export const updateUser = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -13143,6 +15236,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13201,6 +15295,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13275,6 +15370,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13329,6 +15425,7 @@ export const createProductCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -13345,6 +15442,7 @@ export const createProductCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -13451,6 +15549,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13467,6 +15566,7 @@ export const createProductCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -13535,6 +15635,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13611,6 +15712,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13720,6 +15822,7 @@ export const createProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -13827,6 +15930,7 @@ export const createProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -13898,6 +16002,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -13991,6 +16096,7 @@ export const createProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -14083,6 +16189,7 @@ export const createProductCategory = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -14099,6 +16206,7 @@ export const createProductCategory = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -14279,6 +16387,7 @@ export const createProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -14304,6 +16413,7 @@ export const createProductCategory = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -14396,6 +16506,7 @@ export const createProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -14469,6 +16580,7 @@ export const createProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -14562,6 +16674,7 @@ export const createProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -14760,6 +16873,7 @@ export const createProductCategory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -14776,6 +16890,7 @@ export const createProductCategory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -14822,6 +16937,7 @@ export const createProductCategory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -14956,6 +17072,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15014,6 +17131,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15088,6 +17206,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15142,6 +17261,7 @@ export const updateProductCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -15158,6 +17278,7 @@ export const updateProductCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -15264,6 +17385,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15280,6 +17402,7 @@ export const updateProductCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -15348,6 +17471,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15424,6 +17548,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15533,6 +17658,7 @@ export const updateProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -15640,6 +17766,7 @@ export const updateProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -15711,6 +17838,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -15804,6 +17932,7 @@ export const updateProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -15896,6 +18025,7 @@ export const updateProductCategory = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -15912,6 +18042,7 @@ export const updateProductCategory = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -16092,6 +18223,7 @@ export const updateProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -16117,6 +18249,7 @@ export const updateProductCategory = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -16209,6 +18342,7 @@ export const updateProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -16282,6 +18416,7 @@ export const updateProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -16375,6 +18510,7 @@ export const updateProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -16573,6 +18709,7 @@ export const updateProductCategory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -16589,6 +18726,7 @@ export const updateProductCategory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -16635,6 +18773,7 @@ export const updateProductCategory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -16769,6 +18908,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -16827,6 +18967,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -16901,6 +19042,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -16955,6 +19097,7 @@ export const deleteProductCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -16971,6 +19114,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -17077,6 +19221,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -17093,6 +19238,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -17161,6 +19307,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -17237,6 +19384,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -17346,6 +19494,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -17453,6 +19602,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -17524,6 +19674,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -17617,6 +19768,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -17709,6 +19861,7 @@ export const deleteProductCategory = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -17725,6 +19878,7 @@ export const deleteProductCategory = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -17905,6 +20059,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -17930,6 +20085,7 @@ export const deleteProductCategory = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -18022,6 +20178,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -18095,6 +20252,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -18188,6 +20346,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -18386,6 +20545,7 @@ export const deleteProductCategory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -18402,6 +20562,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -18448,6 +20609,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -18581,6 +20743,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -18639,6 +20802,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -18713,6 +20877,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -18767,6 +20932,7 @@ export const createProductSubCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -18783,6 +20949,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -18889,6 +21056,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -18905,6 +21073,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -19054,6 +21223,7 @@ export const createProductSubCategory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -19070,6 +21240,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -19116,6 +21287,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -19230,6 +21402,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19288,6 +21461,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19362,6 +21536,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19416,6 +21591,7 @@ export const createProductSubCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -19432,6 +21608,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -19538,6 +21715,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19554,6 +21732,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -19606,6 +21785,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19682,6 +21862,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19791,6 +21972,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -19878,6 +22060,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -19954,6 +22137,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -20063,6 +22247,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -20170,6 +22355,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -20241,6 +22427,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -20334,6 +22521,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -20426,6 +22614,7 @@ export const createProductSubCategory = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -20442,6 +22631,7 @@ export const createProductSubCategory = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -20622,6 +22812,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -20647,6 +22838,7 @@ export const createProductSubCategory = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -20775,6 +22967,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -20833,6 +23026,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -20907,6 +23101,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -20961,6 +23156,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -20977,6 +23173,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -21083,6 +23280,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21099,6 +23297,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -21248,6 +23447,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -21264,6 +23464,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -21310,6 +23511,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -21424,6 +23626,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21482,6 +23685,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21556,6 +23760,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21610,6 +23815,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -21626,6 +23832,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -21732,6 +23939,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21748,6 +23956,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -21800,6 +24009,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21876,6 +24086,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -21985,6 +24196,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -22072,6 +24284,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -22148,6 +24361,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -22257,6 +24471,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -22364,6 +24579,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -22435,6 +24651,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -22528,6 +24745,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -22620,6 +24838,7 @@ export const updateProductSubCategory = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -22636,6 +24855,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -22816,6 +25036,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -22841,6 +25062,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -22969,6 +25191,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23027,6 +25250,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23101,6 +25325,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23155,6 +25380,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -23171,6 +25397,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -23277,6 +25504,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23293,6 +25521,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -23442,6 +25671,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -23458,6 +25688,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -23504,6 +25735,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -23618,6 +25850,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23676,6 +25909,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23750,6 +25984,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23804,6 +26039,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -23820,6 +26056,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -23926,6 +26163,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -23942,6 +26180,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -23994,6 +26233,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -24070,6 +26310,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -24179,6 +26420,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -24266,6 +26508,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -24342,6 +26585,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -24451,6 +26695,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -24558,6 +26803,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -24629,6 +26875,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -24722,6 +26969,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -24814,6 +27062,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -24830,6 +27079,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -25010,6 +27260,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -25035,6 +27286,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -25114,6 +27366,7 @@ export const createStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -25190,6 +27443,7 @@ export const createStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -25299,6 +27553,7 @@ export const createStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -25406,6 +27661,7 @@ export const createStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -25477,6 +27733,7 @@ export const createStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -25570,6 +27827,7 @@ export const createStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -25662,6 +27920,7 @@ export const createStore = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -25678,6 +27937,7 @@ export const createStore = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -25858,6 +28118,7 @@ export const createStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -25883,6 +28144,7 @@ export const createStore = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -25962,6 +28224,7 @@ export const updateStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -26038,6 +28301,7 @@ export const updateStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -26147,6 +28411,7 @@ export const updateStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -26254,6 +28519,7 @@ export const updateStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -26325,6 +28591,7 @@ export const updateStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -26418,6 +28685,7 @@ export const updateStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -26510,6 +28778,7 @@ export const updateStore = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -26526,6 +28795,7 @@ export const updateStore = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -26706,6 +28976,7 @@ export const updateStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -26731,6 +29002,7 @@ export const updateStore = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -26810,6 +29082,7 @@ export const deleteStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -26886,6 +29159,7 @@ export const deleteStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -26995,6 +29269,7 @@ export const deleteStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -27102,6 +29377,7 @@ export const deleteStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -27173,6 +29449,7 @@ export const deleteStore = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -27266,6 +29543,7 @@ export const deleteStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -27358,6 +29636,7 @@ export const deleteStore = /* GraphQL */ `
           taxable
           barcode
           tags
+          benefits
           weight
           weightUnit
           inventory
@@ -27374,6 +29653,7 @@ export const deleteStore = /* GraphQL */ `
               id
               productId
               title
+              description
               price
               sku
               size
@@ -27554,6 +29834,7 @@ export const deleteStore = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -27579,6 +29860,7 @@ export const deleteStore = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -27707,6 +29989,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -27765,6 +30048,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -27839,6 +30123,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -27893,6 +30178,7 @@ export const createWarehouse = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -27909,6 +30195,7 @@ export const createWarehouse = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -28015,6 +30302,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28031,6 +30319,7 @@ export const createWarehouse = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -28151,6 +30440,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28209,6 +30499,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28283,6 +30574,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28337,6 +30629,7 @@ export const createWarehouse = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -28353,6 +30646,7 @@ export const createWarehouse = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -28459,6 +30753,7 @@ export const createWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28475,6 +30770,7 @@ export const createWarehouse = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -28607,6 +30903,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28665,6 +30962,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28739,6 +31037,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28793,6 +31092,7 @@ export const updateWarehouse = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -28809,6 +31109,7 @@ export const updateWarehouse = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -28915,6 +31216,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -28931,6 +31233,7 @@ export const updateWarehouse = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -29051,6 +31354,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29109,6 +31413,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29183,6 +31488,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29237,6 +31543,7 @@ export const updateWarehouse = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -29253,6 +31560,7 @@ export const updateWarehouse = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -29359,6 +31667,7 @@ export const updateWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29375,6 +31684,7 @@ export const updateWarehouse = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -29507,6 +31817,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29565,6 +31876,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29639,6 +31951,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29693,6 +32006,7 @@ export const deleteWarehouse = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -29709,6 +32023,7 @@ export const deleteWarehouse = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -29815,6 +32130,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -29831,6 +32147,7 @@ export const deleteWarehouse = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -29951,6 +32268,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -30009,6 +32327,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -30083,6 +32402,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -30137,6 +32457,7 @@ export const deleteWarehouse = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -30153,6 +32474,7 @@ export const deleteWarehouse = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -30259,6 +32581,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -30275,6 +32598,7 @@ export const deleteWarehouse = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -30391,6 +32715,7 @@ export const createProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -30464,6 +32789,7 @@ export const createProductInventory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -30557,6 +32883,7 @@ export const createProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -30755,6 +33082,7 @@ export const createProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -30771,6 +33099,7 @@ export const createProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -30817,6 +33146,7 @@ export const createProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -30960,6 +33290,7 @@ export const createProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -30976,6 +33307,7 @@ export const createProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -31022,6 +33354,7 @@ export const createProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -31118,6 +33451,7 @@ export const createProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -31271,6 +33605,7 @@ export const createProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -31287,6 +33622,7 @@ export const createProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -31333,6 +33669,7 @@ export const createProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -31431,6 +33768,7 @@ export const createProductInventory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -31473,6 +33811,7 @@ export const createProductInventory = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -31489,6 +33828,7 @@ export const createProductInventory = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -31604,6 +33944,7 @@ export const createProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -31617,7 +33958,7 @@ export const createProductInventory = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -31821,6 +34162,7 @@ export const createProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -31837,6 +34179,7 @@ export const createProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -31883,6 +34226,7 @@ export const createProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -31893,6 +34237,7 @@ export const createProductInventory = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -32004,6 +34349,7 @@ export const updateProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -32077,6 +34423,7 @@ export const updateProductInventory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -32170,6 +34517,7 @@ export const updateProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -32368,6 +34716,7 @@ export const updateProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -32384,6 +34733,7 @@ export const updateProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -32430,6 +34780,7 @@ export const updateProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -32573,6 +34924,7 @@ export const updateProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -32589,6 +34941,7 @@ export const updateProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -32635,6 +34988,7 @@ export const updateProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -32731,6 +35085,7 @@ export const updateProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -32884,6 +35239,7 @@ export const updateProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -32900,6 +35256,7 @@ export const updateProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -32946,6 +35303,7 @@ export const updateProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -33044,6 +35402,7 @@ export const updateProductInventory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -33086,6 +35445,7 @@ export const updateProductInventory = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -33102,6 +35462,7 @@ export const updateProductInventory = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -33217,6 +35578,7 @@ export const updateProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -33230,7 +35592,7 @@ export const updateProductInventory = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -33434,6 +35796,7 @@ export const updateProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -33450,6 +35813,7 @@ export const updateProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -33496,6 +35860,7 @@ export const updateProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -33506,6 +35871,7 @@ export const updateProductInventory = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -33617,6 +35983,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -33690,6 +36057,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -33783,6 +36151,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -33981,6 +36350,7 @@ export const deleteProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -33997,6 +36367,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -34043,6 +36414,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -34186,6 +36558,7 @@ export const deleteProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -34202,6 +36575,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -34248,6 +36622,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -34344,6 +36719,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -34497,6 +36873,7 @@ export const deleteProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -34513,6 +36890,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -34559,6 +36937,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -34657,6 +37036,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -34699,6 +37079,7 @@ export const deleteProductInventory = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -34715,6 +37096,7 @@ export const deleteProductInventory = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -34830,6 +37212,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -34843,7 +37226,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -35047,6 +37430,7 @@ export const deleteProductInventory = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -35063,6 +37447,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -35109,6 +37494,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -35119,6 +37505,7 @@ export const deleteProductInventory = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -35277,6 +37664,7 @@ export const createProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -35293,6 +37681,7 @@ export const createProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -35339,6 +37728,7 @@ export const createProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -35437,6 +37827,7 @@ export const createProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -35590,6 +37981,7 @@ export const createProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -35606,6 +37998,7 @@ export const createProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -35652,6 +38045,7 @@ export const createProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -35750,6 +38144,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -35874,6 +38269,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -35932,6 +38328,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36006,6 +38403,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36060,6 +38458,7 @@ export const createProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -36076,6 +38475,7 @@ export const createProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -36182,6 +38582,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36198,6 +38599,7 @@ export const createProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -36317,6 +38719,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36375,6 +38778,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36449,6 +38853,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36503,6 +38908,7 @@ export const createProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -36519,6 +38925,7 @@ export const createProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -36625,6 +39032,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -36641,6 +39049,7 @@ export const createProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -36788,6 +39197,7 @@ export const createProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -36804,6 +39214,7 @@ export const createProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -36850,6 +39261,7 @@ export const createProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -36964,6 +39376,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37022,6 +39435,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37096,6 +39510,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37150,6 +39565,7 @@ export const createProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -37166,6 +39582,7 @@ export const createProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -37272,6 +39689,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37288,6 +39706,7 @@ export const createProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -37340,6 +39759,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37416,6 +39836,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37525,6 +39946,7 @@ export const createProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -37576,6 +39998,7 @@ export const createProduct = /* GraphQL */ `
       taxable
       barcode
       tags
+      benefits
       weight
       weightUnit
       inventory
@@ -37592,6 +40015,7 @@ export const createProduct = /* GraphQL */ `
           id
           productId
           title
+          description
           price
           sku
           size
@@ -37675,6 +40099,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37840,6 +40265,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -37856,6 +40282,7 @@ export const createProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -37925,7 +40352,7 @@ export const createProduct = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -37939,7 +40366,7 @@ export const createProduct = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -38232,6 +40659,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -38290,6 +40718,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -38364,6 +40793,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -38418,6 +40848,7 @@ export const createProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -38434,6 +40865,7 @@ export const createProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -38540,6 +40972,7 @@ export const createProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -38556,6 +40989,7 @@ export const createProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -38566,6 +41000,7 @@ export const createProduct = /* GraphQL */ `
           comment
           title
           images
+          verified
           createdAt
           updatedAt
         }
@@ -38720,6 +41155,7 @@ export const updateProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -38736,6 +41172,7 @@ export const updateProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -38782,6 +41219,7 @@ export const updateProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -38880,6 +41318,7 @@ export const updateProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -39033,6 +41472,7 @@ export const updateProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -39049,6 +41489,7 @@ export const updateProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -39095,6 +41536,7 @@ export const updateProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -39193,6 +41635,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39317,6 +41760,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39375,6 +41819,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39449,6 +41894,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39503,6 +41949,7 @@ export const updateProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -39519,6 +41966,7 @@ export const updateProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -39625,6 +42073,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39641,6 +42090,7 @@ export const updateProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -39760,6 +42210,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39818,6 +42269,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39892,6 +42344,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -39946,6 +42399,7 @@ export const updateProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -39962,6 +42416,7 @@ export const updateProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -40068,6 +42523,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40084,6 +42540,7 @@ export const updateProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -40231,6 +42688,7 @@ export const updateProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -40247,6 +42705,7 @@ export const updateProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -40293,6 +42752,7 @@ export const updateProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -40407,6 +42867,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40465,6 +42926,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40539,6 +43001,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40593,6 +43056,7 @@ export const updateProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -40609,6 +43073,7 @@ export const updateProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -40715,6 +43180,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40731,6 +43197,7 @@ export const updateProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -40783,6 +43250,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40859,6 +43327,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -40968,6 +43437,7 @@ export const updateProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -41019,6 +43489,7 @@ export const updateProduct = /* GraphQL */ `
       taxable
       barcode
       tags
+      benefits
       weight
       weightUnit
       inventory
@@ -41035,6 +43506,7 @@ export const updateProduct = /* GraphQL */ `
           id
           productId
           title
+          description
           price
           sku
           size
@@ -41118,6 +43590,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -41283,6 +43756,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -41299,6 +43773,7 @@ export const updateProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -41368,7 +43843,7 @@ export const updateProduct = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -41382,7 +43857,7 @@ export const updateProduct = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -41675,6 +44150,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -41733,6 +44209,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -41807,6 +44284,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -41861,6 +44339,7 @@ export const updateProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -41877,6 +44356,7 @@ export const updateProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -41983,6 +44463,7 @@ export const updateProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -41999,6 +44480,7 @@ export const updateProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -42009,6 +44491,7 @@ export const updateProduct = /* GraphQL */ `
           comment
           title
           images
+          verified
           createdAt
           updatedAt
         }
@@ -42163,6 +44646,7 @@ export const deleteProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -42179,6 +44663,7 @@ export const deleteProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -42225,6 +44710,7 @@ export const deleteProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -42323,6 +44809,7 @@ export const deleteProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -42476,6 +44963,7 @@ export const deleteProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -42492,6 +44980,7 @@ export const deleteProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -42538,6 +45027,7 @@ export const deleteProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -42636,6 +45126,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -42760,6 +45251,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -42818,6 +45310,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -42892,6 +45385,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -42946,6 +45440,7 @@ export const deleteProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -42962,6 +45457,7 @@ export const deleteProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -43068,6 +45564,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43084,6 +45581,7 @@ export const deleteProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -43203,6 +45701,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43261,6 +45760,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43335,6 +45835,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43389,6 +45890,7 @@ export const deleteProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -43405,6 +45907,7 @@ export const deleteProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -43511,6 +46014,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43527,6 +46031,7 @@ export const deleteProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -43674,6 +46179,7 @@ export const deleteProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -43690,6 +46196,7 @@ export const deleteProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -43736,6 +46243,7 @@ export const deleteProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -43850,6 +46358,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43908,6 +46417,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -43982,6 +46492,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -44036,6 +46547,7 @@ export const deleteProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -44052,6 +46564,7 @@ export const deleteProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -44158,6 +46671,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -44174,6 +46688,7 @@ export const deleteProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -44226,6 +46741,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -44302,6 +46818,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -44411,6 +46928,7 @@ export const deleteProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -44462,6 +46980,7 @@ export const deleteProduct = /* GraphQL */ `
       taxable
       barcode
       tags
+      benefits
       weight
       weightUnit
       inventory
@@ -44478,6 +46997,7 @@ export const deleteProduct = /* GraphQL */ `
           id
           productId
           title
+          description
           price
           sku
           size
@@ -44561,6 +47081,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -44726,6 +47247,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -44742,6 +47264,7 @@ export const deleteProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -44811,7 +47334,7 @@ export const deleteProduct = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -44825,7 +47348,7 @@ export const deleteProduct = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -45118,6 +47641,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45176,6 +47700,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45250,6 +47775,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45304,6 +47830,7 @@ export const deleteProduct = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -45320,6 +47847,7 @@ export const deleteProduct = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -45426,6 +47954,7 @@ export const deleteProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45442,6 +47971,7 @@ export const deleteProduct = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -45452,6 +47982,7 @@ export const deleteProduct = /* GraphQL */ `
           comment
           title
           images
+          verified
           createdAt
           updatedAt
         }
@@ -45469,6 +48000,7 @@ export const createVariant = /* GraphQL */ `
       id
       productId
       title
+      description
       price
       sku
       size
@@ -45499,6 +48031,7 @@ export const updateVariant = /* GraphQL */ `
       id
       productId
       title
+      description
       price
       sku
       size
@@ -45529,6 +48062,7 @@ export const deleteVariant = /* GraphQL */ `
       id
       productId
       title
+      description
       price
       sku
       size
@@ -45723,6 +48257,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45781,6 +48316,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45855,6 +48391,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -45909,6 +48446,7 @@ export const createOrder = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -45925,6 +48463,7 @@ export const createOrder = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -46031,6 +48570,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -46047,6 +48587,7 @@ export const createOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -46193,6 +48734,7 @@ export const createOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -46209,6 +48751,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -46255,6 +48798,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -46335,6 +48879,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -46387,6 +48932,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -46404,6 +48950,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -46477,6 +49024,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -46529,6 +49077,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -46546,6 +49095,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -46656,6 +49206,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -46669,7 +49220,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -46873,6 +49424,7 @@ export const createOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -46889,6 +49441,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -46935,6 +49488,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -46945,6 +49499,7 @@ export const createOrder = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -46995,6 +49550,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -47088,6 +49644,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -47101,7 +49658,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -47193,7 +49750,7 @@ export const createOrder = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -47207,7 +49764,7 @@ export const createOrder = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -47356,6 +49913,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -47373,6 +49931,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -47535,6 +50094,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -47628,6 +50188,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -47641,7 +50202,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -47792,6 +50353,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -47885,6 +50447,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -47898,7 +50461,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -48009,7 +50572,7 @@ export const createOrder = /* GraphQL */ `
         location
         area
       }
-      BillingAddress {
+      billingAddress {
         name
         phone
         email
@@ -48023,7 +50586,7 @@ export const createOrder = /* GraphQL */ `
         area
       }
       totalStoreCredit
-      CouponCodeId
+      couponCodeId
       coupon {
         id
         code
@@ -48159,6 +50722,7 @@ export const createOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -48175,6 +50739,7 @@ export const createOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -48221,6 +50786,7 @@ export const createOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -48316,6 +50882,7 @@ export const createOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -48587,6 +51154,7 @@ export const createOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -48612,6 +51180,7 @@ export const createOrder = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -48718,7 +51287,7 @@ export const createOrder = /* GraphQL */ `
                 location
                 area
               }
-              BillingAddress {
+              billingAddress {
                 name
                 phone
                 email
@@ -48732,7 +51301,7 @@ export const createOrder = /* GraphQL */ `
                 area
               }
               totalStoreCredit
-              CouponCodeId
+              couponCodeId
               coupon {
                 id
                 code
@@ -49220,6 +51789,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -49278,6 +51848,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -49352,6 +51923,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -49406,6 +51978,7 @@ export const createOrder = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -49422,6 +51995,7 @@ export const createOrder = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -49528,6 +52102,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -49544,6 +52119,7 @@ export const createOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -49555,6 +52131,7 @@ export const createOrder = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -49695,6 +52272,7 @@ export const createOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -49765,6 +52343,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -49930,6 +52509,7 @@ export const createOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -49946,6 +52526,7 @@ export const createOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -50015,7 +52596,7 @@ export const createOrder = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -50029,7 +52610,7 @@ export const createOrder = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -50349,6 +52930,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -50407,6 +52989,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -50481,6 +53064,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -50535,6 +53119,7 @@ export const updateOrder = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -50551,6 +53136,7 @@ export const updateOrder = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -50657,6 +53243,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -50673,6 +53260,7 @@ export const updateOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -50819,6 +53407,7 @@ export const updateOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -50835,6 +53424,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -50881,6 +53471,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -50961,6 +53552,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -51013,6 +53605,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -51030,6 +53623,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -51103,6 +53697,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -51155,6 +53750,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -51172,6 +53768,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -51282,6 +53879,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -51295,7 +53893,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -51499,6 +54097,7 @@ export const updateOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -51515,6 +54114,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -51561,6 +54161,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -51571,6 +54172,7 @@ export const updateOrder = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -51621,6 +54223,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -51714,6 +54317,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -51727,7 +54331,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -51819,7 +54423,7 @@ export const updateOrder = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -51833,7 +54437,7 @@ export const updateOrder = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -51982,6 +54586,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -51999,6 +54604,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -52161,6 +54767,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -52254,6 +54861,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -52267,7 +54875,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -52418,6 +55026,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -52511,6 +55120,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -52524,7 +55134,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -52635,7 +55245,7 @@ export const updateOrder = /* GraphQL */ `
         location
         area
       }
-      BillingAddress {
+      billingAddress {
         name
         phone
         email
@@ -52649,7 +55259,7 @@ export const updateOrder = /* GraphQL */ `
         area
       }
       totalStoreCredit
-      CouponCodeId
+      couponCodeId
       coupon {
         id
         code
@@ -52785,6 +55395,7 @@ export const updateOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -52801,6 +55412,7 @@ export const updateOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -52847,6 +55459,7 @@ export const updateOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -52942,6 +55555,7 @@ export const updateOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -53213,6 +55827,7 @@ export const updateOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -53238,6 +55853,7 @@ export const updateOrder = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -53344,7 +55960,7 @@ export const updateOrder = /* GraphQL */ `
                 location
                 area
               }
-              BillingAddress {
+              billingAddress {
                 name
                 phone
                 email
@@ -53358,7 +55974,7 @@ export const updateOrder = /* GraphQL */ `
                 area
               }
               totalStoreCredit
-              CouponCodeId
+              couponCodeId
               coupon {
                 id
                 code
@@ -53846,6 +56462,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -53904,6 +56521,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -53978,6 +56596,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -54032,6 +56651,7 @@ export const updateOrder = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -54048,6 +56668,7 @@ export const updateOrder = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -54154,6 +56775,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -54170,6 +56792,7 @@ export const updateOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -54181,6 +56804,7 @@ export const updateOrder = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -54321,6 +56945,7 @@ export const updateOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -54391,6 +57016,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -54556,6 +57182,7 @@ export const updateOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -54572,6 +57199,7 @@ export const updateOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -54641,7 +57269,7 @@ export const updateOrder = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -54655,7 +57283,7 @@ export const updateOrder = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -54975,6 +57603,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55033,6 +57662,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55107,6 +57737,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55161,6 +57792,7 @@ export const deleteOrder = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -55177,6 +57809,7 @@ export const deleteOrder = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -55283,6 +57916,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55299,6 +57933,7 @@ export const deleteOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -55445,6 +58080,7 @@ export const deleteOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -55461,6 +58097,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -55507,6 +58144,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -55587,6 +58225,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55639,6 +58278,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55656,6 +58296,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -55729,6 +58370,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55781,6 +58423,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -55798,6 +58441,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -55908,6 +58552,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -55921,7 +58566,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -56125,6 +58770,7 @@ export const deleteOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -56141,6 +58787,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -56187,6 +58834,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -56197,6 +58845,7 @@ export const deleteOrder = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -56247,6 +58896,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -56340,6 +58990,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -56353,7 +59004,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -56445,7 +59096,7 @@ export const deleteOrder = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -56459,7 +59110,7 @@ export const deleteOrder = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -56608,6 +59259,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -56625,6 +59277,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -56787,6 +59440,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -56880,6 +59534,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -56893,7 +59548,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -57044,6 +59699,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -57137,6 +59793,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -57150,7 +59807,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -57261,7 +59918,7 @@ export const deleteOrder = /* GraphQL */ `
         location
         area
       }
-      BillingAddress {
+      billingAddress {
         name
         phone
         email
@@ -57275,7 +59932,7 @@ export const deleteOrder = /* GraphQL */ `
         area
       }
       totalStoreCredit
-      CouponCodeId
+      couponCodeId
       coupon {
         id
         code
@@ -57411,6 +60068,7 @@ export const deleteOrder = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -57427,6 +60085,7 @@ export const deleteOrder = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -57473,6 +60132,7 @@ export const deleteOrder = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -57568,6 +60228,7 @@ export const deleteOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -57839,6 +60500,7 @@ export const deleteOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -57864,6 +60526,7 @@ export const deleteOrder = /* GraphQL */ `
               comment
               title
               images
+              verified
               createdAt
               updatedAt
             }
@@ -57970,7 +60633,7 @@ export const deleteOrder = /* GraphQL */ `
                 location
                 area
               }
-              BillingAddress {
+              billingAddress {
                 name
                 phone
                 email
@@ -57984,7 +60647,7 @@ export const deleteOrder = /* GraphQL */ `
                 area
               }
               totalStoreCredit
-              CouponCodeId
+              couponCodeId
               coupon {
                 id
                 code
@@ -58472,6 +61135,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -58530,6 +61194,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -58604,6 +61269,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -58658,6 +61324,7 @@ export const deleteOrder = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -58674,6 +61341,7 @@ export const deleteOrder = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -58780,6 +61448,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -58796,6 +61465,7 @@ export const deleteOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -58807,6 +61477,7 @@ export const deleteOrder = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -58947,6 +61618,7 @@ export const deleteOrder = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -59017,6 +61689,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -59182,6 +61855,7 @@ export const deleteOrder = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -59198,6 +61872,7 @@ export const deleteOrder = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -59267,7 +61942,7 @@ export const deleteOrder = /* GraphQL */ `
                   location
                   area
                 }
-                BillingAddress {
+                billingAddress {
                   name
                   phone
                   email
@@ -59281,7 +61956,7 @@ export const deleteOrder = /* GraphQL */ `
                   area
                 }
                 totalStoreCredit
-                CouponCodeId
+                couponCodeId
                 coupon {
                   id
                   code
@@ -59485,542 +62160,17 @@ export const deleteOrder = /* GraphQL */ `
     }
   }
 `;
-export const createOrderProduct = /* GraphQL */ `
-  mutation CreateOrderProduct(
-    $input: CreateOrderProductInput!
-    $condition: ModelOrderProductConditionInput
+export const createOrderComments = /* GraphQL */ `
+  mutation CreateOrderComments(
+    $input: CreateOrderCommentsInput!
+    $condition: ModelOrderCommentsConditionInput
   ) {
-    createOrderProduct(input: $input, condition: $condition) {
+    createOrderComments(input: $input, condition: $condition) {
       id
       orderId
-      productId
-      product {
+      userId
+      user {
         id
-        title
-        brand
-        vendor
-        categoryId
-        subCategoryId
-        subCategory {
-          id
-          storeId
-          store {
-            id
-            name
-            description
-            isActive
-            webUrl
-            appId
-            host
-            priority
-            imageUrl
-            products {
-              items {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          name
-          description
-          categoryID
-          category {
-            id
-            name
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            description
-            slug
-            isFeatured
-            totalProducts
-            priority
-            imageUrl
-            products {
-              items {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              nextToken
-            }
-            subCategory {
-              items {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                name
-                description
-                categoryID
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          slug
-          isFeatured
-          totalProducts
-          priority
-          imageUrl
-          products {
-            items {
-              id
-              title
-              brand
-              vendor
-              categoryId
-              subCategoryId
-              subCategory {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                name
-                description
-                categoryID
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              isFeatured
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              productType
-              createdAt
-              slug
-              productDescription
-              longDescription
-              updatedAt
-              isPublished
-              publishedAt
-              price
-              sku
-              size
-              color
-              status
-              position
-              currency
-              costPrice
-              listingPrice
-              taxable
-              barcode
-              tags
-              weight
-              weightUnit
-              inventory
-              blockedInventory
-              rating
-              totalOrders
-              additionalInfo
-              thumbImages
-              isTaxEnabled
-              isInventoryEnabled
-              hasVarient
-              variants {
-                items {
-                  id
-                  productId
-                  title
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  createdAt
-                  updatedAt
-                  taxable
-                  barcode
-                  imageUrl
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                }
-                nextToken
-              }
-              images {
-                items {
-                  id
-                  productId
-                  position
-                  createdAt
-                  updatedAt
-                  alt
-                  width
-                  height
-                  imageKey
-                  isThumb
-                }
-                nextToken
-              }
-              reviews {
-                items {
-                  id
-                  userId
-                  flagged
-                  productId
-                  rating
-                  comment
-                  title
-                  images
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
         storeId
         store {
           id
@@ -60153,6 +62303,7 @@ export const createOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -60169,6 +62320,7 @@ export const createOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -60215,6 +62367,7 @@ export const createOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -60226,372 +62379,43 @@ export const createOrderProduct = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        isFeatured
-        category {
-          id
-          name
-          storeId
-          store {
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
             id
-            name
-            description
-            isActive
-            webUrl
-            appId
-            host
-            priority
-            imageUrl
-            products {
-              items {
-                id
-                title
-                brand
-                vendor
-                categoryId
-                subCategoryId
-                subCategory {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                isFeatured
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                productType
-                createdAt
-                slug
-                productDescription
-                longDescription
-                updatedAt
-                isPublished
-                publishedAt
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                taxable
-                barcode
-                tags
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-                rating
-                totalOrders
-                additionalInfo
-                thumbImages
-                isTaxEnabled
-                isInventoryEnabled
-                hasVarient
-                variants {
-                  nextToken
-                }
-                images {
-                  nextToken
-                }
-                reviews {
-                  nextToken
-                }
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          description
-          slug
-          isFeatured
-          totalProducts
-          priority
-          imageUrl
-          products {
-            items {
+            storeId
+            store {
               id
-              title
-              brand
-              vendor
-              categoryId
-              subCategoryId
-              subCategory {
-                id
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                name
-                description
-                categoryID
-                category {
-                  id
-                  name
-                  storeId
-                  description
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              isFeatured
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              productType
-              createdAt
-              slug
-              productDescription
-              longDescription
-              updatedAt
-              isPublished
-              publishedAt
-              price
-              sku
-              size
-              color
-              status
-              position
-              currency
-              costPrice
-              listingPrice
-              taxable
-              barcode
-              tags
-              weight
-              weightUnit
-              inventory
-              blockedInventory
-              rating
-              totalOrders
-              additionalInfo
-              thumbImages
-              isTaxEnabled
-              isInventoryEnabled
-              hasVarient
-              variants {
-                items {
-                  id
-                  productId
-                  title
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  createdAt
-                  updatedAt
-                  taxable
-                  barcode
-                  imageUrl
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                }
-                nextToken
-              }
-              images {
-                items {
-                  id
-                  productId
-                  position
-                  createdAt
-                  updatedAt
-                  alt
-                  width
-                  height
-                  imageKey
-                  isThumb
-                }
-                nextToken
-              }
-              reviews {
-                items {
-                  id
-                  userId
-                  flagged
-                  productId
-                  rating
-                  comment
-                  title
-                  images
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-            }
-            nextToken
-          }
-          subCategory {
-            items {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
               name
               description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
+              isActive
+              webUrl
+              appId
+              host
               priority
               imageUrl
               products {
@@ -60624,6 +62448,7 @@ export const createOrderProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -60641,80 +62466,233 @@ export const createOrderProduct = /* GraphQL */ `
               createdAt
               updatedAt
             }
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-        productType
-        createdAt
-        slug
-        productDescription
-        longDescription
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        weight
-        weightUnit
-        inventory
-        blockedInventory
-        rating
-        totalOrders
-        additionalInfo
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        hasVarient
-        variants {
-          items {
-            id
-            productId
-            title
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
-            taxable
-            barcode
-            imageUrl
-            weight
-            weightUnit
-            inventory
-            blockedInventory
           }
           nextToken
         }
-        images {
+        shopingcarts {
           items {
             id
-            productId
-            position
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodeId
             createdAt
             updatedAt
-            alt
-            width
-            height
-            imageKey
-            isThumb
           }
           nextToken
         }
@@ -60797,6 +62775,7 @@ export const createOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -60810,7 +62789,7 @@ export const createOrderProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -61014,6 +62993,7 @@ export const createOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -61030,6 +63010,7 @@ export const createOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -61076,6 +63057,7 @@ export const createOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -61086,6 +63068,4666 @@ export const createOrderProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            billingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            couponCodeId
+            coupon {
+              id
+              code
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              discount
+              expirationDate
+              maxUse
+              totalUsed
+              isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
+              createdAt
+              updatedAt
+            }
+            totalAmount
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOrderComments = /* GraphQL */ `
+  mutation DeleteOrderComments(
+    $input: DeleteOrderCommentsInput!
+    $condition: ModelOrderCommentsConditionInput
+  ) {
+    deleteOrderComments(input: $input, condition: $condition) {
+      id
+      orderId
+      userId
+      user {
+        id
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        shopingcarts {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodeId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            reviewer {
+              name
+              email
+            }
+            flagged
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            title
+            images
+            verified
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            billingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            couponCodeId
+            coupon {
+              id
+              code
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              discount
+              expirationDate
+              maxUse
+              totalUsed
+              isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
+              createdAt
+              updatedAt
+            }
+            totalAmount
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            amount
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOrderProduct = /* GraphQL */ `
+  mutation CreateOrderProduct(
+    $input: CreateOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    createOrderProduct(input: $input, condition: $condition) {
+      id
+      orderId
+      productId
+      product {
+        id
+        title
+        brand
+        vendor
+        categoryId
+        subCategoryId
+        subCategory {
+          id
+          storeId
+          store {
+            id
+            name
+            description
+            isActive
+            webUrl
+            appId
+            host
+            priority
+            imageUrl
+            products {
+              items {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                benefits
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          name
+          description
+          categoryID
+          category {
+            id
+            name
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            description
+            slug
+            isFeatured
+            totalProducts
+            priority
+            imageUrl
+            products {
+              items {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                benefits
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              nextToken
+            }
+            subCategory {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          slug
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        isFeatured
+        category {
+          id
+          name
+          storeId
+          store {
+            id
+            name
+            description
+            isActive
+            webUrl
+            appId
+            host
+            priority
+            imageUrl
+            products {
+              items {
+                id
+                title
+                brand
+                vendor
+                categoryId
+                subCategoryId
+                subCategory {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                isFeatured
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                productType
+                createdAt
+                slug
+                productDescription
+                longDescription
+                updatedAt
+                isPublished
+                publishedAt
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                taxable
+                barcode
+                tags
+                benefits
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+                rating
+                totalOrders
+                additionalInfo
+                thumbImages
+                isTaxEnabled
+                isInventoryEnabled
+                hasVarient
+                variants {
+                  nextToken
+                }
+                images {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          description
+          slug
+          isFeatured
+          totalProducts
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          subCategory {
+            items {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        rating
+        totalOrders
+        additionalInfo
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        hasVarient
+        variants {
+          items {
+            id
+            productId
+            title
+            description
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          nextToken
+        }
+        images {
+          items {
+            id
+            productId
+            position
+            createdAt
+            updatedAt
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  amount
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            reviewer {
+              name
+              email
+            }
+            flagged
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              rating
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            title
+            images
+            verified
             createdAt
             updatedAt
           }
@@ -61097,6 +67739,7 @@ export const createOrderProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -61252,6 +67895,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -61325,6 +67969,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -61418,6 +68063,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -61616,6 +68262,7 @@ export const updateOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -61632,6 +68279,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -61678,6 +68326,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -61821,6 +68470,7 @@ export const updateOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -61837,6 +68487,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -61883,6 +68534,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -61979,6 +68631,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -62132,6 +68785,7 @@ export const updateOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -62148,6 +68802,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -62194,6 +68849,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -62292,6 +68948,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -62334,6 +68991,7 @@ export const updateOrderProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -62350,6 +69008,7 @@ export const updateOrderProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -62465,6 +69124,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -62478,7 +69138,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -62682,6 +69342,7 @@ export const updateOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -62698,6 +69359,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -62744,6 +69406,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -62754,6 +69417,7 @@ export const updateOrderProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -62765,6 +69429,7 @@ export const updateOrderProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -62920,6 +69585,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -62993,6 +69659,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -63086,6 +69753,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -63284,6 +69952,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -63300,6 +69969,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -63346,6 +70016,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -63489,6 +70160,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -63505,6 +70177,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -63551,6 +70224,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -63647,6 +70321,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -63800,6 +70475,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -63816,6 +70492,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -63862,6 +70539,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -63960,6 +70638,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -64002,6 +70681,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -64018,6 +70698,7 @@ export const deleteOrderProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -64133,6 +70814,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -64146,7 +70828,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -64350,6 +71032,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -64366,6 +71049,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -64412,6 +71096,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -64422,6 +71107,7 @@ export const deleteOrderProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -64433,6 +71119,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -64604,6 +71291,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -64662,6 +71350,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -64736,6 +71425,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -64790,6 +71480,7 @@ export const createPayment = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -64806,6 +71497,7 @@ export const createPayment = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -64912,6 +71604,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -64928,6 +71621,7 @@ export const createPayment = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -65074,6 +71768,7 @@ export const createPayment = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -65090,6 +71785,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -65136,6 +71832,7 @@ export const createPayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -65216,6 +71913,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -65268,6 +71966,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -65285,6 +71984,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -65358,6 +72058,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -65410,6 +72111,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -65427,6 +72129,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -65537,6 +72240,7 @@ export const createPayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -65550,7 +72254,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -65754,6 +72458,7 @@ export const createPayment = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -65770,6 +72475,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -65816,6 +72522,7 @@ export const createPayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -65826,6 +72533,7 @@ export const createPayment = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -65876,6 +72584,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -65969,6 +72678,7 @@ export const createPayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -65982,7 +72692,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -66074,7 +72784,7 @@ export const createPayment = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -66088,7 +72798,7 @@ export const createPayment = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -66237,6 +72947,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -66254,6 +72965,7 @@ export const createPayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -66416,6 +73128,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -66509,6 +73222,7 @@ export const createPayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -66522,7 +73236,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -66673,6 +73387,7 @@ export const createPayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -66766,6 +73481,7 @@ export const createPayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -66779,7 +73495,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -66999,6 +73715,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67057,6 +73774,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67131,6 +73849,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67185,6 +73904,7 @@ export const updatePayment = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -67201,6 +73921,7 @@ export const updatePayment = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -67307,6 +74028,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67323,6 +74045,7 @@ export const updatePayment = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -67469,6 +74192,7 @@ export const updatePayment = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -67485,6 +74209,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -67531,6 +74256,7 @@ export const updatePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -67611,6 +74337,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67663,6 +74390,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67680,6 +74408,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -67753,6 +74482,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67805,6 +74535,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -67822,6 +74553,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -67932,6 +74664,7 @@ export const updatePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -67945,7 +74678,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -68149,6 +74882,7 @@ export const updatePayment = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -68165,6 +74899,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -68211,6 +74946,7 @@ export const updatePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -68221,6 +74957,7 @@ export const updatePayment = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -68271,6 +75008,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -68364,6 +75102,7 @@ export const updatePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -68377,7 +75116,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -68469,7 +75208,7 @@ export const updatePayment = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -68483,7 +75222,7 @@ export const updatePayment = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -68632,6 +75371,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -68649,6 +75389,7 @@ export const updatePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -68811,6 +75552,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -68904,6 +75646,7 @@ export const updatePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -68917,7 +75660,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -69068,6 +75811,7 @@ export const updatePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -69161,6 +75905,7 @@ export const updatePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -69174,7 +75919,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -69394,6 +76139,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -69452,6 +76198,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -69526,6 +76273,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -69580,6 +76328,7 @@ export const deletePayment = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -69596,6 +76345,7 @@ export const deletePayment = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -69702,6 +76452,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -69718,6 +76469,7 @@ export const deletePayment = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -69864,6 +76616,7 @@ export const deletePayment = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -69880,6 +76633,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -69926,6 +76680,7 @@ export const deletePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -70006,6 +76761,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -70058,6 +76814,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -70075,6 +76832,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -70148,6 +76906,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -70200,6 +76959,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -70217,6 +76977,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -70327,6 +77088,7 @@ export const deletePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -70340,7 +77102,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -70544,6 +77306,7 @@ export const deletePayment = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -70560,6 +77323,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -70606,6 +77370,7 @@ export const deletePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -70616,6 +77381,7 @@ export const deletePayment = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -70666,6 +77432,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -70759,6 +77526,7 @@ export const deletePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -70772,7 +77540,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -70864,7 +77632,7 @@ export const deletePayment = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -70878,7 +77646,7 @@ export const deletePayment = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -71027,6 +77795,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -71044,6 +77813,7 @@ export const deletePayment = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -71206,6 +77976,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -71299,6 +78070,7 @@ export const deletePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -71312,7 +78084,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -71463,6 +78235,7 @@ export const deletePayment = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -71556,6 +78329,7 @@ export const deletePayment = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -71569,7 +78343,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -71816,6 +78590,7 @@ export const createReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -71832,6 +78607,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -71878,6 +78654,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -71958,6 +78735,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -72010,6 +78788,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -72027,6 +78806,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -72100,6 +78880,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -72152,6 +78933,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -72169,6 +78951,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -72279,6 +79062,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -72292,7 +79076,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -72496,6 +79280,7 @@ export const createReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -72512,6 +79297,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -72558,6 +79344,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -72568,6 +79355,7 @@ export const createReview = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -72618,6 +79406,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -72711,6 +79500,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -72724,7 +79514,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -72816,7 +79606,7 @@ export const createReview = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -72830,7 +79620,7 @@ export const createReview = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -72979,6 +79769,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -72996,6 +79787,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -73158,6 +79950,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -73251,6 +80044,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -73264,7 +80058,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -73415,6 +80209,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -73508,6 +80303,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -73521,7 +80317,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -73714,6 +80510,7 @@ export const createReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -73787,6 +80584,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -73880,6 +80678,7 @@ export const createReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -74078,6 +80877,7 @@ export const createReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -74094,6 +80894,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -74140,6 +80941,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -74283,6 +81085,7 @@ export const createReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -74299,6 +81102,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -74345,6 +81149,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -74441,6 +81246,7 @@ export const createReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -74594,6 +81400,7 @@ export const createReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -74610,6 +81417,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -74656,6 +81464,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -74754,6 +81563,7 @@ export const createReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -74796,6 +81606,7 @@ export const createReview = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -74812,6 +81623,7 @@ export const createReview = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -74927,6 +81739,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -74940,7 +81753,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -75144,6 +81957,7 @@ export const createReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -75160,6 +81974,7 @@ export const createReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -75206,6 +82021,7 @@ export const createReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -75216,6 +82032,7 @@ export const createReview = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -75226,6 +82043,7 @@ export const createReview = /* GraphQL */ `
       comment
       title
       images
+      verified
       createdAt
       updatedAt
     }
@@ -75373,6 +82191,7 @@ export const updateReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -75389,6 +82208,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -75435,6 +82255,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -75515,6 +82336,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -75567,6 +82389,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -75584,6 +82407,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -75657,6 +82481,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -75709,6 +82534,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -75726,6 +82552,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -75836,6 +82663,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -75849,7 +82677,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -76053,6 +82881,7 @@ export const updateReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -76069,6 +82898,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -76115,6 +82945,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -76125,6 +82956,7 @@ export const updateReview = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -76175,6 +83007,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -76268,6 +83101,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -76281,7 +83115,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -76373,7 +83207,7 @@ export const updateReview = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -76387,7 +83221,7 @@ export const updateReview = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -76536,6 +83370,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -76553,6 +83388,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -76715,6 +83551,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -76808,6 +83645,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -76821,7 +83659,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -76972,6 +83810,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -77065,6 +83904,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -77078,7 +83918,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -77271,6 +84111,7 @@ export const updateReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -77344,6 +84185,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -77437,6 +84279,7 @@ export const updateReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -77635,6 +84478,7 @@ export const updateReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -77651,6 +84495,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -77697,6 +84542,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -77840,6 +84686,7 @@ export const updateReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -77856,6 +84703,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -77902,6 +84750,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -77998,6 +84847,7 @@ export const updateReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -78151,6 +85001,7 @@ export const updateReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -78167,6 +85018,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -78213,6 +85065,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -78311,6 +85164,7 @@ export const updateReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -78353,6 +85207,7 @@ export const updateReview = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -78369,6 +85224,7 @@ export const updateReview = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -78484,6 +85340,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -78497,7 +85354,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -78701,6 +85558,7 @@ export const updateReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -78717,6 +85575,7 @@ export const updateReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -78763,6 +85622,7 @@ export const updateReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -78773,6 +85633,7 @@ export const updateReview = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -78783,6 +85644,7 @@ export const updateReview = /* GraphQL */ `
       comment
       title
       images
+      verified
       createdAt
       updatedAt
     }
@@ -78930,6 +85792,7 @@ export const deleteReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -78946,6 +85809,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -78992,6 +85856,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -79072,6 +85937,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -79124,6 +85990,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -79141,6 +86008,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -79214,6 +86082,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -79266,6 +86135,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -79283,6 +86153,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -79393,6 +86264,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -79406,7 +86278,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -79610,6 +86482,7 @@ export const deleteReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -79626,6 +86499,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -79672,6 +86546,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -79682,6 +86557,7 @@ export const deleteReview = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -79732,6 +86608,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -79825,6 +86702,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -79838,7 +86716,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -79930,7 +86808,7 @@ export const deleteReview = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -79944,7 +86822,7 @@ export const deleteReview = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -80093,6 +86971,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -80110,6 +86989,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -80272,6 +87152,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -80365,6 +87246,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -80378,7 +87260,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -80529,6 +87411,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -80622,6 +87505,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -80635,7 +87519,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -80828,6 +87712,7 @@ export const deleteReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -80901,6 +87786,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -80994,6 +87880,7 @@ export const deleteReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -81192,6 +88079,7 @@ export const deleteReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -81208,6 +88096,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -81254,6 +88143,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -81397,6 +88287,7 @@ export const deleteReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -81413,6 +88304,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -81459,6 +88351,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -81555,6 +88448,7 @@ export const deleteReview = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -81708,6 +88602,7 @@ export const deleteReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -81724,6 +88619,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -81770,6 +88666,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -81868,6 +88765,7 @@ export const deleteReview = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -81910,6 +88808,7 @@ export const deleteReview = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -81926,6 +88825,7 @@ export const deleteReview = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -82041,6 +88941,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -82054,7 +88955,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -82258,6 +89159,7 @@ export const deleteReview = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -82274,6 +89176,7 @@ export const deleteReview = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -82320,6 +89223,7 @@ export const deleteReview = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -82330,6 +89234,7 @@ export const deleteReview = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -82340,6 +89245,7 @@ export const deleteReview = /* GraphQL */ `
       comment
       title
       images
+      verified
       createdAt
       updatedAt
     }
@@ -82460,6 +89366,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -82518,6 +89425,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -82592,6 +89500,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -82646,6 +89555,7 @@ export const createWishlist = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -82662,6 +89572,7 @@ export const createWishlist = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -82768,6 +89679,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -82784,6 +89696,7 @@ export const createWishlist = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -82897,6 +89810,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -82955,6 +89869,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83029,6 +89944,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83083,6 +89999,7 @@ export const createWishlist = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -83099,6 +90016,7 @@ export const createWishlist = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -83205,6 +90123,7 @@ export const createWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83221,6 +90140,7 @@ export const createWishlist = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -83232,6 +90152,7 @@ export const createWishlist = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -83376,6 +90297,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83434,6 +90356,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83508,6 +90431,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83562,6 +90486,7 @@ export const updateWishlist = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -83578,6 +90503,7 @@ export const updateWishlist = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -83684,6 +90610,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83700,6 +90627,7 @@ export const updateWishlist = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -83813,6 +90741,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83871,6 +90800,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83945,6 +90875,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -83999,6 +90930,7 @@ export const updateWishlist = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -84015,6 +90947,7 @@ export const updateWishlist = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -84121,6 +91054,7 @@ export const updateWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84137,6 +91071,7 @@ export const updateWishlist = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -84148,6 +91083,7 @@ export const updateWishlist = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -84292,6 +91228,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84350,6 +91287,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84424,6 +91362,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84478,6 +91417,7 @@ export const deleteWishlist = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -84494,6 +91434,7 @@ export const deleteWishlist = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -84600,6 +91541,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84616,6 +91558,7 @@ export const deleteWishlist = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -84729,6 +91672,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84787,6 +91731,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84861,6 +91806,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -84915,6 +91861,7 @@ export const deleteWishlist = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -84931,6 +91878,7 @@ export const deleteWishlist = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -85037,6 +91985,7 @@ export const deleteWishlist = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -85053,6 +92002,7 @@ export const deleteWishlist = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -85064,6 +92014,7 @@ export const deleteWishlist = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -85192,6 +92143,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -85265,6 +92217,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -85358,6 +92311,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -85556,6 +92510,7 @@ export const createWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -85572,6 +92527,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -85618,6 +92574,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -85761,6 +92718,7 @@ export const createWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -85777,6 +92735,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -85823,6 +92782,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -85919,6 +92879,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -86072,6 +93033,7 @@ export const createWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -86088,6 +93050,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -86134,6 +93097,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -86232,6 +93196,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -86274,6 +93239,7 @@ export const createWishlistProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -86290,6 +93256,7 @@ export const createWishlistProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -86405,6 +93372,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -86418,7 +93386,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -86622,6 +93590,7 @@ export const createWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -86638,6 +93607,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -86684,6 +93654,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -86694,6 +93665,7 @@ export const createWishlistProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -86705,6 +93677,7 @@ export const createWishlistProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -86828,6 +93801,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -86901,6 +93875,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -86994,6 +93969,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -87192,6 +94168,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -87208,6 +94185,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -87254,6 +94232,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -87397,6 +94376,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -87413,6 +94393,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -87459,6 +94440,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -87555,6 +94537,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -87708,6 +94691,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -87724,6 +94708,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -87770,6 +94755,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -87868,6 +94854,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -87910,6 +94897,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -87926,6 +94914,7 @@ export const updateWishlistProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -88041,6 +95030,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -88054,7 +95044,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -88258,6 +95248,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -88274,6 +95265,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -88320,6 +95312,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -88330,6 +95323,7 @@ export const updateWishlistProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -88341,6 +95335,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -88464,6 +95459,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -88537,6 +95533,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -88630,6 +95627,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -88828,6 +95826,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -88844,6 +95843,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -88890,6 +95890,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -89033,6 +96034,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -89049,6 +96051,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -89095,6 +96098,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -89191,6 +96195,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -89344,6 +96349,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -89360,6 +96366,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -89406,6 +96413,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -89504,6 +96512,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -89546,6 +96555,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -89562,6 +96572,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -89677,6 +96688,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -89690,7 +96702,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -89894,6 +96906,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -89910,6 +96923,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -89956,6 +96970,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -89966,6 +96981,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -89977,6 +96993,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -90116,6 +97133,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90174,6 +97192,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90248,6 +97267,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90302,6 +97322,7 @@ export const createShoppingCart = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -90318,6 +97339,7 @@ export const createShoppingCart = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -90424,6 +97446,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90440,6 +97463,7 @@ export const createShoppingCart = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -90553,6 +97577,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90611,6 +97636,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90685,6 +97711,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90739,6 +97766,7 @@ export const createShoppingCart = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -90755,6 +97783,7 @@ export const createShoppingCart = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -90861,6 +97890,7 @@ export const createShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -90877,6 +97907,7 @@ export const createShoppingCart = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -90888,6 +97919,7 @@ export const createShoppingCart = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -91034,6 +98066,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91092,6 +98125,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91166,6 +98200,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91220,6 +98255,7 @@ export const updateShoppingCart = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -91236,6 +98272,7 @@ export const updateShoppingCart = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -91342,6 +98379,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91358,6 +98396,7 @@ export const updateShoppingCart = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -91471,6 +98510,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91529,6 +98569,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91603,6 +98644,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91657,6 +98699,7 @@ export const updateShoppingCart = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -91673,6 +98716,7 @@ export const updateShoppingCart = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -91779,6 +98823,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -91795,6 +98840,7 @@ export const updateShoppingCart = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -91806,6 +98852,7 @@ export const updateShoppingCart = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -91952,6 +98999,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92010,6 +99058,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92084,6 +99133,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92138,6 +99188,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -92154,6 +99205,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -92260,6 +99312,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92276,6 +99329,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -92389,6 +99443,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92447,6 +99502,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92521,6 +99577,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92575,6 +99632,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -92591,6 +99649,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -92697,6 +99756,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -92713,6 +99773,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -92724,6 +99785,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -92854,6 +99916,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -92927,6 +99990,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -93020,6 +100084,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -93218,6 +100283,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -93234,6 +100300,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -93280,6 +100347,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -93423,6 +100491,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -93439,6 +100508,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -93485,6 +100555,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -93581,6 +100652,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -93734,6 +100806,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -93750,6 +100823,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -93796,6 +100870,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -93894,6 +100969,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -93936,6 +101012,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -93952,6 +101029,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -94067,6 +101145,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -94080,7 +101159,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -94284,6 +101363,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -94300,6 +101380,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -94346,6 +101427,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -94356,6 +101438,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -94367,6 +101450,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -94491,6 +101575,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -94564,6 +101649,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -94657,6 +101743,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -94855,6 +101942,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -94871,6 +101959,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -94917,6 +102006,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -95060,6 +102150,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -95076,6 +102167,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -95122,6 +102214,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -95218,6 +102311,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -95371,6 +102465,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -95387,6 +102482,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -95433,6 +102529,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -95531,6 +102628,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -95573,6 +102671,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -95589,6 +102688,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -95704,6 +102804,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -95717,7 +102818,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -95921,6 +103022,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -95937,6 +103039,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -95983,6 +103086,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -95993,6 +103097,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -96004,6 +103109,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -96128,6 +103234,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -96201,6 +103308,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -96294,6 +103402,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -96492,6 +103601,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -96508,6 +103618,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -96554,6 +103665,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -96697,6 +103809,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -96713,6 +103826,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -96759,6 +103873,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -96855,6 +103970,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 taxable
                 barcode
                 tags
+                benefits
                 weight
                 weightUnit
                 inventory
@@ -97008,6 +104124,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -97024,6 +104141,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -97070,6 +104188,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -97168,6 +104287,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -97210,6 +104330,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -97226,6 +104347,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
             id
             productId
             title
+            description
             price
             sku
             size
@@ -97341,6 +104463,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -97354,7 +104477,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -97558,6 +104681,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -97574,6 +104698,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -97620,6 +104745,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -97630,6 +104756,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -97641,6 +104768,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         id
         productId
         title
+        description
         price
         sku
         size
@@ -97782,6 +104910,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -97840,6 +104969,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -97914,6 +105044,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -97968,6 +105099,7 @@ export const createCouponCode = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -97984,6 +105116,7 @@ export const createCouponCode = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -98090,6 +105223,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -98106,6 +105240,7 @@ export const createCouponCode = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -98252,6 +105387,7 @@ export const createCouponCode = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -98268,6 +105404,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -98314,6 +105451,7 @@ export const createCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -98394,6 +105532,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -98446,6 +105585,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -98463,6 +105603,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -98536,6 +105677,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -98588,6 +105730,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -98605,6 +105748,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -98715,6 +105859,7 @@ export const createCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -98728,7 +105873,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -98932,6 +106077,7 @@ export const createCouponCode = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -98948,6 +106094,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -98994,6 +106141,7 @@ export const createCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -99004,6 +106152,7 @@ export const createCouponCode = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -99054,6 +106203,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -99147,6 +106297,7 @@ export const createCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -99160,7 +106311,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -99252,7 +106403,7 @@ export const createCouponCode = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -99266,7 +106417,7 @@ export const createCouponCode = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -99415,6 +106566,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -99432,6 +106584,7 @@ export const createCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -99594,6 +106747,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -99687,6 +106841,7 @@ export const createCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -99700,7 +106855,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -99851,6 +107006,7 @@ export const createCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -99944,6 +107100,7 @@ export const createCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -99957,7 +107114,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -100186,6 +107343,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100244,6 +107402,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100318,6 +107477,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100372,6 +107532,7 @@ export const updateCouponCode = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -100388,6 +107549,7 @@ export const updateCouponCode = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -100494,6 +107656,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100510,6 +107673,7 @@ export const updateCouponCode = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -100656,6 +107820,7 @@ export const updateCouponCode = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -100672,6 +107837,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -100718,6 +107884,7 @@ export const updateCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -100798,6 +107965,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100850,6 +108018,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100867,6 +108036,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -100940,6 +108110,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -100992,6 +108163,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -101009,6 +108181,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -101119,6 +108292,7 @@ export const updateCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -101132,7 +108306,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -101336,6 +108510,7 @@ export const updateCouponCode = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -101352,6 +108527,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -101398,6 +108574,7 @@ export const updateCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -101408,6 +108585,7 @@ export const updateCouponCode = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -101458,6 +108636,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -101551,6 +108730,7 @@ export const updateCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -101564,7 +108744,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -101656,7 +108836,7 @@ export const updateCouponCode = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -101670,7 +108850,7 @@ export const updateCouponCode = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -101819,6 +108999,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -101836,6 +109017,7 @@ export const updateCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -101998,6 +109180,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -102091,6 +109274,7 @@ export const updateCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -102104,7 +109288,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -102255,6 +109439,7 @@ export const updateCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -102348,6 +109533,7 @@ export const updateCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -102361,7 +109547,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -102590,6 +109776,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -102648,6 +109835,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -102722,6 +109910,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -102776,6 +109965,7 @@ export const deleteCouponCode = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -102792,6 +109982,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -102898,6 +110089,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -102914,6 +110106,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -103060,6 +110253,7 @@ export const deleteCouponCode = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -103076,6 +110270,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -103122,6 +110317,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -103202,6 +110398,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -103254,6 +110451,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -103271,6 +110469,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -103344,6 +110543,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -103396,6 +110596,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -103413,6 +110614,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -103523,6 +110725,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -103536,7 +110739,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -103740,6 +110943,7 @@ export const deleteCouponCode = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -103756,6 +110960,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -103802,6 +111007,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -103812,6 +111018,7 @@ export const deleteCouponCode = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -103862,6 +111069,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -103955,6 +111163,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -103968,7 +111177,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -104060,7 +111269,7 @@ export const deleteCouponCode = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -104074,7 +111283,7 @@ export const deleteCouponCode = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -104223,6 +111432,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -104240,6 +111450,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -104402,6 +111613,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -104495,6 +111707,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -104508,7 +111721,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -104659,6 +111872,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -104752,6 +111966,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -104765,7 +111980,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -104923,6 +112138,54 @@ export const deleteConfiguration = /* GraphQL */ `
     }
   }
 `;
+export const createProductFaq = /* GraphQL */ `
+  mutation CreateProductFaq(
+    $input: CreateProductFaqInput!
+    $condition: ModelProductFaqConditionInput
+  ) {
+    createProductFaq(input: $input, condition: $condition) {
+      id
+      storeId
+      productId
+      title
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProductFaq = /* GraphQL */ `
+  mutation UpdateProductFaq(
+    $input: UpdateProductFaqInput!
+    $condition: ModelProductFaqConditionInput
+  ) {
+    updateProductFaq(input: $input, condition: $condition) {
+      id
+      storeId
+      productId
+      title
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProductFaq = /* GraphQL */ `
+  mutation DeleteProductFaq(
+    $input: DeleteProductFaqInput!
+    $condition: ModelProductFaqConditionInput
+  ) {
+    deleteProductFaq(input: $input, condition: $condition) {
+      id
+      storeId
+      productId
+      title
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon($code: String!) {
     applyCoupon(code: $code) {
@@ -105036,6 +112299,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105094,6 +112358,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105168,6 +112433,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105222,6 +112488,7 @@ export const applyCoupon = /* GraphQL */ `
             taxable
             barcode
             tags
+            benefits
             weight
             weightUnit
             inventory
@@ -105238,6 +112505,7 @@ export const applyCoupon = /* GraphQL */ `
                 id
                 productId
                 title
+                description
                 price
                 sku
                 size
@@ -105344,6 +112612,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105360,6 +112629,7 @@ export const applyCoupon = /* GraphQL */ `
                 comment
                 title
                 images
+                verified
                 createdAt
                 updatedAt
               }
@@ -105506,6 +112776,7 @@ export const applyCoupon = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -105522,6 +112793,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -105568,6 +112840,7 @@ export const applyCoupon = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -105648,6 +112921,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105700,6 +112974,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105717,6 +112992,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -105790,6 +113066,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105842,6 +113119,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -105859,6 +113137,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -105969,6 +113248,7 @@ export const applyCoupon = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -105982,7 +113262,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -106186,6 +113466,7 @@ export const applyCoupon = /* GraphQL */ `
               taxable
               barcode
               tags
+              benefits
               weight
               weightUnit
               inventory
@@ -106202,6 +113483,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -106248,6 +113530,7 @@ export const applyCoupon = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -106258,6 +113541,7 @@ export const applyCoupon = /* GraphQL */ `
             comment
             title
             images
+            verified
             createdAt
             updatedAt
           }
@@ -106308,6 +113592,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -106401,6 +113686,7 @@ export const applyCoupon = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -106414,7 +113700,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -106506,7 +113792,7 @@ export const applyCoupon = /* GraphQL */ `
               location
               area
             }
-            BillingAddress {
+            billingAddress {
               name
               phone
               email
@@ -106520,7 +113806,7 @@ export const applyCoupon = /* GraphQL */ `
               area
             }
             totalStoreCredit
-            CouponCodeId
+            couponCodeId
             coupon {
               id
               code
@@ -106669,6 +113955,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -106686,6 +113973,7 @@ export const applyCoupon = /* GraphQL */ `
                   id
                   productId
                   title
+                  description
                   price
                   sku
                   size
@@ -106848,6 +114136,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -106941,6 +114230,7 @@ export const applyCoupon = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -106954,7 +114244,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -107105,6 +114395,7 @@ export const applyCoupon = /* GraphQL */ `
                   taxable
                   barcode
                   tags
+                  benefits
                   weight
                   weightUnit
                   inventory
@@ -107198,6 +114489,7 @@ export const applyCoupon = /* GraphQL */ `
                   comment
                   title
                   images
+                  verified
                   createdAt
                   updatedAt
                 }
@@ -107211,7 +114503,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   channelName
                   totalStoreCredit
-                  CouponCodeId
+                  couponCodeId
                   totalAmount
                   totalCashOnDeliveryCharges
                   totalDiscount
@@ -107321,6 +114613,20 @@ export const applyCoupon = /* GraphQL */ `
       paymentMethod
       createdAt
       updatedAt
+    }
+  }
+`;
+export const bulkUploadProducts = /* GraphQL */ `
+  mutation BulkUploadProducts($csvKey: String!) {
+    bulkUploadProducts(csvKey: $csvKey) {
+      success
+    }
+  }
+`;
+export const bulkUpdateProducts = /* GraphQL */ `
+  mutation BulkUpdateProducts($csvKey: String!) {
+    bulkUpdateProducts(csvKey: $csvKey) {
+      success
     }
   }
 `;

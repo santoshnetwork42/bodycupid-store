@@ -159,11 +159,7 @@ function Addresses({ user, onAddressChange }) {
           </button>
         </>
       ) : (
-        <AddressForm
-          onSubmit={onAddress}
-          onAddress={onAddressChange}
-          saveAddress={!!user && !!onAddressChange}
-        />
+        <AddressForm onSubmit={onAddress} onAddress={onAddressChange} />
       )}
 
       <Modal

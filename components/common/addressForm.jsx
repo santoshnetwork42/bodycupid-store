@@ -5,21 +5,23 @@ import { connect } from "react-redux";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { getProperAddress, removePhonePrefix } from "~/utils/helper";
+import States from "~/lib/states.json";
 
 const AddressForm = ({
   defaultAddress,
   user,
   onAddress,
   onSubmit,
-  saveAddress,
 }) => {
   const [address, setAddress] = useSetState(defaultAddress || {});
+
   useEffect(() => {
     if (onAddress) {
       let tempAddress = getProperAddress(address);
       onAddress(tempAddress);
     }
   }, [address]);
+
   useEffect(() => {
     if (defaultAddress && defaultAddress.name) {
       setAddress({
@@ -29,6 +31,7 @@ const AddressForm = ({
       });
     }
   }, [defaultAddress]);
+
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
@@ -189,15 +192,19 @@ const AddressForm = ({
               </div>
               <div className="col-xs-6">
                 <label>State *</label>
-                <input
-                  type="text"
+                <select
+                  name="country"
                   className="form-control"
-                  name="state"
                   required
                   value={address.state}
                   onChange={(e) => setAddress({ state: e.target.value })}
-                  onBlur={(e) => setAddress({ state: e.target.value.trim() })}
-                />
+                >
+                  {States.map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="row">
@@ -215,22 +222,6 @@ const AddressForm = ({
               </div>
             </div>
           </div>
-
-          {!!saveAddress && (
-            <div className="form-checkbox mb-5">
-              <input
-                type="checkbox"
-                className="custom-checkbox"
-                id="terms-condition"
-                name="terms-condition"
-                required
-                onChange={(e) => setAddress({ saveAddress: e.target.checked })}
-              />
-              <label className="form-control-label" htmlFor="terms-condition">
-                Save address for faster checkout
-              </label>
-            </div>
-          )}
 
           {!onAddress && (
             <button

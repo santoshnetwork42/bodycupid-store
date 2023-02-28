@@ -451,7 +451,7 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
-      BillingAddress {
+      billingAddress {
         name
         phone
         email
@@ -465,7 +465,7 @@ export const getOrder = /* GraphQL */ `
         area
       }
       totalStoreCredit
-      CouponCodeId
+      couponCodeId
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount

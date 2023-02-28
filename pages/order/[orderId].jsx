@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { getOrder } from "~/graphql/api";
+import States from "~/lib/states.json";
 
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 
@@ -24,6 +25,17 @@ function Order() {
       setOrder(response.data.getOrder);
     })();
   }, [orderId]);
+
+  const { state, country } = useMemo(() => {
+    if (order?.shippingAddress?.state) {
+      return {
+        state: States.find((s) => s.value === order?.shippingAddress?.state)
+          ?.name,
+        country: "India",
+      };
+    }
+    return {};
+  }, [order?.shippingAddress]);
 
   return (
     <main className="main order">
@@ -226,12 +238,7 @@ function Order() {
                 </>
               )}
               <br />
-              {
-                (order?.shippingAddress?.city + ", ",
-                order?.shippingAddress?.state +
-                  ", " +
-                  order?.shippingAddress?.country)
-              }
+              {(order?.shippingAddress?.city + ", ", state + ", " + country)}
               <br />
               {order?.shippingAddress?.pinCode}
             </p>
