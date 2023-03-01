@@ -8,7 +8,8 @@ export default function ProductVariant({ item, onSelect, selected }) {
     if (listingPrice && listingPrice > price) {
       return Math.round(((listingPrice - price) * 100) / listingPrice);
     }
-  }, [listingPrice]);
+    return 0;
+  }, [listingPrice, price]);
 
   return (
     <div
@@ -18,7 +19,7 @@ export default function ProductVariant({ item, onSelect, selected }) {
       }`}
       onClick={() => onSelect(item.id)}
     >
-      {save && <div className="product-save">-{save}%</div>}
+      {save > 0 && <div className="product-save">-{save}%</div>}
 
       <div className="image-wrapper">
         <img
