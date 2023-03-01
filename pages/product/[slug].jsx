@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
@@ -12,7 +12,8 @@ import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 
 function ProductDefault() {
-  const { slug, variantId } = useRouter().query;
+  const { slug, variantId, review } = useRouter().query;
+
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
@@ -47,6 +48,22 @@ function ProductDefault() {
       });
     }
   }, [product?.id]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToReview();
+    }, 350);
+  }, []);
+
+  const scrollToReview = useCallback(() => {
+    if (review) {
+      const ele = document.getElementById("product-review");
+      if (ele) {
+        ele.scrollIntoView({ behavior: "smooth" });
+        ele.click();
+      }
+    }
+  }, [review]);
 
   return (
     <main className="main mt-6 single-product">

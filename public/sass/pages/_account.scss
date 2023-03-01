@@ -152,8 +152,26 @@
 }
 
 .card-address {
-    p { margin-bottom: 1rem; }
+	min-height: 25rem;
+    .add-lables-values {
+        p {
+            margin-bottom: 0rem;
+        }
+        .add-address {
+            text-overflow:ellipsis;
+            overflow:hidden;
+            display: -webkit-box !important;
+             -webkit-line-clamp: 2;
+             -webkit-box-orient: vertical;
+             white-space: normal;
+        }
+    }
+	.add-bottom-btn {
+		position: absolute;
+		bottom: 1rem;
+	}
 }
+
 @include mq(md, max) {
     .account {
         .nav-tabs { width: 100%; }
