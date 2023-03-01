@@ -13,6 +13,7 @@ import { cartActions } from "~/store/cart";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import ProductVariant from "../product-variant";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -33,7 +34,7 @@ function DetailOne(props) {
     () =>
       (product?.variants?.items || [])
         .sort((a, b) => a.position - b.position)
-        .map((item) => ({ name: item.title, value: item.id })),
+        .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
 
@@ -87,12 +88,12 @@ function DetailOne(props) {
     }
   };
 
-  const setVariantHandler = (e) => {
+  const setVariantHandler = (variant) => {
     if (setVariant) {
-      if (e.target.value === "null") {
+      if (variant === "null") {
         setVariant(null);
       } else {
-        setVariant(e.target.value);
+        setVariant(variant);
       }
     }
   };
@@ -256,7 +257,9 @@ function DetailOne(props) {
               </>
             )}
             <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
-            {!!save && <ins className="product-save">(Save {save}%)</ins>}
+            {!!save && (
+              <ins className="product-save">(₹{listingPrice - price} OFF)</ins>
+            )}
           </div>
         )}
 
@@ -273,7 +276,11 @@ function DetailOne(props) {
                     </>
                   )}
                   <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
-                  {!!save && <ins className="product-save">(Save {save}%)</ins>}
+                  {!!save && (
+                    <ins className="product-save">
+                      (₹{listingPrice - price} OFF)
+                    </ins>
+                  )}
                 </div>
               </div>
             )}
@@ -305,21 +312,17 @@ function DetailOne(props) {
       {sizes.length > 1 && (
         <>
           <div className="product-form product-variations product-size mb-0 pb-2">
-            <label>Size:</label>
-            <div className="product-form-group">
-              <div className="select-box">
-                <select
-                  name="size"
-                  className="form-control select-size"
-                  onChange={setVariantHandler}
-                  value={selectedVaraint}
-                >
-                  {sizes.map((item) => (
-                    <option value={item.value} key={item.value}>
-                      {item.name}
-                    </option>
-                  ))}
-                </select>
+            <div className="product-form-group overflow-auto">
+              <div className="d-flex">
+                {sizes.map((item) => (
+                  <div key={item.id}>
+                    <ProductVariant
+                      onSelect={setVariantHandler}
+                      selected={selectedVaraint}
+                      item={item}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -401,7 +404,7 @@ function DetailOne(props) {
             </div>
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
-              <div className="product-form-group">
+              <div className="product-form-group ">
                 <Quantity
                   max={product.inventory}
                   product={product}
@@ -422,7 +425,7 @@ function DetailOne(props) {
       ) : (
         <div className="product-form product-qty pb-0">
           <label className="d-none">QTY:</label>
-          <div className="product-form-group">
+          <div className="product-form-group cart-button-wrapper">
             <Quantity
               max={product.inventory}
               product={product}
@@ -440,7 +443,7 @@ function DetailOne(props) {
         </div>
       )}
 
-      <hr className="product-divider mb-3"></hr>
+      <hr className="product-divider mb-3 d-sm-none"></hr>
 
       <div className="product-footer">
         <a

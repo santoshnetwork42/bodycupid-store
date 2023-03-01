@@ -258,3 +258,12 @@
 .cursor-pointer {
     cursor: pointer;
 }
+@include mq(sm, max) {
+    .d-sm-none {
+        display: none;
+    }
+}
+
+.overflow-auto {
+    overflow: auto;
+}

@@ -21,7 +21,6 @@ const reviewDefault = {
 function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
-
   let sizes = [];
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
@@ -243,7 +242,7 @@ function DescOne(props) {
               <span className="rating-stars selected">
                 {[1, 2, 3, 4, 5].map((num, index) => (
                   <a
-                    className={`star-${num} active`}
+                    className={`star-${num}`}
                     href="#"
                     onClick={(e) => {
                       setRating(e);

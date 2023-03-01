@@ -92,8 +92,6 @@ function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
         {children}
 
         <Footer footer={footer} />
-
-        <StickyFooter />
       </div>
 
       <ALink
