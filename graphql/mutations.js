@@ -1390,6 +1390,9 @@ export const deleteUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -2509,6 +2512,9 @@ export const deleteUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -3204,6 +3210,82 @@ export const deleteUser = /* GraphQL */ `
             }
             nextToken
           }
+          comments {
+            items {
+              id
+              orderId
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              comment
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -3673,6 +3755,9 @@ export const deleteUser = /* GraphQL */ `
                   nextToken
                 }
                 payments {
+                  nextToken
+                }
+                comments {
                   nextToken
                 }
                 createdAt
@@ -4321,6 +4406,9 @@ export const deleteUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -4493,12 +4581,12 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
-export const updateOrderComments = /* GraphQL */ `
-  mutation UpdateOrderComments(
-    $input: UpdateOrderCommentsInput!
-    $condition: ModelOrderCommentsConditionInput
+export const updateOrderComment = /* GraphQL */ `
+  mutation UpdateOrderComment(
+    $input: UpdateOrderCommentInput!
+    $condition: ModelOrderCommentConditionInput
   ) {
-    updateOrderComments(input: $input, condition: $condition) {
+    updateOrderComment(input: $input, condition: $condition) {
       id
       orderId
       userId
@@ -5965,6 +6053,48 @@ export const updateOrderComments = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -7880,6 +8010,9 @@ export const createUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -8999,6 +9132,9 @@ export const createUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -9694,6 +9830,82 @@ export const createUser = /* GraphQL */ `
             }
             nextToken
           }
+          comments {
+            items {
+              id
+              orderId
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              comment
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -10163,6 +10375,9 @@ export const createUser = /* GraphQL */ `
                   nextToken
                 }
                 payments {
+                  nextToken
+                }
+                comments {
                   nextToken
                 }
                 createdAt
@@ -10809,6 +11024,9 @@ export const createUser = /* GraphQL */ `
                   nextToken
                 }
                 payments {
+                  nextToken
+                }
+                comments {
                   nextToken
                 }
                 createdAt
@@ -12372,6 +12590,9 @@ export const updateUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -13491,6 +13712,9 @@ export const updateUser = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -14186,6 +14410,82 @@ export const updateUser = /* GraphQL */ `
             }
             nextToken
           }
+          comments {
+            items {
+              id
+              orderId
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              comment
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -14655,6 +14955,9 @@ export const updateUser = /* GraphQL */ `
                   nextToken
                 }
                 payments {
+                  nextToken
+                }
+                comments {
                   nextToken
                 }
                 createdAt
@@ -15301,6 +15604,9 @@ export const updateUser = /* GraphQL */ `
                   nextToken
                 }
                 payments {
+                  nextToken
+                }
+                comments {
                   nextToken
                 }
                 createdAt
@@ -43720,6 +44026,9 @@ export const createProduct = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -47951,6 +48260,9 @@ export const updateProduct = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -52180,6 +52492,9 @@ export const deleteProduct = /* GraphQL */ `
                   nextToken
                 }
                 payments {
+                  nextToken
+                }
+                comments {
                   nextToken
                 }
                 createdAt
@@ -61143,6 +61458,48 @@ export const createOrder = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -62552,6 +62909,17 @@ export const createOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              comments {
+                items {
+                  id
+                  orderId
+                  userId
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -63824,6 +64192,9 @@ export const createOrder = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -63978,6 +64349,522 @@ export const createOrder = /* GraphQL */ `
           orderId
           method
           amount
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          orderId
+          userId
+          user {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            isCognitoConfirmed
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                couponCodeId
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                billingAddress {
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                couponCodeId
+                coupon {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                totalAmount
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                currency
+                paymentType
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                comments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            userAddress {
+              items {
+                id
+                userID
+                name
+                phone
+                email
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodes {
+              items {
+                id
+                code
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                discount
+                expirationDate
+                maxUse
+                totalUsed
+                isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          comment
           createdAt
           updatedAt
         }
@@ -65967,6 +66854,48 @@ export const updateOrder = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -67376,6 +68305,17 @@ export const updateOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              comments {
+                items {
+                  id
+                  orderId
+                  userId
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -68648,6 +69588,9 @@ export const updateOrder = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -68802,6 +69745,522 @@ export const updateOrder = /* GraphQL */ `
           orderId
           method
           amount
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      comments {
+        items {
+          id
+          orderId
+          userId
+          user {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            isCognitoConfirmed
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                couponCodeId
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                billingAddress {
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                couponCodeId
+                coupon {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                totalAmount
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                currency
+                paymentType
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                comments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            userAddress {
+              items {
+                id
+                userID
+                name
+                phone
+                email
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodes {
+              items {
+                id
+                code
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                discount
+                expirationDate
+                maxUse
+                totalUsed
+                isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          comment
           createdAt
           updatedAt
         }
@@ -70791,6 +72250,48 @@ export const deleteOrder = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -72200,6 +73701,17 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 nextToken
               }
+              comments {
+                items {
+                  id
+                  orderId
+                  userId
+                  comment
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -73472,6 +74984,9 @@ export const deleteOrder = /* GraphQL */ `
                 payments {
                   nextToken
                 }
+                comments {
+                  nextToken
+                }
                 createdAt
                 updatedAt
               }
@@ -73631,17 +75146,533 @@ export const deleteOrder = /* GraphQL */ `
         }
         nextToken
       }
+      comments {
+        items {
+          id
+          orderId
+          userId
+          user {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            owner
+            firstName
+            lastName
+            email
+            phone
+            gender
+            dob
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            isActive
+            authProvider
+            totalOrders
+            totalSpent
+            walletBalance
+            walletSpent
+            totalStoreCredit
+            isAdmin
+            isCognitoConfirmed
+            profilePhotoUrl
+            wishlists {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                wishlistProducts {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            shopingcarts {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                shoppingcartProducts {
+                  nextToken
+                }
+                couponCodeId
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            orders {
+              items {
+                id
+                code
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                channelName
+                shippingAddress {
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                billingAddress {
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                }
+                totalStoreCredit
+                couponCodeId
+                coupon {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                totalAmount
+                totalCashOnDeliveryCharges
+                totalDiscount
+                totalGiftCharges
+                totalPrepaidAmount
+                totalShippingCharges
+                taxExempted
+                cFormProvided
+                thirdPartyShipping
+                currency
+                paymentType
+                sla
+                priority
+                orderDate
+                status
+                products {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                comments {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            userAddress {
+              items {
+                id
+                userID
+                name
+                phone
+                email
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodes {
+              items {
+                id
+                code
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                discount
+                expirationDate
+                maxUse
+                totalUsed
+                isActive
+                isFeatured
+                couponType
+                minOrderValue
+                maxDiscount
+                description
+                paymentMethod
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          comment
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const createOrderComments = /* GraphQL */ `
-  mutation CreateOrderComments(
-    $input: CreateOrderCommentsInput!
-    $condition: ModelOrderCommentsConditionInput
+export const createOrderComment = /* GraphQL */ `
+  mutation CreateOrderComment(
+    $input: CreateOrderCommentInput!
+    $condition: ModelOrderCommentConditionInput
   ) {
-    createOrderComments(input: $input, condition: $condition) {
+    createOrderComment(input: $input, condition: $condition) {
       id
       orderId
       userId
@@ -75108,6 +77139,48 @@ export const createOrderComments = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -75634,12 +77707,12 @@ export const createOrderComments = /* GraphQL */ `
     }
   }
 `;
-export const deleteOrderComments = /* GraphQL */ `
-  mutation DeleteOrderComments(
-    $input: DeleteOrderCommentsInput!
-    $condition: ModelOrderCommentsConditionInput
+export const deleteOrderComment = /* GraphQL */ `
+  mutation DeleteOrderComment(
+    $input: DeleteOrderCommentInput!
+    $condition: ModelOrderCommentConditionInput
   ) {
-    deleteOrderComments(input: $input, condition: $condition) {
+    deleteOrderComment(input: $input, condition: $condition) {
       id
       orderId
       userId
@@ -77106,6 +79179,48 @@ export const deleteOrderComments = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -85463,6 +87578,48 @@ export const createPayment = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -87959,6 +90116,48 @@ export const updatePayment = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -90465,6 +92664,48 @@ export const deletePayment = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -92459,6 +94700,48 @@ export const createReview = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -96351,6 +98634,48 @@ export const updateReview = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -100233,6 +102558,48 @@ export const deleteReview = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -122361,6 +124728,48 @@ export const createCouponCode = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -124871,6 +127280,48 @@ export const updateCouponCode = /* GraphQL */ `
               }
               nextToken
             }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -127376,6 +129827,48 @@ export const deleteCouponCode = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
@@ -129976,6 +132469,48 @@ export const applyCoupon = /* GraphQL */ `
                 orderId
                 method
                 amount
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
                 createdAt
                 updatedAt
               }
