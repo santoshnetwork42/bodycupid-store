@@ -510,7 +510,7 @@
 
     &::before {
         content: "\e955 " "\e955 " "\e955 " "\e955 " "\e955";
-        @include css( color, product, rating, _star-color );
+        color: $secondary-color !important;
         font-family: 'riode';
     }
 }

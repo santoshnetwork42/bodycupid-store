@@ -172,7 +172,7 @@ function ProductListOne(props) {
         <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
           {products.map((item) => (
             <div className="product-wrap" key={"shop-" + item.id}>
-              <ProductTwo product={item} adClass="" />
+              <ProductTwo product={item}  />
             </div>
           ))}
         </div>
