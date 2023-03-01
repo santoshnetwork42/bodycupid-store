@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function ProductVariant({ item, onSelect, selected }) {
   const { listingPrice, price } = item;
-  const [save, setSave] = useState(null);
-  useEffect(() => {
+  const save = useMemo(() => {
     if (listingPrice && listingPrice > price) {
-      setSave(Math.round(((listingPrice - price) * 100) / listingPrice));
+      return Math.round(((listingPrice - price) * 100) / listingPrice);
     }
-  }, []);
+  }, [listingPrice]);
+
   return (
     <div
       key={item.id}
