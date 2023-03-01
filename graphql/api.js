@@ -477,6 +477,7 @@ export const getOrder = /* GraphQL */ `
       cFormProvided
       thirdPartyShipping
       currency
+      paymentType
       sla
       priority
       orderDate

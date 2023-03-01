@@ -168,7 +168,7 @@ function ProductTwo(props) {
                   <React.Fragment key={item.name + "-" + index}>
                     <ALink
                       href={{
-                        pathname: "/shop",
+                        pathname: "/collections/[category]",
                         query: { category: item.slug },
                       }}
                     >

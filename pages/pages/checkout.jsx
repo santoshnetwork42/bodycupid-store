@@ -6,7 +6,7 @@ import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { createPayment, createOrder, createOrderProduct } from "~/graphql/api";
+import { createOrder, createOrderProduct } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import {
   toDecimal,
@@ -41,6 +41,8 @@ function Checkout(props) {
           totalDiscount: getCouponTotal(appliedCoupon, cartList),
           totalShippingCharges: getShippingPrice(cartList),
           orderDate: new Date().toISOString(),
+          sla: new Date().toISOString(),
+          paymentType: isFirst ? "PREPAID" : "COD",
           shippingAddress: restAddress,
           billingAddress: restAddress,
           couponCodeId: appliedCoupon?.id,
@@ -57,18 +59,6 @@ function Checkout(props) {
         });
 
         const promise = [
-          API.graphql({
-            query: createPayment,
-            variables: {
-              input: {
-                userId: user?.username,
-                orderId,
-                method: isFirst ? "ONLINE" : "COD",
-                amount: getFinalPrice(cartList, appliedCoupon),
-              },
-            },
-            authMode,
-          }),
           ...cartList.map((p) =>
             API.graphql({
               query: createOrderProduct,
@@ -89,7 +79,7 @@ function Checkout(props) {
           ),
         ];
 
-        if (user) {
+        if (user && !ignoreId) {
           promise.push(
             API.graphql({
               query: createUserAddress,

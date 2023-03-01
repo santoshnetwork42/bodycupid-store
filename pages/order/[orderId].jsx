@@ -125,16 +125,12 @@ function Order() {
               <span>Total:</span>
               <strong>₹{toDecimal(order?.totalAmount)}</strong>
             </div>
-            {order?.payments.items[0] && (
-              <div className="overview-item">
-                <span>Payment method:</span>
-                <strong>
-                  {order?.payments?.items[0]?.method === "COD"
-                    ? "Cash on delivery"
-                    : "Online"}
-                </strong>
-              </div>
-            )}
+            <div className="overview-item">
+              <span>Payment method:</span>
+              <strong>
+                {order?.paymentType === "COD" ? "Cash on delivery" : "Online"}
+              </strong>
+            </div>
           </div>
 
           <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
@@ -198,18 +194,16 @@ function Order() {
                     </td>
                   </tr>
                 )}
-                {order?.payments?.items[0] && (
-                  <tr className="summary-subtotal">
-                    <td>
-                      <h4 className="summary-subtitle">Payment method:</h4>
-                    </td>
-                    <td className="summary-subtotal-price">
-                      {order?.payments?.items[0]?.method === "COD"
-                        ? "Cash on delivery"
-                        : "Online"}
-                    </td>
-                  </tr>
-                )}
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Payment method:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.paymentType === "COD"
+                      ? "Cash on delivery"
+                      : "Online"}
+                  </td>
+                </tr>
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Total:</h4>
@@ -250,7 +244,7 @@ function Order() {
           </div>
 
           <ALink
-            href="/shop"
+            href="/collections/all"
             className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
           >
             <i className="d-icon-arrow-left"></i> Back to List

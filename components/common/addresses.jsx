@@ -78,6 +78,7 @@ function Addresses({ user, onAddressChange }) {
     if (onAddressChange && selected) {
       const adr = addresses.find((a) => a.id === selected);
       onAddressChange({
+        id: adr.id,
         name: adr.name,
         phone: adr.phone,
         email: adr.email,
