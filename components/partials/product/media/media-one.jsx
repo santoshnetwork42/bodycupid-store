@@ -121,8 +121,8 @@ export default function MediaOne(props) {
           onChangeRef={changeRefHandler}
           events={events}
         >
-          {lgImages.map((image) => (
-            <div key={image.id}>
+          {lgImages.map((image,i) => (
+            <div key={i}>
               <Magnifier
                 imageSrc={getPublicImageURL(image.imageKey)}
                 imageAlt={image.alt}

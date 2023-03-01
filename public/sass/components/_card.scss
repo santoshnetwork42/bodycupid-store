@@ -1,0 +1,91 @@
+.variant-card-wrapper {
+    line-height: 0 !important;
+    width: 110px;
+    position: relative;
+    height: 190px;
+    border-radius: 4px;
+    // border: 2px solid rgba(0, 0, 0, 0.4);
+    border: 1px solid #e1e1e1;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &.selected {
+        border: 2px solid rgba(0, 0, 0, 0.4);
+    }
+
+    .product-save {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+        font-style: normal;
+        font-weight: 400 !important;
+        z-index: 1;
+        white-space: nowrap;
+        padding: 2px 4px;
+        border-radius: 4px;
+        text-align: center;
+        vertical-align: middle;
+        background-color: $success-color !important;
+        color: white !important;
+        font-size: 1.2rem !important;
+        width: fit-content !important;
+    }
+
+    .product-detail {
+        margin: 0 10px;
+
+    }
+
+    .product-form.product-variations {
+        line-height: 14px !important;
+    }
+
+    .image-wrapper {
+        height: 50%;
+    }
+
+    .product-image {
+        object-fit: contain;
+        padding: 1.5rem;
+        line-height: 14px !important;
+    }
+
+
+    .product-title {
+        margin-top: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        font-size: inherit;
+        line-height: 16px !important;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        white-space: normal;
+        color: #222;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+
+        .product-desc {
+            color: #999;
+            font-size: 1.2rem;
+            font-weight: 400;
+
+        }
+    }
+
+    .old-price {
+        font-size: 12px !important;
+        text-decoration: line-through;
+        margin-top: 5px;
+    }
+
+    .new-price {
+        margin-top: 8px;
+        font-size: 14px !important;
+        text-decoration: line-through;
+    }
+}

@@ -247,6 +247,7 @@ export default function ThumbOne(props) {
 
   return (
     <div className="product-thumbs-wrap product-thumbs-one">
+
       <div className="product-thumbs" id="product-thumbs">
         {product.images.items.map((item, index) => (
           <div
