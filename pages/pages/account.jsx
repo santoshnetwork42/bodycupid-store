@@ -274,8 +274,12 @@ function Account({ user }) {
                     <input
                       type="tel"
                       name="phone"
+                      className="prefix"
                       required
-                      value={removePhonePrefix(userDetail.phone)}
+                      value={removePhonePrefix(
+                        userDetail?.phone ||
+                          userDetail?.attributes?.phone_number
+                      )}
                       onChange={(e) => setUser({ phone: e.target.value })}
                       disabled
                     />

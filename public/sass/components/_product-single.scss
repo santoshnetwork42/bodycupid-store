@@ -183,7 +183,7 @@
     .product-name {
         @include print_css(product-single, name);
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        // -webkit-line-clamp: 2;
         overflow: hidden;
         -webkit-box-orient: vertical;
     }
@@ -681,4 +681,47 @@
 .product-details.sticky {
     position: sticky;
     top: 88px;
+}
+
+.product-best-price-container {
+    background-color: #ffffff;
+    padding: 1.2rem;
+    border-radius: 5px;
+    border-style: solid;
+    border-top-width:  1px;
+    border-bottom-width:  1px;
+    border-color: $success-color;
+    .product-top-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+
+        .fa-percent{
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            color: $primary-color;
+        }
+        p {
+            margin: 0;
+            color: $primary-color;
+        }
+    }
+    p{
+        margin: 0;
+        color: $primary-color;
+    }
+    .copy-code {
+        text-decoration: underline;
+        color: $social-whatsapp;
+        margin: 0px 0px 0px 5px;
+    }
+}
+
+@include mq(sm,max) {
+    .product-details {
+        .product-name {
+            font-size: 2rem;
+        }
+    }
 }

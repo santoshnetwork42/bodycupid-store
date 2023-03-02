@@ -25,6 +25,7 @@ function DetailOne(props) {
     variantId: selectedVaraint,
     setVariant = () => {},
   } = props;
+  console.log(product);
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
@@ -212,7 +213,7 @@ function DetailOne(props) {
 
       <h2 className="product-name">{product.title}</h2>
 
-      <div className="product-meta">
+      {/* <div className="product-meta">
         {product.category && (
           <>
             CATEGORIES:{" "}
@@ -246,7 +247,7 @@ function DetailOne(props) {
             </span>
           </>
         )}
-      </div>
+      </div> */}
 
       <div className="product-variation-price">
         {curIndex < 0 && (
@@ -305,6 +306,25 @@ function DetailOne(props) {
         <div onClick={onReviewClick} className="rating-reviews cursor-pointer">
           ( {product.reviews.items.length} reviews )
         </div>
+      </div>
+
+      <div className="product-best-price-container">
+        <div className="product-top-content">
+          <div className="d-flex align-items-center">
+            <i class="fa fa-percent" aria-hidden="true"></i>
+            <p>
+              Best price :{" "}
+              <span className="font-weight-semi-bold">₹677.60</span>{" "}
+            </p>
+          </div>
+          <p>T&C</p>
+        </div>
+        <p>
+          use coupon <span className="font-weight-semi-bold">WoW20</span>{" "}
+          <ALink href="#" className="copy-code">
+            copy code
+          </ALink>
+        </p>
       </div>
 
       <p className="product-short-desc">{product.productDescription}</p>
