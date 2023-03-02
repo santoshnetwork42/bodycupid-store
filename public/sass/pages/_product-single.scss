@@ -454,6 +454,21 @@
         text-decoration: underline;
     }
 
+        .img-preview {
+            height: 5rem;
+            margin-right: 1rem;
+            border-radius: 4px;
+        }
+        .remove-icon{
+            position: absolute;
+            right: 4px;
+            cursor: pointer;
+            top: -6px;
+            padding: 1px;
+            background: #e4eaec;
+            border-radius: 50%;
+        }
+
     .review-section {
         display: flex;
         margin-bottom: 3rem;

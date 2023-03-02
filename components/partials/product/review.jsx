@@ -1,16 +1,19 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import ALink from "~/components/features/custom-link";
 import { formateDate, toDecimal } from "~/utils";
 
 export default function Review({ review }) {
   const [read, setRead] = useState(false);
+  const [isShowMore, setIsShowMore] = useState(false);
   const pref = useRef(null);
-  const isShowMore = useMemo(() => {
-    if (pref.current && pref.current.scrollHeight > 60) {
-      return true;
+  useEffect(() => {
+    if (pref.current?.clientHeight > 60) {
+      pref.current.className = "review-read";
+      setIsShowMore(true);
+    } else {
+      setIsShowMore(false);
     }
-    return false;
-  }, [pref, review]);
+  }, []);
   const onChange = () => {
     if (!pref.current) return;
     setRead(!read);
@@ -56,11 +59,14 @@ export default function Review({ review }) {
 
           <div className="comment-content">
             <p ref={pref}>{review.comment}</p>
-            {isShowMore && (
-              <span className=" read-more cursor-pointer" onClick={onChange}>
-                Read {!read ? "more" : "less"}
-              </span>
-            )}
+            <span
+              className={` read-more cursor-pointer ${
+                !isShowMore ? "d-none" : ""
+              }`}
+              onClick={onChange}
+            >
+              Read {!read ? "more" : "less"}
+            </span>
           </div>
         </div>
       </div>

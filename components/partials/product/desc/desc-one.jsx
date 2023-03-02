@@ -77,7 +77,7 @@ function DescOne(props) {
   const onPhotoChange = (e) => {
     setReview({
       ...reviewState,
-      image: e.target.files[0],
+      image: URL.createObjectURL(e.target.files[0]),
     });
   };
   const changeFilter = (e) => {
@@ -297,7 +297,7 @@ function DescOne(props) {
                     <span>Based on {total} reviews</span>
                   </div>
                   <div className="rating">
-                    {[1, 2, 3, 4, 5].map((num, i) => (
+                    {[5, 4, 3, 2, 1].map((num, i) => (
                       <div className="d-flex align-items-center mt-2" key={i}>
                         <RatingStar value={num} />
                         <div className="ml-1 percent">
@@ -332,10 +332,13 @@ function DescOne(props) {
                 </div>
               </div>
               {showReview && (
-                <p>
-                  Your email address will not be published. Required fields are
-                  marked *
-                </p>
+                <>
+                  <hr className="product-divider"></hr>
+                  <p>
+                    Your email address will not be published. Required fields
+                    are marked *
+                  </p>
+                </>
               )}
             </div>
             {showReview && (
@@ -378,6 +381,7 @@ function DescOne(props) {
                     onClick={(num) => {
                       setReview({ rating: num });
                     }}
+                    value={reviewState.rating}
                     editable
                   />
                 </div>
@@ -393,10 +397,28 @@ function DescOne(props) {
                   onBlur={(e) => setReview({ comment: e.target.value.trim() })}
                 ></textarea>
                 <div className="d-flex w-100 justify-content-end">
+                  <div className="p-relative">
+                    {reviewState.image && (
+                      <>
+                        <img
+                          className="img-preview"
+                          src={reviewState.image}
+                        ></img>
+                        <i
+                          className="d-icon-close remove-icon"
+                          onClick={() => {
+                            setReview({ ...reviewState, image: "" });
+                          }}
+                        ></i>
+                      </>
+                    )}
+                  </div>
+
                   <input
                     className="d-none"
                     onChange={onPhotoChange}
                     type="file"
+                    accept="image/*"
                     id="review-photo"
                     name="filename"
                   />
@@ -416,6 +438,7 @@ function DescOne(props) {
               </form>
             )}
           </div>
+          <hr className="product-divider"></hr>
           {reviews.length === 0 ? (
             <div className="comments mb-2 pt-2 pb-2 border-no">
               There are no reviews yet.
@@ -424,7 +447,7 @@ function DescOne(props) {
             <div className="comments mb-8 pt-2 pb-2 border-no">
               <ul>
                 {reviews.map((review) => (
-               <Review review={review}/>
+                  <Review review={review} />
                 ))}
               </ul>
             </div>
