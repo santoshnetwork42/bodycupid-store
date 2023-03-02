@@ -89,7 +89,7 @@ const AddressForm = ({
                   }
                 />
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-6 mb-3">
                 <label>Phone *</label>
                 <div className="input-tel">
                   <div className="prefix">+91</div>
