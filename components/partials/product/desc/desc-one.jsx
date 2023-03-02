@@ -290,22 +290,25 @@ function DescOne(props) {
                   : "Be The First To Review “" + product.title + "”"}
               </h3>{" "}
               <div className="review-section ">
-                 <div className="total-review w-100">
-                    <h4>{avg.toFixed(1)}</h4>
-                    <RatingStar value={3} />
-                    <span>Based on {total} reviews</span>
-                  </div>  
-                    <div className="rating w-100">
-                    {[5, 4, 3, 2, 1].map((num, i) => (
-                      <div className="d-flex align-items-center justify-content-center mt-2" key={i}>
-                        <RatingStar value={num} />
-                        <div className="ml-1 percent">
-                          ({getPer(total, allReviews[num]?.length)}%)
-                        </div>
-                        <span className="ml-1">{allReviews[num]?.length}</span>
+                <div className="total-review w-100">
+                  <h4>{avg.toFixed(1)}</h4>
+                  <RatingStar value={3} />
+                  <span>Based on {total} reviews</span>
+                </div>
+                <div className="rating w-100">
+                  {[5, 4, 3, 2, 1].map((num, i) => (
+                    <div
+                      className="d-flex align-items-center justify-content-center mt-2"
+                      key={i}
+                    >
+                      <RatingStar value={num} />
+                      <div className="ml-1 percent">
+                        ({getPer(total, allReviews[num]?.length)}%)
                       </div>
-                    ))}
-                  </div>  
+                      <span className="ml-1">{allReviews[num]?.length}</span>
+                    </div>
+                  ))}
+                </div>
                 <div className="w-100 d-flex align-items-center justify-content-center">
                   <div className="buttons">
                     <div className=" justify-content-end">
