@@ -164,6 +164,19 @@ function Cart(props) {
                     <Coupons />
                     <div className="summary mb-4">
                       <h3 className="summary-title text-left">Cart Totals</h3>
+                      {!!appliedCoupon && (
+                        <div className="summary-saving-lable-container">
+                          <p className="saving-lable">
+                            you are saving{" "}
+                            <span>
+                              {`₹${toDecimal(
+                                getCouponTotal(appliedCoupon, cartItems)
+                              )}`}
+                            </span>{" "}
+                            on this order
+                          </p>
+                        </div>
+                      )}
                       <table className="shipping">
                         <tbody>
                           <tr className="summary-subtotal">

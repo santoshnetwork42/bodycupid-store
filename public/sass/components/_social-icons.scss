@@ -40,6 +40,16 @@
         background: $social-facebook;
         border-color: $social-facebook;
     }
+    &.social-youtube:hover {
+        background: $social-youtube;
+        border-color: $social-youtube;
+    }
+    &.social-insta:hover {
+        background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+        border-color: #cc2366;
+    }
     &.social-twitter:hover {
         background: $social-twitter;
         border-color: $social-twitter;

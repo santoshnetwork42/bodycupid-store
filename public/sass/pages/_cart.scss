@@ -178,6 +178,21 @@
     }
 }
 
+.summary-saving-lable-container {
+    padding: 2.5px 10px;
+    margin:1.2rem 0px;
+    text-align: center;
+    background-color: $light-success-color;
+    border-radius: 0.3rem;
+    .saving-lable {
+        margin: 0px;
+        color: #167221;
+        span{
+            color: #4e9223;
+        }
+    }
+}
+
 .summary-title {
     font-size: 1.8rem;
     font-weight: 700;

@@ -84,7 +84,7 @@ function Coupon(props) {
         <div className="cart-coupon-box mb-4">
           <div>
             <h4 className="title coupon-title text-uppercase ls-m">
-              Coupon Discount
+              Use Coupons
             </h4>
             {!appliedCoupon && (
               <span className="coupon-subtitle">
