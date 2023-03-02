@@ -290,15 +290,14 @@ function DescOne(props) {
                   : "Be The First To Review “" + product.title + "”"}
               </h3>{" "}
               <div className="review-section ">
-                <div className="d-flex review-wrapper justify-content-around w-100">
-                  <div className="total-review">
+                 <div className="total-review w-100">
                     <h4>{avg.toFixed(1)}</h4>
                     <RatingStar value={3} />
                     <span>Based on {total} reviews</span>
-                  </div>
-                  <div className="rating">
+                  </div>  
+                    <div className="rating w-100">
                     {[5, 4, 3, 2, 1].map((num, i) => (
-                      <div className="d-flex align-items-center mt-2" key={i}>
+                      <div className="d-flex align-items-center justify-content-center mt-2" key={i}>
                         <RatingStar value={num} />
                         <div className="ml-1 percent">
                           ({getPer(total, allReviews[num]?.length)}%)
@@ -306,8 +305,7 @@ function DescOne(props) {
                         <span className="ml-1">{allReviews[num]?.length}</span>
                       </div>
                     ))}
-                  </div>
-                </div>
+                  </div>  
                 <div className="w-100 d-flex align-items-center justify-content-center">
                   <div className="buttons">
                     <div className=" justify-content-end">
@@ -396,7 +394,7 @@ function DescOne(props) {
                   onChange={(e) => setReview({ comment: e.target.value })}
                   onBlur={(e) => setReview({ comment: e.target.value.trim() })}
                 ></textarea>
-                <div className="d-flex w-100 justify-content-end">
+                <div className="d-flex w-100 img-wrapper justify-content-end">
                   <div className="p-relative">
                     {reviewState.image && (
                       <>

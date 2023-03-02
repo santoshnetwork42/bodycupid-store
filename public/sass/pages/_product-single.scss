@@ -454,20 +454,21 @@
         text-decoration: underline;
     }
 
-        .img-preview {
-            height: 5rem;
-            margin-right: 1rem;
-            border-radius: 4px;
-        }
-        .remove-icon{
-            position: absolute;
-            right: 4px;
-            cursor: pointer;
-            top: -6px;
-            padding: 1px;
-            background: #e4eaec;
-            border-radius: 50%;
-        }
+    .img-preview {
+        height: 5rem;
+        margin-right: 1rem;
+        border-radius: 4px;
+    }
+
+    .remove-icon {
+        position: absolute;
+        right: 4px;
+        cursor: pointer;
+        top: -6px;
+        padding: 1px;
+        background: #e4eaec;
+        border-radius: 50%;
+    }
 
     .review-section {
         display: flex;
@@ -946,8 +947,28 @@ aside {
         margin-bottom: 3rem;
     }
 
+    .reply {
+        .img-wrapper {
+            display: block !important;
+            text-align: center;
+        }
+        .remove-icon{
+            right: -6px  !important;
+        }
+
+        .img-preview {
+            height: auto !important;
+        }
+
+        .btn {
+            margin-top: 2rem;
+        }
+    }
+
     .review-section {
         display: block !important;
+
+
 
         .review-wrapper {
             margin-top: 3rem;
