@@ -1,18 +1,19 @@
 import { useCallback, useEffect } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { Amplify, Hub, Auth } from "aws-amplify";
+import { Amplify, Hub, Auth, API } from "aws-amplify";
 import Head from "next/head";
 
 import { wrapper } from "../store/index.js";
-import Layout from '~/components/layout';
-import { rootActions } from '~/store';
-import { userActions } from '~/store/user';
+import Layout from "~/components/layout";
+import { rootActions } from "~/store";
+import { userActions } from "~/store/user";
 
 import awsconfig from "~/aws-exports";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
+import { getUser } from "~/graphql/api.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -23,10 +24,15 @@ const App = ({ Component, pageProps }) => {
   const setUser = useCallback(async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      store.dispatch(userActions.setUser({
-        username: user.username,
-        attributes: user.attributes,
-      }));
+      const {
+        data: { getUser: getUserResponse },
+      } = await API.graphql({
+        query: getUser,
+        variables: { id: user.username },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+
+      store.dispatch(userActions.setUser(getUserResponse));
     } catch (error) {
       console.log(error);
       store.dispatch(rootActions.destroySession());
@@ -35,8 +41,10 @@ const App = ({ Component, pageProps }) => {
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
-    Hub.listen('auth', async (authEvent) => {
-      const { payload: { event } } = authEvent;
+    Hub.listen("auth", async (authEvent) => {
+      const {
+        payload: { event },
+      } = authEvent;
       if (event === "signOut") {
         store.dispatch(rootActions.destroySession());
       } else if (loggedInEvents.includes(event)) {
