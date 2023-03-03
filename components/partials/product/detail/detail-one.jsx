@@ -18,17 +18,19 @@ import ProductVariant from "../product-variant";
 function DetailOne(props) {
   let router = useRouter();
   const {
+    cartList,
+    updateCart,
     data: product,
     isStickyCart = false,
     adClass = "",
     isNav = true,
-    variantId: selectedVaraint,
+    variantId: selectedVariant,
     setVariant = () => {},
   } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
-  const [quantity, setQauntity] = useState(1);
+  const [quantity, setQuantity] = useState({});
 
   const sizes = useMemo(
     () =>
@@ -37,6 +39,21 @@ function DetailOne(props) {
         .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
+
+  const cartItem = useMemo(() => {
+    if (cartList.length) {
+      const cartItem = cartList.find(
+        (cl) =>
+          cl.id === product.id &&
+          (!cl.variantId || selectedVariant === cl.variantId)
+      );
+      if (cartItem && cartItem.qty) {
+        setQuantity({ ...quantity, [selectedVariant]: cartItem.qty });
+      }
+      return cartItem;
+    }
+    return;
+  }, [cartList, selectedVariant]);
 
   // decide if the product is wishlisted
   const isWishlisted = useMemo(
@@ -53,11 +70,11 @@ function DetailOne(props) {
 
   useEffect(() => {
     if (product.variants.items.length > 0) {
-      if (selectedVaraint) {
+      if (selectedVariant) {
         setCartActive(true);
         setCurIndex(
           product.variants.items.findIndex(
-            (item) => item.id === selectedVaraint
+            (item) => item.id === selectedVariant
           )
         );
       } else {
@@ -70,7 +87,7 @@ function DetailOne(props) {
     if (product.isInventoryEnabled && !product.inventory) {
       setCartActive(false);
     }
-  }, [selectedVaraint, product]);
+  }, [selectedVariant, product]);
 
   const wishlistHandler = (e) => {
     e.preventDefault();
@@ -99,25 +116,36 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
-    if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
-      if (product.variants.items.length > 0) {
-        let tmpName = product.title,
-          tmpPrice;
-        if (curIndex > -1) {
-          const variant = product.variants.items[curIndex];
-          tmpName = `${tmpName} - ${variant.title}`;
-          tmpPrice = variant.price;
-        }
+    if (cartItem) {
+      router.push("/pages/cart");
+    } else {
+      if (
+        (!product.isInventoryEnabled || product.inventory > 0) &&
+        cartActive
+      ) {
+        if (product.variants.items.length > 0) {
+          let tmpName = product.title,
+            tmpPrice;
+          if (curIndex > -1) {
+            const variant = product.variants.items[curIndex];
+            tmpName = `${tmpName} - ${variant.title}`;
+            tmpPrice = variant.price;
+          }
 
-        addToCart({
-          ...product,
-          name: tmpName,
-          qty: quantity,
-          price: tmpPrice,
-          variantId: selectedVaraint,
-        });
-      } else {
-        addToCart({ ...product, qty: quantity, price: product.price });
+          addToCart({
+            ...product,
+            name: tmpName,
+            qty: quantity[selectedVariant],
+            price: tmpPrice,
+            variantId: selectedVariant,
+          });
+        } else {
+          addToCart({
+            ...product,
+            qty: quantity[selectedVariant],
+            price: product.price,
+          });
+        }
       }
     }
   };
@@ -135,7 +163,16 @@ function DetailOne(props) {
   };
 
   function changeQty(qty) {
-    setQauntity(qty);
+    setQuantity({ ...quantity, [selectedVariant]: qty });
+    if (cartItem)
+      updateCart(
+        cartList.map((item) => {
+          return item.id === product.id &&
+            (!selectedVariant || selectedVariant === item.variantId)
+            ? { ...item, qty: qty }
+            : item;
+        })
+      );
   }
 
   const { price, listingPrice, save } = useMemo(() => {
@@ -318,7 +355,7 @@ function DetailOne(props) {
                   <div key={item.id}>
                     <ProductVariant
                       onSelect={setVariantHandler}
-                      selected={selectedVaraint}
+                      selected={selectedVariant}
                       item={item}
                     />
                   </div>
@@ -407,6 +444,7 @@ function DetailOne(props) {
               <div className="product-form-group ">
                 <Quantity
                   max={product.inventory}
+                  qty={quantity[selectedVariant]}
                   product={product}
                   onChangeQty={changeQty}
                 />
@@ -416,7 +454,8 @@ function DetailOne(props) {
                   }`}
                   onClick={addToCartHandler}
                 >
-                  <i className="d-icon-bag"></i>Add to Cart
+                  <i className="d-icon-bag"></i>
+                  {!cartItem ? "Add to" : "View"} Cart
                 </button>
               </div>
             </div>
@@ -427,6 +466,7 @@ function DetailOne(props) {
           <label className="d-none">QTY:</label>
           <div className="product-form-group cart-button-wrapper">
             <Quantity
+              qty={quantity[selectedVariant]}
               max={product.inventory}
               product={product}
               onChangeQty={changeQty}
@@ -437,7 +477,8 @@ function DetailOne(props) {
               }`}
               onClick={addToCartHandler}
             >
-              <i className="d-icon-bag"></i>Add to Cart
+              <i className="d-icon-bag"></i>
+              {!cartItem ? "Add to" : "View"} Cart
             </button>
           </div>
         </div>
@@ -465,10 +506,12 @@ function DetailOne(props) {
 function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
+    cartList: state.cart.data || [],
   };
 }
 
 export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
+  updateCart: cartActions.updateCart,
 })(DetailOne);

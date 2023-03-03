@@ -16,14 +16,14 @@ function ProductDefault() {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
-  const [selectedVaraint, setVariant] = useState(variantId);
+  const [selectedVariant, setVariant] = useState(variantId);
 
   useEffect(() => {
     API.graphql(graphqlOperation(getProductBySlug, { slug })).then(
       (response) => {
         let [product] = response.data.byslugProduct.items;
         setProduct(product);
-        if (!selectedVaraint && product.variants.items.length) {
+        if (!selectedVariant && product.variants.items.length) {
           setVariant(product.variants.items[0].id);
         }
         setLoading(false);
@@ -61,13 +61,13 @@ function ProductDefault() {
           <div className="container vertical">
             <div className="product product-single row mb-7">
               <div className="col-md-6 sticky-sidebar-wrapper">
-                <MediaOne product={product} variantId={selectedVaraint} />
+                <MediaOne product={product} variantId={selectedVariant} />
               </div>
 
               <div className="col-md-6">
                 <DetailOne
                   data={product}
-                  variantId={selectedVaraint}
+                  variantId={selectedVariant}
                   setVariant={setVariant}
                   isNav={true}
                 />
