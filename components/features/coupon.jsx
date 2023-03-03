@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { API, graphqlOperation } from "aws-amplify";
 import Modal from "react-modal";
@@ -10,6 +10,8 @@ import {
 import { cartActions } from "~/store/cart";
 import { getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
+import AlertPopup from "~/components/features/product/common/alert-popup";
+import { toast } from "react-toastify";
 
 const modalStyles = {
   content: {
@@ -31,6 +33,7 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     layout = "cart",
+    product,
   } = props;
   const [coupon, setCoupon] = useState("");
   const [featured, setFeatured] = useState([]);
@@ -51,6 +54,26 @@ function Coupon(props) {
       setFeatured(items);
     })();
   }, []);
+
+  const { allDiscounts, maxDiscount } = useMemo(() => {
+    let cart = [...cartList];
+    if (product) cart = [product];
+    const allDiscounts = featured.reduce((acc, cur) => {
+      acc = {
+        ...acc,
+        [cur.id]: getCouponTotal(cur, cart),
+      };
+      return acc;
+    }, []);
+    let id = Object.keys(allDiscounts).reduce(
+      (a, b) => (allDiscounts[a] > allDiscounts[b] ? a : b),
+      []
+    );
+    return {
+      allDiscounts,
+      maxDiscount: featured.find((f) => f.id === id),
+    };
+  }, [featured, product, cartList]);
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
@@ -77,6 +100,19 @@ function Coupon(props) {
     },
     [coupon, user]
   );
+
+  const onCopy = () => {
+    var copyText = document.getElementById("coupon-code");
+    if (copyText) {
+      navigator.clipboard.writeText(copyText.textContent);
+      toast(
+        <AlertPopup
+          message={"Copied the text: " + copyText.textContent}
+          status="info"
+        />
+      );
+    }
+  };
 
   return (
     <>
@@ -132,6 +168,31 @@ function Coupon(props) {
           </div>
         </div>
       )}
+      {layout === "product" && maxDiscount && (
+        <div className="product-best-price-container">
+          <div className="product-top-content">
+            <div className="d-flex align-items-center">
+              <i class="fa fa-percent" aria-hidden="true"></i>
+              <p>
+                Best price :{" "}
+                <span className="font-weight-semi-bold">
+                  {toDecimal(product?.price - maxDiscount?.discount)}
+                </span>{" "}
+              </p>
+            </div>
+            <p>T&C</p>
+          </div>
+          <div className="d-flex">
+            Use coupon{" "}
+            <p id="coupon-code" className="font-weight-semi-bold ml-1">
+              {maxDiscount?.code}
+            </p>{" "}
+            <span className="copy-code  cursor-pointer ml-1" onClick={onCopy}>
+              Copy code
+            </span>
+          </div>
+        </div>
+      )}
       <Modal
         isOpen={isOpen}
         style={modalStyles}
@@ -170,7 +231,7 @@ function Coupon(props) {
                     {featured.map((c) => {
                       let className =
                         "btn btn-md btn-dark btn-rounded btn-link m l-2";
-                      const discount = getCouponTotal(c, cartList);
+                      const discount = allDiscounts[c.id];
                       if (!discount) {
                         className = `${className} btn-disabled`;
                       }

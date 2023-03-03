@@ -14,6 +14,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
+import Coupon from "~/components/features/coupon";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -25,7 +26,7 @@ function DetailOne(props) {
     variantId: selectedVaraint,
     setVariant = () => {},
   } = props;
-  console.log(product);
+
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
@@ -210,45 +211,7 @@ function DetailOne(props) {
           <ProductNav product={product} />
         </div>
       )}
-
       <h2 className="product-name">{product.title}</h2>
-
-      {/* <div className="product-meta">
-        {product.category && (
-          <>
-            CATEGORIES:{" "}
-            <span className="product-brand">
-              <React.Fragment key={product.category.id}>
-                <ALink
-                  href={{
-                    pathname: "/collections/[category]",
-                    query: { category: product.category.slug },
-                  }}
-                >
-                  {product.category.name}
-                </ALink>
-                {product.subCategory && (
-                  <>
-                    {", "}
-                    <ALink
-                      href={{
-                        pathname: "/collections/[category]/[subcategory]",
-                        query: {
-                          category: product.category.slug,
-                          subcategory: product.subCategory.slug,
-                        },
-                      }}
-                    >
-                      {product.subCategory.name}
-                    </ALink>
-                  </>
-                )}
-              </React.Fragment>
-            </span>
-          </>
-        )}
-      </div> */}
-
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-2 d-flex">
@@ -308,25 +271,7 @@ function DetailOne(props) {
         </div>
       </div>
 
-      <div className="product-best-price-container">
-        <div className="product-top-content">
-          <div className="d-flex align-items-center">
-            <i class="fa fa-percent" aria-hidden="true"></i>
-            <p>
-              Best price :{" "}
-              <span className="font-weight-semi-bold">₹677.60</span>{" "}
-            </p>
-          </div>
-          <p>T&C</p>
-        </div>
-        <p>
-          use coupon <span className="font-weight-semi-bold">WoW20</span>{" "}
-          <ALink href="#" className="copy-code">
-            copy code
-          </ALink>
-        </p>
-      </div>
-
+      <Coupon layout="product" product={product} />
       <p className="product-short-desc">{product.productDescription}</p>
 
       {sizes.length > 1 && (
