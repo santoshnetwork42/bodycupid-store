@@ -11,6 +11,7 @@ import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import ProductsOptions from "../product-options";
+import { diliveryRemainingTime } from "~/utils/helper";
 
 const reviewDefault = {
   rating: 1,
@@ -18,6 +19,44 @@ const reviewDefault = {
   name: "",
   email: "",
 };
+
+const productOptionsArray = [
+  {
+    id: 1,
+    iconName: "d-icon-lock",
+    title: "2 year warranty",
+    tagline: "Guarantee with no doubt",
+    isDivider: false,
+  },
+  {
+    id: 2,
+    iconName: "d-icon-refresh",
+    title: "Easy Returns",
+    tagline: "Guarantee with no doubt",
+    isDivider: true,
+  },
+  {
+    id: 3,
+    iconName: "d-icon-cash",
+    title: "COD Available",
+    tagline: "Guarantee with no doubt",
+    isDivider: true,
+  },
+  {
+    id: 4,
+    iconName: "d-icon-truck",
+    title: "Delivery in 3 Days",
+    tagline: "Guarantee with no doubt",
+    isDivider: false,
+  },
+  {
+    id: 5,
+    iconName: "d-icon-truck",
+    title: "Free shipping",
+    tagline: "on orders over ₹500.00",
+    isDivider: true,
+  },
+];
 
 function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
@@ -91,44 +130,6 @@ function DescOne(props) {
     },
     [reviewState, user?.id, product?.id]
   );
-
-  const productOptionsArray = [
-    {
-      id: 1,
-      iconName: "d-icon-lock",
-      title: "2 year warranty",
-      tagline: "Guarantee with no doubt",
-      isDivider: false,
-    },
-    {
-      id: 2,
-      iconName: "d-icon-refresh",
-      title: "Easy Returns",
-      tagline: "Guarantee with no doubt",
-      isDivider: true,
-    },
-    {
-      id: 3,
-      iconName: "d-icon-cash",
-      title: "COD Available",
-      tagline: "Guarantee with no doubt",
-      isDivider: true,
-    },
-    {
-      id: 4,
-      iconName: "d-icon-truck",
-      title: "Delivery in 3 Days",
-      tagline: "Guarantee with no doubt",
-      isDivider: false,
-    },
-    {
-      id: 5,
-      iconName: "d-icon-truck",
-      title: "Free shipping",
-      tagline: "on orders over ₹500.00",
-      isDivider: true,
-    },
-  ];
 
   return (
     <Tabs
