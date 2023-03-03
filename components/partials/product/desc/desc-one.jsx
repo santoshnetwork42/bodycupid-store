@@ -10,6 +10,7 @@ import { modalActions } from "~/store/modal";
 import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import ProductsOptions from "../product-options";
 
 const reviewDefault = {
   rating: 1,
@@ -91,6 +92,44 @@ function DescOne(props) {
     [reviewState, user?.id, product?.id]
   );
 
+  const productOptionsArray = [
+    {
+      id: 1,
+      iconName: "d-icon-lock",
+      title: "2 year warranty",
+      tagline: "Guarantee with no doubt",
+      isDivider: false,
+    },
+    {
+      id: 2,
+      iconName: "d-icon-refresh",
+      title: "Easy Returns",
+      tagline: "Guarantee with no doubt",
+      isDivider: true,
+    },
+    {
+      id: 3,
+      iconName: "d-icon-cash",
+      title: "COD Available",
+      tagline: "Guarantee with no doubt",
+      isDivider: true,
+    },
+    {
+      id: 4,
+      iconName: "d-icon-truck",
+      title: "Delivery in 3 Days",
+      tagline: "Guarantee with no doubt",
+      isDivider: false,
+    },
+    {
+      id: 5,
+      iconName: "d-icon-truck",
+      title: "Free shipping",
+      tagline: "on orders over ₹500.00",
+      isDivider: true,
+    },
+  ];
+
   return (
     <Tabs
       className="tab tab-nav-simple product-tabs"
@@ -142,31 +181,11 @@ function DescOne(props) {
 
         <TabPanel className="tab-pane product-tab-specifications">
           <div className="row mt-6">
-            <div className="col-md-6 pl-md-6 pt-4 pt-md-0">
-              <div className="icon-box-wrap d-flex flex-wrap">
-                <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4 mr-10">
-                  <div className="icon-box-icon">
-                    <i className="d-icon-lock"></i>
-                  </div>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">
-                      2 year warranty
-                    </h4>
-                    <p>Guarantee with no doubt</p>
-                  </div>
-                </div>
-                {isDivider && <div className="divider d-xl-show mr-10"></div>}
-                <div className="icon-box icon-box-side icon-border pt-2 pb-2 mb-4">
-                  <div className="icon-box-icon">
-                    <i className="d-icon-truck"></i>
-                  </div>
-                  <div className="icon-box-content">
-                    <h4 className="icon-box-title lh-1 pt-1 ls-s text-normal">
-                      Free shipping
-                    </h4>
-                    <p>On orders over ₹399</p>
-                  </div>
-                </div>
+            <div className="pl-md-6 pt-4 pt-md-0">
+              <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
+                {productOptionsArray.map((options) => (
+                  <ProductsOptions options={options} />
+                ))}
               </div>
               <hr className="product-divider"></hr>
               <h5 className="description-title mb-3 font-weight-semi-bold ls-m">
@@ -193,7 +212,7 @@ function DescOne(props) {
                 </tbody>
               </table>
             </div>
-            <div className="col-md-6 pl-md-6 pt-4 pt-md-0">
+            <div className="pl-md-6 pt-4 pt-md-0">
               {!!product.video && (
                 <>
                   <h5 className="description-title font-weight-semi-bold ls-m mb-5">
