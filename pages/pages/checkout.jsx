@@ -6,7 +6,12 @@ import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { createOrder, createOrderProduct } from "~/graphql/api";
+import {
+  createOrder,
+  createOrderProduct,
+  createTransaction,
+  createPayment,
+} from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import {
   toDecimal,
@@ -19,11 +24,20 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
-import { STORE_ID } from "~/config";
+import loadScript from "~/utils/loadScript";
+import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
-    props;
+  const {
+    cartList,
+    user,
+    emptyCart,
+    appliedCoupon,
+    openLogin,
+    removeCoupon,
+    store,
+  } = props;
 
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -38,7 +52,7 @@ function Checkout(props) {
         const payload = {
           storeId: STORE_ID,
           userId: user?.id,
-          status: "CONFIRMED",
+          status: isFirst ? "PENDING" : "CONFIRMED",
           totalAmount: getFinalPrice(cartList, appliedCoupon),
           totalDiscount: getCouponTotal(appliedCoupon, cartList),
           totalShippingCharges: getShippingPrice(cartList),
@@ -61,6 +75,34 @@ function Checkout(props) {
         });
 
         const promise = [
+          API.graphql({
+            query: createPayment,
+            variables: {
+              input: {
+                userId: user?.id,
+                storeId: STORE_ID,
+                orderId,
+                method: isFirst ? "ONLINE" : "COD",
+                amount: getFinalPrice(cartList, appliedCoupon),
+              },
+            },
+            authMode,
+          }),
+        ];
+
+        if (isFirst) {
+          promise.push(
+            API.graphql({
+              query: createTransaction,
+              variables: { orderId },
+              authMode,
+            })
+          );
+
+          promise.push(loadScript(RAZORPAY_SCRIPT));
+        }
+
+        promise.push(
           ...cartList.map((p) =>
             API.graphql({
               query: createOrderProduct,
@@ -78,8 +120,8 @@ function Checkout(props) {
               },
               authMode,
             })
-          ),
-        ];
+          )
+        );
 
         if (user && !ignoreId) {
           promise.push(
@@ -91,9 +133,48 @@ function Checkout(props) {
           );
         }
 
-        await Promise.all(promise);
-        await emptyCart();
-        await router.push(`/order/${orderId}`);
+        const [
+          {
+            data: { createPayment: payment },
+          },
+          {
+            data: { createTransaction: transaction },
+          },
+        ] = await Promise.all(promise);
+        if (transaction) {
+          const options = {
+            key: RAZORPAY_KEY,
+            amount: transaction.amount,
+            currency: "INR",
+            name: store.name,
+            image: getPublicImageURL(store.imageUrl),
+            order_id: transaction.orderId,
+            handler: async function ({ razorpay_payment_id }) {
+              await router.push(
+                `/order/${orderId}?paymentId=${razorpay_payment_id}`
+              );
+              await emptyCart();
+            },
+            prefill: {
+              name: restAddress.name,
+              email: restAddress.email,
+              contact: restAddress.phone,
+            },
+            notes: {
+              store: store.id,
+              orderId,
+              paymentId: payment.id,
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          };
+          var rzp1 = new Razorpay(options);
+          rzp1.open();
+        } else {
+          await router.push(`/order/${orderId}`);
+          await emptyCart();
+        }
       } catch (e) {
         console.log("e", e);
       }
@@ -358,6 +439,7 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    store: state.system.store,
   };
 }
 

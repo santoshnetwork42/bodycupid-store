@@ -8,13 +8,14 @@ import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
-// import { STORE_ID } from "~/config";
+import { systemActions } from "~/store/system";
+import { STORE_ID } from "~/config";
 
 import awsconfig from "~/aws-exports";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
-import { getUser } from "~/graphql/api.js";
+import { getUser, getStore } from "~/graphql/api";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -34,7 +35,6 @@ const App = ({ Component, pageProps }) => {
       });
 
       store.dispatch(userActions.setUser(getUserResponse));
-      // setCart();
     } catch (error) {
       console.log(error);
       store.dispatch(rootActions.destroySession());
@@ -59,6 +59,24 @@ const App = ({ Component, pageProps }) => {
   //   }
   // }, [store]);
 
+  const setStore = useCallback(async () => {
+    const state = store.getState();
+    if (!state.system.store) {
+      const {
+        data: { getStore: getStoreResponse },
+      } = await API.graphql({
+        query: getStore,
+        variables: { id: STORE_ID },
+      });
+      store.dispatch(systemActions.setStore(getStoreResponse));
+    }
+  }, [store]);
+
+  const initSession = useCallback(async () => {
+    setStore();
+    setUser();
+  }, [store]);
+
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     Hub.listen("auth", async (authEvent) => {
@@ -68,10 +86,10 @@ const App = ({ Component, pageProps }) => {
       if (event === "signOut") {
         store.dispatch(rootActions.destroySession());
       } else if (loggedInEvents.includes(event)) {
-        setUser();
+        initSession();
       }
     });
-    setUser();
+    initSession();
   }, []);
 
   return (

@@ -9,6 +9,7 @@ import cartReducer from '~/store/cart';
 import modalReducer from '~/store/modal';
 import wishlistReducer from '~/store/wishlist';
 import userReducer from '~/store/user';
+import systemReducer from '~/store/system';
 
 const actionTypes = {
     DESTROY_SESSION: 'DESTROY_SESSION'
@@ -21,6 +22,7 @@ const appReducer = combineReducers({
     modal: modalReducer,
     wishlist: wishlistReducer,
     user: userReducer,
+    system: systemReducer,
 });
 
 const rootReducers = (state, action) => {

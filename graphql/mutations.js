@@ -52,6 +52,7 @@ export const deleteUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -109,6 +110,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -163,6 +165,7 @@ export const deleteUser = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -177,6 +180,7 @@ export const deleteUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -566,6 +570,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -581,6 +586,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -671,6 +677,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -686,6 +693,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -815,6 +823,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -830,6 +839,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -920,6 +930,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -935,6 +946,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -1449,6 +1461,7 @@ export const deleteUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -1582,6 +1595,7 @@ export const deleteUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -1639,6 +1653,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -1693,6 +1708,7 @@ export const deleteUser = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -1707,6 +1723,7 @@ export const deleteUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -2077,6 +2094,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -2092,6 +2110,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -2571,6 +2590,7 @@ export const deleteUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -2875,6 +2895,7 @@ export const deleteUser = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -2976,6 +2997,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -2991,6 +3013,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -3204,6 +3227,7 @@ export const deleteUser = /* GraphQL */ `
               }
               orderId
               method
+              status
               amount
               createdAt
               updatedAt
@@ -3322,6 +3346,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -3337,6 +3362,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -3816,6 +3842,7 @@ export const deleteUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -3913,6 +3940,7 @@ export const deleteUser = /* GraphQL */ `
           }
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -3971,6 +3999,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -3986,6 +4015,7 @@ export const deleteUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -4465,6 +4495,7 @@ export const deleteUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -4633,6 +4664,7 @@ export const updateOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -4672,6 +4704,7 @@ export const updateOrderComment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -4680,6 +4713,7 @@ export const updateOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -5248,6 +5282,7 @@ export const updateOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -5334,6 +5369,7 @@ export const updateOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -5373,6 +5409,7 @@ export const updateOrderComment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -5381,6 +5418,7 @@ export const updateOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -5697,6 +5735,7 @@ export const updateOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -6052,6 +6091,7 @@ export const updateOrderComment = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -6285,6 +6325,7 @@ export const updateOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -6338,6 +6379,7 @@ export const updateOrderComment = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -6545,6 +6587,7 @@ export const updateOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -6621,12 +6664,12 @@ export const updateOrderComment = /* GraphQL */ `
     }
   }
 `;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
+export const deleteWishlist = /* GraphQL */ `
+  mutation DeleteWishlist(
+    $input: DeleteWishlistInput!
+    $condition: ModelWishlistConditionInput
   ) {
-    createUser(input: $input, condition: $condition) {
+    deleteWishlist(input: $input, condition: $condition) {
       id
       storeId
       store {
@@ -6672,6 +6715,7 @@ export const createUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -6729,6 +6773,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -6783,6 +6828,7 @@ export const createUser = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -6797,6 +6843,2095 @@ export const createUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      wishlistProducts {
+        items {
+          id
+          wishlistId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            description
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteShoppingCart = /* GraphQL */ `
+  mutation DeleteShoppingCart(
+    $input: DeleteShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    deleteShoppingCart(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        appId
+        host
+        priority
+        imageUrl
+        products {
+          items {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      shoppingcartProducts {
+        items {
+          id
+          shoppingcartId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            rating
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            description
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          quantity
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      couponCodeId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        appId
+        host
+        priority
+        imageUrl
+        products {
+          items {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  rating
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -7186,6 +9321,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7201,6 +9337,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7291,6 +9428,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7306,6 +9444,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7435,6 +9574,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7450,6 +9590,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7540,6 +9681,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -7555,6 +9697,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -8069,6 +10212,7 @@ export const createUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -8202,6 +10346,7 @@ export const createUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -8259,6 +10404,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -8313,6 +10459,7 @@ export const createUser = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -8327,6 +10474,7 @@ export const createUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -8697,6 +10845,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -8712,6 +10861,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -9191,6 +11341,7 @@ export const createUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -9495,6 +11646,7 @@ export const createUser = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -9596,6 +11748,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -9611,6 +11764,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -9824,6 +11978,7 @@ export const createUser = /* GraphQL */ `
               }
               orderId
               method
+              status
               amount
               createdAt
               updatedAt
@@ -9942,6 +12097,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -9957,6 +12113,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -10436,6 +12593,7 @@ export const createUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -10533,6 +12691,7 @@ export const createUser = /* GraphQL */ `
           }
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -10591,6 +12750,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -10606,6 +12766,7 @@ export const createUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -11085,6 +13246,7 @@ export const createUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -11252,6 +13414,7 @@ export const updateUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -11309,6 +13472,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -11363,6 +13527,7 @@ export const updateUser = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -11377,6 +13542,7 @@ export const updateUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -11766,6 +13932,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -11781,6 +13948,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -11871,6 +14039,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -11886,6 +14055,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -12015,6 +14185,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -12030,6 +14201,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -12120,6 +14292,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -12135,6 +14308,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -12649,6 +14823,7 @@ export const updateUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -12782,6 +14957,7 @@ export const updateUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -12839,6 +15015,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -12893,6 +15070,7 @@ export const updateUser = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -12907,6 +15085,7 @@ export const updateUser = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -13277,6 +15456,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -13292,6 +15472,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -13771,6 +15952,7 @@ export const updateUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -14075,6 +16257,7 @@ export const updateUser = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -14176,6 +16359,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -14191,6 +16375,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -14404,6 +16589,7 @@ export const updateUser = /* GraphQL */ `
               }
               orderId
               method
+              status
               amount
               createdAt
               updatedAt
@@ -14522,6 +16708,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -14537,6 +16724,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -15016,6 +17204,7 @@ export const updateUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -15113,6 +17302,7 @@ export const updateUser = /* GraphQL */ `
           }
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -15171,6 +17361,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -15186,6 +17377,7 @@ export const updateUser = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -15665,6 +17857,7 @@ export const updateUser = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -15905,6 +18098,7 @@ export const createProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -15962,6 +18156,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16016,6 +18211,7 @@ export const createProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -16030,6 +18226,7 @@ export const createProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -16369,6 +18566,7 @@ export const createProductCategory = /* GraphQL */ `
       totalProducts
       priority
       imageUrl
+      bannerUrl
       products {
         items {
           id
@@ -16444,6 +18642,7 @@ export const createProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -16461,6 +18660,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16476,6 +18676,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16571,6 +18772,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16579,6 +18781,7 @@ export const createProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -16681,6 +18884,7 @@ export const createProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -16738,6 +18942,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16751,6 +18956,7 @@ export const createProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -16768,6 +18974,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16783,6 +18990,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16879,6 +19087,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -16894,6 +19103,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17128,6 +19338,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17143,6 +19354,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17237,6 +19449,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17252,6 +19465,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17354,6 +19568,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17369,6 +19584,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17508,6 +19724,7 @@ export const createProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -17525,6 +19742,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17540,6 +19758,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17635,6 +19854,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17643,6 +19863,7 @@ export const createProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -17659,6 +19880,7 @@ export const createProductCategory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -17689,6 +19911,7 @@ export const createProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -17728,6 +19951,7 @@ export const createProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -17736,6 +19960,7 @@ export const createProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -17925,6 +20150,7 @@ export const updateProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -17982,6 +20208,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18036,6 +20263,7 @@ export const updateProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -18050,6 +20278,7 @@ export const updateProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -18389,6 +20618,7 @@ export const updateProductCategory = /* GraphQL */ `
       totalProducts
       priority
       imageUrl
+      bannerUrl
       products {
         items {
           id
@@ -18464,6 +20694,7 @@ export const updateProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -18481,6 +20712,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18496,6 +20728,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18591,6 +20824,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18599,6 +20833,7 @@ export const updateProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -18701,6 +20936,7 @@ export const updateProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -18758,6 +20994,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18771,6 +21008,7 @@ export const updateProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -18788,6 +21026,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18803,6 +21042,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18899,6 +21139,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -18914,6 +21155,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19148,6 +21390,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19163,6 +21406,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19257,6 +21501,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19272,6 +21517,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19374,6 +21620,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19389,6 +21636,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19528,6 +21776,7 @@ export const updateProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -19545,6 +21794,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19560,6 +21810,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19655,6 +21906,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19663,6 +21915,7 @@ export const updateProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -19679,6 +21932,7 @@ export const updateProductCategory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -19709,6 +21963,7 @@ export const updateProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -19748,6 +22003,7 @@ export const updateProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -19756,6 +22012,7 @@ export const updateProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -19945,6 +22202,7 @@ export const deleteProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -20002,6 +22260,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20056,6 +22315,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -20070,6 +22330,7 @@ export const deleteProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -20409,6 +22670,7 @@ export const deleteProductCategory = /* GraphQL */ `
       totalProducts
       priority
       imageUrl
+      bannerUrl
       products {
         items {
           id
@@ -20484,6 +22746,7 @@ export const deleteProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -20501,6 +22764,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20516,6 +22780,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20611,6 +22876,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20619,6 +22885,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -20721,6 +22988,7 @@ export const deleteProductCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -20778,6 +23046,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20791,6 +23060,7 @@ export const deleteProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -20808,6 +23078,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20823,6 +23094,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20919,6 +23191,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -20934,6 +23207,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21168,6 +23442,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21183,6 +23458,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21277,6 +23553,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21292,6 +23569,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21394,6 +23672,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21409,6 +23688,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21548,6 +23828,7 @@ export const deleteProductCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -21565,6 +23846,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21580,6 +23862,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21675,6 +23958,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21683,6 +23967,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -21699,6 +23984,7 @@ export const deleteProductCategory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -21729,6 +24015,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -21768,6 +24055,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -21776,6 +24064,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -21964,6 +24253,7 @@ export const createProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -22021,6 +24311,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -22075,6 +24366,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -22089,6 +24381,7 @@ export const createProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -22469,6 +24762,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -22508,6 +24802,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -22516,6 +24811,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -22652,6 +24948,7 @@ export const createProductSubCategory = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -22685,6 +24982,7 @@ export const createProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -22742,6 +25040,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -22796,6 +25095,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -22810,6 +25110,7 @@ export const createProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -23231,6 +25532,7 @@ export const createProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -23288,6 +25590,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23301,6 +25604,7 @@ export const createProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -23318,6 +25622,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23333,6 +25638,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23411,6 +25717,7 @@ export const createProductSubCategory = /* GraphQL */ `
       totalProducts
       priority
       imageUrl
+      bannerUrl
       products {
         items {
           id
@@ -23486,6 +25793,7 @@ export const createProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -23503,6 +25811,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23518,6 +25827,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23613,6 +25923,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23621,6 +25932,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -23723,6 +26035,7 @@ export const createProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -23780,6 +26093,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23793,6 +26107,7 @@ export const createProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -23810,6 +26125,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23825,6 +26141,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23921,6 +26238,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -23936,6 +26254,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24170,6 +26489,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24185,6 +26505,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24279,6 +26600,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24294,6 +26616,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24421,6 +26744,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -24478,6 +26802,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24532,6 +26857,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -24546,6 +26872,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -24926,6 +27253,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -24965,6 +27293,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -24973,6 +27302,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -25109,6 +27439,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -25142,6 +27473,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -25199,6 +27531,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -25253,6 +27586,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -25267,6 +27601,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -25688,6 +28023,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -25745,6 +28081,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -25758,6 +28095,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -25775,6 +28113,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -25790,6 +28129,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -25868,6 +28208,7 @@ export const updateProductSubCategory = /* GraphQL */ `
       totalProducts
       priority
       imageUrl
+      bannerUrl
       products {
         items {
           id
@@ -25943,6 +28284,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -25960,6 +28302,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -25975,6 +28318,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26070,6 +28414,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26078,6 +28423,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -26180,6 +28526,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -26237,6 +28584,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26250,6 +28598,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -26267,6 +28616,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26282,6 +28632,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26378,6 +28729,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26393,6 +28745,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26627,6 +28980,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26642,6 +28996,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26736,6 +29091,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26751,6 +29107,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26878,6 +29235,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -26935,6 +29293,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -26989,6 +29348,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -27003,6 +29363,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -27383,6 +29744,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -27422,6 +29784,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -27430,6 +29793,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -27566,6 +29930,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -27599,6 +29964,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -27656,6 +30022,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -27710,6 +30077,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -27724,6 +30092,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -28145,6 +30514,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -28202,6 +30572,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28215,6 +30586,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -28232,6 +30604,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28247,6 +30620,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28325,6 +30699,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
       totalProducts
       priority
       imageUrl
+      bannerUrl
       products {
         items {
           id
@@ -28400,6 +30775,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -28417,6 +30793,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28432,6 +30809,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28527,6 +30905,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28535,6 +30914,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -28637,6 +31017,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -28694,6 +31075,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28707,6 +31089,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -28724,6 +31107,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28739,6 +31123,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28835,6 +31220,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -28850,6 +31236,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29084,6 +31471,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29099,6 +31487,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29193,6 +31582,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29208,6 +31598,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29374,6 +31765,7 @@ export const createStore = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -29391,6 +31783,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29406,6 +31799,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29501,6 +31895,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29509,6 +31904,7 @@ export const createStore = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -29611,6 +32007,7 @@ export const createStore = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -29668,6 +32065,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29681,6 +32079,7 @@ export const createStore = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -29698,6 +32097,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29713,6 +32113,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29809,6 +32210,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -29824,6 +32226,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30058,6 +32461,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30073,6 +32477,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30167,6 +32572,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30182,6 +32588,7 @@ export const createStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30348,6 +32755,7 @@ export const updateStore = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -30365,6 +32773,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30380,6 +32789,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30475,6 +32885,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30483,6 +32894,7 @@ export const updateStore = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -30585,6 +32997,7 @@ export const updateStore = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -30642,6 +33055,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30655,6 +33069,7 @@ export const updateStore = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -30672,6 +33087,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30687,6 +33103,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30783,6 +33200,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -30798,6 +33216,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31032,6 +33451,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31047,6 +33467,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31141,6 +33562,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31156,6 +33578,7 @@ export const updateStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31322,6 +33745,7 @@ export const deleteStore = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -31339,6 +33763,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31354,6 +33779,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31449,6 +33875,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31457,6 +33884,7 @@ export const deleteStore = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -31559,6 +33987,7 @@ export const deleteStore = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -31616,6 +34045,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31629,6 +34059,7 @@ export const deleteStore = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -31646,6 +34077,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31661,6 +34093,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31757,6 +34190,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -31772,6 +34206,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32006,6 +34441,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32021,6 +34457,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32115,6 +34552,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32130,6 +34568,7 @@ export const deleteStore = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32257,6 +34696,7 @@ export const createWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -32314,6 +34754,7 @@ export const createWarehouse = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32368,6 +34809,7 @@ export const createWarehouse = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -32382,6 +34824,7 @@ export const createWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -32760,6 +35203,7 @@ export const createWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -32817,6 +35261,7 @@ export const createWarehouse = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -32871,6 +35316,7 @@ export const createWarehouse = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -32885,6 +35331,7 @@ export const createWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -33275,6 +35722,7 @@ export const updateWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -33332,6 +35780,7 @@ export const updateWarehouse = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -33386,6 +35835,7 @@ export const updateWarehouse = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -33400,6 +35850,7 @@ export const updateWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -33778,6 +36229,7 @@ export const updateWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -33835,6 +36287,7 @@ export const updateWarehouse = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -33889,6 +36342,7 @@ export const updateWarehouse = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -33903,6 +36357,7 @@ export const updateWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -34293,6 +36748,7 @@ export const deleteWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -34350,6 +36806,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -34404,6 +36861,7 @@ export const deleteWarehouse = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -34418,6 +36876,7 @@ export const deleteWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -34796,6 +37255,7 @@ export const deleteWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -34853,6 +37313,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -34907,6 +37368,7 @@ export const deleteWarehouse = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -34921,6 +37383,7 @@ export const deleteWarehouse = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -35306,6 +37769,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -35321,6 +37785,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -35395,6 +37860,7 @@ export const createProductInventory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -35425,6 +37891,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -35464,6 +37931,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -35472,6 +37940,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -35645,6 +38114,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -35659,6 +38129,7 @@ export const createProductInventory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -35743,6 +38214,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -35758,6 +38230,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -35897,6 +38370,7 @@ export const createProductInventory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -35914,6 +38388,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -35929,6 +38404,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -36024,6 +38500,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -36032,6 +38509,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36048,6 +38526,7 @@ export const createProductInventory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -36078,6 +38557,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36117,6 +38597,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -36125,6 +38606,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36296,6 +38778,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36335,6 +38818,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -36343,6 +38827,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36669,6 +39154,7 @@ export const createProductInventory = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -36755,6 +39241,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36794,6 +39281,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -36802,6 +39290,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -36971,6 +39460,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -37010,6 +39500,7 @@ export const createProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37018,6 +39509,7 @@ export const createProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -37201,6 +39693,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37216,6 +39709,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37290,6 +39784,7 @@ export const updateProductInventory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -37320,6 +39815,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -37359,6 +39855,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37367,6 +39864,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -37540,6 +40038,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -37554,6 +40053,7 @@ export const updateProductInventory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -37638,6 +40138,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37653,6 +40154,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37792,6 +40294,7 @@ export const updateProductInventory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -37809,6 +40312,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37824,6 +40328,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37919,6 +40424,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -37927,6 +40433,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -37943,6 +40450,7 @@ export const updateProductInventory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -37973,6 +40481,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38012,6 +40521,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -38020,6 +40530,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38191,6 +40702,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38230,6 +40742,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -38238,6 +40751,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38564,6 +41078,7 @@ export const updateProductInventory = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -38650,6 +41165,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38689,6 +41205,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -38697,6 +41214,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38866,6 +41384,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -38905,6 +41424,7 @@ export const updateProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -38913,6 +41433,7 @@ export const updateProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -39096,6 +41617,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39111,6 +41633,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39185,6 +41708,7 @@ export const deleteProductInventory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -39215,6 +41739,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -39254,6 +41779,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39262,6 +41788,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -39435,6 +41962,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -39449,6 +41977,7 @@ export const deleteProductInventory = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -39533,6 +42062,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39548,6 +42078,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39687,6 +42218,7 @@ export const deleteProductInventory = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -39704,6 +42236,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39719,6 +42252,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39814,6 +42348,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39822,6 +42357,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -39838,6 +42374,7 @@ export const deleteProductInventory = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -39868,6 +42405,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -39907,6 +42445,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -39915,6 +42454,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -40086,6 +42626,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -40125,6 +42666,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -40133,6 +42675,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -40459,6 +43002,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -40545,6 +43089,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -40584,6 +43129,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -40592,6 +43138,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -40761,6 +43308,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -40800,6 +43348,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -40808,6 +43357,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -41000,6 +43550,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -41039,6 +43590,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -41047,6 +43599,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -41183,6 +43736,7 @@ export const createProduct = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -41216,6 +43770,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -41273,6 +43828,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -41327,6 +43883,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -41341,6 +43898,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -41762,6 +44320,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -41819,6 +44378,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -41832,6 +44392,7 @@ export const createProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -41849,6 +44410,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -41864,6 +44426,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -41981,6 +44544,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -42020,6 +44584,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -42028,6 +44593,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -42192,6 +44758,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -42207,6 +44774,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -42281,6 +44849,7 @@ export const createProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -42311,6 +44880,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -42350,6 +44920,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -42358,6 +44929,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -42531,6 +45103,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -42545,6 +45118,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -42603,6 +45177,7 @@ export const createProduct = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -42636,6 +45211,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -42693,6 +45269,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -42747,6 +45324,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -42761,6 +45339,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -43138,6 +45717,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -43195,6 +45775,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -43249,6 +45830,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -43263,6 +45845,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -44085,6 +46668,7 @@ export const createProduct = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -44218,6 +46802,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -44275,6 +46860,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -44329,6 +46915,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -44343,6 +46930,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -44718,6 +47306,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -44775,6 +47364,7 @@ export const createProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -44829,6 +47419,7 @@ export const createProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -44843,6 +47434,7 @@ export const createProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -45234,6 +47826,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -45273,6 +47866,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -45281,6 +47875,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -45417,6 +48012,7 @@ export const updateProduct = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -45450,6 +48046,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -45507,6 +48104,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -45561,6 +48159,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -45575,6 +48174,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -45996,6 +48596,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -46053,6 +48654,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46066,6 +48668,7 @@ export const updateProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -46083,6 +48686,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46098,6 +48702,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46215,6 +48820,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -46254,6 +48860,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46262,6 +48869,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -46426,6 +49034,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46441,6 +49050,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46515,6 +49125,7 @@ export const updateProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -46545,6 +49156,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -46584,6 +49196,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46592,6 +49205,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -46765,6 +49379,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -46779,6 +49394,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -46837,6 +49453,7 @@ export const updateProduct = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -46870,6 +49487,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -46927,6 +49545,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -46981,6 +49600,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -46995,6 +49615,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -47372,6 +49993,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -47429,6 +50051,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -47483,6 +50106,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -47497,6 +50121,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -48319,6 +50944,7 @@ export const updateProduct = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -48452,6 +51078,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -48509,6 +51136,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -48563,6 +51191,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -48577,6 +51206,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -48952,6 +51582,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -49009,6 +51640,7 @@ export const updateProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -49063,6 +51695,7 @@ export const updateProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -49077,6 +51710,7 @@ export const updateProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -49468,6 +52102,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -49507,6 +52142,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -49515,6 +52151,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -49651,6 +52288,7 @@ export const deleteProduct = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -49684,6 +52322,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -49741,6 +52380,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -49795,6 +52435,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -49809,6 +52450,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -50230,6 +52872,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -50287,6 +52930,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50300,6 +52944,7 @@ export const deleteProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -50317,6 +52962,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50332,6 +52978,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50449,6 +53096,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -50488,6 +53136,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50496,6 +53145,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -50660,6 +53310,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50675,6 +53326,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50749,6 +53401,7 @@ export const deleteProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -50779,6 +53432,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -50818,6 +53472,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -50826,6 +53481,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -50999,6 +53655,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -51013,6 +53670,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -51071,6 +53729,7 @@ export const deleteProduct = /* GraphQL */ `
         totalProducts
         priority
         imageUrl
+        bannerUrl
         products {
           items {
             id
@@ -51104,6 +53763,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -51161,6 +53821,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -51215,6 +53876,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -51229,6 +53891,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -51606,6 +54269,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -51663,6 +54327,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -51717,6 +54382,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -51731,6 +54397,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -52553,6 +55220,7 @@ export const deleteProduct = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -52686,6 +55354,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -52743,6 +55412,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -52797,6 +55467,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -52811,6 +55482,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -53186,6 +55858,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -53243,6 +55916,7 @@ export const deleteProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -53297,6 +55971,7 @@ export const deleteProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -53311,6 +55986,7 @@ export const deleteProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -53693,6 +56369,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -53708,6 +56385,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -53782,6 +56460,7 @@ export const createLinkedProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -53812,6 +56491,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -53851,6 +56531,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -53859,6 +56540,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -54032,6 +56714,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -54046,6 +56729,7 @@ export const createLinkedProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -54130,6 +56814,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54145,6 +56830,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54284,6 +56970,7 @@ export const createLinkedProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -54301,6 +56988,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54316,6 +57004,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54411,6 +57100,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54419,6 +57109,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -54435,6 +57126,7 @@ export const createLinkedProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -54465,6 +57157,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -54504,6 +57197,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54512,6 +57206,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -54683,6 +57378,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -54722,6 +57418,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -54730,6 +57427,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55056,6 +57754,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -55142,6 +57841,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55181,6 +57881,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -55189,6 +57890,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55358,6 +58060,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55397,6 +58100,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -55405,6 +58109,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55587,6 +58292,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -55602,6 +58308,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -55676,6 +58383,7 @@ export const updateLinkedProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -55706,6 +58414,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55745,6 +58454,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -55753,6 +58463,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55926,6 +58637,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -55940,6 +58652,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -56024,6 +58737,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56039,6 +58753,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56178,6 +58893,7 @@ export const updateLinkedProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -56195,6 +58911,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56210,6 +58927,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56305,6 +59023,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56313,6 +59032,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -56329,6 +59049,7 @@ export const updateLinkedProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -56359,6 +59080,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -56398,6 +59120,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56406,6 +59129,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -56577,6 +59301,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -56616,6 +59341,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -56624,6 +59350,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -56950,6 +59677,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -57036,6 +59764,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57075,6 +59804,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -57083,6 +59813,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57252,6 +59983,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57291,6 +60023,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -57299,6 +60032,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57481,6 +60215,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -57496,6 +60231,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -57570,6 +60306,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -57600,6 +60337,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57639,6 +60377,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -57647,6 +60386,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57820,6 +60560,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -57834,6 +60575,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -57918,6 +60660,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -57933,6 +60676,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58072,6 +60816,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -58089,6 +60834,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58104,6 +60850,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58199,6 +60946,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58207,6 +60955,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -58223,6 +60972,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -58253,6 +61003,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -58292,6 +61043,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58300,6 +61052,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -58471,6 +61224,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -58510,6 +61264,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58518,6 +61273,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -58844,6 +61600,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -58930,6 +61687,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -58969,6 +61727,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -58977,6 +61736,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -59146,6 +61906,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -59185,6 +61946,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -59193,6 +61955,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -59531,6 +62294,7 @@ export const createOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -59588,6 +62352,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -59642,6 +62407,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -59656,6 +62422,7 @@ export const createOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -60033,6 +62800,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -60072,6 +62840,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -60080,6 +62849,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -60648,6 +63418,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -60734,6 +63505,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -60773,6 +63545,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -60781,6 +63554,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -61097,6 +63871,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -61452,6 +64227,7 @@ export const createOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -61685,6 +64461,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -61738,6 +64515,7 @@ export const createOrder = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -61945,6 +64723,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -62088,6 +64867,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -62127,6 +64907,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -62135,6 +64916,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -62296,6 +65078,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -62311,6 +65094,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -62571,6 +65355,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -62586,6 +65371,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -62903,6 +65689,7 @@ export const createOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -63013,6 +65800,7 @@ export const createOrder = /* GraphQL */ `
               }
               orderId
               method
+              status
               amount
               createdAt
               updatedAt
@@ -63211,6 +65999,7 @@ export const createOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -63268,6 +66057,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -63322,6 +66112,7 @@ export const createOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -63336,6 +66127,7 @@ export const createOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -63757,6 +66549,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -63772,6 +66565,7 @@ export const createOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -64251,6 +67045,7 @@ export const createOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -64348,6 +67143,7 @@ export const createOrder = /* GraphQL */ `
           }
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -64769,6 +67565,7 @@ export const createOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -64927,6 +67724,7 @@ export const updateOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -64984,6 +67782,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -65038,6 +67837,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -65052,6 +67852,7 @@ export const updateOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -65429,6 +68230,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -65468,6 +68270,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -65476,6 +68279,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -66044,6 +68848,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -66130,6 +68935,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -66169,6 +68975,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -66177,6 +68984,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -66493,6 +69301,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -66848,6 +69657,7 @@ export const updateOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -67081,6 +69891,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -67134,6 +69945,7 @@ export const updateOrder = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -67341,6 +70153,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -67484,6 +70297,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -67523,6 +70337,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -67531,6 +70346,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -67692,6 +70508,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -67707,6 +70524,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -67967,6 +70785,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -67982,6 +70801,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -68299,6 +71119,7 @@ export const updateOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -68409,6 +71230,7 @@ export const updateOrder = /* GraphQL */ `
               }
               orderId
               method
+              status
               amount
               createdAt
               updatedAt
@@ -68607,6 +71429,7 @@ export const updateOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -68664,6 +71487,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -68718,6 +71542,7 @@ export const updateOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -68732,6 +71557,7 @@ export const updateOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -69153,6 +71979,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -69168,6 +71995,7 @@ export const updateOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -69647,6 +72475,7 @@ export const updateOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -69744,6 +72573,7 @@ export const updateOrder = /* GraphQL */ `
           }
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -70165,6 +72995,7 @@ export const updateOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -70323,6 +73154,7 @@ export const deleteOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -70380,6 +73212,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -70434,6 +73267,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -70448,6 +73282,7 @@ export const deleteOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -70825,6 +73660,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -70864,6 +73700,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -70872,6 +73709,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -71440,6 +74278,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -71526,6 +74365,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -71565,6 +74405,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -71573,6 +74414,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -71889,6 +74731,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -72244,6 +75087,7 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -72477,6 +75321,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -72530,6 +75375,7 @@ export const deleteOrder = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -72737,6 +75583,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -72880,6 +75727,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -72919,6 +75767,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -72927,6 +75776,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -73088,6 +75938,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -73103,6 +75954,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -73363,6 +76215,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -73378,6 +76231,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -73695,6 +76549,7 @@ export const deleteOrder = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -73805,6 +76660,7 @@ export const deleteOrder = /* GraphQL */ `
               }
               orderId
               method
+              status
               amount
               createdAt
               updatedAt
@@ -74003,6 +76859,7 @@ export const deleteOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -74060,6 +76917,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -74114,6 +76972,7 @@ export const deleteOrder = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -74128,6 +76987,7 @@ export const deleteOrder = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -74549,6 +77409,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -74564,6 +77425,7 @@ export const deleteOrder = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -75043,6 +77905,7 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -75140,6 +78003,7 @@ export const deleteOrder = /* GraphQL */ `
           }
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -75561,6 +78425,7 @@ export const deleteOrder = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -75719,6 +78584,7 @@ export const createOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -75758,6 +78624,7 @@ export const createOrderComment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -75766,6 +78633,7 @@ export const createOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -76334,6 +79202,7 @@ export const createOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -76420,6 +79289,7 @@ export const createOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -76459,6 +79329,7 @@ export const createOrderComment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -76467,6 +79338,7 @@ export const createOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -76783,6 +79655,7 @@ export const createOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -77138,6 +80011,7 @@ export const createOrderComment = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -77371,6 +80245,7 @@ export const createOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -77424,6 +80299,7 @@ export const createOrderComment = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -77631,6 +80507,7 @@ export const createOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -77759,6 +80636,7 @@ export const deleteOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -77798,6 +80676,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -77806,6 +80685,7 @@ export const deleteOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -78374,6 +81254,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -78460,6 +81341,7 @@ export const deleteOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -78499,6 +81381,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -78507,6 +81390,7 @@ export const deleteOrderComment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -78823,6 +81707,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -79178,6 +82063,7 @@ export const deleteOrderComment = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -79411,6 +82297,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -79464,6 +82351,7 @@ export const deleteOrderComment = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -79671,6 +82559,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -79793,6 +82682,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -79808,6 +82698,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -79882,6 +82773,7 @@ export const createOrderProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -79912,6 +82804,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -79951,6 +82844,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -79959,6 +82853,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -80132,6 +83027,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -80146,6 +83042,7 @@ export const createOrderProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -80230,6 +83127,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80245,6 +83143,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80384,6 +83283,7 @@ export const createOrderProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -80401,6 +83301,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80416,6 +83317,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80511,6 +83413,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80519,6 +83422,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -80535,6 +83439,7 @@ export const createOrderProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -80565,6 +83470,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -80604,6 +83510,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80612,6 +83519,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -80783,6 +83691,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -80822,6 +83731,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -80830,6 +83740,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -81156,6 +84067,7 @@ export const createOrderProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -81242,6 +84154,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -81281,6 +84194,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -81289,6 +84203,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -81458,6 +84373,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -81497,6 +84413,7 @@ export const createOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -81505,6 +84422,7 @@ export const createOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -81744,6 +84662,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -81759,6 +84678,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -81833,6 +84753,7 @@ export const updateOrderProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -81863,6 +84784,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -81902,6 +84824,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -81910,6 +84833,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -82083,6 +85007,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -82097,6 +85022,7 @@ export const updateOrderProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -82181,6 +85107,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82196,6 +85123,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82335,6 +85263,7 @@ export const updateOrderProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -82352,6 +85281,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82367,6 +85297,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82462,6 +85393,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82470,6 +85402,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -82486,6 +85419,7 @@ export const updateOrderProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -82516,6 +85450,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -82555,6 +85490,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82563,6 +85499,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -82734,6 +85671,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -82773,6 +85711,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -82781,6 +85720,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -83107,6 +86047,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -83193,6 +86134,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -83232,6 +86174,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -83240,6 +86183,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -83409,6 +86353,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -83448,6 +86393,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -83456,6 +86402,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -83695,6 +86642,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -83710,6 +86658,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -83784,6 +86733,7 @@ export const deleteOrderProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -83814,6 +86764,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -83853,6 +86804,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -83861,6 +86813,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -84034,6 +86987,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -84048,6 +87002,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -84132,6 +87087,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84147,6 +87103,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84286,6 +87243,7 @@ export const deleteOrderProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -84303,6 +87261,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84318,6 +87277,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84413,6 +87373,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84421,6 +87382,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -84437,6 +87399,7 @@ export const deleteOrderProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -84467,6 +87430,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -84506,6 +87470,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84514,6 +87479,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -84685,6 +87651,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -84724,6 +87691,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -84732,6 +87700,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -85058,6 +88027,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -85144,6 +88114,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -85183,6 +88154,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -85191,6 +88163,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -85360,6 +88333,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -85399,6 +88373,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -85407,6 +88382,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -85651,6 +88627,7 @@ export const createPayment = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -85708,6 +88685,7 @@ export const createPayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -85762,6 +88740,7 @@ export const createPayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -85776,6 +88755,7 @@ export const createPayment = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -86153,6 +89133,7 @@ export const createPayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -86192,6 +89173,7 @@ export const createPayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -86200,6 +89182,7 @@ export const createPayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -86768,6 +89751,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -86854,6 +89838,7 @@ export const createPayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -86893,6 +89878,7 @@ export const createPayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -86901,6 +89887,7 @@ export const createPayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -87217,6 +90204,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -87572,6 +90560,7 @@ export const createPayment = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -87805,6 +90794,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -87858,6 +90848,7 @@ export const createPayment = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -88065,6 +91056,7 @@ export const createPayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -88137,6 +91129,7 @@ export const createPayment = /* GraphQL */ `
       }
       orderId
       method
+      status
       amount
       createdAt
       updatedAt
@@ -88194,6 +91187,7 @@ export const updatePayment = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -88251,6 +91245,7 @@ export const updatePayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -88305,6 +91300,7 @@ export const updatePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -88319,6 +91315,7 @@ export const updatePayment = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -88696,6 +91693,7 @@ export const updatePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -88735,6 +91733,7 @@ export const updatePayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -88743,6 +91742,7 @@ export const updatePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -89311,6 +92311,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -89397,6 +92398,7 @@ export const updatePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -89436,6 +92438,7 @@ export const updatePayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -89444,6 +92447,7 @@ export const updatePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -89760,6 +92764,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -90115,6 +93120,7 @@ export const updatePayment = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -90348,6 +93354,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -90401,6 +93408,7 @@ export const updatePayment = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -90608,6 +93616,7 @@ export const updatePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -90680,6 +93689,7 @@ export const updatePayment = /* GraphQL */ `
       }
       orderId
       method
+      status
       amount
       createdAt
       updatedAt
@@ -90737,6 +93747,7 @@ export const deletePayment = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -90794,6 +93805,7 @@ export const deletePayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -90848,6 +93860,7 @@ export const deletePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -90862,6 +93875,7 @@ export const deletePayment = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -91239,6 +94253,7 @@ export const deletePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -91278,6 +94293,7 @@ export const deletePayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -91286,6 +94302,7 @@ export const deletePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -91854,6 +94871,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -91940,6 +94958,7 @@ export const deletePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -91979,6 +94998,7 @@ export const deletePayment = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -91987,6 +95007,7 @@ export const deletePayment = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -92303,6 +95324,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -92658,6 +95680,7 @@ export const deletePayment = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -92891,6 +95914,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -92944,6 +95968,7 @@ export const deletePayment = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -93151,6 +96176,7 @@ export const deletePayment = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -93223,6 +96249,7 @@ export const deletePayment = /* GraphQL */ `
       }
       orderId
       method
+      status
       amount
       createdAt
       updatedAt
@@ -93280,6 +96307,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -93319,6 +96347,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -93327,6 +96356,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -93895,6 +96925,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -93981,6 +97012,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -94020,6 +97052,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -94028,6 +97061,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -94344,6 +97378,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -94699,6 +97734,7 @@ export const createReview = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -94932,6 +97968,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -94985,6 +98022,7 @@ export const createReview = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -95192,6 +98230,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -95305,6 +98344,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -95320,6 +98360,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -95394,6 +98435,7 @@ export const createReview = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -95424,6 +98466,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -95463,6 +98506,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -95471,6 +98515,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -95644,6 +98689,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -95658,6 +98704,7 @@ export const createReview = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -95742,6 +98789,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -95757,6 +98805,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -95896,6 +98945,7 @@ export const createReview = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -95913,6 +98963,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -95928,6 +98979,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -96023,6 +99075,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -96031,6 +99084,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96047,6 +99101,7 @@ export const createReview = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -96077,6 +99132,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96116,6 +99172,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -96124,6 +99181,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96295,6 +99353,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96334,6 +99393,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -96342,6 +99402,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96668,6 +99729,7 @@ export const createReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -96754,6 +99816,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96793,6 +99856,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -96801,6 +99865,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -96970,6 +100035,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -97009,6 +100075,7 @@ export const createReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -97017,6 +100084,7 @@ export const createReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -97209,6 +100277,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -97248,6 +100317,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -97256,6 +100326,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -97824,6 +100895,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -97910,6 +100982,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -97949,6 +101022,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -97957,6 +101031,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -98273,6 +101348,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -98628,6 +101704,7 @@ export const updateReview = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -98861,6 +101938,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -98914,6 +101992,7 @@ export const updateReview = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -99121,6 +102200,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -99234,6 +102314,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99249,6 +102330,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99323,6 +102405,7 @@ export const updateReview = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -99353,6 +102436,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -99392,6 +102476,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99400,6 +102485,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -99573,6 +102659,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -99587,6 +102674,7 @@ export const updateReview = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -99671,6 +102759,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99686,6 +102775,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99825,6 +102915,7 @@ export const updateReview = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -99842,6 +102933,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99857,6 +102949,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99952,6 +103045,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -99960,6 +103054,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -99976,6 +103071,7 @@ export const updateReview = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -100006,6 +103102,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100045,6 +103142,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -100053,6 +103151,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100224,6 +103323,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100263,6 +103363,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -100271,6 +103372,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100597,6 +103699,7 @@ export const updateReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -100683,6 +103786,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100722,6 +103826,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -100730,6 +103835,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100899,6 +104005,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -100938,6 +104045,7 @@ export const updateReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -100946,6 +104054,7 @@ export const updateReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -101138,6 +104247,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -101177,6 +104287,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -101185,6 +104296,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -101753,6 +104865,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -101839,6 +104952,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -101878,6 +104992,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -101886,6 +105001,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -102202,6 +105318,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -102557,6 +105674,7 @@ export const deleteReview = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -102790,6 +105908,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -102843,6 +105962,7 @@ export const deleteReview = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -103050,6 +106170,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -103163,6 +106284,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103178,6 +106300,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103252,6 +106375,7 @@ export const deleteReview = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -103282,6 +106406,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -103321,6 +106446,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103329,6 +106455,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -103502,6 +106629,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -103516,6 +106644,7 @@ export const deleteReview = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -103600,6 +106729,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103615,6 +106745,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103754,6 +106885,7 @@ export const deleteReview = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -103771,6 +106903,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103786,6 +106919,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103881,6 +107015,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103889,6 +107024,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -103905,6 +107041,7 @@ export const deleteReview = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -103935,6 +107072,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -103974,6 +107112,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -103982,6 +107121,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -104153,6 +107293,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -104192,6 +107333,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -104200,6 +107342,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -104526,6 +107669,7 @@ export const deleteReview = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -104612,6 +107756,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -104651,6 +107796,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -104659,6 +107805,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -104828,6 +107975,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -104867,6 +108015,7 @@ export const deleteReview = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -104875,6 +108024,7 @@ export const deleteReview = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -105067,6 +108217,7 @@ export const createWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -105124,6 +108275,7 @@ export const createWishlist = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -105178,6 +108330,7 @@ export const createWishlist = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -105192,6 +108345,7 @@ export const createWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -105563,6 +108717,7 @@ export const createWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -105620,6 +108775,7 @@ export const createWishlist = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -105674,6 +108830,7 @@ export const createWishlist = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -105688,6 +108845,7 @@ export const createWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -106102,6 +109260,7 @@ export const updateWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -106159,6 +109318,7 @@ export const updateWishlist = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -106213,6 +109373,7 @@ export const updateWishlist = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -106227,6 +109388,7 @@ export const updateWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -106598,6 +109760,7 @@ export const updateWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -106655,6 +109818,7 @@ export const updateWishlist = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -106709,6 +109873,7 @@ export const updateWishlist = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -106723,1041 +109888,7 @@ export const updateWishlist = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          variantId
-          variant {
-            id
-            productId
-            title
-            description
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
-            imageUrl
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-          }
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteWishlist = /* GraphQL */ `
-  mutation DeleteWishlist(
-    $input: DeleteWishlistInput!
-    $condition: ModelWishlistConditionInput
-  ) {
-    deleteWishlist(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        products {
-          items {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      userId
-      wishlistProducts {
-        items {
-          id
-          wishlistId
-          productId
-          product {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -108167,6 +110298,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108182,6 +110314,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108256,6 +110389,7 @@ export const createWishlistProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -108286,6 +110420,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -108325,6 +110460,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108333,6 +110469,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -108506,6 +110643,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -108520,6 +110658,7 @@ export const createWishlistProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -108604,6 +110743,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108619,6 +110759,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108758,6 +110899,7 @@ export const createWishlistProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -108775,6 +110917,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108790,6 +110933,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108885,6 +111029,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108893,6 +111038,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -108909,6 +111055,7 @@ export const createWishlistProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -108939,6 +111086,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -108978,6 +111126,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -108986,6 +111135,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -109157,6 +111307,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -109196,6 +111347,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -109204,6 +111356,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -109530,6 +111683,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -109616,6 +111770,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -109655,6 +111810,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -109663,6 +111819,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -109832,6 +111989,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -109871,6 +112029,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -109879,6 +112038,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -110086,6 +112246,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110101,6 +112262,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110175,6 +112337,7 @@ export const updateWishlistProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -110205,6 +112368,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -110244,6 +112408,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110252,6 +112417,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -110425,6 +112591,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -110439,6 +112606,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -110523,6 +112691,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110538,6 +112707,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110677,6 +112847,7 @@ export const updateWishlistProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -110694,6 +112865,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110709,6 +112881,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110804,6 +112977,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110812,6 +112986,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -110828,6 +113003,7 @@ export const updateWishlistProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -110858,6 +113034,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -110897,6 +113074,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -110905,6 +113083,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -111076,6 +113255,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -111115,6 +113295,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -111123,6 +113304,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -111449,6 +113631,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -111535,6 +113718,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -111574,6 +113758,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -111582,6 +113767,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -111751,6 +113937,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -111790,6 +113977,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -111798,6 +113986,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112005,6 +114194,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112020,6 +114210,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112094,6 +114285,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -112124,6 +114316,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112163,6 +114356,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112171,6 +114365,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112344,6 +114539,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112358,6 +114554,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -112442,6 +114639,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112457,6 +114655,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112596,6 +114795,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -112613,6 +114813,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112628,6 +114829,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112723,6 +114925,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112731,6 +114934,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112747,6 +114951,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -112777,6 +114982,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112816,6 +115022,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -112824,6 +115031,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -112995,6 +115203,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -113034,6 +115243,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -113042,6 +115252,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -113368,6 +115579,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -113454,6 +115666,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -113493,6 +115706,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -113501,6 +115715,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -113670,6 +115885,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -113709,6 +115925,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -113717,6 +115934,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -113929,6 +116147,7 @@ export const createShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -113986,6 +116205,7 @@ export const createShoppingCart = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -114040,6 +116260,7 @@ export const createShoppingCart = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -114054,6 +116275,7 @@ export const createShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -114425,6 +116647,7 @@ export const createShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -114482,6 +116705,7 @@ export const createShoppingCart = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -114536,6 +116760,7 @@ export const createShoppingCart = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -114550,6 +116775,7 @@ export const createShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -114966,6 +117192,7 @@ export const updateShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -115023,6 +117250,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -115077,6 +117305,7 @@ export const updateShoppingCart = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -115091,6 +117320,7 @@ export const updateShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -115462,6 +117692,7 @@ export const updateShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -115519,6 +117750,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -115573,6 +117805,7 @@ export const updateShoppingCart = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -115587,1043 +117820,7 @@ export const updateShoppingCart = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          variantId
-          variant {
-            id
-            productId
-            title
-            description
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
-            imageUrl
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-          }
-          quantity
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      couponCodeId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteShoppingCart = /* GraphQL */ `
-  mutation DeleteShoppingCart(
-    $input: DeleteShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    deleteShoppingCart(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        products {
-          items {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      userId
-      shoppingcartProducts {
-        items {
-          id
-          shoppingcartId
-          productId
-          product {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -117035,6 +118232,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117050,6 +118248,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117124,6 +118323,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -117154,6 +118354,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -117193,6 +118394,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117201,6 +118403,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -117374,6 +118577,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -117388,6 +118592,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -117472,6 +118677,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117487,6 +118693,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117626,6 +118833,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -117643,6 +118851,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117658,6 +118867,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117753,6 +118963,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117761,6 +118972,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -117777,6 +118989,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -117807,6 +119020,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -117846,6 +119060,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -117854,6 +119069,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118025,6 +119241,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118064,6 +119281,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -118072,6 +119290,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118398,6 +119617,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -118484,6 +119704,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118523,6 +119744,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -118531,6 +119753,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118700,6 +119923,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118739,6 +119963,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -118747,6 +119972,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -118955,6 +120181,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -118970,6 +120197,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119044,6 +120272,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -119074,6 +120303,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119113,6 +120343,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119121,6 +120352,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119294,6 +120526,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119308,6 +120541,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -119392,6 +120626,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119407,6 +120642,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119546,6 +120782,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -119563,6 +120800,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119578,6 +120816,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119673,6 +120912,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119681,6 +120921,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119697,6 +120938,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -119727,6 +120969,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119766,6 +121009,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119774,6 +121018,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119945,6 +121190,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -119984,6 +121230,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -119992,6 +121239,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -120318,6 +121566,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -120404,6 +121653,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -120443,6 +121693,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -120451,6 +121702,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -120620,6 +121872,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -120659,6 +121912,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -120667,6 +121921,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -120875,6 +122130,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -120890,6 +122146,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -120964,6 +122221,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -120994,6 +122252,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121033,6 +122292,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121041,6 +122301,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121214,6 +122475,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121228,6 +122490,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -121312,6 +122575,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121327,6 +122591,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121466,6 +122731,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
             totalProducts
             priority
             imageUrl
+            bannerUrl
             products {
               items {
                 id
@@ -121483,6 +122749,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121498,6 +122765,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121593,6 +122861,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121601,6 +122870,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121617,6 +122887,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
           totalProducts
           priority
           imageUrl
+          bannerUrl
           products {
             items {
               id
@@ -121647,6 +122918,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121686,6 +122958,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121694,6 +122967,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121865,6 +123139,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -121904,6 +123179,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -121912,6 +123188,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -122238,6 +123515,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -122324,6 +123602,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -122363,6 +123642,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -122371,6 +123651,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -122540,6 +123821,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -122579,6 +123861,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -122587,6 +123870,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -122801,6 +124085,7 @@ export const createCouponCode = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -122858,6 +124143,7 @@ export const createCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -122912,6 +124198,7 @@ export const createCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -122926,6 +124213,7 @@ export const createCouponCode = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -123303,6 +124591,7 @@ export const createCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -123342,6 +124631,7 @@ export const createCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -123350,6 +124640,7 @@ export const createCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -123918,6 +125209,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -124004,6 +125296,7 @@ export const createCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -124043,6 +125336,7 @@ export const createCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -124051,6 +125345,7 @@ export const createCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -124367,6 +125662,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -124722,6 +126018,7 @@ export const createCouponCode = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -124955,6 +126252,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -125008,6 +126306,7 @@ export const createCouponCode = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -125215,6 +126514,7 @@ export const createCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -125353,6 +126653,7 @@ export const updateCouponCode = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -125410,6 +126711,7 @@ export const updateCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -125464,6 +126766,7 @@ export const updateCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -125478,6 +126781,7 @@ export const updateCouponCode = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -125855,6 +127159,7 @@ export const updateCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -125894,6 +127199,7 @@ export const updateCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -125902,6 +127208,7 @@ export const updateCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -126470,6 +127777,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -126556,6 +127864,7 @@ export const updateCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -126595,6 +127904,7 @@ export const updateCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -126603,6 +127913,7 @@ export const updateCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -126919,6 +128230,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -127274,6 +128586,7 @@ export const updateCouponCode = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -127507,6 +128820,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -127560,6 +128874,7 @@ export const updateCouponCode = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -127767,6 +129082,7 @@ export const updateCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -127905,6 +129221,7 @@ export const deleteCouponCode = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -127962,6 +129279,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -128016,6 +129334,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -128030,6 +129349,7 @@ export const deleteCouponCode = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -128407,6 +129727,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -128446,6 +129767,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -128454,6 +129776,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -129022,6 +130345,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -129108,6 +130432,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -129147,6 +130472,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -129155,6 +130481,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -129471,6 +130798,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -129826,6 +131154,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -130059,6 +131388,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -130112,6 +131442,7 @@ export const deleteCouponCode = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -130319,6 +131650,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -130498,6 +131830,51 @@ export const deleteProductFaq = /* GraphQL */ `
     }
   }
 `;
+export const createZipCode = /* GraphQL */ `
+  mutation CreateZipCode(
+    $input: CreateZipCodeInput!
+    $condition: ModelZipCodeConditionInput
+  ) {
+    createZipCode(input: $input, condition: $condition) {
+      id
+      codMaxAmount
+      cod
+      prepaid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateZipCode = /* GraphQL */ `
+  mutation UpdateZipCode(
+    $input: UpdateZipCodeInput!
+    $condition: ModelZipCodeConditionInput
+  ) {
+    updateZipCode(input: $input, condition: $condition) {
+      id
+      codMaxAmount
+      cod
+      prepaid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteZipCode = /* GraphQL */ `
+  mutation DeleteZipCode(
+    $input: DeleteZipCodeInput!
+    $condition: ModelZipCodeConditionInput
+  ) {
+    deleteZipCode(input: $input, condition: $condition) {
+      id
+      codMaxAmount
+      cod
+      prepaid
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon($code: String!) {
     applyCoupon(code: $code) {
@@ -130547,6 +131924,7 @@ export const applyCoupon = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -130604,6 +131982,7 @@ export const applyCoupon = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -130658,6 +132037,7 @@ export const applyCoupon = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -130672,6 +132052,7 @@ export const applyCoupon = /* GraphQL */ `
               totalProducts
               priority
               imageUrl
+              bannerUrl
               products {
                 items {
                   id
@@ -131049,6 +132430,7 @@ export const applyCoupon = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -131088,6 +132470,7 @@ export const applyCoupon = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -131096,6 +132479,7 @@ export const applyCoupon = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -131664,6 +133048,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -131750,6 +133135,7 @@ export const applyCoupon = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -131789,6 +133175,7 @@ export const applyCoupon = /* GraphQL */ `
                   totalProducts
                   priority
                   imageUrl
+                  bannerUrl
                   createdAt
                   updatedAt
                 }
@@ -131797,6 +133184,7 @@ export const applyCoupon = /* GraphQL */ `
                 totalProducts
                 priority
                 imageUrl
+                bannerUrl
                 products {
                   nextToken
                 }
@@ -132113,6 +133501,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -132468,6 +133857,7 @@ export const applyCoupon = /* GraphQL */ `
                 }
                 orderId
                 method
+                status
                 amount
                 createdAt
                 updatedAt
@@ -132701,6 +134091,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -132754,6 +134145,7 @@ export const applyCoupon = /* GraphQL */ `
             }
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -132961,6 +134353,7 @@ export const applyCoupon = /* GraphQL */ `
                   userId
                   orderId
                   method
+                  status
                   amount
                   createdAt
                   updatedAt
@@ -133058,6 +134451,14 @@ export const bulkUpdateProducts = /* GraphQL */ `
   mutation BulkUpdateProducts($csvKey: String!) {
     bulkUpdateProducts(csvKey: $csvKey) {
       success
+    }
+  }
+`;
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction($orderId: ID!) {
+    createTransaction(orderId: $orderId) {
+      orderId
+      amount
     }
   }
 `;
