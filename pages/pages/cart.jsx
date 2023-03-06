@@ -161,22 +161,13 @@ function Cart(props) {
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
-                    <Coupons />
+                    <Coupons
+                      price={toDecimal(
+                        getCouponTotal(appliedCoupon, cartItems)
+                      )}
+                    />
                     <div className="summary mb-4">
                       <h3 className="summary-title text-left">Cart Totals</h3>
-                      {!!appliedCoupon && (
-                        <div className="summary-saving-lable-container">
-                          <p className="saving-lable">
-                            you are saving{" "}
-                            <span>
-                              {`₹${toDecimal(
-                                getCouponTotal(appliedCoupon, cartItems)
-                              )}`}
-                            </span>{" "}
-                            on this order
-                          </p>
-                        </div>
-                      )}
                       <table className="shipping">
                         <tbody>
                           <tr className="summary-subtotal">
@@ -202,34 +193,54 @@ function Cart(props) {
                             </td>
                           </tr>
                           {!!appliedCoupon && (
-                            <tr className="summary-subtotal">
-                              <td>
-                                <h4 className="summary-subtitle">Coupons</h4>
-                                <p>
-                                  <div className="d-flex">
-                                    <span className="mr-1">
-                                      {appliedCoupon.code}
-                                    </span>
-                                    <ALink
-                                      key={appliedCoupon.id}
-                                      href="#"
-                                      className="product-remove"
-                                      title="Remove coupon"
-                                      onClick={() => removeCoupon()}
-                                    >
-                                      <i className="fas fa-times"></i>
-                                    </ALink>
+                            <>
+                              <tr>
+                                <td>
+                                  <h4 className="summary-subtitle">Coupons</h4>
+                                  <p>
+                                    <div className="d-flex">
+                                      <span className="mr-1">
+                                        {appliedCoupon.code}
+                                      </span>
+                                      <ALink
+                                        key={appliedCoupon.id}
+                                        href="#"
+                                        className="product-remove"
+                                        title="Remove coupon"
+                                        onClick={() => removeCoupon()}
+                                      >
+                                        <i className="fas fa-times"></i>
+                                      </ALink>
+                                    </div>
+                                  </p>
+                                </td>
+                                <td>
+                                  <p className="summary-subtotal-price">
+                                    {`₹${toDecimal(
+                                      getCouponTotal(appliedCoupon, cartItems)
+                                    )}`}
+                                  </p>
+                                </td>
+                              </tr>
+                              <tr className="summary-subtotal">
+                                <td colSpan={2}>
+                                  <div className="summary-saving-lable-container mt-0 mb-3">
+                                    <p className="saving-lable">
+                                      You are saving{" "}
+                                      <span>
+                                        {`₹${toDecimal(
+                                          getCouponTotal(
+                                            appliedCoupon,
+                                            cartItems
+                                          )
+                                        )}`}
+                                      </span>{" "}
+                                      on this order
+                                    </p>
                                   </div>
-                                </p>
-                              </td>
-                              <td>
-                                <p className="summary-subtotal-price">
-                                  {`₹${toDecimal(
-                                    getCouponTotal(appliedCoupon, cartItems)
-                                  )}`}
-                                </p>
-                              </td>
-                            </tr>
+                                </td>
+                              </tr>
+                            </>
                           )}
                         </tbody>
                       </table>
