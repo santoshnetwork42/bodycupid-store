@@ -166,7 +166,7 @@ export function* cartSaga() {
     const { user, cart } = yield select();
     let { cart: cartResponse } = cart;
     const { data } = user;
-    if (cartResponse && data) {
+    if (data) {
       const { product: currProduct } = e.payload;
       if (!currProduct.variantId) {
         currProduct.variantId = getFirstVariantId(currProduct);
