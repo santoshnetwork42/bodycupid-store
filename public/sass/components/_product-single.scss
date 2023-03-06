@@ -419,8 +419,12 @@
     }
 
     .remian-time-lable {
-        color: $success-color;
+        color: #167221;
+        padding: .3rem;
+        text-align: center;
+        border-radius: .3rem;
         font-size: 1.4rem;
+        background-color: #F3FCE2
     }
 }
 

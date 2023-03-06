@@ -330,8 +330,8 @@ function DetailOne(props) {
         </>
       )}
 
-      {today.getHours() > 8 && today.getHours() < 15  && (
-        <p className="remian-time-lable mb-1">
+      {today.getHours() > 8 && today.getHours() < 15 && (
+        <p className="remian-time-lable mb-4">
           For Fastest delivery, order within {deliveryRemainingTime()}
         </p>
       )}

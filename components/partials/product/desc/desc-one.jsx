@@ -11,7 +11,7 @@ import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import ProductsOptions from "../product-options";
-import { deliveryRemainingTime } from "~/utils/helper";
+import productsOptions from "~/lib/productsOptions.json";
 
 const reviewDefault = {
   rating: 1,
@@ -19,44 +19,6 @@ const reviewDefault = {
   name: "",
   email: "",
 };
-
-const productOptionsArray = [
-  {
-    id: 1,
-    iconName: "d-icon-lock",
-    title: "2 year warranty",
-    tagline: "Guarantee with no doubt",
-    isDivider: false,
-  },
-  {
-    id: 2,
-    iconName: "d-icon-refresh",
-    title: "Easy Returns",
-    tagline: "Guarantee with no doubt",
-    isDivider: true,
-  },
-  {
-    id: 3,
-    iconName: "d-icon-cash",
-    title: "COD Available",
-    tagline: "Guarantee with no doubt",
-    isDivider: true,
-  },
-  {
-    id: 4,
-    iconName: "d-icon-truck",
-    title: "Delivery in 3 Days",
-    tagline: "Guarantee with no doubt",
-    isDivider: false,
-  },
-  {
-    id: 5,
-    iconName: "d-icon-truck",
-    title: "Free shipping",
-    tagline: "on orders over ₹500.00",
-    isDivider: true,
-  },
-];
 
 function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
@@ -184,8 +146,8 @@ function DescOne(props) {
           <div className="row mt-6">
             <div className="pl-md-6 pt-4 pt-md-0">
               <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
-                {productOptionsArray.map((options) => (
-                  <ProductsOptions options={options} />
+                {productsOptions.map((options) => (
+                  <ProductsOptions key={options.id} options={options} />
                 ))}
               </div>
               <hr className="product-divider"></hr>
