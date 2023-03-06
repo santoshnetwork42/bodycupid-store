@@ -33,7 +33,6 @@ function Coupon(props) {
     appliedCoupon,
     layout = "cart",
   } = props;
-  console.log("price", price);
   const [coupon, setCoupon] = useState("");
   const [featured, setFeatured] = useState([]);
   const [isOpen, setOpen] = useState(false);
