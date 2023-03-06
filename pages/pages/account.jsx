@@ -29,7 +29,7 @@ function Account({ user }) {
     } = await API.graphql({
       query: searchOrders,
       variables: {
-        filter: { userId: { eq: user.username }, storeId: { eq: STORE_ID } },
+        filter: { userId: { eq: user.id }, storeId: { eq: STORE_ID } },
         sort: [{ field: "orderDate", direction: "desc" }],
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -43,7 +43,7 @@ function Account({ user }) {
       data: { getUser: getUserResponse },
     } = await API.graphql({
       query: getUser,
-      variables: { id: user.username },
+      variables: { id: user.id },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
@@ -80,7 +80,7 @@ function Account({ user }) {
         query: updateUserMutation,
         variables: {
           input: {
-            id: user.username,
+            id: user.id,
             firstName: userDetail.firstName,
             lastName: userDetail.lastName,
           },

@@ -37,7 +37,7 @@ function Checkout(props) {
         const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
         const payload = {
           storeId: STORE_ID,
-          userId: user?.username,
+          userId: user?.id,
           status: "CONFIRMED",
           totalAmount: getFinalPrice(cartList, appliedCoupon),
           totalDiscount: getCouponTotal(appliedCoupon, cartList),
@@ -85,7 +85,7 @@ function Checkout(props) {
           promise.push(
             API.graphql({
               query: createUserAddress,
-              variables: { input: { ...restAddress, userID: user.username } },
+              variables: { input: { ...restAddress, userID: user.id } },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             })
           );

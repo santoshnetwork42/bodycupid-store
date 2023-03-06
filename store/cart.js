@@ -178,7 +178,7 @@ export function* cartSaga() {
           data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
-          variables: { input: { userId: data?.username, storeId: STORE_ID } },
+          variables: { input: { userId: data?.id, storeId: STORE_ID } },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         }));
         cartResponse.products = [];
