@@ -48,7 +48,6 @@ function DetailOne(props) {
       );
       
       if (cartItem && cartItem.qty) {
-        console.log('cartItem.qty', cartItem.qty)
         setQuantity(cartItem.qty);
       } else {
        setQuantity(1);
