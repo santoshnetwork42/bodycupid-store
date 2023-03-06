@@ -21,6 +21,7 @@ function Account({ user }) {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
   const [userDetail, setUser] = useSetState({ ...user });
+  const [activeTab, setActiveTab] = useState(0);
   const getOrders = useCallback(async () => {
     const {
       data: { searchOrders: listOrdersResponse },
@@ -90,6 +91,10 @@ function Account({ user }) {
     [userDetail, user]
   );
 
+  const onActiveTabIndexChange = (index) => {
+    setActiveTab(index);
+  };
+
   if (!user) return <></>;
 
   return (
@@ -120,8 +125,12 @@ function Account({ user }) {
           <Tabs
             selectedTabClassName="show"
             selectedTabPanelClassName="active"
-            defaultIndex={0}
+            defaultIndex={activeTab}
             className="tab tab-vertical gutter-lg"
+            selectedIndex={activeTab}
+            onSelect={(index) => {
+              onActiveTabIndexChange(index);
+            }}
           >
             <TabList
               className="nav nav-tabs mb-4 col-lg-3 col-md-4"
@@ -161,7 +170,13 @@ function Account({ user }) {
                 </p>
                 <p className="mb-8">
                   From your account dashboard you can view your{" "}
-                  <ALink href="#" className="link-to-tab text-primary">
+                  <ALink
+                    href="#"
+                    className="link-to-tab text-primary"
+                    onClick={() => {
+                      onActiveTabIndexChange(1);
+                    }}
+                  >
                     recent orders
                   </ALink>
                   , manage your shipping and billing addresses,
