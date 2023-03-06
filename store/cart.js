@@ -14,6 +14,7 @@ import {
   deleteShoppingCartProduct,
 } from "~/graphql/api";
 import { getFirstVariantId } from "~/utils/products";
+import { STORE_ID } from "~/config";
 
 const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -177,7 +178,7 @@ export function* cartSaga() {
           data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
-          variables: { input: { userId: data?.username } },
+          variables: { input: { userId: data?.username, storeId: STORE_ID } },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         }));
         cartResponse.products = [];
