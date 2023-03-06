@@ -157,8 +157,11 @@ function Account({ user }) {
             <div className="tab-content col-lg-9 col-md-8">
               <TabPanel className="tab-pane dashboard">
                 <p className="mb-0">
-                  Hello <span>{user.attributes.name}</span> (not{" "}
-                  <span>User</span>?{" "}
+                  Hello{" "}
+                  <span>
+                    {user.firstName} {user.lastName}
+                  </span>{" "}
+                  (not <span>User</span>?{" "}
                   <ALink
                     href="/"
                     className="text-primary"
