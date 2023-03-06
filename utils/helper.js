@@ -31,9 +31,9 @@ export const getProperAddress = (address) => {
 
 const pad = (num) => ("0" + parseInt(num)).substr(-2);
 
-export const diliveryRemainingTime = () => {
+export const deliveryRemainingTime = () => {
   var start = new Date();
-  start.setHours(18, 0, 0); // 3pm
+  start.setHours(15, 0, 0); // 3pm
   var now = new Date();
   var remain = (start - now) / 1000;
   var hh = parseInt(pad((remain / 60 / 60) % 60));

@@ -11,7 +11,7 @@ import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import ProductsOptions from "../product-options";
-import { diliveryRemainingTime } from "~/utils/helper";
+import { deliveryRemainingTime } from "~/utils/helper";
 
 const reviewDefault = {
   rating: 1,

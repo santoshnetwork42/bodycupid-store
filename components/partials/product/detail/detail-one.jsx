@@ -14,7 +14,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { diliveryRemainingTime } from "~/utils/helper";
+import { deliveryRemainingTime } from "~/utils/helper";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -330,9 +330,9 @@ function DetailOne(props) {
         </>
       )}
 
-      {today.getHours() > 8 && today.getHours() < 18 && (
-        <p className="remian-time-lable">
-          For Fastest delivery, order within {diliveryRemainingTime()}
+      {today.getHours() > 8 && today.getHours() < 15  && (
+        <p className="remian-time-lable mb-1">
+          For Fastest delivery, order within {deliveryRemainingTime()}
         </p>
       )}
 
