@@ -23,7 +23,6 @@ function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
-  const [filter, setFilter] = useState("helpful");
   const [showReview, setShowReview] = useState(false);
   let sizes = [];
   if (product.variants.items.length > 0) {
@@ -79,19 +78,6 @@ function DescOne(props) {
       ...reviewState,
       image: URL.createObjectURL(e.target.files[0]),
     });
-  };
-  const changeFilter = (e) => {
-    if (!reviews.length) return;
-    setFilter(e.target.value);
-    if (e.target.value === "helpful") {
-      setReviews(reviews.sort((a, b) => a.rating - b.rating).reverse());
-    } else {
-      setReviews(
-        reviews.sort((a, b) =>
-          a.updateAt > b.updateAt ? 1 : b.updateAt > a.updateAt ? -1 : 0
-        )
-      );
-    }
   };
 
   const showVideoModalHandler = (e) => {
@@ -320,14 +306,7 @@ function DescOne(props) {
                       >
                         Add Review
                       </button>
-                      <select
-                        className="form-control"
-                        value={filter}
-                        onChange={changeFilter}
-                      >
-                        <option value="helpful">Most helpful</option>
-                        <option value="new">Newest</option>
-                      </select>
+                     
                     </div>
                   </div>
                 </div>

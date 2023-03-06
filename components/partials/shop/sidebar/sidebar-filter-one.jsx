@@ -9,6 +9,7 @@ import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { scrollTopHandler } from "~/utils";
 import { cleanQuery } from "~/utils/helper";
+import { STORE_ID } from "~/config";
 
 function SidebarFilterOne(props) {
   const { type = "left" } = props;
@@ -32,7 +33,11 @@ function SidebarFilterOne(props) {
         data: {
           searchProductCategories: { items: categories },
         },
-      } = await API.graphql(graphqlOperation(getMenuCategories));
+      } = await API.graphql(
+        graphqlOperation(getMenuCategories, {
+          filter: { storeId: { eq: STORE_ID } },
+        })
+      );
       setSidebarData({ categories });
       setLoading(false);
     })();

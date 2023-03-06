@@ -10,6 +10,7 @@ import {
 import { cartActions } from "~/store/cart";
 import { getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
+import { STORE_ID } from "~/config";
 
 const modalStyles = {
   content: {
@@ -45,7 +46,7 @@ function Coupon(props) {
         },
       } = await API.graphql(
         graphqlOperation(getFeaturedCoupon, {
-          filter: { isFeatured: { eq: true } },
+          filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
         })
       );
       setFeatured(items);

@@ -168,7 +168,7 @@ function ProductTwo(props) {
                   <React.Fragment key={item.name + "-" + index}>
                     <ALink
                       href={{
-                        pathname: "/shop",
+                        pathname: "/collections/[category]",
                         query: { category: item.slug },
                       }}
                     >
@@ -186,6 +186,12 @@ function ProductTwo(props) {
         <h3 className="product-name">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
+
+        {!!product?.tags && (
+          <label className="product-tag">
+            {product?.tags.split(",").join(" | ")}
+          </label>
+        )}
 
         <div className="product-price">
           {/* {

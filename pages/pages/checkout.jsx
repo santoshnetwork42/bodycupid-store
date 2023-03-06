@@ -6,7 +6,7 @@ import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { createPayment, createOrder, createOrderProduct } from "~/graphql/api";
+import { createOrder, createOrderProduct } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import {
   toDecimal,
@@ -19,6 +19,7 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
+import { STORE_ID } from "~/config";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
@@ -35,12 +36,15 @@ function Checkout(props) {
         const { id: ignoreId, ...restAddress } = shippingAddress;
         const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
         const payload = {
-          userId: user?.username,
+          storeId: STORE_ID,
+          userId: user?.id,
           status: "CONFIRMED",
           totalAmount: getFinalPrice(cartList, appliedCoupon),
           totalDiscount: getCouponTotal(appliedCoupon, cartList),
           totalShippingCharges: getShippingPrice(cartList),
           orderDate: new Date().toISOString(),
+          sla: new Date().toISOString(),
+          paymentType: isFirst ? "PREPAID" : "COD",
           shippingAddress: restAddress,
           billingAddress: restAddress,
           couponCodeId: appliedCoupon?.id,
@@ -57,18 +61,6 @@ function Checkout(props) {
         });
 
         const promise = [
-          API.graphql({
-            query: createPayment,
-            variables: {
-              input: {
-                userId: user?.username,
-                orderId,
-                method: isFirst ? "ONLINE" : "COD",
-                amount: getFinalPrice(cartList, appliedCoupon),
-              },
-            },
-            authMode,
-          }),
           ...cartList.map((p) =>
             API.graphql({
               query: createOrderProduct,
@@ -89,11 +81,11 @@ function Checkout(props) {
           ),
         ];
 
-        if (user) {
+        if (user && !ignoreId) {
           promise.push(
             API.graphql({
               query: createUserAddress,
-              variables: { input: { ...restAddress, userID: user.username } },
+              variables: { input: { ...restAddress, userID: user.id } },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             })
           );
