@@ -30,8 +30,7 @@ function DetailOne(props) {
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
-  const [quantity, setQuantity] = useState({});
-
+  const [quantity, setQuantity] = useState(1);
   const sizes = useMemo(
     () =>
       (product?.variants?.items || [])
@@ -47,8 +46,12 @@ function DetailOne(props) {
           cl.id === product.id &&
           (!cl.variantId || selectedVariant === cl.variantId)
       );
+      
       if (cartItem && cartItem.qty) {
-        setQuantity({ ...quantity, [selectedVariant]: cartItem.qty });
+        console.log('cartItem.qty', cartItem.qty)
+        setQuantity(cartItem.qty);
+      } else {
+       setQuantity(1);
       }
       return cartItem;
     }
@@ -116,36 +119,29 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
-    if (cartItem) {
-      router.push("/pages/cart");
-    } else {
-      if (
-        (!product.isInventoryEnabled || product.inventory > 0) &&
-        cartActive
-      ) {
-        if (product.variants.items.length > 0) {
-          let tmpName = product.title,
-            tmpPrice;
-          if (curIndex > -1) {
-            const variant = product.variants.items[curIndex];
-            tmpName = `${tmpName} - ${variant.title}`;
-            tmpPrice = variant.price;
-          }
-
-          addToCart({
-            ...product,
-            name: tmpName,
-            qty: quantity[selectedVariant],
-            price: tmpPrice,
-            variantId: selectedVariant,
-          });
-        } else {
-          addToCart({
-            ...product,
-            qty: quantity[selectedVariant],
-            price: product.price,
-          });
+    if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
+      if (product.variants.items.length > 0) {
+        let tmpName = product.title,
+          tmpPrice;
+        if (curIndex > -1) {
+          const variant = product.variants.items[curIndex];
+          tmpName = `${tmpName} - ${variant.title}`;
+          tmpPrice = variant.price;
         }
+
+        addToCart({
+          ...product,
+          name: tmpName,
+          qty: quantity,
+          price: tmpPrice,
+          variantId: selectedVariant,
+        });
+      } else {
+        addToCart({
+          ...product,
+          qty: quantity,
+          price: product.price,
+        });
       }
     }
   };
@@ -163,7 +159,7 @@ function DetailOne(props) {
   };
 
   function changeQty(qty) {
-    setQuantity({ ...quantity, [selectedVariant]: qty });
+    setQuantity(qty);
     if (cartItem)
       updateCart(
         cartList.map((item) => {
@@ -444,19 +440,35 @@ function DetailOne(props) {
               <div className="product-form-group ">
                 <Quantity
                   max={product.inventory}
-                  qty={quantity[selectedVariant]}
+                  qty={quantity}
                   product={product}
                   onChangeQty={changeQty}
                 />
-                <button
-                  className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                    cartActive ? "" : "disabled"
-                  }`}
-                  onClick={addToCartHandler}
-                >
-                  <i className="d-icon-bag"></i>
-                  {!cartItem ? "Add to" : "View"} Cart
-                </button>
+
+                {cartItem && (
+                  <button
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                      cartActive ? "" : "disabled"
+                    }`}
+                    onClick={() => {
+                      router.push("/pages/cart");
+                    }}
+                  >
+                    <i className="d-icon-bag"></i>
+                    View Cart
+                  </button>
+                )}
+                {!cartItem && (
+                  <button
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                      cartActive ? "" : "disabled"
+                    }`}
+                    onClick={addToCartHandler}
+                  >
+                    <i className="d-icon-bag"></i>
+                    Add toCart
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -466,20 +478,35 @@ function DetailOne(props) {
           <label className="d-none">QTY:</label>
           <div className="product-form-group cart-button-wrapper">
             <Quantity
-              qty={quantity[selectedVariant]}
+              qty={quantity}
               max={product.inventory}
               product={product}
               onChangeQty={changeQty}
             />
-            <button
-              className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                cartActive ? "" : "disabled"
-              }`}
-              onClick={addToCartHandler}
-            >
-              <i className="d-icon-bag"></i>
-              {!cartItem ? "Add to" : "View"} Cart
-            </button>
+            {cartItem && (
+              <button
+                className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                  cartActive ? "" : "disabled"
+                }`}
+                onClick={() => {
+                  router.push("/pages/cart");
+                }}
+              >
+                <i className="d-icon-bag"></i>
+                View Cart
+              </button>
+            )}
+            {!cartItem && (
+              <button
+                className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                  cartActive ? "" : "disabled"
+                }`}
+                onClick={addToCartHandler}
+              >
+                <i className="d-icon-bag"></i>
+                Add toCart
+              </button>
+            )}
           </div>
         </div>
       )}
