@@ -16,6 +16,7 @@ import {
 } from "~/graphql/api";
 import { formateDate, toDecimal } from "~/utils/index";
 import { removePhonePrefix } from "~/utils/helper";
+import { STORE_ID } from "~/config";
 
 function Account({ user }) {
   const router = useRouter();
@@ -28,7 +29,7 @@ function Account({ user }) {
     } = await API.graphql({
       query: searchOrders,
       variables: {
-        filter: { userId: { eq: user.username } },
+        filter: { userId: { eq: user.username }, storeId: { eq: STORE_ID } },
         sort: [{ field: "orderDate", direction: "desc" }],
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",

@@ -8,6 +8,7 @@ import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
+// import { STORE_ID } from "~/config";
 
 import awsconfig from "~/aws-exports";
 
@@ -33,11 +34,30 @@ const App = ({ Component, pageProps }) => {
       });
 
       store.dispatch(userActions.setUser(getUserResponse));
+      // setCart();
     } catch (error) {
       console.log(error);
       store.dispatch(rootActions.destroySession());
     }
   }, [store]);
+
+  // const setCart = useCallback(async () => {
+  //   try {
+  //     const user = await Auth.currentAuthenticatedUser();
+  //     const {
+  //       data: { getUser: getUserResponse },
+  //     } = await API.graphql({
+  //       query: getUser,
+  //       variables: { id: user.username },
+  //       authMode: "AMAZON_COGNITO_USER_POOLS",
+  //     });
+
+  //     store.dispatch(userActions.setUser(getUserResponse));
+  //   } catch (error) {
+  //     console.log(error);
+  //     store.dispatch(rootActions.destroySession());
+  //   }
+  // }, [store]);
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];

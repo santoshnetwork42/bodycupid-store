@@ -19,6 +19,7 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
+import { STORE_ID } from "~/config";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
@@ -35,6 +36,7 @@ function Checkout(props) {
         const { id: ignoreId, ...restAddress } = shippingAddress;
         const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
         const payload = {
+          storeId: STORE_ID,
           userId: user?.username,
           status: "CONFIRMED",
           totalAmount: getFinalPrice(cartList, appliedCoupon),
