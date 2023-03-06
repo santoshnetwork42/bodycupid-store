@@ -124,77 +124,7 @@ export default function Footer({ footer }) {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
-              {/* <div className="widget widget-instagram">
-                <h4 className="widget-title">Instagram</h4>
-                <figure className="widget-body row">
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/01.jpg"
-                      alt="instagram 1"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/02.jpg"
-                      alt="instagram 2"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/03.jpg"
-                      alt="instagram 3"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/04.jpg"
-                      alt="instagram 4"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/05.jpg"
-                      alt="instagram 5"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/06.jpg"
-                      alt="instagram 6"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/07.jpg"
-                      alt="instagram 7"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/08.jpg"
-                      alt="instagram 8"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                </figure>
-              </div> */}
-            </div>
+            <div className="col-lg-3 col-md-6"></div>
           </div>
         </div>
 
@@ -211,7 +141,8 @@ export default function Footer({ footer }) {
           </div>
           <div className="footer-center">
             <p className="copyright ls-normal">
-              Wow lfe science &copy; 2021. All Rights Reserved
+              Wow life science &copy; {new Date().getFullYear()}. All Rights
+              Reserved
             </p>
           </div>
           <div className="footer-right">
