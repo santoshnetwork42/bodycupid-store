@@ -63,6 +63,9 @@ function DescOne(props) {
       setLoading(true);
       API.graphql(
         graphqlOperation(getReviews, {
+          filter: {
+            productId: { eq: product.id },
+          },
           nextToken: reset ? null : token,
         })
       )
