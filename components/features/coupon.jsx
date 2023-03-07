@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import { API, graphqlOperation } from "aws-amplify";
-import Modal from "react-modal";
 
 import {
   applyCoupon as applyCouponMutation,
@@ -10,18 +9,8 @@ import {
 import { cartActions } from "~/store/cart";
 import { getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
-
-const modalStyles = {
-  content: {
-    position: "relative",
-  },
-  overlay: {
-    background: "rgba(0,0,0,.4)",
-    overflowX: "hidden",
-    overflowY: "auto",
-    display: "flex",
-  },
-};
+import { STORE_ID } from "~/config";
+import Modal from "~/components/common/modal";
 
 function Coupon(props) {
   const {
@@ -45,7 +34,7 @@ function Coupon(props) {
         },
       } = await API.graphql(
         graphqlOperation(getFeaturedCoupon, {
-          filter: { isFeatured: { eq: true } },
+          filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
         })
       );
       setFeatured(items);
@@ -134,7 +123,6 @@ function Coupon(props) {
       )}
       <Modal
         isOpen={isOpen}
-        style={modalStyles}
         onRequestClose={() => setOpen(false)}
         shouldReturnFocusAfterClose={false}
         overlayClassName="auth-modal-overlay"

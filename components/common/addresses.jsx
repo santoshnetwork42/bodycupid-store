@@ -1,24 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { API } from "aws-amplify";
-import Modal from "react-modal";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import AddressForm from "./addressForm";
 import { deleteUserAddress } from "~/graphql/mutations";
 import { findUserAddresses } from "~/graphql/api";
-
-const modalStyles = {
-  content: {
-    position: "relative",
-  },
-  overlay: {
-    background: "rgba(0,0,0,.4)",
-    overflowX: "hidden",
-    overflowY: "auto",
-    display: "flex",
-  },
-};
+import Modal from "~/components/common/modal";
 
 function Addresses({ user, onAddressChange }) {
   const [loading, setLoading] = useState(!!user);
@@ -33,7 +21,7 @@ function Addresses({ user, onAddressChange }) {
     } = await API.graphql({
       query: findUserAddresses,
       variables: {
-        filter: { userID: { eq: user.username } },
+        filter: { userID: { eq: user.id } },
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
@@ -165,21 +153,12 @@ function Addresses({ user, onAddressChange }) {
 
       <Modal
         isOpen={isOpen}
-        style={modalStyles}
         onRequestClose={() => setOpen(false)}
         shouldReturnFocusAfterClose={false}
         overlayClassName="address-modal-overlay"
         className="address-popup bg-img"
       >
         <AddressForm defaultAddress={defaultAddress} onSubmit={onAddress} />
-        <button
-          title="Close (Esc)"
-          type="button"
-          className="mfp-close"
-          onClick={() => setOpen(false)}
-        >
-          <span>×</span>
-        </button>
       </Modal>
     </div>
   );

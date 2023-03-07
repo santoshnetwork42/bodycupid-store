@@ -1,12 +1,19 @@
 import { useCallback, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 import ALink from "~/components/features/custom-link";
-import { createOrder, createOrderProduct } from "~/graphql/api";
+import {
+  createOrder,
+  createOrderProduct,
+  createTransaction,
+  createPayment,
+  getZipCode,
+} from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import {
   toDecimal,
@@ -19,86 +26,219 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
+import loadScript from "~/utils/loadScript";
+import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import AlertPopup from "~/components/features/product/common/alert-popup";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, appliedCoupon, openLogin, removeCoupon } =
-    props;
+  const {
+    cartList,
+    user,
+    emptyCart,
+    appliedCoupon,
+    openLogin,
+    removeCoupon,
+    store,
+  } = props;
 
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
 
+  const validateZipCode = useCallback(async () => {
+    const { pinCode } = shippingAddress;
+    if (pinCode) {
+      const {
+        data: { getZipCode: response },
+      } = await API.graphql(graphqlOperation(getZipCode, { id: pinCode }));
+      if (response) {
+        if (isFirst) return response.prepaid;
+        return response.cod;
+      }
+    }
+
+    return false;
+  }, [shippingAddress, isFirst]);
+
+  const handlePayment = useCallback(
+    async ({ orderId, paymentId, address }) => {
+      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+
+      const [
+        rzpEnabled,
+        {
+          data: { createTransaction: transaction },
+        },
+      ] = await Promise.all([
+        loadScript(RAZORPAY_SCRIPT),
+        API.graphql({
+          query: createTransaction,
+          variables: { orderId },
+          authMode,
+        }),
+      ]);
+
+      if (rzpEnabled && transaction) {
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: transaction.amount,
+          currency: "INR",
+          name: store.name,
+          image: getPublicImageURL(store.imageUrl),
+          order_id: transaction.orderId,
+          handler: async function ({ razorpay_payment_id }) {
+            await router.push(
+              `/order/${orderId}?paymentId=${razorpay_payment_id}`
+            );
+            await emptyCart();
+          },
+          prefill: {
+            name: address.name,
+            email: address.email,
+            contact: address.phone,
+          },
+          notes: {
+            storeId: store.id,
+            orderId,
+            paymentId,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+      } else {
+        toast(
+          <AlertPopup
+            message="Something went wrong. Try Again!"
+            status="error"
+          />
+        );
+      }
+    },
+    [store, user]
+  );
+
+  const addUserAddress = useCallback(async () => {
+    const { id: ignoreId, ...restAddress } = shippingAddress;
+    if (user && !ignoreId) {
+      await API.graphql({
+        query: createUserAddress,
+        variables: { input: { ...restAddress, userID: user.id } },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+    }
+
+    return Promise.resolve(null);
+  }, [shippingAddress, user]);
+
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      try {
-        const { id: ignoreId, ...restAddress } = shippingAddress;
-        const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
-        const payload = {
-          userId: user?.username,
-          status: "CONFIRMED",
-          totalAmount: getFinalPrice(cartList, appliedCoupon),
-          totalDiscount: getCouponTotal(appliedCoupon, cartList),
-          totalShippingCharges: getShippingPrice(cartList),
-          orderDate: new Date().toISOString(),
-          sla: new Date().toISOString(),
-          paymentType: isFirst ? "PREPAID" : "COD",
-          shippingAddress: restAddress,
-          billingAddress: restAddress,
-          couponCodeId: appliedCoupon?.id,
-        };
+      if (await validateZipCode()) {
+        try {
+          const { id: ignoreId, ...restAddress } = shippingAddress;
+          const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+          const payload = {
+            storeId: STORE_ID,
+            userId: user?.id,
+            status: isFirst ? "PENDING" : "CONFIRMED",
+            totalAmount: getFinalPrice(cartList, appliedCoupon),
+            totalDiscount: getCouponTotal(appliedCoupon, cartList),
+            totalShippingCharges: getShippingPrice(cartList),
+            orderDate: new Date().toISOString(),
+            sla: new Date().toISOString(),
+            paymentType: isFirst ? "PREPAID" : "COD",
+            shippingAddress: restAddress,
+            billingAddress: restAddress,
+            couponCodeId: appliedCoupon?.id,
+          };
 
-        const {
-          data: {
-            createOrder: { id: orderId },
-          },
-        } = await API.graphql({
-          query: createOrder,
-          variables: { input: payload },
-          authMode,
-        });
+          const {
+            data: {
+              createOrder: { id: orderId },
+            },
+          } = await API.graphql({
+            query: createOrder,
+            variables: { input: payload },
+            authMode,
+          });
 
-        const promise = [
-          ...cartList.map((p) =>
+          const promise = [
             API.graphql({
-              query: createOrderProduct,
+              query: createPayment,
               variables: {
                 input: {
+                  userId: user?.id,
+                  storeId: STORE_ID,
                   orderId,
-                  productId: p.id,
-                  variantId: p.variantId,
-                  quantity: p.qty,
-                  price: p.price,
-                  title: p.title,
-                  totalPrice: parseInt(p.qty) * parseInt(p.price),
-                  sku: p.sku,
+                  method: isFirst ? "ONLINE" : "COD",
+                  amount: getFinalPrice(cartList, appliedCoupon),
                 },
               },
               authMode,
-            })
-          ),
-        ];
+            }),
+            ...cartList.map((p) =>
+              API.graphql({
+                query: createOrderProduct,
+                variables: {
+                  input: {
+                    orderId,
+                    productId: p.id,
+                    variantId: p.variantId,
+                    quantity: p.qty,
+                    price: p.price,
+                    title: p.title,
+                    totalPrice: parseInt(p.qty) * parseInt(p.price),
+                    sku: p.sku,
+                  },
+                },
+                authMode,
+              })
+            ),
+          ];
 
-        if (user && !ignoreId) {
-          promise.push(
-            API.graphql({
-              query: createUserAddress,
-              variables: { input: { ...restAddress, userID: user.username } },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
-            })
-          );
+          promise.push(addUserAddress());
+
+          const [
+            {
+              data: { createPayment: payment },
+            },
+          ] = await Promise.all(promise);
+
+          if (isFirst) {
+            handlePayment({
+              orderId,
+              paymentId: payment.id,
+              address: restAddress,
+            });
+          } else {
+            await router.push(`/order/${orderId}`);
+            await emptyCart();
+          }
+        } catch (error) {
+          console.log(error);
         }
-
-        await Promise.all(promise);
-        await emptyCart();
-        await router.push(`/order/${orderId}`);
-      } catch (e) {
-        console.log("e", e);
+      } else {
+        const message = isFirst
+          ? "Online Delivery is not available at this pincocde"
+          : "Cash on Delivery is not available at this pincocde";
+        toast(<AlertPopup status="error" message={message} />);
       }
-
       return false;
     },
-    [user, isFirst, appliedCoupon, shippingAddress, cartList]
+    [
+      user,
+      isFirst,
+      appliedCoupon,
+      shippingAddress,
+      cartList,
+      createUserAddress,
+      handlePayment,
+      validateZipCode,
+    ]
   );
 
   const codDisabled = useMemo(
@@ -356,6 +496,7 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    store: state.system.store,
   };
 }
 
