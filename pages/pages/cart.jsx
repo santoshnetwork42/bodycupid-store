@@ -161,11 +161,7 @@ function Cart(props) {
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
-                    <Coupons
-                      price={toDecimal(
-                        getCouponTotal(appliedCoupon, cartItems)
-                      )}
-                    />
+                    <Coupons />
                     <div className="summary mb-4">
                       <h3 className="summary-title text-left">Cart Totals</h3>
                       <table className="shipping">

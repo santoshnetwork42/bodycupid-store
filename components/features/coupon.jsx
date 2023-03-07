@@ -25,7 +25,6 @@ const modalStyles = {
 
 function Coupon(props) {
   const {
-    price,
     user,
     cartList,
     applyCoupon,
@@ -122,7 +121,11 @@ function Coupon(props) {
           {!!appliedCoupon && (
             <div className="summary-saving-lable-container">
               <p className="saving-lable">
-                You are saving <span>{`₹${price}`}</span> on this order
+                You are saving{" "}
+                <span>{`₹${toDecimal(
+                  getCouponTotal(appliedCoupon, cartList)
+                )}`}</span>{" "}
+                on this order
               </p>
             </div>
           )}
