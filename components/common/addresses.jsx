@@ -116,32 +116,34 @@ function Addresses({ user, onAddressChange }) {
                     <h5 className="card-title text-uppercase">{adr.name}</h5>
                     <p className="add-lables-values">
                       {adr?.email && (
-                        <p>
+                        <span>
                           {adr?.email} <br />
-                        </p>
+                        </span>
                       )}
                       {adr?.phone && (
-                        <p>
+                        <span>
                           {adr?.phone} <br />
-                        </p>
+                        </span>
                       )}
                       {adr?.address && (
-                        <p className="add-address">
+                        <span className="add-address">
                           {adr?.address}
                           <br />
-                        </p>
+                        </span>
                       )}
                       {adr?.area && (
-                        <p>
+                        <span>
                           {adr?.area} <br />
-                        </p>
+                        </span>
                       )}
                       {adr?.landmark && (
-                        <p>
+                        <span>
                           {adr?.landmark} <br />
-                        </p>
+                        </span>
                       )}
-                      {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
+                      <span>
+                        {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
+                      </span>
                     </p>
                     <div className="add-bottom-btn">
                       <ALink

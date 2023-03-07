@@ -219,14 +219,7 @@ function ProductTwo(props) {
           </div>
 
           {/* <ALink href={`/product/${product.slug}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
-          {/* <ALink href={`/product/${product.slug}`} className="rating-reviews"> */}
-          <ALink
-            href={{
-              pathname: `/product/${product.slug}`,
-              query: { review: true },
-            }}
-            className="rating-reviews"
-          >
+          <ALink href={`/product/${product.slug}`} className="rating-reviews">
             ( {product.reviews?.items?.length} reviews )
           </ALink>
         </div>
