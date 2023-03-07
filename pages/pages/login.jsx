@@ -97,7 +97,7 @@ function Login({ auth, redirect = true, closeLogin }) {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
         } else {
-          toast(<AlertPopup message={error.message} status="success" />);
+          toast(<AlertPopup message={error.message} status="error" />);
         }
       }
       return false;

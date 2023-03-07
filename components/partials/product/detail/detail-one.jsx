@@ -309,7 +309,7 @@ function DetailOne(props) {
 
         {/* <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink> */}
         <div onClick={onReviewClick} className="rating-reviews cursor-pointer">
-          ( {product.totalRating} reviews )
+          ( {product.totalRatings} reviews )
         </div>
       </div>
 

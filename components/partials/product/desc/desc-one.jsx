@@ -189,7 +189,7 @@ function DescOne(props) {
         <Tab className="nav-item">
           {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
           <span className="nav-link" id="product-review">
-            Reviews ({product?.totalRating})
+            Reviews ({product?.totalRatings})
           </span>
         </Tab>
       </TabList>
@@ -308,7 +308,7 @@ function DescOne(props) {
                 <div className="total-review w-100">
                   <h4>{product?.rating}</h4>
                   <RatingStar value={3} />
-                  <span>Based on {product.totalRating} reviews</span>
+                  <span>Based on {product.totalRatings} reviews</span>
                 </div>
                 <div className="rating w-100">
                   {[5, 4, 3, 2, 1].map((num, i) => (

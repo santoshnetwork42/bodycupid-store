@@ -311,6 +311,7 @@ export const getProductBySlug = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -591,6 +592,7 @@ export const getOrder = /* GraphQL */ `
           id
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -1084,6 +1086,7 @@ export const searchOrders = /* GraphQL */ `
             id
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -1159,6 +1162,55 @@ export const updateUser = /* GraphQL */ `
       totalStoreCredit
       isCognitoConfirmed
       profilePhotoUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction($orderId: ID!) {
+    createTransaction(orderId: $orderId) {
+      orderId
+      amount
+    }
+  }
+`;
+
+export const getStore = /* GraphQL */ `
+  query GetStore($id: ID!) {
+    getStore(id: $id) {
+      id
+      name
+      description
+      isActive
+      webUrl
+      appId
+      host
+      priority
+      imageUrl
+    }
+  }
+`;
+
+export const validateTransaction = /* GraphQL */ `
+  mutation ValidateTransaction($orderId: ID!, $razorpayPaymentId: String!) {
+    validateTransaction(
+      orderId: $orderId
+      razorpayPaymentId: $razorpayPaymentId
+    ) {
+      success
+    }
+  }
+`;
+
+export const getZipCode = /* GraphQL */ `
+  query GetZipCode($id: ID!) {
+    getZipCode(id: $id) {
+      id
+      codMaxAmount
+      cod
+      prepaid
       createdAt
       updatedAt
     }
