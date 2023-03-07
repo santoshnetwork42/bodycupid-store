@@ -10,8 +10,8 @@ import { modalActions } from "~/store/modal";
 import { formateDate, toDecimal } from "~/utils";
 import { createReview } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
-import ProductsOptions from "../product-options";
-import productsOptions from "~/lib/productsOptions.json";
+import ProductSpecifications from "../product-specifications";
+import productSpecifications from "~/lib/productSpecifications.json";
 
 const reviewDefault = {
   rating: 1,
@@ -146,8 +146,8 @@ function DescOne(props) {
           <div className="row mt-6">
             <div className="pl-md-6 pt-4 pt-md-0">
               <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
-                {productsOptions.map((options) => (
-                  <ProductsOptions key={options.id} options={options} />
+                {productSpecifications.map((options, index) => (
+                  <ProductSpecifications key={index} {...options} />
                 ))}
               </div>
               <hr className="product-divider"></hr>
