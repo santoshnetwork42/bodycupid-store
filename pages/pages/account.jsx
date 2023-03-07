@@ -16,18 +16,20 @@ import {
 } from "~/graphql/api";
 import { formateDate, toDecimal } from "~/utils/index";
 import { removePhonePrefix } from "~/utils/helper";
+import { STORE_ID } from "~/config";
 
 function Account({ user }) {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
   const [userDetail, setUser] = useSetState({ ...user });
+  const [activeTab, setActiveTab] = useState(0);
   const getOrders = useCallback(async () => {
     const {
       data: { searchOrders: listOrdersResponse },
     } = await API.graphql({
       query: searchOrders,
       variables: {
-        filter: { userId: { eq: user.username } },
+        filter: { userId: { eq: user.id }, storeId: { eq: STORE_ID } },
         sort: [{ field: "orderDate", direction: "desc" }],
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -41,7 +43,7 @@ function Account({ user }) {
       data: { getUser: getUserResponse },
     } = await API.graphql({
       query: getUser,
-      variables: { id: user.username },
+      variables: { id: user.id },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
@@ -78,7 +80,7 @@ function Account({ user }) {
         query: updateUserMutation,
         variables: {
           input: {
-            id: user.username,
+            id: user.id,
             firstName: userDetail.firstName,
             lastName: userDetail.lastName,
           },
@@ -89,6 +91,10 @@ function Account({ user }) {
     },
     [userDetail, user]
   );
+
+  const onActiveTabIndexChange = (index) => {
+    setActiveTab(index);
+  };
 
   if (!user) return <></>;
 
@@ -120,8 +126,12 @@ function Account({ user }) {
           <Tabs
             selectedTabClassName="show"
             selectedTabPanelClassName="active"
-            defaultIndex={0}
+            defaultIndex={activeTab}
             className="tab tab-vertical gutter-lg"
+            selectedIndex={activeTab}
+            onSelect={(index) => {
+              onActiveTabIndexChange(index);
+            }}
           >
             <TabList
               className="nav nav-tabs mb-4 col-lg-3 col-md-4"
@@ -148,8 +158,11 @@ function Account({ user }) {
             <div className="tab-content col-lg-9 col-md-8">
               <TabPanel className="tab-pane dashboard">
                 <p className="mb-0">
-                  Hello {!!user.name && <span>{user.name}</span>} (not{" "}
-                  <span>User</span>?{" "}
+                  Hello{" "}
+                  <span>
+                    {user.firstName} {user.lastName}
+                  </span>{" "}
+                  (not <span>User</span>?{" "}
                   <ALink
                     href="/"
                     className="text-primary"
@@ -161,7 +174,13 @@ function Account({ user }) {
                 </p>
                 <p className="mb-8">
                   From your account dashboard you can view your{" "}
-                  <ALink href="#" className="link-to-tab text-primary">
+                  <ALink
+                    href="#"
+                    className="link-to-tab text-primary"
+                    onClick={() => {
+                      onActiveTabIndexChange(1);
+                    }}
+                  >
                     recent orders
                   </ALink>
                   , manage your shipping and billing addresses,

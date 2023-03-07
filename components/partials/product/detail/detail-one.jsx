@@ -212,6 +212,12 @@ function DetailOne(props) {
 
       <h2 className="product-name">{product.title}</h2>
 
+      {!!product?.tags && (
+        <label className="product-tag">
+          {product?.tags.split(",").join(" | ")}
+        </label>
+      )}
+
       <div className="product-meta">
         {product.category && (
           <>
@@ -301,10 +307,14 @@ function DetailOne(props) {
           </span>
         </div>
 
-        {/* <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink> */}
-        <div onClick={onReviewClick} className="rating-reviews cursor-pointer">
-          ( {product.reviews.items.length} reviews )
-        </div>
+        {!!product.totalRatings && (
+          <div
+            onClick={onReviewClick}
+            className="rating-reviews cursor-pointer"
+          >
+            ( {product.totalRatings} reviews )
+          </div>
+        )}
       </div>
 
       <p className="product-short-desc">{product.productDescription}</p>

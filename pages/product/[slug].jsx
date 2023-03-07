@@ -10,6 +10,7 @@ import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
+import { STORE_ID } from "~/config";
 
 function ProductDefault() {
   const { slug, variantId } = useRouter().query;
@@ -20,21 +21,24 @@ function ProductDefault() {
   const [selectedVaraint, setVariant] = useState(variantId);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(getProductBySlug, { slug })).then(
-      (response) => {
-        let [product] = response.data.byslugProduct.items;
-        setProduct(product);
-        if (!selectedVaraint && product.variants.items.length) {
-          setVariant(product.variants.items[0].id);
-        }
-        setLoading(false);
+    API.graphql(
+      graphqlOperation(getProductBySlug, {
+        slug,
+        filter: { storeId: { eq: STORE_ID } },
+      })
+    ).then((response) => {
+      let [product] = response.data.byslugProduct.items;
+      setProduct(product);
+      if (!selectedVaraint && product.variants.items.length) {
+        setVariant(product.variants.items[0].id);
       }
-    );
+      setLoading(false);
+    });
   }, [slug]);
 
   useEffect(() => {
     if (product?.subCategoryId || product?.subCategoryId) {
-      const filter = { id: { ne: product.id } };
+      const filter = { id: { ne: product.id }, storeId: { ne: STORE_ID } };
       if (product?.subCategoryId) {
         filter.subCategoryId = { eq: product.subCategoryId };
       } else {

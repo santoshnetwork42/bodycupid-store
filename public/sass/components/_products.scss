@@ -452,6 +452,14 @@
     }
 }
 
+// Product Tag
+.product-tag {
+    font-size:1.2rem;
+    text-overflow: ellipsis;
+    color:$success-color;
+    text-align: center !important;
+}
+
 // Product Price
 .product-price {
     overflow: hidden;
@@ -510,7 +518,7 @@
 
     &::before {
         content: "\e955 " "\e955 " "\e955 " "\e955 " "\e955";
-        @include css( color, product, rating, _star-color );
+        color: $secondary-color !important;
         font-family: 'riode';
     }
 }
