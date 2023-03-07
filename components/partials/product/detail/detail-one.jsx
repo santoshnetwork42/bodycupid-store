@@ -14,6 +14,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
+import { deliveryRemainingTime } from "~/utils/helper";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -31,6 +32,7 @@ function DetailOne(props) {
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const today = new Date();
   const sizes = useMemo(
     () =>
       (product?.variants?.items || [])
@@ -46,11 +48,11 @@ function DetailOne(props) {
           cl.id === product.id &&
           (!cl.variantId || selectedVariant === cl.variantId)
       );
-      
+
       if (cartItem && cartItem.qty) {
         setQuantity(cartItem.qty);
       } else {
-       setQuantity(1);
+        setQuantity(1);
       }
       return cartItem;
     }
@@ -369,6 +371,12 @@ function DetailOne(props) {
             </div>
           </div>
         </>
+      )}
+
+      {today.getHours() > 8 && today.getHours() < 15 && (
+        <p className="remian-time-lable mb-4">
+          For Fastest delivery, order within {deliveryRemainingTime()}
+        </p>
       )}
 
       <hr className="product-divider"></hr>

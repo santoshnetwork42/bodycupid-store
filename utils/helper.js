@@ -28,3 +28,17 @@ export const getProperAddress = (address) => {
   }
   return address;
 };
+
+const pad = (num) => ("0" + parseInt(num)).substr(-2);
+
+export const deliveryRemainingTime = () => {
+  var start = new Date();
+  start.setHours(15, 0, 0); // 3pm
+  var now = new Date();
+  var remain = (start - now) / 1000;
+  var hh = parseInt(pad((remain / 60 / 60) % 60));
+  var mm = parseInt(pad((remain / 60) % 60));
+  if (hh >= 0) {
+    return hh > 0 ? `${hh} hrs ${mm} mins` : `${mm} mins`;
+  }
+};
