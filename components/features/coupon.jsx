@@ -57,6 +57,7 @@ function Coupon(props) {
           setCoupon("");
           applyCoupon(response);
           setOpen(false);
+          setError("");
         } else {
           setError("Coupon cannot be applied");
         }
@@ -138,7 +139,10 @@ function Coupon(props) {
       )}
       <Modal
         isOpen={isOpen}
-        onRequestClose={() => setOpen(false)}
+        onRequestClose={() => {
+          setOpen(false);
+          setError("");
+        }}
         shouldReturnFocusAfterClose={false}
         overlayClassName="auth-modal-overlay"
         className="auth-popup bg-img"
@@ -179,10 +183,10 @@ function Coupon(props) {
                       }
                       return (
                         <div key={c.id} className="featured-coupon">
-                          <div>
+                          <div className="featured-coupon-text-content">
                             <strong>{c.code}</strong>
                             {!!discount && (
-                              <div>
+                              <div className="coupon-tagline">
                                 You will save ₹{toDecimal(discount)} with this
                                 coupon
                               </div>

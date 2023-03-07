@@ -1,7 +1,13 @@
 import React, { useEffect, useMemo, useRef } from "react";
 
-const OptimizedImage = ({ optimizedData, alt, spanAttributes, ...props }) => {
-  const { originalUrl, placeholder, width, height } = optimizedData;
+const OptimizedImage = ({
+  optimizedData,
+  src,
+  alt,
+  spanAttributes,
+  ...props
+}) => {
+  const { originalUrl = src, placeholder, width, height } = optimizedData || {};
   const imageRef = useRef(null);
 
   const fetchImage = async () => {

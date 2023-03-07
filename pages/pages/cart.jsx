@@ -147,14 +147,6 @@ function Cart(props) {
                       ))}
                     </tbody>
                   </table>
-                  <div className="cart-actions mb-6 pt-4">
-                    <ALink
-                      href="/shop"
-                      className="btn btn-dark btn-md btn-rounded btn-icon-left mr-4 mb-4"
-                    >
-                      <i className="d-icon-arrow-left"></i>Continue Shopping
-                    </ALink>
-                  </div>
                 </div>
                 <aside className="col-lg-4 sticky-sidebar-wrapper">
                   <div

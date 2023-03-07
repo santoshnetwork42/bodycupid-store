@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
-import CartPopup from "~/components/features/product/common/cart-popup";
+// import CartPopup from "~/components/features/product/common/cart-popup";
 import CouponPopup from "~/components/features/product/common/coupon-popup";
 import {
   createShoppingCart,
@@ -75,7 +75,10 @@ function cartReducer(state = initialState, action) {
         if (product.id !== action.payload.product.id) {
           cartAcc.push(product);
         } else {
-          if (product.variantId && (product.variantId !== action.payload.product.variantId)) {
+          if (
+            product.variantId &&
+            product.variantId !== action.payload.product.variantId
+          ) {
             cartAcc.push(product);
           }
         }
@@ -163,7 +166,7 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
-    toast(<CartPopup product={e.payload.product} />);
+    // toast(<CartPopup product={e.payload.product} />);
     const { user, cart } = yield select();
     let { cart: cartResponse } = cart;
     const { data } = user;

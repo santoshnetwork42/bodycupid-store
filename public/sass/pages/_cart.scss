@@ -505,6 +505,9 @@
     .d-flex {
         align-items: baseline;
     }
+    .coupon-tagline{
+        color: $success-color;
+    }
 }
 
 .featured-coupon {
@@ -513,6 +516,9 @@
     border-bottom: 1px solid #e1e1e1;
     display: flex;
     justify-content: space-between;
+    .featured-coupon-text-content{
+        margin-right: 2rem;
+    }
 }
 
 .cart-coupon-box {
