@@ -41,7 +41,7 @@ export default function ProductVariant({ item, onSelect, selected }) {
           <ins className="new-price mr-2">₹{toDecimal(price)}</ins>{" "}
           {listingPrice > price && (
             <>
-              <del className="old-price mr-2">₹{listingPrice}</del>{" "}
+              <del className="old-price mr-2">₹{toDecimal(listingPrice)}</del>{" "}
             </>
           )}
         </div>
