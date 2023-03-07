@@ -1206,3 +1206,14 @@ export const getStore = /* GraphQL */ `
     }
   }
 `;
+
+export const validateTransaction = /* GraphQL */ `
+  mutation ValidateTransaction($orderId: ID!, $razorpayPaymentId: String!) {
+    validateTransaction(
+      orderId: $orderId
+      razorpayPaymentId: $razorpayPaymentId
+    ) {
+      success
+    }
+  }
+`;

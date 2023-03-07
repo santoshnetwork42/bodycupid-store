@@ -1463,6 +1463,7 @@ export const deleteUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -2592,6 +2593,7 @@ export const deleteUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -2897,6 +2899,7 @@ export const deleteUser = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -3229,6 +3232,7 @@ export const deleteUser = /* GraphQL */ `
               method
               status
               amount
+              paymentDate
               createdAt
               updatedAt
             }
@@ -3844,6 +3848,7 @@ export const deleteUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -3942,6 +3947,7 @@ export const deleteUser = /* GraphQL */ `
           method
           status
           amount
+          paymentDate
           createdAt
           updatedAt
         }
@@ -4497,6 +4503,7 @@ export const deleteUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -5284,6 +5291,7 @@ export const updateOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -5737,6 +5745,7 @@ export const updateOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -6093,6 +6102,7 @@ export const updateOrderComment = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -6327,6 +6337,7 @@ export const updateOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -6381,6 +6392,7 @@ export const updateOrderComment = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -6589,6 +6601,7 @@ export const updateOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -10214,6 +10227,7 @@ export const createUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -11343,6 +11357,7 @@ export const createUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -11648,6 +11663,7 @@ export const createUser = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -11980,6 +11996,7 @@ export const createUser = /* GraphQL */ `
               method
               status
               amount
+              paymentDate
               createdAt
               updatedAt
             }
@@ -12595,6 +12612,7 @@ export const createUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -12693,6 +12711,7 @@ export const createUser = /* GraphQL */ `
           method
           status
           amount
+          paymentDate
           createdAt
           updatedAt
         }
@@ -13248,6 +13267,7 @@ export const createUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -14825,6 +14845,7 @@ export const updateUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -15954,6 +15975,7 @@ export const updateUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -16259,6 +16281,7 @@ export const updateUser = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -16591,6 +16614,7 @@ export const updateUser = /* GraphQL */ `
               method
               status
               amount
+              paymentDate
               createdAt
               updatedAt
             }
@@ -17206,6 +17230,7 @@ export const updateUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -17304,6 +17329,7 @@ export const updateUser = /* GraphQL */ `
           method
           status
           amount
+          paymentDate
           createdAt
           updatedAt
         }
@@ -17859,6 +17885,7 @@ export const updateUser = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -39156,6 +39183,7 @@ export const createProductInventory = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -41080,6 +41108,7 @@ export const updateProductInventory = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -43004,6 +43033,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -46670,6 +46700,7 @@ export const createProduct = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -50946,6 +50977,7 @@ export const updateProduct = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -55222,6 +55254,7 @@ export const deleteProduct = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -57756,6 +57789,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -59679,6 +59713,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -61602,6 +61637,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -63420,6 +63456,7 @@ export const createOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -63873,6 +63910,7 @@ export const createOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -64229,6 +64267,7 @@ export const createOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -64463,6 +64502,7 @@ export const createOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -64517,6 +64557,7 @@ export const createOrder = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -64725,6 +64766,7 @@ export const createOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -65691,6 +65733,7 @@ export const createOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -65802,6 +65845,7 @@ export const createOrder = /* GraphQL */ `
               method
               status
               amount
+              paymentDate
               createdAt
               updatedAt
             }
@@ -67047,6 +67091,7 @@ export const createOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -67145,6 +67190,7 @@ export const createOrder = /* GraphQL */ `
           method
           status
           amount
+          paymentDate
           createdAt
           updatedAt
         }
@@ -67567,6 +67613,7 @@ export const createOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -68850,6 +68897,7 @@ export const updateOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -69303,6 +69351,7 @@ export const updateOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -69659,6 +69708,7 @@ export const updateOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -69893,6 +69943,7 @@ export const updateOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -69947,6 +69998,7 @@ export const updateOrder = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -70155,6 +70207,7 @@ export const updateOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -71121,6 +71174,7 @@ export const updateOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -71232,6 +71286,7 @@ export const updateOrder = /* GraphQL */ `
               method
               status
               amount
+              paymentDate
               createdAt
               updatedAt
             }
@@ -72477,6 +72532,7 @@ export const updateOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -72575,6 +72631,7 @@ export const updateOrder = /* GraphQL */ `
           method
           status
           amount
+          paymentDate
           createdAt
           updatedAt
         }
@@ -72997,6 +73054,7 @@ export const updateOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -74280,6 +74338,7 @@ export const deleteOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -74733,6 +74792,7 @@ export const deleteOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -75089,6 +75149,7 @@ export const deleteOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -75323,6 +75384,7 @@ export const deleteOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -75377,6 +75439,7 @@ export const deleteOrder = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -75585,6 +75648,7 @@ export const deleteOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -76551,6 +76615,7 @@ export const deleteOrder = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -76662,6 +76727,7 @@ export const deleteOrder = /* GraphQL */ `
               method
               status
               amount
+              paymentDate
               createdAt
               updatedAt
             }
@@ -77907,6 +77973,7 @@ export const deleteOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -78005,6 +78072,7 @@ export const deleteOrder = /* GraphQL */ `
           method
           status
           amount
+          paymentDate
           createdAt
           updatedAt
         }
@@ -78427,6 +78495,7 @@ export const deleteOrder = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -79204,6 +79273,7 @@ export const createOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -79657,6 +79727,7 @@ export const createOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -80013,6 +80084,7 @@ export const createOrderComment = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -80247,6 +80319,7 @@ export const createOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -80301,6 +80374,7 @@ export const createOrderComment = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -80509,6 +80583,7 @@ export const createOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -81256,6 +81331,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -81709,6 +81785,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -82065,6 +82142,7 @@ export const deleteOrderComment = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -82299,6 +82377,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -82353,6 +82432,7 @@ export const deleteOrderComment = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -82561,6 +82641,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -84069,6 +84150,7 @@ export const createOrderProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -86049,6 +86131,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -88029,6 +88112,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -89753,6 +89837,7 @@ export const createPayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -90206,6 +90291,7 @@ export const createPayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -90562,6 +90648,7 @@ export const createPayment = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -90796,6 +90883,7 @@ export const createPayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -90850,6 +90938,7 @@ export const createPayment = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -91058,6 +91147,7 @@ export const createPayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -91131,6 +91221,7 @@ export const createPayment = /* GraphQL */ `
       method
       status
       amount
+      paymentDate
       createdAt
       updatedAt
     }
@@ -92313,6 +92404,7 @@ export const updatePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -92766,6 +92858,7 @@ export const updatePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -93122,6 +93215,7 @@ export const updatePayment = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -93356,6 +93450,7 @@ export const updatePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -93410,6 +93505,7 @@ export const updatePayment = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -93618,6 +93714,7 @@ export const updatePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -93691,6 +93788,7 @@ export const updatePayment = /* GraphQL */ `
       method
       status
       amount
+      paymentDate
       createdAt
       updatedAt
     }
@@ -94873,6 +94971,7 @@ export const deletePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -95326,6 +95425,7 @@ export const deletePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -95682,6 +95782,7 @@ export const deletePayment = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -95916,6 +96017,7 @@ export const deletePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -95970,6 +96072,7 @@ export const deletePayment = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -96178,6 +96281,7 @@ export const deletePayment = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -96251,6 +96355,7 @@ export const deletePayment = /* GraphQL */ `
       method
       status
       amount
+      paymentDate
       createdAt
       updatedAt
     }
@@ -96927,6 +97032,7 @@ export const createReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -97380,6 +97486,7 @@ export const createReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -97736,6 +97843,7 @@ export const createReview = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -97970,6 +98078,7 @@ export const createReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -98024,6 +98133,7 @@ export const createReview = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -98232,6 +98342,7 @@ export const createReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -99731,6 +99842,7 @@ export const createReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -100897,6 +101009,7 @@ export const updateReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -101350,6 +101463,7 @@ export const updateReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -101706,6 +101820,7 @@ export const updateReview = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -101940,6 +102055,7 @@ export const updateReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -101994,6 +102110,7 @@ export const updateReview = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -102202,6 +102319,7 @@ export const updateReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -103701,6 +103819,7 @@ export const updateReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -104867,6 +104986,7 @@ export const deleteReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -105320,6 +105440,7 @@ export const deleteReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -105676,6 +105797,7 @@ export const deleteReview = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -105910,6 +106032,7 @@ export const deleteReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -105964,6 +106087,7 @@ export const deleteReview = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -106172,6 +106296,7 @@ export const deleteReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -107671,6 +107796,7 @@ export const deleteReview = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -111685,6 +111811,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -113633,6 +113760,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -115581,6 +115709,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -119619,6 +119748,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -121568,6 +121698,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -123517,6 +123648,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -125211,6 +125343,7 @@ export const createCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -125664,6 +125797,7 @@ export const createCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -126020,6 +126154,7 @@ export const createCouponCode = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -126254,6 +126389,7 @@ export const createCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -126308,6 +126444,7 @@ export const createCouponCode = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -126516,6 +126653,7 @@ export const createCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -127779,6 +127917,7 @@ export const updateCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -128232,6 +128371,7 @@ export const updateCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -128588,6 +128728,7 @@ export const updateCouponCode = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -128822,6 +128963,7 @@ export const updateCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -128876,6 +129018,7 @@ export const updateCouponCode = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -129084,6 +129227,7 @@ export const updateCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -130347,6 +130491,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -130800,6 +130945,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -131156,6 +131302,7 @@ export const deleteCouponCode = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -131390,6 +131537,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -131444,6 +131592,7 @@ export const deleteCouponCode = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -131652,6 +131801,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -133050,6 +133200,7 @@ export const applyCoupon = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -133503,6 +133654,7 @@ export const applyCoupon = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -133859,6 +134011,7 @@ export const applyCoupon = /* GraphQL */ `
                 method
                 status
                 amount
+                paymentDate
                 createdAt
                 updatedAt
               }
@@ -134093,6 +134246,7 @@ export const applyCoupon = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -134147,6 +134301,7 @@ export const applyCoupon = /* GraphQL */ `
             method
             status
             amount
+            paymentDate
             createdAt
             updatedAt
           }
@@ -134355,6 +134510,7 @@ export const applyCoupon = /* GraphQL */ `
                   method
                   status
                   amount
+                  paymentDate
                   createdAt
                   updatedAt
                 }
@@ -134459,6 +134615,16 @@ export const createTransaction = /* GraphQL */ `
     createTransaction(orderId: $orderId) {
       orderId
       amount
+    }
+  }
+`;
+export const validateTransaction = /* GraphQL */ `
+  mutation ValidateTransaction($orderId: ID!, $razorpayPaymentId: String!) {
+    validateTransaction(
+      orderId: $orderId
+      razorpayPaymentId: $razorpayPaymentId
+    ) {
+      success
     }
   }
 `;
