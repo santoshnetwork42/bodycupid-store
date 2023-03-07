@@ -188,6 +188,12 @@ function ProductTwo(props) {
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
+        {!!product?.tags && (
+          <label className="product-tag">
+            {product?.tags.split(",").join(" | ")}
+          </label>
+        )}
+
         <div className="product-price">
           {/* {
                         product.price[0] !== product.price[1] ?
@@ -218,10 +224,11 @@ function ProductTwo(props) {
             </span>
           </div>
 
-          {/* <ALink href={`/product/${product.slug}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
-          <ALink href={`/product/${product.slug}`} className="rating-reviews">
-            ( {product.reviews?.items?.length} reviews )
-          </ALink>
+          {!!product?.totalRatings && (
+            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+              ( {product?.totalRatings} reviews )
+            </ALink>
+          )}
         </div>
       </div>
     </div>

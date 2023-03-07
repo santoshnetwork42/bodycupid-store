@@ -9,6 +9,7 @@ import { searchProductsBasic } from "~/graphql/api";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { STORE_ID } from "~/config";
 
 function SearchForm() {
   const router = useRouter();
@@ -23,7 +24,10 @@ function SearchForm() {
       },
     } = await API.graphql(
       graphqlOperation(searchProductsBasic, {
-        filter: { title: { matchPhrasePrefix: searchTerm } },
+        filter: {
+          storeId: { eq: STORE_ID },
+          title: { matchPhrasePrefix: searchTerm },
+        },
       })
     );
     setData(items);

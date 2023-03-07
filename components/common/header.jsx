@@ -68,7 +68,7 @@ function Header({ navbar, auth, openLogin }) {
           </div>
 
           <div className="header-right">
-            <ALink href="tel:#" className="icon-box icon-box-side">
+            <ALink href="tel:#" className="icon-box d-sm-none icon-box-side">
               <div className="icon-box-icon mr-0 mr-lg-2">
                 <i className="d-icon-phone"></i>
               </div>
@@ -78,7 +78,7 @@ function Header({ navbar, auth, openLogin }) {
               </div>
             </ALink>
             <span className="divider"></span>
-            <ALink href="/pages/wishlist" className="wishlist">
+            <ALink href="/pages/wishlist" className="wishlist d-sm-none">
               <i className="d-icon-heart"></i>
             </ALink>
             <span className="divider"></span>
@@ -86,7 +86,7 @@ function Header({ navbar, auth, openLogin }) {
             <CartMenu />
             <span className="divider"></span>
             {!!auth && (
-              <ALink href="/pages/account" className="account">
+              <ALink href="/pages/account" className="account d-sm-none">
                 <i className="d-icon-user"></i>
               </ALink>
             )}
