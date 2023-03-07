@@ -1,30 +1,78 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
+import { toast } from "react-toastify";
 
 import ALink from "~/components/features/custom-link";
-import { getOrder } from "~/graphql/api";
+import AlertPopup from "~/components/features/product/common/alert-popup";
+import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
-
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 
 function Order() {
   const [order, setOrder] = useState(null);
+  const [timer, setTimer] = useState(null);
 
   const router = useRouter();
   const { query } = router;
-  const { orderId } = query;
+  const { orderId, paymentId } = query;
+
+  const fetchOrder = useCallback(async () => {
+    const response = await API.graphql({
+      query: getOrder,
+      variables: { id: orderId },
+    });
+    setOrder(response.data.getOrder);
+  }, [orderId]);
+
+  const fetchPaymentStatus = useCallback(async () => {
+    if (orderId && paymentId) {
+      const {
+        data: {
+          validateTransaction: { success },
+        },
+      } = await API.graphql({
+        query: validateTransaction,
+        variables: { orderId, razorpayPaymentId: paymentId },
+      });
+
+      if (success) {
+        fetchOrder();
+        toast(
+          <AlertPopup
+            message="Thank you! Your order has been confirmed."
+            status="success"
+          />
+        );
+      }
+    }
+  }, [orderId, paymentId]);
 
   useEffect(() => {
-    (async function () {
-      const response = await API.graphql({
-        query: getOrder,
-        variables: { id: orderId },
-      });
-      setOrder(response.data.getOrder);
-    })();
+    fetchOrder();
   }, [orderId]);
+
+  useEffect(() => {
+    if (
+      order?.status === "PENDING" &&
+      order?.paymentType === "PREPAID" &&
+      paymentId
+    ) {
+      toast(
+        <AlertPopup
+          message="Hold On! We're updating your payment status..."
+          status="info"
+        />
+      );
+      if (timer) clearTimeout(timer);
+      const timerId = setTimeout(() => {
+        fetchPaymentStatus();
+        setTimer(null);
+      }, [2000]);
+      setTimer(timerId);
+    }
+  }, [order, paymentId]);
 
   const { state, country } = useMemo(() => {
     if (order?.shippingAddress?.state) {
@@ -125,16 +173,12 @@ function Order() {
               <span>Total:</span>
               <strong>₹{toDecimal(order?.totalAmount)}</strong>
             </div>
-            {order?.payments.items[0] && (
-              <div className="overview-item">
-                <span>Payment method:</span>
-                <strong>
-                  {order?.payments?.items[0]?.method === "COD"
-                    ? "Cash on delivery"
-                    : "Online"}
-                </strong>
-              </div>
-            )}
+            <div className="overview-item">
+              <span>Payment method:</span>
+              <strong>
+                {order?.paymentType === "COD" ? "Cash on delivery" : "Online"}
+              </strong>
+            </div>
           </div>
 
           <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
@@ -198,18 +242,16 @@ function Order() {
                     </td>
                   </tr>
                 )}
-                {order?.payments?.items[0] && (
-                  <tr className="summary-subtotal">
-                    <td>
-                      <h4 className="summary-subtitle">Payment method:</h4>
-                    </td>
-                    <td className="summary-subtotal-price">
-                      {order?.payments?.items[0]?.method === "COD"
-                        ? "Cash on delivery"
-                        : "Online"}
-                    </td>
-                  </tr>
-                )}
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Payment method:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.paymentType === "COD"
+                      ? "Cash on delivery"
+                      : "Online"}
+                  </td>
+                </tr>
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Total:</h4>
@@ -250,7 +292,7 @@ function Order() {
           </div>
 
           <ALink
-            href="/shop"
+            href="/collections/all"
             className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
           >
             <i className="d-icon-arrow-left"></i> Back to List

@@ -1,26 +1,35 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
 
-import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
-import { formateDate, toDecimal } from "~/utils";
-import { createReview } from "~/graphql/api";
+import { createReview, getReviews } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import RatingStar from "../rating-star";
+import Review from "../review";
+import TokenPagination from "~/components/features/token-pagination";
 
 const reviewDefault = {
-  rating: 1,
+  rating: 5,
   comment: "",
   name: "",
   email: "",
+  image: "",
 };
 
 function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
+  const [reviews, setReviews] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [showReview, setShowReview] = useState(false);
+  const [token, setToken] = useState(null);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   let sizes = [];
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
@@ -37,17 +46,70 @@ function DescOne(props) {
       });
     }
   }
-
-  const setRating = (e) => {
-    e.preventDefault();
-
-    if (e.currentTarget.parentNode.querySelector(".active")) {
-      e.currentTarget.parentNode
-        .querySelector(".active")
-        .classList.remove("active");
+  const allReviews = useMemo(() => {
+    if (reviews && reviews.length) {
+      return [1, 2, 3, 4, 5].reduce((acc, cur) => {
+        acc = {
+          ...acc,
+          [cur]: reviews.filter((d) => d.rating === cur),
+        };
+        return acc;
+      }, {});
     }
+    return 0;
+  }, [reviews]);
+  const getProductReviews = useCallback(
+    (reset) => {
+      setLoading(true);
+      API.graphql(
+        graphqlOperation(getReviews, {
+          filter: {
+            productId: { eq: product.id },
+          },
+          sort: [{ field: "createdAt", direction: "desc" }],
+          nextToken: reset ? null : token,
+        })
+      )
+        .then(
+          ({
+            data: {
+              searchReviews: { items: response, total, nextToken },
+            },
+          }) => {
+            if (reset) {
+              setReviews(response);
+            } else {
+              setReviews([...reviews, ...response]);
+            }
+            setToken(nextToken);
+            setTotal(total);
+            setLoading(false);
+          }
+        )
+        .catch((err) => {
+          setLoading(false);
+          console.log("err", err);
+        });
+    },
+    [product, token]
+  );
 
-    e.currentTarget.classList.add("active");
+  useEffect(() => {
+    if (tabIndex === 2 && reviews.length === 0) {
+      getProductReviews(true);
+    }
+  }, [tabIndex]);
+
+  const getPer = (total, allReview) => {
+    if (total && allReview) return Math.round((allReview * 100) / total);
+    return 0;
+  };
+
+  const onPhotoChange = (e) => {
+    setReview({
+      ...reviewState,
+      image: URL.createObjectURL(e.target.files[0]),
+    });
   };
 
   const showVideoModalHandler = (e) => {
@@ -60,15 +122,16 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
+        const { rating, comment, name, email } = reviewState;
         await API.graphql({
           query: createReview,
           variables: {
             input: {
-              rating: reviewState.rating,
-              comment: reviewState.comment,
+              rating,
+              comment,
               reviewer: {
-                name: reviewState.name,
-                email: reviewState.email,
+                name,
+                email,
               },
               userId: user?.id,
               productId: product?.id,
@@ -76,6 +139,20 @@ function DescOne(props) {
           },
         });
         setReview({ ...reviewDefault });
+        setReviews([
+          {
+            id: new Date().toUTCString(),
+            reviewer: {
+              name,
+              email,
+            },
+            productId: product?.id,
+            rating,
+            comment,
+            updatedAt: new Date().toUTCString(),
+          },
+          ...reviews,
+        ]);
         toast(
           <AlertPopup
             message="Review submitted successfully"
@@ -84,7 +161,7 @@ function DescOne(props) {
         );
       } catch (error) {
         toast(<AlertPopup message={error.message} status="error" />);
-        console.log(err);
+        console.log(error);
       }
       return false;
     },
@@ -96,7 +173,8 @@ function DescOne(props) {
       className="tab tab-nav-simple product-tabs"
       selectedTabClassName="show"
       selectedTabPanelClassName="active"
-      defaultIndex={0}
+      selectedIndex={tabIndex}
+      onSelect={(index) => setTabIndex(index)}
     >
       <TabList className="nav nav-tabs justify-content-center" role="tablist">
         <Tab className="nav-item">
@@ -115,7 +193,7 @@ function DescOne(props) {
         <Tab className="nav-item">
           {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
           <span className="nav-link" id="product-review">
-            Reviews ({product.reviews.items.length})
+            Reviews {!!product?.totalRatings && `(${product?.totalRatings})`}
           </span>
         </Tab>
       </TabList>
@@ -226,131 +304,174 @@ function DescOne(props) {
           <div className="reply mt-8 mb-8">
             <div className="title-wrapper text-left">
               <h3 className="title title-simple text-left text-normal">
-                {product.reviews > 0
+                {reviews > 0
                   ? "Add a Review"
                   : "Be The First To Review “" + product.title + "”"}
-              </h3>
-              <p>
-                Your email address will not be published. Required fields are
-                marked *
-              </p>
-            </div>
-            <div className="rating-form">
-              <label htmlFor="rating" className="text-dark">
-                Your rating *{" "}
-              </label>
-              <span className="rating-stars selected">
-                {[1, 2, 3, 4, 5].map((num, index) => (
-                  <a
-                    className={`star-${num}`}
-                    href="#"
-                    onClick={(e) => {
-                      setRating(e);
-                      setReview({ rating: num });
-                    }}
-                    key={"star-" + index}
-                  >
-                    {num}
-                  </a>
-                ))}
-              </span>
-            </div>
-            <form action="#" onSubmit={submitReview}>
-              <textarea
-                id="reply-message"
-                cols="30"
-                rows="6"
-                className="form-control mb-4"
-                placeholder="Comment *"
-                required
-                value={reviewState.comment}
-                onChange={(e) => setReview({ comment: e.target.value })}
-                onBlur={(e) => setReview({ comment: e.target.value.trim() })}
-              ></textarea>
-              <div className="row">
-                <div className="col-md-6 mb-5">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="reply-name"
-                    name="reply-name"
-                    placeholder="Name *"
-                    required
-                    value={reviewState.name}
-                    onChange={(e) => setReview({ name: e.target.value })}
-                    onBlur={(e) => setReview({ name: e.target.value.trim() })}
-                  />
+              </h3>{" "}
+              <div className="review-section ">
+                <div className="total-review w-100">
+                  <h4>{product?.rating}</h4>
+                  <RatingStar value={product?.rating} />
+                  {!!product?.totalRatings && (
+                    <span>Based on {product.totalRatings} reviews</span>
+                  )}
                 </div>
-                <div className="col-md-6 mb-5">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="reply-email"
-                    name="reply-email"
-                    placeholder="Email *"
-                    required
-                    value={reviewState.email}
-                    onChange={(e) => setReview({ email: e.target.value })}
-                    onBlur={(e) => setReview({ email: e.target.value.trim() })}
-                  />
+                <div className="rating w-100">
+                  {[5, 4, 3, 2, 1].map((num, i) => (
+                    <div
+                      className="d-flex align-items-center justify-content-center mt-2"
+                      key={i}
+                    >
+                      <RatingStar value={num} />
+                      <div className="ml-1 percent">
+                        ({getPer(total, allReviews[num]?.length)}%)
+                      </div>
+                      <span className="ml-1">{allReviews[num]?.length}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="w-100 d-flex align-items-center justify-content-center">
+                  <div className="buttons">
+                    <div className=" justify-content-end">
+                      <button
+                        className="btn btn-primary  btn-rounded mb-2"
+                        onClick={() => {
+                          setShowReview(!showReview);
+                        }}
+                      >
+                        Add Review
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary btn-rounded">
-                Submit<i className="d-icon-arrow-right"></i>
-              </button>
-            </form>
+              {showReview && (
+                <>
+                  <hr className="product-divider"></hr>
+                  <p>
+                    Your email address will not be published. Required fields
+                    are marked *
+                  </p>
+                </>
+              )}
+            </div>
+            {showReview && (
+              <form action="#" onSubmit={submitReview}>
+                <div className="row">
+                  <div className="col-md-6 mb-5">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="reply-name"
+                      name="reply-name"
+                      placeholder="Name *"
+                      required
+                      value={reviewState.name}
+                      onChange={(e) => setReview({ name: e.target.value })}
+                      onBlur={(e) => setReview({ name: e.target.value.trim() })}
+                    />
+                  </div>
+                  <div className="col-md-6 mb-5">
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="reply-email"
+                      name="reply-email"
+                      placeholder="Email *"
+                      required
+                      value={reviewState.email}
+                      onChange={(e) => setReview({ email: e.target.value })}
+                      onBlur={(e) =>
+                        setReview({ email: e.target.value.trim() })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="rating-form">
+                  <label htmlFor="rating" className="text-dark">
+                    Your rating *{" "}
+                  </label>
+                  <RatingStar
+                    onClick={(num) => {
+                      setReview({ rating: num });
+                    }}
+                    value={reviewState.rating}
+                    editable
+                  />
+                </div>
+                <textarea
+                  id="reply-message"
+                  cols="30"
+                  rows="6"
+                  className="form-control mb-4"
+                  placeholder="Comment *"
+                  required
+                  value={reviewState.comment}
+                  onChange={(e) => setReview({ comment: e.target.value })}
+                  onBlur={(e) => setReview({ comment: e.target.value.trim() })}
+                ></textarea>
+                <div className="d-flex w-100 img-wrapper justify-content-end">
+                  <div className="p-relative">
+                    {reviewState.image && (
+                      <>
+                        <img
+                          className="img-preview"
+                          src={reviewState.image}
+                        ></img>
+                        <i
+                          className="d-icon-close remove-icon"
+                          onClick={() => {
+                            setReview({ ...reviewState, image: "" });
+                          }}
+                        ></i>
+                      </>
+                    )}
+                  </div>
+
+                  <input
+                    className="d-none"
+                    onChange={onPhotoChange}
+                    type="file"
+                    accept="image/*"
+                    id="review-photo"
+                    name="filename"
+                  />
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("review-photo").click();
+                    }}
+                    className="btn   btn-rounded mr-2"
+                  >
+                    {reviewState.image ? "Change" : "Add"} Photo
+                  </button>
+                  <button type="submit" className="btn btn-primary btn-rounded">
+                    Submit<i className="d-icon-arrow-right"></i>
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
-          {product.reviews.items.length === 0 ? (
+          <hr className="product-divider"></hr>
+          {reviews.length === 0 ? (
             <div className="comments mb-2 pt-2 pb-2 border-no">
               There are no reviews yet.
             </div>
           ) : (
             <div className="comments mb-8 pt-2 pb-2 border-no">
               <ul>
-                {product.reviews.items.map((review) => (
-                  <li key={review.id}>
-                    <div className="comment">
-                      {/* <figure className="comment-media">
-                        <ALink href="#">
-                          <img
-                            src="/images/blog/comments/1.jpg"
-                            alt="avatar"
-                            width="100"
-                            height="100"
-                          />
-                        </ALink>
-                      </figure> */}
-                      <div className="comment-body">
-                        <div className="comment-rating ratings-container mb-0">
-                          <div className="ratings-full">
-                            <span
-                              className="ratings"
-                              style={{ width: review.rating * 20 + "%" }}
-                            ></span>
-                            <span className="tooltiptext tooltip-top">
-                              {toDecimal(review.rating)}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="comment-user">
-                          <span className="comment-date text-body">
-                            {formateDate(review.createdAt)}
-                          </span>
-                          <h4>
-                            <ALink href="#">{review.reviewer.name}</ALink>
-                          </h4>
-                        </div>
-
-                        <div className="comment-content">
-                          <p>{review.comment}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                {reviews.map((review, id) => (
+                  <Review key={id} review={review} />
                 ))}
               </ul>
             </div>
           )}
+          <TokenPagination
+            onPage={() => getProductReviews(false)}
+            total={total}
+            loaded={reviews?.length}
+            nextToken={token}
+          />
         </TabPanel>
       </div>
     </Tabs>

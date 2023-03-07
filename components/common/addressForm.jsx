@@ -43,7 +43,7 @@ const AddressForm = ({
             data: { [key]: response },
           } = await API.graphql({
             query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: { ...tempAddress, userID: user.username } },
+            variables: { input: { ...tempAddress, userID: user.id } },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
           onSubmit(response);

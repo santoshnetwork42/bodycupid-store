@@ -463,6 +463,14 @@
     }
 }
 
+// Product Tag
+.product-tag {
+    font-size:1.2rem;
+    text-overflow: ellipsis;
+    color:$success-color;
+    text-align: center !important;
+}
+
 // Product Price
 .product-price {
     overflow: hidden;

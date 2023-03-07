@@ -4,13 +4,18 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { getMenuCategories } from "~/graphql/api";
+import { STORE_ID } from "~/config";
 
 function MainMenu() {
   const { pathname } = useRouter();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    API.graphql(graphqlOperation(getMenuCategories)).then(
+    API.graphql(
+      graphqlOperation(getMenuCategories, {
+        filter: { storeId: { eq: STORE_ID } },
+      })
+    ).then(
       ({
         data: {
           searchProductCategories: { items },
@@ -65,8 +70,6 @@ function MainMenu() {
             )}
           </li>
         ))}
-
-     
       </ul>
     </nav>
   );

@@ -15,6 +15,7 @@ import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
 import awsmobile from "~/aws-exports";
 import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { STORE_ID } from "~/config";
 
 function HomePage({ hero, products, categories, brands }) {
   return (
@@ -95,12 +96,15 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
-    const { searchProducts } = await fetchData(getHomePageProducts, { limit: 8 });
+    const { searchProducts } = await fetchData(getHomePageProducts, {
+      filter: { storeId: { eq: STORE_ID } },
+      limit: 8,
+    });
     const { searchProductSubCategories } = await fetchData(
       getHomePageCategories,
       {
         limit: 4,
-        filter: { isFeatured: { eq: true } },
+        filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
         sort: [{ field: "priority", direction: "asc" }],
       }
     );

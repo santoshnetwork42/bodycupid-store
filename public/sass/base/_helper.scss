@@ -58,6 +58,9 @@
 .justify-content-between {
     justify-content: space-between !important;
 }
+.justify-content-around {
+    justify-content:space-around !important;
+}
 .align-items-start {
     align-items: flex-start !important;
 }
@@ -266,4 +269,8 @@
 
 .overflow-auto {
     overflow: auto;
+}
+
+.pointer-none{
+    pointer-events: none;
 }
