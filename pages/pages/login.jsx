@@ -150,6 +150,7 @@ function Login({ auth, redirect = true, closeLogin }) {
                                 name="singin-phone"
                                 placeholder="Phone number *"
                                 required
+                                maxLength={10}
                                 value={removePhonePrefix(state.phone)}
                                 onChange={(e) =>
                                   setState({
@@ -246,6 +247,7 @@ function Login({ auth, redirect = true, closeLogin }) {
                                 name="register-phone"
                                 placeholder="Your phone number *"
                                 required
+                                maxLength={10}
                                 value={removePhonePrefix(state.phone)}
                                 onChange={(e) =>
                                   setState({

@@ -294,6 +294,7 @@ function Account({ user }) {
                       type="tel"
                       name="phone"
                       required
+                      maxLength={10}
                       value={removePhonePrefix(userDetail.phone)}
                       onChange={(e) => setUser({ phone: e.target.value })}
                       disabled
