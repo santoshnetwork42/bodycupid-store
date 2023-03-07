@@ -59,11 +59,16 @@ function Coupon(props) {
   const { allDiscounts, maxDiscountCoupon } = useMemo(() => {
     let cart = [...cartList];
     if (product) cart = [product];
+    let maxDiscountCoupon = {};
     const allDiscounts = featured.reduce((acc, cur) => {
       acc = {
         ...acc,
         [cur.id]: getCouponTotal(cur, cart),
       };
+      maxDiscountCoupon =
+        getCouponTotal(maxDiscountCoupon, cart) > getCouponTotal(cur, cart)
+          ? maxDiscountCoupon
+          : cur;
       return acc;
     }, []);
     let id = Object.keys(allDiscounts).reduce(
@@ -72,7 +77,7 @@ function Coupon(props) {
     );
     return {
       allDiscounts,
-      maxDiscountCoupon: featured.find((f) => f.id === id),
+      maxDiscountCoupon,
     };
   }, [featured, product, cartList]);
 
@@ -103,10 +108,10 @@ function Coupon(props) {
   );
 
   const onCopy = (copyText) => {
-    if (copyText) {
+    if (copyText && navigator?.clipboard) {
       navigator.clipboard.writeText(copyText);
       toast(
-        <AlertPopup message={"Copied the text: " + copyText} status="info" />
+        <AlertPopup message={"Coupon code copied: " + copyText} status="info" />
       );
     }
   };
