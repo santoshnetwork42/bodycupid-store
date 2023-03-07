@@ -2,14 +2,17 @@
     comments
 ---------------------------------------------- */
 .comments {
-    padding: 6rem 0;
-    border-top: 1px solid #ebebeb;
+	padding: 6rem 0;
+	border-top: 1px solid #ebebeb;
+
 	ul ul {
-        margin-left: 6rem;
-        padding-top: 4.5rem;
+		margin-left: 6rem;
+		padding-top: 4.5rem;
 	}
+
 	li {
 		margin-bottom: 4.5rem;
+
 		&:last-child {
 			border-bottom-width: 0;
 			margin-bottom: 0;
@@ -17,17 +20,23 @@
 		}
 	}
 }
-@include mq( sm, max ) {
-    .comments ul ul {
-        margin-left: 3rem;
-    }
+
+@include mq(sm, max) {
+	.comments ul ul {
+		margin-left: 3rem;
+	}
 }
+
 .comment {
 	position: relative;
 	display: flex;
 	align-items: flex-start;
-	p:last-child { margin-bottom: 0; }
+
+	p:last-child {
+		margin-bottom: 0;
+	}
 }
+
 .comment-body {
 	position: relative;
 	flex: 1 1 auto;
@@ -38,24 +47,27 @@
 	color: #777;
 	position: absolute;
 	right: 0;
-    top: 1.7rem;
-    text-transform: uppercase;
+	top: 1.7rem;
+	text-transform: uppercase;
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: -.01em;
-    padding-bottom: .5rem;
-    transition: color .3s, box-shadow .3s;
+	padding-bottom: .5rem;
+	transition: color .3s, box-shadow .3s;
+
 	&:hover,
 	&:focus {
 		color: $primary-color;
 		box-shadow: 0 2px 0 $primary-color;
 	}
 }
+
 .comment-media {
-    max-width: 6rem;
-    flex: 0 0 6rem;
-    height: 6rem;
+	max-width: 6rem;
+	flex: 0 0 6rem;
+	height: 6rem;
 	overflow: hidden;
+
 	img {
 		display: block;
 		width: 100%;
@@ -63,22 +75,27 @@
 		object-fit: cover;
 	}
 }
+
 .comment-user {
 	margin-bottom: 1rem;
+
 	h4 {
 		margin-bottom: 1rem;
 		font-weight: 700;
 		font-size: 1.8rem;
 		line-height: 1;
 		letter-spacing: 0;
+
 		a {
+
 			&:hover,
 			&:focus {
 				color: $primary-color;
 			}
 		}
+
 		span {
-            display: block;
+			display: block;
 		}
 	}
 }
@@ -92,13 +109,23 @@
 }
 
 .reply {
-    .form-control {
-        max-width: 100%;
-        color: #999;
-        border-color: $border-color;
+	.form-control {
+		max-width: 100%;
+		color: #999;
+		border-color: $border-color;
 		background: #fff;
 		border-radius: .3rem;
-    }
-    p { font-size: 1.3rem; }
+	}
+
+	p {
+		font-size: 1.3rem;
+	}
 }
 
+.review-read {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

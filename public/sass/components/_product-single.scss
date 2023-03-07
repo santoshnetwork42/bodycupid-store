@@ -34,7 +34,7 @@
             btn-cart: (max-width: 20.7rem,
                 height: 4.5rem,
             ),
-            rating: (color: #666,
+            rating: (color: $secondary-color,
                 review-color: #999,
             ))));
 
@@ -186,6 +186,15 @@
         -webkit-line-clamp: 2;
         overflow: hidden;
         -webkit-box-orient: vertical;
+    }
+
+    .product-tag {
+        font-size:1.2rem;
+        text-overflow: ellipsis;
+        color:$success-color;
+        text-align: center !important;
+        font-weight: 100;
+        text-transform: none;
     }
 
     .product-price {

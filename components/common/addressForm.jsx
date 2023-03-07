@@ -43,7 +43,7 @@ const AddressForm = ({
             data: { [key]: response },
           } = await API.graphql({
             query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: { ...tempAddress, userID: user.username } },
+            variables: { input: { ...tempAddress, userID: user.id } },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
           onSubmit(response);
@@ -89,7 +89,7 @@ const AddressForm = ({
                   }
                 />
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-6 mb-3">
                 <label>Phone *</label>
                 <div className="input-tel">
                   <div className="prefix">+91</div>

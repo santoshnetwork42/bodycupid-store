@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Magnifier } from "react-image-magnifiers";
-import Modal from "react-modal";
 import imagesLoaded from "imagesloaded";
 import { API, graphqlOperation } from "aws-amplify";
 
@@ -11,6 +10,7 @@ import DetailOne from "~/components/partials/product/detail/detail-one";
 import { modalActions } from "~/store/modal";
 import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import Modal from "~/components/common/modal";
 
 const customStyles = {
   content: {
@@ -23,8 +23,6 @@ const customStyles = {
     overflowY: "auto",
   },
 };
-
-Modal.setAppElement("#__next");
 
 function Quickview(props) {
   const { slug, closeQuickview, isOpen } = props;
@@ -106,73 +104,61 @@ function Quickview(props) {
       contentLabel="QuickView"
       onRequestClose={closeQuick}
       shouldFocusAfterRender={false}
-      style={customStyles}
       className="product product-single row product-popup quickview-modal"
       id="product-quickview"
     >
-      <>
-        <div className={`row p-0 m-0 ${loaded ? "" : "d-none"}`}>
-          <div className="col-md-6">
-            <div className="product-gallery mb-md-0 pb-0">
-              <div className="product-label-group">
-                {product?.isNew && (
-                  <label className="product-label label-new">New</label>
-                )}
-                {product?.isFeatured && (
-                  <label className="product-label label-top">Top</label>
-                )}
-                {discount > 0 &&
-                  (product?.variants.items.length === 0 ? (
-                    <label className="product-label label-sale">
-                      {discount}% OFF
-                    </label>
-                  ) : (
-                    <label className="product-label label-sale">Sale</label>
-                  ))}
-              </div>
-
-              <OwlCarousel
-                adClass="product-single-carousel owl-theme owl-nav-inner"
-                options={mainSlider3}
-              >
-                {lgImages.map((item) => (
-                  <Magnifier
-                    key={item.id}
-                    imageSrc={getPublicImageURL(item.imageKey)}
-                    imageAlt={item.alt}
-                    largeImageSrc={getPublicImageURL(item.imageKey)}
-                    dragToMove={false}
-                    mouseActivation="hover"
-                    cursorStyleActive="crosshair"
-                    className="product-image large-image"
-                  />
+      <div className={`row p-0 m-0 ${loaded ? "" : "d-none"}`}>
+        <div className="col-md-6">
+          <div className="product-gallery mb-md-0 pb-0">
+            <div className="product-label-group">
+              {product?.isNew && (
+                <label className="product-label label-new">New</label>
+              )}
+              {product?.isFeatured && (
+                <label className="product-label label-top">Top</label>
+              )}
+              {discount > 0 &&
+                (product?.variants.items.length === 0 ? (
+                  <label className="product-label label-sale">
+                    {discount}% OFF
+                  </label>
+                ) : (
+                  <label className="product-label label-sale">Sale</label>
                 ))}
-              </OwlCarousel>
             </div>
-          </div>
 
-          <div className="col-md-6">
-            {product && (
-              <DetailOne
-                data={product}
-                adClass="scrollable pr-3"
-                isNav={false}
-                variantId={variant}
-                setVariant={setVariant}
-              />
-            )}
+            <OwlCarousel
+              adClass="product-single-carousel owl-theme owl-nav-inner"
+              options={mainSlider3}
+            >
+              {lgImages.map((item) => (
+                <Magnifier
+                  key={item.id}
+                  imageSrc={getPublicImageURL(item.imageKey)}
+                  imageAlt={item.alt}
+                  largeImageSrc={getPublicImageURL(item.imageKey)}
+                  dragToMove={false}
+                  mouseActivation="hover"
+                  cursorStyleActive="crosshair"
+                  className="product-image large-image"
+                />
+              ))}
+            </OwlCarousel>
           </div>
         </div>
 
-        <button
-          title="Close (Esc)"
-          type="button"
-          className="mfp-close p-0"
-          onClick={closeQuick}
-        >
-          <span>×</span>
-        </button>
-      </>
+        <div className="col-md-6">
+          {product && (
+            <DetailOne
+              data={product}
+              adClass="scrollable pr-3"
+              isNav={false}
+              variantId={variant}
+              setVariant={setVariant}
+            />
+          )}
+        </div>
+      </div>
       {!loaded && (
         <div className="product row p-0 m-0 skeleton-body mfp-product">
           <div className="col-md-6">
