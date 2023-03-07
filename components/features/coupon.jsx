@@ -55,7 +55,7 @@ function Coupon(props) {
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
-         setLoading(true);
+      setLoading(true);
       const {
         data: { applyCoupon: response },
       } = await API.graphql({
@@ -68,7 +68,7 @@ function Coupon(props) {
         if (discount) {
           setCoupon("");
           applyCoupon(response);
-            setOpen(false);
+          setOpen(false);
         } else {
           setError("Coupon cannot be applied");
         }
