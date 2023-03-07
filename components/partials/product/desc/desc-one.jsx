@@ -1,15 +1,16 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
 
 import { modalActions } from "~/store/modal";
-import { createReview } from "~/graphql/api";
+import { createReview, getReviews } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-start";
 import Review from "../review";
+import TokenPagination from "~/components/features/token-pagination";
 
 const reviewDefault = {
   rating: 5,
@@ -23,7 +24,12 @@ function DescOne(props) {
   const { product, isDivider = true, openModal, user } = props;
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
+  const [total, setTotal] = useState(0);
   const [showReview, setShowReview] = useState(false);
+  const [token, setToken] = useState(null);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   let sizes = [];
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
@@ -40,33 +46,55 @@ function DescOne(props) {
       });
     }
   }
-  const { allReviews, avg, total } = useMemo(() => {
-    const { reviews } = product;
-    if (reviews && reviews.items.length) {
-      setReviews(reviews.items);
-      const total = reviews.items.reduce(function (acc, obj) {
-        return acc + obj.rating;
-      }, 0);
-      let allReviews = {};
-      [1, 2, 3, 4, 5].map((num) => {
-        allReviews = {
-          ...allReviews,
-          [num]: reviews.items.filter((d) => d.rating === num),
+  const allReviews = useMemo(() => {
+    if (reviews && reviews.length) {
+      return [1, 2, 3, 4, 5].reduce((acc, cur) => {
+        acc = {
+          ...acc,
+          [cur]: reviews.filter((d) => d.rating === cur),
         };
-      });
-
-      return {
-        total: reviews.items.length,
-        avg: total / reviews.items.length,
-        allReviews,
-      };
+        return acc;
+      }, {});
     }
-    return {
-      total: 0,
-      avg: 0,
-      allReviews: 0,
-    };
-  }, [product]);
+    return 0;
+  }, [reviews]);
+  const getProductReviews = useCallback(
+    (reset) => {
+      setLoading(true);
+      API.graphql(
+        graphqlOperation(getReviews, {
+          nextToken: reset ? null : token,
+        })
+      )
+        .then(
+          ({
+            data: {
+              searchReviews: { items: response, total, nextToken },
+            },
+          }) => {
+            if (reset) {
+              setReviews(response);
+            } else {
+              setReviews([...reviews, ...response]);
+            }
+            setToken(nextToken);
+            setTotal(total);
+            setLoading(false);
+          }
+        )
+        .catch((err) => {
+          setLoading(false);
+          console.log("err", err);
+        });
+    },
+    [product, token]
+  );
+
+  useEffect(() => {
+    if (tabIndex === 2 && reviews.length === 0) {
+      getProductReviews(true);
+    }
+  }, [tabIndex]);
 
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
@@ -141,7 +169,8 @@ function DescOne(props) {
       className="tab tab-nav-simple product-tabs"
       selectedTabClassName="show"
       selectedTabPanelClassName="active"
-      defaultIndex={0}
+      selectedIndex={tabIndex}
+      onSelect={(index) => setTabIndex(index)}
     >
       <TabList className="nav nav-tabs justify-content-center" role="tablist">
         <Tab className="nav-item">
@@ -160,7 +189,7 @@ function DescOne(props) {
         <Tab className="nav-item">
           {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
           <span className="nav-link" id="product-review">
-            Reviews ({reviews.length})
+            Reviews ({product?.totalRating})
           </span>
         </Tab>
       </TabList>
@@ -271,15 +300,15 @@ function DescOne(props) {
           <div className="reply mt-8 mb-8">
             <div className="title-wrapper text-left">
               <h3 className="title title-simple text-left text-normal">
-                {product.reviews > 0
+                {reviews > 0
                   ? "Add a Review"
                   : "Be The First To Review “" + product.title + "”"}
               </h3>{" "}
               <div className="review-section ">
                 <div className="total-review w-100">
-                  <h4>{avg.toFixed(1)}</h4>
+                  <h4>{product?.rating}</h4>
                   <RatingStar value={3} />
-                  <span>Based on {total} reviews</span>
+                  <span>Based on {product.totalRating} reviews</span>
                 </div>
                 <div className="rating w-100">
                   {[5, 4, 3, 2, 1].map((num, i) => (
@@ -306,7 +335,6 @@ function DescOne(props) {
                       >
                         Add Review
                       </button>
-                     
                     </div>
                   </div>
                 </div>
@@ -426,12 +454,18 @@ function DescOne(props) {
           ) : (
             <div className="comments mb-8 pt-2 pb-2 border-no">
               <ul>
-                {reviews.map((review) => (
-                  <Review review={review} />
+                {reviews.map((review, id) => (
+                  <Review key={id} review={review} />
                 ))}
               </ul>
             </div>
           )}
+          <TokenPagination
+            onPage={() => getProductReviews(false)}
+            total={total}
+            loaded={reviews?.length}
+            nextToken={token}
+          />
         </TabPanel>
       </div>
     </Tabs>

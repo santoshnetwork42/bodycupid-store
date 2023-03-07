@@ -357,21 +357,6 @@ export const getProductBySlug = /* GraphQL */ `
             isThumb
           }
         }
-        reviews {
-          items {
-            id
-            reviewer {
-              name
-              email
-            }
-            productId
-            rating
-            comment
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
       }
       nextToken
     }
@@ -1176,6 +1161,42 @@ export const updateUser = /* GraphQL */ `
       profilePhotoUrl
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const getReviews = /* GraphQL */ `
+  query SearchReviews(
+    $filter: SearchableReviewFilterInput
+    $sort: [SearchableReviewSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableReviewAggregationInput]
+  ) {
+    searchReviews(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        userId
+        reviewer {
+          name
+          email
+        }
+        productId
+        rating
+        comment
+        title
+        images
+      }
+      nextToken
+      total
     }
   }
 `;

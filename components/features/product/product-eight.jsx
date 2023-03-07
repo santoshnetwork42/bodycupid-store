@@ -165,7 +165,7 @@ function ProductEight(props) {
           </div>
 
           <ALink href={`/product/${product.slug}`} className="rating-reviews">
-            ( {product.reviews.items.length} reviews )
+            ( {product?.totalRating} reviews )
           </ALink>
         </div>
 

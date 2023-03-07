@@ -225,7 +225,7 @@ function ProductTwo(props) {
 
           {/* <ALink href={`/product/${product.slug}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
           <ALink href={`/product/${product.slug}`} className="rating-reviews">
-            ( {product.reviews?.items?.length} reviews )
+            ( {product?.totalRating} reviews )
           </ALink>
         </div>
       </div>
