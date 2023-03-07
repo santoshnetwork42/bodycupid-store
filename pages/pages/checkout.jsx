@@ -43,6 +43,76 @@ function Checkout(props) {
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
 
+  const validateZipCode = useCallback(() => {}, []);
+
+  const handlePayment = useCallback(
+    async ({ orderId, paymentId, address }) => {
+      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+
+      const [
+        rzpEnabled,
+        {
+          data: { createTransaction: transaction },
+        },
+      ] = await Promise.all([
+        loadScript(RAZORPAY_SCRIPT),
+        API.graphql({
+          query: createTransaction,
+          variables: { orderId },
+          authMode,
+        }),
+      ]);
+
+      if (rzpEnabled && transaction) {
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: transaction.amount,
+          currency: "INR",
+          name: store.name,
+          image: getPublicImageURL(store.imageUrl),
+          order_id: transaction.orderId,
+          handler: async function ({ razorpay_payment_id }) {
+            await router.push(
+              `/order/${orderId}?paymentId=${razorpay_payment_id}`
+            );
+            await emptyCart();
+          },
+          prefill: {
+            name: address.name,
+            email: address.email,
+            contact: address.phone,
+          },
+          notes: {
+            storeId: store.id,
+            orderId,
+            paymentId,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+      } else {
+        // Alert
+      }
+    },
+    [store, user]
+  );
+
+  const createUserAddress = useCallback(async () => {
+    const { id: ignoreId, ...restAddress } = shippingAddress;
+    if (user && !ignoreId) {
+      await API.graphql({
+        query: createUserAddress,
+        variables: { input: { ...restAddress, userID: user.id } },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+    }
+
+    return Promise.resolve(null);
+  }, [shippingAddress, user]);
+
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
@@ -88,21 +158,6 @@ function Checkout(props) {
             },
             authMode,
           }),
-        ];
-
-        if (isFirst) {
-          promise.push(
-            API.graphql({
-              query: createTransaction,
-              variables: { orderId },
-              authMode,
-            })
-          );
-
-          promise.push(loadScript(RAZORPAY_SCRIPT));
-        }
-
-        promise.push(
           ...cartList.map((p) =>
             API.graphql({
               query: createOrderProduct,
@@ -120,68 +175,42 @@ function Checkout(props) {
               },
               authMode,
             })
-          )
-        );
+          ),
+        ];
 
-        if (user && !ignoreId) {
-          promise.push(
-            API.graphql({
-              query: createUserAddress,
-              variables: { input: { ...restAddress, userID: user.id } },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
-            })
-          );
-        }
+        promise.push(createUserAddress());
 
         const [
           {
             data: { createPayment: payment },
           },
-          {
-            data: { createTransaction: transaction },
-          },
         ] = await Promise.all(promise);
-        if (transaction) {
-          const options = {
-            key: RAZORPAY_KEY,
-            amount: transaction.amount,
-            currency: "INR",
-            name: store.name,
-            image: getPublicImageURL(store.imageUrl),
-            order_id: transaction.orderId,
-            handler: async function ({ razorpay_payment_id }) {
-              await router.push(
-                `/order/${orderId}?paymentId=${razorpay_payment_id}`
-              );
-              await emptyCart();
-            },
-            prefill: {
-              name: restAddress.name,
-              email: restAddress.email,
-              contact: restAddress.phone,
-            },
-            notes: {
-              store: store.id,
-              orderId,
-              paymentId: payment.id,
-            },
-            theme: {
-              color: "#3399cc",
-            },
-          };
-          var rzp1 = new Razorpay(options);
-          rzp1.open();
+
+        if (isFirst) {
+          handlePayment({
+            orderId,
+            paymentId: payment.id,
+            address: restAddress,
+          });
         } else {
           await router.push(`/order/${orderId}`);
           await emptyCart();
         }
-      } catch (e) {
-        console.log("e", e);
+      } catch (error) {
+        console.log(error);
       }
 
       return false;
     },
-    [user, isFirst, appliedCoupon, shippingAddress, cartList]
+    [
+      user,
+      isFirst,
+      appliedCoupon,
+      shippingAddress,
+      cartList,
+      createUserAddress,
+      handlePayment,
+    ]
   );
 
   const codDisabled = useMemo(
