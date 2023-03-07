@@ -7,6 +7,7 @@ import OwlCarousel from "~/components/features/owl-carousel";
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";
 import ThumbTwo from "~/components/partials/product/thumb/thumb-two";
 import MediaLightBox from "~/components/partials/product/light-box";
+import OptimizedImage from "~/components/features/optimized-image";
 
 import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -121,17 +122,24 @@ export default function MediaOne(props) {
           onChangeRef={changeRefHandler}
           events={events}
         >
-          {lgImages.map((image,i) => (
+          {lgImages.map((image, i) => (
             <div key={i}>
-              <Magnifier
+              <OptimizedImage
+                optimizedData={image.image}
+                alt={image.alt}
+                spanAttributes={{
+                  className: "product-image-hover",
+                }}
+                src={getPublicImageURL(image.imageKey)}
+              />
+              {/* <Magnifier
                 imageSrc={getPublicImageURL(image.imageKey)}
                 imageAlt={image.alt}
                 largeImageSrc={getPublicImageURL(image.imageKey)}
                 dragToMove={false}
-                mouseActivation="hover"
                 cursorStyleActive="crosshair"
                 className="product-image large-image"
-              />
+              /> */}
             </div>
           ))}
         </OwlCarousel>
