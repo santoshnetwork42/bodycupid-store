@@ -1217,3 +1217,16 @@ export const validateTransaction = /* GraphQL */ `
     }
   }
 `;
+
+export const getZipCode = /* GraphQL */ `
+  query GetZipCode($id: ID!) {
+    getZipCode(id: $id) {
+      id
+      codMaxAmount
+      cod
+      prepaid
+      createdAt
+      updatedAt
+    }
+  }
+`;
