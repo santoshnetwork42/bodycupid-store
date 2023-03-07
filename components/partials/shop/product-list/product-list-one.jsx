@@ -12,6 +12,7 @@ import {
   getBasicSubCategory,
   findProducts,
 } from "~/graphql/api";
+import { STORE_ID } from "~/config";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -46,7 +47,9 @@ function ProductListOne(props) {
   const filters = useMemo(() => {
     if (category || categorySlug === "all") {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
-      const filter = category ? { [apiSearchKey]: { eq: category.id } } : {};
+      const filter = category
+        ? { [apiSearchKey]: { eq: category.id }, storeId: { eq: STORE_ID } }
+        : { storeId: { eq: STORE_ID } };
 
       if (!!search?.trim()) {
         filter.title = { matchPhrasePrefix: search };
@@ -67,7 +70,7 @@ function ProductListOne(props) {
       }
       return { filter, limit: perPage };
     }
-    return null;
+    return { storeId: { eq: STORE_ID } };
   }, [perPage, maxprice, minprice, category?.id, search]);
 
   useEffect(() => {
@@ -78,7 +81,10 @@ function ProductListOne(props) {
         ? "byslugProductSubCategory"
         : "byslugProductCategory";
       API.graphql(
-        graphqlOperation(api, { slug: subCategorySlug || categorySlug })
+        graphqlOperation(api, {
+          slug: subCategorySlug || categorySlug,
+          filter: { storeId: { eq: STORE_ID } },
+        })
       )
         .then(
           ({
@@ -172,7 +178,7 @@ function ProductListOne(props) {
         <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
           {products.map((item) => (
             <div className="product-wrap" key={"shop-" + item.id}>
-              <ProductTwo product={item} adClass="" />
+              <ProductTwo product={item} />
             </div>
           ))}
         </div>

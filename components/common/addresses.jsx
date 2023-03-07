@@ -33,7 +33,7 @@ function Addresses({ user, onAddressChange }) {
     } = await API.graphql({
       query: findUserAddresses,
       variables: {
-        filter: { userID: { eq: user.username } },
+        filter: { userID: { eq: user.id } },
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });

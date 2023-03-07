@@ -606,6 +606,7 @@ export const getOrder = /* GraphQL */ `
           id
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -1099,6 +1100,7 @@ export const searchOrders = /* GraphQL */ `
             id
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -1176,6 +1178,42 @@ export const updateUser = /* GraphQL */ `
       profilePhotoUrl
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction($orderId: ID!) {
+    createTransaction(orderId: $orderId) {
+      orderId
+      amount
+    }
+  }
+`;
+
+export const getStore = /* GraphQL */ `
+  query GetStore($id: ID!) {
+    getStore(id: $id) {
+      id
+      name
+      description
+      isActive
+      webUrl
+      appId
+      host
+      priority
+      imageUrl
+    }
+  }
+`;
+
+export const validateTransaction = /* GraphQL */ `
+  mutation ValidateTransaction($orderId: ID!, $razorpayPaymentId: String!) {
+    validateTransaction(
+      orderId: $orderId
+      razorpayPaymentId: $razorpayPaymentId
+    ) {
+      success
     }
   }
 `;

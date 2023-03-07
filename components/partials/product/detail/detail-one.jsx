@@ -212,6 +212,12 @@ function DetailOne(props) {
         </div>
       )}
       <h2 className="product-name">{product.title}</h2>
+
+      {!!product?.tags && (
+        <label className="product-tag">
+          {product?.tags.split(",").join(" | ")}
+        </label>
+      )}
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-2 d-flex">

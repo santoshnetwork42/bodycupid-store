@@ -1,30 +1,64 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { getOrder } from "~/graphql/api";
+import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
-
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 
 function Order() {
   const [order, setOrder] = useState(null);
+  const [timer, setTimer] = useState(null);
 
   const router = useRouter();
   const { query } = router;
-  const { orderId } = query;
+  const { orderId, paymentId } = query;
+
+  const fetchOrder = useCallback(async () => {
+    const response = await API.graphql({
+      query: getOrder,
+      variables: { id: orderId },
+    });
+    setOrder(response.data.getOrder);
+  }, [orderId]);
+
+  const fetchPaymentStatus = useCallback(async () => {
+    if (orderId && paymentId) {
+      const {
+        data: {
+          validateTransaction: { success },
+        },
+      } = await API.graphql({
+        query: validateTransaction,
+        variables: { orderId, razorpayPaymentId: paymentId },
+      });
+
+      if (success) {
+        fetchOrder();
+      }
+    }
+  }, [orderId, paymentId]);
 
   useEffect(() => {
-    (async function () {
-      const response = await API.graphql({
-        query: getOrder,
-        variables: { id: orderId },
-      });
-      setOrder(response.data.getOrder);
-    })();
+    fetchOrder();
   }, [orderId]);
+
+  useEffect(() => {
+    if (
+      order?.status === "PENDING" &&
+      order?.paymentType === "PREPAID" &&
+      paymentId
+    ) {
+      if (timer) clearTimeout(timer);
+      const timerId = setTimeout(() => {
+        fetchPaymentStatus();
+        setTimer(null);
+      }, [2000]);
+      setTimer(timerId);
+    }
+  }, [order, paymentId]);
 
   const { state, country } = useMemo(() => {
     if (order?.shippingAddress?.state) {
