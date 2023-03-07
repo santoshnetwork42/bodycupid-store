@@ -86,6 +86,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -214,6 +215,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -273,6 +275,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -312,6 +315,7 @@ export const getUser = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -436,6 +440,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -493,6 +498,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -628,6 +634,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -735,6 +742,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -881,6 +889,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -988,6 +997,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -1097,6 +1107,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -1263,6 +1274,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -1630,6 +1642,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -1758,6 +1771,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -1817,6 +1831,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -1856,6 +1871,7 @@ export const getUser = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -1980,6 +1996,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -2037,6 +2054,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -2153,6 +2171,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -2227,6 +2246,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -2393,6 +2413,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -2764,6 +2785,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -3058,6 +3080,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -3408,6 +3431,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -3482,6 +3506,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -3648,6 +3673,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -4063,6 +4089,7 @@ export const getUser = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -4137,6 +4164,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -4303,6 +4331,7 @@ export const getUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -4766,6 +4795,7 @@ export const listUsers = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -4921,6 +4951,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -4974,6 +5005,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -5066,6 +5098,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -5119,6 +5152,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -5472,6 +5506,7 @@ export const listUsers = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -5608,6 +5643,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -5975,6 +6011,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -6200,6 +6237,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -6464,6 +6502,7 @@ export const listUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -6830,6 +6869,7 @@ export const bystoreIdUser = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -6985,6 +7025,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -7038,6 +7079,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -7130,6 +7172,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -7183,6 +7226,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -7536,6 +7580,7 @@ export const bystoreIdUser = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -7672,6 +7717,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -8039,6 +8085,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -8264,6 +8311,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -8528,6 +8576,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -8894,6 +8943,7 @@ export const searchUsers = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -9049,6 +9099,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -9102,6 +9153,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -9194,6 +9246,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -9247,6 +9300,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -9600,6 +9654,7 @@ export const searchUsers = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -9736,6 +9791,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -10103,6 +10159,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -10328,6 +10385,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -10592,6 +10650,7 @@ export const searchUsers = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11039,6 +11098,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11167,6 +11227,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11226,6 +11287,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11265,6 +11327,7 @@ export const getProductCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -11389,6 +11452,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11446,6 +11510,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11528,6 +11593,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11625,6 +11691,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -11747,6 +11814,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11825,6 +11893,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -11939,6 +12008,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -12052,6 +12122,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -12103,6 +12174,7 @@ export const getProductCategory = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -12303,6 +12375,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -12414,6 +12487,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -12533,6 +12607,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -12610,6 +12685,7 @@ export const getProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -12707,6 +12783,7 @@ export const getProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -12915,6 +12992,7 @@ export const getProductCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -13157,6 +13235,7 @@ export const listProductCategories = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -13314,6 +13393,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13442,6 +13522,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13501,6 +13582,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13540,6 +13622,7 @@ export const listProductCategories = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -13664,6 +13747,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13721,6 +13805,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13786,6 +13871,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13864,6 +13950,7 @@ export const listProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -13978,6 +14065,7 @@ export const listProductCategories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -14172,6 +14260,7 @@ export const bynameProductCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -14329,6 +14418,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14457,6 +14547,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14516,6 +14607,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14555,6 +14647,7 @@ export const bynameProductCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -14679,6 +14772,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14736,6 +14830,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14801,6 +14896,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14879,6 +14975,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -14993,6 +15090,7 @@ export const bynameProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -15187,6 +15285,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -15344,6 +15443,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -15472,6 +15572,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -15531,6 +15632,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -15570,6 +15672,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -15694,6 +15797,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -15751,6 +15855,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -15816,6 +15921,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -15894,6 +16000,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16008,6 +16115,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -16202,6 +16310,7 @@ export const byslugProductCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -16359,6 +16468,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16487,6 +16597,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16546,6 +16657,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16585,6 +16697,7 @@ export const byslugProductCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -16709,6 +16822,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16766,6 +16880,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16831,6 +16946,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -16909,6 +17025,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17023,6 +17140,7 @@ export const byslugProductCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -17217,6 +17335,7 @@ export const searchProductCategories = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -17374,6 +17493,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17502,6 +17622,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17561,6 +17682,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17600,6 +17722,7 @@ export const searchProductCategories = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -17724,6 +17847,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17781,6 +17905,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17846,6 +17971,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -17924,6 +18050,7 @@ export const searchProductCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -18038,6 +18165,7 @@ export const searchProductCategories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -18171,6 +18299,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -18299,6 +18428,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -18358,6 +18488,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -18397,6 +18528,7 @@ export const getProductSubCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -18521,6 +18653,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -18578,6 +18711,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -18743,6 +18877,7 @@ export const getProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -18900,6 +19035,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19028,6 +19164,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19087,6 +19224,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19126,6 +19264,7 @@ export const getProductSubCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -19250,6 +19389,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19307,6 +19447,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19372,6 +19513,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19450,6 +19592,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19564,6 +19707,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -19656,6 +19800,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19753,6 +19898,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -19875,6 +20021,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -19953,6 +20100,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -20067,6 +20215,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -20180,6 +20329,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -20231,6 +20381,7 @@ export const getProductSubCategory = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -20431,6 +20582,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -20542,6 +20694,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -20728,6 +20881,7 @@ export const listProductSubCategories = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -20903,6 +21057,7 @@ export const listProductSubCategories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -21064,6 +21219,7 @@ export const listProductSubCategories = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -21239,6 +21395,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -21332,6 +21489,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -21460,6 +21618,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -21519,6 +21678,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -21558,6 +21718,7 @@ export const listProductSubCategories = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -21682,6 +21843,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -21739,6 +21901,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -21921,6 +22084,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -22096,6 +22260,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -22257,6 +22422,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -22432,6 +22598,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -22525,6 +22692,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -22653,6 +22821,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -22712,6 +22881,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -22751,6 +22921,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -22875,6 +23046,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -22932,6 +23104,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -23114,6 +23287,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -23289,6 +23463,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -23450,6 +23625,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -23625,6 +23801,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -23718,6 +23895,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -23846,6 +24024,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -23905,6 +24084,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -23944,6 +24124,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -24068,6 +24249,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -24125,6 +24307,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -24307,6 +24490,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -24482,6 +24666,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -24643,6 +24828,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -24818,6 +25004,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -24911,6 +25098,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -25039,6 +25227,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -25098,6 +25287,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -25137,6 +25327,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -25261,6 +25452,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -25318,6 +25510,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -25500,6 +25693,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -25675,6 +25869,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -25836,6 +26031,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -26011,6 +26207,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -26104,6 +26301,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -26232,6 +26430,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -26291,6 +26490,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -26330,6 +26530,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -26454,6 +26655,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -26511,6 +26713,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -26693,6 +26896,7 @@ export const searchProductSubCategories = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -26868,6 +27072,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -27029,6 +27234,7 @@ export const searchProductSubCategories = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -27204,6 +27410,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27297,6 +27504,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27425,6 +27633,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27484,6 +27693,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27523,6 +27733,7 @@ export const searchProductSubCategories = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -27647,6 +27858,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27704,6 +27916,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27810,6 +28023,7 @@ export const getStore = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -27907,6 +28121,7 @@ export const getStore = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -28029,6 +28244,7 @@ export const getStore = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -28107,6 +28323,7 @@ export const getStore = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -28221,6 +28438,7 @@ export const getStore = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -28334,6 +28552,7 @@ export const getStore = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -28385,6 +28604,7 @@ export const getStore = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -28585,6 +28805,7 @@ export const getStore = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -28696,6 +28917,7 @@ export const getStore = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -28815,6 +29037,7 @@ export const listStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -28943,6 +29166,7 @@ export const listStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29002,6 +29226,7 @@ export const listStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29041,6 +29266,7 @@ export const listStores = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -29165,6 +29391,7 @@ export const listStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29222,6 +29449,7 @@ export const listStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29341,6 +29569,7 @@ export const searchStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29469,6 +29698,7 @@ export const searchStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29528,6 +29758,7 @@ export const searchStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29567,6 +29798,7 @@ export const searchStores = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -29691,6 +29923,7 @@ export const searchStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29748,6 +29981,7 @@ export const searchStores = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29870,6 +30104,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -29998,6 +30233,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30057,6 +30293,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30096,6 +30333,7 @@ export const getWarehouse = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -30220,6 +30458,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30277,6 +30516,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30377,6 +30617,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30505,6 +30746,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30564,6 +30806,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30603,6 +30846,7 @@ export const getWarehouse = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -30727,6 +30971,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30784,6 +31029,7 @@ export const getWarehouse = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -30958,6 +31204,7 @@ export const listWarehouses = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -31180,6 +31427,7 @@ export const listWarehouses = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -31428,6 +31676,7 @@ export const bystoreIdwarehouse = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -31650,6 +31899,7 @@ export const bystoreIdwarehouse = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -31898,6 +32148,7 @@ export const searchWarehouses = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -32120,6 +32371,7 @@ export const searchWarehouses = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -32327,6 +32579,7 @@ export const getProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -32488,6 +32741,7 @@ export const getProductInventory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -32663,6 +32917,7 @@ export const getProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -32772,6 +33027,7 @@ export const getProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -32849,6 +33105,7 @@ export const getProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -32946,6 +33203,7 @@ export const getProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -33154,6 +33412,7 @@ export const getProductInventory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -33375,6 +33634,7 @@ export const getProductInventory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -33482,6 +33742,7 @@ export const getProductInventory = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -33839,6 +34100,7 @@ export const getProductInventory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -34058,6 +34320,7 @@ export const getProductInventory = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -34216,6 +34479,7 @@ export const listProductInventories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -34313,6 +34577,7 @@ export const listProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -34435,6 +34700,7 @@ export const listProductInventories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -34513,6 +34779,7 @@ export const listProductInventories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -34627,6 +34894,7 @@ export const listProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -34740,6 +35008,7 @@ export const listProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -34791,6 +35060,7 @@ export const listProductInventories = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -34991,6 +35261,7 @@ export const listProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -35102,6 +35373,7 @@ export const listProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -35212,6 +35484,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -35309,6 +35582,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -35431,6 +35705,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -35509,6 +35784,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -35623,6 +35899,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -35736,6 +36013,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -35787,6 +36065,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -35987,6 +36266,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -36098,6 +36378,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -36208,6 +36489,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -36305,6 +36587,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -36427,6 +36710,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -36505,6 +36789,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -36619,6 +36904,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -36732,6 +37018,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -36783,6 +37070,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -36983,6 +37271,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -37094,6 +37383,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -37204,6 +37494,7 @@ export const searchProductInventories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -37301,6 +37592,7 @@ export const searchProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -37423,6 +37715,7 @@ export const searchProductInventories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -37501,6 +37794,7 @@ export const searchProductInventories = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -37615,6 +37909,7 @@ export const searchProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -37728,6 +38023,7 @@ export const searchProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -37779,6 +38075,7 @@ export const searchProductInventories = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -37979,6 +38276,7 @@ export const searchProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -38090,6 +38388,7 @@ export const searchProductInventories = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -38290,6 +38589,7 @@ export const getProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -38447,6 +38747,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -38575,6 +38876,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -38634,6 +38936,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -38673,6 +38976,7 @@ export const getProduct = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -38797,6 +39101,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -38854,6 +39159,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -38919,6 +39225,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -38997,6 +39304,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -39111,6 +39419,7 @@ export const getProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -39284,6 +39593,7 @@ export const getProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -39459,6 +39769,7 @@ export const getProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -39620,6 +39931,7 @@ export const getProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -39795,6 +40107,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -39888,6 +40201,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40016,6 +40330,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40075,6 +40390,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40114,6 +40430,7 @@ export const getProduct = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -40238,6 +40555,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40295,6 +40613,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40394,6 +40713,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40522,6 +40842,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40581,6 +40902,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40620,6 +40942,7 @@ export const getProduct = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -40744,6 +41067,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40801,6 +41125,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -40846,6 +41171,7 @@ export const getProduct = /* GraphQL */ `
       inventory
       blockedInventory
       rating
+      totalRatings
       totalOrders
       additionalInfo
       thumbImages
@@ -40947,6 +41273,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41113,6 +41440,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41480,6 +41808,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41608,6 +41937,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41667,6 +41997,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41706,6 +42037,7 @@ export const getProduct = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -41830,6 +42162,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41887,6 +42220,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -41984,6 +42318,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -42112,6 +42447,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -42171,6 +42507,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -42210,6 +42547,7 @@ export const getProduct = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -42334,6 +42672,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -42391,6 +42730,7 @@ export const getProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -42517,6 +42857,7 @@ export const listProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -42678,6 +43019,7 @@ export const listProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -42853,6 +43195,7 @@ export const listProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -42962,6 +43305,7 @@ export const listProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -43039,6 +43383,7 @@ export const listProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -43136,6 +43481,7 @@ export const listProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -43344,6 +43690,7 @@ export const listProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -43565,6 +43912,7 @@ export const listProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -43672,6 +44020,7 @@ export const listProducts = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -44029,6 +44378,7 @@ export const listProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -44248,6 +44598,7 @@ export const listProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -44448,6 +44799,7 @@ export const bytitleProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -44609,6 +44961,7 @@ export const bytitleProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -44784,6 +45137,7 @@ export const bytitleProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -44893,6 +45247,7 @@ export const bytitleProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -44970,6 +45325,7 @@ export const bytitleProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -45067,6 +45423,7 @@ export const bytitleProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -45275,6 +45632,7 @@ export const bytitleProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -45496,6 +45854,7 @@ export const bytitleProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -45603,6 +45962,7 @@ export const bytitleProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -45960,6 +46320,7 @@ export const bytitleProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -46179,6 +46540,7 @@ export const bytitleProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -46379,6 +46741,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -46540,6 +46903,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -46715,6 +47079,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -46824,6 +47189,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -46901,6 +47267,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -46998,6 +47365,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -47206,6 +47574,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -47427,6 +47796,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -47534,6 +47904,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -47891,6 +48262,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -48110,6 +48482,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -48310,6 +48683,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -48471,6 +48845,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -48646,6 +49021,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -48755,6 +49131,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -48832,6 +49209,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -48929,6 +49307,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -49137,6 +49516,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -49358,6 +49738,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -49465,6 +49846,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -49822,6 +50204,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -50041,6 +50424,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -50241,6 +50625,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -50402,6 +50787,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -50577,6 +50963,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -50686,6 +51073,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -50763,6 +51151,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -50860,6 +51249,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -51068,6 +51458,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -51289,6 +51680,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -51396,6 +51788,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -51753,6 +52146,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -51972,6 +52366,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -52172,6 +52567,7 @@ export const byslugProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -52333,6 +52729,7 @@ export const byslugProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -52508,6 +52905,7 @@ export const byslugProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -52617,6 +53015,7 @@ export const byslugProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -52694,6 +53093,7 @@ export const byslugProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -52791,6 +53191,7 @@ export const byslugProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -52999,6 +53400,7 @@ export const byslugProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -53220,6 +53622,7 @@ export const byslugProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -53327,6 +53730,7 @@ export const byslugProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -53684,6 +54088,7 @@ export const byslugProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -53903,6 +54308,7 @@ export const byslugProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -54103,6 +54509,7 @@ export const searchProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -54264,6 +54671,7 @@ export const searchProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -54439,6 +54847,7 @@ export const searchProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -54548,6 +54957,7 @@ export const searchProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -54625,6 +55035,7 @@ export const searchProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -54722,6 +55133,7 @@ export const searchProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -54930,6 +55342,7 @@ export const searchProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -55151,6 +55564,7 @@ export const searchProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -55258,6 +55672,7 @@ export const searchProducts = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -55615,6 +56030,7 @@ export const searchProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -55834,6 +56250,7 @@ export const searchProducts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -56038,6 +56455,7 @@ export const getLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -56199,6 +56617,7 @@ export const getLinkedProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -56374,6 +56793,7 @@ export const getLinkedProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -56483,6 +56903,7 @@ export const getLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -56560,6 +56981,7 @@ export const getLinkedProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -56657,6 +57079,7 @@ export const getLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -56865,6 +57288,7 @@ export const getLinkedProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -57086,6 +57510,7 @@ export const getLinkedProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -57193,6 +57618,7 @@ export const getLinkedProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -57550,6 +57976,7 @@ export const getLinkedProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -57769,6 +58196,7 @@ export const getLinkedProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -57922,6 +58350,7 @@ export const listLinkedProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -58019,6 +58448,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -58141,6 +58571,7 @@ export const listLinkedProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -58219,6 +58650,7 @@ export const listLinkedProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -58333,6 +58765,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -58446,6 +58879,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -58497,6 +58931,7 @@ export const listLinkedProducts = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -58697,6 +59132,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -58808,6 +59244,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -58917,6 +59354,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -59014,6 +59452,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -59136,6 +59575,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -59214,6 +59654,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -59328,6 +59769,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -59441,6 +59883,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -59492,6 +59935,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -59692,6 +60136,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -59803,6 +60248,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -60161,6 +60607,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -60289,6 +60736,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -60348,6 +60796,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -60387,6 +60836,7 @@ export const getOrder = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -60511,6 +60961,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -60568,6 +61019,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -60730,6 +61182,7 @@ export const getOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -60885,6 +61338,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -60938,6 +61392,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -61030,6 +61485,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -61083,6 +61539,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -61436,6 +61893,7 @@ export const getOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -61572,6 +62030,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -61939,6 +62398,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -62164,6 +62624,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -62428,6 +62889,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -62803,6 +63265,7 @@ export const getOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -62975,6 +63438,7 @@ export const getOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -63252,6 +63716,7 @@ export const getOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -63874,6 +64339,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -64002,6 +64468,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -64061,6 +64528,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -64100,6 +64568,7 @@ export const getOrder = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -64224,6 +64693,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -64281,6 +64751,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -64448,6 +64919,7 @@ export const getOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -64522,6 +64994,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -64688,6 +65161,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -65044,6 +65518,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -65210,6 +65685,7 @@ export const getOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -65664,6 +66140,7 @@ export const listOrders = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -65836,6 +66313,7 @@ export const listOrders = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -66113,6 +66591,7 @@ export const listOrders = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -66753,6 +67232,7 @@ export const listOrders = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -66827,6 +67307,7 @@ export const listOrders = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -66993,6 +67474,7 @@ export const listOrders = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -67448,6 +67930,7 @@ export const listOrders = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -67635,6 +68118,7 @@ export const listOrders = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -68177,6 +68661,7 @@ export const bystoreIdOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -68349,6 +68834,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -68626,6 +69112,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -69266,6 +69753,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -69340,6 +69828,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -69506,6 +69995,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -69961,6 +70451,7 @@ export const bystoreIdOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -70148,6 +70639,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -70690,6 +71182,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -70862,6 +71355,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -71139,6 +71633,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -71779,6 +72274,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -71853,6 +72349,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -72019,6 +72516,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -72474,6 +72972,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -72661,6 +73160,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -73203,6 +73703,7 @@ export const searchOrders = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -73375,6 +73876,7 @@ export const searchOrders = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -73652,6 +74154,7 @@ export const searchOrders = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -74292,6 +74795,7 @@ export const searchOrders = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -74366,6 +74870,7 @@ export const searchOrders = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -74532,6 +75037,7 @@ export const searchOrders = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -74987,6 +75493,7 @@ export const searchOrders = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -75174,6 +75681,7 @@ export const searchOrders = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -75719,6 +76227,7 @@ export const getOrderComment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -75874,6 +76383,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -75927,6 +76437,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -76019,6 +76530,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -76072,6 +76584,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -76425,6 +76938,7 @@ export const getOrderComment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -76561,6 +77075,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -76928,6 +77443,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -77153,6 +77669,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -77417,6 +77934,7 @@ export const getOrderComment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -77727,6 +78245,7 @@ export const listOrderComments = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -78004,6 +78523,7 @@ export const listOrderComments = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -78643,6 +79163,7 @@ export const byOrderIdOrderComment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -78920,6 +79441,7 @@ export const byOrderIdOrderComment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -79551,6 +80073,7 @@ export const getOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -79712,6 +80235,7 @@ export const getOrderProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -79887,6 +80411,7 @@ export const getOrderProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -79996,6 +80521,7 @@ export const getOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -80073,6 +80599,7 @@ export const getOrderProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -80170,6 +80697,7 @@ export const getOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -80378,6 +80906,7 @@ export const getOrderProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -80599,6 +81128,7 @@ export const getOrderProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -80706,6 +81236,7 @@ export const getOrderProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -81063,6 +81594,7 @@ export const getOrderProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -81282,6 +81814,7 @@ export const getOrderProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -81492,6 +82025,7 @@ export const listOrderProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -81589,6 +82123,7 @@ export const listOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -81711,6 +82246,7 @@ export const listOrderProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -81789,6 +82325,7 @@ export const listOrderProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -81903,6 +82440,7 @@ export const listOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -82016,6 +82554,7 @@ export const listOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -82067,6 +82606,7 @@ export const listOrderProducts = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -82267,6 +82807,7 @@ export const listOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -82378,6 +82919,7 @@ export const listOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -82544,6 +83086,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -82641,6 +83184,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -82763,6 +83307,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -82841,6 +83386,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -82955,6 +83501,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -83068,6 +83615,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -83119,6 +83667,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -83319,6 +83868,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -83430,6 +83980,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -83596,6 +84147,7 @@ export const searchOrderProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -83693,6 +84245,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -83815,6 +84368,7 @@ export const searchOrderProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -83893,6 +84447,7 @@ export const searchOrderProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -84007,6 +84562,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -84120,6 +84676,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -84171,6 +84728,7 @@ export const searchOrderProducts = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -84371,6 +84929,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -84482,6 +85041,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -84671,6 +85231,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -84799,6 +85360,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -84858,6 +85420,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -84897,6 +85460,7 @@ export const getPayment = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -85021,6 +85585,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -85078,6 +85643,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -85240,6 +85806,7 @@ export const getPayment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -85395,6 +85962,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -85448,6 +86016,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -85540,6 +86109,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -85593,6 +86163,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -85946,6 +86517,7 @@ export const getPayment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -86082,6 +86654,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -86449,6 +87022,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -86674,6 +87248,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -86938,6 +87513,7 @@ export const getPayment = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -87300,6 +87876,7 @@ export const listPayments = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -87472,6 +88049,7 @@ export const listPayments = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -87749,6 +88327,7 @@ export const listPayments = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -88440,6 +89019,7 @@ export const bystoreIdPayment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -88612,6 +89192,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -88889,6 +89470,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -89580,6 +90162,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -89752,6 +90335,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -90029,6 +90613,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -90720,6 +91305,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -90892,6 +91478,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -91169,6 +91756,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -91848,6 +92436,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -92003,6 +92592,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -92056,6 +92646,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -92148,6 +92739,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -92201,6 +92793,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -92554,6 +93147,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -92690,6 +93284,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -93057,6 +93652,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -93282,6 +93878,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -93546,6 +94143,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -93852,6 +94450,7 @@ export const getReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -94013,6 +94612,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -94188,6 +94788,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -94297,6 +94898,7 @@ export const getReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -94374,6 +94976,7 @@ export const getReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -94471,6 +95074,7 @@ export const getReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -94679,6 +95283,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -94900,6 +95505,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -95007,6 +95613,7 @@ export const getReview = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -95364,6 +95971,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -95583,6 +96191,7 @@ export const getReview = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -95775,6 +96384,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -96052,6 +96662,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -96633,6 +97244,7 @@ export const listReviews = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -96730,6 +97342,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -96852,6 +97465,7 @@ export const listReviews = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -96930,6 +97544,7 @@ export const listReviews = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -97044,6 +97659,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -97157,6 +97773,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -97208,6 +97825,7 @@ export const listReviews = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -97408,6 +98026,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -97519,6 +98138,7 @@ export const listReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -97667,6 +98287,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -97944,6 +98565,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -98525,6 +99147,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -98622,6 +99245,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -98744,6 +99368,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -98822,6 +99447,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -98936,6 +99562,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -99049,6 +99676,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -99100,6 +99728,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -99300,6 +99929,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -99411,6 +100041,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -99559,6 +100190,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -99836,6 +100468,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -100417,6 +101050,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -100514,6 +101148,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -100636,6 +101271,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -100714,6 +101350,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -100828,6 +101465,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -100941,6 +101579,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -100992,6 +101631,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -101192,6 +101832,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -101303,6 +101944,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -101451,6 +102093,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -101728,6 +102371,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -102309,6 +102953,7 @@ export const searchReviews = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -102406,6 +103051,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -102528,6 +103174,7 @@ export const searchReviews = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -102606,6 +103253,7 @@ export const searchReviews = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -102720,6 +103368,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -102833,6 +103482,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -102884,6 +103534,7 @@ export const searchReviews = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -103084,6 +103735,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -103195,6 +103847,7 @@ export const searchReviews = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -103332,6 +103985,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -103460,6 +104114,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -103519,6 +104174,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -103558,6 +104214,7 @@ export const getWishlist = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -103682,6 +104339,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -103739,6 +104397,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -103832,6 +104491,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -103960,6 +104620,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -104019,6 +104680,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -104058,6 +104720,7 @@ export const getWishlist = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -104182,6 +104845,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -104239,6 +104903,7 @@ export const getWishlist = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -104437,6 +105102,7 @@ export const listWishlists = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -104652,6 +105318,7 @@ export const listWishlists = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -104924,6 +105591,7 @@ export const bystoreIdWishlist = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -105139,6 +105807,7 @@ export const bystoreIdWishlist = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -105411,6 +106080,7 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -105626,6 +106296,7 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -105842,6 +106513,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -106003,6 +106675,7 @@ export const getWishlistProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -106178,6 +106851,7 @@ export const getWishlistProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -106287,6 +106961,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -106364,6 +107039,7 @@ export const getWishlistProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -106461,6 +107137,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -106669,6 +107346,7 @@ export const getWishlistProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -106890,6 +107568,7 @@ export const getWishlistProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -106997,6 +107676,7 @@ export const getWishlistProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -107354,6 +108034,7 @@ export const getWishlistProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -107573,6 +108254,7 @@ export const getWishlistProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -107755,6 +108437,7 @@ export const listWishlistProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -107852,6 +108535,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -107974,6 +108658,7 @@ export const listWishlistProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -108052,6 +108737,7 @@ export const listWishlistProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -108166,6 +108852,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -108279,6 +108966,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -108330,6 +109018,7 @@ export const listWishlistProducts = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -108530,6 +109219,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -108641,6 +109331,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -108775,6 +109466,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -108872,6 +109564,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -108994,6 +109687,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -109072,6 +109766,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -109186,6 +109881,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -109299,6 +109995,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -109350,6 +110047,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -109550,6 +110248,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -109661,6 +110360,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -109803,6 +110503,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -109931,6 +110632,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -109990,6 +110692,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110029,6 +110732,7 @@ export const getShoppingCart = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -110153,6 +110857,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110210,6 +110915,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110303,6 +111009,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110431,6 +111138,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110490,6 +111198,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110529,6 +111238,7 @@ export const getShoppingCart = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -110653,6 +111363,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110710,6 +111421,7 @@ export const getShoppingCart = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -110910,6 +111622,7 @@ export const listShoppingCarts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -111125,6 +111838,7 @@ export const listShoppingCarts = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -111399,6 +112113,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -111614,6 +112329,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -111888,6 +112604,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -112103,6 +112820,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -112377,6 +113095,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -112592,6 +113311,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -112810,6 +113530,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -112971,6 +113692,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -113146,6 +113868,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -113255,6 +113978,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -113332,6 +114056,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -113429,6 +114154,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -113637,6 +114363,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -113858,6 +114585,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -113965,6 +114693,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -114322,6 +115051,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -114541,6 +115271,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -114724,6 +115455,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -114821,6 +115553,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -114943,6 +115676,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -115021,6 +115755,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -115135,6 +115870,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -115248,6 +115984,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -115299,6 +116036,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -115499,6 +116237,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -115610,6 +116349,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -115745,6 +116485,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -115842,6 +116583,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -115964,6 +116706,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -116042,6 +116785,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -116156,6 +116900,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -116269,6 +117014,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -116320,6 +117066,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
           inventory
           blockedInventory
           rating
+          totalRatings
           totalOrders
           additionalInfo
           thumbImages
@@ -116520,6 +117267,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -116631,6 +117379,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -116775,6 +117524,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -116903,6 +117653,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -116962,6 +117713,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -117001,6 +117753,7 @@ export const getCouponCode = /* GraphQL */ `
             inventory
             blockedInventory
             rating
+            totalRatings
             totalOrders
             additionalInfo
             thumbImages
@@ -117125,6 +117878,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -117182,6 +117936,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -117344,6 +118099,7 @@ export const getCouponCode = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -117499,6 +118255,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -117552,6 +118309,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -117644,6 +118402,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -117697,6 +118456,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -118050,6 +118810,7 @@ export const getCouponCode = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -118186,6 +118947,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -118553,6 +119315,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -118778,6 +119541,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -119042,6 +119806,7 @@ export const getCouponCode = /* GraphQL */ `
                   inventory
                   blockedInventory
                   rating
+                  totalRatings
                   totalOrders
                   additionalInfo
                   thumbImages
@@ -119411,6 +120176,7 @@ export const listCouponCodes = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -119583,6 +120349,7 @@ export const listCouponCodes = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -119860,6 +120627,7 @@ export const listCouponCodes = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -120558,6 +121326,7 @@ export const bycodeCouponCode = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -120730,6 +121499,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -121007,6 +121777,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -121705,6 +122476,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -121877,6 +122649,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -122154,6 +122927,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -122852,6 +123626,7 @@ export const searchCouponCodes = /* GraphQL */ `
               inventory
               blockedInventory
               rating
+              totalRatings
               totalOrders
               additionalInfo
               thumbImages
@@ -123024,6 +123799,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages
@@ -123301,6 +124077,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 inventory
                 blockedInventory
                 rating
+                totalRatings
                 totalOrders
                 additionalInfo
                 thumbImages

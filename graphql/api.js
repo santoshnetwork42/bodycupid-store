@@ -311,6 +311,7 @@ export const getProductBySlug = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
