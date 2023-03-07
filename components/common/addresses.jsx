@@ -102,36 +102,56 @@ function Addresses({ user, onAddressChange }) {
                 >
                   <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">
                     <h5 className="card-title text-uppercase">{adr.name}</h5>
-                    <p>
-                      {adr.email}
-                      <br />
-                      {adr.phone}
-                      <br />
-                      {adr.address}
-                      <br />
-                      {adr.area}
-                      <br />
-                      {adr.landmark}
-                      <br />
-                      {adr.city + ", " + adr.state + ", " + adr.pinCode}
+                    <p className="add-lables-values">
+                      {adr?.email && (
+                        <span>
+                          {adr?.email} <br />
+                        </span>
+                      )}
+                      {adr?.phone && (
+                        <span>
+                          {adr?.phone} <br />
+                        </span>
+                      )}
+                      {adr?.address && (
+                        <span className="add-address">
+                          {adr?.address}
+                          <br />
+                        </span>
+                      )}
+                      {adr?.area && (
+                        <span>
+                          {adr?.area} <br />
+                        </span>
+                      )}
+                      {adr?.landmark && (
+                        <span>
+                          {adr?.landmark} <br />
+                        </span>
+                      )}
+                      <span>
+                        {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
+                      </span>
                     </p>
-                    <ALink
-                      href="#"
-                      className="btn btn-link btn-secondary btn-underline"
-                      onClick={() => {
-                        setDefaultAddress({ ...adr });
-                        setOpen(true);
-                      }}
-                    >
-                      Edit <i className="far fa-edit"></i>
-                    </ALink>
-                    <ALink
-                      href="#"
-                      className="btn btn-link btn-secondary btn-underline ml-3"
-                      onClick={() => removeAddress(adr.id)}
-                    >
-                      Delete <i className="far fa-trash-alt"></i>
-                    </ALink>
+                    <div className="add-bottom-btn">
+                      <ALink
+                        href="#"
+                        className="btn btn-link btn-secondary btn-underline"
+                        onClick={() => {
+                          setDefaultAddress({ ...adr });
+                          setOpen(true);
+                        }}
+                      >
+                        Edit <i className="far fa-edit"></i>
+                      </ALink>
+                      <ALink
+                        href="#"
+                        className="btn btn-link btn-secondary btn-underline ml-3"
+                        onClick={() => removeAddress(adr.id)}
+                      >
+                        Delete <i className="far fa-trash-alt"></i>
+                      </ALink>
+                    </div>
                   </div>
                 </div>
               </div>
