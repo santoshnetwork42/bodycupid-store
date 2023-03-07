@@ -307,10 +307,14 @@ function DetailOne(props) {
           </span>
         </div>
 
-        {/* <ALink href="#" className="rating-reviews">( {product.reviews} reviews )</ALink> */}
-        <div onClick={onReviewClick} className="rating-reviews cursor-pointer">
-          ( {product.totalRatings} reviews )
-        </div>
+        {!!product.totalRatings && (
+          <div
+            onClick={onReviewClick}
+            className="rating-reviews cursor-pointer"
+          >
+            ( {product.totalRatings} reviews )
+          </div>
+        )}
       </div>
 
       <p className="product-short-desc">{product.productDescription}</p>

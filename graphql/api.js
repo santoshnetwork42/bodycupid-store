@@ -767,6 +767,7 @@ export const findProducts = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages

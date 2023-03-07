@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { modalActions } from "~/store/modal";
 import { createReview, getReviews } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
-import RatingStar from "../rating-start";
+import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
 
@@ -66,6 +66,7 @@ function DescOne(props) {
           filter: {
             productId: { eq: product.id },
           },
+          sort: [{ field: "createdAt", direction: "desc" }],
           nextToken: reset ? null : token,
         })
       )
@@ -139,7 +140,6 @@ function DescOne(props) {
         });
         setReview({ ...reviewDefault });
         setReviews([
-          ...reviews,
           {
             id: new Date().toUTCString(),
             reviewer: {
@@ -151,6 +151,7 @@ function DescOne(props) {
             comment,
             updatedAt: new Date().toUTCString(),
           },
+          ...reviews,
         ]);
         toast(
           <AlertPopup
@@ -192,7 +193,7 @@ function DescOne(props) {
         <Tab className="nav-item">
           {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
           <span className="nav-link" id="product-review">
-            Reviews ({product?.totalRatings})
+            Reviews {!!product?.totalRatings && `(${product?.totalRatings})`}
           </span>
         </Tab>
       </TabList>
@@ -310,8 +311,10 @@ function DescOne(props) {
               <div className="review-section ">
                 <div className="total-review w-100">
                   <h4>{product?.rating}</h4>
-                  <RatingStar value={3} />
-                  <span>Based on {product.totalRatings} reviews</span>
+                  <RatingStar value={product?.rating} />
+                  {!!product?.totalRatings && (
+                    <span>Based on {product.totalRatings} reviews</span>
+                  )}
                 </div>
                 <div className="rating w-100">
                   {[5, 4, 3, 2, 1].map((num, i) => (

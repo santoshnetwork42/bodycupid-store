@@ -164,15 +164,16 @@ function ProductEight(props) {
             </span>
           </div>
 
-          <ALink href={`/product/${product.slug}`} className="rating-reviews">
-            ( {product?.totalRatings} reviews )
-          </ALink>
+          {!!product.totalRatings && (
+            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+              ( {product?.totalRatings} reviews )
+            </ALink>
+          )}
         </div>
 
         <p className="product-short-desc">{product.productDescription}</p>
 
         <div className="product-action">
-        
           <a
             href="#"
             className="btn-product btn-cart"
