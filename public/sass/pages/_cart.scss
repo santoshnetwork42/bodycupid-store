@@ -178,6 +178,21 @@
     }
 }
 
+.summary-saving-lable-container {
+    padding: 2.5px 10px;
+    margin:1.2rem 0px 0px 0px;
+    text-align: center;
+    background-color: $light-success-color;
+    border-radius: 0.3rem;
+    .saving-lable {
+        margin: 0px;
+        color: #167221;
+        span{
+            color: #4e9223;
+        }
+    }
+}
+
 .summary-title {
     font-size: 1.8rem;
     font-weight: 700;
@@ -190,6 +205,9 @@
 }
 //?
 .summary-subtotal {
+    border-bottom: 1px solid #e1e1e1;
+}
+.summary-subtotal-saving{
     border-bottom: 1px solid #e1e1e1;
 }
 //?
@@ -415,8 +433,11 @@
 
 .cart-coupon-box {
     display: flex;
-    justify-content: space-between;
-    padding: 2.4rem 3rem 3rem;
+    flex-direction: column;
+    padding: 2.4rem 3rem;
+    .cart-coupon-container {
+        justify-content: space-between;
+    }
     border:1px solid #e1e1e1;
     border-radius: 2px;
     .coupon-title {

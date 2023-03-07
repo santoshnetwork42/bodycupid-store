@@ -122,7 +122,7 @@ function Login({ auth, redirect = true, closeLogin }) {
                   selectedTabClassName="active"
                   selectedTabPanelClassName="active"
                 >
-                  <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5">
+                  <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
                     <Tab className="nav-item">
                       <span className="nav-link border-no lh-1 ls-normal">
                         Sign in

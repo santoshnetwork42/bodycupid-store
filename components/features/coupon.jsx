@@ -71,41 +71,56 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div className="cart-coupon-box mb-4">
-          <div>
-            <h4 className="title coupon-title text-uppercase ls-m">
-              Coupon Discount
-            </h4>
-            {!appliedCoupon && (
-              <span className="coupon-subtitle">
-                Save more with coupon and offers
-              </span>
+          <div className="cart-coupon-container d-flex">
+            <div>
+              <h4 className="title coupon-title text-uppercase ls-m">
+                Use Coupons
+              </h4>
+              {!appliedCoupon && (
+                <span className="coupon-subtitle">
+                  Save more with coupon and offers
+                </span>
+              )}
+              {!!appliedCoupon && (
+                <span className="coupon-subtitle">
+                  {appliedCoupon.code} applied
+                </span>
+              )}
+            </div>
+
+            {!!featured?.length && !appliedCoupon && (
+              <a
+                className="coupon-offer"
+                type="button"
+                onClick={() => setOpen(true)}
+              >{`${featured?.length} Offers >`}</a>
             )}
             {!!appliedCoupon && (
-              <span className="coupon-subtitle">
-                {appliedCoupon.code} applied
-              </span>
+              <ALink
+                key={appliedCoupon.id}
+                href="#"
+                className="product-remove"
+                title="Remove coupon"
+                onClick={() => removeCoupon()}
+              >
+                <i className="fas fa-times"></i>
+              </ALink>
             )}
           </div>
-          {!!featured?.length && !appliedCoupon && (
-            <a
-              className="coupon-offer"
-              type="button"
-              onClick={() => setOpen(true)}
-            >{`${featured?.length} Offers >`}</a>
-          )}
           {!!appliedCoupon && (
-            <ALink
-              key={appliedCoupon.id}
-              href="#"
-              className="product-remove"
-              title="Remove coupon"
-              onClick={() => removeCoupon()}
-            >
-              <i className="fas fa-times"></i>
-            </ALink>
+            <div className="summary-saving-lable-container">
+              <p className="saving-lable">
+                You are saving{" "}
+                <span>{`₹${toDecimal(
+                  getCouponTotal(appliedCoupon, cartList)
+                )}`}</span>{" "}
+                on this order
+              </p>
+            </div>
           )}
         </div>
       )}
+
       {layout === "checkout" && (
         <div className="card accordion">
           <div className="alert alert-light alert-primary alert-icon mb-4 card-header">

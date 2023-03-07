@@ -36,7 +36,10 @@ export default function Footer({ footer }) {
                   <h4 className="widget-title">Subscribe to our Newsletter</h4>
                   <p>Get all the latest information, Sales and Offers.</p>
                 </div>
-                <form action="#" className="input-wrapper footer-email input-wrapper-inline">
+                <form
+                  action="#"
+                  className="input-wrapper footer-email input-wrapper-inline"
+                >
                   <input
                     type="email"
                     className="form-control"
@@ -121,77 +124,7 @@ export default function Footer({ footer }) {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
-              <div className="widget widget-instagram">
-                <h4 className="widget-title">Instagram</h4>
-                <figure className="widget-body row">
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/01.jpg"
-                      alt="instagram 1"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/02.jpg"
-                      alt="instagram 2"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/03.jpg"
-                      alt="instagram 3"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/04.jpg"
-                      alt="instagram 4"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/05.jpg"
-                      alt="instagram 5"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/06.jpg"
-                      alt="instagram 6"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/07.jpg"
-                      alt="instagram 7"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                  <div className="col-3">
-                    <img
-                      src="/images/instagram/08.jpg"
-                      alt="instagram 8"
-                      width="64"
-                      height="64"
-                    />
-                  </div>
-                </figure>
-              </div>
-            </div>
+            <div className="col-lg-3 col-md-6"></div>
           </div>
         </div>
 
@@ -208,23 +141,30 @@ export default function Footer({ footer }) {
           </div>
           <div className="footer-center">
             <p className="copyright ls-normal">
-              Wow eCommerce &copy; 2021. All Rights Reserved
+              Wow life science &copy; {new Date().getFullYear()}. All Rights
+              Reserved
             </p>
           </div>
           <div className="footer-right">
             <div className="social-links">
-              <ALink
-                href="#"
+              <a
+                title="Wow Life Science on Instagram"
+                className="social-link social-insta fab fa-instagram"
+                href="https://www.instagram.com/wowlifescienceindia/"
+                target={"_blank"}
+              />
+              <a
+                title="Wow Life Science on Facebook"
+                href="https://www.facebook.com/wowlifescienceindia/"
                 className="social-link social-facebook fab fa-facebook-f"
-              ></ALink>
-              <ALink
-                href="#"
-                className="social-link social-twitter fab fa-twitter"
-              ></ALink>
-              <ALink
-                href="#"
-                className="social-link social-linkedin fab fa-linkedin-in"
-              ></ALink>
+                target={"_blank"}
+              ></a>
+              <a
+                title="Wow Life Science on YouTube"
+                href="https://www.youtube.com/@WOWLifeScience"
+                className="social-link social-youtube fab fa-youtube"
+                target={"_blank"}
+              ></a>
             </div>
           </div>
         </div>

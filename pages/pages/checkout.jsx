@@ -346,34 +346,54 @@ function Checkout(props) {
                             </td>
                           </tr>
                           {!!appliedCoupon && (
-                            <tr className="summary-subtotal">
-                              <td>
-                                <h4 className="summary-subtitle">Coupons</h4>
-                                <p>
-                                  <div className="d-flex">
-                                    <span className="mr-1">
-                                      {appliedCoupon.code}
-                                    </span>
-                                    <ALink
-                                      key={appliedCoupon.id}
-                                      href="#"
-                                      className="product-remove"
-                                      title="Remove coupon"
-                                      onClick={() => removeCoupon()}
-                                    >
-                                      <i className="fas fa-times"></i>
-                                    </ALink>
+                            <>
+                              <tr>
+                                <td>
+                                  <h4 className="summary-subtitle">Coupons</h4>
+                                  <p>
+                                    <div className="d-flex">
+                                      <span className="mr-1">
+                                        {appliedCoupon.code}
+                                      </span>
+                                      <ALink
+                                        key={appliedCoupon.id}
+                                        href="#"
+                                        className="product-remove"
+                                        title="Remove coupon"
+                                        onClick={() => removeCoupon()}
+                                      >
+                                        <i className="fas fa-times"></i>
+                                      </ALink>
+                                    </div>
+                                  </p>
+                                </td>
+                                <td>
+                                  <p className="summary-subtotal-price">
+                                    {`₹${toDecimal(
+                                      getCouponTotal(appliedCoupon, cartList)
+                                    )}`}
+                                  </p>
+                                </td>
+                              </tr>
+                              <tr className="summary-subtotal-saving">
+                                <td colSpan={2}>
+                                  <div className="summary-saving-lable-container mt-0 mb-2">
+                                    <p className="saving-lable">
+                                      You are saving{" "}
+                                      <span>
+                                        {`₹${toDecimal(
+                                          getCouponTotal(
+                                            appliedCoupon,
+                                            cartList
+                                          )
+                                        )}`}
+                                      </span>{" "}
+                                      on this order
+                                    </p>
                                   </div>
-                                </p>
-                              </td>
-                              <td>
-                                <p className="summary-subtotal-price">
-                                  {`₹${toDecimal(
-                                    getCouponTotal(appliedCoupon, cartList)
-                                  )}`}
-                                </p>
-                              </td>
-                            </tr>
+                                </td>
+                              </tr>
+                            </>
                           )}
                           <tr className="summary-total">
                             <td className="pb-0">
