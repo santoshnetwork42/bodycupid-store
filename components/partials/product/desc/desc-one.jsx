@@ -12,7 +12,7 @@ import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
 import ProductSpecifications from "../product-specifications";
-import productSpecifications from "~/lib/productSpecifications.json";
+import Specifications from "~/lib/specifications.json";
 
 const reviewDefault = {
   rating: 5,
@@ -224,7 +224,7 @@ function DescOne(props) {
           <div className="row mt-6">
             <div className="pl-md-6 pt-4 pt-md-0">
               <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
-                {productSpecifications.map((options, index) => (
+                {Specifications.map((options, index) => (
                   <ProductSpecifications key={index} {...options} />
                 ))}
               </div>
