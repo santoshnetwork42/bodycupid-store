@@ -56,7 +56,7 @@ function Coupon(props) {
     })();
   }, []);
 
-  const { allDiscounts, maxDiscount } = useMemo(() => {
+  const { allDiscounts, maxDiscountCoupon } = useMemo(() => {
     let cart = [...cartList];
     if (product) cart = [product];
     const allDiscounts = featured.reduce((acc, cur) => {
@@ -72,7 +72,7 @@ function Coupon(props) {
     );
     return {
       allDiscounts,
-      maxDiscount: featured.find((f) => f.id === id),
+      maxDiscountCoupon: featured.find((f) => f.id === id),
     };
   }, [featured, product, cartList]);
 
@@ -102,15 +102,11 @@ function Coupon(props) {
     [coupon, user]
   );
 
-  const onCopy = () => {
-    var copyText = document.getElementById("coupon-code");
+  const onCopy = (copyText) => {
     if (copyText) {
-      navigator.clipboard.writeText(copyText.textContent);
+      navigator.clipboard.writeText(copyText);
       toast(
-        <AlertPopup
-          message={"Copied the text: " + copyText.textContent}
-          status="info"
-        />
+        <AlertPopup message={"Copied the text: " + copyText} status="info" />
       );
     }
   };
@@ -169,7 +165,7 @@ function Coupon(props) {
           </div>
         </div>
       )}
-      {layout === "product" && maxDiscount && (
+      {layout === "product" && maxDiscountCoupon && (
         <div className="product-best-price-container">
           <div className="product-top-content">
             <div className="d-flex align-items-center">
@@ -177,7 +173,7 @@ function Coupon(props) {
               <p>
                 Best price :{" "}
                 <span className="font-weight-semi-bold">
-                  {toDecimal(product?.price - maxDiscount?.discount)}
+                  {toDecimal(product?.price - maxDiscountCoupon?.discount)}
                 </span>{" "}
               </p>
             </div>
@@ -186,9 +182,12 @@ function Coupon(props) {
           <div className="d-flex">
             Use coupon{" "}
             <p id="coupon-code" className="font-weight-semi-bold ml-1">
-              {maxDiscount?.code}
+              {maxDiscountCoupon?.code}
             </p>{" "}
-            <span className="copy-code  cursor-pointer ml-1" onClick={onCopy}>
+            <span
+              className="copy-code  cursor-pointer ml-1"
+              onClick={() => onCopy(maxDiscountCoupon?.code)}
+            >
               Copy code
             </span>
           </div>
