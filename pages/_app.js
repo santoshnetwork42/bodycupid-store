@@ -25,16 +25,21 @@ const App = ({ Component, pageProps }) => {
 
   const setUser = useCallback(async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      const {
-        data: { getUser: getUserResponse },
-      } = await API.graphql({
-        query: getUser,
-        variables: { id: user.username },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
+      const state = store.getState();
+      if (!state.user.data) {
+        const user = await Auth.currentAuthenticatedUser().catch(() => null);
+        if (user) {
+          const {
+            data: { getUser: getUserResponse },
+          } = await API.graphql({
+            query: getUser,
+            variables: { id: user.username },
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+          });
 
-      store.dispatch(userActions.setUser(getUserResponse));
+          store.dispatch(userActions.setUser(getUserResponse));
+        }
+      }
     } catch (error) {
       console.log(error);
       store.dispatch(rootActions.destroySession());
