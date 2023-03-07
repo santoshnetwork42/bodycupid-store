@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Magnifier } from "react-image-magnifiers";
 import Modal from "react-modal";
@@ -34,6 +34,24 @@ function Quickview(props) {
   const [loaded, setLoadingState] = useState(false);
   const [product, setProduct] = useState(null);
   const [variant, setVariant] = useState(null);
+  const KEY_NAME_ESC = "Escape";
+  const KEY_EVENT_TYPE = "keyup";
+
+  useEffect(() => {
+    document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+    return () => {
+      document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+    };
+  }, [handleEscKey]);
+
+  const handleEscKey = useCallback(
+    (event) => {
+      if (event.key === KEY_NAME_ESC) {
+        closeQuickview();
+      }
+    },
+    [closeQuickview]
+  );
 
   useEffect(() => {
     if (slug) {
