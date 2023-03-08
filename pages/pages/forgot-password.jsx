@@ -30,7 +30,7 @@ function ForgotPassword() {
             state.confirmationCode,
             state.password
           );
-          router.push("/");
+          router.push("/pages/login");
         }
       } catch (error) {
         console.log("error signin:", error);
