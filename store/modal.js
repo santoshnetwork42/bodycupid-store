@@ -8,6 +8,8 @@ const actionTypes = {
   CLOSE_QUICKVIEW: 'CLOSE_QUICKVIEW',
   OPEN_LOGIN: 'OPEN_LOGIN',
   CLOSE_LOGIN: 'CLOSE_LOGIN',
+  OPEN_PASSWORDLESS: 'OPEN_PASSWORDLESS',
+  CLOSE_PASSWORDLESS: 'CLOSE_PASSWORDLESS',
   REFRESH_STORE: 'REFRESH_STORE'
 }
 
@@ -18,6 +20,7 @@ const initialState = {
   login: false,
   singleSlug: '',
   loginRedirect: true,
+  passwordless: false,
 }
 
 function modalReducer(state = initialState, action) {
@@ -54,6 +57,12 @@ function modalReducer(state = initialState, action) {
     case actionTypes.CLOSE_LOGIN:
       return { ...state, login: false, loginRedirect: true };
 
+    case actionTypes.OPEN_PASSWORDLESS:
+      return { ...state, passwordless: true };
+
+    case actionTypes.CLOSE_PASSWORDLESS:
+      return { ...state, passwordless: false };
+
     case actionTypes.REFRESH_STORE:
       return initialState;
 
@@ -68,7 +77,9 @@ export const modalActions = {
   openQuickview: slug => ({ type: actionTypes.OPEN_QUICKVIEW, payload: { slug } }),
   closeQuickview: () => ({ type: actionTypes.CLOSE_QUICKVIEW }),
   openLoginModal: (redirect = true) => ({ type: actionTypes.OPEN_LOGIN, payload: { redirect } }),
-  closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN })
+  closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN }),
+  openPasswordlessModal: () => ({ type: actionTypes.OPEN_PASSWORDLESS }),
+  closePasswordlessModal: () => ({ type: actionTypes.CLOSE_PASSWORDLESS })
 };
 
 const persistConfig = {

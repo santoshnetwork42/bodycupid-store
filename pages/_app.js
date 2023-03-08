@@ -23,17 +23,22 @@ const App = ({ Component, pageProps }) => {
   const store = useStore();
   const { navbar, footer } = pageProps;
 
+  const destroySession = useCallback(() => {
+    store.__persistor.purge();
+    store.dispatch(rootActions.destroySession());
+  }, [store]);
+
   const setUser = useCallback(async () => {
     try {
       const state = store.getState();
       if (!state.user.data) {
         const user = await Auth.currentAuthenticatedUser().catch(() => null);
-        if (user) {
+        if (user?.attributes?.sub) {
           const {
             data: { getUser: getUserResponse },
           } = await API.graphql({
             query: getUser,
-            variables: { id: user.username },
+            variables: { id: user?.attributes?.sub },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
 
@@ -42,7 +47,7 @@ const App = ({ Component, pageProps }) => {
       }
     } catch (error) {
       console.log(error);
-      store.dispatch(rootActions.destroySession());
+      destroySession();
     }
   }, [store]);
 
@@ -60,7 +65,7 @@ const App = ({ Component, pageProps }) => {
   //     store.dispatch(userActions.setUser(getUserResponse));
   //   } catch (error) {
   //     console.log(error);
-  //     store.dispatch(rootActions.destroySession());
+  //     destroySession();
   //   }
   // }, [store]);
 
@@ -80,7 +85,7 @@ const App = ({ Component, pageProps }) => {
   const initSession = useCallback(async () => {
     setStore();
     setUser();
-  }, [store]);
+  }, [setStore, setUser]);
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
@@ -89,7 +94,7 @@ const App = ({ Component, pageProps }) => {
         payload: { event },
       } = authEvent;
       if (event === "signOut") {
-        store.dispatch(rootActions.destroySession());
+        destroySession();
       } else if (loggedInEvents.includes(event)) {
         initSession();
       }
