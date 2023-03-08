@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { modalActions } from "~/store/modal";
-
-import AuthView from "../../../pages/pages/login";
+import AuthView from "~/pages/pages/login";
 import Modal from "~/components/common/modal";
 
 function LoginModal({ isOpen, redirect = true, closeLoginModal }) {
@@ -17,7 +16,7 @@ function LoginModal({ isOpen, redirect = true, closeLoginModal }) {
       overlayClassName="auth-modal-overlay"
       className="auth-popup bg-img"
     >
-      <AuthView redirect={redirect} />
+      <AuthView redirect={redirect} showOTPLogin />
     </Modal>
   );
 }

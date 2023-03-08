@@ -9,8 +9,9 @@ import getRandomString from "~/utils/getRandomString";
 import { modalActions } from "~/store/modal";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Modal from "~/components/common/modal";
+import ALink from "~/components/features/custom-link";
 
-function Passwordless({ auth, isOpen, closeModal }) {
+function Passwordless({ auth, isOpen, closeModal, openLogin }) {
   const [state, setState] = useState({
     phone: "",
     confirmationCode: "",
@@ -163,6 +164,18 @@ function Passwordless({ auth, isOpen, closeModal }) {
                             >
                               Get OTP
                             </button>
+                            <div className="text-center">
+                              <ALink
+                                href="#"
+                                className="lost-link"
+                                onClick={() => {
+                                  closeModal();
+                                  openLogin();
+                                }}
+                              >
+                                Login with Password
+                              </ALink>
+                            </div>
                           </form>
                         )}
                         {/* <div className="form-choice text-center">
@@ -235,4 +248,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
+  openLogin: modalActions.openLoginModal,
 })(Passwordless);

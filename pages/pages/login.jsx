@@ -10,7 +10,13 @@ import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 
-function Login({ auth, redirect = true, closeLogin }) {
+function Login({
+  auth,
+  redirect = true,
+  closeLogin,
+  showOTPLogin = false,
+  openPasswordless,
+}) {
   const router = useRouter();
   const [state, setState] = useState({
     name: "",
@@ -192,6 +198,20 @@ function Login({ auth, redirect = true, closeLogin }) {
                           >
                             Login
                           </button>
+                          {showOTPLogin && (
+                            <div className="text-center">
+                              <ALink
+                                href="#"
+                                className="lost-link"
+                                onClick={() => {
+                                  closeLogin();
+                                  openPasswordless();
+                                }}
+                              >
+                                Login with OTP
+                              </ALink>
+                            </div>
+                          )}
                         </form>
                       )}
                       {/* <div className="form-choice text-center">
@@ -391,4 +411,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   closeLogin: modalActions.closeLoginModal,
+  openPasswordless: modalActions.openPasswordlessModal,
 })(Login);
