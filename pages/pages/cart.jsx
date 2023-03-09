@@ -25,14 +25,18 @@ function Cart(props) {
     setCartItems([...cartList]);
   }, [cartList]);
 
-  const onChangeQty = (id, variantId, qty) => {
-    setCartItems(
-      cartItems.map((item) => {
+  const onChangeQty = (item, qty) => {
+    if (qty) {
+      const { id, variantId } = item;
+      const cart = cartItems.map((item) => {
         return item.id === id && (!variantId || variantId === item.variantId)
           ? { ...item, qty: qty }
           : item;
-      })
-    );
+      });
+      updateCart(cart);
+    } else {
+      removeFromCart(item);
+    }
   };
 
   const compareItems = () => {
@@ -123,9 +127,7 @@ function Cart(props) {
                               product={item}
                               qty={item.qty}
                               max={item.inventory}
-                              onChangeQty={(qty) =>
-                                onChangeQty(item.id, item.variantId, qty)
-                              }
+                              onChangeQty={(qty) => onChangeQty(item, qty)}
                             />
                           </td>
                           <td className="product-price">
@@ -250,7 +252,6 @@ function Cart(props) {
                         </tbody>
                       </table>
                       <ALink
-                        onClick={update}
                         href="/pages/checkout"
                         className="btn btn-dark btn-rounded btn-checkout"
                       >
