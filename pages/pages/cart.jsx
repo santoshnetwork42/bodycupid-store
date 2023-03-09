@@ -71,7 +71,7 @@ function Cart(props) {
           <div className="row">
             {cartItems.length > 0 ? (
               <>
-                <div className="col-lg-8 col-md-12 pr-lg-4">
+                <div className="col-lg-8 col-md-12 pr-lg-4 mb-4">
                   <table className="shop-table cart-table">
                     <thead>
                       <tr>

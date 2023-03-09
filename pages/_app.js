@@ -120,7 +120,7 @@ const App = ({ Component, pageProps }) => {
         <Head>
           <meta charSet="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="viewport" content="user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height" />
           <title>Wow life science</title>
           <meta name="keywords" content="WOW" />
           <meta name="description" content="Wow life science" />
