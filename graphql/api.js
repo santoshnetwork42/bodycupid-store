@@ -306,6 +306,7 @@ export const getProductBySlug = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory

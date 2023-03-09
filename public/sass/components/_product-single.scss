@@ -169,6 +169,20 @@
         aside+div & {
             padding-top: 2px;
         }
+
+        .product-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            lable {
+                padding: .6rem 1.3rem;
+                border-radius: .5rem;
+                background-color: $border-color;
+                color: $body-color;
+                text-transform: capitalize;
+            }
+        }
     }
 
     .product-cat {
