@@ -1253,3 +1253,81 @@ export const getReviews = /* GraphQL */ `
     }
   }
 `;
+
+export const getLinkedProducts = /* GraphQL */ `
+  query ByProductIdLinkedProduct(
+    $productId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelLinkedProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byProductIdLinkedProduct(
+      productId: $productId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productId
+        linkedProductId
+        linkedProduct {
+          id
+          title
+          brand
+          slug
+          productDescription
+          price
+          sku
+          size
+          position
+          currency
+          costPrice
+          listingPrice
+          taxable
+          barcode
+          tags
+          benefits
+          rating
+          totalRatings
+          totalOrders
+          thumbImages
+          isTaxEnabled
+          isInventoryEnabled
+          hasVarient
+          variants {
+            items {
+              id
+              title
+              price
+              sku
+              position
+              currency
+              costPrice
+              listingPrice
+              imageUrl
+            }
+          }
+          images {
+            items {
+              id
+              productId
+              position
+              createdAt
+              updatedAt
+              alt
+              width
+              height
+              imageKey
+              isThumb
+            }
+          }
+        }
+      }
+    }
+  }
+`;

@@ -328,7 +328,7 @@ export const getTotalPrice = (cartItems = []) => {
   let total = 0;
   if (cartItems) {
     for (let i = 0; i < cartItems.length; i++) {
-      total += cartItems[i].price * parseInt(cartItems[i].qty, 10);
+      total += cartItems[i].price * (parseInt(cartItems[i].qty || 1), 10);
     }
   }
   return total;

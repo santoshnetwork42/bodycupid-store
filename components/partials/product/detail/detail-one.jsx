@@ -484,7 +484,7 @@ function DetailOne(props) {
                     onClick={addToCartHandler}
                   >
                     <i className="d-icon-bag"></i>
-                    Add toCart
+                    Add to cart
                   </button>
                 )}
               </div>
@@ -522,7 +522,7 @@ function DetailOne(props) {
                 onClick={addToCartHandler}
               >
                 <i className="d-icon-bag"></i>
-                Add toCart
+                Add to cart
               </button>
             )}
           </div>

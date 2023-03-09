@@ -10,6 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getThumbImage } from "~/utils/helper";
 import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
@@ -62,10 +63,7 @@ function ProductTwo(props) {
       )
     : 0;
 
-  const images = product?.images.items.sort((a, b) => a.position - b.position);
-
-  const thumbImage = images?.find((i) => i.isThumb) ||
-    images[0] || { imageKey: product.imageUrl };
+  const thumbImage = getThumbImage(product);
 
   return (
     <div className={`product text-left ${adClass}`}>

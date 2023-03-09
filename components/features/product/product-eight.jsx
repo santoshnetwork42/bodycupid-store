@@ -10,6 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getThumbImage } from "~/utils/helper";
 
 function ProductEight(props) {
   const {
@@ -58,8 +59,7 @@ function ProductEight(props) {
       )
     : 0;
 
-  const thumbImage =
-    product.images.items.find((i) => i.isThumb) || product.images.items[0];
+  const thumbImage = getThumbImage(product);
 
   return (
     <div

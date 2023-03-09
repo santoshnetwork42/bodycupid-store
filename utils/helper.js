@@ -42,3 +42,17 @@ export const deliveryRemainingTime = () => {
     return hh > 0 ? `${hh} hrs ${mm} mins` : `${mm} mins`;
   }
 };
+
+export const getThumbImage = (product) => {
+  const images = product?.images.items.sort((a, b) => a.position - b.position);
+
+  return (
+    images?.find((i) => i.isThumb) ||
+    images[0] || { imageKey: product.imageUrl }
+  );
+};
+
+export const getTotalPriceByField = (arr, field) => {
+  const { x } = arr.reduce((a, b) => ({ x: a[field] + b[field] }));
+  return x;
+};
