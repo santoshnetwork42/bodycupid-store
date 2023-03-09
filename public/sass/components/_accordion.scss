@@ -19,7 +19,14 @@
 		display: flex;
 		align-items: center;
 		position: relative;
-		padding: 1.8rem .5rem;
+		padding: 1rem .5rem;
+		.card-title{
+			p {
+				margin: 0;
+				font-size: 2rem;
+				font-weight: 500;
+			}
+		}
 		&:hover {
 			color: $primary-color;
 
@@ -64,6 +71,9 @@
 // }
 .card-body {
 	padding: 1.3rem .5rem;
+	p {
+		margin: 0;
+	}
 }
 
 .card-wrapper {

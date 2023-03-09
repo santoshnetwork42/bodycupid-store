@@ -4,16 +4,19 @@ import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
+import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
-import { createReview, getReviews } from "~/graphql/api";
+import { createReview, getReviews, searchProductFaqs } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
 import ProductSpecifications from "../product-specifications";
 import Specifications from "~/lib/specifications.json";
-
+import { fadeIn } from "~/utils/data/keyframes";
+import Accordion from "~/components/features/accordion/accordion";
+import Card from "~/components/features/accordion/card";
 const reviewDefault = {
   rating: 5,
   comment: "",
@@ -31,6 +34,7 @@ function DescOne(props) {
   const [token, setToken] = useState(null);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [productsFAQs, setProductsFAQs] = useState([]);
 
   let sizes = [];
   if (product.variants.items.length > 0) {
@@ -96,9 +100,40 @@ function DescOne(props) {
     [product, token]
   );
 
+  const getProductFAQs = useCallback(() => {
+    setLoading(true);
+    API.graphql(
+      graphqlOperation(searchProductFaqs, {
+        filter: {
+          productId: { eq: product.id },
+        },
+      })
+    )
+      .then(
+        ({
+          data: {
+            searchProductFaqs: { items: response },
+          },
+        }) => {
+          if (response) {
+            console.log(response);
+            setProductsFAQs(response);
+          }
+          setLoading(false);
+        }
+      )
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [product]);
+
   useEffect(() => {
     if (tabIndex === 2 && reviews.length === 0) {
       getProductReviews(true);
+    }
+
+    if (tabIndex === 3 && productsFAQs.length === 0) {
+      getProductFAQs();
     }
   }, [tabIndex]);
 
@@ -185,18 +220,14 @@ function DescOne(props) {
         <Tab className="nav-item">
           <span className="nav-link">Specifications</span>
         </Tab>
-        {/* {isGuide ? (
-          <Tab className="nav-item">
-            <span className="nav-link">Size Guide</span>
-          </Tab>
-        ) : (
-          ""
-        )} */}
         <Tab className="nav-item">
-          {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
           <span className="nav-link" id="product-review">
             Reviews {!!product?.totalRatings && `(${product?.totalRatings})`}
           </span>
+        </Tab>
+
+        <Tab className="nav-item">
+          <span className="nav-link">FAQ</span>
         </Tab>
       </TabList>
 
@@ -454,6 +485,52 @@ function DescOne(props) {
             loaded={reviews?.length}
             nextToken={token}
           />
+        </TabPanel>
+
+        <TabPanel className="tab-pane product-tab-faq">
+          <div className="row">
+            <div className="col-md-12">
+              <Reveal
+                keyframes={fadeIn}
+                delay="100"
+                duration="1000"
+                triggerOnce
+              >
+                <section>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-12 mt-10">
+                        {!!productsFAQs.length && (
+                          <Accordion adClass="accordion-border accordion-boxed accordion-plus">
+                            {productsFAQs.map((faq) => (
+                              <div key={faq?.id}>
+                                <Card
+                                  title={
+                                    <div
+                                      className="card-title"
+                                      dangerouslySetInnerHTML={{
+                                        __html: faq?.title,
+                                      }}
+                                    />
+                                  }
+                                >
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: faq?.description,
+                                    }}
+                                  />
+                                </Card>
+                              </div>
+                            ))}
+                          </Accordion>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </Reveal>
+            </div>
+          </div>
         </TabPanel>
       </div>
     </Tabs>
