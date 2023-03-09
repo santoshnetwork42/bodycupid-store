@@ -107,7 +107,7 @@ function ProductListTwo( props ) {
                         <div className={ `row product-wrapper cols-2 cols-sm-3` }>
                             { products.length > 0 && products.map( item =>
                                 <div className="product-wrap" key={ 'shop-' + item.slug }>
-                                    <ProductTwo product={ item } adClass="" />
+                                    <ProductTwo product={ item }  />
                                 </div>
                             ) }
                         </div>

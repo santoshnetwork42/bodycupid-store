@@ -147,14 +147,6 @@ function Cart(props) {
                       ))}
                     </tbody>
                   </table>
-                  <div className="cart-actions mb-6 pt-4">
-                    <ALink
-                      href="/shop"
-                      className="btn btn-dark btn-md btn-rounded btn-icon-left mr-4 mb-4"
-                    >
-                      <i className="d-icon-arrow-left"></i>Continue Shopping
-                    </ALink>
-                  </div>
                 </div>
                 <aside className="col-lg-4 sticky-sidebar-wrapper">
                   <div
@@ -189,34 +181,54 @@ function Cart(props) {
                             </td>
                           </tr>
                           {!!appliedCoupon && (
-                            <tr className="summary-subtotal">
-                              <td>
-                                <h4 className="summary-subtitle">Coupons</h4>
-                                <p>
-                                  <div className="d-flex">
-                                    <span className="mr-1">
-                                      {appliedCoupon.code}
-                                    </span>
-                                    <ALink
-                                      key={appliedCoupon.id}
-                                      href="#"
-                                      className="product-remove"
-                                      title="Remove coupon"
-                                      onClick={() => removeCoupon()}
-                                    >
-                                      <i className="fas fa-times"></i>
-                                    </ALink>
+                            <>
+                              <tr>
+                                <td>
+                                  <h4 className="summary-subtitle">Coupons</h4>
+                                  <p>
+                                    <div className="d-flex">
+                                      <span className="mr-1">
+                                        {appliedCoupon.code}
+                                      </span>
+                                      <ALink
+                                        key={appliedCoupon.id}
+                                        href="#"
+                                        className="product-remove"
+                                        title="Remove coupon"
+                                        onClick={() => removeCoupon()}
+                                      >
+                                        <i className="fas fa-times"></i>
+                                      </ALink>
+                                    </div>
+                                  </p>
+                                </td>
+                                <td>
+                                  <p className="summary-subtotal-price">
+                                    {`₹${toDecimal(
+                                      getCouponTotal(appliedCoupon, cartItems)
+                                    )}`}
+                                  </p>
+                                </td>
+                              </tr>
+                              <tr className="summary-subtotal">
+                                <td colSpan={2}>
+                                  <div className="summary-saving-lable-container mt-0 mb-3">
+                                    <p className="saving-lable">
+                                      You are saving{" "}
+                                      <span>
+                                        {`₹${toDecimal(
+                                          getCouponTotal(
+                                            appliedCoupon,
+                                            cartItems
+                                          )
+                                        )}`}
+                                      </span>{" "}
+                                      on this order
+                                    </p>
                                   </div>
-                                </p>
-                              </td>
-                              <td>
-                                <p className="summary-subtotal-price">
-                                  {`₹${toDecimal(
-                                    getCouponTotal(appliedCoupon, cartItems)
-                                  )}`}
-                                </p>
-                              </td>
-                            </tr>
+                                </td>
+                              </tr>
+                            </>
                           )}
                         </tbody>
                       </table>

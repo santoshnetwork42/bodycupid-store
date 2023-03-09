@@ -311,6 +311,7 @@ export const getProductBySlug = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -356,21 +357,6 @@ export const getProductBySlug = /* GraphQL */ `
             imageKey
             isThumb
           }
-        }
-        reviews {
-          items {
-            id
-            reviewer {
-              name
-              email
-            }
-            productId
-            rating
-            comment
-            createdAt
-            updatedAt
-          }
-          nextToken
         }
       }
       nextToken
@@ -781,6 +767,7 @@ export const findProducts = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -1214,6 +1201,55 @@ export const validateTransaction = /* GraphQL */ `
       razorpayPaymentId: $razorpayPaymentId
     ) {
       success
+    }
+  }
+`;
+
+export const getZipCode = /* GraphQL */ `
+  query GetZipCode($id: ID!) {
+    getZipCode(id: $id) {
+      id
+      codMaxAmount
+      cod
+      prepaid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const getReviews = /* GraphQL */ `
+  query SearchReviews(
+    $filter: SearchableReviewFilterInput
+    $sort: [SearchableReviewSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableReviewAggregationInput]
+  ) {
+    searchReviews(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        userId
+        reviewer {
+          name
+          email
+        }
+        productId
+        rating
+        comment
+        title
+        images
+      }
+      nextToken
+      total
     }
   }
 `;

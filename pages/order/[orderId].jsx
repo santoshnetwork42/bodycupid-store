@@ -2,8 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
+import { toast } from "react-toastify";
 
 import ALink from "~/components/features/custom-link";
+import AlertPopup from "~/components/features/product/common/alert-popup";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
@@ -37,6 +39,12 @@ function Order() {
 
       if (success) {
         fetchOrder();
+        toast(
+          <AlertPopup
+            message="Thank you! Your order has been confirmed."
+            status="success"
+          />
+        );
       }
     }
   }, [orderId, paymentId]);
@@ -51,6 +59,12 @@ function Order() {
       order?.paymentType === "PREPAID" &&
       paymentId
     ) {
+      toast(
+        <AlertPopup
+          message="Hold On! We're updating your payment status..."
+          status="info"
+        />
+      );
       if (timer) clearTimeout(timer);
       const timerId = setTimeout(() => {
         fetchPaymentStatus();

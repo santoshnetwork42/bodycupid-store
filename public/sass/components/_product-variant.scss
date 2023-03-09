@@ -2,7 +2,7 @@
     line-height: 0 !important;
     width: 110px;
     position: relative;
-    height: 190px;
+    height: 200px;
     border-radius: 4px;
     // border: 2px solid rgba(0, 0, 0, 0.4);
     border: 1px solid #e1e1e1;
@@ -86,6 +86,11 @@
     .new-price {
         margin-top: 8px;
         font-size: 14px !important;
-        text-decoration: line-through;
+    }
+}
+
+@include mq(sm, max) {
+    .variant-card-wrapper {
+        width: 100px;
     }
 }

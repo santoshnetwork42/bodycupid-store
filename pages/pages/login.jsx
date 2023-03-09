@@ -10,7 +10,13 @@ import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 
-function Login({ auth, redirect = true, closeLogin }) {
+function Login({
+  auth,
+  redirect = true,
+  closeLogin,
+  showOTPLogin = false,
+  openPasswordless,
+}) {
   const router = useRouter();
   const [state, setState] = useState({
     name: "",
@@ -97,7 +103,7 @@ function Login({ auth, redirect = true, closeLogin }) {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
         } else {
-          toast(<AlertPopup message={error.message} status="success" />);
+          toast(<AlertPopup message={error.message} status="error" />);
         }
       }
       return false;
@@ -122,7 +128,7 @@ function Login({ auth, redirect = true, closeLogin }) {
                   selectedTabClassName="active"
                   selectedTabPanelClassName="active"
                 >
-                  <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5">
+                  <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
                     <Tab className="nav-item">
                       <span className="nav-link border-no lh-1 ls-normal">
                         Sign in
@@ -150,6 +156,7 @@ function Login({ auth, redirect = true, closeLogin }) {
                                 name="singin-phone"
                                 placeholder="Phone number *"
                                 required
+                                maxLength={10}
                                 value={removePhonePrefix(state.phone)}
                                 onChange={(e) =>
                                   setState({
@@ -191,6 +198,20 @@ function Login({ auth, redirect = true, closeLogin }) {
                           >
                             Login
                           </button>
+                          {showOTPLogin && (
+                            <div className="text-center">
+                              <ALink
+                                href="#"
+                                className="lost-link"
+                                onClick={() => {
+                                  closeLogin();
+                                  openPasswordless();
+                                }}
+                              >
+                                Login with OTP
+                              </ALink>
+                            </div>
+                          )}
                         </form>
                       )}
                       {/* <div className="form-choice text-center">
@@ -246,6 +267,7 @@ function Login({ auth, redirect = true, closeLogin }) {
                                 name="register-phone"
                                 placeholder="Your phone number *"
                                 required
+                                maxLength={10}
                                 value={removePhonePrefix(state.phone)}
                                 onChange={(e) =>
                                   setState({
@@ -389,4 +411,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   closeLogin: modalActions.closeLoginModal,
+  openPasswordless: modalActions.openPasswordlessModal,
 })(Login);

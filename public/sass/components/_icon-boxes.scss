@@ -42,10 +42,21 @@
     }
 }
 
+.all-options-container{
+    gap: 20px;
+    .options-divider{
+        height: 5rem;
+        background-color: $border-color;
+        align-self: center;
+        width: 1px;
+    }
+}
+
 .icon-box-side {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem 2rem;
     .icon-box-content {
         text-align: left;
     }
@@ -63,8 +74,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 5.2rem;  
-        height: 5.2rem;
+        padding: 1.1rem;
         border-radius: 50%;
         border: 1px solid #222;
         font-size: 2.5rem;

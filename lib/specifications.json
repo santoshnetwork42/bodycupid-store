@@ -1,0 +1,37 @@
+[
+    {
+      "id": 1,
+      "iconName": "d-icon-lock",
+      "title": "2 year warranty",
+      "tagline": "Guarantee with no doubt",
+      "isDivider": false
+    },
+    {
+      "id": 2,
+      "iconName": "d-icon-refresh",
+      "title": "Easy Returns",
+      "tagline": "The return process made easy",
+      "isDivider": true
+    },
+    {
+      "id": 3,
+      "iconName": "d-icon-cash",
+      "title": "COD Available",
+      "tagline": "Hassle-free delivery with COD",
+      "isDivider": true
+    },
+    {
+      "id": 4,
+      "iconName": "d-icon-truck",
+      "title": "Delivery in 3 Days",
+      "tagline": "As fast as it gets!",
+      "isDivider": false
+    },
+    {
+      "id": 5,
+      "iconName": "d-icon-truck",
+      "title": "Free shipping",
+      "tagline": "on orders over ₹399.00",
+      "isDivider": true
+    }
+  ]

@@ -307,7 +307,9 @@ button.mfp-close {
     padding: 4rem;
     border-radius: .3rem;
     width: 100%;
-
+    .flex-no-wrap{
+        flex-wrap: nowrap;
+    }
     .tab {
         font-size: 1.8rem;
         color: $light-color;
@@ -354,9 +356,9 @@ button.mfp-close {
         padding: 0;
     }
 
-    form {
-        margin-bottom: 2.2rem;
-    }
+    // form {
+    //     margin-bottom: 2.2rem;
+    // }
     
     .form-group {
         margin-bottom: 1.8rem;

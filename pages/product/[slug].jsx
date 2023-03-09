@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
@@ -14,10 +14,11 @@ import { STORE_ID } from "~/config";
 
 function ProductDefault() {
   const { slug, variantId } = useRouter().query;
+
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
-  const [selectedVaraint, setVariant] = useState(variantId);
+  const [selectedVariant, setVariant] = useState(variantId);
 
   useEffect(() => {
     API.graphql(
@@ -28,9 +29,6 @@ function ProductDefault() {
     ).then((response) => {
       let [product] = response.data.byslugProduct.items;
       setProduct(product);
-      if (!selectedVaraint && product.variants.items.length) {
-        setVariant(product.variants.items[0].id);
-      }
       setLoading(false);
     });
   }, [slug]);
@@ -53,7 +51,7 @@ function ProductDefault() {
   }, [product?.id]);
 
   return (
-    <main className="main mt-6 single-product">
+    <main className="main single-product">
       <Head>
         <title>{product?.title}</title>
       </Head>
@@ -65,13 +63,14 @@ function ProductDefault() {
           <div className="container vertical">
             <div className="product product-single row mb-7">
               <div className="col-md-6 sticky-sidebar-wrapper">
-                <MediaOne product={product} variantId={selectedVaraint} />
+                <MediaOne product={product} variantId={selectedVariant} />
               </div>
 
               <div className="col-md-6">
                 <DetailOne
                   data={product}
-                  variantId={selectedVaraint}
+                  defaultVariant={product.variants?.items[0]?.id}
+                  variantId={selectedVariant}
                   setVariant={setVariant}
                   isNav={true}
                 />

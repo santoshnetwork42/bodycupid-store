@@ -23,21 +23,31 @@ const App = ({ Component, pageProps }) => {
   const store = useStore();
   const { navbar, footer } = pageProps;
 
+  const destroySession = useCallback(() => {
+    store.__persistor.purge();
+    store.dispatch(rootActions.destroySession());
+  }, [store]);
+
   const setUser = useCallback(async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      const {
-        data: { getUser: getUserResponse },
-      } = await API.graphql({
-        query: getUser,
-        variables: { id: user.username },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
+      const state = store.getState();
+      if (!state.user.data) {
+        const user = await Auth.currentAuthenticatedUser().catch(() => null);
+        if (user?.attributes?.sub) {
+          const {
+            data: { getUser: getUserResponse },
+          } = await API.graphql({
+            query: getUser,
+            variables: { id: user?.attributes?.sub },
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+          });
 
-      store.dispatch(userActions.setUser(getUserResponse));
+          store.dispatch(userActions.setUser(getUserResponse));
+        }
+      }
     } catch (error) {
       console.log(error);
-      store.dispatch(rootActions.destroySession());
+      destroySession();
     }
   }, [store]);
 
@@ -55,7 +65,7 @@ const App = ({ Component, pageProps }) => {
   //     store.dispatch(userActions.setUser(getUserResponse));
   //   } catch (error) {
   //     console.log(error);
-  //     store.dispatch(rootActions.destroySession());
+  //     destroySession();
   //   }
   // }, [store]);
 
@@ -75,7 +85,7 @@ const App = ({ Component, pageProps }) => {
   const initSession = useCallback(async () => {
     setStore();
     setUser();
-  }, [store]);
+  }, [setStore, setUser]);
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
@@ -84,7 +94,7 @@ const App = ({ Component, pageProps }) => {
         payload: { event },
       } = authEvent;
       if (event === "signOut") {
-        store.dispatch(rootActions.destroySession());
+        destroySession();
       } else if (loggedInEvents.includes(event)) {
         initSession();
       }
@@ -110,15 +120,10 @@ const App = ({ Component, pageProps }) => {
         <Head>
           <meta charSet="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <title>Wow life science</title>
           <meta name="keywords" content="WOW" />
           <meta name="description" content="Wow life science" />
-          <meta name="author" content="D-THEMES" />
         </Head>
         <Layout navbar={navbar} footer={footer}>
           <Component {...pageProps} />

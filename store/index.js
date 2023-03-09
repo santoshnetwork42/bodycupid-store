@@ -28,7 +28,7 @@ const appReducer = combineReducers({
 const rootReducers = (state, action) => {
     // Clear all data in redux store to initial.
     if (action.type === actionTypes.DESTROY_SESSION) {
-        state = undefined;
+        return appReducer(undefined, action);
     }
     return appReducer(state, action);
 }

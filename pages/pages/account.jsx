@@ -29,7 +29,11 @@ function Account({ user }) {
     } = await API.graphql({
       query: searchOrders,
       variables: {
-        filter: { userId: { eq: user.id }, storeId: { eq: STORE_ID } },
+        filter: {
+          userId: { eq: user.id },
+          storeId: { eq: STORE_ID },
+          status: { eq: "CONFIRMED" },
+        },
         sort: [{ field: "orderDate", direction: "desc" }],
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -295,6 +299,7 @@ function Account({ user }) {
                       name="phone"
                       className="prefix"
                       required
+                      maxLength={10}
                       value={removePhonePrefix(
                         userDetail?.phone ||
                           userDetail?.attributes?.phone_number

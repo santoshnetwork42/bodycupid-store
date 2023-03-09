@@ -7,12 +7,7 @@ import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { getProperAddress, removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 
-const AddressForm = ({
-  defaultAddress,
-  user,
-  onAddress,
-  onSubmit,
-}) => {
+const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
   const [address, setAddress] = useSetState(defaultAddress || {});
 
   useEffect(() => {
@@ -89,7 +84,7 @@ const AddressForm = ({
                   }
                 />
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-6 mb-3">
                 <label>Phone *</label>
                 <div className="input-tel">
                   <div className="prefix">+91</div>
@@ -97,6 +92,7 @@ const AddressForm = ({
                     type="tel"
                     className="form-control mb-0"
                     name="phone"
+                    maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
                     onChange={(e) => setAddress({ phone: e.target.value })}
