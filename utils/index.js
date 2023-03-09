@@ -240,7 +240,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-          parallax.offsetTop +
+        parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -408,9 +408,10 @@ export const getCartCount = (cartItems = []) => {
  * utils to show number to n places of decimals
  */
 export const toDecimal = (price, fixedCount = 2) => {
+  const isInteger = Number(price) === Number(parseInt(price));
   return parseFloat(price || 0).toLocaleString(undefined, {
-    minimumFractionDigits: fixedCount,
-    maximumFractionDigits: fixedCount,
+    minimumFractionDigits: isInteger ? 0 : fixedCount,
+    maximumFractionDigits: isInteger ? 0 : fixedCount,
   });
 };
 
