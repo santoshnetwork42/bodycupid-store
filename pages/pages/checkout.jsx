@@ -30,6 +30,7 @@ import loadScript from "~/utils/loadScript";
 import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import Loader from "~/components/common/partials/loader";
 
 function Checkout(props) {
   const {
@@ -45,6 +46,7 @@ function Checkout(props) {
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   const validateZipCode = useCallback(async () => {
     const { pinCode } = shippingAddress;
@@ -78,6 +80,8 @@ function Checkout(props) {
           authMode,
         }),
       ]);
+
+      setLoading(false);
 
       if (rzpEnabled && transaction) {
         const options = {
@@ -137,6 +141,7 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+      setLoading(true);
       if (await validateZipCode()) {
         try {
           const { id: ignoreId, ...restAddress } = shippingAddress;
@@ -217,15 +222,18 @@ function Checkout(props) {
           } else {
             await router.push(`/order/${orderId}`);
             await emptyCart();
+            setLoading(false);
           }
         } catch (error) {
           console.log(error);
+          setLoading(false);
         }
       } else {
         const message = isFirst
           ? "Online Delivery is not available at this pincocde"
           : "Cash on Delivery is not available at this pincocde";
         toast(<AlertPopup status="error" message={message} />);
+        setLoading(false);
       }
       return false;
     },
@@ -253,6 +261,8 @@ function Checkout(props) {
       </Head>
 
       <h1 className="d-none">Wow life science - Checkout</h1>
+
+      <Loader loading={!!loading} />
 
       <div
         className={`page-content pt-7 pb-10 ${
@@ -313,8 +323,8 @@ function Checkout(props) {
                           </tr>
                         </thead>
                         <tbody>
-                          {cartList.map((item) => (
-                            <tr key={"checkout-" + item.title}>
+                          {cartList.map((item, index) => (
+                            <tr key={"checkout-" + item.title + "-" + index}>
                               <td className="product-name">
                                 {item.title}{" "}
                                 <span className="product-quantity">
@@ -351,7 +361,7 @@ function Checkout(props) {
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
                                   <p>
-                                    <div className="d-flex">
+                                    <span className="d-flex">
                                       <span className="mr-1">
                                         {appliedCoupon.code}
                                       </span>
@@ -364,7 +374,7 @@ function Checkout(props) {
                                       >
                                         <i className="fas fa-times"></i>
                                       </ALink>
-                                    </div>
+                                    </span>
                                   </p>
                                 </td>
                                 <td>
