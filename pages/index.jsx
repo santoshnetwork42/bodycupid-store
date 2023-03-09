@@ -19,7 +19,7 @@ import { STORE_ID } from "~/config";
 
 function HomePage({ hero, products, categories, brands }) {
   return (
-    <div className="main home">
+    <main className="main home">
       <Head>
         <title>Wow Life Science - Home</title>
       </Head>
@@ -49,7 +49,7 @@ function HomePage({ hero, products, categories, brands }) {
         /> */}
       </div>
       {/* <NewsletterModal /> */}
-    </div>
+    </main>
   );
 }
 

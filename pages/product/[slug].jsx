@@ -29,9 +29,6 @@ function ProductDefault() {
     ).then((response) => {
       let [product] = response.data.byslugProduct.items;
       setProduct(product);
-      if (!selectedVariant && product.variants.items.length) {
-        setVariant(product.variants.items[0].id);
-      }
       setLoading(false);
     });
   }, [slug]);
@@ -54,7 +51,7 @@ function ProductDefault() {
   }, [product?.id]);
 
   return (
-    <main className="main mt-6 single-product">
+    <main className="main single-product">
       <Head>
         <title>{product?.title}</title>
       </Head>
@@ -72,6 +69,7 @@ function ProductDefault() {
               <div className="col-md-6">
                 <DetailOne
                   data={product}
+                  defaultVariant={product.variants?.items[0]?.id}
                   variantId={selectedVariant}
                   setVariant={setVariant}
                   isNav={true}

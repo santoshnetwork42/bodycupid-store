@@ -25,7 +25,8 @@ function DetailOne(props) {
     isStickyCart = false,
     adClass = "",
     isNav = true,
-    variantId: selectedVariant,
+    defaultVariant,
+    variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
   } = props;
   const { toggleWishlist, addToCart, wishlist } = props;
