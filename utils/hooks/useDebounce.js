@@ -1,6 +1,6 @@
 import { useRef, useLayoutEffect } from "react";
 
-export const useDebounce = (value, milliSeconds, callback) => {
+export const useDebounce = (dependency, milliSeconds, callback) => {
   const firstUpdate = useRef(true);
 
   useLayoutEffect(() => {
@@ -16,7 +16,7 @@ export const useDebounce = (value, milliSeconds, callback) => {
     return () => {
       clearTimeout(handler);
     };
-  }, [value, milliSeconds]);
+  }, [dependency, milliSeconds]);
 
   return;
 };
