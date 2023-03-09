@@ -253,46 +253,20 @@ function DetailOne(props) {
       <h2 className="product-name">{product.title}</h2>
 
       {!!product?.tags && (
-        <label className="product-tag">
-          {product?.tags.split(",").join(" | ")}
-        </label>
+        <div className="mb-1">
+          <label className="product-tag">
+            {product?.tags.split(",").join(" | ")}
+          </label>
+        </div>
       )}
 
-      <div className="product-meta">
-        {product.category && (
-          <>
-            CATEGORIES:{" "}
-            <span className="product-brand">
-              <React.Fragment key={product.category.id}>
-                <ALink
-                  href={{
-                    pathname: "/collections/[category]",
-                    query: { category: product.category.slug },
-                  }}
-                >
-                  {product.category.name}
-                </ALink>
-                {product.subCategory && (
-                  <>
-                    {", "}
-                    <ALink
-                      href={{
-                        pathname: "/collections/[category]/[subcategory]",
-                        query: {
-                          category: product.category.slug,
-                          subcategory: product.subCategory.slug,
-                        },
-                      }}
-                    >
-                      {product.subCategory.name}
-                    </ALink>
-                  </>
-                )}
-              </React.Fragment>
-            </span>
-          </>
-        )}
-      </div>
+      {!!product?.benefits && (
+        <div className="product-benefits mb-2">
+          {product?.benefits.map((benefit) => {
+            return <lable>{benefit}</lable>;
+          })}
+        </div>
+      )}
 
       <div className="product-variation-price">
         {curIndex < 0 && (
