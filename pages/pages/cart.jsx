@@ -34,7 +34,6 @@ function Cart(props) {
           : item;
       });
       updateCart(cart);
-      setCartItems(cart);
     } else {
       removeFromCart(item);
     }
