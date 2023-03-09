@@ -30,7 +30,7 @@ function ForgotPassword() {
             state.confirmationCode,
             state.password
           );
-          router.push("/");
+          router.push("/pages/login");
         }
       } catch (error) {
         console.log("error signin:", error);
@@ -84,9 +84,7 @@ function ForgotPassword() {
                       <form onSubmit={handleSubmit}>
                         <div className="form-group mb-3">
                           <div className="input-tel">
-                            <div className="prefix">
-                              +91
-                            </div>
+                            <div className="prefix">+91</div>
                             <input
                               type="tel"
                               className="form-control"
@@ -94,6 +92,7 @@ function ForgotPassword() {
                               name="singin-phone"
                               placeholder="Phone number *"
                               required
+                              maxLength={10}
                               value={removePhonePrefix(state.phone)}
                               onChange={(e) =>
                                 setState({

@@ -124,7 +124,7 @@ export default function ToolBox(props) {
     >
       {type === "horizontal" ? <SidebarFilterThree /> : ""}
       <div className="toolbox-left">
-        {/* {type === "left" ||
+        {type === "left" ||
         type === "off-canvas" ||
         type === "navigation" ||
         type === "horizontal" ? (
@@ -151,7 +151,7 @@ export default function ToolBox(props) {
           ""
         )}
 
-        <div
+        {/* <div
           className={`toolbox-item toolbox-sort ${
             type === "boxed" || type === "banner"
               ? "select-box text-dark"

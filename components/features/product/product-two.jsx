@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { connect } from "react-redux";
 
@@ -168,7 +169,7 @@ function ProductTwo(props) {
                   <React.Fragment key={item.name + "-" + index}>
                     <ALink
                       href={{
-                        pathname: "/shop",
+                        pathname: "/collections/[category]",
                         query: { category: item.slug },
                       }}
                     >
@@ -186,6 +187,12 @@ function ProductTwo(props) {
         <h3 className="product-name">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
+
+        {!!product?.tags && (
+          <label className="product-tag">
+            {product?.tags.split(",").join(" | ")}
+          </label>
+        )}
 
         <div className="product-price">
           {/* {
@@ -217,10 +224,11 @@ function ProductTwo(props) {
             </span>
           </div>
 
-          {/* <ALink href={`/product/${product.slug}`} className="rating-reviews">( {product.review} reviews )</ALink> */}
-          <ALink href={`/product/${product.slug}`} className="rating-reviews">
-            ( {product.reviews?.items?.length} reviews )
-          </ALink>
+          {!!product?.totalRatings && (
+            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+              ( {product?.totalRatings} reviews )
+            </ALink>
+          )}
         </div>
       </div>
     </div>

@@ -58,6 +58,9 @@
 .justify-content-between {
     justify-content: space-between !important;
 }
+.justify-content-around {
+    justify-content:space-around !important;
+}
 .align-items-start {
     align-items: flex-start !important;
 }
@@ -93,6 +96,11 @@
         display: inline-flex !important;
     }
 }
+@include mq(sm) {
+    .d-sm-show {
+        display: none !important;
+    }
+}
 @include mq(lg) {
     .d-lg-none {
         display: none !important;
@@ -114,6 +122,14 @@
 }
 @include mq(lg, max) {
     .d-lg-show {
+        display: none !important;
+    }
+}
+@include mq(sm, max) {
+    .d-sm-show {
+        display: block !important;
+    }
+    .d-sm-none {
         display: none !important;
     }
 }
@@ -257,4 +273,12 @@
 //cursor
 .cursor-pointer {
     cursor: pointer;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.pointer-none{
+    pointer-events: none;
 }

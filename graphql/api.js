@@ -55,6 +55,7 @@ export const getHomePageProducts = /* GraphQL */ `
         productType
         slug
         price
+        sku
         status
         position
         currency
@@ -310,6 +311,7 @@ export const getProductBySlug = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -355,21 +357,6 @@ export const getProductBySlug = /* GraphQL */ `
             imageKey
             isThumb
           }
-        }
-        reviews {
-          items {
-            id
-            reviewer {
-              name
-              email
-            }
-            productId
-            rating
-            comment
-            createdAt
-            updatedAt
-          }
-          nextToken
         }
       }
       nextToken
@@ -451,7 +438,7 @@ export const getOrder = /* GraphQL */ `
         location
         area
       }
-      BillingAddress {
+      billingAddress {
         name
         phone
         email
@@ -465,7 +452,7 @@ export const getOrder = /* GraphQL */ `
         area
       }
       totalStoreCredit
-      CouponCodeId
+      couponCodeId
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
@@ -476,6 +463,7 @@ export const getOrder = /* GraphQL */ `
       cFormProvided
       thirdPartyShipping
       currency
+      paymentType
       sla
       priority
       orderDate
@@ -604,6 +592,7 @@ export const getOrder = /* GraphQL */ `
           id
           orderId
           method
+          status
           amount
           createdAt
           updatedAt
@@ -778,6 +767,7 @@ export const findProducts = /* GraphQL */ `
         inventory
         blockedInventory
         rating
+        totalRatings
         totalOrders
         additionalInfo
         thumbImages
@@ -860,6 +850,7 @@ export const searchProductsBasic = /* GraphQL */ `
         title
         slug
         price
+        sku
         listingPrice
         thumbImages
         images {
@@ -1096,6 +1087,7 @@ export const searchOrders = /* GraphQL */ `
             id
             orderId
             method
+            status
             amount
             createdAt
             updatedAt
@@ -1173,6 +1165,91 @@ export const updateUser = /* GraphQL */ `
       profilePhotoUrl
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction($orderId: ID!) {
+    createTransaction(orderId: $orderId) {
+      orderId
+      amount
+    }
+  }
+`;
+
+export const getStore = /* GraphQL */ `
+  query GetStore($id: ID!) {
+    getStore(id: $id) {
+      id
+      name
+      description
+      isActive
+      webUrl
+      appId
+      host
+      priority
+      imageUrl
+    }
+  }
+`;
+
+export const validateTransaction = /* GraphQL */ `
+  mutation ValidateTransaction($orderId: ID!, $razorpayPaymentId: String!) {
+    validateTransaction(
+      orderId: $orderId
+      razorpayPaymentId: $razorpayPaymentId
+    ) {
+      success
+    }
+  }
+`;
+
+export const getZipCode = /* GraphQL */ `
+  query GetZipCode($id: ID!) {
+    getZipCode(id: $id) {
+      id
+      codMaxAmount
+      cod
+      prepaid
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const getReviews = /* GraphQL */ `
+  query SearchReviews(
+    $filter: SearchableReviewFilterInput
+    $sort: [SearchableReviewSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableReviewAggregationInput]
+  ) {
+    searchReviews(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        userId
+        reviewer {
+          name
+          email
+        }
+        productId
+        rating
+        comment
+        title
+        images
+      }
+      nextToken
+      total
     }
   }
 `;

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Magnifier } from "react-image-magnifiers";
+import { useState, useEffect, useMemo } from "react";
 
 import ALink from "~/components/features/custom-link";
 import OwlCarousel from "~/components/features/owl-carousel";
@@ -7,6 +6,7 @@ import OwlCarousel from "~/components/features/owl-carousel";
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";
 import ThumbTwo from "~/components/partials/product/thumb/thumb-two";
 import MediaLightBox from "~/components/partials/product/light-box";
+import OptimizedImage from "~/components/features/optimized-image";
 
 import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -17,16 +17,19 @@ export default function MediaOne(props) {
   const [isOpen, setOpenState] = useState(false);
   const [mediaRef, setMediaRef] = useState(null);
 
-  let lgImages = product.images.items;
-  if (product.variants.items.length > 0) {
-    lgImages.push(
-      ...product.variants.items.map((i) => ({
-        variantId: i.id,
-        imageKey: i.imageUrl,
-        alt: i.alt || i.title,
-      }))
-    );
-  }
+  const lgImages = useMemo(() => {
+    const images = [...product.images.items];
+    if (product.variants.items.length > 0) {
+      images.push(
+        ...product.variants.items.map((i) => ({
+          variantId: i.id,
+          imageKey: i.imageUrl,
+          alt: i.alt || i.title,
+        }))
+      );
+    }
+    return images;
+  }, [product]);
 
   useEffect(() => {
     setIndex(0);
@@ -121,17 +124,24 @@ export default function MediaOne(props) {
           onChangeRef={changeRefHandler}
           events={events}
         >
-          {lgImages.map((image) => (
-            <div key={image.id}>
-              <Magnifier
+          {lgImages.map((image, i) => (
+            <div key={i}>
+              <OptimizedImage
+                optimizedData={image.image}
+                alt={image.alt}
+                spanAttributes={{
+                  className: "product-image-hover",
+                }}
+                src={getPublicImageURL(image.imageKey)}
+              />
+              {/* <Magnifier
                 imageSrc={getPublicImageURL(image.imageKey)}
                 imageAlt={image.alt}
                 largeImageSrc={getPublicImageURL(image.imageKey)}
                 dragToMove={false}
-                mouseActivation="hover"
                 cursorStyleActive="crosshair"
                 className="product-image large-image"
-              />
+              /> */}
             </div>
           ))}
         </OwlCarousel>
@@ -141,12 +151,12 @@ export default function MediaOne(props) {
         </ALink>
 
         <ThumbOne
-          product={product}
+          images={lgImages}
           index={index}
           onChangeIndex={setIndexHandler}
         />
         <ThumbTwo
-          product={product}
+          images={lgImages}
           index={index}
           onChangeIndex={setIndexHandler}
         />

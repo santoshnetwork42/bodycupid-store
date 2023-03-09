@@ -11,7 +11,7 @@ import ALink from "~/components/features/custom-link";
 
 import Header from "~/components/common/header";
 import Footer from "~/components/common/footer";
-import StickyFooter from "~/components/common/sticky-footer";
+import Passwordless from "~/components/common/partials/passwordless";
 import Quickview from "~/components/features/product/common/quickview-modal";
 import LoginModal from "~/components/features/modals/login-modal";
 import VideoModal from "~/components/features/modals/video-modal";
@@ -27,7 +27,14 @@ import {
   resizeHandler,
 } from "~/utils";
 
-function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
+function Layout({
+  children,
+  navbar,
+  footer,
+  closeQuickview,
+  closeLogin,
+  closePasswordless,
+}) {
   const router = useRouter();
 
   useLayoutEffect(() => {
@@ -56,6 +63,7 @@ function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
   useEffect(() => {
     closeQuickview();
     closeLogin();
+    closePasswordless();
 
     let bodyClasses = [...document.querySelector("body").classList];
     for (let i = 0; i < bodyClasses.length; i++) {
@@ -92,8 +100,6 @@ function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
         {children}
 
         <Footer footer={footer} />
-
-        <StickyFooter />
       </div>
 
       <ALink
@@ -123,6 +129,7 @@ function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
       <Quickview />
       <LoginModal />
       <VideoModal />
+      <Passwordless />
     </>
   );
 }
@@ -130,4 +137,5 @@ function Layout({ children, navbar, footer, closeQuickview, closeLogin }) {
 export default connect(null, {
   closeQuickview: modalActions.closeQuickview,
   closeLogin: modalActions.closeLoginModal,
+  closePasswordless: modalActions.closePasswordlessModal,
 })(Layout);

@@ -5,7 +5,6 @@ import ALink from "~/components/features/custom-link";
 
 function Pagination(props) {
   const {
-    maxShowCounts = 7,
     totalPage = 1,
     distance = 2,
     onNextClick,

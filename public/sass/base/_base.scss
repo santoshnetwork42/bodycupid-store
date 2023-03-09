@@ -456,6 +456,12 @@
     //     }
     // }
 
+    @include mq(sm, max) {
+        main {
+            margin-top: 80px;
+        }
+    }
+
     @include mq(lg, max) {
         #__next {
             overflow: hidden;

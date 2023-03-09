@@ -5,21 +5,18 @@ import { connect } from "react-redux";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { getProperAddress, removePhonePrefix } from "~/utils/helper";
+import States from "~/lib/states.json";
 
-const AddressForm = ({
-  defaultAddress,
-  user,
-  onAddress,
-  onSubmit,
-  saveAddress,
-}) => {
+const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
   const [address, setAddress] = useSetState(defaultAddress || {});
+
   useEffect(() => {
     if (onAddress) {
       let tempAddress = getProperAddress(address);
       onAddress(tempAddress);
     }
   }, [address]);
+
   useEffect(() => {
     if (defaultAddress && defaultAddress.name) {
       setAddress({
@@ -29,6 +26,7 @@ const AddressForm = ({
       });
     }
   }, [defaultAddress]);
+
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
@@ -40,7 +38,7 @@ const AddressForm = ({
             data: { [key]: response },
           } = await API.graphql({
             query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: { ...tempAddress, userID: user.username } },
+            variables: { input: { ...tempAddress, userID: user.id } },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
           onSubmit(response);
@@ -86,7 +84,7 @@ const AddressForm = ({
                   }
                 />
               </div>
-              <div className="col-xs-6">
+              <div className="col-xs-6 mb-3">
                 <label>Phone *</label>
                 <div className="input-tel">
                   <div className="prefix">+91</div>
@@ -94,6 +92,7 @@ const AddressForm = ({
                     type="tel"
                     className="form-control mb-0"
                     name="phone"
+                    maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
                     onChange={(e) => setAddress({ phone: e.target.value })}
@@ -189,15 +188,19 @@ const AddressForm = ({
               </div>
               <div className="col-xs-6">
                 <label>State *</label>
-                <input
-                  type="text"
-                  className="form-control"
+                <select
                   name="state"
+                  className="form-control"
                   required
                   value={address.state}
                   onChange={(e) => setAddress({ state: e.target.value })}
-                  onBlur={(e) => setAddress({ state: e.target.value.trim() })}
-                />
+                >
+                  {States.map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="row">
@@ -215,22 +218,6 @@ const AddressForm = ({
               </div>
             </div>
           </div>
-
-          {!!saveAddress && (
-            <div className="form-checkbox mb-5">
-              <input
-                type="checkbox"
-                className="custom-checkbox"
-                id="terms-condition"
-                name="terms-condition"
-                required
-                onChange={(e) => setAddress({ saveAddress: e.target.checked })}
-              />
-              <label className="form-control-label" htmlFor="terms-condition">
-                Save address for faster checkout
-              </label>
-            </div>
-          )}
 
           {!onAddress && (
             <button
