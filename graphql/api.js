@@ -24,6 +24,7 @@ export const getMenuCategories = /* GraphQL */ `
             id
             name
             slug
+            isFeatured
           }
         }
       }

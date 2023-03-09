@@ -9,6 +9,7 @@ import { STORE_ID } from "~/config";
 function MainMenu() {
   const { pathname } = useRouter();
   const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
 
   useEffect(() => {
     API.graphql(
@@ -21,6 +22,7 @@ function MainMenu() {
           searchProductCategories: { items },
         },
       }) => {
+        setSubCategories(items.map((e) => e.subCategory?.items).flat());
         setCategories(items);
       }
     );
@@ -29,10 +31,6 @@ function MainMenu() {
   return (
     <nav className="main-nav">
       <ul className="menu">
-        <li id="menu-home" className={pathname === "/" ? "active" : ""}>
-          <ALink href="/">Home</ALink>
-        </li>
-
         <li
           id="all"
           className={pathname === "/collections/all" ? "active" : ""}
@@ -40,36 +38,31 @@ function MainMenu() {
           <ALink href="/collections/all">All Products</ALink>
         </li>
 
-        {categories.map((category) => (
-          <li
-            key={category.id}
-            className={`
-              ${
-                pathname.includes(`/collections/${category.slug}`)
-                  ? "active"
-                  : ""
-              }
-              ${category?.subCategory?.items?.length ? "d-xl-show submenu" : ""}
-            `}
-          >
-            <ALink href={`/collections/${category.slug}`}>
-              {category.name}
-            </ALink>
-            {!!category?.subCategory?.items?.length && (
-              <ul>
-                {category.subCategory.items.map((item) => (
-                  <li key={`sub-categories-${item.id}`}>
-                    <ALink
-                      href={"/collections/" + category.slug + "/" + item.slug}
-                    >
-                      {item.name}
-                    </ALink>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
+        {subCategories.map((category) => {
+          return (
+            category.isFeatured && (
+              <li
+                key={category.id}
+                className={`
+                ${
+                  pathname.includes(`/collections/${category.slug}`)
+                    ? "active"
+                    : ""
+                }
+                ${
+                  category?.subCategory?.items?.length
+                    ? "d-xl-show submenu"
+                    : ""
+                }
+              `}
+              >
+                <ALink href={`/collections/${category.slug}`}>
+                  {category.name}
+                </ALink>
+              </li>
+            )
+          );
+        })}
       </ul>
     </nav>
   );

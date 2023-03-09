@@ -12,6 +12,7 @@ function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
   const router = useRouter();
   const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
 
   useEffect(() => {
     API.graphql(
@@ -24,6 +25,7 @@ function MobileMenu({ user }) {
           searchProductCategories: { items },
         },
       }) => {
+        setSubCategories(items.map((cat) => cat.subCategory?.items).flat());
         setCategories(items);
       }
     );
@@ -120,40 +122,15 @@ function MobileMenu({ user }) {
           <li>
             <Card title="categories" type="mobile" url="/collections/all">
               <ul>
-                {categories.map((category) => (
-                  <li key={category.id}>
-                    {!category.subCategory.items.length && (
-                      <ALink href={"/collections/" + category.slug}>
-                        {category.name}
+                {subCategories.map((subcat) => {
+                  return (
+                    subcat.isFeatured && (
+                      <ALink href={"/collections/" + subcat.slug}>
+                        {subcat.name}
                       </ALink>
-                    )}
-                    {category.subCategory.items.length > 0 && (
-                      <Card title={category.name} type="mobile">
-                        <ul>
-                          {category.subCategory.items.map((item) => (
-                            <li key={item.id}>
-                              <ALink
-                                href={
-                                  "/collections/" +
-                                  category.slug +
-                                  "/" +
-                                  item.slug
-                                }
-                              >
-                                {item.name}
-                                {/* {item.hot ? (
-                                  <span className="tip tip-hot">Hot</span>
-                                ) : (
-                                  ""
-                                )} */}
-                              </ALink>
-                            </li>
-                          ))}
-                        </ul>
-                      </Card>
-                    )}
-                  </li>
-                ))}
+                    )
+                  );
+                })}
               </ul>
             </Card>
           </li>
