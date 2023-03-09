@@ -53,6 +53,10 @@ export const getThumbImage = (product) => {
 };
 
 export const getTotalPriceByField = (arr, field) => {
-  const { x } = arr.reduce((a, b) => ({ x: a[field] + b[field] }));
+  const x = arr.reduce((accumulator, object) => {
+    return accumulator + object[field];
+  }, 0);
+
+  console.log("x", x);
   return x;
 };

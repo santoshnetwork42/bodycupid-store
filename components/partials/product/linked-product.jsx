@@ -1,16 +1,20 @@
 import { API } from "aws-amplify";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { getLinkedProducts } from "~/graphql/api";
+import elements from "~/pages/elements";
 import { cartActions } from "~/store/cart";
-import { getTotalPrice, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getThumbImage, getTotalPriceByField } from "~/utils/helper";
 import RatingStar from "./rating-star";
 
-function LinkedProducts({ product, addToCart }) {
+function LinkedProducts({ product, addToCart, cartList }) {
   const [linkedProduct, setLinkedProduct] = useState([]);
   const [selected, setSelected] = useState([]);
+  const router = useRouter();
+
   useEffect(() => {
     API.graphql({
       query: getLinkedProducts,
@@ -34,25 +38,34 @@ function LinkedProducts({ product, addToCart }) {
       });
   }, [product]);
 
+  const allExist = useMemo(
+    () =>
+      selected.every((el) => {
+        return cartList.find((c) => c.id === el.id);
+      }),
+    [selected, cartList]
+  );
+
   const addToCartHandler = () => {
     selected.map((product) => {
       addToCart({ ...product, qty: 1, price: product.price });
     });
   };
+
   const onProductSelect = (p) => {
     const isExist = selected.find((lp) => lp.id === p.id);
-    console.log("isExist", isExist);
     if (isExist) {
       setSelected(selected.filter((s) => s.id !== p.id));
     } else {
       setSelected([...selected, p]);
     }
   };
-  console.log("selected", selected);
+
   const getSrc = (product) => {
     const thumbImage = getThumbImage(product);
     return getPublicImageURL(thumbImage.imageKey);
   };
+
   if (!linkedProduct?.length) return <></>;
   return (
     <div className="mb-6">
@@ -62,7 +75,7 @@ function LinkedProducts({ product, addToCart }) {
       <div className="d-flex d-sm-column linked-product-wrapper align-items-center justify-content-center w-full">
         {selected.map((lp, i) => (
           <div
-            key={i}
+            key={lp.id}
             className="d-flex d-sm-column mt-sm-2 product align-items-center ml-6 "
           >
             {i > 0 && <i className="fas fa-plus mr-6"></i>}
@@ -85,8 +98,8 @@ function LinkedProducts({ product, addToCart }) {
           <div className="ml-8 total-wrapper product-detail">
             <div className="mb-3">
               Total price:
-              <ins className="new-price mr-1">
-                ₹{toDecimal(getTotalPrice(selected))}
+              <ins className="new-price ml-1 mr-1">
+                ₹{toDecimal(getTotalPriceByField(selected, "price"))}
               </ins>
               ({" "}
               <del className="old-price">
@@ -94,12 +107,24 @@ function LinkedProducts({ product, addToCart }) {
               </del>
               )<span className="new-price ml-2"></span>
             </div>
-            <button
-              className="btn   btn-rounded mb-2 "
-              onClick={addToCartHandler}
-            >
-              Add all product to cart
-            </button>
+            {allExist && (
+              <button
+                className="btn btn-primary  btn-rounded mb-2 "
+                onClick={() => {
+                  router.push("/pages/cart");
+                }}
+              >
+                View cart
+              </button>
+            )}
+            {!allExist && (
+              <button
+                className="btn btn-primary  btn-rounded mb-2 "
+                onClick={addToCartHandler}
+              >
+                Add all product to cart
+              </button>
+            )}
           </div>
         ) : (
           <>
