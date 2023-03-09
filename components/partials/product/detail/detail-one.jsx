@@ -29,7 +29,7 @@ function DetailOne(props) {
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
   } = props;
-  const { toggleWishlist, addToCart, wishlist } = props;
+  const { toggleWishlist, addToCart, wishlist, removeFromCart } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -162,15 +162,20 @@ function DetailOne(props) {
 
   function changeQty(qty) {
     setQuantity(qty);
-    if (cartItem)
-      updateCart(
-        cartList.map((item) => {
-          return item.id === product.id &&
-            (!selectedVariant || selectedVariant === item.variantId)
-            ? { ...item, qty: qty }
-            : item;
-        })
-      );
+    if (cartItem) {
+      if (qty) {
+        updateCart(
+          cartList.map((item) => {
+            return item.id === product.id &&
+              (!selectedVariant || selectedVariant === item.variantId)
+              ? { ...item, qty: qty }
+              : item;
+          })
+        );
+      } else {
+        removeFromCart({ ...product, variantId: selectedVariant });
+      }
+    }
   }
 
   const { price, listingPrice, save } = useMemo(() => {
@@ -559,4 +564,5 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
+  removeFromCart: cartActions.removeFromCart,
 })(DetailOne);
