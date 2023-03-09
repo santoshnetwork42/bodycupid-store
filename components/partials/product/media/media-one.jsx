@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Magnifier } from "react-image-magnifiers";
+import { useState, useEffect, useMemo } from "react";
 
 import ALink from "~/components/features/custom-link";
 import OwlCarousel from "~/components/features/owl-carousel";
@@ -18,16 +17,19 @@ export default function MediaOne(props) {
   const [isOpen, setOpenState] = useState(false);
   const [mediaRef, setMediaRef] = useState(null);
 
-  let lgImages = product.images.items;
-  if (product.variants.items.length > 0) {
-    lgImages.push(
-      ...product.variants.items.map((i) => ({
-        variantId: i.id,
-        imageKey: i.imageUrl,
-        alt: i.alt || i.title,
-      }))
-    );
-  }
+  const lgImages = useMemo(() => {
+    const images = [...product.images.items];
+    if (product.variants.items.length > 0) {
+      images.push(
+        ...product.variants.items.map((i) => ({
+          variantId: i.id,
+          imageKey: i.imageUrl,
+          alt: i.alt || i.title,
+        }))
+      );
+    }
+    return images;
+  }, [product]);
 
   useEffect(() => {
     setIndex(0);
@@ -149,12 +151,12 @@ export default function MediaOne(props) {
         </ALink>
 
         <ThumbOne
-          product={product}
+          images={lgImages}
           index={index}
           onChangeIndex={setIndexHandler}
         />
         <ThumbTwo
-          product={product}
+          images={lgImages}
           index={index}
           onChangeIndex={setIndexHandler}
         />

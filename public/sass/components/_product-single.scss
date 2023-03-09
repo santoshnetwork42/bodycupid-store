@@ -714,3 +714,17 @@
     position: sticky;
     top: 88px;
 }
+
+@include mq(xs, max){
+    .product-price {
+        .old-price {
+            font-size: 1.8rem;
+        }
+        .new-price {
+            font-size: 2rem;
+        }
+        .product-save {
+            font-size: 2rem;
+        }
+    }
+}
