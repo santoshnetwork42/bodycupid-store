@@ -29,7 +29,7 @@ function DetailOne(props) {
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
   } = props;
-  const { toggleWishlist, addToCart, wishlist } = props;
+  const { toggleWishlist, addToCart, wishlist, removeFromCart } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -162,15 +162,20 @@ function DetailOne(props) {
 
   function changeQty(qty) {
     setQuantity(qty);
-    if (cartItem)
-      updateCart(
-        cartList.map((item) => {
-          return item.id === product.id &&
-            (!selectedVariant || selectedVariant === item.variantId)
-            ? { ...item, qty: qty }
-            : item;
-        })
-      );
+    if (cartItem) {
+      if (qty) {
+        updateCart(
+          cartList.map((item) => {
+            return item.id === product.id &&
+              (!selectedVariant || selectedVariant === item.variantId)
+              ? { ...item, qty: qty }
+              : item;
+          })
+        );
+      } else {
+        removeFromCart({ ...product, variantId: selectedVariant });
+      }
+    }
   }
 
   const { price, listingPrice, save } = useMemo(() => {
@@ -248,46 +253,20 @@ function DetailOne(props) {
       <h2 className="product-name">{product.title}</h2>
 
       {!!product?.tags && (
-        <label className="product-tag">
-          {product?.tags.split(",").join(" | ")}
-        </label>
+        <div className="mb-1">
+          <label className="product-tag">
+            {product?.tags.split(",").join(" | ")}
+          </label>
+        </div>
       )}
 
-      <div className="product-meta">
-        {product.category && (
-          <>
-            CATEGORIES:{" "}
-            <span className="product-brand">
-              <React.Fragment key={product.category.id}>
-                <ALink
-                  href={{
-                    pathname: "/collections/[category]",
-                    query: { category: product.category.slug },
-                  }}
-                >
-                  {product.category.name}
-                </ALink>
-                {product.subCategory && (
-                  <>
-                    {", "}
-                    <ALink
-                      href={{
-                        pathname: "/collections/[category]/[subcategory]",
-                        query: {
-                          category: product.category.slug,
-                          subcategory: product.subCategory.slug,
-                        },
-                      }}
-                    >
-                      {product.subCategory.name}
-                    </ALink>
-                  </>
-                )}
-              </React.Fragment>
-            </span>
-          </>
-        )}
-      </div>
+      {!!product?.benefits && (
+        <div className="product-benefits mb-2">
+          {product?.benefits.map((benefit) => {
+            return <lable>{benefit}</lable>;
+          })}
+        </div>
+      )}
 
       <div className="product-variation-price">
         {curIndex < 0 && (
@@ -559,4 +538,5 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
+  removeFromCart: cartActions.removeFromCart,
 })(DetailOne);

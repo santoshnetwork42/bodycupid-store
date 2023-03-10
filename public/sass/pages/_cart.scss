@@ -316,9 +316,19 @@
 }
 
 @include mq(md, max) {
+    .product-name-section {
+        text-align: center !important;
+        margin: 0px 15px;
+    }
+
     .summary {
         padding-left: 2rem;
         padding-right: 2rem;
+    }
+
+    .cart-coupon-box {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
     }
 
     .cart .shop-table td {
@@ -327,10 +337,10 @@
         &.product-price {
             display: block;
             width: 100%;
-            text-align: center;
+            text-align: center;   
         }
     }
-
+    
     .cart .shop-table tr {
         padding: 2rem 0 3rem;
     }
@@ -559,7 +569,7 @@
 
 @include mq('lg') {
     .cart.main {
-        .product-thumbnail {
+        .product-thumbnail { 
             width: 12rem;
         }
 

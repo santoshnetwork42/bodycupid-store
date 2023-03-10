@@ -7,7 +7,7 @@ export default function ShopBanner(props) {
     <div
       className="page-header"
       style={{
-        backgroundImage: `url( /images/shop/page-header-back.jpg )`,
+        // backgroundImage: `url( /images/shop/page-header-back.jpg )`,
         backgroundColor: "#3C63A4",
       }}
     >

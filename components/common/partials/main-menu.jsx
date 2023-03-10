@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { getMenuCategories } from "~/graphql/api";
+import { getMenuSubCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 
 function MainMenu() {
@@ -11,28 +11,30 @@ function MainMenu() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    getSubcategories();
+  }, []);
+
+  const getSubcategories = useCallback(() => {
     API.graphql(
-      graphqlOperation(getMenuCategories, {
-        filter: { storeId: { eq: STORE_ID } },
+      graphqlOperation(getMenuSubCategories, {
+        filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
       })
-    ).then(
-      ({
-        data: {
-          searchProductCategories: { items },
-        },
-      }) => {
-        setCategories(items);
-      }
-    );
+    )
+      .then(
+        ({
+          data: {
+            searchProductSubCategories: { items },
+          },
+        }) => {
+          setCategories(items);
+        }
+      )
+      .catch((_err) => {});
   }, []);
 
   return (
     <nav className="main-nav">
       <ul className="menu">
-        <li id="menu-home" className={pathname === "/" ? "active" : ""}>
-          <ALink href="/">Home</ALink>
-        </li>
-
         <li
           id="all"
           className={pathname === "/collections/all" ? "active" : ""}
@@ -40,34 +42,24 @@ function MainMenu() {
           <ALink href="/collections/all">All Products</ALink>
         </li>
 
-        {categories.map((category) => (
+        {categories.map((subcategory) => (
           <li
-            key={category.id}
+            key={subcategory.id}
             className={`
-              ${
-                pathname.includes(`/collections/${category.slug}`)
-                  ? "active"
-                  : ""
-              }
-              ${category?.subCategory?.items?.length ? "d-xl-show submenu" : ""}
-            `}
+                ${
+                  pathname.includes(
+                    `/collections/${subcategory.category.slug}/${subcategory.slug}`
+                  )
+                    ? "active"
+                    : ""
+                }
+              `}
           >
-            <ALink href={`/collections/${category.slug}`}>
-              {category.name}
+            <ALink
+              href={`/collections/${subcategory.category.slug}/${subcategory.slug}`}
+            >
+              {subcategory?.name}
             </ALink>
-            {!!category?.subCategory?.items?.length && (
-              <ul>
-                {category.subCategory.items.map((item) => (
-                  <li key={`sub-categories-${item.id}`}>
-                    <ALink
-                      href={"/collections/" + category.slug + "/" + item.slug}
-                    >
-                      {item.name}
-                    </ALink>
-                  </li>
-                ))}
-              </ul>
-            )}
           </li>
         ))}
       </ul>

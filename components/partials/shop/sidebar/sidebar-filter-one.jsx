@@ -6,10 +6,11 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-import { getMenuCategories } from "~/graphql/api";
+import { getSideBarFilterCategories } from "~/graphql/api";
 import { scrollTopHandler } from "~/utils";
 import { cleanQuery } from "~/utils/helper";
 import { STORE_ID } from "~/config";
+import { useDebounce } from "~/utils/hooks/useDebounce";
 
 function SidebarFilterOne(props) {
   const { type = "left" } = props;
@@ -26,6 +27,9 @@ function SidebarFilterOne(props) {
   });
   const [isFirst, setFirst] = useState(true);
   let timerId;
+  useDebounce(filterPrice, 1000, () => {
+    filterByPrice();
+  });
 
   useEffect(() => {
     (async function () {
@@ -34,7 +38,7 @@ function SidebarFilterOne(props) {
           searchProductCategories: { items: categories },
         },
       } = await API.graphql(
-        graphqlOperation(getMenuCategories, {
+        graphqlOperation(getSideBarFilterCategories, {
           filter: { storeId: { eq: STORE_ID } },
         })
       );
@@ -63,8 +67,8 @@ function SidebarFilterOne(props) {
     }
   }, [query]);
 
-  const filterByPrice = (e) => {
-    e.preventDefault();
+  const filterByPrice = () => {
+    if (!filterPrice.flag) return;
     let url = router.pathname.replace("[grid]", query.grid);
     let arr = [`minprice=${filterPrice.min}`, `maxprice=${filterPrice.max}`];
     for (let key in query) {
@@ -76,7 +80,7 @@ function SidebarFilterOne(props) {
   };
 
   const onChangePrice = (value) => {
-    setPrice(value);
+    setPrice({ ...value, flag: true });
   };
 
   const toggleSidebar = (e) => {
@@ -334,13 +338,6 @@ function SidebarFilterOne(props) {
                         Price: ₹{filterPrice.min} - ₹{filterPrice.max}
                         <span className="filter-price-range"></span>
                       </div>
-
-                      <button
-                        className="btn btn-dark btn-filter btn-rounded"
-                        onClick={filterByPrice}
-                      >
-                        Filter
-                      </button>
                     </div>
                   </form>
                 </div>

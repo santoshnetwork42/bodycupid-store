@@ -169,6 +169,20 @@
         aside+div & {
             padding-top: 2px;
         }
+
+        .product-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            lable {
+                padding: .6rem 1.3rem;
+                border-radius: .5rem;
+                background-color: $border-color;
+                color: $body-color;
+                text-transform: capitalize;
+            }
+        }
     }
 
     .product-cat {
@@ -189,7 +203,7 @@
     }
 
     .product-tag {
-        font-size:1.2rem;
+        font-size:1.5rem;
         text-overflow: ellipsis;
         color:$success-color;
         text-align: center !important;
@@ -699,4 +713,18 @@
 .product-details.sticky {
     position: sticky;
     top: 88px;
+}
+
+@include mq(xs, max){
+    .product-price {
+        .old-price {
+            font-size: 1.8rem;
+        }
+        .new-price {
+            font-size: 2rem;
+        }
+        .product-save {
+            font-size: 2rem;
+        }
+    }
 }

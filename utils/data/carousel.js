@@ -249,8 +249,10 @@ export const mainSlider14 = {
 }
 
 export const mainSlider15 = {
-    items: 4,
-    nav: true,
+    items: 0,
+    dots: true,
+    loop: false,
+    nav: false,
     autoHeight: false
 }
 

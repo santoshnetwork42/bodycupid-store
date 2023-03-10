@@ -1,4 +1,37 @@
-export const getMenuCategories = /* GraphQL */ `
+export const getMenuSubCategories = /* GraphQL */ `
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
+  ) {
+    searchProductSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        category {
+          id
+          name
+          slug
+        }
+        slug
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const getSideBarFilterCategories = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
     $sort: [SearchableProductCategorySortInput]
@@ -306,6 +339,7 @@ export const getProductBySlug = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -1253,6 +1287,39 @@ export const getReviews = /* GraphQL */ `
     }
   }
 `;
+
+export const searchProductFaqs = /* GraphQL */ `
+  query SearchProductFaqs(
+    $filter: SearchableProductFaqFilterInput
+    $sort: [SearchableProductFaqSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductFaqAggregationInput]
+  ) {
+    searchProductFaqs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        productId
+        title
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
 
 export const getLinkedProducts = /* GraphQL */ `
   query ByProductIdLinkedProduct(

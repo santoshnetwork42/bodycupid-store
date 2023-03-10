@@ -30,14 +30,19 @@ function CartMenu(props) {
     delete item.variantId;
     removeFromCart(item);
   };
-  const onChangeQty = (id, variantId, qty) => {
-    updateCart(
-      cartList.map((item) => {
-        return item.id === id && (!variantId || variantId === item.variantId)
-          ? { ...item, qty: qty }
-          : item;
-      })
-    );
+  const onChangeQty = (item, qty) => {
+    if (qty) {
+      const { id, variantId } = item;
+      updateCart(
+        cartList.map((item) => {
+          return item.id === id && (!variantId || variantId === item.variantId)
+            ? { ...item, qty: qty }
+            : item;
+        })
+      );
+    } else {
+      removeCart(item);
+    }
   };
   return (
     <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
@@ -117,9 +122,9 @@ function CartMenu(props) {
                       product={item}
                       qty={item.qty}
                       max={item.inventory}
-                      onChangeQty={(qty) =>
-                        onChangeQty(item.id, item.variantId, qty)
-                      }
+                      onChangeQty={(qty) => {
+                        onChangeQty(item, qty);
+                      }}
                     />
                   </div>
                 </div>

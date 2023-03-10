@@ -13,7 +13,7 @@ export default function Quantity({ qty = 1, ...props }) {
   }, [quantity]);
 
   function minusQuantity() {
-    if (quantity > 1) {
+    if (quantity > 0) {
       setQuantity(parseInt(quantity) - 1);
     }
   }

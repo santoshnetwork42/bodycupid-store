@@ -131,6 +131,12 @@ function ProductEight(props) {
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
+        {!!product?.tags && (
+          <label className="product-tag">
+            {product?.tags.split(",").join(" | ")}
+          </label>
+        )}
+
         <div className="product-price">
           {/* {
                         product.price[0] !== product.price[1] ?
