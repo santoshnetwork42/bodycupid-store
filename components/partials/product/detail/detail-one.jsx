@@ -14,7 +14,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime } from "~/utils/helper";
+import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
 
 function DetailOne(props) {
   const {
@@ -161,16 +161,9 @@ function DetailOne(props) {
   };
 
   const onReviewClick = () => {
-    const ele = document.getElementById("product-review");
-    const elementPosition = ele.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - 120;
-    if (ele) {
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-      ele.click();
-    }
+
+    scrollWithOffset('product-review',120,true)
+    
   };
 
   function changeQty(qty) {
