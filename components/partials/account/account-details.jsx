@@ -8,6 +8,7 @@ import { userActions } from "~/store/user";
 
 function AccountDetails({ user, updateUserData }) {
   const [userDetail, setUser] = useState({ ...user });
+
   const updateUser = useCallback(
     async (e) => {
       e.preventDefault();
@@ -18,6 +19,7 @@ function AccountDetails({ user, updateUserData }) {
             id: user.id,
             firstName: userDetail.firstName,
             lastName: userDetail.lastName,
+            email: userDetail.email,
           },
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -30,6 +32,7 @@ function AccountDetails({ user, updateUserData }) {
     },
     [userDetail, user]
   );
+
   return (
     <form onSubmit={updateUser} className="form">
       <div className="row">
@@ -65,7 +68,6 @@ function AccountDetails({ user, updateUserData }) {
         required
         value={userDetail.email}
         onChange={(e) => setUser({ email: e.target.value })}
-        disabled
       />
       <label>Phone *</label>
       <div className="input-tel form-control">
@@ -76,7 +78,6 @@ function AccountDetails({ user, updateUserData }) {
           required
           maxLength={10}
           value={removePhonePrefix(userDetail.phone)}
-          onChange={(e) => setUser({ phone: e.target.value })}
           disabled
         />
       </div>

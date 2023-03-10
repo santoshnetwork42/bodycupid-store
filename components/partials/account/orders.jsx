@@ -12,7 +12,7 @@ function AccountOrders({ user }) {
   const [orders, setOrders] = useState([]);
   const [totalOrder, setTotalOrder] = useState();
   const [token, setToken] = useState(null);
-  const perPage = 3;
+  const perPage = 10;
 
   const getOrders = useCallback(
     async (reset) => {
@@ -42,9 +42,7 @@ function AccountOrders({ user }) {
         }
         setTotalOrder(total);
         setToken(nextToken);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
     [user, orders, token]
   );
@@ -74,7 +72,7 @@ function AccountOrders({ user }) {
                 <ALink href="#">#{order.code}</ALink>
               </td>
               <td className="order-date">
-                <time>{formateDate(order.createdAt)}</time>
+                <time>{formateDate(order.orderDate)}</time>
               </td>
               <td className="order-status">
                 <span>{order.status}</span>
