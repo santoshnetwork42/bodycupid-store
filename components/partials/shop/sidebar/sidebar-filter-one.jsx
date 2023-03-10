@@ -32,23 +32,19 @@ function SidebarFilterOne(props) {
   });
 
   useEffect(() => {
-    getSubcategories();
-  }, []);
-
-  const getSubcategories = useCallback(async () => {
-    try {
+    (async function () {
       const {
         data: {
-          searchProductSubCategories: { items: categories },
+          searchProductCategories: { items: categories },
         },
       } = await API.graphql(
         graphqlOperation(getMenuCategories, {
-          filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
+          filter: { storeId: { eq: STORE_ID } },
         })
       );
-      setSidebarData(categories);
+      setSidebarData({ categories });
       setLoading(false);
-    } catch (error) {}
+    })();
   }, []);
 
   useEffect(() => {
@@ -212,27 +208,107 @@ function SidebarFilterOne(props) {
                 expanded={true}
               >
                 <ul className="widget-body filter-items search-ul">
-                  {sidebarData.map((item, index) => (
-                    <li
-                      className={query.category === item.slug ? "show" : ""}
-                      key={item.name + " - " + index}
-                    >
-                      <ALink
-                        href={{
-                          pathname: "/collections/[category]/[subcategory]",
-                          query: cleanQuery({
-                            category: item.category.slug,
-                            subcategory: item.slug,
-                            grid: query.grid,
-                            type: router.query.type || null,
-                          }),
-                        }}
-                        scroll={false}
+                  {sidebarData.categories.map((item, index) =>
+                    item.subCategory.items.length > 0 ? (
+                      <li
+                        key={item.name + " - " + index}
+                        className={`with-ul overflow-hidden ${
+                          item.slug === query.category ||
+                          item.subCategory.items.findIndex(
+                            (subCat) => subCat.slug === query.subcategory
+                          ) > -1
+                            ? "show"
+                            : ""
+                        } `}
                       >
-                        {item.name}
-                      </ALink>
-                    </li>
-                  ))}
+                        <SlideToggle collapsed={true}>
+                          {({
+                            onToggle,
+                            setCollapsibleElement,
+                            toggleState,
+                          }) => (
+                            <>
+                              <ALink
+                                href={{
+                                  pathname: "/collections/[category]",
+                                  query: cleanQuery({
+                                    category: item.slug,
+                                    grid: query.grid,
+                                    type: router.query.type || null,
+                                  }),
+                                }}
+                                scroll={false}
+                              >
+                                {item.name}
+                                <i
+                                  className={`fas fa-chevron-down ${toggleState.toLowerCase()}`}
+                                  onClick={(e) => {
+                                    onToggle();
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                  }}
+                                ></i>
+                              </ALink>
+
+                              <div ref={setCollapsibleElement}>
+                                <div>
+                                  <ul style={{ display: "block" }}>
+                                    {item.subCategory.items.map(
+                                      (subItem, index) => (
+                                        <li
+                                          key={subItem.name + " - " + index}
+                                          className={`with-ul ${
+                                            subItem.slug === query.category
+                                              ? "show"
+                                              : ""
+                                          } `}
+                                        >
+                                          <ALink
+                                            scroll={false}
+                                            href={{
+                                              pathname:
+                                                "/collections/[category]/[subcategory]",
+                                              query: cleanQuery({
+                                                category: item.slug,
+                                                subcategory: subItem.slug,
+                                                grid: query.grid,
+                                                type: router.query.type || null,
+                                              }),
+                                            }}
+                                          >
+                                            {subItem.name}
+                                          </ALink>
+                                        </li>
+                                      )
+                                    )}
+                                  </ul>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </SlideToggle>
+                      </li>
+                    ) : (
+                      <li
+                        className={query.category === item.slug ? "show" : ""}
+                        key={item.name + " - " + index}
+                      >
+                        <ALink
+                          href={{
+                            pathname: "/collections/[category]",
+                            query: cleanQuery({
+                              category: item.slug,
+                              grid: query.grid,
+                              type: router.query.type || null,
+                            }),
+                          }}
+                          scroll={false}
+                        >
+                          {item.name}
+                        </ALink>
+                      </li>
+                    )
+                  )}
                 </ul>
               </Card>
             </div>

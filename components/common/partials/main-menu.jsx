@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { getMenuCategories } from "~/graphql/api";
+import { getMenuSubCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 
 function MainMenu() {
@@ -16,7 +16,7 @@ function MainMenu() {
 
   const getSubcategories = useCallback(() => {
     API.graphql(
-      graphqlOperation(getMenuCategories, {
+      graphqlOperation(getMenuSubCategories, {
         filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
       })
     )
@@ -42,26 +42,23 @@ function MainMenu() {
           <ALink href="/collections/all">All Products</ALink>
         </li>
 
-        {categories.map((category) => (
+        {categories.map((subcategory) => (
           <li
-            key={category.id}
+            key={subcategory.id}
             className={`
                 ${
-                  pathname.includes(`/collections/${category.slug}`)
+                  pathname.includes(
+                    `/collections/${subcategory.category.slug}/${subcategory.slug}`
+                  )
                     ? "active"
-                    : ""
-                }
-                ${
-                  category?.subCategory?.items?.length
-                    ? "d-xl-show submenu"
                     : ""
                 }
               `}
           >
             <ALink
-              href={`/collections/${category.category.slug}/${category.slug}`}
+              href={`/collections/${subcategory.category.slug}/${subcategory.slug}`}
             >
-              {category.name}
+              {subcategory?.name}
             </ALink>
           </li>
         ))}

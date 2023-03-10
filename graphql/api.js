@@ -1,4 +1,4 @@
-export const getMenuCategories = /* GraphQL */ `
+export const getMenuSubCategories = /* GraphQL */ `
   query SearchProductSubCategories(
     $filter: SearchableProductSubCategoryFilterInput
     $sort: [SearchableProductSubCategorySortInput]
@@ -27,6 +27,40 @@ export const getMenuCategories = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const getMenuCategories = /* GraphQL */ `
+  query SearchProductCategories(
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductCategoryAggregationInput]
+  ) {
+    searchProductCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        slug
+        subCategory {
+          items {
+            id
+            name
+            slug
+            isFeatured
+          }
+        }
+      }
     }
   }
 `;

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-import { getMenuCategories } from "~/graphql/api";
+import { getMenuSubCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 
 function MobileMenu({ user }) {
@@ -19,7 +19,7 @@ function MobileMenu({ user }) {
 
   const getSubcategories = useCallback(() => {
     API.graphql(
-      graphqlOperation(getMenuCategories, {
+      graphqlOperation(getMenuSubCategories, {
         filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
       })
     )
@@ -126,11 +126,12 @@ function MobileMenu({ user }) {
           <li>
             <Card title="categories" type="mobile" url="/collections/all">
               <ul>
-                {categories.map((category) => (
+                {categories.map((subcategory) => (
                   <ALink
-                    href={`/collections/${category.category.slug}/${category.slug}`}
+                    key={subcategory.id}
+                    href={`/collections/${subcategory.category.slug}/${subcategory.slug}`}
                   >
-                    {category.name}
+                    {subcategory.name}
                   </ALink>
                 ))}
               </ul>
