@@ -161,7 +161,7 @@ function ProductEight(props) {
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
-        <div className="ratings-container cursor-pointer">
+        <div className="ratings-container">
           <div className="ratings-full">
             <span
               className="ratings"
