@@ -185,7 +185,7 @@ export default function ToolBox(props) {
           <select
             name="count"
             className="form-control"
-            defaultValue={perPage}
+            value={perPage}
             onChange={(e) => onChangeAttri(e, "limit")}
           >
             <option value="12">12</option>
