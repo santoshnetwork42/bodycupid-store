@@ -85,8 +85,10 @@ export const removeHoverEffect = () => {
     );
   }
 
-  if (hasTouch()) {
+  console.log("hasTouch()", hasTouch());
+  if (hasTouch() || true) {
     try {
+      debugger
       for (var si in document.styleSheets) {
         var styleSheet = document.styleSheets[si];
         if (!styleSheet.rules) continue;

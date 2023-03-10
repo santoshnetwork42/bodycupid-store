@@ -3,10 +3,7 @@
     ---------------------------------------------- */
 
     // Variables
-    @include set-default(
-        (
-            base: (
-                // max-width of '.container'
+    @include set-default((base: ( // max-width of '.container'
                 _container-width: 1220px,
                 // max-width of '.container-fluid'
                 _container-fluid-width: 1820px,
@@ -18,24 +15,21 @@
                 // background of grey section
                 _grey-section-bg: #f6f7f9,
                 // Body
-                body: (
-                    font-family: $font-family,
+                body: (font-family: $font-family,
                     font-size: 1.4rem,
                     line-height: 1.6,
-                    color: $body-color
-                ),
-                page-wrapper: (
-                    margin-left: false,
+                    color: $body-color ),
+                page-wrapper: (margin-left: false,
                     margin-right: false,
                 ),
                 // ScrollTop
-                scroll-top: (
-                    background-color: #fff
-                )
-            ),
-        )
-    );
-    *, ::after, ::before {
+                scroll-top: (background-color: #fff)),
+        ));
+
+    *,
+    ::after,
+    ::before {
+        touch-action: pan-x pan-y !important;
         box-sizing: inherit;
     }
 
@@ -45,6 +39,7 @@
         font-weight: 400;
         box-sizing: border-box;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
     }
 
     body {
@@ -73,7 +68,7 @@
         opacity: 0;
         position: relative;
         transition: margin .4s, opacity .5s;
-        @include print_css( base, page-wrapper );
+        @include print_css(base, page-wrapper);
     }
 
     table {
