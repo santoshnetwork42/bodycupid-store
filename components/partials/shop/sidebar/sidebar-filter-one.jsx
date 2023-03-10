@@ -6,7 +6,7 @@ import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-import { getMenuCategories } from "~/graphql/api";
+import { getSideBarFilterCategories } from "~/graphql/api";
 import { scrollTopHandler } from "~/utils";
 import { cleanQuery } from "~/utils/helper";
 import { useDebounce } from "~/utils/hooks/useDebounce";
@@ -38,7 +38,7 @@ function SidebarFilterOne(props) {
           searchProductCategories: { items: categories },
         },
       } = await API.graphql(
-        graphqlOperation(getMenuCategories, {
+        graphqlOperation(getSideBarFilterCategories, {
           filter: { storeId: { eq: STORE_ID } },
         })
       );

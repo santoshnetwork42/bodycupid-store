@@ -1,4 +1,37 @@
-export const getMenuCategories = /* GraphQL */ `
+export const getMenuSubCategories = /* GraphQL */ `
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
+  ) {
+    searchProductSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        category {
+          id
+          name
+          slug
+        }
+        slug
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const getSideBarFilterCategories = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
     $sort: [SearchableProductCategorySortInput]
