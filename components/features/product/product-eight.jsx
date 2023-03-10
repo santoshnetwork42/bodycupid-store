@@ -161,15 +161,7 @@ function ProductEight(props) {
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
-        <div
-          className="ratings-container cursor-pointer"
-          onClick={() => {
-            router.push({
-              pathname: `/product/${product.slug}`,
-              query: { review: true },
-            });
-          }}
-        >
+        <div className="ratings-container cursor-pointer">
           <div className="ratings-full">
             <span
               className="ratings"
@@ -181,9 +173,15 @@ function ProductEight(props) {
           </div>
 
           {!!product.totalRatings && (
-            <div className="rating-reviews">
+            <ALink
+              href={{
+                pathname: `/product/${product.slug}`,
+                query: { review: true },
+              }}
+              className="rating-reviews"
+            >
               ( {product?.totalRatings} reviews )
-            </div>
+            </ALink>
           )}
         </div>
 
