@@ -31,7 +31,7 @@ export const getMenuSubCategories = /* GraphQL */ `
   }
 `;
 
-export const getMenuCategories = /* GraphQL */ `
+export const getSideBarFilterCategories = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
     $sort: [SearchableProductCategorySortInput]
@@ -57,7 +57,6 @@ export const getMenuCategories = /* GraphQL */ `
             id
             name
             slug
-            isFeatured
           }
         }
       }
