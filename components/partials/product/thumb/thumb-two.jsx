@@ -6,8 +6,7 @@ import { mainSlider15 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function ThumbTwo(props) {
-  const { product, index = 0 } = props;
-  let thumbs = product.images.items;
+  const { images, index = 0 } = props;
   const [thumbRef, setThumbRef] = useState(null);
 
   useEffect(() => {
@@ -61,7 +60,7 @@ function ThumbTwo(props) {
         options={mainSlider15}
         onChangeRef={changeRefHandler}
       >
-        {thumbs.map((thumb, index) => (
+        {images.map((thumb, index) => (
           <div
             className={`product-thumb ${index === 0 ? "active" : ""}`}
             onClick={(e) => {

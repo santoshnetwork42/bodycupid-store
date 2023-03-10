@@ -53,12 +53,13 @@ function Order() {
     fetchOrder();
   }, [orderId]);
 
+  const isPaymentProcessing =
+    order?.status === "PENDING" &&
+    order?.paymentType === "PREPAID" &&
+    paymentId;
+
   useEffect(() => {
-    if (
-      order?.status === "PENDING" &&
-      order?.paymentType === "PREPAID" &&
-      paymentId
-    ) {
+    if (isPaymentProcessing) {
       toast(
         <AlertPopup
           message="Hold On! We're updating your payment status..."
@@ -147,156 +148,173 @@ function Order() {
                 <h5 className="icon-box-title font-weight-bold lh-1 mb-1">
                   Thank You!
                 </h5>
-                <p className="lh-1 ls-m">Your order has been received</p>
+                {isPaymentProcessing && (
+                  <p className="lh-1 ls-m">
+                    Your order has been received and your payment status is
+                    being updated.
+                  </p>
+                )}
+                {!isPaymentProcessing && (
+                  <p className="lh-1 ls-m">Your order has been received</p>
+                )}
               </div>
             </div>
           </div>
 
-          <div className="order-results">
-            <div className="overview-item">
-              <span>Order number:</span>
-              <strong>#{order?.code || order?.id}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Status:</span>
-              <strong>{order?.status}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Date:</span>
-              <strong>{formateDate(order?.createdAt)}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Email:</span>
-              <strong>{order?.shippingAddress?.email}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Total:</span>
-              <strong>₹{toDecimal(order?.totalAmount)}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Payment method:</span>
-              <strong>
-                {order?.paymentType === "COD" ? "Cash on delivery" : "Online"}
-              </strong>
-            </div>
-          </div>
-
-          <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
-            Order Details
-          </h2>
-          <div className="order-details">
-            <table className="order-details-table">
-              <thead>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h3 className="summary-subtitle">Product</h3>
-                  </td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody>
-                {order?.products?.items?.map((item) => (
-                  <tr key={"order-" + item.id}>
-                    <td className="product-name">
-                      {item.product.title}{" "}
-                      <span>
-                        {" "}
-                        <i className="fas fa-times"></i> {item.quantity}
-                      </span>
-                      {item.variant && (
-                        <p className="mb-0">
-                          <strong>{item.variant.title}</strong>
-                        </p>
-                      )}
-                    </td>
-                    <td className="product-price">
-                      ₹{toDecimal(item.quantity * item.price)}
-                    </td>
-                  </tr>
-                ))}
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Subtotal:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    ₹{toDecimal(getOrderTotal(order?.products?.items))}
-                  </td>
-                </tr>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Shipping:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {order?.totalShippingCharges
-                      ? `₹${toDecimal(order?.totalShippingCharges)}`
-                      : "Free shipping"}
-                  </td>
-                </tr>
-                {!!order?.totalDiscount && (
-                  <tr className="summary-subtotal">
-                    <td>
-                      <h4 className="summary-subtitle">Discount:</h4>
-                    </td>
-                    <td className="summary-subtotal-price">
-                      ₹{toDecimal(order?.totalDiscount)}
-                    </td>
-                  </tr>
-                )}
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Payment method:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
+          {!isPaymentProcessing && (
+            <>
+              <div className="order-results">
+                <div className="overview-item">
+                  <span>Order number:</span>
+                  <strong>#{order?.code || order?.id}</strong>
+                </div>
+                <div className="overview-item">
+                  <span>Status:</span>
+                  <strong>{order?.status}</strong>
+                </div>
+                <div className="overview-item">
+                  <span>Date:</span>
+                  <strong>{formateDate(order?.createdAt)}</strong>
+                </div>
+                <div className="overview-item">
+                  <span>Email:</span>
+                  <strong>{order?.shippingAddress?.email}</strong>
+                </div>
+                <div className="overview-item">
+                  <span>Total:</span>
+                  <strong>₹{toDecimal(order?.totalAmount)}</strong>
+                </div>
+                <div className="overview-item">
+                  <span>Payment method:</span>
+                  <strong>
                     {order?.paymentType === "COD"
                       ? "Cash on delivery"
                       : "Online"}
-                  </td>
-                </tr>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Total:</h4>
-                  </td>
-                  <td>
-                    <p className="summary-total-price">
-                      ₹{toDecimal(order?.totalAmount)}
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <h2 className="title title-simple text-left pt-10 mb-2">
-            Shipping Address
-          </h2>
-          <div className="address-info pb-8 mb-6">
-            <p className="address-detail pb-2">
-              {order?.shippingAddress?.name}
-              <br />
-              {order?.shippingAddress?.address}
-              {!!order?.shippingAddress?.location && (
-                <>
-                  <br />
-                  {order?.shippingAddress?.location}
-                </>
-              )}
-              <br />
-              {(order?.shippingAddress?.city + ", ", state + ", " + country)}
-              <br />
-              {order?.shippingAddress?.pinCode}
-            </p>
-            <p className="email">
-              {order?.shippingAddress?.email}
-              <br />
-              {order?.shippingAddress?.phone}
-            </p>
-          </div>
+                  </strong>
+                </div>
+              </div>
 
-          <ALink
-            href="/collections/all"
-            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
-          >
-            <i className="d-icon-arrow-left"></i> Back to List
-          </ALink>
+              <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
+                Order Details
+              </h2>
+              <div className="order-details">
+                <table className="order-details-table">
+                  <thead>
+                    <tr className="summary-subtotal">
+                      <td>
+                        <h3 className="summary-subtitle">Product</h3>
+                      </td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {order?.products?.items?.map((item) => (
+                      <tr key={"order-" + item.id}>
+                        <td className="product-name">
+                          {item.product.title}{" "}
+                          <span>
+                            {" "}
+                            <i className="fas fa-times"></i> {item.quantity}
+                          </span>
+                          {item.variant && (
+                            <p className="mb-0">
+                              <strong>{item.variant.title}</strong>
+                            </p>
+                          )}
+                        </td>
+                        <td className="product-price">
+                          ₹{toDecimal(item.quantity * item.price)}
+                        </td>
+                      </tr>
+                    ))}
+                    <tr className="summary-subtotal">
+                      <td>
+                        <h4 className="summary-subtitle">Subtotal:</h4>
+                      </td>
+                      <td className="summary-subtotal-price">
+                        ₹{toDecimal(getOrderTotal(order?.products?.items))}
+                      </td>
+                    </tr>
+                    <tr className="summary-subtotal">
+                      <td>
+                        <h4 className="summary-subtitle">Shipping:</h4>
+                      </td>
+                      <td className="summary-subtotal-price">
+                        {order?.totalShippingCharges
+                          ? `₹${toDecimal(order?.totalShippingCharges)}`
+                          : "Free shipping"}
+                      </td>
+                    </tr>
+                    {!!order?.totalDiscount && (
+                      <tr className="summary-subtotal">
+                        <td>
+                          <h4 className="summary-subtitle">Discount:</h4>
+                        </td>
+                        <td className="summary-subtotal-price">
+                          ₹{toDecimal(order?.totalDiscount)}
+                        </td>
+                      </tr>
+                    )}
+                    <tr className="summary-subtotal">
+                      <td>
+                        <h4 className="summary-subtitle">Payment method:</h4>
+                      </td>
+                      <td className="summary-subtotal-price">
+                        {order?.paymentType === "COD"
+                          ? "Cash on delivery"
+                          : "Online"}
+                      </td>
+                    </tr>
+                    <tr className="summary-subtotal">
+                      <td>
+                        <h4 className="summary-subtitle">Total:</h4>
+                      </td>
+                      <td>
+                        <p className="summary-total-price">
+                          ₹{toDecimal(order?.totalAmount)}
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2 className="title title-simple text-left pt-10 mb-2">
+                Shipping Address
+              </h2>
+              <div className="address-info pb-8 mb-6">
+                <p className="address-detail pb-2">
+                  {order?.shippingAddress?.name}
+                  <br />
+                  {order?.shippingAddress?.address}
+                  {!!order?.shippingAddress?.location && (
+                    <>
+                      <br />
+                      {order?.shippingAddress?.location}
+                    </>
+                  )}
+                  <br />
+                  {
+                    (order?.shippingAddress?.city + ", ",
+                    state + ", " + country)
+                  }
+                  <br />
+                  {order?.shippingAddress?.pinCode}
+                </p>
+                <p className="email">
+                  {order?.shippingAddress?.email}
+                  <br />
+                  {order?.shippingAddress?.phone}
+                </p>
+              </div>
+
+              <ALink
+                href="/collections/all"
+                className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
+              >
+                <i className="d-icon-arrow-left"></i> Back to List
+              </ALink>
+            </>
+          )}
         </div>
       </div>
     </main>

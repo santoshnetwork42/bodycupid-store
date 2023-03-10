@@ -9,6 +9,7 @@ import {
 import { cartActions } from "~/store/cart";
 import { getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
+import Loader from "../common/partials/loader";
 import { STORE_ID } from "~/config";
 import Modal from "~/components/common/modal";
 
@@ -25,7 +26,7 @@ function Coupon(props) {
   const [featured, setFeatured] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async function () {
       const {
@@ -43,6 +44,7 @@ function Coupon(props) {
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
+      setLoading(true);
       const {
         data: { applyCoupon: response },
       } = await API.graphql({
@@ -50,7 +52,6 @@ function Coupon(props) {
         variables: { code: couponCode },
         authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
-
       if (response) {
         const discount = getCouponTotal(response, cartList);
         if (discount) {
@@ -61,8 +62,10 @@ function Coupon(props) {
         } else {
           setError("Coupon cannot be applied");
         }
+        setLoading(false);
       } else {
         setError("Invalid coupon");
+        setLoading(false);
       }
     },
     [coupon, user]
@@ -209,6 +212,7 @@ function Coupon(props) {
           </div>
         </main>
       </Modal>
+      <Loader loading={loading} />
     </>
   );
 }

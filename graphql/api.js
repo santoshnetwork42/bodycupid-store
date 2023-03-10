@@ -306,6 +306,7 @@ export const getProductBySlug = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -1247,6 +1248,38 @@ export const getReviews = /* GraphQL */ `
         comment
         title
         images
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const searchProductFaqs = /* GraphQL */ `
+  query SearchProductFaqs(
+    $filter: SearchableProductFaqFilterInput
+    $sort: [SearchableProductFaqSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductFaqAggregationInput]
+  ) {
+    searchProductFaqs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        productId
+        title
+        description
+        createdAt
+        updatedAt
       }
       nextToken
       total

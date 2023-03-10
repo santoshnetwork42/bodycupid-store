@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function ThumbOne(props) {
-  const { index, product } = props;
+  const { index, images } = props;
   const [pos, setPos] = useState(0);
   const [term, setTerm] = useState(4);
 
@@ -52,7 +52,7 @@ export default function ThumbOne(props) {
 
     setPos(0);
 
-    if (term < product.images.items.length) {
+    if (term < images.length) {
       productThumbs.querySelector(".thumb-down").classList.remove("disabled");
     } else {
       productThumbs.querySelector(".thumb-down").classList.add("disabled");
@@ -63,7 +63,7 @@ export default function ThumbOne(props) {
       productThumbs.querySelector(".thumb-up").classList.add("disabled");
       document.querySelector(".product-thumbs").style.top = 0;
     }
-  }, [product]);
+  }, [images]);
 
   // change the pos and top when the media carousel is translated
   useEffect(() => {
@@ -82,13 +82,13 @@ export default function ThumbOne(props) {
 
   useEffect(() => {
     let productThumbs = document.querySelector(".product-thumbs-one");
-    if (pos + term < product.images.items.length) {
+    if (pos + term < images.length) {
       productThumbs.querySelector(".thumb-down").classList.remove("disabled");
     } else {
       productThumbs.querySelector(".thumb-down").classList.add("disabled");
     }
 
-    if (pos + term === product.images.items.length) {
+    if (pos + term === images.length) {
       // moveThumb( "down" );
       // setPos( pos + 1 );
     }
@@ -108,7 +108,7 @@ export default function ThumbOne(props) {
         productThumbs.querySelector(".thumb-up").classList.add("disabled");
       }
 
-      if (pos + term < product.images.items.length) {
+      if (pos + term < images.length) {
         productThumbs.querySelector(".thumb-down").classList.remove("disabled");
       } else {
         productThumbs.querySelector(".thumb-down").classList.add("disabled");
@@ -199,7 +199,7 @@ export default function ThumbOne(props) {
       }
 
       let thumbContainer = document.querySelector(".product-thumbs-one");
-      if (product.images.items.length <= newTerm) {
+      if (images.length <= newTerm) {
         setTimeout(() => {
           thumbContainer.querySelector(".product-thumbs").style.top = 0;
         }, 100);
@@ -209,14 +209,10 @@ export default function ThumbOne(props) {
             .getComputedStyle(thumbContainer.querySelector(".product-thumbs"))
             .getPropertyValue("top")
         );
-        let offset =
-          currentTop + transformUnit * product.images.items.length - thumbSpace;
+        let offset = currentTop + transformUnit * images.length - thumbSpace;
         let temp = wrapperHeight - offset;
 
-        if (
-          (index > newTerm - 1 || temp >= 0) &&
-          product.images.items.length > newTerm
-        ) {
+        if ((index > newTerm - 1 || temp >= 0) && images.length > newTerm) {
           thumbContainer.querySelector(".product-thumbs").style.top =
             currentTop + temp + "px";
         }
@@ -247,9 +243,8 @@ export default function ThumbOne(props) {
 
   return (
     <div className="product-thumbs-wrap product-thumbs-one">
-
       <div className="product-thumbs" id="product-thumbs">
-        {product.images.items.map((item, index) => (
+        {images.map((item, index) => (
           <div
             className={`product-thumb`}
             key={"thumb - " + index}

@@ -27,7 +27,6 @@ function SidebarFilterOne(props) {
   });
   const [isFirst, setFirst] = useState(true);
   let timerId;
-
   useDebounce(filterPrice, 1000, () => {
     filterByPrice();
   });
