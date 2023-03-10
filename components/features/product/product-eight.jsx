@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
@@ -21,7 +20,6 @@ function ProductEight(props) {
     addToCart,
     openQuickview,
   } = props;
-  const router = useRouter();
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =

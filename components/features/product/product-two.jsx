@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -23,7 +22,6 @@ function ProductTwo(props) {
     isCategory = true,
   } = props;
 
-  const router = useRouter();
 
   // decide if the product is wishlisted
   let isWishlisted;

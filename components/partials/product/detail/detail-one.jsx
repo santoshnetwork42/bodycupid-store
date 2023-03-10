@@ -162,8 +162,13 @@ function DetailOne(props) {
 
   const onReviewClick = () => {
     const ele = document.getElementById("product-review");
+    const elementPosition = ele.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - 120;
     if (ele) {
-      ele.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
       ele.click();
     }
   };
