@@ -1,18 +1,17 @@
+import React, { useEffect, useMemo, useState } from "react";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
+
 import { getLinkedProducts } from "~/graphql/api";
-import elements from "~/pages/elements";
 import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getThumbImage, getTotalPriceByField } from "~/utils/helper";
+import { getProductMeta, getTotalPriceByField } from "~/utils/helper";
 import RatingStar from "./rating-star";
 
 function LinkedProducts({ product, addToCart, cartList }) {
   const [linkedProduct, setLinkedProduct] = useState([]);
-  const [selected, setSelected] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,9 +26,18 @@ function LinkedProducts({ product, addToCart, cartList }) {
           },
         }) => {
           if (response.length) {
-            const data = response.map((lp) => lp.linkedProduct);
-            setLinkedProduct([product, ...data]);
-            setSelected([product, ...data]);
+            const data = response.map((lp) => {
+              return { ...lp.linkedProduct, checked: true };
+            });
+            const productData = [{ ...product, checked: true }, ...data].map(
+              (d) => {
+                return {
+                  ...d,
+                  thumbImage: getProductMeta(d).thumbImage,
+                };
+              }
+            );
+            setLinkedProduct(productData);
           }
         }
       )
@@ -37,6 +45,10 @@ function LinkedProducts({ product, addToCart, cartList }) {
         console.log("err", err);
       });
   }, [product]);
+
+  const selected = useMemo(() => {
+    return linkedProduct.filter((lp) => lp.checked);
+  }, [linkedProduct]);
 
   const allExist = useMemo(
     () =>
@@ -53,17 +65,12 @@ function LinkedProducts({ product, addToCart, cartList }) {
   };
 
   const onProductSelect = (p) => {
-    const isExist = selected.find((lp) => lp.id === p.id);
-    if (isExist) {
-      setSelected(selected.filter((s) => s.id !== p.id));
-    } else {
-      setSelected([...selected, p]);
-    }
-  };
-
-  const getSrc = (product) => {
-    const thumbImage = getThumbImage(product);
-    return getPublicImageURL(thumbImage.imageKey);
+    setLinkedProduct(
+      linkedProduct.map((lp) => {
+        if (lp.id === p.id) return { ...lp, checked: !p?.checked };
+        return lp;
+      })
+    );
   };
 
   if (!linkedProduct?.length) return <></>;
@@ -81,8 +88,8 @@ function LinkedProducts({ product, addToCart, cartList }) {
             {i > 0 && <i className="fas fa-plus mr-6"></i>}
             <div className="image-wrapper">
               <img
-                src={getSrc(lp)}
-                alt={getThumbImage(lp).alt}
+                src={getPublicImageURL(lp?.thumbImage?.imageKey)}
+                alt={lp?.thumbImage?.alt}
                 width="80"
                 height="88"
               />
@@ -144,10 +151,10 @@ function LinkedProducts({ product, addToCart, cartList }) {
               type="checkbox"
               className="custom-checkbox"
               id={lp.id}
-              checked={selected.find((s) => s.id === lp.id)}
+              checked={lp.checked}
               name={lp.title}
             />
-            <label className="form-control-label" htmlFor="signin-remember">
+            <label className="form-control-label">
               <span className="font-weight-bold mr-1">
                 {i === 0 && "This item :"}
               </span>

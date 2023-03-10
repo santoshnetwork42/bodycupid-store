@@ -10,7 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getThumbImage } from "~/utils/helper";
+import { getProductMeta } from "~/utils/helper";
 import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
@@ -56,14 +56,7 @@ function ProductTwo(props) {
     });
   };
 
-  const discount = !!(product.listingPrice && product.price)
-    ? parseInt(
-        ((product.listingPrice - product.price) * 100) / product.listingPrice,
-        10
-      )
-    : 0;
-
-  const thumbImage = getThumbImage(product);
+  const { thumbImage, discount } = getProductMeta(product);
 
   return (
     <div className={`product text-left ${adClass}`}>

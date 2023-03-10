@@ -72,14 +72,18 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.REMOVE_FROM_CART:
       let cart = state.data.reduce((cartAcc, product) => {
-        if (product.id !== action.payload.product.id) {
-          cartAcc.push(product);
+        let tmpProduct = product;
+        if (!tmpProduct.variantId) {
+          tmpProduct.variantId = getFirstVariantId(tmpProduct);
+        }
+        if (tmpProduct.id !== action.payload.product.id) {
+          cartAcc.push(tmpProduct);
         } else {
           if (
-            product.variantId &&
-            product.variantId !== action.payload.product.variantId
+            tmpProduct.variantId &&
+            tmpProduct.variantId !== action.payload.product.variantId
           ) {
-            cartAcc.push(product);
+            cartAcc.push(tmpProduct);
           }
         }
 
@@ -161,7 +165,10 @@ export function* cartSaga() {
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: null } });
+      yield put({
+        type: actionTypes.SET_CART,
+        payload: { couponCodeId: null },
+      });
     }
   });
 
@@ -239,12 +246,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+                id: response.id,
+                shoppingcartId: id,
+                productId: response.productId,
+                variantId: response.variantId,
+                quantity: response.quantity,
+              }
             : p
         );
 
@@ -280,7 +287,7 @@ export function* cartSaga() {
         if (product.productId !== id) {
           cartAcc.push(product);
         } else {
-          if (product.variantId && (product.variantId !== variantId)) {
+          if (product.variantId && product.variantId !== variantId) {
             cartAcc.push(product);
           }
         }

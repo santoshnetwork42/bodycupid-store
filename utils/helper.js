@@ -43,13 +43,25 @@ export const deliveryRemainingTime = () => {
   }
 };
 
-export const getThumbImage = (product) => {
+export const getProductMeta = (product) => {
+  if (!product) return {};
+  const { variants = {} } = product;
+  const { items = [] } = variants;
   const images = product?.images.items.sort((a, b) => a.position - b.position);
+  const discount = !!(product.listingPrice && product.price)
+    ? parseInt(
+        ((product.listingPrice - product.price) * 100) / product.listingPrice,
+        10
+      )
+    : 0;
+  const firstVariantId = items.sort((a, b) => a.position - b.position)[0]?.id;
 
-  return (
-    images?.find((i) => i.isThumb) ||
-    images[0] || { imageKey: product.imageUrl }
-  );
+  return {
+    thumbImage: images?.find((i) => i.isThumb) ||
+      images[0] || { imageKey: product.imageUrl },
+    discount,
+    firstVariantId,
+  };
 };
 
 export const getTotalPriceByField = (arr, field) => {
@@ -57,6 +69,5 @@ export const getTotalPriceByField = (arr, field) => {
     return accumulator + object[field];
   }, 0);
 
-  console.log("x", x);
   return x;
 };
