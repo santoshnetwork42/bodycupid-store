@@ -31,6 +31,7 @@ import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
+import Passwordless from "~/components/common/partials/passwordless";
 
 function Checkout(props) {
   const {
@@ -263,6 +264,8 @@ function Checkout(props) {
       <h1 className="d-none">Wow life science - Checkout</h1>
 
       <Loader loading={!!loading} />
+
+      {!user && <Passwordless forceOpen />}
 
       <div
         className={`page-content pt-7 pb-10 ${
@@ -532,6 +535,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
-  openLogin: modalActions.openLoginModal,
+  openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
 })(Checkout);

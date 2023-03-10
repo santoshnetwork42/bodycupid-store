@@ -11,7 +11,7 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 
-function Passwordless({ auth, isOpen, closeModal, openLogin }) {
+function Passwordless({ auth, isOpen, closeModal, openLogin, forceOpen }) {
   const [state, setState] = useState({
     phone: "",
     confirmationCode: "",
@@ -109,7 +109,8 @@ function Passwordless({ auth, isOpen, closeModal, openLogin }) {
 
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={forceOpen || isOpen}
+      isCloseIcon={!forceOpen}
       onRequestClose={() => closeModal()}
       shouldReturnFocusAfterClose={false}
       overlayClassName="auth-modal-overlay"

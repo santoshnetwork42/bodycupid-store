@@ -5,14 +5,16 @@ import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
 
 import { cartActions } from "~/store/cart";
+import { modalActions } from "~/store/modal";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import Quantity from "~/components/features/quantity";
 
 function CartMenu(props) {
-  const { cartList, removeFromCart, updateCart } = props;
+  const { cartList, removeFromCart, updateCart, user, openLogin } = props;
   const router = useRouter();
+
   useEffect(() => {
     hideCartMenu();
   }, [router.asPath]);
@@ -43,6 +45,14 @@ function CartMenu(props) {
       removeCart(item);
     }
   };
+
+  const checkAuth = () => {
+    hideCartMenu();
+    if (user) return true;
+    openLogin();
+    return false;
+  };
+
   return (
     <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
       <a
@@ -146,9 +156,9 @@ function CartMenu(props) {
                 View Cart
               </ALink>
               <ALink
-                href="/pages/checkout"
+                href={user ? "/pages/checkout" : "#"}
                 className="btn btn-dark"
-                onClick={hideCartMenu}
+                onClick={checkAuth}
               >
                 <span>Go To Checkout</span>
               </ALink>
@@ -167,10 +177,12 @@ function CartMenu(props) {
 function mapStateToProps(state) {
   return {
     cartList: state.cart.data || [],
+    user: state.user.data,
   };
 }
 
 export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
+  openLogin: modalActions.openPasswordlessModal,
 })(CartMenu);
