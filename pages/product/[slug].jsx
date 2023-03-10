@@ -13,16 +13,12 @@ import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 
 function ProductDefault() {
-  const router = useRouter();
-
-  const { slug, variantId } = router.query;
+  const { slug, variantId } = useRouter().query;
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
   const [selectedVariant, setVariant] = useState(variantId);
   const ele = document.getElementById("product-review");
-
-  
 
   useEffect(() => {
     API.graphql(
