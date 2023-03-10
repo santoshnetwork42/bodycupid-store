@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
@@ -12,23 +12,27 @@ function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
   const router = useRouter();
   const [categories, setCategories] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
 
   useEffect(() => {
+    getSubcategories();
+  }, []);
+
+  const getSubcategories = useCallback(() => {
     API.graphql(
       graphqlOperation(getMenuCategories, {
-        filter: { storeId: { eq: STORE_ID } },
+        filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
       })
-    ).then(
-      ({
-        data: {
-          searchProductCategories: { items },
-        },
-      }) => {
-        setSubCategories(items.map((cat) => cat.subCategory?.items).flat());
-        setCategories(items);
-      }
-    );
+    )
+      .then(
+        ({
+          data: {
+            searchProductSubCategories: { items },
+          },
+        }) => {
+          setCategories(items);
+        }
+      )
+      .catch((_err) => {});
   }, []);
 
   useEffect(() => {
@@ -122,15 +126,13 @@ function MobileMenu({ user }) {
           <li>
             <Card title="categories" type="mobile" url="/collections/all">
               <ul>
-                {subCategories.map((subcat) => {
-                  return (
-                    subcat.isFeatured && (
-                      <ALink href={"/collections/" + subcat.slug}>
-                        {subcat.name}
-                      </ALink>
-                    )
-                  );
-                })}
+                {categories.map((category) => (
+                  <ALink
+                    href={`/collections/${category.category.slug}/${category.slug}`}
+                  >
+                    {category.name}
+                  </ALink>
+                ))}
               </ul>
             </Card>
           </li>

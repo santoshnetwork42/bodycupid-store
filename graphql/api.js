@@ -1,13 +1,13 @@
 export const getMenuCategories = /* GraphQL */ `
-  query SearchProductCategories(
-    $filter: SearchableProductCategoryFilterInput
-    $sort: [SearchableProductCategorySortInput]
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableProductCategoryAggregationInput]
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
   ) {
-    searchProductCategories(
+    searchProductSubCategories(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -18,16 +18,15 @@ export const getMenuCategories = /* GraphQL */ `
       items {
         id
         name
-        slug
-        subCategory {
-          items {
-            id
-            name
-            slug
-            isFeatured
-          }
+        category {
+          id
+          name
+          slug
         }
+        slug
       }
+      nextToken
+      total
     }
   }
 `;
