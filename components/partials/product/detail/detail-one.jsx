@@ -148,6 +148,12 @@ function DetailOne(props) {
     }
   };
 
+  useEffect(() => {
+    if(router.query?.review){
+      onReviewClick()
+    }
+  }, []);
+
   const resetValueHandler = () => {
     setVariant(null);
   };

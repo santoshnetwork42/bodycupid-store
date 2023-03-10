@@ -23,6 +23,8 @@ function ProductTwo(props) {
     isCategory = true,
   } = props;
 
+  const router = useRouter();
+
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -210,7 +212,15 @@ function ProductTwo(props) {
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
-        <div className="ratings-container">
+        <div
+          className="ratings-container"
+          onClick={() => {
+            router.push({
+              pathname: `/product/${product.slug}`,
+              query: { review: true },
+            });
+          }}
+        >
           <div className="ratings-full">
             {/* // TODO  we have to consider about this */}
             {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
