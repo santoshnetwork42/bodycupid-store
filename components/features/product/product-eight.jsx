@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
@@ -20,6 +21,7 @@ function ProductEight(props) {
     addToCart,
     openQuickview,
   } = props;
+  const router = useRouter();
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -159,7 +161,15 @@ function ProductEight(props) {
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
-        <div className="ratings-container">
+        <div
+          className="ratings-container cursor-pointer"
+          onClick={() => {
+            router.push({
+              pathname: `/product/${product.slug}`,
+              query: { review: true },
+            });
+          }}
+        >
           <div className="ratings-full">
             <span
               className="ratings"
@@ -171,9 +181,9 @@ function ProductEight(props) {
           </div>
 
           {!!product.totalRatings && (
-            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+            <div className="rating-reviews">
               ( {product?.totalRatings} reviews )
-            </ALink>
+            </div>
           )}
         </div>
 

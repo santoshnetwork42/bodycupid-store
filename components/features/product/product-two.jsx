@@ -213,7 +213,7 @@ function ProductTwo(props) {
         </div>
 
         <div
-          className="ratings-container"
+          className="ratings-container cursor-pointer"
           onClick={() => {
             router.push({
               pathname: `/product/${product.slug}`,
@@ -235,9 +235,9 @@ function ProductTwo(props) {
           </div>
 
           {!!product?.totalRatings && (
-            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+            <div  className="rating-reviews">
               ( {product?.totalRatings} reviews )
-            </ALink>
+            </div>
           )}
         </div>
       </div>
