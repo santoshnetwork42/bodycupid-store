@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function RatingStar({
-  editable,
+  editable = false,
   onClick = () => {},
   value: defValue = 0,
 }) {

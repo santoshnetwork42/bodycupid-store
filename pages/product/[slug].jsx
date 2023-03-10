@@ -11,6 +11,7 @@ import RelatedProducts from "~/components/partials/product/related-products";
 import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import LinkedProducts from "~/components/partials/product/linked-product";
 
 function ProductDefault() {
   const { slug, variantId } = useRouter().query;
@@ -34,8 +35,8 @@ function ProductDefault() {
   }, [slug]);
 
   useEffect(() => {
-    if (product?.subCategoryId || product?.subCategoryId) {
-      const filter = { id: { ne: product.id }, storeId: { ne: STORE_ID } };
+    if (product?.categoryId || product?.subCategoryId) {
+      const filter = { id: { ne: product.id }, storeId: { eq: STORE_ID } };
       if (product?.subCategoryId) {
         filter.subCategoryId = { eq: product.subCategoryId };
       } else {
@@ -76,7 +77,7 @@ function ProductDefault() {
                 />
               </div>
             </div>
-
+            <LinkedProducts product={product} />
             <DescOne product={product} />
 
             <RelatedProducts products={related} />

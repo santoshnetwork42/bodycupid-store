@@ -10,6 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getProductMeta } from "~/utils/helper";
 
 function ProductEight(props) {
   const {
@@ -51,15 +52,7 @@ function ProductEight(props) {
     addToCart({ ...product, qty: 1, price: product.price });
   };
 
-  const discount = !!(product.listingPrice && product.price)
-    ? parseInt(
-        ((product.listingPrice - product.price) * 100) / product.listingPrice,
-        10
-      )
-    : 0;
-
-  const thumbImage =
-    product.images.items.find((i) => i.isThumb) || product.images.items[0];
+  const { thumbImage, discount } = getProductMeta(product);
 
   return (
     <div
