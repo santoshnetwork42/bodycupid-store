@@ -18,7 +18,6 @@ function ProductDefault() {
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
   const [selectedVariant, setVariant] = useState(variantId);
-  const ele = document.getElementById("product-review");
 
   useEffect(() => {
     API.graphql(
