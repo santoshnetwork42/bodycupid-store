@@ -174,6 +174,7 @@ export function* cartSaga() {
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
     // toast(<CartPopup product={e.payload.product} />);
+
     const { user, cart } = yield select();
     let { cart: cartResponse } = cart;
     const { data } = user;

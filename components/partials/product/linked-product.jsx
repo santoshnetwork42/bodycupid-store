@@ -53,7 +53,7 @@ function LinkedProducts({ product, addToCart, cartList }) {
   const allExist = useMemo(
     () =>
       selected.every((el) => {
-        return cartList.find((c) => c.id === el.id);
+        return cartList.some((c) => c.id === el.id);
       }),
     [selected, cartList]
   );
