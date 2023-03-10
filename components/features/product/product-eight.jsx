@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 

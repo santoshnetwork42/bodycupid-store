@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";

@@ -1,6 +1,6 @@
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
@@ -17,7 +17,9 @@ import ProductVariant from "../product-variant";
 import { deliveryRemainingTime } from "~/utils/helper";
 
 function DetailOne(props) {
-  let router = useRouter();
+  let {
+    query: { review },
+  } = useRouter();
   const {
     cartList,
     updateCart,
@@ -149,8 +151,8 @@ function DetailOne(props) {
   };
 
   useEffect(() => {
-    if(router.query?.review){
-      onReviewClick()
+    if (review) {
+      onReviewClick();
     }
   }, []);
 
