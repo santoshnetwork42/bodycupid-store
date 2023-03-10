@@ -17,7 +17,7 @@ import ProductVariant from "../product-variant";
 import { deliveryRemainingTime } from "~/utils/helper";
 
 function DetailOne(props) {
-  let {
+  const {
     query: { review },
   } = useRouter();
   const {
