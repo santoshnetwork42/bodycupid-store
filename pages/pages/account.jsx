@@ -4,86 +4,15 @@ import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { API } from "aws-amplify";
-import { useSetState } from "react-use";
 
 import ALink from "~/components/features/custom-link";
 import Addresses from "~/components/common/addresses";
-import {
-  searchOrders,
-  getUser,
-  updateUser as updateUserMutation,
-} from "~/graphql/api";
-import { formateDate, toDecimal } from "~/utils/index";
-import { removePhonePrefix } from "~/utils/helper";
-import { STORE_ID } from "~/config";
-import TokenPagination from "~/components/features/token-pagination";
+import AccountOrders from "~/components/partials/account/orders";
+import AccountDetails from "~/components/partials/account/account-details";
 
 function Account({ user }) {
   const router = useRouter();
-  const [orders, setOrders] = useState([]);
-  const [userDetail, setUser] = useSetState({ ...user });
   const [activeTab, setActiveTab] = useState(0);
-  const [totalOrder, setTotalOrder] = useState();
-  const [token, setToken] = useState(null);
-  const perPage = 3;
-
-  const getOrders = useCallback(
-    async (reset) => {
-      try {
-        const {
-          data: {
-            searchOrders: { items, total, nextToken },
-          },
-        } = await API.graphql({
-          query: searchOrders,
-          variables: {
-            filter: {
-              userId: { eq: user.username },
-              storeId: { eq: STORE_ID },
-              status: { eq: "CONFIRMED" },
-            },
-            sort: [{ field: "orderDate", direction: "desc" }],
-            limit: perPage,
-            nextToken: reset ? null : token,
-          },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
-        });
-        if (reset) {
-          setOrders(items);
-        } else {
-          setOrders([...orders, ...items]);
-        }
-        setTotalOrder(total);
-        setToken(nextToken);
-      } catch (error) {}
-    },
-    [user, orders, token]
-  );
-
-  useEffect(() => {
-    if (user && activeTab === 1 && orders.length === 0) {
-      getOrders(true);
-    }
-  }, [!!user, activeTab]);
-
-  const getUserDetails = useCallback(async () => {
-    const {
-      data: { getUser: getUserResponse },
-    } = await API.graphql({
-      query: getUser,
-      variables: { id: user.username },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
-
-    setUser(getUserResponse);
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      getUserDetails();
-    }
-  }, [!!user]);
 
   useEffect(() => {
     (async function () {
@@ -100,25 +29,6 @@ function Account({ user }) {
     router.push("/");
     return true;
   }, []);
-
-  const updateUser = useCallback(
-    async (e) => {
-      e.preventDefault();
-      await API.graphql({
-        query: updateUserMutation,
-        variables: {
-          input: {
-            id: user.id,
-            firstName: userDetail.firstName,
-            lastName: userDetail.lastName,
-          },
-        },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      return false;
-    },
-    [userDetail, user]
-  );
 
   const onActiveTabIndexChange = (index) => {
     setActiveTab(index);
@@ -220,53 +130,7 @@ function Account({ user }) {
                 </ALink>
               </TabPanel>
               <TabPanel className="tab-pane orders">
-                <div>
-                  <table className="order-table">
-                    <thead>
-                      <tr>
-                        <th className="pl-2">Order</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th className="pr-2">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {orders.map((order) => (
-                        <tr key={order.id}>
-                          <td className="order-number">
-                            <ALink href="#">#{order.code}</ALink>
-                          </td>
-                          <td className="order-date">
-                            <time>{formateDate(order.createdAt)}</time>
-                          </td>
-                          <td className="order-status">
-                            <span>{order.status}</span>
-                          </td>
-                          <td className="order-total">
-                            <span>
-                              ₹{toDecimal(order.payments.items[0]?.amount)}
-                            </span>
-                          </td>
-                          <td className="order-action">
-                            <ALink
-                              href={`/order/${order.id}`}
-                              className="btn btn-primary btn-link btn-underline"
-                            >
-                              View
-                            </ALink>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <TokenPagination
-                    onPage={() => getOrders(false)}
-                    total={totalOrder}
-                    loaded={orders?.length}
-                    nextToken={token}
-                  />
-                </div>
+                <AccountOrders />
               </TabPanel>
               <TabPanel className="tab-pane addresses">
                 <p className="mb-2">
@@ -275,98 +139,7 @@ function Account({ user }) {
                 <Addresses />
               </TabPanel>
               <TabPanel className="tab-pane account">
-                <form onSubmit={updateUser} className="form">
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <label>First Name *</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="first_name"
-                        required
-                        value={userDetail.firstName}
-                        onChange={(e) => setUser({ firstName: e.target.value })}
-                      />
-                    </div>
-                    <div className="col-sm-6">
-                      <label>Last Name *</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="last_name"
-                        required
-                        value={userDetail.lastName}
-                        onChange={(e) => setUser({ lastName: e.target.value })}
-                      />
-                    </div>
-                  </div>
-
-                  {/* <label>Display Name *</label>
-                  <input
-                    type="text"
-                    className="form-control mb-0"
-                    name="display_name"
-                    required
-                  />
-                  <small className="d-block form-text mb-7">
-                    This will be how your name will be displayed in the account
-                    section and in reviews
-                  </small> */}
-
-                  <label>Email Address *</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    required
-                    value={userDetail.email}
-                    onChange={(e) => setUser({ email: e.target.value })}
-                    disabled
-                  />
-                  <label>Phone *</label>
-                  <div className="input-tel form-control">
-                    <div className="prefix">+91</div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      maxLength={10}
-                      value={removePhonePrefix(userDetail.phone)}
-                      onChange={(e) => setUser({ phone: e.target.value })}
-                      disabled
-                    />
-                  </div>
-
-                  {/* <fieldset>
-                    <legend>Password Change</legend>
-                    <label>
-                      Current password (leave blank to leave unchanged)
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      name="current_password"
-                    />
-
-                    <label>New password (leave blank to leave unchanged)</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      name="new_password"
-                    />
-
-                    <label>Confirm new password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      name="confirm_password"
-                    />
-                  </fieldset> */}
-
-                  <button type="submit" className="btn btn-primary">
-                    SAVE CHANGES
-                  </button>
-                </form>
+                <AccountDetails />
               </TabPanel>
               <TabPanel className="tab-pane"></TabPanel>
             </div>
