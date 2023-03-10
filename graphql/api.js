@@ -1116,6 +1116,7 @@ export const searchOrders = /* GraphQL */ `
         priority
         orderDate
         status
+        createdAt
         payments {
           items {
             id
