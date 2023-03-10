@@ -39,7 +39,7 @@ function Account({ user }) {
           query: searchOrders,
           variables: {
             filter: {
-              userId: { eq: user.id },
+              userId: { eq: user.username },
               storeId: { eq: STORE_ID },
               status: { eq: "CONFIRMED" },
             },
@@ -62,17 +62,17 @@ function Account({ user }) {
   );
 
   useEffect(() => {
-    if (activeTab === 1 && orders.length === 0) {
+    if (user && activeTab === 1 && orders.length === 0) {
       getOrders(true);
     }
-  }, [activeTab]);
+  }, [!!user, activeTab]);
 
   const getUserDetails = useCallback(async () => {
     const {
       data: { getUser: getUserResponse },
     } = await API.graphql({
       query: getUser,
-      variables: { id: user.id },
+      variables: { id: user.username },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
 
