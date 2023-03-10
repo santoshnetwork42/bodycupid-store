@@ -27,7 +27,6 @@ function CartMenu(props) {
   };
 
   const removeCart = (item) => {
-    delete item.variantId;
     removeFromCart(item);
   };
   const onChangeQty = (item, qty) => {

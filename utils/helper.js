@@ -47,18 +47,22 @@ export const getProductMeta = (product) => {
   if (!product) return {};
   const { variants = {} } = product;
   const { items = [] } = variants;
+
   const images = product?.images.items.sort((a, b) => a.position - b.position);
+  const thumbImage = images?.find((i) => i.isThumb) ||
+    images[0] || { imageKey: product.imageUrl };
+
   const discount = !!(product.listingPrice && product.price)
     ? parseInt(
         ((product.listingPrice - product.price) * 100) / product.listingPrice,
         10
       )
     : 0;
+
   const firstVariantId = items.sort((a, b) => a.position - b.position)[0]?.id;
 
   return {
-    thumbImage: images?.find((i) => i.isThumb) ||
-      images[0] || { imageKey: product.imageUrl },
+    thumbImage,
     discount,
     firstVariantId,
   };
