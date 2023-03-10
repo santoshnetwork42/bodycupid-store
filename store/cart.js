@@ -270,7 +270,11 @@ export function* cartSaga() {
     const { data: userResponse } = user;
     if (cartResponse && userResponse) {
       const { products } = cartResponse;
-      const { id, variantId } = e.payload.product;
+      let curProduct = e.payload.product;
+      if (!e.payload.product.variantId) {
+        curProduct.variantId = getFirstVariantId(curProduct);
+      }
+      const { id, variantId } = curProduct;
 
       const product = products.find(
         (p) => p.productId === id && (!p.variantId || variantId === p.variantId)

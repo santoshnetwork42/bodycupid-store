@@ -27,6 +27,7 @@ function CartMenu(props) {
   };
 
   const removeCart = (item) => {
+    delete item.variantId;
     removeFromCart(item);
   };
   const onChangeQty = (id, variantId, qty) => {
@@ -73,11 +74,8 @@ function CartMenu(props) {
           <>
             <div className="products scrollable">
               {cartList.map((item, index) => (
-                <div   key={"cart-menu-product-" + index}>
-                  <div
-                    className="product product-cart"
-                  
-                  >
+                <div key={"cart-menu-product-" + index}>
+                  <div className="product product-cart">
                     <figure className="product-media pure-media">
                       <ALink href={"/product/" + item.slug}>
                         <img

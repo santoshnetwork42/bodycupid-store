@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
@@ -14,47 +14,41 @@ function LinkedProducts({ product, addToCart, cartList }) {
   const [linkedProduct, setLinkedProduct] = useState([]);
   const router = useRouter();
 
-  useEffect(() => {
-    API.graphql({
+  const getLinkedProduct = useCallback(async () => {
+    const {
+      data: {
+        byProductIdLinkedProduct: { items: response },
+      },
+    } = await API.graphql({
       query: getLinkedProducts,
       variables: { productId: product.id },
-    })
-      .then(
-        ({
-          data: {
-            byProductIdLinkedProduct: { items: response },
-          },
-        }) => {
-          if (response.length) {
-            const data = response.map((lp) => {
-              return { ...lp.linkedProduct, checked: true };
-            });
-            const productData = [{ ...product, checked: true }, ...data].map(
-              (d) => {
-                return {
-                  ...d,
-                  thumbImage: getProductMeta(d).thumbImage,
-                };
-              }
-            );
-            setLinkedProduct(productData);
-          }
-        }
-      )
-      .catch((err) => {
-        console.log("err", err);
-      });
+    });
+    if (response.length) {
+      const data = response.map((lp) => lp.linkedProduct);
+
+      const productData = [product, ...data].map((d) => ({
+        ...d,
+        thumbImage: getProductMeta(d).thumbImage,
+        checked: true,
+      }));
+
+      setLinkedProduct(productData);
+    }
+  });
+
+  useEffect(() => {
+    if (product) {
+      getLinkedProduct();
+    }
   }, [product]);
 
-  const selected = useMemo(() => {
-    return linkedProduct.filter((lp) => lp.checked);
-  }, [linkedProduct]);
+  const selected = useMemo(
+    () => linkedProduct.filter((lp) => lp.checked),
+    [linkedProduct]
+  );
 
   const allExist = useMemo(
-    () =>
-      selected.every((el) => {
-        return cartList.some((c) => c.id === el.id);
-      }),
+    () => selected.every((el) => cartList.some((c) => c.id === el.id)),
     [selected, cartList]
   );
 
