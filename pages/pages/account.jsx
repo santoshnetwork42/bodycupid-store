@@ -17,30 +17,55 @@ import {
 import { formateDate, toDecimal } from "~/utils/index";
 import { removePhonePrefix } from "~/utils/helper";
 import { STORE_ID } from "~/config";
+import TokenPagination from "~/components/features/token-pagination";
 
 function Account({ user }) {
   const router = useRouter();
   const [orders, setOrders] = useState([]);
   const [userDetail, setUser] = useSetState({ ...user });
   const [activeTab, setActiveTab] = useState(0);
-  const getOrders = useCallback(async () => {
-    const {
-      data: { searchOrders: listOrdersResponse },
-    } = await API.graphql({
-      query: searchOrders,
-      variables: {
-        filter: {
-          userId: { eq: user.id },
-          storeId: { eq: STORE_ID },
-          status: { eq: "CONFIRMED" },
-        },
-        sort: [{ field: "orderDate", direction: "desc" }],
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
+  const [totalOrder, setTotalOrder] = useState();
+  const [token, setToken] = useState(null);
+  const perPage = 3;
 
-    setOrders(listOrdersResponse.items);
-  }, [user]);
+  const getOrders = useCallback(
+    async (reset) => {
+      try {
+        const {
+          data: {
+            searchOrders: { items, total, nextToken },
+          },
+        } = await API.graphql({
+          query: searchOrders,
+          variables: {
+            filter: {
+              userId: { eq: user.id },
+              storeId: { eq: STORE_ID },
+              status: { eq: "CONFIRMED" },
+            },
+            sort: [{ field: "orderDate", direction: "desc" }],
+            limit: perPage,
+            nextToken: reset ? null : token,
+          },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+        if (reset) {
+          setOrders(items);
+        } else {
+          setOrders([...orders, ...items]);
+        }
+        setTotalOrder(total);
+        setToken(nextToken);
+      } catch (error) {}
+    },
+    [user, orders, token]
+  );
+
+  useEffect(() => {
+    if (activeTab === 1 && orders.length === 0) {
+      getOrders(true);
+    }
+  }, [activeTab]);
 
   const getUserDetails = useCallback(async () => {
     const {
@@ -56,7 +81,6 @@ function Account({ user }) {
 
   useEffect(() => {
     if (user) {
-      getOrders();
       getUserDetails();
     }
   }, [!!user]);
@@ -196,45 +220,53 @@ function Account({ user }) {
                 </ALink>
               </TabPanel>
               <TabPanel className="tab-pane orders">
-                <table className="order-table">
-                  <thead>
-                    <tr>
-                      <th className="pl-2">Order</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Total</th>
-                      <th className="pr-2">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {orders.map((order) => (
-                      <tr key={order.id}>
-                        <td className="order-number">
-                          <ALink href="#">#{order.code}</ALink>
-                        </td>
-                        <td className="order-date">
-                          <time>{formateDate(order.createdAt)}</time>
-                        </td>
-                        <td className="order-status">
-                          <span>{order.status}</span>
-                        </td>
-                        <td className="order-total">
-                          <span>
-                            ₹{toDecimal(order.payments.items[0]?.amount)}
-                          </span>
-                        </td>
-                        <td className="order-action">
-                          <ALink
-                            href={`/order/${order.id}`}
-                            className="btn btn-primary btn-link btn-underline"
-                          >
-                            View
-                          </ALink>
-                        </td>
+                <div>
+                  <table className="order-table">
+                    <thead>
+                      <tr>
+                        <th className="pl-2">Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th className="pr-2">Actions</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {orders.map((order) => (
+                        <tr key={order.id}>
+                          <td className="order-number">
+                            <ALink href="#">#{order.code}</ALink>
+                          </td>
+                          <td className="order-date">
+                            <time>{formateDate(order.createdAt)}</time>
+                          </td>
+                          <td className="order-status">
+                            <span>{order.status}</span>
+                          </td>
+                          <td className="order-total">
+                            <span>
+                              ₹{toDecimal(order.payments.items[0]?.amount)}
+                            </span>
+                          </td>
+                          <td className="order-action">
+                            <ALink
+                              href={`/order/${order.id}`}
+                              className="btn btn-primary btn-link btn-underline"
+                            >
+                              View
+                            </ALink>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <TokenPagination
+                    onPage={() => getOrders(false)}
+                    total={totalOrder}
+                    loaded={orders?.length}
+                    nextToken={token}
+                  />
+                </div>
               </TabPanel>
               <TabPanel className="tab-pane addresses">
                 <p className="mb-2">
