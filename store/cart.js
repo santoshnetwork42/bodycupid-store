@@ -186,10 +186,10 @@ export function* cartSaga() {
 
       if (!cartResponse) {
         ({
-          data: { createShoppingCart: cartResponse },
+          data: { createStoreShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
-          variables: { input: { userId: data?.id, storeId: STORE_ID } },
+          variables: { storeId: STORE_ID },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         }));
         cartResponse.products = [];
@@ -247,12 +247,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-                id: response.id,
-                shoppingcartId: id,
-                productId: response.productId,
-                variantId: response.variantId,
-                quantity: response.quantity,
-              }
+              id: response.id,
+              shoppingcartId: id,
+              productId: response.productId,
+              variantId: response.variantId,
+              quantity: response.quantity,
+            }
             : p
         );
 

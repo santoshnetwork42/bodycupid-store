@@ -992,15 +992,14 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 `;
 
 export const createShoppingCart = /* GraphQL */ `
-  mutation CreateShoppingCart(
-    $input: CreateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    createShoppingCart(input: $input, condition: $condition) {
+  mutation CreateStoreShoppingCart($storeId: ID!) {
+    createStoreShoppingCart(storeId: $storeId) {
       id
       storeId
       userId
       couponCodeId
+      createdAt
+      updatedAt
     }
   }
 `;
