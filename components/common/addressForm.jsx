@@ -1,14 +1,22 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useSetState } from "react-use";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { getProperAddress, removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
+import { getZipCode } from "~/graphql/api";
 
 const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
-  const [address, setAddress] = useSetState(defaultAddress || {});
+  const [address, setAddress] = useSetState(
+    defaultAddress || {
+      state: "AN",
+    }
+  );
+
+  const [validatePincodes, setValidatePincodes] = useState({});
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (onAddress) {
@@ -23,35 +31,81 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
         ...defaultAddress,
         firstName: defaultAddress.name.split(" ")[0],
         lastName: defaultAddress.name.split(" ")[1],
+        phone: defaultAddress?.phone.slice(3),
       });
     }
   }, [defaultAddress]);
+
+  const checkValidation = async () => {
+    const phoneregEx = /^\d{10}$/;
+    const isValid = await validateZipCode(address.pinCode);
+    if (!phoneregEx.test(address.phone) && !isValid) {
+      setErrors({
+        phone: "Enter valid phone number",
+        zipcode: "Enter valid pincode",
+      });
+      return false;
+    } else if (!phoneregEx.test(address.phone)) {
+      setErrors({
+        phone: "Enter valid phone number",
+      });
+      return false;
+    } else if (!isValid) {
+      setErrors({
+        zipcode: "Enter valid pincode",
+      });
+      return false;
+    } else {
+      setErrors({});
+      return true;
+    }
+  };
 
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
       try {
-        if (user) {
-          let tempAddress = getProperAddress(address);
-          const key = address.id ? "updateUserAddress" : "createUserAddress";
-          const {
-            data: { [key]: response },
-          } = await API.graphql({
-            query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: { ...tempAddress, userID: user.id } },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
-          });
-          onSubmit(response);
-        } else {
-          onSubmit(tempAddress);
+        const isValid = await checkValidation();
+        if (isValid) {
+          if (user) {
+            let tempAddress = getProperAddress(address);
+            const key = address.id ? "updateUserAddress" : "createUserAddress";
+            const {
+              data: { [key]: response },
+            } = await API.graphql({
+              query: address.id ? updateUserAddress : createUserAddress,
+              variables: { input: { ...tempAddress, userID: user.id } },
+              authMode: "AMAZON_COGNITO_USER_POOLS",
+            });
+            onSubmit(response);
+          } else {
+            onSubmit(tempAddress);
+          }
         }
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
       return false;
     },
-    [address, user, onSubmit]
+    [address, user, onSubmit, errors]
   );
+
+  const validateZipCode = async (zipcode) => {
+    try {
+      if (!validatePincodes.hasOwnProperty(zipcode)) {
+        const {
+          data: { getZipCode: response },
+        } = await API.graphql(graphqlOperation(getZipCode, { id: zipcode }));
+
+        setValidatePincodes({
+          ...validatePincodes,
+          [zipcode]: !!response,
+        });
+        return !!response;
+      } else {
+        return validatePincodes[zipcode];
+      }
+    } catch (error) {}
+  };
+
   return (
     <div>
       <form className="form" onSubmit={addAddress}>
@@ -95,8 +149,11 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                     maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
-                    onChange={(e) => setAddress({ phone: e.target.value })}
-                    onBlur={(e) => setAddress({ phone: e.target.value.trim() })}
+                    onChange={(e) =>
+                      setAddress({
+                        phone: e.target.value.replaceAll(/[^0-9]+/g, "").trim(),
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -108,30 +165,9 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   name="email-address"
                   required
                   value={address.email}
-                  onChange={(e) => setAddress({ email: e.target.value })}
-                  onBlur={(e) => setAddress({ email: e.target.value.trim() })}
+                  onChange={(e) => setAddress({ email: e.target.value.trim() })}
                 />
               </div>
-              {/* <div className="col-xs-12">
-            <label>Country / Region *</label>
-            <div className="select-box">
-              <select
-                name="country"
-                className="form-control"
-                defaultValue="in"
-                value={address.country}
-                onChange={(e) =>
-                  setAddress({ country: e.target.value })
-                }
-              >
-                <option value="in">India</option>
-                <option value="us">United States (US)</option>
-                <option value="uk"> United Kingdom</option>
-                <option value="fr">France</option>
-                <option value="aus">Austria</option>
-              </select>
-            </div>
-          </div> */}
             </div>
 
             <label>Street Address *</label>
@@ -180,6 +216,7 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   type="text"
                   className="form-control"
                   name="city"
+                  placeholder="Your city"
                   required
                   value={address.city}
                   onChange={(e) => setAddress({ city: e.target.value })}
@@ -193,7 +230,9 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   className="form-control"
                   required
                   value={address.state}
-                  onChange={(e) => setAddress({ state: e.target.value })}
+                  onChange={(e) => {
+                    setAddress({ state: e.target.value });
+                  }}
                 >
                   {States.map((s) => (
                     <option key={s.value} value={s.value}>
@@ -210,21 +249,35 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   type="text"
                   className="form-control"
                   name="pincode"
+                  placeholder="Your pincode"
                   required
                   value={address.pinCode}
                   onChange={(e) => setAddress({ pinCode: e.target.value })}
-                  onBlur={(e) => setAddress({ pinCode: e.target.value.trim() })}
+                  onBlur={(e) => {
+                    setAddress({ pinCode: e.target.value.trim() });
+                  }}
                 />
               </div>
             </div>
           </div>
+          {Object.keys(errors).length > 0 && (
+            <div className="overflow-hidden mb-4">
+              <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                <ul className="m-0">
+                  {Object.values(errors).map((val) => {
+                    return <li>{val}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
 
           {!onAddress && (
             <button
               type="submit"
               className="btn btn-dark btn-rounded btn-order"
             >
-              Add Address
+              {address.id ? "Save" : "Add Address"}
             </button>
           )}
         </div>
