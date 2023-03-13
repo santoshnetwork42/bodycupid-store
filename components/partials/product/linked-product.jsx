@@ -73,17 +73,14 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
     openQuickview(slug);
   };
 
-  const comparePrice = () => {
-    if (
-      getTotalPriceByField(selected, "listingPrice") >
-      getTotalPriceByField(selected, "price")
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  console.log(selected);
+  const totalPrice = useMemo(() => {
+    return toDecimal(getTotalPriceByField(selected, "price"));
+  }, [selected]);
+
+  const listingPrice = useMemo(() => {
+    return toDecimal(getTotalPriceByField(selected, "listingPrice"));
+  }, [selected]);
+
   if (!linkedProduct?.length) return <></>;
   return (
     <div className="mb-6">
@@ -113,7 +110,7 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
 
                 <div className="product-price">
                   <ins className="new-price">₹{toDecimal(lp.price || 0)}</ins>
-                  {comparePrice() && (
+                  {lp.listingPrice > lp.price && (
                     <del className="old-price ml-1">
                       ₹{toDecimal(lp.listingPrice || 0)}
                     </del>
@@ -129,14 +126,9 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
           <div className="ml-8 total-wrapper product-detail">
             <div className="mb-3">
               Total price:
-              <ins className="new-price ml-1 mr-1">
-                ₹{toDecimal(getTotalPriceByField(selected, "price"))}
-              </ins>{" "}
-              {comparePrice() && (
-                <del className="old-price">
-                  ( ₹{toDecimal(getTotalPriceByField(selected, "listingPrice"))}
-                  )
-                </del>
+              <ins className="new-price ml-1 mr-1">₹{totalPrice}</ins>{" "}
+              {listingPrice > totalPrice && (
+                <del className="old-price">( ₹{listingPrice})</del>
               )}
               <span className="new-price ml-2"></span>
             </div>
