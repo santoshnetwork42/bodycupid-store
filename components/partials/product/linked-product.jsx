@@ -9,8 +9,10 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getTotalPriceByField } from "~/utils/helper";
 import RatingStar from "./rating-star";
+import ALink from "~/components/features/custom-link";
+import { modalActions } from "~/store/modal";
 
-function LinkedProducts({ product, addToCart, cartList }) {
+function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
   const [linkedProduct, setLinkedProduct] = useState([]);
   const router = useRouter();
 
@@ -67,6 +69,18 @@ function LinkedProducts({ product, addToCart, cartList }) {
     );
   };
 
+  const showQuickviewHandler = (slug) => {
+    openQuickview(slug);
+  };
+
+  const totalPrice = useMemo(() => {
+    return getTotalPriceByField(selected, "price");
+  }, [selected]);
+
+  const listingPrice = useMemo(() => {
+    return getTotalPriceByField(selected, "listingPrice");
+  }, [selected]);
+
   if (!linkedProduct?.length) return <></>;
   return (
     <div className="mb-6">
@@ -75,38 +89,50 @@ function LinkedProducts({ product, addToCart, cartList }) {
       </h2>
       <div className="d-flex d-sm-column linked-product-wrapper align-items-center justify-content-center w-full">
         {selected.map((lp, i) => (
-          <div
-            key={lp.id}
-            className="d-flex d-sm-column mt-sm-2 product align-items-center ml-6 "
+          <ALink
+            href="#"
+            onClick={() =>
+              lp.id !== product.id && showQuickviewHandler(lp.slug)
+            }
           >
-            {i > 0 && <i className="fas fa-plus mr-6"></i>}
-            <div className="image-wrapper">
-              <img
-                src={getPublicImageURL(lp?.thumbImage?.imageKey)}
-                alt={lp?.thumbImage?.alt}
-                width="80"
-                height="88"
-              />
+            <div
+              key={lp.id}
+              className="d-flex d-sm-column mt-sm-2 product align-items-center ml-6 "
+            >
+              {i > 0 && <i className="fas fa-plus mr-6"></i>}
+              <div className="image-wrapper">
+                <img
+                  src={getPublicImageURL(lp?.thumbImage?.imageKey)}
+                  alt={lp?.thumbImage?.alt}
+                  width="80"
+                  height="88"
+                />
 
-              <div className="product-price">
-                <ins className="new-price">₹{toDecimal(lp.price || 0)}</ins>
+                <div className="product-price">
+                  <ins className="new-price">₹{toDecimal(lp.price || 0)}</ins>
+                  {lp.listingPrice > lp.price && (
+                    <del className="old-price ml-1">
+                      ₹{toDecimal(lp.listingPrice || 0)}
+                    </del>
+                  )}
+                </div>
+
+                <RatingStar value={lp.rating} />
               </div>
-              <RatingStar value={lp.rating} />
             </div>
-          </div>
+          </ALink>
         ))}
         {selected.length ? (
           <div className="ml-8 total-wrapper product-detail">
             <div className="mb-3">
               Total price:
               <ins className="new-price ml-1 mr-1">
-                ₹{toDecimal(getTotalPriceByField(selected, "price"))}
-              </ins>
-              ({" "}
-              <del className="old-price">
-                ₹{toDecimal(getTotalPriceByField(selected, "listingPrice"))}
-              </del>
-              )<span className="new-price ml-2"></span>
+                ₹{toDecimal(totalPrice)}
+              </ins>{" "}
+              {listingPrice > totalPrice && (
+                <del className="old-price">( ₹{toDecimal(listingPrice)})</del>
+              )}
+              <span className="new-price ml-2"></span>
             </div>
             {allExist && (
               <button
@@ -168,4 +194,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   addToCart: cartActions.addToCart,
+  openQuickview: modalActions.openQuickview,
 })(LinkedProducts);
