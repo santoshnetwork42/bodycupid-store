@@ -1,22 +1,30 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { getProperAddress, removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import { getZipCode } from "~/graphql/api";
+import AlertPopup from "../features/product/common/alert-popup";
 
 const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
+  const { firstName, lastName, email, phone } = user;
   const [address, setAddress] = useSetState(
-    defaultAddress || {
+    {
+      ...defaultAddress,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
       state: "AN",
-    }
+    } || {}
   );
 
   const [validatePincodes, setValidatePincodes] = useState({});
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     if (onAddress) {
@@ -39,21 +47,15 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
   const checkValidation = async () => {
     const phoneregEx = /^\d{10}$/;
     const isValid = await validateZipCode(address.pinCode);
-    if (!phoneregEx.test(address.phone) && !isValid) {
-      setErrors({
-        phone: "Enter valid phone number",
-        zipcode: "Enter valid pincode",
-      });
-      return false;
-    } else if (!phoneregEx.test(address.phone)) {
-      setErrors({
-        phone: "Enter valid phone number",
-      });
-      return false;
-    } else if (!isValid) {
-      setErrors({
-        zipcode: "Enter valid pincode",
-      });
+    const error = {};
+    if (!phoneregEx.test(removePhonePrefix(address.phone))) {
+      error.phone = "Enter valid phone number";
+    }
+    if (!isValid) {
+      error.zipcode = "Enter valid pincode";
+    }
+    if (Object.keys(error).length > 0) {
+      setErrors(error);
       return false;
     } else {
       setErrors({});
@@ -82,7 +84,9 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
             onSubmit(tempAddress);
           }
         }
-      } catch (error) {}
+      } catch ({ errors }) {
+        toast(<AlertPopup message={errors[0].message} status="error" />);
+      }
       return false;
     },
     [address, user, onSubmit, errors]
@@ -103,7 +107,9 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
       } else {
         return validatePincodes[zipcode];
       }
-    } catch (error) {}
+    } catch (error) {
+      toast(<AlertPopup message={"Something went wrong"} status="error" />);
+    }
   };
 
   return (
@@ -260,7 +266,8 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
               </div>
             </div>
           </div>
-          {Object.keys(errors).length > 0 && (
+
+          {!!errors && (
             <div className="overflow-hidden mb-4">
               <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                 <ul className="m-0">
@@ -277,7 +284,7 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
               type="submit"
               className="btn btn-dark btn-rounded btn-order"
             >
-              {address.id ? "Save" : "Add Address"}
+              {address.id ? "Save Address" : "Add Address"}
             </button>
           )}
         </div>
