@@ -58,7 +58,7 @@ function ProductTwo(props) {
 
   const isCartItem = useMemo(() => {
     if (cartList.length) {
-      const isCartItem = cartList.findIndex((cl) => cl.id === product.id);
+      const isCartItem = cartList.some((cl) => cl.id === product.id);
       return isCartItem;
     }
   }, [cartList]);
@@ -127,14 +127,14 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action-vertical">
-          <a
+          <ALink
             href="#"
             className="btn-product-icon btn-cart"
-            title="Add to cart"
-            onClick={addToCartHandler}
+            title="Quick View"
+            onClick={showQuickviewHandler}
           >
-            <i className="d-icon-bag"></i>
-          </a>
+            <i className="d-icon-search"></i>
+          </ALink>
           <a
             href="#"
             className="btn-product-icon btn-wishlist"
@@ -204,18 +204,24 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action">
-          <ALink
-            href="#"
-            className="btn-product btn-quickview m-0"
-            title="Quick View"
-            onClick={
-              product?.variants?.items?.length > 0
-                ? showQuickviewHandler
-                : addToCartHandler
-            }
-          >
-            {isCartItem > -1 ? "View Cart" : " Add to cart"}
-          </ALink>
+          {isCartItem ? (
+            <ALink
+              href="/pages/cart"
+              className="btn-product btn-quickview m-0"
+              title="View Cart"
+            >
+              View Cart
+            </ALink>
+          ) : (
+            <ALink
+              href="#"
+              className="btn-product btn-quickview m-0"
+              title="Add to cart"
+              onClick={addToCartHandler}
+            >
+              Add to cart
+            </ALink>
+          )}
         </div>
       </div>
     </div>
