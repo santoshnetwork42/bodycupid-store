@@ -56,9 +56,10 @@ function ProductTwo(props) {
     });
   };
 
-  const isCartItem = useMemo(() => {
-    return cartList.some((cl) => cl.id === product.id);
-  }, [cartList]);
+  const isCartItem = useMemo(
+    () => cartList.some((cl) => cl.id === product.id),
+    [cartList]
+  );
 
   const { thumbImage, discount } = getProductMeta(product);
 
