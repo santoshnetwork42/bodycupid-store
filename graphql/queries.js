@@ -94,6 +94,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -224,6 +225,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -285,6 +287,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -326,6 +329,7 @@ export const getUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -452,6 +456,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -511,6 +516,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -648,6 +654,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -757,6 +764,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -905,6 +913,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -1014,6 +1023,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -1125,6 +1135,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1293,6 +1304,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -1662,6 +1674,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1792,6 +1805,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1853,6 +1867,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1894,6 +1909,7 @@ export const getUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -2020,6 +2036,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -2079,6 +2096,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -2197,6 +2215,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -2273,6 +2292,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -2441,6 +2461,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -2814,6 +2835,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -3110,6 +3132,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -3462,6 +3485,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -3538,6 +3562,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -3706,6 +3731,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -4123,6 +4149,7 @@ export const getUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -4199,6 +4226,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -4367,6 +4395,7 @@ export const getUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -4832,6 +4861,7 @@ export const listUsers = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -4989,6 +5019,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -5044,6 +5075,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -5138,6 +5170,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -5193,6 +5226,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -5548,6 +5582,7 @@ export const listUsers = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -5686,6 +5721,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6055,6 +6091,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -6282,6 +6319,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6548,6 +6586,7 @@ export const listUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6916,6 +6955,7 @@ export const bystoreIdUser = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -7073,6 +7113,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7128,6 +7169,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -7222,6 +7264,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7277,6 +7320,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -7632,6 +7676,7 @@ export const bystoreIdUser = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -7770,6 +7815,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8139,6 +8185,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -8366,6 +8413,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8632,6 +8680,7 @@ export const bystoreIdUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -9000,6 +9049,7 @@ export const searchUsers = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -9157,6 +9207,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -9212,6 +9263,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -9306,6 +9358,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -9361,6 +9414,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -9716,6 +9770,7 @@ export const searchUsers = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -9854,6 +9909,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -10223,6 +10279,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -10450,6 +10507,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -10716,6 +10774,7 @@ export const searchUsers = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11165,6 +11224,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11295,6 +11355,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11356,6 +11417,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11397,6 +11459,7 @@ export const getProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -11523,6 +11586,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -11582,6 +11646,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -11666,6 +11731,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11765,6 +11831,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -11889,6 +11956,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11969,6 +12037,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -12085,6 +12154,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12200,6 +12270,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12253,6 +12324,7 @@ export const getProductCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -12455,6 +12527,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12568,6 +12641,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12689,6 +12763,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12768,6 +12843,7 @@ export const getProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -12867,6 +12943,7 @@ export const getProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -13077,6 +13154,7 @@ export const getProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -13321,6 +13399,7 @@ export const listProductCategories = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -13480,6 +13559,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13610,6 +13690,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13671,6 +13752,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13712,6 +13794,7 @@ export const listProductCategories = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -13838,6 +13921,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -13897,6 +13981,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -13964,6 +14049,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -14044,6 +14130,7 @@ export const listProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -14160,6 +14247,7 @@ export const listProductCategories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -14356,6 +14444,7 @@ export const bynameProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -14515,6 +14604,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -14645,6 +14735,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -14706,6 +14797,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -14747,6 +14839,7 @@ export const bynameProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -14873,6 +14966,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -14932,6 +15026,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -14999,6 +15094,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15079,6 +15175,7 @@ export const bynameProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15195,6 +15292,7 @@ export const bynameProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -15391,6 +15489,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -15550,6 +15649,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15680,6 +15780,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15741,6 +15842,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15782,6 +15884,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -15908,6 +16011,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -15967,6 +16071,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -16034,6 +16139,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -16114,6 +16220,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -16230,6 +16337,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -16426,6 +16534,7 @@ export const byslugProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -16585,6 +16694,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -16715,6 +16825,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -16776,6 +16887,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -16817,6 +16929,7 @@ export const byslugProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -16943,6 +17056,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -17002,6 +17116,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -17069,6 +17184,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17149,6 +17265,7 @@ export const byslugProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17265,6 +17382,7 @@ export const byslugProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -17461,6 +17579,7 @@ export const searchProductCategories = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -17620,6 +17739,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17750,6 +17870,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17811,6 +17932,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17852,6 +17974,7 @@ export const searchProductCategories = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -17978,6 +18101,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -18037,6 +18161,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -18104,6 +18229,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18184,6 +18310,7 @@ export const searchProductCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18300,6 +18427,7 @@ export const searchProductCategories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -18435,6 +18563,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18565,6 +18694,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18626,6 +18756,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18667,6 +18798,7 @@ export const getProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -18793,6 +18925,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -18852,6 +18985,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -19019,6 +19153,7 @@ export const getProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -19178,6 +19313,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19308,6 +19444,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19369,6 +19506,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19410,6 +19548,7 @@ export const getProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -19536,6 +19675,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -19595,6 +19735,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -19662,6 +19803,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19742,6 +19884,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19858,6 +20001,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -19952,6 +20096,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20051,6 +20196,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -20175,6 +20321,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20255,6 +20402,7 @@ export const getProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20371,6 +20519,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -20486,6 +20635,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -20539,6 +20689,7 @@ export const getProductSubCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -20741,6 +20892,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -20854,6 +21006,7 @@ export const getProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21042,6 +21195,7 @@ export const listProductSubCategories = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -21219,6 +21373,7 @@ export const listProductSubCategories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21382,6 +21537,7 @@ export const listProductSubCategories = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -21559,6 +21715,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -21654,6 +21811,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -21784,6 +21942,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -21845,6 +22004,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -21886,6 +22046,7 @@ export const listProductSubCategories = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -22012,6 +22173,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -22071,6 +22233,7 @@ export const listProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -22255,6 +22418,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -22432,6 +22596,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -22595,6 +22760,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -22772,6 +22938,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -22867,6 +23034,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -22997,6 +23165,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -23058,6 +23227,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -23099,6 +23269,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -23225,6 +23396,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -23284,6 +23456,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -23468,6 +23641,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -23645,6 +23819,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -23808,6 +23983,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -23985,6 +24161,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24080,6 +24257,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24210,6 +24388,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24271,6 +24450,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24312,6 +24492,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -24438,6 +24619,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -24497,6 +24679,7 @@ export const bynameProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -24681,6 +24864,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -24858,6 +25042,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -25021,6 +25206,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -25198,6 +25384,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25293,6 +25480,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25423,6 +25611,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25484,6 +25673,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25525,6 +25715,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -25651,6 +25842,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -25710,6 +25902,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -25894,6 +26087,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -26071,6 +26265,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -26234,6 +26429,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -26411,6 +26607,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26506,6 +26703,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26636,6 +26834,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26697,6 +26896,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26738,6 +26938,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -26864,6 +27065,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -26923,6 +27125,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -27107,6 +27310,7 @@ export const searchProductSubCategories = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -27284,6 +27488,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -27447,6 +27652,7 @@ export const searchProductSubCategories = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -27624,6 +27830,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27719,6 +27926,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27849,6 +28057,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27910,6 +28119,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27951,6 +28161,7 @@ export const searchProductSubCategories = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -28077,6 +28288,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -28136,6 +28348,7 @@ export const searchProductSubCategories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -28244,6 +28457,7 @@ export const getStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28343,6 +28557,7 @@ export const getStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -28467,6 +28682,7 @@ export const getStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28547,6 +28763,7 @@ export const getStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28663,6 +28880,7 @@ export const getStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -28778,6 +28996,7 @@ export const getStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -28831,6 +29050,7 @@ export const getStore = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -29033,6 +29253,7 @@ export const getStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -29146,6 +29367,7 @@ export const getStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -29267,6 +29489,7 @@ export const listStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29397,6 +29620,7 @@ export const listStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29458,6 +29682,7 @@ export const listStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29499,6 +29724,7 @@ export const listStores = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -29625,6 +29851,7 @@ export const listStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -29684,6 +29911,7 @@ export const listStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -29805,6 +30033,7 @@ export const searchStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29935,6 +30164,7 @@ export const searchStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29996,6 +30226,7 @@ export const searchStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30037,6 +30268,7 @@ export const searchStores = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -30163,6 +30395,7 @@ export const searchStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -30222,6 +30455,7 @@ export const searchStores = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -30346,6 +30580,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30476,6 +30711,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30537,6 +30773,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30578,6 +30815,7 @@ export const getWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -30704,6 +30942,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -30763,6 +31002,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -30865,6 +31105,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30995,6 +31236,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -31056,6 +31298,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -31097,6 +31340,7 @@ export const getWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -31223,6 +31467,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -31282,6 +31527,7 @@ export const getWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -31458,6 +31704,7 @@ export const listWarehouses = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -31682,6 +31929,7 @@ export const listWarehouses = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -31932,6 +32180,7 @@ export const bystoreIdwarehouse = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -32156,6 +32405,7 @@ export const bystoreIdwarehouse = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -32406,6 +32656,7 @@ export const searchWarehouses = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -32630,6 +32881,7 @@ export const searchWarehouses = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -32839,6 +33091,7 @@ export const getProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33002,6 +33255,7 @@ export const getProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -33179,6 +33433,7 @@ export const getProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -33290,6 +33545,7 @@ export const getProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33369,6 +33625,7 @@ export const getProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -33468,6 +33725,7 @@ export const getProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33678,6 +33936,7 @@ export const getProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -33901,6 +34160,7 @@ export const getProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -34010,6 +34270,7 @@ export const getProductInventory = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -34369,6 +34630,7 @@ export const getProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -34590,6 +34852,7 @@ export const getProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -34750,6 +35013,7 @@ export const listProductInventories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -34849,6 +35113,7 @@ export const listProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -34973,6 +35238,7 @@ export const listProductInventories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35053,6 +35319,7 @@ export const listProductInventories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35169,6 +35436,7 @@ export const listProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -35284,6 +35552,7 @@ export const listProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -35337,6 +35606,7 @@ export const listProductInventories = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -35539,6 +35809,7 @@ export const listProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -35652,6 +35923,7 @@ export const listProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -35764,6 +36036,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35863,6 +36136,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -35987,6 +36261,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36067,6 +36342,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36183,6 +36459,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -36298,6 +36575,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -36351,6 +36629,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -36553,6 +36832,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -36666,6 +36946,7 @@ export const bywarehouseIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -36778,6 +37059,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36877,6 +37159,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -37001,6 +37284,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37081,6 +37365,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37197,6 +37482,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -37312,6 +37598,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -37365,6 +37652,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -37567,6 +37855,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -37680,6 +37969,7 @@ export const byproductIdProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -37792,6 +38082,7 @@ export const searchProductInventories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37891,6 +38182,7 @@ export const searchProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38015,6 +38307,7 @@ export const searchProductInventories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -38095,6 +38388,7 @@ export const searchProductInventories = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -38211,6 +38505,7 @@ export const searchProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38326,6 +38621,7 @@ export const searchProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38379,6 +38675,7 @@ export const searchProductInventories = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -38581,6 +38878,7 @@ export const searchProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38694,6 +38992,7 @@ export const searchProductInventories = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38896,6 +39195,7 @@ export const getProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -39055,6 +39355,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -39185,6 +39486,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -39246,6 +39548,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -39287,6 +39590,7 @@ export const getProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -39413,6 +39717,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -39472,6 +39777,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -39539,6 +39845,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -39619,6 +39926,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -39735,6 +40043,7 @@ export const getProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -39910,6 +40219,7 @@ export const getProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -40087,6 +40397,7 @@ export const getProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -40250,6 +40561,7 @@ export const getProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -40427,6 +40739,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -40522,6 +40835,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -40652,6 +40966,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -40713,6 +41028,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -40754,6 +41070,7 @@ export const getProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -40880,6 +41197,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -40939,6 +41257,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -41040,6 +41359,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -41170,6 +41490,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -41231,6 +41552,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -41272,6 +41594,7 @@ export const getProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -41398,6 +41721,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -41457,6 +41781,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -41504,6 +41829,7 @@ export const getProduct = /* GraphQL */ `
       isTaxEnabled
       isInventoryEnabled
       hasVarient
+      hasFaq
       variants {
         items {
           id
@@ -41607,6 +41933,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -41775,6 +42102,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -42144,6 +42472,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42274,6 +42603,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42335,6 +42665,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42376,6 +42707,7 @@ export const getProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -42502,6 +42834,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -42561,6 +42894,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -42660,6 +42994,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42790,6 +43125,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42851,6 +43187,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42892,6 +43229,7 @@ export const getProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -43018,6 +43356,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -43077,6 +43416,7 @@ export const getProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -43205,6 +43545,7 @@ export const listProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -43368,6 +43709,7 @@ export const listProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -43545,6 +43887,7 @@ export const listProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -43656,6 +43999,7 @@ export const listProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -43735,6 +44079,7 @@ export const listProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -43834,6 +44179,7 @@ export const listProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -44044,6 +44390,7 @@ export const listProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -44267,6 +44614,7 @@ export const listProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -44376,6 +44724,7 @@ export const listProducts = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -44735,6 +45084,7 @@ export const listProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -44956,6 +45306,7 @@ export const listProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -45158,6 +45509,7 @@ export const bytitleProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -45321,6 +45673,7 @@ export const bytitleProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -45498,6 +45851,7 @@ export const bytitleProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -45609,6 +45963,7 @@ export const bytitleProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -45688,6 +46043,7 @@ export const bytitleProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -45787,6 +46143,7 @@ export const bytitleProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -45997,6 +46354,7 @@ export const bytitleProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -46220,6 +46578,7 @@ export const bytitleProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -46329,6 +46688,7 @@ export const bytitleProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -46688,6 +47048,7 @@ export const bytitleProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -46909,6 +47270,7 @@ export const bytitleProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -47111,6 +47473,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -47274,6 +47637,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -47451,6 +47815,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47562,6 +47927,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -47641,6 +48007,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47740,6 +48107,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -47950,6 +48318,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -48173,6 +48542,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -48282,6 +48652,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -48641,6 +49012,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -48862,6 +49234,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -49064,6 +49437,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -49227,6 +49601,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -49404,6 +49779,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -49515,6 +49891,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -49594,6 +49971,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -49693,6 +50071,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -49903,6 +50282,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -50126,6 +50506,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -50235,6 +50616,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -50594,6 +50976,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -50815,6 +51198,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -51017,6 +51401,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -51180,6 +51565,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -51357,6 +51743,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -51468,6 +51855,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -51547,6 +51935,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -51646,6 +52035,7 @@ export const bystoreIdProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -51856,6 +52246,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -52079,6 +52470,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -52188,6 +52580,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -52547,6 +52940,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -52768,6 +53162,7 @@ export const bystoreIdProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -52970,6 +53365,7 @@ export const byslugProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -53133,6 +53529,7 @@ export const byslugProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -53310,6 +53707,7 @@ export const byslugProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -53421,6 +53819,7 @@ export const byslugProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -53500,6 +53899,7 @@ export const byslugProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -53599,6 +53999,7 @@ export const byslugProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -53809,6 +54210,7 @@ export const byslugProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -54032,6 +54434,7 @@ export const byslugProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -54141,6 +54544,7 @@ export const byslugProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -54500,6 +54904,7 @@ export const byslugProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -54721,6 +55126,7 @@ export const byslugProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -54923,6 +55329,7 @@ export const searchProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -55086,6 +55493,7 @@ export const searchProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -55263,6 +55671,7 @@ export const searchProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -55374,6 +55783,7 @@ export const searchProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -55453,6 +55863,7 @@ export const searchProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -55552,6 +55963,7 @@ export const searchProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -55762,6 +56174,7 @@ export const searchProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -55985,6 +56398,7 @@ export const searchProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -56094,6 +56508,7 @@ export const searchProducts = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -56453,6 +56868,7 @@ export const searchProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -56674,6 +57090,7 @@ export const searchProducts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -56880,6 +57297,7 @@ export const getLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -57043,6 +57461,7 @@ export const getLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -57220,6 +57639,7 @@ export const getLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -57331,6 +57751,7 @@ export const getLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -57410,6 +57831,7 @@ export const getLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -57509,6 +57931,7 @@ export const getLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -57719,6 +58142,7 @@ export const getLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -57942,6 +58366,7 @@ export const getLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -58051,6 +58476,7 @@ export const getLinkedProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -58410,6 +58836,7 @@ export const getLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -58631,6 +59058,7 @@ export const getLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -58786,6 +59214,7 @@ export const listLinkedProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -58885,6 +59314,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59009,6 +59439,7 @@ export const listLinkedProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -59089,6 +59520,7 @@ export const listLinkedProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -59205,6 +59637,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59320,6 +59753,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59373,6 +59807,7 @@ export const listLinkedProducts = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -59575,6 +60010,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59688,6 +60124,7 @@ export const listLinkedProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59799,6 +60236,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -59898,6 +60336,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -60022,6 +60461,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -60102,6 +60542,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -60218,6 +60659,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -60333,6 +60775,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -60386,6 +60829,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -60588,6 +61032,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -60701,6 +61146,7 @@ export const byProductIdLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -61124,6 +61570,7 @@ export const getProductLog = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -61281,6 +61728,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -61336,6 +61784,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -61430,6 +61879,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -61485,6 +61935,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -61840,6 +62291,7 @@ export const getProductLog = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -61978,6 +62430,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -62347,6 +62800,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -62574,6 +63028,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -62840,6 +63295,7 @@ export const getProductLog = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -63152,6 +63608,7 @@ export const listProductLogs = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -63431,6 +63888,7 @@ export const listProductLogs = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -64072,6 +64530,7 @@ export const byProductIdProductLogs = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -64351,6 +64810,7 @@ export const byProductIdProductLogs = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -64966,6 +65426,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65096,6 +65557,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65157,6 +65619,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65198,6 +65661,7 @@ export const getOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -65324,6 +65788,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -65383,6 +65848,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -65547,6 +66013,7 @@ export const getOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -65704,6 +66171,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65759,6 +66227,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -65853,6 +66322,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65908,6 +66378,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -66263,6 +66734,7 @@ export const getOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -66401,6 +66873,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -66770,6 +67243,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -66997,6 +67471,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -67263,6 +67738,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -67640,6 +68116,7 @@ export const getOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -67814,6 +68291,7 @@ export const getOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -68093,6 +68571,7 @@ export const getOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -68717,6 +69196,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -68847,6 +69327,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -68908,6 +69389,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -68949,6 +69431,7 @@ export const getOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -69075,6 +69558,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -69134,6 +69618,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -69303,6 +69788,7 @@ export const getOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -69379,6 +69865,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -69547,6 +70034,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -69905,6 +70393,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -70073,6 +70562,7 @@ export const getOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -70529,6 +71019,7 @@ export const listOrders = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -70703,6 +71194,7 @@ export const listOrders = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -70982,6 +71474,7 @@ export const listOrders = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -71624,6 +72117,7 @@ export const listOrders = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -71700,6 +72194,7 @@ export const listOrders = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -71868,6 +72363,7 @@ export const listOrders = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -72325,6 +72821,7 @@ export const listOrders = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -72514,6 +73011,7 @@ export const listOrders = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -73058,6 +73556,7 @@ export const bystoreIdOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -73232,6 +73731,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -73511,6 +74011,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -74153,6 +74654,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -74229,6 +74731,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -74397,6 +74900,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -74854,6 +75358,7 @@ export const bystoreIdOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -75043,6 +75548,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -75587,6 +76093,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -75761,6 +76268,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -76040,6 +76548,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -76682,6 +77191,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -76758,6 +77268,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -76926,6 +77437,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -77383,6 +77895,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -77572,6 +78085,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -78116,6 +78630,7 @@ export const searchOrders = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -78290,6 +78805,7 @@ export const searchOrders = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -78569,6 +79085,7 @@ export const searchOrders = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -79211,6 +79728,7 @@ export const searchOrders = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -79287,6 +79805,7 @@ export const searchOrders = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -79455,6 +79974,7 @@ export const searchOrders = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -79912,6 +80432,7 @@ export const searchOrders = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -80101,6 +80622,7 @@ export const searchOrders = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -80648,6 +81170,7 @@ export const getOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -80805,6 +81328,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -80860,6 +81384,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -80954,6 +81479,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -81009,6 +81535,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -81364,6 +81891,7 @@ export const getOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -81502,6 +82030,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -81871,6 +82400,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -82098,6 +82628,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -82364,6 +82895,7 @@ export const getOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -82676,6 +83208,7 @@ export const listOrderComments = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -82955,6 +83488,7 @@ export const listOrderComments = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -83596,6 +84130,7 @@ export const byOrderIdOrderComment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -83875,6 +84410,7 @@ export const byOrderIdOrderComment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -84508,6 +85044,7 @@ export const getOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -84671,6 +85208,7 @@ export const getOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -84848,6 +85386,7 @@ export const getOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -84959,6 +85498,7 @@ export const getOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -85038,6 +85578,7 @@ export const getOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -85137,6 +85678,7 @@ export const getOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -85347,6 +85889,7 @@ export const getOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -85570,6 +86113,7 @@ export const getOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -85679,6 +86223,7 @@ export const getOrderProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -86038,6 +86583,7 @@ export const getOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -86259,6 +86805,7 @@ export const getOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -86471,6 +87018,7 @@ export const listOrderProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -86570,6 +87118,7 @@ export const listOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -86694,6 +87243,7 @@ export const listOrderProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -86774,6 +87324,7 @@ export const listOrderProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -86890,6 +87441,7 @@ export const listOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87005,6 +87557,7 @@ export const listOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87058,6 +87611,7 @@ export const listOrderProducts = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -87260,6 +87814,7 @@ export const listOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87373,6 +87928,7 @@ export const listOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87541,6 +88097,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -87640,6 +88197,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87764,6 +88322,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -87844,6 +88403,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -87960,6 +88520,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -88075,6 +88636,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -88128,6 +88690,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -88330,6 +88893,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -88443,6 +89007,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -88611,6 +89176,7 @@ export const searchOrderProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -88710,6 +89276,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -88834,6 +89401,7 @@ export const searchOrderProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -88914,6 +89482,7 @@ export const searchOrderProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89030,6 +89599,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -89145,6 +89715,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -89198,6 +89769,7 @@ export const searchOrderProducts = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -89400,6 +89972,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -89513,6 +90086,7 @@ export const searchOrderProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -89704,6 +90278,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89834,6 +90409,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89895,6 +90471,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89936,6 +90513,7 @@ export const getPayment = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -90062,6 +90640,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -90121,6 +90700,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -90285,6 +90865,7 @@ export const getPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -90442,6 +91023,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -90497,6 +91079,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -90591,6 +91174,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -90646,6 +91230,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -91001,6 +91586,7 @@ export const getPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -91139,6 +91725,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -91508,6 +92095,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -91735,6 +92323,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92001,6 +92590,7 @@ export const getPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92365,6 +92955,7 @@ export const listPayments = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -92539,6 +93130,7 @@ export const listPayments = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -92818,6 +93410,7 @@ export const listPayments = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -93511,6 +94104,7 @@ export const bystoreIdPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -93685,6 +94279,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -93964,6 +94559,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -94657,6 +95253,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -94831,6 +95428,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -95110,6 +95708,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -95803,6 +96402,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -95977,6 +96577,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -96256,6 +96857,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -96937,6 +97539,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -97094,6 +97697,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -97149,6 +97753,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -97243,6 +97848,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -97298,6 +97904,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -97653,6 +98260,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -97791,6 +98399,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -98160,6 +98769,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -98387,6 +98997,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -98653,6 +99264,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -98961,6 +99573,7 @@ export const getReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -99124,6 +99737,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -99301,6 +99915,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -99412,6 +100027,7 @@ export const getReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -99491,6 +100107,7 @@ export const getReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -99590,6 +100207,7 @@ export const getReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -99800,6 +100418,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100023,6 +100642,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100132,6 +100752,7 @@ export const getReview = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -100491,6 +101112,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100712,6 +101334,7 @@ export const getReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100906,6 +101529,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -101185,6 +101809,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -101768,6 +102393,7 @@ export const listReviews = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -101867,6 +102493,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -101991,6 +102618,7 @@ export const listReviews = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -102071,6 +102699,7 @@ export const listReviews = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -102187,6 +102816,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -102302,6 +102932,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -102355,6 +102986,7 @@ export const listReviews = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -102557,6 +103189,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -102670,6 +103303,7 @@ export const listReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -102820,6 +103454,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -103099,6 +103734,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -103682,6 +104318,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -103781,6 +104418,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -103905,6 +104543,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -103985,6 +104624,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -104101,6 +104741,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -104216,6 +104857,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -104269,6 +104911,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -104471,6 +105114,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -104584,6 +105228,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -104734,6 +105379,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -105013,6 +105659,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -105596,6 +106243,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -105695,6 +106343,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -105819,6 +106468,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -105899,6 +106549,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -106015,6 +106666,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -106130,6 +106782,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -106183,6 +106836,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -106385,6 +107039,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -106498,6 +107153,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -106648,6 +107304,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -106927,6 +107584,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -107510,6 +108168,7 @@ export const searchReviews = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -107609,6 +108268,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -107733,6 +108393,7 @@ export const searchReviews = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -107813,6 +108474,7 @@ export const searchReviews = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -107929,6 +108591,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -108044,6 +108707,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -108097,6 +108761,7 @@ export const searchReviews = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -108299,6 +108964,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -108412,6 +109078,7 @@ export const searchReviews = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -108551,6 +109218,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -108681,6 +109349,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -108742,6 +109411,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -108783,6 +109453,7 @@ export const getWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -108909,6 +109580,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -108968,6 +109640,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -109063,6 +109736,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109193,6 +109867,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109254,6 +109929,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109295,6 +109971,7 @@ export const getWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -109421,6 +110098,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -109480,6 +110158,7 @@ export const getWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -109680,6 +110359,7 @@ export const listWishlists = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -109897,6 +110577,7 @@ export const listWishlists = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -110171,6 +110852,7 @@ export const bystoreIdWishlist = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -110388,6 +111070,7 @@ export const bystoreIdWishlist = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -110662,6 +111345,7 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -110879,6 +111563,7 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -111097,6 +111782,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -111260,6 +111946,7 @@ export const getWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -111437,6 +112124,7 @@ export const getWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -111548,6 +112236,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -111627,6 +112316,7 @@ export const getWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -111726,6 +112416,7 @@ export const getWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -111936,6 +112627,7 @@ export const getWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -112159,6 +112851,7 @@ export const getWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -112268,6 +112961,7 @@ export const getWishlistProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -112627,6 +113321,7 @@ export const getWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -112848,6 +113543,7 @@ export const getWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -113032,6 +113728,7 @@ export const listWishlistProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -113131,6 +113828,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -113255,6 +113953,7 @@ export const listWishlistProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -113335,6 +114034,7 @@ export const listWishlistProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -113451,6 +114151,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -113566,6 +114267,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -113619,6 +114321,7 @@ export const listWishlistProducts = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -113821,6 +114524,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -113934,6 +114638,7 @@ export const listWishlistProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -114070,6 +114775,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -114169,6 +114875,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -114293,6 +115000,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -114373,6 +115081,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -114489,6 +115198,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -114604,6 +115314,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -114657,6 +115368,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -114859,6 +115571,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -114972,6 +115685,7 @@ export const bywishlistIdcreatedAtWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -115116,6 +115830,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115246,6 +115961,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115307,6 +116023,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115348,6 +116065,7 @@ export const getShoppingCart = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -115474,6 +116192,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -115533,6 +116252,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -115628,6 +116348,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115758,6 +116479,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115819,6 +116541,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115860,6 +116583,7 @@ export const getShoppingCart = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -115986,6 +116710,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -116045,6 +116770,7 @@ export const getShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -116247,6 +116973,7 @@ export const listShoppingCarts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -116464,6 +117191,7 @@ export const listShoppingCarts = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -116740,6 +117468,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -116957,6 +117686,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -117233,6 +117963,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -117450,6 +118181,7 @@ export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -117726,6 +118458,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -117943,6 +118676,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -118163,6 +118897,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -118326,6 +119061,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -118503,6 +119239,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118614,6 +119351,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -118693,6 +119431,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118792,6 +119531,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -119002,6 +119742,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -119225,6 +119966,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -119334,6 +120076,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -119693,6 +120436,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -119914,6 +120658,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -120099,6 +120844,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -120198,6 +120944,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -120322,6 +121069,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -120402,6 +121150,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -120518,6 +121267,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -120633,6 +121383,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -120686,6 +121437,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -120888,6 +121640,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121001,6 +121754,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121138,6 +121892,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -121237,6 +121992,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121361,6 +122117,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -121441,6 +122198,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -121557,6 +122315,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121672,6 +122431,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121725,6 +122485,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -121927,6 +122688,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -122040,6 +122802,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -122186,6 +122949,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -122316,6 +123080,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -122377,6 +123142,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -122418,6 +123184,7 @@ export const getCouponCode = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -122544,6 +123311,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -122603,6 +123371,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -122767,6 +123536,7 @@ export const getCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -122924,6 +123694,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -122979,6 +123750,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -123073,6 +123845,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -123128,6 +123901,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -123483,6 +124257,7 @@ export const getCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -123621,6 +124396,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -123990,6 +124766,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -124217,6 +124994,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -124483,6 +125261,7 @@ export const getCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -124854,6 +125633,7 @@ export const listCouponCodes = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -125028,6 +125808,7 @@ export const listCouponCodes = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -125307,6 +126088,7 @@ export const listCouponCodes = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -126007,6 +126789,7 @@ export const bycodeCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -126181,6 +126964,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -126460,6 +127244,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -127160,6 +127945,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -127334,6 +128120,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -127613,6 +128400,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -128313,6 +129101,7 @@ export const searchCouponCodes = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -128487,6 +129276,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -128766,6 +129556,7 @@ export const searchCouponCodes = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
