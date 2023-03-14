@@ -9,8 +9,10 @@ import { getProperAddress, removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import { getZipCode } from "~/graphql/api";
 import AlertPopup from "../features/product/common/alert-popup";
+import { checkValidation } from "~/utils/addressFormValidation";
 
-const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
+const AddressForm = (props) => {
+  const { defaultAddress, user, onAddress, onSubmit, formErorrs } = props;
   const { firstName, lastName, email, phone } = user;
   const [address, setAddress] = useSetState(
     {
@@ -20,16 +22,21 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
       email: email,
       phone: phone,
       state: "AN",
+      city: "",
+      pinCode: "",
     } || {}
   );
 
   const [validatePincodes, setValidatePincodes] = useState({});
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState(formErorrs || null);
+
+  useEffect(() => {
+    setErrors(formErorrs);
+  }, [formErorrs]);
 
   useEffect(() => {
     if (onAddress) {
-      let tempAddress = getProperAddress(address);
-      onAddress(tempAddress);
+      onAddress(address);
     }
   }, [address]);
 
@@ -44,31 +51,13 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
     }
   }, [defaultAddress]);
 
-  const checkValidation = async () => {
-    const phoneregEx = /^\d{10}$/;
-    const isValid = await validateZipCode(address.pinCode);
-    const error = {};
-    if (!phoneregEx.test(removePhonePrefix(address.phone))) {
-      error.phone = "Enter valid phone number";
-    }
-    if (!isValid) {
-      error.zipcode = "Enter valid pincode";
-    }
-    if (Object.keys(error).length > 0) {
-      setErrors(error);
-      return false;
-    } else {
-      setErrors({});
-      return true;
-    }
-  };
-
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
       try {
-        const isValid = await checkValidation();
-        if (isValid) {
+        const isValidPinCode = await validateZipCode(address.pinCode);
+        const isValid = await checkValidation(address, isValidPinCode);
+        if (!isValid) {
           if (user) {
             let tempAddress = getProperAddress(address);
             const key = address.id ? "updateUserAddress" : "createUserAddress";
@@ -83,9 +72,11 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
           } else {
             onSubmit(tempAddress);
           }
+        } else {
+          setErrors(isValid);
         }
-      } catch ({ errors }) {
-        toast(<AlertPopup message={errors[0].message} status="error" />);
+      } catch (errors) {
+        toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
     },

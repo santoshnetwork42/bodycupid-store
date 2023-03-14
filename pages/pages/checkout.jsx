@@ -32,6 +32,8 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
+import { getProperAddress } from "~/utils/helper";
+import { checkValidation } from "~/utils/addressFormValidation";
 
 function Checkout(props) {
   const {
@@ -48,21 +50,33 @@ function Checkout(props) {
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
-
+  const [formErorr, setFormErorr] = useState(null);
+  const [validatePincodes, setValidatePincodes] = useState({});
   const validateZipCode = useCallback(async () => {
     const { pinCode } = shippingAddress;
     if (pinCode) {
-      const {
-        data: { getZipCode: response },
-      } = await API.graphql(graphqlOperation(getZipCode, { id: pinCode }));
-      if (response) {
-        if (isFirst) return response.prepaid;
-        return response.cod;
+      if (!validatePincodes.hasOwnProperty(pinCode)) {
+        const {
+          data: { getZipCode: response },
+        } = await API.graphql(graphqlOperation(getZipCode, { id: pinCode }));
+        setValidatePincodes({
+          ...validatePincodes,
+          [pinCode]: !!response,
+        });
+        console.log(response);
+        if (response) {
+          if (isFirst) return response.prepaid;
+          return response.cod;
+        } else {
+          return !!response;
+        }
+      } else {
+        return validatePincodes[pinCode];
       }
     }
 
     return false;
-  }, [shippingAddress, isFirst]);
+  }, [shippingAddress, isFirst, validatePincodes]);
 
   const handlePayment = useCallback(
     async ({ orderId, paymentId, address }) => {
@@ -143,9 +157,12 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       setLoading(true);
-      if (await validateZipCode()) {
+      const isValidPinCode = await validateZipCode();
+      const isValid = await checkValidation(shippingAddress, isValidPinCode);
+      if (!isValid) {
         try {
-          const { id: ignoreId, ...restAddress } = shippingAddress;
+          let tempAddress = getProperAddress(shippingAddress);
+          const { id: ignoreId, ...restAddress } = tempAddress;
           const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
           const payload = {
             storeId: STORE_ID,
@@ -230,10 +247,15 @@ function Checkout(props) {
           setLoading(false);
         }
       } else {
-        const message = isFirst
-          ? "Online Delivery is not available at this pincocde"
-          : "Cash on Delivery is not available at this pincocde";
-        toast(<AlertPopup status="error" message={message} />);
+        if (shippingAddress?.pinCode && !isValidPinCode && isValid.zipcode) {
+          const message = isFirst
+            ? "Online Delivery is not available at this pincocde"
+            : "Cash on Delivery is not available at this pincocde";
+          setFormErorr({ ...isValid, zipcode: message });
+          toast(<AlertPopup status="error" message={message} />);
+        } else {
+          setFormErorr(isValid);
+        }
         setLoading(false);
       }
       return false;
@@ -245,8 +267,10 @@ function Checkout(props) {
       shippingAddress,
       cartList,
       createUserAddress,
+      formErorr,
       handlePayment,
       validateZipCode,
+      setFormErorr,
     ]
   );
 
@@ -306,7 +330,10 @@ function Checkout(props) {
                   <h3 className="title title-simple text-left text-uppercase">
                     Shipping Address
                   </h3>
-                  <Addresses onAddressChange={setAddress} />
+                  <Addresses
+                    onAddressChange={setAddress}
+                    formErorrs={formErorr}
+                  />
                 </div>
 
                 <aside className="col-lg-5 sticky-sidebar-wrapper">

@@ -8,7 +8,7 @@ import { deleteUserAddress } from "~/graphql/mutations";
 import { findUserAddresses } from "~/graphql/api";
 import Modal from "~/components/common/modal";
 
-function Addresses({ user, onAddressChange }) {
+function Addresses({ user, onAddressChange, formErorrs }) {
   const [loading, setLoading] = useState(!!user);
   const [selected, setSelected] = useState(null);
   const [addresses, setAddresses] = useState([]);
@@ -168,7 +168,11 @@ function Addresses({ user, onAddressChange }) {
           </button>
         </>
       ) : (
-        <AddressForm onSubmit={onAddress} onAddress={onAddressChange} />
+        <AddressForm
+          onSubmit={onAddress}
+          onAddress={onAddressChange}
+          formErorrs={formErorrs}
+        />
       )}
 
       <Modal
