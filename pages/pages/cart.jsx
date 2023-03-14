@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 import Coupons from "~/components/features/coupon";
 
 import { cartActions } from "~/store/cart";
+import { modalActions } from "~/store/modal";
 
 import {
   toDecimal,
@@ -17,8 +18,15 @@ import {
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function Cart(props) {
-  const { cartList, removeFromCart, updateCart, appliedCoupon, removeCoupon } =
-    props;
+  const {
+    cartList,
+    removeFromCart,
+    updateCart,
+    appliedCoupon,
+    removeCoupon,
+    user,
+    openLogin,
+  } = props;
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -39,22 +47,28 @@ function Cart(props) {
     }
   };
 
-  const compareItems = () => {
-    if (cartItems.length !== cartList.length) return false;
+  // const compareItems = () => {
+  //   if (cartItems.length !== cartList.length) return false;
 
-    for (let index = 0; index < cartItems.length; index++) {
-      if (cartItems[index].qty !== cartList[index].qty) return false;
-    }
+  //   for (let index = 0; index < cartItems.length; index++) {
+  //     if (cartItems[index].qty !== cartList[index].qty) return false;
+  //   }
 
-    return true;
-  };
+  //   return true;
+  // };
 
-  const update = () => {
-    if (!compareItems()) {
-      updateCart(cartItems);
-    }
-    return true;
-  };
+  // const update = () => {
+  //   if (!compareItems()) {
+  //     updateCart(cartItems);
+  //   }
+  //   return true;
+  // };
+
+  const checkAuth = useCallback(() => {
+    if (user) return true;
+    openLogin();
+    return false;
+  }, [user]);
 
   return (
     <div className="main cart">
@@ -64,10 +78,12 @@ function Cart(props) {
             <ALink href="#">1. Shopping Cart</ALink>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/checkout">2. Checkout</ALink>
+            <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
+              2. Checkout
+            </ALink>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/order">3. Order Complete</ALink>
+            <ALink href="#">3. Order Complete</ALink>
           </h3>
         </div>
 
@@ -252,7 +268,8 @@ function Cart(props) {
                         </tbody>
                       </table>
                       <ALink
-                        href="/pages/checkout"
+                        onClick={checkAuth}
+                        href={user ? "/pages/checkout" : "#"}
                         className="btn btn-dark btn-rounded btn-checkout"
                       >
                         Proceed to checkout
@@ -294,4 +311,5 @@ export default connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
+  openLogin: modalActions.openPasswordlessModal,
 })(Cart);

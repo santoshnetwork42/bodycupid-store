@@ -254,7 +254,7 @@ function DetailOne(props) {
         </div>
       )}
 
-      <h2 className="product-name">{product.title}</h2>
+      <h2 className="detail-product-name">{product.title}</h2>
 
       {!!product?.tags && (
         <div className="mb-1">
@@ -467,7 +467,7 @@ function DetailOne(props) {
                     onClick={addToCartHandler}
                   >
                     <i className="d-icon-bag"></i>
-                    Add toCart
+                    Add to cart
                   </button>
                 )}
               </div>
@@ -505,7 +505,7 @@ function DetailOne(props) {
                 onClick={addToCartHandler}
               >
                 <i className="d-icon-bag"></i>
-                Add toCart
+                Add to cart
               </button>
             )}
           </div>

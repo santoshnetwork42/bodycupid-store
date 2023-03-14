@@ -992,15 +992,14 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 `;
 
 export const createShoppingCart = /* GraphQL */ `
-  mutation CreateShoppingCart(
-    $input: CreateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    createShoppingCart(input: $input, condition: $condition) {
+  mutation CreateStoreShoppingCart($storeId: ID!) {
+    createStoreShoppingCart(storeId: $storeId) {
       id
       storeId
       userId
       couponCodeId
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1116,6 +1115,7 @@ export const searchOrders = /* GraphQL */ `
         priority
         orderDate
         status
+        createdAt
         payments {
           items {
             id
@@ -1316,6 +1316,85 @@ export const searchProductFaqs = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+
+export const getLinkedProducts = /* GraphQL */ `
+  query ByProductIdLinkedProduct(
+    $productId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelLinkedProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byProductIdLinkedProduct(
+      productId: $productId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productId
+        linkedProductId
+        linkedProduct {
+          id
+          title
+          brand
+          slug
+          productDescription
+          price
+          sku
+          size
+          position
+          currency
+          costPrice
+          listingPrice
+          taxable
+          barcode
+          tags
+          benefits
+          rating
+          totalRatings
+          totalOrders
+          thumbImages
+          isTaxEnabled
+          isInventoryEnabled
+          hasVarient
+          variants {
+            items {
+              id
+              title
+              price
+              sku
+              position
+              currency
+              costPrice
+              listingPrice
+              imageUrl
+            }
+          }
+          images {
+            items {
+              id
+              productId
+              position
+              createdAt
+              updatedAt
+              alt
+              width
+              height
+              imageKey
+              isThumb
+            }
+          }
+        }
+      }
     }
   }
 `;
