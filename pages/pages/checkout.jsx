@@ -32,6 +32,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
+import { validateAddress, getProperAddress } from "~/utils/address";
 
 function Checkout(props) {
   const {
@@ -48,21 +49,7 @@ function Checkout(props) {
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
-
-  const validateZipCode = useCallback(async () => {
-    const { pinCode } = shippingAddress;
-    if (pinCode) {
-      const {
-        data: { getZipCode: response },
-      } = await API.graphql(graphqlOperation(getZipCode, { id: pinCode }));
-      if (response) {
-        if (isFirst) return response.prepaid;
-        return response.cod;
-      }
-    }
-
-    return false;
-  }, [shippingAddress, isFirst]);
+  const [formErorr, setFormErorr] = useState(null);
 
   const handlePayment = useCallback(
     async ({ orderId, paymentId, address }) => {
@@ -127,7 +114,8 @@ function Checkout(props) {
   );
 
   const addUserAddress = useCallback(async () => {
-    const { id: ignoreId, ...restAddress } = shippingAddress;
+    const tempAddress = getProperAddress(shippingAddress);
+    const { id: ignoreId, ...restAddress } = tempAddress;
     if (user && !ignoreId) {
       await API.graphql({
         query: createUserAddress,
@@ -143,9 +131,13 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       setLoading(true);
-      if (await validateZipCode()) {
+      const paymentType = isFirst ? "PREPAID" : "COD";
+      const formErrors = await validateAddress(shippingAddress, paymentType);
+      setFormErorr(formErrors);
+      if (!formErrors) {
         try {
-          const { id: ignoreId, ...restAddress } = shippingAddress;
+          const tempAddress = getProperAddress(shippingAddress);
+          const { id: ignoreId, ...restAddress } = tempAddress;
           const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
           const payload = {
             storeId: STORE_ID,
@@ -227,15 +219,9 @@ function Checkout(props) {
           }
         } catch (error) {
           console.log(error);
-          setLoading(false);
         }
-      } else {
-        const message = isFirst
-          ? "Online Delivery is not available at this pincocde"
-          : "Cash on Delivery is not available at this pincocde";
-        toast(<AlertPopup status="error" message={message} />);
-        setLoading(false);
       }
+      setLoading(false);
       return false;
     },
     [
@@ -245,8 +231,9 @@ function Checkout(props) {
       shippingAddress,
       cartList,
       createUserAddress,
+      formErorr,
       handlePayment,
-      validateZipCode,
+      setFormErorr,
     ]
   );
 
@@ -492,6 +479,17 @@ function Checkout(props) {
                           <ALink href="#">terms and conditions </ALink>*
                         </label>
                       </div> */}
+                      {!!formErorr && (
+                        <div className="overflow-hidden mb-4 mt-4">
+                          <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                            <ul className="m-0">
+                              {Object.values(formErorr).map((val) => (
+                                <li key={val}>{val}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                       <button
                         onClick={placeOrder}
                         className="btn btn-dark btn-rounded btn-order"

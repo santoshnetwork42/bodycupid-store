@@ -14,20 +14,6 @@ export const cleanQuery = (data) => {
     return a;
   }, {});
 };
-export const getProperAddress = (address) => {
-  if (address.firstName || address.lastName) {
-    let tempAddress = {
-      ...address,
-      name: address.firstName + " " + address.lastName,
-      country: "IN",
-      phone: addPhonePrefix(address.phone),
-    };
-    delete tempAddress.firstName;
-    delete tempAddress.lastName;
-    return tempAddress;
-  }
-  return address;
-};
 
 const pad = (num) => ("0" + parseInt(num)).substr(-2);
 

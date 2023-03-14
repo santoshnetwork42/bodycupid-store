@@ -1,19 +1,36 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
-import { getProperAddress, removePhonePrefix } from "~/utils/helper";
+import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
+import AlertPopup from "../features/product/common/alert-popup";
+import { validateAddress, getProperAddress } from "~/utils/address";
 
-const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
-  const [address, setAddress] = useSetState(defaultAddress || {});
+const AddressForm = (props) => {
+  const { defaultAddress, user, onAddress, onSubmit } = props;
+  const { firstName, lastName, email, phone } = user;
+  const [address, setAddress] = useSetState({
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    phone: phone,
+    address: "",
+    state: "AN",
+    city: "",
+    pinCode: "",
+    landmark: "",
+    area: "",
+  });
+
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     if (onAddress) {
-      let tempAddress = getProperAddress(address);
-      onAddress(tempAddress);
+      onAddress(address);
     }
   }, [address]);
 
@@ -31,27 +48,34 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
     async (e) => {
       e.preventDefault();
       try {
-        if (user) {
-          let tempAddress = getProperAddress(address);
-          const key = address.id ? "updateUserAddress" : "createUserAddress";
-          const {
-            data: { [key]: response },
-          } = await API.graphql({
-            query: address.id ? updateUserAddress : createUserAddress,
-            variables: { input: { ...tempAddress, userID: user.id } },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
-          });
-          onSubmit(response);
+        const formErrors = await validateAddress(address, "ALL");
+        if (!formErrors) {
+          if (user) {
+            const tempAddress = getProperAddress(address);
+            const key = address.id ? "updateUserAddress" : "createUserAddress";
+            const {
+              data: { [key]: response },
+            } = await API.graphql({
+              query: address.id ? updateUserAddress : createUserAddress,
+              variables: { input: { ...tempAddress, userID: user.id } },
+              authMode: "AMAZON_COGNITO_USER_POOLS",
+            });
+            onSubmit(response);
+          } else {
+            onSubmit(tempAddress);
+          }
         } else {
-          onSubmit(tempAddress);
+          setErrors(formErrors);
         }
-      } catch (error) {
-        console.log(error);
+      } catch (errors) {
+        console.log(errors);
+        toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
     },
-    [address, user, onSubmit]
+    [address, user, onSubmit, setErrors]
   );
+
   return (
     <div>
       <form className="form" onSubmit={addAddress}>
@@ -95,8 +119,11 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                     maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
-                    onChange={(e) => setAddress({ phone: e.target.value })}
-                    onBlur={(e) => setAddress({ phone: e.target.value.trim() })}
+                    onChange={(e) =>
+                      setAddress({
+                        phone: e.target.value.replaceAll(/[^0-9]+/g, "").trim(),
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -108,30 +135,9 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   name="email-address"
                   required
                   value={address.email}
-                  onChange={(e) => setAddress({ email: e.target.value })}
-                  onBlur={(e) => setAddress({ email: e.target.value.trim() })}
+                  onChange={(e) => setAddress({ email: e.target.value.trim() })}
                 />
               </div>
-              {/* <div className="col-xs-12">
-            <label>Country / Region *</label>
-            <div className="select-box">
-              <select
-                name="country"
-                className="form-control"
-                defaultValue="in"
-                value={address.country}
-                onChange={(e) =>
-                  setAddress({ country: e.target.value })
-                }
-              >
-                <option value="in">India</option>
-                <option value="us">United States (US)</option>
-                <option value="uk"> United Kingdom</option>
-                <option value="fr">France</option>
-                <option value="aus">Austria</option>
-              </select>
-            </div>
-          </div> */}
             </div>
 
             <label>Street Address *</label>
@@ -180,6 +186,7 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   type="text"
                   className="form-control"
                   name="city"
+                  placeholder="Your city"
                   required
                   value={address.city}
                   onChange={(e) => setAddress({ city: e.target.value })}
@@ -193,7 +200,9 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   className="form-control"
                   required
                   value={address.state}
-                  onChange={(e) => setAddress({ state: e.target.value })}
+                  onChange={(e) => {
+                    setAddress({ state: e.target.value });
+                  }}
                 >
                   {States.map((s) => (
                     <option key={s.value} value={s.value}>
@@ -210,21 +219,36 @@ const AddressForm = ({ defaultAddress, user, onAddress, onSubmit }) => {
                   type="text"
                   className="form-control"
                   name="pincode"
+                  placeholder="Your pincode"
                   required
                   value={address.pinCode}
                   onChange={(e) => setAddress({ pinCode: e.target.value })}
-                  onBlur={(e) => setAddress({ pinCode: e.target.value.trim() })}
+                  onBlur={(e) => {
+                    setAddress({ pinCode: e.target.value.trim() });
+                  }}
                 />
               </div>
             </div>
           </div>
+
+          {!!errors && (
+            <div className="overflow-hidden mb-4">
+              <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                <ul className="m-0">
+                  {Object.values(errors).map((val) => (
+                    <li key={val}>{val}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
 
           {!onAddress && (
             <button
               type="submit"
               className="btn btn-dark btn-rounded btn-order"
             >
-              Add Address
+              {address.id ? "Save Address" : "Add Address"}
             </button>
           )}
         </div>
