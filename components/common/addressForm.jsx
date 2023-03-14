@@ -11,7 +11,7 @@ import AlertPopup from "../features/product/common/alert-popup";
 import { checkValidation } from "~/utils/addressFormValidation";
 
 const AddressForm = (props) => {
-  const { defaultAddress, user, onAddress, onSubmit, formErorrs } = props;
+  const { defaultAddress, user, onAddress, onSubmit } = props;
   const { firstName, lastName, email, phone } = user;
   const [address, setAddress] = useSetState({
     firstName: firstName,
@@ -26,11 +26,7 @@ const AddressForm = (props) => {
     area: "",
   });
 
-  const [errors, setErrors] = useState(formErorrs || null);
-
-  useEffect(() => {
-    setErrors(formErorrs);
-  }, [formErorrs]);
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     if (onAddress) {

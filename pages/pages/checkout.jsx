@@ -134,7 +134,6 @@ function Checkout(props) {
       setLoading(true);
       const paymentType = isFirst ? "PREPAID" : "COD";
       const isFormValid = await checkValidation(shippingAddress, paymentType);
-
       if (!isFormValid) {
         try {
           setFormErorr(null);
