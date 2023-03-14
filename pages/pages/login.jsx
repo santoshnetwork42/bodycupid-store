@@ -205,7 +205,7 @@ function Login({
                                 className="lost-link"
                                 onClick={() => {
                                   closeLogin();
-                                  openPasswordless();
+                                  openPasswordless(false);
                                 }}
                               >
                                 Login with OTP

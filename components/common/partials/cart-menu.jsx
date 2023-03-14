@@ -49,7 +49,7 @@ function CartMenu(props) {
   const checkAuth = () => {
     hideCartMenu();
     if (user) return true;
-    openLogin();
+    openLogin(true);
     return false;
   };
 

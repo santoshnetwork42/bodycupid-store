@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -12,7 +12,6 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
-  getZipCode,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import {
@@ -35,15 +34,8 @@ import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
 
 function Checkout(props) {
-  const {
-    cartList,
-    user,
-    emptyCart,
-    appliedCoupon,
-    openLogin,
-    removeCoupon,
-    store,
-  } = props;
+  const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
+    props;
 
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -252,7 +244,7 @@ function Checkout(props) {
 
       <Loader loading={!!loading} />
 
-      {!user && <Passwordless forceOpen />}
+      {!user && <Passwordless forceOpen redirect={false} />}
 
       <div
         className={`page-content pt-7 pb-10 ${
@@ -271,21 +263,6 @@ function Checkout(props) {
         <div className="container mt-7">
           {cartList.length > 0 ? (
             <>
-              {!user && (
-                <div className="card accordion">
-                  <div className="alert alert-light alert-primary alert-icon mb-4 card-header">
-                    <i className="fas fa-exclamation-circle"></i>{" "}
-                    <span className="text-body">Returning customer?</span>{" "}
-                    <ALink
-                      href="#"
-                      onClick={() => openLogin(false)}
-                      className="text-primary collapse"
-                    >
-                      Click here to login
-                    </ALink>
-                  </div>
-                </div>
-              )}
               {!appliedCoupon && <Coupons layout="checkout" />}
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import getRandomString from "~/utils/getRandomString";
@@ -11,7 +12,15 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 
-function Passwordless({ auth, isOpen, closeModal, openLogin, forceOpen }) {
+function Passwordless({
+  auth,
+  isOpen,
+  closeModal,
+  openLogin,
+  forceOpen,
+  redirect,
+}) {
+  const router = useRouter();
   const [state, setState] = useState({
     phone: "",
     confirmationCode: "",
@@ -67,6 +76,7 @@ function Passwordless({ auth, isOpen, closeModal, openLogin, forceOpen }) {
             state.confirmationCode
           );
         }
+        if (redirect) router.push("/pages/checkout");
         closeModal();
         return false;
       } catch (error) {
@@ -75,7 +85,7 @@ function Passwordless({ auth, isOpen, closeModal, openLogin, forceOpen }) {
       }
       return false;
     },
-    [state, confirmSignUp, currentUser, closeModal]
+    [state, confirmSignUp, currentUser, closeModal, redirect]
   );
 
   const handleSignIn = useCallback(
@@ -244,6 +254,7 @@ function mapStateToProps(state) {
   return {
     auth: !!state.user.data,
     isOpen: state.modal.passwordless,
+    redirect: !!state.modal.loginRedirect,
   };
 }
 

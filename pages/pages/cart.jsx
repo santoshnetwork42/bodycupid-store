@@ -66,7 +66,7 @@ function Cart(props) {
 
   const checkAuth = useCallback(() => {
     if (user) return true;
-    openLogin();
+    openLogin(true);
     return false;
   }, [user]);
 

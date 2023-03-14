@@ -58,10 +58,10 @@ function modalReducer(state = initialState, action) {
       return { ...state, login: false, loginRedirect: true };
 
     case actionTypes.OPEN_PASSWORDLESS:
-      return { ...state, passwordless: true };
+      return { ...state, passwordless: true, loginRedirect: action.payload.redirect };
 
     case actionTypes.CLOSE_PASSWORDLESS:
-      return { ...state, passwordless: false };
+      return { ...state, passwordless: false, loginRedirect: true };
 
     case actionTypes.REFRESH_STORE:
       return initialState;
@@ -78,7 +78,7 @@ export const modalActions = {
   closeQuickview: () => ({ type: actionTypes.CLOSE_QUICKVIEW }),
   openLoginModal: (redirect = true) => ({ type: actionTypes.OPEN_LOGIN, payload: { redirect } }),
   closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN }),
-  openPasswordlessModal: () => ({ type: actionTypes.OPEN_PASSWORDLESS }),
+  openPasswordlessModal: (redirect = false) => ({ type: actionTypes.OPEN_PASSWORDLESS, payload: { redirect } }),
   closePasswordlessModal: () => ({ type: actionTypes.CLOSE_PASSWORDLESS })
 };
 
