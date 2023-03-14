@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
-import { getProperAddress, removePhonePrefix } from "~/utils/helper";
+import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import AlertPopup from "../features/product/common/alert-popup";
-import { checkValidation } from "~/utils/addressFormValidation";
+import { validateAddress, getProperAddress } from "~/utils/address";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit } = props;
@@ -48,8 +48,8 @@ const AddressForm = (props) => {
     async (e) => {
       e.preventDefault();
       try {
-        const isFormValid = await checkValidation(address);
-        if (!isFormValid) {
+        const formErrors = await validateAddress(address);
+        if (!formErrors) {
           if (user) {
             const tempAddress = getProperAddress(address);
             const key = address.id ? "updateUserAddress" : "createUserAddress";
@@ -65,14 +65,14 @@ const AddressForm = (props) => {
             onSubmit(tempAddress);
           }
         } else {
-          setErrors(isFormValid);
+          setErrors(formErrors);
         }
       } catch (errors) {
         toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
     },
-    [address, user, onSubmit, errors]
+    [address, user, onSubmit, setErrors]
   );
 
   return (

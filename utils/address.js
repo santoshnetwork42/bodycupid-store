@@ -6,7 +6,22 @@ import { emailRegEx, phoneRegEx } from "~/constant";
 import { getZipCode } from "~/graphql/api";
 import { removePhonePrefix } from "./helper";
 
-const validateZipCode = async (pincode, type) => {
+export const getProperAddress = (address) => {
+  if (address.firstName || address.lastName) {
+    let tempAddress = {
+      ...address,
+      name: address.firstName + " " + address.lastName,
+      country: "IN",
+      phone: addPhonePrefix(address.phone),
+    };
+    delete tempAddress.firstName;
+    delete tempAddress.lastName;
+    return tempAddress;
+  }
+  return address;
+};
+
+export const validateZipCode = async (pincode, type) => {
   try {
     if (pincode) {
       const {
@@ -24,7 +39,7 @@ const validateZipCode = async (pincode, type) => {
   return null;
 };
 
-export const checkValidation = async (address, type = "ALL") => {
+export const validateAddress = async (address, type = "ALL") => {
   const {
     firstName,
     lastName,
@@ -34,32 +49,38 @@ export const checkValidation = async (address, type = "ALL") => {
     pinCode,
     address: streetAddress,
   } = address;
-
   const error = {};
+
   const isValidPinCode = await validateZipCode(pinCode, type);
+
   if (!phone || !phoneRegEx.test(removePhonePrefix(phone))) {
-    error.phone = "please enter valid phone number";
+    error.phone = "Please enter valid phone number";
   }
+
   if (!isValidPinCode) {
-    if (type === "PREPAID" && pinCode) {
+    if (!pinCode) {
+      error.pincode = "Please enter valid pincode";
+    } else if (type === "PREPAID") {
       error.pincode = "Online Delivery is not available at this pincocde";
-    } else if (type === "COD" && pinCode) {
-      error.pincode = "Cash on Delivery is not available at this pincocde";
     } else {
-      error.pincode = "please enter valid pincode";
+      error.pincode = "Cash on Delivery is not available at this pincocde";
     }
   }
-  if (!firstName || !lastName) {
-    error.name = "please enter name";
+
+  if (!firstName) {
+    error.firstname = "Please enter firstname";
   }
-  if (!email && !emailRegEx.test(email)) {
-    error.email = "please enter correct email";
+  if (!lastName) {
+    error.lastname = "Please enter lastname";
+  }
+  if (!email || !emailRegEx.test(email)) {
+    error.email = "Please enter correct email";
   }
   if (!streetAddress) {
-    error.address = "please enter addres";
+    error.address = "Please enter address";
   }
   if (!city) {
-    error.city = "please enter city";
+    error.city = "Please enter city";
   }
   if (Object.keys(error).length > 0) {
     return error;

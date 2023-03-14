@@ -32,8 +32,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
-import { getProperAddress } from "~/utils/helper";
-import { checkValidation } from "~/utils/addressFormValidation";
+import { validateAddress, getProperAddress } from "~/utils/address";
 
 function Checkout(props) {
   const {
@@ -133,8 +132,8 @@ function Checkout(props) {
       e.preventDefault();
       setLoading(true);
       const paymentType = isFirst ? "PREPAID" : "COD";
-      const isFormValid = await checkValidation(shippingAddress, paymentType);
-      if (!isFormValid) {
+      const formErrors = await validateAddress(shippingAddress, paymentType);
+      if (!formErrors) {
         try {
           setFormErorr(null);
           const tempAddress = getProperAddress(shippingAddress);
@@ -223,7 +222,7 @@ function Checkout(props) {
           setLoading(false);
         }
       } else {
-        setFormErorr(isFormValid);
+        setFormErorr(formErrors);
         setLoading(false);
       }
       return false;
