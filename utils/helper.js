@@ -85,6 +85,6 @@ export const scrollWithOffset = (id, offset, callback) => {
       top: offsetPosition,
       behavior: "smooth",
     });
-    callback(ele);
+    if (callback) callback(ele);
   }
 };

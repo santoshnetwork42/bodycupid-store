@@ -161,7 +161,9 @@ function DetailOne(props) {
   };
 
   const onReviewClick = () => {
-    scrollWithOffset("product-review", 120, (ele)=>{ele.click()});
+    scrollWithOffset("product-review", 120, (ele) => {
+      ele.click();
+    });
   };
 
   function changeQty(qty) {
