@@ -151,7 +151,7 @@ function Quickview(props) {
           {product && (
             <DetailOne
               data={product}
-              adClass="scrollable pr-3"
+              adClass="scrollable"
               isNav={false}
               variantId={variant}
               setVariant={setVariant}

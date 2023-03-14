@@ -88,6 +88,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -96,6 +97,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -217,6 +219,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -225,6 +228,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -277,6 +281,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -285,6 +290,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -317,6 +323,7 @@ export const deleteUser = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -325,6 +332,7 @@ export const deleteUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -442,6 +450,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -450,6 +459,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -500,6 +510,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -508,6 +519,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -636,6 +648,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -644,6 +657,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -744,6 +758,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -752,6 +767,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -891,6 +907,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -899,6 +916,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -999,6 +1017,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -1007,6 +1026,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -1109,6 +1129,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -1117,6 +1138,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1276,6 +1298,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -1284,6 +1307,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -1644,6 +1668,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -1652,6 +1677,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1773,6 +1799,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -1781,6 +1808,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1833,6 +1861,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -1841,6 +1870,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -1873,6 +1903,7 @@ export const deleteUser = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -1881,6 +1912,7 @@ export const deleteUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -1998,6 +2030,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -2006,6 +2039,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -2056,6 +2090,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -2064,6 +2099,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -2173,6 +2209,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -2181,6 +2218,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -2248,6 +2286,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -2256,6 +2295,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -2415,6 +2455,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -2423,6 +2464,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -2787,6 +2829,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -2795,6 +2838,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -3082,6 +3126,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -3090,6 +3135,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -3433,6 +3479,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -3441,6 +3488,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -3508,6 +3556,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -3516,6 +3565,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -3675,6 +3725,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -3683,6 +3734,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -4091,6 +4143,7 @@ export const deleteUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -4099,6 +4152,7 @@ export const deleteUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -4166,6 +4220,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -4174,6 +4229,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -4333,6 +4389,7 @@ export const deleteUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -4341,6 +4398,7 @@ export const deleteUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -4799,6 +4857,7 @@ export const updateOrderComment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -4807,6 +4866,7 @@ export const updateOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -4955,6 +5015,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -4963,6 +5024,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -5009,6 +5071,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -5017,6 +5080,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -5102,6 +5166,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -5110,6 +5175,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -5156,6 +5222,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -5164,6 +5231,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -5510,6 +5578,7 @@ export const updateOrderComment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -5518,6 +5587,7 @@ export const updateOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -5647,6 +5717,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -5655,6 +5726,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6015,6 +6087,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -6023,6 +6096,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -6241,6 +6315,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -6249,6 +6324,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6506,6 +6582,7 @@ export const updateOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -6514,6 +6591,7 @@ export const updateOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6803,6 +6881,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -6811,6 +6890,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6932,6 +7012,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -6940,6 +7021,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -6992,6 +7074,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7000,6 +7083,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7032,6 +7116,7 @@ export const deleteWishlist = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -7040,6 +7125,7 @@ export const deleteWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -7157,6 +7243,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7165,6 +7252,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -7215,6 +7303,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7223,6 +7312,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -7309,6 +7399,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7317,6 +7408,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7438,6 +7530,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7446,6 +7539,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7498,6 +7592,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7506,6 +7601,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7538,6 +7634,7 @@ export const deleteWishlist = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -7546,6 +7643,7 @@ export const deleteWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -7663,6 +7761,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7671,6 +7770,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -7721,6 +7821,7 @@ export const deleteWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7729,6 +7830,7 @@ export const deleteWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -7766,6 +7868,1087 @@ export const deleteWishlist = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createShoppingCart = /* GraphQL */ `
+  mutation CreateShoppingCart(
+    $input: CreateShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    createShoppingCart(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        appId
+        host
+        priority
+        imageUrl
+        products {
+          items {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            continueSellingOutOfStock
+            rating
+            totalRatings
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            hasFaq
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      shoppingcartProducts {
+        items {
+          id
+          shoppingcartId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            continueSellingOutOfStock
+            rating
+            totalRatings
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            hasFaq
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            description
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          quantity
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      couponCodeId
       createdAt
       updatedAt
     }
@@ -7858,6 +9041,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7866,6 +9050,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -7987,6 +9172,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -7995,6 +9181,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8047,6 +9234,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8055,6 +9243,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8087,6 +9276,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -8095,6 +9285,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -8212,6 +9403,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8220,6 +9412,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -8270,6 +9463,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8278,6 +9472,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -8364,6 +9559,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8372,6 +9568,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8493,6 +9690,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8501,6 +9699,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8553,6 +9752,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8561,6 +9761,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -8593,6 +9794,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -8601,6 +9803,7 @@ export const deleteShoppingCart = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -8718,6 +9921,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8726,6 +9930,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -8776,6 +9981,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8784,6 +9990,7 @@ export const deleteShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -8915,6 +10122,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -8923,6 +10131,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -9044,6 +10253,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -9052,6 +10262,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -9104,6 +10315,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -9112,6 +10324,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -9144,6 +10357,7 @@ export const createUser = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -9152,6 +10366,7 @@ export const createUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -9269,6 +10484,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -9277,6 +10493,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -9327,6 +10544,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -9335,6 +10553,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -9463,6 +10682,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -9471,6 +10691,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -9571,6 +10792,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -9579,6 +10801,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -9718,6 +10941,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -9726,6 +10950,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -9826,6 +11051,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -9834,6 +11060,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -9936,6 +11163,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -9944,6 +11172,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -10103,6 +11332,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -10111,6 +11341,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -10471,6 +11702,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -10479,6 +11711,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -10600,6 +11833,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -10608,6 +11842,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -10660,6 +11895,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -10668,6 +11904,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -10700,6 +11937,7 @@ export const createUser = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -10708,6 +11946,7 @@ export const createUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -10825,6 +12064,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -10833,6 +12073,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -10883,6 +12124,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -10891,6 +12133,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -11000,6 +12243,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -11008,6 +12252,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -11075,6 +12320,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -11083,6 +12329,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11242,6 +12489,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -11250,6 +12498,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -11614,6 +12863,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -11622,6 +12872,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -11909,6 +13160,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -11917,6 +13169,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12260,6 +13513,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -12268,6 +13522,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12335,6 +13590,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -12343,6 +13599,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -12502,6 +13759,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -12510,6 +13768,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -12918,6 +14177,7 @@ export const createUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -12926,6 +14186,7 @@ export const createUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -12993,6 +14254,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13001,6 +14263,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13160,6 +14423,7 @@ export const createUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13168,6 +14432,7 @@ export const createUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -13562,6 +14827,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13570,6 +14836,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13691,6 +14958,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13699,6 +14967,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13751,6 +15020,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13759,6 +15029,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -13791,6 +15062,7 @@ export const updateUser = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -13799,6 +15071,7 @@ export const updateUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -13916,6 +15189,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13924,6 +15198,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -13974,6 +15249,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -13982,6 +15258,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -14110,6 +15387,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -14118,6 +15396,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -14218,6 +15497,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -14226,6 +15506,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -14365,6 +15646,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -14373,6 +15655,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -14473,6 +15756,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -14481,6 +15765,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -14583,6 +15868,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -14591,6 +15877,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -14750,6 +16037,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -14758,6 +16046,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -15118,6 +16407,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15126,6 +16416,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15247,6 +16538,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15255,6 +16547,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15307,6 +16600,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15315,6 +16609,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15347,6 +16642,7 @@ export const updateUser = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -15355,6 +16651,7 @@ export const updateUser = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -15472,6 +16769,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15480,6 +16778,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -15530,6 +16829,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15538,6 +16838,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -15647,6 +16948,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -15655,6 +16957,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -15722,6 +17025,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15730,6 +17034,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -15889,6 +17194,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -15897,6 +17203,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -16261,6 +17568,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -16269,6 +17577,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -16556,6 +17865,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -16564,6 +17874,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -16907,6 +18218,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -16915,6 +18227,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -16982,6 +18295,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -16990,6 +18304,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17149,6 +18464,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -17157,6 +18473,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -17565,6 +18882,7 @@ export const updateUser = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -17573,6 +18891,7 @@ export const updateUser = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -17640,6 +18959,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -17648,6 +18968,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -17807,6 +19128,7 @@ export const updateUser = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -17815,6 +19137,7 @@ export const updateUser = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -18282,6 +19605,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -18290,6 +19614,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18411,6 +19736,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -18419,6 +19745,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18471,6 +19798,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -18479,6 +19807,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18511,6 +19840,7 @@ export const createProductCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -18519,6 +19849,7 @@ export const createProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -18636,6 +19967,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -18644,6 +19976,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -18694,6 +20027,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -18702,6 +20036,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -18777,6 +20112,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -18785,6 +20121,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -18875,6 +20212,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -18883,6 +20221,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -18998,6 +20337,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -19006,6 +20346,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19077,6 +20418,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -19085,6 +20427,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19192,6 +20535,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -19200,6 +20544,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -19306,6 +20651,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -19314,6 +20660,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -19358,6 +20705,7 @@ export const createProductCategory = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -19366,6 +20714,7 @@ export const createProductCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -19559,6 +20908,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -19567,6 +20917,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -19671,6 +21022,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -19679,6 +21031,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -19791,6 +21144,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -19799,6 +21153,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -19869,6 +21224,7 @@ export const createProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -19877,6 +21233,7 @@ export const createProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -19967,6 +21324,7 @@ export const createProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -19975,6 +21333,7 @@ export const createProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -20176,6 +21535,7 @@ export const createProductCategory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -20184,6 +21544,7 @@ export const createProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -20353,6 +21714,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -20361,6 +21723,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20482,6 +21845,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -20490,6 +21854,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20542,6 +21907,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -20550,6 +21916,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20582,6 +21949,7 @@ export const updateProductCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -20590,6 +21958,7 @@ export const updateProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -20707,6 +22076,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -20715,6 +22085,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -20765,6 +22136,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -20773,6 +22145,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -20848,6 +22221,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -20856,6 +22230,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -20946,6 +22321,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -20954,6 +22330,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21069,6 +22446,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -21077,6 +22455,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -21148,6 +22527,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -21156,6 +22536,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -21263,6 +22644,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -21271,6 +22653,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21377,6 +22760,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -21385,6 +22769,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21429,6 +22814,7 @@ export const updateProductCategory = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -21437,6 +22823,7 @@ export const updateProductCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -21630,6 +23017,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -21638,6 +23026,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21742,6 +23131,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -21750,6 +23140,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21862,6 +23253,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -21870,6 +23262,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -21940,6 +23333,7 @@ export const updateProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -21948,6 +23342,7 @@ export const updateProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -22038,6 +23433,7 @@ export const updateProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -22046,6 +23442,7 @@ export const updateProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -22247,6 +23644,7 @@ export const updateProductCategory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -22255,6 +23653,7 @@ export const updateProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -22424,6 +23823,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -22432,6 +23832,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -22553,6 +23954,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -22561,6 +23963,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -22613,6 +24016,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -22621,6 +24025,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -22653,6 +24058,7 @@ export const deleteProductCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -22661,6 +24067,7 @@ export const deleteProductCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -22778,6 +24185,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -22786,6 +24194,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -22836,6 +24245,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -22844,6 +24254,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -22919,6 +24330,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -22927,6 +24339,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -23017,6 +24430,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -23025,6 +24439,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -23140,6 +24555,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -23148,6 +24564,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -23219,6 +24636,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -23227,6 +24645,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -23334,6 +24753,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -23342,6 +24762,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -23448,6 +24869,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -23456,6 +24878,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -23500,6 +24923,7 @@ export const deleteProductCategory = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -23508,6 +24932,7 @@ export const deleteProductCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -23701,6 +25126,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -23709,6 +25135,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -23813,6 +25240,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -23821,6 +25249,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -23933,6 +25362,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -23941,6 +25371,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -24011,6 +25442,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -24019,6 +25451,7 @@ export const deleteProductCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24109,6 +25542,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -24117,6 +25551,7 @@ export const deleteProductCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -24318,6 +25753,7 @@ export const deleteProductCategory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -24326,6 +25762,7 @@ export const deleteProductCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -24494,6 +25931,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -24502,6 +25940,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24623,6 +26062,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -24631,6 +26071,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24683,6 +26124,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -24691,6 +26133,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -24723,6 +26166,7 @@ export const createProductSubCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -24731,6 +26175,7 @@ export const createProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -24848,6 +26293,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -24856,6 +26302,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -24906,6 +26353,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -24914,6 +26362,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -25072,6 +26521,7 @@ export const createProductSubCategory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -25080,6 +26530,7 @@ export const createProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -25230,6 +26681,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25238,6 +26690,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25359,6 +26812,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25367,6 +26821,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25419,6 +26874,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25427,6 +26883,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25459,6 +26916,7 @@ export const createProductSubCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -25467,6 +26925,7 @@ export const createProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -25584,6 +27043,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25592,6 +27052,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -25642,6 +27103,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25650,6 +27112,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -25708,6 +27171,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25716,6 +27180,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25787,6 +27252,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -25795,6 +27261,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -25902,6 +27369,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -25910,6 +27378,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -25995,6 +27464,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -26003,6 +27473,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26093,6 +27564,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -26101,6 +27573,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -26216,6 +27689,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -26224,6 +27698,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26295,6 +27770,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -26303,6 +27779,7 @@ export const createProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -26410,6 +27887,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -26418,6 +27896,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -26524,6 +28003,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -26532,6 +28012,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -26576,6 +28057,7 @@ export const createProductSubCategory = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -26584,6 +28066,7 @@ export const createProductSubCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -26777,6 +28260,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -26785,6 +28269,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -26889,6 +28374,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -26897,6 +28383,7 @@ export const createProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -27010,6 +28497,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27018,6 +28506,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27139,6 +28628,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27147,6 +28637,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27199,6 +28690,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27207,6 +28699,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27239,6 +28732,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -27247,6 +28741,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -27364,6 +28859,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27372,6 +28868,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -27422,6 +28919,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27430,6 +28928,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -27588,6 +29087,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -27596,6 +29096,7 @@ export const updateProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -27746,6 +29247,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27754,6 +29256,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27875,6 +29378,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27883,6 +29387,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27935,6 +29440,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -27943,6 +29449,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -27975,6 +29482,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -27983,6 +29491,7 @@ export const updateProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -28100,6 +29609,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28108,6 +29618,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -28158,6 +29669,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28166,6 +29678,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -28224,6 +29737,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28232,6 +29746,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28303,6 +29818,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28311,6 +29827,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28418,6 +29935,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -28426,6 +29944,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -28511,6 +30030,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28519,6 +30039,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28609,6 +30130,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -28617,6 +30139,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -28732,6 +30255,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28740,6 +30264,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28811,6 +30336,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -28819,6 +30345,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -28926,6 +30453,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -28934,6 +30462,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -29040,6 +30569,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -29048,6 +30578,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -29092,6 +30623,7 @@ export const updateProductSubCategory = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -29100,6 +30632,7 @@ export const updateProductSubCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -29293,6 +30826,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -29301,6 +30835,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -29405,6 +30940,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -29413,6 +30949,7 @@ export const updateProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -29526,6 +31063,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -29534,6 +31072,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29655,6 +31194,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -29663,6 +31203,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29715,6 +31256,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -29723,6 +31265,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -29755,6 +31298,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -29763,6 +31307,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -29880,6 +31425,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -29888,6 +31434,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -29938,6 +31485,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -29946,6 +31494,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -30104,6 +31653,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -30112,6 +31662,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -30262,6 +31813,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30270,6 +31822,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30391,6 +31944,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30399,6 +31953,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30451,6 +32006,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30459,6 +32015,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30491,6 +32048,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -30499,6 +32057,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -30616,6 +32175,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30624,6 +32184,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -30674,6 +32235,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30682,6 +32244,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -30740,6 +32303,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30748,6 +32312,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30819,6 +32384,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -30827,6 +32393,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -30934,6 +32501,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -30942,6 +32510,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -31027,6 +32596,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -31035,6 +32605,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -31125,6 +32696,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -31133,6 +32705,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -31248,6 +32821,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -31256,6 +32830,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -31327,6 +32902,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -31335,6 +32911,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -31442,6 +33019,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -31450,6 +33028,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -31556,6 +33135,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -31564,6 +33144,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -31608,6 +33189,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -31616,6 +33198,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -31809,6 +33392,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -31817,6 +33401,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -31921,6 +33506,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -31929,6 +33515,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -32026,6 +33613,7 @@ export const createStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -32034,6 +33622,7 @@ export const createStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -32124,6 +33713,7 @@ export const createStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -32132,6 +33722,7 @@ export const createStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -32247,6 +33838,7 @@ export const createStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -32255,6 +33847,7 @@ export const createStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -32326,6 +33919,7 @@ export const createStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -32334,6 +33928,7 @@ export const createStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -32441,6 +34036,7 @@ export const createStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -32449,6 +34045,7 @@ export const createStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -32555,6 +34152,7 @@ export const createStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -32563,6 +34161,7 @@ export const createStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -32607,6 +34206,7 @@ export const createStore = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -32615,6 +34215,7 @@ export const createStore = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -32808,6 +34409,7 @@ export const createStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -32816,6 +34418,7 @@ export const createStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -32920,6 +34523,7 @@ export const createStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -32928,6 +34532,7 @@ export const createStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33025,6 +34630,7 @@ export const updateStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -33033,6 +34639,7 @@ export const updateStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -33123,6 +34730,7 @@ export const updateStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -33131,6 +34739,7 @@ export const updateStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33246,6 +34855,7 @@ export const updateStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -33254,6 +34864,7 @@ export const updateStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -33325,6 +34936,7 @@ export const updateStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -33333,6 +34945,7 @@ export const updateStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -33440,6 +35053,7 @@ export const updateStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -33448,6 +35062,7 @@ export const updateStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33554,6 +35169,7 @@ export const updateStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -33562,6 +35178,7 @@ export const updateStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33606,6 +35223,7 @@ export const updateStore = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -33614,6 +35232,7 @@ export const updateStore = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -33807,6 +35426,7 @@ export const updateStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -33815,6 +35435,7 @@ export const updateStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -33919,6 +35540,7 @@ export const updateStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -33927,6 +35549,7 @@ export const updateStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -34024,6 +35647,7 @@ export const deleteStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -34032,6 +35656,7 @@ export const deleteStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -34122,6 +35747,7 @@ export const deleteStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -34130,6 +35756,7 @@ export const deleteStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -34245,6 +35872,7 @@ export const deleteStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -34253,6 +35881,7 @@ export const deleteStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -34324,6 +35953,7 @@ export const deleteStore = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -34332,6 +35962,7 @@ export const deleteStore = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -34439,6 +36070,7 @@ export const deleteStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -34447,6 +36079,7 @@ export const deleteStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -34553,6 +36186,7 @@ export const deleteStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -34561,6 +36195,7 @@ export const deleteStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -34605,6 +36240,7 @@ export const deleteStore = /* GraphQL */ `
           weightUnit
           inventory
           blockedInventory
+          continueSellingOutOfStock
           rating
           totalRatings
           totalOrders
@@ -34613,6 +36249,7 @@ export const deleteStore = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
+          hasFaq
           variants {
             items {
               id
@@ -34806,6 +36443,7 @@ export const deleteStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -34814,6 +36452,7 @@ export const deleteStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -34918,6 +36557,7 @@ export const deleteStore = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -34926,6 +36566,7 @@ export const deleteStore = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -35039,6 +36680,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35047,6 +36689,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35168,6 +36811,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35176,6 +36820,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35228,6 +36873,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35236,6 +36882,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35268,6 +36915,7 @@ export const createWarehouse = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -35276,6 +36924,7 @@ export const createWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -35393,6 +37042,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35401,6 +37051,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -35451,6 +37102,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35459,6 +37111,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -35552,6 +37205,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35560,6 +37214,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35681,6 +37336,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35689,6 +37345,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35741,6 +37398,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35749,6 +37407,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -35781,6 +37440,7 @@ export const createWarehouse = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -35789,6 +37449,7 @@ export const createWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -35906,6 +37567,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35914,6 +37576,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -35964,6 +37627,7 @@ export const createWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -35972,6 +37636,7 @@ export const createWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -36077,6 +37742,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36085,6 +37751,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36206,6 +37873,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36214,6 +37882,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36266,6 +37935,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36274,6 +37944,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36306,6 +37977,7 @@ export const updateWarehouse = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -36314,6 +37986,7 @@ export const updateWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -36431,6 +38104,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36439,6 +38113,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -36489,6 +38164,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36497,6 +38173,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -36590,6 +38267,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36598,6 +38276,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36719,6 +38398,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36727,6 +38407,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36779,6 +38460,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36787,6 +38469,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -36819,6 +38502,7 @@ export const updateWarehouse = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -36827,6 +38511,7 @@ export const updateWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -36944,6 +38629,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -36952,6 +38638,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -37002,6 +38689,7 @@ export const updateWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37010,6 +38698,7 @@ export const updateWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -37115,6 +38804,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37123,6 +38813,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37244,6 +38935,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37252,6 +38944,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37304,6 +38997,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37312,6 +39006,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37344,6 +39039,7 @@ export const deleteWarehouse = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -37352,6 +39048,7 @@ export const deleteWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -37469,6 +39166,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37477,6 +39175,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -37527,6 +39226,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37535,6 +39235,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -37628,6 +39329,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37636,6 +39338,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37757,6 +39460,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37765,6 +39469,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37817,6 +39522,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37825,6 +39531,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -37857,6 +39564,7 @@ export const deleteWarehouse = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -37865,6 +39573,7 @@ export const deleteWarehouse = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -37982,6 +39691,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -37990,6 +39700,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -38040,6 +39751,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -38048,6 +39760,7 @@ export const deleteWarehouse = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -38172,6 +39885,7 @@ export const createProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -38180,6 +39894,7 @@ export const createProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38334,6 +40049,7 @@ export const createProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -38342,6 +40058,7 @@ export const createProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -38510,6 +40227,7 @@ export const createProductInventory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -38518,6 +40236,7 @@ export const createProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -38620,6 +40339,7 @@ export const createProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -38628,6 +40348,7 @@ export const createProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -38698,6 +40419,7 @@ export const createProductInventory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -38706,6 +40428,7 @@ export const createProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -38796,6 +40519,7 @@ export const createProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -38804,6 +40528,7 @@ export const createProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -39005,6 +40730,7 @@ export const createProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -39013,6 +40739,7 @@ export const createProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -39227,6 +40954,7 @@ export const createProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -39235,6 +40963,7 @@ export const createProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -39335,6 +41064,7 @@ export const createProductInventory = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -39343,6 +41073,7 @@ export const createProductInventory = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -39693,6 +41424,7 @@ export const createProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -39701,6 +41433,7 @@ export const createProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -39913,6 +41646,7 @@ export const createProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -39921,6 +41655,7 @@ export const createProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -40108,6 +41843,7 @@ export const updateProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -40116,6 +41852,7 @@ export const updateProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -40270,6 +42007,7 @@ export const updateProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -40278,6 +42016,7 @@ export const updateProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -40446,6 +42185,7 @@ export const updateProductInventory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -40454,6 +42194,7 @@ export const updateProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -40556,6 +42297,7 @@ export const updateProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -40564,6 +42306,7 @@ export const updateProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -40634,6 +42377,7 @@ export const updateProductInventory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -40642,6 +42386,7 @@ export const updateProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -40732,6 +42477,7 @@ export const updateProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -40740,6 +42486,7 @@ export const updateProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -40941,6 +42688,7 @@ export const updateProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -40949,6 +42697,7 @@ export const updateProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -41163,6 +42912,7 @@ export const updateProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -41171,6 +42921,7 @@ export const updateProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -41271,6 +43022,7 @@ export const updateProductInventory = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -41279,6 +43031,7 @@ export const updateProductInventory = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -41629,6 +43382,7 @@ export const updateProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -41637,6 +43391,7 @@ export const updateProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -41849,6 +43604,7 @@ export const updateProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -41857,6 +43613,7 @@ export const updateProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -42044,6 +43801,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -42052,6 +43810,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -42206,6 +43965,7 @@ export const deleteProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -42214,6 +43974,7 @@ export const deleteProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -42382,6 +44143,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -42390,6 +44152,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42492,6 +44255,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -42500,6 +44264,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -42570,6 +44335,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -42578,6 +44344,7 @@ export const deleteProductInventory = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -42668,6 +44435,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -42676,6 +44444,7 @@ export const deleteProductInventory = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -42877,6 +44646,7 @@ export const deleteProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -42885,6 +44655,7 @@ export const deleteProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -43099,6 +44870,7 @@ export const deleteProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -43107,6 +44879,7 @@ export const deleteProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -43207,6 +44980,7 @@ export const deleteProductInventory = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -43215,6 +44989,7 @@ export const deleteProductInventory = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -43565,6 +45340,7 @@ export const deleteProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -43573,6 +45349,7 @@ export const deleteProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -43785,6 +45562,7 @@ export const deleteProductInventory = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -43793,6 +45571,7 @@ export const deleteProductInventory = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -44028,6 +45807,7 @@ export const createProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -44036,6 +45816,7 @@ export const createProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -44186,6 +45967,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44194,6 +45976,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -44315,6 +46098,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44323,6 +46107,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -44375,6 +46160,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44383,6 +46169,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -44415,6 +46202,7 @@ export const createProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -44423,6 +46211,7 @@ export const createProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -44540,6 +46329,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44548,6 +46338,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -44598,6 +46389,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44606,6 +46398,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -44664,6 +46457,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44672,6 +46466,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -44743,6 +46538,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -44751,6 +46547,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -44858,6 +46655,7 @@ export const createProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -44866,6 +46664,7 @@ export const createProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -45032,6 +46831,7 @@ export const createProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -45040,6 +46840,7 @@ export const createProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -45208,6 +47009,7 @@ export const createProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -45216,6 +47018,7 @@ export const createProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -45370,6 +47173,7 @@ export const createProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -45378,6 +47182,7 @@ export const createProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -45546,6 +47351,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -45554,6 +47360,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -45640,6 +47447,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -45648,6 +47456,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -45769,6 +47578,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -45777,6 +47587,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -45829,6 +47640,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -45837,6 +47649,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -45869,6 +47682,7 @@ export const createProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -45877,6 +47691,7 @@ export const createProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -45994,6 +47809,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46002,6 +47818,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -46052,6 +47869,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46060,6 +47878,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -46152,6 +47971,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46160,6 +47980,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -46281,6 +48102,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46289,6 +48111,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -46341,6 +48164,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46349,6 +48173,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -46381,6 +48206,7 @@ export const createProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -46389,6 +48215,7 @@ export const createProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -46506,6 +48333,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46514,6 +48342,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -46564,6 +48393,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46572,6 +48402,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -46610,6 +48441,7 @@ export const createProduct = /* GraphQL */ `
       weightUnit
       inventory
       blockedInventory
+      continueSellingOutOfStock
       rating
       totalRatings
       totalOrders
@@ -46618,6 +48450,7 @@ export const createProduct = /* GraphQL */ `
       isTaxEnabled
       isInventoryEnabled
       hasVarient
+      hasFaq
       variants {
         items {
           id
@@ -46712,6 +48545,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46720,6 +48554,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -46879,6 +48714,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -46887,6 +48723,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -47247,6 +49084,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47255,6 +49093,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47376,6 +49215,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47384,6 +49224,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47436,6 +49277,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47444,6 +49286,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47476,6 +49319,7 @@ export const createProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -47484,6 +49328,7 @@ export const createProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -47601,6 +49446,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47609,6 +49455,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -47659,6 +49506,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47667,6 +49515,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -47757,6 +49606,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47765,6 +49615,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47886,6 +49737,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47894,6 +49746,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47946,6 +49799,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -47954,6 +49808,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -47986,6 +49841,7 @@ export const createProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -47994,6 +49850,7 @@ export const createProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -48111,6 +49968,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48119,6 +49977,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -48169,6 +50028,7 @@ export const createProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48177,6 +50037,7 @@ export const createProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -48346,6 +50207,7 @@ export const updateProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -48354,6 +50216,7 @@ export const updateProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -48504,6 +50367,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48512,6 +50376,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -48633,6 +50498,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48641,6 +50507,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -48693,6 +50560,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48701,6 +50569,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -48733,6 +50602,7 @@ export const updateProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -48741,6 +50611,7 @@ export const updateProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -48858,6 +50729,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48866,6 +50738,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -48916,6 +50789,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48924,6 +50798,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -48982,6 +50857,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -48990,6 +50866,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -49061,6 +50938,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -49069,6 +50947,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -49176,6 +51055,7 @@ export const updateProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -49184,6 +51064,7 @@ export const updateProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -49350,6 +51231,7 @@ export const updateProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -49358,6 +51240,7 @@ export const updateProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -49526,6 +51409,7 @@ export const updateProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -49534,6 +51418,7 @@ export const updateProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -49688,6 +51573,7 @@ export const updateProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -49696,6 +51582,7 @@ export const updateProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -49864,6 +51751,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -49872,6 +51760,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -49958,6 +51847,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -49966,6 +51856,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -50087,6 +51978,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50095,6 +51987,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -50147,6 +52040,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50155,6 +52049,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -50187,6 +52082,7 @@ export const updateProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -50195,6 +52091,7 @@ export const updateProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -50312,6 +52209,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50320,6 +52218,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -50370,6 +52269,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50378,6 +52278,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -50470,6 +52371,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50478,6 +52380,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -50599,6 +52502,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50607,6 +52511,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -50659,6 +52564,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50667,6 +52573,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -50699,6 +52606,7 @@ export const updateProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -50707,6 +52615,7 @@ export const updateProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -50824,6 +52733,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50832,6 +52742,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -50882,6 +52793,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -50890,6 +52802,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -50928,6 +52841,7 @@ export const updateProduct = /* GraphQL */ `
       weightUnit
       inventory
       blockedInventory
+      continueSellingOutOfStock
       rating
       totalRatings
       totalOrders
@@ -50936,6 +52850,7 @@ export const updateProduct = /* GraphQL */ `
       isTaxEnabled
       isInventoryEnabled
       hasVarient
+      hasFaq
       variants {
         items {
           id
@@ -51030,6 +52945,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51038,6 +52954,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -51197,6 +53114,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51205,6 +53123,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -51565,6 +53484,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51573,6 +53493,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -51694,6 +53615,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51702,6 +53624,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -51754,6 +53677,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51762,6 +53686,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -51794,6 +53719,7 @@ export const updateProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -51802,6 +53728,7 @@ export const updateProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -51919,6 +53846,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51927,6 +53855,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -51977,6 +53906,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -51985,6 +53915,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -52075,6 +54006,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52083,6 +54015,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -52204,6 +54137,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52212,6 +54146,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -52264,6 +54199,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52272,6 +54208,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -52304,6 +54241,7 @@ export const updateProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -52312,6 +54250,7 @@ export const updateProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -52429,6 +54368,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52437,6 +54377,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -52487,6 +54428,7 @@ export const updateProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52495,6 +54437,7 @@ export const updateProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -52664,6 +54607,7 @@ export const deleteProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -52672,6 +54616,7 @@ export const deleteProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -52822,6 +54767,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52830,6 +54776,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -52951,6 +54898,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -52959,6 +54907,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -53011,6 +54960,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -53019,6 +54969,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -53051,6 +55002,7 @@ export const deleteProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -53059,6 +55011,7 @@ export const deleteProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -53176,6 +55129,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -53184,6 +55138,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -53234,6 +55189,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -53242,6 +55198,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -53300,6 +55257,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -53308,6 +55266,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -53379,6 +55338,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -53387,6 +55347,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -53494,6 +55455,7 @@ export const deleteProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -53502,6 +55464,7 @@ export const deleteProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -53668,6 +55631,7 @@ export const deleteProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -53676,6 +55640,7 @@ export const deleteProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -53844,6 +55809,7 @@ export const deleteProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -53852,6 +55818,7 @@ export const deleteProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -54006,6 +55973,7 @@ export const deleteProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -54014,6 +55982,7 @@ export const deleteProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -54182,6 +56151,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54190,6 +56160,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -54276,6 +56247,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54284,6 +56256,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -54405,6 +56378,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54413,6 +56387,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -54465,6 +56440,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54473,6 +56449,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -54505,6 +56482,7 @@ export const deleteProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -54513,6 +56491,7 @@ export const deleteProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -54630,6 +56609,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54638,6 +56618,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -54688,6 +56669,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54696,6 +56678,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -54788,6 +56771,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54796,6 +56780,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -54917,6 +56902,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54925,6 +56911,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -54977,6 +56964,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -54985,6 +56973,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -55017,6 +57006,7 @@ export const deleteProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -55025,6 +57015,7 @@ export const deleteProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -55142,6 +57133,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -55150,6 +57142,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -55200,6 +57193,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -55208,6 +57202,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -55246,6 +57241,7 @@ export const deleteProduct = /* GraphQL */ `
       weightUnit
       inventory
       blockedInventory
+      continueSellingOutOfStock
       rating
       totalRatings
       totalOrders
@@ -55254,6 +57250,7 @@ export const deleteProduct = /* GraphQL */ `
       isTaxEnabled
       isInventoryEnabled
       hasVarient
+      hasFaq
       variants {
         items {
           id
@@ -55348,6 +57345,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -55356,6 +57354,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -55515,6 +57514,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -55523,6 +57523,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -55883,6 +57884,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -55891,6 +57893,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -56012,6 +58015,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56020,6 +58024,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -56072,6 +58077,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56080,6 +58086,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -56112,6 +58119,7 @@ export const deleteProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -56120,6 +58128,7 @@ export const deleteProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -56237,6 +58246,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56245,6 +58255,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -56295,6 +58306,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56303,6 +58315,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -56393,6 +58406,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56401,6 +58415,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -56522,6 +58537,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56530,6 +58546,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -56582,6 +58599,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56590,6 +58608,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -56622,6 +58641,7 @@ export const deleteProduct = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -56630,6 +58650,7 @@ export const deleteProduct = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -56747,6 +58768,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56755,6 +58777,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -56805,6 +58828,7 @@ export const deleteProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -56813,6 +58837,7 @@ export const deleteProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -56934,6 +58959,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -56942,6 +58968,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -57096,6 +59123,7 @@ export const createLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -57104,6 +59132,7 @@ export const createLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -57272,6 +59301,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -57280,6 +59310,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -57382,6 +59413,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -57390,6 +59422,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -57460,6 +59493,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -57468,6 +59502,7 @@ export const createLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -57558,6 +59593,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -57566,6 +59602,7 @@ export const createLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -57767,6 +59804,7 @@ export const createLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -57775,6 +59813,7 @@ export const createLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -57989,6 +60028,7 @@ export const createLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -57997,6 +60037,7 @@ export const createLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -58097,6 +60138,7 @@ export const createLinkedProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -58105,6 +60147,7 @@ export const createLinkedProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -58455,6 +60498,7 @@ export const createLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -58463,6 +60507,7 @@ export const createLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -58675,6 +60720,7 @@ export const createLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -58683,6 +60729,7 @@ export const createLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -58869,6 +60916,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -58877,6 +60925,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59031,6 +61080,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -59039,6 +61089,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -59207,6 +61258,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -59215,6 +61267,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -59317,6 +61370,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -59325,6 +61379,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59395,6 +61450,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -59403,6 +61459,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -59493,6 +61550,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -59501,6 +61559,7 @@ export const updateLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -59702,6 +61761,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -59710,6 +61770,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -59924,6 +61985,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -59932,6 +61994,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -60032,6 +62095,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -60040,6 +62104,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -60390,6 +62455,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -60398,6 +62464,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -60610,6 +62677,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -60618,6 +62686,7 @@ export const updateLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -60804,6 +62873,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -60812,6 +62882,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -60966,6 +63037,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -60974,6 +63046,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -61142,6 +63215,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -61150,6 +63224,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -61252,6 +63327,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -61260,6 +63336,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -61330,6 +63407,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -61338,6 +63416,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -61428,6 +63507,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -61436,6 +63516,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -61637,6 +63718,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -61645,6 +63727,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -61859,6 +63942,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -61867,6 +63951,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -61967,6 +64052,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -61975,6 +64061,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -62325,6 +64412,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -62333,6 +64421,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -62545,6 +64634,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -62553,6 +64643,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -62783,526 +64874,14 @@ export const deleteProductImage = /* GraphQL */ `
     }
   }
 `;
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
+export const createProductLog = /* GraphQL */ `
+  mutation CreateProductLog(
+    $input: CreateProductLogInput!
+    $condition: ModelProductLogConditionInput
   ) {
-    createOrder(input: $input, condition: $condition) {
+    createProductLog(input: $input, condition: $condition) {
       id
-      code
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        products {
-          items {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              bannerUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  bannerUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                bannerUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              bannerUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalRatings
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      productId
       userId
       user {
         id
@@ -63446,6 +65025,7 @@ export const createOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -63454,6 +65034,7 @@ export const createOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -63602,6 +65183,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -63610,6 +65192,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -63656,6 +65239,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -63664,6 +65248,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -63749,6 +65334,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -63757,6 +65343,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -63803,6 +65390,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -63811,6 +65399,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -64157,6 +65746,7 @@ export const createOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -64165,6 +65755,7 @@ export const createOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -64294,6 +65885,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -64302,6 +65894,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -64662,6 +66255,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -64670,6 +66264,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -64888,6 +66483,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -64896,6 +66492,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65153,6 +66750,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -65161,6 +66759,6795 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateProductLog = /* GraphQL */ `
+  mutation UpdateProductLog(
+    $input: UpdateProductLogInput!
+    $condition: ModelProductLogConditionInput
+  ) {
+    updateProductLog(input: $input, condition: $condition) {
+      id
+      productId
+      userId
+      user {
+        id
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              continueSellingOutOfStock
+              rating
+              totalRatings
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              hasFaq
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              linkedProducts {
+                items {
+                  id
+                  productId
+                  linkedProductId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        shopingcarts {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodeId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            reviewer {
+              name
+              email
+            }
+            flagged
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              continueSellingOutOfStock
+              rating
+              totalRatings
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              hasFaq
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              linkedProducts {
+                items {
+                  id
+                  productId
+                  linkedProductId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            title
+            images
+            verified
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            billingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            couponCodeId
+            coupon {
+              id
+              code
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              discount
+              expirationDate
+              maxUse
+              totalUsed
+              isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
+              createdAt
+              updatedAt
+            }
+            totalAmount
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            paymentType
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                status
+                amount
+                paymentDate
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            status
+            amount
+            paymentDate
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteProductLog = /* GraphQL */ `
+  mutation DeleteProductLog(
+    $input: DeleteProductLogInput!
+    $condition: ModelProductLogConditionInput
+  ) {
+    deleteProductLog(input: $input, condition: $condition) {
+      id
+      productId
+      userId
+      user {
+        id
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              continueSellingOutOfStock
+              rating
+              totalRatings
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              hasFaq
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              linkedProducts {
+                items {
+                  id
+                  productId
+                  linkedProductId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        shopingcarts {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodeId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            reviewer {
+              name
+              email
+            }
+            flagged
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              continueSellingOutOfStock
+              rating
+              totalRatings
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              hasFaq
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              linkedProducts {
+                items {
+                  id
+                  productId
+                  linkedProductId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            title
+            images
+            verified
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            billingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            couponCodeId
+            coupon {
+              id
+              code
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              discount
+              expirationDate
+              maxUse
+              totalUsed
+              isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
+              createdAt
+              updatedAt
+            }
+            totalAmount
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            paymentType
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                status
+                amount
+                paymentDate
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            status
+            amount
+            paymentDate
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            discount
+            expirationDate
+            maxUse
+            totalUsed
+            isActive
+            isFeatured
+            couponType
+            minOrderValue
+            maxDiscount
+            description
+            paymentMethod
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    createOrder(input: $input, condition: $condition) {
+      id
+      code
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        appId
+        host
+        priority
+        imageUrl
+        products {
+          items {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            continueSellingOutOfStock
+            rating
+            totalRatings
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            hasFaq
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      user {
+        id
+        storeId
+        store {
+          id
+          name
+          description
+          isActive
+          webUrl
+          appId
+          host
+          priority
+          imageUrl
+          products {
+            items {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              continueSellingOutOfStock
+              rating
+              totalRatings
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              hasFaq
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              linkedProducts {
+                items {
+                  id
+                  productId
+                  linkedProductId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        isActive
+        authProvider
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        isAdmin
+        isCognitoConfirmed
+        profilePhotoUrl
+        wishlists {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            wishlistProducts {
+              items {
+                id
+                wishlistId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        shopingcarts {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            shoppingcartProducts {
+              items {
+                id
+                shoppingcartId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                quantity
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            couponCodeId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        reviews {
+          items {
+            id
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            reviewer {
+              name
+              email
+            }
+            flagged
+            productId
+            product {
+              id
+              title
+              brand
+              vendor
+              categoryId
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              subCategoryId
+              subCategory {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                name
+                description
+                categoryID
+                category {
+                  id
+                  name
+                  storeId
+                  description
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              isFeatured
+              productType
+              createdAt
+              slug
+              productDescription
+              longDescription
+              updatedAt
+              isPublished
+              publishedAt
+              price
+              sku
+              size
+              color
+              status
+              position
+              currency
+              costPrice
+              listingPrice
+              taxable
+              barcode
+              tags
+              benefits
+              weight
+              weightUnit
+              inventory
+              blockedInventory
+              continueSellingOutOfStock
+              rating
+              totalRatings
+              totalOrders
+              additionalInfo
+              thumbImages
+              isTaxEnabled
+              isInventoryEnabled
+              hasVarient
+              hasFaq
+              variants {
+                items {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                nextToken
+              }
+              images {
+                items {
+                  id
+                  productId
+                  position
+                  createdAt
+                  updatedAt
+                  alt
+                  width
+                  height
+                  imageKey
+                  isThumb
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              linkedProducts {
+                items {
+                  id
+                  productId
+                  linkedProductId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+            }
+            rating
+            comment
+            title
+            images
+            verified
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        orders {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            channelName
+            shippingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            billingAddress {
+              name
+              phone
+              email
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+            }
+            totalStoreCredit
+            couponCodeId
+            coupon {
+              id
+              code
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              userId
+              user {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                owner
+                firstName
+                lastName
+                email
+                phone
+                gender
+                dob
+                country
+                state
+                city
+                pinCode
+                landmark
+                address
+                location
+                area
+                isActive
+                authProvider
+                totalOrders
+                totalSpent
+                walletBalance
+                walletSpent
+                totalStoreCredit
+                isAdmin
+                isCognitoConfirmed
+                profilePhotoUrl
+                wishlists {
+                  nextToken
+                }
+                shopingcarts {
+                  nextToken
+                }
+                reviews {
+                  nextToken
+                }
+                orders {
+                  nextToken
+                }
+                payments {
+                  nextToken
+                }
+                userAddress {
+                  nextToken
+                }
+                couponCodes {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              discount
+              expirationDate
+              maxUse
+              totalUsed
+              isActive
+              isFeatured
+              couponType
+              minOrderValue
+              maxDiscount
+              description
+              paymentMethod
+              createdAt
+              updatedAt
+            }
+            totalAmount
+            totalCashOnDeliveryCharges
+            totalDiscount
+            totalGiftCharges
+            totalPrepaidAmount
+            totalShippingCharges
+            taxExempted
+            cFormProvided
+            thirdPartyShipping
+            currency
+            paymentType
+            sla
+            priority
+            orderDate
+            status
+            products {
+              items {
+                id
+                orderId
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                variantId
+                variant {
+                  id
+                  productId
+                  title
+                  description
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  createdAt
+                  updatedAt
+                  taxable
+                  barcode
+                  imageUrl
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                }
+                sku
+                returnReason
+                returnDate
+                returnAWB
+                returnShippingProvider
+                title
+                shippingMethodCode
+                cashOnDeliveryCharges
+                sellingPrice
+                shippingCharges
+                discount
+                totalPrice
+                currency
+                onHold
+                facilityCode
+                gstin
+                additionalInfo
+                centralGstPercentage
+                compensationCessPercentage
+                integratedGstPercentage
+                stateGstPercentage
+                taxRate
+                unionTerritoryGstPercentage
+                deliveryPartner
+                dispatchDate
+                invoiceDate
+                invoiceNumber
+                tentativeDeliveryDate
+                trackingId
+                quantity
+                price
+                status
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            payments {
+              items {
+                id
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                orderId
+                method
+                status
+                amount
+                paymentDate
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            comments {
+              items {
+                id
+                orderId
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                comment
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        payments {
+          items {
+            id
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            userId
+            user {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              owner
+              firstName
+              lastName
+              email
+              phone
+              gender
+              dob
+              country
+              state
+              city
+              pinCode
+              landmark
+              address
+              location
+              area
+              isActive
+              authProvider
+              totalOrders
+              totalSpent
+              walletBalance
+              walletSpent
+              totalStoreCredit
+              isAdmin
+              isCognitoConfirmed
+              profilePhotoUrl
+              wishlists {
+                items {
+                  id
+                  storeId
+                  userId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              shopingcarts {
+                items {
+                  id
+                  storeId
+                  userId
+                  couponCodeId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              reviews {
+                items {
+                  id
+                  userId
+                  flagged
+                  productId
+                  rating
+                  comment
+                  title
+                  images
+                  verified
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              orders {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  channelName
+                  totalStoreCredit
+                  couponCodeId
+                  totalAmount
+                  totalCashOnDeliveryCharges
+                  totalDiscount
+                  totalGiftCharges
+                  totalPrepaidAmount
+                  totalShippingCharges
+                  taxExempted
+                  cFormProvided
+                  thirdPartyShipping
+                  currency
+                  paymentType
+                  sla
+                  priority
+                  orderDate
+                  status
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              payments {
+                items {
+                  id
+                  storeId
+                  userId
+                  orderId
+                  method
+                  status
+                  amount
+                  paymentDate
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              userAddress {
+                items {
+                  id
+                  userID
+                  name
+                  phone
+                  email
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              couponCodes {
+                items {
+                  id
+                  code
+                  storeId
+                  userId
+                  discount
+                  expirationDate
+                  maxUse
+                  totalUsed
+                  isActive
+                  isFeatured
+                  couponType
+                  minOrderValue
+                  maxDiscount
+                  description
+                  paymentMethod
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            orderId
+            method
+            status
+            amount
+            paymentDate
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        userAddress {
+          items {
+            id
+            userID
+            name
+            phone
+            email
+            country
+            state
+            city
+            pinCode
+            landmark
+            address
+            location
+            area
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        couponCodes {
+          items {
+            id
+            code
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -65529,6 +73916,7 @@ export const createOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -65537,6 +73925,7 @@ export const createOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -65702,6 +74091,7 @@ export const createOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -65710,6 +74100,7 @@ export const createOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -65980,6 +74371,7 @@ export const createOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -65988,6 +74380,7 @@ export const createOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -66603,6 +74996,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -66611,6 +75005,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -66732,6 +75127,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -66740,6 +75136,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -66792,6 +75189,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -66800,6 +75198,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -66832,6 +75231,7 @@ export const createOrder = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -66840,6 +75240,7 @@ export const createOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -66957,6 +75358,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -66965,6 +75367,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -67015,6 +75418,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -67023,6 +75427,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -67183,6 +75588,7 @@ export const createOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -67191,6 +75597,7 @@ export const createOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -67258,6 +75665,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -67266,6 +75674,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -67425,6 +75834,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -67433,6 +75843,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -67782,6 +76193,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -67790,6 +76202,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -67949,6 +76362,7 @@ export const createOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -67957,6 +76371,7 @@ export const createOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -68342,6 +76757,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -68350,6 +76766,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -68471,6 +76888,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -68479,6 +76897,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -68531,6 +76950,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -68539,6 +76959,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -68571,6 +76992,7 @@ export const updateOrder = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -68579,6 +77001,7 @@ export const updateOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -68696,6 +77119,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -68704,6 +77128,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -68754,6 +77179,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -68762,6 +77188,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -68917,6 +77344,7 @@ export const updateOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -68925,6 +77353,7 @@ export const updateOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -69073,6 +77502,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -69081,6 +77511,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -69127,6 +77558,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -69135,6 +77567,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -69220,6 +77653,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -69228,6 +77662,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -69274,6 +77709,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -69282,6 +77718,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -69628,6 +78065,7 @@ export const updateOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -69636,6 +78074,7 @@ export const updateOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -69765,6 +78204,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -69773,6 +78213,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -70133,6 +78574,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -70141,6 +78583,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -70359,6 +78802,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -70367,6 +78811,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -70624,6 +79069,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -70632,6 +79078,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -71000,6 +79447,7 @@ export const updateOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -71008,6 +79456,7 @@ export const updateOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -71173,6 +79622,7 @@ export const updateOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -71181,6 +79631,7 @@ export const updateOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -71451,6 +79902,7 @@ export const updateOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -71459,6 +79911,7 @@ export const updateOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -72074,6 +80527,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72082,6 +80536,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -72203,6 +80658,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72211,6 +80667,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -72263,6 +80720,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72271,6 +80729,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -72303,6 +80762,7 @@ export const updateOrder = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -72311,6 +80771,7 @@ export const updateOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -72428,6 +80889,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72436,6 +80898,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -72486,6 +80949,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72494,6 +80958,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -72654,6 +81119,7 @@ export const updateOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -72662,6 +81128,7 @@ export const updateOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -72729,6 +81196,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72737,6 +81205,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -72896,6 +81365,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -72904,6 +81374,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -73253,6 +81724,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -73261,6 +81733,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -73420,6 +81893,7 @@ export const updateOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -73428,6 +81902,7 @@ export const updateOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -73813,6 +82288,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -73821,6 +82297,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -73942,6 +82419,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -73950,6 +82428,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -74002,6 +82481,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74010,6 +82490,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -74042,6 +82523,7 @@ export const deleteOrder = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -74050,6 +82532,7 @@ export const deleteOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -74167,6 +82650,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74175,6 +82659,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -74225,6 +82710,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74233,6 +82719,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -74388,6 +82875,7 @@ export const deleteOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -74396,6 +82884,7 @@ export const deleteOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -74544,6 +83033,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74552,6 +83042,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -74598,6 +83089,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74606,6 +83098,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -74691,6 +83184,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74699,6 +83193,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -74745,6 +83240,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -74753,6 +83249,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -75099,6 +83596,7 @@ export const deleteOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -75107,6 +83605,7 @@ export const deleteOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -75236,6 +83735,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -75244,6 +83744,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -75604,6 +84105,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -75612,6 +84114,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -75830,6 +84333,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -75838,6 +84342,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -76095,6 +84600,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -76103,6 +84609,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -76471,6 +84978,7 @@ export const deleteOrder = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -76479,6 +84987,7 @@ export const deleteOrder = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -76644,6 +85153,7 @@ export const deleteOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -76652,6 +85162,7 @@ export const deleteOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -76922,6 +85433,7 @@ export const deleteOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -76930,6 +85442,7 @@ export const deleteOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -77545,6 +86058,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -77553,6 +86067,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -77674,6 +86189,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -77682,6 +86198,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -77734,6 +86251,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -77742,6 +86260,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -77774,6 +86293,7 @@ export const deleteOrder = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -77782,6 +86302,7 @@ export const deleteOrder = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -77899,6 +86420,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -77907,6 +86429,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -77957,6 +86480,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -77965,6 +86489,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -78125,6 +86650,7 @@ export const deleteOrder = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -78133,6 +86659,7 @@ export const deleteOrder = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -78200,6 +86727,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -78208,6 +86736,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -78367,6 +86896,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -78375,6 +86905,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -78724,6 +87255,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -78732,6 +87264,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -78891,6 +87424,7 @@ export const deleteOrder = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -78899,6 +87433,7 @@ export const deleteOrder = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -79347,6 +87882,7 @@ export const createOrderComment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -79355,6 +87891,7 @@ export const createOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -79503,6 +88040,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -79511,6 +88049,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -79557,6 +88096,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -79565,6 +88105,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -79650,6 +88191,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -79658,6 +88200,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -79704,6 +88247,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -79712,6 +88256,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -80058,6 +88603,7 @@ export const createOrderComment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -80066,6 +88612,7 @@ export const createOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -80195,6 +88742,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -80203,6 +88751,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -80563,6 +89112,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -80571,6 +89121,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -80789,6 +89340,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -80797,6 +89349,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -81054,6 +89607,7 @@ export const createOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -81062,6 +89616,7 @@ export const createOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -81415,6 +89970,7 @@ export const deleteOrderComment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -81423,6 +89979,7 @@ export const deleteOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -81571,6 +90128,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -81579,6 +90137,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -81625,6 +90184,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -81633,6 +90193,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -81718,6 +90279,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -81726,6 +90288,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -81772,6 +90335,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -81780,6 +90344,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -82126,6 +90691,7 @@ export const deleteOrderComment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -82134,6 +90700,7 @@ export const deleteOrderComment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -82263,6 +90830,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -82271,6 +90839,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -82631,6 +91200,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -82639,6 +91209,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -82857,6 +91428,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -82865,6 +91437,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -83122,6 +91695,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -83130,6 +91704,7 @@ export const deleteOrderComment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -83438,6 +92013,7 @@ export const createOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -83446,6 +92022,7 @@ export const createOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -83600,6 +92177,7 @@ export const createOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -83608,6 +92186,7 @@ export const createOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -83776,6 +92355,7 @@ export const createOrderProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -83784,6 +92364,7 @@ export const createOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -83886,6 +92467,7 @@ export const createOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -83894,6 +92476,7 @@ export const createOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -83964,6 +92547,7 @@ export const createOrderProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -83972,6 +92556,7 @@ export const createOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -84062,6 +92647,7 @@ export const createOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -84070,6 +92656,7 @@ export const createOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -84271,6 +92858,7 @@ export const createOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -84279,6 +92867,7 @@ export const createOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -84493,6 +93082,7 @@ export const createOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -84501,6 +93091,7 @@ export const createOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -84601,6 +93192,7 @@ export const createOrderProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -84609,6 +93201,7 @@ export const createOrderProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -84959,6 +93552,7 @@ export const createOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -84967,6 +93561,7 @@ export const createOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -85179,6 +93774,7 @@ export const createOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -85187,6 +93783,7 @@ export const createOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -85430,6 +94027,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -85438,6 +94036,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -85592,6 +94191,7 @@ export const updateOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -85600,6 +94200,7 @@ export const updateOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -85768,6 +94369,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -85776,6 +94378,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -85878,6 +94481,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -85886,6 +94490,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -85956,6 +94561,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -85964,6 +94570,7 @@ export const updateOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -86054,6 +94661,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -86062,6 +94670,7 @@ export const updateOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -86263,6 +94872,7 @@ export const updateOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -86271,6 +94881,7 @@ export const updateOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -86485,6 +95096,7 @@ export const updateOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -86493,6 +95105,7 @@ export const updateOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -86593,6 +95206,7 @@ export const updateOrderProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -86601,6 +95215,7 @@ export const updateOrderProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -86951,6 +95566,7 @@ export const updateOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -86959,6 +95575,7 @@ export const updateOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -87171,6 +95788,7 @@ export const updateOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -87179,6 +95797,7 @@ export const updateOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -87422,6 +96041,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -87430,6 +96050,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87584,6 +96205,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -87592,6 +96214,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -87760,6 +96383,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -87768,6 +96392,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -87870,6 +96495,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -87878,6 +96504,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -87948,6 +96575,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -87956,6 +96584,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -88046,6 +96675,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -88054,6 +96684,7 @@ export const deleteOrderProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -88255,6 +96886,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -88263,6 +96895,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -88477,6 +97110,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -88485,6 +97119,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -88585,6 +97220,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -88593,6 +97229,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -88943,6 +97580,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -88951,6 +97589,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -89163,6 +97802,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -89171,6 +97811,7 @@ export const deleteOrderProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -89395,6 +98036,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -89403,6 +98045,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89524,6 +98167,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -89532,6 +98176,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89584,6 +98229,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -89592,6 +98238,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -89624,6 +98271,7 @@ export const createPayment = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -89632,6 +98280,7 @@ export const createPayment = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -89749,6 +98398,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -89757,6 +98407,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -89807,6 +98458,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -89815,6 +98467,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -89970,6 +98623,7 @@ export const createPayment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -89978,6 +98632,7 @@ export const createPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -90126,6 +98781,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -90134,6 +98790,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -90180,6 +98837,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -90188,6 +98846,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -90273,6 +98932,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -90281,6 +98941,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -90327,6 +98988,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -90335,6 +98997,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -90681,6 +99344,7 @@ export const createPayment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -90689,6 +99353,7 @@ export const createPayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -90818,6 +99483,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -90826,6 +99492,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -91186,6 +99853,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -91194,6 +99862,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -91412,6 +100081,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -91420,6 +100090,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -91677,6 +100348,7 @@ export const createPayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -91685,6 +100357,7 @@ export const createPayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -91978,6 +100651,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -91986,6 +100660,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92107,6 +100782,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92115,6 +100791,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92167,6 +100844,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92175,6 +100853,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92207,6 +100886,7 @@ export const updatePayment = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -92215,6 +100895,7 @@ export const updatePayment = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -92332,6 +101013,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92340,6 +101022,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -92390,6 +101073,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92398,6 +101082,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -92553,6 +101238,7 @@ export const updatePayment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -92561,6 +101247,7 @@ export const updatePayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -92709,6 +101396,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92717,6 +101405,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92763,6 +101452,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92771,6 +101461,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -92856,6 +101547,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92864,6 +101556,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -92910,6 +101603,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -92918,6 +101612,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -93264,6 +101959,7 @@ export const updatePayment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -93272,6 +101968,7 @@ export const updatePayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -93401,6 +102098,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -93409,6 +102107,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -93769,6 +102468,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -93777,6 +102477,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -93995,6 +102696,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94003,6 +102705,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -94260,6 +102963,7 @@ export const updatePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94268,6 +102972,7 @@ export const updatePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -94561,6 +103266,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94569,6 +103275,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -94690,6 +103397,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94698,6 +103406,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -94750,6 +103459,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94758,6 +103468,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -94790,6 +103501,7 @@ export const deletePayment = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -94798,6 +103510,7 @@ export const deletePayment = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -94915,6 +103628,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94923,6 +103637,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -94973,6 +103688,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -94981,6 +103697,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -95136,6 +103853,7 @@ export const deletePayment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -95144,6 +103862,7 @@ export const deletePayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -95292,6 +104011,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -95300,6 +104020,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -95346,6 +104067,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -95354,6 +104076,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -95439,6 +104162,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -95447,6 +104171,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -95493,6 +104218,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -95501,6 +104227,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -95847,6 +104574,7 @@ export const deletePayment = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -95855,6 +104583,7 @@ export const deletePayment = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -95984,6 +104713,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -95992,6 +104722,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -96352,6 +105083,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -96360,6 +105092,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -96578,6 +105311,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -96586,6 +105320,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -96843,6 +105578,7 @@ export const deletePayment = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -96851,6 +105587,7 @@ export const deletePayment = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -97207,6 +105944,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -97215,6 +105953,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -97363,6 +106102,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -97371,6 +106111,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -97417,6 +106158,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -97425,6 +106167,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -97510,6 +106253,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -97518,6 +106262,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -97564,6 +106309,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -97572,6 +106318,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -97918,6 +106665,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -97926,6 +106674,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -98055,6 +106804,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -98063,6 +106813,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -98423,6 +107174,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -98431,6 +107183,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -98649,6 +107402,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -98657,6 +107411,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -98914,6 +107669,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -98922,6 +107678,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -99221,6 +107978,7 @@ export const createReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -99229,6 +107987,7 @@ export const createReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -99383,6 +108142,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -99391,6 +108151,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -99559,6 +108320,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -99567,6 +108329,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -99669,6 +108432,7 @@ export const createReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -99677,6 +108441,7 @@ export const createReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -99747,6 +108512,7 @@ export const createReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -99755,6 +108521,7 @@ export const createReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -99845,6 +108612,7 @@ export const createReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -99853,6 +108621,7 @@ export const createReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -100054,6 +108823,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -100062,6 +108832,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100276,6 +109047,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -100284,6 +109056,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100384,6 +109157,7 @@ export const createReview = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -100392,6 +109166,7 @@ export const createReview = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -100742,6 +109517,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -100750,6 +109526,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -100962,6 +109739,7 @@ export const createReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -100970,6 +109748,7 @@ export const createReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -101205,6 +109984,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -101213,6 +109993,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -101361,6 +110142,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -101369,6 +110151,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -101415,6 +110198,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -101423,6 +110207,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -101508,6 +110293,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -101516,6 +110302,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -101562,6 +110349,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -101570,6 +110358,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -101916,6 +110705,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -101924,6 +110714,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -102053,6 +110844,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -102061,6 +110853,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -102421,6 +111214,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -102429,6 +111223,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -102647,6 +111442,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -102655,6 +111451,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -102912,6 +111709,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -102920,6 +111718,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -103219,6 +112018,7 @@ export const updateReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -103227,6 +112027,7 @@ export const updateReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -103381,6 +112182,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -103389,6 +112191,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -103557,6 +112360,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -103565,6 +112369,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -103667,6 +112472,7 @@ export const updateReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -103675,6 +112481,7 @@ export const updateReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -103745,6 +112552,7 @@ export const updateReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -103753,6 +112561,7 @@ export const updateReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -103843,6 +112652,7 @@ export const updateReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -103851,6 +112661,7 @@ export const updateReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -104052,6 +112863,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -104060,6 +112872,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -104274,6 +113087,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -104282,6 +113096,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -104382,6 +113197,7 @@ export const updateReview = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -104390,6 +113206,7 @@ export const updateReview = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -104740,6 +113557,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -104748,6 +113566,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -104960,6 +113779,7 @@ export const updateReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -104968,6 +113788,7 @@ export const updateReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -105203,6 +114024,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -105211,6 +114033,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -105359,6 +114182,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -105367,6 +114191,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -105413,6 +114238,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -105421,6 +114247,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -105506,6 +114333,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -105514,6 +114342,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -105560,6 +114389,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -105568,6 +114398,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -105914,6 +114745,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -105922,6 +114754,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -106051,6 +114884,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -106059,6 +114893,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -106419,6 +115254,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -106427,6 +115263,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -106645,6 +115482,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -106653,6 +115491,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -106910,6 +115749,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -106918,6 +115758,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -107217,6 +116058,7 @@ export const deleteReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -107225,6 +116067,7 @@ export const deleteReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -107379,6 +116222,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -107387,6 +116231,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -107555,6 +116400,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -107563,6 +116409,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -107665,6 +116512,7 @@ export const deleteReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -107673,6 +116521,7 @@ export const deleteReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -107743,6 +116592,7 @@ export const deleteReview = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -107751,6 +116601,7 @@ export const deleteReview = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -107841,6 +116692,7 @@ export const deleteReview = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -107849,6 +116701,7 @@ export const deleteReview = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -108050,6 +116903,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -108058,6 +116912,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -108272,6 +117127,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -108280,6 +117136,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -108380,6 +117237,7 @@ export const deleteReview = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -108388,6 +117246,7 @@ export const deleteReview = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -108738,6 +117597,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -108746,6 +117606,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -108958,6 +117819,7 @@ export const deleteReview = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -108966,6 +117828,7 @@ export const deleteReview = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -109138,6 +118001,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109146,6 +118010,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109267,6 +118132,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109275,6 +118141,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109327,6 +118194,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109335,6 +118203,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109367,6 +118236,7 @@ export const createWishlist = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -109375,6 +118245,7 @@ export const createWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -109492,6 +118363,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109500,6 +118372,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -109550,6 +118423,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109558,6 +118432,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -109644,6 +118519,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109652,6 +118528,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109773,6 +118650,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109781,6 +118659,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109833,6 +118712,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -109841,6 +118721,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -109873,6 +118754,7 @@ export const createWishlist = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -109881,6 +118763,7 @@ export const createWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -109998,6 +118881,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110006,6 +118890,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -110056,6 +118941,7 @@ export const createWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110064,6 +118950,7 @@ export const createWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -110193,6 +119080,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110201,6 +119089,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -110322,6 +119211,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110330,6 +119220,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -110382,6 +119273,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110390,6 +119282,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -110422,6 +119315,7 @@ export const updateWishlist = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -110430,6 +119324,7 @@ export const updateWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -110547,6 +119442,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110555,6 +119451,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -110605,6 +119502,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110613,6 +119511,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -110699,6 +119598,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110707,6 +119607,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -110828,6 +119729,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110836,6 +119738,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -110888,6 +119791,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -110896,6 +119800,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -110928,6 +119833,7 @@ export const updateWishlist = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -110936,6 +119842,7 @@ export const updateWishlist = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -111053,6 +119960,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -111061,6 +119969,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -111111,6 +120020,7 @@ export const updateWishlist = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -111119,6 +120029,7 @@ export const updateWishlist = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -111267,6 +120178,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -111275,6 +120187,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -111429,6 +120342,7 @@ export const createWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -111437,6 +120351,7 @@ export const createWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -111605,6 +120520,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -111613,6 +120529,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -111715,6 +120632,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -111723,6 +120641,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -111793,6 +120712,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -111801,6 +120721,7 @@ export const createWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -111891,6 +120812,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -111899,6 +120821,7 @@ export const createWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -112100,6 +121023,7 @@ export const createWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -112108,6 +121032,7 @@ export const createWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -112322,6 +121247,7 @@ export const createWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -112330,6 +121256,7 @@ export const createWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -112430,6 +121357,7 @@ export const createWishlistProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -112438,6 +121366,7 @@ export const createWishlistProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -112788,6 +121717,7 @@ export const createWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -112796,6 +121726,7 @@ export const createWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -113008,6 +121939,7 @@ export const createWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -113016,6 +121948,7 @@ export const createWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -113227,6 +122160,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -113235,6 +122169,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -113389,6 +122324,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -113397,6 +122333,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -113565,6 +122502,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -113573,6 +122511,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -113675,6 +122614,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -113683,6 +122623,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -113753,6 +122694,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -113761,6 +122703,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -113851,6 +122794,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -113859,6 +122803,7 @@ export const updateWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -114060,6 +123005,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -114068,6 +123014,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -114282,6 +123229,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -114290,6 +123238,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -114390,6 +123339,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -114398,6 +123348,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -114748,6 +123699,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -114756,6 +123708,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -114968,6 +123921,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -114976,6 +123930,7 @@ export const updateWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -115187,6 +124142,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -115195,6 +124151,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -115349,6 +124306,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -115357,6 +124315,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -115525,6 +124484,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -115533,6 +124493,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115635,6 +124596,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -115643,6 +124605,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -115713,6 +124676,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -115721,6 +124685,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -115811,6 +124776,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -115819,6 +124785,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -116020,6 +124987,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -116028,6 +124996,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -116242,6 +125211,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -116250,6 +125220,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -116350,6 +125321,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -116358,6 +125330,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -116708,6 +125681,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -116716,6 +125690,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -116928,6 +125903,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -116936,6 +125912,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -117041,1063 +126018,6 @@ export const deleteWishlistProduct = /* GraphQL */ `
     }
   }
 `;
-export const createShoppingCart = /* GraphQL */ `
-  mutation CreateShoppingCart(
-    $input: CreateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    createShoppingCart(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        products {
-          items {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              bannerUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  bannerUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                bannerUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              bannerUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalRatings
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      userId
-      shoppingcartProducts {
-        items {
-          id
-          shoppingcartId
-          productId
-          product {
-            id
-            title
-            brand
-            vendor
-            categoryId
-            category {
-              id
-              name
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              description
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              bannerUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              subCategory {
-                items {
-                  id
-                  storeId
-                  name
-                  description
-                  categoryID
-                  slug
-                  isFeatured
-                  totalProducts
-                  priority
-                  imageUrl
-                  bannerUrl
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            subCategoryId
-            subCategory {
-              id
-              storeId
-              store {
-                id
-                name
-                description
-                isActive
-                webUrl
-                appId
-                host
-                priority
-                imageUrl
-                products {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              name
-              description
-              categoryID
-              category {
-                id
-                name
-                storeId
-                store {
-                  id
-                  name
-                  description
-                  isActive
-                  webUrl
-                  appId
-                  host
-                  priority
-                  imageUrl
-                  createdAt
-                  updatedAt
-                }
-                description
-                slug
-                isFeatured
-                totalProducts
-                priority
-                imageUrl
-                bannerUrl
-                products {
-                  nextToken
-                }
-                subCategory {
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              slug
-              isFeatured
-              totalProducts
-              priority
-              imageUrl
-              bannerUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            storeId
-            store {
-              id
-              name
-              description
-              isActive
-              webUrl
-              appId
-              host
-              priority
-              imageUrl
-              products {
-                items {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            benefits
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalRatings
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            variants {
-              items {
-                id
-                productId
-                title
-                description
-                price
-                sku
-                size
-                color
-                status
-                position
-                currency
-                costPrice
-                listingPrice
-                createdAt
-                updatedAt
-                taxable
-                barcode
-                imageUrl
-                weight
-                weightUnit
-                inventory
-                blockedInventory
-              }
-              nextToken
-            }
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-            reviews {
-              items {
-                id
-                userId
-                user {
-                  id
-                  storeId
-                  owner
-                  firstName
-                  lastName
-                  email
-                  phone
-                  gender
-                  dob
-                  country
-                  state
-                  city
-                  pinCode
-                  landmark
-                  address
-                  location
-                  area
-                  isActive
-                  authProvider
-                  totalOrders
-                  totalSpent
-                  walletBalance
-                  walletSpent
-                  totalStoreCredit
-                  isAdmin
-                  isCognitoConfirmed
-                  profilePhotoUrl
-                  createdAt
-                  updatedAt
-                }
-                reviewer {
-                  name
-                  email
-                }
-                flagged
-                productId
-                product {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                rating
-                comment
-                title
-                images
-                verified
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            linkedProducts {
-              items {
-                id
-                productId
-                linkedProductId
-                linkedProduct {
-                  id
-                  title
-                  brand
-                  vendor
-                  categoryId
-                  subCategoryId
-                  storeId
-                  isFeatured
-                  productType
-                  createdAt
-                  slug
-                  productDescription
-                  longDescription
-                  updatedAt
-                  isPublished
-                  publishedAt
-                  price
-                  sku
-                  size
-                  color
-                  status
-                  position
-                  currency
-                  costPrice
-                  listingPrice
-                  taxable
-                  barcode
-                  tags
-                  benefits
-                  weight
-                  weightUnit
-                  inventory
-                  blockedInventory
-                  rating
-                  totalRatings
-                  totalOrders
-                  additionalInfo
-                  thumbImages
-                  isTaxEnabled
-                  isInventoryEnabled
-                  hasVarient
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-          }
-          variantId
-          variant {
-            id
-            productId
-            title
-            description
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
-            imageUrl
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-          }
-          quantity
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      couponCodeId
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const updateShoppingCart = /* GraphQL */ `
   mutation UpdateShoppingCart(
     $input: UpdateShoppingCartInput!
@@ -118185,6 +126105,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118193,6 +126114,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118314,6 +126236,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118322,6 +126245,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118374,6 +126298,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118382,6 +126307,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118414,6 +126340,7 @@ export const updateShoppingCart = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -118422,6 +126349,7 @@ export const updateShoppingCart = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -118539,6 +126467,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118547,6 +126476,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -118597,6 +126527,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118605,6 +126536,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -118691,6 +126623,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118699,6 +126632,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118820,6 +126754,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118828,6 +126763,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118880,6 +126816,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -118888,6 +126825,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -118920,6 +126858,7 @@ export const updateShoppingCart = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -118928,6 +126867,7 @@ export const updateShoppingCart = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -119045,6 +126985,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -119053,6 +126994,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -119103,6 +127045,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -119111,6 +127054,7 @@ export const updateShoppingCart = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -119261,6 +127205,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -119269,6 +127214,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -119423,6 +127369,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -119431,6 +127378,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -119599,6 +127547,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -119607,6 +127556,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -119709,6 +127659,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -119717,6 +127668,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -119787,6 +127739,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -119795,6 +127748,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -119885,6 +127839,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -119893,6 +127848,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -120094,6 +128050,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -120102,6 +128059,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -120316,6 +128274,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -120324,6 +128283,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -120424,6 +128384,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -120432,6 +128393,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -120782,6 +128744,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -120790,6 +128753,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -121002,6 +128966,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -121010,6 +128975,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -121222,6 +129188,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -121230,6 +129197,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121384,6 +129352,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -121392,6 +129361,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -121560,6 +129530,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -121568,6 +129539,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -121670,6 +129642,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -121678,6 +129651,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -121748,6 +129722,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -121756,6 +129731,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -121846,6 +129822,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -121854,6 +129831,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -122055,6 +130033,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -122063,6 +130042,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -122277,6 +130257,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -122285,6 +130266,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -122385,6 +130367,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -122393,6 +130376,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -122743,6 +130727,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -122751,6 +130736,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -122963,6 +130949,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -122971,6 +130958,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -123183,6 +131171,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -123191,6 +131180,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -123345,6 +131335,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -123353,6 +131344,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -123521,6 +131513,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -123529,6 +131522,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -123631,6 +131625,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -123639,6 +131634,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -123709,6 +131705,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -123717,6 +131714,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -123807,6 +131805,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 weightUnit
                 inventory
                 blockedInventory
+                continueSellingOutOfStock
                 rating
                 totalRatings
                 totalOrders
@@ -123815,6 +131814,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
                 isTaxEnabled
                 isInventoryEnabled
                 hasVarient
+                hasFaq
                 variants {
                   nextToken
                 }
@@ -124016,6 +132016,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -124024,6 +132025,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -124238,6 +132240,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -124246,6 +132249,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -124346,6 +132350,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -124354,6 +132359,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -124704,6 +132710,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -124712,6 +132719,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -124924,6 +132932,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -124932,6 +132941,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -125126,6 +133136,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125134,6 +133145,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -125255,6 +133267,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125263,6 +133276,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -125315,6 +133329,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125323,6 +133338,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -125355,6 +133371,7 @@ export const createCouponCode = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -125363,6 +133380,7 @@ export const createCouponCode = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -125480,6 +133498,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125488,6 +133507,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -125538,6 +133558,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125546,6 +133567,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -125701,6 +133723,7 @@ export const createCouponCode = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -125709,6 +133732,7 @@ export const createCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -125857,6 +133881,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125865,6 +133890,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -125911,6 +133937,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -125919,6 +133946,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -126004,6 +134032,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -126012,6 +134041,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -126058,6 +134088,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -126066,6 +134097,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -126412,6 +134444,7 @@ export const createCouponCode = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -126420,6 +134453,7 @@ export const createCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -126549,6 +134583,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -126557,6 +134592,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -126917,6 +134953,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -126925,6 +134962,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -127143,6 +135181,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -127151,6 +135190,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -127408,6 +135448,7 @@ export const createCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -127416,6 +135457,7 @@ export const createCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -127716,6 +135758,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -127724,6 +135767,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -127845,6 +135889,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -127853,6 +135898,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -127905,6 +135951,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -127913,6 +135960,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -127945,6 +135993,7 @@ export const updateCouponCode = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -127953,6 +136002,7 @@ export const updateCouponCode = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -128070,6 +136120,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -128078,6 +136129,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -128128,6 +136180,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -128136,6 +136189,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -128291,6 +136345,7 @@ export const updateCouponCode = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -128299,6 +136354,7 @@ export const updateCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -128447,6 +136503,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -128455,6 +136512,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -128501,6 +136559,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -128509,6 +136568,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -128594,6 +136654,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -128602,6 +136663,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -128648,6 +136710,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -128656,6 +136719,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -129002,6 +137066,7 @@ export const updateCouponCode = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -129010,6 +137075,7 @@ export const updateCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -129139,6 +137205,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -129147,6 +137214,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -129507,6 +137575,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -129515,6 +137584,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -129733,6 +137803,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -129741,6 +137812,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -129998,6 +138070,7 @@ export const updateCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -130006,6 +138079,7 @@ export const updateCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -130306,6 +138380,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -130314,6 +138389,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -130435,6 +138511,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -130443,6 +138520,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -130495,6 +138573,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -130503,6 +138582,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -130535,6 +138615,7 @@ export const deleteCouponCode = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -130543,6 +138624,7 @@ export const deleteCouponCode = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -130660,6 +138742,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -130668,6 +138751,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -130718,6 +138802,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -130726,6 +138811,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -130881,6 +138967,7 @@ export const deleteCouponCode = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -130889,6 +138976,7 @@ export const deleteCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -131037,6 +139125,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -131045,6 +139134,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -131091,6 +139181,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -131099,6 +139190,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -131184,6 +139276,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -131192,6 +139285,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -131238,6 +139332,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -131246,6 +139341,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -131592,6 +139688,7 @@ export const deleteCouponCode = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -131600,6 +139697,7 @@ export const deleteCouponCode = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -131729,6 +139827,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -131737,6 +139836,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -132097,6 +140197,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -132105,6 +140206,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -132323,6 +140425,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -132331,6 +140434,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -132588,6 +140692,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -132596,6 +140701,7 @@ export const deleteCouponCode = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -133031,6 +141137,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133039,6 +141146,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -133160,6 +141268,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133168,6 +141277,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -133220,6 +141330,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133228,6 +141339,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -133260,6 +141372,7 @@ export const applyCoupon = /* GraphQL */ `
             weightUnit
             inventory
             blockedInventory
+            continueSellingOutOfStock
             rating
             totalRatings
             totalOrders
@@ -133268,6 +141381,7 @@ export const applyCoupon = /* GraphQL */ `
             isTaxEnabled
             isInventoryEnabled
             hasVarient
+            hasFaq
             variants {
               items {
                 id
@@ -133385,6 +141499,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133393,6 +141508,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 rating
                 comment
@@ -133443,6 +141559,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133451,6 +141568,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 createdAt
                 updatedAt
@@ -133606,6 +141724,7 @@ export const applyCoupon = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -133614,6 +141733,7 @@ export const applyCoupon = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -133762,6 +141882,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133770,6 +141891,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -133816,6 +141938,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133824,6 +141947,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -133909,6 +142033,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133917,6 +142042,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -133963,6 +142089,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -133971,6 +142098,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -134317,6 +142445,7 @@ export const applyCoupon = /* GraphQL */ `
               weightUnit
               inventory
               blockedInventory
+              continueSellingOutOfStock
               rating
               totalRatings
               totalOrders
@@ -134325,6 +142454,7 @@ export const applyCoupon = /* GraphQL */ `
               isTaxEnabled
               isInventoryEnabled
               hasVarient
+              hasFaq
               variants {
                 items {
                   id
@@ -134454,6 +142584,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -134462,6 +142593,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -134822,6 +142954,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -134830,6 +142963,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 variantId
                 variant {
@@ -135048,6 +143182,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -135056,6 +143191,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -135313,6 +143449,7 @@ export const applyCoupon = /* GraphQL */ `
                   weightUnit
                   inventory
                   blockedInventory
+                  continueSellingOutOfStock
                   rating
                   totalRatings
                   totalOrders
@@ -135321,6 +143458,7 @@ export const applyCoupon = /* GraphQL */ `
                   isTaxEnabled
                   isInventoryEnabled
                   hasVarient
+                  hasFaq
                 }
                 nextToken
               }
@@ -135562,6 +143700,1084 @@ export const validateTransaction = /* GraphQL */ `
       razorpayPaymentId: $razorpayPaymentId
     ) {
       success
+    }
+  }
+`;
+export const createStoreShoppingCart = /* GraphQL */ `
+  mutation CreateStoreShoppingCart($storeId: ID!) {
+    createStoreShoppingCart(storeId: $storeId) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        appId
+        host
+        priority
+        imageUrl
+        products {
+          items {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            continueSellingOutOfStock
+            rating
+            totalRatings
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            hasFaq
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      userId
+      shoppingcartProducts {
+        items {
+          id
+          shoppingcartId
+          productId
+          product {
+            id
+            title
+            brand
+            vendor
+            categoryId
+            category {
+              id
+              name
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              description
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              subCategory {
+                items {
+                  id
+                  storeId
+                  name
+                  description
+                  categoryID
+                  slug
+                  isFeatured
+                  totalProducts
+                  priority
+                  imageUrl
+                  bannerUrl
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            subCategoryId
+            subCategory {
+              id
+              storeId
+              store {
+                id
+                name
+                description
+                isActive
+                webUrl
+                appId
+                host
+                priority
+                imageUrl
+                products {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              name
+              description
+              categoryID
+              category {
+                id
+                name
+                storeId
+                store {
+                  id
+                  name
+                  description
+                  isActive
+                  webUrl
+                  appId
+                  host
+                  priority
+                  imageUrl
+                  createdAt
+                  updatedAt
+                }
+                description
+                slug
+                isFeatured
+                totalProducts
+                priority
+                imageUrl
+                bannerUrl
+                products {
+                  nextToken
+                }
+                subCategory {
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              slug
+              isFeatured
+              totalProducts
+              priority
+              imageUrl
+              bannerUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            storeId
+            store {
+              id
+              name
+              description
+              isActive
+              webUrl
+              appId
+              host
+              priority
+              imageUrl
+              products {
+                items {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            isFeatured
+            productType
+            createdAt
+            slug
+            productDescription
+            longDescription
+            updatedAt
+            isPublished
+            publishedAt
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            taxable
+            barcode
+            tags
+            benefits
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+            continueSellingOutOfStock
+            rating
+            totalRatings
+            totalOrders
+            additionalInfo
+            thumbImages
+            isTaxEnabled
+            isInventoryEnabled
+            hasVarient
+            hasFaq
+            variants {
+              items {
+                id
+                productId
+                title
+                description
+                price
+                sku
+                size
+                color
+                status
+                position
+                currency
+                costPrice
+                listingPrice
+                createdAt
+                updatedAt
+                taxable
+                barcode
+                imageUrl
+                weight
+                weightUnit
+                inventory
+                blockedInventory
+              }
+              nextToken
+            }
+            images {
+              items {
+                id
+                productId
+                position
+                createdAt
+                updatedAt
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+              nextToken
+            }
+            reviews {
+              items {
+                id
+                userId
+                user {
+                  id
+                  storeId
+                  owner
+                  firstName
+                  lastName
+                  email
+                  phone
+                  gender
+                  dob
+                  country
+                  state
+                  city
+                  pinCode
+                  landmark
+                  address
+                  location
+                  area
+                  isActive
+                  authProvider
+                  totalOrders
+                  totalSpent
+                  walletBalance
+                  walletSpent
+                  totalStoreCredit
+                  isAdmin
+                  isCognitoConfirmed
+                  profilePhotoUrl
+                  createdAt
+                  updatedAt
+                }
+                reviewer {
+                  name
+                  email
+                }
+                flagged
+                productId
+                product {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                rating
+                comment
+                title
+                images
+                verified
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+            linkedProducts {
+              items {
+                id
+                productId
+                linkedProductId
+                linkedProduct {
+                  id
+                  title
+                  brand
+                  vendor
+                  categoryId
+                  subCategoryId
+                  storeId
+                  isFeatured
+                  productType
+                  createdAt
+                  slug
+                  productDescription
+                  longDescription
+                  updatedAt
+                  isPublished
+                  publishedAt
+                  price
+                  sku
+                  size
+                  color
+                  status
+                  position
+                  currency
+                  costPrice
+                  listingPrice
+                  taxable
+                  barcode
+                  tags
+                  benefits
+                  weight
+                  weightUnit
+                  inventory
+                  blockedInventory
+                  continueSellingOutOfStock
+                  rating
+                  totalRatings
+                  totalOrders
+                  additionalInfo
+                  thumbImages
+                  isTaxEnabled
+                  isInventoryEnabled
+                  hasVarient
+                  hasFaq
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            description
+            price
+            sku
+            size
+            color
+            status
+            position
+            currency
+            costPrice
+            listingPrice
+            createdAt
+            updatedAt
+            taxable
+            barcode
+            imageUrl
+            weight
+            weightUnit
+            inventory
+            blockedInventory
+          }
+          quantity
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      couponCodeId
+      createdAt
+      updatedAt
     }
   }
 `;

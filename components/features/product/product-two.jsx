@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -15,6 +15,7 @@ import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
   const {
+    cartList,
     product,
     adClass = "text-center",
     toggleWishlist,
@@ -47,14 +48,18 @@ function ProductTwo(props) {
     }, 1000);
   };
 
-  const addToCartHandler = (e) => {
-    e.preventDefault();
+  const addToCartHandler = () => {
     addToCart({
       ...product,
       qty: 1,
       price: product.price,
     });
   };
+
+  const isCartItem = useMemo(
+    () => cartList.some((cl) => cl.id === product.id),
+    [cartList]
+  );
 
   const { thumbImage, discount } = getProductMeta(product);
 
@@ -120,14 +125,14 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action-vertical">
-          <a
+          <ALink
             href="#"
             className="btn-product-icon btn-cart"
-            title="Add to cart"
-            onClick={addToCartHandler}
+            title="Quick View"
+            onClick={showQuickviewHandler}
           >
-            <i className="d-icon-bag"></i>
-          </a>
+            <i className="d-icon-search"></i>
+          </ALink>
           <a
             href="#"
             className="btn-product-icon btn-wishlist"
@@ -138,17 +143,6 @@ function ProductTwo(props) {
               className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
             ></i>
           </a>
-        </div>
-
-        <div className="product-action">
-          <ALink
-            href="#"
-            className="btn-product btn-quickview"
-            title="Quick View"
-            onClick={showQuickviewHandler}
-          >
-            Quick View
-          </ALink>
         </div>
       </figure>
 
@@ -175,7 +169,7 @@ function ProductTwo(props) {
           ""
         )}
 
-        <h3 className="product-name">
+        <h3 className="product-name p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
@@ -186,26 +180,11 @@ function ProductTwo(props) {
         )}
 
         <div className="product-price">
-          {/* {
-                        product.price[0] !== product.price[1] ?
-                            product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
-                                <>
-                                    <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                    <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                </>
-                                :
-                                < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                            : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                    } */}
-          {/* <ins className="new-price">₹{toDecimal(product.price)}</ins> */}
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
         <div className="ratings-container">
           <div className="ratings-full">
-            {/* // TODO  we have to consider about this */}
-            {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
-                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
             <span
               className="ratings"
               style={{ width: Math.min(20 * product.rating, 100) + "%" }}
@@ -221,6 +200,27 @@ function ProductTwo(props) {
             </ALink>
           )}
         </div>
+
+        <div className="product-action">
+          {isCartItem ? (
+            <ALink
+              href="/pages/cart"
+              className="btn-product btn-quickview m-0"
+              title="View Cart"
+            >
+              View Cart
+            </ALink>
+          ) : (
+            <ALink
+              href="#"
+              className="btn-product btn-quickview m-0"
+              title="Add to cart"
+              onClick={addToCartHandler}
+            >
+              Add to cart
+            </ALink>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -229,6 +229,7 @@ function ProductTwo(props) {
 function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
+    cartList: state.cart.data || [],
   };
 }
 
