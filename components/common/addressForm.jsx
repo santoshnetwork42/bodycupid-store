@@ -48,7 +48,7 @@ const AddressForm = (props) => {
     async (e) => {
       e.preventDefault();
       try {
-        const formErrors = await validateAddress(address);
+        const formErrors = await validateAddress(address, "ALL");
         if (!formErrors) {
           if (user) {
             const tempAddress = getProperAddress(address);
@@ -68,6 +68,7 @@ const AddressForm = (props) => {
           setErrors(formErrors);
         }
       } catch (errors) {
+        console.log(errors);
         toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
@@ -234,9 +235,9 @@ const AddressForm = (props) => {
             <div className="overflow-hidden mb-4">
               <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                 <ul className="m-0">
-                  {Object.values(errors).map((val) => {
-                    return <li>{val}</li>;
-                  })}
+                  {Object.values(errors).map((val) => (
+                    <li key={val}>{val}</li>
+                  ))}
                 </ul>
               </div>
             </div>

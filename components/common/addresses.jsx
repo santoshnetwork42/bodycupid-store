@@ -81,7 +81,7 @@ function Addresses({ user, onAddressChange }) {
         area: adr.area,
       });
     }
-  }, [selected]);
+  }, [selected, addresses]);
 
   if (loading) return <></>;
 

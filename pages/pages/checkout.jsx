@@ -133,9 +133,9 @@ function Checkout(props) {
       setLoading(true);
       const paymentType = isFirst ? "PREPAID" : "COD";
       const formErrors = await validateAddress(shippingAddress, paymentType);
+      setFormErorr(formErrors);
       if (!formErrors) {
         try {
-          setFormErorr(null);
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
           const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
@@ -219,12 +219,9 @@ function Checkout(props) {
           }
         } catch (error) {
           console.log(error);
-          setLoading(false);
         }
-      } else {
-        setFormErorr(formErrors);
-        setLoading(false);
       }
+      setLoading(false);
       return false;
     },
     [
@@ -297,17 +294,6 @@ function Checkout(props) {
                     Shipping Address
                   </h3>
                   <Addresses onAddressChange={setAddress} />
-                  {!!formErorr && (
-                    <div className="overflow-hidden mb-4">
-                      <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
-                        <ul className="m-0">
-                          {Object.values(formErorr).map((val) => {
-                            return <li>{val}</li>;
-                          })}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 <aside className="col-lg-5 sticky-sidebar-wrapper">
@@ -493,6 +479,17 @@ function Checkout(props) {
                           <ALink href="#">terms and conditions </ALink>*
                         </label>
                       </div> */}
+                      {!!formErorr && (
+                        <div className="overflow-hidden mb-4 mt-4">
+                          <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                            <ul className="m-0">
+                              {Object.values(formErorr).map((val) => (
+                                <li key={val}>{val}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                       <button
                         onClick={placeOrder}
                         className="btn btn-dark btn-rounded btn-order"
