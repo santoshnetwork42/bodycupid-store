@@ -61,3 +61,16 @@ export const getTotalPriceByField = (arr, field) => {
 
   return x;
 };
+
+export const scrollWithOffset = (id, offset, callback) => {
+  const ele = document.getElementById(id);
+  if (ele) {
+    const elementPosition = ele.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+    if (callback) callback(ele);
+  }
+};

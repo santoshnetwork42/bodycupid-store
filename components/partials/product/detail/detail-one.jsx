@@ -1,6 +1,6 @@
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
@@ -14,10 +14,12 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime } from "~/utils/helper";
+import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
 
 function DetailOne(props) {
-  let router = useRouter();
+  const {
+    query: { review },
+  } = useRouter();
   const {
     cartList,
     updateCart,
@@ -148,16 +150,20 @@ function DetailOne(props) {
     }
   };
 
+  useEffect(() => {
+    if (review) {
+      onReviewClick();
+    }
+  }, []);
+
   const resetValueHandler = () => {
     setVariant(null);
   };
 
   const onReviewClick = () => {
-    const ele = document.getElementById("product-review");
-    if (ele) {
-      ele.scrollIntoView({ behavior: "smooth" });
+    scrollWithOffset("product-review", 120, (ele) => {
       ele.click();
-    }
+    });
   };
 
   function changeQty(qty) {

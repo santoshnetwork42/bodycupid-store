@@ -164,7 +164,13 @@ function ProductEight(props) {
           </div>
 
           {!!product.totalRatings && (
-            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+            <ALink
+              href={{
+                pathname: `/product/${product.slug}`,
+                query: { review: true },
+              }}
+              className="rating-reviews"
+            >
               ( {product?.totalRatings} reviews )
             </ALink>
           )}

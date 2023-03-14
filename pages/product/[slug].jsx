@@ -15,7 +15,6 @@ import LinkedProducts from "~/components/partials/product/linked-product";
 
 function ProductDefault() {
   const { slug, variantId } = useRouter().query;
-
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);

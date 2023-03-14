@@ -25,6 +25,7 @@ function ProductTwo(props) {
     isCategory = true,
   } = props;
 
+
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -195,7 +196,13 @@ function ProductTwo(props) {
           </div>
 
           {!!product?.totalRatings && (
-            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+            <ALink
+              href={{
+                pathname: `/product/${product.slug}`,
+                query: { review: true },
+              }}
+              className="rating-reviews"
+            >
               ( {product?.totalRatings} reviews )
             </ALink>
           )}
