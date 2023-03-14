@@ -43,17 +43,15 @@ export const deliveryRemainingTime = () => {
   }
 };
 
-export const scrollWithOffset = (id, offset, isClick) => {
+export const scrollWithOffset = (id, offset, callback) => {
   const ele = document.getElementById(id);
-  const elementPosition = ele.getBoundingClientRect().top;
-  const offsetPosition = elementPosition + window.pageYOffset - offset;
   if (ele) {
+    const elementPosition = ele.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
     window.scrollTo({
       top: offsetPosition,
       behavior: "smooth",
     });
-    if (isClick) {
-      ele.click();
-    }
+    callback(ele);
   }
 };
