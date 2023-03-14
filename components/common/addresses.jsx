@@ -8,7 +8,7 @@ import { deleteUserAddress } from "~/graphql/mutations";
 import { findUserAddresses } from "~/graphql/api";
 import Modal from "~/components/common/modal";
 
-function Addresses({ user, onAddressChange, formErorrs }) {
+function Addresses({ user, onAddressChange }) {
   const [loading, setLoading] = useState(!!user);
   const [selected, setSelected] = useState(null);
   const [addresses, setAddresses] = useState([]);
@@ -67,7 +67,8 @@ function Addresses({ user, onAddressChange, formErorrs }) {
       const adr = addresses.find((a) => a.id === selected);
       onAddressChange({
         id: adr.id,
-        name: adr.name,
+        firstName: adr.name.split(" ")[0],
+        lastName: adr.name.split(" ")[1],
         phone: adr.phone,
         email: adr.email,
         country: adr.country,
@@ -168,11 +169,7 @@ function Addresses({ user, onAddressChange, formErorrs }) {
           </button>
         </>
       ) : (
-        <AddressForm
-          onSubmit={onAddress}
-          onAddress={onAddressChange}
-          formErorrs={formErorrs}
-        />
+        <AddressForm onSubmit={onAddress} onAddress={onAddressChange} />
       )}
 
       <Modal

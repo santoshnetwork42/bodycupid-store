@@ -51,32 +51,6 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
-  const [validatePincodes, setValidatePincodes] = useState({});
-  const validateZipCode = useCallback(async () => {
-    const { pinCode } = shippingAddress;
-    if (pinCode) {
-      if (!validatePincodes.hasOwnProperty(pinCode)) {
-        const {
-          data: { getZipCode: response },
-        } = await API.graphql(graphqlOperation(getZipCode, { id: pinCode }));
-        setValidatePincodes({
-          ...validatePincodes,
-          [pinCode]: !!response,
-        });
-        console.log(response);
-        if (response) {
-          if (isFirst) return response.prepaid;
-          return response.cod;
-        } else {
-          return !!response;
-        }
-      } else {
-        return validatePincodes[pinCode];
-      }
-    }
-
-    return false;
-  }, [shippingAddress, isFirst, validatePincodes]);
 
   const handlePayment = useCallback(
     async ({ orderId, paymentId, address }) => {
@@ -141,7 +115,8 @@ function Checkout(props) {
   );
 
   const addUserAddress = useCallback(async () => {
-    const { id: ignoreId, ...restAddress } = shippingAddress;
+    const tempAddress = getProperAddress(shippingAddress);
+    const { id: ignoreId, ...restAddress } = tempAddress;
     if (user && !ignoreId) {
       await API.graphql({
         query: createUserAddress,
@@ -157,11 +132,13 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       setLoading(true);
-      const isValidPinCode = await validateZipCode();
-      const isValid = await checkValidation(shippingAddress, isValidPinCode);
-      if (!isValid) {
+      const paymentType = isFirst ? "PREPAID" : "COD";
+      const isFormValid = await checkValidation(shippingAddress, paymentType);
+
+      if (!isFormValid) {
         try {
-          let tempAddress = getProperAddress(shippingAddress);
+          setFormErorr(null);
+          const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
           const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
           const payload = {
@@ -247,15 +224,7 @@ function Checkout(props) {
           setLoading(false);
         }
       } else {
-        if (shippingAddress?.pinCode && !isValidPinCode && isValid.zipcode) {
-          const message = isFirst
-            ? "Online Delivery is not available at this pincocde"
-            : "Cash on Delivery is not available at this pincocde";
-          setFormErorr({ ...isValid, zipcode: message });
-          toast(<AlertPopup status="error" message={message} />);
-        } else {
-          setFormErorr(isValid);
-        }
+        setFormErorr(isFormValid);
         setLoading(false);
       }
       return false;
@@ -269,7 +238,6 @@ function Checkout(props) {
       createUserAddress,
       formErorr,
       handlePayment,
-      validateZipCode,
       setFormErorr,
     ]
   );
@@ -330,10 +298,18 @@ function Checkout(props) {
                   <h3 className="title title-simple text-left text-uppercase">
                     Shipping Address
                   </h3>
-                  <Addresses
-                    onAddressChange={setAddress}
-                    formErorrs={formErorr}
-                  />
+                  <Addresses onAddressChange={setAddress} />
+                  {!!formErorr && (
+                    <div className="overflow-hidden mb-4">
+                      <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                        <ul className="m-0">
+                          {Object.values(formErorr).map((val) => {
+                            return <li>{val}</li>;
+                          })}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <aside className="col-lg-5 sticky-sidebar-wrapper">

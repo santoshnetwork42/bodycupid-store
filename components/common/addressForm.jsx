@@ -1,33 +1,31 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSetState } from "react-use";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { getProperAddress, removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
-import { getZipCode } from "~/graphql/api";
 import AlertPopup from "../features/product/common/alert-popup";
 import { checkValidation } from "~/utils/addressFormValidation";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit, formErorrs } = props;
   const { firstName, lastName, email, phone } = user;
-  const [address, setAddress] = useSetState(
-    {
-      ...defaultAddress,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      state: "AN",
-      city: "",
-      pinCode: "",
-    } || {}
-  );
+  const [address, setAddress] = useSetState({
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    phone: phone,
+    address: "",
+    state: "AN",
+    city: "",
+    pinCode: "",
+    landmark: "",
+    area: "",
+  });
 
-  const [validatePincodes, setValidatePincodes] = useState({});
   const [errors, setErrors] = useState(formErorrs || null);
 
   useEffect(() => {
@@ -46,7 +44,6 @@ const AddressForm = (props) => {
         ...defaultAddress,
         firstName: defaultAddress.name.split(" ")[0],
         lastName: defaultAddress.name.split(" ")[1],
-        phone: defaultAddress?.phone.slice(3),
       });
     }
   }, [defaultAddress]);
@@ -55,11 +52,10 @@ const AddressForm = (props) => {
     async (e) => {
       e.preventDefault();
       try {
-        const isValidPinCode = await validateZipCode(address.pinCode);
-        const isValid = await checkValidation(address, isValidPinCode);
-        if (!isValid) {
+        const isFormValid = await checkValidation(address);
+        if (!isFormValid) {
           if (user) {
-            let tempAddress = getProperAddress(address);
+            const tempAddress = getProperAddress(address);
             const key = address.id ? "updateUserAddress" : "createUserAddress";
             const {
               data: { [key]: response },
@@ -73,7 +69,7 @@ const AddressForm = (props) => {
             onSubmit(tempAddress);
           }
         } else {
-          setErrors(isValid);
+          setErrors(isFormValid);
         }
       } catch (errors) {
         toast(<AlertPopup message={"Something went wrong"} status="error" />);
@@ -82,26 +78,6 @@ const AddressForm = (props) => {
     },
     [address, user, onSubmit, errors]
   );
-
-  const validateZipCode = async (zipcode) => {
-    try {
-      if (!validatePincodes.hasOwnProperty(zipcode)) {
-        const {
-          data: { getZipCode: response },
-        } = await API.graphql(graphqlOperation(getZipCode, { id: zipcode }));
-
-        setValidatePincodes({
-          ...validatePincodes,
-          [zipcode]: !!response,
-        });
-        return !!response;
-      } else {
-        return validatePincodes[zipcode];
-      }
-    } catch (error) {
-      toast(<AlertPopup message={"Something went wrong"} status="error" />);
-    }
-  };
 
   return (
     <div>
