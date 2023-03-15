@@ -26,7 +26,6 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
-import PaymentLogos from "~/components/common/partials/payment-logos";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
@@ -44,7 +43,7 @@ function Checkout(props) {
     shippingTotal,
     amoutSaved,
     couponTotal,
-    cartTotal,
+    grandTotal,
     prepaidDiscount,
   } = useMemo(
     () => getCartTotals(cartList, appliedCoupon, isFirst),
@@ -396,7 +395,7 @@ function Checkout(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(cartTotal)}
+                                ₹{toDecimal(grandTotal)}
                               </p>
                             </td>
                           </tr>
@@ -506,7 +505,7 @@ function Checkout(props) {
                         <div className="d-sm-show">
                           <h4 className="summary-subtitle p-0">Total</h4>
                           <p className="summary-total-price ls-s text-primary">
-                          ₹{toDecimal(cartTotal)}
+                            ₹{toDecimal(grandTotal)}
                           </p>
                         </div>
                         <button

@@ -35,7 +35,7 @@ function Cart(props) {
     shippingTotal,
     amoutSaved,
     couponTotal,
-    cartTotal,
+    grandTotal,
   } = useMemo(
     () => getCartTotals(cartItems, appliedCoupon),
     [cartItems, appliedCoupon]
@@ -156,9 +156,7 @@ function Cart(props) {
                               )}
                               <span className={`discount-percetage ml-2`}>
                                 {productDiscountPercentage(item) > 0 &&
-                                  `${toDecimal(
-                                    productDiscountPercentage(item)
-                                  )}% off`}
+                                  `${productDiscountPercentage(item)}% off`}
                               </span>
                             </p>
                           </td>
@@ -277,7 +275,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(cartTotal)}
+                                ₹{toDecimal(grandTotal)}
                               </p>
                             </td>
                           </tr>
@@ -314,7 +312,7 @@ function Cart(props) {
                       <div className="d-none stick-bottom-button d-sm-show">
                         <div>
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(cartTotal)}
+                            ₹{toDecimal(grandTotal)}
                           </p>
                           <ALink
                             onClick={() => {

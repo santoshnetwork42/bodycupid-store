@@ -43,11 +43,6 @@ function Coupon(props) {
     })();
   }, []);
 
-  const { couponTotal } = useMemo(
-    () => getCartTotals(cartList, appliedCoupon),
-    [cartList, appliedCoupon]
-  );
-
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
       setLoading(true);
@@ -80,8 +75,10 @@ function Coupon(props) {
   return (
     <>
       {layout === "cart" && (
-        <div id='details' className="cart-coupon-box mb-4"
-          onClick={() => !!featured?.length && !appliedCoupon && setOpen(true)}
+        <div
+          id="details"
+          className="cart-coupon-box mb-4"
+          onClick={() => !appliedCoupon && setOpen(true)}
         >
           <div className="cart-coupon-container d-flex">
             <div>
@@ -97,7 +94,8 @@ function Coupon(props) {
               )}
               {!!appliedCoupon && (
                 <span className="coupon-subtitle">
-                  You saved additional ₹{toDecimal(couponTotal)}
+                  You saved additional ₹
+                  {toDecimal(getCouponTotal(appliedCoupon, cartList))}
                 </span>
               )}
             </div>

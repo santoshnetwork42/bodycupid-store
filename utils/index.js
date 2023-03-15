@@ -343,30 +343,25 @@ export const getCartTotals = (
   let totalListingprice = 0;
   const shippingTotal = getShippingPrice(cartItems);
   const couponTotal = getCouponTotal(appliedCoupon, cartItems);
-  if (cartItems) {
-    for (let i = 0; i < cartItems.length; i++) {
-      totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
-      totalListingprice +=
-        cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
-    }
+  for (let i = 0; i < cartItems.length; i++) {
+    totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
+    totalListingprice +=
+      cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
-  const cartTotal = totalPrice + shippingTotal - couponTotal;
-  const prepaidDiscount =
-    ((totalPrice + shippingTotal - couponTotal) / 100) * 5;
+  const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
+  const grandTotal = totalPrice + shippingTotal - couponTotal - prepaidDiscount;
 
-  const amoutSaved = totalListingprice - totalPrice + couponTotal;
+  const amoutSaved =
+    totalListingprice - totalPrice + couponTotal + prepaidDiscount;
 
   return {
     totalPrice,
     totalListingprice,
     shippingTotal,
     couponTotal,
-    amoutSaved: prepaid ? amoutSaved + prepaidDiscount : amoutSaved,
-    amoutSavedInPercent: Math.round(
-      ((totalListingprice - totalPrice + couponTotal) * 100) / totalListingprice
-    ),
-    cartTotal: prepaid ? cartTotal - prepaidDiscount : cartTotal,
     prepaidDiscount,
+    amoutSaved,
+    grandTotal,
   };
 };
 
