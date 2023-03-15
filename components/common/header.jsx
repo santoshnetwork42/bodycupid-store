@@ -121,6 +121,9 @@ function Header({ navbar, auth, openLogin }) {
           </div>
         </div>
       </div>
+      <div className="bottom-search d-sm-show">
+        <SearchBox />
+      </div>
     </header>
   );
 }

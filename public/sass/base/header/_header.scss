@@ -1025,3 +1025,15 @@
         display: none;
     }
 }
+
+@include mq(sm, max) {
+    .header-left {
+        .logo {
+            position: absolute;
+            left: calc(50vw - 45px);
+        }
+    }
+    .header-search.hs-simple{
+        margin: 1rem 15px !important;
+    }
+}
