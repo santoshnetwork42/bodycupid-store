@@ -457,8 +457,8 @@
     // }
 
     @include mq(sm, max) {
-        .main {
-            margin-top: 65px ;
+        main {
+            margin-top: 80px;
         }
     }
 
