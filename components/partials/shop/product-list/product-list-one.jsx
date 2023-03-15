@@ -13,6 +13,7 @@ import {
   findProducts,
 } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import Loader from "~/components/common/partials/loader";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -173,14 +174,15 @@ function ProductListOne(props) {
   return (
     <>
       {isToolbox && <ToolBox type={type} />}
+    
       <InfiniteScroll
         dataLength={products ? products.length : 0}
         next={() => {
           getProducts(false);
         }}
         style={{ overflow: "visible" }}
-        hasMore={products.length >= total ? false : true}
-        loader={<div className="d-loading"></div>}
+        hasMore={products.length < total}
+        loader={<Loader loading small/>}
       >
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
