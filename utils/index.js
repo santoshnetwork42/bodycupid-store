@@ -240,7 +240,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-        parallax.offsetTop +
+          parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -332,6 +332,42 @@ export const getTotalPrice = (cartItems = []) => {
     }
   }
   return total;
+};
+
+export const getCartTotals = (
+  cartItems = [],
+  appliedCoupon,
+  prepaid = false
+) => {
+  let totalPrice = 0;
+  let totalListingprice = 0;
+  const shippingTotal = getShippingPrice(cartItems);
+  const couponTotal = getCouponTotal(appliedCoupon, cartItems);
+  if (cartItems) {
+    for (let i = 0; i < cartItems.length; i++) {
+      totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
+      totalListingprice +=
+        cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
+    }
+  }
+  const cartTotal = totalPrice + shippingTotal - couponTotal;
+  const prepaidDiscount =
+    ((totalPrice + shippingTotal - couponTotal) / 100) * 5;
+
+  const amoutSaved = totalListingprice - totalPrice + couponTotal;
+
+  return {
+    totalPrice,
+    totalListingprice,
+    shippingTotal,
+    couponTotal,
+    amoutSaved: prepaid ? amoutSaved + prepaidDiscount : amoutSaved,
+    amoutSavedInPercent: Math.round(
+      ((totalListingprice - totalPrice + couponTotal) * 100) / totalListingprice
+    ),
+    cartTotal: prepaid ? cartTotal - prepaidDiscount : cartTotal,
+    prepaidDiscount,
+  };
 };
 
 /**
