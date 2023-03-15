@@ -314,6 +314,11 @@
             ;
         }
     }
+    .cart-coupon-box {
+        .summary {
+            padding: 2.4rem 3rem 0 !important;
+        }
+    }
 }
 
 @include mq(md, max) {

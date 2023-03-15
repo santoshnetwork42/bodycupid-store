@@ -253,7 +253,7 @@ function Cart(props) {
                       </table>
                       <table className="total">
                         <tbody>
-                          <tr className="summary-subtotal">
+                          <tr >
                             <td>
                               <h4 className="summary-subtitle">Total</h4>
                             </td>
