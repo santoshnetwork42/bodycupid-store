@@ -22,7 +22,7 @@ function Categories() {
             <SidebarFilterOne />
 
             <div className="col-lg-9 main-content">
-              <ProductListOne />
+             <ProductListOne />
             </div>
           </div>
         </div>

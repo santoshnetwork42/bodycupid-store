@@ -422,7 +422,7 @@
     }
 
     // d-loading
-    .infinite-scroll-component>.d-loading {
+    .d-loading {
         display: block;
         position: absolute;
         top: 100%;
@@ -430,7 +430,7 @@
         width: 34px;
         height: 34px;
         border: 2px solid transparent;
-        border-top-color: #26b;
+        border-top-color: rgb(0, 0, 0);
         border-radius: 50%;
         animation: spin 0.75s infinite linear;
 
