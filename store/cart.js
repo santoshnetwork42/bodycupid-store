@@ -14,7 +14,7 @@ import {
   deleteShoppingCartProduct,
 } from "~/graphql/api";
 import { getFirstVariantId } from "~/utils/products";
-import { STORE_ID } from "~/config";
+import { STORE_ID, STORE_PREFIX } from "~/config";
 
 const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -378,7 +378,7 @@ export function* cartSaga() {
 }
 
 const persistConfig = {
-  keyPrefix: "riode-",
+  keyPrefix: `${STORE_PREFIX}-`,
   key: "cart",
   storage,
 };
