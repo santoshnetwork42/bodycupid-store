@@ -5,9 +5,8 @@
 .checkout {
     line-height: 1.54;
     &.main {
-        border-top: 1px solid #e1e1e1;
+        // border-top: 1px solid #e1e1e1;
     }
-
     .alert.card-header {
         padding-top: 1.2rem;
         padding-bottom: 1.3rem;
@@ -192,6 +191,16 @@
                 left: .5rem;
                 background: #666;
             }
+        }
+        p{
+            background-color: $success-color;
+            padding: 0px 1rem;
+            color: #fafafa;
+            border-radius: .3rem;
+            
+        }
+        .extra-lable{
+            font-size: 12px;
         }
     }
     .card-body {
