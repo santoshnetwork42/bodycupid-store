@@ -16,6 +16,7 @@ import awsconfig from "~/aws-exports";
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
 import { getUser, getStore } from "~/graphql/api";
+import Scripts from "~/components/scripts.jsx";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -28,6 +29,7 @@ const App = ({ Component, pageProps }) => {
     store.dispatch(rootActions.destroySession());
   }, [store]);
 
+  
   const setUser = useCallback(async () => {
     try {
       const state = store.getState();
@@ -120,12 +122,16 @@ const App = ({ Component, pageProps }) => {
         <Head>
           <meta charSet="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
+          />
           <meta name="HandheldFriendly" content="true" />
           <title>Wow life science</title>
           <meta name="keywords" content="WOW" />
           <meta name="description" content="Wow life science" />
         </Head>
+        <Scripts/>
         <Layout navbar={navbar} footer={footer}>
           <Component {...pageProps} />
         </Layout>
