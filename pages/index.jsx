@@ -12,9 +12,9 @@ import BrandSection from "~/components/partials/home/brand-section";
 // import BlogSection from "~/components/partials/home/blog-section";
 
 import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
-import awsmobile from "~/aws-exports";
 import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
 function HomePage({ hero, products, categories, brands }) {
@@ -55,25 +55,6 @@ function HomePage({ hero, products, categories, brands }) {
 
 export const getStaticProps = async () => {
   try {
-    const fetchData = async (query = "", variables = {}) => {
-      const response = await fetch(awsmobile.aws_appsync_graphqlEndpoint, {
-        method: "POST",
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-        headers: {
-          "x-api-key": awsmobile.aws_appsync_apiKey,
-          accept: "*/*",
-          "content-type": "application/json; charset=UTF-8",
-        },
-      });
-
-      const data = await response.json();
-
-      return data.data;
-    };
-
     const optimizedLogoImage = await optimizeImage({
       src: "/images/logo.png",
       options: {
@@ -93,6 +74,11 @@ export const getStaticProps = async () => {
 
     const optimizedHeroImage = await optimizeImage({
       src: "/images/home/slides/wow.jpg",
+      type: "self-hosted",
+    });
+
+    const optimizedMobileHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow-mobile.jpg",
       type: "self-hosted",
     });
 
@@ -182,6 +168,7 @@ export const getStaticProps = async () => {
         },
         hero: {
           banner: optimizedHeroImage,
+          mobileBanner: optimizedMobileHeroImage,
         },
         products: searchProducts.items,
         categories: searchProductSubCategories.items,
