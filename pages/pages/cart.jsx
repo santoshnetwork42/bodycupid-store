@@ -310,7 +310,7 @@ function Cart(props) {
                         Proceed to checkout
                       </ALink>
                       <div className="d-none stick-bottom-button d-sm-show">
-                        <div>
+                        <div className="lh-2">
                           <p className="summary-total-price text-left ls-s">
                             ₹{toDecimal(grandTotal)}
                           </p>

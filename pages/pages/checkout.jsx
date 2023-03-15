@@ -507,7 +507,7 @@ function Checkout(props) {
                         </div>
                       )}
                       <div className="stick-bottom-button">
-                        <div className="d-sm-show">
+                        <div className="d-sm-show lh-2">
                           <p className="summary-total-price ls-s text-primary">
                             ₹{toDecimal(grandTotal)}
                           </p>
