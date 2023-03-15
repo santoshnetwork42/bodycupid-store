@@ -77,6 +77,11 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
+    const optimizedMobileHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow-mobile.jpg",
+      type: "self-hosted",
+    });
+
     const { searchProducts } = await fetchData(getHomePageProducts, {
       filter: { storeId: { eq: STORE_ID } },
       limit: 8,
@@ -163,6 +168,7 @@ export const getStaticProps = async () => {
         },
         hero: {
           banner: optimizedHeroImage,
+          mobileBanner: optimizedMobileHeroImage,
         },
         products: searchProducts.items,
         categories: searchProductSubCategories.items,
