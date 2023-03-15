@@ -467,12 +467,20 @@ function Checkout(props) {
                           </div>
                         </div>
                       )}
-                      <button
-                        onClick={placeOrder}
-                        className="btn btn-dark btn-rounded btn-order"
-                      >
-                        Place Order
-                      </button>
+                      <div className="stick-bottom-button">
+                        <div className="d-sm-show">
+                          <h4 className="summary-subtitle p-0">Total</h4>
+                          <p className="summary-total-price ls-s text-primary">
+                            ₹{toDecimal(getFinalPrice(cartList, appliedCoupon))}
+                          </p>
+                        </div>
+                        <button
+                          onClick={placeOrder}
+                          className="btn btn-dark btn-rounded btn-order "
+                        >
+                          Place Order
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </aside>

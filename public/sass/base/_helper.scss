@@ -42,6 +42,9 @@
 .d-none {
     display: none !important;
 }
+.d-sm-show {
+    display: none !important;
+}
 
 .d-block {
     display: block !important;
@@ -293,6 +296,11 @@
 .ls-normal {
     letter-spacing: 0 !important;
 }
+//text-decoration
+.text-underline{
+    text-decoration: underline !important;
+}
+
 
 // Line Height
 .lh-2 {

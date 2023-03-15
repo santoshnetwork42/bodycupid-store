@@ -273,6 +273,7 @@
     color: $dark-color;
     // padding: 10px 0;
     text-align: right;
+    line-height: 1;
     margin-bottom: 0;
     font-family: $font-family;
 
@@ -569,7 +570,7 @@
 
 @include mq('lg') {
     .cart.main {
-        .product-thumbnail { 
+        .product-thumbnail {
             width: 12rem;
         }
 
@@ -588,5 +589,28 @@
         .product-close {
             width: 2.3rem;
         }
+    }
+}
+
+@include mq(sm, max) {
+    .stick-bottom-button {
+        width: 100vw;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: #fff;
+        z-index: 99;
+        padding: 13px 0;
+        box-shadow: 0 0 10px 1px rgb(0 0 0 / 10%);
+        padding-left: 15px;
+        padding-right: 15px;
+
+        .btn-order {
+            width: unset !important;
+        }
+
     }
 }

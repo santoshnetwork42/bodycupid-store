@@ -16,6 +16,7 @@ import {
   getCouponTotal,
 } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { scrollWithOffset } from "~/utils/helper";
 
 function Cart(props) {
   const {
@@ -270,10 +271,35 @@ function Cart(props) {
                       <ALink
                         onClick={checkAuth}
                         href={user ? "/pages/checkout" : "#"}
-                        className="btn btn-dark btn-rounded btn-checkout"
+                        className="btn btn-dark d-sm-none btn-rounded btn-checkout"
                       >
                         Proceed to checkout
                       </ALink>
+                      <div className="d-none stick-bottom-button d-sm-show">
+                        <div>
+                          <p className="summary-total-price text-left ls-s">
+                            ₹
+                            {toDecimal(getFinalPrice(cartItems, appliedCoupon))}
+                          </p>
+                          <ALink
+                            onClick={() => {
+                              scrollWithOffset("details", 65);
+                            }}
+                            className="text-underline"
+                            href="#"
+                          >
+                            View details
+                          </ALink>
+                        </div>
+
+                        <ALink
+                          onClick={checkAuth}
+                          href={user ? "/pages/checkout" : "#"}
+                          className="btn btn-dark btn-rounded  btn-checkout"
+                        >
+                          Proceed to checkout
+                        </ALink>
+                      </div>
                     </div>
                   </div>
                 </aside>

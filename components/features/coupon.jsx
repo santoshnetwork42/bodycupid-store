@@ -74,7 +74,7 @@ function Coupon(props) {
   return (
     <>
       {layout === "cart" && (
-        <div className="cart-coupon-box mb-4">
+        <div id='details' className="cart-coupon-box mb-4">
           <div className="cart-coupon-container d-flex">
             <div>
               <h4 className="title coupon-title text-uppercase ls-m">
