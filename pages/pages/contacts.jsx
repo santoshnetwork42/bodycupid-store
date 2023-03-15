@@ -1,14 +1,15 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
-function CONTACT() {
+function ContactUs({ store }) {
   return (
     <main className="main about-us">
       <Head>
-        <title>Wow life science | Titles</title>
+        <title>{store.name} | Contact Us</title>
       </Head>
 
-      <h1 className="d-none">CONTACT - WOW Life Science</h1>
+      <h1 className="d-none">CONTACT - {store.name}</h1>
 
       <div className="page-content">
         <div className="container">
@@ -56,4 +57,10 @@ function CONTACT() {
   );
 }
 
-export default React.memo(CONTACT);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(ContactUs);
