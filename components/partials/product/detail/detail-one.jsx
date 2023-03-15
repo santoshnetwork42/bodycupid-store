@@ -17,9 +17,10 @@ import ProductVariant from "../product-variant";
 import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
 
 function DetailOne(props) {
+  const router = useRouter();
   const {
     query: { review },
-  } = useRouter();
+  } = router;
   const {
     cartList,
     updateCart,
