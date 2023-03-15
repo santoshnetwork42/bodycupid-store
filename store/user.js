@@ -1,6 +1,8 @@
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 
+import { STORE_PREFIX } from "~/config";
+
 const actionTypes = {
     SET_USER: 'SET_USER',
     REMOVE_USER: 'REMOVE_USER',
@@ -33,7 +35,7 @@ export const userActions = {
 };
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: `${STORE_PREFIX}-`,
     key: "user",
     storage
 }

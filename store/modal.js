@@ -1,6 +1,8 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import { STORE_PREFIX } from "~/config";
+
 const actionTypes = {
   OPEN_MODAL: 'OPEN_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
@@ -83,7 +85,7 @@ export const modalActions = {
 };
 
 const persistConfig = {
-  keyPrefix: "riode-",
+  keyPrefix: `${STORE_PREFIX}-`,
   key: "modal",
   storage,
 };

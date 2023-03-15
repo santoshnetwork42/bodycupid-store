@@ -1,6 +1,8 @@
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 
+import { STORE_PREFIX } from "~/config";
+
 const actionTypes = {
     SET_STORE: 'SET_STORE',
     SET_SHIPPING: 'SET_SHIPPING',
@@ -33,7 +35,7 @@ export const systemActions = {
 };
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: `${STORE_PREFIX}-`,
     key: "system",
     storage
 }
