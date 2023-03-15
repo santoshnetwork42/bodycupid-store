@@ -25,7 +25,6 @@ function ProductTwo(props) {
     isCategory = true,
   } = props;
 
-
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -170,7 +169,7 @@ function ProductTwo(props) {
           ""
         )}
 
-        <h3 className="product-name p-0">
+        <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
