@@ -5,21 +5,35 @@ import OptimizedImage from "~/components/features/optimized-image";
 
 function IntroSection({ data }) {
   const { banner } = data;
-
   return (
-    <ALink
-      href="/collections/all"
-      className="banner banner-fixed intro-slide2"
-      style={{ backgroundColor: "#dddee0" }}
-    >
-      <figure>
-        <OptimizedImage
-          optimizedData={banner}
-          loading="eager"
-          alt="Intro Slider"
-        />
-      </figure>
-    </ALink>
+    <>
+      <ALink
+        href="/collections/all"
+        className="banner d-sm-none banner-fixed intro-slide2"  //for desktop size
+        style={{ backgroundColor: "#dddee0" }}
+      >
+        <figure>
+          <OptimizedImage
+            optimizedData={banner}
+            loading="eager"
+            alt="Intro Slider"
+          />
+        </figure>
+      </ALink>
+      <ALink
+        href="/collections/all"
+        className="banner d-none d-sm-show banner-fixed intro-slide2"  //for mobile size
+        style={{ backgroundColor: "#dddee0" }}
+      >
+        <figure>
+          <OptimizedImage
+            optimizedData={banner}
+            loading="eager"
+            alt="Intro Slider"
+          />
+        </figure>
+      </ALink>
+    </>
   );
 }
 
