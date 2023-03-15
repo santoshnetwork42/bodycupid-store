@@ -142,9 +142,9 @@ function Checkout(props) {
             storeId: STORE_ID,
             userId: user?.id,
             status: isFirst ? "PENDING" : "CONFIRMED",
-            totalAmount: getFinalPrice(cartList, appliedCoupon),
-            totalDiscount: getCouponTotal(appliedCoupon, cartList),
-            totalShippingCharges: getShippingPrice(cartList),
+            totalAmount: grandTotal,
+            totalDiscount: couponTotal + prepaidDiscount,
+            totalShippingCharges: shippingTotal,
             orderDate: new Date().toISOString(),
             sla: new Date().toISOString(),
             paymentType: isFirst ? "PREPAID" : "COD",
@@ -172,7 +172,7 @@ function Checkout(props) {
                   storeId: STORE_ID,
                   orderId,
                   method: isFirst ? "ONLINE" : "COD",
-                  amount: getFinalPrice(cartList, appliedCoupon),
+                  amount: grandTotal,
                 },
               },
               authMode,
@@ -233,6 +233,10 @@ function Checkout(props) {
       formErorr,
       handlePayment,
       setFormErorr,
+      grandTotal,
+      shippingTotal,
+      couponTotal,
+      prepaidDiscount,
     ]
   );
 
