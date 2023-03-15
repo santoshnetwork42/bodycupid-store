@@ -1,6 +1,7 @@
 import ALink from "~/components/features/custom-link";
 
 import OptimizedImage from "~/components/features/optimized-image";
+import PaymentLogos from "./partials/payment-logos";
 
 export default function Footer({ footer }) {
   return (
@@ -130,14 +131,7 @@ export default function Footer({ footer }) {
 
         <div className="footer-bottom">
           <div className="footer-left">
-            <figure className="payment">
-              <img
-                src="/images/payment.png"
-                alt="payment"
-                width="159"
-                height="29"
-              />
-            </figure>
+            <PaymentLogos />
           </div>
           <div className="footer-center">
             <p className="copyright ls-normal">

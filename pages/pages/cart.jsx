@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -8,14 +8,10 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 
-import {
-  toDecimal,
-  getTotalPrice,
-  getShippingPrice,
-  getFinalPrice,
-  getCouponTotal,
-} from "~/utils";
+import { toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { scrollWithOffset } from "~/utils/helper";
+import PaymentLogos from "~/components/common/partials/payment-logos";
 
 function Cart(props) {
   const {
@@ -32,6 +28,18 @@ function Cart(props) {
   useEffect(() => {
     setCartItems([...cartList]);
   }, [cartList]);
+
+  const {
+    totalListingprice,
+    totalPrice,
+    shippingTotal,
+    amoutSaved,
+    couponTotal,
+    grandTotal,
+  } = useMemo(
+    () => getCartTotals(cartItems, appliedCoupon),
+    [cartItems, appliedCoupon]
+  );
 
   const onChangeQty = (item, qty) => {
     if (qty) {
@@ -70,8 +78,12 @@ function Cart(props) {
     return false;
   }, [user]);
 
+  const productDiscountPercentage = ({ price, listingPrice }) => {
+    return Math.round(((listingPrice - price) / listingPrice) * 100);
+  };
+
   return (
-    <div className="main cart">
+    <main className="main cart">
       <div className="page-content pt-7 pb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-simple title-step active">
@@ -136,6 +148,17 @@ function Cart(props) {
                             <span className="amount">
                               ₹{toDecimal(item.price)}
                             </span>
+                            <p className="m-0 product-discount-listing">
+                              {item.price < item.listingPrice && (
+                                <del className="summary-subtotal-listingprice">
+                                  ₹{toDecimal(item.listingPrice)}
+                                </del>
+                              )}
+                              <span className={`discount-percetage ml-2`}>
+                                {productDiscountPercentage(item) > 0 &&
+                                  `${productDiscountPercentage(item)}% off`}
+                              </span>
+                            </p>
                           </td>
 
                           <td className="product-quantity">
@@ -182,25 +205,19 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-subtotal-price">
-                                ₹{toDecimal(getTotalPrice(cartItems))}
+                                {totalPrice < totalListingprice && (
+                                  <del className="summary-subtotal-listingprice mr-2">
+                                    ₹{toDecimal(totalListingprice)}
+                                  </del>
+                                )}
+                                ₹{toDecimal(totalPrice)}
                               </p>
                             </td>
                           </tr>
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle">Shipping</h4>
-                            </td>
-                            <td>
-                              <p className="summary-subtotal-price">
-                                {getShippingPrice(cartItems)
-                                  ? `₹${toDecimal(getShippingPrice(cartItems))}`
-                                  : "FREE"}
-                              </p>
-                            </td>
-                          </tr>
+
                           {!!appliedCoupon && (
                             <>
-                              <tr>
+                              <tr className="summary-subtotal">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
                                   <p>
@@ -221,48 +238,66 @@ function Cart(props) {
                                   </p>
                                 </td>
                                 <td>
-                                  <p className="summary-subtotal-price">
-                                    {`₹${toDecimal(
-                                      getCouponTotal(appliedCoupon, cartItems)
-                                    )}`}
+                                  <p className="summary-subtotal-price discount-price-color">
+                                    {`₹${toDecimal(couponTotal)}`}
                                   </p>
-                                </td>
-                              </tr>
-                              <tr className="summary-subtotal">
-                                <td colSpan={2}>
-                                  <div className="summary-saving-lable-container mt-0 mb-3">
-                                    <p className="saving-lable">
-                                      You are saving{" "}
-                                      <span>
-                                        {`₹${toDecimal(
-                                          getCouponTotal(
-                                            appliedCoupon,
-                                            cartItems
-                                          )
-                                        )}`}
-                                      </span>{" "}
-                                      on this order
-                                    </p>
-                                  </div>
                                 </td>
                               </tr>
                             </>
                           )}
+
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Shipping</h4>
+                            </td>
+                            <td>
+                              <p
+                                className={`summary-subtotal-price ${
+                                  !shippingTotal && "discount-price-color"
+                                }`}
+                              >
+                                {!!shippingTotal
+                                  ? `₹${toDecimal(shippingTotal)}`
+                                  : "FREE"}
+                              </p>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                       <table className="total">
                         <tbody>
-                          <tr className="summary-subtotal">
+                          <tr>
                             <td>
-                              <h4 className="summary-subtitle">Total</h4>
+                              <h4 className="summary-subtitle">
+                                Total{" "}
+                                <p className="m-0">Inclusive of all taxes</p>
+                              </h4>
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹
-                                {toDecimal(
-                                  getFinalPrice(cartItems, appliedCoupon)
-                                )}
+                                ₹{toDecimal(grandTotal)}
                               </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan={2}>
+                              <div
+                                className={
+                                  "avg-delivery-lable-container mt-3 mb-2"
+                                }
+                              >
+                                <p className="m-0">
+                                  Average delivery time: <span>3-5 days</span>
+                                </p>
+                              </div>
+                              {!!amoutSaved && (
+                                <div className="summary-saving-lable-container mb-4">
+                                  <p className="saving-lable">
+                                    <span>{`₹${toDecimal(amoutSaved)} `}</span>
+                                    saved so far on this order
+                                  </p>
+                                </div>
+                              )}
                             </td>
                           </tr>
                         </tbody>
@@ -270,10 +305,34 @@ function Cart(props) {
                       <ALink
                         onClick={checkAuth}
                         href={user ? "/pages/checkout" : "#"}
-                        className="btn btn-dark btn-rounded btn-checkout"
+                        className="btn btn-dark d-sm-none btn-rounded btn-checkout"
                       >
                         Proceed to checkout
                       </ALink>
+                      <div className="d-none stick-bottom-button d-sm-show">
+                        <div>
+                          <p className="summary-total-price text-left ls-s">
+                            ₹{toDecimal(grandTotal)}
+                          </p>
+                          <ALink
+                            onClick={() => {
+                              scrollWithOffset("details", 65);
+                            }}
+                            className="text-underline"
+                            href="#"
+                          >
+                            View details
+                          </ALink>
+                        </div>
+
+                        <ALink
+                          onClick={checkAuth}
+                          href={user ? "/pages/checkout" : "#"}
+                          className="btn btn-dark btn-rounded  btn-checkout"
+                        >
+                          Proceed to checkout
+                        </ALink>
+                      </div>
                     </div>
                   </div>
                 </aside>
@@ -295,7 +354,7 @@ function Cart(props) {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

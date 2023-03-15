@@ -14,13 +14,7 @@ import {
   createPayment,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import {
-  toDecimal,
-  getTotalPrice,
-  getShippingPrice,
-  getFinalPrice,
-  getCouponTotal,
-} from "~/utils";
+import { toDecimal, getCartTotals } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
@@ -42,6 +36,19 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
+
+  const {
+    totalListingprice,
+    totalPrice,
+    shippingTotal,
+    amoutSaved,
+    couponTotal,
+    grandTotal,
+    prepaidDiscount,
+  } = useMemo(
+    () => getCartTotals(cartList, appliedCoupon, isFirst),
+    [cartList, appliedCoupon, isFirst]
+  );
 
   const handlePayment = useCallback(
     async ({ orderId, paymentId, address }) => {
@@ -135,9 +142,9 @@ function Checkout(props) {
             storeId: STORE_ID,
             userId: user?.id,
             status: isFirst ? "PENDING" : "CONFIRMED",
-            totalAmount: getFinalPrice(cartList, appliedCoupon),
-            totalDiscount: getCouponTotal(appliedCoupon, cartList),
-            totalShippingCharges: getShippingPrice(cartList),
+            totalAmount: grandTotal,
+            totalDiscount: couponTotal + prepaidDiscount,
+            totalShippingCharges: shippingTotal,
             orderDate: new Date().toISOString(),
             sla: new Date().toISOString(),
             paymentType: isFirst ? "PREPAID" : "COD",
@@ -165,7 +172,7 @@ function Checkout(props) {
                   storeId: STORE_ID,
                   orderId,
                   method: isFirst ? "ONLINE" : "COD",
-                  amount: getFinalPrice(cartList, appliedCoupon),
+                  amount: grandTotal,
                 },
               },
               authMode,
@@ -226,6 +233,10 @@ function Checkout(props) {
       formErorr,
       handlePayment,
       setFormErorr,
+      grandTotal,
+      shippingTotal,
+      couponTotal,
+      prepaidDiscount,
     ]
   );
 
@@ -308,23 +319,21 @@ function Checkout(props) {
                             <td>
                               <h4 className="summary-subtitle">Subtotal</h4>
                             </td>
-                            <td className="summary-subtotal-price pb-0 pt-0">
-                              ₹{toDecimal(getTotalPrice(cartList))}
-                            </td>
-                          </tr>
-                          <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle">Shipping</h4>
-                            </td>
-                            <td className="summary-subtotal-price pb-0 pt-0">
-                              {getShippingPrice(cartList)
-                                ? `₹${toDecimal(getShippingPrice(cartList))}`
-                                : "Free"}
+                              <p className="summary-subtotal-price">
+                                {totalPrice < totalListingprice && (
+                                  <del className="summary-subtotal-listingprice mr-2">
+                                    ₹{toDecimal(totalListingprice)}
+                                  </del>
+                                )}
+                                ₹{toDecimal(totalPrice)}
+                              </p>
                             </td>
                           </tr>
+
                           {!!appliedCoupon && (
                             <>
-                              <tr>
+                              <tr className="summary-subtotal-saving">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
                                   <p>
@@ -345,44 +354,72 @@ function Checkout(props) {
                                   </p>
                                 </td>
                                 <td>
-                                  <p className="summary-subtotal-price">
-                                    {`₹${toDecimal(
-                                      getCouponTotal(appliedCoupon, cartList)
-                                    )}`}
+                                  <p className="summary-subtotal-price discount-price-color">
+                                    {`₹${toDecimal(couponTotal)}`}
                                   </p>
-                                </td>
-                              </tr>
-                              <tr className="summary-subtotal-saving">
-                                <td colSpan={2}>
-                                  <div className="summary-saving-lable-container mt-0 mb-2">
-                                    <p className="saving-lable">
-                                      You are saving{" "}
-                                      <span>
-                                        {`₹${toDecimal(
-                                          getCouponTotal(
-                                            appliedCoupon,
-                                            cartList
-                                          )
-                                        )}`}
-                                      </span>{" "}
-                                      on this order
-                                    </p>
-                                  </div>
                                 </td>
                               </tr>
                             </>
                           )}
-                          <tr className="summary-total">
-                            <td className="pb-0">
-                              <h4 className="summary-subtitle">Total</h4>
+
+                          {isFirst && (
+                            <tr className="summary-subtotal">
+                              <td>
+                                <h4 className="summary-subtitle">
+                                  5% Online Payment Discount
+                                </h4>
+                              </td>
+                              <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
+                                {`₹${toDecimal(prepaidDiscount)}`}
+                              </td>
+                            </tr>
+                          )}
+
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Shipping</h4>
                             </td>
-                            <td className=" pt-0 pb-0">
-                              <p className="summary-total-price ls-s text-primary">
-                                ₹
-                                {toDecimal(
-                                  getFinalPrice(cartList, appliedCoupon)
-                                )}
+                            <td
+                              className={`summary-subtotal-price pb-0 pt-0 ${
+                                !shippingTotal && "discount-price-color"
+                              }`}
+                            >
+                              {!!shippingTotal
+                                ? `₹${toDecimal(shippingTotal)}`
+                                : "Free"}
+                            </td>
+                          </tr>
+
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">
+                                Total{" "}
+                                <p className="m-0">Inclusive of all taxes</p>
+                              </h4>
+                            </td>
+                            <td>
+                              <p className="summary-total-price ls-s">
+                                ₹{toDecimal(grandTotal)}
                               </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan={2}>
+                              <div
+                                className={"avg-delivery-lable-container mt-3"}
+                              >
+                                <p className="m-0">
+                                  Average delivery time: <span>3-5 days</span>
+                                </p>
+                              </div>
+                              {!!amoutSaved && (
+                                <div className="summary-saving-lable-container">
+                                  <p className="saving-lable">
+                                    <span>{`₹${toDecimal(amoutSaved)}`}</span>{" "}
+                                    saved so far on this order
+                                  </p>
+                                </div>
+                              )}
                             </td>
                           </tr>
                         </tbody>
@@ -393,10 +430,10 @@ function Checkout(props) {
                         </h4>
 
                         <div className="checkbox-group">
-                          <div className="card-header">
+                          <div className="card-header d-flex align-items-center">
                             <ALink
                               href="#"
-                              className={`text-body text-normal ls-m ${
+                              className={`text-body text-normal ls-m mr-2 ${
                                 isFirst ? "collapse" : ""
                               }`}
                               onClick={() => {
@@ -405,6 +442,7 @@ function Checkout(props) {
                             >
                               Pay Online
                             </ALink>
+                            <p className="extra-lable m-0">EXTRA 5% OFF</p>
                           </div>
 
                           <Collapse in={isFirst}>
@@ -467,12 +505,20 @@ function Checkout(props) {
                           </div>
                         </div>
                       )}
-                      <button
-                        onClick={placeOrder}
-                        className="btn btn-dark btn-rounded btn-order"
-                      >
-                        Place Order
-                      </button>
+                      <div className="stick-bottom-button">
+                        <div className="d-sm-show">
+                          <h4 className="summary-subtitle p-0">Total</h4>
+                          <p className="summary-total-price ls-s text-primary">
+                            ₹{toDecimal(grandTotal)}
+                          </p>
+                        </div>
+                        <button
+                          onClick={placeOrder}
+                          className="btn btn-dark btn-rounded btn-order "
+                        >
+                          Place Order
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </aside>
