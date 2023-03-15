@@ -10,6 +10,7 @@ import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
 import { STORE_ID } from "~/config";
+import fetchData from "~/utils/fetchData";
 
 import awsconfig from "~/aws-exports";
 
@@ -22,7 +23,7 @@ Amplify.configure({ ...awsconfig, ssr: true });
 
 const App = ({ Component, pageProps }) => {
   const store = useStore();
-  const { navbar, footer } = pageProps;
+  const { navbar, footer, store: wowStore } = pageProps;
 
   const destroySession = useCallback(() => {
     store.__persistor.purge();
@@ -74,15 +75,19 @@ const App = ({ Component, pageProps }) => {
   const setStore = useCallback(async () => {
     const state = store.getState();
     if (!state.system.store) {
-      const {
-        data: { getStore: getStoreResponse },
-      } = await API.graphql({
-        query: getStore,
-        variables: { id: STORE_ID },
-      });
-      store.dispatch(systemActions.setStore(getStoreResponse));
+      if (wowStore) {
+        store.dispatch(systemActions.setStore(wowStore));
+      } else {
+        const {
+          data: { getStore: getStoreResponse },
+        } = await API.graphql({
+          query: getStore,
+          variables: { id: STORE_ID },
+        });
+        store.dispatch(systemActions.setStore(getStoreResponse));
+      }
     }
-  }, [store]);
+  }, [store, wowStore]);
 
   const initSession = useCallback(async () => {
     setStore();
@@ -144,6 +149,11 @@ App.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
+  }
+  if (!!ctx.req) {
+    pageProps = pageProps || {};
+    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+    pageProps.store = store;
   }
   return { pageProps };
 };

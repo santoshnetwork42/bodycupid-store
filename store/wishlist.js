@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { toast } from 'react-toastify';
 import { takeEvery } from 'redux-saga/effects';
 
+import { STORE_PREFIX } from "~/config";
 import WishListPopup from "~/components/features/product/common/wishlist-popup";
 
 const actionTypes = {
@@ -63,7 +64,7 @@ export const wishlistActions = {
 };
 
 const persistConfig = {
-    keyPrefix: "riode-",
+    keyPrefix: `${STORE_PREFIX}-`,
     key: "wishlist",
     storage
 }
