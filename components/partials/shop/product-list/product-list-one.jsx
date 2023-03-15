@@ -2,11 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 // import { useLazyQuery } from '@apollo/react-hooks';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
-import Pagination from "~/components/features/token-pagination";
 import {
   getBasicCategory,
   getBasicSubCategory,
@@ -173,33 +173,37 @@ function ProductListOne(props) {
   return (
     <>
       {isToolbox && <ToolBox type={type} />}
+      <InfiniteScroll
+        dataLength={products ? products.length : 0}
+        next={() => {
+          getProducts(false);
+        }}
+        style={{ overflow: "visible" }}
+        hasMore={products.length >= total ? false : true}
+        loader={<div className="d-loading"></div>}
+      >
+        {gridType === "grid" ? (
+          <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
+            {products.map((item) => (
+              <div className="product-wrap" key={"shop-" + item.id}>
+                <ProductTwo product={item} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="product-lists product-wrapper">
+            {products.map((item) => (
+              <ProductEight product={item} key={"shop-list-" + item.id} />
+            ))}
+          </div>
+        )}
 
-      {gridType === "grid" ? (
-        <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
-          {products.map((item) => (
-            <div className="product-wrap" key={"shop-" + item.id}>
-              <ProductTwo product={item} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="product-lists product-wrapper">
-          {products.map((item) => (
-            <ProductEight product={item} key={"shop-list-" + item.id} />
-          ))}
-        </div>
-      )}
-
-      {!total && (
-        <p className="ml-1">No products were found matching your selection.</p>
-      )}
-
-      <Pagination
-        onPage={() => getProducts(false)}
-        total={total}
-        loaded={products?.length}
-        nextToken={token}
-      />
+        {!total && (
+          <p className="ml-1">
+            No products were found matching your selection.
+          </p>
+        )}
+      </InfiniteScroll>
     </>
   );
 }

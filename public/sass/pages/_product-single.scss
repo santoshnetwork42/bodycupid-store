@@ -500,7 +500,7 @@
     }
 
     .ratings::before {
-        color: $body-color;
+        @include css(color, product, rating, _star-color);
     }
 
     .form-checkbox {
