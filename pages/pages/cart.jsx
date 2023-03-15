@@ -266,7 +266,7 @@ function Cart(props) {
                       </table>
                       <table className="total">
                         <tbody>
-                          <tr>
+                          <tr className="summary-subtotal">
                             <td>
                               <h4 className="summary-subtitle">
                                 Total{" "}
@@ -316,7 +316,7 @@ function Cart(props) {
                           </p>
                           <ALink
                             onClick={() => {
-                              scrollWithOffset("details", 65);
+                              scrollWithOffset("details", 130);
                             }}
                             className="text-underline"
                             href="#"

@@ -26,6 +26,7 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
+import { scrollWithOffset } from "~/utils/helper";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
@@ -284,7 +285,7 @@ function Checkout(props) {
                   <Addresses onAddressChange={setAddress} />
                 </div>
 
-                <aside className="col-lg-5 sticky-sidebar-wrapper">
+                <aside id="details" className="col-lg-5 sticky-sidebar-wrapper">
                   <div
                     className="sticky-sidebar mt-1"
                     data-sticky-options="{'bottom': 50}"
@@ -507,10 +508,18 @@ function Checkout(props) {
                       )}
                       <div className="stick-bottom-button">
                         <div className="d-sm-show">
-                          <h4 className="summary-subtitle p-0">Total</h4>
                           <p className="summary-total-price ls-s text-primary">
                             ₹{toDecimal(grandTotal)}
                           </p>
+                          <ALink
+                            onClick={() => {
+                              scrollWithOffset("details", 130);
+                            }}
+                            className="text-underline"
+                            href="#"
+                          >
+                            View details
+                          </ALink>
                         </div>
                         <button
                           onClick={placeOrder}
