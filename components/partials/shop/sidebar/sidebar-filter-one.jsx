@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import InputRange from "react-input-range";
 import SlideToggle from "react-slide-toggle";
@@ -27,7 +27,7 @@ function SidebarFilterOne(props) {
   });
   const [isFirst, setFirst] = useState(true);
   let timerId;
-  useDebounce(filterPrice, 1000, () => {
+  useDebounce(filterPrice, 1200, () => {
     filterByPrice();
   });
 
@@ -67,21 +67,23 @@ function SidebarFilterOne(props) {
     }
   }, [query]);
 
-  const filterByPrice = () => {
+  const filterByPrice = useCallback(() => {
     if (!filterPrice.flag) return;
     let url = router.pathname.replace("[grid]", query.grid);
-    let arr = [`minprice=${filterPrice.min}`, `maxprice=${filterPrice.max}`];
+    let arr = [];
+    if (filterPrice.min > 0) {
+      arr.push(`minprice=${filterPrice.min}`);
+    }
+    if (filterPrice.min < filterPrice.max) {
+      arr.push(`maxprice=${filterPrice.max}`);
+    }
     for (let key in query) {
       if (key !== "minprice" && key !== "maxprice" && key !== "grid")
         arr.push(key + "=" + query[key]);
     }
     url = url + "?" + arr.join("&");
     router.push(url);
-  };
-
-  const onChangePrice = (value) => {
-    setPrice({ ...value, flag: true });
-  };
+  }, [filterPrice]);
 
   const toggleSidebar = (e) => {
     e.preventDefault();
@@ -233,6 +235,7 @@ function SidebarFilterOne(props) {
                                 href={{
                                   pathname: "/collections/[category]",
                                   query: cleanQuery({
+                                    ...query,
                                     category: item.slug,
                                     grid: query.grid,
                                     type: router.query.type || null,
@@ -270,6 +273,7 @@ function SidebarFilterOne(props) {
                                               pathname:
                                                 "/collections/[category]/[subcategory]",
                                               query: cleanQuery({
+                                                ...query,
                                                 category: item.slug,
                                                 subcategory: subItem.slug,
                                                 grid: query.grid,
@@ -322,15 +326,40 @@ function SidebarFilterOne(props) {
               >
                 <div className="widget-body">
                   <form action="#">
-                    <div className="filter-price-slider noUi-target noUi-ltr noUi-horizontal shop-input-range">
-                      <InputRange
-                        formatLabel={(value) => `$${value}`}
-                        maxValue={3000}
-                        minValue={0}
-                        step={50}
-                        value={filterPrice}
-                        onChange={onChangePrice}
-                      />
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="price-range d-flex">
+                        <spna>₹</spna>
+                        <input
+                          type={"number"}
+                          placeholder="Minimum"
+                          className="price-input"
+                          value={filterPrice.min}
+                          onChange={(e) => {
+                            setPrice({
+                              ...filterPrice,
+                              min: e.target.value,
+                              flag: true,
+                            });
+                          }}
+                        />
+                      </div>
+                      <span>-</span>
+                      <div className="price-range d-flex">
+                        <spna>₹</spna>
+                        <input
+                          type={"number"}
+                          placeholder="Maximum"
+                          className="price-input"
+                          value={filterPrice.max}
+                          onChange={(e) => {
+                            setPrice({
+                              ...filterPrice,
+                              max: e.target.value,
+                              flag: true,
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
 
                     <div className="filter-actions">
