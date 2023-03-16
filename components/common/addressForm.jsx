@@ -34,7 +34,6 @@ const AddressForm = (props) => {
       onAddress(address);
     }
   }, [address]);
-  console.log("defaultAddress", defaultAddress);
   useEffect(() => {
     if (defaultAddress && defaultAddress.name) {
       setAddress({
