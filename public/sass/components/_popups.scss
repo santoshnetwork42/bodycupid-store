@@ -323,9 +323,11 @@ button.mfp-close {
     padding: 4rem;
     border-radius: .3rem;
     width: 100%;
-    .flex-no-wrap{
+
+    .flex-no-wrap {
         flex-wrap: nowrap;
     }
+
     .tab {
         font-size: 1.8rem;
         color: $light-color;
@@ -377,7 +379,7 @@ button.mfp-close {
     // form {
     //     margin-bottom: 2.2rem;
     // }
-    
+
     .form-group {
         margin-bottom: 1.8rem;
 
@@ -386,10 +388,11 @@ button.mfp-close {
             margin-bottom: 1rem;
             font-size: 1.4rem;
         }
+
         label {
             display: inline-block;
             margin-bottom: 8px;
-            
+
             font: {
                 size: 1.3rem;
             }
@@ -404,10 +407,10 @@ button.mfp-close {
             color: $grey-color;
             border-radius: .3rem;
             border-color: $border-color;
-        }  
+        }
     }
 
-    
+
     .form-footer {
         display: flex;
         align-items: center;
@@ -430,14 +433,14 @@ button.mfp-close {
         }
     }
 
-    .resend-label { 
+    .resend-label {
         color: $body-color;
         text-decoration: underline;
         font-weight: 500;
         font-size: 1.5rem;
     }
 
-    .not-receive-otp-label{
+    .not-receive-otp-label {
         color: $body-color;
     }
 
@@ -808,19 +811,20 @@ button.mfp-close {
 }
 
 @include mq('lg') {
-   
+
     .login-modal-container {
         .auth-popup {
-           width: 50rem;
+            width: 50rem;
         }
     }
 
 }
+
 @include mq('md') {
-   
+
     .login-modal-container {
         .auth-popup {
-           width: 50rem;
+            width: 50rem;
         }
     }
 
