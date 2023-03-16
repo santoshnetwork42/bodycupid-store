@@ -130358,3 +130358,105 @@ export const searchZipCodes = /* GraphQL */ `
     }
   }
 `;
+export const getBlog = /* GraphQL */ `
+  query GetBlog($id: ID!) {
+    getBlog(id: $id) {
+      id
+      storeId
+      title
+      content
+      excerpt
+      featuredImage
+      tags
+      isVisible
+      seo {
+        pageTitle
+        pageDescrption
+        pageURL
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listBlogs = /* GraphQL */ `
+  query ListBlogs(
+    $filter: ModelBlogFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        storeId
+        title
+        content
+        excerpt
+        featuredImage
+        tags
+        isVisible
+        seo {
+          pageTitle
+          pageDescrption
+          pageURL
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchBlogs = /* GraphQL */ `
+  query SearchBlogs(
+    $filter: SearchableBlogFilterInput
+    $sort: [SearchableBlogSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableBlogAggregationInput]
+  ) {
+    searchBlogs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        title
+        content
+        excerpt
+        featuredImage
+        tags
+        isVisible
+        seo {
+          pageTitle
+          pageDescrption
+          pageURL
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;

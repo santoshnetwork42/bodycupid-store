@@ -492,6 +492,7 @@ function DescOne(props) {
             total={total}
             loaded={reviews?.length}
             nextToken={token}
+            content="reviews"
           />
         </TabPanel>
 
