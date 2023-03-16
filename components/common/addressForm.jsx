@@ -25,7 +25,6 @@ const AddressForm = (props) => {
     landmark: "",
     area: "",
   });
-  console.log("address", address);
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
