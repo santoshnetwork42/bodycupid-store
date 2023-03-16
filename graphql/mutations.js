@@ -141052,6 +141052,78 @@ export const deleteZipCode = /* GraphQL */ `
     }
   }
 `;
+export const createBlog = /* GraphQL */ `
+  mutation CreateBlog(
+    $input: CreateBlogInput!
+    $condition: ModelBlogConditionInput
+  ) {
+    createBlog(input: $input, condition: $condition) {
+      id
+      storeId
+      title
+      content
+      excerpt
+      featuredImage
+      tags
+      isVisible
+      seo {
+        pageTitle
+        pageDescrption
+        pageURL
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBlog = /* GraphQL */ `
+  mutation UpdateBlog(
+    $input: UpdateBlogInput!
+    $condition: ModelBlogConditionInput
+  ) {
+    updateBlog(input: $input, condition: $condition) {
+      id
+      storeId
+      title
+      content
+      excerpt
+      featuredImage
+      tags
+      isVisible
+      seo {
+        pageTitle
+        pageDescrption
+        pageURL
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBlog = /* GraphQL */ `
+  mutation DeleteBlog(
+    $input: DeleteBlogInput!
+    $condition: ModelBlogConditionInput
+  ) {
+    deleteBlog(input: $input, condition: $condition) {
+      id
+      storeId
+      title
+      content
+      excerpt
+      featuredImage
+      tags
+      isVisible
+      seo {
+        pageTitle
+        pageDescrption
+        pageURL
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon($code: String!) {
     applyCoupon(code: $code) {
