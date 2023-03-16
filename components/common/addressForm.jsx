@@ -27,7 +27,7 @@ const AddressForm = (props) => {
   });
 
   const [errors, setErrors] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (onAddress) {
       onAddress(address);
@@ -47,6 +47,7 @@ const AddressForm = (props) => {
   const addAddress = useCallback(
     async (e) => {
       e.preventDefault();
+      setLoading(true);
       try {
         const formErrors = await validateAddress(address, "ALL");
         if (!formErrors) {
@@ -67,8 +68,10 @@ const AddressForm = (props) => {
         } else {
           setErrors(formErrors);
         }
+        setLoading(false);
       } catch (errors) {
         console.log(errors);
+        setLoading(false);
         toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
@@ -245,10 +248,12 @@ const AddressForm = (props) => {
 
           {!onAddress && (
             <button
+              className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
               type="submit"
-              className="btn btn-dark btn-rounded btn-order"
+              disabled={loading}
             >
               {address.id ? "Save Address" : "Add Address"}
+              {loading && <div className="spin-loader ml-2" />}
             </button>
           )}
         </div>

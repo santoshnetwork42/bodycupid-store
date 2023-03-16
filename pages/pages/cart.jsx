@@ -16,6 +16,10 @@ import {
   getCouponTotal,
 } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import RelatedProducts from "~/components/partials/product/related-products";
+import { API, graphqlOperation } from "aws-amplify";
+import { getHomePageProducts } from "~/graphql/api";
+import { STORE_ID } from "~/config";
 
 function Cart(props) {
   const {
@@ -28,6 +32,24 @@ function Cart(props) {
     openLogin,
   } = props;
   const [cartItems, setCartItems] = useState([]);
+  const [related, setRelated] = useState(null);
+
+  useEffect(() => {
+    API.graphql(
+      graphqlOperation(getHomePageProducts, {
+        filter: { storeId: { eq: STORE_ID } },
+        limit: 8,
+      })
+    ).then(
+      ({
+        data: {
+          searchProducts: { items },
+        },
+      }) => {
+        setRelated(items);
+      }
+    );
+  }, []);
 
   useEffect(() => {
     setCartItems([...cartList]);
@@ -293,6 +315,10 @@ function Cart(props) {
               </div>
             )}
           </div>
+          <RelatedProducts
+            products={related}
+            heading="Other popular products"
+          />
         </div>
       </div>
     </div>

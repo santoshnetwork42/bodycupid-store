@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
+  getHomePageProducts,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import {
@@ -32,6 +33,7 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
+import RelatedProducts from "~/components/partials/product/related-products";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
@@ -42,6 +44,24 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
+  const [related, setRelated] = useState(null);
+
+  useEffect(() => {
+    API.graphql(
+      graphqlOperation(getHomePageProducts, {
+        filter: { storeId: { eq: STORE_ID } },
+        limit: 8,
+      })
+    ).then(
+      ({
+        data: {
+          searchProducts: { items },
+        },
+      }) => {
+        setRelated(items);
+      }
+    );
+  }, []);
 
   const handlePayment = useCallback(
     async ({ orderId, paymentId, address }) => {
@@ -241,8 +261,6 @@ function Checkout(props) {
       </Head>
 
       <h1 className="d-none">Wow life science - Checkout</h1>
-
-      <Loader loading={!!loading} />
 
       {!user && <Passwordless forceOpen redirect={false} />}
 
@@ -469,9 +487,10 @@ function Checkout(props) {
                       )}
                       <button
                         onClick={placeOrder}
-                        className="btn btn-dark btn-rounded btn-order"
+                        className="btn btn-dark btn-rounded btn-order d-flex justify-content-center align-items-center"
                       >
                         Place Order
+                        {loading && <div className="spin-loader ml-2" />}
                       </button>
                     </div>
                   </div>
@@ -493,6 +512,10 @@ function Checkout(props) {
               </p>
             </div>
           )}
+          <RelatedProducts
+            products={related}
+            heading="Other popular products"
+          />
         </div>
       </div>
     </main>

@@ -32,17 +32,16 @@ function Passwordless({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    let timer;
     if (seconds) {
-      const timer = setInterval(() => {
-        if (seconds) {
-          setSeconds(seconds - 1);
-        }
+      timer = setInterval(() => {
+        setSeconds(seconds - 1);
       }, 1000);
-      return () => {
-        clearInterval(timer);
-      };
     }
-  }, [seconds, setSeconds]);
+    return () => {
+      timer && clearInterval(timer);
+    };
+  }, [seconds]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -78,7 +77,8 @@ function Passwordless({
 
   const handleConfirmSignUp = useCallback(
     async (e) => {
-      e.preventDefault();
+      e?.preventDefault();
+      setLoading(true);
       try {
         if (confirmSignUp === "SIGNUP") {
           await Auth.confirmSignUp(
@@ -93,9 +93,11 @@ function Passwordless({
         }
         if (redirect) router.push("/pages/checkout");
         closeModal();
+        setLoading(false);
         return false;
       } catch (error) {
         console.log("error signup confirm:", error);
+        setLoading(false);
         toast(<AlertPopup message={error.message} status="error" />);
       }
       return false;
@@ -135,6 +137,12 @@ function Passwordless({
   useEffect(() => {
     closeModal();
   }, [auth]);
+
+  useEffect(() => {
+    if (state.confirmationCode.length === 6) {
+      handleConfirmSignUp();
+    }
+  }, [state.confirmationCode]);
 
   return (
     <Modal
@@ -181,14 +189,14 @@ function Passwordless({
                                   required
                                   maxLength={10}
                                   value={removePhonePrefix(state.phone)}
-                                  onChange={(e) =>
+                                  onChange={(e) => {
                                     setState({
                                       ...state,
                                       phone: e.target.value
                                         .replaceAll(/[^0-9]+/g, "")
                                         .trim(),
-                                    })
-                                  }
+                                    });
+                                  }}
                                 />
                               </div>
                             </div>
@@ -199,7 +207,7 @@ function Passwordless({
                               disabled={loading}
                             >
                               Get OTP
-                              {loading && <div class="spin-loader ml-2"></div>}
+                              {loading && <div className="spin-loader ml-2" />}
                             </button>
                           </form>
                         )}
@@ -249,10 +257,12 @@ function Passwordless({
                           </div>
 
                           <button
-                            className="btn btn-dark btn-block btn-rounded"
+                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
+                            disabled={loading}
                           >
                             Confirm
+                            {loading && <div className="spin-loader ml-2" />}
                           </button>
                           {!seconds ? (
                             <ALink href="#" onClick={handleSignIn}>

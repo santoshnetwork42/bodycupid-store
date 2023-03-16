@@ -14,7 +14,7 @@ function ForgotPassword() {
     password: "",
     confirmationCode: null,
   });
-
+  const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(null);
 
   const handleSubmit = useCallback(
@@ -142,10 +142,12 @@ function ForgotPassword() {
                           </>
                         )}
                         <button
-                          className="btn btn-dark btn-block btn-rounded mt-2"
+                          className="btn btn-dark btn-block btn-rounded mt-2 d-flex justify-content-center align-items-center"
                           type="submit"
+                          disabled={loading}
                         >
                           {showOTP ? "Reset Password" : "Get Code"}
+                          {loading && <div className="spin-loader ml-2" />}
                         </button>
                         <div className="form-footer mt-3 align-items-center border-no justify-content-center">
                           <ALink href="/pages/login" className="lost-link">
