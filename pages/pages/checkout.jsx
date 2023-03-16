@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -12,6 +12,7 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
+  getHomePageProducts,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getCartTotals } from "~/utils";
@@ -23,9 +24,9 @@ import loadScript from "~/utils/loadScript";
 import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
-import Loader from "~/components/common/partials/loader";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
+import RelatedProducts from "~/components/partials/product/related-products";
 import { scrollWithOffset } from "~/utils/helper";
 
 function Checkout(props) {
@@ -37,6 +38,24 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
+  const [related, setRelated] = useState(null);
+
+  useEffect(() => {
+    API.graphql(
+      graphqlOperation(getHomePageProducts, {
+        filter: { storeId: { eq: STORE_ID } },
+        limit: 8,
+      })
+    ).then(
+      ({
+        data: {
+          searchProducts: { items },
+        },
+      }) => {
+        setRelated(items);
+      }
+    );
+  }, []);
 
   const {
     totalListingprice,
@@ -254,8 +273,6 @@ function Checkout(props) {
 
       <h1 className="d-none">Wow life science - Checkout</h1>
 
-      <Loader loading={!!loading} />
-
       {!user && <Passwordless forceOpen redirect={false} />}
 
       <div
@@ -285,7 +302,10 @@ function Checkout(props) {
                   <Addresses onAddressChange={setAddress} />
                 </div>
 
-                <aside id="details" className="col-lg-5 sticky-sidebar-wrapper">
+                <aside
+                  id="checkout-details"
+                  className="col-lg-5 sticky-sidebar-wrapper"
+                >
                   <div
                     className="sticky-sidebar mt-1"
                     data-sticky-options="{'bottom': 50}"
@@ -513,7 +533,7 @@ function Checkout(props) {
                           </p>
                           <ALink
                             onClick={() => {
-                              scrollWithOffset("details", 130);
+                              scrollWithOffset("checkout-details", 130);
                             }}
                             className="text-underline"
                             href="#"
@@ -523,9 +543,10 @@ function Checkout(props) {
                         </div>
                         <button
                           onClick={placeOrder}
-                          className="btn btn-dark btn-rounded btn-order "
+                          className="btn btn-dark btn-rounded btn-order d-flex justify-content-center align-items-center"
                         >
                           Place Order
+                          {loading && <div className="spin-loader ml-2" />}
                         </button>
                       </div>
                     </div>
@@ -548,6 +569,10 @@ function Checkout(props) {
               </p>
             </div>
           )}
+          <RelatedProducts
+            products={related}
+            heading="Other popular products"
+          />
         </div>
       </div>
     </main>

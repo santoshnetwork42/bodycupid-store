@@ -76,7 +76,6 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          id="details"
           className="cart-coupon-box mb-4"
           onClick={() => !appliedCoupon && setOpen(true)}
         >

@@ -458,8 +458,16 @@ function DescOne(props) {
                   >
                     {reviewState.image ? "Change" : "Add"} Photo
                   </button>
-                  <button type="submit" className="btn btn-primary btn-rounded">
-                    Submit<i className="d-icon-arrow-right"></i>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-rounded d-flex justify-content-center align-items-center"
+                  >
+                    Submit
+                    {loading ? (
+                      <div className="spin-loader ml-2" />
+                    ) : (
+                      <i className="d-icon-arrow-right"></i>
+                    )}
                   </button>
                 </div>
               </form>

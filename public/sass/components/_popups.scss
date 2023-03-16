@@ -381,10 +381,15 @@ button.mfp-close {
     .form-group {
         margin-bottom: 1.8rem;
 
+        .number-otp-label {
+            color: $body-color;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
         label {
             display: inline-block;
             margin-bottom: 8px;
-
+            
             font: {
                 size: 1.3rem;
             }
@@ -399,9 +404,10 @@ button.mfp-close {
             color: $grey-color;
             border-radius: .3rem;
             border-color: $border-color;
-        }
+        }  
     }
 
+    
     .form-footer {
         display: flex;
         align-items: center;
@@ -422,6 +428,17 @@ button.mfp-close {
         font: {
             size: 1.3rem;
         }
+    }
+
+    .resend-label { 
+        color: $body-color;
+        text-decoration: underline;
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+
+    .not-receive-otp-label{
+        color: $body-color;
     }
 
     .lost-link {
@@ -788,4 +805,23 @@ button.mfp-close {
         -webkit-box-shadow: none !important;
         box-shadow: none !important
     }
+}
+
+@include mq('lg') {
+   
+    .login-modal-container {
+        .auth-popup {
+           width: 50rem;
+        }
+    }
+
+}
+@include mq('md') {
+   
+    .login-modal-container {
+        .auth-popup {
+           width: 50rem;
+        }
+    }
+
 }

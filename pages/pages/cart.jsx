@@ -4,14 +4,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 import Coupons from "~/components/features/coupon";
-
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
-
 import { toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import RelatedProducts from "~/components/partials/product/related-products";
+import { API, graphqlOperation } from "aws-amplify";
+import { getHomePageProducts } from "~/graphql/api";
+import { STORE_ID } from "~/config";
 import { scrollWithOffset } from "~/utils/helper";
-import PaymentLogos from "~/components/common/partials/payment-logos";
 
 function Cart(props) {
   const {
@@ -24,6 +25,24 @@ function Cart(props) {
     openLogin,
   } = props;
   const [cartItems, setCartItems] = useState([]);
+  const [related, setRelated] = useState(null);
+
+  useEffect(() => {
+    API.graphql(
+      graphqlOperation(getHomePageProducts, {
+        filter: { storeId: { eq: STORE_ID } },
+        limit: 8,
+      })
+    ).then(
+      ({
+        data: {
+          searchProducts: { items },
+        },
+      }) => {
+        setRelated(items);
+      }
+    );
+  }, []);
 
   useEffect(() => {
     setCartItems([...cartList]);
@@ -189,7 +208,10 @@ function Cart(props) {
                     </tbody>
                   </table>
                 </div>
-                <aside className="col-lg-4 sticky-sidebar-wrapper">
+                <aside
+                  id="cart-details"
+                  className="col-lg-4 sticky-sidebar-wrapper"
+                >
                   <div
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
@@ -316,7 +338,7 @@ function Cart(props) {
                           </p>
                           <ALink
                             onClick={() => {
-                              scrollWithOffset("details", 130);
+                              scrollWithOffset("cart-details", 130);
                             }}
                             className="text-underline"
                             href="#"
@@ -352,6 +374,10 @@ function Cart(props) {
               </div>
             )}
           </div>
+          <RelatedProducts
+            products={related}
+            heading="Other popular products"
+          />
         </div>
       </div>
     </main>
