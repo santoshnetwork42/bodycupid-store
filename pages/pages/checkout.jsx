@@ -13,6 +13,7 @@ import {
   createTransaction,
   createPayment,
   getHomePageProducts,
+  validateTransaction,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getCartTotals } from "~/utils";
@@ -28,6 +29,7 @@ import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import RelatedProducts from "~/components/partials/product/related-products";
 import { scrollWithOffset } from "~/utils/helper";
+import PaymentLoader from "~/components/common/partials/payment-loader";
 
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
@@ -39,6 +41,10 @@ function Checkout(props) {
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
   const [related, setRelated] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+  const [paymentId, setPaymentId] = useState(null);
+  const [timer, setTimer] = useState(null);
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   useEffect(() => {
     API.graphql(
@@ -99,10 +105,9 @@ function Checkout(props) {
           image: getPublicImageURL(store.imageUrl),
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
-            await router.push(
-              `/order/${orderId}?paymentId=${razorpay_payment_id}`
-            );
-            await emptyCart();
+            setOrderId(orderId);
+            setPaymentId(razorpay_payment_id);
+            setPaymentLoading(true);
           },
           prefill: {
             name: address.name,
@@ -131,6 +136,34 @@ function Checkout(props) {
     },
     [store, user]
   );
+  const fetchPaymentStatus = useCallback(async () => {
+    if (orderId && paymentId) {
+      const {
+        data: {
+          validateTransaction: { success },
+        },
+      } = await API.graphql({
+        query: validateTransaction,
+        variables: { orderId, razorpayPaymentId: paymentId },
+      });
+      if (success) {
+        await router.push(`/order/${orderId}?paymentId=${paymentId}`);
+        await emptyCart();
+        setPaymentLoading(false);
+      }
+    }
+  }, [orderId, paymentId]);
+
+  useEffect(() => {
+    if (paymentLoading) {
+      if (timer) clearTimeout(timer);
+      const timerId = setTimeout(() => {
+        fetchPaymentStatus();
+        setTimer(null);
+      }, [2000]);
+      setTimer(timerId);
+    }
+  }, [orderId, paymentId, paymentLoading]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
@@ -575,6 +608,7 @@ function Checkout(props) {
           />
         </div>
       </div>
+      <PaymentLoader loading={paymentLoading} />
     </main>
   );
 }
