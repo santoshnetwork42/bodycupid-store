@@ -71,7 +71,7 @@ function ProductListOne(props) {
       }
       return { filter, limit: perPage };
     }
-    return { storeId: { eq: STORE_ID } };
+    return null;
   }, [perPage, maxprice, minprice, category?.id, search]);
 
   useEffect(() => {
