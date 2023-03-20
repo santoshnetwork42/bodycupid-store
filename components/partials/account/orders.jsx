@@ -97,7 +97,7 @@ function AccountOrders({ user }) {
         total={totalOrder}
         loaded={orders?.length}
         nextToken={token}
-        content='orders'
+        content="orders"
       />
     </div>
   );
