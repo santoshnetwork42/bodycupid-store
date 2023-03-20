@@ -26,6 +26,7 @@ import {
   stickyFooterHandler,
   resizeHandler,
 } from "~/utils";
+import { removeHoverEffect } from "~/utils/helper";
 
 function Layout({
   children,
@@ -36,6 +37,9 @@ function Layout({
   closePasswordless,
 }) {
   const router = useRouter();
+  useEffect(() => {
+    removeHoverEffect();
+  }, []);
 
   useLayoutEffect(() => {
     document.querySelector("body") &&

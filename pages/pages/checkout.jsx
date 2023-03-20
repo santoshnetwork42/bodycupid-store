@@ -147,8 +147,8 @@ function Checkout(props) {
         variables: { orderId, razorpayPaymentId: paymentId },
       });
       if (success) {
-        await router.push(`/order/${orderId}?paymentId=${paymentId}`);
         await emptyCart();
+        await router.push(`/order/${orderId}?paymentId=${paymentId}`);
         setPaymentLoading(false);
       }
     }
@@ -265,8 +265,8 @@ function Checkout(props) {
               address: restAddress,
             });
           } else {
-            await router.push(`/order/${orderId}`);
             await emptyCart();
+            await router.push(`/order/${orderId}`);
             setLoading(false);
           }
         } catch (error) {
