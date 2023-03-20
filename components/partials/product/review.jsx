@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ALink from "~/components/features/custom-link";
 import { formateDate, toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function Review({ review }) {
   const [read, setRead] = useState(false);
@@ -26,16 +27,6 @@ export default function Review({ review }) {
   return (
     <li key={review.id}>
       <div className="comment">
-        <figure className="comment-media">
-          <ALink href="#">
-            <img
-              src="/images/blog/comments/1.jpg"
-              alt="avatar"
-              width="100"
-              height="100"
-            />
-          </ALink>
-        </figure>
         <div className="comment-body">
           <div className="comment-rating ratings-container mb-0">
             <div className="ratings-full">
@@ -70,6 +61,22 @@ export default function Review({ review }) {
           </div>
         </div>
       </div>
+      {review?.images && (
+        <div className="comment-media d-flex flex-wrap ">
+          {review.images.map((img) => {
+            return (
+              <ALink href="#">
+                <img
+                  src={getPublicImageURL(img)}
+                  alt="avatar"
+                  width="100"
+                  height="100"
+                />
+              </ALink>
+            );
+          })}
+        </div>
+      )}
     </li>
   );
 }
