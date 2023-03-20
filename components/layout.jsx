@@ -46,6 +46,9 @@ function Layout({
       document.querySelector("body").classList.remove("loaded");
   }, [router.pathname]);
 
+  const blockFooter = ["/checkout"];
+  const hideFooter = blockFooter.some((f) => router.pathname.includes(f));
+
   useEffect(() => {
     window.addEventListener("scroll", showScrollTopHandler, { passive: true });
     window.addEventListener("scroll", stickyHeaderHandler, { passive: true });
@@ -102,8 +105,8 @@ function Layout({
         <Header navbar={navbar} />
 
         {children}
-
-        <Footer footer={footer} />
+        
+        {!hideFooter && <Footer footer={footer} />}
       </div>
 
       <ALink

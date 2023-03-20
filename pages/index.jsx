@@ -83,7 +83,7 @@ export const getStaticProps = async () => {
     });
 
     const { searchProducts } = await fetchData(getHomePageProducts, {
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       limit: 8,
     });
     const { searchProductSubCategories } = await fetchData(

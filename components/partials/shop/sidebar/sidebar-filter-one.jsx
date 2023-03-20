@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import InputRange from "react-input-range";
 import SlideToggle from "react-slide-toggle";
@@ -20,14 +20,16 @@ function SidebarFilterOne(props) {
   const router = useRouter();
 
   const query = router.query;
+  const { maxprice, minprice, grid, limit } = query;
+  const { category, subcategory, ...filterQuery } = query;
 
   const [filterPrice, setPrice] = useState({
-    max: query.maxprice ? parseInt(query.maxprice) : 3000,
-    min: query.minprice ? parseInt(query.minprice) : 0,
+    max: maxprice ? parseInt(maxprice) : 3000,
+    min: minprice ? parseInt(minprice) : 0,
   });
   const [isFirst, setFirst] = useState(true);
   let timerId;
-  useDebounce(filterPrice, 1000, () => {
+  useDebounce(filterPrice, 1200, () => {
     filterByPrice();
   });
 
@@ -57,31 +59,32 @@ function SidebarFilterOne(props) {
 
   useEffect(() => {
     setPrice({
-      max: query.maxprice ? parseInt(query.maxprice) : 3000,
-      min: query.minprice ? parseInt(query.minprice) : 0,
+      max: maxprice ? parseInt(maxprice) : 3000,
+      min: minprice ? parseInt(minprice) : 0,
     });
-    if (isFirst) {
-      setFirst(false);
-    } else {
+
+    if (category !== "all") {
       scrollTopHandler();
     }
   }, [query]);
 
-  const filterByPrice = () => {
+  const filterByPrice = useCallback(() => {
     if (!filterPrice.flag) return;
-    let url = router.pathname.replace("[grid]", query.grid);
-    let arr = [`minprice=${filterPrice.min}`, `maxprice=${filterPrice.max}`];
+    let url = router.pathname.replace("[grid]", grid);
+    let arr = [];
+    if (filterPrice.min > 0) {
+      arr.push(`minprice=${filterPrice.min}`);
+    }
+    if (filterPrice.min < filterPrice.max) {
+      arr.push(`maxprice=${filterPrice.max}`);
+    }
     for (let key in query) {
       if (key !== "minprice" && key !== "maxprice" && key !== "grid")
         arr.push(key + "=" + query[key]);
     }
     url = url + "?" + arr.join("&");
     router.push(url);
-  };
-
-  const onChangePrice = (value) => {
-    setPrice({ ...value, flag: true });
-  };
+  }, [filterPrice]);
 
   const toggleSidebar = (e) => {
     e.preventDefault();
@@ -98,7 +101,7 @@ function SidebarFilterOne(props) {
     let stickyWraper = e.currentTarget.closest(".sticky-sidebar-wrapper");
 
     let mainContent = e.currentTarget.closest(".main-content-wrap");
-    if (mainContent && type !== "off-canvas" && query.grid !== "4cols")
+    if (mainContent && type !== "off-canvas" && grid !== "4cols")
       mainContent.querySelector(".row.product-wrapper") &&
         mainContent
           .querySelector(".row.product-wrapper")
@@ -188,10 +191,11 @@ function SidebarFilterOne(props) {
                   href={{
                     pathname: router.pathname,
                     query: cleanQuery({
-                      subcategory: query.subcategory || null,
-                      category: query.category,
-                      grid: query.grid,
+                      subcategory: subcategory || null,
+                      category: category,
+                      grid: grid,
                       type: router.query.type ? router.query.type : null,
+                      limit: limit ? limit : null,
                     }),
                   }}
                   scroll={false}
@@ -214,9 +218,9 @@ function SidebarFilterOne(props) {
                       <li
                         key={item.name + " - " + index}
                         className={`with-ul overflow-hidden ${
-                          item.slug === query.category ||
+                          item.slug === category ||
                           item.subCategory.items.findIndex(
-                            (subCat) => subCat.slug === query.subcategory
+                            (subCat) => subCat.slug === subcategory
                           ) > -1
                             ? "show"
                             : ""
@@ -233,8 +237,9 @@ function SidebarFilterOne(props) {
                                 href={{
                                   pathname: "/collections/[category]",
                                   query: cleanQuery({
+                                    ...filterQuery,
                                     category: item.slug,
-                                    grid: query.grid,
+                                    grid: grid,
                                     type: router.query.type || null,
                                   }),
                                 }}
@@ -259,7 +264,7 @@ function SidebarFilterOne(props) {
                                         <li
                                           key={subItem.name + " - " + index}
                                           className={`with-ul ${
-                                            subItem.slug === query.category
+                                            subItem.slug === category
                                               ? "show"
                                               : ""
                                           } `}
@@ -270,9 +275,10 @@ function SidebarFilterOne(props) {
                                               pathname:
                                                 "/collections/[category]/[subcategory]",
                                               query: cleanQuery({
+                                                ...filterQuery,
                                                 category: item.slug,
                                                 subcategory: subItem.slug,
-                                                grid: query.grid,
+                                                grid: grid,
                                                 type: router.query.type || null,
                                               }),
                                             }}
@@ -291,7 +297,7 @@ function SidebarFilterOne(props) {
                       </li>
                     ) : (
                       <li
-                        className={query.category === item.slug ? "show" : ""}
+                        className={category === item.slug ? "show" : ""}
                         key={item.name + " - " + index}
                       >
                         <ALink
@@ -299,7 +305,7 @@ function SidebarFilterOne(props) {
                             pathname: "/collections/[category]",
                             query: cleanQuery({
                               category: item.slug,
-                              grid: query.grid,
+                              grid: grid,
                               type: router.query.type || null,
                             }),
                           }}
@@ -322,15 +328,40 @@ function SidebarFilterOne(props) {
               >
                 <div className="widget-body">
                   <form action="#">
-                    <div className="filter-price-slider noUi-target noUi-ltr noUi-horizontal shop-input-range">
-                      <InputRange
-                        formatLabel={(value) => `$${value}`}
-                        maxValue={3000}
-                        minValue={0}
-                        step={50}
-                        value={filterPrice}
-                        onChange={onChangePrice}
-                      />
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="price-range d-flex">
+                        <spna>₹</spna>
+                        <input
+                          type={"number"}
+                          placeholder="Minimum"
+                          className="price-input"
+                          value={filterPrice.min}
+                          onChange={(e) => {
+                            setPrice({
+                              ...filterPrice,
+                              min: e.target.value,
+                              flag: true,
+                            });
+                          }}
+                        />
+                      </div>
+                      <span>-</span>
+                      <div className="price-range d-flex">
+                        <spna>₹</spna>
+                        <input
+                          type={"number"}
+                          placeholder="Maximum"
+                          className="price-input"
+                          value={filterPrice.max}
+                          onChange={(e) => {
+                            setPrice({
+                              ...filterPrice,
+                              max: e.target.value,
+                              flag: true,
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
 
                     <div className="filter-actions">

@@ -49,8 +49,12 @@ function ProductListOne(props) {
     if (category || categorySlug === "all") {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
       const filter = category
-        ? { [apiSearchKey]: { eq: category.id }, storeId: { eq: STORE_ID } }
-        : { storeId: { eq: STORE_ID } };
+        ? {
+            [apiSearchKey]: { eq: category.id },
+            storeId: { eq: STORE_ID },
+            status: { eq: "ENABLED" },
+          }
+        : { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
 
       if (!!search?.trim()) {
         filter.title = { matchPhrasePrefix: search };
@@ -71,7 +75,7 @@ function ProductListOne(props) {
       }
       return { filter, limit: perPage };
     }
-    return { storeId: { eq: STORE_ID } };
+    return null;
   }, [perPage, maxprice, minprice, category?.id, search]);
 
   useEffect(() => {
@@ -174,7 +178,7 @@ function ProductListOne(props) {
   return (
     <>
       {isToolbox && <ToolBox type={type} />}
-    
+
       <InfiniteScroll
         dataLength={products ? products.length : 0}
         next={() => {
@@ -182,7 +186,7 @@ function ProductListOne(props) {
         }}
         style={{ overflow: "visible" }}
         hasMore={products.length < total}
-        loader={<Loader loading small/>}
+        loader={<Loader loading small />}
       >
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
