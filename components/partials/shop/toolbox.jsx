@@ -156,7 +156,7 @@ export default function ToolBox(props) {
           ) : (
             ""
           )}
-          <div
+          {/* <div
             className={`toolbox-item toolbox-sort ${
               type === "boxed" || type === "banner"
                 ? "select-box text-dark"
@@ -180,7 +180,7 @@ export default function ToolBox(props) {
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
             </select>
-          </div>
+          </div> */}
         </div>
 
         <div className="toolbox-right">
