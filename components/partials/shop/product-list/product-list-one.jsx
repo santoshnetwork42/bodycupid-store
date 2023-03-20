@@ -71,7 +71,7 @@ function ProductListOne(props) {
       }
       return { filter, limit: perPage };
     }
-    return { storeId: { eq: STORE_ID } };
+    return null;
   }, [perPage, maxprice, minprice, category?.id, search]);
 
   useEffect(() => {
@@ -174,7 +174,7 @@ function ProductListOne(props) {
   return (
     <>
       {isToolbox && <ToolBox type={type} />}
-    
+
       <InfiniteScroll
         dataLength={products ? products.length : 0}
         next={() => {
@@ -182,7 +182,7 @@ function ProductListOne(props) {
         }}
         style={{ overflow: "visible" }}
         hasMore={products.length < total}
-        loader={<Loader loading small/>}
+        loader={<Loader loading small />}
       >
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
