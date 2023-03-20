@@ -49,7 +49,7 @@ function Checkout(props) {
   useEffect(() => {
     API.graphql(
       graphqlOperation(getHomePageProducts, {
-        filter: { storeId: { eq: STORE_ID } },
+        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
         limit: 8,
       })
     ).then(

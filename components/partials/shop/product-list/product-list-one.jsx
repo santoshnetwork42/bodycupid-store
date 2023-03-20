@@ -49,8 +49,12 @@ function ProductListOne(props) {
     if (category || categorySlug === "all") {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
       const filter = category
-        ? { [apiSearchKey]: { eq: category.id }, storeId: { eq: STORE_ID } }
-        : { storeId: { eq: STORE_ID } };
+        ? {
+            [apiSearchKey]: { eq: category.id },
+            storeId: { eq: STORE_ID },
+            status: { eq: "ENABLED" },
+          }
+        : { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
 
       if (!!search?.trim()) {
         filter.title = { matchPhrasePrefix: search };
