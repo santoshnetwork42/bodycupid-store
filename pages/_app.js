@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API } from "aws-amplify";
@@ -25,12 +25,17 @@ const App = ({ Component, pageProps }) => {
   const store = useStore();
   const { navbar, footer, store: wowStore } = pageProps;
 
+  const storeName = useMemo(() => {
+    if (wowStore) return wowStore.name;
+    const state = store.getState();
+    return state?.system?.store?.name;
+  }, [wowStore]);
+
   const destroySession = useCallback(() => {
     store.__persistor.purge();
     store.dispatch(rootActions.destroySession());
   }, [store]);
 
-  
   const setUser = useCallback(async () => {
     try {
       const state = store.getState();
@@ -132,11 +137,11 @@ const App = ({ Component, pageProps }) => {
             content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
           />
           <meta name="HandheldFriendly" content="true" />
-          <title>Wow life science</title>
+          <title>{storeName}</title>
           <meta name="keywords" content="WOW" />
-          <meta name="description" content="Wow life science" />
+          <meta name="description" content={storeName} />
         </Head>
-        <Scripts/>
+        <Scripts />
         <Layout navbar={navbar} footer={footer}>
           <Component {...pageProps} />
         </Layout>

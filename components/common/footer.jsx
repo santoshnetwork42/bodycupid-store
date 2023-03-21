@@ -144,19 +144,19 @@ function Footer({ footer, store }) {
           <div className="footer-right">
             <div className="social-links">
               <a
-                title="Wow Life Science on Instagram"
+                title={`${name} on Instagram`}
                 className="social-link social-insta fab fa-instagram"
                 href="https://www.instagram.com/wowlifescienceindia/"
                 target={"_blank"}
               />
               <a
-                title="Wow Life Science on Facebook"
+                title={`${name} on Facebook`}
                 href="https://www.facebook.com/wowlifescienceindia/"
                 className="social-link social-facebook fab fa-facebook-f"
                 target={"_blank"}
               ></a>
               <a
-                title="Wow Life Science on YouTube"
+                title={`${name} on YouTube`}
                 href="https://www.youtube.com/@WOWLifeScience"
                 className="social-link social-youtube fab fa-youtube"
                 target={"_blank"}
