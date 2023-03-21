@@ -238,7 +238,7 @@ export default function ToolBox(props) {
         </div>
       </nav>
       <div className="filters-container d-flex mb-5 flex-wrap align-items-center">
-        {category && category !== "all" && (
+        {!!category && category !== "all" && (
           <div className="selected-filter-tags d-flex align-items-center">
             <span className="text-capitalize">
               {category.replaceAll("-", " ")}
@@ -261,7 +261,7 @@ export default function ToolBox(props) {
           </div>
         )}
 
-        {subcategory && (
+        {!!subcategory && (
           <div className="selected-filter-tags d-flex align-items-center">
             <span className="text-capitalize">
               {subcategory.replaceAll("-", " ")}
@@ -284,7 +284,7 @@ export default function ToolBox(props) {
             </ALink>
           </div>
         )}
-        {minprice && (
+        {!!minprice && (
           <div className="selected-filter-tags d-flex align-items-center">
             <span className="text-capitalize">Minmum Price : ₹{minprice}</span>
             <ALink
@@ -306,7 +306,7 @@ export default function ToolBox(props) {
             </ALink>
           </div>
         )}
-        {maxprice && (
+        {!!maxprice && (
           <div className="selected-filter-tags d-flex align-items-center">
             <span className="text-capitalize">Maximum Price : ₹{maxprice}</span>
             <ALink
