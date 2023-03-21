@@ -12,7 +12,7 @@ import { validateAddress, getProperAddress } from "~/utils/address";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit } = props;
-  const { firstName, lastName, email, phone } = user;
+  const { firstName, lastName, email, phone } = user || {};
   const [address, setAddress] = useSetState({
     firstName: firstName || "",
     lastName: lastName || "",
