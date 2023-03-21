@@ -24,9 +24,7 @@ function Shop() {
         <title>Wow life science - Shop Page Grid {grid}</title>
       </Head>
 
-      <h1 className="d-none">
-        Wow life science - Shop Page Grid {grid}
-      </h1>
+      <h1 className="d-none">Wow life science - Shop Page Grid {grid}</h1>
 
       <ShopBanner />
 

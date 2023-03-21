@@ -1,11 +1,13 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
-function Shiiping() {
+function Shiiping({ store }) {
+  const { name } = store;
   return (
     <main className="main about-us">
       <Head>
-        <title>Wow life science | Titles</title>
+        <title>{name} | Titles</title>
       </Head>
 
       <h1 className="d-none">
@@ -33,4 +35,10 @@ function Shiiping() {
   );
 }
 
-export default React.memo(Shiiping);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(Shiiping));

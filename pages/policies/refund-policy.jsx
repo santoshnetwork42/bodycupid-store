@@ -1,14 +1,17 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
-function RefundPolicy() {
+function RefundPolicy({ store }) {
+  const { name } = store;
+
   return (
     <main className="main about-us">
       <Head>
-        <title>Wow life science | Titles</title>
+        <title>{name} | Titles</title>
       </Head>
 
-      <h1 className="d-none">Refund policy - WOW Life Science</h1>
+      <h1 className="d-none">Refund policy - {name}</h1>
 
       <div className="page-content">
         <div className="container">
@@ -238,4 +241,10 @@ function RefundPolicy() {
   );
 }
 
-export default React.memo(RefundPolicy);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(RefundPolicy));

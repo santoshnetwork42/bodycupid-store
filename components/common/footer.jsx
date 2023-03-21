@@ -1,9 +1,12 @@
-import ALink from "~/components/features/custom-link";
+import { connect } from "react-redux";
 
+import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 import PaymentLogos from "./partials/payment-logos";
 
-export default function Footer({ footer }) {
+function Footer({ footer, store }) {
+  const { name } = store || {};
+
   return (
     <footer className="footer">
       <div className="container">
@@ -166,3 +169,11 @@ export default function Footer({ footer }) {
     </footer>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(Footer);

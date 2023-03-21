@@ -10,7 +10,8 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function Wishlist(props) {
-  const { wishlist, addToCart, removeFromWishlist } = props;
+  const { wishlist, addToCart, removeFromWishlist, store } = props;
+  const { name } = store;
 
   const moveToCart = (e, item) => {
     e.preventDefault();
@@ -21,10 +22,10 @@ function Wishlist(props) {
   return (
     <main className="main">
       <Head>
-        <title>Wow life science | Wishlist</title>
+        <title>{name} | Wishlist</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Wishlist</h1>
+      <h1 className="d-none">{name} - Wishlist</h1>
       <nav className="breadcrumb-nav">
         <div className="container">
           <ul className="breadcrumb">
@@ -200,6 +201,7 @@ function Wishlist(props) {
 function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
+    store: state.system.store,
   };
 }
 
