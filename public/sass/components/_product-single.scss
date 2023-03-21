@@ -453,6 +453,17 @@
             text-transform: none;
             color: $dark-color;
         }
+        .out-of-stock {
+            margin-bottom: 2rem ;
+            p:first-child {
+                font-size: 2rem;
+                font-weight: 600;
+                color: $alert-color;
+            }
+            p {
+                padding: 0;
+            }
+        }
         .notify-btn {
             padding: 1.2rem 0px;
         }

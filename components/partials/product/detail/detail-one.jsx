@@ -15,6 +15,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
+import ProductNotify from "~/components/features/product-notify";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -383,7 +384,7 @@ function DetailOne(props) {
       )}
 
       <hr className="product-divider"></hr>
-      {console.log("isStickyCart", isStickyCart)}
+
       {isStickyCart ? (
         <div className="sticky-content fix-top product-sticky-content">
           <div className="container">
@@ -506,27 +507,7 @@ function DetailOne(props) {
           </div>
         </div>
       ) : (
-        <div className="notify-container">
-          <form>
-            <label>*This product is currently out of stock</label>
-            <input
-              className="form-control mt-1"
-              type="email"
-              id="email"
-              required
-              name="email"
-              placeholder="Enter email to find out when it's back"
-              value={notifyEmail}
-              onChange={(e) => setNotifyEmail(e.target.value.trim())}
-            />
-            <button
-              className="notify-btn btn btn-dark btn-block btn-rounded text-capitalize font-weight-semi-bold mt-3"
-              onClick={() => {}}
-            >
-              Notify me when available
-            </button>
-          </form>
-        </div>
+        <ProductNotify />
       )}
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
