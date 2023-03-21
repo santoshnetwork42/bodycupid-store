@@ -16,26 +16,28 @@ function Categories() {
   const { category: categorySlug } = router.query;
 
   useEffect(() => {
-    if (categorySlug !== "all") {
-      getCategoryByslug();
-    }
+    getCategoryByslug();
   }, [categorySlug]);
 
   const getCategoryByslug = useCallback(async () => {
     try {
-      const {
-        data: {
-          byslugProductCategory: {
-            items: [response],
+      if (categorySlug !== "all") {
+        const {
+          data: {
+            byslugProductCategory: {
+              items: [response],
+            },
           },
-        },
-      } = await API.graphql(
-        graphqlOperation(getBasicCategory, {
-          slug: categorySlug,
-          filter: { storeId: { eq: STORE_ID } },
-        })
-      );
-      setCategory(response);
+        } = await API.graphql(
+          graphqlOperation(getBasicCategory, {
+            slug: categorySlug,
+            filter: { storeId: { eq: STORE_ID } },
+          })
+        );
+        setCategory(response);
+      } else {
+        setCategory(null);
+      }
     } catch (error) {
       console.log("byslugProductCategory", error);
     }

@@ -88,7 +88,7 @@
 	}
 
 	&.shop-sidebar {
-		.sidebar-content {
+		.sidebar-content {	
 			top: 0px;
 		}
 	}
@@ -235,7 +235,7 @@
 		}
 		.sidebar-content {
 			position: sticky;
-			// top: 75px;
+			top: 16rem !important;
 			overflow: visible;
 			padding: 0;
 			opacity: 1;
