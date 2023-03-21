@@ -31,11 +31,14 @@ function DetailOne(props) {
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
+    user,
   } = props;
   const { toggleWishlist, addToCart, wishlist, removeFromCart } = props;
+  const { email } = user;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [notifyEmail, setNotifyEmail] = useState(email);
   const today = new Date();
   const sizes = useMemo(
     () =>
@@ -44,6 +47,19 @@ function DetailOne(props) {
         .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
+
+  const { inventoryEnabled, currentInventory } = useMemo(() => {
+    const { isInventoryEnabled, inventory = 0 } = product;
+    if (isInventoryEnabled) {
+      if (sizes.length) {
+        const variant = sizes.find((s) => s.id === selectedVariant);
+        const { inventory: variantInventory } = variant || {};
+        return { inventoryEnabled: true, currentInventory: variantInventory };
+      }
+      return { inventoryEnabled: true, currentInventory: inventory };
+    }
+    return { inventoryEnabled: false };
+  }, [selectedVariant, sizes, product]);
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -367,7 +383,7 @@ function DetailOne(props) {
       )}
 
       <hr className="product-divider"></hr>
-
+      {console.log("isStickyCart", isStickyCart)}
       {isStickyCart ? (
         <div className="sticky-content fix-top product-sticky-content">
           <div className="container">
@@ -393,30 +409,6 @@ function DetailOne(props) {
                     <ins className="new-price">
                       ₹{toDecimal(product.price || 0)}
                     </ins>
-                    {/* {
-                                                curIndex > -1 && product.variants[0] ?
-                                                    product.variants[curIndex].price ?
-                                                        product.variants[curIndex].sale_price ?
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].sale_price)}</ins>
-                                                                <del className="old-price">₹{toDecimal(product.variants[curIndex].price)}</del>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].price)}</ins>
-                                                            </>
-                                                        : ""
-                                                    :
-                                                    product.price[0] !== product.price[1] ?
-                                                        product.variants.length === 0 ?
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                                                <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                                            </>
-                                                            :
-                                                            < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                                                        : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                            } */}
                   </div>
 
                   <div className="ratings-container mb-0">
@@ -433,7 +425,7 @@ function DetailOne(props) {
                     </div>
 
                     <ALink href="#" className="rating-reviews">
-                      ( {product.reviews.items.length} reviews )
+                      ( {product?.reviews?.items.length} reviews )
                     </ALink>
                   </div>
                 </div>
@@ -477,13 +469,13 @@ function DetailOne(props) {
             </div>
           </div>
         </div>
-      ) : (
+      ) : !inventoryEnabled || (!!inventoryEnabled && !!currentInventory) ? (
         <div className="product-form product-qty pb-0">
           <label className="d-none">QTY:</label>
           <div className="product-form-group cart-button-wrapper">
             <Quantity
               qty={quantity}
-              max={product.inventory}
+              max={currentInventory}
               product={product}
               onChangeQty={changeQty}
             />
@@ -513,6 +505,28 @@ function DetailOne(props) {
             )}
           </div>
         </div>
+      ) : (
+        <div className="notify-container">
+          <form>
+            <label>*This product is currently out of stock</label>
+            <input
+              className="form-control mt-1"
+              type="email"
+              id="email"
+              required
+              name="email"
+              placeholder="Enter email to find out when it's back"
+              value={notifyEmail}
+              onChange={(e) => setNotifyEmail(e.target.value.trim())}
+            />
+            <button
+              className="notify-btn btn btn-dark btn-block btn-rounded text-capitalize font-weight-semi-bold mt-3"
+              onClick={() => {}}
+            >
+              Notify me when available
+            </button>
+          </form>
+        </div>
       )}
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
@@ -538,6 +552,7 @@ function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
+    user: state.user.data,
   };
 }
 
