@@ -27,8 +27,10 @@ export default function ToolBox(props) {
 
   const onChangeAttri = (e, attri) => {
     e.preventDefault();
+
     let url = router.pathname.replace("[grid]", query.grid);
-    let arr = [`${attri}=${e.target.value}`];
+    let arr =
+      e.target.value !== "default" ? [`${attri}=${e.target.value}`] : [];
     for (let key in query) {
       if (key !== attri && key !== "grid") arr.push(key + "=" + query[key]);
     }

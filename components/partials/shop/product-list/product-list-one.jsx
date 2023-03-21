@@ -1,17 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
-// import { useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
-import {
-  getBasicCategory,
-  getBasicSubCategory,
-  findProducts,
-} from "~/graphql/api";
+import { findProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import Loader from "~/components/common/partials/loader";
 
@@ -25,10 +20,9 @@ const gridClasses = {
 };
 
 function ProductListOne(props) {
-  const { itemsPerRow = 3, type = "left", isToolbox = true } = props;
+  const { itemsPerRow = 3, type = "left", isToolbox = true, category } = props;
 
   const [token, setToken] = useState(null);
-  const [category, setCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState();
@@ -42,12 +36,14 @@ function ProductListOne(props) {
     category: categorySlug,
     subcategory: subCategorySlug,
     search,
+    sortby,
   } = router.query;
   const perPage = limit ? parseInt(limit) : 12;
 
   const filters = useMemo(() => {
     if (category || categorySlug === "all") {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
+      const sortBy = [];
       const filter = category
         ? {
             [apiSearchKey]: { eq: category.id },
@@ -73,43 +69,19 @@ function ProductListOne(props) {
       } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
         filter.price = { lte: Number(maxprice) };
       }
-      return { filter, limit: perPage };
+      if (sortby === "popularity") {
+        sortBy.push({ field: "rating", direction: "desc" });
+      } else if (sortby === "date") {
+        sortBy.push({ field: "createdAt", direction: "desc" });
+      } else if (sortby === "price-low") {
+        sortBy.push({ field: "price", direction: "asc" });
+      } else if (sortby === "price-high") {
+        sortBy.push({ field: "price", direction: "desc" });
+      }
+      return { filter, limit: perPage, sort: sortBy };
     }
     return null;
-  }, [perPage, maxprice, minprice, category?.id, search]);
-
-  useEffect(() => {
-    setLoading(true);
-    if (categorySlug !== "all") {
-      const api = subCategorySlug ? getBasicSubCategory : getBasicCategory;
-      const apiSearch = subCategorySlug
-        ? "byslugProductSubCategory"
-        : "byslugProductCategory";
-      API.graphql(
-        graphqlOperation(api, {
-          slug: subCategorySlug || categorySlug,
-          filter: { storeId: { eq: STORE_ID } },
-        })
-      )
-        .then(
-          ({
-            data: {
-              [apiSearch]: {
-                items: [response],
-              },
-            },
-          }) => {
-            setCategory(response);
-            if (!response) {
-              setLoading(false);
-            }
-          }
-        )
-        .catch((err) => {
-          console.log("err", err);
-        });
-    }
-  }, [categorySlug, subCategorySlug]);
+  }, [perPage, maxprice, minprice, category?.id, search, sortby]);
 
   const getProducts = useCallback(
     (reset) => {
