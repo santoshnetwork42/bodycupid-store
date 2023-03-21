@@ -247,12 +247,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+                id: response.id,
+                shoppingcartId: id,
+                productId: response.productId,
+                variantId: response.variantId,
+                quantity: response.quantity,
+              }
             : p
         );
 
@@ -353,25 +353,27 @@ export function* cartSaga() {
     const { cart, user } = yield select() || {};
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
+
     if (cartResponse && userResponse) {
       const { products = [] } = cartResponse;
 
       const promise = [];
       if (Array.isArray(products)) {
-        products.forEach((product) =>
-          promise.push(
-            call([API, API.graphql], {
-              query: deleteShoppingCartProduct,
-              variables: {
-                input: { id: product.id },
-              },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
-            })
-          )
-        );
+        products.forEach((product) => {
+          if (product && product.id) {
+            promise.push(
+              call([API, API.graphql], {
+                query: deleteShoppingCartProduct,
+                variables: {
+                  input: { id: product.id },
+                },
+                authMode: "AMAZON_COGNITO_USER_POOLS",
+              })
+            );
+          }
+        });
       }
-
-      yield all(promise);
+      if (promise.length > 0) yield all(promise);
     }
     yield put({ type: actionTypes.REFRESH_STORE });
   });
