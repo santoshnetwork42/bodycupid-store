@@ -24,8 +24,10 @@ export default function ToolBox(props) {
 
   const onChangeAttri = (e, attri) => {
     e.preventDefault();
+
     let url = router.pathname.replace("[grid]", query.grid);
-    let arr = [`${attri}=${e.target.value}`];
+    let arr =
+      e.target.value !== "default" ? [`${attri}=${e.target.value}`] : [];
     for (let key in query) {
       if (key !== attri && key !== "grid") arr.push(key + "=" + query[key]);
     }
@@ -151,7 +153,7 @@ export default function ToolBox(props) {
           ""
         )}
 
-        {/* <div
+        <div
           className={`toolbox-item toolbox-sort ${
             type === "boxed" || type === "banner"
               ? "select-box text-dark"
@@ -171,13 +173,11 @@ export default function ToolBox(props) {
           >
             <option value="default">Default</option>
             <option value="popularity">Most Popular</option>
-            <option value="rating">Average rating</option>
             <option value="date">Latest</option>
-            <option value="price-low">Sort forward price low</option>
-            <option value="price-high">Sort forward price high</option>
-            <option value="">Clear custom sort</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
           </select>
-        </div> */}
+        </div>
       </div>
       <div className="toolbox-right">
         <div className="toolbox-item toolbox-show select-box text-dark">

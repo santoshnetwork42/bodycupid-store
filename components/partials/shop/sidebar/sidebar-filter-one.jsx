@@ -339,7 +339,7 @@ function SidebarFilterOne(props) {
                           onChange={(e) => {
                             setPrice({
                               ...filterPrice,
-                              min: e.target.value,
+                              min: e.target.value.replace(/^0+/, ""),
                               flag: true,
                             });
                           }}
@@ -356,7 +356,7 @@ function SidebarFilterOne(props) {
                           onChange={(e) => {
                             setPrice({
                               ...filterPrice,
-                              max: e.target.value,
+                              max: e.target.value.replace(/^0+/, ""),
                               flag: true,
                             });
                           }}

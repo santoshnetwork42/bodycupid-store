@@ -42,12 +42,14 @@ function ProductListOne(props) {
     category: categorySlug,
     subcategory: subCategorySlug,
     search,
+    sortby,
   } = router.query;
   const perPage = limit ? parseInt(limit) : 12;
 
   const filters = useMemo(() => {
     if (category || categorySlug === "all") {
       const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
+      const sortBy = [];
       const filter = category
         ? {
             [apiSearchKey]: { eq: category.id },
@@ -73,10 +75,19 @@ function ProductListOne(props) {
       } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
         filter.price = { lte: Number(maxprice) };
       }
-      return { filter, limit: perPage };
+      if (sortby === "popularity") {
+        sortBy.push({ field: "rating", direction: "desc" });
+      } else if (sortby === "date") {
+        sortBy.push({ field: "createdAt", direction: "desc" });
+      } else if (sortby === "price-low") {
+        sortBy.push({ field: "price", direction: "asc" });
+      } else if (sortby === "price-high") {
+        sortBy.push({ field: "price", direction: "desc" });
+      }
+      return { filter, limit: perPage, sort: sortBy };
     }
     return null;
-  }, [perPage, maxprice, minprice, category?.id, search]);
+  }, [perPage, maxprice, minprice, category?.id, search, sortby]);
 
   useEffect(() => {
     setLoading(true);
