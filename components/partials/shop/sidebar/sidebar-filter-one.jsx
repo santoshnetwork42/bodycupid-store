@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import InputRange from "react-input-range";
 import SlideToggle from "react-slide-toggle";
 import { API, graphqlOperation } from "aws-amplify";
 
@@ -27,7 +26,7 @@ function SidebarFilterOne(props) {
     max: maxprice ? parseInt(maxprice) : 3000,
     min: minprice ? parseInt(minprice) : 0,
   });
-  const [isFirst, setFirst] = useState(true);
+
   let timerId;
   useDebounce(filterPrice, 1200, () => {
     filterByPrice();
