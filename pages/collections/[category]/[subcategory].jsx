@@ -21,7 +21,6 @@ function Categories() {
 
   const getSubCategoryBySlug = useCallback(async () => {
     try {
-      const api = getBasicSubCategory;
       const {
         data: {
           byslugProductSubCategory: {
@@ -29,7 +28,7 @@ function Categories() {
           },
         },
       } = await API.graphql(
-        graphqlOperation(api, {
+        graphqlOperation(getBasicSubCategory, {
           slug: subCategorySlug,
           filter: { storeId: { eq: STORE_ID } },
         })

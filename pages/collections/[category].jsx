@@ -23,7 +23,6 @@ function Categories() {
 
   const getCategoryByslug = useCallback(async () => {
     try {
-      const api = getBasicCategory;
       const {
         data: {
           byslugProductCategory: {
@@ -31,12 +30,11 @@ function Categories() {
           },
         },
       } = await API.graphql(
-        graphqlOperation(api, {
+        graphqlOperation(getBasicCategory, {
           slug: categorySlug,
           filter: { storeId: { eq: STORE_ID } },
         })
       );
-      console.log(response);
       setCategory(response);
     } catch (error) {
       console.log("byslugProductCategory", error);
