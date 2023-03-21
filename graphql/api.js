@@ -710,6 +710,7 @@ export const getBasicSubCategory = /* GraphQL */ `
         id
         name
         slug
+        bannerUrl
       }
     }
   }
@@ -736,6 +737,7 @@ export const getBasicCategory = /* GraphQL */ `
         id
         name
         slug
+        bannerUrl
       }
     }
   }
@@ -1319,7 +1321,6 @@ export const searchProductFaqs = /* GraphQL */ `
     }
   }
 `;
-
 
 export const getLinkedProducts = /* GraphQL */ `
   query ByProductIdLinkedProduct(
