@@ -1,14 +1,20 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 function ProductNotify(props) {
   const { user } = props;
-  const { email } = user;
-  const [notifyEmail, setNotifyEmail] = useState(email);
+  const { email } = user || {};
+
+  const [notifyEmail, setNotifyEmail] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setNotifyEmail(email);
+  }, [user]);
 
   const handleNotify = useCallback((e) => {
     e.preventDefault();
+    alert(notifyEmail);
   });
 
   return (
@@ -16,7 +22,7 @@ function ProductNotify(props) {
       <div className="out-of-stock">
         <p className="m-0">Temporarily out of stock.</p>
         <p className="m-0">
-          we are working hard to be back in stock as soon as possible
+          We are working hard to be back in stock as soon as possible
         </p>
       </div>
       <form onSubmit={handleNotify}>
