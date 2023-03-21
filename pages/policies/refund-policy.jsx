@@ -116,21 +116,20 @@ function RefundPolicy({ store }) {
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">RETURN & EXCHANGE POLICY</h2>
             <p className="text-grey" a>
-              1. WOW Skin Science and WOW Life Science products are
-              non-returnable due to hygiene/health and personal
-              care/wellness/consumable nature of the product. 2. In case you
-              would want a refund or replacement, please send us an email with
-              the Images of the Product, Invoice, Inner & Outer Packaging and
-              Batch Number to support@buywow.in, within 24 hours of the order
-              delivery. We would require 48-72 hours to revert. 3. Kindly take
-              picture of the damaged/tampered side of the product or package. 4.
-              Please allow us 10 to 15 days from the day you return your
-              package, for your request to be processed. We may contact you to
-              ascertain the damage or defect in the product prior to issuing
-              refund/replacement. 5. You will be eligible for full refund or
-              exchange without incurring any additional charges if it is the
-              case of: a. Package has accessories missing. b. Damaged or broken
-              bottles/pack. c. Wrong product delivery. d. Expired product
+              1. WOW Skin Science and {name} products are non-returnable due to
+              hygiene/health and personal care/wellness/consumable nature of the
+              product. 2. In case you would want a refund or replacement, please
+              send us an email with the Images of the Product, Invoice, Inner &
+              Outer Packaging and Batch Number to support@buywow.in, within 24
+              hours of the order delivery. We would require 48-72 hours to
+              revert. 3. Kindly take picture of the damaged/tampered side of the
+              product or package. 4. Please allow us 10 to 15 days from the day
+              you return your package, for your request to be processed. We may
+              contact you to ascertain the damage or defect in the product prior
+              to issuing refund/replacement. 5. You will be eligible for full
+              refund or exchange without incurring any additional charges if it
+              is the case of: a. Package has accessories missing. b. Damaged or
+              broken bottles/pack. c. Wrong product delivery. d. Expired product
               delivery. 6. In case you received a wrong product, we request you
               to keep the product safe, saleable and undamaged in its original
               packaging. Retain the invoice and original manufacturer’s packing
@@ -192,7 +191,7 @@ function RefundPolicy({ store }) {
               the products 2. Take proper snapshots of the products 3. Keep the
               invoice copy with you If, however, the order is placed through an
               online marketplace, please raise the issue to our customer service
-              team. In such a case, WOW Skin Science and WOW Life Science is not
+              team. In such a case, WOW Skin Science and {name} is not
               responsible for any damages caused.
             </p>
           </section>
@@ -222,9 +221,9 @@ function RefundPolicy({ store }) {
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">SUSPENDING PROMOTIONS</h2>
             <p className="text-grey">
-              WOW Skin Science and WOW Life Science reserve the right to cancel
-              any on-going or future promotions, offers, sales, gifts and
-              giveaways on the products without any liabilities.
+              WOW Skin Science and {name} reserve the right to cancel any
+              on-going or future promotions, offers, sales, gifts and giveaways
+              on the products without any liabilities.
             </p>
           </section>
           <section className="mt-10 pt-2">

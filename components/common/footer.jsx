@@ -138,8 +138,7 @@ function Footer({ footer, store }) {
           </div>
           <div className="footer-center">
             <p className="copyright ls-normal">
-              Wow life science &copy; {new Date().getFullYear()}. All Rights
-              Reserved
+              {name} &copy; {new Date().getFullYear()}. All Rights Reserved
             </p>
           </div>
           <div className="footer-right">

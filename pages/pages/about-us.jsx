@@ -39,13 +39,13 @@ function AboutUs({ store }) {
             </h2>
             <p className="text-grey">
               Thousands of our regular and devoted customers trust us for one
-              good reason. At WOW LIFE SCIENCE, they are assured of getting only
-              the purest and the most premium quality products powered by
-              natural bio-active ingredients and unsullied by artificial
-              additives or harmful synthetic chemicals. Our dietary supplements
-              all deliver such positive results that after trying out WOW
-              products, our customers seldom go anywhere else for their health
-              and supplement needs.
+              good reason. At {name}, they are assured of getting only the
+              purest and the most premium quality products powered by natural
+              bio-active ingredients and unsullied by artificial additives or
+              harmful synthetic chemicals. Our dietary supplements all deliver
+              such positive results that after trying out WOW products, our
+              customers seldom go anywhere else for their health and supplement
+              needs.
             </p>
           </section>
           <section className="mt-10 pt-2">
@@ -56,8 +56,8 @@ function AboutUs({ store }) {
               We understand that the way to a customer’s heart passes through
               two milestones – outstanding product quality that fulfils their
               needs and attentive and courteous customer service that shows we
-              care. WOW LIFE SCIENCE scores at both these front. We match (and
-              often exceed) highest industry standards in both these domains.
+              care. {name} scores at both these front. We match (and often
+              exceed) highest industry standards in both these domains.
             </p>
             <p className="text-grey">
               Not only are our products the best you can find, our customer

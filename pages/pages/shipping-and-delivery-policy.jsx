@@ -10,9 +10,7 @@ function Shiiping({ store }) {
         <title>{name} | Titles</title>
       </Head>
 
-      <h1 className="d-none">
-        SHIPPING AND DELIVERY POLICY - WOW Life Science
-      </h1>
+      <h1 className="d-none">SHIPPING AND DELIVERY POLICY - {name}</h1>
 
       <div className="page-content">
         <div className="container">
