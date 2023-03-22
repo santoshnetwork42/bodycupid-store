@@ -165,9 +165,7 @@ export default function ToolBox(props) {
                 : "select-menu"
             }`}
           >
-            {(type === "boxed" || type === "banner") && (
-              <label>Sort By:</label>
-            )}
+            {(type === "boxed" || type === "banner") && <label>Sort By:</label>}
             <select
               name="orderby"
               className="form-control"

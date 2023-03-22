@@ -1399,3 +1399,22 @@ export const getLinkedProducts = /* GraphQL */ `
     }
   }
 `;
+
+export const addProductNotification = /* GraphQL */ `
+  mutation AddProductNotification(
+    $productId: ID!
+    $variantId: ID
+    $userId: ID
+    $email: AWSEmail
+  ) {
+    addProductNotification(
+      productId: $productId
+      variantId: $variantId
+      userId: $userId
+      email: $email
+    ) {
+      success
+      message
+    }
+  }
+`;

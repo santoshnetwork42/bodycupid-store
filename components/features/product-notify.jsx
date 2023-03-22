@@ -1,21 +1,58 @@
+import { API } from "aws-amplify";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
+
+import { addProductNotification } from "~/graphql/mutations";
+import AlertPopup from "./product/common/alert-popup";
 
 function ProductNotify(props) {
-  const { user } = props;
-  const { email } = user || {};
-
+  const { user, productId, variantId } = props;
   const [notifyEmail, setNotifyEmail] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setNotifyEmail(email);
-  }, [user]);
+    if (user?.email) {
+      setNotifyEmail(user?.email);
+    }
+  }, [user?.email]);
 
-  const handleNotify = useCallback((e) => {
-    e.preventDefault();
-    alert(notifyEmail);
-  });
+  const handleNotify = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        setLoading(true);
+        const {
+          data: { addProductNotification: response },
+        } = await API.graphql({
+          query: addProductNotification,
+          variables: {
+            productId: productId,
+            email: notifyEmail,
+            userId: user?.id,
+            varientId: variantId,
+          },
+          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        });
+        if (response?.success) {
+          toast(
+            <AlertPopup
+              message="We'll notify you when this product is back in stock"
+              status="success"
+            />
+          );
+        } else {
+          toast(<AlertPopup message="Something went wrong" status="error" />);
+        }
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        toast(<AlertPopup message="Something went wrong" status="error" />);
+        console.log("notify", error);
+      }
+    },
+    [notifyEmail, productId, variantId, user?.id]
+  );
 
   return (
     <div className="notify-container">

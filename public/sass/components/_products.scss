@@ -493,11 +493,18 @@
 }
 
 // Product Tag
-.product-tag {
-    font-size:1.2rem;
-    text-overflow: ellipsis;
-    color:$success-color;
-    text-align: center !important;
+.product-tags-container{
+    min-height: 3rem;
+    .product-tag {
+        font-size:1.2rem;
+        text-overflow: ellipsis;
+        color:$success-color;
+        text-align: center !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
 }
 
 // Product Price
@@ -659,13 +666,18 @@
             font-size: 1.8rem;
         }
     }
-
+ 
     .btn-cart {
         flex: 1;
         height: 4.2rem;
         font-size: 1.3rem;
         transition: color .3s, background-color .3s, border-color .3s;
         z-index: 1;
+    }
+
+    .list-cart-btn {
+        height: 4.5rem;
+        font-size: 1.4rem;
     }
 
     .btn-quickview {

@@ -1,4 +1,5 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useMemo, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
@@ -11,16 +12,63 @@ import { wishlistActions } from "~/store/wishlist";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/helper";
+import { getFirstVariantId } from "~/utils/products";
+import Quantity from "../quantity";
 
 function ProductEight(props) {
+  const router = useRouter();
   const {
     product,
+    cartList,
     adClass,
     toggleWishlist,
     wishlist,
     addToCart,
+    updateCart,
+    removeFromCart,
     openQuickview,
   } = props;
+  const [quantity, setQuantity] = useState(1);
+
+  const {
+    inventoryEnabled,
+    currentInventory,
+    selectedVarientId = null,
+  } = useMemo(() => {
+    const { isInventoryEnabled, inventory = 0, variants } = product;
+    const { items } = variants;
+    if (isInventoryEnabled) {
+      if (items.length) {
+        // const { inventory: variantInventory, id } = items[0];
+        const id = getFirstVariantId(product);
+        const { inventory: variantInventory } = items.find((i) => i.id === id);
+        return {
+          inventoryEnabled: true,
+          currentInventory: variantInventory,
+          selectedVarientId: id,
+        };
+      }
+      return { inventoryEnabled: true, currentInventory: inventory };
+    }
+    return { inventoryEnabled: false };
+  }, [product]);
+
+  const cartItem = useMemo(() => {
+    if (cartList.length) {
+      const cartItem = cartList.find((cl) => cl.id === product.id);
+
+      if (cartItem && cartItem.qty) {
+        setQuantity(cartItem.qty);
+      } else {
+        setQuantity(1);
+      }
+      return cartItem;
+    } else {
+      setQuantity(1);
+    }
+    return;
+  }, [cartList]);
+
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -46,13 +94,26 @@ function ProductEight(props) {
     }, 1000);
   };
 
-  const addToCartHandler = (e) => {
-    e.preventDefault();
-    // addToCart({ ...product, qty: 1, price: product.price[0] });
-    addToCart({ ...product, qty: 1, price: product.price });
+  const addToCartHandler = () => {
+    addToCart({ ...product, qty: quantity, price: product.price });
   };
 
   const { thumbImage, discount } = getProductMeta(product);
+
+  function changeQty(qty) {
+    setQuantity(qty);
+    if (cartItem) {
+      if (qty) {
+        updateCart(
+          cartList.map((item) => {
+            return item.id === product.id ? { ...item, qty: qty } : item;
+          })
+        );
+      } else {
+        removeFromCart({ ...product, variantId: selectedVarientId });
+      }
+    }
+  }
 
   return (
     <div
@@ -179,34 +240,72 @@ function ProductEight(props) {
         <p className="product-short-desc">{product.productDescription}</p>
 
         <div className="product-action">
-          <a
-            href="#"
-            className="btn-product btn-cart"
-            title="Add to cart"
-            onClick={addToCartHandler}
-          >
-            <i className="d-icon-bag"></i>
-            <span>Add to cart</span>
-          </a>
-          <a
-            href="#"
-            className="btn-product-icon btn-wishlist"
-            title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-            onClick={wishlistHandler}
-          >
-            <i
-              className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-            ></i>
-          </a>
-
-          <ALink
-            href="#"
-            className="btn-product-icon btn-quickview"
-            title="Quick View"
-            onClick={showQuickviewHandler}
-          >
-            <i className="d-icon-search"></i>
-          </ALink>
+          <div className="product-form-group cart-button-wrapper">
+            {!inventoryEnabled || !!currentInventory ? (
+              <>
+                <Quantity
+                  qty={quantity}
+                  max={currentInventory}
+                  product={product}
+                  onChangeQty={changeQty}
+                />
+                {cartItem && (
+                  <ALink
+                    href="#"
+                    className="btn-product btn-cart list-cart-btn"
+                    title="Add to cart"
+                    onClick={() => {
+                      router.push("/pages/cart");
+                    }}
+                  >
+                    <i className="d-icon-bag"></i>
+                    <span>View Cart</span>
+                  </ALink>
+                )}
+                {!cartItem && (
+                  <ALink
+                    href="#"
+                    className="btn-product btn-cart list-cart-btn"
+                    title="Add to cart"
+                    onClick={addToCartHandler}
+                  >
+                    <i className="d-icon-bag"></i>
+                    <span>Add to cart</span>
+                  </ALink>
+                )}
+                <a
+                  href="#"
+                  className="btn-product-icon btn-wishlist"
+                  title={
+                    isWishlisted ? "Remove from wishlist" : "Add to wishlist"
+                  }
+                  onClick={wishlistHandler}
+                >
+                  <i
+                    className={
+                      isWishlisted ? "d-icon-heart-full" : "d-icon-heart"
+                    }
+                  ></i>
+                </a>
+                <ALink
+                  href="#"
+                  className="btn-product-icon btn-quickview"
+                  title="Quick View"
+                  onClick={showQuickviewHandler}
+                >
+                  <i className="d-icon-search"></i>
+                </ALink>
+              </>
+            ) : (
+              <ALink
+                href={`/product/${product.slug}`}
+                className="btn-product btn-cart list-cart-btn"
+                title="Out of stock"
+              >
+                <span>Out of stock</span>
+              </ALink>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -216,11 +315,14 @@ function ProductEight(props) {
 function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
+    cartList: state.cart.data || [],
   };
 }
 
 export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
+  updateCart: cartActions.updateCart,
+  removeFromCart: cartActions.removeFromCart,
   ...modalActions,
 })(ProductEight);

@@ -34,6 +34,19 @@ function ProductTwo(props) {
     openQuickview(product.slug);
   };
 
+  const { inventoryEnabled, currentInventory } = useMemo(() => {
+    const { isInventoryEnabled, inventory = 0, variants } = product;
+    const { items } = variants;
+    if (isInventoryEnabled) {
+      if (items.length) {
+        const { inventory: variantInventory } = items[0];
+        return { inventoryEnabled: true, currentInventory: variantInventory };
+      }
+      return { inventoryEnabled: true, currentInventory: inventory };
+    }
+    return { inventoryEnabled: false };
+  }, [product]);
+
   const wishlistHandler = (e) => {
     if (toggleWishlist) {
       toggleWishlist({ ...product, notWishlisted: !isWishlisted });
@@ -173,11 +186,13 @@ function ProductTwo(props) {
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
-        {!!product?.tags && (
-          <label className="product-tag">
-            {product?.tags.split(",").join(" | ")}
-          </label>
-        )}
+        <div className="product-tags-container">
+          {!!product?.tags && (
+            <label className="product-tag">
+              {product?.tags.split(",").join(" | ")}
+            </label>
+          )}
+        </div>
 
         <div className="product-price">
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
@@ -206,24 +221,35 @@ function ProductTwo(props) {
             </ALink>
           )}
         </div>
-
         <div className="product-action">
-          {isCartItem ? (
+          {!inventoryEnabled || !!currentInventory ? (
+            <>
+              {isCartItem ? (
+                <ALink
+                  href="/pages/cart"
+                  className="btn-product btn-quickview m-0"
+                  title="View Cart"
+                >
+                  View Cart
+                </ALink>
+              ) : (
+                <ALink
+                  href="#"
+                  className="btn-product btn-quickview m-0"
+                  title="Add to cart"
+                  onClick={addToCartHandler}
+                >
+                  Add to cart
+                </ALink>
+              )}
+            </>
+          ) : (
             <ALink
-              href="/pages/cart"
+              href={`/product/${product.slug}`}
               className="btn-product btn-quickview m-0"
               title="View Cart"
             >
-              View Cart
-            </ALink>
-          ) : (
-            <ALink
-              href="#"
-              className="btn-product btn-quickview m-0"
-              title="Add to cart"
-              onClick={addToCartHandler}
-            >
-              Add to cart
+              Out of stock
             </ALink>
           )}
         </div>

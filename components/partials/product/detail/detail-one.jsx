@@ -73,6 +73,8 @@ function DetailOne(props) {
         setQuantity(1);
       }
       return cartItem;
+    } else {
+      setQuantity(1);
     }
     return;
   }, [cartList, selectedVariant]);
@@ -472,7 +474,7 @@ function DetailOne(props) {
               </div>
             </div>
           ) : (
-            <ProductNotify />
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
           )}
         </>
       ) : (
@@ -514,7 +516,7 @@ function DetailOne(props) {
               </div>
             </div>
           ) : (
-            <ProductNotify />
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
           )}
         </>
       )}
