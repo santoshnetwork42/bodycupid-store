@@ -3200,6 +3200,7 @@ export const getUser = /* GraphQL */ `
               invoiceNumber
               tentativeDeliveryDate
               trackingId
+              cancelledQuantity
               quantity
               price
               status
@@ -6147,6 +6148,7 @@ export const listUsers = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -8241,6 +8243,7 @@ export const bystoreIdUser = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -10335,6 +10338,7 @@ export const searchUsers = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -62856,6 +62860,7 @@ export const getProductLog = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -64141,6 +64146,7 @@ export const listProductLogs = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -65063,6 +65069,7 @@ export const byProductIdProductLogs = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -67299,6 +67306,7 @@ export const getOrder = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -68824,6 +68832,7 @@ export const getOrder = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -69680,6 +69689,7 @@ export const getOrder = /* GraphQL */ `
           invoiceNumber
           tentativeDeliveryDate
           trackingId
+          cancelledQuantity
           quantity
           price
           status
@@ -71727,6 +71737,7 @@ export const listOrders = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -72945,6 +72956,7 @@ export const listOrders = /* GraphQL */ `
             invoiceNumber
             tentativeDeliveryDate
             trackingId
+            cancelledQuantity
             quantity
             price
             status
@@ -74264,6 +74276,7 @@ export const bystoreIdOrder = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -75482,6 +75495,7 @@ export const bystoreIdOrder = /* GraphQL */ `
             invoiceNumber
             tentativeDeliveryDate
             trackingId
+            cancelledQuantity
             quantity
             price
             status
@@ -76801,6 +76815,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -78019,6 +78034,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
             invoiceNumber
             tentativeDeliveryDate
             trackingId
+            cancelledQuantity
             quantity
             price
             status
@@ -79338,6 +79354,7 @@ export const searchOrders = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -80556,6 +80573,7 @@ export const searchOrders = /* GraphQL */ `
             invoiceNumber
             tentativeDeliveryDate
             trackingId
+            cancelledQuantity
             quantity
             price
             status
@@ -82456,6 +82474,7 @@ export const getOrderComment = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -83741,6 +83760,7 @@ export const listOrderComments = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -84663,6 +84683,7 @@ export const byOrderIdOrderComment = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -86935,6 +86956,7 @@ export const getOrderProduct = /* GraphQL */ `
       invoiceNumber
       tentativeDeliveryDate
       trackingId
+      cancelledQuantity
       quantity
       price
       status
@@ -88002,6 +88024,7 @@ export const listOrderProducts = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        cancelledQuantity
         quantity
         price
         status
@@ -89081,6 +89104,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        cancelledQuantity
         quantity
         price
         status
@@ -90160,6 +90184,7 @@ export const searchOrderProducts = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        cancelledQuantity
         quantity
         price
         status
@@ -92151,6 +92176,7 @@ export const getPayment = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -93663,6 +93689,7 @@ export const listPayments = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -94812,6 +94839,7 @@ export const bystoreIdPayment = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -95961,6 +95989,7 @@ export const byuserIdcreatedAtPayment = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -97110,6 +97139,7 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -98825,6 +98855,7 @@ export const getReview = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -102062,6 +102093,7 @@ export const listReviews = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -103987,6 +104019,7 @@ export const byUseridcreatedAtReview = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -105912,6 +105945,7 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -107837,6 +107871,7 @@ export const searchReviews = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -124822,6 +124857,7 @@ export const getCouponCode = /* GraphQL */ `
                 invoiceNumber
                 tentativeDeliveryDate
                 trackingId
+                cancelledQuantity
                 quantity
                 price
                 status
@@ -126341,6 +126377,7 @@ export const listCouponCodes = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -127497,6 +127534,7 @@ export const bycodeCouponCode = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -128653,6 +128691,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -129809,6 +129848,7 @@ export const searchCouponCodes = /* GraphQL */ `
                   invoiceNumber
                   tentativeDeliveryDate
                   trackingId
+                  cancelledQuantity
                   quantity
                   price
                   status
@@ -130457,6 +130497,99 @@ export const searchBlogs = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+export const getProductNotify = /* GraphQL */ `
+  query GetProductNotify($id: ID!) {
+    getProductNotify(id: $id) {
+      id
+      userId
+      productId
+      variantId
+      email
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listProductNotifies = /* GraphQL */ `
+  query ListProductNotifies(
+    $filter: ModelProductNotifyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProductNotifies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        productId
+        variantId
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const byProductIdUserIdProductNotify = /* GraphQL */ `
+  query ByProductIdUserIdProductNotify(
+    $productId: ID!
+    $userId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductNotifyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byProductIdUserIdProductNotify(
+      productId: $productId
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        productId
+        variantId
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const byProductIdEmailProductNotify = /* GraphQL */ `
+  query ByProductIdEmailProductNotify(
+    $productId: ID!
+    $email: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductNotifyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byProductIdEmailProductNotify(
+      productId: $productId
+      email: $email
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        productId
+        variantId
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;
