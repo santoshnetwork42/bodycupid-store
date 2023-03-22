@@ -242,10 +242,9 @@ export default function ToolBox(props) {
             </span>
             <ALink
               href={{
-                pathname: "/collections/[category]",
+                pathname: "/collections/all",
                 query: cleanQuery({
                   ...filterQuery,
-                  category: "all",
                   grid: grid,
                   type: router.query.type ? router.query.type : null,
                   limit: limit ? limit : null,
