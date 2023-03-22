@@ -165,18 +165,15 @@ export default function ToolBox(props) {
                 : "select-menu"
             }`}
           >
-            {(type === "boxed" || type === "banner") && (
-              <label>Sort By:</label>
-            )}
+            {(type === "boxed" || type === "banner") && <label>Sort By:</label>}
             <select
               name="orderby"
               className="form-control"
               defaultValue={query.sortby ? query.sortby : "default"}
               onChange={(e) => onChangeAttri(e, "sortby")}
             >
-              <option value="default">Default</option>
+              <option value="default">Latest</option>
               <option value="popularity">Most Popular</option>
-              <option value="date">Latest</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
             </select>

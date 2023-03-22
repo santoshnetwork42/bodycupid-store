@@ -71,8 +71,6 @@ function ProductListOne(props) {
       }
       if (sortby === "popularity") {
         sortBy.push({ field: "rating", direction: "desc" });
-      } else if (sortby === "date") {
-        sortBy.push({ field: "createdAt", direction: "desc" });
       } else if (sortby === "price-low") {
         sortBy.push({ field: "price", direction: "asc" });
       } else if (sortby === "price-high") {
