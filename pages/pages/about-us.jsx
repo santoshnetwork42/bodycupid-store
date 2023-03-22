@@ -20,7 +20,7 @@ function AboutUs({ store }) {
           </section>
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              WOW HEALTH : Your one-stop destination for all health & Supplement
+              {name}: Your one-stop destination for all health & Supplement
               needs
             </h2>
             <p className="text-grey">
@@ -35,7 +35,7 @@ function AboutUs({ store }) {
           </section>
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              WOW HEALTH : Naturally and holistically better than the rest
+              {name}: Naturally and holistically better than the rest
             </h2>
             <p className="text-grey">
               Thousands of our regular and devoted customers trust us for one
@@ -50,7 +50,7 @@ function AboutUs({ store }) {
           </section>
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              WOW HEALTH : Not just the best products, peerless service too
+              {name}: Not just the best products, peerless service too
             </h2>
             <p className="text-grey">
               We understand that the way to a customer’s heart passes through
