@@ -24,7 +24,11 @@ function Order() {
       query: getOrder,
       variables: { id: orderId },
     });
-    setOrder(response.data.getOrder);
+    if (!!response.data.getOrder) {
+      setOrder(response.data.getOrder);
+    } else {
+      router.push("/404");
+    }
   }, [orderId]);
 
   const fetchPaymentStatus = useCallback(async () => {
@@ -305,8 +309,24 @@ function Order() {
             href="/collections/all"
             className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
           >
-            <i className="d-icon-arrow-left"></i> Back to List
+            Continue Shopping
           </ALink>
+          <a
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
+            onClick={() => {
+              router.push(
+                {
+                  pathname: "/pages/account",
+                  query: {
+                    activeTabIndex: 1,
+                  },
+                },
+                "/pages/account"
+              );
+            }}
+          >
+            Your Orders
+          </a>
 
           <PaymentLoader loading={isPaymentProcessing} />
         </div>

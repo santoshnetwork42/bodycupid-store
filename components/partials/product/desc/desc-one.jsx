@@ -205,6 +205,7 @@ function DescOne(props) {
           },
           ...reviews,
         ]);
+        setShowReview(!showReview);
         toast(
           <AlertPopup
             message="Review submitted successfully"
