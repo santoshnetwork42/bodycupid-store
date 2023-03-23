@@ -16,6 +16,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
+import { productInventory } from "~/utils/products";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -46,18 +47,10 @@ function DetailOne(props) {
     [product?.variants?.items]
   );
 
-  const { inventoryEnabled, currentInventory } = useMemo(() => {
-    const { isInventoryEnabled, inventory = 0 } = product;
-    if (isInventoryEnabled) {
-      if (sizes.length) {
-        const variant = sizes.find((s) => s.id === selectedVariant);
-        const { inventory: variantInventory } = variant || {};
-        return { inventoryEnabled: true, currentInventory: variantInventory };
-      }
-      return { inventoryEnabled: true, currentInventory: inventory };
-    }
-    return { inventoryEnabled: false };
-  }, [selectedVariant, sizes, product]);
+  const { inventoryEnabled, currentInventory } = useMemo(
+    () => productInventory(product, selectedVariant),
+    [selectedVariant, sizes, product]
+  );
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -73,8 +66,6 @@ function DetailOne(props) {
         setQuantity(1);
       }
       return cartItem;
-    } else {
-      setQuantity(1);
     }
     return;
   }, [cartList, selectedVariant]);

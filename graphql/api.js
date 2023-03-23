@@ -802,6 +802,7 @@ export const findProducts = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders

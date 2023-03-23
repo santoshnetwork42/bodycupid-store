@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
@@ -11,9 +11,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta } from "~/utils/helper";
-import { getFirstVariantId } from "~/utils/products";
-import Quantity from "../quantity";
+import { getProductMeta, productInventory } from "~/utils/products";
 
 function ProductEight(props) {
   const router = useRouter();
@@ -24,50 +22,18 @@ function ProductEight(props) {
     toggleWishlist,
     wishlist,
     addToCart,
-    updateCart,
-    removeFromCart,
     openQuickview,
   } = props;
-  const [quantity, setQuantity] = useState(1);
 
-  const {
-    inventoryEnabled,
-    currentInventory,
-    selectedVarientId = null,
-  } = useMemo(() => {
-    const { isInventoryEnabled, inventory = 0, variants } = product;
-    const { items } = variants;
-    if (isInventoryEnabled) {
-      if (items.length) {
-        // const { inventory: variantInventory, id } = items[0];
-        const id = getFirstVariantId(product);
-        const { inventory: variantInventory } = items.find((i) => i.id === id);
-        return {
-          inventoryEnabled: true,
-          currentInventory: variantInventory,
-          selectedVarientId: id,
-        };
-      }
-      return { inventoryEnabled: true, currentInventory: inventory };
-    }
-    return { inventoryEnabled: false };
-  }, [product]);
+  const { inventoryEnabled, currentInventory } = useMemo(
+    () => productInventory(product),
+    [product]
+  );
 
-  const cartItem = useMemo(() => {
-    if (cartList.length) {
-      const cartItem = cartList.find((cl) => cl.id === product.id);
-
-      if (cartItem && cartItem.qty) {
-        setQuantity(cartItem.qty);
-      } else {
-        setQuantity(1);
-      }
-      return cartItem;
-    } else {
-      setQuantity(1);
-    }
-    return;
-  }, [cartList]);
+  const isCartItem = useMemo(
+    () => cartList.some((cl) => cl.id === product.id),
+    [cartList]
+  );
 
   // decide if the product is wishlisted
   let isWishlisted;
@@ -95,25 +61,10 @@ function ProductEight(props) {
   };
 
   const addToCartHandler = () => {
-    addToCart({ ...product, qty: quantity, price: product.price });
+    addToCart({ ...product, qty: 1, price: product.price });
   };
 
   const { thumbImage, discount } = getProductMeta(product);
-
-  function changeQty(qty) {
-    setQuantity(qty);
-    if (cartItem) {
-      if (qty) {
-        updateCart(
-          cartList.map((item) => {
-            return item.id === product.id ? { ...item, qty: qty } : item;
-          })
-        );
-      } else {
-        removeFromCart({ ...product, variantId: selectedVarientId });
-      }
-    }
-  }
 
   return (
     <div
@@ -243,16 +194,10 @@ function ProductEight(props) {
           <div className="product-form-group cart-button-wrapper">
             {!inventoryEnabled || !!currentInventory ? (
               <>
-                <Quantity
-                  qty={quantity}
-                  max={currentInventory}
-                  product={product}
-                  onChangeQty={changeQty}
-                />
-                {cartItem && (
+                {isCartItem ? (
                   <ALink
                     href="#"
-                    className="btn-product btn-cart list-cart-btn"
+                    className="btn-product btn-cart"
                     title="Add to cart"
                     onClick={() => {
                       router.push("/pages/cart");
@@ -261,11 +206,10 @@ function ProductEight(props) {
                     <i className="d-icon-bag"></i>
                     <span>View Cart</span>
                   </ALink>
-                )}
-                {!cartItem && (
+                ) : (
                   <ALink
                     href="#"
-                    className="btn-product btn-cart list-cart-btn"
+                    className="btn-product btn-cart"
                     title="Add to cart"
                     onClick={addToCartHandler}
                   >
@@ -299,7 +243,7 @@ function ProductEight(props) {
             ) : (
               <ALink
                 href={`/product/${product.slug}`}
-                className="btn-product btn-cart list-cart-btn"
+                className="btn-product btn-cart"
                 title="Out of stock"
               >
                 <span>Out of stock</span>

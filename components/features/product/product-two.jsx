@@ -10,7 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta } from "~/utils/helper";
+import { getProductMeta, productInventory } from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
@@ -34,18 +34,10 @@ function ProductTwo(props) {
     openQuickview(product.slug);
   };
 
-  const { inventoryEnabled, currentInventory } = useMemo(() => {
-    const { isInventoryEnabled, inventory = 0, variants } = product;
-    const { items } = variants;
-    if (isInventoryEnabled) {
-      if (items.length) {
-        const { inventory: variantInventory } = items[0];
-        return { inventoryEnabled: true, currentInventory: variantInventory };
-      }
-      return { inventoryEnabled: true, currentInventory: inventory };
-    }
-    return { inventoryEnabled: false };
-  }, [product]);
+  const { inventoryEnabled, currentInventory } = useMemo(
+    () => productInventory(product),
+    [product]
+  );
 
   const wishlistHandler = (e) => {
     if (toggleWishlist) {
