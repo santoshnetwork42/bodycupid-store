@@ -13,7 +13,7 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import fetchData from "~/utils/fetchData";
 
 function Order({ order: orderItem, paymentId }) {
-  const { orderId } = orderItem;
+  const { orderId } = orderItem || {};
   const [order, setOrder] = useState(null);
   const [timer, setTimer] = useState(null);
 
@@ -49,7 +49,6 @@ function Order({ order: orderItem, paymentId }) {
         query: validateTransaction,
         variables: { orderId, razorpayPaymentId: paymentId },
       });
-      console.log("success", success);
       if (success) {
         fetchOrder();
         toast(
