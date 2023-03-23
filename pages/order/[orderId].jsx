@@ -10,14 +10,22 @@ import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 import PaymentLoader from "~/components/common/partials/payment-loader";
+import fetchData from "~/utils/fetchData";
 
-function Order() {
+function Order({ order: orderItem, paymentId }) {
+  const { orderId } = orderItem;
   const [order, setOrder] = useState(null);
   const [timer, setTimer] = useState(null);
 
   const router = useRouter();
-  const { query } = router;
-  const { orderId, paymentId } = query;
+
+  useEffect(() => {
+    if (!!orderItem) {
+      setOrder(orderItem);
+    } else {
+      router.push("/404");
+    }
+  }, [orderItem]);
 
   const fetchOrder = useCallback(async () => {
     const response = await API.graphql({
@@ -41,7 +49,7 @@ function Order() {
         query: validateTransaction,
         variables: { orderId, razorpayPaymentId: paymentId },
       });
-
+      console.log("success", success);
       if (success) {
         fetchOrder();
         toast(
@@ -53,10 +61,6 @@ function Order() {
       }
     }
   }, [orderId, paymentId]);
-
-  useEffect(() => {
-    fetchOrder();
-  }, [orderId]);
 
   const isPaymentProcessing =
     order?.status === "PENDING" &&
@@ -311,22 +315,18 @@ function Order() {
           >
             Continue Shopping
           </ALink>
-          <a
-            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
-            onClick={() => {
-              router.push(
-                {
-                  pathname: "/pages/account",
-                  query: {
-                    activeTabIndex: 1,
-                  },
-                },
-                "/pages/account"
-              );
+          <ALink
+            href={{
+              pathname: "/pages/account",
+              query: {
+                activeTabIndex: 1,
+              },
             }}
+            as="/pages/account"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
           >
             Your Orders
-          </a>
+          </ALink>
 
           <PaymentLoader loading={isPaymentProcessing} />
         </div>
@@ -335,4 +335,18 @@ function Order() {
   );
 }
 
-export default React.memo(Order);
+Order.getInitialProps = async (context) => {
+  const { query } = context;
+  const { orderId, paymentId = null } = query;
+
+  const { getOrder: response } = await fetchData(getOrder, {
+    id: orderId,
+  });
+
+  return {
+    order: response,
+    paymentId,
+  };
+};
+
+export default Order;
