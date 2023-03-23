@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 import { toast } from "react-toastify";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import AlertPopup from "~/components/features/product/common/alert-popup";
@@ -11,7 +12,8 @@ import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 
-function Order() {
+function Order({ store }) {
+  const { name } = store;
   const [order, setOrder] = useState(null);
   const [timer, setTimer] = useState(null);
 
@@ -90,10 +92,10 @@ function Order() {
   return (
     <main className="main order">
       <Head>
-        <title>Wow life science | Order</title>
+        <title>{name} | Order</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Order</h1>
+      <h1 className="d-none">{name}- Order</h1>
 
       <div className="page-content pt-7 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
@@ -315,4 +317,10 @@ function Order() {
   );
 }
 
-export default React.memo(Order);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(Order));

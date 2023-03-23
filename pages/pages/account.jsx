@@ -10,7 +10,8 @@ import Addresses from "~/components/common/addresses";
 import AccountOrders from "~/components/partials/account/orders";
 import AccountDetails from "~/components/partials/account/account-details";
 
-function Account({ user }) {
+function Account({ user, store }) {
+  const { name } = store;
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -39,10 +40,10 @@ function Account({ user }) {
   return (
     <main className="main account">
       <Head>
-        <title>Wow life science | Account</title>
+        <title>{name} | Account</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Account</h1>
+      <h1 className="d-none">{name} - Account</h1>
 
       <nav className="breadcrumb-nav">
         <div className="container">
@@ -153,6 +154,7 @@ function Account({ user }) {
 function mapStateToProps(state) {
   return {
     user: state.user.data,
+    store: state.system.store,
   };
 }
 

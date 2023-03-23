@@ -1,18 +1,21 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 
-function Shop() {
+function Shop({ store }) {
+  const { name } = store;
+
   return (
     <main className="main">
       <Head>
-        <title>Wow life science - Shop Page</title>
+        <title>{name} - Shop Page</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Shop Page</h1>
+      <h1 className="d-none">{name} - Shop Page</h1>
 
       <ShopBanner />
 
@@ -31,4 +34,10 @@ function Shop() {
   );
 }
 
-export default React.memo(Shop);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(Shop));
