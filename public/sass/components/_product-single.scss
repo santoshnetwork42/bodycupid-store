@@ -95,6 +95,10 @@
     }
 }
 
+.mobile-product-navigation { 
+    display: none;
+}
+
 .product-thumbs-wrap button,
 .product-thumbs .owl-nav .owl-prev,
 .product-thumbs .owl-nav .owl-next {
@@ -722,5 +726,12 @@
         .product-save {
             font-size: 2rem;
         }
+    }
+}
+
+@include mq(md,max){
+    .mobile-product-navigation{
+       display: block;
+       padding: 1rem 2rem;
     }
 }
