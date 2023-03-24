@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import Head from "next/head";
 
@@ -8,9 +10,15 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import Pagination from "~/components/features/pagination";
+
+const PAGE_SIZE = 5;
 
 function Wishlist(props) {
   const { wishlist, addToCart, removeFromWishlist, store } = props;
+  const router = useRouter();
+  const { query } = router;
+  const { page = 1 } = query;
   const { name } = store;
 
   const moveToCart = (e, item) => {
@@ -18,6 +26,11 @@ function Wishlist(props) {
     addToCart({ ...item, qty: 1, price: item.price });
     removeFromWishlist(item);
   };
+
+  const currentList = useMemo(
+    () => [...wishlist].splice((Number(page) - 1) * PAGE_SIZE, PAGE_SIZE),
+    [page, wishlist]
+  );
 
   return (
     <main className="main">
@@ -41,7 +54,7 @@ function Wishlist(props) {
 
       <div className="page-content pt-10 pb-10 mb-2">
         <div className="container">
-          {wishlist.length > 0 ? (
+          {!!currentList.length ? (
             <>
               <table className="shop-table wishlist-table mt-2 mb-4">
                 <thead>
@@ -61,7 +74,7 @@ function Wishlist(props) {
                   </tr>
                 </thead>
                 <tbody className="wishlist-items-wrapper">
-                  {wishlist.map((item) => (
+                  {currentList.map((item) => (
                     <tr key={"wishlist-" + item.title}>
                       <td className="product-thumbnail">
                         <ALink href={"/product/" + item.slug}>
@@ -83,16 +96,6 @@ function Wishlist(props) {
                         </ALink>
                       </td>
                       <td className="product-price">
-                        {/* {
-                                                            item.price[0] !== item.price[1] ?
-                                                                < span className="amount">₹{toDecimal(item.price[0])} – ₹{toDecimal(item.price[1])}</span>
-                                                                : item.discount > 0 && item.variants.length > 0 ?
-                                                                    <>
-                                                                        <span className="amount">₹{toDecimal(item.salePrice)}</span>
-                                                                        <span className="amount">₹{toDecimal(item.price)}</span>
-                                                                    </>
-                                                                    : <span className="amount">₹{toDecimal(item.price[0])}</span>
-                                                        } */}
                         <span className="amount">₹{toDecimal(item.price)}</span>
                       </td>
                       <td className="product-stock-status">
@@ -137,45 +140,35 @@ function Wishlist(props) {
                   ))}
                 </tbody>
               </table>
+              <Pagination totalPage={Math.ceil(wishlist.length / PAGE_SIZE)} />
               <div className="social-links share-on">
                 <h5 className="text-uppercase font-weight-bold mb-0 mr-4 ls-s">
                   Share on:
                 </h5>
-                <ALink
-                  href="#"
+                <a
+                  href="https://www.instagram.com/wowlifescienceindia/"
+                  className="social-link social-icon social-instagram "
+                  title="Instagram"
+                  target={"_blank"}
+                >
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a
+                  href="https://www.facebook.com/wowlifescienceindia/"
                   className="social-link social-icon social-facebook"
                   title="Facebook"
+                  target={"_blank"}
                 >
                   <i className="fab fa-facebook-f"></i>
-                </ALink>
-                <ALink
-                  href="#"
-                  className="social-link social-icon social-twitter"
-                  title="Twitter"
+                </a>
+                <a
+                  href="https://www.youtube.com/@WOWLifeScience"
+                  className="social-link social-icon social-youtube"
+                  title="Youtube"
+                  target={"_blank"}
                 >
-                  <i className="fab fa-twitter"></i>
-                </ALink>
-                <ALink
-                  href="#"
-                  className="social-link social-icon social-pinterest"
-                  title="Pinterest"
-                >
-                  <i className="fab fa-pinterest-p"></i>
-                </ALink>
-                <ALink
-                  href="#"
-                  className="social-link social-icon social-email"
-                  title="Email"
-                >
-                  <i className="far fa-envelope"></i>
-                </ALink>
-                <ALink
-                  href="#"
-                  className="social-link social-icon social-whatsapp"
-                  title="Whatsapp"
-                >
-                  <i className="fab fa-whatsapp"></i>
-                </ALink>
+                  <i className="fab fa-youtube"></i>
+                </a>
               </div>
             </>
           ) : (
