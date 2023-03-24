@@ -33,7 +33,7 @@ export const getProductMeta = (product) => {
   };
 };
 
-export const productInventory = (product, selectedVariantId = null) => {
+export const getProductInventory = (product, selectedVariantId = null) => {
   const {
     continueSellingOutOfStock,
     isInventoryEnabled,
@@ -41,23 +41,31 @@ export const productInventory = (product, selectedVariantId = null) => {
     variants = {},
   } = product;
   const { items = [] } = variants;
+  let { inventoryEnabled, currentInventory } = {
+    inventoryEnabled: false,
+    currentInventory: 1000,
+  };
   if (isInventoryEnabled && !continueSellingOutOfStock) {
     if (items.length) {
-      let variantInventory = 0;
       if (!selectedVariantId) {
         const { firstVariant } = getProductMeta(product);
         const { inventory } = firstVariant;
-        variantInventory = inventory;
+        currentInventory = inventory;
       } else {
         const { inventory } = items.find((s) => s.id === selectedVariantId);
-        variantInventory = inventory;
+        currentInventory = inventory;
       }
-      return {
-        inventoryEnabled: true,
-        currentInventory: variantInventory,
-      };
+      inventoryEnabled = true;
+    } else {
+      inventoryEnabled = true;
+      currentInventory = inventory;
     }
-    return { inventoryEnabled: true, currentInventory: inventory };
   }
-  return { inventoryEnabled: false };
+  if (!inventoryEnabled || !!currentInventory) {
+    return { isInventoryAvailable: true, currentInventory: currentInventory };
+  }
+  return {
+    isInventoryAvailable: false,
+    currentInventory: currentInventory,
+  };
 };

@@ -16,7 +16,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
-import { productInventory } from "~/utils/products";
+import { getProductInventory } from "~/utils/products";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -47,8 +47,8 @@ function DetailOne(props) {
     [product?.variants?.items]
   );
 
-  const { inventoryEnabled, currentInventory } = useMemo(
-    () => productInventory(product, selectedVariant),
+  const { isInventoryAvailable, currentInventory } = useMemo(
+    () => getProductInventory(product, selectedVariant),
     [selectedVariant, sizes, product]
   );
 
@@ -377,7 +377,7 @@ function DetailOne(props) {
 
       {isStickyCart ? (
         <>
-          {!inventoryEnabled || !!currentInventory ? (
+          {!!isInventoryAvailable ? (
             <div className="sticky-content fix-top product-sticky-content">
               <div className="container">
                 <div className="sticky-product-details">
@@ -470,7 +470,7 @@ function DetailOne(props) {
         </>
       ) : (
         <>
-          {!inventoryEnabled || !!currentInventory ? (
+          {!!isInventoryAvailable ? (
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
               <div className="product-form-group cart-button-wrapper">

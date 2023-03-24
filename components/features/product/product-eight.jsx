@@ -11,7 +11,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, productInventory } from "~/utils/products";
+import { getProductMeta, getProductInventory } from "~/utils/products";
 
 function ProductEight(props) {
   const router = useRouter();
@@ -25,8 +25,8 @@ function ProductEight(props) {
     openQuickview,
   } = props;
 
-  const { inventoryEnabled, currentInventory } = useMemo(
-    () => productInventory(product),
+  const { isInventoryAvailable } = useMemo(
+    () => getProductInventory(product),
     [product]
   );
 
@@ -192,16 +192,13 @@ function ProductEight(props) {
 
         <div className="product-action">
           <div className="product-form-group cart-button-wrapper">
-            {!inventoryEnabled || !!currentInventory ? (
+            {!!isInventoryAvailable ? (
               <>
                 {isCartItem ? (
                   <ALink
-                    href="#"
+                    href="/pages/cart"
                     className="btn-product btn-cart"
-                    title="Add to cart"
-                    onClick={() => {
-                      router.push("/pages/cart");
-                    }}
+                    title="View Cart"
                   >
                     <i className="d-icon-bag"></i>
                     <span>View Cart</span>
@@ -266,7 +263,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
-  updateCart: cartActions.updateCart,
-  removeFromCart: cartActions.removeFromCart,
   ...modalActions,
 })(ProductEight);

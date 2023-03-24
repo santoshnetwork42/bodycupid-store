@@ -96,6 +96,7 @@ export const getHomePageProducts = /* GraphQL */ `
         taxable
         tags
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         thumbImages
@@ -224,6 +225,7 @@ export const getQuickViewProduct = /* GraphQL */ `
         weight
         weightUnit
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         totalOrders
@@ -351,6 +353,7 @@ export const getProductBySlug = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        continueSellingOutOfStock
         hasVarient
         variants {
           items {

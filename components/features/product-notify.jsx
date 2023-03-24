@@ -8,7 +8,7 @@ import AlertPopup from "./product/common/alert-popup";
 
 function ProductNotify(props) {
   const { user, productId, variantId } = props;
-  const [notifyEmail, setNotifyEmail] = useState(null);
+  const [notifyEmail, setNotifyEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function ProductNotify(props) {
         console.log("notify", error);
       }
     },
-    [notifyEmail, productId, variantId, user?.id]
+    [notifyEmail, productId, variantId, user]
   );
 
   return (

@@ -10,7 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, productInventory } from "~/utils/products";
+import { getProductMeta, getProductInventory } from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
@@ -34,8 +34,8 @@ function ProductTwo(props) {
     openQuickview(product.slug);
   };
 
-  const { inventoryEnabled, currentInventory } = useMemo(
-    () => productInventory(product),
+  const { isInventoryAvailable } = useMemo(
+    () => getProductInventory(product),
     [product]
   );
 
@@ -152,39 +152,15 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details">
-        {isCategory ? (
-          <div className="product-cat">
-            {product.categories
-              ? product.categories.map((item, index) => (
-                  <React.Fragment key={item.name + "-" + index}>
-                    <ALink
-                      href={{
-                        pathname: "/collections/[category]",
-                        query: { category: item.slug },
-                      }}
-                    >
-                      {item.name}
-                      {index < product.categories.length - 1 ? ", " : ""}
-                    </ALink>
-                  </React.Fragment>
-                ))
-              : ""}
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="product-cat">
+          <label className="product-tag">
+            {product?.tags?.split(",").join(" | ") || <span>''</span>}
+          </label>
+        </div>
 
         <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
-
-        <div className="product-tags-container">
-          {!!product?.tags && (
-            <label className="product-tag">
-              {product?.tags.split(",").join(" | ")}
-            </label>
-          )}
-        </div>
 
         <div className="product-price">
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
@@ -214,7 +190,7 @@ function ProductTwo(props) {
           )}
         </div>
         <div className="product-action">
-          {!inventoryEnabled || !!currentInventory ? (
+          {!!isInventoryAvailable ? (
             <>
               {isCartItem ? (
                 <ALink
