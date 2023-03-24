@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
+import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -16,6 +17,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime } from "~/utils/helper";
 import Coupon from "~/components/features/coupon";
+import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 
 function DetailOne(props) {
   let router = useRouter();
@@ -29,12 +31,15 @@ function DetailOne(props) {
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
+    user,
+    applyCoupon,
   } = props;
 
   const { toggleWishlist, addToCart, wishlist } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [couponCode, setCouponCode] = useState(null);
   const today = new Date();
   const sizes = useMemo(
     () =>
@@ -122,6 +127,21 @@ function DetailOne(props) {
     }
   };
 
+  const applyCouponCode = useCallback(async () => {
+    if (couponCode) {
+      const {
+        data: { applyCoupon: response },
+      } = await API.graphql({
+        query: applyCouponMutation,
+        variables: { code: couponCode },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+      });
+      if (response) {
+        applyCoupon(response);
+      }
+    }
+  }, [couponCode, user]);
+
   const addToCartHandler = () => {
     if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
       if (product.variants.items.length > 0) {
@@ -147,6 +167,7 @@ function DetailOne(props) {
           price: product.price,
         });
       }
+      applyCouponCode();
     }
   };
 
@@ -316,7 +337,11 @@ function DetailOne(props) {
         )}
       </div>
 
-      <Coupon layout="product" product={product} />
+      <Coupon
+        layout="product"
+        product={product}
+        getCouponCode={setCouponCode}
+      />
       <p className="product-short-desc">{product.productDescription}</p>
 
       {sizes.length > 1 && (
@@ -517,6 +542,7 @@ function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
+    user: state.user.data,
   };
 }
 
@@ -524,4 +550,5 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
+  applyCoupon: cartActions.applyCoupon,
 })(DetailOne);

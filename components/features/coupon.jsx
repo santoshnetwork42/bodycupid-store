@@ -23,6 +23,7 @@ function Coupon(props) {
     appliedCoupon,
     layout = "cart",
     product,
+    getCouponCode = () => {},
   } = props;
   const [coupon, setCoupon] = useState("");
   const [featured, setFeatured] = useState([]);
@@ -46,7 +47,9 @@ function Coupon(props) {
 
   const { allDiscounts, maxDiscountCoupon } = useMemo(() => {
     let cart = [...cartList];
-    if (product) cart = [product];
+    if (product) {
+      cart = [product];
+    }
     let maxDiscountCoupon = {};
     const allDiscounts = featured.reduce((acc, cur) => {
       acc = {
@@ -63,6 +66,7 @@ function Coupon(props) {
       (a, b) => (allDiscounts[a] > allDiscounts[b] ? a : b),
       []
     );
+    getCouponCode(maxDiscountCoupon?.code);
     return {
       allDiscounts,
       maxDiscountCoupon,
@@ -174,6 +178,7 @@ function Coupon(props) {
           </div>
         </div>
       )}
+
       {layout === "product" && maxDiscountCoupon && (
         <div className="product-best-price-container">
           <div className="product-top-content">
