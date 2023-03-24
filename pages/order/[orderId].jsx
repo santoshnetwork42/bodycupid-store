@@ -11,21 +11,19 @@ import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import fetchData from "~/utils/fetchData";
+import { STORE_ID } from "~/config";
 
-function Order({ order: orderItem, paymentId }) {
-  const { orderId } = orderItem || {};
-  const [order, setOrder] = useState(null);
+function Order({ order: orderItem, paymentId, orderId }) {
+  const [order, setOrder] = useState(orderItem);
   const [timer, setTimer] = useState(null);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!!orderItem) {
-      setOrder(orderItem);
-    } else {
+    if (!orderItem) {
       router.push("/404");
     }
-  }, [orderItem]);
+  }, []);
 
   const fetchOrder = useCallback(async () => {
     const response = await API.graphql({
@@ -34,8 +32,6 @@ function Order({ order: orderItem, paymentId }) {
     });
     if (!!response.data.getOrder) {
       setOrder(response.data.getOrder);
-    } else {
-      router.push("/404");
     }
   }, [orderId]);
 
@@ -59,7 +55,7 @@ function Order({ order: orderItem, paymentId }) {
         );
       }
     }
-  }, [orderId, paymentId]);
+  }, [orderId, paymentId, fetchOrder]);
 
   const isPaymentProcessing =
     order?.status === "PENDING" &&
@@ -337,14 +333,25 @@ function Order({ order: orderItem, paymentId }) {
 Order.getInitialProps = async (context) => {
   const { query } = context;
   const { orderId, paymentId = null } = query;
+  try {
+    const { getOrder: response } = await fetchData(getOrder, {
+      id: orderId,
+    });
 
-  const { getOrder: response } = await fetchData(getOrder, {
-    id: orderId,
-  });
-
+    if (response?.storeId === STORE_ID) {
+      return {
+        order: response,
+        paymentId,
+        orderId: orderId,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
   return {
-    order: response,
+    order: null,
     paymentId,
+    orderId: orderId,
   };
 };
 
