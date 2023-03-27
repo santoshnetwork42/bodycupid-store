@@ -475,6 +475,7 @@
 .product-name {
     @include print_css(product, name);
     text-overflow: ellipsis;
+
     a {
 
         // transition: color .3s;
@@ -485,18 +486,18 @@
 }
 
 .product-card-title {
-     min-height: 40px;
-     display: -webkit-box !important;
+    min-height: 40px;
+    display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
-     -webkit-box-orient: vertical !important;
-     overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
 }
 
 // Product Tag
 .product-tag {
-    font-size:1.2rem;
+    font-size: 1.2rem;
     text-overflow: ellipsis;
-    color:$success-color;
+    color: $success-color;
     text-align: center !important;
 }
 
@@ -1286,6 +1287,7 @@
     .header-middle {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
+
         .header-search {
             margin: 0 1rem;
         }
@@ -1320,9 +1322,8 @@
 }
 
 .cancelled-tag {
-    width: fit-content;
+    width: auto;
     color: $secondary-color;
-    padding:0.3rem 0rem;
     text-align: center;
     border-radius: 0.3rem;
     font-size: 1.4rem;

@@ -213,23 +213,30 @@ function Order({ order: orderItem, paymentId, orderId }) {
                   <tr key={"order-" + item.id}>
                     <td className="product-name">
                       {item.product.title}{" "}
-                      <span>
-                        {" "}
-                        <i className="fas fa-times"></i> {item.quantity}
-                      </span>
+                      {item.quantity > 0 && (
+                        <span>
+                          <i className="fas fa-times"></i> {item.quantity}
+                        </span>
+                      )}
                       {item.variant && (
                         <p className="mb-0">
                           <strong>{item.variant.title}</strong>
                         </p>
                       )}
-                      {item.cancelledQuantity && (
-                        <p className="cancelled-tag mb-0">
+                      {item.cancelledQuantity > 0 && item.quantity > 0 && (
+                        <p className="cancelled-tag mb-0 text-left">
                           Cancelled qty : {item.cancelledQuantity}
                         </p>
                       )}
                     </td>
                     <td className="product-price">
-                      ₹{toDecimal(item.quantity * item.price)}
+                      {item.quantity > 0 ? (
+                        `₹${toDecimal(item.quantity * item.price)}`
+                      ) : (
+                        <p className="cancelled-tag mb-0 text-right">
+                          Cancelled qty : {item.cancelledQuantity}
+                        </p>
+                      )}
                     </td>
                   </tr>
                 ))}
