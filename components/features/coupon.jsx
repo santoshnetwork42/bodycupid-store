@@ -7,7 +7,7 @@ import {
   getFeaturedCoupon,
 } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import { getCouponTotal, toDecimal } from "~/utils";
+import { getCartTotals, getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
 import Loader from "../common/partials/loader";
 import { STORE_ID } from "~/config";
@@ -22,8 +22,6 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     layout = "cart",
-    product,
-    getCouponCode = () => {},
   } = props;
   const [coupon, setCoupon] = useState("");
   const [featured, setFeatured] = useState([]);
@@ -44,34 +42,6 @@ function Coupon(props) {
       setFeatured(items);
     })();
   }, []);
-
-  const { allDiscounts, maxDiscountCoupon } = useMemo(() => {
-    let cart = [...cartList];
-    if (product) {
-      cart = [product];
-    }
-    let maxDiscountCoupon = {};
-    const allDiscounts = featured.reduce((acc, cur) => {
-      acc = {
-        ...acc,
-        [cur.id]: getCouponTotal(cur, cart),
-      };
-      maxDiscountCoupon =
-        getCouponTotal(maxDiscountCoupon, cart) > getCouponTotal(cur, cart)
-          ? maxDiscountCoupon
-          : cur;
-      return acc;
-    }, []);
-    let id = Object.keys(allDiscounts).reduce(
-      (a, b) => (allDiscounts[a] > allDiscounts[b] ? a : b),
-      []
-    );
-    getCouponCode(maxDiscountCoupon?.code);
-    return {
-      allDiscounts,
-      maxDiscountCoupon,
-    };
-  }, [featured, product, cartList]);
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
@@ -165,7 +135,6 @@ function Coupon(props) {
           </div>
         </div>
       )}
-
       <Modal
         isOpen={isOpen}
         onRequestClose={() => {
@@ -206,7 +175,7 @@ function Coupon(props) {
                     {featured.map((c) => {
                       let className =
                         "btn btn-md btn-dark btn-rounded btn-link m l-2";
-                      const discount = allDiscounts[c.id];
+                      const discount = getCouponTotal(c, cartList);
                       if (!discount) {
                         className = `${className} btn-disabled`;
                       }
