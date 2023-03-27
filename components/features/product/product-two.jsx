@@ -22,9 +22,7 @@ function ProductTwo(props) {
     wishlist,
     addToCart,
     openQuickview,
-    isCategory = true,
   } = props;
-
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -34,7 +32,7 @@ function ProductTwo(props) {
     openQuickview(product.slug);
   };
 
-  const { isInventoryAvailable } = useMemo(
+  const { hasInventory } = useMemo(
     () => getProductInventory(product),
     [product]
   );
@@ -154,7 +152,7 @@ function ProductTwo(props) {
       <div className="product-details">
         <div className="product-cat">
           <label className="product-tag">
-            {product?.tags?.split(",").join(" | ") || <span>''</span>}
+            {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </label>
         </div>
 
@@ -190,7 +188,7 @@ function ProductTwo(props) {
           )}
         </div>
         <div className="product-action">
-          {!!isInventoryAvailable ? (
+          {!!hasInventory ? (
             <>
               {isCartItem ? (
                 <ALink

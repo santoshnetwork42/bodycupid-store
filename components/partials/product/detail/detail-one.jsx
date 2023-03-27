@@ -47,7 +47,7 @@ function DetailOne(props) {
     [product?.variants?.items]
   );
 
-  const { isInventoryAvailable, currentInventory } = useMemo(
+  const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
     [selectedVariant, sizes, product]
   );
@@ -377,7 +377,7 @@ function DetailOne(props) {
 
       {isStickyCart ? (
         <>
-          {!!isInventoryAvailable ? (
+          {!!hasInventory ? (
             <div className="sticky-content fix-top product-sticky-content">
               <div className="container">
                 <div className="sticky-product-details">
@@ -470,7 +470,7 @@ function DetailOne(props) {
         </>
       ) : (
         <>
-          {!!isInventoryAvailable ? (
+          {!!hasInventory ? (
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
               <div className="product-form-group cart-button-wrapper">

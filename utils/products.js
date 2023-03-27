@@ -41,31 +41,37 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     variants = {},
   } = product;
   const { items = [] } = variants;
-  let { inventoryEnabled, currentInventory } = {
-    inventoryEnabled: false,
-    currentInventory: 1000,
-  };
-  if (isInventoryEnabled && !continueSellingOutOfStock) {
-    if (items.length) {
-      if (!selectedVariantId) {
-        const { firstVariant } = getProductMeta(product);
-        const { inventory } = firstVariant;
-        currentInventory = inventory;
+
+  if (isInventoryEnabled) {
+    if (!continueSellingOutOfStock) {
+      if (items.length) {
+        if (!selectedVariantId) {
+          const { firstVariant } = getProductMeta(product);
+          const { inventory: variantInventory } = firstVariant;
+          return {
+            hasInventory: !!variantInventory,
+            currentInventory: variantInventory,
+          };
+        } else {
+          const { inventory: variantInventory } = items.find(
+            (s) => s.id === selectedVariantId
+          );
+          return {
+            hasInventory: !!variantInventory,
+            currentInventory: variantInventory,
+          };
+        }
       } else {
-        const { inventory } = items.find((s) => s.id === selectedVariantId);
-        currentInventory = inventory;
+        return {
+          hasInventory: !!inventory,
+          currentInventory: inventory,
+        };
       }
-      inventoryEnabled = true;
-    } else {
-      inventoryEnabled = true;
-      currentInventory = inventory;
     }
   }
-  if (!inventoryEnabled || !!currentInventory) {
-    return { isInventoryAvailable: true, currentInventory: currentInventory };
-  }
+
   return {
-    isInventoryAvailable: false,
-    currentInventory: currentInventory,
+    hasInventory: true,
+    currentInventory: 1000,
   };
 };
