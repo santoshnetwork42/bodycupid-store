@@ -10,7 +10,6 @@ import OptimizedImage from "~/components/features/optimized-image";
 
 import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 export default function MediaOne(props) {
   const { product, variantId } = props;
@@ -96,9 +95,6 @@ export default function MediaOne(props) {
 
   return (
     <>
-      <div className="mb-2 mt-2">
-        <ProductBreadcrumbs {...product} />
-      </div>
       <div
         className="product-gallery pg-vertical media-default"
         style={{ top: "88px" }}
