@@ -12,7 +12,6 @@ import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function ProductDefault() {
   const router = useRouter();
@@ -79,10 +78,7 @@ function ProductDefault() {
       <h1 className="d-none">{product?.title}</h1>
 
       {!!product && (
-        <div className={`page-content mb-10 pb-6 mt-3`}>
-          <div className="mobile-product-navigation">
-            <ProductBreadcrumbs product={product} />
-          </div>
+        <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
               <div className="col-md-6 sticky-sidebar-wrapper">

@@ -15,7 +15,6 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -209,11 +208,9 @@ function DetailOne(props) {
   }, [product, curIndex]);
 
   return (
-    <div className={"product-details" + adClass}>
+    <div className={`product-details ${adClass}`}>
       {isNav && (
         <div className="product-navigation">
-          <ProductBreadcrumbs product={product} />
-
           <ProductNav product={product} />
         </div>
       )}

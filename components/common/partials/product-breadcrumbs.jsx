@@ -2,7 +2,9 @@ import React from "react";
 
 import ALink from "~/components/features/custom-link";
 
-function ProductBreadcrumbs({ product }) {
+function ProductBreadcrumbs({ category, subCategory }) {
+  const { slug, name } = category;
+  const { slug: subCatSlug, name: subCatName } = subCategory;
   return (
     <div>
       <ul className="breadcrumb breadcrumb-lg">
@@ -16,32 +18,32 @@ function ProductBreadcrumbs({ product }) {
             Products
           </ALink>
         </li>
-        {product.category && (
+        {category && (
           <li>
             <ALink
               href={{
                 pathname: "/collections/[category]",
-                query: { category: product.category.slug },
+                query: { category: slug },
               }}
               className="active"
             >
-              {product.category.name}
+              {name}
             </ALink>
           </li>
         )}
-        {product.subCategory && (
+        {subCategory && (
           <li>
             <ALink
               href={{
                 pathname: "/collections/[category][subcategory]",
                 query: {
-                  category: product.category.slug,
-                  subcategory: product.subCategory.slug,
+                  category: slug,
+                  subcategory: subCatSlug,
                 },
               }}
               className="active"
             >
-              {product.subCategory.name}
+              {subCatName}
             </ALink>
           </li>
         )}
