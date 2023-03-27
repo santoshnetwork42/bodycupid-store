@@ -1321,10 +1321,26 @@
     }
 }
 
-.cancelled-tag {
-    width: auto;
-    color: $secondary-color;
+.order-tag {
+    white-space: nowrap;
+    font-weight: 400 !important;
+    width: fit-content;
+    color: #FFF !important;
+
+    padding: 0rem 1rem;
     text-align: center;
     border-radius: 0.3rem;
     font-size: 1.4rem;
+
+    &.cancel {
+        background-color: $secondary-color;
+    }
+
+    &.success {
+        background-color: $success-color;
+    }
+
+    &.info {
+        background-color: $info-color;
+    }
 }

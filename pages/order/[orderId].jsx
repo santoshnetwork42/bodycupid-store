@@ -13,10 +13,12 @@ import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
+import Tag from "~/components/common/tag";
 
 function Order({ order: orderItem, paymentId, orderId }) {
   const [order, setOrder] = useState(orderItem);
   const [timer, setTimer] = useState(null);
+  const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
 
@@ -90,6 +92,18 @@ function Order({ order: orderItem, paymentId, orderId }) {
     }
     return {};
   }, [order?.shippingAddress]);
+
+  const getStatusType = (status) => {
+    switch (status) {
+      case "DISPATCHED":
+        return "info";
+      case "CANCELLED":
+      case "COURIER_RETURN":
+        return "cancel";
+      case "DELIVERED":
+        return "success";
+    }
+  };
 
   return (
     <main className="main order">
@@ -213,30 +227,31 @@ function Order({ order: orderItem, paymentId, orderId }) {
                   <tr key={"order-" + item.id}>
                     <td className="product-name">
                       {item.product.title}{" "}
-                      {item.quantity > 0 && (
-                        <span>
-                          <i className="fas fa-times"></i> {item.quantity}
-                        </span>
+                      <span>
+                        <i className="fas fa-times"></i>{" "}
+                        {item.quantity || item.cancelledQuantity}
+                      </span>
+                      {item.cancelledQuantity > 0 && item.quantity > 0 && (
+                        <Tag
+                          type="cancel"
+                          title="CANCELLED"
+                          qty={item.cancelledQuantity}
+                        ></Tag>
+                      )}
+                      {allStatus.includes(item.status) && (
+                        <Tag
+                          type={getStatusType(item.status)}
+                          title={item.status}
+                        ></Tag>
                       )}
                       {item.variant && (
                         <p className="mb-0">
                           <strong>{item.variant.title}</strong>
                         </p>
                       )}
-                      {item.cancelledQuantity > 0 && item.quantity > 0 && (
-                        <p className="cancelled-tag mb-0 text-left">
-                          Cancelled qty : {item.cancelledQuantity}
-                        </p>
-                      )}
                     </td>
                     <td className="product-price">
-                      {item.quantity > 0 ? (
-                        `₹${toDecimal(item.quantity * item.price)}`
-                      ) : (
-                        <p className="cancelled-tag mb-0 text-right">
-                          Cancelled qty : {item.cancelledQuantity}
-                        </p>
-                      )}
+                      ₹{toDecimal(item.quantity * item.price)}
                     </td>
                   </tr>
                 ))}
