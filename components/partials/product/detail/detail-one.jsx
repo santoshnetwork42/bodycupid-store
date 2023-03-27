@@ -16,10 +16,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime } from "~/utils/helper";
-import {
-  applyCoupon as applyCouponMutation,
-  getFeaturedCoupon,
-} from "~/graphql/api";
+import { getFeaturedCoupon } from "~/graphql/api";
 import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
@@ -72,7 +69,11 @@ function DetailOne(props) {
       },
     } = await API.graphql(
       graphqlOperation(getFeaturedCoupon, {
-        filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
+        filter: {
+          isFeatured: { eq: true },
+          isActive: { eq: true },
+          storeId: { eq: STORE_ID },
+        },
       })
     );
     setFeaturedCoupons(items);
@@ -85,37 +86,33 @@ function DetailOne(props) {
         (v) => v.id === selectedVariant
       );
     }
-    const maxDiscountCoupon = featuredCoupons.reduce((prev, current) => {
-      return getProductCouponTotal(prev, selectedProduct) >
-        getProductCouponTotal(current, selectedProduct)
-        ? {
-            ...prev,
-            price: selectedProduct?.price,
-            totalDiscount: getProductCouponTotal(prev, selectedProduct),
-          }
-        : {
-            ...current,
-            price: selectedProduct?.price,
-            totalDiscount: getProductCouponTotal(current, selectedProduct),
-          };
-    }, []);
-    return { maxDiscountCoupon };
+    if (!!featuredCoupons.length) {
+      const discountCoupon = featuredCoupons.reduce((prev, current) => {
+        const first = getProductCouponTotal(prev, selectedProduct);
+        const secend = getProductCouponTotal(current, selectedProduct);
+        return first > secend
+          ? {
+              ...prev,
+              price: selectedProduct?.price,
+              totalDiscount: getProductCouponTotal(prev, selectedProduct),
+            }
+          : {
+              ...current,
+              price: selectedProduct?.price,
+              totalDiscount: getProductCouponTotal(current, selectedProduct),
+            };
+      });
+      return { maxDiscountCoupon: discountCoupon };
+    }
+    return {
+      maxDiscountCoupon: null,
+    };
   }, [featuredCoupons, selectedVariant]);
 
   const applyCouponCode = useCallback(async () => {
     try {
-      if (maxDiscountCoupon) {
-        const { code } = maxDiscountCoupon;
-        const {
-          data: { applyCoupon: response },
-        } = await API.graphql({
-          query: applyCouponMutation,
-          variables: { code: code },
-          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-        });
-        if (response) {
-          applyCoupon(response);
-        }
+      if (!!maxDiscountCoupon) {
+        applyCoupon(maxDiscountCoupon);
       }
     } catch (error) {
       console.log("error", error);
@@ -380,7 +377,9 @@ function DetailOne(props) {
         )}
       </div>
 
-      <ProductBestPrice {...maxDiscountCoupon} />
+      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
+        <ProductBestPrice {...maxDiscountCoupon} />
+      )}
 
       <p className="product-short-desc">{product.productDescription}</p>
 
