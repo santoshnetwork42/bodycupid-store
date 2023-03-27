@@ -7,10 +7,8 @@ import {
   getFeaturedCoupon,
 } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import { getCartTotals, getCouponTotal, toDecimal } from "~/utils";
+import { getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
-import AlertPopup from "~/components/features/product/common/alert-popup";
-import { toast } from "react-toastify";
 import Loader from "../common/partials/loader";
 import { STORE_ID } from "~/config";
 import Modal from "~/components/common/modal";
@@ -104,15 +102,6 @@ function Coupon(props) {
     [coupon, user]
   );
 
-  const onCopy = (copyText) => {
-    if (copyText && navigator?.clipboard) {
-      navigator.clipboard.writeText(copyText);
-      toast(
-        <AlertPopup message={"Coupon code copied: " + copyText} status="info" />
-      );
-    }
-  };
-
   return (
     <>
       {layout === "cart" && (
@@ -177,34 +166,6 @@ function Coupon(props) {
         </div>
       )}
 
-      {layout === "product" && maxDiscountCoupon && (
-        <div className="product-best-price-container">
-          <div className="product-top-content">
-            <div className="d-flex align-items-center">
-              <i class="fa fa-percent" aria-hidden="true"></i>
-              <p>
-                Best price :{" "}
-                <span className="font-weight-semi-bold">
-                  {toDecimal(product?.price - maxDiscountCoupon?.discount)}
-                </span>{" "}
-              </p>
-            </div>
-            <p>T&C</p>
-          </div>
-          <div className="d-flex">
-            Use coupon{" "}
-            <p id="coupon-code" className="font-weight-semi-bold ml-1">
-              {maxDiscountCoupon?.code}
-            </p>{" "}
-            <span
-              className="copy-code  cursor-pointer ml-1"
-              onClick={() => onCopy(maxDiscountCoupon?.code)}
-            >
-              Copy code
-            </span>
-          </div>
-        </div>
-      )}
       <Modal
         isOpen={isOpen}
         onRequestClose={() => {

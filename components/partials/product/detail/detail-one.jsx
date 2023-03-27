@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -16,10 +16,14 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime } from "~/utils/helper";
-import Coupon from "~/components/features/coupon";
-import { applyCoupon as applyCouponMutation } from "~/graphql/api";
+import {
+  applyCoupon as applyCouponMutation,
+  getFeaturedCoupon,
+} from "~/graphql/api";
 import ProductNotify from "~/components/features/product-notify";
-import { getProductInventory } from "~/utils/products";
+import { getProductInventory, getProductCouponTotal } from "~/utils/products";
+import ProductBestPrice from "~/components/partials/product/product-best-price";
+import { STORE_ID } from "~/config";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -46,8 +50,9 @@ function DetailOne(props) {
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [couponCode, setCouponCode] = useState(null);
+  const [featuredCoupons, setFeaturedCoupons] = useState([]);
   const today = new Date();
+
   const sizes = useMemo(
     () =>
       (product?.variants?.items || [])
@@ -55,6 +60,67 @@ function DetailOne(props) {
         .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
+
+  useEffect(() => {
+    getFeaturedCoupons();
+  }, []);
+
+  const getFeaturedCoupons = useCallback(async () => {
+    const {
+      data: {
+        searchCouponCodes: { items },
+      },
+    } = await API.graphql(
+      graphqlOperation(getFeaturedCoupon, {
+        filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
+      })
+    );
+    setFeaturedCoupons(items);
+  }, []);
+
+  const { maxDiscountCoupon } = useMemo(() => {
+    let selectedProduct = product;
+    if (sizes.length) {
+      selectedProduct = product?.variants?.items.find(
+        (v) => v.id === selectedVariant
+      );
+    }
+    const maxDiscountCoupon = featuredCoupons.reduce((prev, current) => {
+      return getProductCouponTotal(prev, selectedProduct) >
+        getProductCouponTotal(current, selectedProduct)
+        ? {
+            ...prev,
+            price: selectedProduct?.price,
+            totalDiscount: getProductCouponTotal(prev, selectedProduct),
+          }
+        : {
+            ...current,
+            price: selectedProduct?.price,
+            totalDiscount: getProductCouponTotal(current, selectedProduct),
+          };
+    }, []);
+    return { maxDiscountCoupon };
+  }, [featuredCoupons, selectedVariant]);
+
+  const applyCouponCode = useCallback(async () => {
+    try {
+      if (maxDiscountCoupon) {
+        const { code } = maxDiscountCoupon;
+        const {
+          data: { applyCoupon: response },
+        } = await API.graphql({
+          query: applyCouponMutation,
+          variables: { code: code },
+          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        });
+        if (response) {
+          applyCoupon(response);
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }, [maxDiscountCoupon, user]);
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
@@ -139,21 +205,6 @@ function DetailOne(props) {
     }
   };
 
-  const applyCouponCode = useCallback(async () => {
-    if (couponCode) {
-      const {
-        data: { applyCoupon: response },
-      } = await API.graphql({
-        query: applyCouponMutation,
-        variables: { code: couponCode },
-        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-      });
-      if (response) {
-        applyCoupon(response);
-      }
-    }
-  }, [couponCode, user]);
-
   const addToCartHandler = () => {
     if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
       if (product.variants.items.length > 0) {
@@ -211,6 +262,7 @@ function DetailOne(props) {
               : item;
           })
         );
+        applyCouponCode();
       } else {
         removeFromCart({ ...product, variantId: selectedVariant });
       }
@@ -328,11 +380,8 @@ function DetailOne(props) {
         )}
       </div>
 
-      <Coupon
-        layout="product"
-        product={product}
-        getCouponCode={setCouponCode}
-      />
+      <ProductBestPrice {...maxDiscountCoupon} />
+
       <p className="product-short-desc">{product.productDescription}</p>
 
       {sizes.length > 1 && (
