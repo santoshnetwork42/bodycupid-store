@@ -614,6 +614,7 @@ export const getOrder = /* GraphQL */ `
           invoiceNumber
           tentativeDeliveryDate
           trackingId
+          cancelledQuantity
           quantity
           price
           status

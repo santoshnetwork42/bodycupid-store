@@ -222,6 +222,11 @@ function Order({ order: orderItem, paymentId, orderId }) {
                           <strong>{item.variant.title}</strong>
                         </p>
                       )}
+                      {item.cancelledQuantity && (
+                        <p className="cancelled-tag mb-0">
+                          Cancelled qty : {item.cancelledQuantity}
+                        </p>
+                      )}
                     </td>
                     <td className="product-price">
                       ₹{toDecimal(item.quantity * item.price)}
