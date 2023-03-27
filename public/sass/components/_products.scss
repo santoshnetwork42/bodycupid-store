@@ -421,7 +421,7 @@
 .product-details {
     position: relative;
     @include print_css(product, body);
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 2rem;
 
     >.btn-wishlist {
         position: absolute;
@@ -490,14 +490,6 @@
     -webkit-line-clamp: 2 !important;
      -webkit-box-orient: vertical !important;
      overflow: hidden !important;
-}
-
-// Product Tag
-.product-tag {
-    font-size:1.2rem;
-    text-overflow: ellipsis;
-    color:$success-color;
-    text-align: center !important;
 }
 
 // Product Price
@@ -659,7 +651,7 @@
             font-size: 1.8rem;
         }
     }
-
+ 
     .btn-cart {
         flex: 1;
         height: 4.2rem;
@@ -1064,6 +1056,18 @@
     &.text-center {
         .product-cat {
             padding: 0;
+            .product-tag {
+                font-size:1.2rem;
+                text-overflow: ellipsis;
+                color:$success-color;
+                text-align: center !important;
+                -webkit-line-clamp: 1 !important;
+                -webkit-box-orient: vertical !important;
+                overflow: hidden !important;
+                span {
+                   visibility: hidden;
+                }
+            }
         }
 
         .product-name {
