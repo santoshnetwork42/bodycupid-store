@@ -12,6 +12,7 @@ import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function ProductDefault() {
   const router = useRouter();
@@ -81,6 +82,9 @@ function ProductDefault() {
         <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
+              <div className="mb-2 mt-2">
+                <ProductBreadcrumbs {...product} />
+              </div>
               <div className="col-md-6 sticky-sidebar-wrapper">
                 <MediaOne product={product} variantId={selectedVariant} />
               </div>
