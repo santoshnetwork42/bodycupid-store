@@ -34,7 +34,7 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 function Checkout(props) {
   const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
     props;
-
+  const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
@@ -301,10 +301,10 @@ function Checkout(props) {
   return (
     <main className="main checkout">
       <Head>
-        <title>Wow life science | Checkout</title>
+        <title>{name} | Checkout</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Checkout</h1>
+      <h1 className="d-none">{name} - Checkout</h1>
 
       {!user && <Passwordless forceOpen redirect={false} />}
 

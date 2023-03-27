@@ -1,14 +1,17 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
-function AboutUs() {
+function AboutUs({ store }) {
+  const { name } = store;
+
   return (
     <main className="main about-us">
       <Head>
-        <title>Wow life science | Titles</title>
+        <title>{name} | Titles</title>
       </Head>
 
-      <h1 className="d-none">Privacy Policy - WOW Life Science</h1>
+      <h1 className="d-none">Privacy Policy - {name}</h1>
 
       <div className="page-content">
         <div className="container">
@@ -386,4 +389,10 @@ function AboutUs() {
   );
 }
 
-export default React.memo(AboutUs);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(AboutUs));

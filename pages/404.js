@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 
-function Error404() {
+function Error404({ store }) {
+  const { name } = store;
+
   useEffect(() => {
     document.querySelector("header").classList.remove("header-border");
 
@@ -15,10 +18,10 @@ function Error404() {
   return (
     <main className="main">
       <Head>
-        <title>Wow life science | 404</title>
+        <title>{name} | 404</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - 404</h1>
+      <h1 className="d-none">{name} - 404</h1>
 
       <div className="page-content">
         <section className="error-section d-flex flex-column justify-content-center align-items-center text-center pl-3 pr-3">
@@ -44,4 +47,10 @@ function Error404() {
   );
 }
 
-export default React.memo(Error404);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(Error404));
