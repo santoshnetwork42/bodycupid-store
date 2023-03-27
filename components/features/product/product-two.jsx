@@ -213,7 +213,7 @@ function ProductTwo(props) {
             <ALink
               href="#"
               className="btn-product btn-quickview m-0"
-              title="View Cart"
+              title="Out of stock"
               onClick={showQuickviewHandler}
             >
               Out of stock
