@@ -11,7 +11,7 @@
     //     line-height: 1;
     // }
     &.main {
-        border-top: 1px solid #e1e1e1;
+        // border-top: 1px solid #e1e1e1;
     }
 
     .accordion {
@@ -76,7 +76,6 @@
             padding: 0.2rem 0 1.8rem;
             font-size: 1.3rem;
             font-weight: 700;
-            text-align: center;
             color: $grey-color;
             line-height: 1;
             letter-spacing: -.025em;
@@ -87,8 +86,6 @@
         }
 
         td {
-            padding: 1.6rem 0;
-            text-align: center;
 
             &:last-child {
                 padding-right: 0;
@@ -135,7 +132,14 @@
             padding-bottom: .3rem;
         }
     }
+    .product-subtotal {
+        .discount-percetage {
+         color:$success-color;
+        }
+    }
 }
+
+
 
 .step-by {
     display: flex;
@@ -225,7 +229,7 @@
         margin: 0px;
         color: #167221;
         span{
-            color: #4e9223;
+            font-weight: bold;
         }
     }
 }
@@ -256,6 +260,10 @@
     color: $dark-color;
     margin-bottom: 0;
     padding: 2rem 0;
+    p{
+        color: $body-color;
+        font-size: 1.2rem;
+    }
 }
 
 .summary-subtotal-price {
@@ -266,6 +274,26 @@
     font-family: $font-family;
 }
 
+.summary-subtotal-listingprice{
+    color: #aaa;
+}
+.discount-price-color{
+    color: $success-color;
+}
+
+.avg-delivery-lable-container{
+    text-align: start;
+
+    p{
+        color: $body-color;
+        font-size: 1.2rem;
+        span{
+            font-weight: 500;
+            color: $primary-color;
+        }
+    }
+}
+
 .summary-total-price {
     font-size: 2rem;
     letter-spacing: -0.025em;
@@ -273,6 +301,7 @@
     color: $dark-color;
     // padding: 10px 0;
     text-align: right;
+    line-height: 1;
     margin-bottom: 0;
     font-family: $font-family;
 
@@ -313,12 +342,27 @@
             ;
         }
     }
+    .cart-coupon-box {
+        .summary {
+            padding: 2.4rem 3rem 0 !important;
+        }
+    }
 }
 
 @include mq(md, max) {
+    .product-name-section {
+        text-align: center !important;
+        margin: 0px 15px;
+    }
+
     .summary {
         padding-left: 2rem;
         padding-right: 2rem;
+    }
+
+    .cart-coupon-box {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
     }
 
     .cart .shop-table td {
@@ -327,8 +371,15 @@
         &.product-price {
             display: block;
             width: 100%;
-            text-align: center;
+            text-align: center;   
         }
+    }
+
+    .summary-subtotal-listingprice{
+        margin-left: 1rem;
+    }
+    .product-discount-listing {
+        display: inline;
     }
 
     .cart .shop-table tr {
@@ -348,6 +399,7 @@
             margin-bottom: .5rem;
         }
     }
+
 }
 
 .shipping-address {
@@ -438,6 +490,7 @@
         font-weight: 600;
         color: $dark-color;
         line-height: 1.86;
+        padding-right: 2rem;
     }
 
     .product-price {
@@ -449,7 +502,6 @@
     }
 
     .product-subtotal {
-        width: 85px;
         color: $dark-color;
     }
 
@@ -512,10 +564,8 @@
 
 .featured-coupon {
     margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid #e1e1e1;
-    display: flex;
-    justify-content: space-between;
     .featured-coupon-text-content{
         margin-right: 2rem;
     }
@@ -527,6 +577,7 @@
     padding: 2.4rem 3rem;
     border:1px solid #e1e1e1;
     border-radius: 2px;
+    cursor: pointer;
 
     .cart-coupon-container {
         justify-content: space-between;
@@ -578,5 +629,41 @@
         .product-close {
             width: 2.3rem;
         }
+    }
+    .coupon-modal-container {
+        .auth-popup {
+           width: 55rem;
+        }
+    }
+}
+
+@include mq('md') {
+    .coupon-modal-container {
+        .auth-popup {
+           width: 55rem;
+        }
+    }
+}
+
+@include mq(sm, max) {
+    .stick-bottom-button {
+        width: 100vw;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: #fff;
+        z-index: 99;
+        padding: 13px 0;
+        box-shadow: 0 0 10px 1px rgb(0 0 0 / 10%);
+        padding-left: 15px;
+        padding-right: 15px;
+
+        .btn-order {
+            width: unset !important;
+        }
+
     }
 }

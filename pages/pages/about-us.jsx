@@ -1,14 +1,17 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
-function AboutUs() {
+function AboutUs({ store }) {
+  const { name } = store;
+
   return (
     <main className="main about-us">
       <Head>
-        <title>Wow life science | Titles</title>
+        <title>{name} | Titles</title>
       </Head>
 
-      <h1 className="d-none">About Us - WOW Life Science</h1>
+      <h1 className="d-none">About Us - {name}</h1>
 
       <div className="page-content">
         <div className="container">
@@ -17,7 +20,7 @@ function AboutUs() {
           </section>
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              WOW HEALTH : Your one-stop destination for all health & Supplement
+              {name}: Your one-stop destination for all health & Supplement
               needs
             </h2>
             <p className="text-grey">
@@ -32,29 +35,29 @@ function AboutUs() {
           </section>
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              WOW HEALTH : Naturally and holistically better than the rest
+              {name}: Naturally and holistically better than the rest
             </h2>
             <p className="text-grey">
               Thousands of our regular and devoted customers trust us for one
-              good reason. At WOW LIFE SCIENCE, they are assured of getting only
-              the purest and the most premium quality products powered by
-              natural bio-active ingredients and unsullied by artificial
-              additives or harmful synthetic chemicals. Our dietary supplements
-              all deliver such positive results that after trying out WOW
-              products, our customers seldom go anywhere else for their health
-              and supplement needs.
+              good reason. At {name}, they are assured of getting only the
+              purest and the most premium quality products powered by natural
+              bio-active ingredients and unsullied by artificial additives or
+              harmful synthetic chemicals. Our dietary supplements all deliver
+              such positive results that after trying out WOW products, our
+              customers seldom go anywhere else for their health and supplement
+              needs.
             </p>
           </section>
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              WOW HEALTH : Not just the best products, peerless service too
+              {name}: Not just the best products, peerless service too
             </h2>
             <p className="text-grey">
               We understand that the way to a customer’s heart passes through
               two milestones – outstanding product quality that fulfils their
               needs and attentive and courteous customer service that shows we
-              care. WOW LIFE SCIENCE scores at both these front. We match (and
-              often exceed) highest industry standards in both these domains.
+              care. {name} scores at both these front. We match (and often
+              exceed) highest industry standards in both these domains.
             </p>
             <p className="text-grey">
               Not only are our products the best you can find, our customer
@@ -77,4 +80,10 @@ function AboutUs() {
   );
 }
 
-export default React.memo(AboutUs);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(AboutUs));

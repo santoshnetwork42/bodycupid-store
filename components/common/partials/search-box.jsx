@@ -26,6 +26,7 @@ function SearchForm() {
       graphqlOperation(searchProductsBasic, {
         filter: {
           storeId: { eq: STORE_ID },
+          status: { eq: "ENABLED" },
           title: { matchPhrasePrefix: searchTerm },
         },
       })

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -10,19 +10,19 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getProductMeta, getProductInventory } from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
   const {
+    cartList,
     product,
     adClass = "text-center",
     toggleWishlist,
     wishlist,
     addToCart,
     openQuickview,
-    isCategory = true,
   } = props;
-
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -31,6 +31,11 @@ function ProductTwo(props) {
   const showQuickviewHandler = () => {
     openQuickview(product.slug);
   };
+
+  const { hasInventory } = useMemo(
+    () => getProductInventory(product),
+    [product]
+  );
 
   const wishlistHandler = (e) => {
     if (toggleWishlist) {
@@ -46,8 +51,7 @@ function ProductTwo(props) {
     }, 1000);
   };
 
-  const addToCartHandler = (e) => {
-    e.preventDefault();
+  const addToCartHandler = () => {
     addToCart({
       ...product,
       qty: 1,
@@ -55,17 +59,12 @@ function ProductTwo(props) {
     });
   };
 
-  const discount = !!(product.listingPrice && product.price)
-    ? parseInt(
-        ((product.listingPrice - product.price) * 100) / product.listingPrice,
-        10
-      )
-    : 0;
+  const isCartItem = useMemo(
+    () => cartList.some((cl) => cl.id === product.id),
+    [cartList]
+  );
 
-  const images = product?.images.items.sort((a, b) => a.position - b.position);
-
-  const thumbImage = images?.find((i) => i.isThumb) ||
-    images[0] || { imageKey: product.imageUrl };
+  const { thumbImage, discount } = getProductMeta(product);
 
   return (
     <div className={`product text-left ${adClass}`}>
@@ -129,14 +128,14 @@ function ProductTwo(props) {
         </div>
 
         <div className="product-action-vertical">
-          <a
+          <ALink
             href="#"
             className="btn-product-icon btn-cart"
-            title="Add to cart"
-            onClick={addToCartHandler}
+            title="Quick View"
+            onClick={showQuickviewHandler}
           >
-            <i className="d-icon-bag"></i>
-          </a>
+            <i className="d-icon-search"></i>
+          </ALink>
           <a
             href="#"
             className="btn-product-icon btn-wishlist"
@@ -148,73 +147,25 @@ function ProductTwo(props) {
             ></i>
           </a>
         </div>
-
-        <div className="product-action">
-          <ALink
-            href="#"
-            className="btn-product btn-quickview"
-            title="Quick View"
-            onClick={showQuickviewHandler}
-          >
-            Quick View
-          </ALink>
-        </div>
       </figure>
 
       <div className="product-details">
-        {isCategory ? (
-          <div className="product-cat">
-            {product.categories
-              ? product.categories.map((item, index) => (
-                  <React.Fragment key={item.name + "-" + index}>
-                    <ALink
-                      href={{
-                        pathname: "/collections/[category]",
-                        query: { category: item.slug },
-                      }}
-                    >
-                      {item.name}
-                      {index < product.categories.length - 1 ? ", " : ""}
-                    </ALink>
-                  </React.Fragment>
-                ))
-              : ""}
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="product-cat">
+          <label className="product-tag">
+            {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
+          </label>
+        </div>
 
-        <h3 className="product-name">
+        <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
-        {!!product?.tags && (
-          <label className="product-tag">
-            {product?.tags.split(",").join(" | ")}
-          </label>
-        )}
-
         <div className="product-price">
-          {/* {
-                        product.price[0] !== product.price[1] ?
-                            product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
-                                <>
-                                    <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                    <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                </>
-                                :
-                                < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                            : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                    } */}
-          {/* <ins className="new-price">₹{toDecimal(product.price)}</ins> */}
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
         <div className="ratings-container">
           <div className="ratings-full">
-            {/* // TODO  we have to consider about this */}
-            {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
-                        <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
             <span
               className="ratings"
               style={{ width: Math.min(20 * product.rating, 100) + "%" }}
@@ -225,8 +176,47 @@ function ProductTwo(props) {
           </div>
 
           {!!product?.totalRatings && (
-            <ALink href={`/product/${product.slug}`} className="rating-reviews">
+            <ALink
+              href={{
+                pathname: `/product/${product.slug}`,
+                query: { review: true },
+              }}
+              className="rating-reviews"
+            >
               ( {product?.totalRatings} reviews )
+            </ALink>
+          )}
+        </div>
+        <div className="product-action">
+          {!!hasInventory ? (
+            <>
+              {isCartItem ? (
+                <ALink
+                  href="/pages/cart"
+                  className="btn-product btn-quickview m-0"
+                  title="View Cart"
+                >
+                  View Cart
+                </ALink>
+              ) : (
+                <ALink
+                  href="#"
+                  className="btn-product btn-quickview m-0"
+                  title="Add to cart"
+                  onClick={addToCartHandler}
+                >
+                  Add to cart
+                </ALink>
+              )}
+            </>
+          ) : (
+            <ALink
+              href="#"
+              className="btn-product btn-quickview m-0"
+              title="Out of stock"
+              onClick={showQuickviewHandler}
+            >
+              Out of stock
             </ALink>
           )}
         </div>
@@ -238,6 +228,7 @@ function ProductTwo(props) {
 function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
+    cartList: state.cart.data || [],
   };
 }
 

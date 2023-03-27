@@ -1,14 +1,24 @@
 import ALink from "~/components/features/custom-link";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function ShopBanner(props) {
-  const { subTitle = "", title = "Wow Shop", current = "Wow Shop" } = props;
+  const {
+    subTitle = "",
+    title = "Wow Shop",
+    current = "Wow Shop",
+    bannerUrl,
+  } = props;
 
   return (
     <div
       className="page-header"
       style={{
-        backgroundImage: `url( /images/shop/page-header-back.jpg )`,
+        backgroundImage: bannerUrl
+          ? `url(${getPublicImageURL(bannerUrl)})`
+          : null,
         backgroundColor: "#3C63A4",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
       }}
     >
       {subTitle ? <h3 className="page-subtitle">{subTitle}</h3> : ""}

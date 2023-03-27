@@ -3,7 +3,7 @@ import React from "react";
 import ALink from "~/components/features/custom-link";
 
 function TokenPagination(props) {
-  const { onPage, total = 0, loaded = 0, nextToken } = props;
+  const { onPage, total = 0, loaded = 0, nextToken, content = "items" } = props;
 
   if (!total) return <></>;
 
@@ -14,7 +14,7 @@ function TokenPagination(props) {
         <span>
           1 - {loaded} of {total}
         </span>
-        Products
+        {content}
       </p>
       {!!nextToken && loaded < total && (
         <ul className="pagination">

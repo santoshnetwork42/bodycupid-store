@@ -5,7 +5,7 @@ export default function Quantity({ qty = 1, ...props }) {
   const [quantity, setQuantity] = useState(parseInt(qty));
 
   useEffect(() => {
-    setQuantity(qty);
+    setQuantity(qty || 1);
   }, [qty]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Quantity({ qty = 1, ...props }) {
   }, [quantity]);
 
   function minusQuantity() {
-    if (quantity > 1) {
+    if (quantity > 0) {
       setQuantity(parseInt(quantity) - 1);
     }
   }

@@ -14,7 +14,7 @@ import {
   deleteShoppingCartProduct,
 } from "~/graphql/api";
 import { getFirstVariantId } from "~/utils/products";
-import { STORE_ID } from "~/config";
+import { STORE_ID, STORE_PREFIX } from "~/config";
 
 const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -72,14 +72,18 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.REMOVE_FROM_CART:
       let cart = state.data.reduce((cartAcc, product) => {
-        if (product.id !== action.payload.product.id) {
-          cartAcc.push(product);
+        let tmpProduct = product;
+        if (!tmpProduct.variantId) {
+          tmpProduct.variantId = getFirstVariantId(tmpProduct);
+        }
+        if (tmpProduct.id !== action.payload.product.id) {
+          cartAcc.push(tmpProduct);
         } else {
           if (
-            product.variantId &&
-            product.variantId !== action.payload.product.variantId
+            tmpProduct.variantId &&
+            tmpProduct.variantId !== action.payload.product.variantId
           ) {
-            cartAcc.push(product);
+            cartAcc.push(tmpProduct);
           }
         }
 
@@ -161,12 +165,16 @@ export function* cartSaga() {
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: null } });
+      yield put({
+        type: actionTypes.SET_CART,
+        payload: { couponCodeId: null },
+      });
     }
   });
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
     // toast(<CartPopup product={e.payload.product} />);
+
     const { user, cart } = yield select();
     let { cart: cartResponse } = cart;
     const { data } = user;
@@ -178,10 +186,10 @@ export function* cartSaga() {
 
       if (!cartResponse) {
         ({
-          data: { createShoppingCart: cartResponse },
+          data: { createStoreShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
-          variables: { input: { userId: data?.id, storeId: STORE_ID } },
+          variables: { storeId: STORE_ID },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         }));
         cartResponse.products = [];
@@ -239,12 +247,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+                id: response.id,
+                shoppingcartId: id,
+                productId: response.productId,
+                variantId: response.variantId,
+                quantity: response.quantity,
+              }
             : p
         );
 
@@ -262,7 +270,11 @@ export function* cartSaga() {
     const { data: userResponse } = user;
     if (cartResponse && userResponse) {
       const { products } = cartResponse;
-      const { id, variantId } = e.payload.product;
+      let curProduct = e.payload.product;
+      if (!e.payload.product.variantId) {
+        curProduct.variantId = getFirstVariantId(curProduct);
+      }
+      const { id, variantId } = curProduct;
 
       const product = products.find(
         (p) => p.productId === id && (!p.variantId || variantId === p.variantId)
@@ -280,7 +292,7 @@ export function* cartSaga() {
         if (product.productId !== id) {
           cartAcc.push(product);
         } else {
-          if (product.variantId && (product.variantId !== variantId)) {
+          if (product.variantId && product.variantId !== variantId) {
             cartAcc.push(product);
           }
         }
@@ -341,32 +353,34 @@ export function* cartSaga() {
     const { cart, user } = yield select() || {};
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
+
     if (cartResponse && userResponse) {
       const { products = [] } = cartResponse;
 
       const promise = [];
       if (Array.isArray(products)) {
-        products.forEach((product) =>
-          promise.push(
-            call([API, API.graphql], {
-              query: deleteShoppingCartProduct,
-              variables: {
-                input: { id: product.id },
-              },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
-            })
-          )
-        );
+        products.forEach((product) => {
+          if (product && product.id) {
+            promise.push(
+              call([API, API.graphql], {
+                query: deleteShoppingCartProduct,
+                variables: {
+                  input: { id: product.id },
+                },
+                authMode: "AMAZON_COGNITO_USER_POOLS",
+              })
+            );
+          }
+        });
       }
-
-      yield all(promise);
+      if (promise.length > 0) yield all(promise);
     }
     yield put({ type: actionTypes.REFRESH_STORE });
   });
 }
 
 const persistConfig = {
-  keyPrefix: "riode-",
+  keyPrefix: `${STORE_PREFIX}-`,
   key: "cart",
   storage,
 };

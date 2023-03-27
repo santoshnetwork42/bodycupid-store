@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
@@ -12,16 +12,11 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
-  getZipCode,
+  getHomePageProducts,
+  validateTransaction,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import {
-  toDecimal,
-  getTotalPrice,
-  getShippingPrice,
-  getFinalPrice,
-  getCouponTotal,
-} from "~/utils";
+import { toDecimal, getCartTotals } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import Addresses from "~/components/common/addresses";
@@ -30,36 +25,56 @@ import loadScript from "~/utils/loadScript";
 import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import Passwordless from "~/components/common/partials/passwordless";
+import { validateAddress, getProperAddress } from "~/utils/address";
+import RelatedProducts from "~/components/partials/product/related-products";
+import { scrollWithOffset } from "~/utils/helper";
+import PaymentLoader from "~/components/common/partials/payment-loader";
 
 function Checkout(props) {
-  const {
-    cartList,
-    user,
-    emptyCart,
-    appliedCoupon,
-    openLogin,
-    removeCoupon,
-    store,
-  } = props;
-
+  const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
+    props;
+  const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [formErorr, setFormErorr] = useState(null);
+  const [related, setRelated] = useState(null);
+  const [orderId, setOrderId] = useState(null);
+  const [paymentId, setPaymentId] = useState(null);
+  const [timer, setTimer] = useState(null);
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
-  const validateZipCode = useCallback(async () => {
-    const { pinCode } = shippingAddress;
-    if (pinCode) {
-      const {
-        data: { getZipCode: response },
-      } = await API.graphql(graphqlOperation(getZipCode, { id: pinCode }));
-      if (response) {
-        if (isFirst) return response.prepaid;
-        return response.cod;
+  useEffect(() => {
+    API.graphql(
+      graphqlOperation(getHomePageProducts, {
+        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+        limit: 8,
+      })
+    ).then(
+      ({
+        data: {
+          searchProducts: { items },
+        },
+      }) => {
+        setRelated(items);
       }
-    }
+    );
+  }, []);
 
-    return false;
-  }, [shippingAddress, isFirst]);
+  const {
+    totalListingprice,
+    totalPrice,
+    shippingTotal,
+    amoutSaved,
+    couponTotal,
+    grandTotal,
+    prepaidDiscount,
+  } = useMemo(
+    () => getCartTotals(cartList, appliedCoupon, isFirst),
+    [cartList, appliedCoupon, isFirst]
+  );
 
   const handlePayment = useCallback(
     async ({ orderId, paymentId, address }) => {
@@ -79,6 +94,8 @@ function Checkout(props) {
         }),
       ]);
 
+      setLoading(false);
+
       if (rzpEnabled && transaction) {
         const options = {
           key: RAZORPAY_KEY,
@@ -88,10 +105,9 @@ function Checkout(props) {
           image: getPublicImageURL(store.imageUrl),
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
-            await router.push(
-              `/order/${orderId}?paymentId=${razorpay_payment_id}`
-            );
-            await emptyCart();
+            setOrderId(orderId);
+            setPaymentId(razorpay_payment_id);
+            setPaymentLoading(true);
           },
           prefill: {
             name: address.name,
@@ -120,9 +136,38 @@ function Checkout(props) {
     },
     [store, user]
   );
+  const fetchPaymentStatus = useCallback(async () => {
+    if (orderId && paymentId) {
+      const {
+        data: {
+          validateTransaction: { success },
+        },
+      } = await API.graphql({
+        query: validateTransaction,
+        variables: { orderId, razorpayPaymentId: paymentId },
+      });
+      if (success) {
+        await emptyCart();
+        await router.push(`/order/${orderId}?paymentId=${paymentId}`);
+        setPaymentLoading(false);
+      }
+    }
+  }, [orderId, paymentId]);
+
+  useEffect(() => {
+    if (paymentLoading) {
+      if (timer) clearTimeout(timer);
+      const timerId = setTimeout(() => {
+        fetchPaymentStatus();
+        setTimer(null);
+      }, [2000]);
+      setTimer(timerId);
+    }
+  }, [orderId, paymentId, paymentLoading]);
 
   const addUserAddress = useCallback(async () => {
-    const { id: ignoreId, ...restAddress } = shippingAddress;
+    const tempAddress = getProperAddress(shippingAddress);
+    const { id: ignoreId, ...restAddress } = tempAddress;
     if (user && !ignoreId) {
       await API.graphql({
         query: createUserAddress,
@@ -137,17 +182,22 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      if (await validateZipCode()) {
+      setLoading(true);
+      const paymentType = isFirst ? "PREPAID" : "COD";
+      const formErrors = await validateAddress(shippingAddress, paymentType);
+      setFormErorr(formErrors);
+      if (!formErrors) {
         try {
-          const { id: ignoreId, ...restAddress } = shippingAddress;
+          const tempAddress = getProperAddress(shippingAddress);
+          const { id: ignoreId, ...restAddress } = tempAddress;
           const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
           const payload = {
             storeId: STORE_ID,
             userId: user?.id,
             status: isFirst ? "PENDING" : "CONFIRMED",
-            totalAmount: getFinalPrice(cartList, appliedCoupon),
-            totalDiscount: getCouponTotal(appliedCoupon, cartList),
-            totalShippingCharges: getShippingPrice(cartList),
+            totalAmount: grandTotal,
+            totalDiscount: couponTotal + prepaidDiscount,
+            totalShippingCharges: shippingTotal,
             orderDate: new Date().toISOString(),
             sla: new Date().toISOString(),
             paymentType: isFirst ? "PREPAID" : "COD",
@@ -175,7 +225,7 @@ function Checkout(props) {
                   storeId: STORE_ID,
                   orderId,
                   method: isFirst ? "ONLINE" : "COD",
-                  amount: getFinalPrice(cartList, appliedCoupon),
+                  amount: grandTotal,
                 },
               },
               authMode,
@@ -215,18 +265,15 @@ function Checkout(props) {
               address: restAddress,
             });
           } else {
-            await router.push(`/order/${orderId}`);
             await emptyCart();
+            await router.push(`/order/${orderId}`);
+            setLoading(false);
           }
         } catch (error) {
           console.log(error);
         }
-      } else {
-        const message = isFirst
-          ? "Online Delivery is not available at this pincocde"
-          : "Cash on Delivery is not available at this pincocde";
-        toast(<AlertPopup status="error" message={message} />);
       }
+      setLoading(false);
       return false;
     },
     [
@@ -236,8 +283,13 @@ function Checkout(props) {
       shippingAddress,
       cartList,
       createUserAddress,
+      formErorr,
       handlePayment,
-      validateZipCode,
+      setFormErorr,
+      grandTotal,
+      shippingTotal,
+      couponTotal,
+      prepaidDiscount,
     ]
   );
 
@@ -249,10 +301,12 @@ function Checkout(props) {
   return (
     <main className="main checkout">
       <Head>
-        <title>Wow life science | Checkout</title>
+        <title>{name} | Checkout</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Checkout</h1>
+      <h1 className="d-none">{name} - Checkout</h1>
+
+      {!user && <Passwordless forceOpen redirect={false} />}
 
       <div
         className={`page-content pt-7 pb-10 ${
@@ -271,21 +325,6 @@ function Checkout(props) {
         <div className="container mt-7">
           {cartList.length > 0 ? (
             <>
-              {!user && (
-                <div className="card accordion">
-                  <div className="alert alert-light alert-primary alert-icon mb-4 card-header">
-                    <i className="fas fa-exclamation-circle"></i>{" "}
-                    <span className="text-body">Returning customer?</span>{" "}
-                    <ALink
-                      href="#"
-                      onClick={() => openLogin(false)}
-                      className="text-primary collapse"
-                    >
-                      Click here to login
-                    </ALink>
-                  </div>
-                </div>
-              )}
               {!appliedCoupon && <Coupons layout="checkout" />}
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
@@ -296,7 +335,10 @@ function Checkout(props) {
                   <Addresses onAddressChange={setAddress} />
                 </div>
 
-                <aside className="col-lg-5 sticky-sidebar-wrapper">
+                <aside
+                  id="checkout-details"
+                  className="col-lg-5 sticky-sidebar-wrapper"
+                >
                   <div
                     className="sticky-sidebar mt-1"
                     data-sticky-options="{'bottom': 50}"
@@ -313,8 +355,8 @@ function Checkout(props) {
                           </tr>
                         </thead>
                         <tbody>
-                          {cartList.map((item) => (
-                            <tr key={"checkout-" + item.title}>
+                          {cartList.map((item, index) => (
+                            <tr key={"checkout-" + item.title + "-" + index}>
                               <td className="product-name">
                                 {item.title}{" "}
                                 <span className="product-quantity">
@@ -331,27 +373,25 @@ function Checkout(props) {
                             <td>
                               <h4 className="summary-subtitle">Subtotal</h4>
                             </td>
-                            <td className="summary-subtotal-price pb-0 pt-0">
-                              ₹{toDecimal(getTotalPrice(cartList))}
-                            </td>
-                          </tr>
-                          <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle">Shipping</h4>
-                            </td>
-                            <td className="summary-subtotal-price pb-0 pt-0">
-                              {getShippingPrice(cartList)
-                                ? `₹${toDecimal(getShippingPrice(cartList))}`
-                                : "Free"}
+                              <p className="summary-subtotal-price">
+                                {totalPrice < totalListingprice && (
+                                  <del className="summary-subtotal-listingprice mr-2">
+                                    ₹{toDecimal(totalListingprice)}
+                                  </del>
+                                )}
+                                ₹{toDecimal(totalPrice)}
+                              </p>
                             </td>
                           </tr>
+
                           {!!appliedCoupon && (
                             <>
-                              <tr>
+                              <tr className="summary-subtotal-saving">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
                                   <p>
-                                    <div className="d-flex">
+                                    <span className="d-flex">
                                       <span className="mr-1">
                                         {appliedCoupon.code}
                                       </span>
@@ -364,48 +404,76 @@ function Checkout(props) {
                                       >
                                         <i className="fas fa-times"></i>
                                       </ALink>
-                                    </div>
+                                    </span>
                                   </p>
                                 </td>
                                 <td>
-                                  <p className="summary-subtotal-price">
-                                    {`₹${toDecimal(
-                                      getCouponTotal(appliedCoupon, cartList)
-                                    )}`}
+                                  <p className="summary-subtotal-price discount-price-color">
+                                    {`₹${toDecimal(couponTotal)}`}
                                   </p>
-                                </td>
-                              </tr>
-                              <tr className="summary-subtotal-saving">
-                                <td colSpan={2}>
-                                  <div className="summary-saving-lable-container mt-0 mb-2">
-                                    <p className="saving-lable">
-                                      You are saving{" "}
-                                      <span>
-                                        {`₹${toDecimal(
-                                          getCouponTotal(
-                                            appliedCoupon,
-                                            cartList
-                                          )
-                                        )}`}
-                                      </span>{" "}
-                                      on this order
-                                    </p>
-                                  </div>
                                 </td>
                               </tr>
                             </>
                           )}
-                          <tr className="summary-total">
-                            <td className="pb-0">
-                              <h4 className="summary-subtitle">Total</h4>
+
+                          {isFirst && (
+                            <tr className="summary-subtotal">
+                              <td>
+                                <h4 className="summary-subtitle">
+                                  5% Online Payment Discount
+                                </h4>
+                              </td>
+                              <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
+                                {`₹${toDecimal(prepaidDiscount)}`}
+                              </td>
+                            </tr>
+                          )}
+
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Shipping</h4>
                             </td>
-                            <td className=" pt-0 pb-0">
-                              <p className="summary-total-price ls-s text-primary">
-                                ₹
-                                {toDecimal(
-                                  getFinalPrice(cartList, appliedCoupon)
-                                )}
+                            <td
+                              className={`summary-subtotal-price pb-0 pt-0 ${
+                                !shippingTotal && "discount-price-color"
+                              }`}
+                            >
+                              {!!shippingTotal
+                                ? `₹${toDecimal(shippingTotal)}`
+                                : "Free"}
+                            </td>
+                          </tr>
+
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">
+                                Total{" "}
+                                <p className="m-0">Inclusive of all taxes</p>
+                              </h4>
+                            </td>
+                            <td>
+                              <p className="summary-total-price ls-s">
+                                ₹{toDecimal(grandTotal)}
                               </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan={2}>
+                              <div
+                                className={"avg-delivery-lable-container mt-3"}
+                              >
+                                <p className="m-0">
+                                  Average delivery time: <span>3-5 days</span>
+                                </p>
+                              </div>
+                              {!!amoutSaved && (
+                                <div className="summary-saving-lable-container">
+                                  <p className="saving-lable">
+                                    <span>{`₹${toDecimal(amoutSaved)}`}</span>{" "}
+                                    saved so far on this order
+                                  </p>
+                                </div>
+                              )}
                             </td>
                           </tr>
                         </tbody>
@@ -416,10 +484,10 @@ function Checkout(props) {
                         </h4>
 
                         <div className="checkbox-group">
-                          <div className="card-header">
+                          <div className="card-header d-flex align-items-center">
                             <ALink
                               href="#"
-                              className={`text-body text-normal ls-m ${
+                              className={`text-body text-normal ls-m mr-2 ${
                                 isFirst ? "collapse" : ""
                               }`}
                               onClick={() => {
@@ -428,6 +496,7 @@ function Checkout(props) {
                             >
                               Pay Online
                             </ALink>
+                            <p className="extra-lable m-0">EXTRA 5% OFF</p>
                           </div>
 
                           <Collapse in={isFirst}>
@@ -479,12 +548,40 @@ function Checkout(props) {
                           <ALink href="#">terms and conditions </ALink>*
                         </label>
                       </div> */}
-                      <button
-                        onClick={placeOrder}
-                        className="btn btn-dark btn-rounded btn-order"
-                      >
-                        Place Order
-                      </button>
+                      {!!formErorr && (
+                        <div className="overflow-hidden mb-4 mt-4">
+                          <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+                            <ul className="m-0">
+                              {Object.values(formErorr).map((val) => (
+                                <li key={val}>{val}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
+                      <div className="stick-bottom-button">
+                        <div className="d-sm-show lh-2">
+                          <p className="summary-total-price ls-s text-primary">
+                            ₹{toDecimal(grandTotal)}
+                          </p>
+                          <ALink
+                            onClick={() => {
+                              scrollWithOffset("checkout-details", 130);
+                            }}
+                            className="text-underline"
+                            href="#"
+                          >
+                            View details
+                          </ALink>
+                        </div>
+                        <button
+                          onClick={placeOrder}
+                          className="btn btn-dark btn-rounded btn-order d-flex justify-content-center align-items-center"
+                        >
+                          Place Order
+                          {loading && <div className="spin-loader ml-2" />}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </aside>
@@ -505,8 +602,13 @@ function Checkout(props) {
               </p>
             </div>
           )}
+          <RelatedProducts
+            products={related}
+            heading="Other popular products"
+          />
         </div>
       </div>
+      <PaymentLoader loading={paymentLoading} />
     </main>
   );
 }
@@ -522,6 +624,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
-  openLogin: modalActions.openLoginModal,
+  openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
 })(Checkout);

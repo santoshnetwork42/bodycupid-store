@@ -6,8 +6,8 @@ import sharp from "sharp";
 const { NODE_ENV } = process.env;
 
 const optimizeImage = async ({ src, type = "url", options = {} }) => {
-  let output = "";
   const { quality = 15, resize = 400, blur = 1 } = options;
+  let output = "";
 
   const returnValues = {
     originalUrl: src,

@@ -67,7 +67,8 @@ function Addresses({ user, onAddressChange }) {
       const adr = addresses.find((a) => a.id === selected);
       onAddressChange({
         id: adr.id,
-        name: adr.name,
+        firstName: adr.name.split(" ")[0],
+        lastName: adr.name.split(" ")[1],
         phone: adr.phone,
         email: adr.email,
         country: adr.country,
@@ -80,7 +81,7 @@ function Addresses({ user, onAddressChange }) {
         area: adr.area,
       });
     }
-  }, [selected]);
+  }, [selected, addresses]);
 
   if (loading) return <></>;
 

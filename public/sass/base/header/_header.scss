@@ -108,8 +108,6 @@
             ),
             // Sticky Header
             sticky: (
-                padding-top: 1.5rem,
-                padding-bottom: 1.4rem,
                 background: false,
                 box-shadow: 0 2px 5px rgba(0,0,0,0.1),
                 color: false
@@ -314,6 +312,8 @@
 }
 .header-middle {
     @include print_css(header, middle);
+    padding-bottom: 2rem;
+   padding-top: 2rem;
     .login-link {
         display: flex;
         align-items: center;
@@ -389,6 +389,7 @@
     }
 }
 .header-bottom {
+    padding-bottom: 1rem !important;
     @include print_css(header, bottom);
     .header-right {
         margin-right: .3rem;
@@ -1023,5 +1024,17 @@
 @include mq(md) {
     .mobile-link {
         display: none;
+    }
+}
+
+@include mq(sm, max) {
+    .header-left {
+        .logo {
+            position: absolute;
+            left: calc(50vw - 45px);
+        }
+    }
+    .header-search.hs-simple{
+        margin: 1rem 15px !important;
     }
 }

@@ -3,18 +3,20 @@ import Head from "next/head";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 
-function ForgotPassword() {
+function ForgotPassword({ store }) {
+  const { name } = store;
   const router = useRouter();
   const [state, setState] = useState({
     phone: "",
     password: "",
     confirmationCode: null,
   });
-
+  const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(null);
 
   const handleSubmit = useCallback(
@@ -43,10 +45,10 @@ function ForgotPassword() {
   return (
     <main className="main">
       <Head>
-        <title>Wow life science | Login</title>
+        <title>{name} | Login</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Login</h1>
+      <h1 className="d-none">{name} - Login</h1>
       <nav className="breadcrumb-nav">
         <div className="container">
           <ul className="breadcrumb">
@@ -142,10 +144,12 @@ function ForgotPassword() {
                           </>
                         )}
                         <button
-                          className="btn btn-dark btn-block btn-rounded mt-2"
+                          className="btn btn-dark btn-block btn-rounded mt-2 d-flex justify-content-center align-items-center"
                           type="submit"
+                          disabled={loading}
                         >
                           {showOTP ? "Reset Password" : "Get Code"}
+                          {loading && <div className="spin-loader ml-2" />}
                         </button>
                         <div className="form-footer mt-3 align-items-center border-no justify-content-center">
                           <ALink href="/pages/login" className="lost-link">
@@ -165,4 +169,10 @@ function ForgotPassword() {
   );
 }
 
-export default React.memo(ForgotPassword);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(ForgotPassword));

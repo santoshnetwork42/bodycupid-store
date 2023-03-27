@@ -334,6 +334,37 @@ export const getTotalPrice = (cartItems = []) => {
   return total;
 };
 
+export const getCartTotals = (
+  cartItems = [],
+  appliedCoupon,
+  prepaid = false
+) => {
+  let totalPrice = 0;
+  let totalListingprice = 0;
+  const shippingTotal = getShippingPrice(cartItems);
+  const couponTotal = getCouponTotal(appliedCoupon, cartItems);
+  for (let i = 0; i < cartItems.length; i++) {
+    totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
+    totalListingprice +=
+      cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
+  }
+  const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
+  const grandTotal = totalPrice + shippingTotal - couponTotal - prepaidDiscount;
+
+  const amoutSaved =
+    totalListingprice - totalPrice + couponTotal + prepaidDiscount;
+
+  return {
+    totalPrice,
+    totalListingprice,
+    shippingTotal,
+    couponTotal,
+    prepaidDiscount,
+    amoutSaved,
+    grandTotal,
+  };
+};
+
 /**
  * utils to get total Price of products in cart.
  */
@@ -408,9 +439,10 @@ export const getCartCount = (cartItems = []) => {
  * utils to show number to n places of decimals
  */
 export const toDecimal = (price, fixedCount = 2) => {
+  const isInteger = Number(price) === Number(parseInt(price));
   return parseFloat(price || 0).toLocaleString(undefined, {
-    minimumFractionDigits: fixedCount,
-    maximumFractionDigits: fixedCount,
+    minimumFractionDigits: isInteger ? 0 : fixedCount,
+    maximumFractionDigits: isInteger ? 0 : fixedCount,
   });
 };
 

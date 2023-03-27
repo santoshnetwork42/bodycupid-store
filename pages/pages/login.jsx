@@ -27,7 +27,7 @@ function Login({
   });
 
   const [confirmSignUp, setConfirmSignUp] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const handleSignup = useCallback(
     async (e) => {
       e.preventDefault();
@@ -63,6 +63,7 @@ function Login({
   const handleConfirmSignUp = useCallback(
     async (e) => {
       e.preventDefault();
+      setLoading(true);
       try {
         await Auth.confirmSignUp(
           addPhonePrefix(state.phone),
@@ -76,7 +77,9 @@ function Login({
         } else {
           setConfirmSignUp(null);
         }
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log("error signup confirm:", error);
         toast(<AlertPopup message={error.message} status="error" />);
       }
@@ -88,6 +91,7 @@ function Login({
   const handleSignIn = useCallback(
     async (e) => {
       e.preventDefault();
+      setLoading(true);
       try {
         await Auth.signIn({
           username: addPhonePrefix(state.phone),
@@ -97,6 +101,7 @@ function Login({
         if (redirect) {
           router.push("/");
         }
+        setLoading(false);
       } catch (error) {
         console.log("error signin:", error);
         if (error.code === "UserNotConfirmedException") {
@@ -105,6 +110,7 @@ function Login({
         } else {
           toast(<AlertPopup message={error.message} status="error" />);
         }
+        setLoading(false);
       }
       return false;
     },
@@ -193,11 +199,14 @@ function Login({
                             </ALink>
                           </div>
                           <button
-                            className="btn btn-dark btn-block btn-rounded"
+                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
+                            disabled={loading}
                           >
                             Login
+                            {loading && <div className="spin-loader ml-2" />}
                           </button>
+
                           {showOTPLogin && (
                             <div className="text-center">
                               <ALink
@@ -205,7 +214,7 @@ function Login({
                                 className="lost-link"
                                 onClick={() => {
                                   closeLogin();
-                                  openPasswordless();
+                                  openPasswordless(false);
                                 }}
                               >
                                 Login with OTP
@@ -336,10 +345,12 @@ function Login({
                             </div>
                           </div>
                           <button
-                            className="btn btn-dark btn-block btn-rounded"
+                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
+                            disabled={loading}
                           >
                             Register
+                            {loading && <div className="spin-loader ml-2" />}
                           </button>
                         </form>
                       )}
@@ -385,10 +396,12 @@ function Login({
                           />
                         </div>
                         <button
-                          className="btn btn-dark btn-block btn-rounded"
+                          className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
                           type="submit"
+                          disabled={loading}
                         >
                           Confirm
+                          {loading && <div className="spin-loader ml-2" />}
                         </button>
                       </form>
                     )}

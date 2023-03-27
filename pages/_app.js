@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API } from "aws-amplify";
@@ -10,18 +10,26 @@ import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
 import { STORE_ID } from "~/config";
+import fetchData from "~/utils/fetchData";
 
 import awsconfig from "~/aws-exports";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
 import { getUser, getStore } from "~/graphql/api";
+import Scripts from "~/components/scripts.jsx";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
 const App = ({ Component, pageProps }) => {
   const store = useStore();
-  const { navbar, footer } = pageProps;
+  const { navbar, footer, store: wowStore } = pageProps;
+
+  const storeName = useMemo(() => {
+    if (wowStore) return wowStore.name;
+    const state = store.getState();
+    return state?.system?.store?.name;
+  }, [wowStore]);
 
   const destroySession = useCallback(() => {
     store.__persistor.purge();
@@ -72,15 +80,19 @@ const App = ({ Component, pageProps }) => {
   const setStore = useCallback(async () => {
     const state = store.getState();
     if (!state.system.store) {
-      const {
-        data: { getStore: getStoreResponse },
-      } = await API.graphql({
-        query: getStore,
-        variables: { id: STORE_ID },
-      });
-      store.dispatch(systemActions.setStore(getStoreResponse));
+      if (wowStore) {
+        store.dispatch(systemActions.setStore(wowStore));
+      } else {
+        const {
+          data: { getStore: getStoreResponse },
+        } = await API.graphql({
+          query: getStore,
+          variables: { id: STORE_ID },
+        });
+        store.dispatch(systemActions.setStore(getStoreResponse));
+      }
     }
-  }, [store]);
+  }, [store, wowStore]);
 
   const initSession = useCallback(async () => {
     setStore();
@@ -122,12 +134,14 @@ const App = ({ Component, pageProps }) => {
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0"
+            content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
           />
-          <title>Wow life science</title>
+          <meta name="HandheldFriendly" content="true" />
+          <title>{storeName}</title>
           <meta name="keywords" content="WOW" />
-          <meta name="description" content="Wow life science" />
+          <meta name="description" content={storeName} />
         </Head>
+        <Scripts />
         <Layout navbar={navbar} footer={footer}>
           <Component {...pageProps} />
         </Layout>
@@ -140,6 +154,11 @@ App.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {};
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
+  }
+  if (!!ctx.req) {
+    pageProps = pageProps || {};
+    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+    pageProps.store = store;
   }
   return { pageProps };
 };

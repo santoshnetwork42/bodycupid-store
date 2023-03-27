@@ -7,12 +7,14 @@ import {
   getFeaturedCoupon,
 } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import { getCouponTotal, toDecimal } from "~/utils";
+import { getCartTotals, getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import { toast } from "react-toastify";
+import Loader from "../common/partials/loader";
 import { STORE_ID } from "~/config";
 import Modal from "~/components/common/modal";
+import { getCouponMessage } from "~/utils/coupons";
 
 function Coupon(props) {
   const {
@@ -29,7 +31,7 @@ function Coupon(props) {
   const [featured, setFeatured] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async function () {
       const {
@@ -75,6 +77,7 @@ function Coupon(props) {
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
+      setLoading(true);
       const {
         data: { applyCoupon: response },
       } = await API.graphql({
@@ -82,7 +85,6 @@ function Coupon(props) {
         variables: { code: couponCode },
         authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
-
       if (response) {
         const discount = getCouponTotal(response, cartList);
         if (discount) {
@@ -93,8 +95,10 @@ function Coupon(props) {
         } else {
           setError("Coupon cannot be applied");
         }
+        setLoading(false);
       } else {
         setError("Invalid coupon");
+        setLoading(false);
       }
     },
     [coupon, user]
@@ -112,11 +116,16 @@ function Coupon(props) {
   return (
     <>
       {layout === "cart" && (
-        <div className="cart-coupon-box mb-4">
+        <div
+          className="cart-coupon-box mb-4"
+          onClick={() => !appliedCoupon && setOpen(true)}
+        >
           <div className="cart-coupon-container d-flex">
             <div>
               <h4 className="title coupon-title text-uppercase ls-m">
-                Use Coupons
+                {!!appliedCoupon
+                  ? `"${appliedCoupon.code}" applied`
+                  : "Coupons and offers"}
               </h4>
               {!appliedCoupon && (
                 <span className="coupon-subtitle">
@@ -125,7 +134,8 @@ function Coupon(props) {
               )}
               {!!appliedCoupon && (
                 <span className="coupon-subtitle">
-                  {appliedCoupon.code} applied
+                  You saved additional ₹
+                  {toDecimal(getCouponTotal(appliedCoupon, cartList))}
                 </span>
               )}
             </div>
@@ -134,7 +144,6 @@ function Coupon(props) {
               <a
                 className="coupon-offer"
                 type="button"
-                onClick={() => setOpen(true)}
               >{`${featured?.length} Offers >`}</a>
             )}
             {!!appliedCoupon && (
@@ -149,17 +158,6 @@ function Coupon(props) {
               </ALink>
             )}
           </div>
-          {!!appliedCoupon && (
-            <div className="summary-saving-lable-container">
-              <p className="saving-lable">
-                You are saving{" "}
-                <span>{`₹${toDecimal(
-                  getCouponTotal(appliedCoupon, cartList)
-                )}`}</span>{" "}
-                on this order
-              </p>
-            </div>
-          )}
         </div>
       )}
 
@@ -214,10 +212,10 @@ function Coupon(props) {
           setError("");
         }}
         shouldReturnFocusAfterClose={false}
-        overlayClassName="auth-modal-overlay"
+        overlayClassName="auth-modal-overlay coupon-modal-container"
         className="auth-popup bg-img"
       >
-        <main className="main">
+        <main className="main ">
           <div className="page-content mt-6 pb-2 mb-2">
             <div className="container">
               <div className="cart-coupon-modal m-8">
@@ -238,7 +236,7 @@ function Coupon(props) {
                     onClick={() => applyCouponCode()}
                     className="btn btn-md btn-dark btn-rounded btn-link m l-2"
                   >
-                    Apply Coupon
+                    Apply
                   </button>
                 </div>
                 {!!featured.length && (
@@ -253,21 +251,24 @@ function Coupon(props) {
                       }
                       return (
                         <div key={c.id} className="featured-coupon">
-                          <div className="featured-coupon-text-content">
-                            <strong>{c.code}</strong>
-                            {!!discount && (
-                              <div className="coupon-tagline">
-                                You will save ₹{toDecimal(discount)} with this
-                                coupon
-                              </div>
-                            )}
+                          <div className="d-flex justify-content-between ">
+                            <div className="featured-coupon-text-content">
+                              <strong>{c.code}</strong>
+                              {!!discount && (
+                                <div className="coupon-tagline">
+                                  You will save ₹{toDecimal(discount)} with this
+                                  coupon
+                                </div>
+                              )}
+                            </div>
+                            <button
+                              onClick={() => applyCouponCode(c.code)}
+                              className={className}
+                            >
+                              Apply
+                            </button>
                           </div>
-                          <button
-                            onClick={() => applyCouponCode(c.code)}
-                            className={className}
-                          >
-                            Apply
-                          </button>
+                          <p className="m-0">{getCouponMessage(c)}</p>
                         </div>
                       );
                     })}
@@ -279,6 +280,7 @@ function Coupon(props) {
           </div>
         </main>
       </Modal>
+      <Loader loading={loading} />
     </>
   );
 }

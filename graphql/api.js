@@ -1,4 +1,37 @@
-export const getMenuCategories = /* GraphQL */ `
+export const getMenuSubCategories = /* GraphQL */ `
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
+  ) {
+    searchProductSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        category {
+          id
+          name
+          slug
+        }
+        slug
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const getSideBarFilterCategories = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
     $sort: [SearchableProductCategorySortInput]
@@ -63,6 +96,7 @@ export const getHomePageProducts = /* GraphQL */ `
         taxable
         tags
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         thumbImages
@@ -191,6 +225,7 @@ export const getQuickViewProduct = /* GraphQL */ `
         weight
         weightUnit
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         totalOrders
@@ -306,6 +341,7 @@ export const getProductBySlug = /* GraphQL */ `
         taxable
         barcode
         tags
+        benefits
         weight
         weightUnit
         inventory
@@ -317,6 +353,7 @@ export const getProductBySlug = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        continueSellingOutOfStock
         hasVarient
         variants {
           items {
@@ -417,6 +454,7 @@ export const getOrder = /* GraphQL */ `
     getOrder(id: $id) {
       id
       code
+      storeId
       userId
       user {
         id
@@ -676,6 +714,7 @@ export const getBasicSubCategory = /* GraphQL */ `
         id
         name
         slug
+        bannerUrl
       }
     }
   }
@@ -702,6 +741,7 @@ export const getBasicCategory = /* GraphQL */ `
         id
         name
         slug
+        bannerUrl
       }
     }
   }
@@ -766,6 +806,7 @@ export const findProducts = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -958,15 +999,14 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 `;
 
 export const createShoppingCart = /* GraphQL */ `
-  mutation CreateShoppingCart(
-    $input: CreateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    createShoppingCart(input: $input, condition: $condition) {
+  mutation CreateStoreShoppingCart($storeId: ID!) {
+    createStoreShoppingCart(storeId: $storeId) {
       id
       storeId
       userId
       couponCodeId
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1082,6 +1122,7 @@ export const searchOrders = /* GraphQL */ `
         priority
         orderDate
         status
+        createdAt
         payments {
           items {
             id
@@ -1250,6 +1291,135 @@ export const getReviews = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const searchProductFaqs = /* GraphQL */ `
+  query SearchProductFaqs(
+    $filter: SearchableProductFaqFilterInput
+    $sort: [SearchableProductFaqSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductFaqAggregationInput]
+  ) {
+    searchProductFaqs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        productId
+        title
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+
+export const getLinkedProducts = /* GraphQL */ `
+  query ByProductIdLinkedProduct(
+    $productId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelLinkedProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byProductIdLinkedProduct(
+      productId: $productId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        productId
+        linkedProductId
+        linkedProduct {
+          id
+          title
+          brand
+          slug
+          productDescription
+          price
+          sku
+          size
+          position
+          currency
+          costPrice
+          listingPrice
+          taxable
+          barcode
+          tags
+          benefits
+          rating
+          totalRatings
+          totalOrders
+          thumbImages
+          isTaxEnabled
+          isInventoryEnabled
+          hasVarient
+          variants {
+            items {
+              id
+              title
+              price
+              sku
+              position
+              currency
+              costPrice
+              listingPrice
+              imageUrl
+            }
+          }
+          images {
+            items {
+              id
+              productId
+              position
+              createdAt
+              updatedAt
+              alt
+              width
+              height
+              imageKey
+              isThumb
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const addProductNotification = /* GraphQL */ `
+  mutation AddProductNotification(
+    $productId: ID!
+    $variantId: ID
+    $userId: ID
+    $email: AWSEmail
+  ) {
+    addProductNotification(
+      productId: $productId
+      variantId: $variantId
+      userId: $userId
+      email: $email
+    ) {
+      success
+      message
     }
   }
 `;

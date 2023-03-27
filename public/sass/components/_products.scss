@@ -115,12 +115,6 @@
     }
 }
 
-.text-center {
-    .product-details {
-        padding-left: .5rem;
-        padding-right: .5rem;
-    }
-}
 
 // Default
 .product-wrap {
@@ -226,6 +220,35 @@
         z-index: 3;
     }
 }
+
+.loader-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    cursor: pointer;
+
+    .common-loading-overlay {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        -webkit-animation: spin 650ms infinite linear;
+        animation: spin 650ms infinite linear;
+        border-radius: 75%;
+        border: 2px solid $primary-color !important;
+        border-bottom-color: transparent !important;
+        z-index: 9999;
+    }
+}
+
 
 // Product Label
 .product-label-group {
@@ -398,6 +421,7 @@
 .product-details {
     position: relative;
     @include print_css(product, body);
+    padding: 1rem 1.5rem 2rem;
 
     >.btn-wishlist {
         position: absolute;
@@ -450,10 +474,7 @@
 // Product Name
 .product-name {
     @include print_css(product, name);
-    white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-
     a {
 
         // transition: color .3s;
@@ -463,12 +484,12 @@
     }
 }
 
-// Product Tag
-.product-tag {
-    font-size:1.2rem;
-    text-overflow: ellipsis;
-    color:$success-color;
-    text-align: center !important;
+.product-card-title {
+     min-height: 40px;
+     display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+     -webkit-box-orient: vertical !important;
+     overflow: hidden !important;
 }
 
 // Product Price
@@ -541,7 +562,7 @@
 }
 
 .rating-reviews {
-    margin: 2px 0;
+    margin: 0px 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -630,7 +651,7 @@
             font-size: 1.8rem;
         }
     }
-
+ 
     .btn-cart {
         flex: 1;
         height: 4.2rem;
@@ -1035,6 +1056,18 @@
     &.text-center {
         .product-cat {
             padding: 0;
+            .product-tag {
+                font-size:1.2rem;
+                text-overflow: ellipsis;
+                color:$success-color;
+                text-align: center !important;
+                -webkit-line-clamp: 1 !important;
+                -webkit-box-orient: vertical !important;
+                overflow: hidden !important;
+                span {
+                   visibility: hidden;
+                }
+            }
         }
 
         .product-name {

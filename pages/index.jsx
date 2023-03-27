@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
 import ServiceBox from "~/components/partials/home/service-section";
@@ -12,19 +13,20 @@ import BrandSection from "~/components/partials/home/brand-section";
 // import BlogSection from "~/components/partials/home/blog-section";
 
 import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
-import awsmobile from "~/aws-exports";
 import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
-function HomePage({ hero, products, categories, brands }) {
+function HomePage({ hero, products, categories, brands, store }) {
+  const { name } = store;
   return (
     <main className="main home">
       <Head>
-        <title>Wow Life Science - Home</title>
+        <title>{name} - Home</title>
       </Head>
 
-      <h1 className="d-none">Wow Life Science - Homepage</h1>
+      <h1 className="d-none">{name} - Homepage</h1>
 
       <div className="page-content">
         <div className="intro-section">
@@ -55,25 +57,6 @@ function HomePage({ hero, products, categories, brands }) {
 
 export const getStaticProps = async () => {
   try {
-    const fetchData = async (query = "", variables = {}) => {
-      const response = await fetch(awsmobile.aws_appsync_graphqlEndpoint, {
-        method: "POST",
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-        headers: {
-          "x-api-key": awsmobile.aws_appsync_apiKey,
-          accept: "*/*",
-          "content-type": "application/json; charset=UTF-8",
-        },
-      });
-
-      const data = await response.json();
-
-      return data.data;
-    };
-
     const optimizedLogoImage = await optimizeImage({
       src: "/images/logo.png",
       options: {
@@ -96,8 +79,13 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
+    const optimizedMobileHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow-mobile.jpg",
+      type: "self-hosted",
+    });
+
     const { searchProducts } = await fetchData(getHomePageProducts, {
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       limit: 8,
     });
     const { searchProductSubCategories } = await fetchData(
@@ -182,6 +170,7 @@ export const getStaticProps = async () => {
         },
         hero: {
           banner: optimizedHeroImage,
+          mobileBanner: optimizedMobileHeroImage,
         },
         products: searchProducts.items,
         categories: searchProductSubCategories.items,
@@ -198,4 +187,10 @@ export const getStaticProps = async () => {
   }
 };
 
-export default HomePage;
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(HomePage);

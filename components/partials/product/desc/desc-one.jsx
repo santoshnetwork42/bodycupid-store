@@ -4,22 +4,27 @@ import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
+import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
-import { createReview, getReviews } from "~/graphql/api";
+import { createReview, getReviews, searchProductFaqs } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
 import ProductSpecifications from "../product-specifications";
 import Specifications from "~/lib/specifications.json";
-
+import { fadeIn } from "~/utils/data/keyframes";
+import Accordion from "~/components/features/accordion/accordion";
+import Card from "~/components/features/accordion/card";
+import { uploadImages } from "~/utils/imageupload";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 const reviewDefault = {
   rating: 5,
   comment: "",
   name: "",
   email: "",
-  image: "",
+  image: [],
 };
 
 function DescOne(props) {
@@ -31,7 +36,8 @@ function DescOne(props) {
   const [token, setToken] = useState(null);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const [productsFAQs, setProductsFAQs] = useState([]);
+  const [reviewImages, setReviewImages] = useState([]);
   let sizes = [];
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
@@ -96,9 +102,40 @@ function DescOne(props) {
     [product, token]
   );
 
+  const getProductFAQs = useCallback(() => {
+    setLoading(true);
+    API.graphql(
+      graphqlOperation(searchProductFaqs, {
+        filter: {
+          productId: { eq: product.id },
+        },
+      })
+    )
+      .then(
+        ({
+          data: {
+            searchProductFaqs: { items: response },
+          },
+        }) => {
+          if (response) {
+            console.log(response);
+            setProductsFAQs(response);
+          }
+          setLoading(false);
+        }
+      )
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [product]);
+
   useEffect(() => {
     if (tabIndex === 2 && reviews.length === 0) {
       getProductReviews(true);
+    }
+
+    if (tabIndex === 3 && productsFAQs.length === 0) {
+      getProductFAQs();
     }
   }, [tabIndex]);
 
@@ -107,11 +144,21 @@ function DescOne(props) {
     return 0;
   };
 
-  const onPhotoChange = (e) => {
-    setReview({
-      ...reviewState,
-      image: URL.createObjectURL(e.target.files[0]),
-    });
+  const onPhotoChange = async (e) => {
+    const files = [...reviewImages, ...e.target.files];
+    setReviewImages(files);
+    if (reviewImages) {
+      const urls = await Promise.all(
+        files.map(async (element) => {
+          const key = await uploadImages(element, "review");
+          return key;
+        })
+      );
+      setReview({
+        ...reviewState,
+        image: urls,
+      });
+    }
   };
 
   const showVideoModalHandler = (e) => {
@@ -124,7 +171,7 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { rating, comment, name, email } = reviewState;
+        const { rating, comment, name, email, image } = reviewState;
         await API.graphql({
           query: createReview,
           variables: {
@@ -137,10 +184,12 @@ function DescOne(props) {
               },
               userId: user?.id,
               productId: product?.id,
+              images: image,
             },
           },
         });
         setReview({ ...reviewDefault });
+        setReviewImages([]);
         setReviews([
           {
             id: new Date().toUTCString(),
@@ -151,10 +200,12 @@ function DescOne(props) {
             productId: product?.id,
             rating,
             comment,
+            images: image,
             updatedAt: new Date().toUTCString(),
           },
           ...reviews,
         ]);
+        setShowReview(!showReview);
         toast(
           <AlertPopup
             message="Review submitted successfully"
@@ -185,18 +236,14 @@ function DescOne(props) {
         <Tab className="nav-item">
           <span className="nav-link">Specifications</span>
         </Tab>
-        {/* {isGuide ? (
-          <Tab className="nav-item">
-            <span className="nav-link">Size Guide</span>
-          </Tab>
-        ) : (
-          ""
-        )} */}
         <Tab className="nav-item">
-          {/* <span className="nav-link">Reviews ({product.reviews})</span> */}
           <span className="nav-link" id="product-review">
             Reviews {!!product?.totalRatings && `(${product?.totalRatings})`}
           </span>
+        </Tab>
+
+        <Tab className="nav-item">
+          <span className="nav-link">FAQ</span>
         </Tab>
       </TabList>
 
@@ -393,22 +440,28 @@ function DescOne(props) {
                   onBlur={(e) => setReview({ comment: e.target.value.trim() })}
                 ></textarea>
                 <div className="d-flex w-100 img-wrapper justify-content-end">
-                  <div className="p-relative">
-                    {reviewState.image && (
-                      <>
+                  {reviewState.image &&
+                    reviewState.image.map((img, index) => (
+                      <div className="img_wrp mr-2">
                         <img
+                          src={getPublicImageURL(img)}
                           className="img-preview"
-                          src={reviewState.image}
-                        ></img>
-                        <i
-                          className="d-icon-close remove-icon"
+                          alt=""
+                        />
+                        <img
+                          className="close"
+                          src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png"
                           onClick={() => {
-                            setReview({ ...reviewState, image: "" });
+                            const temp = [...reviewState.image];
+                            temp.splice(index, 1);
+                            setReview({
+                              ...reviewState,
+                              image: temp,
+                            });
                           }}
-                        ></i>
-                      </>
-                    )}
-                  </div>
+                        />
+                      </div>
+                    ))}
 
                   <input
                     className="d-none"
@@ -417,18 +470,26 @@ function DescOne(props) {
                     accept="image/*"
                     id="review-photo"
                     name="filename"
+                    multiple
                   />
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       document.getElementById("review-photo").click();
                     }}
-                    className="btn   btn-rounded mr-2"
+                    className="btn btn-rounded mr-2"
                   >
-                    {reviewState.image ? "Change" : "Add"} Photo
+                    Add Photo
                   </button>
                   <button type="submit" className="btn btn-primary btn-rounded">
-                    Submit<i className="d-icon-arrow-right"></i>
+                    <div className="d-flex justify-content-center align-items-center">
+                      Submit
+                      {loading ? (
+                        <div className="spin-loader ml-2" />
+                      ) : (
+                        <i className="d-icon-arrow-right"></i>
+                      )}
+                    </div>
                   </button>
                 </div>
               </form>
@@ -453,7 +514,54 @@ function DescOne(props) {
             total={total}
             loaded={reviews?.length}
             nextToken={token}
+            content="reviews"
           />
+        </TabPanel>
+
+        <TabPanel className="tab-pane product-tab-faq">
+          <div className="row">
+            <div className="col-md-12">
+              <Reveal
+                keyframes={fadeIn}
+                delay="100"
+                duration="1000"
+                triggerOnce
+              >
+                <section>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-12 mt-10">
+                        {!!productsFAQs.length && (
+                          <Accordion adClass="accordion-border accordion-boxed accordion-plus">
+                            {productsFAQs.map((faq) => (
+                              <div key={faq?.id}>
+                                <Card
+                                  title={
+                                    <div
+                                      className="card-title"
+                                      dangerouslySetInnerHTML={{
+                                        __html: faq?.title,
+                                      }}
+                                    />
+                                  }
+                                >
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: faq?.description,
+                                    }}
+                                  />
+                                </Card>
+                              </div>
+                            ))}
+                          </Accordion>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </Reveal>
+            </div>
+          </div>
         </TabPanel>
       </div>
     </Tabs>

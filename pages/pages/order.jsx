@@ -6,15 +6,16 @@ import ALink from "~/components/features/custom-link";
 import { toDecimal, getTotalPrice } from "~/utils";
 
 function Order(props) {
-  const { cartList } = props;
+  const { cartList, store } = props;
+  const { name } = store;
 
   return (
     <main className="main order">
       <Head>
-        <title>Wow life science | Order</title>
+        <title>{name} | Order</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Order</h1>
+      <h1 className="d-none">{name} - Order</h1>
 
       <div className="page-content pt-7 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
@@ -196,6 +197,7 @@ function Order(props) {
 function mapStateToProps(state) {
   return {
     cartList: state.cart.data ? state.cart.data : [],
+    store: state.system.store,
   };
 }
 

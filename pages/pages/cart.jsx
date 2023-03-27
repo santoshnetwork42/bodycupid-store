@@ -1,69 +1,120 @@
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 import Coupons from "~/components/features/coupon";
-
 import { cartActions } from "~/store/cart";
-
-import {
-  toDecimal,
-  getTotalPrice,
-  getShippingPrice,
-  getFinalPrice,
-  getCouponTotal,
-} from "~/utils";
+import { modalActions } from "~/store/modal";
+import { toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import RelatedProducts from "~/components/partials/product/related-products";
+import { API, graphqlOperation } from "aws-amplify";
+import { getHomePageProducts } from "~/graphql/api";
+import { STORE_ID } from "~/config";
+import { scrollWithOffset } from "~/utils/helper";
 
 function Cart(props) {
-  const { cartList, removeFromCart, updateCart, appliedCoupon, removeCoupon } =
-    props;
+  const {
+    cartList,
+    removeFromCart,
+    updateCart,
+    appliedCoupon,
+    removeCoupon,
+    user,
+    openLogin,
+  } = props;
   const [cartItems, setCartItems] = useState([]);
+  const [related, setRelated] = useState(null);
+
+  useEffect(() => {
+    API.graphql(
+      graphqlOperation(getHomePageProducts, {
+        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+        limit: 8,
+      })
+    ).then(
+      ({
+        data: {
+          searchProducts: { items },
+        },
+      }) => {
+        setRelated(items);
+      }
+    );
+  }, []);
 
   useEffect(() => {
     setCartItems([...cartList]);
   }, [cartList]);
 
-  const onChangeQty = (id, variantId, qty) => {
-    setCartItems(
-      cartItems.map((item) => {
+  const {
+    totalListingprice,
+    totalPrice,
+    shippingTotal,
+    amoutSaved,
+    couponTotal,
+    grandTotal,
+  } = useMemo(
+    () => getCartTotals(cartItems, appliedCoupon),
+    [cartItems, appliedCoupon]
+  );
+
+  const onChangeQty = (item, qty) => {
+    if (qty) {
+      const { id, variantId } = item;
+      const cart = cartItems.map((item) => {
         return item.id === id && (!variantId || variantId === item.variantId)
           ? { ...item, qty: qty }
           : item;
-      })
-    );
+      });
+      updateCart(cart);
+    } else {
+      removeFromCart(item);
+    }
   };
 
-  const compareItems = () => {
-    if (cartItems.length !== cartList.length) return false;
+  // const compareItems = () => {
+  //   if (cartItems.length !== cartList.length) return false;
 
-    for (let index = 0; index < cartItems.length; index++) {
-      if (cartItems[index].qty !== cartList[index].qty) return false;
-    }
+  //   for (let index = 0; index < cartItems.length; index++) {
+  //     if (cartItems[index].qty !== cartList[index].qty) return false;
+  //   }
 
-    return true;
-  };
+  //   return true;
+  // };
 
-  const update = () => {
-    if (!compareItems()) {
-      updateCart(cartItems);
-    }
-    return true;
+  // const update = () => {
+  //   if (!compareItems()) {
+  //     updateCart(cartItems);
+  //   }
+  //   return true;
+  // };
+
+  const checkAuth = useCallback(() => {
+    if (user) return true;
+    openLogin(true);
+    return false;
+  }, [user]);
+
+  const productDiscountPercentage = ({ price, listingPrice }) => {
+    return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
 
   return (
-    <div className="main cart">
+    <main className="main cart">
       <div className="page-content pt-7 pb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/checkout">2. Checkout</ALink>
+            <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
+              2. Checkout
+            </ALink>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/order">3. Order Complete</ALink>
+            <ALink href="#">3. Order Complete</ALink>
           </h3>
         </div>
 
@@ -71,7 +122,7 @@ function Cart(props) {
           <div className="row">
             {cartItems.length > 0 ? (
               <>
-                <div className="col-lg-8 col-md-12 pr-lg-4">
+                <div className="col-lg-8 col-md-12 pr-lg-4 mb-4">
                   <table className="shop-table cart-table">
                     <thead>
                       <tr>
@@ -116,6 +167,17 @@ function Cart(props) {
                             <span className="amount">
                               ₹{toDecimal(item.price)}
                             </span>
+                            <p className="m-0 product-discount-listing">
+                              {item.price < item.listingPrice && (
+                                <del className="summary-subtotal-listingprice">
+                                  ₹{toDecimal(item.listingPrice)}
+                                </del>
+                              )}
+                              <span className={`discount-percetage ml-2`}>
+                                {productDiscountPercentage(item) > 0 &&
+                                  `${productDiscountPercentage(item)}% off`}
+                              </span>
+                            </p>
                           </td>
 
                           <td className="product-quantity">
@@ -123,9 +185,7 @@ function Cart(props) {
                               product={item}
                               qty={item.qty}
                               max={item.inventory}
-                              onChangeQty={(qty) =>
-                                onChangeQty(item.id, item.variantId, qty)
-                              }
+                              onChangeQty={(qty) => onChangeQty(item, qty)}
                             />
                           </td>
                           <td className="product-price">
@@ -148,7 +208,10 @@ function Cart(props) {
                     </tbody>
                   </table>
                 </div>
-                <aside className="col-lg-4 sticky-sidebar-wrapper">
+                <aside
+                  id="cart-details"
+                  className="col-lg-4 sticky-sidebar-wrapper"
+                >
                   <div
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
@@ -164,25 +227,19 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-subtotal-price">
-                                ₹{toDecimal(getTotalPrice(cartItems))}
+                                {totalPrice < totalListingprice && (
+                                  <del className="summary-subtotal-listingprice mr-2">
+                                    ₹{toDecimal(totalListingprice)}
+                                  </del>
+                                )}
+                                ₹{toDecimal(totalPrice)}
                               </p>
                             </td>
                           </tr>
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle">Shipping</h4>
-                            </td>
-                            <td>
-                              <p className="summary-subtotal-price">
-                                {getShippingPrice(cartItems)
-                                  ? `₹${toDecimal(getShippingPrice(cartItems))}`
-                                  : "FREE"}
-                              </p>
-                            </td>
-                          </tr>
+
                           {!!appliedCoupon && (
                             <>
-                              <tr>
+                              <tr className="summary-subtotal">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
                                   <p>
@@ -203,59 +260,101 @@ function Cart(props) {
                                   </p>
                                 </td>
                                 <td>
-                                  <p className="summary-subtotal-price">
-                                    {`₹${toDecimal(
-                                      getCouponTotal(appliedCoupon, cartItems)
-                                    )}`}
+                                  <p className="summary-subtotal-price discount-price-color">
+                                    {`₹${toDecimal(couponTotal)}`}
                                   </p>
-                                </td>
-                              </tr>
-                              <tr className="summary-subtotal">
-                                <td colSpan={2}>
-                                  <div className="summary-saving-lable-container mt-0 mb-3">
-                                    <p className="saving-lable">
-                                      You are saving{" "}
-                                      <span>
-                                        {`₹${toDecimal(
-                                          getCouponTotal(
-                                            appliedCoupon,
-                                            cartItems
-                                          )
-                                        )}`}
-                                      </span>{" "}
-                                      on this order
-                                    </p>
-                                  </div>
                                 </td>
                               </tr>
                             </>
                           )}
+
+                          <tr className="summary-subtotal">
+                            <td>
+                              <h4 className="summary-subtitle">Shipping</h4>
+                            </td>
+                            <td>
+                              <p
+                                className={`summary-subtotal-price ${
+                                  !shippingTotal && "discount-price-color"
+                                }`}
+                              >
+                                {!!shippingTotal
+                                  ? `₹${toDecimal(shippingTotal)}`
+                                  : "FREE"}
+                              </p>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                       <table className="total">
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle">Total</h4>
+                              <h4 className="summary-subtitle">
+                                Total{" "}
+                                <p className="m-0">Inclusive of all taxes</p>
+                              </h4>
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹
-                                {toDecimal(
-                                  getFinalPrice(cartItems, appliedCoupon)
-                                )}
+                                ₹{toDecimal(grandTotal)}
                               </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan={2}>
+                              <div
+                                className={
+                                  "avg-delivery-lable-container mt-3 mb-2"
+                                }
+                              >
+                                <p className="m-0">
+                                  Average delivery time: <span>3-5 days</span>
+                                </p>
+                              </div>
+                              {!!amoutSaved && (
+                                <div className="summary-saving-lable-container mb-4">
+                                  <p className="saving-lable">
+                                    <span>{`₹${toDecimal(amoutSaved)} `}</span>
+                                    saved so far on this order
+                                  </p>
+                                </div>
+                              )}
                             </td>
                           </tr>
                         </tbody>
                       </table>
                       <ALink
-                        onClick={update}
-                        href="/pages/checkout"
-                        className="btn btn-dark btn-rounded btn-checkout"
+                        onClick={checkAuth}
+                        href={user ? "/pages/checkout" : "#"}
+                        className="btn btn-dark d-sm-none btn-rounded btn-checkout"
                       >
                         Proceed to checkout
                       </ALink>
+                      <div className="d-none stick-bottom-button d-sm-show">
+                        <div className="lh-2">
+                          <p className="summary-total-price text-left ls-s">
+                            ₹{toDecimal(grandTotal)}
+                          </p>
+                          <ALink
+                            onClick={() => {
+                              scrollWithOffset("cart-details", 130);
+                            }}
+                            className="text-underline"
+                            href="#"
+                          >
+                            View details
+                          </ALink>
+                        </div>
+
+                        <ALink
+                          onClick={checkAuth}
+                          href={user ? "/pages/checkout" : "#"}
+                          className="btn btn-dark btn-rounded  btn-checkout"
+                        >
+                          Proceed to checkout
+                        </ALink>
+                      </div>
                     </div>
                   </div>
                 </aside>
@@ -275,9 +374,13 @@ function Cart(props) {
               </div>
             )}
           </div>
+          <RelatedProducts
+            products={related}
+            heading="Other popular products"
+          />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -293,4 +396,5 @@ export default connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
+  openLogin: modalActions.openPasswordlessModal,
 })(Cart);

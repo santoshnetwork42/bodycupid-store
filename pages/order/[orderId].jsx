@@ -3,27 +3,37 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 import { toast } from "react-toastify";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
+import PaymentLoader from "~/components/common/partials/payment-loader";
+import fetchData from "~/utils/fetchData";
+import { STORE_ID } from "~/config";
 
-function Order() {
-  const [order, setOrder] = useState(null);
+function Order({ order: orderItem, paymentId, orderId }) {
+  const [order, setOrder] = useState(orderItem);
   const [timer, setTimer] = useState(null);
 
   const router = useRouter();
-  const { query } = router;
-  const { orderId, paymentId } = query;
+
+  useEffect(() => {
+    if (!orderItem) {
+      router.push("/404");
+    }
+  }, []);
 
   const fetchOrder = useCallback(async () => {
     const response = await API.graphql({
       query: getOrder,
       variables: { id: orderId },
     });
-    setOrder(response.data.getOrder);
+    if (!!response.data.getOrder) {
+      setOrder(response.data.getOrder);
+    }
   }, [orderId]);
 
   const fetchPaymentStatus = useCallback(async () => {
@@ -36,7 +46,6 @@ function Order() {
         query: validateTransaction,
         variables: { orderId, razorpayPaymentId: paymentId },
       });
-
       if (success) {
         fetchOrder();
         toast(
@@ -47,18 +56,15 @@ function Order() {
         );
       }
     }
-  }, [orderId, paymentId]);
+  }, [orderId, paymentId, fetchOrder]);
+
+  const isPaymentProcessing =
+    order?.status === "PENDING" &&
+    order?.paymentType === "PREPAID" &&
+    paymentId;
 
   useEffect(() => {
-    fetchOrder();
-  }, [orderId]);
-
-  useEffect(() => {
-    if (
-      order?.status === "PENDING" &&
-      order?.paymentType === "PREPAID" &&
-      paymentId
-    ) {
+    if (isPaymentProcessing) {
       toast(
         <AlertPopup
           message="Hold On! We're updating your payment status..."
@@ -88,10 +94,10 @@ function Order() {
   return (
     <main className="main order">
       <Head>
-        <title>Wow life science | Order</title>
+        <title>{name} | Order</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Order</h1>
+      <h1 className="d-none">{name}- Order</h1>
 
       <div className="page-content pt-7 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
@@ -147,7 +153,15 @@ function Order() {
                 <h5 className="icon-box-title font-weight-bold lh-1 mb-1">
                   Thank You!
                 </h5>
-                <p className="lh-1 ls-m">Your order has been received</p>
+                {isPaymentProcessing && (
+                  <p className="lh-1 ls-m">
+                    Your order has been received and your payment status is
+                    being updated.
+                  </p>
+                )}
+                {!isPaymentProcessing && (
+                  <p className="lh-1 ls-m">Your order has been received</p>
+                )}
               </div>
             </div>
           </div>
@@ -295,12 +309,51 @@ function Order() {
             href="/collections/all"
             className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
           >
-            <i className="d-icon-arrow-left"></i> Back to List
+            Continue Shopping
           </ALink>
+          <ALink
+            href={{
+              pathname: "/pages/account",
+              query: {
+                activeTabIndex: 1,
+              },
+            }}
+            as="/pages/account"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
+          >
+            Your Orders
+          </ALink>
+
+          <PaymentLoader loading={isPaymentProcessing} />
         </div>
       </div>
     </main>
   );
 }
 
-export default React.memo(Order);
+Order.getInitialProps = async (context) => {
+  const { query } = context;
+  const { orderId, paymentId = null } = query;
+  try {
+    const { getOrder: response } = await fetchData(getOrder, {
+      id: orderId,
+    });
+
+    if (response?.storeId === STORE_ID) {
+      return {
+        order: response,
+        paymentId,
+        orderId: orderId,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return {
+    order: null,
+    paymentId,
+    orderId: orderId,
+  };
+};
+
+export default Order;
