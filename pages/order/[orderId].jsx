@@ -11,22 +11,29 @@ import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
 import PaymentLoader from "~/components/common/partials/payment-loader";
+import fetchData from "~/utils/fetchData";
+import { STORE_ID } from "~/config";
 
-function Order({ store }) {
-  const { name } = store;
-  const [order, setOrder] = useState(null);
+function Order({ order: orderItem, paymentId, orderId }) {
+  const [order, setOrder] = useState(orderItem);
   const [timer, setTimer] = useState(null);
 
   const router = useRouter();
-  const { query } = router;
-  const { orderId, paymentId } = query;
+
+  useEffect(() => {
+    if (!orderItem) {
+      router.push("/404");
+    }
+  }, []);
 
   const fetchOrder = useCallback(async () => {
     const response = await API.graphql({
       query: getOrder,
       variables: { id: orderId },
     });
-    setOrder(response.data.getOrder);
+    if (!!response.data.getOrder) {
+      setOrder(response.data.getOrder);
+    }
   }, [orderId]);
 
   const fetchPaymentStatus = useCallback(async () => {
@@ -39,7 +46,6 @@ function Order({ store }) {
         query: validateTransaction,
         variables: { orderId, razorpayPaymentId: paymentId },
       });
-
       if (success) {
         fetchOrder();
         toast(
@@ -50,11 +56,7 @@ function Order({ store }) {
         );
       }
     }
-  }, [orderId, paymentId]);
-
-  useEffect(() => {
-    fetchOrder();
-  }, [orderId]);
+  }, [orderId, paymentId, fetchOrder]);
 
   const isPaymentProcessing =
     order?.status === "PENDING" &&
@@ -307,7 +309,19 @@ function Order({ store }) {
             href="/collections/all"
             className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
           >
-            <i className="d-icon-arrow-left"></i> Back to List
+            Continue Shopping
+          </ALink>
+          <ALink
+            href={{
+              pathname: "/pages/account",
+              query: {
+                activeTabIndex: 1,
+              },
+            }}
+            as="/pages/account"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
+          >
+            Your Orders
           </ALink>
 
           <PaymentLoader loading={isPaymentProcessing} />
@@ -317,10 +331,29 @@ function Order({ store }) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    store: state.system.store,
-  };
-}
+Order.getInitialProps = async (context) => {
+  const { query } = context;
+  const { orderId, paymentId = null } = query;
+  try {
+    const { getOrder: response } = await fetchData(getOrder, {
+      id: orderId,
+    });
 
-export default connect(mapStateToProps)(React.memo(Order));
+    if (response?.storeId === STORE_ID) {
+      return {
+        order: response,
+        paymentId,
+        orderId: orderId,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return {
+    order: null,
+    paymentId,
+    orderId: orderId,
+  };
+};
+
+export default Order;

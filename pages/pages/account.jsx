@@ -13,7 +13,10 @@ import AccountDetails from "~/components/partials/account/account-details";
 function Account({ user, store }) {
   const { name } = store;
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(0);
+  const { query } = router;
+  const { activeTabIndex } = query;
+
+  const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
 
   useEffect(() => {
     (async function () {

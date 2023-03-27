@@ -451,6 +451,7 @@ export const getOrder = /* GraphQL */ `
     getOrder(id: $id) {
       id
       code
+      storeId
       userId
       user {
         id
