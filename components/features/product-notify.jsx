@@ -10,6 +10,7 @@ function ProductNotify(props) {
   const { user, productId, variantId } = props;
   const [notifyEmail, setNotifyEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [allreadyNotify, setAllreadyNotify] = useState(false);
 
   useEffect(() => {
     if (user?.email) {
@@ -44,6 +45,7 @@ function ProductNotify(props) {
         } else {
           toast(<AlertPopup message="Something went wrong" status="error" />);
         }
+        setAllreadyNotify(true);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -62,27 +64,36 @@ function ProductNotify(props) {
           We are working hard to be back in stock as soon as possible
         </p>
       </div>
-      <form onSubmit={handleNotify}>
-        <label>*This product is currently out of stock</label>
-        <input
-          className="form-control mt-1"
-          type="email"
-          id="email"
-          required
-          name="email"
-          placeholder="Enter email to find out when it's back"
-          value={notifyEmail}
-          onChange={(e) => setNotifyEmail(e.target.value.trim())}
-        />
-        <button
-          className="notify-btn btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
-          type="submit"
-          disabled={loading}
-        >
-          Notify me when available
-          {loading && <div className="spin-loader ml-2" />}
-        </button>
-      </form>
+      {!!allreadyNotify ? (
+        <div className="d-flex align-items-center">
+          <i className="check-mark fas fa-check-circle mr-2"></i>
+          <p className="m-0">
+            We'll notify you when this product is back in stock
+          </p>
+        </div>
+      ) : (
+        <form onSubmit={handleNotify}>
+          <label>*This product is currently out of stock</label>
+          <input
+            className="form-control mt-1"
+            type="email"
+            id="email"
+            required
+            name="email"
+            placeholder="Enter email to find out when it's back"
+            value={notifyEmail}
+            onChange={(e) => setNotifyEmail(e.target.value.trim())}
+          />
+          <button
+            className="notify-btn btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
+            type="submit"
+            disabled={loading}
+          >
+            Notify me when available
+            {loading && <div className="spin-loader ml-2" />}
+          </button>
+        </form>
+      )}
     </div>
   );
 }

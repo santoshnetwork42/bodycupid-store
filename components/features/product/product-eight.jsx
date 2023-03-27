@@ -25,7 +25,7 @@ function ProductEight(props) {
     openQuickview,
   } = props;
 
-  const { isInventoryAvailable } = useMemo(
+  const { hasInventory } = useMemo(
     () => getProductInventory(product),
     [product]
   );
@@ -192,7 +192,7 @@ function ProductEight(props) {
 
         <div className="product-action">
           <div className="product-form-group cart-button-wrapper">
-            {!!isInventoryAvailable ? (
+            {!!hasInventory ? (
               <>
                 {isCartItem ? (
                   <ALink
@@ -239,9 +239,10 @@ function ProductEight(props) {
               </>
             ) : (
               <ALink
-                href={`/product/${product.slug}`}
+                href="#"
                 className="btn-product btn-cart"
                 title="Out of stock"
+                onClick={showQuickviewHandler}
               >
                 <span>Out of stock</span>
               </ALink>

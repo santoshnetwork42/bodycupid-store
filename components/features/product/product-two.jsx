@@ -211,9 +211,10 @@ function ProductTwo(props) {
             </>
           ) : (
             <ALink
-              href={`/product/${product.slug}`}
+              href="#"
               className="btn-product btn-quickview m-0"
               title="View Cart"
+              onClick={showQuickviewHandler}
             >
               Out of stock
             </ALink>
