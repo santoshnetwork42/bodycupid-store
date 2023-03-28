@@ -232,17 +232,15 @@ function Order({ order: orderItem, paymentId, orderId }) {
                         {item.quantity || item.cancelledQuantity}
                       </span>
                       {item.cancelledQuantity > 0 && item.quantity > 0 && (
-                        <Tag
-                          type="cancel"
-                          title="CANCELLED"
-                          qty={item.cancelledQuantity}
-                        ></Tag>
+                        <Tag type="cancel">
+                          CANCELLED <i className="fas fa-times"></i>&nbsp;
+                          {item.cancelledQuantity}
+                        </Tag>
                       )}
                       {allStatus.includes(item.status) && (
-                        <Tag
-                          type={getStatusType(item.status)}
-                          title={item.status}
-                        ></Tag>
+                        <Tag type={getStatusType(item.status)}>
+                          {item.status}
+                        </Tag>
                       )}
                       {item.variant && (
                         <p className="mb-0">

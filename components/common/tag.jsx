@@ -1,15 +1,9 @@
 import React from "react";
 
-export default function Tag({ title = "", type = "cancel", qty = 0 }) {
+export default function Tag({ children, type = "success" }) {
   return (
-    <span className={`order-tag ${type} mb-0 ml-1 text-left`}>
-      {title}&nbsp;
-      {qty > 0 && (
-        <>
-          <i className="fas fa-times mr-1"></i>
-          {qty}
-        </>
-      )}
+    <span className={`tag-wrapper ${type} mb-0 ml-1 text-left`}>
+      {children}
     </span>
   );
 }
