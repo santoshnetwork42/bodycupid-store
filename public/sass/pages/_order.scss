@@ -31,7 +31,7 @@
         position: relative;
         flex-direction: column;
         flex-wrap: wrap;
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
         &:not(:last-child) {
             margin-right: 3rem;
             padding-right: 3.1rem;
@@ -148,17 +148,35 @@
         .order-message {
             font-size: 2rem;
         }
+        .order-results{
+            display: grid;
+            grid-template-columns: 1fr 0.5fr;
+        }
         .overview-item {
-            flex-direction: row;
-            width: 100%;
-            align-items: center;
+            &:not(:last-child) {
+                margin-right: 0px;
+            }
             &:not(:last-child)::after {
                 content: none;
             }
             span {
                 margin-right: 2rem;
+                font-size: 1.3rem;
+            }
+            strong {
+                color: $dark-color;
+                font-weight: 600;
+                font-size: 1.5rem;
             }
         }
+        .order-page-content {
+           padding-top: 0px !important;
+
+           .order-results {
+                padding-top: 20px !important;
+            }
+        }
+       
     }
 }
 
