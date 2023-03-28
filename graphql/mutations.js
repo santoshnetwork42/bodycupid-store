@@ -1013,6 +1013,7 @@ export const createProductInventory = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -1073,6 +1074,7 @@ export const updateProductInventory = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -1133,6 +1135,7 @@ export const deleteProductInventory = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -1231,6 +1234,7 @@ export const createProduct = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      bulkActionId
       isFeatured
       productType
       createdAt
@@ -1337,6 +1341,7 @@ export const updateProduct = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      bulkActionId
       isFeatured
       productType
       createdAt
@@ -1443,6 +1448,7 @@ export const deleteProduct = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      bulkActionId
       isFeatured
       productType
       createdAt
@@ -1511,6 +1517,7 @@ export const createLinkedProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -1570,6 +1577,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -1629,6 +1637,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -2461,6 +2470,7 @@ export const createOrderProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -2578,6 +2588,7 @@ export const updateOrderProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -2695,6 +2706,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3037,6 +3049,7 @@ export const createReview = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3137,6 +3150,7 @@ export const updateReview = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3237,6 +3251,7 @@ export const deleteReview = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3361,6 +3376,7 @@ export const createWishlistProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3445,6 +3461,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3529,6 +3546,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3644,6 +3662,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3729,6 +3748,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
@@ -3814,6 +3834,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         categoryId
         subCategoryId
         storeId
+        bulkActionId
         isFeatured
         productType
         createdAt
