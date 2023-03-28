@@ -43,18 +43,14 @@ export const systemActions = {
     type: actionTypes.SET_SHIPPING,
     payload: { shipping },
   }),
-  setFeaturedCoupons: (coupons) => {
-    return {
-      type: actionTypes.SET_FEATURED_COUPONS,
-      payload: { coupons },
-    };
-  },
-  getFeaturedCoupon: (coupons) => {
-    return {
-      type: actionTypes.GET_FEATURED_COUPONS,
-      payload: { coupons },
-    };
-  },
+  setFeaturedCoupons: (coupons) => ({
+    type: actionTypes.SET_FEATURED_COUPONS,
+    payload: { coupons },
+  }),
+  getFeaturedCoupon: (coupons) => ({
+    type: actionTypes.GET_FEATURED_COUPONS,
+    payload: { coupons },
+  }),
 };
 
 const persistConfig = {
