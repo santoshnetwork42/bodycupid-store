@@ -96,6 +96,7 @@ export const getHomePageProducts = /* GraphQL */ `
         taxable
         tags
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         thumbImages
@@ -224,6 +225,7 @@ export const getQuickViewProduct = /* GraphQL */ `
         weight
         weightUnit
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         totalOrders
@@ -351,6 +353,7 @@ export const getProductBySlug = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        continueSellingOutOfStock
         hasVarient
         variants {
           items {
@@ -804,6 +807,7 @@ export const findProducts = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -1398,6 +1402,25 @@ export const getLinkedProducts = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+
+export const addProductNotification = /* GraphQL */ `
+  mutation AddProductNotification(
+    $productId: ID!
+    $variantId: ID
+    $userId: ID
+    $email: AWSEmail
+  ) {
+    addProductNotification(
+      productId: $productId
+      variantId: $variantId
+      userId: $userId
+      email: $email
+    ) {
+      success
+      message
     }
   }
 `;

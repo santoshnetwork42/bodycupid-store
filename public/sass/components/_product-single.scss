@@ -445,6 +445,33 @@
         font-size: 1.4rem;
         background-color: #F3FCE2
     }
+
+    .notify-container {
+        padding-bottom:20px;
+        label {
+            font-weight: 500;
+            text-transform: none;
+            color: $dark-color;
+        }
+        .out-of-stock {
+            margin-bottom: 2rem ;
+            p:first-child {
+                font-size: 2rem;
+                font-weight: 600;
+                color: $alert-color;
+            }
+            p {
+                padding: 0;
+            }
+        }
+        .notify-btn {
+            padding: 1.2rem 0px;
+        }
+        .check-mark {
+            font-size: 2rem;
+            color: $success-color;
+        }
+    }
 }
 
 .product-meta {

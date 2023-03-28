@@ -129,7 +129,10 @@ function Account({ user, store }) {
                   <br />
                   and edit your password and account details.
                 </p>
-                <ALink href="/shop" className="btn btn-dark btn-rounded">
+                <ALink
+                  href="/collections/all"
+                  className="btn btn-dark btn-rounded"
+                >
                   Go To Shop<i className="d-icon-arrow-right"></i>
                 </ALink>
               </TabPanel>

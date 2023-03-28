@@ -15,6 +15,8 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
+import ProductNotify from "~/components/features/product-notify";
+import { getProductInventory } from "~/utils/products";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -43,6 +45,11 @@ function DetailOne(props) {
         .sort((a, b) => a.position - b.position)
         .map((item) => ({ ...item })),
     [product?.variants?.items]
+  );
+
+  const { hasInventory, currentInventory } = useMemo(
+    () => getProductInventory(product, selectedVariant),
+    [selectedVariant, sizes, product]
   );
 
   const cartItem = useMemo(() => {
@@ -327,86 +334,110 @@ function DetailOne(props) {
       <hr className="product-divider"></hr>
 
       {isStickyCart ? (
-        <div className="sticky-content fix-top product-sticky-content">
-          <div className="container">
-            <div className="sticky-product-details">
-              <figure className="product-image">
-                <ALink href={"/product/" + product.slug}>
-                  <img
-                    src={getPublicImageURL(product.images.items[0]?.imageKey)}
-                    width="90"
-                    height="90"
-                    alt={product.images.items[0]?.alt}
-                  />
-                </ALink>
-              </figure>
-              <div>
-                <h4 className="product-title">
-                  <ALink href={"/product/" + product.slug}>
-                    {product.title}
-                  </ALink>
-                </h4>
-                <div className="product-info">
-                  <div className="product-price mb-0">
-                    <ins className="new-price">
-                      ₹{toDecimal(product.price || 0)}
-                    </ins>
-                    {/* {
-                                                curIndex > -1 && product.variants[0] ?
-                                                    product.variants[curIndex].price ?
-                                                        product.variants[curIndex].sale_price ?
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].sale_price)}</ins>
-                                                                <del className="old-price">₹{toDecimal(product.variants[curIndex].price)}</del>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].price)}</ins>
-                                                            </>
-                                                        : ""
-                                                    :
-                                                    product.price[0] !== product.price[1] ?
-                                                        product.variants.length === 0 ?
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                                                <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                                            </>
-                                                            :
-                                                            < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                                                        : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                            } */}
-                  </div>
-
-                  <div className="ratings-container mb-0">
-                    <div className="ratings-full">
-                      <span
-                        className="ratings"
-                        style={{
-                          width: Math.min(20 * product.rating, 100) + "%",
-                        }}
-                      ></span>
-                      <span className="tooltiptext tooltip-top">
-                        {toDecimal(product.ratings)}
-                      </span>
-                    </div>
-
-                    <ALink href="#" className="rating-reviews">
-                      ( {product.reviews.items.length} reviews )
+        <>
+          {!!hasInventory ? (
+            <div className="sticky-content fix-top product-sticky-content">
+              <div className="container">
+                <div className="sticky-product-details">
+                  <figure className="product-image">
+                    <ALink href={"/product/" + product.slug}>
+                      <img
+                        src={getPublicImageURL(
+                          product.images.items[0]?.imageKey
+                        )}
+                        width="90"
+                        height="90"
+                        alt={product.images.items[0]?.alt}
+                      />
                     </ALink>
+                  </figure>
+                  <div>
+                    <h4 className="product-title">
+                      <ALink href={"/product/" + product.slug}>
+                        {product.title}
+                      </ALink>
+                    </h4>
+                    <div className="product-info">
+                      <div className="product-price mb-0">
+                        <ins className="new-price">
+                          ₹{toDecimal(product.price || 0)}
+                        </ins>
+                      </div>
+
+                      <div className="ratings-container mb-0">
+                        <div className="ratings-full">
+                          <span
+                            className="ratings"
+                            style={{
+                              width: Math.min(20 * product.rating, 100) + "%",
+                            }}
+                          ></span>
+                          <span className="tooltiptext tooltip-top">
+                            {toDecimal(product.ratings)}
+                          </span>
+                        </div>
+
+                        <ALink href="#" className="rating-reviews">
+                          ( {product?.reviews?.items.length} reviews )
+                        </ALink>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product-form product-qty pb-0">
+                  <label className="d-none">QTY:</label>
+                  <div className="product-form-group ">
+                    <Quantity
+                      max={currentInventory}
+                      qty={quantity}
+                      product={product}
+                      onChangeQty={changeQty}
+                    />
+
+                    {cartItem && (
+                      <button
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={() => {
+                          router.push("/pages/cart");
+                        }}
+                      >
+                        <i className="d-icon-bag"></i>
+                        View Cart
+                      </button>
+                    )}
+                    {!cartItem && (
+                      <button
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={addToCartHandler}
+                      >
+                        <i className="d-icon-bag"></i>
+                        Add to cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
+          ) : (
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
+          )}
+        </>
+      ) : (
+        <>
+          {!!hasInventory ? (
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
-              <div className="product-form-group ">
+              <div className="product-form-group cart-button-wrapper">
                 <Quantity
-                  max={product.inventory}
                   qty={quantity}
+                  max={currentInventory}
                   product={product}
                   onChangeQty={changeQty}
                 />
-
                 {cartItem && (
                   <button
                     className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
@@ -433,44 +464,10 @@ function DetailOne(props) {
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div className="product-form product-qty pb-0">
-          <label className="d-none">QTY:</label>
-          <div className="product-form-group cart-button-wrapper">
-            <Quantity
-              qty={quantity}
-              max={product.inventory}
-              product={product}
-              onChangeQty={changeQty}
-            />
-            {cartItem && (
-              <button
-                className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                  cartActive ? "" : "disabled"
-                }`}
-                onClick={() => {
-                  router.push("/pages/cart");
-                }}
-              >
-                <i className="d-icon-bag"></i>
-                View Cart
-              </button>
-            )}
-            {!cartItem && (
-              <button
-                className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                  cartActive ? "" : "disabled"
-                }`}
-                onClick={addToCartHandler}
-              >
-                <i className="d-icon-bag"></i>
-                Add to cart
-              </button>
-            )}
-          </div>
-        </div>
+          ) : (
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
+          )}
+        </>
       )}
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
