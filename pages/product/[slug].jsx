@@ -93,7 +93,7 @@ function ProductDefault() {
                 <DetailOne
                   data={product}
                   defaultVariant={product.variants?.items[0]?.id}
-                  variantId={selectedVariant}
+                  variantId={selectedVariant || product.variants?.items[0]?.id}
                   setVariant={setVariant}
                   isNav={true}
                 />

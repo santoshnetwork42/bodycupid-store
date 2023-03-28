@@ -136,7 +136,6 @@ export const cartActions = {
 
 export function* cartSaga() {
   yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
-    toast(<CouponPopup coupon={e.payload.coupon} />);
     const { cart, user } = yield select();
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
