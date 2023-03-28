@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
+import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -14,9 +15,12 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
+import { deliveryRemainingTime } from "~/utils/helper";
+import { getFeaturedCoupon } from "~/graphql/api";
 import ProductNotify from "~/components/features/product-notify";
-import { getProductInventory } from "~/utils/products";
+import { getProductInventory, getProductCouponTotal } from "~/utils/products";
+import ProductBestPrice from "~/components/partials/product/product-best-price";
+import { STORE_ID } from "~/config";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -33,12 +37,20 @@ function DetailOne(props) {
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
+    user,
+    applyCoupon,
+    toggleWishlist,
+    addToCart,
+    wishlist,
+    removeFromCart,
+    coupon: appliedCoupon,
   } = props;
-  const { toggleWishlist, addToCart, wishlist, removeFromCart } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [featuredCoupons, setFeaturedCoupons] = useState([]);
   const today = new Date();
+
   const sizes = useMemo(
     () =>
       (product?.variants?.items || [])
@@ -46,6 +58,67 @@ function DetailOne(props) {
         .map((item) => ({ ...item })),
     [product?.variants?.items]
   );
+
+  useEffect(() => {
+    getFeaturedCoupons();
+  }, []);
+
+  const getFeaturedCoupons = useCallback(async () => {
+    const {
+      data: {
+        searchCouponCodes: { items },
+      },
+    } = await API.graphql(
+      graphqlOperation(getFeaturedCoupon, {
+        filter: {
+          isFeatured: { eq: true },
+          isActive: { eq: true },
+          storeId: { eq: STORE_ID },
+        },
+      })
+    );
+    setFeaturedCoupons(items);
+  }, []);
+
+  const { maxDiscountCoupon } = useMemo(() => {
+    let selectedProduct = product;
+    if (sizes.length) {
+      selectedProduct = product?.variants?.items.find(
+        (v) => v.id === selectedVariant
+      );
+    }
+    if (!!featuredCoupons.length && selectedProduct) {
+      const discountCoupon = featuredCoupons.reduce((prev, current) => {
+        const first = getProductCouponTotal(prev, selectedProduct);
+        const second = getProductCouponTotal(current, selectedProduct);
+        return first > second
+          ? {
+              ...prev,
+              price: selectedProduct?.price,
+              totalDiscount: getProductCouponTotal(prev, selectedProduct),
+            }
+          : {
+              ...current,
+              price: selectedProduct?.price,
+              totalDiscount: getProductCouponTotal(current, selectedProduct),
+            };
+      }, {});
+      return { maxDiscountCoupon: discountCoupon };
+    }
+    return {
+      maxDiscountCoupon: null,
+    };
+  }, [featuredCoupons, selectedVariant]);
+
+  const applyCouponCode = useCallback(async () => {
+    try {
+      if (!!maxDiscountCoupon && !appliedCoupon?.isFeatured) {
+        applyCoupon(maxDiscountCoupon);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }, [maxDiscountCoupon, user, appliedCoupon]);
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
@@ -155,6 +228,7 @@ function DetailOne(props) {
           price: product.price,
         });
       }
+      applyCouponCode();
     }
   };
 
@@ -186,6 +260,7 @@ function DetailOne(props) {
               : item;
           })
         );
+        applyCouponCode();
       } else {
         removeFromCart({ ...product, variantId: selectedVariant });
       }
@@ -199,7 +274,7 @@ function DetailOne(props) {
       variants: { items },
     } = product;
     if (curIndex > -1 && Array.isArray(items)) {
-      const { price: p, listingPrice: lp } = items[curIndex];
+      const { price: p, listingPrice: lp } = items[curIndex] || {};
       return {
         price: p,
         listingPrice: lp,
@@ -302,6 +377,10 @@ function DetailOne(props) {
           </div>
         )}
       </div>
+
+      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
+        <ProductBestPrice {...maxDiscountCoupon} />
+      )}
 
       <p className="product-short-desc">{product.productDescription}</p>
 
@@ -493,6 +572,8 @@ function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
+    user: state.user.data,
+    coupon: state.cart.coupon,
   };
 }
 
@@ -500,5 +581,6 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
+  applyCoupon: cartActions.applyCoupon,
   removeFromCart: cartActions.removeFromCart,
 })(DetailOne);
