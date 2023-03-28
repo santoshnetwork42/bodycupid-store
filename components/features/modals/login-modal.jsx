@@ -13,7 +13,7 @@ function LoginModal({ isOpen, redirect = true, closeLoginModal }) {
       isOpen={isOpen}
       onRequestClose={() => closeLoginModal()}
       shouldReturnFocusAfterClose={false}
-      overlayClassName="auth-modal-overlay"
+      overlayClassName="auth-modal-overlay login-modal-container"
       className="auth-popup bg-img"
     >
       <AuthView redirect={redirect} showOTPLogin />

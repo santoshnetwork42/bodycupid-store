@@ -1,14 +1,17 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
-function Terms() {
+function Terms({ store }) {
+  const { name } = store;
+
   return (
     <main className="main about-us">
       <Head>
-        <title>Wow life science | Titles</title>
+        <title>{name} | Titles</title>
       </Head>
 
-      <h1 className="d-none">Terms of service - WOW Life Science</h1>
+      <h1 className="d-none">Terms of service - {name}</h1>
 
       <div className="page-content">
         <div className="container">
@@ -472,4 +475,10 @@ function Terms() {
   );
 }
 
-export default React.memo(Terms);
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(React.memo(Terms));

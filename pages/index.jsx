@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
 import ServiceBox from "~/components/partials/home/service-section";
@@ -17,14 +18,15 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
-function HomePage({ hero, products, categories, brands }) {
+function HomePage({ hero, products, categories, brands, store }) {
+  const { name } = store;
   return (
     <main className="main home">
       <Head>
-        <title>Wow Life Science - Home</title>
+        <title>{name} - Home</title>
       </Head>
 
-      <h1 className="d-none">Wow Life Science - Homepage</h1>
+      <h1 className="d-none">{name} - Homepage</h1>
 
       <div className="page-content">
         <div className="intro-section">
@@ -77,8 +79,13 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
+    const optimizedMobileHeroImage = await optimizeImage({
+      src: "/images/home/slides/wow-mobile.jpg",
+      type: "self-hosted",
+    });
+
     const { searchProducts } = await fetchData(getHomePageProducts, {
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       limit: 8,
     });
     const { searchProductSubCategories } = await fetchData(
@@ -163,6 +170,7 @@ export const getStaticProps = async () => {
         },
         hero: {
           banner: optimizedHeroImage,
+          mobileBanner: optimizedMobileHeroImage,
         },
         products: searchProducts.items,
         categories: searchProductSubCategories.items,
@@ -179,4 +187,10 @@ export const getStaticProps = async () => {
   }
 };
 
-export default HomePage;
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(HomePage);

@@ -1,8 +1,12 @@
+import { connect } from "react-redux";
+
 import ALink from "~/components/features/custom-link";
-
 import OptimizedImage from "~/components/features/optimized-image";
+import PaymentLogos from "./partials/payment-logos";
 
-export default function Footer({ footer }) {
+function Footer({ footer, store }) {
+  const { name } = store || {};
+
   return (
     <footer className="footer">
       <div className="container">
@@ -130,37 +134,29 @@ export default function Footer({ footer }) {
 
         <div className="footer-bottom">
           <div className="footer-left">
-            <figure className="payment">
-              <img
-                src="/images/payment.png"
-                alt="payment"
-                width="159"
-                height="29"
-              />
-            </figure>
+            <PaymentLogos />
           </div>
           <div className="footer-center">
             <p className="copyright ls-normal">
-              Wow life science &copy; {new Date().getFullYear()}. All Rights
-              Reserved
+              {name} &copy; {new Date().getFullYear()}. All Rights Reserved
             </p>
           </div>
           <div className="footer-right">
             <div className="social-links">
               <a
-                title="Wow Life Science on Instagram"
+                title={`${name} on Instagram`}
                 className="social-link social-insta fab fa-instagram"
                 href="https://www.instagram.com/wowlifescienceindia/"
                 target={"_blank"}
               />
               <a
-                title="Wow Life Science on Facebook"
+                title={`${name} on Facebook`}
                 href="https://www.facebook.com/wowlifescienceindia/"
                 className="social-link social-facebook fab fa-facebook-f"
                 target={"_blank"}
               ></a>
               <a
-                title="Wow Life Science on YouTube"
+                title={`${name} on YouTube`}
                 href="https://www.youtube.com/@WOWLifeScience"
                 className="social-link social-youtube fab fa-youtube"
                 target={"_blank"}
@@ -172,3 +168,11 @@ export default function Footer({ footer }) {
     </footer>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(Footer);

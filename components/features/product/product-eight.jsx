@@ -1,4 +1,5 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useMemo } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
@@ -10,17 +11,30 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta } from "~/utils/helper";
+import { getProductMeta, getProductInventory } from "~/utils/products";
 
 function ProductEight(props) {
+  const router = useRouter();
   const {
     product,
+    cartList,
     adClass,
     toggleWishlist,
     wishlist,
     addToCart,
     openQuickview,
   } = props;
+
+  const { hasInventory } = useMemo(
+    () => getProductInventory(product),
+    [product]
+  );
+
+  const isCartItem = useMemo(
+    () => cartList.some((cl) => cl.id === product.id),
+    [cartList]
+  );
+
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -46,9 +60,7 @@ function ProductEight(props) {
     }, 1000);
   };
 
-  const addToCartHandler = (e) => {
-    e.preventDefault();
-    // addToCart({ ...product, qty: 1, price: product.price[0] });
+  const addToCartHandler = () => {
     addToCart({ ...product, qty: 1, price: product.price });
   };
 
@@ -179,34 +191,63 @@ function ProductEight(props) {
         <p className="product-short-desc">{product.productDescription}</p>
 
         <div className="product-action">
-          <a
-            href="#"
-            className="btn-product btn-cart"
-            title="Add to cart"
-            onClick={addToCartHandler}
-          >
-            <i className="d-icon-bag"></i>
-            <span>Add to cart</span>
-          </a>
-          <a
-            href="#"
-            className="btn-product-icon btn-wishlist"
-            title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-            onClick={wishlistHandler}
-          >
-            <i
-              className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-            ></i>
-          </a>
-
-          <ALink
-            href="#"
-            className="btn-product-icon btn-quickview"
-            title="Quick View"
-            onClick={showQuickviewHandler}
-          >
-            <i className="d-icon-search"></i>
-          </ALink>
+          <div className="product-form-group cart-button-wrapper">
+            {!!hasInventory ? (
+              <>
+                {isCartItem ? (
+                  <ALink
+                    href="/pages/cart"
+                    className="btn-product btn-cart"
+                    title="View Cart"
+                  >
+                    <i className="d-icon-bag"></i>
+                    <span>View Cart</span>
+                  </ALink>
+                ) : (
+                  <ALink
+                    href="#"
+                    className="btn-product btn-cart"
+                    title="Add to cart"
+                    onClick={addToCartHandler}
+                  >
+                    <i className="d-icon-bag"></i>
+                    <span>Add to cart</span>
+                  </ALink>
+                )}
+                <a
+                  href="#"
+                  className="btn-product-icon btn-wishlist"
+                  title={
+                    isWishlisted ? "Remove from wishlist" : "Add to wishlist"
+                  }
+                  onClick={wishlistHandler}
+                >
+                  <i
+                    className={
+                      isWishlisted ? "d-icon-heart-full" : "d-icon-heart"
+                    }
+                  ></i>
+                </a>
+                <ALink
+                  href="#"
+                  className="btn-product-icon btn-quickview"
+                  title="Quick View"
+                  onClick={showQuickviewHandler}
+                >
+                  <i className="d-icon-search"></i>
+                </ALink>
+              </>
+            ) : (
+              <ALink
+                href="#"
+                className="btn-product btn-cart"
+                title="Out of stock"
+                onClick={showQuickviewHandler}
+              >
+                <span>Out of stock</span>
+              </ALink>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -216,6 +257,7 @@ function ProductEight(props) {
 function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
+    cartList: state.cart.data || [],
   };
 }
 

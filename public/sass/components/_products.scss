@@ -421,7 +421,7 @@
 .product-details {
     position: relative;
     @include print_css(product, body);
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 2rem;
 
     >.btn-wishlist {
         position: absolute;
@@ -474,11 +474,8 @@
 // Product Name
 .product-name {
     @include print_css(product, name);
-    min-height: 40px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+
     a {
 
         // transition: color .3s;
@@ -488,11 +485,19 @@
     }
 }
 
+.product-card-title {
+    min-height: 40px;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
 // Product Tag
 .product-tag {
-    font-size:1.2rem;
+    font-size: 1.2rem;
     text-overflow: ellipsis;
-    color:$success-color;
+    color: $success-color;
     text-align: center !important;
 }
 
@@ -655,7 +660,7 @@
             font-size: 1.8rem;
         }
     }
-
+ 
     .btn-cart {
         flex: 1;
         height: 4.2rem;
@@ -1060,6 +1065,18 @@
     &.text-center {
         .product-cat {
             padding: 0;
+            .product-tag {
+                font-size:1.2rem;
+                text-overflow: ellipsis;
+                color:$success-color;
+                text-align: center !important;
+                -webkit-line-clamp: 1 !important;
+                -webkit-box-orient: vertical !important;
+                overflow: hidden !important;
+                span {
+                   visibility: hidden;
+                }
+            }
         }
 
         .product-name {
@@ -1282,6 +1299,7 @@
     .header-middle {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
+
         .header-search {
             margin: 0 1rem;
         }
@@ -1312,5 +1330,29 @@
                 margin-left: 10px
             }
         }
+    }
+}
+
+.tag-wrapper {
+    white-space: nowrap;
+    font-weight: 400 !important;
+    width: fit-content;
+    color: #FFF !important;
+
+    padding: 0rem 1rem;
+    text-align: center;
+    border-radius: 0.3rem;
+    font-size: 1.4rem;
+
+    &.cancel {
+        background-color: $secondary-color;
+    }
+
+    &.success {
+        background-color: $success-color;
+    }
+
+    &.info {
+        background-color: $info-color;
     }
 }

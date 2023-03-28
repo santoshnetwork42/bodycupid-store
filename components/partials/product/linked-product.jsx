@@ -7,10 +7,11 @@ import { getLinkedProducts } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, getTotalPriceByField } from "~/utils/helper";
+import { getTotalPriceByField } from "~/utils/helper";
 import RatingStar from "./rating-star";
 import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
+import { getProductMeta } from "~/utils/products";
 
 function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
   const [linkedProduct, setLinkedProduct] = useState([]);

@@ -28,12 +28,28 @@ function Passwordless({
 
   const [confirmSignUp, setConfirmSignUp] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [seconds, setSeconds] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [otpError, setOtpError] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (seconds) {
+      timer = setInterval(() => {
+        setSeconds(seconds - 1);
+      }, 1000);
+    }
+    return () => {
+      timer && clearInterval(timer);
+    };
+  }, [seconds]);
 
   useEffect(() => {
     if (!isOpen) {
       setState({ phone: "", confirmationCode: "" });
       setConfirmSignUp(null);
       setCurrentUser(null);
+      setOtpError(false);
     }
   }, [isOpen]);
 
@@ -53,6 +69,7 @@ function Passwordless({
           enabled: true,
         },
       });
+      setSeconds(30);
       setConfirmSignUp("SIGNUP");
     } catch (error) {
       console.log("error signing up:", error);
@@ -63,26 +80,33 @@ function Passwordless({
 
   const handleConfirmSignUp = useCallback(
     async (e) => {
-      e.preventDefault();
+      e?.preventDefault();
+      setLoading(true);
       try {
         if (confirmSignUp === "SIGNUP") {
           await Auth.confirmSignUp(
             addPhonePrefix(state.phone),
             state.confirmationCode
           );
+          closeModal();
+          if (redirect) router.push("/pages/checkout");
         } else {
-          await Auth.sendCustomChallengeAnswer(
+          const { signInUserSession } = await Auth.sendCustomChallengeAnswer(
             currentUser,
             state.confirmationCode
           );
+          if (!!signInUserSession) {
+            closeModal();
+            if (redirect) router.push("/pages/checkout");
+          } else {
+            setOtpError(true);
+          }
         }
-        if (redirect) router.push("/pages/checkout");
-        closeModal();
-        return false;
       } catch (error) {
         console.log("error signup confirm:", error);
-        toast(<AlertPopup message={error.message} status="error" />);
+        setOtpError(true);
       }
+      setLoading(false);
       return false;
     },
     [state, confirmSignUp, currentUser, closeModal, redirect]
@@ -90,23 +114,27 @@ function Passwordless({
 
   const handleSignIn = useCallback(
     async (e) => {
-      e.preventDefault();
+      e?.preventDefault();
+      setLoading(true);
       try {
         const cu = await Auth.signIn({
           username: addPhonePrefix(state.phone),
         });
         setCurrentUser(cu);
         setConfirmSignUp("SIGNIN");
+        setSeconds(30);
+        setLoading(false);
       } catch (error) {
         console.log("error signin:", error);
         if (error.code === "UserNotConfirmedException") {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
-          setConfirmSignUp("SIGNIN");
+          setConfirmSignUp("SIGNUP");
         } else if (error.code === "UserNotFoundException") {
           await handleSignup();
         } else {
           toast(<AlertPopup message={error.message} status="error" />);
         }
+        setLoading(false);
       }
       return false;
     },
@@ -117,13 +145,19 @@ function Passwordless({
     closeModal();
   }, [auth]);
 
+  useEffect(() => {
+    if (state.confirmationCode.length === 6) {
+      handleConfirmSignUp();
+    }
+  }, [state.confirmationCode]);
+
   return (
     <Modal
       isOpen={forceOpen || isOpen}
       isCloseIcon={!forceOpen}
       onRequestClose={() => closeModal()}
       shouldReturnFocusAfterClose={false}
-      overlayClassName="auth-modal-overlay"
+      overlayClassName="auth-modal-overlay login-modal-container"
       className="auth-popup bg-img"
     >
       <main className="main">
@@ -139,7 +173,9 @@ function Passwordless({
                     <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
                       <Tab className="nav-item">
                         <span className="nav-link border-no lh-1 ls-normal">
-                          Enter Mobile Number
+                          {confirmSignUp
+                            ? "OTP verification"
+                            : "Enter Mobile Number"}
                         </span>
                       </Tab>
                     </TabList>
@@ -160,33 +196,26 @@ function Passwordless({
                                   required
                                   maxLength={10}
                                   value={removePhonePrefix(state.phone)}
-                                  onChange={(e) =>
+                                  onChange={(e) => {
                                     setState({
                                       ...state,
-                                      phone: e.target.value,
-                                    })
-                                  }
+                                      phone: e.target.value
+                                        .replaceAll(/[^0-9]+/g, "")
+                                        .trim(),
+                                    });
+                                  }}
                                 />
                               </div>
                             </div>
+
                             <button
-                              className="btn btn-dark btn-block btn-rounded"
+                              className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
                               type="submit"
+                              disabled={loading}
                             >
                               Get OTP
+                              {loading && <div className="spin-loader ml-2" />}
                             </button>
-                            <div className="text-center">
-                              <ALink
-                                href="#"
-                                className="lost-link"
-                                onClick={() => {
-                                  closeModal();
-                                  openLogin();
-                                }}
-                              >
-                                Login with Password
-                              </ALink>
-                            </div>
                           </form>
                         )}
                         {/* <div className="form-choice text-center">
@@ -211,8 +240,11 @@ function Passwordless({
                       {confirmSignUp && (
                         <form onSubmit={handleConfirmSignUp}>
                           <div className="form-group">
-                            <label htmlFor="confirm-code-2">
-                              Confirmation Code:
+                            <label
+                              htmlFor="confirm-code-2"
+                              className="number-otp-label"
+                            >
+                              Enter 6-Digit OTP sent to +91{state.phone}
                             </label>
                             <input
                               type="text"
@@ -225,17 +257,40 @@ function Passwordless({
                               onChange={(e) =>
                                 setState({
                                   ...state,
-                                  confirmationCode: e.target.value,
+                                  confirmationCode: e.target.value?.substring(
+                                    0,
+                                    6
+                                  ),
                                 })
                               }
                             />
                           </div>
+                          {otpError && (
+                            <div className="overflow-hidden mb-4">
+                              <div className="alert alert-danger alert-summary alert-light alert-message alert-inline m-0">
+                                OTP invalid, please try again.
+                              </div>
+                            </div>
+                          )}
                           <button
-                            className="btn btn-dark btn-block btn-rounded"
+                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
+                            disabled={loading}
                           >
                             Confirm
+                            {loading && <div className="spin-loader ml-2" />}
                           </button>
+                          {!seconds ? (
+                            <ALink href="#" onClick={handleSignIn}>
+                              <p className="resend-label mt-2">
+                                Didn't get the code? Resend OTP
+                              </p>
+                            </ALink>
+                          ) : (
+                            <p className="not-receive-otp-label mt-2">
+                              Did't receive it? Resend in {seconds}
+                            </p>
+                          )}
                         </form>
                       )}
                     </div>

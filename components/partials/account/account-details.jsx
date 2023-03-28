@@ -8,10 +8,11 @@ import { userActions } from "~/store/user";
 
 function AccountDetails({ user, updateUserData }) {
   const [userDetail, setUser] = useState({ ...user });
-
+  const [loading, setLoading] = useState(false);
   const updateUser = useCallback(
     async (e) => {
       e.preventDefault();
+      setLoading(true);
       await API.graphql({
         query: updateUserMutation,
         variables: {
@@ -26,8 +27,11 @@ function AccountDetails({ user, updateUserData }) {
       })
         .then(({ data: { updateUser } }) => {
           updateUserData(updateUser);
+          setLoading(false);
         })
-        .catch((_err) => {});
+        .catch((_err) => {
+          setLoading(false);
+        });
       return false;
     },
     [userDetail, user]
@@ -82,8 +86,13 @@ function AccountDetails({ user, updateUserData }) {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary">
+      <button
+        type="submit"
+        className="btn btn-primary d-flex justify-content-center align-items-center"
+        disabled={loading}
+      >
         SAVE CHANGES
+        {loading && <div className="spin-loader ml-2" />}
       </button>
     </form>
   );

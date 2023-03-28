@@ -26,6 +26,7 @@ import {
   stickyFooterHandler,
   resizeHandler,
 } from "~/utils";
+import { removeHoverEffect } from "~/utils/helper";
 
 function Layout({
   children,
@@ -36,11 +37,17 @@ function Layout({
   closePasswordless,
 }) {
   const router = useRouter();
+  useEffect(() => {
+    removeHoverEffect();
+  }, []);
 
   useLayoutEffect(() => {
     document.querySelector("body") &&
       document.querySelector("body").classList.remove("loaded");
   }, [router.pathname]);
+
+  const blockFooter = ["/checkout"];
+  const hideFooter = blockFooter.some((f) => router.pathname.includes(f));
 
   useEffect(() => {
     window.addEventListener("scroll", showScrollTopHandler, { passive: true });
@@ -98,8 +105,8 @@ function Layout({
         <Header navbar={navbar} />
 
         {children}
-
-        <Footer footer={footer} />
+        
+        {!hideFooter && <Footer footer={footer} />}
       </div>
 
       <ALink

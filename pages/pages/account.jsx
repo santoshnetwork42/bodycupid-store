@@ -10,9 +10,13 @@ import Addresses from "~/components/common/addresses";
 import AccountOrders from "~/components/partials/account/orders";
 import AccountDetails from "~/components/partials/account/account-details";
 
-function Account({ user }) {
+function Account({ user, store }) {
+  const { name } = store;
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(0);
+  const { query } = router;
+  const { activeTabIndex } = query;
+
+  const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
 
   useEffect(() => {
     (async function () {
@@ -39,10 +43,10 @@ function Account({ user }) {
   return (
     <main className="main account">
       <Head>
-        <title>Wow life science | Account</title>
+        <title>{name} | Account</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Account</h1>
+      <h1 className="d-none">{name} - Account</h1>
 
       <nav className="breadcrumb-nav">
         <div className="container">
@@ -125,7 +129,10 @@ function Account({ user }) {
                   <br />
                   and edit your password and account details.
                 </p>
-                <ALink href="/shop" className="btn btn-dark btn-rounded">
+                <ALink
+                  href="/collections/all"
+                  className="btn btn-dark btn-rounded"
+                >
                   Go To Shop<i className="d-icon-arrow-right"></i>
                 </ALink>
               </TabPanel>
@@ -153,6 +160,7 @@ function Account({ user }) {
 function mapStateToProps(state) {
   return {
     user: state.user.data,
+    store: state.system.store,
   };
 }
 

@@ -3,27 +3,39 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 import { toast } from "react-toastify";
+import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
+import PaymentLoader from "~/components/common/partials/payment-loader";
+import fetchData from "~/utils/fetchData";
+import { STORE_ID } from "~/config";
+import Tag from "~/components/common/tag";
 
-function Order() {
-  const [order, setOrder] = useState(null);
+function Order({ order: orderItem, paymentId, orderId }) {
+  const [order, setOrder] = useState(orderItem);
   const [timer, setTimer] = useState(null);
+  const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
-  const { query } = router;
-  const { orderId, paymentId } = query;
+
+  useEffect(() => {
+    if (!orderItem) {
+      router.push("/404");
+    }
+  }, []);
 
   const fetchOrder = useCallback(async () => {
     const response = await API.graphql({
       query: getOrder,
       variables: { id: orderId },
     });
-    setOrder(response.data.getOrder);
+    if (!!response.data.getOrder) {
+      setOrder(response.data.getOrder);
+    }
   }, [orderId]);
 
   const fetchPaymentStatus = useCallback(async () => {
@@ -36,7 +48,6 @@ function Order() {
         query: validateTransaction,
         variables: { orderId, razorpayPaymentId: paymentId },
       });
-
       if (success) {
         fetchOrder();
         toast(
@@ -47,11 +58,7 @@ function Order() {
         );
       }
     }
-  }, [orderId, paymentId]);
-
-  useEffect(() => {
-    fetchOrder();
-  }, [orderId]);
+  }, [orderId, paymentId, fetchOrder]);
 
   const isPaymentProcessing =
     order?.status === "PENDING" &&
@@ -86,13 +93,25 @@ function Order() {
     return {};
   }, [order?.shippingAddress]);
 
+  const getStatusType = (status) => {
+    switch (status) {
+      case "DISPATCHED":
+        return "info";
+      case "CANCELLED":
+      case "COURIER_RETURN":
+        return "cancel";
+      case "DELIVERED":
+        return "success";
+    }
+  };
+
   return (
     <main className="main order">
       <Head>
-        <title>Wow life science | Order</title>
+        <title>{name} | Order</title>
       </Head>
 
-      <h1 className="d-none">Wow life science - Order</h1>
+      <h1 className="d-none">{name}- Order</h1>
 
       <div className="page-content pt-7 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
@@ -161,164 +180,205 @@ function Order() {
             </div>
           </div>
 
-          {!isPaymentProcessing && (
-            <>
-              <div className="order-results">
-                <div className="overview-item">
-                  <span>Order number:</span>
-                  <strong>#{order?.code || order?.id}</strong>
-                </div>
-                <div className="overview-item">
-                  <span>Status:</span>
-                  <strong>{order?.status}</strong>
-                </div>
-                <div className="overview-item">
-                  <span>Date:</span>
-                  <strong>{formateDate(order?.createdAt)}</strong>
-                </div>
-                <div className="overview-item">
-                  <span>Email:</span>
-                  <strong>{order?.shippingAddress?.email}</strong>
-                </div>
-                <div className="overview-item">
-                  <span>Total:</span>
-                  <strong>₹{toDecimal(order?.totalAmount)}</strong>
-                </div>
-                <div className="overview-item">
-                  <span>Payment method:</span>
-                  <strong>
+          <div className="order-results">
+            <div className="overview-item">
+              <span>Order number:</span>
+              <strong>#{order?.code || order?.id}</strong>
+            </div>
+            <div className="overview-item">
+              <span>Status:</span>
+              <strong>{order?.status}</strong>
+            </div>
+            <div className="overview-item">
+              <span>Date:</span>
+              <strong>{formateDate(order?.createdAt)}</strong>
+            </div>
+            <div className="overview-item">
+              <span>Email:</span>
+              <strong>{order?.shippingAddress?.email}</strong>
+            </div>
+            <div className="overview-item">
+              <span>Total:</span>
+              <strong>₹{toDecimal(order?.totalAmount)}</strong>
+            </div>
+            <div className="overview-item">
+              <span>Payment method:</span>
+              <strong>
+                {order?.paymentType === "COD" ? "Cash on delivery" : "Online"}
+              </strong>
+            </div>
+          </div>
+
+          <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
+            Order Details
+          </h2>
+          <div className="order-details">
+            <table className="order-details-table">
+              <thead>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h3 className="summary-subtitle">Product</h3>
+                  </td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                {order?.products?.items?.map((item) => (
+                  <tr key={"order-" + item.id}>
+                    <td className="product-name">
+                      {item.product.title}{" "}
+                      <span>
+                        <i className="fas fa-times"></i>{" "}
+                        {item.quantity || item.cancelledQuantity}
+                      </span>
+                      {item.cancelledQuantity > 0 && item.status === "CREATED" && (
+                        <Tag type="cancel">
+                          CANCELLED <i className="fas fa-times"></i>&nbsp;
+                          {item.cancelledQuantity}
+                        </Tag>
+                      )}
+                      {allStatus.includes(item.status) && (
+                        <Tag type={getStatusType(item.status)}>
+                          {item.status}
+                        </Tag>
+                      )}
+                      {item.variant && (
+                        <p className="mb-0">
+                          <strong>{item.variant.title}</strong>
+                        </p>
+                      )}
+                    </td>
+                    <td className="product-price">
+                      ₹{toDecimal(item.quantity * item.price)}
+                    </td>
+                  </tr>
+                ))}
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Subtotal:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    ₹{toDecimal(getOrderTotal(order?.products?.items))}
+                  </td>
+                </tr>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Shipping:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.totalShippingCharges
+                      ? `₹${toDecimal(order?.totalShippingCharges)}`
+                      : "Free shipping"}
+                  </td>
+                </tr>
+                {!!order?.totalDiscount && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Discount:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      ₹{toDecimal(order?.totalDiscount)}
+                    </td>
+                  </tr>
+                )}
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Payment method:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
                     {order?.paymentType === "COD"
                       ? "Cash on delivery"
                       : "Online"}
-                  </strong>
-                </div>
-              </div>
+                  </td>
+                </tr>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Total:</h4>
+                  </td>
+                  <td>
+                    <p className="summary-total-price">
+                      ₹{toDecimal(order?.totalAmount)}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 className="title title-simple text-left pt-10 mb-2">
+            Shipping Address
+          </h2>
+          <div className="address-info pb-8 mb-6">
+            <p className="address-detail pb-2">
+              {order?.shippingAddress?.name}
+              <br />
+              {order?.shippingAddress?.address}
+              {!!order?.shippingAddress?.location && (
+                <>
+                  <br />
+                  {order?.shippingAddress?.location}
+                </>
+              )}
+              <br />
+              {(order?.shippingAddress?.city + ", ", state + ", " + country)}
+              <br />
+              {order?.shippingAddress?.pinCode}
+            </p>
+            <p className="email">
+              {order?.shippingAddress?.email}
+              <br />
+              {order?.shippingAddress?.phone}
+            </p>
+          </div>
 
-              <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
-                Order Details
-              </h2>
-              <div className="order-details">
-                <table className="order-details-table">
-                  <thead>
-                    <tr className="summary-subtotal">
-                      <td>
-                        <h3 className="summary-subtitle">Product</h3>
-                      </td>
-                      <td></td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {order?.products?.items?.map((item) => (
-                      <tr key={"order-" + item.id}>
-                        <td className="product-name">
-                          {item.product.title}{" "}
-                          <span>
-                            {" "}
-                            <i className="fas fa-times"></i> {item.quantity}
-                          </span>
-                          {item.variant && (
-                            <p className="mb-0">
-                              <strong>{item.variant.title}</strong>
-                            </p>
-                          )}
-                        </td>
-                        <td className="product-price">
-                          ₹{toDecimal(item.quantity * item.price)}
-                        </td>
-                      </tr>
-                    ))}
-                    <tr className="summary-subtotal">
-                      <td>
-                        <h4 className="summary-subtitle">Subtotal:</h4>
-                      </td>
-                      <td className="summary-subtotal-price">
-                        ₹{toDecimal(getOrderTotal(order?.products?.items))}
-                      </td>
-                    </tr>
-                    <tr className="summary-subtotal">
-                      <td>
-                        <h4 className="summary-subtitle">Shipping:</h4>
-                      </td>
-                      <td className="summary-subtotal-price">
-                        {order?.totalShippingCharges
-                          ? `₹${toDecimal(order?.totalShippingCharges)}`
-                          : "Free shipping"}
-                      </td>
-                    </tr>
-                    {!!order?.totalDiscount && (
-                      <tr className="summary-subtotal">
-                        <td>
-                          <h4 className="summary-subtitle">Discount:</h4>
-                        </td>
-                        <td className="summary-subtotal-price">
-                          ₹{toDecimal(order?.totalDiscount)}
-                        </td>
-                      </tr>
-                    )}
-                    <tr className="summary-subtotal">
-                      <td>
-                        <h4 className="summary-subtitle">Payment method:</h4>
-                      </td>
-                      <td className="summary-subtotal-price">
-                        {order?.paymentType === "COD"
-                          ? "Cash on delivery"
-                          : "Online"}
-                      </td>
-                    </tr>
-                    <tr className="summary-subtotal">
-                      <td>
-                        <h4 className="summary-subtitle">Total:</h4>
-                      </td>
-                      <td>
-                        <p className="summary-total-price">
-                          ₹{toDecimal(order?.totalAmount)}
-                        </p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <h2 className="title title-simple text-left pt-10 mb-2">
-                Shipping Address
-              </h2>
-              <div className="address-info pb-8 mb-6">
-                <p className="address-detail pb-2">
-                  {order?.shippingAddress?.name}
-                  <br />
-                  {order?.shippingAddress?.address}
-                  {!!order?.shippingAddress?.location && (
-                    <>
-                      <br />
-                      {order?.shippingAddress?.location}
-                    </>
-                  )}
-                  <br />
-                  {
-                    (order?.shippingAddress?.city + ", ",
-                    state + ", " + country)
-                  }
-                  <br />
-                  {order?.shippingAddress?.pinCode}
-                </p>
-                <p className="email">
-                  {order?.shippingAddress?.email}
-                  <br />
-                  {order?.shippingAddress?.phone}
-                </p>
-              </div>
+          <ALink
+            href="/collections/all"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
+          >
+            Continue Shopping
+          </ALink>
+          <ALink
+            href={{
+              pathname: "/pages/account",
+              query: {
+                activeTabIndex: 1,
+              },
+            }}
+            as="/pages/account"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
+          >
+            Your Orders
+          </ALink>
 
-              <ALink
-                href="/collections/all"
-                className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
-              >
-                <i className="d-icon-arrow-left"></i> Back to List
-              </ALink>
-            </>
-          )}
+          <PaymentLoader loading={isPaymentProcessing} />
         </div>
       </div>
     </main>
   );
 }
 
-export default React.memo(Order);
+Order.getInitialProps = async (context) => {
+  const { query } = context;
+  const { orderId, paymentId = null } = query;
+  try {
+    const { getOrder: response } = await fetchData(getOrder, {
+      id: orderId,
+    });
+
+    if (response?.storeId === STORE_ID) {
+      return {
+        order: response,
+        paymentId,
+        orderId: orderId,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return {
+    order: null,
+    paymentId,
+    orderId: orderId,
+  };
+};
+
+export default Order;

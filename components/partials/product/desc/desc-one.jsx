@@ -17,12 +17,14 @@ import Specifications from "~/lib/specifications.json";
 import { fadeIn } from "~/utils/data/keyframes";
 import Accordion from "~/components/features/accordion/accordion";
 import Card from "~/components/features/accordion/card";
+import { uploadImages } from "~/utils/imageupload";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 const reviewDefault = {
   rating: 5,
   comment: "",
   name: "",
   email: "",
-  image: "",
+  image: [],
 };
 
 function DescOne(props) {
@@ -35,7 +37,7 @@ function DescOne(props) {
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [productsFAQs, setProductsFAQs] = useState([]);
-
+  const [reviewImages, setReviewImages] = useState([]);
   let sizes = [];
   if (product.variants.items.length > 0) {
     if (product.variants.items[0].size)
@@ -142,11 +144,21 @@ function DescOne(props) {
     return 0;
   };
 
-  const onPhotoChange = (e) => {
-    setReview({
-      ...reviewState,
-      image: URL.createObjectURL(e.target.files[0]),
-    });
+  const onPhotoChange = async (e) => {
+    const files = [...reviewImages, ...e.target.files];
+    setReviewImages(files);
+    if (reviewImages) {
+      const urls = await Promise.all(
+        files.map(async (element) => {
+          const key = await uploadImages(element, "review");
+          return key;
+        })
+      );
+      setReview({
+        ...reviewState,
+        image: urls,
+      });
+    }
   };
 
   const showVideoModalHandler = (e) => {
@@ -159,7 +171,7 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { rating, comment, name, email } = reviewState;
+        const { rating, comment, name, email, image } = reviewState;
         await API.graphql({
           query: createReview,
           variables: {
@@ -172,10 +184,12 @@ function DescOne(props) {
               },
               userId: user?.id,
               productId: product?.id,
+              images: image,
             },
           },
         });
         setReview({ ...reviewDefault });
+        setReviewImages([]);
         setReviews([
           {
             id: new Date().toUTCString(),
@@ -186,10 +200,12 @@ function DescOne(props) {
             productId: product?.id,
             rating,
             comment,
+            images: image,
             updatedAt: new Date().toUTCString(),
           },
           ...reviews,
         ]);
+        setShowReview(!showReview);
         toast(
           <AlertPopup
             message="Review submitted successfully"
@@ -424,22 +440,28 @@ function DescOne(props) {
                   onBlur={(e) => setReview({ comment: e.target.value.trim() })}
                 ></textarea>
                 <div className="d-flex w-100 img-wrapper justify-content-end">
-                  <div className="p-relative">
-                    {reviewState.image && (
-                      <>
+                  {reviewState.image &&
+                    reviewState.image.map((img, index) => (
+                      <div className="img_wrp mr-2">
                         <img
+                          src={getPublicImageURL(img)}
                           className="img-preview"
-                          src={reviewState.image}
-                        ></img>
-                        <i
-                          className="d-icon-close remove-icon"
+                          alt=""
+                        />
+                        <img
+                          className="close"
+                          src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png"
                           onClick={() => {
-                            setReview({ ...reviewState, image: "" });
+                            const temp = [...reviewState.image];
+                            temp.splice(index, 1);
+                            setReview({
+                              ...reviewState,
+                              image: temp,
+                            });
                           }}
-                        ></i>
-                      </>
-                    )}
-                  </div>
+                        />
+                      </div>
+                    ))}
 
                   <input
                     className="d-none"
@@ -448,18 +470,26 @@ function DescOne(props) {
                     accept="image/*"
                     id="review-photo"
                     name="filename"
+                    multiple
                   />
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       document.getElementById("review-photo").click();
                     }}
-                    className="btn   btn-rounded mr-2"
+                    className="btn btn-rounded mr-2"
                   >
-                    {reviewState.image ? "Change" : "Add"} Photo
+                    Add Photo
                   </button>
                   <button type="submit" className="btn btn-primary btn-rounded">
-                    Submit<i className="d-icon-arrow-right"></i>
+                    <div className="d-flex justify-content-center align-items-center">
+                      Submit
+                      {loading ? (
+                        <div className="spin-loader ml-2" />
+                      ) : (
+                        <i className="d-icon-arrow-right"></i>
+                      )}
+                    </div>
                   </button>
                 </div>
               </form>
@@ -484,6 +514,7 @@ function DescOne(props) {
             total={total}
             loaded={reviews?.length}
             nextToken={token}
+            content="reviews"
           />
         </TabPanel>
 

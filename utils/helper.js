@@ -29,31 +29,6 @@ export const deliveryRemainingTime = () => {
   }
 };
 
-export const getProductMeta = (product) => {
-  if (!product) return {};
-  const { variants = {} } = product;
-  const { items = [] } = variants;
-
-  const images = product?.images.items.sort((a, b) => a.position - b.position);
-  const thumbImage = images?.find((i) => i.isThumb) ||
-    images[0] || { imageKey: product.imageUrl };
-
-  const discount = !!(product.listingPrice && product.price)
-    ? parseInt(
-        ((product.listingPrice - product.price) * 100) / product.listingPrice,
-        10
-      )
-    : 0;
-
-  const firstVariantId = items.sort((a, b) => a.position - b.position)[0]?.id;
-
-  return {
-    thumbImage,
-    discount,
-    firstVariantId,
-  };
-};
-
 export const getTotalPriceByField = (arr, field) => {
   const x = arr.reduce((accumulator, object) => {
     return accumulator + object[field];
@@ -72,5 +47,32 @@ export const scrollWithOffset = (id, offset, callback) => {
       behavior: "smooth",
     });
     if (callback) callback(ele);
+  }
+};
+
+export const removeHoverEffect = () => {
+  function hasTouch() {
+    return (
+      "ontouchstart" in document.documentElement ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  }
+
+  if (hasTouch()) {
+    try {
+      for (var si in document.styleSheets) {
+        var styleSheet = document.styleSheets[si];
+        if (!styleSheet.rules) continue;
+
+        for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+          if (!styleSheet.rules[ri].selectorText) continue;
+
+          if (styleSheet.rules[ri].selectorText.match(":hover")) {
+            styleSheet.deleteRule(ri);
+          }
+        }
+      }
+    } catch (ex) {}
   }
 };

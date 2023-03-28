@@ -114,7 +114,7 @@
             right: 1.4rem;
         }
     }
-    
+  
     // .left-sidebar-toggle {
     //     padding: .8em 1.04em;
     //     i {
@@ -125,6 +125,21 @@
     //     }
     // }
 }
+
+.filters-container{
+    gap: 1rem;
+    padding-left: 2px;
+    .selected-filter-tags {
+        padding: 5px 10px;
+        border: 1px solid #d7d7d7;
+        gap: 10px;
+        span { 
+            color:$dark-color;
+            font-size: 12px;
+        }
+    }
+}
+
 .toolbox-item {
     flex-wrap: nowrap;
     margin-bottom: 1rem;

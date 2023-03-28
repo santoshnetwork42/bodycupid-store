@@ -10,7 +10,7 @@ import { wishlistActions } from "~/store/wishlist";
 
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta } from "~/utils/helper";
+import { getProductMeta, getProductInventory } from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 
 function ProductTwo(props) {
@@ -22,10 +22,7 @@ function ProductTwo(props) {
     wishlist,
     addToCart,
     openQuickview,
-    isCategory = true,
   } = props;
-
-
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -34,6 +31,11 @@ function ProductTwo(props) {
   const showQuickviewHandler = () => {
     openQuickview(product.slug);
   };
+
+  const { hasInventory } = useMemo(
+    () => getProductInventory(product),
+    [product]
+  );
 
   const wishlistHandler = (e) => {
     if (toggleWishlist) {
@@ -148,37 +150,15 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details">
-        {isCategory ? (
-          <div className="product-cat">
-            {product.categories
-              ? product.categories.map((item, index) => (
-                  <React.Fragment key={item.name + "-" + index}>
-                    <ALink
-                      href={{
-                        pathname: "/collections/[category]",
-                        query: { category: item.slug },
-                      }}
-                    >
-                      {item.name}
-                      {index < product.categories.length - 1 ? ", " : ""}
-                    </ALink>
-                  </React.Fragment>
-                ))
-              : ""}
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="product-cat">
+          <label className="product-tag">
+            {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
+          </label>
+        </div>
 
-        <h3 className="product-name p-0">
+        <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
-
-        {!!product?.tags && (
-          <label className="product-tag">
-            {product?.tags.split(",").join(" | ")}
-          </label>
-        )}
 
         <div className="product-price">
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
@@ -207,24 +187,36 @@ function ProductTwo(props) {
             </ALink>
           )}
         </div>
-
         <div className="product-action">
-          {isCartItem ? (
-            <ALink
-              href="/pages/cart"
-              className="btn-product btn-quickview m-0"
-              title="View Cart"
-            >
-              View Cart
-            </ALink>
+          {!!hasInventory ? (
+            <>
+              {isCartItem ? (
+                <ALink
+                  href="/pages/cart"
+                  className="btn-product btn-quickview m-0"
+                  title="View Cart"
+                >
+                  View Cart
+                </ALink>
+              ) : (
+                <ALink
+                  href="#"
+                  className="btn-product btn-quickview m-0"
+                  title="Add to cart"
+                  onClick={addToCartHandler}
+                >
+                  Add to cart
+                </ALink>
+              )}
+            </>
           ) : (
             <ALink
               href="#"
               className="btn-product btn-quickview m-0"
-              title="Add to cart"
-              onClick={addToCartHandler}
+              title="Out of stock"
+              onClick={showQuickviewHandler}
             >
-              Add to cart
+              Out of stock
             </ALink>
           )}
         </div>

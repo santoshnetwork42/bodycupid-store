@@ -12,9 +12,11 @@ import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function ProductDefault() {
-  const { slug, variantId } = useRouter().query;
+  const router = useRouter();
+  const { slug, variantId } = router.query;
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState(null);
@@ -24,18 +26,36 @@ function ProductDefault() {
     API.graphql(
       graphqlOperation(getProductBySlug, {
         slug,
-        filter: { storeId: { eq: STORE_ID } },
+        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       })
-    ).then((response) => {
-      let [product] = response.data.byslugProduct.items;
-      setProduct(product);
-      setLoading(false);
-    });
+    )
+      .then(
+        ({
+          data: {
+            byslugProduct: { items },
+          },
+        }) => {
+          if (items.length) {
+            let [product] = items;
+            setProduct(product);
+            setLoading(false);
+          } else {
+            router.push("/404");
+          }
+        }
+      )
+      .catch((e) => {
+        console.log("e", e);
+      });
   }, [slug]);
 
   useEffect(() => {
     if (product?.categoryId || product?.subCategoryId) {
-      const filter = { id: { ne: product.id }, storeId: { eq: STORE_ID } };
+      const filter = {
+        id: { ne: product.id },
+        storeId: { eq: STORE_ID },
+        status: { eq: "ENABLED" },
+      };
       if (product?.subCategoryId) {
         filter.subCategoryId = { eq: product.subCategoryId };
       } else {
@@ -62,6 +82,9 @@ function ProductDefault() {
         <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
+              <div className="mb-2 mt-2">
+                <ProductBreadcrumbs {...product} />
+              </div>
               <div className="col-md-6 sticky-sidebar-wrapper">
                 <MediaOne product={product} variantId={selectedVariant} />
               </div>
