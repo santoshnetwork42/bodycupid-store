@@ -43,6 +43,7 @@ function DetailOne(props) {
     addToCart,
     wishlist,
     removeFromCart,
+    coupon: appliedCoupon,
   } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
@@ -86,11 +87,11 @@ function DetailOne(props) {
         (v) => v.id === selectedVariant
       );
     }
-    if (!!featuredCoupons.length) {
+    if (!!featuredCoupons.length && selectedProduct) {
       const discountCoupon = featuredCoupons.reduce((prev, current) => {
         const first = getProductCouponTotal(prev, selectedProduct);
-        const secend = getProductCouponTotal(current, selectedProduct);
-        return first > secend
+        const second = getProductCouponTotal(current, selectedProduct);
+        return first > second
           ? {
               ...prev,
               price: selectedProduct?.price,
@@ -101,7 +102,7 @@ function DetailOne(props) {
               price: selectedProduct?.price,
               totalDiscount: getProductCouponTotal(current, selectedProduct),
             };
-      });
+      }, {});
       return { maxDiscountCoupon: discountCoupon };
     }
     return {
@@ -111,13 +112,13 @@ function DetailOne(props) {
 
   const applyCouponCode = useCallback(async () => {
     try {
-      if (!!maxDiscountCoupon) {
+      if (!!maxDiscountCoupon && !appliedCoupon?.isFeatured) {
         applyCoupon(maxDiscountCoupon);
       }
     } catch (error) {
       console.log("error", error);
     }
-  }, [maxDiscountCoupon, user]);
+  }, [maxDiscountCoupon, user, appliedCoupon]);
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
@@ -273,7 +274,7 @@ function DetailOne(props) {
       variants: { items },
     } = product;
     if (curIndex > -1 && Array.isArray(items)) {
-      const { price: p, listingPrice: lp } = items[curIndex];
+      const { price: p, listingPrice: lp } = items[curIndex] || {};
       return {
         price: p,
         listingPrice: lp,
@@ -572,6 +573,7 @@ function mapStateToProps(state) {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
     user: state.user.data,
+    coupon: state.cart.coupon,
   };
 }
 

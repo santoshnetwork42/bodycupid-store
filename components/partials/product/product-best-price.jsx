@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import { toDecimal } from "~/utils";
+import ALink from "~/components/features/custom-link";
 
 function ProductBestPrice(props) {
   const { price, code, totalDiscount } = props;
@@ -35,12 +36,13 @@ function ProductBestPrice(props) {
         <p id="coupon-code" className="font-weight-semi-bold ml-1">
           {code}
         </p>{" "}
-        <span
+        <ALink
+          href="#"
           className="copy-code  cursor-pointer ml-1"
           onClick={() => onCopy(code)}
         >
           Copy code
-        </span>
+        </ALink>
       </div>
     </div>
   );

@@ -19,9 +19,9 @@ export const getProductMeta = (product) => {
 
   const discount = !!(product.listingPrice && product.price)
     ? parseInt(
-        ((product.listingPrice - product.price) * 100) / product.listingPrice,
-        10
-      )
+      ((product.listingPrice - product.price) * 100) / product.listingPrice,
+      10
+    )
     : 0;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);
@@ -76,17 +76,17 @@ export const getProductInventory = (product, selectedVariantId = null) => {
   };
 };
 
-export const getProductCouponTotal = (coupon, product = {}) => {
-  if (coupon) {
-    const { price } = product;
-    const { couponType, discount, minOrderValue, maxDiscount } = coupon;
-    if (!minOrderValue || minOrderValue > price) {
-      let amount = discount;
-      if (couponType === "PERCENTAGE") {
-        amount = (price * discount) / 100;
-      }
-      return maxDiscount ? Math.min(amount, maxDiscount) : amount;
+export const getProductCouponTotal = (coupon, product) => {
+  const { price } = product;
+  const { couponType, discount, minOrderValue, maxDiscount } = coupon;
+  if (!minOrderValue || minOrderValue > price) {
+    let amount = discount;
+    if (couponType === "PERCENTAGE") {
+      amount = (price * discount) / 100;
+    } else if (couponType === "BOGO") {
+      amount = 0;
     }
+    return maxDiscount ? Math.min(amount, maxDiscount) : amount;
   }
   return 0;
 };

@@ -36,7 +36,11 @@ function Coupon(props) {
         },
       } = await API.graphql(
         graphqlOperation(getFeaturedCoupon, {
-          filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
+          filter: {
+            isFeatured: { eq: true },
+            isActive: { eq: true },
+            storeId: { eq: STORE_ID },
+          },
         })
       );
       setFeatured(items);
