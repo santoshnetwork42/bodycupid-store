@@ -231,7 +231,7 @@ function Order({ order: orderItem, paymentId, orderId }) {
                         <i className="fas fa-times"></i>{" "}
                         {item.quantity || item.cancelledQuantity}
                       </span>
-                      {item.cancelledQuantity > 0 && item.quantity > 0 && (
+                      {item.cancelledQuantity > 0 && item.status === "CREATED" && (
                         <Tag type="cancel">
                           CANCELLED <i className="fas fa-times"></i>&nbsp;
                           {item.cancelledQuantity}
