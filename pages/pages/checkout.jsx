@@ -602,10 +602,6 @@ function Checkout(props) {
               </p>
             </div>
           )}
-          <RelatedProducts
-            products={related}
-            heading="Other popular products"
-          />
         </div>
       </div>
       <PaymentLoader loading={paymentLoading} />

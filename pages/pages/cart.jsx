@@ -374,10 +374,6 @@ function Cart(props) {
               </div>
             )}
           </div>
-          <RelatedProducts
-            products={related}
-            heading="Other popular products"
-          />
         </div>
       </div>
     </main>

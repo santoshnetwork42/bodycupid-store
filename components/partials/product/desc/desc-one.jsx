@@ -139,6 +139,12 @@ function DescOne(props) {
     }
   }, [tabIndex]);
 
+  useEffect(() => {
+    if (!product?.totalRatings) {
+      setShowReview(true);
+    }
+  }, []);
+
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
     return 0;
@@ -337,43 +343,45 @@ function DescOne(props) {
                   ? "Add a Review"
                   : "Be The First To Review “" + product.title + "”"}
               </h3>{" "}
-              <div className="review-section ">
-                <div className="total-review w-100">
-                  <h4>{product?.rating}</h4>
-                  <RatingStar value={product?.rating} />
-                  {!!product?.totalRatings && (
-                    <span>Based on {product.totalRatings} reviews</span>
-                  )}
-                </div>
-                <div className="rating w-100">
-                  {[5, 4, 3, 2, 1].map((num, i) => (
-                    <div
-                      className="d-flex align-items-center justify-content-center mt-2"
-                      key={i}
-                    >
-                      <RatingStar value={num} />
-                      <div className="ml-1 percent">
-                        ({getPer(total, allReviews[num]?.length)}%)
-                      </div>
-                      <span className="ml-1">{allReviews[num]?.length}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="w-100 d-flex align-items-center justify-content-center">
-                  <div className="buttons">
-                    <div className=" justify-content-end">
-                      <button
-                        className="btn btn-primary  btn-rounded mb-2"
-                        onClick={() => {
-                          setShowReview(!showReview);
-                        }}
+              {!!product?.totalRatings && (
+                <div className="review-section">
+                  <div className="total-review w-100">
+                    <h4>{product?.rating}</h4>
+                    <RatingStar value={product?.rating} />
+                    {!!product?.totalRatings && (
+                      <span>Based on {product.totalRatings} reviews</span>
+                    )}
+                  </div>
+                  <div className="rating w-100">
+                    {[5, 4, 3, 2, 1].map((num, i) => (
+                      <div
+                        className="d-flex align-items-center justify-content-center mt-2"
+                        key={i}
                       >
-                        Add Review
-                      </button>
+                        <RatingStar value={num} />
+                        <div className="ml-1 percent">
+                          ({getPer(total, allReviews[num]?.length)}%)
+                        </div>
+                        <span className="ml-1">{allReviews[num]?.length}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="w-100 d-flex align-items-center justify-content-center">
+                    <div className="buttons">
+                      <div className=" justify-content-end">
+                        <button
+                          className="btn btn-primary  btn-rounded mb-2"
+                          onClick={() => {
+                            setShowReview(!showReview);
+                          }}
+                        >
+                          Add Review
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
               {showReview && (
                 <>
                   <hr className="product-divider"></hr>
