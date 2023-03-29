@@ -30,6 +30,11 @@ const App = ({ Component, pageProps }) => {
     showMobileSearchBar: !!Component.showMobileSearchBar,
   };
 
+  const footerProps={
+    ...navbar,
+    hideFooter: !!Component.hideFooter,
+  }
+
   const storeName = useMemo(() => {
     if (wowStore) return wowStore.name;
     const state = store.getState();
@@ -147,7 +152,7 @@ const App = ({ Component, pageProps }) => {
           <meta name="description" content={storeName} />
         </Head>
         <Scripts />
-        <Layout navbar={navbarProps} footer={footer}>
+        <Layout navbar={navbarProps} footer={footerProps}>
           <Component {...pageProps} />
         </Layout>
       </PersistGate>

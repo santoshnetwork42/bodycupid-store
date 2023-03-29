@@ -7,6 +7,8 @@ import PaymentLogos from "./partials/payment-logos";
 function Footer({ footer, store }) {
   const { name } = store || {};
 
+  if (footer.hideFooter) return <></>;
+
   return (
     <footer className="footer">
       <div className="container">

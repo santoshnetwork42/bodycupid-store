@@ -59,10 +59,10 @@ function SearchForm({ isMobile = false }) {
   }, [search]);
 
   useEffect(() => {
-    // document.querySelector(".header-search.show-results") &&
-    //   document
-    //     .querySelector(".header-search.show-results")
-    //     .classList.remove("show-results");
+    document.querySelector(".header-search.show-results") &&
+      document
+        .querySelector(".header-search.show-results")
+        .classList.remove("show-results");
   }, [router.pathname]);
 
   function removeXSSAttacks(html) {

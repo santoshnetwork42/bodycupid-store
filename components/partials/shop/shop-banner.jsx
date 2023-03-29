@@ -8,7 +8,6 @@ export default function ShopBanner(props) {
     current = "Wow Shop",
     bannerUrl,
   } = props;
-  ShopBanner.isVisible = true;
 
   return (
     <div

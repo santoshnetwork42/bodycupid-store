@@ -616,9 +616,11 @@ function mapStateToProps(state) {
     store: state.system.store,
   };
 }
-
-export default connect(mapStateToProps, {
+const Component=connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
 })(Checkout);
+
+Component.hideFooter=true
+export default Component
