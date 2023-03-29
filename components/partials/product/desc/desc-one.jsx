@@ -34,7 +34,6 @@ function DescOne(props) {
   const [total, setTotal] = useState(0);
   const [showReview, setShowReview] = useState(false);
   const [token, setToken] = useState(null);
-  const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [productsFAQs, setProductsFAQs] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
@@ -130,14 +129,9 @@ function DescOne(props) {
   }, [product]);
 
   useEffect(() => {
-    // if (tabIndex === 2 && reviews.length === 0) {
     getProductReviews(true);
-    // }
-
-    // if (tabIndex === 3 && productsFAQs.length === 0) {
     getProductFAQs();
-    // }
-  }, [tabIndex]);
+  }, []);
 
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
