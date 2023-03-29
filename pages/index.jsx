@@ -192,5 +192,6 @@ function mapStateToProps(state) {
     store: state.system.store,
   };
 }
-
-export default connect(mapStateToProps)(HomePage);
+const Component = connect(mapStateToProps)(HomePage);
+Component.showMobileSearchBar = true;
+export default Component;

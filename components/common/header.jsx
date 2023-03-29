@@ -89,10 +89,15 @@ function Header({ navbar, auth, openLogin }) {
 
               <CartMenu />
               <span className="divider"></span>
-              {!!auth && (
+              {!!auth && navbar.showMobileSearchBar && (
                 <ALink href="/pages/account" className="account wishlist">
                   <i className="d-icon-user"></i>
                 </ALink>
+              )}
+              {!navbar.showMobileSearchBar && (
+                <div className="d-sm-show">
+                  <SearchBox isMobile />
+                </div>
               )}
               {!auth && (
                 <ALink
@@ -122,10 +127,11 @@ function Header({ navbar, auth, openLogin }) {
           </div>
         </div>
       </div>
-
-      <div className="bottom-search d-sm-show">
-        <SearchBox />
-      </div>
+      {navbar.showMobileSearchBar && (
+        <div className="bottom-search d-sm-show">
+          <SearchBox />
+        </div>
+      )}
     </header>
   );
 }

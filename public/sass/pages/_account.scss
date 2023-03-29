@@ -152,7 +152,6 @@
 }
 
 .card-address {
-	min-height: 31.5rem;
     position: relative;
     .add-lables-values {
         span {
@@ -160,7 +159,7 @@
         }
         .add-address {
             text-overflow:ellipsis;
-            overflow:hidden;
+            overflow:hidden; 
             display: -webkit-box !important;
              -webkit-line-clamp: 2;
              -webkit-box-orient: vertical;
@@ -168,7 +167,7 @@
         }
     }
 	.add-bottom-btn {
-		position: absolute;
+	//	position: absolute;
 		bottom: 1rem;
 	}
 }

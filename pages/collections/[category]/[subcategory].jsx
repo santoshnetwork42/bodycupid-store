@@ -71,5 +71,7 @@ function mapStateToProps(state) {
     store: state.system.store,
   };
 }
+const Component = connect(mapStateToProps)(React.memo(Categories));
+Component.showMobileSearchBar = true;
 
-export default connect(mapStateToProps)(React.memo(Categories));
+export default Component;

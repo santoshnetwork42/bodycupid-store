@@ -102,7 +102,9 @@ function Addresses({ user, onAddressChange }) {
                   }`}
                 >
                   <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">
-                    <h5 className="card-title text-uppercase">{adr.name}</h5>
+                    <h5 className="card-title text-uppercase mb-2">
+                      {adr.name}
+                    </h5>
                     <p className="add-lables-values">
                       {adr?.email && (
                         <span>
@@ -114,27 +116,21 @@ function Addresses({ user, onAddressChange }) {
                           {adr?.phone} <br />
                         </span>
                       )}
-                      {adr?.address && (
-                        <span className="add-address">
-                          {adr?.address}
-                          <br />
-                        </span>
-                      )}
-                      {adr?.area && (
-                        <span>
-                          {adr?.area} <br />
-                        </span>
-                      )}
-                      {adr?.landmark && (
-                        <span>
-                          {adr?.landmark} <br />
-                        </span>
-                      )}
+                      <span className="add-address">
+                        {adr?.address && (
+                          <span className="">
+                            {adr?.address}, &nbsp;
+                          </span>
+                        )}
+                        {adr?.area && <span>{adr?.area}, &nbsp;</span>}
+                        {adr?.landmark && <span>{adr?.landmark}, &nbsp;</span>}
+                      </span>
+
                       <span>
                         {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
                       </span>
                     </p>
-                    <div className="add-bottom-btn">
+                    <div className="add-bottom-btn mt-2">
                       <ALink
                         href="#"
                         className="btn btn-link btn-secondary btn-underline"

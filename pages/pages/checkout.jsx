@@ -313,7 +313,7 @@ function Checkout(props) {
           cartList.length > 0 ? "mb-10" : "mb-2"
         }`}
       >
-        <div className="step-by pr-4 pl-4">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
           </h3>
@@ -322,16 +322,14 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
-        <div className="container mt-7">
+        <div className="container mt-md-7">
           {cartList.length > 0 ? (
             <>
               {!appliedCoupon && <Coupons layout="checkout" />}
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
-                  <h3 className="title title-simple text-left text-uppercase">
-                    Shipping Address
-                  </h3>
+                 
                   <Addresses onAddressChange={setAddress} />
                 </div>
 
@@ -602,10 +600,7 @@ function Checkout(props) {
               </p>
             </div>
           )}
-          <RelatedProducts
-            products={related}
-            heading="Other popular products"
-          />
+        
         </div>
       </div>
       <PaymentLoader loading={paymentLoading} />

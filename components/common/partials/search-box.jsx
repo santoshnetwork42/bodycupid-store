@@ -11,7 +11,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
 
-function SearchForm() {
+function SearchForm({ isMobile = false }) {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [timer, setTimer] = useState(null);
@@ -59,10 +59,10 @@ function SearchForm() {
   }, [search]);
 
   useEffect(() => {
-    document.querySelector(".header-search.show-results") &&
-      document
-        .querySelector(".header-search.show-results")
-        .classList.remove("show-results");
+    // document.querySelector(".header-search.show-results") &&
+    //   document
+    //     .querySelector(".header-search.show-results")
+    //     .classList.remove("show-results");
   }, [router.pathname]);
 
   function removeXSSAttacks(html) {
@@ -123,14 +123,22 @@ function SearchForm() {
   }
 
   return (
-    <div className="header-search hs-simple">
+    <div
+      className={`header-search  ${
+        isMobile ? "hs-toggle d-block" : "hs-simple"
+      }`}
+    >
       <a
         href="#"
         className="search-toggle"
         role="button"
         onClick={onSearchClick}
       >
-        <i className="icon-search-3"></i>
+        {isMobile ? (
+          <i className="d-icon-search"></i>
+        ) : (
+          <i className="icon-search-3"></i>
+        )}
       </a>
       <form
         action="#"
