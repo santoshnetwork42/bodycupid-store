@@ -114,7 +114,7 @@ function Order({ order: orderItem, paymentId, orderId }) {
       <h1 className="d-none">{name}- Order</h1>
 
       <div className="page-content pt-7 pb-10 mb-10">
-        <div className="step-by pr-4 pl-4">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
           </h3>
