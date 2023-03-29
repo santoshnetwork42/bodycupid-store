@@ -27,7 +27,6 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
-import RelatedProducts from "~/components/partials/product/related-products";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 
@@ -40,28 +39,10 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
-  const [related, setRelated] = useState(null);
   const [orderId, setOrderId] = useState(null);
   const [paymentId, setPaymentId] = useState(null);
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
-
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(getHomePageProducts, {
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-        limit: 8,
-      })
-    ).then(
-      ({
-        data: {
-          searchProducts: { items },
-        },
-      }) => {
-        setRelated(items);
-      }
-    );
-  }, []);
 
   const {
     totalListingprice,
@@ -329,7 +310,6 @@ function Checkout(props) {
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
-                 
                   <Addresses onAddressChange={setAddress} />
                 </div>
 
@@ -338,7 +318,7 @@ function Checkout(props) {
                   className="col-lg-5 sticky-sidebar-wrapper"
                 >
                   <div
-                    className="sticky-sidebar mt-1"
+                    className="sticky-sidebar"
                     data-sticky-options="{'bottom': 50}"
                   >
                     <div className="summary pt-5">
@@ -600,7 +580,6 @@ function Checkout(props) {
               </p>
             </div>
           )}
-        
         </div>
       </div>
       <PaymentLoader loading={paymentLoading} />
@@ -616,11 +595,11 @@ function mapStateToProps(state) {
     store: state.system.store,
   };
 }
-const Component=connect(mapStateToProps, {
+const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
 })(Checkout);
 
-Component.hideFooter=true
-export default Component
+Component.hideFooter = true;
+export default Component;
