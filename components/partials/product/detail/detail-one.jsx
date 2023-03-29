@@ -154,7 +154,7 @@ function DetailOne(props) {
       setCurIndex(-1);
       resetValueHandler();
     };
-  }, [product]);
+  }, []);
 
   useEffect(() => {
     if (product.variants.items.length > 0) {
