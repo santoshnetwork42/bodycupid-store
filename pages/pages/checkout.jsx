@@ -12,7 +12,6 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
-  getHomePageProducts,
   validateTransaction,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
@@ -27,7 +26,6 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
-import RelatedProducts from "~/components/partials/product/related-products";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 
@@ -40,28 +38,10 @@ function Checkout(props) {
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
-  const [related, setRelated] = useState(null);
   const [orderId, setOrderId] = useState(null);
   const [paymentId, setPaymentId] = useState(null);
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
-
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(getHomePageProducts, {
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-        limit: 8,
-      })
-    ).then(
-      ({
-        data: {
-          searchProducts: { items },
-        },
-      }) => {
-        setRelated(items);
-      }
-    );
-  }, []);
 
   const {
     totalListingprice,
