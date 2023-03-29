@@ -48,7 +48,9 @@ function AccountDetails({ user, updateUserData }) {
             name="first_name"
             required
             value={userDetail.firstName}
-            onChange={(e) => setUser({ firstName: e.target.value })}
+            onChange={(e) =>
+              setUser({ ...userDetail, firstName: e.target.value })
+            }
           />
         </div>
         <div className="col-sm-6">
@@ -59,7 +61,9 @@ function AccountDetails({ user, updateUserData }) {
             name="last_name"
             required
             value={userDetail.lastName}
-            onChange={(e) => setUser({ lastName: e.target.value })}
+            onChange={(e) =>
+              setUser({ ...userDetail, lastName: e.target.value })
+            }
           />
         </div>
       </div>
@@ -71,7 +75,7 @@ function AccountDetails({ user, updateUserData }) {
         name="email"
         required
         value={userDetail.email}
-        onChange={(e) => setUser({ email: e.target.value })}
+        onChange={(e) => setUser({ ...userDetail, email: e.target.value })}
       />
       <label>Phone *</label>
       <div className="input-tel form-control">
