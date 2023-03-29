@@ -24,6 +24,9 @@ function Cart(props) {
 
   useEffect(() => {
     setCartItems([...cartList]);
+    if (!cartList.length) {
+      removeCoupon();
+    }
   }, [cartList]);
 
   const {
