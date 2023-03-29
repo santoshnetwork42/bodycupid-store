@@ -357,14 +357,33 @@ function Checkout(props) {
                         <tbody>
                           {cartList.map((item, index) => (
                             <tr key={"checkout-" + item.title + "-" + index}>
-                              <td className="product-name">
-                                {item.title}{" "}
-                                <span className="product-quantity">
-                                  ×&nbsp;{item.qty}
-                                </span>
-                              </td>
-                              <td className="product-total text-body">
-                                ₹{toDecimal(item.price * item.qty)}
+                              <td colSpan={2} className="product-name pr-0">
+                                <div className="d-flex justify-content-between">
+                                  <div className="d-flex">
+                                    <ALink
+                                      className="order-image"
+                                      href={"/product/" + item.slug}
+                                    >
+                                      <img
+                                        src={getPublicImageURL(
+                                          item.images?.items[0]?.imageKey
+                                        )}
+                                        alt={item?.images.items[0]?.alt}
+                                        width="80"
+                                        height="88"
+                                      />
+                                    </ALink>
+                                    <div className="text-left lh-default">
+                                      {item.title}{" "}
+                                      <span className="product-quantity">
+                                        ×&nbsp;{item.qty}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="product-total text-body">
+                                    ₹{toDecimal(item.price * item.qty)}
+                                  </div>{" "}
+                                </div>
                               </td>
                             </tr>
                           ))}
