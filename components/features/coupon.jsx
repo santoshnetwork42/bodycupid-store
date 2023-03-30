@@ -19,7 +19,7 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     layout = "cart",
-    featured,
+    featured = [],
     getFeaturedCoupons,
   } = props;
   const [coupon, setCoupon] = useState("");
@@ -33,31 +33,29 @@ function Coupon(props) {
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
-      if (!!coupon) {
-        setLoading(true);
-        const {
-          data: { applyCoupon: response },
-        } = await API.graphql({
-          query: applyCouponMutation,
-          variables: { code: couponCode },
-          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-        });
-        if (response) {
-          const discount = getCouponTotal(response, cartList);
-          if (discount) {
-            setCoupon("");
-            applyCoupon(response);
-            setOpen(false);
-            setError("");
-          } else {
-            setError("Coupon cannot be applied");
-          }
-          setLoading(false);
-        } else {
+      setLoading(true);
+      const {
+        data: { applyCoupon: response },
+      } = await API.graphql({
+        query: applyCouponMutation,
+        variables: { code: couponCode },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+      });
+      if (response) {
+        const discount = getCouponTotal(response, cartList);
+        if (discount) {
           setCoupon("");
-          setError("Coupon not found");
-          setLoading(false);
+          applyCoupon(response);
+          setOpen(false);
+          setError("");
+        } else {
+          setError("Coupon cannot be applied");
         }
+        setLoading(false);
+      } else {
+        setCoupon("");
+        setError("Coupon not found");
+        setLoading(false);
       }
     },
     [coupon, user]
@@ -159,7 +157,7 @@ function Coupon(props) {
                   <button
                     className="btn btn-primary coupon-apply-btn d-flex justify-content-center align-items-center"
                     disabled={loading}
-                    onClick={() => applyCouponCode()}
+                    onClick={() => !!coupon && applyCouponCode()}
                   >
                     <span className=" mr-1">Apply</span>
 
@@ -167,7 +165,7 @@ function Coupon(props) {
                   </button>
                 </div>
                 <span className="coupon-error-lable">{error}</span>
-                {!!featured.length && (
+                {!!featured?.length && (
                   <div className="mt-2">
                     <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {
