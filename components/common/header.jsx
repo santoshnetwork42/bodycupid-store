@@ -113,6 +113,14 @@ function Header({ navbar, auth, openLogin }) {
                   <i className="d-icon-user"></i>
                 </ALink>
               )}
+              {!auth && (
+                <ALink
+                  href="/pages/login"
+                  className="label-block wishlist d-sm-show"
+                >
+                  <i className="d-icon-user"></i>
+                </ALink>
+              )}
             </div>
           </div>
         </div>
