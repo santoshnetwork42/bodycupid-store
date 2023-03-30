@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -119,8 +119,8 @@ function Cart(props) {
                     </thead>
                     <tbody>
                       {cartItems.map((item) => (
-                        <>
-                          <tr key={"cart" + item.title} className="d-sm-none">
+                        <Fragment key={"cart" + item.title}>
+                          <tr className="d-sm-none">
                             <td className="product-thumbnail">
                               <figure>
                                 <ALink href={"/product/" + item.slug}>
@@ -183,68 +183,72 @@ function Cart(props) {
                               </ALink>
                             </td>
                           </tr>
-                          <div className="d-sm-show">
-                            <div className="mobile-specific-cart-product-container d-flex">
-                              <figure>
-                                <ALink href={"/product/" + item.slug}>
-                                  <img
-                                    src={getPublicImageURL(
-                                      item.images.items[0]?.imageKey
-                                    )}
-                                    width="100"
-                                    height="100"
-                                    alt={item.images.items[0]?.alt}
-                                  />
-                                </ALink>
-                              </figure>
-                              <div className="text-left mr-3 ml-2">
-                                <div className="">
+                          <tr className="m-0 p-0 border-no d-sm-show">
+                            <td className="m-0 p-0">
+                              <div className="mobile-specific-cart-product-container d-flex">
+                                <figure>
                                   <ALink href={"/product/" + item.slug}>
-                                    {item.title}
+                                    <img
+                                      src={getPublicImageURL(
+                                        item.images.items[0]?.imageKey
+                                      )}
+                                      width="100"
+                                      height="100"
+                                      alt={item.images.items[0]?.alt}
+                                    />
+                                  </ALink>
+                                </figure>
+                                <div className="text-left mr-3 ml-2">
+                                  <div className="">
+                                    <ALink href={"/product/" + item.slug}>
+                                      {item.title}
+                                    </ALink>
+                                  </div>
+                                  <div className="product-subtotal mt-1">
+                                    <span className="sm-product-amount">
+                                      ₹{toDecimal(item.price)}
+                                    </span>
+                                    <p className="m-0 product-discount-listing">
+                                      {item.price < item.listingPrice && (
+                                        <del className="summary-subtotal-listingprice">
+                                          ₹{toDecimal(item.listingPrice)}
+                                        </del>
+                                      )}
+                                      <span
+                                        className={`discount-percetage ml-2`}
+                                      >
+                                        {productDiscountPercentage(item) > 0 &&
+                                          `${productDiscountPercentage(
+                                            item
+                                          )}% off`}
+                                      </span>
+                                    </p>
+                                  </div>
+                                  <div className="product-quantity w-0">
+                                    <Quantity
+                                      product={item}
+                                      qty={item.qty}
+                                      max={item.inventory}
+                                      onChangeQty={(qty) =>
+                                        onChangeQty(item, qty)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="product-close">
+                                  <ALink
+                                    href="#"
+                                    className="sm-product-remove"
+                                    title="Remove this product"
+                                    onClick={() => removeFromCart(item)}
+                                  >
+                                    <i className="fas fa-times"></i>
                                   </ALink>
                                 </div>
-                                <div className="product-subtotal mt-1">
-                                  <span className="sm-product-amount">
-                                    ₹{toDecimal(item.price)}
-                                  </span>
-                                  <p className="m-0 product-discount-listing">
-                                    {item.price < item.listingPrice && (
-                                      <del className="summary-subtotal-listingprice">
-                                        ₹{toDecimal(item.listingPrice)}
-                                      </del>
-                                    )}
-                                    <span className={`discount-percetage ml-2`}>
-                                      {productDiscountPercentage(item) > 0 &&
-                                        `${productDiscountPercentage(
-                                          item
-                                        )}% off`}
-                                    </span>
-                                  </p>
-                                </div>
-                                <div className="product-quantity w-0">
-                                  <Quantity
-                                    product={item}
-                                    qty={item.qty}
-                                    max={item.inventory}
-                                    onChangeQty={(qty) =>
-                                      onChangeQty(item, qty)
-                                    }
-                                  />
-                                </div>
                               </div>
-                              <div className="product-close">
-                                <ALink
-                                  href="#"
-                                  className="sm-product-remove"
-                                  title="Remove this product"
-                                  onClick={() => removeFromCart(item)}
-                                >
-                                  <i className="fas fa-times"></i>
-                                </ALink>
-                              </div>
-                            </div>
-                          </div>
-                        </>
+                            </td>
+                          </tr>
+                        </Fragment>
                       ))}
                     </tbody>
                   </table>
