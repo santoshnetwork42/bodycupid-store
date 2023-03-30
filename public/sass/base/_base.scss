@@ -61,8 +61,8 @@
     }
 
     .spin-loader {
-        width: 20px;
-        height: 20px;
+        width: 17px;
+        height: 17px;
         -webkit-animation: spin 650ms infinite linear;
         animation: spin 650ms infinite linear;
         border-radius: 75%;
@@ -465,7 +465,7 @@
 
     @include mq(sm, max) {
         main {
-            margin-top: 130px;
+            margin-top: 60px;
         }
     }
 

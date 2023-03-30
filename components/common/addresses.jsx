@@ -89,7 +89,7 @@ function Addresses({ user, onAddressChange }) {
     <div>
       {addresses.length > 0 ? (
         <>
-          <div className="row mt-4">
+          <div className="row ">
             {addresses.map((adr) => (
               <div
                 className="col-sm-6 mb-4 accordion-border"
@@ -97,12 +97,14 @@ function Addresses({ user, onAddressChange }) {
                 onClick={() => setSelected(adr.id)}
               >
                 <div
-                  className={`card card-address ${
+                  className={`card card-address w-100 ${
                     adr.id === selected && !!onAddressChange ? "selected" : ""
                   }`}
                 >
                   <div className="card-body pr-4 pl-4 pt-3 cursor-pointer">
-                    <h5 className="card-title text-uppercase">{adr.name}</h5>
+                    <h5 className="card-title text-uppercase mb-2">
+                      {adr.name}
+                    </h5>
                     <p className="add-lables-values">
                       {adr?.email && (
                         <span>
@@ -114,27 +116,23 @@ function Addresses({ user, onAddressChange }) {
                           {adr?.phone} <br />
                         </span>
                       )}
-                      {adr?.address && (
+                      <div className="add-wrap">
                         <span className="add-address">
-                          {adr?.address}
-                          <br />
+                          {adr?.address && (
+                            <span className="">{adr?.address}, &nbsp;</span>
+                          )}
+                          {adr?.area && <span>{adr?.area}, &nbsp;</span>}
+                          {adr?.landmark && (
+                            <span>{adr?.landmark}, &nbsp;</span>
+                          )}
                         </span>
-                      )}
-                      {adr?.area && (
+
                         <span>
-                          {adr?.area} <br />
+                          {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
                         </span>
-                      )}
-                      {adr?.landmark && (
-                        <span>
-                          {adr?.landmark} <br />
-                        </span>
-                      )}
-                      <span>
-                        {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
-                      </span>
+                      </div>
                     </p>
-                    <div className="add-bottom-btn">
+                    <div className="add-bottom-btn mt-2">
                       <ALink
                         href="#"
                         className="btn btn-link btn-secondary btn-underline"

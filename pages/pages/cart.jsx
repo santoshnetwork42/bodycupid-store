@@ -8,10 +8,6 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import RelatedProducts from "~/components/partials/product/related-products";
-import { API, graphqlOperation } from "aws-amplify";
-import { getHomePageProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
 import { scrollWithOffset } from "~/utils/helper";
 
 function Cart(props) {
@@ -25,24 +21,6 @@ function Cart(props) {
     openLogin,
   } = props;
   const [cartItems, setCartItems] = useState([]);
-  const [related, setRelated] = useState(null);
-
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(getHomePageProducts, {
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-        limit: 8,
-      })
-    ).then(
-      ({
-        data: {
-          searchProducts: { items },
-        },
-      }) => {
-        setRelated(items);
-      }
-    );
-  }, []);
 
   useEffect(() => {
     setCartItems([...cartList]);
@@ -104,7 +82,7 @@ function Cart(props) {
   return (
     <main className="main cart">
       <div className="page-content pt-7 pb-10">
-        <div className="step-by pr-4 pl-4">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
           </h3>
@@ -374,10 +352,6 @@ function Cart(props) {
               </div>
             )}
           </div>
-          <RelatedProducts
-            products={related}
-            heading="Other popular products"
-          />
         </div>
       </div>
     </main>
