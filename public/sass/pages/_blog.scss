@@ -132,6 +132,12 @@
     }
 }
 
+.best-collection {
+    .owl-dots {
+        display: none;
+    }
+}
+
 
 
 @include mq(xxl) {

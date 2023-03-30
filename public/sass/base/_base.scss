@@ -45,7 +45,7 @@
     body {
         margin: 0;
         // overflow-x: hidden;
-        @include print_css( base, body );
+        @include print_css(base, body);
         overflow-x: hidden !important;
         overflow-y: scroll !important;
         touch-action: pan-x pan-y;
@@ -466,6 +466,10 @@
     @include mq(sm, max) {
         main {
             margin-top: 60px;
+
+            &.searchBar {
+                margin-top: 130px !important;
+            }
         }
     }
 
