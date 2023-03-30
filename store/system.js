@@ -1,6 +1,6 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import { getFeaturedCoupon } from "~/graphql/api";
@@ -47,9 +47,8 @@ export const systemActions = {
     type: actionTypes.SET_FEATURED_COUPONS,
     payload: { coupons },
   }),
-  getFeaturedCoupon: (coupons) => ({
+  getFeaturedCoupon: () => ({
     type: actionTypes.GET_FEATURED_COUPONS,
-    payload: { coupons },
   }),
 };
 
@@ -62,7 +61,9 @@ const persistConfig = {
 
 export function* systemSaga() {
   yield takeEvery(actionTypes.GET_FEATURED_COUPONS, function* saga(e) {
-    if (!e.payload?.coupons) {
+    const { system } = yield select();
+    const { featuredCoupon } = system;
+    if (!featuredCoupon) {
       const {
         data: {
           searchCouponCodes: { items },

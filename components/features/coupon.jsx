@@ -29,7 +29,7 @@ function Coupon(props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getFeaturedCoupons(featured);
+    getFeaturedCoupons();
   }, []);
 
   const applyCouponCode = useCallback(

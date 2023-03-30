@@ -59,7 +59,7 @@ function DetailOne(props) {
   );
 
   useEffect(() => {
-    getFeaturedCoupons(featuredCoupons);
+    getFeaturedCoupons();
   }, []);
 
   const { maxDiscountCoupon } = useMemo(() => {
