@@ -1,17 +1,15 @@
 import { useState, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 
-import {
-  applyCoupon as applyCouponMutation,
-  getFeaturedCoupon,
-} from "~/graphql/api";
-import { cartActions } from "~/store/cart";
-import { getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
-import { STORE_ID } from "~/config";
+
+import { systemActions } from "~/store/system";
+import { applyCoupon as applyCouponMutation } from "~/graphql/api";
+import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
+import { getCouponTotal, toDecimal } from "~/utils";
 
 function Coupon(props) {
   const {
@@ -21,29 +19,16 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     layout = "cart",
+    featured,
+    getFeaturedCoupons,
   } = props;
   const [coupon, setCoupon] = useState("");
-  const [featured, setFeatured] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    (async function () {
-      const {
-        data: {
-          searchCouponCodes: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(getFeaturedCoupon, {
-          filter: {
-            isFeatured: { eq: true },
-            isActive: { eq: true },
-            storeId: { eq: STORE_ID },
-          },
-        })
-      );
-      setFeatured(items);
-    })();
+    getFeaturedCoupons();
   }, []);
 
   const applyCouponCode = useCallback(
@@ -176,11 +161,9 @@ function Coupon(props) {
                     disabled={loading}
                     onClick={() => applyCouponCode()}
                   >
-                    <span className=" mr-1">
-                        Apply
-                    </span>
-                  
-                    {loading  && <div className="spin-loader" />}
+                    <span className=" mr-1">Apply</span>
+
+                    {loading && <div className="spin-loader" />}
                   </button>
                 </div>
                 <span className="coupon-error-lable">{error}</span>
@@ -233,10 +216,12 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    featured: state.system.featuredCoupon,
   };
 }
 
 export default connect(mapStateToProps, {
   applyCoupon: cartActions.applyCoupon,
   removeCoupon: cartActions.removeCoupon,
+  getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(Coupon);
