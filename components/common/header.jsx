@@ -82,7 +82,7 @@ function Header({ navbar, auth, openLogin }) {
                 </div>
               </ALink>
               <span className="divider"></span>
-              <ALink href="/pages/wishlist" className="wishlist d-sm-none">
+              <ALink href="/pages/wishlist" className="wishlist mr-3 d-sm-none">
                 <i className="d-icon-heart"></i>
               </ALink>
               <span className="divider"></span>
