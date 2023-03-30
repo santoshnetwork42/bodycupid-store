@@ -116,7 +116,9 @@ function Header({ navbar, auth, openLogin }) {
               {!auth && (
                 <ALink
                   href="/pages/login"
-                  className="label-block wishlist d-sm-show"
+                  className={`label-block wishlist d-sm-show ${
+                    !navbar.showMobileSearchBar && "d-sm-none"
+                  }`}
                 >
                   <i className="d-icon-user"></i>
                 </ALink>
