@@ -176,8 +176,11 @@ function Coupon(props) {
                     disabled={loading}
                     onClick={() => applyCouponCode()}
                   >
-                    Apply
-                    {loading && <div className="spin-loader ml-1" />}
+                    <span className=" mr-1">
+                        Apply
+                    </span>
+                  
+                    {loading  && <div className="spin-loader" />}
                   </button>
                 </div>
                 <span className="coupon-error-lable">{error}</span>
