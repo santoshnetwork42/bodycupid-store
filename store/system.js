@@ -62,7 +62,7 @@ const persistConfig = {
 export function* systemSaga() {
   yield takeEvery(actionTypes.GET_FEATURED_COUPONS, function* saga(e) {
     const { system } = yield select();
-    const { featuredCoupon } = system;
+    const { featuredCoupon } = system || {};
     if (!featuredCoupon) {
       const {
         data: {
