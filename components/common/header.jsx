@@ -96,7 +96,7 @@ function Header({ navbar, auth, openLogin }) {
               )}
               {!navbar.showMobileSearchBar && (
                 <div className="d-sm-show">
-                  <SearchBox isMobile />
+                  <SearchBox type='icon' />
                 </div>
               )}
               {!auth && (

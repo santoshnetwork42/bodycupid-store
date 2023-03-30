@@ -11,7 +11,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
 
-function SearchForm({ isMobile = false }) {
+function SearchForm({ type = "input" }) {
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [timer, setTimer] = useState(null);
@@ -125,7 +125,7 @@ function SearchForm({ isMobile = false }) {
   return (
     <div
       className={`header-search  ${
-        isMobile ? "hs-toggle d-block" : "hs-simple"
+        type === "icon" ? "hs-toggle d-block" : "hs-simple"
       }`}
     >
       <a
@@ -134,7 +134,7 @@ function SearchForm({ isMobile = false }) {
         role="button"
         onClick={onSearchClick}
       >
-        {isMobile ? (
+        {type === "icon" ? (
           <i className="d-icon-search"></i>
         ) : (
           <i className="icon-search-3"></i>
