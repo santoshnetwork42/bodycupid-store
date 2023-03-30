@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
@@ -23,32 +23,33 @@ function ProductDefault() {
   const [selectedVariant, setVariant] = useState(variantId);
 
   useEffect(() => {
-    setProduct(null);
-    setLoading(true);
-    API.graphql(
-      graphqlOperation(getProductBySlug, {
-        slug,
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-      })
-    )
-      .then(
-        ({
-          data: {
-            byslugProduct: { items },
-          },
-        }) => {
-          if (items.length) {
-            let [product] = items;
-            setProduct(product);
-            setLoading(false);
-          } else {
-            router.push("/404");
-          }
-        }
-      )
-      .catch((e) => {
-        console.log("e", e);
-      });
+    getProductsBySlug();
+  }, [slug]);
+
+  const getProductsBySlug = useCallback(async () => {
+    try {
+      setLoading(true);
+      setProduct(null);
+      const {
+        data: {
+          byslugProduct: { items },
+        },
+      } = await API.graphql(
+        graphqlOperation(getProductBySlug, {
+          slug,
+          filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+        })
+      );
+      if (items.length) {
+        let [product] = items;
+        setProduct(product);
+        setLoading(false);
+      } else {
+        router.push("/404");
+      }
+    } catch (error) {
+      console.log("getProductBySlug", error);
+    }
   }, [slug]);
 
   useEffect(() => {

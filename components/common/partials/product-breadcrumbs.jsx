@@ -9,13 +9,8 @@ function ProductBreadcrumbs({ category, subCategory }) {
     <div>
       <ul className="breadcrumb breadcrumb-lg">
         <li>
-          <ALink href="/">
+          <ALink href="/collections/all">
             <i className="d-icon-home"></i>
-          </ALink>
-        </li>
-        <li>
-          <ALink href="/collections/all" className="active">
-            Products
           </ALink>
         </li>
         {category && (
@@ -35,7 +30,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
           <li>
             <ALink
               href={{
-                pathname: "/collections/[category][subcategory]",
+                pathname: "/collections/[category]/[subcategory]",
                 query: {
                   category: slug,
                   subcategory: subCatSlug,

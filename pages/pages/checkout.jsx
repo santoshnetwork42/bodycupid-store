@@ -12,7 +12,6 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
-  getHomePageProducts,
   validateTransaction,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
