@@ -167,7 +167,7 @@ function Coupon(props) {
                   </button>
                 </div>
                 <span className="coupon-error-lable">{error}</span>
-                {!!featured.length && (
+                {!!featured?.length && (
                   <div className="mt-2">
                     <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {

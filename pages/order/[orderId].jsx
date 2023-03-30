@@ -14,6 +14,7 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
@@ -163,32 +164,50 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
               <tbody>
                 {order?.products?.items?.map((item) => (
                   <tr key={"order-" + item.id}>
-                    <td className="product-name">
-                      {item.product.title}{" "}
-                      <span>
-                        <i className="fas fa-times"></i>{" "}
-                        {item.quantity || item.cancelledQuantity}
-                      </span>
-                      {item.cancelledQuantity > 0 &&
-                        item.status === "CREATED" && (
-                          <Tag type="cancel">
-                            CANCELLED <i className="fas fa-times"></i>&nbsp;
-                            {item.cancelledQuantity}
-                          </Tag>
-                        )}
-                      {allStatus.includes(item.status) && (
-                        <Tag type={getStatusType(item.status)}>
-                          {item.status}
-                        </Tag>
-                      )}
-                      {item.variant && (
-                        <p className="mb-0">
-                          <strong>{item.variant.title}</strong>
-                        </p>
-                      )}
-                    </td>
-                    <td className="product-price">
-                      ₹{toDecimal(item.quantity * item.price)}
+                    <td className="product-name" colSpan={2}>
+                      <div className="d-flex justify-content-between">
+                        <div className="d-flex">
+                          <ALink className='order-image' href={"/product/" + item.slug}>
+                            <img
+                              src={getPublicImageURL(
+                                item.product.images?.items[0]?.imageKey
+                              )}
+                              alt={item.product?.images.items[0]?.alt}
+                              width="80"
+                              height="88"
+                            />
+                          </ALink>
+                          <div>
+                            {item.product.title}
+                            <span>
+                              <i className="fas fa-times"></i>
+                              {item.quantity || item.cancelledQuantity}
+                            </span>
+                            {item.cancelledQuantity > 0 &&
+                              item.status === "CREATED" && (
+                                <Tag type="cancel">
+                                  CANCELLED <i className="fas fa-times"></i>
+                                  &nbsp;
+                                  {item.cancelledQuantity}
+                                </Tag>
+                              )}
+                            {allStatus.includes(item.status) && (
+                              <Tag type={getStatusType(item.status)}>
+                                {item.status}
+                              </Tag>
+                            )}
+                            {item.variant && (
+                              <p className="mb-0">
+                                <strong>{item.variant.title}</strong>
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="product-price">
+                          ₹{toDecimal(item.quantity * item.price)}
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 ))}
