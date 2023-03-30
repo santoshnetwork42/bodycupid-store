@@ -23,6 +23,8 @@ function ProductDefault() {
   const [selectedVariant, setVariant] = useState(variantId);
 
   useEffect(() => {
+    setProduct(null);
+    setLoading(true);
     API.graphql(
       graphqlOperation(getProductBySlug, {
         slug,
