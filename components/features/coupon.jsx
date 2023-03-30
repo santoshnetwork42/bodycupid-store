@@ -19,7 +19,7 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     layout = "cart",
-    featured,
+    featured = [],
     getFeaturedCoupons,
   } = props;
   const [coupon, setCoupon] = useState("");
