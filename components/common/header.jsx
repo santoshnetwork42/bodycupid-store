@@ -82,17 +82,22 @@ function Header({ navbar, auth, openLogin }) {
                 </div>
               </ALink>
               <span className="divider"></span>
-              <ALink href="/pages/wishlist" className="wishlist d-sm-none">
+              <ALink href="/pages/wishlist" className="wishlist mr-3 d-sm-none">
                 <i className="d-icon-heart"></i>
               </ALink>
               <span className="divider"></span>
 
               <CartMenu />
               <span className="divider"></span>
-              {!!auth && (
+              {!!auth && navbar.showMobileSearchBar && (
                 <ALink href="/pages/account" className="account wishlist">
                   <i className="d-icon-user"></i>
                 </ALink>
+              )}
+              {!navbar.showMobileSearchBar && (
+                <div className="d-sm-show">
+                  <SearchBox type='icon' />
+                </div>
               )}
               {!auth && (
                 <ALink
@@ -122,10 +127,11 @@ function Header({ navbar, auth, openLogin }) {
           </div>
         </div>
       </div>
-
-      <div className="bottom-search d-sm-show">
-        <SearchBox />
-      </div>
+      {navbar.showMobileSearchBar && (
+        <div className="bottom-search d-sm-show">
+          <SearchBox />
+        </div>
+      )}
     </header>
   );
 }

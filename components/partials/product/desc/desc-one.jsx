@@ -44,7 +44,7 @@ function DescOne(props) {
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
-  const [showReview, setShowReview] = useState(!totalRatings ? true : false);
+  const [showReview, setShowReview] = useState(!totalRatings);
   const [token, setToken] = useState(null);
   const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);

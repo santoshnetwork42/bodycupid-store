@@ -779,7 +779,8 @@
 
 @include mq(sm,max) {
     .product-details {
-        .product-name {
+        .detail-product-name {
+
             font-size: 2rem;
         }
     }

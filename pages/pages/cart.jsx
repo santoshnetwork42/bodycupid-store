@@ -24,9 +24,6 @@ function Cart(props) {
 
   useEffect(() => {
     setCartItems([...cartList]);
-    if (!cartList.length) {
-      removeCoupon();
-    }
   }, [cartList]);
 
   const {
@@ -85,7 +82,7 @@ function Cart(props) {
   return (
     <main className="main cart">
       <div className="page-content pt-7 pb-10">
-        <div className="step-by pr-4 pl-4">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
           </h3>

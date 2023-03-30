@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
-import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -16,11 +15,10 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
 import { deliveryRemainingTime } from "~/utils/helper";
-import { getFeaturedCoupon } from "~/graphql/api";
 import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
-import { STORE_ID } from "~/config";
+import { systemActions } from "~/store/system";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -44,11 +42,12 @@ function DetailOne(props) {
     wishlist,
     removeFromCart,
     coupon: appliedCoupon,
+    featuredCoupons,
+    getFeaturedCoupons,
   } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [featuredCoupons, setFeaturedCoupons] = useState([]);
   const today = new Date();
 
   const sizes = useMemo(
@@ -63,23 +62,6 @@ function DetailOne(props) {
     getFeaturedCoupons();
   }, []);
 
-  const getFeaturedCoupons = useCallback(async () => {
-    const {
-      data: {
-        searchCouponCodes: { items },
-      },
-    } = await API.graphql(
-      graphqlOperation(getFeaturedCoupon, {
-        filter: {
-          isFeatured: { eq: true },
-          isActive: { eq: true },
-          storeId: { eq: STORE_ID },
-        },
-      })
-    );
-    setFeaturedCoupons(items);
-  }, []);
-
   const { maxDiscountCoupon } = useMemo(() => {
     let selectedProduct = product;
     if (sizes.length) {
@@ -87,7 +69,7 @@ function DetailOne(props) {
         (v) => v.id === selectedVariant
       );
     }
-    if (!!featuredCoupons.length && selectedProduct) {
+    if (!!featuredCoupons?.length && selectedProduct) {
       const discountCoupon = featuredCoupons.reduce((prev, current) => {
         const first = getProductCouponTotal(prev, selectedProduct);
         const second = getProductCouponTotal(current, selectedProduct);
@@ -154,7 +136,7 @@ function DetailOne(props) {
       setCurIndex(-1);
       resetValueHandler();
     };
-  }, [product]);
+  }, []);
 
   useEffect(() => {
     if (product.variants.items.length > 0) {
@@ -574,6 +556,7 @@ function mapStateToProps(state) {
     cartList: state.cart.data || [],
     user: state.user.data,
     coupon: state.cart.coupon,
+    featuredCoupons: state.system.featuredCoupon,
   };
 }
 
@@ -583,4 +566,5 @@ export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   applyCoupon: cartActions.applyCoupon,
   removeFromCart: cartActions.removeFromCart,
+  getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(DetailOne);
