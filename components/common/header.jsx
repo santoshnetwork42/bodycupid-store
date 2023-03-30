@@ -89,14 +89,19 @@ function Header({ navbar, auth, openLogin }) {
 
               <CartMenu />
               <span className="divider"></span>
-              {!!auth && navbar.showMobileSearchBar && (
-                <ALink href="/pages/account" className="account wishlist">
+              {!!auth && (
+                <ALink
+                  href="/pages/account"
+                  className={`account wishlist ${
+                    !navbar.showMobileSearchBar && "d-sm-none"
+                  }`}
+                >
                   <i className="d-icon-user"></i>
                 </ALink>
               )}
               {!navbar.showMobileSearchBar && (
                 <div className="d-sm-show">
-                  <SearchBox type='icon' />
+                  <SearchBox type="icon" />
                 </div>
               )}
               {!auth && (
@@ -104,14 +109,6 @@ function Header({ navbar, auth, openLogin }) {
                   href="#"
                   className="label-block wishlist d-sm-none"
                   onClick={() => openLogin(false)}
-                >
-                  <i className="d-icon-user"></i>
-                </ALink>
-              )}
-              {!auth && (
-                <ALink
-                  href="/pages/login"
-                  className="label-block wishlist d-sm-show"
                 >
                   <i className="d-icon-user"></i>
                 </ALink>

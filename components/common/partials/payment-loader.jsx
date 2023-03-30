@@ -9,7 +9,7 @@ export default function PaymentLoader({ loading = false, message = 'Processing y
             onRequestClose={() => { }}
             shouldReturnFocusAfterClose={false}
             className="auth-popup bg-img order-message"
-            overlayClassName="order"
+            overlayClassName="order d-flex"
         >
             <div className=" text-center mr-auto ml-auto">
                 <img
