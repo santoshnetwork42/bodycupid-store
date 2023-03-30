@@ -160,7 +160,7 @@ export function* cartSaga() {
       yield call([API, API.graphql], {
         query: updateShoppingCart,
         variables: {
-          input: { id: cartResponse.id, couponCodeId: null },
+          input: { id: cartResponse.id, couponCodeId: "" },
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
@@ -267,6 +267,7 @@ export function* cartSaga() {
     const { cart, user } = yield select();
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
+
     if (cartResponse && userResponse) {
       const { products } = cartResponse;
       let curProduct = e.payload.product;
@@ -297,6 +298,13 @@ export function* cartSaga() {
         }
         return cartAcc;
       }, []);
+
+      if (!updatedProducts.length) {
+        yield put({
+          type: actionTypes.REMOVE_COUPON,
+          payload: {},
+        });
+      }
 
       yield put({
         type: actionTypes.SET_CART,
