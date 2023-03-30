@@ -501,6 +501,22 @@
         width: 135px;
     }
 
+    .mobile-specific-cart-product-container {
+       padding: 2rem 2rem 2rem .5rem;
+       .sm-product-amount{
+            font-size: 1.7rem;
+            font-weight: 500;
+       }
+       .sm-product-remove{
+            padding: 2px 6.5px;   
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            color:$dark-color;
+            text-align: center;
+            font-size: 1.2rem;
+       }
+    }
+
     .product-subtotal {
         color: $dark-color;
     }
@@ -657,6 +673,9 @@
 }
 
 @include mq(sm, max) {
+    .sm-container {
+        margin-top: 0px !important;
+    }
     .stick-bottom-button {
         width: 100vw;
         display: flex !important;
