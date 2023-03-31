@@ -5,7 +5,6 @@ import ALink from "~/components/features/custom-link";
 import SlideToggle from "react-slide-toggle";
 
 export default function Card(props) {
-  const [isVisible, setIsVisible] = useState(false);
   const {
     title,
     expanded = false,
@@ -16,7 +15,11 @@ export default function Card(props) {
   } = props;
 
   return "normal" === type ? (
-    <SlideToggle collapsed={expanded ? false : true}>
+    <SlideToggle
+      noOverflowHidden
+      noDisplayStyle
+      collapsed={expanded ? false : true}
+    >
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <div className={`card ${adClass}`}>
           <div className={`card-header`} onClick={onToggle}>
@@ -52,38 +55,6 @@ export default function Card(props) {
             {props.children}
           </div>
         </>
-      )}
-    </SlideToggle>
-  ) : "productDetail" === type ? (
-    <SlideToggle collapsed={expanded ? false : true}>
-      {({ onToggle, setCollapsibleElement, toggleState }) => (
-        <div className={`card ${adClass}`}>
-          <div
-            className={`card-header`}
-            onClick={() => {
-              onToggle();
-              setIsVisible(!isVisible);
-            }}
-          >
-            <ALink
-              href="#"
-              className={`toggle-button ${toggleState.toLowerCase()}`}
-            >
-              {iconClass ? <i className={iconClass}></i> : ""}
-              {title ? title : ""}
-            </ALink>
-          </div>
-
-          <div
-            className={` test-content ${
-              isVisible
-                ? "collapsible-content-is-visible"
-                : "collapsible-content"
-            }`}
-          >
-            <div className="card-body overflow-hidden">{props.children}</div>
-          </div>
-        </div>
       )}
     </SlideToggle>
   ) : (

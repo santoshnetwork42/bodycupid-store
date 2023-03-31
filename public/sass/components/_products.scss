@@ -92,19 +92,7 @@
         height: 100%;
     }
 }
-
-.collapsible-content {
-    visibility: hidden;
-    overflow: hidden;
-    height: 0;
-    opacity: 0;
-}
-.collapsible-content-is-visible{
-    visibility: visible;
-    opacity: 1;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-}   
+ 
 
 // Product Shadow
 .product-shadow {

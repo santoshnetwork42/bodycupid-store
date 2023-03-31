@@ -116,7 +116,6 @@ function DescOne(props) {
             searchProductFaqs: { items: response },
           },
         }) => {
-          console.log(response);
           if (response) {
             setProductsFAQs(response);
           }
@@ -218,7 +217,7 @@ function DescOne(props) {
   return (
     <div className="col-md-12 mb-6">
       <Accordion adClass="accordion-simple">
-        <Card title="Description" adClass="border-no" type={"productDetail"}>
+        <Card title="Description" adClass="border-no">
           <div className="row">
             <div className="col-md-12">
               {!!product.longDescription && (
@@ -237,7 +236,7 @@ function DescOne(props) {
           </div>
         </Card>
 
-        <Card title="Specifications" type={"productDetail"}>
+        <Card title="Specifications">
           <div className="row mt-6">
             <div className="pl-md-6 pt-4 pt-md-0">
               <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
@@ -304,7 +303,6 @@ function DescOne(props) {
             title={`Reviews  ${
               product?.totalRatings ? `(${product.totalRatings})` : ""
             }`}
-            type={"productDetail"}
           >
             <div className="product-tab-reviews">
               <div className="reply mt-8 mb-8">
@@ -507,7 +505,7 @@ function DescOne(props) {
         )}
 
         {!!productsFAQs.length && (
-          <Card title="FAQs" type={"productDetail"}>
+          <Card title="FAQs">
             <div className="col-md-12">
               <Reveal
                 keyframes={fadeIn}
