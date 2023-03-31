@@ -25,17 +25,17 @@ const appReducer = combineReducers({
   system: systemReducer,
 });
 
-const preventedStore = ["modal", "system"];
+const destroyedStore = ["cart", "wishlist", "user"];
 
 const rootReducers = (state, action) => {
   // Clear all data in redux store to initial.
   if (action.type === actionTypes.DESTROY_SESSION) {
-    const filteredStore = Object.keys(state)
-      .filter((key) => preventedStore.includes(key))
-      .reduce((obj, key) => {
+    const filteredStore = Object.keys(state).reduce((obj, key) => {
+      if (!destroyedStore.includes(key)) {
         obj[key] = state[key];
-        return obj;
-      }, {});
+      }
+      return obj;
+    }, {});
     return appReducer(filteredStore, action);
   }
   return appReducer(state, action);
