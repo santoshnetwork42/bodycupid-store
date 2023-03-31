@@ -195,7 +195,7 @@ function DetailOne(props) {
           tmpName = `${tmpName} - ${variant.title}`;
           tmpPrice = variant.price;
         }
-
+  
         addToCart({
           ...product,
           name: tmpName,
@@ -504,7 +504,8 @@ function DetailOne(props) {
                     className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       router.push("/pages/cart");
                     }}
                   >
