@@ -30,10 +30,10 @@ const App = ({ Component, pageProps }) => {
     showMobileSearchBar: !!Component.showMobileSearchBar,
   };
 
-  const footerProps={
+  const footerProps = {
     ...navbar,
     hideFooter: !!Component.hideFooter,
-  }
+  };
 
   const storeName = useMemo(() => {
     if (wowStore) return wowStore.name;
