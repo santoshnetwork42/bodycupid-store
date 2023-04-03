@@ -38,8 +38,6 @@ function DescOne(props) {
     weight,
     weightUnit,
     video,
-    rating,
-    title,
   } = product;
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
@@ -48,7 +46,6 @@ function DescOne(props) {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const [productsFAQs, setProductsFAQs] = useState([]);
-  const [reviewImages, setReviewImages] = useState([]);
 
   const allReviews = useMemo(() => {
     if (reviews && reviews.length) {
@@ -131,9 +128,8 @@ function DescOne(props) {
   };
 
   const onPhotoChange = async (e) => {
-    const files = [...reviewImages, ...e.target.files];
-    setReviewImages(files);
-    if (reviewImages) {
+    const files = [...e.target.files];
+    if (files) {
       const urls = await Promise.all(
         files.map(async (element) => {
           const key = await uploadImages(element, "review");
@@ -142,7 +138,7 @@ function DescOne(props) {
       );
       setReview({
         ...reviewState,
-        image: urls,
+        image: [...reviewState.image, ...urls],
       });
     }
   };
@@ -175,7 +171,6 @@ function DescOne(props) {
           },
         });
         setReview({ ...reviewDefault });
-        setReviewImages([]);
         setReviews([
           {
             id: new Date().toUTCString(),
@@ -370,9 +365,14 @@ function DescOne(props) {
                           placeholder="Name *"
                           required
                           value={reviewState.name}
-                          onChange={(e) => setReview({ name: e.target.value })}
+                          onChange={(e) =>
+                            setReview({ ...reviewState, name: e.target.value })
+                          }
                           onBlur={(e) =>
-                            setReview({ name: e.target.value.trim() })
+                            setReview({
+                              ...reviewState,
+                              name: e.target.value.trim(),
+                            })
                           }
                         />
                       </div>
@@ -385,9 +385,14 @@ function DescOne(props) {
                           placeholder="Email *"
                           required
                           value={reviewState.email}
-                          onChange={(e) => setReview({ email: e.target.value })}
+                          onChange={(e) =>
+                            setReview({ ...reviewState, email: e.target.value })
+                          }
                           onBlur={(e) =>
-                            setReview({ email: e.target.value.trim() })
+                            setReview({
+                              ...reviewState,
+                              email: e.target.value.trim(),
+                            })
                           }
                         />
                       </div>
@@ -398,7 +403,7 @@ function DescOne(props) {
                       </label>
                       <RatingStar
                         onClick={(num) => {
-                          setReview({ rating: num });
+                          setReview({ ...reviewState, rating: num });
                         }}
                         value={reviewState.rating}
                         editable
@@ -412,34 +417,41 @@ function DescOne(props) {
                       placeholder="Comment *"
                       required
                       value={reviewState.comment}
-                      onChange={(e) => setReview({ comment: e.target.value })}
+                      onChange={(e) =>
+                        setReview({ ...reviewState, comment: e.target.value })
+                      }
                       onBlur={(e) =>
-                        setReview({ comment: e.target.value.trim() })
+                        setReview({
+                          ...reviewState,
+                          comment: e.target.value.trim(),
+                        })
                       }
                     ></textarea>
                     <div className="d-flex w-100 img-wrapper justify-content-end">
-                      {reviewState.image &&
-                        reviewState.image.map((img, index) => (
-                          <div className="img_wrp mr-2" key={index}>
-                            <img
-                              src={getPublicImageURL(img)}
-                              className="img-preview"
-                              alt=""
-                            />
-                            <img
-                              className="close"
-                              src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png"
-                              onClick={() => {
-                                const temp = [...reviewState.image];
-                                temp.splice(index, 1);
-                                setReview({
-                                  ...reviewState,
-                                  image: temp,
-                                });
-                              }}
-                            />
-                          </div>
-                        ))}
+                      <div className=" img-wrapper">
+                        {reviewState.image &&
+                          reviewState.image.map((img, index) => (
+                            <div className="img_wrp mr-2" key={index}>
+                              <img
+                                src={getPublicImageURL(img)}
+                                className="img-preview"
+                                alt=""
+                              />
+
+                              <i
+                                className="d-icon-close close"
+                                onClick={() => {
+                                  const temp = [...reviewState.image];
+                                  temp.splice(index, 1);
+                                  setReview({
+                                    ...reviewState,
+                                    image: temp,
+                                  });
+                                }}
+                              ></i>
+                            </div>
+                          ))}
+                      </div>
 
                       <input
                         className="d-none"

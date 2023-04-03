@@ -92,7 +92,7 @@
         height: 100%;
     }
 }
- 
+
 
 // Product Shadow
 .product-shadow {
@@ -363,7 +363,7 @@
 .btn-quickview {
     opacity: 1;
     transition: opacity .3s;
-    
+
     &:hover {
         opacity: 1;
     }
@@ -488,6 +488,7 @@
 
 .product-card-title {
     font-size: 1.4rem !important;
+    min-height: 4rem;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
