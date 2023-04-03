@@ -12,12 +12,12 @@ export default function Card(props) {
     iconClass,
     type = "normal",
     url,
+    displayStyleNone = false,
   } = props;
 
   return "normal" === type ? (
     <SlideToggle
-      noOverflowHidden
-      noDisplayStyle
+      noDisplayStyle={displayStyleNone}
       collapsed={expanded ? false : true}
     >
       {({ onToggle, setCollapsibleElement, toggleState }) => (
