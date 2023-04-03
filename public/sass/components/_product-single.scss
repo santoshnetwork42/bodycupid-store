@@ -587,6 +587,9 @@
             }
         }
 
+        &:hover:not(.disabled) {
+            background-color: darken($primary-color, 7%);
+        }
     }
 }
 
