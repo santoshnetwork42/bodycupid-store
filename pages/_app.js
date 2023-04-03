@@ -33,7 +33,7 @@ const App = ({ Component, pageProps }) => {
   const footerProps={
     ...footer,
     hideFooter: !!Component.hideFooter,
-  }
+  };
 
   const storeName = useMemo(() => {
     if (wowStore) return wowStore.name;
