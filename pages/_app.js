@@ -106,12 +106,12 @@ const App = ({ Component, pageProps }) => {
 
     const metadata = {
       landingPage: meta?.landingPage || landingPage || null,
-      referrer: meta?.referrer || referrer || null,
-      utmCampaign: meta?.utmCampaign || campaign || null,
-      utmContent: meta?.utmContent || content || null,
-      utmMedium: meta?.utmMedium || medium || null,
-      utmSource: meta?.utmSource || source || null,
-      utmTerm: meta?.utmTerm || term || null,
+      referrer: referrer || meta?.referrer || null,
+      utmCampaign: campaign || meta?.utmCampaign || null,
+      utmContent: content || meta?.utmContent || null,
+      utmMedium: medium || meta?.utmMedium || null,
+      utmSource: source || meta?.utmSource || null,
+      utmTerm: term || meta?.utmTerm || null,
     };
 
     Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
