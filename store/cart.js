@@ -1,11 +1,10 @@
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
 // import CartPopup from "~/components/features/product/common/cart-popup";
-import CouponPopup from "~/components/features/product/common/coupon-popup";
+// import CouponPopup from "~/components/features/product/common/coupon-popup";
 import {
   createShoppingCart,
   updateShoppingCart,
@@ -15,12 +14,13 @@ import {
 } from "~/graphql/api";
 import { getFirstVariantId } from "~/utils/products";
 import { STORE_ID, STORE_PREFIX } from "~/config";
+import storage from "~/utils/storage";
 
 const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   UPDATE_CART: "UPDATE_CART",
-  REFRESH_STORE: "REFRESH_STORE",
+  REFRESH_CART: "REFRESH_CART",
   APPLY_COUPONS: "APPLY_COUPONS",
   REMOVE_COUPON: "REMOVE_COUPON",
   SET_CART: "SET_CART",
@@ -95,7 +95,7 @@ function cartReducer(state = initialState, action) {
     case actionTypes.UPDATE_CART:
       return { ...state, data: action.payload.products || [] };
 
-    case actionTypes.REFRESH_STORE:
+    case actionTypes.REFRESH_CART:
       return initialState;
 
     case actionTypes.SET_CART:
@@ -136,7 +136,6 @@ export const cartActions = {
 
 export function* cartSaga() {
   yield takeEvery(actionTypes.APPLY_COUPONS, function* saga(e) {
-    toast(<CouponPopup coupon={e.payload.coupon} />);
     const { cart, user } = yield select();
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
@@ -161,7 +160,7 @@ export function* cartSaga() {
       yield call([API, API.graphql], {
         query: updateShoppingCart,
         variables: {
-          input: { id: cartResponse.id, couponCodeId: null },
+          input: { id: cartResponse.id, couponCodeId: "" },
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
@@ -247,12 +246,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-                id: response.id,
-                shoppingcartId: id,
-                productId: response.productId,
-                variantId: response.variantId,
-                quantity: response.quantity,
-              }
+              id: response.id,
+              shoppingcartId: id,
+              productId: response.productId,
+              variantId: response.variantId,
+              quantity: response.quantity,
+            }
             : p
         );
 
@@ -268,6 +267,7 @@ export function* cartSaga() {
     const { cart, user } = yield select();
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
+
     if (cartResponse && userResponse) {
       const { products } = cartResponse;
       let curProduct = e.payload.product;
@@ -298,6 +298,13 @@ export function* cartSaga() {
         }
         return cartAcc;
       }, []);
+
+      if (!updatedProducts.length) {
+        yield put({
+          type: actionTypes.REMOVE_COUPON,
+          payload: {},
+        });
+      }
 
       yield put({
         type: actionTypes.SET_CART,
@@ -373,9 +380,10 @@ export function* cartSaga() {
           }
         });
       }
-      if (promise.length > 0) yield all(promise);
+
+      yield all(promise);
     }
-    yield put({ type: actionTypes.REFRESH_STORE });
+    yield put({ type: actionTypes.REFRESH_CART });
   });
 }
 

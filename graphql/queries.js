@@ -2384,6 +2384,7 @@ export const getOrder = /* GraphQL */ `
       couponCodeId
       coupon {
         id
+        groupId
         code
         storeId
         userId
@@ -2427,6 +2428,14 @@ export const getOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -2462,6 +2471,14 @@ export const listOrders = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
     }
@@ -2509,6 +2526,14 @@ export const bystoreIdOrder = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
     }
@@ -2556,6 +2581,14 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
     }
@@ -2603,6 +2636,14 @@ export const searchOrders = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
       total
@@ -3951,6 +3992,7 @@ export const getCouponCode = /* GraphQL */ `
   query GetCouponCode($id: ID!) {
     getCouponCode(id: $id) {
       id
+      groupId
       code
       storeId
       store {
@@ -4023,6 +4065,7 @@ export const listCouponCodes = /* GraphQL */ `
     listCouponCodes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        groupId
         code
         storeId
         userId
@@ -4063,6 +4106,7 @@ export const bycodeCouponCode = /* GraphQL */ `
     ) {
       items {
         id
+        groupId
         code
         storeId
         userId
@@ -4103,6 +4147,7 @@ export const byuserIdCouponCode = /* GraphQL */ `
     ) {
       items {
         id
+        groupId
         code
         storeId
         userId
@@ -4143,6 +4188,7 @@ export const searchCouponCodes = /* GraphQL */ `
     ) {
       items {
         id
+        groupId
         code
         storeId
         userId
