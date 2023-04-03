@@ -354,6 +354,7 @@ export const getProductBySlug = /* GraphQL */ `
         isInventoryEnabled
         continueSellingOutOfStock
         hasVarient
+        hasFaq
         variants {
           items {
             id

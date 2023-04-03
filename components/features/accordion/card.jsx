@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 
@@ -12,10 +12,11 @@ export default function Card(props) {
     iconClass,
     type = "normal",
     url,
+    ...restProps
   } = props;
 
   return "normal" === type ? (
-    <SlideToggle collapsed={expanded ? false : true}>
+    <SlideToggle {...restProps} collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <div className={`card ${adClass}`}>
           <div className={`card-header`} onClick={onToggle}>

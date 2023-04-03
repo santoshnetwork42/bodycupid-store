@@ -46,7 +46,6 @@ function DescOne(props) {
   const [total, setTotal] = useState(0);
   const [showReview, setShowReview] = useState(!totalRatings);
   const [token, setToken] = useState(null);
-  const [tabIndex, setTabIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [productsFAQs, setProductsFAQs] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
@@ -116,26 +115,15 @@ function DescOne(props) {
           },
         }) => {
           if (response) {
-            console.log(response);
             setProductsFAQs(response);
           }
           setLoading(false);
         }
       )
-      .catch(() => {
+      .catch((err) => {
         setLoading(false);
       });
   }, [product]);
-
-  useEffect(() => {
-    if (tabIndex === 2 && reviews.length === 0) {
-      getProductReviews(true);
-    }
-
-    if (tabIndex === 3 && productsFAQs.length === 0) {
-      getProductFAQs();
-    }
-  }, [tabIndex]);
 
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
@@ -220,34 +208,10 @@ function DescOne(props) {
   );
 
   return (
-    <Tabs
-      className="tab tab-nav-simple product-tabs"
-      selectedTabClassName="show"
-      selectedTabPanelClassName="active"
-      selectedIndex={tabIndex}
-      onSelect={(index) => setTabIndex(index)}
-    >
-      <TabList className="nav nav-tabs justify-content-center" role="tablist">
-        <Tab className="nav-item">
-          <span className="nav-link">Description</span>
-        </Tab>
-        <Tab className="nav-item">
-          <span className="nav-link">Specifications</span>
-        </Tab>
-        <Tab className="nav-item">
-          <span className="nav-link" id="product-review">
-            Reviews {!!totalRatings && `(${totalRatings})`}
-          </span>
-        </Tab>
-
-        <Tab className="nav-item">
-          <span className="nav-link">FAQ</span>
-        </Tab>
-      </TabList>
-
-      <div className="tab-content">
-        <TabPanel className="tab-pane product-tab-description">
-          <div className="row mt-6">
+    <div className="col-md-12 mb-6">
+      <Accordion adClass="accordion-simple">
+        <Card title="Description" adClass="border-no" noDisplayStyle>
+          <div className="row">
             <div className="col-md-12">
               {!!longDescription && (
                 <>
@@ -263,9 +227,9 @@ function DescOne(props) {
               )}
             </div>
           </div>
-        </TabPanel>
+        </Card>
 
-        <TabPanel className="tab-pane product-tab-specifications">
+        <Card title="Specifications" noDisplayStyle>
           <div className="row mt-6">
             <div className="pl-md-6 pt-4 pt-md-0">
               <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
@@ -323,201 +287,230 @@ function DescOne(props) {
               )}
             </div>
           </div>
-        </TabPanel>
+        </Card>
 
-        <TabPanel className="tab-pane product-tab-reviews">
-          <div className="reply mt-8 mb-8">
-            <div className="title-wrapper text-left">
-              <h3 className="title title-simple text-left text-normal">
-                {reviews > 0
-                  ? "Add a Review"
-                  : "Be The First To Review “" + title + "”"}
-              </h3>{" "}
-              {!!totalRatings && (
-                <div className="review-section">
-                  <div className="total-review w-100">
-                    <h4>{rating}</h4>
-                    <RatingStar value={rating} />
-                    {!!totalRatings && (
-                      <span>Based on {totalRatings} reviews</span>
-                    )}
-                  </div>
-                  <div className="rating w-100">
-                    {[5, 4, 3, 2, 1].map((num, i) => (
-                      <div
-                        className="d-flex align-items-center justify-content-center mt-2"
-                        key={i}
-                      >
-                        <RatingStar value={num} />
-                        <div className="ml-1 percent">
-                          ({getPer(total, allReviews[num]?.length)}%)
-                        </div>
-                        <span className="ml-1">{allReviews[num]?.length}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="w-100 d-flex align-items-center justify-content-center">
-                    <div className="buttons">
-                      <div className=" justify-content-end">
-                        <button
-                          className="btn btn-primary  btn-rounded mb-2"
-                          onClick={() => {
-                            setShowReview(!showReview);
-                          }}
-                        >
-                          Add Review
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {showReview && (
-                <>
-                  <hr className="product-divider"></hr>
-                  <p>
-                    Your email address will not be published. Required fields
-                    are marked *
-                  </p>
-                </>
-              )}
-            </div>
-            {showReview && (
-              <form action="#" onSubmit={submitReview}>
-                <div className="row">
-                  <div className="col-md-6 mb-5">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="reply-name"
-                      name="reply-name"
-                      placeholder="Name *"
-                      required
-                      value={reviewState.name}
-                      onChange={(e) => setReview({ name: e.target.value })}
-                      onBlur={(e) => setReview({ name: e.target.value.trim() })}
-                    />
-                  </div>
-                  <div className="col-md-6 mb-5">
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="reply-email"
-                      name="reply-email"
-                      placeholder="Email *"
-                      required
-                      value={reviewState.email}
-                      onChange={(e) => setReview({ email: e.target.value })}
-                      onBlur={(e) =>
-                        setReview({ email: e.target.value.trim() })
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="rating-form">
-                  <label htmlFor="rating" className="text-dark">
-                    Your rating *{" "}
-                  </label>
-                  <RatingStar
-                    onClick={(num) => {
-                      setReview({ rating: num });
-                    }}
-                    value={reviewState.rating}
-                    editable
-                  />
-                </div>
-                <textarea
-                  id="reply-message"
-                  cols="30"
-                  rows="6"
-                  className="form-control mb-4"
-                  placeholder="Comment *"
-                  required
-                  value={reviewState.comment}
-                  onChange={(e) => setReview({ comment: e.target.value })}
-                  onBlur={(e) => setReview({ comment: e.target.value.trim() })}
-                ></textarea>
-                <div className="d-flex w-100 img-wrapper justify-content-end">
-                  {reviewState.image &&
-                    reviewState.image.map((img, index) => (
-                      <div className="img_wrp mr-2">
-                        <img
-                          src={getPublicImageURL(img)}
-                          className="img-preview"
-                          alt=""
-                        />
-                        <img
-                          className="close"
-                          src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png"
-                          onClick={() => {
-                            const temp = [...reviewState.image];
-                            temp.splice(index, 1);
-                            setReview({
-                              ...reviewState,
-                              image: temp,
-                            });
-                          }}
-                        />
-                      </div>
-                    ))}
-
-                  <input
-                    className="d-none"
-                    onChange={onPhotoChange}
-                    type="file"
-                    accept="image/*"
-                    id="review-photo"
-                    name="filename"
-                    multiple
-                  />
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById("review-photo").click();
-                    }}
-                    className="btn btn-rounded mr-2"
-                  >
-                    Add Photo
-                  </button>
-                  <button type="submit" className="btn btn-primary btn-rounded">
-                    <div className="d-flex justify-content-center align-items-center">
-                      Submit
-                      {loading ? (
-                        <div className="spin-loader ml-2" />
-                      ) : (
-                        <i className="d-icon-arrow-right"></i>
+        {!!product?.totalRatings && (
+          <Card
+            title={`Reviews  ${
+              product?.totalRatings ? `(${product.totalRatings})` : ""
+            }`}
+            noDisplayStyle
+            onExpanded={() => {
+              if (!!product?.totalRatings && !reviews.length) {
+                getProductReviews();
+              }
+            }}
+          >
+            <div className="product-tab-reviews">
+              <div className="reply mt-8 mb-8">
+                <div className="title-wrapper text-left">
+                  <h3 className="title title-simple text-left text-normal">
+                    {reviews > 0
+                      ? "Add a Review"
+                      : "Be The First To Review “" + product.title + "”"}
+                  </h3>{" "}
+                  <div className="review-section">
+                    <div className="total-review w-100">
+                      <h4>{product?.rating}</h4>
+                      <RatingStar value={product?.rating} />
+                      {!!product?.totalRatings && (
+                        <span>Based on {product.totalRatings} reviews</span>
                       )}
                     </div>
-                  </button>
+                    <div className="rating w-100">
+                      {[5, 4, 3, 2, 1].map((num, i) => (
+                        <div
+                          className="d-flex align-items-center justify-content-center mt-2"
+                          key={i}
+                        >
+                          <RatingStar value={num} />
+                          <div className="ml-1 percent">
+                            ({getPer(total, allReviews[num]?.length)}%)
+                          </div>
+                          <span className="ml-1">
+                            {allReviews[num]?.length}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="w-100 d-flex align-items-center justify-content-center">
+                      <div className="buttons">
+                        <div className="justify-content-end">
+                          <button
+                            className="btn btn-primary  btn-rounded mb-2"
+                            onClick={() => {
+                              setShowReview(!showReview);
+                            }}
+                          >
+                            Add Review
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {showReview && (
+                    <>
+                      <hr className="product-divider"></hr>
+                      <p>
+                        Your email address will not be published. Required
+                        fields are marked *
+                      </p>
+                    </>
+                  )}
                 </div>
-              </form>
-            )}
-          </div>
-          <hr className="product-divider"></hr>
-          {reviews.length === 0 ? (
-            <div className="comments mb-2 pt-2 pb-2 border-no">
-              There are no reviews yet.
-            </div>
-          ) : (
-            <div className="comments mb-8 pt-2 pb-2 border-no">
-              <ul>
-                {reviews.map((review, id) => (
-                  <Review key={id} review={review} />
-                ))}
-              </ul>
-            </div>
-          )}
-          <TokenPagination
-            onPage={() => getProductReviews(false)}
-            total={total}
-            loaded={reviews?.length}
-            nextToken={token}
-            content="reviews"
-          />
-        </TabPanel>
+                {showReview && (
+                  <form action="#" onSubmit={submitReview}>
+                    <div className="row">
+                      <div className="col-md-6 mb-5">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="reply-name"
+                          name="reply-name"
+                          placeholder="Name *"
+                          required
+                          value={reviewState.name}
+                          onChange={(e) => setReview({ name: e.target.value })}
+                          onBlur={(e) =>
+                            setReview({ name: e.target.value.trim() })
+                          }
+                        />
+                      </div>
+                      <div className="col-md-6 mb-5">
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="reply-email"
+                          name="reply-email"
+                          placeholder="Email *"
+                          required
+                          value={reviewState.email}
+                          onChange={(e) => setReview({ email: e.target.value })}
+                          onBlur={(e) =>
+                            setReview({ email: e.target.value.trim() })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="rating-form">
+                      <label htmlFor="rating" className="text-dark">
+                        Your rating *{" "}
+                      </label>
+                      <RatingStar
+                        onClick={(num) => {
+                          setReview({ rating: num });
+                        }}
+                        value={reviewState.rating}
+                        editable
+                      />
+                    </div>
+                    <textarea
+                      id="reply-message"
+                      cols="30"
+                      rows="6"
+                      className="form-control mb-4"
+                      placeholder="Comment *"
+                      required
+                      value={reviewState.comment}
+                      onChange={(e) => setReview({ comment: e.target.value })}
+                      onBlur={(e) =>
+                        setReview({ comment: e.target.value.trim() })
+                      }
+                    ></textarea>
+                    <div className="d-flex w-100 img-wrapper justify-content-end">
+                      {reviewState.image &&
+                        reviewState.image.map((img, index) => (
+                          <div className="img_wrp mr-2" key={index}>
+                            <img
+                              src={getPublicImageURL(img)}
+                              className="img-preview"
+                              alt=""
+                            />
+                            <img
+                              className="close"
+                              src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png"
+                              onClick={() => {
+                                const temp = [...reviewState.image];
+                                temp.splice(index, 1);
+                                setReview({
+                                  ...reviewState,
+                                  image: temp,
+                                });
+                              }}
+                            />
+                          </div>
+                        ))}
 
-        <TabPanel className="tab-pane product-tab-faq">
-          <div className="row">
+                      <input
+                        className="d-none"
+                        onChange={onPhotoChange}
+                        type="file"
+                        accept="image/*"
+                        id="review-photo"
+                        name="filename"
+                        multiple
+                      />
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById("review-photo").click();
+                        }}
+                        className="btn btn-rounded mr-2"
+                      >
+                        Add Photo
+                      </button>
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-rounded"
+                      >
+                        <div className="d-flex justify-content-center align-items-center">
+                          Submit
+                          {loading ? (
+                            <div className="spin-loader ml-2" />
+                          ) : (
+                            <i className="d-icon-arrow-right"></i>
+                          )}
+                        </div>
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+              <hr className="product-divider"></hr>
+              {reviews.length === 0 ? (
+                <div className="comments mb-2 pt-2 pb-2 border-no">
+                  There are no reviews yet.
+                </div>
+              ) : (
+                <div className="comments mb-8 pt-2 pb-2 border-no">
+                  <ul>
+                    {reviews.map((review, id) => (
+                      <Review key={id} review={review} />
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <TokenPagination
+                onPage={() => getProductReviews(false)}
+                total={total}
+                loaded={reviews?.length}
+                nextToken={token}
+                content="reviews"
+              />
+            </div>
+          </Card>
+        )}
+
+        {!!product.hasFaq && (
+          <Card
+            title="FAQs"
+            noDisplayStyle
+            onExpanded={() => {
+              if (!!product?.hasFaq && !productsFAQs.length) {
+                getProductFAQs();
+              }
+            }}
+          >
             <div className="col-md-12">
               <Reveal
                 keyframes={fadeIn}
@@ -525,44 +518,41 @@ function DescOne(props) {
                 duration="1000"
                 triggerOnce
               >
-                <section>
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-md-12 mt-10">
-                        {!!productsFAQs.length && (
-                          <Accordion adClass="accordion-border accordion-boxed accordion-plus">
-                            {productsFAQs.map((faq) => (
-                              <div key={faq?.id}>
-                                <Card
-                                  title={
-                                    <div
-                                      className="card-title"
-                                      dangerouslySetInnerHTML={{
-                                        __html: faq?.title,
-                                      }}
-                                    />
-                                  }
-                                >
-                                  <div
-                                    dangerouslySetInnerHTML={{
-                                      __html: faq?.description,
-                                    }}
-                                  />
-                                </Card>
-                              </div>
-                            ))}
-                          </Accordion>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </section>
+                <div className="col-md-12">
+                  {!!productsFAQs.length && (
+                    <Accordion adClass="accordion-border">
+                      <>
+                        {productsFAQs.map((faq) => (
+                          <div key={faq?.id}>
+                            <Card
+                              title={
+                                <div
+                                  className="card-title w-100"
+                                  dangerouslySetInnerHTML={{
+                                    __html: faq?.title,
+                                  }}
+                                />
+                              }
+                              noDisplayStyle
+                            >
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: faq?.description,
+                                }}
+                              />
+                            </Card>
+                          </div>
+                        ))}
+                      </>
+                    </Accordion>
+                  )}
+                </div>
               </Reveal>
             </div>
-          </div>
-        </TabPanel>
-      </div>
-    </Tabs>
+          </Card>
+        )}
+      </Accordion>
+    </div>
   );
 }
 
