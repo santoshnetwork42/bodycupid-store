@@ -24,7 +24,7 @@ const reviewDefault = {
   comment: "",
   name: "",
   email: "",
-  image: [],
+  images: [],
 };
 
 function DescOne(props) {
@@ -138,7 +138,7 @@ function DescOne(props) {
       );
       setReview({
         ...reviewState,
-        image: [...reviewState.image, ...urls],
+        images: [...reviewState.images, ...urls],
       });
     }
   };
@@ -153,7 +153,7 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { rating, comment, name, email, image } = reviewState;
+        const { rating, comment, name, email, images } = reviewState;
         await API.graphql({
           query: createReview,
           variables: {
@@ -166,7 +166,7 @@ function DescOne(props) {
               },
               userId: user?.id,
               productId: id,
-              images: image,
+              images,
             },
           },
         });
@@ -181,7 +181,7 @@ function DescOne(props) {
             productId: id,
             rating,
             comment,
-            images: image,
+            images,
             updatedAt: new Date().toUTCString(),
           },
           ...reviews,
@@ -201,6 +201,15 @@ function DescOne(props) {
     },
     [reviewState, user?.id, id]
   );
+
+  const removeImage = (index) => {
+    const temp = [...reviewState.images];
+    temp.splice(index, 1);
+    setReview({
+      ...reviewState,
+      images: temp,
+    });
+  };
 
   return (
     <div className="col-md-12 mb-6">
@@ -284,26 +293,26 @@ function DescOne(props) {
           </div>
         </Card>
 
-        {!!product?.totalRatings && (
-          <Card
-            title={`Reviews  ${
-              product?.totalRatings ? `(${product.totalRatings})` : ""
-            }`}
-            noDisplayStyle
-            onExpanded={() => {
-              if (!!product?.totalRatings && !reviews.length) {
-                getProductReviews();
-              }
-            }}
-          >
-            <div className="product-tab-reviews">
-              <div className="reply mt-8 mb-8">
-                <div className="title-wrapper text-left">
-                  <h3 className="title title-simple text-left text-normal">
-                    {reviews > 0
-                      ? "Add a Review"
-                      : "Be The First To Review “" + product.title + "”"}
-                  </h3>{" "}
+        <Card
+          title={`Reviews  ${
+            product?.totalRatings ? `(${product.totalRatings})` : ""
+          }`}
+          noDisplayStyle
+          onExpanded={() => {
+            if (!!product?.totalRatings && !reviews.length) {
+              getProductReviews();
+            }
+          }}
+        >
+          <div className="product-tab-reviews">
+            <div className="reply mt-8 mb-8">
+              <div className="title-wrapper text-left">
+                <h3 className="title title-simple text-left text-normal">
+                  {reviews > 0
+                    ? "Add a Review"
+                    : "Be The First To Review “" + product.title + "”"}
+                </h3>{" "}
+                {!!reviews.length && (
                   <div className="review-section">
                     <div className="total-review w-100">
                       <h4>{product?.rating}</h4>
@@ -343,175 +352,167 @@ function DescOne(props) {
                       </div>
                     </div>
                   </div>
-                  {showReview && (
-                    <>
-                      <hr className="product-divider"></hr>
-                      <p>
-                        Your email address will not be published. Required
-                        fields are marked *
-                      </p>
-                    </>
-                  )}
-                </div>
+                )}
                 {showReview && (
-                  <form action="#" onSubmit={submitReview}>
-                    <div className="row">
-                      <div className="col-md-6 mb-5">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="reply-name"
-                          name="reply-name"
-                          placeholder="Name *"
-                          required
-                          value={reviewState.name}
-                          onChange={(e) =>
-                            setReview({ ...reviewState, name: e.target.value })
-                          }
-                          onBlur={(e) =>
-                            setReview({
-                              ...reviewState,
-                              name: e.target.value.trim(),
-                            })
-                          }
-                        />
-                      </div>
-                      <div className="col-md-6 mb-5">
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="reply-email"
-                          name="reply-email"
-                          placeholder="Email *"
-                          required
-                          value={reviewState.email}
-                          onChange={(e) =>
-                            setReview({ ...reviewState, email: e.target.value })
-                          }
-                          onBlur={(e) =>
-                            setReview({
-                              ...reviewState,
-                              email: e.target.value.trim(),
-                            })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="rating-form">
-                      <label htmlFor="rating" className="text-dark">
-                        Your rating *{" "}
-                      </label>
-                      <RatingStar
-                        onClick={(num) => {
-                          setReview({ ...reviewState, rating: num });
-                        }}
-                        value={reviewState.rating}
-                        editable
-                      />
-                    </div>
-                    <textarea
-                      id="reply-message"
-                      cols="30"
-                      rows="6"
-                      className="form-control mb-4"
-                      placeholder="Comment *"
-                      required
-                      value={reviewState.comment}
-                      onChange={(e) =>
-                        setReview({ ...reviewState, comment: e.target.value })
-                      }
-                      onBlur={(e) =>
-                        setReview({
-                          ...reviewState,
-                          comment: e.target.value.trim(),
-                        })
-                      }
-                    ></textarea>
-                    <div className="d-flex w-100 img-wrapper justify-content-end">
-                      <div className=" img-wrapper">
-                        {reviewState.image &&
-                          reviewState.image.map((img, index) => (
-                            <div className="img_wrp mr-2" key={index}>
-                              <img
-                                src={getPublicImageURL(img)}
-                                className="img-preview"
-                                alt=""
-                              />
-
-                              <i
-                                className="d-icon-close close"
-                                onClick={() => {
-                                  const temp = [...reviewState.image];
-                                  temp.splice(index, 1);
-                                  setReview({
-                                    ...reviewState,
-                                    image: temp,
-                                  });
-                                }}
-                              ></i>
-                            </div>
-                          ))}
-                      </div>
-
-                      <input
-                        className="d-none"
-                        onChange={onPhotoChange}
-                        type="file"
-                        accept="image/*"
-                        id="review-photo"
-                        name="filename"
-                        multiple
-                      />
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          document.getElementById("review-photo").click();
-                        }}
-                        className="btn btn-rounded mr-2"
-                      >
-                        Add Photo
-                      </button>
-                      <button
-                        type="submit"
-                        className="btn btn-primary btn-rounded"
-                      >
-                        <div className="d-flex justify-content-center align-items-center">
-                          Submit
-                          {loading ? (
-                            <div className="spin-loader ml-2" />
-                          ) : (
-                            <i className="d-icon-arrow-right"></i>
-                          )}
-                        </div>
-                      </button>
-                    </div>
-                  </form>
+                  <>
+                    <hr className="product-divider"></hr>
+                    <p>
+                      Your email address will not be published. Required fields
+                      are marked *
+                    </p>
+                  </>
                 )}
               </div>
-              <hr className="product-divider"></hr>
-              {reviews.length === 0 ? (
-                <div className="comments mb-2 pt-2 pb-2 border-no">
-                  There are no reviews yet.
-                </div>
-              ) : (
-                <div className="comments mb-8 pt-2 pb-2 border-no">
-                  <ul>
-                    {reviews.map((review, id) => (
-                      <Review key={id} review={review} />
-                    ))}
-                  </ul>
-                </div>
+              {showReview && (
+                <form action="#" onSubmit={submitReview}>
+                  <div className="row">
+                    <div className="col-md-6 mb-5">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="reply-name"
+                        name="reply-name"
+                        placeholder="Name *"
+                        required
+                        value={reviewState.name}
+                        onChange={(e) =>
+                          setReview({ ...reviewState, name: e.target.value })
+                        }
+                        onBlur={(e) =>
+                          setReview({
+                            ...reviewState,
+                            name: e.target.value.trim(),
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="col-md-6 mb-5">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="reply-email"
+                        name="reply-email"
+                        placeholder="Email *"
+                        required
+                        value={reviewState.email}
+                        onChange={(e) =>
+                          setReview({ ...reviewState, email: e.target.value })
+                        }
+                        onBlur={(e) =>
+                          setReview({
+                            ...reviewState,
+                            email: e.target.value.trim(),
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="rating-form">
+                    <label htmlFor="rating" className="text-dark">
+                      Your rating *{" "}
+                    </label>
+                    <RatingStar
+                      onClick={(num) => {
+                        setReview({ ...reviewState, rating: num });
+                      }}
+                      value={reviewState.rating}
+                      editable
+                    />
+                  </div>
+                  <textarea
+                    id="reply-message"
+                    cols="30"
+                    rows="6"
+                    className="form-control mb-4"
+                    placeholder="Comment *"
+                    required
+                    value={reviewState.comment}
+                    onChange={(e) =>
+                      setReview({ ...reviewState, comment: e.target.value })
+                    }
+                    onBlur={(e) =>
+                      setReview({
+                        ...reviewState,
+                        comment: e.target.value.trim(),
+                      })
+                    }
+                  ></textarea>
+                  <div className="d-flex w-100 img-wrapper justify-content-end">
+                    <div className=" img-wrapper">
+                      {reviewState.images.map((img, index) => (
+                        <div className="img_wrp mr-2" key={img}>
+                          <img 
+                            src={getPublicImageURL(img)}
+                            className="img-preview"
+                            alt=""
+                          />
+
+                          <i
+                            className="d-icon-close close"
+                            onClick={() => removeImage(index)}
+                          ></i>
+                        </div>
+                      ))}
+                    </div>
+
+                    <input
+                      className="d-none"
+                      onChange={onPhotoChange}
+                      type="file"
+                      accept="image/*"
+                      id="review-photo"
+                      name="filename"
+                      multiple
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById("review-photo").click();
+                      }}
+                      className="btn btn-rounded mr-2"
+                    >
+                      Add Photo
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-rounded"
+                    >
+                      <div className="d-flex justify-content-center align-items-center">
+                        Submit
+                        {loading ? (
+                          <div className="spin-loader ml-2" />
+                        ) : (
+                          <i className="d-icon-arrow-right"></i>
+                        )}
+                      </div>
+                    </button>
+                  </div>
+                </form>
               )}
-              <TokenPagination
-                onPage={() => getProductReviews(false)}
-                total={total}
-                loaded={reviews?.length}
-                nextToken={token}
-                content="reviews"
-              />
             </div>
-          </Card>
-        )}
+            <hr className="product-divider"></hr>
+            {reviews.length === 0 ? (
+              <div className="comments mb-2 pt-2 pb-2 border-no">
+                There are no reviews yet.
+              </div>
+            ) : (
+              <div className="comments mb-8 pt-2 pb-2 border-no">
+                <ul>
+                  {reviews.map((review, id) => (
+                    <Review key={id} review={review} />
+                  ))}
+                </ul>
+              </div>
+            )}
+            <TokenPagination
+              onPage={() => getProductReviews(false)}
+              total={total}
+              loaded={reviews?.length}
+              nextToken={token}
+              content="reviews"
+            />
+          </div>
+        </Card>
 
         {!!product.hasFaq && (
           <Card
