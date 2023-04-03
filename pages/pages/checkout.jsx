@@ -30,8 +30,15 @@ import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
-    props;
+  const {
+    cartList,
+    user,
+    emptyCart,
+    appliedCoupon,
+    removeCoupon,
+    store,
+    metadata,
+  } = props;
   const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -116,6 +123,7 @@ function Checkout(props) {
     },
     [store, user]
   );
+
   const fetchPaymentStatus = useCallback(async () => {
     if (orderId && paymentId) {
       const {
@@ -184,6 +192,7 @@ function Checkout(props) {
             shippingAddress: restAddress,
             billingAddress: restAddress,
             couponCodeId: appliedCoupon?.id,
+            ...metadata,
           };
 
           const {
@@ -270,6 +279,7 @@ function Checkout(props) {
       shippingTotal,
       couponTotal,
       prepaidDiscount,
+      metadata,
     ]
   );
 
@@ -611,6 +621,7 @@ function mapStateToProps(state) {
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
+    metadata: state.system.meta,
   };
 }
 const Component = connect(mapStateToProps, {

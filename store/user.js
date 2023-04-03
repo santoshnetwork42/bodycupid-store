@@ -1,7 +1,7 @@
 import { persistReducer } from "redux-persist";
-import storage from 'redux-persist/lib/storage';
 
 import { STORE_PREFIX } from "~/config";
+import storage from "~/utils/storage";
 
 const actionTypes = {
     SET_USER: 'SET_USER',
