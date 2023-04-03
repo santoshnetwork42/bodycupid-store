@@ -193,7 +193,6 @@ export default function ThumbOne(props) {
         document.querySelector(".product-gallery.pg-vertical").offsetHeight +
         thumbSpace;
       newTerm = parseInt(newTerm / transformUnit);
-      console.log("new term is", newTerm, window.innerWidth);
       if (newTerm !== term) {
         setTerm(newTerm);
       }

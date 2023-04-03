@@ -46,7 +46,7 @@ function Categories({ store }) {
   }, [categorySlug]);
 
   return (
-    <main className="main">
+    <main className="main searchBar">
       <Head>
         <title>{name} - Shop Page</title>
       </Head>
@@ -76,4 +76,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(React.memo(Categories));
+const Component = connect(mapStateToProps)(React.memo(Categories));
+
+Component.showMobileSearchBar = true;
+
+export default Component;

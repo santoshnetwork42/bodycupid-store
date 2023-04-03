@@ -150,11 +150,9 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details">
-        <div className="product-cat">
-          <label className="product-tag">
+          <div className="product-tags">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-          </label>
-        </div>
+          </div>
 
         <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>

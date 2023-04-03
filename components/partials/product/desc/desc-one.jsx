@@ -28,31 +28,28 @@ const reviewDefault = {
 };
 
 function DescOne(props) {
-  const { product, isDivider = true, openModal, user } = props;
+  const { product, openModal, user } = props;
+  const {
+    id,
+    totalRatings,
+    longDescription,
+    brand,
+    vendor,
+    weight,
+    weightUnit,
+    video,
+    rating,
+    title,
+  } = product;
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
-  const [showReview, setShowReview] = useState(false);
+  const [showReview, setShowReview] = useState(!totalRatings);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const [productsFAQs, setProductsFAQs] = useState([]);
   const [reviewImages, setReviewImages] = useState([]);
-  let sizes = [];
-  if (product.variants.items.length > 0) {
-    if (product.variants.items[0].size)
-      product.variants.items.forEach((item) => {
-        if (sizes.findIndex((size) => size.name === item.size.name) === -1) {
-          sizes.push({ name: item.size.name, value: item.size.size });
-        }
-      });
 
-    if (product.variants.items[0].color) {
-      product.variants.items.forEach((item) => {
-        if (colors.findIndex((color) => color.name === item.color.name) === -1)
-          colors.push({ name: item.color.name, value: item.color.color });
-      });
-    }
-  }
   const allReviews = useMemo(() => {
     if (reviews && reviews.length) {
       return [1, 2, 3, 4, 5].reduce((acc, cur) => {
@@ -65,13 +62,14 @@ function DescOne(props) {
     }
     return 0;
   }, [reviews]);
+
   const getProductReviews = useCallback(
     (reset) => {
       setLoading(true);
       API.graphql(
         graphqlOperation(getReviews, {
           filter: {
-            productId: { eq: product.id },
+            productId: { eq: id },
           },
           sort: [{ field: "createdAt", direction: "desc" }],
           nextToken: reset ? null : token,
@@ -106,7 +104,7 @@ function DescOne(props) {
     API.graphql(
       graphqlOperation(searchProductFaqs, {
         filter: {
-          productId: { eq: product.id },
+          productId: { eq: id },
         },
       })
     )
@@ -180,7 +178,7 @@ function DescOne(props) {
                 email,
               },
               userId: user?.id,
-              productId: product?.id,
+              productId: id,
               images: image,
             },
           },
@@ -194,7 +192,7 @@ function DescOne(props) {
               name,
               email,
             },
-            productId: product?.id,
+            productId: id,
             rating,
             comment,
             images: image,
@@ -215,7 +213,7 @@ function DescOne(props) {
       }
       return false;
     },
-    [reviewState, user?.id, product?.id]
+    [reviewState, user?.id, id]
   );
 
   return (
@@ -224,14 +222,14 @@ function DescOne(props) {
         <Card title="Description" adClass="border-no" noDisplayStyle>
           <div className="row">
             <div className="col-md-12">
-              {!!product.longDescription && (
+              {!!longDescription && (
                 <>
                   <h5 className="description-title mb-4 font-weight-semi-bold ls-m">
                     Features
                   </h5>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: product.longDescription,
+                      __html: longDescription,
                     }}
                   />
                 </>
@@ -258,23 +256,21 @@ function DescOne(props) {
                     <th className="font-weight-semi-bold text-dark pl-0 text-left">
                       Brand
                     </th>
-                    <td className="pl-4">{product.brand || product.vendor}</td>
+                    <td className="pl-4">{brand || vendor}</td>
                   </tr>
-                  {!!(product.weight && product.weightUnit) && (
+                  {!!(weight && weightUnit) && (
                     <tr>
                       <th className="font-weight-semi-bold text-dark pl-0">
                         Weight
                       </th>
-                      <td className="pl-4">
-                        {product.weight + " " + product.weightUnit}
-                      </td>
+                      <td className="pl-4">{weight + " " + weightUnit}</td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
             <div className="pl-md-6 pt-4 pt-md-0">
-              {!!product.video && (
+              {!!video && (
                 <>
                   <h5 className="description-title font-weight-semi-bold ls-m mb-5">
                     Video Description
@@ -290,7 +286,7 @@ function DescOne(props) {
                     <a
                       className="btn-play btn-iframe"
                       href="#"
-                      data={product.video}
+                      data={video}
                       onClick={showVideoModalHandler}
                     >
                       <i className="d-icon-play-solid"></i>

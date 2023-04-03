@@ -14,9 +14,11 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-function Order({ order: orderItem, paymentId, orderId }) {
+function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
+  const { name } = store;
   const [timer, setTimer] = useState(null);
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
@@ -113,8 +115,8 @@ function Order({ order: orderItem, paymentId, orderId }) {
 
       <h1 className="d-none">{name}- Order</h1>
 
-      <div className="page-content pt-7 pb-10 mb-10">
-        <div className="step-by pr-4 pl-4">
+      <div className="order-page-content page-content pt-7 pb-10 mb-10">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
           </h3>
@@ -126,60 +128,6 @@ function Order({ order: orderItem, paymentId, orderId }) {
           </h3>
         </div>
         <div className="container mt-8">
-          <div className="order-message mr-auto ml-auto">
-            <div className="icon-box d-inline-flex align-items-center">
-              <div className="icon-box-icon mb-0">
-                <svg
-                  version="1.1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 50 50"
-                  enableBackground="new 0 0 50 50"
-                  xmlSpace="preserve"
-                >
-                  <g>
-                    <path
-                      fill="none"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="bevel"
-                      strokeMiterlimit="10"
-                      d="
-                                        M33.3,3.9c-2.7-1.1-5.6-1.8-8.7-1.8c-12.3,0-22.4,10-22.4,22.4c0,12.3,10,22.4,22.4,22.4c12.3,0,22.4-10,22.4-22.4
-                                        c0-0.7,0-1.4-0.1-2.1"
-                    ></path>
-                    <polyline
-                      fill="none"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      strokeLinejoin="bevel"
-                      strokeMiterlimit="10"
-                      points="
-                                        48,6.9 24.4,29.8 17.2,22.3 	"
-                    ></polyline>
-                  </g>
-                </svg>
-              </div>
-              <div className="icon-box-content text-left">
-                <h5 className="icon-box-title font-weight-bold lh-1 mb-1">
-                  Thank You!
-                </h5>
-                {isPaymentProcessing && (
-                  <p className="lh-1 ls-m">
-                    Your order has been received and your payment status is
-                    being updated.
-                  </p>
-                )}
-                {!isPaymentProcessing && (
-                  <p className="lh-1 ls-m">Your order has been received</p>
-                )}
-              </div>
-            </div>
-          </div>
-
           <div className="order-results">
             <div className="overview-item">
               <span>Order number:</span>
@@ -193,19 +141,10 @@ function Order({ order: orderItem, paymentId, orderId }) {
               <span>Date:</span>
               <strong>{formateDate(order?.createdAt)}</strong>
             </div>
-            <div className="overview-item">
-              <span>Email:</span>
-              <strong>{order?.shippingAddress?.email}</strong>
-            </div>
+
             <div className="overview-item">
               <span>Total:</span>
               <strong>₹{toDecimal(order?.totalAmount)}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Payment method:</span>
-              <strong>
-                {order?.paymentType === "COD" ? "Cash on delivery" : "Online"}
-              </strong>
             </div>
           </div>
 
@@ -225,31 +164,50 @@ function Order({ order: orderItem, paymentId, orderId }) {
               <tbody>
                 {order?.products?.items?.map((item) => (
                   <tr key={"order-" + item.id}>
-                    <td className="product-name">
-                      {item.product.title}{" "}
-                      <span>
-                        <i className="fas fa-times"></i>{" "}
-                        {item.quantity || item.cancelledQuantity}
-                      </span>
-                      {item.cancelledQuantity > 0 && item.status === "CREATED" && (
-                        <Tag type="cancel">
-                          CANCELLED <i className="fas fa-times"></i>&nbsp;
-                          {item.cancelledQuantity}
-                        </Tag>
-                      )}
-                      {allStatus.includes(item.status) && (
-                        <Tag type={getStatusType(item.status)}>
-                          {item.status}
-                        </Tag>
-                      )}
-                      {item.variant && (
-                        <p className="mb-0">
-                          <strong>{item.variant.title}</strong>
-                        </p>
-                      )}
-                    </td>
-                    <td className="product-price">
-                      ₹{toDecimal(item.quantity * item.price)}
+                    <td className="product-name" colSpan={2}>
+                      <div className="d-flex justify-content-between">
+                        <div className="d-flex">
+                          <ALink className='order-image' href={"/product/" + item.slug}>
+                            <img
+                              src={getPublicImageURL(
+                                item.product.images?.items[0]?.imageKey
+                              )}
+                              alt={item.product?.images.items[0]?.alt}
+                              width="80"
+                              height="88"
+                            />
+                          </ALink>
+                          <div>
+                            {item.product.title}
+                            <span>
+                              <i className="fas fa-times"></i>
+                              {item.quantity || item.cancelledQuantity}
+                            </span>
+                            {item.cancelledQuantity > 0 &&
+                              item.status === "CREATED" && (
+                                <Tag type="cancel">
+                                  CANCELLED <i className="fas fa-times"></i>
+                                  &nbsp;
+                                  {item.cancelledQuantity}
+                                </Tag>
+                              )}
+                            {allStatus.includes(item.status) && (
+                              <Tag type={getStatusType(item.status)}>
+                                {item.status}
+                              </Tag>
+                            )}
+                            {item.variant && (
+                              <p className="mb-0">
+                                <strong>{item.variant.title}</strong>
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="product-price">
+                          ₹{toDecimal(item.quantity * item.price)}
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -304,35 +262,65 @@ function Order({ order: orderItem, paymentId, orderId }) {
               </tbody>
             </table>
           </div>
-          <h2 className="title title-simple text-left pt-10 mb-2">
-            Shipping Address
-          </h2>
-          <div className="address-info pb-8 mb-6">
-            <p className="address-detail pb-2">
-              {order?.shippingAddress?.name}
-              <br />
-              {order?.shippingAddress?.address}
-              {!!order?.shippingAddress?.location && (
-                <>
+          <div className="d-flex flex-wrap address-info pb-8 mb-6 pt-10">
+            <div className="mr-8">
+              <h2 className="title title-simple text-left">Billing Address</h2>
+              <div className="">
+                <p className="address-detail">
+                  {order?.billingAddress?.name}
                   <br />
-                  {order?.shippingAddress?.location}
-                </>
-              )}
-              <br />
-              {(order?.shippingAddress?.city + ", ", state + ", " + country)}
-              <br />
-              {order?.shippingAddress?.pinCode}
-            </p>
-            <p className="email">
-              {order?.shippingAddress?.email}
-              <br />
-              {order?.shippingAddress?.phone}
-            </p>
+                  {order?.billingAddress?.address}
+                  {!!order?.billingAddress?.location && (
+                    <>
+                      <br />
+                      {order?.billingAddress?.location}
+                    </>
+                  )}
+                  <br />
+                  {(order?.billingAddress?.city + ", ", state + ", " + country)}
+                  <br />
+                  {order?.billingAddress?.pinCode}
+                </p>
+                <p className="email">
+                  {order?.billingAddress?.email}
+                  <br />
+                  {order?.billingAddress?.phone}
+                </p>
+              </div>
+            </div>
+            <div>
+              <h2 className="title title-simple text-left">Shipping Address</h2>
+              <div className="">
+                <p className="address-detail">
+                  {order?.shippingAddress?.name}
+                  <br />
+                  {order?.shippingAddress?.address}
+                  {!!order?.shippingAddress?.location && (
+                    <>
+                      <br />
+                      {order?.shippingAddress?.location}
+                    </>
+                  )}
+                  <br />
+                  {
+                    (order?.shippingAddress?.city + ", ",
+                    state + ", " + country)
+                  }
+                  <br />
+                  {order?.shippingAddress?.pinCode}
+                </p>
+                <p className="email">
+                  {order?.shippingAddress?.email}
+                  <br />
+                  {order?.shippingAddress?.phone}
+                </p>
+              </div>
+            </div>
           </div>
 
           <ALink
             href="/collections/all"
-            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 mr-3"
           >
             Continue Shopping
           </ALink>
@@ -344,7 +332,7 @@ function Order({ order: orderItem, paymentId, orderId }) {
               },
             }}
             as="/pages/account"
-            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 ml-3"
+            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 "
           >
             Your Orders
           </ALink>
@@ -381,4 +369,10 @@ Order.getInitialProps = async (context) => {
   };
 };
 
-export default Order;
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps)(Order);

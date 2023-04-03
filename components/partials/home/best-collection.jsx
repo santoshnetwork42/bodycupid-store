@@ -11,7 +11,7 @@ import { fadeIn } from "~/utils/data/keyframes";
 function BestCollection({ products = [] }) {
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
-      <section className="product-wrapper container mt-6 mt-md-10 pt-4 pb-8">
+      <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 pb-8">
         <h2 className="title title-center mb-5">Best Sellers</h2>
 
         <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>

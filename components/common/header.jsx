@@ -82,7 +82,7 @@ function Header({ navbar, auth, openLogin }) {
                 </div>
               </ALink>
               <span className="divider"></span>
-              <ALink href="/pages/wishlist" className="wishlist d-sm-none">
+              <ALink href="/pages/wishlist" className="wishlist mr-3 d-sm-none">
                 <i className="d-icon-heart"></i>
               </ALink>
               <span className="divider"></span>
@@ -90,9 +90,19 @@ function Header({ navbar, auth, openLogin }) {
               <CartMenu />
               <span className="divider"></span>
               {!!auth && (
-                <ALink href="/pages/account" className="account wishlist">
+                <ALink
+                  href="/pages/account"
+                  className={`account wishlist ${
+                    !navbar.showMobileSearchBar && "d-sm-none"
+                  }`}
+                >
                   <i className="d-icon-user"></i>
                 </ALink>
+              )}
+              {!navbar.showMobileSearchBar && (
+                <div className="d-sm-show">
+                  <SearchBox type="icon" />
+                </div>
               )}
               {!auth && (
                 <ALink
@@ -106,7 +116,9 @@ function Header({ navbar, auth, openLogin }) {
               {!auth && (
                 <ALink
                   href="/pages/login"
-                  className="label-block wishlist d-sm-show"
+                  className={`label-block wishlist d-sm-show ${
+                    !navbar.showMobileSearchBar && "d-sm-none"
+                  }`}
                 >
                   <i className="d-icon-user"></i>
                 </ALink>
@@ -122,10 +134,11 @@ function Header({ navbar, auth, openLogin }) {
           </div>
         </div>
       </div>
-
-      <div className="bottom-search d-sm-show">
-        <SearchBox />
-      </div>
+      {navbar.showMobileSearchBar && (
+        <div className="bottom-search d-sm-show">
+          <SearchBox />
+        </div>
+      )}
     </header>
   );
 }

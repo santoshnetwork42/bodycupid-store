@@ -110,7 +110,6 @@ export const getHomePageProducts = /* GraphQL */ `
             price
             sku
             size
-            color
             status
             position
             currency

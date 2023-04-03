@@ -329,7 +329,7 @@ function SidebarFilterOne(props) {
                   <form action="#">
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="price-range d-flex">
-                        <spna>₹</spna>
+                        <span>₹</span>
                         <input
                           type={"number"}
                           placeholder="Minimum"
@@ -346,7 +346,7 @@ function SidebarFilterOne(props) {
                       </div>
                       <span>-</span>
                       <div className="price-range d-flex">
-                        <spna>₹</spna>
+                        <span>₹</span>
                         <input
                           type={"number"}
                           placeholder="Maximum"
