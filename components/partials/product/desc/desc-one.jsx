@@ -125,15 +125,6 @@ function DescOne(props) {
       });
   }, [product]);
 
-  useEffect(() => {
-    if (!!product?.totalRatings) {
-      getProductReviews(true);
-    }
-    if (!!product?.hasFaq) {
-      getProductFAQs();
-    }
-  }, []);
-
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
     return 0;
@@ -304,6 +295,11 @@ function DescOne(props) {
               product?.totalRatings ? `(${product.totalRatings})` : ""
             }`}
             noDisplayStyle
+            onExpanded={() => {
+              if (!!product?.totalRatings && !reviews.length) {
+                getProductReviews();
+              }
+            }}
           >
             <div className="product-tab-reviews">
               <div className="reply mt-8 mb-8">
@@ -506,7 +502,15 @@ function DescOne(props) {
         )}
 
         {!!product.hasFaq && (
-          <Card title="FAQs" noDisplayStyle>
+          <Card
+            title="FAQs"
+            noDisplayStyle
+            onExpanded={() => {
+              if (!!product?.hasFaq && !productsFAQs.length) {
+                getProductFAQs();
+              }
+            }}
+          >
             <div className="col-md-12">
               <Reveal
                 keyframes={fadeIn}
