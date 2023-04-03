@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ALink from "~/components/features/custom-link";
+import OptimizedImage from "~/components/features/optimized-image";
 import { formateDate, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
@@ -65,8 +66,8 @@ export default function Review({ review }) {
         <div className="comment-media d-flex flex-wrap ">
           {review.images.map((img) => {
             return (
-              <ALink href="#">
-                <img
+              <ALink href="#" key={img}>
+                <OptimizedImage
                   src={getPublicImageURL(img)}
                   alt="avatar"
                   width="100"

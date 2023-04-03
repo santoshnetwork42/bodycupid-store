@@ -1,15 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
-import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
-import { STORE_ID } from "~/config";
-import { getBasicCategory } from "~/graphql/api";
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import fetchData from "~/utils/fetchData";
 
 function All(props) {
   const { store } = props;
@@ -18,10 +13,14 @@ function All(props) {
   return (
     <main className="main">
       <Head>
-        <title>{name} - Shop Page</title>
+        <title>
+          {"All Products"} - {name}
+        </title>
       </Head>
 
-      <h1 className="d-none">{name} - Shop Page</h1>
+      <h1 className="d-none">
+        {"All Products"} - {name}
+      </h1>
 
       <ShopBanner bannerUrl={null} />
 

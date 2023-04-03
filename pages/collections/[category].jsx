@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
-import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
-import { getBasicCategory } from "~/graphql/api";
+import { getBasicCategory, getCategoriesSlug } from "~/graphql/api";
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
@@ -14,48 +12,17 @@ import fetchData from "~/utils/fetchData";
 function Categories(props) {
   const { store, category } = props;
   const { name } = store;
-  console.log("data", props);
-  // const [category, setCategory] = useState(null);
-  // const router = useRouter();
-
-  // const { category: categorySlug } = router.query;
-
-  // useEffect(() => {
-  //   if (categorySlug !== "all") {
-  //     getCategoryByslug();
-  //   }
-  // }, [categorySlug]);
-
-  // const getCategoryByslug = useCallback(async () => {
-  //   try {
-  //     const {
-  //       data: {
-  //         byslugProductCategory: {
-  //           items: [response],
-  //         },
-  //       },
-  //     } = await API.graphql(
-  //       graphqlOperation(getBasicCategory, {
-  //         slug: categorySlug,
-  //         filter: { storeId: { eq: STORE_ID } },
-  //       })
-  //     );
-  //     setCategory(response);
-  //   } catch (error) {
-  //     console.log("byslugProductCategory", error);
-  //   }
-  // }, [categorySlug]);
 
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {category?.name || "All Products"}
+          {category?.name} - {name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {category?.name || "All Products"}
+        {category?.name} - {name}
       </h1>
 
       <ShopBanner bannerUrl={category?.bannerUrl} />
@@ -76,6 +43,22 @@ function Categories(props) {
 }
 
 export const getStaticPaths = async () => {
+  const {
+    searchProductCategories: { items: response },
+  } = await fetchData(getCategoriesSlug, {
+    filter: { storeId: { eq: STORE_ID } },
+  });
+  if (!!response?.length) {
+    const paths = response.map((c) => {
+      return {
+        params: { category: c.slug },
+      };
+    });
+    return {
+      paths: paths,
+      fallback: false,
+    };
+  }
   return {
     paths: [],
     fallback: true,
@@ -84,7 +67,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   try {
-    const { category: categorySlug } = context.params;
+    const { params } = context;
+    const { category: categorySlug } = params;
     const {
       byslugProductCategory: {
         items: [response],
