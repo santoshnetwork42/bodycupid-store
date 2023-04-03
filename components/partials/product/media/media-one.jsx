@@ -34,7 +34,7 @@ export default function MediaOne(props) {
 
   useEffect(() => {
     setIndex(0);
-  }, [window.location.pathname]);
+  }, [product?.slug]);
 
   useEffect(() => {
     if (variantId) {
@@ -126,7 +126,7 @@ export default function MediaOne(props) {
           events={events}
         >
           {lgImages.map((image, i) => (
-            <div key={i}>
+            <div key={image.imageKey}>
               <OptimizedImage
                 optimizedData={image.image}
                 alt={image.alt}

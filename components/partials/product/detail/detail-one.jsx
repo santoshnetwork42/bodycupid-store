@@ -45,9 +45,11 @@ function DetailOne(props) {
     featuredCoupons,
     getFeaturedCoupons,
   } = props;
+
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
+
   const today = new Date();
 
   const sizes = useMemo(
@@ -90,7 +92,7 @@ function DetailOne(props) {
     return {
       maxDiscountCoupon: null,
     };
-  }, [featuredCoupons, selectedVariant]);
+  }, [product?.slug, featuredCoupons, selectedVariant]);
 
   const applyCouponCode = useCallback(async () => {
     try {
@@ -104,7 +106,7 @@ function DetailOne(props) {
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
-    [selectedVariant, sizes, product]
+    [selectedVariant, sizes, product?.slug]
   );
 
   const cartItem = useMemo(() => {
@@ -133,10 +135,16 @@ function DetailOne(props) {
 
   useEffect(() => {
     return () => {
-      setCurIndex(-1);
       resetValueHandler();
     };
   }, []);
+
+  useEffect(() => {
+    setCurIndex(-1);
+    return () => {
+      setCurIndex(-1);
+    };
+  }, [product?.slug]);
 
   useEffect(() => {
     if (product.variants.items.length > 0) {
@@ -195,7 +203,7 @@ function DetailOne(props) {
           tmpName = `${tmpName} - ${variant.title}`;
           tmpPrice = variant.price;
         }
-  
+
         addToCart({
           ...product,
           name: tmpName,
@@ -255,6 +263,7 @@ function DetailOne(props) {
       listingPrice,
       variants: { items },
     } = product;
+
     if (curIndex > -1 && Array.isArray(items)) {
       const { price: p, listingPrice: lp } = items[curIndex] || {};
       return {

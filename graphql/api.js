@@ -870,6 +870,31 @@ export const findProducts = /* GraphQL */ `
   }
 `;
 
+export const getProductSlug = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $sort: [SearchableProductSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductAggregationInput]
+  ) {
+    searchProducts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+      }
+      total
+    }
+  }
+`;
+
 export const searchProductsBasic = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput

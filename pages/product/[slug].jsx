@@ -1,77 +1,43 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
 
-import OwlCarousel from "~/components/features/owl-carousel";
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
-import { mainSlider17 } from "~/utils/data/carousel";
-import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
+import {
+  getProductBySlug,
+  getHomePageProducts,
+  searchProductFaqs,
+  getReviews,
+  getProductSlug,
+} from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
+import fetchData from "~/utils/fetchData";
 
-function ProductDefault() {
+function ProductDefault(props) {
   const router = useRouter();
-  const { slug, variantId } = router.query;
-  const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState(null);
-  const [related, setRelated] = useState(null);
+  const { variantId } = router.query;
+  const { product, relatedProducts, productFAQs = [], productReviews } = props;
   const [selectedVariant, setVariant] = useState(variantId);
 
-  useEffect(() => {
-    getProductsBySlug();
-  }, [slug]);
-
-  const getProductsBySlug = useCallback(async () => {
-    try {
-      setLoading(true);
-      setProduct(null);
-      const {
-        data: {
-          byslugProduct: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(getProductBySlug, {
-          slug,
-          filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-        })
-      );
-      if (items.length) {
-        let [product] = items;
-        setProduct(product);
-        setLoading(false);
-      } else {
-        router.push("/404");
-      }
-    } catch (error) {
-      console.log("getProductBySlug", error);
-    }
-  }, [slug]);
-
-  useEffect(() => {
-    if (product?.categoryId || product?.subCategoryId) {
-      const filter = {
-        id: { ne: product.id },
-        storeId: { eq: STORE_ID },
-        status: { eq: "ENABLED" },
+  const { defaultVariantId } = useMemo(() => {
+    const { variants = {} } = product || {};
+    const { items = [] } = variants;
+    if (items.length) {
+      const [variants] = items.sort((a, b) => a.position - b.position);
+      const { id } = variants || {};
+      return {
+        defaultVariantId: id,
       };
-      if (product?.subCategoryId) {
-        filter.subCategoryId = { eq: product.subCategoryId };
-      } else {
-        filter.categoryId = { eq: product.categoryId };
-      }
-
-      API.graphql(
-        graphqlOperation(getHomePageProducts, { filter, limit: 4 })
-      ).then((response) => {
-        setRelated(response.data.searchProducts.items);
-      });
     }
-  }, [product?.id]);
+    return {
+      defaultVariantId: null,
+    };
+  }, [product?.slug]);
 
   return (
     <main className="main single-product">
@@ -95,7 +61,7 @@ function ProductDefault() {
               <div className="col-md-6">
                 <DetailOne
                   data={product}
-                  defaultVariant={product.variants?.items[0]?.id}
+                  defaultVariant={defaultVariantId}
                   variantId={selectedVariant}
                   setVariant={setVariant}
                   isNav={true}
@@ -103,46 +69,115 @@ function ProductDefault() {
               </div>
             </div>
             <LinkedProducts product={product} />
-            <DescOne product={product} />
+            <DescOne
+              product={product}
+              productFAQs={productFAQs}
+              productReviews={productReviews}
+            />
 
-            <RelatedProducts products={related} />
+            <RelatedProducts products={relatedProducts} />
           </div>
-        </div>
-      )}
-
-      {loading && (
-        <div className="skeleton-body container mb-10">
-          <div className="row mb-7">
-            <div className="col-md-6 pg-vertical">
-              <div className="skel-pro-gallery"></div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="skel-pro-summary"></div>
-            </div>
-          </div>
-
-          <div className="skel-pro-tabs"></div>
-
-          <section className="pt-3 mt-4">
-            <h2 className="title justify-content-center">Related Products</h2>
-
-            <OwlCarousel
-              adClass="owl-carousel owl-theme owl-nav-full"
-              options={mainSlider17}
-            >
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div
-                  className="product-loading-overlay"
-                  key={"popup-skel-" + item}
-                ></div>
-              ))}
-            </OwlCarousel>
-          </section>
         </div>
       )}
     </main>
   );
 }
+
+export const getStaticPaths = async () => {
+  const {
+    searchProducts: { items },
+  } = await fetchData(getProductSlug, {
+    filter: {
+      status: { eq: "ENABLED" },
+      storeId: { eq: STORE_ID },
+    },
+  });
+  const paths = items.map((s) => ({
+    params: { slug: s.slug },
+  }));
+
+  return {
+    paths: paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (context) => {
+  try {
+    const { params } = context;
+    const { slug } = params;
+
+    // get Product By Slug
+    const {
+      byslugProduct: { items },
+    } = await fetchData(getProductBySlug, {
+      slug,
+      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+    });
+    const [product] = items;
+
+    const { id } = product || {};
+
+    // get Related Product By Category
+    let relatedProducts = [];
+    if (product?.categoryId || product?.subCategoryId) {
+      const filter = {
+        id: { ne: id },
+        storeId: { eq: STORE_ID },
+        status: { eq: "ENABLED" },
+      };
+      if (product?.subCategoryId) {
+        filter.subCategoryId = { eq: product.subCategoryId };
+      } else {
+        filter.categoryId = { eq: product.categoryId };
+      }
+
+      const {
+        searchProducts: { items },
+      } = await fetchData(getHomePageProducts, {
+        filter,
+        limit: 4,
+      });
+
+      relatedProducts = items;
+    }
+
+    // get Product FAQ
+    const {
+      searchProductFaqs: { items: faqS },
+    } = await fetchData(searchProductFaqs, {
+      filter: {
+        productId: { eq: id },
+      },
+    });
+
+    // get Product Reviews
+    const {
+      searchReviews: { items: reviews, total, nextToken },
+    } = await fetchData(getReviews, {
+      filter: {
+        productId: { eq: id },
+      },
+      sort: [{ field: "createdAt", direction: "desc" }],
+    });
+
+    return {
+      props: {
+        product: product,
+        relatedProducts: relatedProducts,
+        productFAQs: faqS,
+        productReviews: {
+          reviews,
+          total,
+          nextToken,
+        },
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+};
 
 export default ProductDefault;
