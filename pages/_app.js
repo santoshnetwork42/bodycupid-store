@@ -3,13 +3,15 @@ import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API } from "aws-amplify";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import Cookie from "js-cookie";
 
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
-import { STORE_ID } from "~/config";
+import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 
 import awsconfig from "~/aws-exports";
@@ -23,7 +25,20 @@ Amplify.configure({ ...awsconfig, ssr: true });
 
 const App = ({ Component, pageProps }) => {
   const store = useStore();
+  const router = useRouter();
+
+  const { query } = router;
   const { navbar, footer, store: wowStore } = pageProps;
+
+  const navbarProps = {
+    ...navbar,
+    showMobileSearchBar: !!Component.showMobileSearchBar,
+  };
+
+  const footerProps = {
+    ...footer,
+    hideFooter: !!Component.hideFooter,
+  };
 
   const storeName = useMemo(() => {
     if (wowStore) return wowStore.name;
@@ -59,24 +74,6 @@ const App = ({ Component, pageProps }) => {
     }
   }, [store]);
 
-  // const setCart = useCallback(async () => {
-  //   try {
-  //     const user = await Auth.currentAuthenticatedUser();
-  //     const {
-  //       data: { getUser: getUserResponse },
-  //     } = await API.graphql({
-  //       query: getUser,
-  //       variables: { id: user.username },
-  //       authMode: "AMAZON_COGNITO_USER_POOLS",
-  //     });
-
-  //     store.dispatch(userActions.setUser(getUserResponse));
-  //   } catch (error) {
-  //     console.log(error);
-  //     destroySession();
-  //   }
-  // }, [store]);
-
   const setStore = useCallback(async () => {
     const state = store.getState();
     if (!state.system.store) {
@@ -94,10 +91,38 @@ const App = ({ Component, pageProps }) => {
     }
   }, [store, wowStore]);
 
+  const setMetaData = useCallback(() => {
+    const cookieMeta = Cookie.get(`${STORE_PREFIX}_metadata`);
+    const meta = cookieMeta ? JSON.parse(cookieMeta) : {};
+    const {
+      utm_campaign: campaign,
+      utm_content: content,
+      utm_medium: medium,
+      utm_source: source,
+      utm_term: term
+    } = query;
+    const landingPage = window?.location?.href;
+    const referrer = document?.referrer;
+
+    const metadata = {
+      landingPage: meta?.landingPage || landingPage || null,
+      referrer: referrer || meta?.referrer || null,
+      utmCampaign: campaign || meta?.utmCampaign || null,
+      utmContent: content || meta?.utmContent || null,
+      utmMedium: medium || meta?.utmMedium || null,
+      utmSource: source || meta?.utmSource || null,
+      utmTerm: term || meta?.utmTerm || null,
+    };
+
+    Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
+    store.dispatch(systemActions.setMeta(metadata));
+  }, [store, query]);
+
   const initSession = useCallback(async () => {
     setStore();
     setUser();
-  }, [setStore, setUser]);
+    setMetaData();
+  }, [setStore, setUser, setMetaData]);
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
@@ -142,7 +167,7 @@ const App = ({ Component, pageProps }) => {
           <meta name="description" content={storeName} />
         </Head>
         <Scripts />
-        <Layout navbar={navbar} footer={footer}>
+        <Layout navbar={navbarProps} footer={footerProps}>
           <Component {...pageProps} />
         </Layout>
       </PersistGate>

@@ -42,6 +42,7 @@
 .d-none {
     display: none !important;
 }
+
 .d-sm-show {
     display: none !important;
 }
@@ -296,8 +297,9 @@
 .ls-normal {
     letter-spacing: 0 !important;
 }
+
 //text-decoration
-.text-underline{
+.text-underline {
     text-decoration: underline !important;
 }
 
@@ -313,6 +315,10 @@
 
 .lh-0 {
     line-height: 0 !important;
+}
+
+.lh-default {
+    line-height: 1.42 !important;
 }
 
 // Background

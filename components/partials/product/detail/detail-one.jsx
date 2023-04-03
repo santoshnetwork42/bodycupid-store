@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
@@ -14,7 +14,11 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
+import { deliveryRemainingTime } from "~/utils/helper";
+import ProductNotify from "~/components/features/product-notify";
+import { getProductInventory, getProductCouponTotal } from "~/utils/products";
+import ProductBestPrice from "~/components/partials/product/product-best-price";
+import { systemActions } from "~/store/system";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -31,18 +35,76 @@ function DetailOne(props) {
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
+    user,
+    applyCoupon,
+    toggleWishlist,
+    addToCart,
+    wishlist,
+    removeFromCart,
+    coupon: appliedCoupon,
+    featuredCoupons,
+    getFeaturedCoupons,
   } = props;
-  const { toggleWishlist, addToCart, wishlist, removeFromCart } = props;
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const today = new Date();
+
   const sizes = useMemo(
     () =>
       (product?.variants?.items || [])
         .sort((a, b) => a.position - b.position)
         .map((item) => ({ ...item })),
     [product?.variants?.items]
+  );
+
+  useEffect(() => {
+    getFeaturedCoupons();
+  }, []);
+
+  const { maxDiscountCoupon } = useMemo(() => {
+    let selectedProduct = product;
+    if (sizes.length) {
+      selectedProduct = product?.variants?.items.find(
+        (v) => v.id === selectedVariant
+      );
+    }
+    if (!!featuredCoupons?.length && selectedProduct) {
+      const discountCoupon = featuredCoupons.reduce((prev, current) => {
+        const first = getProductCouponTotal(prev, selectedProduct);
+        const second = getProductCouponTotal(current, selectedProduct);
+        return first > second
+          ? {
+              ...prev,
+              price: selectedProduct?.price,
+              totalDiscount: getProductCouponTotal(prev, selectedProduct),
+            }
+          : {
+              ...current,
+              price: selectedProduct?.price,
+              totalDiscount: getProductCouponTotal(current, selectedProduct),
+            };
+      }, {});
+      return { maxDiscountCoupon: discountCoupon };
+    }
+    return {
+      maxDiscountCoupon: null,
+    };
+  }, [featuredCoupons, selectedVariant]);
+
+  const applyCouponCode = useCallback(async () => {
+    try {
+      if (!!maxDiscountCoupon && !appliedCoupon?.isFeatured) {
+        applyCoupon(maxDiscountCoupon);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }, [maxDiscountCoupon, user, appliedCoupon]);
+
+  const { hasInventory, currentInventory } = useMemo(
+    () => getProductInventory(product, selectedVariant),
+    [selectedVariant, sizes, product]
   );
 
   const cartItem = useMemo(() => {
@@ -74,7 +136,7 @@ function DetailOne(props) {
       setCurIndex(-1);
       resetValueHandler();
     };
-  }, [product]);
+  }, []);
 
   useEffect(() => {
     if (product.variants.items.length > 0) {
@@ -133,7 +195,7 @@ function DetailOne(props) {
           tmpName = `${tmpName} - ${variant.title}`;
           tmpPrice = variant.price;
         }
-
+  
         addToCart({
           ...product,
           name: tmpName,
@@ -148,6 +210,7 @@ function DetailOne(props) {
           price: product.price,
         });
       }
+      applyCouponCode();
     }
   };
 
@@ -179,6 +242,7 @@ function DetailOne(props) {
               : item;
           })
         );
+        applyCouponCode();
       } else {
         removeFromCart({ ...product, variantId: selectedVariant });
       }
@@ -192,7 +256,7 @@ function DetailOne(props) {
       variants: { items },
     } = product;
     if (curIndex > -1 && Array.isArray(items)) {
-      const { price: p, listingPrice: lp } = items[curIndex];
+      const { price: p, listingPrice: lp } = items[curIndex] || {};
       return {
         price: p,
         listingPrice: lp,
@@ -208,51 +272,9 @@ function DetailOne(props) {
   }, [product, curIndex]);
 
   return (
-    <div className={"product-details " + adClass}>
+    <div className={`product-details ${adClass}`}>
       {isNav && (
         <div className="product-navigation">
-          <ul className="breadcrumb breadcrumb-lg">
-            <li>
-              <ALink href="/">
-                <i className="d-icon-home"></i>
-              </ALink>
-            </li>
-            <li>
-              <ALink href="/collections/all" className="active">
-                Products
-              </ALink>
-            </li>
-            {product.category && (
-              <li>
-                <ALink
-                  href={{
-                    pathname: "/collections/[category]",
-                    query: { category: product.category.slug },
-                  }}
-                  className="active"
-                >
-                  {product.category.name}
-                </ALink>
-              </li>
-            )}
-            {product.subCategory && (
-              <li>
-                <ALink
-                  href={{
-                    pathname: "/collections/[category][subcategory]",
-                    query: {
-                      category: product.category.slug,
-                      subcategory: product.subCategory.slug,
-                    },
-                  }}
-                  className="active"
-                >
-                  {product.subCategory.name}
-                </ALink>
-              </li>
-            )}
-          </ul>
-
           <ProductNav product={product} />
         </div>
       )}
@@ -338,6 +360,10 @@ function DetailOne(props) {
         )}
       </div>
 
+      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
+        <ProductBestPrice {...maxDiscountCoupon} />
+      )}
+
       <p className="product-short-desc">{product.productDescription}</p>
 
       {sizes.length > 1 && (
@@ -369,92 +395,117 @@ function DetailOne(props) {
       <hr className="product-divider"></hr>
 
       {isStickyCart ? (
-        <div className="sticky-content fix-top product-sticky-content">
-          <div className="container">
-            <div className="sticky-product-details">
-              <figure className="product-image">
-                <ALink href={"/product/" + product.slug}>
-                  <img
-                    src={getPublicImageURL(product.images.items[0]?.imageKey)}
-                    width="90"
-                    height="90"
-                    alt={product.images.items[0]?.alt}
-                  />
-                </ALink>
-              </figure>
-              <div>
-                <h4 className="product-title">
-                  <ALink href={"/product/" + product.slug}>
-                    {product.title}
-                  </ALink>
-                </h4>
-                <div className="product-info">
-                  <div className="product-price mb-0">
-                    <ins className="new-price">
-                      ₹{toDecimal(product.price || 0)}
-                    </ins>
-                    {/* {
-                                                curIndex > -1 && product.variants[0] ?
-                                                    product.variants[curIndex].price ?
-                                                        product.variants[curIndex].sale_price ?
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].sale_price)}</ins>
-                                                                <del className="old-price">₹{toDecimal(product.variants[curIndex].price)}</del>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.variants[curIndex].price)}</ins>
-                                                            </>
-                                                        : ""
-                                                    :
-                                                    product.price[0] !== product.price[1] ?
-                                                        product.variants.length === 0 ?
-                                                            <>
-                                                                <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                                                <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                                            </>
-                                                            :
-                                                            < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                                                        : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                            } */}
-                  </div>
-
-                  <div className="ratings-container mb-0">
-                    <div className="ratings-full">
-                      <span
-                        className="ratings"
-                        style={{
-                          width: Math.min(20 * product.rating, 100) + "%",
-                        }}
-                      ></span>
-                      <span className="tooltiptext tooltip-top">
-                        {toDecimal(product.ratings)}
-                      </span>
-                    </div>
-
-                    <ALink href="#" className="rating-reviews">
-                      ( {product.reviews.items.length} reviews )
+        <>
+          {!!hasInventory ? (
+            <div className="sticky-content fix-top product-sticky-content">
+              <div className="container">
+                <div className="sticky-product-details">
+                  <figure className="product-image">
+                    <ALink href={"/product/" + product.slug}>
+                      <img
+                        src={getPublicImageURL(
+                          product.images.items[0]?.imageKey
+                        )}
+                        width="90"
+                        height="90"
+                        alt={product.images.items[0]?.alt}
+                      />
                     </ALink>
+                  </figure>
+                  <div>
+                    <h4 className="product-title">
+                      <ALink href={"/product/" + product.slug}>
+                        {product.title}
+                      </ALink>
+                    </h4>
+                    <div className="product-info">
+                      <div className="product-price mb-0">
+                        <ins className="new-price">
+                          ₹{toDecimal(product.price || 0)}
+                        </ins>
+                      </div>
+
+                      <div className="ratings-container mb-0">
+                        <div className="ratings-full">
+                          <span
+                            className="ratings"
+                            style={{
+                              width: Math.min(20 * product.rating, 100) + "%",
+                            }}
+                          ></span>
+                          <span className="tooltiptext tooltip-top">
+                            {toDecimal(product.ratings)}
+                          </span>
+                        </div>
+
+                        <ALink href="#" className="rating-reviews">
+                          ( {product?.reviews?.items.length} reviews )
+                        </ALink>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="product-form product-qty pb-0">
+                  <label className="d-none">QTY:</label>
+                  <div className="product-form-group ">
+                    <Quantity
+                      max={currentInventory}
+                      qty={quantity}
+                      product={product}
+                      onChangeQty={changeQty}
+                    />
+
+                    {cartItem && (
+                      <button
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={() => {
+                          router.push("/pages/cart");
+                        }}
+                      >
+                        <i className="d-icon-bag"></i>
+                        View Cart
+                      </button>
+                    )}
+                    {!cartItem && (
+                      <button
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={addToCartHandler}
+                      >
+                        <i className="d-icon-bag"></i>
+                        Add to cart
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
+          ) : (
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
+          )}
+        </>
+      ) : (
+        <>
+          {!!hasInventory ? (
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
-              <div className="product-form-group ">
+              <div className="product-form-group cart-button-wrapper">
                 <Quantity
-                  max={product.inventory}
                   qty={quantity}
+                  max={currentInventory}
                   product={product}
                   onChangeQty={changeQty}
                 />
-
                 {cartItem && (
                   <button
                     className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       router.push("/pages/cart");
                     }}
                   >
@@ -475,44 +526,10 @@ function DetailOne(props) {
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div className="product-form product-qty pb-0">
-          <label className="d-none">QTY:</label>
-          <div className="product-form-group cart-button-wrapper">
-            <Quantity
-              qty={quantity}
-              max={product.inventory}
-              product={product}
-              onChangeQty={changeQty}
-            />
-            {cartItem && (
-              <button
-                className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                  cartActive ? "" : "disabled"
-                }`}
-                onClick={() => {
-                  router.push("/pages/cart");
-                }}
-              >
-                <i className="d-icon-bag"></i>
-                View Cart
-              </button>
-            )}
-            {!cartItem && (
-              <button
-                className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                  cartActive ? "" : "disabled"
-                }`}
-                onClick={addToCartHandler}
-              >
-                <i className="d-icon-bag"></i>
-                Add to cart
-              </button>
-            )}
-          </div>
-        </div>
+          ) : (
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
+          )}
+        </>
       )}
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
@@ -538,6 +555,9 @@ function mapStateToProps(state) {
   return {
     wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
+    user: state.user.data,
+    coupon: state.cart.coupon,
+    featuredCoupons: state.system.featuredCoupon,
   };
 }
 
@@ -545,5 +565,7 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
+  applyCoupon: cartActions.applyCoupon,
   removeFromCart: cartActions.removeFromCart,
+  getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(DetailOne);

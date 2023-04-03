@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
@@ -12,6 +12,7 @@ import { mainSlider17 } from "~/utils/data/carousel";
 import { getProductBySlug, getHomePageProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function ProductDefault() {
   const router = useRouter();
@@ -22,30 +23,33 @@ function ProductDefault() {
   const [selectedVariant, setVariant] = useState(variantId);
 
   useEffect(() => {
-    API.graphql(
-      graphqlOperation(getProductBySlug, {
-        slug,
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-      })
-    )
-      .then(
-        ({
-          data: {
-            byslugProduct: { items },
-          },
-        }) => {
-          if (items.length) {
-            let [product] = items;
-            setProduct(product);
-            setLoading(false);
-          } else {
-            router.push("/404");
-          }
-        }
-      )
-      .catch((e) => {
-        console.log("e", e);
-      });
+    getProductsBySlug();
+  }, [slug]);
+
+  const getProductsBySlug = useCallback(async () => {
+    try {
+      setLoading(true);
+      setProduct(null);
+      const {
+        data: {
+          byslugProduct: { items },
+        },
+      } = await API.graphql(
+        graphqlOperation(getProductBySlug, {
+          slug,
+          filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+        })
+      );
+      if (items.length) {
+        let [product] = items;
+        setProduct(product);
+        setLoading(false);
+      } else {
+        router.push("/404");
+      }
+    } catch (error) {
+      console.log("getProductBySlug", error);
+    }
   }, [slug]);
 
   useEffect(() => {
@@ -81,6 +85,9 @@ function ProductDefault() {
         <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
+              <div className="mb-2 mt-2">
+                <ProductBreadcrumbs {...product} />
+              </div>
               <div className="col-md-6 sticky-sidebar-wrapper">
                 <MediaOne product={product} variantId={selectedVariant} />
               </div>

@@ -1,18 +1,15 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { connect } from "react-redux";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 
-import {
-  applyCoupon as applyCouponMutation,
-  getFeaturedCoupon,
-} from "~/graphql/api";
-import { cartActions } from "~/store/cart";
-import { getCartTotals, getCouponTotal, toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
-import Loader from "../common/partials/loader";
-import { STORE_ID } from "~/config";
+
+import { systemActions } from "~/store/system";
+import { applyCoupon as applyCouponMutation } from "~/graphql/api";
+import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
+import { getCouponTotal, toDecimal } from "~/utils";
 
 function Coupon(props) {
   const {
@@ -22,25 +19,16 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     layout = "cart",
+    featured = [],
+    getFeaturedCoupons,
   } = props;
   const [coupon, setCoupon] = useState("");
-  const [featured, setFeatured] = useState([]);
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    (async function () {
-      const {
-        data: {
-          searchCouponCodes: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(getFeaturedCoupon, {
-          filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
-        })
-      );
-      setFeatured(items);
-    })();
+    getFeaturedCoupons();
   }, []);
 
   const applyCouponCode = useCallback(
@@ -65,7 +53,8 @@ function Coupon(props) {
         }
         setLoading(false);
       } else {
-        setError("Invalid coupon");
+        setCoupon("");
+        setError("Coupon not found");
         setLoading(false);
       }
     },
@@ -152,26 +141,33 @@ function Coupon(props) {
                 <h5 className="title coupon-title text-uppercase ls-m">
                   Coupons and offers
                 </h5>
-                <div className="d-flex">
+                <div
+                  className={`coupons-input-wrapper d-flex align-items-center justify-content-between mb-2`}
+                >
                   <input
+                    className={`form-control mr-2 ${
+                      !!error && "coupon-error-box-border"
+                    }`}
                     type="text"
                     name="coupon_code"
-                    className="input-text form-control text-grey ls-m mb-4"
-                    id="coupon_code"
                     placeholder="Enter coupon code here..."
                     value={coupon}
                     onChange={(e) => setCoupon(e.target.value)}
                   />
                   <button
-                    onClick={() => applyCouponCode()}
-                    className="btn btn-md btn-dark btn-rounded btn-link m l-2"
+                    className="btn btn-primary coupon-apply-btn d-flex justify-content-center align-items-center"
+                    disabled={loading}
+                    onClick={() => !!coupon && applyCouponCode()}
                   >
-                    Apply
+                    <span className=" mr-1">Apply</span>
+
+                    {loading && <div className="spin-loader" />}
                   </button>
                 </div>
-                {!!featured.length && (
+                <span className="coupon-error-lable">{error}</span>
+                {!!featured?.length && (
                   <div className="mt-2">
-                    <h6>Available coupons</h6>
+                    <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {
                       let className =
                         "btn btn-md btn-dark btn-rounded btn-link m l-2";
@@ -204,13 +200,11 @@ function Coupon(props) {
                     })}
                   </div>
                 )}
-                <span>{error}</span>
               </div>
             </div>
           </div>
         </main>
       </Modal>
-      <Loader loading={loading} />
     </>
   );
 }
@@ -220,10 +214,12 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    featured: state.system.featuredCoupon,
   };
 }
 
 export default connect(mapStateToProps, {
   applyCoupon: cartActions.applyCoupon,
   removeCoupon: cartActions.removeCoupon,
+  getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(Coupon);

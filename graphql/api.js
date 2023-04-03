@@ -96,6 +96,7 @@ export const getHomePageProducts = /* GraphQL */ `
         taxable
         tags
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         thumbImages
@@ -109,7 +110,6 @@ export const getHomePageProducts = /* GraphQL */ `
             price
             sku
             size
-            color
             status
             position
             currency
@@ -224,6 +224,7 @@ export const getQuickViewProduct = /* GraphQL */ `
         weight
         weightUnit
         inventory
+        continueSellingOutOfStock
         blockedInventory
         rating
         totalOrders
@@ -351,7 +352,9 @@ export const getProductBySlug = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        continueSellingOutOfStock
         hasVarient
+        hasFaq
         variants {
           items {
             id
@@ -451,6 +454,7 @@ export const getOrder = /* GraphQL */ `
     getOrder(id: $id) {
       id
       code
+      storeId
       userId
       user {
         id
@@ -613,6 +617,7 @@ export const getOrder = /* GraphQL */ `
           invoiceNumber
           tentativeDeliveryDate
           trackingId
+          cancelledQuantity
           quantity
           price
           status
@@ -802,6 +807,7 @@ export const findProducts = /* GraphQL */ `
         weightUnit
         inventory
         blockedInventory
+        continueSellingOutOfStock
         rating
         totalRatings
         totalOrders
@@ -1089,46 +1095,10 @@ export const searchOrders = /* GraphQL */ `
       items {
         id
         code
-        channelName
-        shippingAddress {
-          name
-          phone
-          email
-          country
-          state
-          city
-          pinCode
-          landmark
-          address
-          location
-          area
-        }
         totalAmount
-        totalCashOnDeliveryCharges
-        totalDiscount
-        totalGiftCharges
-        totalPrepaidAmount
-        totalShippingCharges
-        taxExempted
-        cFormProvided
-        thirdPartyShipping
-        currency
-        sla
-        priority
         orderDate
         status
         createdAt
-        payments {
-          items {
-            id
-            orderId
-            method
-            status
-            amount
-            createdAt
-            updatedAt
-          }
-        }
       }
       nextToken
       total
@@ -1396,6 +1366,25 @@ export const getLinkedProducts = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+
+export const addProductNotification = /* GraphQL */ `
+  mutation AddProductNotification(
+    $productId: ID!
+    $variantId: ID
+    $userId: ID
+    $email: AWSEmail
+  ) {
+    addProductNotification(
+      productId: $productId
+      variantId: $variantId
+      userId: $userId
+      email: $email
+    ) {
+      success
+      message
     }
   }
 `;

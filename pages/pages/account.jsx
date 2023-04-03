@@ -13,7 +13,10 @@ import AccountDetails from "~/components/partials/account/account-details";
 function Account({ user, store }) {
   const { name } = store;
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(0);
+  const { query } = router;
+  const { activeTabIndex } = query;
+
+  const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
 
   useEffect(() => {
     (async function () {
@@ -126,7 +129,10 @@ function Account({ user, store }) {
                   <br />
                   and edit your password and account details.
                 </p>
-                <ALink href="/shop" className="btn btn-dark btn-rounded">
+                <ALink
+                  href="/collections/all"
+                  className="btn btn-dark btn-rounded"
+                >
                   Go To Shop<i className="d-icon-arrow-right"></i>
                 </ALink>
               </TabPanel>

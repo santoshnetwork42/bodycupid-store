@@ -451,9 +451,13 @@ export const toDecimal = (price, fixedCount = 2) => {
  */
 export const formateDate = (date) => {
   const dt = date ? new Date(date) : new Date();
-  return dt.toLocaleDateString("en-IN", {
-    year: "numeric",
+  const dd = String(dt.getDate()).padStart(2, "0");
+  const hh = String(dt.getHours() % 12).padStart(2, "0");
+  const mm = String(dt.getMinutes()).padStart(2, "0");
+  const monthName = dt.toLocaleString("en-IN", {
     month: "long",
-    day: "numeric",
   });
+  const yyyy = dt.getFullYear();
+  const ap = dt.getHours() >= 12 ? "pm" : "am";
+  return `${dd} ${monthName} ${yyyy}, ${hh}:${mm} ${ap}`;
 };

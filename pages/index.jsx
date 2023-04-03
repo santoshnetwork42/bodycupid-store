@@ -21,7 +21,7 @@ import { STORE_ID } from "~/config";
 function HomePage({ hero, products, categories, brands, store }) {
   const { name } = store;
   return (
-    <main className="main home">
+    <main className="main home searchBar">
       <Head>
         <title>{name} - Home</title>
       </Head>
@@ -192,5 +192,6 @@ function mapStateToProps(state) {
     store: state.system.store,
   };
 }
-
-export default connect(mapStateToProps)(HomePage);
+const Component = connect(mapStateToProps)(HomePage);
+Component.showMobileSearchBar = true;
+export default Component;
