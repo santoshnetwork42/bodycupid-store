@@ -27,7 +27,7 @@ function AccountOrders({ user }) {
             filter: {
               userId: { eq: user.id },
               storeId: { eq: STORE_ID },
-              status: { eq: "CONFIRMED" },
+              status: { ne: "PENDING" },
             },
             sort: [{ field: "orderDate", direction: "desc" }],
             limit: perPage,
@@ -69,7 +69,7 @@ function AccountOrders({ user }) {
           {orders.map((order) => (
             <tr key={order.id}>
               <td className="order-number">
-                <ALink href="#">#{order.code}</ALink>
+                <ALink href={`/order/${order.id}`}>#{order.code}</ALink>
               </td>
               <td className="order-date">
                 <time>{formateDate(order.orderDate)}</time>
