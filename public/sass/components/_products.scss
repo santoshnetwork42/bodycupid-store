@@ -362,7 +362,10 @@
 .btn-quickview {
     opacity: 1;
     transition: opacity .3s;
-
+    
+    &:hover {
+        opacity: 1;
+    }
 
     i {
 

@@ -34,7 +34,7 @@ const App = ({ Component, pageProps }) => {
     showMobileSearchBar: !!Component.showMobileSearchBar,
   };
 
-  const footerProps = {
+  const footerProps={
     ...footer,
     hideFooter: !!Component.hideFooter,
   };
