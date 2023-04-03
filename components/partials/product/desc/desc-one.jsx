@@ -128,8 +128,12 @@ function DescOne(props) {
   }, [product]);
 
   useEffect(() => {
-    getProductReviews(true);
-    getProductFAQs();
+    if (!!product?.totalRatings) {
+      getProductReviews(true);
+    }
+    if (!!product?.hasFaq) {
+      getProductFAQs();
+    }
   }, []);
 
   const getPer = (total, allReview) => {
@@ -424,7 +428,7 @@ function DescOne(props) {
                     <div className="d-flex w-100 img-wrapper justify-content-end">
                       {reviewState.image &&
                         reviewState.image.map((img, index) => (
-                          <div className="img_wrp mr-2">
+                          <div className="img_wrp mr-2" key={index}>
                             <img
                               src={getPublicImageURL(img)}
                               className="img-preview"
@@ -505,7 +509,7 @@ function DescOne(props) {
           </Card>
         )}
 
-        {!!productsFAQs.length && (
+        {!!product.hasFaq && (
           <Card title="FAQs" noDisplayStyle>
             <div className="col-md-12">
               <Reveal
