@@ -31,7 +31,7 @@ const App = ({ Component, pageProps }) => {
   };
 
   const footerProps={
-    ...navbar,
+    ...footer,
     hideFooter: !!Component.hideFooter,
   }
 
