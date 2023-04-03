@@ -76,7 +76,6 @@ export default function ToolBox(props) {
       e.currentTarget.scrollY < tmp
     ) {
       if (stickyToolbox) {
-        stickyToolbox.classList.add("fixed");
         if (!document.querySelector(".sticky-toolbox-wrapper")) {
           let newNode = document.createElement("div");
           newNode.className = "sticky-toolbox-wrapper";
@@ -100,10 +99,6 @@ export default function ToolBox(props) {
         }
       }
     } else {
-      if (stickyToolbox) {
-        stickyToolbox.classList.remove("fixed");
-      }
-
       if (document.querySelector(".sticky-toolbox-wrapper")) {
         document
           .querySelector(".sticky-toolbox-wrapper")

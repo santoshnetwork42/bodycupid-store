@@ -21,7 +21,7 @@ import { STORE_ID } from "~/config";
 function HomePage({ hero, products, categories, brands, store }) {
   const { name } = store;
   return (
-    <main className="main home">
+    <main className="main home searchBar">
       <Head>
         <title>{name} - Home</title>
       </Head>

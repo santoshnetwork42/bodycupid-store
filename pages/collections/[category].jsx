@@ -46,7 +46,7 @@ function Categories({ store }) {
   }, [categorySlug]);
 
   return (
-    <main className="main">
+    <main className="main searchBar">
       <Head>
         <title>{name} - Shop Page</title>
       </Head>
