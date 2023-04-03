@@ -4,13 +4,14 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API } from "aws-amplify";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Cookie from "js-cookie";
 
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
-import { STORE_ID } from "~/config";
+import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 
 import awsconfig from "~/aws-exports";
@@ -34,7 +35,7 @@ const App = ({ Component, pageProps }) => {
     showMobileSearchBar: !!Component.showMobileSearchBar,
   };
 
-  const footerProps={
+  const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
   };
@@ -91,10 +92,8 @@ const App = ({ Component, pageProps }) => {
   }, [store, wowStore]);
 
   const setMetaData = useCallback(() => {
-    const state = store.getState();
-    const { system } = state;
-    const { meta } = system;
-
+    const cookieMeta = Cookie.get(`${STORE_PREFIX}_metadata`);
+    const meta = cookieMeta ? JSON.parse(cookieMeta) : {};
     const {
       utm_campaign: campaign,
       utm_content: content,
@@ -115,6 +114,7 @@ const App = ({ Component, pageProps }) => {
       utmTerm: meta?.utmTerm || term || null,
     };
 
+    Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
     store.dispatch(systemActions.setMeta(metadata));
   }, [store, query]);
 
