@@ -74,16 +74,18 @@ function ProductNotify(props) {
       ) : (
         <form onSubmit={handleNotify}>
           <label>*This product is currently out of stock</label>
-          <input
-            className="form-control mt-1"
-            type="email"
-            id="email"
-            required
-            name="email"
-            placeholder="Enter email to find out when it's back"
-            value={notifyEmail}
-            onChange={(e) => setNotifyEmail(e.target.value.trim())}
-          />
+          {!user && (
+            <input
+              className="form-control mt-1"
+              type="email"
+              id="email"
+              required
+              name="email"
+              placeholder="Enter email to find out when it's back"
+              value={notifyEmail}
+              onChange={(e) => setNotifyEmail(e.target.value.trim())}
+            />
+          )}
           <button
             className="notify-btn btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
             type="submit"

@@ -2053,6 +2053,7 @@ export const createOrder = /* GraphQL */ `
       couponCodeId
       coupon {
         id
+        groupId
         code
         storeId
         userId
@@ -2096,6 +2097,14 @@ export const createOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -2184,6 +2193,7 @@ export const updateOrder = /* GraphQL */ `
       couponCodeId
       coupon {
         id
+        groupId
         code
         storeId
         userId
@@ -2227,6 +2237,14 @@ export const updateOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -2315,6 +2333,7 @@ export const deleteOrder = /* GraphQL */ `
       couponCodeId
       coupon {
         id
+        groupId
         code
         storeId
         userId
@@ -2358,6 +2377,14 @@ export const deleteOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -3910,6 +3937,7 @@ export const createCouponCode = /* GraphQL */ `
   ) {
     createCouponCode(input: $input, condition: $condition) {
       id
+      groupId
       code
       storeId
       store {
@@ -3980,6 +4008,7 @@ export const updateCouponCode = /* GraphQL */ `
   ) {
     updateCouponCode(input: $input, condition: $condition) {
       id
+      groupId
       code
       storeId
       store {
@@ -4050,6 +4079,7 @@ export const deleteCouponCode = /* GraphQL */ `
   ) {
     deleteCouponCode(input: $input, condition: $condition) {
       id
+      groupId
       code
       storeId
       store {
@@ -4346,6 +4376,7 @@ export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon($code: String!) {
     applyCoupon(code: $code) {
       id
+      groupId
       code
       storeId
       store {
@@ -4469,6 +4500,14 @@ export const addProductNotification = /* GraphQL */ `
       userId: $userId
       email: $email
     ) {
+      success
+      message
+    }
+  }
+`;
+export const createBulkCoupons = /* GraphQL */ `
+  mutation CreateBulkCoupons($input: CreateBulkCouponInput!, $count: Int!) {
+    createBulkCoupons(input: $input, count: $count) {
       success
       message
     }

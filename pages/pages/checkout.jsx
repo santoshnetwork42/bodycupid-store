@@ -12,7 +12,6 @@ import {
   createOrderProduct,
   createTransaction,
   createPayment,
-  getHomePageProducts,
   validateTransaction,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
@@ -27,41 +26,29 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
-import RelatedProducts from "~/components/partials/product/related-products";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 
 function Checkout(props) {
-  const { cartList, user, emptyCart, appliedCoupon, removeCoupon, store } =
-    props;
+  const {
+    cartList,
+    user,
+    emptyCart,
+    appliedCoupon,
+    removeCoupon,
+    store,
+    metadata,
+  } = props;
   const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
-  const [related, setRelated] = useState(null);
   const [orderId, setOrderId] = useState(null);
   const [paymentId, setPaymentId] = useState(null);
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
-
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(getHomePageProducts, {
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-        limit: 8,
-      })
-    ).then(
-      ({
-        data: {
-          searchProducts: { items },
-        },
-      }) => {
-        setRelated(items);
-      }
-    );
-  }, []);
 
   const {
     totalListingprice,
@@ -136,6 +123,7 @@ function Checkout(props) {
     },
     [store, user]
   );
+
   const fetchPaymentStatus = useCallback(async () => {
     if (orderId && paymentId) {
       const {
@@ -204,6 +192,7 @@ function Checkout(props) {
             shippingAddress: restAddress,
             billingAddress: restAddress,
             couponCodeId: appliedCoupon?.id,
+            ...metadata,
           };
 
           const {
@@ -290,6 +279,7 @@ function Checkout(props) {
       shippingTotal,
       couponTotal,
       prepaidDiscount,
+      metadata,
     ]
   );
 
@@ -313,7 +303,7 @@ function Checkout(props) {
           cartList.length > 0 ? "mb-10" : "mb-2"
         }`}
       >
-        <div className="step-by pr-4 pl-4">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
           </h3>
@@ -322,16 +312,13 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
-        <div className="container mt-7">
+        <div className="container mt-md-7">
           {cartList.length > 0 ? (
             <>
               {!appliedCoupon && <Coupons layout="checkout" />}
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
-                  <h3 className="title title-simple text-left text-uppercase">
-                    Shipping Address
-                  </h3>
                   <Addresses onAddressChange={setAddress} />
                 </div>
 
@@ -340,7 +327,7 @@ function Checkout(props) {
                   className="col-lg-5 sticky-sidebar-wrapper"
                 >
                   <div
-                    className="sticky-sidebar mt-1"
+                    className="sticky-sidebar"
                     data-sticky-options="{'bottom': 50}"
                   >
                     <div className="summary pt-5">
@@ -357,14 +344,33 @@ function Checkout(props) {
                         <tbody>
                           {cartList.map((item, index) => (
                             <tr key={"checkout-" + item.title + "-" + index}>
-                              <td className="product-name">
-                                {item.title}{" "}
-                                <span className="product-quantity">
-                                  ×&nbsp;{item.qty}
-                                </span>
-                              </td>
-                              <td className="product-total text-body">
-                                ₹{toDecimal(item.price * item.qty)}
+                              <td colSpan={2} className="product-name pr-0">
+                                <div className="d-flex justify-content-between">
+                                  <div className="d-flex">
+                                    <ALink
+                                      className="order-image"
+                                      href={"/product/" + item.slug}
+                                    >
+                                      <img
+                                        src={getPublicImageURL(
+                                          item.images?.items[0]?.imageKey
+                                        )}
+                                        alt={item?.images.items[0]?.alt}
+                                        width="80"
+                                        height="88"
+                                      />
+                                    </ALink>
+                                    <div className="text-left lh-default">
+                                      {item.title}{" "}
+                                      <span className="product-quantity">
+                                        ×&nbsp;{item.qty}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="product-total text-body">
+                                    ₹{toDecimal(item.price * item.qty)}
+                                  </div>{" "}
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -602,10 +608,6 @@ function Checkout(props) {
               </p>
             </div>
           )}
-          <RelatedProducts
-            products={related}
-            heading="Other popular products"
-          />
         </div>
       </div>
       <PaymentLoader loading={paymentLoading} />
@@ -619,11 +621,14 @@ function mapStateToProps(state) {
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
+    metadata: state.system.meta,
   };
 }
-
-export default connect(mapStateToProps, {
+const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
 })(Checkout);
+
+Component.hideFooter = true;
+export default Component;

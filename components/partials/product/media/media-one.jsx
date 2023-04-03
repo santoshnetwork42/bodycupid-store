@@ -19,6 +19,7 @@ export default function MediaOne(props) {
 
   const lgImages = useMemo(() => {
     const images = [...product.images.items];
+    images.sort((a, b) => a.position - b.position);
     if (product.variants.items.length > 0) {
       images.push(
         ...product.variants.items.map((i) => ({
@@ -149,7 +150,6 @@ export default function MediaOne(props) {
         <ALink href="#" className="product-image-full" onClick={openLightBox}>
           <i className="d-icon-zoom"></i>
         </ALink>
-
         <ThumbOne
           images={lgImages}
           index={index}

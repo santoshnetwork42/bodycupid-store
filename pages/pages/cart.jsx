@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -8,10 +8,6 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import RelatedProducts from "~/components/partials/product/related-products";
-import { API, graphqlOperation } from "aws-amplify";
-import { getHomePageProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
 import { scrollWithOffset } from "~/utils/helper";
 
 function Cart(props) {
@@ -25,24 +21,6 @@ function Cart(props) {
     openLogin,
   } = props;
   const [cartItems, setCartItems] = useState([]);
-  const [related, setRelated] = useState(null);
-
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(getHomePageProducts, {
-        filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-        limit: 8,
-      })
-    ).then(
-      ({
-        data: {
-          searchProducts: { items },
-        },
-      }) => {
-        setRelated(items);
-      }
-    );
-  }, []);
 
   useEffect(() => {
     setCartItems([...cartList]);
@@ -104,7 +82,7 @@ function Cart(props) {
   return (
     <main className="main cart">
       <div className="page-content pt-7 pb-10">
-        <div className="step-by pr-4 pl-4">
+        <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
           </h3>
@@ -118,7 +96,7 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container mt-7 mb-2">
+        <div className="container sm-container mt-7 mb-2">
           <div className="row">
             {cartItems.length > 0 ? (
               <>
@@ -141,73 +119,141 @@ function Cart(props) {
                     </thead>
                     <tbody>
                       {cartItems.map((item) => (
-                        <tr key={"cart" + item.title}>
-                          <td className="product-thumbnail">
-                            <figure>
-                              <ALink href={"/product/" + item.slug}>
-                                <img
-                                  src={getPublicImageURL(
-                                    item.images.items[0]?.imageKey
-                                  )}
-                                  width="100"
-                                  height="100"
-                                  alt={item.images.items[0]?.alt}
-                                />
-                              </ALink>
-                            </figure>
-                          </td>
-                          <td className="product-name">
-                            <div className="product-name-section">
-                              <ALink href={"/product/" + item.slug}>
-                                {item.title}
-                              </ALink>
-                            </div>
-                          </td>
-                          <td className="product-subtotal">
-                            <span className="amount">
-                              ₹{toDecimal(item.price)}
-                            </span>
-                            <p className="m-0 product-discount-listing">
-                              {item.price < item.listingPrice && (
-                                <del className="summary-subtotal-listingprice">
-                                  ₹{toDecimal(item.listingPrice)}
-                                </del>
-                              )}
-                              <span className={`discount-percetage ml-2`}>
-                                {productDiscountPercentage(item) > 0 &&
-                                  `${productDiscountPercentage(item)}% off`}
+                        <Fragment key={"cart" + item.title}>
+                          <tr className="d-sm-none">
+                            <td className="product-thumbnail">
+                              <figure>
+                                <ALink href={"/product/" + item.slug}>
+                                  <img
+                                    src={getPublicImageURL(
+                                      item.images.items[0]?.imageKey
+                                    )}
+                                    width="100"
+                                    height="100"
+                                    alt={item.images.items[0]?.alt}
+                                  />
+                                </ALink>
+                              </figure>
+                            </td>
+                            <td className="product-name">
+                              <div className="product-name-section">
+                                <ALink href={"/product/" + item.slug}>
+                                  {item.title}
+                                </ALink>
+                              </div>
+                            </td>
+                            <td className="product-subtotal">
+                              <span className="amount">
+                                ₹{toDecimal(item.price)}
                               </span>
-                            </p>
-                          </td>
+                              <p className="m-0 product-discount-listing">
+                                {item.price < item.listingPrice && (
+                                  <del className="summary-subtotal-listingprice">
+                                    ₹{toDecimal(item.listingPrice)}
+                                  </del>
+                                )}
+                                <span className={`discount-percetage ml-2`}>
+                                  {productDiscountPercentage(item) > 0 &&
+                                    `${productDiscountPercentage(item)}% off`}
+                                </span>
+                              </p>
+                            </td>
 
-                          <td className="product-quantity">
-                            <Quantity
-                              product={item}
-                              qty={item.qty}
-                              max={item.inventory}
-                              onChangeQty={(qty) => onChangeQty(item, qty)}
-                            />
-                          </td>
-                          <td className="product-price">
-                            <span className="amount">
-                              ₹{toDecimal(item.price * item.qty)}
-                            </span>
-                          </td>
-                          <td className="product-close">
-                            <ALink
-                              href="#"
-                              className="product-remove"
-                              title="Remove this product"
-                              onClick={() => removeFromCart(item)}
-                            >
-                              <i className="fas fa-times"></i>
-                            </ALink>
-                          </td>
-                        </tr>
+                            <td className="product-quantity">
+                              <Quantity
+                                product={item}
+                                qty={item.qty}
+                                max={item.inventory}
+                                onChangeQty={(qty) => onChangeQty(item, qty)}
+                              />
+                            </td>
+                            <td className="product-price">
+                              <span className="amount">
+                                ₹{toDecimal(item.price * item.qty)}
+                              </span>
+                            </td>
+                            <td className="product-close">
+                              <ALink
+                                href="#"
+                                className="product-remove"
+                                title="Remove this product"
+                                onClick={() => removeFromCart(item)}
+                              >
+                                <i className="fas fa-times"></i>
+                              </ALink>
+                            </td>
+                          </tr>
+                          <tr className="m-0 p-0 border-no d-sm-show">
+                            <td className="m-0 p-0">
+                              <div className="mobile-specific-cart-product-container d-flex">
+                                <figure>
+                                  <ALink href={"/product/" + item.slug}>
+                                    <img
+                                      src={getPublicImageURL(
+                                        item.images.items[0]?.imageKey
+                                      )}
+                                      width="100"
+                                      height="100"
+                                      alt={item.images.items[0]?.alt}
+                                    />
+                                  </ALink>
+                                </figure>
+                                <div className="text-left mr-3 ml-2">
+                                  <div className="">
+                                    <ALink href={"/product/" + item.slug}>
+                                      {item.title}
+                                    </ALink>
+                                  </div>
+                                  <div className="product-subtotal mt-1">
+                                    <span className="sm-product-amount">
+                                      ₹{toDecimal(item.price)}
+                                    </span>
+                                    <p className="m-0 product-discount-listing">
+                                      {item.price < item.listingPrice && (
+                                        <del className="summary-subtotal-listingprice">
+                                          ₹{toDecimal(item.listingPrice)}
+                                        </del>
+                                      )}
+                                      <span
+                                        className={`discount-percetage ml-2`}
+                                      >
+                                        {productDiscountPercentage(item) > 0 &&
+                                          `${productDiscountPercentage(
+                                            item
+                                          )}% off`}
+                                      </span>
+                                    </p>
+                                  </div>
+                                  <div className="product-quantity w-0">
+                                    <Quantity
+                                      product={item}
+                                      qty={item.qty}
+                                      max={item.inventory}
+                                      onChangeQty={(qty) =>
+                                        onChangeQty(item, qty)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="product-close">
+                                  <ALink
+                                    href="#"
+                                    className="sm-product-remove"
+                                    title="Remove this product"
+                                    onClick={() => removeFromCart(item)}
+                                  >
+                                    <i className="fas fa-times"></i>
+                                  </ALink>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </Fragment>
                       ))}
                     </tbody>
                   </table>
                 </div>
+
                 <aside
                   id="cart-details"
                   className="col-lg-4 sticky-sidebar-wrapper"
@@ -374,10 +420,6 @@ function Cart(props) {
               </div>
             )}
           </div>
-          <RelatedProducts
-            products={related}
-            heading="Other popular products"
-          />
         </div>
       </div>
     </main>
