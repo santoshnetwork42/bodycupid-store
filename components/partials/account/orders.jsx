@@ -78,7 +78,7 @@ function AccountOrders({ user }) {
                 <span>{order.status}</span>
               </td>
               <td className="order-total">
-                <span>₹{toDecimal(order.payments.items[0]?.amount)}</span>
+                <span>₹{toDecimal(order.totalAmount)}</span>
               </td>
               <td className="order-action">
                 <ALink

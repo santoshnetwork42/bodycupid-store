@@ -1095,46 +1095,10 @@ export const searchOrders = /* GraphQL */ `
       items {
         id
         code
-        channelName
-        shippingAddress {
-          name
-          phone
-          email
-          country
-          state
-          city
-          pinCode
-          landmark
-          address
-          location
-          area
-        }
         totalAmount
-        totalCashOnDeliveryCharges
-        totalDiscount
-        totalGiftCharges
-        totalPrepaidAmount
-        totalShippingCharges
-        taxExempted
-        cFormProvided
-        thirdPartyShipping
-        currency
-        sla
-        priority
         orderDate
         status
         createdAt
-        payments {
-          items {
-            id
-            orderId
-            method
-            status
-            amount
-            createdAt
-            updatedAt
-          }
-        }
       }
       nextToken
       total
