@@ -1,15 +1,15 @@
 import { persistReducer } from "redux-persist";
-import storage from 'redux-persist/lib/storage';
 import { toast } from 'react-toastify';
 import { takeEvery } from 'redux-saga/effects';
 
 import { STORE_PREFIX } from "~/config";
+import storage from "~/utils/storage";
 import WishListPopup from "~/components/features/product/common/wishlist-popup";
 
 const actionTypes = {
     TOGGLE_WISHLIST: 'TOGGLE_WISHLIST',
     REMOVE_FROM_WISHLIST: 'REMOVE_FROM_WISHLIST',
-    REFRESH_STORE: 'REFRESH_STORE'
+    REFRESH_WISHLIST: 'REFRESH_WISHLIST'
 }
 
 const initialState = {
@@ -43,7 +43,7 @@ function wishlistReducer(state = initialState, action) {
 
             return { ...state, data: wishlist };
 
-        case actionTypes.REFRESH_STORE:
+        case actionTypes.REFRESH_WISHLIST:
             return initialState;
 
         default:

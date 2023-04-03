@@ -1,7 +1,7 @@
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 
 import { STORE_PREFIX } from "~/config";
+import storage from "~/utils/storage";
 
 const actionTypes = {
   OPEN_MODAL: 'OPEN_MODAL',
@@ -12,7 +12,7 @@ const actionTypes = {
   CLOSE_LOGIN: 'CLOSE_LOGIN',
   OPEN_PASSWORDLESS: 'OPEN_PASSWORDLESS',
   CLOSE_PASSWORDLESS: 'CLOSE_PASSWORDLESS',
-  REFRESH_STORE: 'REFRESH_STORE'
+  REFRESH_MODAL: 'REFRESH_MODAL'
 }
 
 const initialState = {
@@ -65,7 +65,7 @@ function modalReducer(state = initialState, action) {
     case actionTypes.CLOSE_PASSWORDLESS:
       return { ...state, passwordless: false, loginRedirect: true };
 
-    case actionTypes.REFRESH_STORE:
+    case actionTypes.REFRESH_MODAL:
       return initialState;
 
     default:

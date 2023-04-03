@@ -3,6 +3,7 @@ import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API } from "aws-amplify";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
@@ -23,6 +24,9 @@ Amplify.configure({ ...awsconfig, ssr: true });
 
 const App = ({ Component, pageProps }) => {
   const store = useStore();
+  const router = useRouter();
+
+  const { query } = router;
   const { navbar, footer, store: wowStore } = pageProps;
 
   const navbarProps = {
@@ -31,7 +35,7 @@ const App = ({ Component, pageProps }) => {
   };
 
   const footerProps = {
-    ...navbar,
+    ...footer,
     hideFooter: !!Component.hideFooter,
   };
 
@@ -69,24 +73,6 @@ const App = ({ Component, pageProps }) => {
     }
   }, [store]);
 
-  // const setCart = useCallback(async () => {
-  //   try {
-  //     const user = await Auth.currentAuthenticatedUser();
-  //     const {
-  //       data: { getUser: getUserResponse },
-  //     } = await API.graphql({
-  //       query: getUser,
-  //       variables: { id: user.username },
-  //       authMode: "AMAZON_COGNITO_USER_POOLS",
-  //     });
-
-  //     store.dispatch(userActions.setUser(getUserResponse));
-  //   } catch (error) {
-  //     console.log(error);
-  //     destroySession();
-  //   }
-  // }, [store]);
-
   const setStore = useCallback(async () => {
     const state = store.getState();
     if (!state.system.store) {
@@ -104,10 +90,39 @@ const App = ({ Component, pageProps }) => {
     }
   }, [store, wowStore]);
 
+  const setMetaData = useCallback(() => {
+    const state = store.getState();
+    const { system } = state;
+    const { meta } = system;
+
+    const {
+      utm_campaign: campaign,
+      utm_content: content,
+      utm_medium: medium,
+      utm_source: source,
+      utm_term: term
+    } = query;
+    const landingPage = window?.location?.href;
+    const referrer = document?.referrer;
+
+    const metadata = {
+      landingPage: meta?.landingPage || landingPage || null,
+      referrer: meta?.referrer || referrer || null,
+      utmCampaign: meta?.utmCampaign || campaign || null,
+      utmContent: meta?.utmContent || content || null,
+      utmMedium: meta?.utmMedium || medium || null,
+      utmSource: meta?.utmSource || source || null,
+      utmTerm: meta?.utmTerm || term || null,
+    };
+
+    store.dispatch(systemActions.setMeta(metadata));
+  }, [store, query]);
+
   const initSession = useCallback(async () => {
     setStore();
     setUser();
-  }, [setStore, setUser]);
+    setMetaData();
+  }, [setStore, setUser, setMetaData]);
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];

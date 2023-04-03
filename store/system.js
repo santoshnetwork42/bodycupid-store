@@ -1,21 +1,26 @@
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
+
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import { getFeaturedCoupon } from "~/graphql/api";
+import storage from "~/utils/storage";
 
 const actionTypes = {
   SET_STORE: "SET_STORE",
-  SET_SHIPPING: "SET_SHIPPING",
+  REFRESH_SYSTEM: "REFRESH_SYSTEM",
+
   SET_FEATURED_COUPONS: "SET_FEATURED_COUPONS",
   GET_FEATURED_COUPONS: "GET_FEATURED_COUPONS",
+
+  SET_META: "SET_META",
 };
 
 const initialState = {
   store: null,
   shipping: null,
   featuredCoupon: null,
+  meta: null,
 };
 
 function systemReducer(state = initialState, action) {
@@ -29,7 +34,10 @@ function systemReducer(state = initialState, action) {
     case actionTypes.SET_FEATURED_COUPONS:
       return { ...state, featuredCoupon: action.payload.coupons };
 
-    case actionTypes.REFRESH_USER:
+    case actionTypes.SET_META:
+      return { ...state, meta: action.payload.meta };
+
+    case actionTypes.REFRESH_SYSTEM:
       return initialState;
 
     default:
@@ -39,17 +47,10 @@ function systemReducer(state = initialState, action) {
 
 export const systemActions = {
   setStore: (store) => ({ type: actionTypes.SET_STORE, payload: { store } }),
-  setShipping: (shipping) => ({
-    type: actionTypes.SET_SHIPPING,
-    payload: { shipping },
-  }),
-  setFeaturedCoupons: (coupons) => ({
-    type: actionTypes.SET_FEATURED_COUPONS,
-    payload: { coupons },
-  }),
-  getFeaturedCoupon: () => ({
-    type: actionTypes.GET_FEATURED_COUPONS,
-  }),
+  setShipping: (shipping) => ({ type: actionTypes.SET_SHIPPING, payload: { shipping } }),
+  setFeaturedCoupons: (coupons) => ({ type: actionTypes.SET_FEATURED_COUPONS, payload: { coupons } }),
+  getFeaturedCoupon: () => ({ type: actionTypes.GET_FEATURED_COUPONS }),
+  setMeta: (meta) => ({ type: actionTypes.SET_META, payload: { meta } })
 };
 
 const persistConfig = {

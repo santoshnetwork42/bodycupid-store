@@ -2428,6 +2428,14 @@ export const getOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -2463,6 +2471,14 @@ export const listOrders = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
     }
@@ -2510,6 +2526,14 @@ export const bystoreIdOrder = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
     }
@@ -2557,6 +2581,14 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
     }
@@ -2604,6 +2636,14 @@ export const searchOrders = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
       }
       nextToken
       total

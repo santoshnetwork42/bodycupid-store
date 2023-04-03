@@ -2097,6 +2097,14 @@ export const createOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -2229,6 +2237,14 @@ export const updateOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
@@ -2361,6 +2377,14 @@ export const deleteOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
     }
   }
 `;
