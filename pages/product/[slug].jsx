@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -17,11 +17,13 @@ import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import fetchData from "~/utils/fetchData";
+import optimizeImage from "~/utils/optimizeImage";
 
 function ProductDefault(props) {
+  const { product, relatedProducts, productFAQs = [], productReviews } = props;
   const router = useRouter();
   const { variantId } = router.query;
-  const { product, relatedProducts, productFAQs = [], productReviews } = props;
+  console.log("pro", product);
   const [selectedVariant, setVariant] = useState(variantId);
 
   const { defaultVariantId } = useMemo(() => {
@@ -38,6 +40,11 @@ function ProductDefault(props) {
       defaultVariantId: null,
     };
   }, [product?.slug]);
+
+  useEffect(() => {
+    test();
+  }, []);
+  const test = async () => {};
 
   return (
     <main className="main single-product">
@@ -116,7 +123,15 @@ export const getStaticProps = async (context) => {
     });
     const [product] = items;
 
-    const { id } = product || {};
+    const { id, images } = product || {};
+    console.log("ima", images.items);
+    // Optimized Product Image
+    for (const img in images?.items) {
+      const optimizedProductImage = await optimizeImage({
+        src: images.items[img].imageKey,
+        type: "self-hosted",
+      });
+    }
 
     // get Related Product By Category
     let relatedProducts = [];
