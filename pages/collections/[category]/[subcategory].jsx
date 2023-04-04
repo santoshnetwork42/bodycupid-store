@@ -45,12 +45,12 @@ function Categories({ store }) {
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {category.name}
+          {name} - {category?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {category.name}
+        {name} - {category?.name}
       </h1>
 
       <ShopBanner bannerUrl={category?.bannerUrl} />
