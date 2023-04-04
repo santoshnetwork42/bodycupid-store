@@ -3,13 +3,28 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
-import { getBasicSubCategory, getSubCategoriesSlug } from "~/graphql/api";
+import {
+  getBasicSubCategory,
+  getAllSubcategoriesPath,
+  findProducts,
+  getSideBarFilterCategories,
+} from "~/graphql/api";
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
+import { CATEGORY_REVALIDATE_DURATION } from "~/constant";
+import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
 
-function Categories({ subCategory, store }) {
+function Categories(props) {
+  const {
+    store,
+    subCategory,
+    products,
+    categoryId,
+    subCategoryId,
+    sideBarCategories,
+  } = props;
   const { name } = store;
 
   return (
@@ -24,15 +39,20 @@ function Categories({ subCategory, store }) {
         {name} - {subCategory.name}
       </h1>
 
-      <ShopBanner bannerUrl={subCategory?.bannerUrl} />
+      <ShopBanner category={subCategory} />
 
       <div className="page-content mb-10 pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne />
+            <SidebarFilterOne categories={sideBarCategories} />
 
             <div className="col-lg-9 main-content">
-              <ProductListOne category={subCategory} />
+              <ProductListOne
+                category={subCategory}
+                categoryId={categoryId}
+                subCategoryId={subCategoryId}
+                products={products}
+              />
             </div>
           </div>
         </div>
@@ -42,58 +62,90 @@ function Categories({ subCategory, store }) {
 }
 
 export const getStaticPaths = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
+
   const {
     searchProductSubCategories: { items: response },
-  } = await fetchData(getSubCategoriesSlug, {
+  } = await fetchData(getAllSubcategoriesPath, {
     filter: { storeId: { eq: STORE_ID }, categoryID: { exists: true } },
   });
 
-  if (!!response?.length) {
-    const paths = response.reduce((obj, cur) => {
-      if (cur.category) {
-        obj.push({
-          params: {
-            category: cur?.category?.slug,
-            subcategory: cur?.slug,
-          },
-        });
-      }
-      return obj;
-    }, []);
-    return {
-      paths: paths,
-      fallback: false,
-    };
-  }
+  const paths = response.reduce((obj, cur) => {
+    if (cur.category) {
+      obj.push({
+        params: {
+          category: cur?.category?.slug,
+          subcategory: cur?.slug,
+        },
+      });
+    }
+    return obj;
+  }, []);
+
   return {
-    paths: [],
-    fallback: true,
+    paths,
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps = async (context) => {
   try {
     const { params } = context;
-    const { subcategory: subCategorySlug } = params || {};
-    const {
+    const { subcategory: slug } = params || {};
+    let {
       byslugProductSubCategory: {
-        items: [response],
+        items: [subCategory],
       },
     } = await fetchData(getBasicSubCategory, {
-      slug: subCategorySlug,
+      slug,
       filter: { storeId: { eq: STORE_ID } },
     });
 
-    return {
-      props: {
-        subCategory: response,
-      },
-    };
+    // Get SideBar Categories
+    const {
+      searchProductCategories: { items: categories },
+    } = await fetchData(getSideBarFilterCategories, {
+      filter: { storeId: { eq: STORE_ID } },
+    });
+
+    // Get Product By Sub Category
+    if (subCategory) {
+      const { id, categoryID } = subCategory;
+      const { searchProducts } = await fetchData(findProducts, {
+        filter: {
+          subCategoryId: { eq: id },
+          status: { eq: "ENABLED" },
+          storeId: { eq: STORE_ID },
+        },
+        limit: 50,
+      });
+
+      const { items } = searchProducts;
+      const products = await Promise.all(items.map(optimizeProduct));
+      const optimizedSubCategory = await optimizeCategory(subCategory);
+
+      return {
+        props: {
+          subCategory: optimizedSubCategory,
+          categoryId: categoryID,
+          subCategoryId: id,
+          products: { ...searchProducts, items: products },
+          sideBarCategories: categories,
+        },
+        revalidate: CATEGORY_REVALIDATE_DURATION,
+      };
+    }
   } catch (error) {
-    return {
-      notFound: true,
-    };
+    console.log("sub category", error);
   }
+  return {
+    notFound: true,
+  };
 };
 
 function mapStateToProps(state) {

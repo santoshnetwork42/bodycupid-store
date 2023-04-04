@@ -31,7 +31,7 @@ export const getMenuSubCategories = /* GraphQL */ `
   }
 `;
 
-export const getSubCategoriesSlug = /* GraphQL */ `
+export const getAllSubcategoriesPath = /* GraphQL */ `
   query SearchProductSubCategories(
     $filter: SearchableProductSubCategoryFilterInput
     $sort: [SearchableProductSubCategorySortInput]
@@ -91,7 +91,7 @@ export const getSideBarFilterCategories = /* GraphQL */ `
   }
 `;
 
-export const getCategoriesSlug = /* GraphQL */ `
+export const getAllCategoriesPath = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
     $sort: [SearchableProductCategorySortInput]
@@ -110,11 +110,6 @@ export const getCategoriesSlug = /* GraphQL */ `
     ) {
       items {
         slug
-        subCategory {
-          items {
-            slug
-          }
-        }
       }
     }
   }
@@ -772,6 +767,7 @@ export const getBasicSubCategory = /* GraphQL */ `
         name
         slug
         bannerUrl
+        categoryID
       }
     }
   }

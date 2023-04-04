@@ -17,6 +17,7 @@ import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
+import { HOME_REVALIDATE_DURATION } from "~/constant";
 
 function HomePage({ hero, products, categories, brands, store }) {
   const { name } = store;
@@ -179,6 +180,7 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
+      revalidate: HOME_REVALIDATE_DURATION,
     };
   } catch (e) {
     return {

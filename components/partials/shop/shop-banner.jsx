@@ -2,19 +2,21 @@ import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function ShopBanner(props) {
+  const { category } = props;
   const {
     subTitle = "",
     title = "Wow Shop",
     current = "Wow Shop",
     bannerUrl,
-  } = props;
+    bannerImage,
+  } = category || {};
 
   return (
     <div
       className="page-header"
       style={{
         backgroundImage: bannerUrl
-          ? `url(${getPublicImageURL(bannerUrl)})`
+          ? `url(${bannerImage?.originalUrl || getPublicImageURL(bannerUrl)})`
           : null,
         backgroundColor: "#3C63A4",
         backgroundSize: "cover",
