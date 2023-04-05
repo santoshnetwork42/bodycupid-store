@@ -71,7 +71,7 @@ function Header({ navbar, auth, openLogin }) {
             <div className="header-right">
               <ALink
                 href="tel:#"
-                className="icon-box d-sm-none icon-box-side p-0 mr-3"
+                className="icon-box d-sm-none  p-0 mr-3"
               >
                 <div className="icon-box-icon mr-0 mr-lg-2">
                   <i className="d-icon-phone"></i>

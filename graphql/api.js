@@ -31,6 +31,33 @@ export const getMenuSubCategories = /* GraphQL */ `
   }
 `;
 
+export const getAllSubcategoriesPath = /* GraphQL */ `
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
+  ) {
+    searchProductSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        category {
+          slug
+        }
+      }
+    }
+  }
+`;
+
 export const getSideBarFilterCategories = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
@@ -59,6 +86,30 @@ export const getSideBarFilterCategories = /* GraphQL */ `
             slug
           }
         }
+      }
+    }
+  }
+`;
+
+export const getAllCategoriesPath = /* GraphQL */ `
+  query SearchProductCategories(
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductCategoryAggregationInput]
+  ) {
+    searchProductCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
       }
     }
   }
@@ -716,6 +767,7 @@ export const getBasicSubCategory = /* GraphQL */ `
         name
         slug
         bannerUrl
+        categoryID
       }
     }
   }
@@ -1221,6 +1273,10 @@ export const getStore = /* GraphQL */ `
       host
       priority
       imageUrl
+      banners {
+        webKey
+        mobileKey
+      }
     }
   }
 `;
@@ -1281,6 +1337,41 @@ export const getReviews = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const getReviewsAnalytics = /* GraphQL */ `
+  query SearchReviews(
+    $filter: SearchableReviewFilterInput
+    $sort: [SearchableReviewSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableReviewAggregationInput]
+  ) {
+    searchReviews(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;

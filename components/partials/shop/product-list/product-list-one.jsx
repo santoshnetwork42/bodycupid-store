@@ -20,102 +20,110 @@ const gridClasses = {
 };
 
 function ProductListOne(props) {
-  const { itemsPerRow = 3, type = "left", isToolbox = true, category } = props;
+  const {
+    itemsPerRow = 3,
+    type = "left",
+    isToolbox = true,
+    products: initialData,
+    categoryId,
+    subCategoryId,
+  } = props;
 
-  const [token, setToken] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [total, setTotal] = useState();
   const router = useRouter();
 
-  const {
-    limit,
-    minprice,
-    maxprice,
-    type: gridType = "grid",
-    category: categorySlug,
-    subcategory: subCategorySlug,
-    search,
-    sortby,
-  } = router.query;
-  const perPage = limit ? parseInt(limit) : 12;
+  const [applyFilters, resetFilter] = useState(false);
+  const [token, setToken] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const { query } = router;
+  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
+
+  const perPage = 50;
 
   const filters = useMemo(() => {
-    if (category || categorySlug === "all") {
-      const apiSearchKey = subCategorySlug ? "subCategoryId" : "categoryId";
-      const sortBy = [];
-      const filter = category
-        ? {
-            [apiSearchKey]: { eq: category.id },
-            storeId: { eq: STORE_ID },
-            status: { eq: "ENABLED" },
-          }
-        : { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
+    const sortBy = [];
+    const filter = { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
 
-      if (!!search?.trim()) {
-        filter.title = { matchPhrasePrefix: search };
-      }
-
-      if (
-        !Number.isNaN(Number(minprice)) &&
-        !Number.isNaN(Number(maxprice)) &&
-        Number(minprice)
-      ) {
-        filter.price = {
-          range: [Number(minprice), Number(maxprice)],
-        };
-      } else if (!Number.isNaN(Number(minprice)) && Number(minprice)) {
-        filter.price = { gte: Number(minprice) };
-      } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
-        filter.price = { lte: Number(maxprice) };
-      }
-      if (sortby === "popularity") {
-        sortBy.push({ field: "rating", direction: "desc" });
-      } else if (sortby === "price-low") {
-        sortBy.push({ field: "price", direction: "asc" });
-      } else if (sortby === "price-high") {
-        sortBy.push({ field: "price", direction: "desc" });
-      }
-      return { filter, limit: perPage, sort: sortBy };
+    if (categoryId) {
+      filter.categoryId = { eq: categoryId };
     }
-    return null;
-  }, [perPage, maxprice, minprice, category?.id, search, sortby]);
+
+    if (subCategoryId) {
+      filter.subCategoryId = { eq: subCategoryId };
+    }
+
+    if (!!search?.trim()) {
+      filter.title = { matchPhrasePrefix: search };
+    }
+
+    if (
+      !Number.isNaN(Number(minprice)) &&
+      !Number.isNaN(Number(maxprice)) &&
+      Number(minprice)
+    ) {
+      filter.price = {
+        range: [Number(minprice), Number(maxprice)],
+      };
+    } else if (!Number.isNaN(Number(minprice)) && Number(minprice)) {
+      filter.price = { gte: Number(minprice) };
+    } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
+      filter.price = { lte: Number(maxprice) };
+    }
+
+    if (sortby === "popularity") {
+      sortBy.push({ field: "rating", direction: "desc" });
+    } else if (sortby === "price-low") {
+      sortBy.push({ field: "price", direction: "asc" });
+    } else if (sortby === "price-high") {
+      sortBy.push({ field: "price", direction: "desc" });
+    }
+
+    return { filter, limit: perPage, sort: sortBy };
+  }, [perPage, maxprice, minprice, search, sortby]);
 
   const getProducts = useCallback(
-    (reset) => {
-      API.graphql(
-        graphqlOperation(findProducts, {
-          ...filters,
-          nextToken: reset ? null : token,
-        })
-      )
-        .then(
-          ({
-            data: {
-              searchProducts: { items: response, total, nextToken },
-            },
-          }) => {
-            if (reset) {
-              setProducts(response);
-            } else {
-              setProducts([...products, ...response]);
-            }
-            setToken(nextToken);
-            setTotal(total);
-            setLoading(false);
-          }
-        )
-        .catch((err) => {
-          console.log(err);
-        });
+    async (reset) => {
+      try {
+        if (!applyFilters) return;
+        if (reset) setLoading(true);
+        const {
+          data: {
+            searchProducts: { items: response, total, nextToken },
+          },
+        } = await API.graphql(
+          graphqlOperation(findProducts, {
+            ...filters,
+            nextToken: reset ? null : token,
+          })
+        );
+
+        if (reset) {
+          setProducts(response);
+        } else {
+          setProducts([...products, ...response]);
+        }
+        setToken(nextToken);
+        setTotal(total);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    [filters, products, token]
+    [filters, products, token, applyFilters]
   );
 
   useEffect(() => {
-    if (filters) {
-      getProducts(true);
-    }
+    const { items, nextToken, total } = initialData || {};
+    setProducts(items);
+    setToken(nextToken);
+    setTotal(total);
+  }, [categoryId, subCategoryId]);
+
+  useEffect(() => {
+    getProducts(true);
+    resetFilter(true);
   }, [filters]);
 
   if (loading) {
