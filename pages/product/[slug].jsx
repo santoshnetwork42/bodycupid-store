@@ -17,6 +17,10 @@ import { STORE_ID } from "~/config";
 import LinkedProducts from "~/components/partials/product/linked-product";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import fetchData from "~/utils/fetchData";
+import {
+  optimizeProduct,
+  variantImageOptimization,
+} from "~/utils/getStaticData";
 
 function ProductDefault(props) {
   const { product, relatedProducts, productFAQs = [], productReviews } = props;
@@ -116,9 +120,13 @@ export const getStaticProps = async (context) => {
     });
     const [product] = items;
 
-    const { id, images } = product || {};
+    const { id, variants } = product || {};
 
-    // Optimized Product Image
+    const [optimizedProducts] = await Promise.all(items.map(optimizeProduct));
+
+    const { variants: optimizedVariants } = await variantImageOptimization(
+      variants
+    );
 
     // get Related Product By Category
     let relatedProducts = [];
@@ -165,7 +173,7 @@ export const getStaticProps = async (context) => {
 
     return {
       props: {
-        product: product,
+        product: { ...optimizedProducts, variants: optimizedVariants },
         relatedProducts: relatedProducts,
         productFAQs: faqS,
         productReviews: {
