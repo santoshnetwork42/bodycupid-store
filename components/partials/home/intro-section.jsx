@@ -3,8 +3,7 @@ import React from "react";
 import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 
-function IntroSection({ data }) {
-  const { banners } = data;
+function IntroSection({ banners: { banners } }) {
   const [{ webImage, mobileImage }] = banners || [];
   return (
     <>

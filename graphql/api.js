@@ -942,7 +942,6 @@ export const getProductSlug = /* GraphQL */ `
       items {
         slug
       }
-      total
     }
   }
 `;

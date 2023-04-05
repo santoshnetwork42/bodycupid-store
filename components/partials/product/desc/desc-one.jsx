@@ -45,16 +45,12 @@ function DescOne(props) {
     title,
     rating,
   } = product;
-  const {
-    reviews: productReview,
-    total: totalreview,
-    nextToken,
-  } = productReviews;
+
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
-  const [reviews, setReviews] = useState([...productReview]);
-  const [total, setTotal] = useState(totalreview);
+  const [reviews, setReviews] = useState([]);
+  const [total, setTotal] = useState(0);
   const [showReview, setShowReview] = useState(!totalRatings);
-  const [token, setToken] = useState(nextToken);
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const [reviewAnalytics, setReviewAnalytics] = useState([]);
 
@@ -92,7 +88,7 @@ function DescOne(props) {
   };
 
   const getProductReviews = useCallback(
-    (reset) => {
+    (reset = true) => {
       setLoading(true);
       API.graphql(
         graphqlOperation(getReviews, {
@@ -216,10 +212,6 @@ function DescOne(props) {
     });
   };
 
-  useEffect(() => {
-    getStarAnalytics();
-  }, []);
-
   return (
     <div className="col-md-12 mb-6">
       <Accordion adClass="accordion-simple">
@@ -307,6 +299,12 @@ function DescOne(props) {
             product?.totalRatings ? `(${product.totalRatings})` : ""
           }`}
           noDisplayStyle
+          onExpanded={() => {
+            if (!!product?.totalRatings && !reviews.length) {
+              getProductReviews();
+              getStarAnalytics();
+            }
+          }}
         >
           <div className="product-tab-reviews">
             <div className="reply mt-8 mb-8">

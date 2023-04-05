@@ -21,7 +21,7 @@ export default function MediaOne(props) {
     const images = [...product.images.items];
     images.sort((a, b) => a.position - b.position);
     if (product.variants.items.length > 0) {
-      product.variants.items.map((i) => {
+      product.variants.items.forEach((i) => {
         images.push({
           ...i,
           variantId: i.id,
