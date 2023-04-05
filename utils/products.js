@@ -19,9 +19,9 @@ export const getProductMeta = (product) => {
 
   const discount = !!(product.listingPrice && product.price)
     ? parseInt(
-      ((product.listingPrice - product.price) * 100) / product.listingPrice,
-      10
-    )
+        ((product.listingPrice - product.price) * 100) / product.listingPrice,
+        10
+      )
     : 0;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);
@@ -53,9 +53,8 @@ export const getProductInventory = (product, selectedVariantId = null) => {
             currentInventory: variantInventory,
           };
         } else {
-          const { inventory: variantInventory } = items.find(
-            (s) => s.id === selectedVariantId
-          );
+          const selectedVariant = items.find((s) => s.id === selectedVariantId);
+          const { inventory: variantInventory } = selectedVariant || {};
           return {
             hasInventory: !!variantInventory,
             currentInventory: variantInventory,

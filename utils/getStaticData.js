@@ -55,3 +55,25 @@ export const optimizeStore = async (banner) => {
   }
   return { ...banner };
 };
+
+export const variantImageOptimization = async (variants) => {
+  const { items } = variants;
+  if (items.length) {
+    const optimizedImages = await Promise.all(
+      items.map(async (item) => {
+        const imageUrl = getPublicImageURL(item.imageUrl);
+        const optimizedProductImage = await optimizeImage({
+          src: imageUrl,
+          options: {
+            resize: 200,
+            blur: 3,
+          },
+        });
+        return { ...item, image: optimizedProductImage };
+      })
+    );
+
+    return { variants: { ...variants, items: optimizedImages } };
+  }
+  return { variants: { ...variants } };
+};
