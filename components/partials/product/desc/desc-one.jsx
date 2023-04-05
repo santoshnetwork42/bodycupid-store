@@ -1,18 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
-import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
 import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
-import {
-  createReview,
-  getReviews,
-  getReviewsAnalytics,
-  searchProductFaqs,
-} from "~/graphql/api";
+import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
@@ -33,7 +27,7 @@ const reviewDefault = {
 };
 
 function DescOne(props) {
-  const { product, openModal, user } = props;
+  const { product, openModal, user, productFAQs, productReviews } = props;
   const {
     id,
     totalRatings,
@@ -43,14 +37,16 @@ function DescOne(props) {
     weight,
     weightUnit,
     video,
+    title,
+    rating,
   } = product;
+
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
   const [showReview, setShowReview] = useState(!totalRatings);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [productsFAQs, setProductsFAQs] = useState([]);
   const [reviewAnalytics, setReviewAnalytics] = useState([]);
 
   const getStarAnalytics = async () => {
@@ -87,7 +83,7 @@ function DescOne(props) {
   };
 
   const getProductReviews = useCallback(
-    (reset) => {
+    (reset = true) => {
       setLoading(true);
       API.graphql(
         graphqlOperation(getReviews, {
@@ -121,32 +117,6 @@ function DescOne(props) {
     },
     [product, token]
   );
-
-  const getProductFAQs = useCallback(() => {
-    setLoading(true);
-    API.graphql(
-      graphqlOperation(searchProductFaqs, {
-        filter: {
-          productId: { eq: id },
-        },
-      })
-    )
-      .then(
-        ({
-          data: {
-            searchProductFaqs: { items: response },
-          },
-        }) => {
-          if (response) {
-            setProductsFAQs(response);
-          }
-          setLoading(false);
-        }
-      )
-      .catch((err) => {
-        setLoading(false);
-      });
-  }, [product]);
 
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
@@ -337,13 +307,13 @@ function DescOne(props) {
                 <h3 className="title title-simple text-left text-normal">
                   {reviews.length > 0
                     ? "Add a Review"
-                    : "Be The First To Review “" + product.title + "”"}
+                    : "Be The First To Review “" + title + "”"}
                 </h3>{" "}
                 {!!reviews.length && (
                   <div className="review-section">
                     <div className="total-review w-100">
-                      <h4>{product?.rating}</h4>
-                      <RatingStar value={product?.rating} />
+                      <h4>{rating}</h4>
+                      <RatingStar value={rating} />
                       {!!product?.totalRatings && (
                         <span>Based on {product.totalRatings} reviews</span>
                       )}
@@ -466,7 +436,7 @@ function DescOne(props) {
                     <div className=" img-wrapper">
                       {reviewState.images.map((img, index) => (
                         <div className="img_wrp mr-2" key={img}>
-                          <img 
+                          <img
                             src={getPublicImageURL(img)}
                             className="img-preview"
                             alt=""
@@ -540,15 +510,7 @@ function DescOne(props) {
         </Card>
 
         {!!product.hasFaq && (
-          <Card
-            title="FAQs"
-            noDisplayStyle
-            onExpanded={() => {
-              if (!!product?.hasFaq && !productsFAQs.length) {
-                getProductFAQs();
-              }
-            }}
-          >
+          <Card title="FAQs" noDisplayStyle>
             <div className="col-md-12">
               <Reveal
                 keyframes={fadeIn}
@@ -557,10 +519,10 @@ function DescOne(props) {
                 triggerOnce
               >
                 <div className="col-md-12">
-                  {!!productsFAQs.length && (
+                  {!!productFAQs.length && (
                     <Accordion adClass="accordion-border">
                       <>
-                        {productsFAQs.map((faq) => (
+                        {productFAQs.map((faq) => (
                           <div key={faq?.id}>
                             <Card
                               title={

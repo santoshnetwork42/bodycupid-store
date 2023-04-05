@@ -5,7 +5,6 @@ import OptimizedImage from "~/components/features/optimized-image";
 
 function IntroSection({ banners }) {
   const [{ webImage, mobileImage }] = banners || [];
-
   return (
     <>
       <ALink

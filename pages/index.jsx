@@ -37,7 +37,7 @@ function HomePage({ products, categories, brands, store, hero }) {
 
       <div className="page-content">
         <div className="intro-section">
-          <IntroSection data={hero} />
+          <IntroSection {...hero} />
           <ServiceBox />
         </div>
 
