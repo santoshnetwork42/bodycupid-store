@@ -25,6 +25,7 @@ import { HOME_REVALIDATE_DURATION } from "~/constant";
 import { optimizeStore } from "~/utils/getStaticData";
 
 function HomePage({ products, categories, brands, store, hero }) {
+  console.log(hero);
   const { name } = store;
 
   return (
