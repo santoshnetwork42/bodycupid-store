@@ -97,6 +97,8 @@ export const getStaticProps = async (context) => {
   try {
     const { params } = context;
     const { subcategory: slug } = params || {};
+
+    // Sub Category By Slug
     let {
       byslugProductSubCategory: {
         items: [subCategory],
@@ -106,17 +108,16 @@ export const getStaticProps = async (context) => {
       filter: { storeId: { eq: STORE_ID } },
     });
 
-    // Get SideBar Categories
-    const {
-      searchProductCategories: { items: categories },
-    } = await fetchData(getSideBarFilterCategories, {
-      filter: { storeId: { eq: STORE_ID } },
-    });
-
     // Get Product By Sub Category
     if (subCategory) {
       const { id, categoryID } = subCategory;
-      const { searchProducts } = await fetchData(findProducts, {
+
+      // Get SideBar Categories
+      const getSidebarCategory = fetchData(getSideBarFilterCategories, {
+        filter: { storeId: { eq: STORE_ID } },
+      });
+
+      const getProduct = fetchData(findProducts, {
         filter: {
           subCategoryId: { eq: id },
           status: { eq: "ENABLED" },
@@ -125,6 +126,10 @@ export const getStaticProps = async (context) => {
         limit: 50,
       });
 
+      const [{ searchProductCategories }, { searchProducts }] =
+        await Promise.all([getSidebarCategory, getProduct]);
+
+      const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
       const products = await Promise.all(items.map(optimizeProduct));
       const optimizedSubCategory = await optimizeCategory(subCategory);

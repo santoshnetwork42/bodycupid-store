@@ -12,15 +12,21 @@ import CtaSection from "~/components/partials/home/cta-section";
 import BrandSection from "~/components/partials/home/brand-section";
 // import BlogSection from "~/components/partials/home/blog-section";
 
-import { getHomePageCategories, getHomePageProducts } from "~/graphql/api";
+import {
+  getHomePageCategories,
+  getHomePageProducts,
+  getStore,
+} from "~/graphql/api";
 import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import { HOME_REVALIDATE_DURATION } from "~/constant";
+import { optimizeStore } from "~/utils/getStaticData";
 
-function HomePage({ hero, products, categories, brands, store }) {
+function HomePage({ products, categories, brands, store, hero }) {
   const { name } = store;
+
   return (
     <main className="main home searchBar">
       <Head>
@@ -75,15 +81,15 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
-    const optimizedHeroImage = await optimizeImage({
-      src: "/images/home/slides/wow.jpg",
-      type: "self-hosted",
-    });
+    // const optimizedHeroImage = await optimizeImage({
+    //   src: "/images/home/slides/wow.jpg",
+    //   type: "self-hosted",
+    // });
 
-    const optimizedMobileHeroImage = await optimizeImage({
-      src: "/images/home/slides/wow-mobile.jpg",
-      type: "self-hosted",
-    });
+    // const optimizedMobileHeroImage = await optimizeImage({
+    //   src: "/images/home/slides/wow-mobile.jpg",
+    //   type: "self-hosted",
+    // });
 
     const { searchProducts } = await fetchData(getHomePageProducts, {
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
@@ -96,6 +102,13 @@ export const getStaticProps = async () => {
         filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
         sort: [{ field: "priority", direction: "asc" }],
       }
+    );
+
+    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+    const { banners = [] } = store;
+
+    const optimizedStoreBanners = await Promise.all(
+      (banners || []).map(optimizeStore)
     );
 
     for (const category of searchProductSubCategories.items) {
@@ -170,8 +183,7 @@ export const getStaticProps = async () => {
           logo: optimizedLogoImage,
         },
         hero: {
-          banner: optimizedHeroImage,
-          mobileBanner: optimizedMobileHeroImage,
+          banners: optimizedStoreBanners,
         },
         products: searchProducts.items,
         categories: searchProductSubCategories.items,
@@ -190,9 +202,7 @@ export const getStaticProps = async () => {
 };
 
 function mapStateToProps(state) {
-  return {
-    store: state.system.store,
-  };
+  return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
 Component.showMobileSearchBar = true;

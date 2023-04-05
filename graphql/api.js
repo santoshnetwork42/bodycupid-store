@@ -1248,6 +1248,10 @@ export const getStore = /* GraphQL */ `
       host
       priority
       imageUrl
+      banners {
+        webKey
+        mobileKey
+      }
     }
   }
 `;

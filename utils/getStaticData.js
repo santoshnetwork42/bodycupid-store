@@ -33,12 +33,25 @@ export const optimizeCategory = async (category) => {
     const imageUrl = getPublicImageURL(bannerUrl);
     const optimizedCategoryBanner = await optimizeImage({
       src: imageUrl,
-      options: {
-        resize: 200,
-        blur: 3,
-      },
     });
     return { ...category, bannerImage: optimizedCategoryBanner };
   }
   return { ...category };
+};
+
+export const optimizeStore = async (banner) => {
+  if (banner) {
+    const { webKey, mobileKey } = banner;
+
+    const webUrl = getPublicImageURL(webKey);
+    const webImage = await optimizeImage({
+      src: webUrl,
+    });
+    const mobileUrl = getPublicImageURL(mobileKey);
+    const mobileImage = await optimizeImage({
+      src: mobileUrl,
+    });
+    return { ...banner, webImage, mobileImage };
+  }
+  return { ...banner };
 };

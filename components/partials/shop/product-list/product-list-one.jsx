@@ -24,7 +24,7 @@ function ProductListOne(props) {
     itemsPerRow = 3,
     type = "left",
     isToolbox = true,
-    products: productData,
+    products: initialData,
     categoryId,
     subCategoryId,
   } = props;
@@ -84,37 +84,38 @@ function ProductListOne(props) {
   }, [perPage, maxprice, minprice, search, sortby]);
 
   const getProducts = useCallback(
-    (reset) => {
-      if (!applyFilters) return;
-      if (reset) setLoading(true);
-      API.graphql(
-        graphqlOperation(findProducts, {
-          ...filters,
-          nextToken: reset ? null : token,
-        })
-      )
-        .then((res) => {
-          const {
-            data: {
-              searchProducts: { items: response, total, nextToken },
-            },
-          } = res;
-          if (reset) {
-            setProducts(response);
-          } else {
-            setProducts([...products, ...response]);
-          }
-          setToken(nextToken);
-          setTotal(total);
-          setLoading(false);
-        })
-        .catch(console.error);
+    async (reset) => {
+      try {
+        if (!applyFilters) return;
+        if (reset) setLoading(true);
+        const {
+          data: {
+            searchProducts: { items: response, total, nextToken },
+          },
+        } = await API.graphql(
+          graphqlOperation(findProducts, {
+            ...filters,
+            nextToken: reset ? null : token,
+          })
+        );
+
+        if (reset) {
+          setProducts(response);
+        } else {
+          setProducts([...products, ...response]);
+        }
+        setToken(nextToken);
+        setTotal(total);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
     },
     [filters, products, token, applyFilters]
   );
 
   useEffect(() => {
-    const { items, nextToken, total } = productData || {};
+    const { items, nextToken, total } = initialData || {};
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
