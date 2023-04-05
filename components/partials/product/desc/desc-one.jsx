@@ -23,7 +23,7 @@ const reviewDefault = {
   comment: "",
   name: "",
   email: "",
-  image: [],
+  images: [],
 };
 
 function DescOne(props) {
@@ -52,18 +52,38 @@ function DescOne(props) {
   const [token, setToken] = useState(nextToken);
   const [loading, setLoading] = useState(false);
 
-  const allReviews = useMemo(() => {
-    if (reviews && reviews.length) {
-      return [1, 2, 3, 4, 5].reduce((acc, cur) => {
-        acc = {
-          ...acc,
-          [cur]: reviews.filter((d) => d.rating === cur),
-        };
-        return acc;
-      }, {});
+  const getStarAnalytics = async () => {
+    try {
+      const {
+        data: {
+          searchReviews: {
+            aggregateItems: [item],
+          },
+        },
+      } = await API.graphql(
+        graphqlOperation(getReviewsAnalytics, {
+          filter: {
+            productId: { eq: id },
+          },
+          aggregates: [
+            {
+              name: "perStartGrouping",
+              type: "terms",
+              field: "rating",
+            },
+          ],
+        })
+      );
+      if (item) {
+        const data = item.result.buckets
+          .sort((a, b) => +a.key - +b.key)
+          .reverse();
+        setReviewAnalytics(data);
+      }
+    } catch (e) {
+      console.log("e", e);
     }
-    return 0;
-  }, [reviews]);
+  };
 
   const getProductReviews = useCallback(
     (reset) => {
@@ -117,7 +137,7 @@ function DescOne(props) {
       );
       setReview({
         ...reviewState,
-        image: [...reviewState.image, ...urls],
+        images: [...reviewState.images, ...urls],
       });
     }
   };
@@ -132,7 +152,7 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { rating, comment, name, email, image } = reviewState;
+        const { rating, comment, name, email, images } = reviewState;
         await API.graphql({
           query: createReview,
           variables: {
@@ -145,7 +165,7 @@ function DescOne(props) {
               },
               userId: user?.id,
               productId: id,
-              images: image,
+              images,
             },
           },
         });
@@ -160,7 +180,7 @@ function DescOne(props) {
             productId: id,
             rating,
             comment,
-            images: image,
+            images,
             updatedAt: new Date().toUTCString(),
           },
           ...reviews,
@@ -180,6 +200,15 @@ function DescOne(props) {
     },
     [reviewState, user?.id, id]
   );
+
+  const removeImage = (index) => {
+    const temp = [...reviewState.images];
+    temp.splice(index, 1);
+    setReview({
+      ...reviewState,
+      images: temp,
+    });
+  };
 
   return (
     <div className="col-md-12 mb-6">
@@ -287,18 +316,16 @@ function DescOne(props) {
                       )}
                     </div>
                     <div className="rating w-100">
-                      {[5, 4, 3, 2, 1].map((num, i) => (
+                      {reviewAnalytics.map((r) => (
                         <div
                           className="d-flex align-items-center justify-content-center mt-2"
-                          key={i}
+                          key={r.key}
                         >
-                          <RatingStar value={num} />
+                          <RatingStar value={+r.key} />
                           <div className="ml-1 percent">
-                            ({getPer(total, allReviews[num]?.length)}%)
+                            ({getPer(total, +r.doc_count)}%)
                           </div>
-                          <span className="ml-1">
-                            {allReviews[num]?.length}
-                          </span>
+                          <span className="ml-1">{+r.doc_count}</span>
                         </div>
                       ))}
                     </div>
@@ -317,6 +344,7 @@ function DescOne(props) {
                       </div>
                     </div>
                   </div>
+                  )}
                   {showReview && (
                     <>
                       <hr className="product-divider"></hr>
@@ -400,31 +428,23 @@ function DescOne(props) {
                           comment: e.target.value.trim(),
                         })
                       }
-                    ></textarea>
+                    />
                     <div className="d-flex w-100 img-wrapper justify-content-end">
                       <div className=" img-wrapper">
-                        {reviewState.image &&
-                          reviewState.image.map((img, index) => (
-                            <div className="img_wrp mr-2" key={index}>
-                              <img
-                                src={getPublicImageURL(img)}
-                                className="img-preview"
-                                alt=""
-                              />
+                        {reviewState.images.map((img, index) => (
+                          <div className="img_wrp mr-2" key={img}>
+                            <img
+                              src={getPublicImageURL(img)}
+                              className="img-preview"
+                              alt=""
+                            />
 
-                              <i
-                                className="d-icon-close close"
-                                onClick={() => {
-                                  const temp = [...reviewState.image];
-                                  temp.splice(index, 1);
-                                  setReview({
-                                    ...reviewState,
-                                    image: temp,
-                                  });
-                                }}
-                              ></i>
-                            </div>
-                          ))}
+                            <i
+                              className="d-icon-close close"
+                              onClick={() => removeImage(index)}
+                            ></i>
+                          </div>
+                        ))}
                       </div>
 
                       <input

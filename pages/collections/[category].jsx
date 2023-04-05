@@ -1,71 +1,50 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
-import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
-import { getBasicCategory } from "~/graphql/api";
+import {
+  getBasicCategory,
+  getAllCategoriesPath,
+  findProducts,
+  getSideBarFilterCategories,
+} from "~/graphql/api";
 import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
+import fetchData from "~/utils/fetchData";
+import { CATEGORY_REVALIDATE_DURATION } from "~/constant";
+import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
 
-function Categories({ store }) {
+function Categories(props) {
+  const { store, category, products, categoryId, sideBarCategories } = props;
   const { name } = store;
-  const [category, setCategory] = useState(null);
-  const router = useRouter();
-
-  const { category: categorySlug } = router.query;
-
-  useEffect(() => {
-    getCategoryByslug();
-  }, [categorySlug]);
-
-  const getCategoryByslug = useCallback(async () => {
-    try {
-      if (categorySlug !== "all") {
-        const {
-          data: {
-            byslugProductCategory: {
-              items: [response],
-            },
-          },
-        } = await API.graphql(
-          graphqlOperation(getBasicCategory, {
-            slug: categorySlug,
-            filter: { storeId: { eq: STORE_ID } },
-          })
-        );
-        setCategory(response);
-      } else {
-        setCategory(null);
-      }
-    } catch (error) {
-      console.log("byslugProductCategory", error);
-    }
-  }, [categorySlug]);
 
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {category?.name || "All Products"}
+          {name} - {category.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {category?.name || "All Products"}
+        {name} - {category.name}
       </h1>
 
-      <ShopBanner bannerUrl={category?.bannerUrl} />
+      <ShopBanner category={category} />
 
       <div className="page-content mb-10 pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne />
+            <SidebarFilterOne categories={sideBarCategories} />
 
             <div className="col-lg-9 main-content">
-              <ProductListOne category={category} />
+              <ProductListOne
+                category={category}
+                categoryId={categoryId}
+                products={products}
+              />
             </div>
           </div>
         </div>
@@ -73,6 +52,89 @@ function Categories({ store }) {
     </main>
   );
 }
+
+export const getStaticPaths = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
+  const {
+    searchProductCategories: { items: response },
+  } = await fetchData(getAllCategoriesPath, {
+    filter: { storeId: { eq: STORE_ID } },
+  });
+
+  const paths = response.map((c) => {
+    return {
+      params: { category: c.slug },
+    };
+  });
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async (context) => {
+  try {
+    const { params } = context;
+    const { category: slug } = params;
+
+    // Category By Slug
+    let {
+      byslugProductCategory: {
+        items: [category],
+      },
+    } = await fetchData(getBasicCategory, {
+      slug,
+      filter: { storeId: { eq: STORE_ID } },
+    });
+
+    if (category) {
+      const { id } = category;
+
+      // Get SideBar Categories
+      const getSidebarCategory = fetchData(getSideBarFilterCategories, {
+        filter: { storeId: { eq: STORE_ID } },
+      });
+
+      // Get Product By Category
+      const getProduct = fetchData(findProducts, {
+        filter: {
+          categoryId: { eq: id },
+          status: { eq: "ENABLED" },
+          storeId: { eq: STORE_ID },
+        },
+        limit: 50,
+      });
+
+      const [{ searchProductCategories }, { searchProducts }] =
+        await Promise.all([getSidebarCategory, getProduct]);
+
+      const { items: categories } = searchProductCategories;
+      const { items } = searchProducts;
+      const products = await Promise.all(items.map(optimizeProduct));
+      const optimizedCategory = await optimizeCategory(category);
+
+      return {
+        props: {
+          categoryId: id,
+          category: optimizedCategory,
+          products: { ...searchProducts, items: products },
+          sideBarCategories: categories,
+        },
+        revalidate: CATEGORY_REVALIDATE_DURATION,
+      };
+    }
+  } catch (error) {
+    console.log("category", error);
+  }
+  return {
+    notFound: true,
+  };
+};
 
 function mapStateToProps(state) {
   return {
