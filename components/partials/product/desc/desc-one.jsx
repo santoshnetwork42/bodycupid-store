@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
@@ -6,12 +6,7 @@ import { toast } from "react-toastify";
 import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
-import {
-  createReview,
-  getReviews,
-  getReviewsAnalytics,
-  searchProductFaqs,
-} from "~/graphql/api";
+import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
