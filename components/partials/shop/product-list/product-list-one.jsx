@@ -24,7 +24,7 @@ function ProductListOne(props) {
     itemsPerRow = 3,
     type = "left",
     isToolbox = true,
-    products: productData = [],
+    products: productData,
     categoryId,
     subCategoryId,
   } = props;
@@ -114,7 +114,7 @@ function ProductListOne(props) {
   );
 
   useEffect(() => {
-    const { items, nextToken, total } = productData;
+    const { items, nextToken, total } = productData || {};
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
