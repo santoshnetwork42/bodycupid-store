@@ -50,7 +50,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         <FeaturedCollection products={products} />
         <CtaSection />
         {/* <BlogSection /> */}
-        <BrandSection brands={brands} />
+        {/* <BrandSection brands={brands} /> */}
 
         {/* <SmallCollection
           featured={featured}
