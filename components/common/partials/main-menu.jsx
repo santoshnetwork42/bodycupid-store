@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { getMenuSubCategories } from "~/graphql/api";
+import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 
 function MainMenu() {
@@ -11,25 +11,23 @@ function MainMenu() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getSubcategories();
+    getCategories();
   }, []);
 
-  const getSubcategories = useCallback(() => {
+  const getCategories = useCallback(() => {
     API.graphql(
-      graphqlOperation(getMenuSubCategories, {
-        filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
+      graphqlOperation(getMenuCategories, {
+        filter: { storeId: { eq: STORE_ID } },
       })
-    )
-      .then(
-        ({
-          data: {
-            searchProductSubCategories: { items },
-          },
-        }) => {
-          setCategories(items);
-        }
-      )
-      .catch((_err) => {});
+    ).then(
+      ({
+        data: {
+          searchProductCategories: { items },
+        },
+      }) => {
+        setCategories(items);
+      }
+    );
   }, []);
 
   return (
@@ -42,24 +40,34 @@ function MainMenu() {
           <ALink href="/collections/all">All Products</ALink>
         </li>
 
-        {categories.map((subcategory) => (
+        {categories.map((category) => (
           <li
-            key={subcategory.id}
+            key={category.id}
             className={`
-                ${
-                  pathname.includes(
-                    `/collections/${subcategory.category.slug}/${subcategory.slug}`
-                  )
-                    ? "active"
-                    : ""
-                }
-              `}
+              ${
+                pathname.includes(`/collections/${category.slug}`)
+                  ? "active"
+                  : ""
+              }
+              ${category?.subCategory?.items?.length ? "submenu" : ""}
+            `}
           >
-            <ALink
-              href={`/collections/${subcategory.category.slug}/${subcategory.slug}`}
-            >
-              {subcategory?.name}
+            <ALink href={`/collections/${category.slug}`}>
+              {category.name}
             </ALink>
+            {!!category?.subCategory?.items?.length && (
+              <ul>
+                {category.subCategory.items.map((item) => (
+                  <li key={`sub-categories-${item.id}`}>
+                    <ALink
+                      href={"/collections/" + category.slug + "/" + item.slug}
+                    >
+                      {item.name}
+                    </ALink>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
