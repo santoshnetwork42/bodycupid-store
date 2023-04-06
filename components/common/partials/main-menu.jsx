@@ -29,7 +29,7 @@ function MainMenu() {
       }
     );
   }, []);
-
+ 
   return (
     <nav className="main-nav">
       <ul className="menu">
