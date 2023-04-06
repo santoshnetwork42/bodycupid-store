@@ -28,15 +28,29 @@ export const optimizeProduct = async (product) => {
 };
 
 export const optimizeCategory = async (category) => {
-  const { bannerUrl } = category;
+  const categoryDetails = { ...category };
+  const { bannerUrl, imageUrl } = categoryDetails;
   if (bannerUrl) {
     const imageUrl = getPublicImageURL(bannerUrl);
     const optimizedCategoryBanner = await optimizeImage({
       src: imageUrl,
     });
-    return { ...category, bannerImage: optimizedCategoryBanner };
+    categoryDetails.bannerImage = optimizedCategoryBanner;
   }
-  return { ...category };
+  if (imageUrl) {
+    const imgUrl = getPublicImageURL(imageUrl);
+
+    const optimizedCategoryImage = await optimizeImage({
+      src: imgUrl,
+      options: {
+        resize: 200,
+        blur: 3,
+      },
+    });
+
+    categoryDetails.image = optimizedCategoryImage;
+  }
+  return { ...categoryDetails };
 };
 
 export const optimizeStore = async (banner) => {
@@ -76,4 +90,17 @@ export const variantImageOptimization = async (variants) => {
     return { variants: { ...variants, items: optimizedImages } };
   }
   return { variants: { ...variants } };
+};
+
+export const optimizedBlogs = async (blogs) => {
+  const { featuredImage } = blogs;
+  if (featuredImage) {
+    const imageUrl = getPublicImageURL(featuredImage);
+    const optimizedBlogImage = await optimizeImage({
+      src: imageUrl,
+    });
+
+    return { ...blogs, image: optimizedBlogImage };
+  }
+  return { ...blogs };
 };
