@@ -68,7 +68,6 @@ function Account({ user, store }) {
           <Tabs
             selectedTabClassName="show"
             selectedTabPanelClassName="active"
-            defaultIndex={activeTab}
             className="tab tab-vertical gutter-lg"
             selectedIndex={activeTab}
             onSelect={(index) => {

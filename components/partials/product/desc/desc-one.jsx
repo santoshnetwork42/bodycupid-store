@@ -183,6 +183,7 @@ function DescOne(props) {
           ...reviews,
         ]);
         setShowReview(!showReview);
+        getStarAnalytics();
         toast(
           <AlertPopup
             message="Review submitted successfully"
@@ -295,7 +296,7 @@ function DescOne(props) {
           }`}
           noDisplayStyle
           onExpanded={() => {
-            if (!!product?.totalRatings && !reviews.length) {
+            if (!reviews.length) {
               getProductReviews();
               getStarAnalytics();
             }
