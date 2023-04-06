@@ -200,6 +200,28 @@ export const RightArrow = ({
   );
 };
 
+export const LeftArrow = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill={color}
+      className="icon flat-color"
+      data-name="Flat Color"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill={color}
+        d="M21 11H5.41l1.3-1.29a1 1 0 00-1.42-1.42l-3 3a1 1 0 000 1.42l3 3a1 1 0 001.42 0 1 1 0 000-1.42L5.41 13H21a1 1 0 000-2z"
+      ></path>
+    </svg>
+  );
+};
+
 export const Facebook = ({
   size = defaultIconSize,
   color = defaultIconColor,
@@ -591,6 +613,65 @@ export const Plus = ({
         fill={color}
         fillRule="evenodd"
         d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"
+      ></path>
+    </svg>
+  );
+};
+
+export const Cross = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+    >
+      <path
+        fill={color}
+        d="M18.8 16l5.5-5.5c.8-.8.8-2 0-2.8-.3-.4-.8-.7-1.3-.7s-1 .2-1.4.6L16 13.2l-5.5-5.5c-.8-.8-2.1-.8-2.8 0-.4.3-.7.8-.7 1.4s.2 1 .6 1.4l5.5 5.5-5.5 5.5c-.3.4-.6.9-.6 1.5 0 .5.2 1 .6 1.4.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l5.5-5.5 5.5 5.5c.8.8 2.1.8 2.8 0 .8-.8.8-2.1 0-2.8L18.8 16z"
+      ></path>
+    </svg>
+  );
+};
+
+export const Grid = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill={color}
+        d="M7.75 2v5.8H2C2 4.19 4.15 2.02 7.75 2zM22 7.8h-5.75V2c3.6.02 5.75 2.19 5.75 5.8zM22 16.3c-.04 3.55-2.18 5.68-5.75 5.7v-5.7H22zM7.75 16.3V22c-3.57-.02-5.71-2.15-5.75-5.7h5.75zM7.75 9.3H2v5.5h5.75V9.3zM22 9.3h-5.75v5.5H22V9.3zM14.75 9.3h-5.5v5.5h5.5V9.3zM14.75 2h-5.5v5.8h5.5V2zM14.75 16.3h-5.5V22h5.5v-5.7z"
+      ></path>
+    </svg>
+  );
+};
+
+export const List = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill={color}
+        d="M4 8a2 2 0 100-4 2 2 0 000 4zM4 14a2 2 0 100-4 2 2 0 000 4zM6 18a2 2 0 11-4 0 2 2 0 014 0zM21 7.5a1 1 0 001-1v-1a1 1 0 00-1-1H9a1 1 0 00-1 1v1a1 1 0 001 1h12zM22 12.5a1 1 0 01-1 1H9a1 1 0 01-1-1v-1a1 1 0 011-1h12a1 1 0 011 1v1zM21 19.5a1 1 0 001-1v-1a1 1 0 00-1-1H9a1 1 0 00-1 1v1a1 1 0 001 1h12z"
       ></path>
     </svg>
   );

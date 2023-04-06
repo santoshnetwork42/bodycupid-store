@@ -399,6 +399,7 @@
 	a {
 		position: relative;
 		display: block;
+
 		&:hover {
 			color: $primary-color;
 		}
@@ -428,12 +429,12 @@
 	// Arrow
 	.with-ul  {
 		> a > i {
-			content: '\f068';
+			// content: '\f068';
 			position: absolute;
 			top: 50%;
 			right: .7rem;
 			line-height: 0;
-			margin: -1.3rem -3px 0 0;
+			margin: -1.8rem -3px 0 0;
 			padding: 1.2rem 5px;
 			font-size: 1.2rem;
 			font-family: 'Font Awesome 5 Free';
