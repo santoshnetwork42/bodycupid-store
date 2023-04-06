@@ -1,3 +1,4 @@
+import React from "react";
 import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -8,7 +9,6 @@ export default function ShopBanner(props) {
     subTitle = "",
     title = "Wow Shop",
     current = "Wow Shop",
-    bannerUrl,
     bannerImage,
   } = category || {};
 
@@ -39,11 +39,6 @@ export default function ShopBanner(props) {
       </div> */}
 
       <div className="shop-banner-container">
-        {/* <img
-          className="shop-banner-img"
-          src={getPublicImageURL(bannerUrl)}
-          alt=""
-        /> */}
         {bannerImage && (
           <div className="shop-banner-img">
             <figure>

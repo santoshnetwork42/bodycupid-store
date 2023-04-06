@@ -13,6 +13,7 @@ import BrandSection from "~/components/partials/home/brand-section";
 // import BlogSection from "~/components/partials/home/blog-section";
 
 import {
+  getHomePageBlogs,
   getHomePageCategories,
   getHomePageProducts,
   getStore,
@@ -21,10 +22,11 @@ import optimizeImage from "~/utils/optimizeImage";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
+import BlogSection from "~/components/partials/home/blog-section";
 import { HOME_REVALIDATE_DURATION } from "~/constant";
 import { optimizeStore } from "~/utils/getStaticData";
 
-function HomePage({ products, categories, brands, store, hero }) {
+function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store;
 
   return (
@@ -37,17 +39,17 @@ function HomePage({ products, categories, brands, store, hero }) {
 
       <div className="page-content">
         <div className="intro-section">
-          <IntroSection data={hero} />
+          <IntroSection {...hero} />
           <ServiceBox />
         </div>
 
         <CategorySection categories={categories} />
         <BestCollection products={products} />
-        <DealSection />
+        {/* <DealSection /> */}
+        <BlogSection posts={blogs} />
         <FeaturedCollection products={products} />
-        <CtaSection />
-        {/* <BlogSection /> */}
-        <BrandSection brands={brands} />
+        {/* <CtaSection /> */}
+        {/* <BrandSection brands={brands} /> */}
 
         {/* <SmallCollection
           featured={featured}
@@ -90,6 +92,10 @@ export const getStaticProps = async () => {
     //   src: "/images/home/slides/wow-mobile.jpg",
     //   type: "self-hosted",
     // });
+
+    const { searchBlogs } = await fetchData(getHomePageBlogs, {
+      filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
+    });
 
     const { searchProducts } = await fetchData(getHomePageProducts, {
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
@@ -186,6 +192,7 @@ export const getStaticProps = async () => {
           banners: optimizedStoreBanners,
         },
         products: searchProducts.items,
+        blogs: searchBlogs.items,
         categories: searchProductSubCategories.items,
         brands,
         footer: {

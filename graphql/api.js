@@ -1,3 +1,36 @@
+export const getMenuCategories = /* GraphQL */ `
+  query SearchProductCategories(
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductCategoryAggregationInput]
+  ) {
+    searchProductCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        slug
+        subCategory {
+          items {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getMenuSubCategories = /* GraphQL */ `
   query SearchProductSubCategories(
     $filter: SearchableProductSubCategoryFilterInput
@@ -922,6 +955,30 @@ export const findProducts = /* GraphQL */ `
   }
 `;
 
+export const getProductSlug = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $sort: [SearchableProductSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductAggregationInput]
+  ) {
+    searchProducts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
 export const searchProductsBasic = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
@@ -1476,6 +1533,41 @@ export const addProductNotification = /* GraphQL */ `
     ) {
       success
       message
+    }
+  }
+`;
+
+export const getHomePageBlogs = /* GraphQL */ `
+  query SearchBlogs(
+    $filter: SearchableBlogFilterInput
+    $sort: [SearchableBlogSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableBlogAggregationInput]
+  ) {
+    searchBlogs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        title
+        content
+        excerpt
+        featuredImage
+        tags
+        isVisible
+        seo {
+          pageURL
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
