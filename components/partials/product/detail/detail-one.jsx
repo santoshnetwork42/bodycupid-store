@@ -14,7 +14,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime } from "~/utils/helper";
+import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
