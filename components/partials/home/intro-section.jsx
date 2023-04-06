@@ -18,6 +18,7 @@ function IntroSection({ banners }) {
               optimizedData={webImage}
               loading="eager"
               alt="Intro Slider"
+              resizeMobile={false}
             />
           </figure>
         </ALink>
@@ -33,6 +34,7 @@ function IntroSection({ banners }) {
               optimizedData={mobileImage}
               loading="eager"
               alt="Intro Slider"
+              resizeMobile={false}
             />
           </figure>
         </ALink>
