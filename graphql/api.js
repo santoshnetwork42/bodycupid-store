@@ -1,3 +1,36 @@
+export const getMenuCategories = /* GraphQL */ `
+  query SearchProductCategories(
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductCategoryAggregationInput]
+  ) {
+    searchProductCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        slug
+        subCategory {
+          items {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getMenuSubCategories = /* GraphQL */ `
   query SearchProductSubCategories(
     $filter: SearchableProductSubCategoryFilterInput
@@ -31,6 +64,33 @@ export const getMenuSubCategories = /* GraphQL */ `
   }
 `;
 
+export const getAllSubcategoriesPath = /* GraphQL */ `
+  query SearchProductSubCategories(
+    $filter: SearchableProductSubCategoryFilterInput
+    $sort: [SearchableProductSubCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductSubCategoryAggregationInput]
+  ) {
+    searchProductSubCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        category {
+          slug
+        }
+      }
+    }
+  }
+`;
+
 export const getSideBarFilterCategories = /* GraphQL */ `
   query SearchProductCategories(
     $filter: SearchableProductCategoryFilterInput
@@ -59,6 +119,30 @@ export const getSideBarFilterCategories = /* GraphQL */ `
             slug
           }
         }
+      }
+    }
+  }
+`;
+
+export const getAllCategoriesPath = /* GraphQL */ `
+  query SearchProductCategories(
+    $filter: SearchableProductCategoryFilterInput
+    $sort: [SearchableProductCategorySortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductCategoryAggregationInput]
+  ) {
+    searchProductCategories(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
       }
     }
   }
@@ -716,6 +800,7 @@ export const getBasicSubCategory = /* GraphQL */ `
         name
         slug
         bannerUrl
+        categoryID
       }
     }
   }
@@ -866,6 +951,30 @@ export const findProducts = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const getProductSlug = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $sort: [SearchableProductSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableProductAggregationInput]
+  ) {
+    searchProducts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+      }
     }
   }
 `;
@@ -1196,6 +1305,21 @@ export const getStore = /* GraphQL */ `
       host
       priority
       imageUrl
+      banners {
+        webKey
+        mobileKey
+      }
+    }
+  }
+`;
+
+export const getStoreBanners = /* GraphQL */ `
+  query GetStore($id: ID!) {
+    getStore(id: $id) {
+      banners {
+        webKey
+        mobileKey
+      }
     }
   }
 `;
@@ -1256,6 +1380,41 @@ export const getReviews = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const getReviewsAnalytics = /* GraphQL */ `
+  query SearchReviews(
+    $filter: SearchableReviewFilterInput
+    $sort: [SearchableReviewSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableReviewAggregationInput]
+  ) {
+    searchReviews(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -1385,6 +1544,41 @@ export const addProductNotification = /* GraphQL */ `
     ) {
       success
       message
+    }
+  }
+`;
+
+export const getHomePageBlogs = /* GraphQL */ `
+  query SearchBlogs(
+    $filter: SearchableBlogFilterInput
+    $sort: [SearchableBlogSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableBlogAggregationInput]
+  ) {
+    searchBlogs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        title
+        content
+        excerpt
+        featuredImage
+        tags
+        isVisible
+        seo {
+          pageURL
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `;

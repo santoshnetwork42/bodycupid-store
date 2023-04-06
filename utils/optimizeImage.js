@@ -43,13 +43,12 @@ const optimizeImage = async ({ src, type = "url", options = {} }) => {
         returnValues.width = imageMetaData.width;
         returnValues.height = imageMetaData.height;
       }
-    } catch (e) { }
+    } catch (e) {}
   } else {
     returnValues.placeholder = "";
     returnValues.width = 0;
     returnValues.height = 0;
   }
-
 
   return returnValues;
 };

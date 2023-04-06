@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
-import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
 import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
-import { createReview, getReviews, searchProductFaqs } from "~/graphql/api";
+import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
@@ -24,11 +23,11 @@ const reviewDefault = {
   comment: "",
   name: "",
   email: "",
-  image: [],
+  images: [],
 };
 
 function DescOne(props) {
-  const { product, openModal, user } = props;
+  const { product, openModal, user, productFAQs, productReviews } = props;
   const {
     id,
     totalRatings,
@@ -38,33 +37,53 @@ function DescOne(props) {
     weight,
     weightUnit,
     video,
-    rating,
     title,
+    rating,
   } = product;
+
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
   const [showReview, setShowReview] = useState(!totalRatings);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [productsFAQs, setProductsFAQs] = useState([]);
-  const [reviewImages, setReviewImages] = useState([]);
+  const [reviewAnalytics, setReviewAnalytics] = useState([]);
 
-  const allReviews = useMemo(() => {
-    if (reviews && reviews.length) {
-      return [1, 2, 3, 4, 5].reduce((acc, cur) => {
-        acc = {
-          ...acc,
-          [cur]: reviews.filter((d) => d.rating === cur),
-        };
-        return acc;
-      }, {});
+  const getStarAnalytics = async () => {
+    try {
+      const {
+        data: {
+          searchReviews: {
+            aggregateItems: [item],
+          },
+        },
+      } = await API.graphql(
+        graphqlOperation(getReviewsAnalytics, {
+          filter: {
+            productId: { eq: id },
+          },
+          aggregates: [
+            {
+              name: "perStartGrouping",
+              type: "terms",
+              field: "rating",
+            },
+          ],
+        })
+      );
+      if (item) {
+        const data = item.result.buckets
+          .sort((a, b) => +a.key - +b.key)
+          .reverse();
+        setReviewAnalytics(data);
+      }
+    } catch (e) {
+      console.log("e", e);
     }
-    return 0;
-  }, [reviews]);
+  };
 
   const getProductReviews = useCallback(
-    (reset) => {
+    (reset = true) => {
       setLoading(true);
       API.graphql(
         graphqlOperation(getReviews, {
@@ -99,41 +118,14 @@ function DescOne(props) {
     [product, token]
   );
 
-  const getProductFAQs = useCallback(() => {
-    setLoading(true);
-    API.graphql(
-      graphqlOperation(searchProductFaqs, {
-        filter: {
-          productId: { eq: id },
-        },
-      })
-    )
-      .then(
-        ({
-          data: {
-            searchProductFaqs: { items: response },
-          },
-        }) => {
-          if (response) {
-            setProductsFAQs(response);
-          }
-          setLoading(false);
-        }
-      )
-      .catch((err) => {
-        setLoading(false);
-      });
-  }, [product]);
-
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
     return 0;
   };
 
   const onPhotoChange = async (e) => {
-    const files = [...reviewImages, ...e.target.files];
-    setReviewImages(files);
-    if (reviewImages) {
+    const files = [...e.target.files];
+    if (files) {
       const urls = await Promise.all(
         files.map(async (element) => {
           const key = await uploadImages(element, "review");
@@ -142,7 +134,7 @@ function DescOne(props) {
       );
       setReview({
         ...reviewState,
-        image: urls,
+        images: [...reviewState.images, ...urls],
       });
     }
   };
@@ -157,7 +149,7 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { rating, comment, name, email, image } = reviewState;
+        const { rating, comment, name, email, images } = reviewState;
         await API.graphql({
           query: createReview,
           variables: {
@@ -170,12 +162,11 @@ function DescOne(props) {
               },
               userId: user?.id,
               productId: id,
-              images: image,
+              images,
             },
           },
         });
         setReview({ ...reviewDefault });
-        setReviewImages([]);
         setReviews([
           {
             id: new Date().toUTCString(),
@@ -186,12 +177,13 @@ function DescOne(props) {
             productId: id,
             rating,
             comment,
-            images: image,
+            images,
             updatedAt: new Date().toUTCString(),
           },
           ...reviews,
         ]);
         setShowReview(!showReview);
+        getStarAnalytics();
         toast(
           <AlertPopup
             message="Review submitted successfully"
@@ -206,6 +198,15 @@ function DescOne(props) {
     },
     [reviewState, user?.id, id]
   );
+
+  const removeImage = (index) => {
+    const temp = [...reviewState.images];
+    temp.splice(index, 1);
+    setReview({
+      ...reviewState,
+      images: temp,
+    });
+  };
 
   return (
     <div className="col-md-12 mb-6">
@@ -289,47 +290,46 @@ function DescOne(props) {
           </div>
         </Card>
 
-        {!!product?.totalRatings && (
-          <Card
-            title={`Reviews  ${
-              product?.totalRatings ? `(${product.totalRatings})` : ""
-            }`}
-            noDisplayStyle
-            onExpanded={() => {
-              if (!!product?.totalRatings && !reviews.length) {
-                getProductReviews();
-              }
-            }}
-          >
-            <div className="product-tab-reviews">
-              <div className="reply mt-8 mb-8">
-                <div className="title-wrapper text-left">
-                  <h3 className="title title-simple text-left text-normal">
-                    {reviews > 0
-                      ? "Add a Review"
-                      : "Be The First To Review “" + product.title + "”"}
-                  </h3>{" "}
+        <Card
+          title={`Reviews  ${
+            product?.totalRatings ? `(${product.totalRatings})` : ""
+          }`}
+          noDisplayStyle
+          onExpanded={() => {
+            if (!reviews.length) {
+              getProductReviews();
+              getStarAnalytics();
+            }
+          }}
+        >
+          <div className="product-tab-reviews">
+            <div className="reply mt-8 mb-8">
+              <div className="title-wrapper text-left">
+                <h3 className="title title-simple text-left text-normal">
+                  {reviews.length > 0
+                    ? "Add a Review"
+                    : "Be The First To Review “" + title + "”"}
+                </h3>{" "}
+                {!!reviews.length && (
                   <div className="review-section">
                     <div className="total-review w-100">
-                      <h4>{product?.rating}</h4>
-                      <RatingStar value={product?.rating} />
+                      <h4>{rating}</h4>
+                      <RatingStar value={rating} />
                       {!!product?.totalRatings && (
                         <span>Based on {product.totalRatings} reviews</span>
                       )}
                     </div>
                     <div className="rating w-100">
-                      {[5, 4, 3, 2, 1].map((num, i) => (
+                      {reviewAnalytics.map((r) => (
                         <div
                           className="d-flex align-items-center justify-content-center mt-2"
-                          key={i}
+                          key={r.key}
                         >
-                          <RatingStar value={num} />
+                          <RatingStar value={+r.key} />
                           <div className="ml-1 percent">
-                            ({getPer(total, allReviews[num]?.length)}%)
+                            ({getPer(total, +r.doc_count)}%)
                           </div>
-                          <span className="ml-1">
-                            {allReviews[num]?.length}
-                          </span>
+                          <span className="ml-1">{+r.doc_count}</span>
                         </div>
                       ))}
                     </div>
@@ -348,169 +348,170 @@ function DescOne(props) {
                       </div>
                     </div>
                   </div>
-                  {showReview && (
-                    <>
-                      <hr className="product-divider"></hr>
-                      <p>
-                        Your email address will not be published. Required
-                        fields are marked *
-                      </p>
-                    </>
-                  )}
-                </div>
+                )}
                 {showReview && (
-                  <form action="#" onSubmit={submitReview}>
-                    <div className="row">
-                      <div className="col-md-6 mb-5">
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="reply-name"
-                          name="reply-name"
-                          placeholder="Name *"
-                          required
-                          value={reviewState.name}
-                          onChange={(e) => setReview({ name: e.target.value })}
-                          onBlur={(e) =>
-                            setReview({ name: e.target.value.trim() })
-                          }
-                        />
-                      </div>
-                      <div className="col-md-6 mb-5">
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="reply-email"
-                          name="reply-email"
-                          placeholder="Email *"
-                          required
-                          value={reviewState.email}
-                          onChange={(e) => setReview({ email: e.target.value })}
-                          onBlur={(e) =>
-                            setReview({ email: e.target.value.trim() })
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="rating-form">
-                      <label htmlFor="rating" className="text-dark">
-                        Your rating *{" "}
-                      </label>
-                      <RatingStar
-                        onClick={(num) => {
-                          setReview({ rating: num });
-                        }}
-                        value={reviewState.rating}
-                        editable
-                      />
-                    </div>
-                    <textarea
-                      id="reply-message"
-                      cols="30"
-                      rows="6"
-                      className="form-control mb-4"
-                      placeholder="Comment *"
-                      required
-                      value={reviewState.comment}
-                      onChange={(e) => setReview({ comment: e.target.value })}
-                      onBlur={(e) =>
-                        setReview({ comment: e.target.value.trim() })
-                      }
-                    ></textarea>
-                    <div className="d-flex w-100 img-wrapper justify-content-end">
-                      {reviewState.image &&
-                        reviewState.image.map((img, index) => (
-                          <div className="img_wrp mr-2" key={index}>
-                            <img
-                              src={getPublicImageURL(img)}
-                              className="img-preview"
-                              alt=""
-                            />
-                            <img
-                              className="close"
-                              src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png"
-                              onClick={() => {
-                                const temp = [...reviewState.image];
-                                temp.splice(index, 1);
-                                setReview({
-                                  ...reviewState,
-                                  image: temp,
-                                });
-                              }}
-                            />
-                          </div>
-                        ))}
-
-                      <input
-                        className="d-none"
-                        onChange={onPhotoChange}
-                        type="file"
-                        accept="image/*"
-                        id="review-photo"
-                        name="filename"
-                        multiple
-                      />
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          document.getElementById("review-photo").click();
-                        }}
-                        className="btn btn-rounded mr-2"
-                      >
-                        Add Photo
-                      </button>
-                      <button
-                        type="submit"
-                        className="btn btn-primary btn-rounded"
-                      >
-                        <div className="d-flex justify-content-center align-items-center">
-                          Submit
-                          {loading ? (
-                            <div className="spin-loader ml-2" />
-                          ) : (
-                            <i className="d-icon-arrow-right"></i>
-                          )}
-                        </div>
-                      </button>
-                    </div>
-                  </form>
+                  <>
+                    <hr className="product-divider"></hr>
+                    <p>
+                      Your email address will not be published. Required fields
+                      are marked *
+                    </p>
+                  </>
                 )}
               </div>
-              <hr className="product-divider"></hr>
-              {reviews.length === 0 ? (
-                <div className="comments mb-2 pt-2 pb-2 border-no">
-                  There are no reviews yet.
-                </div>
-              ) : (
-                <div className="comments mb-8 pt-2 pb-2 border-no">
-                  <ul>
-                    {reviews.map((review, id) => (
-                      <Review key={id} review={review} />
-                    ))}
-                  </ul>
-                </div>
+              {showReview && (
+                <form action="#" onSubmit={submitReview}>
+                  <div className="row">
+                    <div className="col-md-6 mb-5">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="reply-name"
+                        name="reply-name"
+                        placeholder="Name *"
+                        required
+                        value={reviewState.name}
+                        onChange={(e) =>
+                          setReview({ ...reviewState, name: e.target.value })
+                        }
+                        onBlur={(e) =>
+                          setReview({
+                            ...reviewState,
+                            name: e.target.value.trim(),
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="col-md-6 mb-5">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="reply-email"
+                        name="reply-email"
+                        placeholder="Email *"
+                        required
+                        value={reviewState.email}
+                        onChange={(e) =>
+                          setReview({ ...reviewState, email: e.target.value })
+                        }
+                        onBlur={(e) =>
+                          setReview({
+                            ...reviewState,
+                            email: e.target.value.trim(),
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="rating-form">
+                    <label htmlFor="rating" className="text-dark">
+                      Your rating *{" "}
+                    </label>
+                    <RatingStar
+                      onClick={(num) => {
+                        setReview({ ...reviewState, rating: num });
+                      }}
+                      value={reviewState.rating}
+                      editable
+                    />
+                  </div>
+                  <textarea
+                    id="reply-message"
+                    cols="30"
+                    rows="6"
+                    className="form-control mb-4"
+                    placeholder="Comment *"
+                    required
+                    value={reviewState.comment}
+                    onChange={(e) =>
+                      setReview({ ...reviewState, comment: e.target.value })
+                    }
+                    onBlur={(e) =>
+                      setReview({
+                        ...reviewState,
+                        comment: e.target.value.trim(),
+                      })
+                    }
+                  />
+                  <div className="d-flex w-100 img-wrapper justify-content-end">
+                    <div className=" img-wrapper">
+                      {reviewState.images.map((img, index) => (
+                        <div className="img_wrp mr-2" key={img}>
+                          <img
+                            src={getPublicImageURL(img)}
+                            className="img-preview"
+                            alt=""
+                          />
+
+                          <i
+                            className="d-icon-close close"
+                            onClick={() => removeImage(index)}
+                          ></i>
+                        </div>
+                      ))}
+                    </div>
+
+                    <input
+                      className="d-none"
+                      onChange={onPhotoChange}
+                      type="file"
+                      accept="image/*"
+                      id="review-photo"
+                      name="filename"
+                      multiple
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById("review-photo").click();
+                      }}
+                      className="btn btn-rounded mr-2"
+                    >
+                      Add Photo
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-rounded"
+                    >
+                      <div className="d-flex justify-content-center align-items-center">
+                        Submit
+                        {loading ? (
+                          <div className="spin-loader ml-2" />
+                        ) : (
+                          <i className="d-icon-arrow-right"></i>
+                        )}
+                      </div>
+                    </button>
+                  </div>
+                </form>
               )}
-              <TokenPagination
-                onPage={() => getProductReviews(false)}
-                total={total}
-                loaded={reviews?.length}
-                nextToken={token}
-                content="reviews"
-              />
             </div>
-          </Card>
-        )}
+            <hr className="product-divider"></hr>
+            {reviews.length === 0 ? (
+              <div className="comments mb-2 pt-2 pb-2 border-no">
+                There are no reviews yet.
+              </div>
+            ) : (
+              <div className="comments mb-8 pt-2 pb-2 border-no">
+                <ul>
+                  {reviews.map((review, id) => (
+                    <Review key={id} review={review} />
+                  ))}
+                </ul>
+              </div>
+            )}
+            <TokenPagination
+              onPage={() => getProductReviews(false)}
+              total={total}
+              loaded={reviews?.length}
+              nextToken={token}
+              content="reviews"
+            />
+          </div>
+        </Card>
 
         {!!product.hasFaq && (
-          <Card
-            title="FAQs"
-            noDisplayStyle
-            onExpanded={() => {
-              if (!!product?.hasFaq && !productsFAQs.length) {
-                getProductFAQs();
-              }
-            }}
-          >
+          <Card title="FAQs" noDisplayStyle>
             <div className="col-md-12">
               <Reveal
                 keyframes={fadeIn}
@@ -519,10 +520,10 @@ function DescOne(props) {
                 triggerOnce
               >
                 <div className="col-md-12">
-                  {!!productsFAQs.length && (
+                  {!!productFAQs.length && (
                     <Accordion adClass="accordion-border">
                       <>
-                        {productsFAQs.map((faq) => (
+                        {productFAQs.map((faq) => (
                           <div key={faq?.id}>
                             <Card
                               title={

@@ -8,7 +8,7 @@ function AboutUs({ store }) {
   return (
     <main className="main about-us">
       <Head>
-        <title>{name} | Titles</title>
+        <title>{name} | About Us</title>
       </Head>
 
       <h1 className="d-none">About Us - {name}</h1>

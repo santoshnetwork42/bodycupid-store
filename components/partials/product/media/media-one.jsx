@@ -21,20 +21,21 @@ export default function MediaOne(props) {
     const images = [...product.images.items];
     images.sort((a, b) => a.position - b.position);
     if (product.variants.items.length > 0) {
-      images.push(
-        ...product.variants.items.map((i) => ({
+      product.variants.items.forEach((i) => {
+        images.push({
+          ...i,
           variantId: i.id,
           imageKey: i.imageUrl,
           alt: i.alt || i.title,
-        }))
-      );
+        });
+      });
     }
     return images;
   }, [product]);
 
   useEffect(() => {
     setIndex(0);
-  }, [window.location.pathname]);
+  }, [product?.slug]);
 
   useEffect(() => {
     if (variantId) {
@@ -126,7 +127,7 @@ export default function MediaOne(props) {
           events={events}
         >
           {lgImages.map((image, i) => (
-            <div key={i}>
+            <div key={image.imageKey}>
               <OptimizedImage
                 optimizedData={image.image}
                 alt={image.alt}
