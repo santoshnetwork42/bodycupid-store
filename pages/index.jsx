@@ -45,11 +45,10 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
 
         <CategorySection categories={categories} />
         <BestCollection products={products} />
-        <DealSection />
+        {/* <DealSection /> */}
         <BlogSection posts={blogs} />
         <FeaturedCollection products={products} />
-        <CtaSection />
-        {/* <BlogSection /> */}
+        {/* <CtaSection /> */}
         {/* <BrandSection brands={brands} /> */}
 
         {/* <SmallCollection

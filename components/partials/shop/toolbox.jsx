@@ -176,7 +176,7 @@ export default function ToolBox(props) {
         </div>
 
         <div className="toolbox-right">
-          <div className="toolbox-item toolbox-show select-box text-dark">
+          {/* <div className="toolbox-item toolbox-show select-box text-dark">
             <label>Show :</label>
             <select
               name="count"
@@ -188,7 +188,7 @@ export default function ToolBox(props) {
               <option value="24">24</option>
               <option value="36">36</option>
             </select>
-          </div>
+          </div> */}
           <div
             className={`toolbox-item toolbox-layout ${
               type === "right" ? "mr-lg-0" : ""

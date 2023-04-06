@@ -181,10 +181,10 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                             />
                           </ALink>
                           <div>
-                            {item.product.title}
+                            {`${item.product.title} `}
                             <span>
                               <i className="fas fa-times"></i>
-                              {item.quantity || item.cancelledQuantity}
+                              {` ${item.quantity || item.cancelledQuantity}`}
                             </span>
                             {item.cancelledQuantity > 0 &&
                               item.status === "CREATED" && (
