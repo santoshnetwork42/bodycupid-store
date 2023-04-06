@@ -254,7 +254,11 @@
             > ul,
             .megamenu {
                 top: 100%;
+                min-width: fit-content;
                 z-index: 1201;
+                .cat-name{
+                    white-space: nowrap;
+                }
             }
             // &::after {
             //     visibility: visible;

@@ -29,7 +29,15 @@ function MainMenu() {
       }
     );
   }, []);
- 
+
+  const getSmallerArrays = (a) => {
+    let arrayOfArrays = [];
+    for (let i = 0; i < a.length; i += 8) {
+      arrayOfArrays.push([...a].splice(i, 8));
+    }
+    return arrayOfArrays;
+  };
+
   return (
     <nav className="main-nav">
       <ul className="menu">
@@ -55,19 +63,33 @@ function MainMenu() {
             <ALink href={`/collections/${category.slug}`}>
               {category.name}
             </ALink>
-            {!!category?.subCategory?.items?.length && (
-              <ul>
-                {category.subCategory.items.map((item) => (
-                  <li key={`sub-categories-${item.id}`}>
-                    <ALink
-                      href={"/collections/" + category.slug + "/" + item.slug}
-                    >
-                      {item.name}
-                    </ALink>
-                  </li>
+            <div className="megamenu">
+              <div className="d-flex">
+                {getSmallerArrays(category?.subCategory?.items).map((cat) => (
+                  <div className="ml-2 mr-2">
+                    {!!cat.length && (
+                      <ul>
+                        {cat.map((item) => (
+                          <li key={`sub-categories-${item.id}`}>
+                            <ALink
+                              className="cat-name"
+                              href={
+                                "/collections/" +
+                                category.slug +
+                                "/" +
+                                item.slug
+                              }
+                            >
+                              {item.name}
+                            </ALink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 ))}
-              </ul>
-            )}
+              </div>
+            </div>
           </li>
         ))}
       </ul>
