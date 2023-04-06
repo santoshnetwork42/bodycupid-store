@@ -1,3 +1,4 @@
+import React from "react";
 import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
