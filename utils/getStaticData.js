@@ -28,13 +28,14 @@ export const optimizeProduct = async (product) => {
 };
 
 export const optimizeCategory = async (category) => {
-  const { bannerUrl, imageUrl } = category;
+  const categoryDetails = { ...category };
+  const { bannerUrl, imageUrl } = categoryDetails;
   if (bannerUrl) {
     const imageUrl = getPublicImageURL(bannerUrl);
     const optimizedCategoryBanner = await optimizeImage({
       src: imageUrl,
     });
-    return { ...category, bannerImage: optimizedCategoryBanner };
+    categoryDetails.bannerImage = optimizedCategoryBanner;
   }
   if (imageUrl) {
     const imgUrl = getPublicImageURL(imageUrl);
@@ -47,9 +48,9 @@ export const optimizeCategory = async (category) => {
       },
     });
 
-    return { ...category, image: optimizedCategoryImage };
+    categoryDetails.image = optimizedCategoryImage;
   }
-  return { ...category };
+  return { ...categoryDetails };
 };
 
 export const optimizeStore = async (banner) => {
