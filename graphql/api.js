@@ -1313,6 +1313,17 @@ export const getStore = /* GraphQL */ `
   }
 `;
 
+export const getStoreBanners = /* GraphQL */ `
+  query GetStore($id: ID!) {
+    getStore(id: $id) {
+      banners {
+        webKey
+        mobileKey
+      }
+    }
+  }
+`;
+
 export const validateTransaction = /* GraphQL */ `
   mutation ValidateTransaction($orderId: ID!, $razorpayPaymentId: String!) {
     validateTransaction(

@@ -6,25 +6,25 @@ import IntroSection from "~/components/partials/home/intro-section";
 import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
 import BestCollection from "~/components/partials/home/best-collection";
-import DealSection from "~/components/partials/home/deal-section";
 import FeaturedCollection from "~/components/partials/home/featured-collection";
-import CtaSection from "~/components/partials/home/cta-section";
-import BrandSection from "~/components/partials/home/brand-section";
-// import BlogSection from "~/components/partials/home/blog-section";
+import BlogSection from "~/components/partials/home/blog-section";
 
 import {
   getHomePageBlogs,
   getHomePageCategories,
   getHomePageProducts,
-  getStore,
+  getStoreBanners,
 } from "~/graphql/api";
 import optimizeImage from "~/utils/optimizeImage";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
-import BlogSection from "~/components/partials/home/blog-section";
 import { HOME_REVALIDATE_DURATION } from "~/constant";
-import { optimizeStore } from "~/utils/getStaticData";
+import {
+  optimizeHomeCategoryImages,
+  optimizeProduct,
+  optimizeStore,
+  optimizedBlogs,
+} from "~/utils/getStaticData";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store;
@@ -83,85 +83,49 @@ export const getStaticProps = async () => {
       type: "self-hosted",
     });
 
-    // const optimizedHeroImage = await optimizeImage({
-    //   src: "/images/home/slides/wow.jpg",
-    //   type: "self-hosted",
-    // });
-
-    // const optimizedMobileHeroImage = await optimizeImage({
-    //   src: "/images/home/slides/wow-mobile.jpg",
-    //   type: "self-hosted",
-    // });
-
-    const { searchBlogs } = await fetchData(getHomePageBlogs, {
+    const getSearchBlogs = fetchData(getHomePageBlogs, {
       filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
     });
 
-    const { searchProducts } = await fetchData(getHomePageProducts, {
+    const getSearchProducts = fetchData(getHomePageProducts, {
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       limit: 8,
     });
-    const { searchProductSubCategories } = await fetchData(
-      getHomePageCategories,
-      {
-        limit: 4,
-        filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
-        sort: [{ field: "priority", direction: "asc" }],
-      }
-    );
+    const getSearchProductSubCategories = fetchData(getHomePageCategories, {
+      limit: 4,
+      filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
+      sort: [{ field: "priority", direction: "asc" }],
+    });
 
-    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+    const getStoreData = fetchData(getStoreBanners, { id: STORE_ID });
+
+    const [
+      { searchBlogs },
+      { searchProducts },
+      { searchProductSubCategories },
+      { getStore: store },
+    ] = await Promise.all([
+      getSearchBlogs,
+      getSearchProducts,
+      getSearchProductSubCategories,
+      getStoreData,
+    ]);
+
     const { banners = [] } = store;
+    const { items } = searchProducts;
+    const { items: category } = searchProductSubCategories;
+    const { items: blogsData } = searchBlogs;
 
+    const blogs = await Promise.all((blogsData || []).map(optimizedBlogs));
     const optimizedStoreBanners = await Promise.all(
       (banners || []).map(optimizeStore)
     );
 
-    for (const category of searchProductSubCategories.items) {
-      if (category.imageUrl) {
-        const imageUrl = getPublicImageURL(category.imageUrl);
+    const products = await Promise.all((items || []).map(optimizeProduct));
 
-        const optimizedCategoryImage = await optimizeImage({
-          src: imageUrl,
-          options: {
-            resize: 200,
-            blur: 3,
-          },
-        });
-
-        delete category.imageUrl;
-        category.image = optimizedCategoryImage;
-      }
-    }
-
-    for (const product of searchProducts.items) {
-      for (const image in product.images.items) {
-        const imageUrl = getPublicImageURL(
-          product.images.items[image].imageKey
-        );
-
-        const optimizedProductImage = await optimizeImage({
-          src: imageUrl,
-          options: {
-            resize: 200,
-            blur: 3,
-          },
-        });
-
-        product.images.items[image].image = optimizedProductImage;
-      }
-
-      const imageUrl = getPublicImageURL(product.thumbImages);
-      const optimizedProductImage = await optimizeImage({
-        src: imageUrl,
-        options: {
-          resize: 200,
-          blur: 3,
-        },
-      });
-
-      product.image = optimizedProductImage;
-    }
+    const categories = await Promise.all(
+      (category || []).map(optimizeHomeCategoryImages)
+    );
 
     const brands = [
       "/images/brands/1.png",
@@ -191,9 +155,9 @@ export const getStaticProps = async () => {
         hero: {
           banners: optimizedStoreBanners,
         },
-        products: searchProducts.items,
-        blogs: searchBlogs.items,
-        categories: searchProductSubCategories.items,
+        products,
+        blogs,
+        categories,
         brands,
         footer: {
           logo: optimizedFooterImage,
