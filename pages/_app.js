@@ -99,7 +99,7 @@ const App = ({ Component, pageProps }) => {
       utm_content: content,
       utm_medium: medium,
       utm_source: source,
-      utm_term: term
+      utm_term: term,
     } = query;
     const landingPage = window?.location?.href;
     const referrer = document?.referrer;
