@@ -553,3 +553,45 @@ export const MagnifyingGlass = ({
     </svg>
   );
 };
+
+export const Minus = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <path
+        fill={color}
+        fillRule="evenodd"
+        d="M18 10a1 1 0 01-1 1H3a1 1 0 110-2h14a1 1 0 011 1z"
+      ></path>
+    </svg>
+  );
+};
+
+export const Plus = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <path
+        fill={color}
+        fillRule="evenodd"
+        d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"
+      ></path>
+    </svg>
+  );
+};

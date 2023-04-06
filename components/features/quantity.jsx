@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { Minus, Plus } from "~/components/icons";
+
 export default function Quantity({ qty = 1, ...props }) {
   const { adClass = "mr-2 input-group", product } = props;
   const [quantity, setQuantity] = useState(parseInt(qty));
@@ -39,9 +41,11 @@ export default function Quantity({ qty = 1, ...props }) {
   return (
     <div className={adClass}>
       <button
-        className="quantity-minus d-icon-minus"
+        className="quantity-minus"
         onClick={minusQuantity}
-      ></button>
+      >
+        <Minus size={12} color="currentColor" />
+      </button>
       <input
         className="quantity form-control"
         type="number"
@@ -51,9 +55,11 @@ export default function Quantity({ qty = 1, ...props }) {
         onChange={changeQty}
       />
       <button
-        className="quantity-plus d-icon-plus"
+        className="quantity-plus"
         onClick={plusQuantity}
-      ></button>
+      >
+        <Plus size={12} color="currentColor" />
+      </button>
     </div>
   );
 }

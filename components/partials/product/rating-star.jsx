@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { Star } from "~/components/icons";
+
 export default function RatingStar({
   editable = false,
   onClick = () => {},
@@ -11,10 +13,12 @@ export default function RatingStar({
     return (
       <div className="ratings-container m-0 pointer-none">
         <div className="ratings-full">
-          <span
-            className="ratings"
-            style={{ width: Math.min(20 * value, 100) + "%" }}
-          ></span>
+
+          {Array.from({ length: 5 }).map((_, index) => {
+            const isFilled = index + 1 <= value;
+
+            return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+          })}
         </div>
       </div>
     );
