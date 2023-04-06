@@ -20,7 +20,7 @@ import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import { HOME_REVALIDATE_DURATION } from "~/constant";
 import {
-  optimizeHomeCategoryImages,
+  optimizeCategory,
   optimizeProduct,
   optimizeStore,
   optimizedBlogs,
@@ -113,7 +113,7 @@ export const getStaticProps = async () => {
 
     const { banners = [] } = store;
     const { items } = searchProducts;
-    const { items: category } = searchProductSubCategories;
+    const { items: categoriesData } = searchProductSubCategories;
     const { items: blogsData } = searchBlogs;
 
     const blogs = await Promise.all((blogsData || []).map(optimizedBlogs));
@@ -124,7 +124,7 @@ export const getStaticProps = async () => {
     const products = await Promise.all((items || []).map(optimizeProduct));
 
     const categories = await Promise.all(
-      (category || []).map(optimizeHomeCategoryImages)
+      (categoriesData || []).map(optimizeCategory)
     );
 
     const brands = [

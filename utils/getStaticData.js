@@ -28,13 +28,26 @@ export const optimizeProduct = async (product) => {
 };
 
 export const optimizeCategory = async (category) => {
-  const { bannerUrl } = category;
+  const { bannerUrl, imageUrl } = category;
   if (bannerUrl) {
     const imageUrl = getPublicImageURL(bannerUrl);
     const optimizedCategoryBanner = await optimizeImage({
       src: imageUrl,
     });
     return { ...category, bannerImage: optimizedCategoryBanner };
+  }
+  if (imageUrl) {
+    const imgUrl = getPublicImageURL(imageUrl);
+
+    const optimizedCategoryImage = await optimizeImage({
+      src: imgUrl,
+      options: {
+        resize: 200,
+        blur: 3,
+      },
+    });
+
+    return { ...category, image: optimizedCategoryImage };
   }
   return { ...category };
 };
@@ -76,26 +89,6 @@ export const variantImageOptimization = async (variants) => {
     return { variants: { ...variants, items: optimizedImages } };
   }
   return { variants: { ...variants } };
-};
-
-export const optimizeHomeCategoryImages = async (category) => {
-  const { imageUrl } = category;
-  if (imageUrl) {
-    const imgUrl = getPublicImageURL(imageUrl);
-
-    const optimizedCategoryImage = await optimizeImage({
-      src: imgUrl,
-      options: {
-        resize: 200,
-        blur: 3,
-      },
-    });
-
-    return { ...category, image: optimizedCategoryImage };
-  }
-  return {
-    ...category,
-  };
 };
 
 export const optimizedBlogs = async (blogs) => {
