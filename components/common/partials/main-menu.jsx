@@ -5,6 +5,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { getSplitedArray } from "~/utils/helper";
 
 function MainMenu() {
   const { pathname } = useRouter();
@@ -29,14 +30,6 @@ function MainMenu() {
       }
     );
   }, []);
-
-  const getSmallerArrays = (a) => {
-    let arrayOfArrays = [];
-    for (let i = 0; i < a.length; i += 8) {
-      arrayOfArrays.push([...a].splice(i, 8));
-    }
-    return arrayOfArrays;
-  };
 
   return (
     <nav className="main-nav">
@@ -65,7 +58,7 @@ function MainMenu() {
             </ALink>
             <div className="megamenu">
               <div className="d-flex">
-                {getSmallerArrays(category?.subCategory?.items).map((cat) => (
+                {getSplitedArray(category?.subCategory?.items, 8).map((cat) => (
                   <div className="ml-2 mr-2">
                     {!!cat.length && (
                       <ul>
