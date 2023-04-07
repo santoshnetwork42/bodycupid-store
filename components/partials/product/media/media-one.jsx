@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
 import ALink from "~/components/features/custom-link";
+import { FullSreen } from "~/components/icons";
 import OwlCarousel from "~/components/features/owl-carousel";
 
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";
@@ -149,7 +150,7 @@ export default function MediaOne(props) {
         </OwlCarousel>
 
         <ALink href="#" className="product-image-full" onClick={openLightBox}>
-          <i className="d-icon-zoom"></i>
+          <FullSreen color="currentColor" size={22} />
         </ALink>
         <ThumbOne
           images={lgImages}

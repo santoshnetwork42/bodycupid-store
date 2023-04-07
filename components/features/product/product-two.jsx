@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { Star, MagnifyingGlass, Heart, HeartFilled } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
@@ -134,7 +135,7 @@ function ProductTwo(props) {
             title="Quick View"
             onClick={showQuickviewHandler}
           >
-            <i className="d-icon-search"></i>
+            <MagnifyingGlass size={24} />
           </ALink>
           <a
             href="#"
@@ -142,17 +143,15 @@ function ProductTwo(props) {
             title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
             onClick={wishlistHandler}
           >
-            <i
-              className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-            ></i>
+            {isWishlisted ? <HeartFilled size={20} /> : <Heart size={20} />}
           </a>
         </div>
       </figure>
 
       <div className="product-details">
-          <div className="product-tags">
-            {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-          </div>
+        <div className="product-tags">
+          {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
+        </div>
 
         <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
@@ -164,10 +163,11 @@ function ProductTwo(props) {
 
         <div className="ratings-container">
           <div className="ratings-full">
-            <span
-              className="ratings"
-              style={{ width: Math.min(20 * product.rating, 100) + "%" }}
-            ></span>
+            {Array.from({ length: 5 }).map((_, index) => {
+              const isFilled = index + 1 <= product.rating;
+
+              return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+            })}
             <span className="tooltiptext tooltip-top">
               {toDecimal(product.rating)}
             </span>

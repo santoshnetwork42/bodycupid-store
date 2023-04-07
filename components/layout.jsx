@@ -9,6 +9,7 @@ import "react-input-range/lib/css/index.css";
 
 import ALink from "~/components/features/custom-link";
 
+import { UpArrow } from "~/components/icons";
 import Header from "~/components/common/header";
 import Footer from "~/components/common/footer";
 import Passwordless from "~/components/common/partials/passwordless";
@@ -87,7 +88,7 @@ function Layout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900;SegoeScript:700&display=swap"
         />
-        <link
+        {/* <link
           rel="stylesheet"
           type="text/css"
           href="/vendor/riode-fonts/riode-fonts.css"
@@ -96,7 +97,7 @@ function Layout({
           rel="stylesheet"
           type="text/css"
           href="/vendor/fontawesome-free/css/all.min.css"
-        />
+        /> */}
       </Head>
       <div className="page-wrapper">
         <Header navbar={navbar} />
@@ -114,7 +115,7 @@ function Layout({
         className="scroll-top"
         onClick={() => scrollTopHandler(false)}
       >
-        <i className="d-icon-arrow-up"></i>
+        <UpArrow size={27} />
       </ALink>
 
       <MobileMenu />

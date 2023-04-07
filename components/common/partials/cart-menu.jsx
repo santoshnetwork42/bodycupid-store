@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { Bag } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
@@ -66,9 +67,8 @@ function CartMenu(props) {
             ₹{toDecimal(getTotalPrice(cartList))}
           </span>
         </div>
-        <i className="d-icon-bag">
-          <span className="cart-count">{getCartCount(cartList)}</span>
-        </i>
+        <Bag />
+        <span className="cart-count">{getCartCount(cartList)}</span>
       </a>
       <div className="cart-overlay" onClick={hideCartMenu}></div>
       <div className="dropdown-box">

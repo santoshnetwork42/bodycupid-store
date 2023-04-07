@@ -76,3 +76,13 @@ export const removeHoverEffect = () => {
     } catch (ex) {}
   }
 };
+
+export const getSplitedArray = (array, size) => {
+  let result = [];
+  if (!array.length) return [];
+
+  for (let i = 0; i < array.length; i += size) {
+    result.push([...array].splice(i, size));
+  }
+  return result;
+};

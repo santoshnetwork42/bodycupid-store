@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { RightArrow, Instagram, Facebook, Youtube } from "~/components/icons";
 import OptimizedImage from "~/components/features/optimized-image";
 import PaymentLogos from "./partials/payment-logos";
 
@@ -58,7 +59,8 @@ function Footer({ footer, store }) {
                     className="btn btn-primary btn-rounded btn-md ml-2"
                     type="submit"
                   >
-                    subscribe<i className="d-icon-arrow-right"></i>
+                    subscribe
+                    <RightArrow size={19} color="#fff" />
                   </button>
                 </form>
               </div>
@@ -147,22 +149,28 @@ function Footer({ footer, store }) {
             <div className="social-links">
               <a
                 title={`${name} on Instagram`}
-                className="social-link social-insta fab fa-instagram"
+                className="social-link"
                 href="https://www.instagram.com/wowlifescienceindia/"
                 target={"_blank"}
-              />
+              >
+                <Instagram size={18} color="currentColor" />
+              </a>
               <a
                 title={`${name} on Facebook`}
                 href="https://www.facebook.com/wowlifescienceindia/"
-                className="social-link social-facebook fab fa-facebook-f"
+                className="social-link"
                 target={"_blank"}
-              ></a>
+              >
+                <Facebook size={22} color="currentColor" />
+              </a>
               <a
                 title={`${name} on YouTube`}
                 href="https://www.youtube.com/@WOWLifeScience"
-                className="social-link social-youtube fab fa-youtube"
+                className="social-link"
                 target={"_blank"}
-              ></a>
+              >
+                <Youtube size={18} color="currentColor" />
+              </a>
             </div>
           </div>
         </div>

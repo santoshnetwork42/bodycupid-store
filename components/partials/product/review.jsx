@@ -3,6 +3,7 @@ import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 import { formateDate, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { Star } from "~/components/icons";
 
 export default function Review({ review }) {
   const [read, setRead] = useState(false);
@@ -31,10 +32,12 @@ export default function Review({ review }) {
         <div className="comment-body">
           <div className="comment-rating ratings-container mb-0">
             <div className="ratings-full">
-              <span
-                className="ratings"
-                style={{ width: review.rating * 20 + "%" }}
-              ></span>
+              {Array.from({ length: 5 }).map((_, index) => {
+                const isFilled = index + 1 <= review.rating;
+
+                return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+              })}
+
               <span className="tooltiptext tooltip-top">
                 {toDecimal(review.rating)}
               </span>
