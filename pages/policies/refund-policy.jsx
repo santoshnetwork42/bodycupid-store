@@ -8,7 +8,7 @@ function RefundPolicy({ store }) {
   return (
     <main className="main about-us">
       <Head>
-        <title>{name} | Titles</title>
+        <title>{name} | Refund policy</title>
       </Head>
 
       <h1 className="d-none">Refund policy - {name}</h1>

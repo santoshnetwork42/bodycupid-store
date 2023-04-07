@@ -20,7 +20,7 @@ function Footer({ footer, store }) {
                   <OptimizedImage
                     optimizedData={{
                       ...footer.logo,
-                      width: 154,
+                      width: 100,
                       height: 43,
                     }}
                     loading="lazy"
@@ -28,9 +28,9 @@ function Footer({ footer, store }) {
                   />
                 ) : (
                   <img
-                    src="/images/logo-footer.png"
+                    src="/images/logo.png"
                     alt="logo-footer"
-                    width="154"
+                    width="100"
                     height="43"
                   />
                 )}

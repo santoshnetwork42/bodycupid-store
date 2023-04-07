@@ -2,7 +2,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { toast } from "react-toastify";
 
 import AlertPopup from "~/components/features/product/common/alert-popup";
-import { emailRegEx, phoneRegEx } from "~/constant";
+import { EMAIl_REGEX, PHONE_REGEX } from "~/constant";
 import { getZipCode } from "~/graphql/api";
 import { addPhonePrefix, removePhonePrefix } from "./helper";
 
@@ -53,7 +53,7 @@ export const validateAddress = async (address, paymentType = "ALL") => {
 
   const isValidPinCode = await validateZipCode(pinCode, paymentType);
 
-  if (!phone || !phoneRegEx.test(removePhonePrefix(phone))) {
+  if (!phone || !PHONE_REGEX.test(removePhonePrefix(phone))) {
     error.phone = "Please enter valid phone number";
   }
 
@@ -73,7 +73,7 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   if (!lastName) {
     error.lastname = "Please enter lastname";
   }
-  if (!email || !emailRegEx.test(email)) {
+  if (!email || !EMAIl_REGEX.test(email)) {
     error.email = "Please enter correct email";
   }
   if (!streetAddress) {

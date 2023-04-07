@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
@@ -167,7 +167,10 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     <td className="product-name" colSpan={2}>
                       <div className="d-flex justify-content-between">
                         <div className="d-flex">
-                          <ALink className='order-image' href={"/product/" + item.slug}>
+                          <ALink
+                            className="order-image"
+                            href={"/product/" + item.slug}
+                          >
                             <img
                               src={getPublicImageURL(
                                 item.product.images?.items[0]?.imageKey
@@ -178,10 +181,10 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                             />
                           </ALink>
                           <div>
-                            {item.product.title}
+                            {`${item.product.title} `}
                             <span>
                               <i className="fas fa-times"></i>
-                              {item.quantity || item.cancelledQuantity}
+                              {` ${item.quantity || item.cancelledQuantity}`}
                             </span>
                             {item.cancelledQuantity > 0 &&
                               item.status === "CREATED" && (
