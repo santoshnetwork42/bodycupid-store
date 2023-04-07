@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import SlideToggle from "react-slide-toggle";
 
 import ALink from "~/components/features/custom-link";
+import { DownAngle, RightArrow, LeftArrow } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { scrollTopHandler } from "~/utils";
 import { cleanQuery } from "~/utils/helper";
@@ -163,10 +164,15 @@ function SidebarFilterOne(props) {
                   onClick={toggleSidebar}
                 >
                   Filter
+
                   {type === "left" || type === "off-canvas" ? (
-                    <i className="d-icon-arrow-left"></i>
+                    <i>
+                      <LeftArrow size={16} color="currentColor" />
+                    </i>
                   ) : (
-                    <i className="d-icon-arrow-right"></i>
+                    <i>
+                      <RightArrow size={16} color="currentColor" />
+                    </i>
                   )}
                 </a>
                 <ALink
@@ -196,7 +202,7 @@ function SidebarFilterOne(props) {
               >
                 <ul className="widget-body filter-items search-ul">
                   {sidebarData.categories.map((item, index) =>
-                    item.subCategory.items.length > 0 ? (
+                    item.subCategory?.items.length > 0 ? (
                       <li
                         key={item.name + " - " + index}
                         className={`with-ul overflow-hidden ${
@@ -229,13 +235,15 @@ function SidebarFilterOne(props) {
                               >
                                 {item.name}
                                 <i
-                                  className={`fas fa-chevron-down ${toggleState.toLowerCase()}`}
+                                  className={`${toggleState.toLowerCase()}`}
                                   onClick={(e) => {
                                     onToggle();
                                     e.stopPropagation();
                                     e.preventDefault();
                                   }}
-                                ></i>
+                                >
+                                  <DownAngle size={10} color="currentColor" />
+                                </i>
                               </ALink>
 
                               <div ref={setCollapsibleElement}>

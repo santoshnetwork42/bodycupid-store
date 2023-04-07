@@ -133,6 +133,15 @@
         padding: 5px 10px;
         border: 1px solid #d7d7d7;
         gap: 10px;
+
+        .product-remove i{
+            height: 16px;
+            width: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         span { 
             color:$dark-color;
             font-size: 12px;

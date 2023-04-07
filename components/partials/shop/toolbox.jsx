@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import ALink from "~/components/features/custom-link";
+import { Cross, Grid, List } from "~/components/icons";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
 import { cleanQuery } from "~/utils/helper";
@@ -200,10 +201,14 @@ export default function ToolBox(props) {
                 query: { ...query, type: "list" },
               }}
               scroll={false}
-              className={`d-icon-mode-list btn-layout ${
+              className={`btn-layout ${
                 gridType === "list" ? "active" : ""
               }`}
-            ></ALink>
+            >
+              <i>
+                <List size={24} color="currentColor" />
+              </i>
+            </ALink>
             <ALink
               href={{
                 pathname: router.pathname,
@@ -213,7 +218,11 @@ export default function ToolBox(props) {
               className={`d-icon-mode-grid btn-layout ${
                 gridType !== "list" ? "active" : ""
               }`}
-            ></ALink>
+            >
+              <i>
+                <Grid size={24} color="currentColor" />
+              </i>
+            </ALink>
           </div>
 
           {type === "right" ? (
@@ -247,7 +256,9 @@ export default function ToolBox(props) {
               }}
               className="product-remove"
             >
-              <i className="fas fa-times"></i>
+              <i>
+                <Cross size={16} color="currentColor" />
+              </i>
             </ALink>
           </div>
         )}
@@ -271,7 +282,9 @@ export default function ToolBox(props) {
               className="product-remove"
               title="Remove coupon"
             >
-              <i className="fas fa-times"></i>
+              <i>
+                <Cross size={16} color="currentColor" />
+              </i>
             </ALink>
           </div>
         )}
@@ -293,7 +306,9 @@ export default function ToolBox(props) {
               className="product-remove"
               title="Remove coupon"
             >
-              <i className="fas fa-times"></i>
+              <i>
+                <Cross size={16} color="currentColor" />
+              </i>
             </ALink>
           </div>
         )}
@@ -315,7 +330,9 @@ export default function ToolBox(props) {
               className="product-remove"
               title="Remove coupon"
             >
-              <i className="fas fa-times"></i>
+              <i>
+                <Cross size={16} color="currentColor" />
+              </i>
             </ALink>
           </div>
         )}
