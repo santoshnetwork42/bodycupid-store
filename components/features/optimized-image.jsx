@@ -5,15 +5,19 @@ const OptimizedImage = ({
   src,
   alt,
   spanAttributes,
+  resizeMobile = true,
   ...props
 }) => {
   const { originalUrl = src, placeholder, width, height } = optimizedData || {};
   const imageRef = useRef(null);
 
   const fetchImage = async () => {
+
+    const { width: imageWidth } = imageRef.current?.getBoundingClientRect();
+
     window.imagesReplaced = true;
     const image = new Image();
-    image.src = originalUrl;
+    image.src =  `${originalUrl}${resizeMobile ? `?resize=${imageWidth.toFixed(0)}` : ""}`;
     image.width = width;
     image.height = height;
     image.alt = alt;

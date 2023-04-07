@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { Phone, Heart, User } from "~/components/icons";
 import CartMenu from "~/components/common/partials/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
@@ -69,12 +70,9 @@ function Header({ navbar, auth, openLogin }) {
             </div>
 
             <div className="header-right">
-              <ALink
-                href="tel:#"
-                className="icon-box d-sm-none  p-0 mr-3"
-              >
+              <ALink href="tel:#" className="icon-box d-sm-none  p-0 mr-3">
                 <div className="icon-box-icon mr-0 mr-lg-2">
-                  <i className="d-icon-phone"></i>
+                  <Phone />
                 </div>
                 <div className="icon-box-content d-lg-show">
                   <h4 className="icon-box-title">Call Us Now:</h4>
@@ -83,7 +81,7 @@ function Header({ navbar, auth, openLogin }) {
               </ALink>
               <span className="divider"></span>
               <ALink href="/pages/wishlist" className="wishlist mr-3 d-sm-none">
-                <i className="d-icon-heart"></i>
+                <Heart />
               </ALink>
               <span className="divider"></span>
 
@@ -96,7 +94,7 @@ function Header({ navbar, auth, openLogin }) {
                     !navbar.showMobileSearchBar && "d-sm-none"
                   }`}
                 >
-                  <i className="d-icon-user"></i>
+                  <User />
                 </ALink>
               )}
               {!navbar.showMobileSearchBar && (
@@ -110,7 +108,7 @@ function Header({ navbar, auth, openLogin }) {
                   className="label-block wishlist d-sm-none"
                   onClick={() => openLogin(false)}
                 >
-                  <i className="d-icon-user"></i>
+                  <User />
                 </ALink>
               )}
               {!auth && (
@@ -120,7 +118,7 @@ function Header({ navbar, auth, openLogin }) {
                     !navbar.showMobileSearchBar && "d-sm-none"
                   }`}
                 >
-                  <i className="d-icon-user"></i>
+                  <User />
                 </ALink>
               )}
             </div>
