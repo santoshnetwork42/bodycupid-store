@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
-import { getMenuSubCategories } from "~/graphql/api";
+import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { errorHandler } from "~/utils/errorHandler";
 
@@ -15,27 +15,19 @@ function MobileMenu({ user }) {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getSubcategories();
-  }, []);
-
-  const getSubcategories = useCallback(() => {
     API.graphql(
-      graphqlOperation(getMenuSubCategories, {
-        filter: { storeId: { eq: STORE_ID }, isFeatured: { eq: true } },
+      graphqlOperation(getMenuCategories, {
+        filter: { storeId: { eq: STORE_ID } },
       })
-    )
-      .then(
-        ({
-          data: {
-            searchProductSubCategories: { items },
-          },
-        }) => {
-          setCategories(items);
-        }
-      )
-      .catch((_err) => {
-        errorHandler(_err);
-      });
+    ).then(
+      ({
+        data: {
+          searchProductCategories: { items },
+        },
+      }) => {
+        setCategories(items);
+      }
+    );
   }, []);
 
   useEffect(() => {
@@ -129,13 +121,35 @@ function MobileMenu({ user }) {
           <li>
             <Card title="categories" type="mobile" url="/collections/all">
               <ul>
-                {categories.map((subcategory) => (
-                  <ALink
-                    key={subcategory.id}
-                    href={`/collections/${subcategory.category.slug}/${subcategory.slug}`}
-                  >
-                    {subcategory.name}
-                  </ALink>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    {!category.subCategory.items.length && (
+                      <ALink href={"/collections/" + category.slug}>
+                        {category.name}
+                      </ALink>
+                    )}
+                    {category.subCategory.items.length > 0 && (
+                      <Card title={category.name} type="mobile">
+                        <ul>
+                          {category.subCategory.items.map((item) => (
+                            <li key={item.id}>
+                              <ALink
+                                href={
+                                  "/collections/" +
+                                  category.slug +
+                                  "/" +
+                                  item.slug
+                                }
+                              >
+                                {item.name}
+                              
+                              </ALink>
+                            </li>
+                          ))}
+                        </ul>
+                      </Card>
+                    )}
+                  </li>
                 ))}
               </ul>
             </Card>

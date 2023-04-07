@@ -105,7 +105,7 @@ function Addresses({ user, onAddressChange }) {
                     <h5 className="card-title text-uppercase mb-2">
                       {adr.name}
                     </h5>
-                    <p className="add-lables-values">
+                    <div className="add-lables-values">
                       {adr?.email && (
                         <span>
                           {adr?.email} <br />
@@ -131,7 +131,7 @@ function Addresses({ user, onAddressChange }) {
                           {`${adr?.city}, ${adr?.state}, ${adr?.pinCode}`}
                         </span>
                       </div>
-                    </p>
+                    </div>
                     <div className="add-bottom-btn mt-2">
                       <ALink
                         href="#"

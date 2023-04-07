@@ -255,8 +255,8 @@ function Checkout(props) {
               address: restAddress,
             });
           } else {
-            await emptyCart();
             await router.push(`/order/${orderId}`);
+            await emptyCart();
             setLoading(false);
           }
         } catch (error) {

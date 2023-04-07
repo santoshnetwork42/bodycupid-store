@@ -5,6 +5,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { getSplitedArray } from "~/utils/helper";
 
 function MainMenu() {
   const { pathname } = useRouter();
@@ -29,7 +30,7 @@ function MainMenu() {
       }
     );
   }, []);
- 
+
   return (
     <nav className="main-nav">
       <ul className="menu">
@@ -55,19 +56,33 @@ function MainMenu() {
             <ALink href={`/collections/${category.slug}`}>
               {category.name}
             </ALink>
-            {!!category?.subCategory?.items?.length && (
-              <ul>
-                {category.subCategory.items.map((item) => (
-                  <li key={`sub-categories-${item.id}`}>
-                    <ALink
-                      href={"/collections/" + category.slug + "/" + item.slug}
-                    >
-                      {item.name}
-                    </ALink>
-                  </li>
+            <div className="megamenu">
+              <div className="d-flex">
+                {getSplitedArray(category?.subCategory?.items, 8).map((cat) => (
+                  <div className="ml-2 mr-2">
+                    {!!cat.length && (
+                      <ul>
+                        {cat.map((item) => (
+                          <li key={`sub-categories-${item.id}`}>
+                            <ALink
+                              className="cat-name"
+                              href={
+                                "/collections/" +
+                                category.slug +
+                                "/" +
+                                item.slug
+                              }
+                            >
+                              {item.name}
+                            </ALink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 ))}
-              </ul>
-            )}
+              </div>
+            </div>
           </li>
         ))}
       </ul>
