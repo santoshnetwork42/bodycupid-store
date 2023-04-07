@@ -10,6 +10,7 @@ import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Coupon(props) {
   const {
@@ -34,28 +35,32 @@ function Coupon(props) {
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
       setLoading(true);
-      const {
-        data: { applyCoupon: response },
-      } = await API.graphql({
-        query: applyCouponMutation,
-        variables: { code: couponCode },
-        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-      });
-      if (response) {
-        const discount = getCouponTotal(response, cartList);
-        if (discount) {
-          setCoupon("");
-          applyCoupon(response);
-          setOpen(false);
-          setError("");
+      try {
+        const {
+          data: { applyCoupon: response },
+        } = await API.graphql({
+          query: applyCouponMutation,
+          variables: { code: couponCode },
+          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        });
+        if (response) {
+          const discount = getCouponTotal(response, cartList);
+          if (discount) {
+            setCoupon("");
+            applyCoupon(response);
+            setOpen(false);
+            setError("");
+          } else {
+            setError("Coupon cannot be applied");
+          }
+          setLoading(false);
         } else {
-          setError("Coupon cannot be applied");
+          setCoupon("");
+          setError("Coupon not found");
+          setLoading(false);
         }
-        setLoading(false);
-      } else {
-        setCoupon("");
-        setError("Coupon not found");
-        setLoading(false);
+      } catch (error) {
+        errorHandler(error);
       }
     },
     [coupon, user]

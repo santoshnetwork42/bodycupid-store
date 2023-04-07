@@ -19,15 +19,19 @@ function MobileMenu({ user }) {
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
       })
-    ).then(
-      ({
-        data: {
-          searchProductCategories: { items },
-        },
-      }) => {
-        setCategories(items);
-      }
-    );
+    )
+      .then(
+        ({
+          data: {
+            searchProductCategories: { items },
+          },
+        }) => {
+          setCategories(items);
+        }
+      )
+      .catch((error) => {
+        errorHandler(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -142,7 +146,6 @@ function MobileMenu({ user }) {
                                 }
                               >
                                 {item.name}
-                              
                               </ALink>
                             </li>
                           ))}

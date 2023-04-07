@@ -127,18 +127,22 @@ function Checkout(props) {
 
   const fetchPaymentStatus = useCallback(async () => {
     if (orderId && paymentId) {
-      const {
-        data: {
-          validateTransaction: { success },
-        },
-      } = await API.graphql({
-        query: validateTransaction,
-        variables: { orderId, razorpayPaymentId: paymentId },
-      });
-      if (success) {
-        await emptyCart();
-        await router.push(`/order/${orderId}?paymentId=${paymentId}`);
-        setPaymentLoading(false);
+      try {
+        const {
+          data: {
+            validateTransaction: { success },
+          },
+        } = await API.graphql({
+          query: validateTransaction,
+          variables: { orderId, razorpayPaymentId: paymentId },
+        });
+        if (success) {
+          await emptyCart();
+          await router.push(`/order/${orderId}?paymentId=${paymentId}`);
+          setPaymentLoading(false);
+        }
+      } catch (error) {
+        errorHandler(error);
       }
     }
   }, [orderId, paymentId]);
@@ -158,11 +162,15 @@ function Checkout(props) {
     const tempAddress = getProperAddress(shippingAddress);
     const { id: ignoreId, ...restAddress } = tempAddress;
     if (user && !ignoreId) {
-      await API.graphql({
-        query: createUserAddress,
-        variables: { input: { ...restAddress, userID: user.id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
+      try {
+        await API.graphql({
+          query: createUserAddress,
+          variables: { input: { ...restAddress, userID: user.id } },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+      } catch (error) {
+        errorHandler(error);
+      }
     }
 
     return Promise.resolve(null);
@@ -261,7 +269,6 @@ function Checkout(props) {
           }
         } catch (error) {
           errorHandler(error);
-          console.log(error);
         }
       }
       setLoading(false);

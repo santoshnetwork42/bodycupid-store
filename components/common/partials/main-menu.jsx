@@ -6,6 +6,7 @@ import ALink from "~/components/features/custom-link";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { getSplitedArray } from "~/utils/helper";
+import { errorHandler } from "~/utils/errorHandler";
 
 function MainMenu() {
   const { pathname } = useRouter();
@@ -20,15 +21,19 @@ function MainMenu() {
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
       })
-    ).then(
-      ({
-        data: {
-          searchProductCategories: { items },
-        },
-      }) => {
-        setCategories(items);
-      }
-    );
+    )
+      .then(
+        ({
+          data: {
+            searchProductCategories: { items },
+          },
+        }) => {
+          setCategories(items);
+        }
+      )
+      .catch((error) => {
+        errorHandler(error);
+      });
   }, []);
 
   return (
@@ -59,7 +64,7 @@ function MainMenu() {
             <div className="megamenu">
               <div className="d-flex">
                 {getSplitedArray(category?.subCategory?.items, 8).map((cat) => (
-                  <div className="ml-2 mr-2">
+                  <div className="ml-2 mr-2" key={cat.id}>
                     {!!cat.length && (
                       <ul>
                         {cat.map((item) => (

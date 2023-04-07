@@ -53,7 +53,6 @@ function Login({
         });
         setConfirmSignUp("SIGNUP");
       } catch (error) {
-        console.log("error signing up:", error);
         errorHandler(error);
       }
       return false;

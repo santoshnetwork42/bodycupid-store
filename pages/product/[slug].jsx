@@ -21,6 +21,7 @@ import {
   optimizeProduct,
   variantImageOptimization,
 } from "~/utils/getStaticData";
+import { errorHandler } from "~/utils/errorHandler";
 
 function ProductDefault(props) {
   const { product, productFAQs = [] } = props;
@@ -49,15 +50,20 @@ function ProductDefault(props) {
       } else {
         filter.categoryId = { eq: categoryId };
       }
-      const {
-        data: {
-          searchProducts: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(getHomePageProducts, { filter, limit: 4 })
-      );
-      if (items.length) {
-        setRelatedProducts(items);
+
+      try {
+        const {
+          data: {
+            searchProducts: { items },
+          },
+        } = await API.graphql(
+          graphqlOperation(getHomePageProducts, { filter, limit: 4 })
+        );
+        if (items.length) {
+          setRelatedProducts(items);
+        }
+      } catch (error) {
+        errorHandler(error);
       }
     }
   }, [product]);

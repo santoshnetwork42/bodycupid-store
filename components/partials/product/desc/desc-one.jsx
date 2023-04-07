@@ -80,7 +80,6 @@ function DescOne(props) {
       }
     } catch (e) {
       errorHandler(e);
-      console.log("e", e);
     }
   };
 
@@ -115,7 +114,6 @@ function DescOne(props) {
         .catch((err) => {
           errorHandler(err);
           setLoading(false);
-          console.log("err", err);
         });
     },
     [product, token]

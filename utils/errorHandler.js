@@ -4,6 +4,5 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 
 export const errorHandler = (error) => {
   Sentry.captureException(error);
-  toast(<AlertPopup message={error.message} status="error" />);
-  console.log("Error:", error);
+  toast(<AlertPopup message={error?.message || error} status="error" />);
 };

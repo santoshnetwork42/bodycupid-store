@@ -37,7 +37,6 @@ function ForgotPassword({ store }) {
         }
       } catch (error) {
         errorHandler(error);
-        console.log("error signin:", error);
       }
       return false;
     },
