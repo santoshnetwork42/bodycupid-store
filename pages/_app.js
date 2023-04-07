@@ -20,6 +20,7 @@ import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
 import { getUser, getStore } from "~/graphql/api";
 import Scripts from "~/components/scripts.jsx";
+import { errorHandler } from "~/utils/errorHandler.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -69,7 +70,7 @@ const App = ({ Component, pageProps }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
       destroySession();
     }
   }, [store]);
@@ -99,7 +100,7 @@ const App = ({ Component, pageProps }) => {
       utm_content: content,
       utm_medium: medium,
       utm_source: source,
-      utm_term: term
+      utm_term: term,
     } = query;
     const landingPage = window?.location?.href;
     const referrer = document?.referrer;

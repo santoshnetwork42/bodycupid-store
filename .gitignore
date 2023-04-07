@@ -65,3 +65,9 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# Sentry
+.sentryclirc
+
+# Sentry
+next.config.original.js

@@ -9,6 +9,7 @@ import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import Loader from "~/components/common/partials/loader";
+import { errorHandler } from "~/utils/errorHandler";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -108,7 +109,7 @@ function ProductListOne(props) {
         setTotal(total);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     },
     [filters, products, token, applyFilters]

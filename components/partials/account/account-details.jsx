@@ -5,6 +5,7 @@ import { API } from "aws-amplify";
 import { updateUser as updateUserMutation } from "~/graphql/api";
 import { removePhonePrefix } from "~/utils/helper";
 import { userActions } from "~/store/user";
+import { errorHandler } from "~/utils/errorHandler";
 
 function AccountDetails({ user, updateUserData }) {
   const [userDetail, setUser] = useState({ ...user });
@@ -30,6 +31,7 @@ function AccountDetails({ user, updateUserData }) {
           setLoading(false);
         })
         .catch((_err) => {
+          errorHandler(_err)
           setLoading(false);
         });
       return false;

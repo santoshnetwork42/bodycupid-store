@@ -18,6 +18,7 @@ import Accordion from "~/components/features/accordion/accordion";
 import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { errorHandler } from "~/utils/errorHandler";
 const reviewDefault = {
   rating: 5,
   comment: "",
@@ -78,6 +79,7 @@ function DescOne(props) {
         setReviewAnalytics(data);
       }
     } catch (e) {
+      errorHandler(e);
       console.log("e", e);
     }
   };
@@ -111,6 +113,7 @@ function DescOne(props) {
           }
         )
         .catch((err) => {
+          errorHandler(err);
           setLoading(false);
           console.log("err", err);
         });
@@ -190,8 +193,7 @@ function DescOne(props) {
           />
         );
       } catch (error) {
-        toast(<AlertPopup message={error.message} status="error" />);
-        console.log(error);
+        errorHandler(error);
       }
       return false;
     },

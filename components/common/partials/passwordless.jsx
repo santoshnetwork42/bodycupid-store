@@ -11,6 +11,7 @@ import { modalActions } from "~/store/modal";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Passwordless({
   auth,
@@ -103,7 +104,7 @@ function Passwordless({
           }
         }
       } catch (error) {
-        console.log("error signup confirm:", error);
+        errorHandler(error);
         setOtpError(true);
       }
       setLoading(false);

@@ -28,6 +28,7 @@ import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Checkout(props) {
   const {
@@ -259,6 +260,7 @@ function Checkout(props) {
             setLoading(false);
           }
         } catch (error) {
+          errorHandler(error);
           console.log(error);
         }
       }

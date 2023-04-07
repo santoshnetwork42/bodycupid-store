@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 
 import { addProductNotification } from "~/graphql/mutations";
+import { errorHandler } from "~/utils/errorHandler";
 import AlertPopup from "./product/common/alert-popup";
 
 function ProductNotify(props) {
@@ -49,8 +50,7 @@ function ProductNotify(props) {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        toast(<AlertPopup message="Something went wrong" status="error" />);
-        console.log("notify", error);
+       errorHandler(error)
       }
     },
     [notifyEmail, productId, variantId, user]

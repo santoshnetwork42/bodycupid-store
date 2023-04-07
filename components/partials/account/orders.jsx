@@ -7,6 +7,7 @@ import TokenPagination from "~/components/features/token-pagination";
 import { formateDate, toDecimal } from "~/utils";
 import { searchOrders } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { errorHandler } from "~/utils/errorHandler";
 
 function AccountOrders({ user }) {
   const [orders, setOrders] = useState([]);
@@ -42,7 +43,9 @@ function AccountOrders({ user }) {
         }
         setTotalOrder(total);
         setToken(nextToken);
-      } catch (error) {}
+      } catch (error) {
+        errorHandler(error);
+      }
     },
     [user, orders, token]
   );

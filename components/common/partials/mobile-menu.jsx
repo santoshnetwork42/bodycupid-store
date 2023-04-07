@@ -7,6 +7,7 @@ import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
 import { getMenuSubCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { errorHandler } from "~/utils/errorHandler";
 
 function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
@@ -32,7 +33,9 @@ function MobileMenu({ user }) {
           setCategories(items);
         }
       )
-      .catch((_err) => {});
+      .catch((_err) => {
+        errorHandler(_err);
+      });
   }, []);
 
   useEffect(() => {

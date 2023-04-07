@@ -19,6 +19,7 @@ import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
+import { errorHandler } from "~/utils/errorHandler";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -100,7 +101,7 @@ function DetailOne(props) {
         applyCoupon(maxDiscountCoupon);
       }
     } catch (error) {
-      console.log("error", error);
+      errorHandler(error);
     }
   }, [maxDiscountCoupon, user, appliedCoupon]);
 

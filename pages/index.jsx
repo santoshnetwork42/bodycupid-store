@@ -9,7 +9,7 @@ import BestCollection from "~/components/partials/home/best-collection";
 import DealSection from "~/components/partials/home/deal-section";
 import FeaturedCollection from "~/components/partials/home/featured-collection";
 import CtaSection from "~/components/partials/home/cta-section";
-import BrandSection from "~/components/partials/home/brand-section";
+import * as Sentry from "@sentry/browser";
 // import BlogSection from "~/components/partials/home/blog-section";
 
 import {
@@ -25,6 +25,7 @@ import { STORE_ID } from "~/config";
 import BlogSection from "~/components/partials/home/blog-section";
 import { HOME_REVALIDATE_DURATION } from "~/constant";
 import { optimizeStore } from "~/utils/getStaticData";
+import { errorHandler } from "~/utils/errorHandler";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store;
