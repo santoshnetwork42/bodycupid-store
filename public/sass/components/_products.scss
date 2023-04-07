@@ -306,8 +306,8 @@
     background-color .3s;
 
     &.btn-wishlist i {
-        margin-top: .3rem;
-        margin-left: .1rem;
+        // margin-top: .3rem;
+        // margin-left: .1rem;
     }
 
     &:hover {
@@ -545,7 +545,7 @@
     }
 
     &::before {
-        content: "\e955 " "\e955 " "\e955 " "\e955 " "\e955";
+        // content: "\e955 " "\e955 " "\e955 " "\e955 " "\e955";
         color: rgba(0, 0, 0, 0.16);
         font-family: 'riode';
     }
@@ -581,6 +581,7 @@
     color: #aaa;
     letter-spacing: 0;
     text-transform: capitalize;
+    height: 18px;
 
     &:hover {
         color: $primary-color;
@@ -643,7 +644,8 @@
     }
 
     .btn-cart {
-        display: block;
+        display: flex;
+        align-items: center;
         max-width: 14rem;
         line-height: 2.9;
         padding: 0 .6em;
@@ -659,7 +661,11 @@
 
         i {
             margin-right: .8rem;
-            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 18px;
+            width: 18px;
         }
     }
 
@@ -684,6 +690,11 @@
 
         i {
             font-size: 1.8rem;
+            height: 20px;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         &:hover {
