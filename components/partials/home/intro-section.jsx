@@ -19,6 +19,7 @@ function IntroSection({ banners }) {
               resizeMobile={false}
               loading="eager"
               alt="Intro Slider"
+              resizeMobile={false}
             />
           </figure>
         </ALink>
@@ -35,6 +36,7 @@ function IntroSection({ banners }) {
               resizeMobile={false}
               loading="eager"
               alt="Intro Slider"
+              resizeMobile={false}
             />
           </figure>
         </ALink>
