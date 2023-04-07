@@ -30,15 +30,16 @@ function ProductListOne(props) {
   } = props;
 
   const router = useRouter();
+  const { query } = router; 
+  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
 
-  const [applyFilters, resetFilter] = useState(false);
+
+  const [applyFilters, resetFilter] = useState(!!search?.trim());
   const [token, setToken] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const { query } = router;
-  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
 
   const perPage = 50;
 
