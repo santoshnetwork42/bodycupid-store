@@ -81,6 +81,64 @@ export const User = ({ size = defaultIconSize, color = defaultIconColor }) => {
   );
 };
 
+export const Hamburger = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title />
+
+      <g id="Complete">
+        <g id="align-justify">
+          <g>
+            <polygon
+              fill="#ffffff"
+              points="20 18 4 18 4 18 20 18 20 18"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+
+            <polygon
+              fill="#ffffff"
+              points="20 14 4 14 4 14 20 14 20 14"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+
+            <polygon
+              fill="#ffffff"
+              points="20 10 4 10 4 10 20 10 20 10"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+
+            <polygon
+              fill="#ffffff"
+              points="20 6 4 6 4 6 20 6 20 6"
+              stroke="#000000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
 export const Bag = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
@@ -93,6 +151,31 @@ export const Bag = ({ size = defaultIconSize, color = defaultIconColor }) => {
         fill={color}
         d="M3 22h18a1 1 0 001-1.077l-1-13A1 1 0 0020 7h-3A5 5 0 007 7H4a1 1 0 00-1 .923l-1 13A1 1 0 003 22zm9-18a3 3 0 013 3H9a3 3 0 013-3zM4.926 9H7v2a1 1 0 002 0V9h6v2a1 1 0 002 0V9h2.074l.846 11H4.08z"
       ></path>
+    </svg>
+  );
+};
+export const Search = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="Interface / Search_Magnifying_Glass">
+        <path
+          id="Vector"
+          d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
     </svg>
   );
 };
@@ -576,10 +659,7 @@ export const MagnifyingGlass = ({
   );
 };
 
-export const Minus = ({
-  size = defaultIconSize,
-  color = defaultIconColor,
-}) => {
+export const Minus = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -597,10 +677,7 @@ export const Minus = ({
   );
 };
 
-export const Plus = ({
-  size = defaultIconSize,
-  color = defaultIconColor,
-}) => {
+export const Plus = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -618,10 +695,7 @@ export const Plus = ({
   );
 };
 
-export const Cross = ({
-  size = defaultIconSize,
-  color = defaultIconColor,
-}) => {
+export const Cross = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -637,10 +711,7 @@ export const Cross = ({
   );
 };
 
-export const Grid = ({
-  size = defaultIconSize,
-  color = defaultIconColor,
-}) => {
+export const Grid = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -657,10 +728,7 @@ export const Grid = ({
   );
 };
 
-export const List = ({
-  size = defaultIconSize,
-  color = defaultIconColor,
-}) => {
+export const List = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

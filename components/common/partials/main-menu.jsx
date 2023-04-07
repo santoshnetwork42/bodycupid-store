@@ -34,12 +34,6 @@ function MainMenu() {
   return (
     <nav className="main-nav">
       <ul className="menu">
-        <li
-          id="all"
-          className={pathname === "/collections/all" ? "active" : ""}
-        >
-          <ALink href="/collections/all">All Products</ALink>
-        </li>
 
         {categories.map((category) => (
           <li
