@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
+import { RightArrow, Star } from "~/components/icons";
 import { parallaxHandler } from "~/utils";
 import { blurIn } from "~/utils/data/keyframes";
 
@@ -28,7 +29,7 @@ function CtaSection() {
           <div className="banner-content">
             <h4 className="banner-subtitle text-white font-weight-bold ls-l">
               Extra
-              <span className="d-inline-block label-star bg-dark text-primary ml-4 mr-2">
+              <span className="d-inline-block bg-dark text-primary ml-4 mr-2">
                 30% Off
               </span>
               Online
@@ -44,7 +45,8 @@ function CtaSection() {
               href="/shop"
               className="btn btn-primary btn-rounded btn-icon-right"
             >
-              Shop Now<i className="d-icon-arrow-right"></i>
+              Shop Now
+              <RightArrow size={19} color="#fff" />
             </ALink>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { House } from "~/components/icons";
+
 
 export default function ShopBanner(props) {
   const { category } = props;
@@ -57,7 +58,10 @@ export default function ShopBanner(props) {
           <ul className="breadcrumb">
             <li>
               <ALink href="/">
-                <i className="d-icon-home"></i>
+                <i>
+                  <House color="currentColor" size={16} />
+                </i>
+                {/* <i className="d-icon-home"></i> */}
               </ALink>
             </li>
             <li className="delimiter">/</li>

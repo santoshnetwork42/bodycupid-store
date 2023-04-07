@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { Bag, Heart, HeartFilled, MagnifyingGlass } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
@@ -200,7 +201,9 @@ function ProductEight(props) {
                     className="btn-product btn-cart"
                     title="View Cart"
                   >
-                    <i className="d-icon-bag"></i>
+                    <i>
+                      <Bag size={18} color="currentColor" />
+                    </i>
                     <span>View Cart</span>
                   </ALink>
                 ) : (
@@ -210,7 +213,9 @@ function ProductEight(props) {
                     title="Add to cart"
                     onClick={addToCartHandler}
                   >
-                    <i className="d-icon-bag"></i>
+                    <i>
+                      <Bag size={18} color="currentColor" />
+                    </i>
                     <span>Add to cart</span>
                   </ALink>
                 )}
@@ -222,11 +227,9 @@ function ProductEight(props) {
                   }
                   onClick={wishlistHandler}
                 >
-                  <i
-                    className={
-                      isWishlisted ? "d-icon-heart-full" : "d-icon-heart"
-                    }
-                  ></i>
+                  <i>
+                    {isWishlisted ? <HeartFilled size={20} color="currentColor" /> : <Heart size={20} color="currentColor" /> }
+                  </i>
                 </a>
                 <ALink
                   href="#"
@@ -234,7 +237,9 @@ function ProductEight(props) {
                   title="Quick View"
                   onClick={showQuickviewHandler}
                 >
-                  <i className="d-icon-search"></i>
+                  <i>
+                    <MagnifyingGlass size={20} color="currentColor" />
+                  </i>
                 </ALink>
               </>
             ) : (

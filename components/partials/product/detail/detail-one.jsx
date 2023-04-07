@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
+import { Star, Bag, Heart, HeartFilled } from "~/components/icons";
 import Quantity from "~/components/features/quantity";
 
 import ProductNav from "~/components/partials/product/product-nav";
@@ -348,12 +349,11 @@ function DetailOne(props) {
 
       <div className="ratings-container">
         <div className="ratings-full" onClick={onReviewClick}>
-          {/* <span className="ratings" style={{ width: Math.min(20 * product.rating, 100)s + '%' }}></span>
-                    <span className="tooltiptext tooltip-top">{toDecimal(product.ratings)}</span> */}
-          <span
-            className="ratings"
-            style={{ width: Math.min(20 * product.rating, 100) + "%" }}
-          ></span>
+          {Array.from({ length: 5 }).map((_, index) => {
+            const isFilled = index + 1 <= product.rating;
+
+            return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+          })}
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}
           </span>
@@ -473,7 +473,9 @@ function DetailOne(props) {
                           router.push("/pages/cart");
                         }}
                       >
-                        <i className="d-icon-bag"></i>
+                        <i>
+                          <Bag color="currentColor" size={20} />
+                        </i>
                         View Cart
                       </button>
                     )}
@@ -484,7 +486,9 @@ function DetailOne(props) {
                         }`}
                         onClick={addToCartHandler}
                       >
-                        <i className="d-icon-bag"></i>
+                        <i>
+                          <Bag color="currentColor" size={20} />
+                        </i>
                         Add to cart
                       </button>
                     )}
@@ -518,7 +522,9 @@ function DetailOne(props) {
                       router.push("/pages/cart");
                     }}
                   >
-                    <i className="d-icon-bag"></i>
+                    <i>
+                      <Bag color="currentColor" size={20} />
+                    </i>
                     View Cart
                   </button>
                 )}
@@ -529,7 +535,9 @@ function DetailOne(props) {
                     }`}
                     onClick={addToCartHandler}
                   >
-                    <i className="d-icon-bag"></i>
+                    <i>
+                      <Bag color="currentColor" size={20} />
+                    </i>
                     Add to cart
                   </button>
                 )}
@@ -550,9 +558,16 @@ function DetailOne(props) {
           title={isWishlisted ? "Browse wishlist" : "Add to wishlist"}
           onClick={wishlistHandler}
         >
-          <i
+          <i>
+            {isWishlisted ? (
+              <HeartFilled size={18} color="currentColor" />
+            ) : (
+              <Heart size={18} color="currentColor" />
+            )}
+          </i>
+          {/* <i
             className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-          ></i>{" "}
+          ></i> */}
           {isWishlisted ? "Browse wishlist" : "Add to Wishlist"}
         </a>
       </div>

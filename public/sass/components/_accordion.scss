@@ -35,11 +35,15 @@
 			}
 		}
 		
-		&::after {
+		& i.icon {
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
 			right: .5rem;
+			transform-origin: center center;
+			height: 12px;
+			width: 12px;
+			
 			font: {
 				family: "riode";
 				size: 1.8rem;
@@ -53,7 +57,7 @@
 	.expanded {
 		color: $primary-color;
 
-		&::after {
+		& i.icon {
 			color: $primary-color;
 		}
 	}
@@ -149,15 +153,15 @@
 	}
 }
 
-.toggle-button.collapsed, .toggle-button.collapsing {
-	&::after {
-		content: '\e953';
-	}
-}
+// .toggle-button.collapsed, .toggle-button.collapsing {
+// 	&::after {
+// 		content: '\e953';
+// 	}
+// }
 
 .toggle-button.expanded, .toggle-button.expanding {
-	&::after {
-		content: '\e952';
+	& i.icon {
+		transform: rotate(180deg);
 	}
 }
 
