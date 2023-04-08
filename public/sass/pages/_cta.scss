@@ -155,10 +155,13 @@
     }
     .btn {
         font-weight: 500;
+        display: flex;
+        align-items: center;
+
         i {
             margin-left: .8rem;
-            font-size: 1.9rem;
-            vertical-align: middle;
+            height: 19px;
+            width: 19px;
         }
     }
     img {
@@ -191,6 +194,12 @@
     .btn { 
         padding: 1.5em 2.1em 1.5em 2.1em;
         font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+
+        svg{
+            margin-left: 4px;
+        }
     }
 }
 .banner-5 {
@@ -261,6 +270,10 @@
     .btn { 
         padding: 1.22em 2.7em;
         font-weight: 600;
+
+        svg{
+            margin-left: 4px;
+        }
     }
 }
 .label-star {

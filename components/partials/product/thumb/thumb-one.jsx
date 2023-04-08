@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
+// Components
+import { UpAngle, DownAngle } from "~/components/icons";
+
 export default function ThumbOne(props) {
   const { index, images } = props;
   const [pos, setPos] = useState(0);
@@ -260,10 +263,10 @@ export default function ThumbOne(props) {
       </div>
 
       <button className="thumb-up" onClick={prevPosHandler}>
-        <i className="fas fa-chevron-left"></i>
+        <UpAngle color="currentColor" />
       </button>
       <button className="thumb-down" onClick={nextPosHandler}>
-        <i className="fas fa-chevron-right"></i>
+        <DownAngle color="currentColor" size={14} />
       </button>
     </div>
   );

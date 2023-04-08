@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import ALink from "~/components/features/custom-link";
+import { DownAngle } from "~/components/icons";
 
 import SlideToggle from "react-slide-toggle";
 
@@ -26,6 +27,9 @@ export default function Card(props) {
             >
               {iconClass ? <i className={iconClass}></i> : ""}
               {title ? title : ""}
+              <i className="icon">
+                <DownAngle size={12} color="currentColor" />
+              </i>
             </ALink>
           </div>
 

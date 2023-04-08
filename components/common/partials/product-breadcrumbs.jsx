@@ -1,6 +1,7 @@
 import React from "react";
 
 import ALink from "~/components/features/custom-link";
+import { House, RightAngle } from "~/components/icons";
 
 function ProductBreadcrumbs({ category, subCategory }) {
   const { slug, name } = category;
@@ -10,11 +11,16 @@ function ProductBreadcrumbs({ category, subCategory }) {
       <ul className="breadcrumb breadcrumb-lg">
         <li>
           <ALink href="/collections/all">
-            <i className="d-icon-home"></i>
+            <i>
+              <House color="currentColor" size={16} />
+            </i>
           </ALink>
         </li>
         {category && (
           <li>
+            <i>
+              <RightAngle color="currentColor" />
+            </i>
             <ALink
               href={{
                 pathname: "/collections/[category]",
@@ -28,6 +34,9 @@ function ProductBreadcrumbs({ category, subCategory }) {
         )}
         {subCategory && (
           <li>
+            <i>
+              <RightAngle color="currentColor" />
+            </i>
             <ALink
               href={{
                 pathname: "/collections/[category]/[subcategory]",
