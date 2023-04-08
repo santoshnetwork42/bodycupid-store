@@ -6,7 +6,6 @@ import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import { findProducts, getSideBarFilterCategories } from "~/graphql/api";
-import { CATEGORY_REVALIDATE_DURATION } from "~/constant";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import { optimizeProduct } from "~/utils/getStaticData";
@@ -68,7 +67,6 @@ export const getStaticProps = async () => {
         categorySlug: null,
         sideBarCategories: categories,
       },
-      revalidate: CATEGORY_REVALIDATE_DURATION,
     };
   } catch (error) {
     return {
