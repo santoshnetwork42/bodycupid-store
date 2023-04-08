@@ -47,27 +47,6 @@ export const deleteUser = /* GraphQL */ `
       isAdmin
       isCognitoConfirmed
       profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -358,27 +337,6 @@ export const createUser = /* GraphQL */ `
       isAdmin
       isCognitoConfirmed
       profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -430,27 +388,6 @@ export const updateUser = /* GraphQL */ `
       isAdmin
       isCognitoConfirmed
       profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
       createdAt
       updatedAt
     }
