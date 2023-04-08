@@ -4,7 +4,3 @@ export const EMAIl_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 export const MEDIA_BASE_URL = "https://d3pvtru6vse1kf.cloudfront.net";
-
-export const CATEGORY_REVALIDATE_DURATION = 60;
-
-export const HOME_REVALIDATE_DURATION = 60;
