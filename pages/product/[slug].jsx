@@ -11,7 +11,7 @@ import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import {
   getProductBySlug,
-  getHomePageProducts,
+  findProducts,
   searchProductFaqs,
   getProductSlug,
 } from "~/graphql/api";
@@ -54,7 +54,7 @@ function ProductDefault(props) {
           searchProducts: { items },
         },
       } = await API.graphql(
-        graphqlOperation(getHomePageProducts, { filter, limit: 4 })
+        graphqlOperation(findProducts, { filter, limit: 4 })
       );
       if (items.length) {
         setRelatedProducts(items);
@@ -143,17 +143,18 @@ export const getStaticProps = async (context) => {
 
     // get Product By Slug
     const {
-      byslugProduct: { items },
+      byslugProduct: {
+        items: [product],
+      },
     } = await fetchData(getProductBySlug, {
       slug,
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
     });
-    const [product] = items;
-    if (!!product) {
-      const { id, variants } = product || {};
 
-      const [optimizedProducts] = await Promise.all(items.map(optimizeProduct));
+    if (product) {
+      const { id, variants } = product;
 
+      const optimizedProduct = await optimizeProduct(product);
       const { variants: optimizedVariants } = await variantImageOptimization(
         variants
       );
@@ -169,7 +170,7 @@ export const getStaticProps = async (context) => {
 
       return {
         props: {
-          product: { ...optimizedProducts, variants: optimizedVariants },
+          product: { ...optimizedProduct, variants: optimizedVariants },
           productFAQs: faqS,
         },
       };

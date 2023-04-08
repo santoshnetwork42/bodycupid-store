@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
-import ShopBanner from "~/components/partials/shop/shop-banner";
+// import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import { findProducts, getSideBarFilterCategories } from "~/graphql/api";
@@ -22,7 +22,7 @@ function AllProduct(props) {
 
       <h1 className="d-none">{name} - All Products</h1>
 
-      <ShopBanner category={null} />
+      {/* <ShopBanner category={null} /> */}
 
       <div className="page-content mb-10 pb-3">
         <div className="container">
@@ -47,7 +47,7 @@ export const getStaticProps = async () => {
         status: { eq: "ENABLED" },
         storeId: { eq: STORE_ID },
       },
-      limit: 50,
+      limit: 24,
     });
 
     // Get SideBar Categories
@@ -58,7 +58,9 @@ export const getStaticProps = async () => {
     });
 
     const { items } = searchProducts;
-    const products = await Promise.all(items.map(optimizeProduct));
+    const products = await Promise.all(
+      items.map((product) => optimizeProduct(product, { partial: true }))
+    );
 
     return {
       props: {

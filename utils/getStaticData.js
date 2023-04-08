@@ -1,11 +1,14 @@
 import { getPublicImageURL } from "./getPublicImageUrl";
 import optimizeImage from "./optimizeImage";
 
-export const optimizeProduct = async (product) => {
-  const { images } = product;
+export const optimizeProduct = async (product, { partial = false } = {}) => {
+  const { images } = { ...product };
+
+  const sortedImages = Array.isArray(images?.items) ? images.items.sort((a, b) => a.position - b.position) : [];
 
   const optimizedImages = await Promise.all(
-    images.items.map(async (image) => {
+    sortedImages.map(async (image, index) => {
+      if (partial && index > 1) return image;
       const imageUrl = getPublicImageURL(image.imageKey);
       const optimizedProductImage = await optimizeImage({
         src: imageUrl,

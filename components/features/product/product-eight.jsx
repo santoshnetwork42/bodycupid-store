@@ -1,21 +1,17 @@
-import { useRouter } from "next/router";
 import React, { useMemo } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import { Bag, Heart, HeartFilled, MagnifyingGlass } from "~/components/icons";
-
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getProductInventory } from "~/utils/products";
+import OptimizedImage from "../optimized-image";
 
 function ProductEight(props) {
-  const router = useRouter();
   const {
     product,
     cartList,
@@ -65,7 +61,7 @@ function ProductEight(props) {
     addToCart({ ...product, qty: 1, price: product.price });
   };
 
-  const { thumbImage, discount } = getProductMeta(product);
+  const { thumbImage, secondaryImage, discount } = getProductMeta(product);
 
   return (
     <div
@@ -77,24 +73,19 @@ function ProductEight(props) {
     >
       <figure className="product-media">
         <ALink href={`/product/${product.slug}`}>
-          <LazyLoadImage
-            alt={thumbImage?.alt}
-            src={getPublicImageURL(thumbImage?.imageKey)}
-            threshold={500}
-            effect="opacity"
-            width="300"
-            height="338"
+          <OptimizedImage
+            optimizedData={thumbImage.image}
+            src={getPublicImageURL(thumbImage.imageKey)}
+            alt={thumbImage.alt}
           />
-
-          {product.images.items.length >= 2 && (
-            <LazyLoadImage
-              alt={product.images.items[1].alt}
-              src={getPublicImageURL(product.images.items[1].imageKey)}
-              threshold={500}
-              width="300"
-              height="338"
-              effect="opacity"
-              wrapperClassName="product-image-hover"
+          {!!secondaryImage && (
+            <OptimizedImage
+              optimizedData={secondaryImage.image}
+              src={getPublicImageURL(secondaryImage.imageKey)}
+              alt={secondaryImage.alt}
+              spanAttributes={{
+                className: "product-image-hover",
+              }}
             />
           )}
         </ALink>
@@ -151,17 +142,6 @@ function ProductEight(props) {
         )}
 
         <div className="product-price">
-          {/* {
-                        product.price[0] !== product.price[1] ?
-                            product.variants && product.variants.length === 0 || (product.variants && product.variants.length > 0 && !product.variants[0].price) ?
-                                <>
-                                    <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                                    <del className="old-price">₹{toDecimal(product.price[1])}</del>
-                                </>
-                                :
-                                < del className="new-price">₹{toDecimal(product.price[0])} – ₹{toDecimal(product.price[1])}</del>
-                            : <ins className="new-price">₹{toDecimal(product.price[0])}</ins>
-                    } */}
           <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
         </div>
 
@@ -228,7 +208,11 @@ function ProductEight(props) {
                   onClick={wishlistHandler}
                 >
                   <i>
-                    {isWishlisted ? <HeartFilled size={20} color="currentColor" /> : <Heart size={20} color="currentColor" /> }
+                    {isWishlisted ? (
+                      <HeartFilled size={20} color="currentColor" />
+                    ) : (
+                      <Heart size={20} color="currentColor" />
+                    )}
                   </i>
                 </a>
                 <ALink
