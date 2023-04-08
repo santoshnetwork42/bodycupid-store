@@ -69,9 +69,9 @@ function ProductTwo(props) {
       <figure className="product-media">
         <ALink href={`/product/${product.slug}`}>
           <OptimizedImage
-            optimizedData={thumbImage.image}
-            src={getPublicImageURL(thumbImage.imageKey)}
-            alt={thumbImage.alt}
+            optimizedData={thumbImage?.image}
+            src={getPublicImageURL(thumbImage?.imageKey)}
+            alt={thumbImage?.alt}
           />
           {!!secondaryImage && (
             <OptimizedImage
