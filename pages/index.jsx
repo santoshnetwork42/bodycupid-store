@@ -12,13 +12,12 @@ import BlogSection from "~/components/partials/home/blog-section";
 import {
   getHomePageBlogs,
   getHomePageCategories,
-  getHomePageProducts,
+  findProducts,
   getStoreBanners,
 } from "~/graphql/api";
 import optimizeImage from "~/utils/optimizeImage";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
-import { HOME_REVALIDATE_DURATION } from "~/constant";
 import {
   optimizeCategory,
   optimizeProduct,
@@ -87,7 +86,7 @@ export const getStaticProps = async () => {
       filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
     });
 
-    const getSearchProducts = fetchData(getHomePageProducts, {
+    const getSearchProducts = fetchData(findProducts, {
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       limit: 8,
     });
@@ -121,20 +120,17 @@ export const getStaticProps = async () => {
       (banners || []).map(optimizeStore)
     );
 
-    const products = await Promise.all((items || []).map(optimizeProduct));
+    const products = await Promise.all(
+      (items || []).map((product) =>
+        optimizeProduct(product, { partial: true })
+      )
+    );
 
     const categories = await Promise.all(
       (categoriesData || []).map(optimizeCategory)
     );
 
-    const brands = [
-      "/images/brands/1.png",
-      "/images/brands/2.png",
-      "/images/brands/3.png",
-      "/images/brands/4.png",
-      "/images/brands/5.png",
-      "/images/brands/6.png",
-    ];
+    const brands = [];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
         src: brands[brand],
@@ -163,7 +159,6 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: HOME_REVALIDATE_DURATION,
     };
   } catch (e) {
     return {

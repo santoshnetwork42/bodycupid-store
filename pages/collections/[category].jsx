@@ -9,7 +9,7 @@ import {
   findProducts,
   getSideBarFilterCategories,
 } from "~/graphql/api";
-import ShopBanner from "~/components/partials/shop/shop-banner";
+// import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
@@ -31,7 +31,7 @@ function Categories(props) {
         {name} - {category.name}
       </h1>
 
-      <ShopBanner category={category} />
+      {/* <ShopBanner category={category} /> */}
 
       <div className="page-content mb-10 pb-3">
         <div className="container">
@@ -100,21 +100,23 @@ export const getStaticProps = async (context) => {
       });
 
       // Get Product By Category
-      const getProduct = fetchData(findProducts, {
+      const getProducts = fetchData(findProducts, {
         filter: {
           categoryId: { eq: id },
           status: { eq: "ENABLED" },
           storeId: { eq: STORE_ID },
         },
-        limit: 50,
+        limit: 18,
       });
 
       const [{ searchProductCategories }, { searchProducts }] =
-        await Promise.all([getSidebarCategory, getProduct]);
+        await Promise.all([getSidebarCategory, getProducts]);
 
       const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
-      const products = await Promise.all(items.map(optimizeProduct));
+      const products = await Promise.all(
+        items.map((product) => optimizeProduct(product, { partial: true }))
+      );
       const optimizedCategory = await optimizeCategory(category);
 
       return {
