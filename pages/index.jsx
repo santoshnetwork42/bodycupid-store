@@ -27,7 +27,7 @@ import {
 } from "~/utils/getStaticData";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main home searchBar">
@@ -111,7 +111,7 @@ export const getStaticProps = async () => {
       getStoreData,
     ]);
 
-    const { banners = [] } = store;
+    const { banners = [] } = store || {};
     const { items } = searchProducts;
     const { items: categoriesData } = searchProductSubCategories;
     const { items: blogsData } = searchBlogs;
@@ -166,6 +166,7 @@ export const getStaticProps = async () => {
       revalidate: HOME_REVALIDATE_DURATION,
     };
   } catch (e) {
+    console.log("error >>", e);
     return {
       notFound: true,
     };

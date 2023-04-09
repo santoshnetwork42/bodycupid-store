@@ -201,12 +201,10 @@ export default function ToolBox(props) {
                 query: { ...query, type: "list" },
               }}
               scroll={false}
-              className={`btn-layout ${
-                gridType === "list" ? "active" : ""
-              }`}
+              className={`btn-layout ${gridType === "list" ? "active" : ""}`}
             >
               <i>
-                <List size={24} color="currentColor" />
+                <List size={20} color="currentColor" />
               </i>
             </ALink>
             <ALink
@@ -220,7 +218,7 @@ export default function ToolBox(props) {
               }`}
             >
               <i>
-                <Grid size={24} color="currentColor" />
+                <Grid size={20} color="currentColor" />
               </i>
             </ALink>
           </div>
