@@ -4,7 +4,7 @@ import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 
 function IntroSection({ banners }) {
-  const [{ webImage, mobileImage } ={}] = banners || [];
+  const [{ webImage, mobileImage } = {}] = banners || [];
   return (
     <>
       {webImage && (
@@ -16,7 +16,7 @@ function IntroSection({ banners }) {
           <figure>
             <OptimizedImage
               optimizedData={webImage}
-              resizeMobile={false}
+              resize="WIDTH"
               loading="eager"
               alt="Intro Slider"
               resizeMobile={false}
@@ -33,7 +33,7 @@ function IntroSection({ banners }) {
           <figure>
             <OptimizedImage
               optimizedData={mobileImage}
-              resizeMobile={false}
+              resize="WIDTH"
               loading="eager"
               alt="Intro Slider"
               resizeMobile={false}
