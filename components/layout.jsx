@@ -99,6 +99,11 @@ function Layout({
           type="text/css"
           href="/vendor/fontawesome-free/css/all.min.css"
         /> */}
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="vendor/owl-carousel/owl.carousel.min.css"
+        />
       </Head>
       <div className="page-wrapper">
         <Announcement />
