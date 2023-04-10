@@ -11,7 +11,7 @@ import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
 import OptimizedImage from "~/components/features/optimized-image";
 
-function Header({ navbar, auth, openLogin }) {
+function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -106,7 +106,7 @@ function Header({ navbar, auth, openLogin }) {
                 <ALink
                   href="#"
                   className="label-block wishlist d-sm-none"
-                  onClick={() => openLogin(false)}
+                  onClick={() => openPasswordLess(false)}
                 >
                   <User />
                 </ALink>
@@ -148,5 +148,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  openLogin: modalActions.openLoginModal,
+  openPasswordLess: modalActions.openPasswordlessModal,
 })(Header);
