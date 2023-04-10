@@ -5,7 +5,7 @@ const OptimizedImage = ({
   src,
   alt,
   spanAttributes,
-  resize = "SQUARE",
+  resize = true,
   ...props
 }) => {
   const { originalUrl = src, placeholder, width, height } = optimizedData || {};
@@ -18,12 +18,8 @@ const OptimizedImage = ({
     const image = new Image();
     image.src = originalUrl;
 
-    if (resize === "SQUARE") {
+    if (resize) {
       image.src = `${originalUrl}?resize=${imageWidth.toFixed(0)}`;
-    }
-
-    if (resize === "WIDTH") {
-      image.src = `${originalUrl}?width=${imageWidth.toFixed(0)}`;
     }
 
     image.width = width;
