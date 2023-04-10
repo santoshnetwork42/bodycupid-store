@@ -81,7 +81,16 @@
             transform: translate( -50%, -50% );
         }
     }   
+    .intro-slider-link {
+        .intro-slider-figure {
+            img {
+                height:auto !important;
+                object-fit: cover;
+            }
+        }
+    }
 }
+
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     .intro-slider {
         .banner img {
@@ -139,3 +148,8 @@
     }
 }
 
+@include mq(sm,max){
+    .intro-slider-container{
+        max-height: 310px;
+    }
+}

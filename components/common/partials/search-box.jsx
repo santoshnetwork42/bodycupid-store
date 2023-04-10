@@ -10,6 +10,7 @@ import { searchProductsBasic } from "~/graphql/api";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
+import { Search } from "~/components/icons";
 
 function SearchForm({ type = "input" }) {
   const router = useRouter();
@@ -114,9 +115,9 @@ function SearchForm({ type = "input" }) {
   function onSubmitSearchForm(e) {
     e.preventDefault();
     router.push({
-      pathname: "/collections/[category]",
+      pathname: "/collections/all",
       query: {
-        category: "all",
+       
         search: search,
       },
     });
@@ -135,7 +136,7 @@ function SearchForm({ type = "input" }) {
         onClick={onSearchClick}
       >
         {type === "icon" ? (
-          <i className="d-icon-search"></i>
+          <Search />
         ) : (
           <i className="icon-search-3"></i>
         )}

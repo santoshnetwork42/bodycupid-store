@@ -110,15 +110,13 @@ export const getStaticProps = async () => {
       getStoreData,
     ]);
 
-    const { banners = [] } = store;
     const { items } = searchProducts;
     const { items: categoriesData } = searchProductSubCategories;
     const { items: blogsData } = searchBlogs;
 
     const blogs = await Promise.all((blogsData || []).map(optimizedBlogs));
-    const optimizedStoreBanners = await Promise.all(
-      (banners || []).map(optimizeStore)
-    );
+
+    const { banners } = await optimizeStore(store);
 
     const products = await Promise.all(
       (items || []).map((product) =>
@@ -149,7 +147,7 @@ export const getStaticProps = async () => {
           logo: optimizedLogoImage,
         },
         hero: {
-          banners: optimizedStoreBanners,
+          banners,
         },
         products,
         blogs,
