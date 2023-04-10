@@ -98,7 +98,7 @@ function Header({ navbar, auth, openPasswordLess }) {
                   <User />
                 </ALink>
               )}
-              {!auth && (
+              {/* {!auth && (
                 <ALink
                   href="/pages/login"
                   className={`label-block wishlist d-sm-show ${
@@ -107,7 +107,7 @@ function Header({ navbar, auth, openPasswordLess }) {
                 >
                   <User />
                 </ALink>
-              )}
+              )} */}
             </div>
           </div>
         </div>
