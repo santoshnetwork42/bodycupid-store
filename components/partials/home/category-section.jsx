@@ -11,10 +11,7 @@ function CategorySection({ categories = [] }) {
         <div className="row elements">
           {categories.map((category) => {
             return (
-              <div
-                key={category.id}
-                className="col-xl-3 col col-lg-3 col-md-2 col-sm-4 col-3"
-              >
+              <div key={category.id} className=" col-3">
                 <div className="category category-spacing category-ellipse">
                   <ALink href="#">
                     <figure className="category-media">
