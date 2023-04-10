@@ -1307,6 +1307,7 @@ export const getStore = /* GraphQL */ `
       host
       priority
       imageUrl
+      announcements
       banners {
         webKey
         mobileKey

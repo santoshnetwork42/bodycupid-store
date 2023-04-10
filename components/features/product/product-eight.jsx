@@ -144,11 +144,11 @@ function ProductEight(props) {
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
         </h3>
 
-        {!!product?.tags && (
+        {/* {!!product?.tags && (
           <label className="product-tag">
             {product?.tags.split(",").join(" | ")}
           </label>
-        )}
+        )} */}
 
         <div className="product-price">
           {/* {

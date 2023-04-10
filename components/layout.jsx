@@ -28,6 +28,7 @@ import {
   resizeHandler,
 } from "~/utils";
 import { removeHoverEffect } from "~/utils/helper";
+import Announcement from "./common/announcement";
 
 function Layout({
   children,
@@ -100,6 +101,8 @@ function Layout({
         /> */}
       </Head>
       <div className="page-wrapper">
+        <Announcement />
+
         <Header navbar={navbar} />
 
         {children}
