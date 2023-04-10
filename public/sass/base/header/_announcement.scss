@@ -2,6 +2,7 @@
     background-color: $dark-color;
     .announcement {
         padding: 1.2rem;
+        min-height: 75px;
         .announcement-text {
             letter-spacing: 2.5px;
             font-weight: 400;

@@ -18,7 +18,7 @@ const Announcement = ({ store }) => {
               return (
                 <div
                   key={index}
-                  className="announcement testimonial d-flex justify-content-center"
+                  className="announcement testimonial d-flex justify-content-center align-items-center"
                 >
                   <p className="announcement-text m-0">{announcement}</p>
                 </div>

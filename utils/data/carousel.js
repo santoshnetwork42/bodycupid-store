@@ -424,14 +424,18 @@ export const productSlider = {
   responsive: {
     0: {
       items: 2,
+      dots: true,
+      nav: false,
     },
     768: {
       items: 3,
+      dots: true,
+      nav: false,
     },
     992: {
       items: 4,
-      dots: false,
-      nav: true,
+      nav: false,
+      dots: true,
     },
   },
 };
