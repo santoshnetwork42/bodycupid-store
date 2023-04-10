@@ -4,12 +4,8 @@ import { mainSlider4 } from "~/utils/data/carousel";
 
 export default function ReviewSection() {
   return (
-    <section
-      className="pt-10 pb-10 parallax"
-     
-    >
-      <div className="container mt-4 mb-4">
-
+    <section className="pt-10 parallax">
+      <div className="container">
         <OwlCarousel adClass="owl-theme owl-dot-white" options={mainSlider4}>
           <div className="testimonial testimonial-centered testimonial-bg">
             <div className="testimonial-info">
