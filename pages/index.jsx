@@ -12,19 +12,20 @@ import BlogSection from "~/components/partials/home/blog-section";
 import {
   getHomePageBlogs,
   getHomePageCategories,
-  getHomePageProducts,
+  findProducts,
   getStoreBanners,
 } from "~/graphql/api";
 import optimizeImage from "~/utils/optimizeImage";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
-import { HOME_REVALIDATE_DURATION } from "~/constant";
 import {
   optimizeCategory,
   optimizeProduct,
   optimizeStore,
   optimizedBlogs,
 } from "~/utils/getStaticData";
+import BrandSection from "~/components/partials/home/brand-section";
+import ReviewSection from "~/components/partials/home/review-section";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
@@ -49,7 +50,8 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         <BlogSection posts={blogs} />
         <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
-        {/* <BrandSection brands={brands} /> */}
+        <ReviewSection />
+        <BrandSection brands={brands} />
 
         {/* <SmallCollection
           featured={featured}
@@ -87,12 +89,12 @@ export const getStaticProps = async () => {
       filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
     });
 
-    const getSearchProducts = fetchData(getHomePageProducts, {
+    const getSearchProducts = fetchData(findProducts, {
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
       limit: 8,
     });
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
-      limit: 4,
+      limit: 8,
       filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
       sort: [{ field: "priority", direction: "asc" }],
     });
@@ -111,17 +113,19 @@ export const getStaticProps = async () => {
       getStoreData,
     ]);
 
-    const { banners = [] } = store || {};
     const { items } = searchProducts;
     const { items: categoriesData } = searchProductSubCategories;
     const { items: blogsData } = searchBlogs;
 
     const blogs = await Promise.all((blogsData || []).map(optimizedBlogs));
-    const optimizedStoreBanners = await Promise.all(
-      (banners || []).map(optimizeStore)
-    );
 
-    const products = await Promise.all((items || []).map(optimizeProduct));
+    const { banners } = await optimizeStore(store);
+
+    const products = await Promise.all(
+      (items || []).map((product) =>
+        optimizeProduct(product, { partial: true })
+      )
+    );
 
     const categories = await Promise.all(
       (categoriesData || []).map(optimizeCategory)
@@ -153,7 +157,7 @@ export const getStaticProps = async () => {
           logo: optimizedLogoImage,
         },
         hero: {
-          banners: optimizedStoreBanners,
+          banners,
         },
         products,
         blogs,
@@ -163,7 +167,6 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: HOME_REVALIDATE_DURATION,
     };
   } catch (e) {
     console.log("error >>", e);

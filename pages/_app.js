@@ -76,18 +76,16 @@ const App = ({ Component, pageProps }) => {
 
   const setStore = useCallback(async () => {
     const state = store.getState();
-    if (!state.system.store) {
-      if (wowStore) {
-        store.dispatch(systemActions.setStore(wowStore));
-      } else {
-        const {
-          data: { getStore: getStoreResponse },
-        } = await API.graphql({
-          query: getStore,
-          variables: { id: STORE_ID },
-        });
-        store.dispatch(systemActions.setStore(getStoreResponse));
-      }
+    if (wowStore) {
+      store.dispatch(systemActions.setStore(wowStore));
+    } else if (!state.system.store) {
+      const {
+        data: { getStore: getStoreResponse },
+      } = await API.graphql({
+        query: getStore,
+        variables: { id: STORE_ID },
+      });
+      store.dispatch(systemActions.setStore(getStoreResponse));
     }
   }, [store, wowStore]);
 

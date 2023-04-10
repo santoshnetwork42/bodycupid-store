@@ -54,7 +54,7 @@
             ),
             // MegaMenu
             megamenu: (
-                padding: 1rem,
+                padding: 1.5rem 2.2rem 1.5rem 1.5rem,
                 min-width: 61.8rem,
                 background: #fff,
                 title: (
@@ -227,6 +227,10 @@
             transform: translate3d(0, 0, 0);
         }
     }
+    .hide{
+        visibility: hidden;
+        opacity: 0;
+    }
     > li {
         @include css( margin-right, menu, ancestor, _gap );
         &:last-child {
@@ -261,6 +265,7 @@
                 z-index: 1201;
                 .cat-name{
                     white-space: nowrap;
+                    padding: 0.7rem 0.7rem 0.7rem 1rem;
                 }
             }
             // &::after {

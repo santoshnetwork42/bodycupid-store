@@ -11,6 +11,7 @@ import { searchProductsBasic } from "~/graphql/api";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
+import { Search } from "~/components/icons";
 
 function SearchForm({ type = "input" }) {
   const router = useRouter();
@@ -136,7 +137,7 @@ function SearchForm({ type = "input" }) {
         onClick={onSearchClick}
       >
         {type === "icon" ? (
-          <i className="d-icon-search"></i>
+          <Search />
         ) : (
           <i className="icon-search-3"></i>
         )}

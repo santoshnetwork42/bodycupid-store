@@ -6,7 +6,10 @@ import ALink from "~/components/features/custom-link";
 import { DownAngle } from "~/components/icons";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
-import { getSplitedArray } from "~/utils/helper";
+import {
+  getSortedCategoryAndSubCategory,
+  getSplitedArray,
+} from "~/utils/helper";
 
 function MainMenu() {
   const { pathname } = useRouter();
@@ -20,6 +23,7 @@ function MainMenu() {
     API.graphql(
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
+        sort: [{ field: "priority", direction: "asc" }],
       })
     ).then(
       ({
@@ -27,7 +31,8 @@ function MainMenu() {
           searchProductCategories: { items },
         },
       }) => {
-        setCategories(items);
+        const sortedItems = getSortedCategoryAndSubCategory(items);
+        setCategories(sortedItems);
       }
     );
   }, []);
@@ -35,13 +40,6 @@ function MainMenu() {
   return (
     <nav className="main-nav">
       <ul className="menu">
-        <li
-          id="all"
-          className={pathname === "/collections/all" ? "active" : ""}
-        >
-          <ALink href="/collections/all">All Products</ALink>
-        </li>
-
         {categories.map((category) => (
           <li
             key={category.id}
@@ -60,33 +58,37 @@ function MainMenu() {
                 <DownAngle color="currentColor" size={12} />
               </i>
             </ALink>
-            <div className="megamenu">
-              <div className="d-flex">
-                {getSplitedArray(category?.subCategory?.items, 8).map((cat) => (
-                  <div className="ml-2 mr-2">
-                    {!!cat.length && (
-                      <ul>
-                        {cat.map((item) => (
-                          <li key={`sub-categories-${item.id}`}>
-                            <ALink
-                              className="cat-name"
-                              href={
-                                "/collections/" +
-                                category.slug +
-                                "/" +
-                                item.slug
-                              }
-                            >
-                              {item.name}
-                            </ALink>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
+            {!!category?.subCategory?.items?.length && (
+              <div className="megamenu" >
+                <div className="d-flex">
+                  {getSplitedArray(category?.subCategory?.items, 10).map(
+                    (cat, i) => (
+                      <div className="ml-2 mr-2" key={`cat-${i}`}>
+                        {!!cat.length && (
+                          <ul>
+                            {cat.map((item) => (
+                              <li key={`sub-categories-${item.id}`}>
+                                <ALink
+                                  className="cat-name"
+                                  href={
+                                    "/collections/" +
+                                    category.slug +
+                                    "/" +
+                                    item.slug
+                                  }
+                                >
+                                  {item.name}
+                                </ALink>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </li>
         ))}
       </ul>

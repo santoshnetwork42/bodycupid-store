@@ -5,23 +5,32 @@ const OptimizedImage = ({
   src,
   alt,
   spanAttributes,
-  resizeMobile = true,
+  resize = "SQUARE",
   ...props
 }) => {
   const { originalUrl = src, placeholder, width, height } = optimizedData || {};
   const imageRef = useRef(null);
 
   const fetchImage = async () => {
-
     const { width: imageWidth } = imageRef.current?.getBoundingClientRect();
 
     window.imagesReplaced = true;
     const image = new Image();
-    image.src =  `${originalUrl}${resizeMobile ? `?resize=${imageWidth.toFixed(0)}` : ""}`;
+    image.src = originalUrl;
+
+    if (resize === "SQUARE") {
+      image.src = `${originalUrl}?resize=${imageWidth.toFixed(0)}`;
+    }
+
+    if (resize === "WIDTH") {
+      image.src = `${originalUrl}?width=${imageWidth.toFixed(0)}`;
+    }
+
     image.width = width;
     image.height = height;
     image.alt = alt;
-    image.addEventListener("load", (e) => {
+
+    image.addEventListener("load", () => {
       if (!imageRef.current) return;
       imageRef.current.innerHTML = "";
       imageRef.current.replaceWith(image);

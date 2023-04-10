@@ -1,14 +1,11 @@
-import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import { Star, MagnifyingGlass, Heart, HeartFilled } from "~/components/icons";
-
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getProductInventory } from "~/utils/products";
@@ -65,43 +62,27 @@ function ProductTwo(props) {
     [cartList]
   );
 
-  const { thumbImage, discount } = getProductMeta(product);
+  const { thumbImage, secondaryImage, discount } = getProductMeta(product);
 
   return (
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
         <ALink href={`/product/${product.slug}`}>
-          {thumbImage?.image ? (
+          <OptimizedImage
+            optimizedData={thumbImage?.image}
+            src={getPublicImageURL(thumbImage?.imageKey)}
+            alt={thumbImage?.alt}
+          />
+          {!!secondaryImage && (
             <OptimizedImage
-              optimizedData={thumbImage.image}
-              alt={thumbImage.alt}
+              optimizedData={secondaryImage.image}
+              src={getPublicImageURL(secondaryImage.imageKey)}
+              alt={secondaryImage.alt}
+              spanAttributes={{
+                className: "product-image-hover",
+              }}
             />
-          ) : (
-            <span>
-              <img src={getPublicImageURL(thumbImage?.imageKey)} />
-            </span>
           )}
-
-          {product.images.items.length > 1 ? (
-            <>
-              {product.images.items[1].image ? (
-                <OptimizedImage
-                  optimizedData={product.images.items[1].image}
-                  alt={product.images.items[1].alt}
-                  spanAttributes={{
-                    className: "product-image-hover",
-                  }}
-                />
-              ) : (
-                <span className="product-image-hover">
-                  <img
-                    src={getPublicImageURL(product.images.items[1].imageKey)}
-                    alt={product.images.items[1].alt}
-                  />
-                </span>
-              )}
-            </>
-          ) : null}
         </ALink>
 
         <div className="product-label-group">
@@ -143,15 +124,19 @@ function ProductTwo(props) {
             title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
             onClick={wishlistHandler}
           >
-            {isWishlisted ? <HeartFilled color="currentColor" size={18} /> : <Heart color="currentColor" size={18} />}
+            {isWishlisted ? (
+              <HeartFilled color="currentColor" size={18} />
+            ) : (
+              <Heart color="currentColor" size={18} />
+            )}
           </a>
         </div>
       </figure>
 
       <div className="product-details">
-        <div className="product-tags">
+        {/* <div className="product-tags">
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-        </div>
+        </div> */}
 
         <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${product.slug}`}>{product.title}</ALink>

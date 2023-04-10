@@ -28,6 +28,7 @@ import {
   resizeHandler,
 } from "~/utils";
 import { removeHoverEffect } from "~/utils/helper";
+import Announcement from "./common/announcement";
 
 function Layout({
   children,
@@ -98,8 +99,15 @@ function Layout({
           type="text/css"
           href="/vendor/fontawesome-free/css/all.min.css"
         /> */}
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="vendor/owl-carousel/owl.carousel.min.css"
+        />
       </Head>
       <div className="page-wrapper">
+        <Announcement />
+
         <Header navbar={navbar} />
 
         {children}

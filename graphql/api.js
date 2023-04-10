@@ -19,11 +19,13 @@ export const getMenuCategories = /* GraphQL */ `
         id
         name
         slug
+        priority
         subCategory {
           items {
             id
             name
             slug
+            priority
           }
         }
       }
@@ -827,7 +829,6 @@ export const getBasicCategory = /* GraphQL */ `
         id
         name
         slug
-        bannerUrl
       }
     }
   }
@@ -853,99 +854,47 @@ export const findProducts = /* GraphQL */ `
       items {
         id
         title
-        brand
-        vendor
-        categoryId
-        subCategoryId
         subCategory {
-          id
           name
           slug
         }
         isFeatured
         category {
-          id
           name
           slug
         }
-        productType
-        createdAt
         slug
-        productDescription
-        longDescription
-        updatedAt
-        isPublished
-        publishedAt
         price
-        sku
-        size
-        color
-        status
         position
-        currency
-        costPrice
         listingPrice
-        taxable
-        barcode
         tags
-        weight
-        weightUnit
         inventory
         blockedInventory
         continueSellingOutOfStock
         rating
         totalRatings
-        totalOrders
-        additionalInfo
         thumbImages
-        isTaxEnabled
         isInventoryEnabled
-        hasVarient
         variants {
           items {
             id
-            productId
-            title
             price
-            sku
-            size
-            color
-            status
             position
-            currency
-            costPrice
             listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
             imageUrl
-            weight
-            weightUnit
             inventory
             blockedInventory
           }
-          nextToken
         }
         images {
           items {
             id
-            productId
             position
-            createdAt
-            updatedAt
             alt
             width
             height
             imageKey
             isThumb
-          }
-          nextToken
-        }
-        reviews {
-          items {
-            id
-            rating
           }
         }
       }
@@ -1226,24 +1175,20 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
+      authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isCognitoConfirmed
-      profilePhotoUrl
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1305,6 +1250,7 @@ export const getStore = /* GraphQL */ `
       host
       priority
       imageUrl
+      announcements
       banners {
         webKey
         mobileKey

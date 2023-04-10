@@ -5,7 +5,7 @@ import OwlCarousel from "~/components/features/owl-carousel";
 
 import ProductTwo from "~/components/features/product/product-two";
 
-import { productSlider2 } from "~/utils/data/carousel";
+import { productSlider } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function FeaturedCollection({ products = [] }) {
@@ -14,7 +14,7 @@ function FeaturedCollection({ products = [] }) {
       <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 mb-10 pb-2">
         <h2 className="title title-center">Our Featured</h2>
 
-        <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider2}>
+        <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
           {products &&
             products.map((item, index) => (
               <ProductTwo product={item} key={`featured-product-${index}`} />
