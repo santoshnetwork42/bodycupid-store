@@ -89,6 +89,7 @@ export const deleteWishlist = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -119,6 +120,7 @@ export const createShoppingCart = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -150,6 +152,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -417,6 +420,7 @@ export const createProductCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -457,6 +461,7 @@ export const updateProductCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -497,6 +502,7 @@ export const deleteProductCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -536,6 +542,7 @@ export const createProductSubCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -588,6 +595,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -640,6 +648,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -693,6 +702,7 @@ export const createStore = /* GraphQL */ `
         webKey
         mobileKey
       }
+      announcements
       products {
         nextToken
       }
@@ -720,6 +730,7 @@ export const updateStore = /* GraphQL */ `
         webKey
         mobileKey
       }
+      announcements
       products {
         nextToken
       }
@@ -747,6 +758,7 @@ export const deleteStore = /* GraphQL */ `
         webKey
         mobileKey
       }
+      announcements
       products {
         nextToken
       }
@@ -773,6 +785,7 @@ export const createWarehouse = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -810,6 +823,7 @@ export const updateWarehouse = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -847,6 +861,7 @@ export const deleteWarehouse = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1101,6 +1116,7 @@ export const createProduct = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1208,6 +1224,7 @@ export const updateProduct = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1315,6 +1332,7 @@ export const deleteProduct = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1836,6 +1854,7 @@ export const createOrder = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1969,6 +1988,7 @@ export const updateOrder = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -2102,6 +2122,7 @@ export const deleteOrder = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -2666,6 +2687,7 @@ export const createPayment = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -2722,6 +2744,7 @@ export const updatePayment = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -2778,6 +2801,7 @@ export const deletePayment = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3116,6 +3140,7 @@ export const createWishlist = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3146,6 +3171,7 @@ export const updateWishlist = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3431,6 +3457,7 @@ export const updateShoppingCart = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3722,6 +3749,7 @@ export const createCouponCode = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3786,6 +3814,7 @@ export const updateCouponCode = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3850,6 +3879,7 @@ export const deleteCouponCode = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -4140,6 +4170,7 @@ export const applyCoupon = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -4218,6 +4249,7 @@ export const createStoreShoppingCart = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }

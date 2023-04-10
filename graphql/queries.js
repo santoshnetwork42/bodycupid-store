@@ -280,6 +280,7 @@ export const getProductCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -465,6 +466,7 @@ export const getProductSubCategory = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -704,6 +706,7 @@ export const getStore = /* GraphQL */ `
         webKey
         mobileKey
       }
+      announcements
       products {
         nextToken
       }
@@ -729,6 +732,7 @@ export const listStores = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -763,6 +767,7 @@ export const searchStores = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -800,6 +805,7 @@ export const getWarehouse = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1161,6 +1167,7 @@ export const getProduct = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -2066,6 +2073,7 @@ export const getOrder = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -2810,6 +2818,7 @@ export const getPayment = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3183,6 +3192,7 @@ export const getWishlist = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3418,6 +3428,7 @@ export const getShoppingCart = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3662,6 +3673,7 @@ export const getCouponCode = /* GraphQL */ `
         host
         priority
         imageUrl
+        announcements
         createdAt
         updatedAt
       }
