@@ -14,14 +14,13 @@ const Announcement = ({ store }) => {
       {isReady && (
         <div className="announcement-bar">
           <OwlCarousel adClass="owl-nav-bottom" options={introSlider}>
-            {announcements.map((announcement) => {
-              const { id, title } = announcement;
+            {announcements.map((announcement, index) => {
               return (
                 <div
-                  key={id}
+                  key={index}
                   className="announcement testimonial d-flex justify-content-center"
                 >
-                  <p className="announcement-text m-0">{title}</p>
+                  <p className="announcement-text m-0">{announcement}</p>
                 </div>
               );
             })}
