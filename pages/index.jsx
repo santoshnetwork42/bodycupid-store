@@ -25,8 +25,10 @@ import {
   optimizeStore,
   optimizedBlogs,
 } from "~/utils/getStaticData";
+import BrandSection from "~/components/partials/home/brand-section";
+import ReviewSection from "~/components/partials/home/review-section";
 
-function HomePage({ hero, products, blogs, categories, brands, store }) {
+function HomePage({ hero, products, blogs, brands, categories, store }) {
   const { name } = store;
 
   return (
@@ -49,7 +51,8 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         <BlogSection posts={blogs} />
         <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
-        {/* <BrandSection brands={brands} /> */}
+        <ReviewSection/>
+        <BrandSection brands={brands} />
 
         {/* <SmallCollection
           featured={featured}
@@ -92,7 +95,7 @@ export const getStaticProps = async () => {
       limit: 8,
     });
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
-      limit: 4,
+      limit: 8,
       filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
       sort: [{ field: "priority", direction: "asc" }],
     });

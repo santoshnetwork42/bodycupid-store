@@ -57,7 +57,7 @@ function MainMenu() {
             {!!category?.subCategory?.items?.length && (
               <div className="megamenu" >
                 <div className="d-flex">
-                  {getSplitedArray(category?.subCategory?.items, 8).map(
+                  {getSplitedArray(category?.subCategory?.items, 10).map(
                     (cat, i) => (
                       <div className="ml-2 mr-2" key={`cat-${i}`}>
                         {!!cat.length && (
