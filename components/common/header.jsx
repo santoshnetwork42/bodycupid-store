@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Phone, Heart, User } from "~/components/icons";
+import { Phone, Heart, User, Hamburger } from "~/components/icons";
 import CartMenu from "~/components/common/partials/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
@@ -13,7 +13,6 @@ import OptimizedImage from "~/components/features/optimized-image";
 
 function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
-
   useEffect(() => {
     let header = document.querySelector("header");
     if (header) {
@@ -33,7 +32,7 @@ function Header({ navbar, auth, openPasswordLess }) {
 
   return (
     <header className="header header-border">
-      <div className=" sticky-header fix-top sticky-content">
+      <div className="  fix-top sticky-content">
         <div className="header-middle">
           <div className="container">
             <div className="header-left">
@@ -42,7 +41,7 @@ function Header({ navbar, auth, openPasswordLess }) {
                 className="mobile-menu-toggle"
                 onClick={showMobileMenu}
               >
-                <i className="d-icon-bars2"></i>
+                <Hamburger />
               </ALink>
 
               <ALink href="/" className="logo">
@@ -70,17 +69,7 @@ function Header({ navbar, auth, openPasswordLess }) {
             </div>
 
             <div className="header-right">
-              <ALink href="tel:#" className="icon-box d-sm-none  p-0 mr-3">
-                <div className="icon-box-icon mr-0 mr-lg-2">
-                  <Phone />
-                </div>
-                <div className="icon-box-content d-lg-show">
-                  <h4 className="icon-box-title">Call Us Now:</h4>
-                  <p>8042896000</p>
-                </div>
-              </ALink>
-              <span className="divider"></span>
-              <ALink href="/pages/wishlist" className="wishlist mr-3 d-sm-none">
+              <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
               </ALink>
               <span className="divider"></span>
@@ -90,9 +79,7 @@ function Header({ navbar, auth, openPasswordLess }) {
               {!!auth && (
                 <ALink
                   href="/pages/account"
-                  className={`account wishlist ${
-                    !navbar.showMobileSearchBar && "d-sm-none"
-                  }`}
+                  className="account wishlist d-sm-none "
                 >
                   <User />
                 </ALink>
@@ -124,7 +111,7 @@ function Header({ navbar, auth, openPasswordLess }) {
             </div>
           </div>
         </div>
-        <div className="header-bottom d-lg-show sticky-header fix-top sticky-content">
+        <div className="header-bottom d-lg-show  fix-top sticky-content">
           <div className="container">
             <div className="header-left">
               <MainMenu />
