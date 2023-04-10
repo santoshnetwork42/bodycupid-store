@@ -17,7 +17,7 @@
 .category {
   position: relative;
   font-size: 1rem;
-
+padding: 3rem;
 
   img {
     display: block;
@@ -606,5 +606,11 @@
   .category-absolute .btn {
     line-height: 50px;
     padding: 0;
+  }
+}
+
+@include mq(sm, max) {
+  .category-spacing {
+    padding: 0 !important
   }
 }
