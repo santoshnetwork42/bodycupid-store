@@ -6,7 +6,7 @@ import OwlCarousel from "../features/owl-carousel";
 import { announcementSlider } from "~/utils/data/carousel";
 
 const Announcement = ({ store }) => {
-  const { announcements = [] } = store;
+  const { announcements = [] } = store || {};
   const router = useRouter();
   const { isReady } = router;
   return (
