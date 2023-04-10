@@ -288,7 +288,6 @@ export function scrollTopHandler(isCustom = true, speed = 15) {
       window.scrollBy(0, -speed);
       pos -= speed;
     }, 1);
-    clearInterval(timerId)
   } else {
     window.scrollTo({
       top: offsetTop,
