@@ -88,14 +88,13 @@ export const getSplitedArray = (array, size) => {
 };
 
 export const getSortedCategory = (items) => {
-  if (Array.isArray(items) && items.length)
-    return items.sort((a, b) => a.priority - b.priority) || [];
-  return items;
+  if (Array.isArray(items))
+    return items.sort((a, b) => a.priority - b.priority);
+  return [];
 };
 
 export const getSortedCategoryAndSubCategory = (items) => {
-  const sortedCategory = getSortedCategory(items);
-  const result = sortedCategory.map((i) => {
+  const result = items.map((i) => {
     if (i.subCategory) {
       return {
         ...i,

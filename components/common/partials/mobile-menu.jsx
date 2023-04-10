@@ -18,6 +18,7 @@ function MobileMenu({ user }) {
     API.graphql(
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
+        sort: [{ field: "priority", direction: "asc" }],
       })
     ).then(
       ({

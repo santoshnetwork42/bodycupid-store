@@ -13,7 +13,6 @@ import OptimizedImage from "~/components/features/optimized-image";
 
 function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
-console.log('navbar', navbar)
   useEffect(() => {
     let header = document.querySelector("header");
     if (header) {
@@ -43,7 +42,6 @@ console.log('navbar', navbar)
                 onClick={showMobileMenu}
               >
                 <Hamburger />
-                <i className="d-icon-bars2"></i>
               </ALink>
 
               <ALink href="/" className="logo">
