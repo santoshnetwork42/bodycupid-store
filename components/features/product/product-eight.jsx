@@ -228,7 +228,11 @@ function ProductEight(props) {
                   onClick={wishlistHandler}
                 >
                   <i>
-                    {isWishlisted ? <HeartFilled size={20} color="currentColor" /> : <Heart size={20} color="currentColor" /> }
+                    {isWishlisted ? (
+                      <HeartFilled size={20} color="currentColor" />
+                    ) : (
+                      <Heart size={20} color="currentColor" />
+                    )}
                   </i>
                 </a>
                 <ALink

@@ -211,7 +211,12 @@ function DescOne(props) {
   return (
     <div className="col-md-12 mb-6">
       <Accordion adClass="accordion-simple">
-        <Card title="Description" adClass="border-no" noDisplayStyle>
+        <Card
+          title="Description"
+          expanded={true}
+          adClass="border-no"
+          noDisplayStyle
+        >
           <div className="row">
             <div className="col-md-12">
               {!!longDescription && (
