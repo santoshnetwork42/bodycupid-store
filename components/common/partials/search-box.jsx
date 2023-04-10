@@ -4,6 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
+import { MagnifyingGlass } from "~/components/icons";
 
 import { searchProductsBasic } from "~/graphql/api";
 
@@ -158,7 +159,7 @@ function SearchForm({ type = "input" }) {
         />
 
         <button className="btn btn-search" type="submit" aria-label="search">
-          <i className="d-icon-search"></i>
+          <MagnifyingGlass color="currentColor" size={20} />
         </button>
 
         <div className="live-search-list bg-white scrollable">

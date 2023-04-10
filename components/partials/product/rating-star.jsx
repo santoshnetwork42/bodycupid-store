@@ -42,7 +42,7 @@ export default function RatingStar({
           }}
           key={"star-" + index}
         >
-          {num}
+          <Star size={16} color={num <= value ? "#d26e4b" : "#999"} />
         </a>
       ))}
     </span>

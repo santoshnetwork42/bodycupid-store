@@ -135,7 +135,7 @@ function ProductTwo(props) {
             title="Quick View"
             onClick={showQuickviewHandler}
           >
-            <MagnifyingGlass size={24} />
+            <MagnifyingGlass color="currentColor" size={18} />
           </ALink>
           <a
             href="#"
@@ -143,7 +143,7 @@ function ProductTwo(props) {
             title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
             onClick={wishlistHandler}
           >
-            {isWishlisted ? <HeartFilled size={20} /> : <Heart size={20} />}
+            {isWishlisted ? <HeartFilled color="currentColor" size={18} /> : <Heart color="currentColor" size={18} />}
           </a>
         </div>
       </figure>
@@ -166,7 +166,7 @@ function ProductTwo(props) {
             {Array.from({ length: 5 }).map((_, index) => {
               const isFilled = index + 1 <= product.rating;
 
-              return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+              return <Star size={13} color={isFilled ? "#d26e4b" : "#999"} />;
             })}
             <span className="tooltiptext tooltip-top">
               {toDecimal(product.rating)}

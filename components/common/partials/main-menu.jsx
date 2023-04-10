@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
+import { DownAngle } from "~/components/icons";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { getSplitedArray } from "~/utils/helper";
@@ -55,6 +56,9 @@ function MainMenu() {
           >
             <ALink href={`/collections/${category.slug}`}>
               {category.name}
+              <i>
+                <DownAngle color="currentColor" size={12} />
+              </i>
             </ALink>
             <div className="megamenu">
               <div className="d-flex">

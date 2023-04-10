@@ -1,7 +1,7 @@
 import React from "react";
 
 import ALink from "~/components/features/custom-link";
-import { DownAngle } from "~/components/icons";
+import { DownAngle, RightAngle } from "~/components/icons";
 
 import SlideToggle from "react-slide-toggle";
 
@@ -70,7 +70,14 @@ export default function Card(props) {
                 onToggle();
                 e.preventDefault();
               }}
-            ></span>
+            >
+              {["expanded", "expanding"].includes(toggleState.toLowerCase()) ? ( 
+                <DownAngle size={12} color="currentColor" />
+              ) : (
+                <RightAngle size={12} color="currentColor" />
+              )}
+              
+            </span>
           </ALink>
 
           <div ref={setCollapsibleElement} className="overflow-hidden">

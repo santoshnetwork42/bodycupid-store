@@ -4,6 +4,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { Cross, MagnifyingGlass } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
@@ -88,7 +89,9 @@ function MobileMenu({ user }) {
       <div className="mobile-menu-overlay" onClick={hideMobileMenu}></div>
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
-        <i className="d-icon-times"></i>
+        <i>
+          <Cross color="currentColor"  />
+        </i>
       </ALink>
 
       <div className="mobile-menu-container scrollable">
@@ -108,7 +111,7 @@ function MobileMenu({ user }) {
             required
           />
           <button className="btn btn-search" type="submit">
-            <i className="d-icon-search"></i>
+            <MagnifyingGlass color="currentColor" size={14} />
           </button>
         </form>
 
