@@ -26,6 +26,7 @@ import {
   optimizedBlogs,
 } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
+import ReviewSection from "~/components/partials/home/review-section";
 
 function HomePage({ hero, products, blogs, brands, categories, store }) {
   const { name } = store;
@@ -50,6 +51,7 @@ function HomePage({ hero, products, blogs, brands, categories, store }) {
         <BlogSection posts={blogs} />
         <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
+        <ReviewSection/>
         <BrandSection brands={brands} />
 
         {/* <SmallCollection
