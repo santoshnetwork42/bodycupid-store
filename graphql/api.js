@@ -1173,24 +1173,20 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
+      authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isCognitoConfirmed
-      profilePhotoUrl
-      createdAt
-      updatedAt
     }
   }
 `;
