@@ -19,11 +19,13 @@ export const getMenuCategories = /* GraphQL */ `
         id
         name
         slug
+        priority
         subCategory {
           items {
             id
             name
             slug
+            priority
           }
         }
       }

@@ -86,3 +86,26 @@ export const getSplitedArray = (array, size) => {
   }
   return result;
 };
+
+export const getSortedCategory = (items) => {
+  if (Array.isArray(items) && items.length)
+    return items.sort((a, b) => a.priority - b.priority) || [];
+  return items;
+};
+
+export const getSortedCategoryAndSubCategory = (items) => {
+  const sortedCategory = getSortedCategory(items);
+  const result = sortedCategory.map((i) => {
+    if (i.subCategory) {
+      return {
+        ...i,
+        subCategory: {
+          ...i.subCategory,
+          items: getSortedCategory(i.subCategory.items),
+        },
+      };
+    }
+    return i;
+  });
+  return result;
+};

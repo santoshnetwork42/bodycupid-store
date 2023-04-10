@@ -101,36 +101,36 @@ export const Hamburger = ({
               fill="#ffffff"
               points="20 18 4 18 4 18 20 18 20 18"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
             />
 
             <polygon
               fill="#ffffff"
               points="20 14 4 14 4 14 20 14 20 14"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
             />
 
             <polygon
               fill="#ffffff"
               points="20 10 4 10 4 10 20 10 20 10"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
             />
 
             <polygon
               fill="#ffffff"
               points="20 6 4 6 4 6 20 6 20 6"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
             />
           </g>
         </g>
@@ -171,9 +171,9 @@ export const Search = ({
           id="Vector"
           d="M15 15L21 21M10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 13.866 13.866 17 10 17Z"
           stroke="#000000"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

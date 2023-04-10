@@ -274,7 +274,7 @@ export function scrollTopHandler(isCustom = true, speed = 15) {
           .querySelector(".main .container > .row")
           .getBoundingClientRect().top +
         window.pageYOffset -
-        document.querySelector(".sticky-header").offsetHeight +
+        document.querySelector(".sticky-header")?.offsetHeight +
         2;
     }
   } else {

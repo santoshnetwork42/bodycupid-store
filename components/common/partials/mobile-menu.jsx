@@ -7,6 +7,7 @@ import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { getSortedCategoryAndSubCategory } from "~/utils/helper";
 
 function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
@@ -24,7 +25,8 @@ function MobileMenu({ user }) {
           searchProductCategories: { items },
         },
       }) => {
-        setCategories(items);
+        const sortedItems = getSortedCategoryAndSubCategory(items);
+        setCategories(sortedItems);
       }
     );
   }, []);
