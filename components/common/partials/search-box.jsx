@@ -115,9 +115,9 @@ function SearchForm({ type = "input" }) {
   function onSubmitSearchForm(e) {
     e.preventDefault();
     router.push({
-      pathname: "/collections/[category]",
+      pathname: "/collections/all",
       query: {
-        category: "all",
+       
         search: search,
       },
     });
