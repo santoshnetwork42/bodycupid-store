@@ -354,7 +354,7 @@ export const introSlider = {
   dots: true,
   loop: true,
   items: 1,
-  autoplay: false,
+  autoplay: true,
   autoplayTimeout: 5000,
 };
 

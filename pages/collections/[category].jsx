@@ -13,7 +13,6 @@ import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
-import { CATEGORY_REVALIDATE_DURATION } from "~/constant";
 import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
 
 function Categories(props) {
@@ -24,12 +23,12 @@ function Categories(props) {
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {category.name}
+          {name} - {category?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {category.name}
+        {name} - {category?.name}
       </h1>
 
       <ShopBanner category={category} />
@@ -125,7 +124,6 @@ export const getStaticProps = async (context) => {
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
         },
-        revalidate: CATEGORY_REVALIDATE_DURATION,
       };
     }
   } catch (error) {
