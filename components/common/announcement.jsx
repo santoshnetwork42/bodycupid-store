@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 
 import OwlCarousel from "../features/owl-carousel";
-import { introSlider } from "~/utils/data/carousel";
+import { announcementSlider } from "~/utils/data/carousel";
 
 const Announcement = ({ store }) => {
   const { announcements = [] } = store;
@@ -13,7 +13,7 @@ const Announcement = ({ store }) => {
     <>
       {isReady && (
         <div className="announcement-bar">
-          <OwlCarousel adClass="owl-nav-bottom" options={introSlider}>
+          <OwlCarousel adClass="owl-nav-bottom" options={announcementSlider}>
             {announcements.map((announcement, index) => {
               return (
                 <div

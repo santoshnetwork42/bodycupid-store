@@ -50,7 +50,7 @@ function HomePage({ hero, products, blogs, brands, categories, store }) {
         <BlogSection posts={blogs} />
         <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
-        <ReviewSection/>
+        <ReviewSection />
         <BrandSection brands={brands} />
 
         {/* <SmallCollection
@@ -131,7 +131,14 @@ export const getStaticProps = async () => {
       (categoriesData || []).map(optimizeCategory)
     );
 
-    const brands = [];
+    const brands = [
+      "/images/brands/1.png",
+      "/images/brands/2.png",
+      "/images/brands/3.png",
+      "/images/brands/4.png",
+      "/images/brands/5.png",
+      "/images/brands/6.png",
+    ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
         src: brands[brand],

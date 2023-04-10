@@ -357,6 +357,14 @@ export const introSlider = {
   autoplay: true,
   autoplayTimeout: 5000,
 };
+export const announcementSlider = {
+  nav: false,
+  dots: false,
+  loop: true,
+  items: 1,
+  autoplay: true,
+  autoplayTimeout: 5000,
+};
 
 export const serviceSlider = {
   items: 3,
