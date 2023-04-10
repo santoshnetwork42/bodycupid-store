@@ -19,11 +19,13 @@ export const getMenuCategories = /* GraphQL */ `
         id
         name
         slug
+        priority
         subCategory {
           items {
             id
             name
             slug
+            priority
           }
         }
       }
@@ -1173,24 +1175,20 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
+      authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isCognitoConfirmed
-      profilePhotoUrl
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1252,6 +1250,7 @@ export const getStore = /* GraphQL */ `
       host
       priority
       imageUrl
+      announcements
       banners {
         webKey
         mobileKey

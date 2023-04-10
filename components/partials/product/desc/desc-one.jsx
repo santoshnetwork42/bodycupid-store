@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
@@ -18,6 +18,7 @@ import Accordion from "~/components/features/accordion/accordion";
 import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import useWindowDimensions from "~/utils/getWindowDimension";
 const reviewDefault = {
   rating: 5,
   comment: "",
@@ -41,6 +42,7 @@ function DescOne(props) {
     rating,
   } = product;
 
+  const { width } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
@@ -211,7 +213,13 @@ function DescOne(props) {
   return (
     <div className="col-md-12 mb-6">
       <Accordion adClass="accordion-simple">
-        <Card title="Description" adClass="border-no" noDisplayStyle>
+        <Card
+          title="Description"
+          expanded={width > 450}
+          adClass="border-no"
+          noDisplayStyle
+          collapseEvent
+        >
           <div className="row">
             <div className="col-md-12">
               {!!longDescription && (

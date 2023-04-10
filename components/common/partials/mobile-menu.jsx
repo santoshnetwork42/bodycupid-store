@@ -7,6 +7,7 @@ import ALink from "~/components/features/custom-link";
 import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { getSortedCategoryAndSubCategory } from "~/utils/helper";
 
 function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
@@ -17,6 +18,7 @@ function MobileMenu({ user }) {
     API.graphql(
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
+        sort: [{ field: "priority", direction: "asc" }],
       })
     ).then(
       ({
@@ -24,7 +26,8 @@ function MobileMenu({ user }) {
           searchProductCategories: { items },
         },
       }) => {
-        setCategories(items);
+        const sortedItems = getSortedCategoryAndSubCategory(items);
+        setCategories(sortedItems);
       }
     );
   }, []);
