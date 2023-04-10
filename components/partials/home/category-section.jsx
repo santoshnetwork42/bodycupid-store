@@ -22,7 +22,7 @@ function CategorySection({ categories = [] }) {
             return (
               <div
                 key={category.id}
-                className="col-xl-3 col col-lg-3 col-md-4 col-sm-4 col-4"
+                className="col-xl-3 col col-lg-3 col-md-3 col-sm-4 col-4"
               >
                 <div className="category category-ellipse">
                   <ALink href="#">
