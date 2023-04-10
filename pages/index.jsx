@@ -26,7 +26,7 @@ import {
   optimizedBlogs,
 } from "~/utils/getStaticData";
 
-function HomePage({ hero, products, blogs, categories, brands, store }) {
+function HomePage({ hero, products, blogs, categories, store }) {
   const { name } = store;
 
   return (
