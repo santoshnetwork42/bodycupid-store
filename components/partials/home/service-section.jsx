@@ -2,6 +2,7 @@ import React from "react";
 import Reveal from "react-awesome-reveal";
 
 import OwlCarousel from "~/components/features/owl-carousel";
+import { Shipping, Customer, Payment } from "~/components/icons";
 
 import { serviceSlider } from "~/utils/data/carousel";
 import { fadeInRightShorter } from "~/utils/data/keyframes";
@@ -18,7 +19,7 @@ function ServiceBox(props) {
             triggerOnce
           >
             <div className="icon-box icon-box-side icon-box1">
-              <i className="icon-box-icon d-icon-truck"></i>
+              <Shipping size={46} />
 
               <div className="icon-box-content">
                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">
@@ -37,7 +38,7 @@ function ServiceBox(props) {
             triggerOnce
           >
             <div className="icon-box icon-box-side icon-box2">
-              <i className="icon-box-icon d-icon-service"></i>
+              <Customer size={46} />
 
               <div className="icon-box-content">
                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">
@@ -56,7 +57,7 @@ function ServiceBox(props) {
             triggerOnce
           >
             <div className="icon-box icon-box-side icon-box3">
-              <i className="icon-box-icon d-icon-secure"></i>
+              <Payment size={46} />
 
               <div className="icon-box-content">
                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">

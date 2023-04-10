@@ -149,6 +149,9 @@
         }
     }
     .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         @include print_css( footer, social-link );
         &:hover {
             @include print_css( footer, social-link, hover );
@@ -298,7 +301,13 @@
         @include print_css( footer, newsletter, input );
     }
     .btn {
+        display: flex;
+        align-items: center;
         @include print_css( footer, newsletter, btn );
+
+        svg{
+            margin-left: 4px
+        }
     }
     .widget-title {
         @include print_css( footer, newsletter, title );

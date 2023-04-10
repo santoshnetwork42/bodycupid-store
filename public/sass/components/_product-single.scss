@@ -547,10 +547,12 @@
 
     .quantity-minus {
         border-radius: .3rem 0 0 .3rem;
+        font-size: 22px;
     }
 
     .quantity-plus {
         border-radius: 0 .3rem .3rem 0;
+        font-size: 22px;
     }
 
     .input-group {
@@ -566,6 +568,8 @@
         background-color: $primary-color;
         color: #fff;
         cursor: pointer;
+        display: flex;
+        align-items: center;
         @include css(max-width, product-single, btn-cart, max-width);
         @include css(height, product-single, btn-cart, height);
 
@@ -756,8 +760,8 @@
         align-items: center;
         margin: 0;
 
-        .fa-percent{
-            font-size: 1.2rem;
+        i{
+            font-size: 1.4rem;
             margin-right: 0.5rem;
             color: $primary-color;
         }

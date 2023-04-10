@@ -21,7 +21,7 @@ function ProductBestPrice(props) {
     <div className="product-best-price-container">
       <div className="product-top-content">
         <div className="d-flex align-items-center">
-          <i className="fa fa-percent" aria-hidden="true"></i>
+          <i>%</i>
           <p>
             Best price :{" "}
             <span className="font-weight-semi-bold">

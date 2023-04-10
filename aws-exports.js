@@ -3,10 +3,21 @@
 
 const awsmobile = {
     "aws_project_region": "ap-south-1",
-    "aws_cognito_identity_pool_id": "ap-south-1:9c1d51c4-f33a-4a6d-8e62-362a58e6c877",
+    "aws_appsync_graphqlEndpoint": "https://pogjt6ntkvdb7gjbhfxfqkxidu.appsync-api.ap-south-1.amazonaws.com/graphql",
+    "aws_appsync_region": "ap-south-1",
+    "aws_appsync_authenticationType": "API_KEY",
+    "aws_appsync_apiKey": "da2-t3l3ygaho5erlaypt27r6vjz5u",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "healthrestapi",
+            "endpoint": "https://g7hlrlv1wh.execute-api.ap-south-1.amazonaws.com/develop",
+            "region": "ap-south-1"
+        }
+    ],
+    "aws_cognito_identity_pool_id": "ap-south-1:549647da-4eae-43fd-a7b7-b659b69be666",
     "aws_cognito_region": "ap-south-1",
-    "aws_user_pools_id": "ap-south-1_0bxfSbbv4",
-    "aws_user_pools_web_client_id": "4l9siajnc04ic20aghf21brjhi",
+    "aws_user_pools_id": "ap-south-1_MakqxH3dS",
+    "aws_user_pools_web_client_id": "2uiusjlk3da9sperajkkscvqk4",
     "oauth": {},
     "aws_cognito_username_attributes": [
         "PHONE_NUMBER"
@@ -26,13 +37,9 @@ const awsmobile = {
         "passwordPolicyCharacters": []
     },
     "aws_cognito_verification_mechanisms": [
-        "EMAIL"
+        "PHONE_NUMBER"
     ],
-    "aws_appsync_graphqlEndpoint": "https://nridzg352rhplbuzaapcjld26y.appsync-api.ap-south-1.amazonaws.com/graphql",
-    "aws_appsync_region": "ap-south-1",
-    "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-5yject73eneyblkwnlivcphnce",
-    "aws_user_files_s3_bucket": "healthstaticbucket210034-dev",
+    "aws_user_files_s3_bucket": "healthstaticbucket92130-develop",
     "aws_user_files_s3_bucket_region": "ap-south-1"
 };
 
