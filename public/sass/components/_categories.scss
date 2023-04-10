@@ -17,14 +17,13 @@
 .category {
   position: relative;
   font-size: 1rem;
-
-  .category-media {
-    height: 280px;
-  }
+padding: 3rem;
 
   img {
     display: block;
     width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
     margin-left: auto;
     margin-right: auto;
     border-radius: 0.3rem;
@@ -257,15 +256,11 @@
   .category-media {
     border-radius: 50%;
     overflow: hidden;
-    padding: 1.2rem;
     background: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
     text-align: center;
   }
-  img {
-    transform: rotateZ(-10deg) translateX(-14px);
-    transition: transform 0.3s;
-  }
+ 
   .category-content {
     padding-top: 2rem;
   }
@@ -611,5 +606,11 @@
   .category-absolute .btn {
     line-height: 50px;
     padding: 0;
+  }
+}
+
+@include mq(sm, max) {
+  .category-spacing {
+    padding: 0 !important
   }
 }
