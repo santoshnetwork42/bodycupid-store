@@ -276,10 +276,8 @@ export const getProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -462,10 +460,8 @@ export const getProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -698,17 +694,19 @@ export const getStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
       announcements
-      products {
-        nextToken
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -728,10 +726,8 @@ export const listStores = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -763,10 +759,8 @@ export const searchStores = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -801,10 +795,8 @@ export const getWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -946,6 +938,7 @@ export const getProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1118,6 +1111,165 @@ export const searchProductInventories = /* GraphQL */ `
     }
   }
 `;
+export const getShippingCharge = /* GraphQL */ `
+  query GetShippingCharge($id: ID!) {
+    getShippingCharge(id: $id) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      amount
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listShippingCharges = /* GraphQL */ `
+  query ListShippingCharges(
+    $filter: ModelShippingChargeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listShippingCharges(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        storeId
+        amount
+        maxOrderValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchShippingCharges = /* GraphQL */ `
+  query SearchShippingCharges(
+    $filter: SearchableShippingChargeFilterInput
+    $sort: [SearchableShippingChargeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableShippingChargeAggregationInput]
+  ) {
+    searchShippingCharges(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        amount
+        maxOrderValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const getTags = /* GraphQL */ `
+  query GetTags($id: ID!) {
+    getTags(id: $id) {
+      id
+      slug
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTags = /* GraphQL */ `
+  query ListTags(
+    $filter: ModelTagsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        slug
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchTags = /* GraphQL */ `
+  query SearchTags(
+    $filter: SearchableTagsFilterInput
+    $sort: [SearchableTagsSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTagsAggregationInput]
+  ) {
+    searchTags(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        name
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
@@ -1125,6 +1277,7 @@ export const getProduct = /* GraphQL */ `
       title
       brand
       vendor
+      productTags
       categoryId
       category {
         id
@@ -1163,10 +1316,8 @@ export const getProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -1235,6 +1386,7 @@ export const listProducts = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1302,6 +1454,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1369,6 +1522,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1436,6 +1590,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1503,6 +1658,7 @@ export const byslugProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1570,6 +1726,7 @@ export const searchProducts = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1641,6 +1798,7 @@ export const getLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -2069,10 +2227,8 @@ export const getOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -2508,6 +2664,7 @@ export const getOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -2814,10 +2971,8 @@ export const getPayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3019,6 +3174,7 @@ export const getReview = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3188,10 +3344,8 @@ export const getWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3290,6 +3444,7 @@ export const getWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3424,10 +3579,8 @@ export const getShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3530,6 +3683,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3669,10 +3823,8 @@ export const getCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
