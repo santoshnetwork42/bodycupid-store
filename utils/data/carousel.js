@@ -43,6 +43,17 @@ export const mainSlider3 = {
   autoHeight: false,
   dots: false,
   nav: true,
+  responsive: {
+    0: {
+      dots: true,
+    },
+    768: {
+      dots: false,
+    },
+    992: {
+      dots: false,
+    },
+  },
   // dotsContainer: ".product-thumbs"
 };
 

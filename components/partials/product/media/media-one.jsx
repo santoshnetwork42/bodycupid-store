@@ -157,11 +157,11 @@ export default function MediaOne(props) {
           index={index}
           onChangeIndex={setIndexHandler}
         />
-        <ThumbTwo
+        {/* <ThumbTwo
           images={lgImages}
           index={index}
           onChangeIndex={setIndexHandler}
-        />
+        /> */}
       </div>
 
       <MediaLightBox
