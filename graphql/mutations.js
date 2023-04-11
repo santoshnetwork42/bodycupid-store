@@ -85,10 +85,8 @@ export const deleteWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -116,10 +114,8 @@ export const createShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -148,10 +144,8 @@ export const deleteShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -416,10 +410,8 @@ export const createProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -457,10 +449,8 @@ export const updateProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -498,10 +488,8 @@ export const deleteProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -538,10 +526,8 @@ export const createProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -591,10 +577,8 @@ export const updateProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -644,10 +628,8 @@ export const deleteProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -694,17 +676,19 @@ export const createStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
       announcements
-      products {
-        nextToken
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -722,17 +706,19 @@ export const updateStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
       announcements
-      products {
-        nextToken
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -750,17 +736,19 @@ export const deleteStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
       announcements
-      products {
-        nextToken
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -781,10 +769,8 @@ export const createWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -819,10 +805,8 @@ export const updateWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -857,10 +841,8 @@ export const deleteWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -895,6 +877,7 @@ export const createProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -956,6 +939,7 @@ export const updateProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1017,6 +1001,7 @@ export const deleteProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1064,6 +1049,129 @@ export const deleteProductInventory = /* GraphQL */ `
     }
   }
 `;
+export const createShippingCharge = /* GraphQL */ `
+  mutation CreateShippingCharge(
+    $input: CreateShippingChargeInput!
+    $condition: ModelShippingChargeConditionInput
+  ) {
+    createShippingCharge(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      amount
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateShippingCharge = /* GraphQL */ `
+  mutation UpdateShippingCharge(
+    $input: UpdateShippingChargeInput!
+    $condition: ModelShippingChargeConditionInput
+  ) {
+    updateShippingCharge(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      amount
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteShippingCharge = /* GraphQL */ `
+  mutation DeleteShippingCharge(
+    $input: DeleteShippingChargeInput!
+    $condition: ModelShippingChargeConditionInput
+  ) {
+    deleteShippingCharge(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      amount
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createTags = /* GraphQL */ `
+  mutation CreateTags(
+    $input: CreateTagsInput!
+    $condition: ModelTagsConditionInput
+  ) {
+    createTags(input: $input, condition: $condition) {
+      id
+      slug
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTags = /* GraphQL */ `
+  mutation UpdateTags(
+    $input: UpdateTagsInput!
+    $condition: ModelTagsConditionInput
+  ) {
+    updateTags(input: $input, condition: $condition) {
+      id
+      slug
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTags = /* GraphQL */ `
+  mutation DeleteTags(
+    $input: DeleteTagsInput!
+    $condition: ModelTagsConditionInput
+  ) {
+    deleteTags(input: $input, condition: $condition) {
+      id
+      slug
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createProduct = /* GraphQL */ `
   mutation CreateProduct(
     $input: CreateProductInput!
@@ -1074,6 +1182,7 @@ export const createProduct = /* GraphQL */ `
       title
       brand
       vendor
+      productTags
       categoryId
       category {
         id
@@ -1112,10 +1221,8 @@ export const createProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -1182,6 +1289,7 @@ export const updateProduct = /* GraphQL */ `
       title
       brand
       vendor
+      productTags
       categoryId
       category {
         id
@@ -1220,10 +1328,8 @@ export const updateProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -1290,6 +1396,7 @@ export const deleteProduct = /* GraphQL */ `
       title
       brand
       vendor
+      productTags
       categoryId
       category {
         id
@@ -1328,10 +1435,8 @@ export const deleteProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -1402,6 +1507,7 @@ export const createLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1462,6 +1568,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1522,6 +1629,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -1850,10 +1958,8 @@ export const createOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -1984,10 +2090,8 @@ export const updateOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -2118,10 +2222,8 @@ export const deleteOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -2329,6 +2431,7 @@ export const createOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -2447,6 +2550,7 @@ export const updateOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -2565,6 +2669,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -2683,10 +2788,8 @@ export const createPayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -2740,10 +2843,8 @@ export const updatePayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -2797,10 +2898,8 @@ export const deletePayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -2883,6 +2982,7 @@ export const createReview = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -2977,6 +3077,7 @@ export const updateReview = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3071,6 +3172,7 @@ export const deleteReview = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3136,10 +3238,8 @@ export const createWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3167,10 +3267,8 @@ export const updateWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3198,6 +3296,7 @@ export const createWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3283,6 +3382,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3368,6 +3468,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3453,10 +3554,8 @@ export const updateShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3485,6 +3584,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3571,6 +3671,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3657,6 +3758,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        productTags
         categoryId
         subCategoryId
         storeId
@@ -3745,10 +3847,8 @@ export const createCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3810,10 +3910,8 @@ export const updateCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -3875,10 +3973,8 @@ export const deleteCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -4166,10 +4262,8 @@ export const applyCoupon = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
@@ -4245,10 +4339,8 @@ export const createStoreShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
         announcements
         createdAt
         updatedAt
