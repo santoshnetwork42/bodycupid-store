@@ -1,4 +1,5 @@
 import React from "react";
+import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
@@ -13,7 +14,7 @@ function CategorySection({ categories = [] }) {
             return (
               <div key={category.id} className=" col-3">
                 <div className="category category-spacing category-ellipse">
-                  <ALink href="#">
+                  <ALink href={`/collections/${category.category.slug}/${category.slug}`}>
                     <figure className="category-media">
                       <OptimizedImage
                         optimizedData={category.image}
