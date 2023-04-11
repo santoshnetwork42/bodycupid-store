@@ -5,7 +5,6 @@ import { FullSreen } from "~/components/icons";
 import OwlCarousel from "~/components/features/owl-carousel";
 
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";
-import ThumbTwo from "~/components/partials/product/thumb/thumb-two";
 import MediaLightBox from "~/components/partials/product/light-box";
 import OptimizedImage from "~/components/features/optimized-image";
 
