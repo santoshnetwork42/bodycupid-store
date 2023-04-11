@@ -22,7 +22,6 @@ function IntroSection({ banners = [] }) {
               <figure className="intro-slider-figure">
                 <OptimizedImage
                   optimizedData={webImage}
-                  resizeMobile={false}
                   loading="eager"
                   alt="Intro Slider"
                 />
@@ -35,7 +34,6 @@ function IntroSection({ banners = [] }) {
               <figure className="intro-slider-figure">
                 <OptimizedImage
                   optimizedData={mobileImage}
-                  resizeMobile={false}
                   loading="eager"
                   alt="Intro Slider"
                 />
