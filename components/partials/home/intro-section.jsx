@@ -14,7 +14,7 @@ function IntroSection({ banners = [] }) {
       {banners.map((banner) => {
         const { webImage, mobileImage } = banner;
         return (
-          <div className="banner banner-fixed intro-slide2 ">
+          <div className="banner banner-fixed intro-slide2 " key={webImage}>
             <ALink
               href="/collections/all"
               className={`banner d-sm-none banner-fixed intro-slide2 intro-slider-link`} //for desktop size
