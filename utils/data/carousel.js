@@ -357,6 +357,7 @@ export const introSlider = {
   autoplay: true,
   autoplayTimeout: 5000,
 };
+
 export const announcementSlider = {
   nav: false,
   dots: false,
@@ -424,18 +425,12 @@ export const productSlider = {
   responsive: {
     0: {
       items: 2,
-      dots: true,
-      nav: false,
     },
     768: {
       items: 3,
-      dots: true,
-      nav: false,
     },
     992: {
       items: 4,
-      nav: false,
-      dots: true,
     },
   },
 };

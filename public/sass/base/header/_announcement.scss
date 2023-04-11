@@ -1,8 +1,11 @@
 .announcement-bar{
     background-color: $dark-color;
+    .owl-stage{
+        display: flex;
+        align-items: center;
+    }
     .announcement {
         padding: 1.2rem;
-        min-height: 75px;
         .announcement-text {
             letter-spacing: 2.5px;
             font-weight: 400;

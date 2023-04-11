@@ -1243,18 +1243,18 @@ export const getStore = /* GraphQL */ `
     getStore(id: $id) {
       id
       name
-      description
-      isActive
-      webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       announcements
-      banners {
-        webKey
-        mobileKey
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
+      createdAt
+      updatedAt
     }
   }
 `;
