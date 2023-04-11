@@ -13,6 +13,7 @@ const OptimizedImage = ({
 
   const fetchImage = async () => {
     const { width: imageWidth } = imageRef.current?.getBoundingClientRect();
+    if (!imageWidth) return;
 
     window.imagesReplaced = true;
     const image = new Image();
