@@ -46,9 +46,7 @@ function SidebarFilterOne(props) {
       min: minprice ? parseInt(minprice) : 0,
     });
 
-    if (category !== "all") {
-      scrollTopHandler();
-    }
+ 
   }, [query]);
 
   const filterByPrice = useCallback(() => {
