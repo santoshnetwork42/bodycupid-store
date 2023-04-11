@@ -46,11 +46,11 @@ export default function ThumbOne(props) {
 
     if (window.innerWidth < 992) {
       document.querySelector(".product-thumbs-one").style.display = "none";
-      document.querySelector(".product-thumbs-two").style.display = "block";
+      // document.querySelector(".product-thumbs-two").style.display = "block";
       window.jQuery(".owl-carousel").trigger("refresh.owl.carousel");
     } else {
       document.querySelector(".product-thumbs-one").style.display = "block";
-      document.querySelector(".product-thumbs-two").style.display = "none";
+      // document.querySelector(".product-thumbs-two").style.display = "none";
     }
 
     setPos(0);
@@ -171,11 +171,11 @@ export default function ThumbOne(props) {
   const initCarouselHanlder = () => {
     if (window.innerWidth < 992) {
       document.querySelector(".product-thumbs-one").style.display = "none";
-      document.querySelector(".product-thumbs-two").style.display = "block";
+      // document.querySelector(".product-thumbs-two").style.display = "block";
       window.jQuery(".owl-carousel").trigger("refresh.owl.carousel");
     } else {
       document.querySelector(".product-thumbs-one").style.display = "block";
-      document.querySelector(".product-thumbs-two").style.display = "none";
+      // document.querySelector(".product-thumbs-two").style.display = "none";
       setTermHandler();
     }
   };
