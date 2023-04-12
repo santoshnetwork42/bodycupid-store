@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Bag } from "~/components/icons";
+import { Bag, Cross } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
@@ -107,8 +107,9 @@ function CartMenu(props) {
                           removeCart(item);
                         }}
                       >
-                        <i className="fas fa-times"></i>
-                        <span className="sr-only">Close</span>
+                        <i>
+                          <Cross size={12} color="currentColor" />
+                        </i>
                       </button>
                     </figure>
                     <div className="product-detail">

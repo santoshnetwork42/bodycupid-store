@@ -20,6 +20,7 @@ import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -283,11 +284,15 @@ function DetailOne(props) {
 
   return (
     <div className={`product-details ${adClass}`}>
-      {isNav && (
+      {/* {isNav && (
         <div className="product-navigation">
           <ProductNav product={product} />
         </div>
-      )}
+      )} */}
+
+      <div className="mb-3 mt-3">
+        <ProductBreadcrumbs {...product} />
+      </div>
 
       <h2 className="detail-product-name">{product.title}</h2>
 

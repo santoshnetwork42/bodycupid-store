@@ -19,7 +19,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
         {category && (
           <li>
             <i>
-              <RightAngle color="currentColor" />
+              <RightAngle color="currentColor" size={10} />
             </i>
             <ALink
               href={{
@@ -35,7 +35,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
         {subCategory && (
           <li>
             <i>
-              <RightAngle color="currentColor" />
+              <RightAngle color="currentColor" size={10} />
             </i>
             <ALink
               href={{

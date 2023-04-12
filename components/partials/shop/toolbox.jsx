@@ -203,10 +203,10 @@ export default function ToolBox(props) {
               scroll={false}
               className={`btn-layout ${
                 gridType === "list" ? "active" : ""
-              }`}
+              } mr-1`}
             >
               <i>
-                <List size={24} color="currentColor" />
+                <List size={20} color="currentColor" />
               </i>
             </ALink>
             <ALink
@@ -220,7 +220,7 @@ export default function ToolBox(props) {
               }`}
             >
               <i>
-                <Grid size={24} color="currentColor" />
+                <Grid size={18} color="currentColor" />
               </i>
             </ALink>
           </div>

@@ -89,10 +89,7 @@ function ProductDefault(props) {
         <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
-              <div className="mb-2 mt-2">
-                <ProductBreadcrumbs {...product} />
-              </div>
-              <div className="col-md-6 sticky-sidebar-wrapper">
+              <div className="col-md-6 sticky-sidebar-wrapper mt-3">
                 <MediaOne product={product} variantId={selectedVariant} />
               </div>
 
