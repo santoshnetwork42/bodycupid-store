@@ -71,12 +71,11 @@ export default function Card(props) {
                 e.preventDefault();
               }}
             >
-              {["expanded", "expanding"].includes(toggleState.toLowerCase()) ? ( 
+              {["expanded", "expanding"].includes(toggleState.toLowerCase()) ? (
                 <DownAngle size={12} color="currentColor" />
               ) : (
                 <RightAngle size={12} color="currentColor" />
               )}
-              
             </span>
           </ALink>
 
