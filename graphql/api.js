@@ -948,6 +948,7 @@ export const searchProductsBasic = /* GraphQL */ `
       items {
         id
         title
+        productTags
         slug
         price
         sku
@@ -1525,6 +1526,48 @@ export const getHomePageBlogs = /* GraphQL */ `
         createdAt
         updatedAt
       }
+    }
+  }
+`;
+
+export const listTags = /* GraphQL */ `
+  query ListTags(
+    $filter: ModelTagsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
+export const getBasicTagBySlug = /* GraphQL */ `
+  query SearchTags(
+    $filter: SearchableTagsFilterInput
+    $sort: [SearchableTagsSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTagsAggregationInput]
+  ) {
+    searchTags(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        name
+      }
+      nextToken
+      total
     }
   }
 `;
