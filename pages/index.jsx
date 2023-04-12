@@ -27,8 +27,8 @@ import {
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
 
-function HomePage({ hero, products, blogs, brands, categories, store }) {
-  const { name } = store;
+function HomePage({ hero, products, blogs, categories, brands, store }) {
+  const { name } = store || {};
 
   return (
     <main className="main home searchBar">
@@ -170,6 +170,7 @@ export const getStaticProps = async () => {
       revalidate: 300,
     };
   } catch (e) {
+    console.log("error >>", e);
     return {
       notFound: true,
     };
