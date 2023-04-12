@@ -27,19 +27,18 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
+    tagId,
   } = props;
 
   const router = useRouter();
-  const { query } = router; 
+  const { query } = router;
   const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
-
 
   const [applyFilters, resetFilter] = useState(!!search?.trim());
   const [token, setToken] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
-
 
   const perPage = 50;
 
@@ -53,6 +52,13 @@ function ProductListOne(props) {
 
     if (subCategoryId) {
       filter.subCategoryId = { eq: subCategoryId };
+    }
+
+    if (tagId) {
+      filter = {
+        productTags: { eq: tagId },
+        status: { eq: "ENABLED" },
+      };
     }
 
     if (!!search?.trim()) {
