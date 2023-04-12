@@ -30,7 +30,6 @@ function ProductListOne(props) {
     tagId,
     pageFilter = {},
   } = props;
-console.log('pageFilter', pageFilter)
   const router = useRouter();
   const { query } = router;
   const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
