@@ -28,7 +28,7 @@ function ProductListOne(props) {
     categoryId,
     subCategoryId,
     tagId,
-    defaultFilter,
+    defaultFilter = {},
   } = props;
 
   const router = useRouter();
