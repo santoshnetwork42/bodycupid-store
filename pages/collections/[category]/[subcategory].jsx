@@ -23,7 +23,7 @@ function Categories(props) {
     categoryId,
     subCategoryId,
     sideBarCategories,
-    filter,
+    pageFilter,
   } = props;
   const { name } = store;
 
@@ -52,7 +52,7 @@ function Categories(props) {
                 categoryId={categoryId}
                 subCategoryId={subCategoryId}
                 products={products}
-                defaultFilter={filter}
+                pageFilter={pageFilter}
               />
             </div>
           </div>
@@ -145,7 +145,7 @@ export const getStaticProps = async (context) => {
           subCategoryId: id,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
-          filter,
+          pageFilter:filter,
         },
       };
     }

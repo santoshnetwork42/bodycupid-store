@@ -28,9 +28,9 @@ function ProductListOne(props) {
     categoryId,
     subCategoryId,
     tagId,
-    defaultFilter = {},
+    pageFilter = {},
   } = props;
-
+console.log('pageFilter', pageFilter)
   const router = useRouter();
   const { query } = router;
   const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
@@ -45,7 +45,7 @@ function ProductListOne(props) {
 
   const filters = useMemo(() => {
     const sortBy = [];
-    const filter = defaultFilter;
+    const filter = {};
     if (!!search?.trim()) {
       filter.title = { matchPhrasePrefix: search };
     }
@@ -74,7 +74,6 @@ function ProductListOne(props) {
 
     return { filter, limit: perPage, sort: sortBy };
   }, [perPage, maxprice, minprice, search, sortby]);
-
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -87,6 +86,7 @@ function ProductListOne(props) {
         } = await API.graphql(
           graphqlOperation(findProducts, {
             ...filters,
+            filter: { ...filters.filter, ...pageFilter },
             nextToken: reset ? null : token,
           })
         );

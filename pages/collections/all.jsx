@@ -11,7 +11,7 @@ import fetchData from "~/utils/fetchData";
 import { optimizeProduct } from "~/utils/getStaticData";
 
 function AllProduct(props) {
-  const { store, products, sideBarCategories, filter } = props;
+  const { store, products, sideBarCategories, pageFilter } = props;
   const { name } = store;
 
   return (
@@ -30,7 +30,7 @@ function AllProduct(props) {
             <SidebarFilterOne categories={sideBarCategories} />
 
             <div className="col-lg-9 main-content">
-              <ProductListOne products={products} defaultFilter={filter} />
+              <ProductListOne products={products} pageFilter={pageFilter} />
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export const getStaticProps = async () => {
         products: { ...searchProducts, items: products },
         categorySlug: null,
         sideBarCategories: categories,
-        filter,
+        pageFilter: filter,
       },
     };
   } catch (error) {

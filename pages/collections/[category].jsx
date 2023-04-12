@@ -26,7 +26,7 @@ function Categories(props) {
     tag,
     tagId,
     sideBarCategories,
-    filter,
+    pageFilter,
   } = props;
   const { name } = store;
   const collectionType = category || tag;
@@ -55,7 +55,7 @@ function Categories(props) {
                 tagId={tagId}
                 categoryId={categoryId}
                 products={products}
-                defaultFilter={filter}
+                pageFilter={pageFilter}
               />
             </div>
           </div>
@@ -119,21 +119,13 @@ export const getStaticProps = async (context) => {
       filter: { slug: { eq: slug } },
     });
 
-    if (category || tag) {
-      const id = category?.id || tag.id;
-      const collectionType = category ? "category" : "tag";
-      const collectionTypeId = category ? "categoryId" : "tagId";
-
-      const filter = {
-        status: { eq: "ENABLED" },
-        storeId: { eq: STORE_ID },
-      };
-
-      if (category) {
-        filter.categoryId = { eq: id };
-      } else {
-        filter.productTags = { eq: id };
-      }
+    const filter = {
+      status: { eq: "ENABLED" },
+      storeId: { eq: STORE_ID },
+    };
+    if (category) {
+      const { id } = category;
+      filter.categoryId = { eq: id };
 
       // Get SideBar Categories
       const getSidebarCategory = fetchData(getSideBarFilterCategories, {
@@ -145,7 +137,7 @@ export const getStaticProps = async (context) => {
         filter,
         limit: 18,
       });
-      
+
       const [{ searchProductCategories }, { searchProducts }] =
         await Promise.all([getSidebarCategory, getProducts]);
 
@@ -158,11 +150,34 @@ export const getStaticProps = async (context) => {
 
       return {
         props: {
-          [collectionTypeId]: id,
-          [collectionType]: category ? optimizedCategory : tag,
+          categoryId: id,
+          category: optimizedCategory,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
           filter,
+        },
+      };
+    } else if (tag) {
+      const { id } = tag;
+      filter.productTags = { eq: id };
+
+      // Get Product By tag
+      const { searchProducts } = await fetchData(findProducts, {
+        filter,
+        limit: 18,
+      });
+      const products = await Promise.all(
+        searchProducts?.items.map((product) =>
+          optimizeProduct(product, { partial: true })
+        )
+      );
+      return {
+        props: {
+          tagId: id,
+          tag,
+          products: { ...searchProducts, items: products },
+          pageFilter: filter,
+          sideBarCategories: [],
         },
       };
     }
