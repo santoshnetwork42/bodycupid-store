@@ -288,7 +288,7 @@ function Cart(props) {
                               <tr className="summary-subtotal">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
-                                  <p>
+                                  <div>
                                     <div className="d-flex">
                                       <span className="mr-1">
                                         {appliedCoupon.code}
@@ -303,7 +303,7 @@ function Cart(props) {
                                         <i className="fas fa-times"></i>
                                       </ALink>
                                     </div>
-                                  </p>
+                                  </div>
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
