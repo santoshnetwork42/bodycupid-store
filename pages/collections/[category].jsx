@@ -111,14 +111,6 @@ export const getStaticProps = async (context) => {
       filter: { storeId: { eq: STORE_ID } },
     });
 
-    const {
-      searchTags: {
-        items: [tag],
-      },
-    } = await fetchData(getBasicTagBySlug, {
-      filter: { slug: { eq: slug } },
-    });
-
     const filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
@@ -157,7 +149,17 @@ export const getStaticProps = async (context) => {
           filter,
         },
       };
-    } else if (tag) {
+    }
+
+    const {
+      searchTags: {
+        items: [tag],
+      },
+    } = await fetchData(getBasicTagBySlug, {
+      filter: { slug: { eq: slug } },
+    });
+    
+    if (tag) {
       const { id } = tag;
       filter.productTags = { eq: id };
 
