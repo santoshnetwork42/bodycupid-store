@@ -9,6 +9,7 @@ import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { scrollWithOffset } from "~/utils/helper";
+import { Cross, RightAngle } from "~/components/icons";
 
 function Cart(props) {
   const {
@@ -85,11 +86,17 @@ function Cart(props) {
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
+            <i>
+              <RightAngle size={18} color="currentColor" />
+            </i>
           </h3>
           <h3 className="title title-simple title-step">
             <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
               2. Checkout
             </ALink>
+            <i>
+              <RightAngle size={18} color="currentColor" />
+            </i>
           </h3>
           <h3 className="title title-simple title-step">
             <ALink href="#">3. Order Complete</ALink>
@@ -179,7 +186,9 @@ function Cart(props) {
                                 title="Remove this product"
                                 onClick={() => removeFromCart(item)}
                               >
-                                <i className="fas fa-times"></i>
+                                <i>
+                                  <Cross size={12} color="currentColor" />
+                                </i>
                               </ALink>
                             </td>
                           </tr>
@@ -288,7 +297,7 @@ function Cart(props) {
                               <tr className="summary-subtotal">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
-                                  <p>
+                                  <div>
                                     <div className="d-flex">
                                       <span className="mr-1">
                                         {appliedCoupon.code}
@@ -303,7 +312,7 @@ function Cart(props) {
                                         <i className="fas fa-times"></i>
                                       </ALink>
                                     </div>
-                                  </p>
+                                  </div>
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">

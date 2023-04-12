@@ -239,7 +239,10 @@
         > a {
             position: relative;
             @include print_css( menu, ancestor );
-            &::after { 
+            // &::after { 
+            //     margin-left: .8rem;
+            // }
+            i{
                 margin-left: .8rem;
             }
         }
@@ -284,11 +287,11 @@
             // display: flex;
             // align-items: center;
             z-index: 1001;
-            &::after {
-                position: static;
-                content: '\f078';
-                margin-top: 0;
-            }
+            // &::after {
+            //     position: static;
+            //     content: '\f078';
+            //     margin-top: 0;
+            // }
         }
         // &::after {
         //     content: '';
@@ -317,20 +320,20 @@
 }
 .submenu {
     > a {
-        &::after {
-            display: inline-block;
-            position: absolute;
-            margin-top: 2px;
-            right: .5rem;
-            top: 50%;
-            line-height: 0;
-            vertical-align: middle;
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: inherit;
-            content: '\f054';
-        }
+        // &::after {
+        //     display: inline-block;
+        //     position: absolute;
+        //     margin-top: 2px;
+        //     right: .5rem;
+        //     top: 50%;
+        //     line-height: 0;
+        //     vertical-align: middle;
+        //     font-family: 'Font Awesome 5 Free';
+        //     font-weight: 700;
+        //     font-size: 1.1rem;
+        //     color: inherit;
+        //     content: '\f054';
+        // }
     }
 }
 
@@ -420,7 +423,9 @@
 
 // MobileMenu SlideToggle Button
 .toggle-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     padding: 6px;
     right: 0;
@@ -432,15 +437,15 @@
         position: absolute;
     }
 
-    &:not(.parse-content)::before {
-        content: "\f054";
-        display: block;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: 'Font Awesome 5 Free';
-        line-height: 1;
-        transition: transform .5s;
-    }
+    // &:not(.parse-content)::before {
+    //     content: "\f054";
+    //     display: block;
+    //     font-size: 1rem;
+    //     font-weight: 600;
+    //     font-family: 'Font Awesome 5 Free';
+    //     line-height: 1;
+    //     transition: transform .5s;
+    // }
 
     &.expanded:not(.parse-content)::before {
         transform: rotate(630deg);       
@@ -613,6 +618,10 @@
             color: #fff;
             font-size: 1.4rem;
             border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
             i {
                 margin: 0 0 .5rem;
                 font-size: inherit;
@@ -754,10 +763,14 @@
     left: calc(100vw - 50px);
     top: 25px;
     z-index: 10001;
+
     i {
-        font-size: 2.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: #e1e1e1;
     }
+
     transition: opacity .3s;
     opacity: 0;
 }

@@ -6,19 +6,20 @@ import OwlCarousel from "../features/owl-carousel";
 import { announcementSlider } from "~/utils/data/carousel";
 
 const Announcement = ({ store }) => {
-  const { announcements = [] } = store || {};
+  const { announcements } = store || {};
   const router = useRouter();
   const { isReady } = router;
+
   return (
     <>
-      {isReady && (
+      {isReady && Array.isArray(announcements) && !!announcements.length && (
         <div className="announcement-bar">
           <OwlCarousel adClass="owl-nav-bottom" options={announcementSlider}>
-            {announcements.map((announcement, index) => {
+            {announcements.map((announcement) => {
               return (
                 <div
-                  key={index}
-                  className="announcement testimonial d-flex justify-content-center"
+                  key={announcement}
+                  className="announcement d-flex justify-content-center align-items-center"
                 >
                   <p className="announcement-text m-0">{announcement}</p>
                 </div>
