@@ -539,34 +539,43 @@
 
 .rating-stars {
     display: flex;
+    align-items: center;
     position: relative;
     height: 14px;
     font-size: 1.4rem;
 
-    a {
-        color: $grey-color;
-        text-indent: -9999px;
-        letter-spacing: 1px;
+    a{
+        height: 16px;
         width: 16px;
-        letter-spacing: .2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    a:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        height: 14px;
-        line-height: 1;
-        font-family: 'riode';
-        text-indent: 0;
-        overflow: hidden;
-        white-space: nowrap;
-    }
+    // a {
+    //     color: $grey-color;
+    //     text-indent: -9999px;
+    //     letter-spacing: 1px;
+    //     width: 16px;
+    //     letter-spacing: .2em;
+    // }
 
-    a.active:before {
-        content: "\e955\e955\e955\e955\e955";
-        color: $secondary-color !important;
-    }
+    // a:before {
+    //     content: '';
+    //     position: absolute;
+    //     left: 0;
+    //     height: 14px;
+    //     line-height: 1;
+    //     font-family: 'riode';
+    //     text-indent: 0;
+    //     overflow: hidden;
+    //     white-space: nowrap;
+    // }
+
+    // a.active:before {
+    //     content: "\e955\e955\e955\e955\e955";
+    //     color: $secondary-color !important;
+    // }
 
     .star-1 {
         z-index: 10;
@@ -588,25 +597,25 @@
         z-index: 6;
     }
 
-    .star-1:before {
-        width: 20%;
-    }
+    // .star-1:before {
+    //     width: 20%;
+    // }
 
-    .star-2:before {
-        width: 40%;
-    }
+    // .star-2:before {
+    //     width: 40%;
+    // }
 
-    .star-3:before {
-        width: 60%;
-    }
+    // .star-3:before {
+    //     width: 60%;
+    // }
 
-    .star-4:before {
-        width: 80%;
-    }
+    // .star-4:before {
+    //     width: 80%;
+    // }
 
-    .star-5:before {
-        content: "\e955\e955\e955\e955\e955";
-    }
+    // .star-5:before {
+    //     content: "\e955\e955\e955\e955\e955";
+    // }
 }
 
 // Product Sticky

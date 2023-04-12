@@ -153,7 +153,7 @@ function Footer({ footer, store }) {
                 href="https://www.instagram.com/wowlifescienceindia/"
                 target={"_blank"}
               >
-                <Instagram size={18} color="currentColor" />
+                <Instagram size={16} color="currentColor" />
               </a>
               <a
                 title={`${name} on Facebook`}
@@ -161,7 +161,7 @@ function Footer({ footer, store }) {
                 className="social-link"
                 target={"_blank"}
               >
-                <Facebook size={22} color="currentColor" />
+                <Facebook size={16} color="currentColor" />
               </a>
               <a
                 title={`${name} on YouTube`}
@@ -169,7 +169,7 @@ function Footer({ footer, store }) {
                 className="social-link"
                 target={"_blank"}
               >
-                <Youtube size={18} color="currentColor" />
+                <Youtube size={16} color="currentColor" />
               </a>
             </div>
           </div>

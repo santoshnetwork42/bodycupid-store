@@ -263,7 +263,7 @@ export default function ThumbOne(props) {
       </div>
 
       <button className="thumb-up" onClick={prevPosHandler}>
-        <UpAngle color="currentColor" />
+        <UpAngle color="currentColor" size={14} />
       </button>
       <button className="thumb-down" onClick={nextPosHandler}>
         <DownAngle color="currentColor" size={14} />
