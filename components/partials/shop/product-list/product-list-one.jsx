@@ -28,6 +28,7 @@ function ProductListOne(props) {
     categoryId,
     subCategoryId,
     tagId,
+    defaultFilter,
   } = props;
 
   const router = useRouter();
@@ -44,20 +45,7 @@ function ProductListOne(props) {
 
   const filters = useMemo(() => {
     const sortBy = [];
-    const filter = { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
-
-    if (categoryId) {
-      filter.categoryId = { eq: categoryId };
-    }
-
-    if (subCategoryId) {
-      filter.subCategoryId = { eq: subCategoryId };
-    }
-
-    if (tagId) {
-      filter.productTags = { eq: tagId };
-    }
-
+    const filter = defaultFilter;
     if (!!search?.trim()) {
       filter.title = { matchPhrasePrefix: search };
     }
@@ -123,7 +111,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId]);
+  }, [categoryId, subCategoryId, tagId]);
 
   useEffect(() => {
     getProducts(true);

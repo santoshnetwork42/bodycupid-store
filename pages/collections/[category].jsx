@@ -26,6 +26,7 @@ function Categories(props) {
     tag,
     tagId,
     sideBarCategories,
+    filter,
   } = props;
   const { name } = store;
   const collectionType = category || tag;
@@ -54,6 +55,7 @@ function Categories(props) {
                 tagId={tagId}
                 categoryId={categoryId}
                 products={products}
+                defaultFilter={filter}
               />
             </div>
           </div>
@@ -118,13 +120,11 @@ export const getStaticProps = async (context) => {
     });
 
     if (category || tag) {
-
-      const  id = category?.id || tag.id;
+      const id = category?.id || tag.id;
       const collectionType = category ? "category" : "tag";
       const collectionTypeId = category ? "categoryId" : "tagId";
 
       const filter = {
-        categoryId: { eq: id },
         status: { eq: "ENABLED" },
         storeId: { eq: STORE_ID },
       };

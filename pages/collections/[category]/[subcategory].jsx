@@ -23,6 +23,7 @@ function Categories(props) {
     categoryId,
     subCategoryId,
     sideBarCategories,
+    filter,
   } = props;
   const { name } = store;
 
@@ -51,6 +52,7 @@ function Categories(props) {
                 categoryId={categoryId}
                 subCategoryId={subCategoryId}
                 products={products}
+                defaultFilter={filter}
               />
             </div>
           </div>
@@ -110,6 +112,11 @@ export const getStaticProps = async (context) => {
     // Get Product By Sub Category
     if (subCategory) {
       const { id, categoryID } = subCategory;
+      const filter = {
+        subCategoryId: { eq: id },
+        status: { eq: "ENABLED" },
+        storeId: { eq: STORE_ID },
+      };
 
       // Get SideBar Categories
       const getSidebarCategory = fetchData(getSideBarFilterCategories, {
@@ -117,11 +124,7 @@ export const getStaticProps = async (context) => {
       });
 
       const getProduct = fetchData(findProducts, {
-        filter: {
-          subCategoryId: { eq: id },
-          status: { eq: "ENABLED" },
-          storeId: { eq: STORE_ID },
-        },
+        filter,
         limit: 18,
       });
 
@@ -142,6 +145,7 @@ export const getStaticProps = async (context) => {
           subCategoryId: id,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
+          filter,
         },
       };
     }
