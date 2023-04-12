@@ -55,10 +55,7 @@ function ProductListOne(props) {
     }
 
     if (tagId) {
-      filter = {
-        productTags: { eq: tagId },
-        status: { eq: "ENABLED" },
-      };
+      filter.productTags = { eq: tagId };
     }
 
     if (!!search?.trim()) {

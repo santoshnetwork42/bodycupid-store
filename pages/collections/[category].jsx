@@ -28,18 +28,18 @@ function Categories(props) {
     sideBarCategories,
   } = props;
   const { name } = store;
-  const group = category || tag;
+  const collectionType = category || tag;
 
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {group?.name}
+          {name} - {collectionType?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {group?.name}
+        {name} - {collectionType?.name}
       </h1>
 
       {/* <ShopBanner category={category} /> */}
@@ -80,7 +80,10 @@ export const getStaticPaths = async () => {
     listTags: { items: tagRes },
   } = await fetchData(listTags);
 
-  const paths = [...response, ...tagRes].map((c) => {
+  const data = [
+    ...new Map([...tagRes, ...response].map((v) => [v.slug, v])).values(),
+  ];
+  const paths = data.map((c) => {
     return {
       params: { category: c.slug },
     };
@@ -113,21 +116,23 @@ export const getStaticProps = async (context) => {
     } = await fetchData(getBasicTagBySlug, {
       filter: { slug: { eq: slug } },
     });
-    if (category || tag) {
-      let id = category?.id || tag.id;
-      const group = category ? "category" : "tag";
-      const groupId = category ? "categoryId" : "tagId";
 
-      let filter = {
+    if (category || tag) {
+
+      const  id = category?.id || tag.id;
+      const collectionType = category ? "category" : "tag";
+      const collectionTypeId = category ? "categoryId" : "tagId";
+
+      const filter = {
         categoryId: { eq: id },
         status: { eq: "ENABLED" },
         storeId: { eq: STORE_ID },
       };
-      if (!category) {
-        filter = {
-          productTags: { eq: id },
-          status: { eq: "ENABLED" },
-        };
+
+      if (category) {
+        filter.categoryId = { eq: id };
+      } else {
+        filter.productTags = { eq: id };
       }
 
       // Get SideBar Categories
@@ -140,6 +145,7 @@ export const getStaticProps = async (context) => {
         filter,
         limit: 18,
       });
+      
       const [{ searchProductCategories }, { searchProducts }] =
         await Promise.all([getSidebarCategory, getProducts]);
 
@@ -152,10 +158,11 @@ export const getStaticProps = async (context) => {
 
       return {
         props: {
-          [groupId]: id,
-          [group]: category ? optimizedCategory : tag,
+          [collectionTypeId]: id,
+          [collectionType]: category ? optimizedCategory : tag,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
+          filter,
         },
       };
     }
