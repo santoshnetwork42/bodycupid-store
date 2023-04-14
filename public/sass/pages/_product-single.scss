@@ -858,6 +858,19 @@ aside {
     }
 }
 
+@include mq(sm,'max'){
+    .product-wrapper-sm {
+        background-color: $product-backgroud-mobile;
+        padding-bottom: 1rem;
+        .product-sm {
+            background-color: $white-color;
+            padding-top: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2rem 3rem rgba(0,0,0,.05), 0 0 5px rgba(0,0,0,.05);
+        }
+    }
+}
+
 @include mq(lg) {
     .product-form select {
         width: 20rem;

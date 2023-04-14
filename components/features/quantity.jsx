@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import { Minus, Plus } from "~/components/icons";
 
 export default function Quantity({ qty = 1, ...props }) {
-  const { adClass = "mr-2 input-group", product } = props;
+  const {
+    isProductList = false,
+    adClass = `${
+      isProductList ? "quntity-container d-flex" : "mr-2 input-group"
+    }`,
+    product,
+  } = props;
   const [quantity, setQuantity] = useState(parseInt(qty));
 
   useEffect(() => {
@@ -40,24 +46,18 @@ export default function Quantity({ qty = 1, ...props }) {
 
   return (
     <div className={adClass}>
-      <button
-        className="quantity-minus"
-        onClick={minusQuantity}
-      >
+      <button className="quantity-minus" onClick={minusQuantity}>
         <Minus size={12} color="currentColor" />
       </button>
       <input
-        className="quantity form-control"
+        className="quantity-cart"
         type="number"
         min="1"
         max={props.max}
         value={quantity}
         onChange={changeQty}
       />
-      <button
-        className="quantity-plus"
-        onClick={plusQuantity}
-      >
+      <button className="quantity-plus" onClick={plusQuantity}>
         <Plus size={12} color="currentColor" />
       </button>
     </div>
