@@ -41,7 +41,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
-
+ 
         <CategorySection categories={categories} />
         <BestCollection products={products} />
         {/* <DealSection /> */}
