@@ -26,6 +26,7 @@ import {
 } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
+import StickyFooter from "~/components/partials/home/sticky-footer";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
@@ -52,7 +53,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-
+        <StickyFooter />
         {/* <SmallCollection
           featured={featured}
           latest={latest}
