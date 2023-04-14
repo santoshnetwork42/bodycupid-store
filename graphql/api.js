@@ -319,6 +319,16 @@ export const getQuickViewProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
+        category {
+          id
+          name
+          slug
+        }
+        subCategory {
+          id
+          name
+          slug
+        }
         variants {
           items {
             id
