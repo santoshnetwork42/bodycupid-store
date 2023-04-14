@@ -99,7 +99,7 @@ function MobileMenu({ user }) {
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
         <i>
-          <Cross color="currentColor" />
+          <Cross color="currentColor" /> 
         </i>
       </ALink>
 
