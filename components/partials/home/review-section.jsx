@@ -1,6 +1,7 @@
 import React from "react";
 import OwlCarousel from "~/components/features/owl-carousel";
 import { mainSlider4 } from "~/utils/data/carousel";
+import RatingStar from "../product/rating-star";
 
 export default function ReviewSection() {
   return (
@@ -17,15 +18,17 @@ export default function ReviewSection() {
                   height="50"
                 />
               </figure>
+              <div className="d-flex align-item-center justify-content-center">
+                <RatingStar value={3} />
+              </div>
               <blockquote>
-                “ Donec nec justo eget felis facilisis fermentum. Aliquam
-                porttitor mauris sit amet orci. Aenean dignissim pellentesque
-                felis. Morbi in sem quis dui placerat ornare. Pellentesque odio
-                nisi, euismod in, pharetra ”
+                “This is the best plant store I have ever ordered from! My
+                plants were shipped/delivered so fast. When I had a question,
+                Bloomscape got back to me right away, and they were so
+                friendly!”
               </blockquote>
               <cite>
-                Charly Simth
-                <span>Customer</span>
+                Dilshad Khan <span>Customer</span>
               </cite>
             </div>
           </div>
