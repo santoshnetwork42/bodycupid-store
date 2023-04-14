@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { API, graphqlOperation } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Cross, MagnifyingGlass } from "~/components/icons";
+import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
@@ -87,77 +87,40 @@ function MobileMenu({ user }) {
     hideMobileMenu();
   }
 
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut();
+    router.push("/");
+    return true;
+  }, []);
+
   return (
     <div className="mobile-menu-wrapper">
       <div className="mobile-menu-overlay" onClick={hideMobileMenu}></div>
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
         <i>
-          <Cross color="currentColor"  />
+          <Cross color="currentColor" />
         </i>
       </ALink>
 
       <div className="mobile-menu-container scrollable">
-        <form
-          action="#"
-          className="input-wrapper"
-          onSubmit={onSubmitSearchForm}
-        >
-          <input
-            type="text"
-            className="form-control"
-            name="search"
-            autoComplete="off"
-            value={search}
-            onChange={onSearchChange}
-            placeholder="Search your keyword..."
-            required
-          />
-          <button className="btn btn-search" type="submit">
-            <MagnifyingGlass color="currentColor" size={14} />
-          </button>
-        </form>
-
         <ul className="mobile-menu mmenu-anim">
           <li>
-            <ALink href="/">Home</ALink>
-          </li>
-
-          <li>
-            <Card title="categories" type="mobile" url="/collections/all">
-              <ul>
-                {categories.map((category) => (
-                  <li key={category.id}>
-                    {!category.subCategory.items.length && (
-                      <ALink href={"/collections/" + category.slug}>
-                        {category.name}
+            {categories.map((category) => (
+              <Card title={category.name} type="mobile" url="/collections/all">
+                <ul>
+                  {category.subCategory.items.map((item) => (
+                    <li key={item.id}>
+                      <ALink
+                        href={"/collections/" + category.slug + "/" + item.slug}
+                      >
+                        {item.name}
                       </ALink>
-                    )}
-                    {category.subCategory.items.length > 0 && (
-                      <Card title={category.name} type="mobile">
-                        <ul>
-                          {category.subCategory.items.map((item) => (
-                            <li key={item.id}>
-                              <ALink
-                                href={
-                                  "/collections/" +
-                                  category.slug +
-                                  "/" +
-                                  item.slug
-                                }
-                              >
-                                {item.name}
-                              
-                              </ALink>
-                            </li>
-                          ))}
-                        </ul>
-                      </Card>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Card>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
           </li>
 
           {/* <li>
@@ -272,22 +235,17 @@ function MobileMenu({ user }) {
             <a href="https://d-themes.com/buynow/riodereact">Buy Wow!</a>
           </li> */}
 
-          {!user && (
+          {!user ? (
             <li>
               <ALink href={"/pages/login"}>Login</ALink>
             </li>
-          )}
-          {!!user && (
+          ) : (
             <li>
-              <ALink href={"/pages/account"}>Account</ALink>
+              <ALink href={"/"} onClick={handleLogout}>
+                Logout
+              </ALink>
             </li>
           )}
-          <li>
-            <ALink href={"/pages/cart"}>My Cart</ALink>
-          </li>
-          <li>
-            <ALink href={"/pages/wishlist"}>Wishlist</ALink>
-          </li>
         </ul>
       </div>
     </div>
