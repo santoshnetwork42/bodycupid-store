@@ -154,7 +154,7 @@ function ProductTwo(props) {
           <ALink href={`/product/${slug}`}>{title}</ALink>
         </h3>
 
-        <div className="product-price">
+        <div className="product-price product-sm">
           <ins className="new-price mr-2">
             <span>MRP</span> ₹{toDecimal(price || 0)}
           </ins>

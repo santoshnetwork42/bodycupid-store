@@ -158,7 +158,7 @@ export const getStaticProps = async (context) => {
     } = await fetchData(getBasicTagBySlug, {
       filter: { slug: { eq: slug } },
     });
-    
+
     if (tag) {
       const { id } = tag;
       filter.productTags = { eq: id };
