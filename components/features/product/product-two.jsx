@@ -12,7 +12,7 @@ import {
   getProductMeta,
   getProductInventory,
   getFirstVariantId,
-} from "~/utils/products";
+} from "~/utils/products"; 
 import OptimizedImage from "../optimized-image";
 import Quantity from "../quantity";
 
