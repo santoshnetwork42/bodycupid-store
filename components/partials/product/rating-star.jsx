@@ -8,7 +8,6 @@ export default function RatingStar({
   value: defValue = 0,
 }) {
   const [value, setValue] = useState(defValue);
-console.log('value', value)
   if (!editable) {
     return (
       <div className="ratings-container m-0 pointer-none">
