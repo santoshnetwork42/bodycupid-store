@@ -28,7 +28,7 @@ import ReviewSection from "~/components/partials/home/review-section";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
-
+ 
   return (
     <main className="main home searchBar">
       <Head>
