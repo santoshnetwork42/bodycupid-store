@@ -459,6 +459,16 @@
         opacity: 1;
         visibility: visible;
     }
+    .product-tags {
+        font-size: 1.2rem;
+        color: $success-color;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
 }
 
 // Product Category
@@ -517,6 +527,10 @@
     .new-price,
     .product-save {
         text-decoration: none;
+        span {
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
     }
 }
 
@@ -1095,16 +1109,7 @@
             }
         }
 
-        .product-tags {
-            font-size: 1.2rem;
-            color: $success-color;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-        }
+        
 
         .product-name {
             padding-left: 2rem;

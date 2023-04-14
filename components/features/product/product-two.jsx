@@ -21,13 +21,25 @@ function ProductTwo(props) {
     addToCart,
     openQuickview,
   } = props;
+
+  const {
+    id,
+    price,
+    listingPrice,
+    title,
+    slug,
+    isFeatured,
+    rating,
+    totalRatings,
+  } = product || {};
+
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
-    wishlist.findIndex((item) => item.id === product.id) > -1 ? true : false;
+    wishlist.findIndex((item) => item.id === id) > -1 ? true : false;
 
   const showQuickviewHandler = () => {
-    openQuickview(product.slug);
+    openQuickview(slug);
   };
 
   const { hasInventory } = useMemo(
@@ -53,12 +65,12 @@ function ProductTwo(props) {
     addToCart({
       ...product,
       qty: 1,
-      price: product.price,
+      price: price,
     });
   };
 
   const isCartItem = useMemo(
-    () => cartList.some((cl) => cl.id === product.id),
+    () => cartList.some((cl) => cl.id === id),
     [cartList]
   );
 
@@ -67,7 +79,7 @@ function ProductTwo(props) {
   return (
     <div className={`product text-left ${adClass}`}>
       <figure className="product-media">
-        <ALink href={`/product/${product.slug}`}>
+        <ALink href={`/product/${slug}`}>
           <OptimizedImage
             optimizedData={thumbImage?.image}
             src={getPublicImageURL(thumbImage?.imageKey)}
@@ -86,12 +98,12 @@ function ProductTwo(props) {
         </ALink>
 
         <div className="product-label-group">
-          {product.isFeatured ? (
+          {isFeatured ? (
             <label className="product-label label-new">New</label>
           ) : (
             ""
           )}
-          {product.isFeatured ? (
+          {isFeatured ? (
             <label className="product-label label-top">Top</label>
           ) : (
             ""
@@ -134,39 +146,42 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details">
-        {/* <div className="product-tags">
+        <div className="product-tags">
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-        </div> */}
+        </div>
 
         <h3 className="product-name product-card-title p-0">
-          <ALink href={`/product/${product.slug}`}>{product.title}</ALink>
+          <ALink href={`/product/${slug}`}>{title}</ALink>
         </h3>
 
         <div className="product-price">
-          <ins className="new-price">₹{toDecimal(product.price || 0)}</ins>
+          <ins className="new-price mr-2">
+            <span>MRP</span> ₹{toDecimal(price || 0)}
+          </ins>
+          {price < listingPrice && listingPrice && (
+            <del className="old-price">₹{toDecimal(listingPrice || 0)}</del>
+          )}
         </div>
 
         <div className="ratings-container">
           <div className="ratings-full">
             {Array.from({ length: 5 }).map((_, index) => {
-              const isFilled = index + 1 <= product.rating;
+              const isFilled = index + 1 <= rating;
 
               return <Star size={13} color={isFilled ? "#d26e4b" : "#999"} />;
             })}
-            <span className="tooltiptext tooltip-top">
-              {toDecimal(product.rating)}
-            </span>
+            <span className="tooltiptext tooltip-top">{toDecimal(rating)}</span>
           </div>
 
-          {!!product?.totalRatings && (
+          {!!totalRatings && (
             <ALink
               href={{
-                pathname: `/product/${product.slug}`,
+                pathname: `/product/${slug}`,
                 query: { review: true },
               }}
               className="rating-reviews"
             >
-              ( {product?.totalRatings} reviews )
+              ( {totalRatings} reviews )
             </ALink>
           )}
         </div>
