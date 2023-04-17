@@ -115,6 +115,12 @@ function ProductDefault(props) {
 }
 
 export const getStaticPaths = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
   const {
     searchProducts: { items },
   } = await fetchData(getProductSlug, {
@@ -129,7 +135,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
