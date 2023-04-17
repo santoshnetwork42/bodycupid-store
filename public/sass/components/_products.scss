@@ -463,7 +463,7 @@
         font-size: 1.2rem;
         color: $success-color;
         display: -webkit-box;
-        -webkit-line-clamp: 1;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -586,15 +586,15 @@
 }
 
 .rating-reviews {
-    margin: 0px 1rem;
+    margin: 0px 0.7rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #aaa;
     letter-spacing: 0;
     text-transform: capitalize;
-    height: 18px;
+    
 
     &:hover {
         color: $primary-color;

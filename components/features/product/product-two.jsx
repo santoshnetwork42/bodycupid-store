@@ -146,13 +146,17 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details">
-        <div className="product-tags">
+        {/* <div className="product-tags">
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-        </div>
+        </div> */}
 
         <h3 className="product-name product-card-title p-0">
           <ALink href={`/product/${slug}`}>{title}</ALink>
         </h3>
+
+        <div className="product-tags">
+          {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
+        </div>
 
         <div className="product-price product-sm">
           <ins className="new-price mr-2">
@@ -164,26 +168,19 @@ function ProductTwo(props) {
         </div>
 
         <div className="ratings-container">
-          <div className="ratings-full">
-            {Array.from({ length: 5 }).map((_, index) => {
-              const isFilled = index + 1 <= rating;
-
-              return <Star size={13} color={isFilled ? "#d26e4b" : "#999"} />;
-            })}
-            <span className="tooltiptext tooltip-top">{toDecimal(rating)}</span>
+          <div className="ratings-full mr-1">
+            <Star size={20} color={"#d26e4b"} />
           </div>
-
-          {!!totalRatings && (
-            <ALink
-              href={{
-                pathname: `/product/${slug}`,
-                query: { review: true },
-              }}
-              className="rating-reviews"
-            >
-              ( {totalRatings} reviews )
-            </ALink>
-          )}
+          <p className="m-0">{toDecimal(rating)}</p>
+          <ALink
+            href={{
+              pathname: `/product/${slug}`,
+              query: { review: true },
+            }}
+            className="rating-reviews"
+          >
+            ( {totalRatings || 0} reviews )
+          </ALink>
         </div>
         <div className="product-action">
           {!!hasInventory ? (
