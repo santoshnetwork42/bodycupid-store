@@ -1571,3 +1571,49 @@ export const getBasicTagBySlug = /* GraphQL */ `
     }
   }
 `;
+export const searchShippingTiers = /* GraphQL */ `
+  query SearchShippingTiers(
+    $filter: SearchableShippingTierFilterInput
+    $sort: [SearchableShippingTierSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableShippingTierAggregationInput]
+  ) {
+    searchShippingTiers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;

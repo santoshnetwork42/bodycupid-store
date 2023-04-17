@@ -337,18 +337,21 @@ export const getTotalPrice = (cartItems = []) => {
 export const getCartTotals = (
   cartItems = [],
   appliedCoupon,
-  prepaid = false
+  prepaid = false,
+  shippingTiers = [],
+  prePaidDiscountPercentage
 ) => {
   let totalPrice = 0;
   let totalListingprice = 0;
-  const shippingTotal = getShippingPrice(cartItems);
+  const shippingTotal = getShippingPrice(cartItems, prepaid, shippingTiers);
   const couponTotal = getCouponTotal(appliedCoupon, cartItems);
   for (let i = 0; i < cartItems.length; i++) {
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
     totalListingprice +=
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
-  const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
+  const prepaidDiscount =
+    ((totalPrice - couponTotal) / 100) * prePaidDiscountPercentage;
   const grandTotal = totalPrice + shippingTotal - couponTotal - prepaidDiscount;
 
   const amoutSaved =
@@ -366,11 +369,29 @@ export const getCartTotals = (
 };
 
 /**
- * utils to get total Price of products in cart.
+ * utils to get Shipping Price of products in cart.
  */
-export const getShippingPrice = (cartItems = []) => {
+export const getShippingPrice = (
+  cartItems = [],
+  prepaid = false,
+  shippingTiers = []
+) => {
   const total = getTotalPrice(cartItems);
-  return total > 399 ? 0 : 51;
+  let shippingCharges = 0;
+  if (!!shippingTiers?.length) {
+    shippingTiers.forEach((element) => {
+      const paymentMethod = prepaid ? "PREPAID" : "COD";
+      const { minOrderValue, maxOrderValue, paymentType, amount } = element;
+      if (
+        minOrderValue < total &&
+        maxOrderValue > total &&
+        paymentType === paymentMethod
+      ) {
+        shippingCharges = amount;
+      }
+    });
+  }
+  return shippingCharges;
 };
 
 /**
