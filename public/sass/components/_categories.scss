@@ -333,7 +333,9 @@ padding: 3rem;
   display: flex;
   width: 95vw;
   overflow-y: scroll;
-
+.category-name{
+  font-size: 1.2rem;
+}
   .category {
     min-width: 18vw;
     padding: 0 !important;
