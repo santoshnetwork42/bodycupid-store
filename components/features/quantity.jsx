@@ -46,7 +46,10 @@ export default function Quantity({ qty = 1, ...props }) {
 
   return (
     <div className={adClass}>
-      <button className="quantity-minus" onClick={minusQuantity}>
+      <button
+        className="quantity-minus d-flex justify-content-center align-items-center"
+        onClick={minusQuantity}
+      >
         <Minus size={12} color="currentColor" />
       </button>
       <input
@@ -57,7 +60,10 @@ export default function Quantity({ qty = 1, ...props }) {
         value={quantity}
         onChange={changeQty}
       />
-      <button className="quantity-plus" onClick={plusQuantity}>
+      <button
+        className="quantity-plus d-flex justify-content-center align-items-center"
+        onClick={plusQuantity}
+      >
         <Plus size={12} color="currentColor" />
       </button>
     </div>

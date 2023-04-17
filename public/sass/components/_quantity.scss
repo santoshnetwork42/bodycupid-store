@@ -10,7 +10,7 @@
     }
     button {
         flex: 1;
-        padding:1.5rem 0;
+        padding:1.7rem 0;
         border: 1px solid $dark-color;
         font-size: 1.4rem;
         color: #222;
@@ -33,7 +33,7 @@
 @include mq(sm,'max'){
     .quntity-container {
         button {
-            padding:1.05rem 0;
+            padding:1.2rem 0;
             font-size: 1rem;
         }
     }
