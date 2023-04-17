@@ -146,7 +146,7 @@ export const getStaticProps = async (context) => {
           category: optimizedCategory,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
-          filter,
+          pageFilter: filter,
         },
       };
     }
@@ -158,7 +158,7 @@ export const getStaticProps = async (context) => {
     } = await fetchData(getBasicTagBySlug, {
       filter: { slug: { eq: slug } },
     });
-    
+
     if (tag) {
       const { id } = tag;
       filter.productTags = { eq: id };
