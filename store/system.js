@@ -63,8 +63,8 @@ export const systemActions = {
     payload: { coupons },
   }),
   getFeaturedCoupon: () => ({ type: actionTypes.GET_FEATURED_COUPONS }),
-  getShippingTier: () => ({ type: actionTypes.GET_SHIPPING_TIERS }),
-  setFeaturedCoupons: (tiers) => ({
+  getShippingTiers: () => ({ type: actionTypes.GET_SHIPPING_TIERS }),
+  setShippingTiers: (tiers) => ({
     type: actionTypes.SET_SHIPPING_TIERS,
     payload: { tiers },
   }),

@@ -40,7 +40,7 @@ function Checkout(props) {
     store,
     metadata,
     shippingTiers,
-    getShippingTier,
+    getShippingTiers,
   } = props;
   const prePaidDiscountPercentage = 5;
   const { name } = store;
@@ -55,7 +55,7 @@ function Checkout(props) {
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   useEffect(() => {
-    getShippingTier();
+    getShippingTiers();
   }, []);
 
   const {
@@ -644,7 +644,7 @@ const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
-  getShippingTier: systemActions.getShippingTier,
+  getShippingTiers: systemActions.getShippingTiers,
 })(Checkout);
 
 Component.hideFooter = true;

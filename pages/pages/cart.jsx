@@ -22,7 +22,7 @@ function Cart(props) {
     user,
     openLogin,
     shippingTiers,
-    getShippingTier,
+    getShippingTiers,
   } = props;
 
   const prePaidDiscountPercentage = 0;
@@ -33,7 +33,7 @@ function Cart(props) {
   }, [cartList]);
 
   useEffect(() => {
-    getShippingTier();
+    getShippingTiers();
   }, []);
 
   const {
@@ -465,5 +465,5 @@ export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
-  getShippingTier: systemActions.getShippingTier,
+  getShippingTiers: systemActions.getShippingTiers,
 })(Cart);
