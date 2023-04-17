@@ -877,7 +877,7 @@ export const createProductInventory = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -939,7 +939,7 @@ export const updateProductInventory = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1001,7 +1001,7 @@ export const deleteProductInventory = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1049,12 +1049,12 @@ export const deleteProductInventory = /* GraphQL */ `
     }
   }
 `;
-export const createShippingCharge = /* GraphQL */ `
-  mutation CreateShippingCharge(
-    $input: CreateShippingChargeInput!
-    $condition: ModelShippingChargeConditionInput
+export const createShippingTier = /* GraphQL */ `
+  mutation CreateShippingTier(
+    $input: CreateShippingTierInput!
+    $condition: ModelShippingTierConditionInput
   ) {
-    createShippingCharge(input: $input, condition: $condition) {
+    createShippingTier(input: $input, condition: $condition) {
       id
       storeId
       store {
@@ -1069,19 +1069,21 @@ export const createShippingCharge = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      paymentType
       amount
+      minOrderValue
       maxOrderValue
       createdAt
       updatedAt
     }
   }
 `;
-export const updateShippingCharge = /* GraphQL */ `
-  mutation UpdateShippingCharge(
-    $input: UpdateShippingChargeInput!
-    $condition: ModelShippingChargeConditionInput
+export const updateShippingTier = /* GraphQL */ `
+  mutation UpdateShippingTier(
+    $input: UpdateShippingTierInput!
+    $condition: ModelShippingTierConditionInput
   ) {
-    updateShippingCharge(input: $input, condition: $condition) {
+    updateShippingTier(input: $input, condition: $condition) {
       id
       storeId
       store {
@@ -1096,19 +1098,21 @@ export const updateShippingCharge = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      paymentType
       amount
+      minOrderValue
       maxOrderValue
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteShippingCharge = /* GraphQL */ `
-  mutation DeleteShippingCharge(
-    $input: DeleteShippingChargeInput!
-    $condition: ModelShippingChargeConditionInput
+export const deleteShippingTier = /* GraphQL */ `
+  mutation DeleteShippingTier(
+    $input: DeleteShippingTierInput!
+    $condition: ModelShippingTierConditionInput
   ) {
-    deleteShippingCharge(input: $input, condition: $condition) {
+    deleteShippingTier(input: $input, condition: $condition) {
       id
       storeId
       store {
@@ -1123,50 +1127,103 @@ export const deleteShippingCharge = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      paymentType
       amount
+      minOrderValue
       maxOrderValue
       createdAt
       updatedAt
     }
   }
 `;
-export const createTags = /* GraphQL */ `
-  mutation CreateTags(
-    $input: CreateTagsInput!
-    $condition: ModelTagsConditionInput
+export const createCollection = /* GraphQL */ `
+  mutation CreateCollection(
+    $input: CreateCollectionInput!
+    $condition: ModelCollectionConditionInput
   ) {
-    createTags(input: $input, condition: $condition) {
-      id
+    createCollection(input: $input, condition: $condition) {
       slug
+      parent
       name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const updateTags = /* GraphQL */ `
-  mutation UpdateTags(
-    $input: UpdateTagsInput!
-    $condition: ModelTagsConditionInput
+export const updateCollection = /* GraphQL */ `
+  mutation UpdateCollection(
+    $input: UpdateCollectionInput!
+    $condition: ModelCollectionConditionInput
   ) {
-    updateTags(input: $input, condition: $condition) {
-      id
+    updateCollection(input: $input, condition: $condition) {
       slug
+      parent
       name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteTags = /* GraphQL */ `
-  mutation DeleteTags(
-    $input: DeleteTagsInput!
-    $condition: ModelTagsConditionInput
+export const deleteCollection = /* GraphQL */ `
+  mutation DeleteCollection(
+    $input: DeleteCollectionInput!
+    $condition: ModelCollectionConditionInput
   ) {
-    deleteTags(input: $input, condition: $condition) {
-      id
+    deleteCollection(input: $input, condition: $condition) {
       slug
+      parent
       name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
@@ -1182,7 +1239,7 @@ export const createProduct = /* GraphQL */ `
       title
       brand
       vendor
-      productTags
+      collections
       categoryId
       category {
         id
@@ -1289,7 +1346,7 @@ export const updateProduct = /* GraphQL */ `
       title
       brand
       vendor
-      productTags
+      collections
       categoryId
       category {
         id
@@ -1396,7 +1453,7 @@ export const deleteProduct = /* GraphQL */ `
       title
       brand
       vendor
-      productTags
+      collections
       categoryId
       category {
         id
@@ -1507,7 +1564,7 @@ export const createLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1568,7 +1625,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1629,7 +1686,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2431,7 +2488,7 @@ export const createOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2550,7 +2607,7 @@ export const updateOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2669,7 +2726,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2982,7 +3039,7 @@ export const createReview = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3077,7 +3134,7 @@ export const updateReview = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3172,7 +3229,7 @@ export const deleteReview = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3296,7 +3353,7 @@ export const createWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3382,7 +3439,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3468,7 +3525,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3584,7 +3641,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3671,7 +3728,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3758,7 +3815,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
