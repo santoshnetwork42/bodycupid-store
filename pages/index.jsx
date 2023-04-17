@@ -37,7 +37,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
       </Head>
 
       <h1 className="d-none">{name} - Homepage</h1>
-
+      <CategorySection type="story" categories={categories} />
       <div className="page-content">
         <div className="intro-section">
           <IntroSection {...hero} />

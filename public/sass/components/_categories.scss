@@ -329,6 +329,20 @@ padding: 3rem;
   }
 }
 
+.story-wrapper {
+  display: flex;
+  width: 95vw;
+  overflow-y: scroll;
+
+  .category {
+    min-width: 18vw;
+    padding: 0 !important;
+    margin: 0 0.5rem !important;
+  }
+}
+.story-wrapper::-webkit-scrollbar {
+  display: none;
+}
 // Image
 .category-group-image {
   color: #666;
