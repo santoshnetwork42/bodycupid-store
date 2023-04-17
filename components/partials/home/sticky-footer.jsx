@@ -7,13 +7,13 @@ function StickyFooter(props) {
   const { cartList, appliedCoupon, user } = props;
   const { grandTotal } = useMemo(
     () => getCartTotals(cartList, appliedCoupon),
-    [appliedCoupon,cartList]
+    [appliedCoupon, cartList]
   );
 
   if (!cartList.length) return <></>;
   return (
     <div className="stick-bottom-button pl-5 pr-5 d-sm-show">
-      <div className="lh-2">
+      <div className="lh-default">
         <span href="#">
           {cartList.length}&nbsp;
           {cartList.length > 1 ? "Items" : "Item"}
@@ -24,10 +24,10 @@ function StickyFooter(props) {
       </div>
 
       <ALink
-        href={user ? "/pages/checkout" : "#"}
-        className="text-bold text-underline checkout "
+        href="/pages/cart"
+        className="btn btn-dark  btn-rounded btn-checkout"
       >
-        Go to checkout
+        View cart
       </ALink>
     </div>
   );
