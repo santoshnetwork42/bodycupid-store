@@ -168,10 +168,10 @@ function ProductTwo(props) {
         </div>
 
         <div className="ratings-container">
-          <div className="ratings-full mr-1">
+          <div className="ratings-full mr-1 d-flex">
             <Star size={20} color={"#d26e4b"} />
           </div>
-          <p className="m-0">{toDecimal(rating)}</p>
+          <p className="m-0 ">{rating}</p>
           <ALink
             href={{
               pathname: `/product/${slug}`,
