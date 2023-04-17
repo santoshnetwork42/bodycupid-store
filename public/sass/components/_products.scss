@@ -631,6 +631,18 @@
     }
 }
 
+.brand-carousel {
+    img {
+        width: 100% !important;
+        height: 100%;
+        max-width: 300px;
+    }
+
+    figure {
+        padding: 2.5rem;
+    }
+}
+
 // Product Details
 .product-details,
 .product-hide-details {
