@@ -8,8 +8,6 @@ import {
   getAllCategoriesPath,
   findProducts,
   getSideBarFilterCategories,
-  listTags,
-  getBasicTagBySlug,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -23,24 +21,21 @@ function Categories(props) {
     category,
     products,
     categoryId,
-    tag,
-    tagId,
     sideBarCategories,
     pageFilter,
   } = props;
   const { name } = store;
-  const collectionType = category || tag;
 
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {collectionType?.name}
+          {name} - {category?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {collectionType?.name}
+        {name} - {category?.name}
       </h1>
 
       {/* <ShopBanner category={category} /> */}
@@ -52,7 +47,6 @@ function Categories(props) {
 
             <div className="col-lg-9 main-content">
               <ProductListOne
-                tagId={tagId}
                 categoryId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
@@ -78,13 +72,11 @@ export const getStaticPaths = async () => {
     filter: { storeId: { eq: STORE_ID } },
   });
 
-  const {
-    listTags: { items: tagRes },
-  } = await fetchData(listTags);
+  // const {
+  //   listTags: { items: tagRes },
+  // } = await fetchData(listTags);
 
-  const data = [
-    ...new Map([...tagRes, ...response].map((v) => [v.slug, v])).values(),
-  ];
+  const data = [...new Map([...response].map((v) => [v.slug, v])).values()];
   const paths = data.map((c) => {
     return {
       params: { category: c.slug },
@@ -115,6 +107,7 @@ export const getStaticProps = async (context) => {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
     };
+
     if (category) {
       const { id } = category;
       filter.categoryId = { eq: id };
@@ -147,39 +140,6 @@ export const getStaticProps = async (context) => {
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
           filter,
-        },
-      };
-    }
-
-    const {
-      searchTags: {
-        items: [tag],
-      },
-    } = await fetchData(getBasicTagBySlug, {
-      filter: { slug: { eq: slug } },
-    });
-    
-    if (tag) {
-      const { id } = tag;
-      filter.productTags = { eq: id };
-
-      // Get Product By tag
-      const { searchProducts } = await fetchData(findProducts, {
-        filter,
-        limit: 18,
-      });
-      const products = await Promise.all(
-        searchProducts?.items.map((product) =>
-          optimizeProduct(product, { partial: true })
-        )
-      );
-      return {
-        props: {
-          tagId: id,
-          tag,
-          products: { ...searchProducts, items: products },
-          pageFilter: filter,
-          sideBarCategories: [],
         },
       };
     }
