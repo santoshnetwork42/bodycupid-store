@@ -107,7 +107,11 @@ function MobileMenu({ user }) {
         <ul className="mobile-menu mmenu-anim">
           <li>
             {categories.map((category) => (
-              <Card title={category.name} type="mobile" url="/collections/all">
+              <Card
+                title={category.name}
+                type="mobile"
+                url={`/collections/${category.slug}`}
+              >
                 <ul>
                   {category.subCategory.items.map((item) => (
                     <li key={item.id}>
