@@ -199,6 +199,5 @@ function mapStateToProps(state) {
 
 const Component = connect(mapStateToProps)(React.memo(Categories));
 
-Component.showMobileSearchBar = true;
 
 export default Component;

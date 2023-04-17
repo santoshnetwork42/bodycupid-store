@@ -181,5 +181,4 @@ function mapStateToProps(state) {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
-Component.showMobileSearchBar = true;
 export default Component;
