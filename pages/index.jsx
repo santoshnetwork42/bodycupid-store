@@ -138,6 +138,10 @@ export const getStaticProps = async () => {
       "/images/brands/4.png",
       "/images/brands/5.png",
       "/images/brands/6.png",
+      "/images/brands/7.png",
+      "/images/brands/8.png",
+      "/images/brands/9.png",
+      "/images/brands/10.png",
     ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
