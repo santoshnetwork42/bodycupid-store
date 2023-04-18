@@ -113,7 +113,7 @@ function Layout({
 
         {children}
 
-        {footer.showStickyCheckout && <StickyCheckout />}
+        <StickyCheckout showStickyCheckout={footer.showStickyCheckout} />
         <Footer footer={footer} />
       </div>
 

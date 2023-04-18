@@ -5,13 +5,13 @@ import ALink from "~/components/features/custom-link";
 import { getCartTotals, toDecimal } from "~/utils";
 
 function StickyFooter(props) {
-  const { cartList, appliedCoupon } = props;
+  const { cartList, appliedCoupon, showStickyCheckout } = props;
   const { grandTotal } = useMemo(
     () => getCartTotals(cartList, appliedCoupon),
     [appliedCoupon, cartList]
   );
 
-  if (!cartList.length) return <></>;
+  if (!cartList.length || !showStickyCheckout) return <></>;
   return (
     <div className="stick-bottom-button pl-5 pr-5 d-sm-show">
       <div className="lh-default">
