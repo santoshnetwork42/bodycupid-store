@@ -171,7 +171,7 @@ function ProductTwo(props) {
           )}
         </div>
         <div className="product-action">
-          {!!hasInventory ? (
+          {!hasInventory ? (
             <>
               {isCartItem ? (
                 <ALink
@@ -195,11 +195,10 @@ function ProductTwo(props) {
           ) : (
             <ALink
               href="#"
-              className="btn-product btn-quickview m-0"
-              title="Out of stock"
-              onClick={showQuickviewHandler}
+              className="btn-product btn-sold-out m-0"
+              title="Sold Out"
             >
-              Out of stock
+              Sold Out
             </ALink>
           )}
         </div>

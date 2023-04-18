@@ -377,6 +377,15 @@
     }
 }
 
+.btn-sold-out {
+    background-color: rgb(249, 232, 232);
+    color: #C20000;
+    letter-spacing: 1px;
+    &:hover {
+        color: #C20000;
+    }
+}
+
 // WishList Button
 .btn-wishlist {
     line-height: 1;
@@ -1288,6 +1297,10 @@
     }
 
     .btn-quickview {
+        font-size: 1.1rem;
+    }
+
+    .btn-sold-out {
         font-size: 1.1rem;
     }
 
