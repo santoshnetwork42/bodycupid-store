@@ -27,7 +27,6 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
-    tagId,
     pageFilter = {},
     subCategories,
   } = props;
@@ -113,7 +112,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId, tagId]);
+  }, [categoryId, subCategoryId]);
 
   useEffect(() => {
     getProducts(true);
