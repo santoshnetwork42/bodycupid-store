@@ -18,7 +18,7 @@ export default function ReviewSection() {
                   height="50"
                 />
               </figure>
-              <div className="d-flex align-item-center justify-content-center">
+              <div className="d-flex align-item-center mb-2 justify-content-center">
                 <RatingStar value={3} />
               </div>
               <blockquote>
