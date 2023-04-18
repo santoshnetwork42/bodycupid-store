@@ -1,21 +1,19 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { Cross, Grid, List } from "~/components/icons";
+import { Grid, List } from "~/components/icons";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
 import { cleanQuery } from "~/utils/helper";
 
 export default function ToolBox(props) {
-  const { type = "left" } = props;
+  const { type = "left", subCategories } = props;
   const router = useRouter();
   const query = router.query;
-  const { maxprice, minprice, grid, limit } = query;
+  const { grid } = query;
   const { category, subcategory, ...filterQuery } = query;
   const gridType = query.type ? query.type : "grid";
-  const sortBy = query.sortby ? query.sortby : "default";
-  const perPage = query.limit ? query.limit : 12;
   let tmp = 0;
 
   useEffect(() => {
@@ -125,35 +123,7 @@ export default function ToolBox(props) {
         }`}
       >
         {type === "horizontal" ? <SidebarFilterThree /> : ""}
-        <div className="toolbox-left">
-          {type === "left" ||
-          type === "off-canvas" ||
-          type === "navigation" ||
-          type === "horizontal" ? (
-            <ALink
-              href="#"
-              className={`toolbox-item left-sidebar-toggle btn btn-outline btn-primary btn-rounded ${
-                type === "navigation"
-                  ? "btn-icon-left btn-sm"
-                  : "btn-sm btn-icon-right"
-              } ${
-                type === "off-canvas" || type === "navigation"
-                  ? ""
-                  : "d-lg-none"
-              }`}
-              onClick={showSidebar}
-            >
-              {type === "navigation" ? <i className="d-icon-filter-2"></i> : ""}
-              Filter
-              {type === "navigation" ? (
-                ""
-              ) : (
-                <i className="d-icon-arrow-right"></i>
-              )}
-            </ALink>
-          ) : (
-            ""
-          )}
+        <div className="toolbox-left d-flex" style={{ alignSelf: "flex-end" }}>
           <div
             className={`toolbox-item toolbox-sort ${
               type === "boxed" || type === "banner"
@@ -161,35 +131,25 @@ export default function ToolBox(props) {
                 : "select-menu"
             }`}
           >
-            {(type === "boxed" || type === "banner") && <label>Sort By:</label>}
-            <select
-              name="orderby"
-              className="form-control"
-              defaultValue={query.sortby ? query.sortby : "default"}
-              onChange={(e) => onChangeAttri(e, "sortby")}
-            >
-              <option value="default">Latest</option>
-              <option value="popularity">Most Popular</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
+            <label className="sort-by">Sort By: </label>
+            <div className="d-flex justify-content-center align-items-center">
+              <select
+                name="orderby"
+                className="form-control"
+                defaultValue={query.sortby ? query.sortby : "default"}
+                onChange={(e) => onChangeAttri(e, "sortby")}
+              >
+                <option value="default">Latest</option>
+                <option value="best-seller">Best sellers</option>
+                <option value="popularity">Highest rated</option>
+                <option value="price-high">Price - High to Low</option>
+                <option value="price-low">Price - Low to High</option>
+              </select>
+            </div>
           </div>
         </div>
 
         <div className="toolbox-right">
-          {/* <div className="toolbox-item toolbox-show select-box text-dark">
-            <label>Show :</label>
-            <select
-              name="count"
-              className="form-control"
-              value={perPage}
-              onChange={(e) => onChangeAttri(e, "limit")}
-            >
-              <option value="12">12</option>
-              <option value="24">24</option>
-              <option value="36">36</option>
-            </select>
-          </div> */}
           <div
             className={`toolbox-item toolbox-layout ${
               type === "right" ? "mr-lg-0" : ""
@@ -238,105 +198,48 @@ export default function ToolBox(props) {
           )}
         </div>
       </nav>
-      <div className="filters-container d-flex mb-5 flex-wrap align-items-center">
-        {!!category && category !== "all" && (
-          <div className="selected-filter-tags d-flex align-items-center">
-            <span className="text-capitalize">
-              {category.replaceAll("-", " ")}
-            </span>
-            <ALink
-              href={{
-                pathname: "/collections/all",
-                query: cleanQuery({
-                  ...filterQuery,
-                  grid: grid,
-                  type: router.query.type ? router.query.type : null,
-                  limit: limit ? limit : null,
-                }),
-              }}
-              className="product-remove"
-            >
-              <i>
-                <Cross size={16} color="currentColor" />
-              </i>
-            </ALink>
-          </div>
-        )}
-
-        {!!subcategory && (
-          <div className="selected-filter-tags d-flex align-items-center">
-            <span className="text-capitalize">
-              {subcategory.replaceAll("-", " ")}
-            </span>
-            <ALink
-              href={{
-                pathname: "/collections/[category]",
-                query: cleanQuery({
-                  ...filterQuery,
-                  category: category,
-                  grid: grid,
-                  type: router.query.type ? router.query.type : null,
-                  limit: limit ? limit : null,
-                }),
-              }}
-              className="product-remove"
-              title="Remove coupon"
-            >
-              <i>
-                <Cross size={16} color="currentColor" />
-              </i>
-            </ALink>
-          </div>
-        )}
-        {!!minprice && (
-          <div className="selected-filter-tags d-flex align-items-center">
-            <span className="text-capitalize">Minmum Price : ₹{minprice}</span>
-            <ALink
-              href={{
-                pathname: router.pathname,
-                query: cleanQuery({
-                  subcategory: subcategory || null,
-                  category: category,
-                  grid: grid,
-                  type: router.query.type ? router.query.type : null,
-                  limit: limit ? limit : null,
-                  maxprice: maxprice ? maxprice : null,
-                }),
-              }}
-              className="product-remove"
-              title="Remove coupon"
-            >
-              <i>
-                <Cross size={16} color="currentColor" />
-              </i>
-            </ALink>
-          </div>
-        )}
-        {!!maxprice && (
-          <div className="selected-filter-tags d-flex align-items-center">
-            <span className="text-capitalize">Maximum Price : ₹{maxprice}</span>
-            <ALink
-              href={{
-                pathname: router.pathname,
-                query: cleanQuery({
-                  subcategory: subcategory || null,
-                  category: category,
-                  grid: grid,
-                  type: router.query.type ? router.query.type : null,
-                  limit: limit ? limit : null,
-                  minprice: minprice ? minprice : null,
-                }),
-              }}
-              className="product-remove"
-              title="Remove coupon"
-            >
-              <i>
-                <Cross size={16} color="currentColor" />
-              </i>
-            </ALink>
-          </div>
-        )}
-      </div>
+      {!!subCategories?.length && (
+        <div className="filters-container d-flex mb-5 align-items-center">
+          <ALink
+            href={{
+              pathname: "/collections/[category]",
+              query: cleanQuery({
+                ...filterQuery,
+                category: category,
+                grid: grid,
+                type: router.query.type || null,
+              }),
+            }}
+            className={`sub-category-tag ${
+              !subcategory && "selected-sub-category-tag"
+            }`}
+          >
+            <p className="m-0">All</p>
+          </ALink>
+          {subCategories.map((subcat) => {
+            return (
+              <ALink
+                key={subcat.id}
+                className={`sub-category-tag ${
+                  subcategory === subcat.slug && "selected-sub-category-tag"
+                }`}
+                href={{
+                  pathname: "/collections/[category]/[subcategory]",
+                  query: cleanQuery({
+                    ...filterQuery,
+                    category: subcat.category.slug,
+                    subcategory: subcat.slug,
+                    grid: grid,
+                    type: router.query.type || null,
+                  }),
+                }}
+              >
+                <p className="m-0">{subcat.name}</p>
+              </ALink>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }

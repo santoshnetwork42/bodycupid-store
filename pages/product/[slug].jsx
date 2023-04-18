@@ -16,7 +16,6 @@ import {
   getProductSlug,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import {
   optimizeProduct,
   variantImageOptimization,
