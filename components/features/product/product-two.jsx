@@ -123,15 +123,16 @@ function ProductTwo(props) {
           )}
           {discount > 0 ? (
             product.variants?.items?.length < 2 ? (
-              <label className="product-label label-sale">
-                {discount}% OFF
-              </label>
+              <label className="product-label label-sale">{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
             )
           ) : (
             ""
           )}
+        </div>
+        <div className="product-tags-group">
+          <label className="product-label label-best-seller">Best Seller</label>
         </div>
 
         <div className="product-action-vertical">
