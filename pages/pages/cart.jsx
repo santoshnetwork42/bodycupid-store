@@ -442,8 +442,7 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
   };
 }
-
-export default connect(mapStateToProps, {
+const Component =connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,

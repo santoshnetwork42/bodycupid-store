@@ -29,6 +29,7 @@ import {
 } from "~/utils";
 import { removeHoverEffect } from "~/utils/helper";
 import Announcement from "./common/announcement";
+import StickyCheckout from "./common/sticky-checkout";
 
 function Layout({
   children,
@@ -112,6 +113,7 @@ function Layout({
 
         {children}
 
+        {footer.showStickyCheckout && <StickyCheckout />}
         <Footer footer={footer} />
       </div>
 

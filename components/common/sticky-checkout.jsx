@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { connect } from "react-redux";
+
 import ALink from "~/components/features/custom-link";
 import { getCartTotals, toDecimal } from "~/utils";
 
 function StickyFooter(props) {
-  const { cartList, appliedCoupon, user } = props;
+  const { cartList, appliedCoupon } = props;
   const { grandTotal } = useMemo(
     () => getCartTotals(cartList, appliedCoupon),
     [appliedCoupon, cartList]

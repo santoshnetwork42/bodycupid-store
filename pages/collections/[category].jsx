@@ -200,5 +200,6 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps)(React.memo(Categories));
 
 Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 
 export default Component;
