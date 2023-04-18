@@ -538,6 +538,9 @@
     align-items: center;
     padding: 5px;
     @include print_css(product, rating);
+    .rating-product-list {
+        padding-bottom: 3px;
+    }
     .rating {
         font-size: 1.3rem;
         text-align: center;

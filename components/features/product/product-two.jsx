@@ -168,7 +168,7 @@ function ProductTwo(props) {
         </div>
 
         <div className="ratings-container">
-          <div className="ratings-full d-flex">
+          <div className="ratings-full d-flex rating-product-list">
             <Star size={20} color={"#d26e4b"} />
           </div>
           <span className="rating">{rating}</span>
