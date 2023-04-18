@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
+import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
@@ -21,9 +22,10 @@ import {
   optimizeProduct,
   variantImageOptimization,
 } from "~/utils/getStaticData";
+import { eventActions } from "~/store/events";
 
 function ProductDefault(props) {
-  const { product, productFAQs = [] } = props;
+  const { product, productFAQs = [], viewItem, slug } = props;
   const router = useRouter();
   const { query, isReady } = router;
   const { variantId } = query;
@@ -31,10 +33,14 @@ function ProductDefault(props) {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
+    viewItem({
+      ...product,
+      section: { id: "product-detail", name: "Product Detail" },
+    });
     if (!!isReady) {
       getRelatedProducts();
     }
-  }, []);
+  }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
     if (!!product) {
@@ -173,6 +179,7 @@ export const getStaticProps = async (context) => {
 
       return {
         props: {
+          slug,
           product: { ...optimizedProduct, variants: optimizedVariants },
           productFAQs: faqS,
         },
@@ -186,4 +193,12 @@ export const getStaticProps = async (context) => {
   };
 };
 
-export default ProductDefault;
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps, {
+  viewItem: eventActions.viewItem,
+})(ProductDefault);

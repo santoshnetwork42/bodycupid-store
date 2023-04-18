@@ -15,10 +15,9 @@ function FeaturedCollection({ products = [] }) {
         <h2 className="title title-center">Our Featured</h2>
 
         <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
-          {products &&
-            products.map((item, index) => (
-              <ProductTwo product={item} key={`featured-product-${index}`} />
-            ))}
+          {products.map((item) => (
+            <ProductTwo product={item} key={`featured-product-${item.id}`} />
+          ))}
         </OwlCarousel>
       </section>
     </Reveal>
