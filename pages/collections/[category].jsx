@@ -10,6 +10,7 @@ import {
   getSideBarFilterCategories,
   listTags,
   getBasicTagBySlug,
+  getSubCategoriesByCategoryID,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -27,6 +28,7 @@ function Categories(props) {
     tagId,
     sideBarCategories,
     pageFilter,
+    subCategories,
   } = props;
   const { name } = store;
   const collectionType = category || tag;
@@ -56,6 +58,7 @@ function Categories(props) {
                 categoryId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
+                subCategories={subCategories}
               />
             </div>
           </div>
@@ -130,9 +133,23 @@ export const getStaticProps = async (context) => {
         limit: 18,
       });
 
-      const [{ searchProductCategories }, { searchProducts }] =
-        await Promise.all([getSidebarCategory, getProducts]);
-
+      // Get Product Sub-Category By Category ID
+      const getSubCategoriesByCategory = fetchData(
+        getSubCategoriesByCategoryID,
+        {
+          filter: { storeId: { eq: STORE_ID }, categoryID: { eq: id } },
+        }
+      );
+      const [
+        { searchProductCategories },
+        { searchProducts },
+        { searchProductSubCategories },
+      ] = await Promise.all([
+        getSidebarCategory,
+        getProducts,
+        getSubCategoriesByCategory,
+      ]);
+      const { items: subCategories } = searchProductSubCategories;
       const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
       const products = await Promise.all(
@@ -146,6 +163,7 @@ export const getStaticProps = async (context) => {
           category: optimizedCategory,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
+          subCategories,
           filter,
         },
       };
@@ -158,7 +176,7 @@ export const getStaticProps = async (context) => {
     } = await fetchData(getBasicTagBySlug, {
       filter: { slug: { eq: slug } },
     });
-    
+
     if (tag) {
       const { id } = tag;
       filter.productTags = { eq: id };
