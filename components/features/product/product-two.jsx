@@ -171,7 +171,7 @@ function ProductTwo(props) {
           <div className="ratings-full mr-1 d-flex">
             <Star size={20} color={"#d26e4b"} />
           </div>
-          <p className="m-0 ">{rating}</p>
+          <span className="rating">{rating}</span>
           <ALink
             href={{
               pathname: `/product/${slug}`,

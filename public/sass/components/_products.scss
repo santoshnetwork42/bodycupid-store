@@ -538,8 +538,14 @@
     display: flex;
     align-items: center;
     margin-left: 1px;
-    line-height: 1.1;
+    line-height: 1;
+    padding: 5px;
     @include print_css(product, rating);
+    .rating {
+        font-size: 1.3rem;
+        text-align: center;
+        margin: 0px 3px;
+    }
 }
 
 .ratings-full {
@@ -586,16 +592,13 @@
 }
 
 .rating-reviews {
-    margin: 0px 0.7rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #aaa;
     letter-spacing: 0;
     text-transform: capitalize;
-    
-
     &:hover {
         color: $primary-color;
     }
