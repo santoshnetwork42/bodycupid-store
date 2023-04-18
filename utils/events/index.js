@@ -1,6 +1,6 @@
 import { getFirstVariantId } from "~/utils/products";
 
-export const itemMapper = (product) => {
+export const itemMapper = (product, coupon) => {
   let { variantId, id, title, category, subCategory, section, price, listingPrice, qty = 1, vendor } = product;
 
   if (!variantId) {
@@ -13,11 +13,11 @@ export const itemMapper = (product) => {
 
   return {
     value: price * qty,
-    item: {
+    attributes: {
       item_id: id,
       item_name: title,
       affiliation: "",
-      coupon: "",
+      coupon: coupon?.code || "",
       discount: listingPrice - price,
       item_brand: vendor,
       item_category: category?.name || "",
@@ -47,4 +47,15 @@ export const itemMapper = (product) => {
       quantity: qty
     }]
   };
+};
+
+export const orderMapper = (products, coupon) => {
+  return products.reduce(({ value, attributes, items }, product, index) => {
+    const { items: [item], attributes: dt, value: v } = itemMapper(product, coupon);
+    return {
+      value: value + v,
+      attributes: [...attributes, dt],
+      items: [...items, { ...item, index }]
+    }
+  }, { value: 0, attributes: [], items: [] });
 };
