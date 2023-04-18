@@ -107,13 +107,7 @@ function ProductTwo(props) {
           )}
         </div>
         <div className="product-tags-group">
-          {!hasInventory ? (
-            <label className="product-label label-best-seller">
-              Best Seller
-            </label>
-          ) : (
-            <label className="product-label label-sold">Sold out</label>
-          )}
+          <label className="product-label label-best-seller">Best Seller</label>
         </div>
 
         <div className="product-action-vertical">
