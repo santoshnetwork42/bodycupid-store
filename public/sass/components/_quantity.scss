@@ -1,0 +1,40 @@
+.quntity-container {
+    width: 100%;
+    justify-content: center;
+    .quantity-cart {
+        flex: 1 !important;
+        text-align: center !important;
+        border-top: 1px solid $dark-color;
+        border-bottom: 1px solid $dark-color;
+        font-weight: 600;
+    }
+    button {
+        flex: 1;
+        padding:1.7rem 0;
+        border: 1px solid $dark-color;
+        font-size: 1.4rem;
+        color: #222;
+        background-color: transparent;
+        cursor: pointer;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+}
+
+.input-group {
+    .quantity-cart {
+        text-align: center !important;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        font-weight: 600;
+    }
+}
+
+@include mq(sm,'max'){
+    .quntity-container {
+        button {
+            padding:1.2rem 0;
+            font-size: 1rem;
+        }
+    }
+}
