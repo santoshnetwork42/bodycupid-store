@@ -12,9 +12,9 @@ import { fadeIn } from "~/utils/data/keyframes";
 function BestCollection({ products = [] }) {
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
-      <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 product-wrapper-sm">
+      <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 product-card-wrapper">
         <div className="d-flex justify-content-between mb-5">
-          <h2 className="title m-0">Best Sellers</h2>
+          <h2 className="capitalize-title m-0">Best Sellers</h2>
           <ALink href="#">
             <p className="view-all  text-underline m-0">VIEW ALL</p>
           </ALink>

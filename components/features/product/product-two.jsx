@@ -12,7 +12,7 @@ import {
   getProductMeta,
   getProductInventory,
   getFirstVariantId,
-} from "~/utils/products"; 
+} from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 import Quantity from "../quantity";
 
@@ -90,7 +90,7 @@ function ProductTwo(props) {
   }
 
   return (
-    <div className={`product text-left ${adClass} product-sm`}>
+    <div className={`product text-left ${adClass} product-card`}>
       <figure className="product-media">
         <ALink href={`/product/${product.slug}`}>
           <OptimizedImage
