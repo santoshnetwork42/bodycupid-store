@@ -3,7 +3,6 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
-import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
 import BestCollection from "~/components/partials/home/best-collection";
 import FeaturedCollection from "~/components/partials/home/featured-collection";
@@ -29,7 +28,7 @@ import ReviewSection from "~/components/partials/home/review-section";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
-
+ 
   return (
     <main className="main home searchBar">
       <Head>
@@ -41,9 +40,8 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
       <div className="page-content">
         <div className="intro-section">
           <IntroSection {...hero} />
-          <ServiceBox />
         </div>
-
+ 
         <CategorySection categories={categories} />
         <BestCollection products={products} />
         {/* <DealSection /> */}
