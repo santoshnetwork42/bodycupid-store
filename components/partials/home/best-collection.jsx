@@ -15,8 +15,8 @@ function BestCollection({ products = [] }) {
         <h2 className="title title-center mb-5">Best Sellers</h2>
 
         <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
-          {products.map((item, index) => (
-            <ProductTwo product={item} key={`top-selling-product ${index}`} />
+          {products.map((item) => (
+            <ProductTwo product={item} key={`top-selling-product-${item.id}`} />
           ))}
         </OwlCarousel>
       </section>

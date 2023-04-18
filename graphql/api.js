@@ -854,6 +854,7 @@ export const findProducts = /* GraphQL */ `
       items {
         id
         title
+        vendor
         subCategory {
           name
           slug
