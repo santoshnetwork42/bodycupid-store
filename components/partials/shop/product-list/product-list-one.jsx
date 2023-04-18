@@ -28,6 +28,7 @@ function ProductListOne(props) {
     categoryId,
     subCategoryId,
     pageFilter = {},
+    subCategories,
   } = props;
   const router = useRouter();
   const { query } = router;
@@ -68,6 +69,8 @@ function ProductListOne(props) {
       sortBy.push({ field: "price", direction: "asc" });
     } else if (sortby === "price-high") {
       sortBy.push({ field: "price", direction: "desc" });
+    } else if (sortBy === "best-seller") {
+      sortBy.push({ field: "totalOrders", direction: "desc" });
     }
 
     return { filter, limit: perPage, sort: sortBy };
@@ -145,7 +148,7 @@ function ProductListOne(props) {
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} />}
+      {isToolbox && <ToolBox type={type} subCategories={subCategories} />}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}
