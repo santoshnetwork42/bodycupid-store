@@ -98,9 +98,7 @@ function ProductTwo(props) {
           )}
           {discount > 0 ? (
             product.variants?.items?.length < 2 ? (
-              <label className="product-label label-sale">
-                {discount}% OFF
-              </label>
+              <label className="product-label label-sale">{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
             )
@@ -109,7 +107,7 @@ function ProductTwo(props) {
           )}
         </div>
         <div className="product-tags-group">
-          {!!hasInventory ? (
+          {!hasInventory ? (
             <label className="product-label label-best-seller">
               Best Seller
             </label>
