@@ -26,6 +26,7 @@ import {
 } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
+import StorySection from "~/components/partials/home/story-section";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
@@ -37,7 +38,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
       </Head>
 
       <h1 className="d-none">{name} - Homepage</h1>
-      <CategorySection type="story" categories={categories} />
+      <StorySection  categories={categories} />
       <div className="page-content">
         <div className="intro-section">
           <IntroSection {...hero} />
