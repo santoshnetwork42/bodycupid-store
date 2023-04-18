@@ -969,7 +969,7 @@ export const searchProductsBasic = /* GraphQL */ `
       }
     }
   }
-`;
+`; 
 
 export const createReview = /* GraphQL */ `
   mutation CreateReview(
