@@ -171,7 +171,7 @@ function ProductTwo(props) {
           )}
         </div>
         <div className="product-action">
-          {!hasInventory ? (
+          {!!hasInventory ? (
             <>
               {isCartItem ? (
                 <ALink
