@@ -231,3 +231,13 @@
         line-height: 0;
     }
 }
+
+.capitalize-title {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase !important;
+    @include print_css( base, title );
+}
