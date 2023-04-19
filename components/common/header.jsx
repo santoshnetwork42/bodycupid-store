@@ -95,8 +95,9 @@ function Header({ navbar, auth, openPasswordLess }) {
                   <User />
                 </ALink>
               )} */}
-              <CartMenu />
               <span className="divider"></span>
+
+              <CartMenu />
              
                 <div className="d-sm-show search-container ">
                   <SearchBox type="icon" />
