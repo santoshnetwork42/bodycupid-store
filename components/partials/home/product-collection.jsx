@@ -19,8 +19,12 @@ function ProductCollection({ products = [],title='',slug }) {
         </div>
 
         <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
-          {products.map((item, index) => (
-            <ProductTwo tagSlug={slug} product={item} key={`top-selling-product ${index}`} />
+          {products.map((item) => (
+            <ProductTwo
+              tagSlug={slug}
+              product={item}
+              key={`top-selling-product-${item.id}`}
+            />
           ))}
         </OwlCarousel>
       </section>

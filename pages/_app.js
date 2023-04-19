@@ -6,6 +6,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 
+import "~/public/sass/style.scss";
+import "react-owl-carousel2/lib/styles.css";
+
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 import { rootActions } from "~/store";
@@ -13,13 +16,9 @@ import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
-
 import awsconfig from "~/aws-exports";
-
-import "~/public/sass/style.scss";
-import "react-owl-carousel2/lib/styles.css";
 import { getUser, getStore } from "~/graphql/api";
-import Scripts from "~/components/scripts.jsx";
+import Scripts from "~/components/scripts";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
