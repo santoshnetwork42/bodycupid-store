@@ -20,6 +20,7 @@ import {
   optimizeProduct,
   variantImageOptimization,
 } from "~/utils/getStaticData";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function ProductDefault(props) {
   const { product, productFAQs = [] } = props;
