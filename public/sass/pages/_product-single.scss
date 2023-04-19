@@ -864,8 +864,11 @@ aside {
         background-color: $white-color;
         padding-top: 1.5rem;
         border-radius: 1rem;
-        box-shadow: 0 2rem 3rem rgba(0,0,0,.05), 0 0 5px rgba(0,0,0,.05);
+        box-shadow: 0 2rem 1rem rgba(0,0,0,.05), 0 0 5px rgba(0,0,0,.05);
     }   
+    .owl-stage-outer{
+        padding-bottom: 3rem;
+    }
 }
 
 

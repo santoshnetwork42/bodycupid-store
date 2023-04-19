@@ -332,6 +332,7 @@ padding: 3rem;
 .story-wrapper {
   display: flex;
   width: 95vw;
+  touch-action:pan-x !important;
   overflow-y: scroll;
 .category-name{
   font-size: 1.2rem;

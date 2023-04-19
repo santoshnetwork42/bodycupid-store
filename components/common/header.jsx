@@ -73,20 +73,15 @@ function Header({ navbar, auth, openPasswordLess }) {
                 <Heart />
               </ALink>
               <span className="divider"></span> */}
-                <div className="d-sm-show search-container mr-2">
-                  <SearchBox type="icon" />
-                </div>
-              <CartMenu />
-              <span className="divider"></span>
-              {!!auth && (
-                <ALink href="/pages/account" className="account wishlist ">
+               {!!auth && (
+                <ALink href="/pages/account" className="account wishlist mr-2">
                   <User />
                 </ALink>
               )}
               {!auth && (
                 <ALink
                   href="#"
-                  className="label-block wishlist "
+                  className="label-block wishlist mr-2"
                   onClick={() => openPasswordLess(false)}
                 >
                   <User />
@@ -100,6 +95,12 @@ function Header({ navbar, auth, openPasswordLess }) {
                   <User />
                 </ALink>
               )} */}
+              <CartMenu />
+              <span className="divider"></span>
+             
+                <div className="d-sm-show search-container ">
+                  <SearchBox type="icon" />
+                </div>
             </div>
           </div>
         </div>

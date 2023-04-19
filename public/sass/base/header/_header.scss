@@ -522,7 +522,7 @@
   &.hs-toggle {
     .input-wrapper {
       position: absolute;
-      right: -9.5rem;
+      right: -1.5rem;
       top:-3rem ;
       min-width: 100vw !important;
       @include css(min-width, header, search, toggle, width);
