@@ -25,7 +25,7 @@ import {
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
 import StorySection from "~/components/partials/home/story-section";
-import TagCollection from "~/components/partials/home/tag-collection";
+import ProductCollection from "~/components/partials/home/product-collection";
 
 function HomePage({ hero, bestSellerProducts, featuredProducts, blogs, categories, brands, store }) {
   const { name } = store || {};
@@ -43,8 +43,8 @@ function HomePage({ hero, bestSellerProducts, featuredProducts, blogs, categorie
           <IntroSection {...hero} />
         </div>
 
-        <TagCollection products={bestSellerProducts} title='Best sellers' slug='best-seller' />
-        <TagCollection products={featuredProducts} title='Our featured' slug='featured' />
+        <ProductCollection products={bestSellerProducts} title='Best sellers' slug='best-seller' />
+        <ProductCollection products={featuredProducts} title='Our featured' slug='featured' />
         <CategorySection categories={categories} />
         {/* <DealSection /> */}
         <BlogSection posts={blogs} />

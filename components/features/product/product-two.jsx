@@ -27,7 +27,7 @@ function ProductTwo(props) {
     openQuickview,
     updateCart,
     removeFromCart,
-    tagSlug
+    tagSlug,
   } = props;
 
   const {
@@ -39,7 +39,7 @@ function ProductTwo(props) {
     isFeatured,
     rating,
     totalRatings,
-    collections
+    collections,
   } = product || {};
 
   const [quantity, setQuantity] = useState(1);
@@ -71,16 +71,14 @@ function ProductTwo(props) {
     }, 1000);
   };
 
-
   const tag = useMemo(() => {
-    if (!collections) return
-    const result = collections.filter((c) => c !== tagSlug)
-    if (result.length) {
-
-      return result[0].replace('-', ' ').toUpperCase()
+    if (!collections) return;
+    const result = collections.find((c) => c !== tagSlug);
+    if (result) {
+      return result.replace("-", " ").toUpperCase();
     }
-    return
-  }, [collections])
+    return;
+  }, [collections]);
   const addToCartHandler = () => {
     addToCart({
       ...product,
@@ -154,9 +152,11 @@ function ProductTwo(props) {
             ""
           )}
         </div>
-        {tag && <div className="product-tags-group">
-          <label className="product-label label-best-seller">{tag}</label>
-        </div>}
+        {tag && (
+          <div className="product-tags-group">
+            <label className="product-label label-best-seller">{tag}</label>
+          </div>
+        )}
 
         <div className="product-action-vertical">
           <ALink

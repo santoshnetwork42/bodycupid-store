@@ -7,7 +7,7 @@ import ProductTwo from "~/components/features/product/product-two";
 import { productSlider } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
-function TagCollection({ products = [],title='',slug }) {
+function ProductCollection({ products = [],title='',slug }) {
   return (
     <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
       <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 product-card-wrapper">
@@ -28,4 +28,4 @@ function TagCollection({ products = [],title='',slug }) {
   );
 }
 
-export default React.memo(TagCollection);
+export default React.memo(ProductCollection);

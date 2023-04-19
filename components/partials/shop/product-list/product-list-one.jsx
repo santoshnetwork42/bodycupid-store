@@ -32,7 +32,8 @@ function ProductListOne(props) {
   } = props;
   const router = useRouter();
   const { query } = router;
-  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
+  
+  const { minprice, maxprice, type: gridType = "grid", search, sortby,category } = query;
 
   const [applyFilters, resetFilter] = useState(
     !!sortby || !!search?.trim() || minprice || maxprice
@@ -165,14 +166,14 @@ function ProductListOne(props) {
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {products.map((item) => (
               <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo tagSlug={tag?.slug} product={item} />
+                <ProductTwo tagSlug={category} product={item} />
               </div>
             ))}
           </div>
         ) : (
           <div className="product-lists product-wrapper">
             {products.map((item) => (
-              <ProductEight tagSlug={tag?.slug} product={item} key={"shop-list-" + item.id} />
+              <ProductEight product={item} key={"shop-list-" + item.id} />
             ))}
           </div>
         )}

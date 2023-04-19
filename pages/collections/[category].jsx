@@ -88,7 +88,6 @@ export const getStaticPaths = async () => {
       [...collectionRes, ...response].map((v) => [v.slug, v])
     ).values(),
   ];
-  console.log('data', data)
   const paths = data.map((c) => {
     return {
       params: { category: c.slug },
