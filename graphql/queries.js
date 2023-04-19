@@ -938,7 +938,7 @@ export const getProductInventory = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1111,9 +1111,9 @@ export const searchProductInventories = /* GraphQL */ `
     }
   }
 `;
-export const getShippingCharge = /* GraphQL */ `
-  query GetShippingCharge($id: ID!) {
-    getShippingCharge(id: $id) {
+export const getShippingTier = /* GraphQL */ `
+  query GetShippingTier($id: ID!) {
+    getShippingTier(id: $id) {
       id
       storeId
       store {
@@ -1128,24 +1128,28 @@ export const getShippingCharge = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      paymentType
       amount
+      minOrderValue
       maxOrderValue
       createdAt
       updatedAt
     }
   }
 `;
-export const listShippingCharges = /* GraphQL */ `
-  query ListShippingCharges(
-    $filter: ModelShippingChargeFilterInput
+export const listShippingTiers = /* GraphQL */ `
+  query ListShippingTiers(
+    $filter: ModelShippingTierFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listShippingCharges(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listShippingTiers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         storeId
+        paymentType
         amount
+        minOrderValue
         maxOrderValue
         createdAt
         updatedAt
@@ -1154,16 +1158,16 @@ export const listShippingCharges = /* GraphQL */ `
     }
   }
 `;
-export const searchShippingCharges = /* GraphQL */ `
-  query SearchShippingCharges(
-    $filter: SearchableShippingChargeFilterInput
-    $sort: [SearchableShippingChargeSortInput]
+export const searchShippingTiers = /* GraphQL */ `
+  query SearchShippingTiers(
+    $filter: SearchableShippingTierFilterInput
+    $sort: [SearchableShippingTierSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableShippingChargeAggregationInput]
+    $aggregates: [SearchableShippingTierAggregationInput]
   ) {
-    searchShippingCharges(
+    searchShippingTiers(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -1174,7 +1178,9 @@ export const searchShippingCharges = /* GraphQL */ `
       items {
         id
         storeId
+        paymentType
         amount
+        minOrderValue
         maxOrderValue
         createdAt
         updatedAt
@@ -1198,28 +1204,58 @@ export const searchShippingCharges = /* GraphQL */ `
     }
   }
 `;
-export const getTags = /* GraphQL */ `
-  query GetTags($id: ID!) {
-    getTags(id: $id) {
-      id
+export const getCollection = /* GraphQL */ `
+  query GetCollection($slug: ID!) {
+    getCollection(slug: $slug) {
       slug
+      parent
       name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
   }
 `;
-export const listTags = /* GraphQL */ `
-  query ListTags(
-    $filter: ModelTagsFilterInput
+export const listCollections = /* GraphQL */ `
+  query ListCollections(
+    $slug: ID
+    $filter: ModelCollectionFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCollections(
+      slug: $slug
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
         slug
+        parent
         name
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
         createdAt
         updatedAt
       }
@@ -1227,16 +1263,49 @@ export const listTags = /* GraphQL */ `
     }
   }
 `;
-export const searchTags = /* GraphQL */ `
-  query SearchTags(
-    $filter: SearchableTagsFilterInput
-    $sort: [SearchableTagsSortInput]
+export const bystoreIdCollections = /* GraphQL */ `
+  query BystoreIdCollections(
+    $storeId: ID!
+    $priority: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bystoreIdCollections(
+      storeId: $storeId
+      priority: $priority
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchCollections = /* GraphQL */ `
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableTagsAggregationInput]
+    $aggregates: [SearchableCollectionAggregationInput]
   ) {
-    searchTags(
+    searchCollections(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -1245,9 +1314,14 @@ export const searchTags = /* GraphQL */ `
       aggregates: $aggregates
     ) {
       items {
-        id
         slug
+        parent
         name
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
         createdAt
         updatedAt
       }
@@ -1277,7 +1351,7 @@ export const getProduct = /* GraphQL */ `
       title
       brand
       vendor
-      productTags
+      collections
       categoryId
       category {
         id
@@ -1386,7 +1460,7 @@ export const listProducts = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1454,7 +1528,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1522,7 +1596,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1590,7 +1664,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1658,7 +1732,7 @@ export const byslugProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1726,7 +1800,7 @@ export const searchProducts = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1798,7 +1872,7 @@ export const getLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2664,7 +2738,7 @@ export const getOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3174,7 +3248,7 @@ export const getReview = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3444,7 +3518,7 @@ export const getWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3683,7 +3757,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
-        productTags
+        collections
         categoryId
         subCategoryId
         storeId

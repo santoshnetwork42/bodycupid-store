@@ -8,8 +8,7 @@ import {
   getAllCategoriesPath,
   findProducts,
   getSideBarFilterCategories,
-  listTags,
-  getBasicTagBySlug,
+  getSubCategoriesByCategoryID,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -23,24 +22,22 @@ function Categories(props) {
     category,
     products,
     categoryId,
-    tag,
-    tagId,
     sideBarCategories,
     pageFilter,
+    subCategories,
   } = props;
   const { name } = store;
-  const collectionType = category || tag;
 
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {collectionType?.name}
+          {name} - {category?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {collectionType?.name}
+        {name} - {category?.name}
       </h1>
 
       {/* <ShopBanner category={category} /> */}
@@ -52,10 +49,10 @@ function Categories(props) {
 
             <div className="col-lg-9 main-content">
               <ProductListOne
-                tagId={tagId}
                 categoryId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
+                subCategories={subCategories}
               />
             </div>
           </div>
@@ -78,13 +75,11 @@ export const getStaticPaths = async () => {
     filter: { storeId: { eq: STORE_ID } },
   });
 
-  const {
-    listTags: { items: tagRes },
-  } = await fetchData(listTags);
+  // const {
+  //   listTags: { items: tagRes },
+  // } = await fetchData(listTags);
 
-  const data = [
-    ...new Map([...tagRes, ...response].map((v) => [v.slug, v])).values(),
-  ];
+  const data = [...new Map([...response].map((v) => [v.slug, v])).values()];
   const paths = data.map((c) => {
     return {
       params: { category: c.slug },
@@ -115,6 +110,7 @@ export const getStaticProps = async (context) => {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
     };
+
     if (category) {
       const { id } = category;
       filter.categoryId = { eq: id };
@@ -130,9 +126,23 @@ export const getStaticProps = async (context) => {
         limit: 18,
       });
 
-      const [{ searchProductCategories }, { searchProducts }] =
-        await Promise.all([getSidebarCategory, getProducts]);
-
+      // Get Product Sub-Category By Category ID
+      const getSubCategoriesByCategory = fetchData(
+        getSubCategoriesByCategoryID,
+        {
+          filter: { storeId: { eq: STORE_ID }, categoryID: { eq: id } },
+        }
+      );
+      const [
+        { searchProductCategories },
+        { searchProducts },
+        { searchProductSubCategories },
+      ] = await Promise.all([
+        getSidebarCategory,
+        getProducts,
+        getSubCategoriesByCategory,
+      ]);
+      const { items: subCategories } = searchProductSubCategories;
       const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
       const products = await Promise.all(
@@ -146,40 +156,8 @@ export const getStaticProps = async (context) => {
           category: optimizedCategory,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
-          pageFilter: filter,
-        },
-      };
-    }
-
-    const {
-      searchTags: {
-        items: [tag],
-      },
-    } = await fetchData(getBasicTagBySlug, {
-      filter: { slug: { eq: slug } },
-    });
-
-    if (tag) {
-      const { id } = tag;
-      filter.productTags = { eq: id };
-
-      // Get Product By tag
-      const { searchProducts } = await fetchData(findProducts, {
-        filter,
-        limit: 18,
-      });
-      const products = await Promise.all(
-        searchProducts?.items.map((product) =>
-          optimizeProduct(product, { partial: true })
-        )
-      );
-      return {
-        props: {
-          tagId: id,
-          tag,
-          products: { ...searchProducts, items: products },
-          pageFilter: filter,
-          sideBarCategories: [],
+          subCategories,
+          filter,
         },
       };
     }
@@ -199,6 +177,6 @@ function mapStateToProps(state) {
 
 const Component = connect(mapStateToProps)(React.memo(Categories));
 
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 
 export default Component;

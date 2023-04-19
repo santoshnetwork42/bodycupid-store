@@ -16,7 +16,6 @@ import {
   getProductSlug,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import {
   optimizeProduct,
   variantImageOptimization,
@@ -89,6 +88,9 @@ function ProductDefault(props) {
         <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
+              <div className="mt-3 d-sm-show">
+                <ProductBreadcrumbs {...product} />
+              </div>
               <div className="col-md-6 sticky-sidebar-wrapper mt-3">
                 <MediaOne product={product} variantId={selectedVariant} />
               </div>
@@ -115,6 +117,12 @@ function ProductDefault(props) {
 }
 
 export const getStaticPaths = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
   const {
     searchProducts: { items },
   } = await fetchData(getProductSlug, {
@@ -129,7 +137,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
