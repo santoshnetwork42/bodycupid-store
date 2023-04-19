@@ -21,11 +21,8 @@ import {
   optimizeProduct,
   variantImageOptimization,
 } from "~/utils/getStaticData";
-<<<<<<< HEAD
 import { eventActions } from "~/store/events";
-=======
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
->>>>>>> 08f3df9f52529a16caee3073ff86fc5c1d90b66f
 
 function ProductDefault(props) {
   const { product, productFAQs = [], viewItem, slug } = props;
