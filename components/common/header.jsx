@@ -73,11 +73,9 @@ function Header({ navbar, auth, openPasswordLess }) {
                 <Heart />
               </ALink>
               <span className="divider"></span> */}
-              {!navbar.showMobileSearchBar && (
                 <div className="d-sm-show search-container mr-2">
                   <SearchBox type="icon" />
                 </div>
-              )}
               <CartMenu />
               <span className="divider"></span>
               {!!auth && (
@@ -113,11 +111,7 @@ function Header({ navbar, auth, openPasswordLess }) {
           </div>
         </div>
       </div>
-      {navbar.showMobileSearchBar && (
-        <div className="bottom-search d-sm-show">
-          <SearchBox />
-        </div>
-      )}
+     
     </header>
   );
 }

@@ -854,6 +854,7 @@ export const findProducts = /* GraphQL */ `
       items {
         id
         title
+        collections
         subCategory {
           name
           slug
@@ -949,7 +950,7 @@ export const searchProductsBasic = /* GraphQL */ `
       items {
         id
         title
-        productTags
+        collections
         slug
         price
         sku
@@ -1531,44 +1532,55 @@ export const getHomePageBlogs = /* GraphQL */ `
   }
 `;
 
-export const listTags = /* GraphQL */ `
-  query ListTags(
-    $filter: ModelTagsFilterInput
+export const listCollections = /* GraphQL */ `
+  query ListCollections(
+    $slug: ID
+    $filter: ModelCollectionFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCollections(
+      slug: $slug
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         slug
       }
+      nextToken
     }
   }
 `;
 
-export const getBasicTagBySlug = /* GraphQL */ `
-  query SearchTags(
-    $filter: SearchableTagsFilterInput
-    $sort: [SearchableTagsSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableTagsAggregationInput]
+export const getCollectionsBySlug = /* GraphQL */ `
+query SearchCollections(
+  $filter: SearchableCollectionFilterInput
+  $sort: [SearchableCollectionSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableCollectionAggregationInput]
+) {
+  searchCollections(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
   ) {
-    searchTags(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        slug
-        name
-      }
-      nextToken
-      total
+    items {
+      slug
+      parent
+      name
+      description
+      showInMenu
+      priority
     }
+    nextToken
   }
+}
 `;

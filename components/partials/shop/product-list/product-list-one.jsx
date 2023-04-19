@@ -7,7 +7,6 @@ import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
 import Loader from "~/components/common/partials/loader";
 
 const gridClasses = {
@@ -27,6 +26,7 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
+    tag,
     pageFilter = {},
     subCategories,
   } = props;
@@ -114,7 +114,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId]);
+  }, [categoryId, subCategoryId, tag]);
 
   useEffect(() => {
     getProducts(true);
@@ -165,14 +165,14 @@ function ProductListOne(props) {
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {products.map((item) => (
               <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo product={item} />
+                <ProductTwo tagSlug={tag?.slug} product={item} />
               </div>
             ))}
           </div>
         ) : (
           <div className="product-lists product-wrapper">
             {products.map((item) => (
-              <ProductEight product={item} key={"shop-list-" + item.id} />
+              <ProductEight tagSlug={tag?.slug} product={item} key={"shop-list-" + item.id} />
             ))}
           </div>
         )}

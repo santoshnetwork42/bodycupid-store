@@ -258,14 +258,14 @@
 .product-label-group {
     position: absolute;
     right: 0px;
-    top: 0px;
+    top: -15px;
     max-width: 10rem;
 }
 
 .product-tags-group {
     position: absolute;
     left: 0px;
-    top: 0px;
+    top: -15px;
     max-width: 10rem;
 }
 
@@ -287,14 +287,14 @@
         @include print_css(product, label, sold);
     }
     &.label-best-seller {
-        border-top-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
+        border-top-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
         @include print_css(product, label, bestseller);
     }
 
     &.label-sale {
-       border-top-right-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
+       border-top-right-radius: 1rem;
+        border-bottom-left-radius: 1rem;
         @include print_css(product, label, sale);
     }
 
