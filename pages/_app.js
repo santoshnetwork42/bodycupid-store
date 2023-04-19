@@ -38,6 +38,7 @@ const App = ({ Component, pageProps }) => {
   const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
+    showStickyCheckout: !!Component.showStickyCheckout,
   };
 
   const storeName = useMemo(() => {

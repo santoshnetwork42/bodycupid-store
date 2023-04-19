@@ -3,7 +3,6 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
-import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
 import BestCollection from "~/components/partials/home/best-collection";
 import FeaturedCollection from "~/components/partials/home/featured-collection";
@@ -39,10 +38,9 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
 
       <h1 className="d-none">{name} - Homepage</h1>
       <StorySection  categories={categories} />
-      <div className="page-content">
+      <div className="page-content home-page-content">
         <div className="intro-section">
           <IntroSection {...hero} />
-          <ServiceBox />
         </div>
 
         <CategorySection categories={categories} />
@@ -53,7 +51,6 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-
         {/* <SmallCollection
           featured={featured}
           latest={latest}
@@ -139,6 +136,10 @@ export const getStaticProps = async () => {
       "/images/brands/4.png",
       "/images/brands/5.png",
       "/images/brands/6.png",
+      "/images/brands/7.png",
+      "/images/brands/8.png",
+      "/images/brands/9.png",
+      "/images/brands/10.png",
     ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
@@ -182,5 +183,5 @@ function mapStateToProps(state) {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 export default Component;
