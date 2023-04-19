@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
