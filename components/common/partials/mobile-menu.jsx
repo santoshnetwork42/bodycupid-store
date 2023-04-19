@@ -9,6 +9,7 @@ import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { getSortedCategoryAndSubCategory } from "~/utils/helper";
+import OptimizedImage from "~/components/features/optimized-image";
 
 function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
@@ -99,11 +100,22 @@ function MobileMenu({ user }) {
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
         <i>
-          <Cross color="currentColor" /> 
+          <Cross color="currentColor" />
         </i>
       </ALink>
 
       <div className="mobile-menu-container scrollable">
+        <div className="pt-2">
+          <OptimizedImage
+            optimizedData={{
+              width: 60,
+              height: 60,
+            }}
+            src="/images/logo.png"
+            loading="eager"
+            alt="logo"
+          />
+        </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
             {categories.map((category) => (
