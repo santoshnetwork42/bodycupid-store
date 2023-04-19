@@ -25,10 +25,11 @@ import {
 } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
+import StorySection from "~/components/partials/home/story-section";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
- 
+
   return (
     <main className="main home searchBar">
       <Head>
@@ -36,21 +37,20 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
       </Head>
 
       <h1 className="d-none">{name} - Homepage</h1>
-
+      <StorySection  categories={categories} />
       <div className="page-content home-page-content">
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
- 
-        <CategorySection categories={categories} />
+
         <BestCollection products={products} />
+        <FeaturedCollection products={products} />
+        <CategorySection categories={categories} />
         {/* <DealSection /> */}
         <BlogSection posts={blogs} />
-        <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-
         {/* <SmallCollection
           featured={featured}
           latest={latest}
@@ -183,5 +183,5 @@ function mapStateToProps(state) {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 export default Component;

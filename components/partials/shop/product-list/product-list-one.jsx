@@ -34,7 +34,9 @@ function ProductListOne(props) {
   const { query } = router;
   const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
 
-  const [applyFilters, resetFilter] = useState(!!search?.trim());
+  const [applyFilters, resetFilter] = useState(
+    !!sortby || !!search?.trim() || minprice || maxprice
+  );
   const [token, setToken] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
