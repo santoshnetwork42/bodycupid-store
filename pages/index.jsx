@@ -50,7 +50,6 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-
         {/* <SmallCollection
           featured={featured}
           latest={latest}
@@ -184,4 +183,5 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps)(HomePage);
 Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 export default Component;
