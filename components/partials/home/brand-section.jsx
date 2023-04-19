@@ -10,7 +10,7 @@ function BrandSection({ brands }) {
   return (
     <Reveal keyframes={fadeIn} duration={1200} delay={300} triggerOnce>
       <section className="mt-2 pb-6 pt-10 pb-md-10">
-      <h2 className="title title-center">As featured in</h2>
+      <h2 className="title title-center capitalize-title">As featured in</h2>
 
         <div className="container">
           <div className="row brand-carousel">
