@@ -69,45 +69,39 @@ function Header({ navbar, auth, openPasswordLess }) {
             </div>
 
             <div className="header-right">
-              <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
+              {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
               </ALink>
-              <span className="divider"></span>
-
+              <span className="divider"></span> */}
+              {!navbar.showMobileSearchBar && (
+                <div className="d-sm-show search-container mr-2">
+                  <SearchBox type="icon" />
+                </div>
+              )}
               <CartMenu />
               <span className="divider"></span>
               {!!auth && (
-                <ALink
-                  href="/pages/account"
-                  className="account wishlist d-sm-none "
-                >
+                <ALink href="/pages/account" className="account wishlist ">
                   <User />
                 </ALink>
-              )}
-              {!navbar.showMobileSearchBar && (
-                <div className="d-sm-show">
-                  <SearchBox type="icon" />
-                </div>
               )}
               {!auth && (
                 <ALink
                   href="#"
-                  className="label-block wishlist d-sm-none"
+                  className="label-block wishlist "
                   onClick={() => openPasswordLess(false)}
                 >
                   <User />
                 </ALink>
               )}
-              {!auth && (
+              {/* {!auth && (
                 <ALink
                   href="/pages/login"
-                  className={`label-block wishlist d-sm-show ${
-                    !navbar.showMobileSearchBar && "d-sm-none"
-                  }`}
+                  className='label-block wishlist d-sm-show'
                 >
                   <User />
                 </ALink>
-              )}
+              )} */}
             </div>
           </div>
         </div>

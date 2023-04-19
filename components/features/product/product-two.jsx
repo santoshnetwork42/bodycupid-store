@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -8,8 +8,13 @@ import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta, getProductInventory } from "~/utils/products";
+import {
+  getProductMeta,
+  getProductInventory,
+  getFirstVariantId,
+} from "~/utils/products";
 import OptimizedImage from "../optimized-image";
+import Quantity from "../quantity";
 
 function ProductTwo(props) {
   const {
@@ -20,6 +25,8 @@ function ProductTwo(props) {
     wishlist,
     addToCart,
     openQuickview,
+    updateCart,
+    removeFromCart,
   } = props;
 
   const {
@@ -33,6 +40,7 @@ function ProductTwo(props) {
     totalRatings,
   } = product || {};
 
+  const [quantity, setQuantity] = useState(1);
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -42,7 +50,7 @@ function ProductTwo(props) {
     openQuickview(slug);
   };
 
-  const { hasInventory } = useMemo(
+  const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product),
     [product]
   );
@@ -76,8 +84,24 @@ function ProductTwo(props) {
 
   const { thumbImage, secondaryImage, discount } = getProductMeta(product);
 
+  function changeQty(qty) {
+    setQuantity(qty);
+    if (isCartItem) {
+      if (qty) {
+        updateCart(
+          cartList.map((item) => {
+            return item.id === product.id ? { ...item, qty: qty } : item;
+          })
+        );
+      } else {
+        const id = getFirstVariantId(product);
+        removeFromCart({ ...product, variantId: id });
+      }
+    }
+  }
+
   return (
-    <div className={`product text-left ${adClass}`}>
+    <div className={`product text-left ${adClass} product-card`}>
       <figure className="product-media">
         <ALink href={`/product/${slug}`}>
           <OptimizedImage
@@ -110,15 +134,16 @@ function ProductTwo(props) {
           )}
           {discount > 0 ? (
             product.variants?.items?.length < 2 ? (
-              <label className="product-label label-sale">
-                {discount}% OFF
-              </label>
+              <label className="product-label label-sale">{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
             )
           ) : (
             ""
           )}
+        </div>
+        <div className="product-tags-group">
+          <label className="product-label label-best-seller">Best Seller</label>
         </div>
 
         <div className="product-action-vertical">
@@ -168,10 +193,10 @@ function ProductTwo(props) {
         </div>
 
         <div className="ratings-container">
-          <div className="ratings-full mr-1">
+          <div className="ratings-full d-flex rating-product-list">
             <Star size={20} color={"#d26e4b"} />
           </div>
-          <p className="m-0">{toDecimal(rating)}</p>
+          <span className="rating">{rating}</span>
           <ALink
             href={{
               pathname: `/product/${slug}`,
@@ -186,13 +211,13 @@ function ProductTwo(props) {
           {!!hasInventory ? (
             <>
               {isCartItem ? (
-                <ALink
-                  href="/pages/cart"
-                  className="btn-product btn-quickview m-0"
-                  title="View Cart"
-                >
-                  View Cart
-                </ALink>
+                <Quantity
+                  isProductList={true}
+                  qty={quantity}
+                  max={currentInventory}
+                  product={product}
+                  onChangeQty={changeQty}
+                />
               ) : (
                 <ALink
                   href="#"
@@ -207,11 +232,10 @@ function ProductTwo(props) {
           ) : (
             <ALink
               href="#"
-              className="btn-product btn-quickview m-0"
-              title="Out of stock"
-              onClick={showQuickviewHandler}
+              className="btn-product btn-sold-out m-0"
+              title="Sold Out"
             >
-              Out of stock
+              Sold Out
             </ALink>
           )}
         </div>
@@ -230,5 +254,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
+  updateCart: cartActions.updateCart,
+  removeFromCart: cartActions.removeFromCart,
   ...modalActions,
 })(ProductTwo);

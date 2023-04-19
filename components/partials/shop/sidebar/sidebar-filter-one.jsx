@@ -45,8 +45,6 @@ function SidebarFilterOne(props) {
       max: maxprice ? parseInt(maxprice) : 3000,
       min: minprice ? parseInt(minprice) : 0,
     });
-
- 
   }, [query]);
 
   const filterByPrice = useCallback(() => {
@@ -162,7 +160,6 @@ function SidebarFilterOne(props) {
                   onClick={toggleSidebar}
                 >
                   Filter
-
                   {type === "left" || type === "off-canvas" ? (
                     <i>
                       <LeftArrow size={16} color="currentColor" />

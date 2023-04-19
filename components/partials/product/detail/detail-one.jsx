@@ -290,7 +290,7 @@ function DetailOne(props) {
         </div>
       )} */}
 
-      <div className="mb-3 mt-3">
+      <div className="mb-3 mt-3 d-sm-none">
         <ProductBreadcrumbs {...product} />
       </div>
 

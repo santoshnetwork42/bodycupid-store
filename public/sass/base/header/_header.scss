@@ -267,6 +267,14 @@
 .header-right {
   margin-left: auto;
 
+  .search-container {
+    .search-toggle {
+      display: block !important;
+      padding: 0 !important;
+      line-height: 1;
+    }
+  }
+
   a {
     display: flex;
     align-items: center;
@@ -514,11 +522,12 @@
   &.hs-toggle {
     .input-wrapper {
       position: absolute;
-      right: -1.5rem;
-      top: 100%;
+      right: -9.5rem;
+      top:-3rem ;
+      min-width: 100vw !important;
       @include css(min-width, header, search, toggle, width);
       padding: 1.5rem;
-      height: auto;
+      height: 8.5rem;
       background-color: #fff;
       box-shadow: 0 2px 35px rgba(0, 0, 0, 0.1);
       visibility: hidden;
@@ -664,6 +673,16 @@
     transition: transform 0.4s;
     opacity: 1;
   }
+}
+.header-search.hs-simple {
+  .show {
+    input.form-control {
+      visibility: visible;
+      transition: all 0.5s ease-in;
+      opacity: 1;
+    }
+  }
+
 }
 
 .mobile-search {

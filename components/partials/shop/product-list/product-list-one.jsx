@@ -27,14 +27,16 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
-    tagId,
     pageFilter = {},
+    subCategories,
   } = props;
   const router = useRouter();
   const { query } = router;
   const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
 
-  const [applyFilters, resetFilter] = useState(!!search?.trim());
+  const [applyFilters, resetFilter] = useState(
+    !!sortby || !!search?.trim() || minprice || maxprice
+  );
   const [token, setToken] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -69,6 +71,8 @@ function ProductListOne(props) {
       sortBy.push({ field: "price", direction: "asc" });
     } else if (sortby === "price-high") {
       sortBy.push({ field: "price", direction: "desc" });
+    } else if (sortBy === "best-seller") {
+      sortBy.push({ field: "totalOrders", direction: "desc" });
     }
 
     return { filter, limit: perPage, sort: sortBy };
@@ -110,7 +114,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId, tagId]);
+  }, [categoryId, subCategoryId]);
 
   useEffect(() => {
     getProducts(true);
@@ -146,7 +150,7 @@ function ProductListOne(props) {
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} />}
+      {isToolbox && <ToolBox type={type} subCategories={subCategories} />}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}

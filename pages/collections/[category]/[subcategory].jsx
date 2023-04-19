@@ -8,6 +8,7 @@ import {
   getAllSubcategoriesPath,
   findProducts,
   getSideBarFilterCategories,
+  getSubCategoriesByCategoryID,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -24,6 +25,7 @@ function Categories(props) {
     subCategoryId,
     sideBarCategories,
     pageFilter,
+    subCategories,
   } = props;
   const { name } = store;
 
@@ -53,6 +55,7 @@ function Categories(props) {
                 subCategoryId={subCategoryId}
                 products={products}
                 pageFilter={pageFilter}
+                subCategories={subCategories}
               />
             </div>
           </div>
@@ -128,9 +131,25 @@ export const getStaticProps = async (context) => {
         limit: 18,
       });
 
-      const [{ searchProductCategories }, { searchProducts }] =
-        await Promise.all([getSidebarCategory, getProduct]);
+      // Get Product Sub-Category By Category ID
+      const getSubCategoriesByCategory = fetchData(
+        getSubCategoriesByCategoryID,
+        {
+          filter: { storeId: { eq: STORE_ID }, categoryID: { eq: categoryID } },
+        }
+      );
 
+      const [
+        { searchProductCategories },
+        { searchProducts },
+        { searchProductSubCategories },
+      ] = await Promise.all([
+        getSidebarCategory,
+        getProduct,
+        getSubCategoriesByCategory,
+      ]);
+
+      const { items: subCategories } = searchProductSubCategories;
       const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
       const products = await Promise.all(
@@ -145,7 +164,8 @@ export const getStaticProps = async (context) => {
           subCategoryId: id,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
-          pageFilter:filter,
+          subCategories,
+          pageFilter: filter,
         },
       };
     }
@@ -164,6 +184,5 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(React.memo(Categories));
-Component.showMobileSearchBar = true;
 
 export default Component;
