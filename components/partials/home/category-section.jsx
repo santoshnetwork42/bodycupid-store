@@ -1,5 +1,4 @@
 import React from "react";
-import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
