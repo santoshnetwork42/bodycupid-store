@@ -42,11 +42,11 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
           <IntroSection {...hero} />
         </div>
 
-        <CategorySection categories={categories} />
         <BestCollection products={products} />
+        <FeaturedCollection products={products} />
+        <CategorySection categories={categories} />
         {/* <DealSection /> */}
         <BlogSection posts={blogs} />
-        <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
