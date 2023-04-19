@@ -21,7 +21,6 @@ const actionTypes = {
 
 const initialState = {
   store: null,
-  shipping: null,
   featuredCoupon: null,
   meta: null,
   shippingTiers: null,
@@ -32,9 +31,6 @@ function systemReducer(state = initialState, action) {
     case actionTypes.SET_STORE:
       return { ...state, store: action.payload.store };
 
-    case actionTypes.SET_SHIPPING:
-      return { ...state, shipping: action.payload.shipping };
-
     case actionTypes.SET_FEATURED_COUPONS:
       return { ...state, featuredCoupon: action.payload.coupons };
 
@@ -42,7 +38,7 @@ function systemReducer(state = initialState, action) {
       return { ...state, meta: action.payload.meta };
 
     case actionTypes.SET_SHIPPING_TIERS:
-      return { ...state, shippingTiers: action.payload.tiers };
+      return { ...state, shippingTiers: action.payload.shippingTiers };
 
     case actionTypes.REFRESH_SYSTEM:
       return initialState;
@@ -54,19 +50,15 @@ function systemReducer(state = initialState, action) {
 
 export const systemActions = {
   setStore: (store) => ({ type: actionTypes.SET_STORE, payload: { store } }),
-  setShipping: (shipping) => ({
-    type: actionTypes.SET_SHIPPING,
-    payload: { shipping },
-  }),
   setFeaturedCoupons: (coupons) => ({
     type: actionTypes.SET_FEATURED_COUPONS,
     payload: { coupons },
   }),
   getFeaturedCoupon: () => ({ type: actionTypes.GET_FEATURED_COUPONS }),
   getShippingTiers: () => ({ type: actionTypes.GET_SHIPPING_TIERS }),
-  setShippingTiers: (tiers) => ({
+  setShippingTiers: (shippingTiers) => ({
     type: actionTypes.SET_SHIPPING_TIERS,
-    payload: { tiers },
+    payload: { shippingTiers },
   }),
   setMeta: (meta) => ({ type: actionTypes.SET_META, payload: { meta } }),
 };
@@ -122,7 +114,7 @@ export function* systemSaga() {
       });
       yield put({
         type: actionTypes.SET_SHIPPING_TIERS,
-        payload: { tiers: items },
+        payload: { shippingTiers: items },
       });
     }
   });

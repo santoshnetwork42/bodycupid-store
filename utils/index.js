@@ -336,7 +336,7 @@ export const getTotalPrice = (cartItems = []) => {
 
 export const getCartTotals = (
   cartItems = [],
-  appliedCoupon,
+  appliedCoupon = null,
   shippingTiers = [],
   prepaid = true
 ) => {
@@ -385,21 +385,17 @@ export const getShippingPrice = (
   shippingTiers = []
 ) => {
   const total = getTotalPrice(cartItems);
-
+  const paymentMethod = prepaid ? "PREPAID" : "COD";
   if (!!shippingTiers?.length) {
-    const { amount } =
-      shippingTiers.find((element) => {
-        const paymentMethod = prepaid ? "PREPAID" : "COD";
-        const { minOrderValue, maxOrderValue, paymentType } = element;
-        if (
-          minOrderValue < total &&
-          maxOrderValue > total &&
-          paymentType === paymentMethod
-        ) {
-          return element;
-        }
-      }) || {};
-    return amount || 0;
+    const shippingTier = shippingTiers.find((element) => {
+      const { minOrderValue, maxOrderValue, paymentType } = element;
+      return (
+        minOrderValue <= total &&
+        maxOrderValue >= total &&
+        paymentType === paymentMethod
+      );
+    });
+    return !!shippingTier ? shippingTier?.amount : 0;
   }
   return 0;
 };
