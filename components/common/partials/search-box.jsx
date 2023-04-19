@@ -93,6 +93,10 @@ function SearchForm({ type = "input" }) {
     e.stopPropagation();
     e.currentTarget.parentNode.classList.toggle("show");
   }
+ function onSearchExpand(e) {
+    e.preventDefault();
+    e.currentTarget.parentNode.classList.toggle("show");
+  }
 
   function onBodyClick(e) {
     if (e.target.closest(".header-search"))
@@ -154,7 +158,12 @@ function SearchForm({ type = "input" }) {
           required
         />
 
-        <button className="btn btn-search" type="submit" aria-label="search">
+        <button
+          className="btn btn-search"
+          onClick={onSearchExpand}
+          type="submit"
+          aria-label="search"
+        >
           <MagnifyingGlass color="currentColor" size={20} />
         </button>
 

@@ -69,10 +69,10 @@ function Header({ navbar, auth, openPasswordLess }) {
             </div>
 
             <div className="header-right">
-              <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
+              {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
               </ALink>
-              <span className="divider"></span>
+              <span className="divider"></span> */}
 
               <CartMenu />
               <span className="divider"></span>
