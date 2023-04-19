@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
@@ -91,7 +91,6 @@ function MobileMenu({ user }) {
   const handleLogout = useCallback(async () => {
     await Auth.signOut();
     router.push("/");
-    return true;
   }, []);
 
   return (
@@ -105,7 +104,7 @@ function MobileMenu({ user }) {
       </ALink>
 
       <div className="mobile-menu-container scrollable">
-        <div className="pt-2">
+        <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
           <OptimizedImage
             optimizedData={{
               width: 60,
@@ -119,23 +118,27 @@ function MobileMenu({ user }) {
         <ul className="mobile-menu mmenu-anim">
           <li>
             {categories.map((category) => (
-              <Card
-                title={category.name}
-                type="mobile"
-                url={`/collections/${category.slug}`}
-              >
-                <ul>
-                  {category.subCategory.items.map((item) => (
-                    <li key={item.id}>
-                      <ALink
-                        href={"/collections/" + category.slug + "/" + item.slug}
-                      >
-                        {item.name}
-                      </ALink>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
+              <div key={category?.id}>
+                <Card
+                  title={category.name}
+                  type="mobile"
+                  url={`/collections/${category.slug}`}
+                >
+                  <ul>
+                    {category.subCategory.items.map((item) => (
+                      <li key={item.id}>
+                        <ALink
+                          href={
+                            "/collections/" + category.slug + "/" + item.slug
+                          }
+                        >
+                          {item.name}
+                        </ALink>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </div>
             ))}
           </li>
 
@@ -251,11 +254,12 @@ function MobileMenu({ user }) {
             <a href="https://d-themes.com/buynow/riodereact">Buy Wow!</a>
           </li> */}
 
-          {!user ? (
+          {!user && (
             <li>
               <ALink href={"/pages/login"}>Login</ALink>
             </li>
-          ) : (
+          )}
+          {!!user && (
             <li>
               <ALink href={"/"} onClick={handleLogout}>
                 Logout
