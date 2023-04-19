@@ -556,8 +556,8 @@ function DetailOne(props) {
             <BigDot color="#17B31B" />
           </>
         )}
-        {product.isInventoryEnabled && product.inventory < 100 && (
-          <span className="text-secondary">Last {product.inventory} units left</span>
+        {hasInventory && currentInventory < 100 && (
+          <span className="text-secondary">Last {currentInventory} units left</span>
         )}
       </div>
 
