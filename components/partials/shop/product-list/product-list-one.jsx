@@ -7,7 +7,6 @@ import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
 import Loader from "~/components/common/partials/loader";
 
 const gridClasses = {
@@ -27,12 +26,14 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
+    tag,
     pageFilter = {},
     subCategories,
   } = props;
   const router = useRouter();
   const { query } = router;
-  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
+  
+  const { minprice, maxprice, type: gridType = "grid", search, sortby,category } = query;
 
   const [applyFilters, resetFilter] = useState(
     !!sortby || !!search?.trim() || minprice || maxprice
@@ -114,7 +115,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId]);
+  }, [categoryId, subCategoryId, tag]);
 
   useEffect(() => {
     getProducts(true);
@@ -165,7 +166,7 @@ function ProductListOne(props) {
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {products.map((item) => (
               <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo product={item} />
+                <ProductTwo slug={category} product={item} />
               </div>
             ))}
           </div>

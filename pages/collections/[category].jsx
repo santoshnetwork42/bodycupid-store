@@ -9,6 +9,8 @@ import {
   findProducts,
   getSideBarFilterCategories,
   getSubCategoriesByCategoryID,
+  listCollections,
+  getCollectionsBySlug,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
@@ -22,22 +24,24 @@ function Categories(props) {
     category,
     products,
     categoryId,
+    tag,
     sideBarCategories,
     pageFilter,
-    subCategories,
   } = props;
+
   const { name } = store;
+  const collectionType = category || tag;
 
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {category?.name}
+          {name} - {collectionType?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {category?.name}
+        {name} - {collectionType?.name}
       </h1>
 
       {/* <ShopBanner category={category} /> */}
@@ -49,10 +53,10 @@ function Categories(props) {
 
             <div className="col-lg-9 main-content">
               <ProductListOne
+                tag={tag}
                 categoryId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
-                subCategories={subCategories}
               />
             </div>
           </div>
@@ -75,11 +79,15 @@ export const getStaticPaths = async () => {
     filter: { storeId: { eq: STORE_ID } },
   });
 
-  // const {
-  //   listTags: { items: tagRes },
-  // } = await fetchData(listTags);
+  const {
+    listCollections: { items: collectionRes },
+  } = await fetchData(listCollections);
 
-  const data = [...new Map([...response].map((v) => [v.slug, v])).values()];
+  const data = [
+    ...new Map(
+      [...collectionRes, ...response].map((v) => [v.slug, v])
+    ).values(),
+  ];
   const paths = data.map((c) => {
     return {
       params: { category: c.slug },
@@ -158,6 +166,36 @@ export const getStaticProps = async (context) => {
           sideBarCategories: categories,
           subCategories,
           filter,
+        },
+      };
+    }
+    const {
+      searchCollections: {
+        items: [tag],
+      },
+    } = await fetchData(getCollectionsBySlug, {
+      filter: { slug: { eq: slug } },
+    });
+    if (tag) {
+      const { slug } = tag;
+      filter.collections = { eq: slug };
+
+      // Get Product By tag
+      const { searchProducts } = await fetchData(findProducts, {
+        filter,
+        limit: 18,
+      });
+      const products = await Promise.all(
+        searchProducts?.items.map((product) =>
+          optimizeProduct(product, { partial: true })
+        )
+      );
+      return {
+        props: {
+          tag,
+          products: { ...searchProducts, items: products },
+          pageFilter: filter,
+          sideBarCategories: [],
         },
       };
     }
