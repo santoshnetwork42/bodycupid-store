@@ -336,12 +336,13 @@ export const getTotalPrice = (cartItems = []) => {
 
 export const getCartTotals = (
   cartItems = [],
-  appliedCoupon,
-  prepaid = false
+  appliedCoupon = null,
+  shippingTiers = [],
+  prepaid = true
 ) => {
   let totalPrice = 0;
   let totalListingprice = 0;
-  const shippingTotal = getShippingPrice(cartItems);
+  const shippingTotal = getShippingPrice(cartItems, prepaid, shippingTiers);
   const couponTotal = getCouponTotal(appliedCoupon, cartItems);
   for (let i = 0; i < cartItems.length; i++) {
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
@@ -349,10 +350,18 @@ export const getCartTotals = (
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
   const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
+  const codDiscount = 0;
+
   const grandTotal = totalPrice + shippingTotal - couponTotal - prepaidDiscount;
+
+  const gradTotalWithoutDiscount =
+    totalPrice + shippingTotal - couponTotal - codDiscount;
 
   const amoutSaved =
     totalListingprice - totalPrice + couponTotal + prepaidDiscount;
+
+  const amoutSavedWithoutDiscout =
+    totalListingprice - totalPrice + couponTotal + codDiscount;
 
   return {
     totalPrice,
@@ -362,15 +371,33 @@ export const getCartTotals = (
     prepaidDiscount,
     amoutSaved,
     grandTotal,
+    gradTotalWithoutDiscount,
+    amoutSavedWithoutDiscout,
   };
 };
 
 /**
- * utils to get total Price of products in cart.
+ * utils to get Shipping Price of products in cart.
  */
-export const getShippingPrice = (cartItems = []) => {
+export const getShippingPrice = (
+  cartItems = [],
+  prepaid = false,
+  shippingTiers = []
+) => {
   const total = getTotalPrice(cartItems);
-  return total > 399 ? 0 : 51;
+  const paymentMethod = prepaid ? "PREPAID" : "COD";
+  if (!!shippingTiers?.length) {
+    const shippingTier = shippingTiers.find((element) => {
+      const { minOrderValue, maxOrderValue, paymentType } = element;
+      return (
+        minOrderValue <= total &&
+        maxOrderValue >= total &&
+        paymentType === paymentMethod
+      );
+    });
+    return !!shippingTier ? shippingTier?.amount : 0;
+  }
+  return 0;
 };
 
 /**
