@@ -1598,22 +1598,6 @@ export const searchShippingTiers = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
     }
   }
 `;

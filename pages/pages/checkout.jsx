@@ -42,7 +42,7 @@ function Checkout(props) {
     shippingTiers,
     getShippingTiers,
   } = props;
-  const prePaidDiscountPercentage = 5;
+
   const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -67,14 +67,7 @@ function Checkout(props) {
     grandTotal,
     prepaidDiscount,
   } = useMemo(
-    () =>
-      getCartTotals(
-        cartList,
-        appliedCoupon,
-        isFirst,
-        shippingTiers,
-        prePaidDiscountPercentage
-      ),
+    () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
     [cartList, appliedCoupon, isFirst, shippingTiers]
   );
 

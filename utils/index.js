@@ -337,9 +337,8 @@ export const getTotalPrice = (cartItems = []) => {
 export const getCartTotals = (
   cartItems = [],
   appliedCoupon,
-  prepaid = false,
   shippingTiers = [],
-  prePaidDiscountPercentage
+  prepaid = true
 ) => {
   let totalPrice = 0;
   let totalListingprice = 0;
@@ -350,12 +349,19 @@ export const getCartTotals = (
     totalListingprice +=
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
-  const prepaidDiscount =
-    ((totalPrice - couponTotal) / 100) * prePaidDiscountPercentage;
+  const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
+  const codDiscount = 0;
+
   const grandTotal = totalPrice + shippingTotal - couponTotal - prepaidDiscount;
+
+  const gradTotalWithoutDiscount =
+    totalPrice + shippingTotal - couponTotal - codDiscount;
 
   const amoutSaved =
     totalListingprice - totalPrice + couponTotal + prepaidDiscount;
+
+  const amoutSavedWithoutDiscout =
+    totalListingprice - totalPrice + couponTotal + codDiscount;
 
   return {
     totalPrice,
@@ -365,6 +371,8 @@ export const getCartTotals = (
     prepaidDiscount,
     amoutSaved,
     grandTotal,
+    gradTotalWithoutDiscount,
+    amoutSavedWithoutDiscout,
   };
 };
 
@@ -377,21 +385,23 @@ export const getShippingPrice = (
   shippingTiers = []
 ) => {
   const total = getTotalPrice(cartItems);
-  let shippingCharges = 0;
+
   if (!!shippingTiers?.length) {
-    shippingTiers.forEach((element) => {
-      const paymentMethod = prepaid ? "PREPAID" : "COD";
-      const { minOrderValue, maxOrderValue, paymentType, amount } = element;
-      if (
-        minOrderValue < total &&
-        maxOrderValue > total &&
-        paymentType === paymentMethod
-      ) {
-        shippingCharges = amount;
-      }
-    });
+    const { amount } =
+      shippingTiers.find((element) => {
+        const paymentMethod = prepaid ? "PREPAID" : "COD";
+        const { minOrderValue, maxOrderValue, paymentType } = element;
+        if (
+          minOrderValue < total &&
+          maxOrderValue > total &&
+          paymentType === paymentMethod
+        ) {
+          return element;
+        }
+      }) || {};
+    return amount || 0;
   }
-  return shippingCharges;
+  return 0;
 };
 
 /**
