@@ -28,6 +28,7 @@ import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
+import { systemActions } from "~/store/system";
 
 function Checkout(props) {
   const {
@@ -38,7 +39,10 @@ function Checkout(props) {
     removeCoupon,
     store,
     metadata,
+    shippingTiers,
+    getShippingTiers,
   } = props;
+
   const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -50,6 +54,10 @@ function Checkout(props) {
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
+  useEffect(() => {
+    getShippingTiers();
+  }, []);
+
   const {
     totalListingprice,
     totalPrice,
@@ -59,8 +67,8 @@ function Checkout(props) {
     grandTotal,
     prepaidDiscount,
   } = useMemo(
-    () => getCartTotals(cartList, appliedCoupon, isFirst),
-    [cartList, appliedCoupon, isFirst]
+    () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
+    [cartList, appliedCoupon, isFirst, shippingTiers]
   );
 
   const handlePayment = useCallback(
@@ -622,12 +630,14 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
     metadata: state.system.meta,
+    shippingTiers: state.system.shippingTiers,
   };
 }
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
+  getShippingTiers: systemActions.getShippingTiers,
 })(Checkout);
 
 Component.hideFooter = true;

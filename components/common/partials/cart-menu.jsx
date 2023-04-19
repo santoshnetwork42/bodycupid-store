@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
@@ -8,13 +8,15 @@ import { Bag, Cross } from "~/components/icons";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 
-import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
+import { getTotalPrice, getCartCount, toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import Quantity from "~/components/features/quantity";
 
 function CartMenu(props) {
   const { cartList, removeFromCart, updateCart, user, openLogin } = props;
   const router = useRouter();
+
+  const { totalPrice } = useMemo(() => getCartTotals(cartList), [cartList]);
 
   useEffect(() => {
     hideCartMenu();
@@ -143,9 +145,7 @@ function CartMenu(props) {
 
             <div className="cart-total">
               <label>Subtotal:</label>
-              <span className="price">
-                ₹{toDecimal(getTotalPrice(cartList))}
-              </span>
+              <span className="price">₹{totalPrice}</span>
             </div>
 
             <div className="cart-action">
