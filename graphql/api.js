@@ -33,7 +33,7 @@ export const getMenuCategories = /* GraphQL */ `
   }
 `;
 
-export const getMenuSubCategories = /* GraphQL */ `
+export const getSubCategoriesByCategoryID = /* GraphQL */ `
   query SearchProductSubCategories(
     $filter: SearchableProductSubCategoryFilterInput
     $sort: [SearchableProductSubCategorySortInput]
@@ -877,6 +877,7 @@ export const findProducts = /* GraphQL */ `
         totalRatings
         thumbImages
         isInventoryEnabled
+        totalOrders
         variants {
           items {
             id
@@ -970,7 +971,7 @@ export const searchProductsBasic = /* GraphQL */ `
       }
     }
   }
-`;
+`; 
 
 export const createReview = /* GraphQL */ `
   mutation CreateReview(

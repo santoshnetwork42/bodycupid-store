@@ -37,7 +37,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
 
       <h1 className="d-none">{name} - Homepage</h1>
 
-      <div className="page-content">
+      <div className="page-content home-page-content">
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
@@ -136,6 +136,10 @@ export const getStaticProps = async () => {
       "/images/brands/4.png",
       "/images/brands/5.png",
       "/images/brands/6.png",
+      "/images/brands/7.png",
+      "/images/brands/8.png",
+      "/images/brands/9.png",
+      "/images/brands/10.png",
     ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
