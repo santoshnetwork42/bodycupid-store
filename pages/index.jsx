@@ -27,7 +27,15 @@ import ReviewSection from "~/components/partials/home/review-section";
 import StorySection from "~/components/partials/home/story-section";
 import ProductCollection from "~/components/partials/home/product-collection";
 
-function HomePage({ hero, bestSellerProducts, featuredProducts, blogs, categories, brands, store }) {
+function HomePage({
+  hero,
+  bestSellerProducts,
+  featuredProducts,
+  blogs,
+  categories,
+  brands,
+  store,
+}) {
   const { name } = store || {};
 
   return (
@@ -43,8 +51,18 @@ function HomePage({ hero, bestSellerProducts, featuredProducts, blogs, categorie
           <IntroSection {...hero} />
         </div>
 
-        <ProductCollection products={bestSellerProducts} title='Best sellers' slug='best-seller' />
-        <ProductCollection products={featuredProducts} title='Our featured' slug='featured' />
+        <ProductCollection
+          products={bestSellerProducts}
+          title="Best sellers"
+          slug='best-seller'
+          redirectTo="/collections/best-seller"
+        />
+        <ProductCollection
+          products={featuredProducts}
+          title="Our featured"
+          slug='featured'
+          redirectTo="/collections/featured"
+        />
         <CategorySection categories={categories} />
         {/* <DealSection /> */}
         <BlogSection posts={blogs} />
@@ -87,10 +105,15 @@ export const getStaticProps = async () => {
       filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
     });
 
-    const getSearchProducts = (filter) => fetchData(findProducts, {
-      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" }, ...filter },
-      limit: 8,
-    });
+    const getSearchProducts = (filter) =>
+      fetchData(findProducts, {
+        filter: {
+          storeId: { eq: STORE_ID },
+          status: { eq: "ENABLED" },
+          ...filter,
+        },
+        limit: 8,
+      });
 
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
       limit: 8,
@@ -108,8 +131,8 @@ export const getStaticProps = async () => {
       { getStore: store },
     ] = await Promise.all([
       getSearchBlogs,
-      getSearchProducts({ collections: { eq: 'best-seller' } }),
-      getSearchProducts({ collections: { eq: 'featured' } }),
+      getSearchProducts({ collections: { eq: "best-seller" } }),
+      getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
     ]);
@@ -130,10 +153,8 @@ export const getStaticProps = async () => {
 
     const { banners } = await optimizeStore(store);
 
-    const bestSellerProducts = await getOptimizedProduct(bestSellerItems)
-    const featuredProducts = await getOptimizedProduct(featuredItems)
-
-
+    const bestSellerProducts = await getOptimizedProduct(bestSellerItems);
+    const featuredProducts = await getOptimizedProduct(featuredItems);
 
     const categories = await Promise.all(
       (categoriesData || []).map(optimizeCategory)

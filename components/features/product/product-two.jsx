@@ -27,7 +27,7 @@ function ProductTwo(props) {
     openQuickview,
     updateCart,
     removeFromCart,
-    tagSlug,
+    slug:tagSlug,
   } = props;
 
   const {
