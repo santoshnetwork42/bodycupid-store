@@ -855,6 +855,7 @@ export const findProducts = /* GraphQL */ `
         id
         title
         collections
+        vendor
         subCategory {
           name
           slug
@@ -866,6 +867,7 @@ export const findProducts = /* GraphQL */ `
         }
         slug
         price
+        sku
         position
         listingPrice
         tags
@@ -990,6 +992,9 @@ export const createOrder = /* GraphQL */ `
   ) {
     createOrder(input: $input, condition: $condition) {
       id
+      totalAmount
+      totalDiscount
+      totalShippingCharges
     }
   }
 `;

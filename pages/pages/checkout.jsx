@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getCartTotals } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
+import { eventActions } from "~/store/events";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
 import loadScript from "~/utils/loadScript";
@@ -38,6 +39,7 @@ function Checkout(props) {
     removeCoupon,
     store,
     metadata,
+    placeOrder: onPlaceOrder,
   } = props;
   const { name } = store;
   const router = useRouter();
@@ -64,7 +66,8 @@ function Checkout(props) {
   );
 
   const handlePayment = useCallback(
-    async ({ orderId, paymentId, address }) => {
+    async ({ order, paymentId, address }) => {
+      const { id: orderId } = order;
       const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
 
       const [
@@ -92,6 +95,7 @@ function Checkout(props) {
           image: getPublicImageURL(store.imageUrl),
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
+            onPlaceOrder(order, [...cartList], appliedCoupon);
             setOrderId(orderId);
             setPaymentId(razorpay_payment_id);
             setPaymentLoading(true);
@@ -196,14 +200,14 @@ function Checkout(props) {
           };
 
           const {
-            data: {
-              createOrder: { id: orderId },
-            },
+            data: { createOrder: order },
           } = await API.graphql({
             query: createOrder,
             variables: { input: payload },
             authMode,
           });
+
+          const { id: orderId } = order;
 
           const promise = [
             API.graphql({
@@ -249,11 +253,12 @@ function Checkout(props) {
 
           if (isFirst) {
             handlePayment({
-              orderId,
+              order,
               paymentId: payment.id,
               address: restAddress,
             });
           } else {
+            onPlaceOrder(order, [...cartList], appliedCoupon);
             await router.push(`/order/${orderId}`);
             await emptyCart();
             setLoading(false);
@@ -628,6 +633,7 @@ const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
+  placeOrder: eventActions.placeOrder,
 })(Checkout);
 
 Component.hideFooter = true;
