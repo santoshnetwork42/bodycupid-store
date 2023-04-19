@@ -28,7 +28,7 @@ import ReviewSection from "~/components/partials/home/review-section";
 
 function HomePage({ hero, products, blogs, categories, brands, store }) {
   const { name } = store || {};
- 
+
   return (
     <main className="main home searchBar">
       <Head>
@@ -41,7 +41,7 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
- 
+
         <CategorySection categories={categories} />
         <BestCollection products={products} />
         {/* <DealSection /> */}
@@ -182,6 +182,5 @@ function mapStateToProps(state) {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
-Component.showMobileSearchBar = true;
 Component.showStickyCheckout = true;
 export default Component;
