@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { API, graphqlOperation } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Cross, MagnifyingGlass } from "~/components/icons";
+import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { getSortedCategoryAndSubCategory } from "~/utils/helper";
+import OptimizedImage from "~/components/features/optimized-image";
 
 function MobileMenu({ user }) {
   const [search, setSearch] = useState("");
@@ -87,77 +88,58 @@ function MobileMenu({ user }) {
     hideMobileMenu();
   }
 
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut();
+    router.push("/");
+  }, []);
+
   return (
     <div className="mobile-menu-wrapper">
       <div className="mobile-menu-overlay" onClick={hideMobileMenu}></div>
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
         <i>
-          <Cross color="currentColor"  />
+          <Cross color="currentColor" />
         </i>
       </ALink>
 
       <div className="mobile-menu-container scrollable">
-        <form
-          action="#"
-          className="input-wrapper"
-          onSubmit={onSubmitSearchForm}
-        >
-          <input
-            type="text"
-            className="form-control"
-            name="search"
-            autoComplete="off"
-            value={search}
-            onChange={onSearchChange}
-            placeholder="Search your keyword..."
-            required
+        <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
+          <OptimizedImage
+            optimizedData={{
+              width: 60,
+              height: 60,
+            }}
+            src="/images/logo.png"
+            loading="eager"
+            alt="logo"
           />
-          <button className="btn btn-search" type="submit">
-            <MagnifyingGlass color="currentColor" size={14} />
-          </button>
-        </form>
-
+        </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
-            <ALink href="/">Home</ALink>
-          </li>
-
-          <li>
-            <Card title="categories" type="mobile" url="/collections/all">
-              <ul>
-                {categories.map((category) => (
-                  <li key={category.id}>
-                    {!category.subCategory.items.length && (
-                      <ALink href={"/collections/" + category.slug}>
-                        {category.name}
-                      </ALink>
-                    )}
-                    {category.subCategory.items.length > 0 && (
-                      <Card title={category.name} type="mobile">
-                        <ul>
-                          {category.subCategory.items.map((item) => (
-                            <li key={item.id}>
-                              <ALink
-                                href={
-                                  "/collections/" +
-                                  category.slug +
-                                  "/" +
-                                  item.slug
-                                }
-                              >
-                                {item.name}
-                              
-                              </ALink>
-                            </li>
-                          ))}
-                        </ul>
-                      </Card>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Card>
+            {categories.map((category) => (
+              <div key={category?.id}>
+                <Card
+                  title={category.name}
+                  type="mobile"
+                  url={`/collections/${category.slug}`}
+                >
+                  <ul>
+                    {category.subCategory.items.map((item) => (
+                      <li key={item.id}>
+                        <ALink
+                          href={
+                            "/collections/" + category.slug + "/" + item.slug
+                          }
+                        >
+                          {item.name}
+                        </ALink>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </div>
+            ))}
           </li>
 
           {/* <li>
@@ -279,15 +261,11 @@ function MobileMenu({ user }) {
           )}
           {!!user && (
             <li>
-              <ALink href={"/pages/account"}>Account</ALink>
+              <ALink href={"/"} onClick={handleLogout}>
+                Logout
+              </ALink>
             </li>
           )}
-          <li>
-            <ALink href={"/pages/cart"}>My Cart</ALink>
-          </li>
-          <li>
-            <ALink href={"/pages/wishlist"}>Wishlist</ALink>
-          </li>
         </ul>
       </div>
     </div>

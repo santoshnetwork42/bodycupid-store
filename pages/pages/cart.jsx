@@ -452,8 +452,7 @@ function mapStateToProps(state) {
     shippingTiers: state.system.shippingTiers,
   };
 }
-
-export default connect(mapStateToProps, {
+const Component =connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
