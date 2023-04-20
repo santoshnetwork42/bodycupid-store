@@ -506,6 +506,61 @@ export const FullSreen = ({
     </svg>
   );
 };
+export const Share = ({ size = defaultIconSize, color = defaultIconColor }) => {
+  return (
+    <svg
+    width={size}
+    height={size}
+      viewBox="0 0 44 44"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#filter0_d_1_1714)">
+        <rect x="4" y="2" width="36" height="36" rx="18" fill="white" />
+        <path
+          d="M12.4525 28.6549C12.3735 28.6553 12.2949 28.6426 12.22 28.6174C12.0634 28.5665 11.9278 28.4655 11.8343 28.33C11.7408 28.1944 11.6944 28.0319 11.7025 27.8674C11.7025 27.7549 12.475 16.8649 23.395 16.0099V12.0949C23.3949 11.9458 23.4392 11.8 23.5223 11.6762C23.6054 11.5524 23.7235 11.4562 23.8616 11.3999C23.9996 11.3435 24.1513 11.3296 24.2973 11.3599C24.4433 11.3902 24.577 11.4633 24.6812 11.5699L32.0837 19.1299C32.2212 19.2701 32.2981 19.4586 32.2981 19.6549C32.2981 19.8512 32.2212 20.0397 32.0837 20.1799L24.6812 27.7399C24.577 27.8465 24.4433 27.9196 24.2973 27.9499C24.1513 27.9802 23.9996 27.9663 23.8616 27.9099C23.7235 27.8536 23.6054 27.7574 23.5223 27.6336C23.4392 27.5098 23.3949 27.364 23.395 27.2149V23.3749C16.105 23.6524 13.1162 28.2499 13.0862 28.3061C13.0186 28.413 12.925 28.501 12.8142 28.562C12.7034 28.6229 12.579 28.6549 12.4525 28.6549ZM24.895 13.9324V16.7111C24.8951 16.9056 24.8197 17.0925 24.6847 17.2324C24.5497 17.3723 24.3656 17.4543 24.1712 17.4611C17.1062 17.7199 14.5787 22.4261 13.6712 25.4524C15.5462 23.8324 18.8875 21.8524 24.1 21.8524H24.1337C24.3327 21.8524 24.5234 21.9314 24.6641 22.0721C24.8047 22.2127 24.8837 22.4035 24.8837 22.6024V25.3811L30.5087 19.6586L24.895 13.9324Z"
+          fill={color}
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_1_1714"
+          x="0"
+          y="0"
+          width="44"
+          height="44"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy="2" />
+          <feGaussianBlur stdDeviation="2" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.101961 0 0 0 0 0.0941176 0 0 0 0 0.117647 0 0 0 0.24 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_1_1714"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_1_1714"
+            result="shape"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+};
 
 export const Lock = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (

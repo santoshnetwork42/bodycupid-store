@@ -4,18 +4,10 @@ import { toast } from "react-toastify";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import { toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
+import { copyText } from "~/utils/helper";
 
 function ProductBestPrice(props) {
   const { price, code, totalDiscount } = props;
-
-  const onCopy = (copyText) => {
-    if (copyText && navigator?.clipboard) {
-      navigator.clipboard.writeText(copyText);
-      toast(
-        <AlertPopup message={"Coupon code copied: " + copyText} status="info" />
-      );
-    }
-  };
 
   return (
     <div className="product-best-price-container">
@@ -39,7 +31,9 @@ function ProductBestPrice(props) {
         <ALink
           href="#"
           className="copy-code  cursor-pointer ml-1"
-          onClick={() => onCopy(code)}
+          onClick={() => {
+            copyText(code, `Coupon code copied: "${code}`);
+          }}
         >
           Copy code
         </ALink>

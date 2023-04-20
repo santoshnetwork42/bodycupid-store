@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
 import ALink from "~/components/features/custom-link";
-import { FullSreen } from "~/components/icons";
+import { Share } from "~/components/icons";
 import OwlCarousel from "~/components/features/owl-carousel";
 
 import ThumbOne from "~/components/partials/product/thumb/thumb-one";
@@ -10,6 +10,7 @@ import OptimizedImage from "~/components/features/optimized-image";
 
 import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { copyText } from "~/utils/helper";
 
 export default function MediaOne(props) {
   const { product, variantId } = props;
@@ -148,8 +149,12 @@ export default function MediaOne(props) {
           ))}
         </OwlCarousel>
 
-        <ALink href="#" className="product-image-full" onClick={openLightBox}>
-          <FullSreen color="currentColor" size={22} />
+        <ALink
+          href="#"
+          className="product-image-full"
+          onClick={() => {copyText(window.location.href,'Product link copied!',)}}
+        >
+          <Share size={44} />
         </ALink>
         <ThumbOne
           images={lgImages}

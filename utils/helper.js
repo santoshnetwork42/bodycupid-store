@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import AlertPopup from "~/components/features/product/common/alert-popup";
+
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
   return number;
@@ -107,4 +110,11 @@ export const getSortedCategoryAndSubCategory = (items) => {
     return i;
   });
   return result;
+};
+
+export const copyText = (copyText, message) => {
+  if (copyText && navigator?.clipboard) {
+    navigator.clipboard.writeText(copyText);
+    toast(<AlertPopup message={message} status="info" />);
+  }
 };
