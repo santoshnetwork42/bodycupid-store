@@ -33,12 +33,10 @@ function DetailOne(props) {
     data: product,
     isStickyCart = false,
     adClass = "",
-    isNav = true,
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
     user,
-    applyCoupon,
     toggleWishlist,
     addToCart,
     wishlist,
@@ -65,8 +63,7 @@ function DetailOne(props) {
   useEffect(() => {
     getFeaturedCoupons();
   }, []);
-
-  const { maxDiscountCoupon } = useMemo(() => {
+  const { maxDiscountCoupon, couponList } = useMemo(() => {
     let selectedProduct = product;
     if (sizes.length) {
       selectedProduct = product?.variants?.items.find(
@@ -74,37 +71,29 @@ function DetailOne(props) {
       );
     }
     if (!!featuredCoupons?.length && selectedProduct) {
-      const discountCoupon = featuredCoupons.reduce((prev, current) => {
-        const first = getProductCouponTotal(prev, selectedProduct);
+      const list = featuredCoupons.filter((f) => f.couponType !== "BOGO");
+
+      const couponList = list.reduce((prev, current) => {
         const second = getProductCouponTotal(current, selectedProduct);
-        return first > second
-          ? {
-              ...prev,
-              price: selectedProduct?.price,
-              totalDiscount: getProductCouponTotal(prev, selectedProduct),
-            }
-          : {
-              ...current,
-              price: selectedProduct?.price,
-              totalDiscount: getProductCouponTotal(current, selectedProduct),
-            };
-      }, {});
-      return { maxDiscountCoupon: discountCoupon };
+        prev.push({
+          ...current,
+          price: selectedProduct?.price,
+          totalDiscount: second,
+        });
+        return prev;
+      }, []);
+
+      const res = couponList
+        .sort((a, b) => b.totalDiscount - a.totalDiscount)
+        .filter((c) => c.totalDiscount);
+      return { maxDiscountCoupon: res[0], couponList: res.slice(1, 4) };
     }
     return {
       maxDiscountCoupon: null,
+      couponList: [],
     };
   }, [product?.slug, featuredCoupons, selectedVariant]);
-
-  const applyCouponCode = useCallback(async () => {
-    try {
-      if (!!maxDiscountCoupon && !appliedCoupon?.isFeatured) {
-        applyCoupon(maxDiscountCoupon);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  }, [maxDiscountCoupon, user, appliedCoupon]);
+ 
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
@@ -220,7 +209,6 @@ function DetailOne(props) {
           price: product.price,
         });
       }
-      applyCouponCode();
     }
   };
 
@@ -252,7 +240,6 @@ function DetailOne(props) {
               : item;
           })
         );
-        applyCouponCode();
       } else {
         removeFromCart({ ...product, variantId: selectedVariant });
       }
@@ -373,9 +360,8 @@ function DetailOne(props) {
           </div>
         )}
       </div>
-
       {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
-        <ProductBestPrice {...maxDiscountCoupon} />
+        <ProductBestPrice {...maxDiscountCoupon} couponList={couponList} />
       )}
 
       <p className="product-short-desc">{product.productDescription}</p>
@@ -594,7 +580,6 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
-  applyCoupon: cartActions.applyCoupon,
   removeFromCart: cartActions.removeFromCart,
   getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(DetailOne);

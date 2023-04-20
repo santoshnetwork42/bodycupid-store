@@ -80,7 +80,7 @@ export const getProductInventory = (product, selectedVariantId = null) => {
 export const getProductCouponTotal = (coupon, product) => {
   const { price } = product;
   const { couponType, discount, minOrderValue, maxDiscount } = coupon;
-  if (!minOrderValue || minOrderValue > price) {
+  if (!minOrderValue || minOrderValue < price) {
     let amount = discount;
     if (couponType === "PERCENTAGE") {
       amount = (price * discount) / 100;

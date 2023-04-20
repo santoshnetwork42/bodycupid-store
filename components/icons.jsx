@@ -509,8 +509,8 @@ export const FullSreen = ({
 export const Share = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
-    width={size}
-    height={size}
+      width={size}
+      height={size}
       viewBox="0 0 44 44"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -574,6 +574,18 @@ export const Lock = ({ size = defaultIconSize, color = defaultIconColor }) => {
         fill={color}
         d="M384 192h-32v-64.9C352 56.52 294.58 0 224 0S96 57.42 96 127.1V192H64c-35.35 0-64 28.7-64 64v191.1c0 35.35 28.65 64 64 64h320c35.35 0 64-28.65 64-64V256c0-35.3-28.7-64-64-64zm-240-64c0-44.11 35.89-80 80-80s80 35.89 80 80v64H144v-64zm256 320c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V256c0-8.822 7.178-16 16-16h320c8.822 0 16 7.178 16 16v192z"
       ></path>
+    </svg>
+  );
+};
+export const Copy = ({ size = defaultIconSize, color = defaultIconColor }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 448 512"
+    >
+      <path   fill={color} d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM352 32.491a15.88 15.88 0 0 1 7.431 4.195l51.882 51.883A15.885 15.885 0 0 1 415.508 96H352V32.491zM288 464c0 8.822-7.178 16-16 16H48c-8.822 0-16-7.178-16-16V144c0-8.822 7.178-16 16-16h80v240c0 26.51 21.49 48 48 48h112v48zm128-96c0 8.822-7.178 16-16 16H176c-8.822 0-16-7.178-16-16V48c0-8.822 7.178-16 16-16h144v72c0 13.2 10.8 24 24 24h72v240z" />
     </svg>
   );
 };
