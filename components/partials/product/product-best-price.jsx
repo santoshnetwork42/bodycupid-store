@@ -1,7 +1,5 @@
 import React from "react";
-import { toast } from "react-toastify";
 
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import { toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
 import { copyText } from "~/utils/helper";
@@ -37,6 +35,7 @@ function ProductBestPrice(props) {
         >
           Copy code
         </ALink>
+
       </div>
     </div>
   );
