@@ -216,4 +216,5 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps)(HomePage);
 Component.showStickyCheckout = true;
+Component.showTopRunner = true;
 export default Component;

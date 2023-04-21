@@ -87,7 +87,7 @@ function ProductNotify(props) {
             />
           )}
           <button
-            className="notify-btn btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
+            className="notify-btn btn  btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
             type="submit"
             disabled={loading}
           >
