@@ -187,7 +187,7 @@ function ProductTwo(props) {
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
         </div> */}
 
-        <h3 className="product-name product-card-title p-0">
+        <h3 className="product-name text-uppercase product-card-title p-0">
           <ALink href={`/product/${slug}`}>{title}</ALink>
         </h3>
 
@@ -195,7 +195,7 @@ function ProductTwo(props) {
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
         </div>
 
-        <div className="product-price product-sm">
+        <div className="product-price product-sm mt-1 lh-1">
           <ins className="new-price mr-2">
             <span>MRP</span> ₹{toDecimal(price || 0)}
           </ins>

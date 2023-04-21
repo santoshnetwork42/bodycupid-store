@@ -570,7 +570,6 @@
 .ratings-container {
     display: flex;
     align-items: center;
-    padding: 5px;
     @include print_css(product, rating);
     .rating-product-list {
         padding-bottom: 3px;

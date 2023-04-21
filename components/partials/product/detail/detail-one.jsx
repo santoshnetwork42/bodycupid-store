@@ -294,7 +294,7 @@ function DetailOne(props) {
         <ProductBreadcrumbs {...product} />
       </div>
 
-      <h2 className="detail-product-name">{product.title}</h2>
+      <h2 className="detail-product-name text-uppercase">{product.title}</h2>
  
       {!!product?.tags && (
         <div className="mb-1">
