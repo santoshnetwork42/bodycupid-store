@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
@@ -38,35 +38,49 @@ function ProductBestPrice(props) {
           Copy code
         </ALink>
       </div>
-      <Card
-        title={`${couponList.length} more coupons`}
-        expanded={false}
-        adClass="coupon-list"
-        noDisplayStyle
-        collapseEvent
-      >
-        <div>
-          {couponList.map((coupon) => (
-            <div
-              key={coupon.key}
-              className="d-flex w-full align-items-center justify-content-between pl-1 pr-1"
-            >
-              <div>
-                <div className="text-dark">{coupon.code} </div>
-                <span className="coupon-subtext">BEST PRICE: {toDecimal(price - coupon.totalDiscount)}</span>
-              </div>
+      {couponList.length > 0 && (
+        <Card
+          title={`${couponList.length} more coupons`}
+          expanded={false}
+          adClass="coupon-list"
+          noDisplayStyle
+          collapseEvent
+        >
+          <div>
+            {couponList.map((coupon) => (
               <div
-                className=" cursor-pointer"
-                onClick={() => {
-                  copyText(coupon.code, `Coupon code copied: ${coupon.code}`);
-                }}
+                key={coupon.key}
+                className="d-flex w-full mb-2 lh-default align-items-center justify-content-between pl-1 pr-1"
               >
-                <Copy size={18} />
+                <div>
+                  <span className="coupon-subtext">
+                    BEST PRICE:&nbsp;
+                    <span className="font-weight-semi-bold text-dark">
+                      {toDecimal(price - coupon.totalDiscount)}
+                    </span>{" "}
+                  </span>
+                  <div>
+                    Use coupon
+                    <span className="text-dark font-weight-semi-bold ">
+                      {" "}
+                      {coupon.code}
+                    </span>{" "}
+                    <ALink
+                      href="#"
+                      className="copy-code  cursor-pointer ml-1"
+                      onClick={() => {
+                        copyText(code, `Coupon code copied: ${code}`);
+                      }}
+                    >
+                      Copy code
+                    </ALink>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </Card>
+            ))}
+          </div>
+        </Card>
+      )}
     </div>
   );
 }
