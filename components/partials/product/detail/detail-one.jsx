@@ -295,14 +295,14 @@ function DetailOne(props) {
       </div>
 
       <h2 className="detail-product-name">{product.title}</h2>
-
-      {/* {!!product?.tags && (
+ 
+      {!!product?.tags && (
         <div className="mb-1">
           <label className="product-tag">
             {product?.tags.split(",").join(" | ")}
           </label>
         </div>
-      )} */}
+      )}
 
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
