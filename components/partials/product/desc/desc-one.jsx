@@ -238,66 +238,6 @@ function DescOne(props) {
           </div>
         </Card>
 
-        <Card title="Specifications" noDisplayStyle>
-          <div className="row mt-6">
-            <div className="pl-md-6 pt-4 pt-md-0">
-              <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
-                {Specifications.map((options, index) => (
-                  <ProductSpecifications key={index} {...options} />
-                ))}
-              </div>
-              <hr className="product-divider"></hr>
-              <h5 className="description-title mb-3 font-weight-semi-bold ls-m">
-                Specifications
-              </h5>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <th className="font-weight-semi-bold text-dark pl-0 text-left">
-                      Brand
-                    </th>
-                    <td className="pl-4">{brand || vendor}</td>
-                  </tr>
-                  {!!(weight && weightUnit) && (
-                    <tr>
-                      <th className="font-weight-semi-bold text-dark pl-0">
-                        Weight
-                      </th>
-                      <td className="pl-4">{weight + " " + weightUnit}</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-            <div className="pl-md-6 pt-4 pt-md-0">
-              {!!video && (
-                <>
-                  <h5 className="description-title font-weight-semi-bold ls-m mb-5">
-                    Video Description
-                  </h5>
-                  <figure className="p-relative d-inline-block mb-3">
-                    <img
-                      src="/images/product.jpg"
-                      width="559"
-                      height="370"
-                      alt="Product"
-                    />
-
-                    <a
-                      className="btn-play btn-iframe"
-                      href="#"
-                      data={video}
-                      onClick={showVideoModalHandler}
-                    >
-                      <i className="d-icon-play-solid"></i>
-                    </a>
-                  </figure>
-                </>
-              )}
-            </div>
-          </div>
-        </Card>
-
         <Card
           title={`Reviews  ${
             product?.totalRatings ? `(${product.totalRatings})` : ""
