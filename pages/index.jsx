@@ -46,7 +46,7 @@ function HomePage({
 
       <h1 className="d-none">{name} - Homepage</h1>
       <StorySection categories={categories} />
-      <div className="page-content home-page-content">
+      <div className="page-content page-content-wrapper">
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
@@ -69,7 +69,7 @@ function HomePage({
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-        {/* <SmallCollection
+        {/* <SmallCollection  
           featured={featured}
           latest={latest}
           bestSelling={bestSelling}

@@ -233,7 +233,7 @@ function ProductTwo(props) {
               ) : (
                 <ALink
                   href="#"
-                  className="btn-product btn-quickview m-0"
+                  className="btn-product btn-primary btn-quickview m-0"
                   title="Add to cart"
                   onClick={addToCartHandler}
                 >

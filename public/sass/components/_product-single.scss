@@ -446,7 +446,7 @@
     }
 
     .remian-time-lable {
-        color: #167221;
+        color: $success-color;
         padding: .3rem;
         text-align: center;
         border-radius: .3rem;
@@ -569,8 +569,8 @@
         min-width: 13rem;
         font-size: 1.4rem;
         border-radius: .3rem;
-        background-color: $primary-color;
-        color: #fff;
+        background-color: $primary-button-color;
+        color: $primary-color;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -757,7 +757,7 @@
     border-style: solid;
     border-top-width:  1px;
     border-bottom-width:  1px;
-    border-color: $success-color;
+    border-color: $dark-green;
     .product-top-content {
         display: flex;
         justify-content: space-between;
