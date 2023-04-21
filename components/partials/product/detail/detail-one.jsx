@@ -357,7 +357,7 @@ function DetailOne(props) {
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= product.rating;
 
-            return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+            return <Star size={16} color={isFilled ? "#d26e4b" : "#D9D9D9"} />;
           })}
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}
@@ -561,28 +561,8 @@ function DetailOne(props) {
         )}
       </div>
 
-      <hr className="product-divider mb-3 d-sm-none"></hr>
 
-      <div className="product-footer">
-        <a
-          href="#"
-          className={`btn-product btn-wishlist`}
-          title={isWishlisted ? "Browse wishlist" : "Add to wishlist"}
-          onClick={wishlistHandler}
-        >
-          <i>
-            {isWishlisted ? (
-              <HeartFilled size={18} color="currentColor" />
-            ) : (
-              <Heart size={18} color="currentColor" />
-            )}
-          </i>
-          {/* <i
-            className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-          ></i> */}
-          {isWishlisted ? "Browse wishlist" : "Add to Wishlist"}
-        </a>
-      </div>
+    
     </div>
   );
 }
