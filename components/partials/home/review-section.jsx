@@ -5,7 +5,7 @@ import RatingStar from "../product/rating-star";
 
 export default function ReviewSection() {
   return (
-    <section className="parallax">
+    <section className="parallax pb-3">
       <div className="container ">
         <OwlCarousel adClass="owl-theme owl-dot-white" options={mainSlider4}>
           <div className="testimonial testimonial-centered testimonial-bg">
