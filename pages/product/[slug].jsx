@@ -93,9 +93,9 @@ function ProductDefault(props) {
 
       {!!product && (
         <>
-          <div className='page-content  bg-white mb-10 pb-6'>
+          <div className='page-content bg-white'>
             <div className="container vertical">
-              <div className="product product-single row mb-7">
+              <div className="product product-single row ">
                 <div className="mt-3 d-sm-show">
                   <ProductBreadcrumbs {...product} />
                 </div>
