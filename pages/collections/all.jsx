@@ -11,7 +11,7 @@ import fetchData from "~/utils/fetchData";
 import { optimizeProduct } from "~/utils/getStaticData";
 
 function AllProduct(props) {
-  const { store, products, sideBarCategories } = props;
+  const { store, products, sideBarCategories, pageFilter } = props;
   const { name } = store;
 
   return (
@@ -30,7 +30,7 @@ function AllProduct(props) {
             <SidebarFilterOne categories={sideBarCategories} />
 
             <div className="col-lg-9 main-content">
-              <ProductListOne products={products} />
+              <ProductListOne products={products} pageFilter={pageFilter} />
             </div>
           </div>
         </div>
@@ -41,12 +41,14 @@ function AllProduct(props) {
 
 export const getStaticProps = async () => {
   try {
+    const filter = {
+      status: { eq: "ENABLED" },
+      storeId: { eq: STORE_ID },
+    };
+
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {
-      filter: {
-        status: { eq: "ENABLED" },
-        storeId: { eq: STORE_ID },
-      },
+      filter,
       limit: 24,
     });
 
@@ -68,6 +70,7 @@ export const getStaticProps = async () => {
         products: { ...searchProducts, items: products },
         categorySlug: null,
         sideBarCategories: categories,
+        pageFilter: filter,
       },
     };
   } catch (error) {
@@ -84,6 +87,6 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(React.memo(AllProduct));
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 
 export default Component;

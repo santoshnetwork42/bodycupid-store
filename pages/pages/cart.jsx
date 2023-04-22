@@ -7,6 +7,7 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
+import { systemActions } from "~/store/system";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { scrollWithOffset } from "~/utils/helper";
 import { Cross, RightAngle } from "~/components/icons";
@@ -20,23 +21,29 @@ function Cart(props) {
     removeCoupon,
     user,
     openLogin,
+    shippingTiers,
+    getShippingTiers,
   } = props;
-  const [cartItems, setCartItems] = useState([]);
 
+  const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     setCartItems([...cartList]);
   }, [cartList]);
+
+  useEffect(() => {
+    getShippingTiers();
+  }, []);
 
   const {
     totalListingprice,
     totalPrice,
     shippingTotal,
-    amoutSaved,
     couponTotal,
-    grandTotal,
+    gradTotalWithoutDiscount,
+    amoutSavedWithoutDiscout,
   } = useMemo(
-    () => getCartTotals(cartItems, appliedCoupon),
-    [cartItems, appliedCoupon]
+    () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
+    [cartItems, appliedCoupon, shippingTiers]
   );
 
   const onChangeQty = (item, qty) => {
@@ -352,7 +359,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(grandTotal)}
+                                ₹{toDecimal(gradTotalWithoutDiscount)}
                               </p>
                             </td>
                           </tr>
@@ -367,10 +374,12 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!amoutSaved && (
+                              {!!amoutSavedWithoutDiscout && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
-                                    <span>{`₹${toDecimal(amoutSaved)} `}</span>
+                                    <span>{`₹${toDecimal(
+                                      amoutSavedWithoutDiscout
+                                    )} `}</span>
                                     saved so far on this order
                                   </p>
                                 </div>
@@ -389,7 +398,7 @@ function Cart(props) {
                       <div className="d-none stick-bottom-button d-sm-show">
                         <div className="lh-2">
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(grandTotal)}
+                            ₹{toDecimal(gradTotalWithoutDiscount)}
                           </p>
                           <ALink
                             onClick={() => {
@@ -440,12 +449,13 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    shippingTiers: state.system.shippingTiers,
   };
 }
-
 export default connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
+  getShippingTiers: systemActions.getShippingTiers,
 })(Cart);

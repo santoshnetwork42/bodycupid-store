@@ -110,7 +110,7 @@ table {
 }
 
 .parallax {
-  background-color: #3c3f41;
+  background-color: #E9DBC4;
 }
 
 ul {
@@ -645,4 +645,8 @@ button {
   .product-category.cat-type-default {
     border-radius: 10px;
   }
+}
+
+.home-page-content {
+  background-color: $new-primary-color;
 }

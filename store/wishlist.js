@@ -6,7 +6,7 @@ import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 import WishListPopup from "~/components/features/product/common/wishlist-popup";
 
-const actionTypes = {
+export const actionTypes = {
     TOGGLE_WISHLIST: 'TOGGLE_WISHLIST',
     REMOVE_FROM_WISHLIST: 'REMOVE_FROM_WISHLIST',
     REFRESH_WISHLIST: 'REFRESH_WISHLIST'

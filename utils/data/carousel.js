@@ -446,6 +446,21 @@ export const productSlider = {
   },
 };
 
+export const categorySlider = {
+  items: 5,
+  nav: false,
+  dots: false,
+  autoplay: false,
+  loop: false,
+  margin: 20,
+  responsive: {
+    0: {
+      items: 4.5,
+    },
+   
+  },
+};
+
 export const productSlider2 = {
   items: 5,
   nav: false,

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
-import { Star, Bag, Heart, HeartFilled } from "~/components/icons";
+import { Star, Bag, Heart, HeartFilled, BigDot } from "~/components/icons";
 import Quantity from "~/components/features/quantity";
 
 import ProductNav from "~/components/partials/product/product-nav";
@@ -36,7 +36,7 @@ function DetailOne(props) {
     isNav = true,
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
-    setVariant = () => {},
+    setVariant = () => { },
     user,
     applyCoupon,
     toggleWishlist,
@@ -79,15 +79,15 @@ function DetailOne(props) {
         const second = getProductCouponTotal(current, selectedProduct);
         return first > second
           ? {
-              ...prev,
-              price: selectedProduct?.price,
-              totalDiscount: getProductCouponTotal(prev, selectedProduct),
-            }
+            ...prev,
+            price: selectedProduct?.price,
+            totalDiscount: getProductCouponTotal(prev, selectedProduct),
+          }
           : {
-              ...current,
-              price: selectedProduct?.price,
-              totalDiscount: getProductCouponTotal(current, selectedProduct),
-            };
+            ...current,
+            price: selectedProduct?.price,
+            totalDiscount: getProductCouponTotal(current, selectedProduct),
+          };
       }, {});
       return { maxDiscountCoupon: discountCoupon };
     }
@@ -290,19 +290,19 @@ function DetailOne(props) {
         </div>
       )} */}
 
-      <div className="mb-3 mt-3">
+      <div className="mb-3 mt-3 d-sm-none">
         <ProductBreadcrumbs {...product} />
       </div>
 
-      <h2 className="detail-product-name">{product.title}</h2>
-
-      {/* {!!product?.tags && (
+      <h2 className="detail-product-name text-uppercase">{product.title}</h2>
+ 
+      {!!product?.tags && (
         <div className="mb-1">
           <label className="product-tag">
             {product?.tags.split(",").join(" | ")}
           </label>
         </div>
-      )} */}
+      )}
 
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
@@ -406,7 +406,7 @@ function DetailOne(props) {
         </p>
       )}
 
-      <hr className="product-divider"></hr>
+      <hr className="product-divider d-sm-none"></hr>
 
       {isStickyCart ? (
         <>
@@ -471,9 +471,8 @@ function DetailOne(props) {
 
                     {cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                          cartActive ? "" : "disabled"
-                        }`}
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
+                          }`}
                         onClick={() => {
                           router.push("/pages/cart");
                         }}
@@ -486,9 +485,8 @@ function DetailOne(props) {
                     )}
                     {!cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                          cartActive ? "" : "disabled"
-                        }`}
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
+                          }`}
                         onClick={addToCartHandler}
                       >
                         <i>
@@ -519,9 +517,8 @@ function DetailOne(props) {
                 />
                 {cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                      cartActive ? "" : "disabled"
-                    }`}
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
+                      }`}
                     onClick={(e) => {
                       e.preventDefault();
                       router.push("/pages/cart");
@@ -535,9 +532,8 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                      cartActive ? "" : "disabled"
-                    }`}
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
+                      }`}
                     onClick={addToCartHandler}
                   >
                     <i>
@@ -553,6 +549,17 @@ function DetailOne(props) {
           )}
         </>
       )}
+      <div className="d-flex text-success align-items-center mb-3 pointer-none">
+        {product.totalOrders > 1000 && (
+          <>
+            <div className="d-flex">1000+ units sold</div>
+            <BigDot color="#17B31B" />
+          </>
+        )}
+        {hasInventory && currentInventory < 100 && (
+          <span className="text-secondary">Last {currentInventory} units left</span>
+        )}
+      </div>
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
 

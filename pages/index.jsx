@@ -3,10 +3,8 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
-import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
-import BestCollection from "~/components/partials/home/best-collection";
-import FeaturedCollection from "~/components/partials/home/featured-collection";
+
 import BlogSection from "~/components/partials/home/blog-section";
 
 import {
@@ -26,8 +24,18 @@ import {
 } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
+import StorySection from "~/components/partials/home/story-section";
+import ProductCollection from "~/components/partials/home/product-collection";
 
-function HomePage({ hero, products, blogs, categories, brands, store }) {
+function HomePage({
+  hero,
+  bestSellerProducts,
+  featuredProducts,
+  blogs,
+  categories,
+  brands,
+  store,
+}) {
   const { name } = store || {};
 
   return (
@@ -37,22 +45,30 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
       </Head>
 
       <h1 className="d-none">{name} - Homepage</h1>
-
-      <div className="page-content">
+      <StorySection categories={categories} />
+      <div className="page-content home-page-content">
         <div className="intro-section">
           <IntroSection {...hero} />
-          <ServiceBox />
         </div>
 
+        <ProductCollection
+          products={bestSellerProducts}
+          title="Best sellers"
+          slug='best-seller'
+          redirectTo="/collections/best-seller"
+        />
+        <ProductCollection
+          products={featuredProducts}
+          title="Our featured"
+          slug='featured'
+          redirectTo="/collections/featured"
+        />
         <CategorySection categories={categories} />
-        <BestCollection products={products} />
         {/* <DealSection /> */}
         <BlogSection posts={blogs} />
-        <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-
         {/* <SmallCollection
           featured={featured}
           latest={latest}
@@ -89,10 +105,16 @@ export const getStaticProps = async () => {
       filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
     });
 
-    const getSearchProducts = fetchData(findProducts, {
-      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-      limit: 8,
-    });
+    const getSearchProducts = (filter) =>
+      fetchData(findProducts, {
+        filter: {
+          storeId: { eq: STORE_ID },
+          status: { eq: "ENABLED" },
+          ...filter,
+        },
+        limit: 8,
+      });
+
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
       limit: 8,
       filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
@@ -103,17 +125,27 @@ export const getStaticProps = async () => {
 
     const [
       { searchBlogs },
-      { searchProducts },
+      { searchProducts: searchBestSellerProducts },
+      { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
     ] = await Promise.all([
       getSearchBlogs,
-      getSearchProducts,
+      getSearchProducts({ collections: { eq: "best-seller" } }),
+      getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
     ]);
 
-    const { items } = searchProducts;
+    const getOptimizedProduct = (items) =>
+      Promise.all(
+        (items || []).map((product) =>
+          optimizeProduct(product, { partial: true })
+        )
+      );
+
+    const { items: bestSellerItems } = searchBestSellerProducts;
+    const { items: featuredItems } = searchFeaturedProducts;
     const { items: categoriesData } = searchProductSubCategories;
     const { items: blogsData } = searchBlogs;
 
@@ -121,11 +153,8 @@ export const getStaticProps = async () => {
 
     const { banners } = await optimizeStore(store);
 
-    const products = await Promise.all(
-      (items || []).map((product) =>
-        optimizeProduct(product, { partial: true })
-      )
-    );
+    const bestSellerProducts = await getOptimizedProduct(bestSellerItems);
+    const featuredProducts = await getOptimizedProduct(featuredItems);
 
     const categories = await Promise.all(
       (categoriesData || []).map(optimizeCategory)
@@ -134,10 +163,10 @@ export const getStaticProps = async () => {
     const brands = [
       "/images/brands/1.png",
       "/images/brands/2.png",
-      "/images/brands/3.png",
-      "/images/brands/4.png",
-      "/images/brands/5.png",
       "/images/brands/6.png",
+      "/images/brands/7.png",
+      "/images/brands/8.png",
+      "/images/brands/9.png",
     ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
@@ -159,7 +188,8 @@ export const getStaticProps = async () => {
         hero: {
           banners,
         },
-        products,
+        bestSellerProducts,
+        featuredProducts,
         blogs,
         categories,
         brands,
@@ -181,5 +211,5 @@ function mapStateToProps(state) {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 export default Component;

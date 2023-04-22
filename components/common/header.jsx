@@ -32,7 +32,7 @@ function Header({ navbar, auth, openPasswordLess }) {
 
   return (
     <header className="header header-border">
-      <div className="  fix-top sticky-content">
+      <div className="sticky-header fix-top sticky-content">
         <div className="header-middle">
           <div className="container">
             <div className="header-left">
@@ -69,61 +69,48 @@ function Header({ navbar, auth, openPasswordLess }) {
             </div>
 
             <div className="header-right">
-              <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
+              {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
               </ALink>
-              <span className="divider"></span>
-
-              <CartMenu />
-              <span className="divider"></span>
+              <span className="divider"></span> */}
               {!!auth && (
-                <ALink
-                  href="/pages/account"
-                  className="account wishlist d-sm-none "
-                >
+                <ALink href="/pages/account" className="account wishlist mr-2">
                   <User />
                 </ALink>
-              )}
-              {!navbar.showMobileSearchBar && (
-                <div className="d-sm-show">
-                  <SearchBox type="icon" />
-                </div>
               )}
               {!auth && (
                 <ALink
                   href="#"
-                  className="label-block wishlist d-sm-none"
+                  className="label-block wishlist mr-2"
                   onClick={() => openPasswordLess(false)}
                 >
                   <User />
                 </ALink>
               )}
-              {!auth && (
+              {/* {!auth && (
                 <ALink
                   href="/pages/login"
-                  className={`label-block wishlist d-sm-show ${
-                    !navbar.showMobileSearchBar && "d-sm-none"
-                  }`}
+                  className='label-block wishlist d-sm-show'
                 >
                   <User />
                 </ALink>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="header-bottom d-lg-show  fix-top sticky-content">
-          <div className="container">
-            <div className="header-left">
-              <MainMenu />
+              )} */}
+              <span className="divider"></span>
+              <CartMenu />
+              <div className="d-sm-show search-container ">
+                <SearchBox type="icon" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {navbar.showMobileSearchBar && (
-        <div className="bottom-search d-sm-show">
-          <SearchBox />
+      <div className="header-bottom d-lg-show  fix-top sticky-content">
+        <div className="container">
+          <div className="header-left">
+            <MainMenu />
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

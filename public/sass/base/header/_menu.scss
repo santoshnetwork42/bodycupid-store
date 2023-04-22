@@ -89,7 +89,7 @@
             // Mobile Menu Container
             container: (
                 max-width: 296px,
-                padding: 2rem 1.5rem,
+                padding: 1rem 1.5rem,
                 background: #222529,
                 border-color: #2e3237,
             ),
@@ -830,7 +830,7 @@
 @include mq( '400px', 'max' ) {
     .mobile-menu-close {
         left: calc(100vw - 40px);
-        top: 10px;
+        top: 25px;
     }
 }
 

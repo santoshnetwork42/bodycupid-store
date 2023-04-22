@@ -33,7 +33,7 @@ export const getMenuCategories = /* GraphQL */ `
   }
 `;
 
-export const getMenuSubCategories = /* GraphQL */ `
+export const getSubCategoriesByCategoryID = /* GraphQL */ `
   query SearchProductSubCategories(
     $filter: SearchableProductSubCategoryFilterInput
     $sort: [SearchableProductSubCategorySortInput]
@@ -854,6 +854,8 @@ export const findProducts = /* GraphQL */ `
       items {
         id
         title
+        collections
+        vendor
         subCategory {
           name
           slug
@@ -865,6 +867,7 @@ export const findProducts = /* GraphQL */ `
         }
         slug
         price
+        sku
         position
         listingPrice
         tags
@@ -875,6 +878,7 @@ export const findProducts = /* GraphQL */ `
         totalRatings
         thumbImages
         isInventoryEnabled
+        totalOrders
         variants {
           items {
             id
@@ -948,6 +952,7 @@ export const searchProductsBasic = /* GraphQL */ `
       items {
         id
         title
+        collections
         slug
         price
         sku
@@ -987,6 +992,9 @@ export const createOrder = /* GraphQL */ `
   ) {
     createOrder(input: $input, condition: $condition) {
       id
+      totalAmount
+      totalDiscount
+      totalShippingCharges
     }
   }
 `;
@@ -1522,6 +1530,89 @@ export const getHomePageBlogs = /* GraphQL */ `
         seo {
           pageURL
         }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+
+export const listCollections = /* GraphQL */ `
+  query ListCollections(
+    $slug: ID
+    $filter: ModelCollectionFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCollections(
+      slug: $slug
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        slug
+      }
+      nextToken
+    }
+  }
+`;
+
+export const getCollectionsBySlug = /* GraphQL */ `
+query SearchCollections(
+  $filter: SearchableCollectionFilterInput
+  $sort: [SearchableCollectionSortInput]
+  $limit: Int
+  $nextToken: String
+  $from: Int
+  $aggregates: [SearchableCollectionAggregationInput]
+) {
+  searchCollections(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+    aggregates: $aggregates
+  ) {
+    items {
+      slug
+      parent
+      name
+      description
+      showInMenu
+      priority
+    }
+    nextToken
+  }
+}
+`;
+export const searchShippingTiers = /* GraphQL */ `
+  query SearchShippingTiers(
+    $filter: SearchableShippingTierFilterInput
+    $sort: [SearchableShippingTierSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableShippingTierAggregationInput]
+  ) {
+    searchShippingTiers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
         createdAt
         updatedAt
       }

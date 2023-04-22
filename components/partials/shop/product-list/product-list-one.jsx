@@ -7,7 +7,6 @@ import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
 import Loader from "~/components/common/partials/loader";
 
 const gridClasses = {
@@ -27,34 +26,28 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
+    tag,
+    pageFilter = {},
+    subCategories,
   } = props;
-
   const router = useRouter();
-  const { query } = router; 
-  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
+  const { query } = router;
+  
+  const { minprice, maxprice, type: gridType = "grid", search, sortby,category } = query;
 
-
-  const [applyFilters, resetFilter] = useState(!!search?.trim());
+  const [applyFilters, resetFilter] = useState(
+    !!sortby || !!search?.trim() || minprice || maxprice
+  );
   const [token, setToken] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-
   const perPage = 50;
 
   const filters = useMemo(() => {
     const sortBy = [];
-    const filter = { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
-
-    if (categoryId) {
-      filter.categoryId = { eq: categoryId };
-    }
-
-    if (subCategoryId) {
-      filter.subCategoryId = { eq: subCategoryId };
-    }
-
+    const filter = {};
     if (!!search?.trim()) {
       filter.title = { matchPhrasePrefix: search };
     }
@@ -79,11 +72,12 @@ function ProductListOne(props) {
       sortBy.push({ field: "price", direction: "asc" });
     } else if (sortby === "price-high") {
       sortBy.push({ field: "price", direction: "desc" });
+    } else if (sortBy === "best-seller") {
+      sortBy.push({ field: "totalOrders", direction: "desc" });
     }
 
     return { filter, limit: perPage, sort: sortBy };
   }, [perPage, maxprice, minprice, search, sortby]);
-
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -96,6 +90,7 @@ function ProductListOne(props) {
         } = await API.graphql(
           graphqlOperation(findProducts, {
             ...filters,
+            filter: { ...filters.filter, ...pageFilter },
             nextToken: reset ? null : token,
           })
         );
@@ -120,7 +115,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId]);
+  }, [categoryId, subCategoryId, tag]);
 
   useEffect(() => {
     getProducts(true);
@@ -156,7 +151,7 @@ function ProductListOne(props) {
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} />}
+      {isToolbox && <ToolBox type={type} subCategories={subCategories} />}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}
@@ -171,7 +166,7 @@ function ProductListOne(props) {
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {products.map((item) => (
               <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo product={item} />
+                <ProductTwo slug={category} product={item} />
               </div>
             ))}
           </div>

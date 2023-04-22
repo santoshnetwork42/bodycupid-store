@@ -3,26 +3,28 @@ import Reveal from "react-awesome-reveal";
 import ALink from "~/components/features/custom-link";
 
 import OwlCarousel from "~/components/features/owl-carousel";
-
 import ProductTwo from "~/components/features/product/product-two";
-
 import { productSlider } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
-function FeaturedCollection({ products = [] }) {
+function ProductCollection({ products = [],title='',slug,redirectTo }) {
   return (
-    <Reveal keyframes={fadeIn} delay={600} duration={1200} triggerOnce>
-      <section className="product-wrapper product-collection container pt-6 mt-md-10 pt-4 mb-10 pb-2 product-card-wrapper">
+    <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
+      <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 product-card-wrapper">
         <div className="d-flex justify-content-between mb-5">
-          <h2 className="capitalize-title m-0">Our Featured</h2>
-          <ALink href="#">
+          <h2 className="capitalize-title m-0">{title}</h2>
+          <ALink href={redirectTo}>
             <p className="view-all  text-underline m-0">VIEW ALL</p>
           </ALink>
         </div>
 
         <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
           {products.map((item) => (
-            <ProductTwo product={item} key={`featured-product-${item.id}`} />
+            <ProductTwo
+              slug={slug}
+              product={item}
+              key={`top-selling-product-${item.id}`}
+            />
           ))}
         </OwlCarousel>
       </section>
@@ -30,4 +32,4 @@ function FeaturedCollection({ products = [] }) {
   );
 }
 
-export default React.memo(FeaturedCollection);
+export default React.memo(ProductCollection);

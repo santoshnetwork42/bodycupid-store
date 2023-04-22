@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
+import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
@@ -16,14 +17,15 @@ import {
   getProductSlug,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import {
   optimizeProduct,
   variantImageOptimization,
 } from "~/utils/getStaticData";
+import { eventActions } from "~/store/events";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 
 function ProductDefault(props) {
-  const { product, productFAQs = [] } = props;
+  const { product, productFAQs = [], viewItem, slug } = props;
   const router = useRouter();
   const { query, isReady } = router;
   const { variantId } = query;
@@ -31,10 +33,14 @@ function ProductDefault(props) {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
+    viewItem({
+      ...product,
+      section: { id: "product-detail", name: "Product Detail" },
+    });
     if (!!isReady) {
       getRelatedProducts();
     }
-  }, []);
+  }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
     if (!!product) {
@@ -89,6 +95,9 @@ function ProductDefault(props) {
         <div className={`page-content mb-10 pb-6`}>
           <div className="container vertical">
             <div className="product product-single row mb-7">
+              <div className="mt-3 d-sm-show">
+                <ProductBreadcrumbs {...product} />
+              </div>
               <div className="col-md-6 sticky-sidebar-wrapper mt-3">
                 <MediaOne product={product} variantId={selectedVariant} />
               </div>
@@ -115,6 +124,12 @@ function ProductDefault(props) {
 }
 
 export const getStaticPaths = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
   const {
     searchProducts: { items },
   } = await fetchData(getProductSlug, {
@@ -129,7 +144,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -167,6 +182,7 @@ export const getStaticProps = async (context) => {
 
       return {
         props: {
+          slug,
           product: { ...optimizedProduct, variants: optimizedVariants },
           productFAQs: faqS,
         },
@@ -180,4 +196,12 @@ export const getStaticProps = async (context) => {
   };
 };
 
-export default ProductDefault;
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+export default connect(mapStateToProps, {
+  viewItem: eventActions.viewItem,
+})(ProductDefault);
