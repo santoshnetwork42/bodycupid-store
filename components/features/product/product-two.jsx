@@ -144,7 +144,7 @@ function ProductTwo(props) {
           )}
           {discount > 0 ? (
             product.variants?.items?.length < 2 ? (
-              <label className="product-label label-sale">{discount}%</label>
+              <label className="product-label label-sale">-{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
             )
@@ -187,7 +187,7 @@ function ProductTwo(props) {
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
         </div> */}
 
-        <h3 className="product-name product-card-title p-0">
+        <h3 className="product-name text-uppercase product-card-title p-0">
           <ALink href={`/product/${slug}`}>{title}</ALink>
         </h3>
 
@@ -195,7 +195,7 @@ function ProductTwo(props) {
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
         </div>
 
-        <div className="product-price product-sm">
+        <div className="product-price product-sm mt-1 lh-1">
           <ins className="new-price mr-2">
             <span>MRP</span> ₹{toDecimal(price || 0)}
           </ins>
@@ -233,7 +233,7 @@ function ProductTwo(props) {
               ) : (
                 <ALink
                   href="#"
-                  className="btn-product btn-quickview m-0"
+                  className="btn-product btn-primary btn-quickview m-0"
                   title="Add to cart"
                   onClick={addToCartHandler}
                 >

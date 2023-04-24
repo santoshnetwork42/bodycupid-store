@@ -114,7 +114,7 @@ function Pagination(props) {
 
           <li className={`page-item ${page > totalPage - 1 ? "disabled" : ""}`}>
             <ALink
-              className="page-link page-link-next"
+              className="page-link page-link-next btn"
               href={
                 page < totalPage
                   ? {

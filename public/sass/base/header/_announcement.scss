@@ -1,15 +1,14 @@
 .announcement-bar{
-    background-color: $dark-color;
+    background-color: $primary-button-color;
     .owl-stage{
         display: flex;
         align-items: center;
     }
     .announcement {
-        padding: 1.2rem;
         .announcement-text {
             letter-spacing: 2.5px;
             font-weight: 400;
-            color: $white_color;
+            color: $dark-color;
             text-align: center;
         }
     }

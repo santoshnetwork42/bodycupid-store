@@ -80,6 +80,10 @@ body:not(.loaded) * {
   @include print_css(base, page-wrapper);
 }
 
+.page-content {
+  background-color: $background-color-1;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -103,7 +107,7 @@ table {
 }
 
 .parallax {
-  background-color: #E9DBC4;
+  background-color: $background-color-2;
 }
 
 ul {
@@ -652,8 +656,4 @@ button {
   .product-category.cat-type-default {
     border-radius: 10px;
   }
-}
-
-.home-page-content {
-  background-color: $new-primary-color;
 }

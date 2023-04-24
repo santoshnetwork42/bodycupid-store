@@ -32,7 +32,7 @@ function Header({ navbar, auth, openPasswordLess }) {
 
   return (
     <header className="header header-border">
-      <div className="  fix-top sticky-content">
+      <div className="sticky-header fix-top sticky-content">
         <div className="header-middle">
           <div className="container">
             <div className="header-left">
@@ -73,7 +73,7 @@ function Header({ navbar, auth, openPasswordLess }) {
                 <Heart />
               </ALink>
               <span className="divider"></span> */}
-               {!!auth && (
+              {!!auth && (
                 <ALink href="/pages/account" className="account wishlist mr-2">
                   <User />
                 </ALink>
@@ -96,24 +96,21 @@ function Header({ navbar, auth, openPasswordLess }) {
                 </ALink>
               )} */}
               <span className="divider"></span>
-
               <CartMenu />
-             
-                <div className="d-sm-show search-container ">
-                  <SearchBox type="icon" />
-                </div>
-            </div>
-          </div>
-        </div>
-        <div className="header-bottom d-lg-show  fix-top sticky-content">
-          <div className="container">
-            <div className="header-left">
-              <MainMenu />
+              <div className="d-sm-show search-container ">
+                <SearchBox type="icon" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-     
+      <div className="header-bottom d-lg-show  fix-top sticky-content">
+        <div className="container">
+          <div className="header-left">
+            <MainMenu />
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

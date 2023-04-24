@@ -105,6 +105,7 @@ function MobileMenu({ user }) {
 
       <div className="mobile-menu-container scrollable">
         <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
+        <ALink href="/" className="logo-footer">
           <OptimizedImage
             optimizedData={{
               width: 60,
@@ -114,6 +115,8 @@ function MobileMenu({ user }) {
             loading="eager"
             alt="logo"
           />
+        </ALink>
+          
         </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
