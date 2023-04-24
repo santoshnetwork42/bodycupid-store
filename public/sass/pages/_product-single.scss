@@ -86,11 +86,13 @@
     position: absolute;
     padding: 1rem;
     right: 1rem;
+    top: 1rem;
     bottom: 4rem;
+    width: fit-content;
     color: #999;
     font-size: 2rem;
     line-height: 1;
-    opacity: 0;
+    opacity: 1;
     transition: opacity .3s;
     z-index: 1;
 
@@ -481,8 +483,8 @@
 
     .review-section {
         display: flex;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
         width: 100%;
         justify-content: center;
         flex-direction: row;
@@ -490,15 +492,18 @@
         align-items: center;
 
         .percent {
-            width: 5rem;
+            width: 6rem;
         }
 
         .total-review {
-
-            display: flex;
-            flex-direction: column;
+            display: flex !important;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+        }
+
+        .review-bar {
+            min-width: 150px;
         }
     }
 
@@ -1032,14 +1037,25 @@ aside {
         display: block !important;
 
 
-
         .review-wrapper {
             margin-top: 3rem;
             display: block !important;
         }
 
+        .buttons {
+            width: 100%;
+        }
+
+        .total-review {
+            flex-direction: row !important;
+            align-items: start !important;
+            justify-content: start !important;
+        }
+        .comment-user{
+            
+        }
+
         .rating {
-            margin-top: 3rem;
             text-align: center;
             width: 100%;
             display: flex;
@@ -1048,10 +1064,6 @@ aside {
 
         }
 
-        .buttons {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-        }
     }
 }
 
