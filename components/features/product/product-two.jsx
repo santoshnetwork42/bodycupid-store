@@ -144,7 +144,7 @@ function ProductTwo(props) {
           )}
           {discount > 0 ? (
             product.variants?.items?.length < 2 ? (
-              <label className="product-label label-sale">{discount}%</label>
+              <label className="product-label label-sale">-{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
             )
@@ -233,7 +233,7 @@ function ProductTwo(props) {
               ) : (
                 <ALink
                   href="#"
-                  className="btn-product btn-quickview m-0"
+                  className="btn-product btn-primary btn-quickview m-0"
                   title="Add to cart"
                   onClick={addToCartHandler}
                 >

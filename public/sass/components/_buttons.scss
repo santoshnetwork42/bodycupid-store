@@ -392,7 +392,7 @@
 
 // 8. Button Color Styles
 .btn-primary {
-    @include button-variant($primary-color);
+    @include button-variant($primary-button-color);
 }
 
 

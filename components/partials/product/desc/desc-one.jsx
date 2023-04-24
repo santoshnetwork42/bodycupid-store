@@ -211,7 +211,7 @@ function DescOne(props) {
   };
 
   return (
-    <div className="col-md-12 mb-6">
+    <div className="col-md-12 mb-6 product-description">
       <Accordion adClass="accordion-simple">
         <Card
           title="Description"

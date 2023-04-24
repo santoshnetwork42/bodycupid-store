@@ -315,12 +315,12 @@ function DetailOne(props) {
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-2 d-flex">
-            {listingPrice > price && (
+           <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
+           {listingPrice > price && (
               <>
                 <del className="old-price mr-2">₹{listingPrice}</del>{" "}
               </>
             )}
-            <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
             {!!save && (
               <ins className="product-save">(₹{listingPrice - price} OFF)</ins>
             )}
@@ -563,26 +563,6 @@ function DetailOne(props) {
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
 
-      <div className="product-footer">
-        <a
-          href="#"
-          className={`btn-product btn-wishlist`}
-          title={isWishlisted ? "Browse wishlist" : "Add to wishlist"}
-          onClick={wishlistHandler}
-        >
-          <i>
-            {isWishlisted ? (
-              <HeartFilled size={18} color="currentColor" />
-            ) : (
-              <Heart size={18} color="currentColor" />
-            )}
-          </i>
-          {/* <i
-            className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-          ></i> */}
-          {isWishlisted ? "Browse wishlist" : "Add to Wishlist"}
-        </a>
-      </div>
     </div>
   );
 }

@@ -32,6 +32,7 @@ const App = ({ Component, pageProps }) => {
   const navbarProps = {
     ...navbar,
     showMobileSearchBar: !!Component.showMobileSearchBar,
+    showTopRunner: !!Component.showTopRunner,
   };
 
   const footerProps = {

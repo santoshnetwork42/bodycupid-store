@@ -3,10 +3,7 @@
     ---------------------------------------------- */
 
 // Variables
-@include set-default(
-  (
-    base: (
-      // max-width of '.container'
+@include set-default((base: ( // max-width of '.container'
       _container-width: 1220px,
       // max-width of '.container-fluid'
       _container-fluid-width: 1820px,
@@ -18,19 +15,15 @@
       // background of grey section
       _grey-section-bg: #f6f7f9,
       // Body
-      body:
-        (
-          font-family: $font-family,
-          font-size: 1.4rem,
-          line-height: 1.6,
-          color: $body-color
-        ),
+      body: (font-family: $font-family,
+        font-size: 1.4rem,
+        line-height: 1.6,
+        color: $body-color ),
       page-wrapper: (margin-left: false, margin-right: false),
       // ScrollTop
       scroll-top: (background-color: #fff),
     ),
-  )
-);
+  ));
 
 *,
 ::after,
@@ -87,6 +80,10 @@ body:not(.loaded) * {
   @include print_css(base, page-wrapper);
 }
 
+.page-content {
+  background-color: $background-color-1;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -110,7 +107,7 @@ table {
 }
 
 .parallax {
-  background-color: #E9DBC4;
+  background-color: $background-color-2;
 }
 
 ul {
@@ -128,14 +125,14 @@ ul {
 .list,
 .breadcrumb,
 .filter-items,
-.select-menu > ul,
+.select-menu>ul,
 .dropdown-box,
 .pagination,
 .nav-filters,
 .category ul,
 .comments ul,
 .product-nav,
-.product-tabs > div ul {
+.product-tabs>div ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -221,6 +218,7 @@ button {
 
 // Overlay Animation
 @keyframes bouncedelay {
+
   0%,
   80%,
   100% {
@@ -472,7 +470,7 @@ button {
 
 @include mq(sm, max) {
   main {
-   // margin-top: 60px;
+    // margin-top: 60px;
 
     // &.searchBar {
     //   margin-top: 130px !important;
@@ -598,11 +596,12 @@ button {
 }
 
 .riode-rounded-skin {
+
   .btn,
   .post-calendar,
   .product-hide-details .btn-product,
   .product-hide-details .btn-product-icon,
-  .post-single > .post-wrap img,
+  .post-single>.post-wrap img,
   .post-single .post-author-detail,
   .post-media,
   .post-framed,
@@ -612,7 +611,7 @@ button {
   .product-with-qty .quantity button,
   .product-wrapper .banner,
   .vendor-widget .vendor-logo,
-  .vendor-widget .vendor-product > figure,
+  .vendor-widget .vendor-product>figure,
   .vendor-widget .vendor-banner {
     border-radius: 3px;
     overflow: hidden;
@@ -645,8 +644,4 @@ button {
   .product-category.cat-type-default {
     border-radius: 10px;
   }
-}
-
-.home-page-content {
-  background-color: $new-primary-color;
 }
