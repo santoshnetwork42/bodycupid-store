@@ -35,10 +35,10 @@
     }
 }
 .alert-title {
-    text-transform: uppercase;
     font-size: 1.4rem;
     line-height: inherit;
     color: inherit;
+    font-weight: 400;
 }
 
 .btn-close {
@@ -50,8 +50,8 @@
 
 // Color types
 .alert-primary {
-    background-color: $primary-color;
-    border-color: $primary-color;
+    background-color: $info-color;
+    border-color: $info-color;
     color: $primary-color;
     // .btn-close { color: $primary-color; }
 }
@@ -182,8 +182,8 @@
         margin: 0 .8rem 0 0 ;
     }
     &.error-height{
-        width: 500px;
-        height: 64px;
+        width: 350px;
+        height: 40px;
         display: flex;
         align-items: center;
     }

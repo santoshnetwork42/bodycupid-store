@@ -46,7 +46,7 @@ function HomePage({
 
       <h1 className="d-none">{name} - Homepage</h1>
       <StorySection categories={categories} />
-      <div className="page-content home-page-content">
+      <div className="page-content page-content-wrapper">
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
@@ -69,7 +69,7 @@ function HomePage({
         {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-        {/* <SmallCollection
+        {/* <SmallCollection  
           featured={featured}
           latest={latest}
           bestSelling={bestSelling}
@@ -163,14 +163,10 @@ export const getStaticProps = async () => {
     const brands = [
       "/images/brands/1.png",
       "/images/brands/2.png",
-      "/images/brands/3.png",
-      "/images/brands/4.png",
-      "/images/brands/5.png",
       "/images/brands/6.png",
       "/images/brands/7.png",
       "/images/brands/8.png",
       "/images/brands/9.png",
-      "/images/brands/10.png",
     ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
@@ -216,4 +212,5 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps)(HomePage);
 Component.showStickyCheckout = true;
+Component.showTopRunner = true;
 export default Component;
