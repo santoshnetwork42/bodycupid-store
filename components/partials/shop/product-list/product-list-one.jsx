@@ -20,7 +20,7 @@ const gridClasses = {
 
 function ProductListOne(props) {
   const {
-    itemsPerRow = 3,
+    itemsPerRow = 4,
     type = "left",
     isToolbox = true,
     products: initialData,
@@ -133,6 +133,9 @@ function ProductListOne(props) {
   useEffect(() => {
     getProducts(true);
     resetFilter(true);
+    return () => {
+      resetFilter(false);
+    };
   }, [filters]);
 
   if (loading) {

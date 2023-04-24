@@ -51,9 +51,8 @@ function Categories(props) {
             description={subCategory?.description}
           />
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne categories={sideBarCategories} />
 
-            <div className="col-lg-9 main-content">
+            <div className="col-lg-12 main-content">
               <ProductListOne
                 category={subCategory}
                 categoryId={categoryId}

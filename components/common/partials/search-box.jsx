@@ -94,7 +94,6 @@ function SearchForm({ type = "input" }) {
     e.currentTarget.parentNode.classList.toggle("show");
   }
  function onSearchExpand(e) {
-    e.preventDefault();
     e.currentTarget.parentNode.classList.toggle("show");
   }
 

@@ -54,9 +54,8 @@ function Categories(props) {
             description={collectionType?.description}
           />
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne categories={sideBarCategories} />
 
-            <div className="col-lg-9 main-content">
+            <div className="col-lg-12 main-content">
               <ProductListOne
                 tag={tag}
                 categoryId={categoryId}
