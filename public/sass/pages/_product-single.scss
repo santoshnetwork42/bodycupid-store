@@ -86,11 +86,12 @@
     position: absolute;
     padding: 1rem;
     right: 1rem;
+    top: 1rem;
     bottom: 4rem;
     color: #999;
     font-size: 2rem;
     line-height: 1;
-    opacity: 0;
+    opacity: 1;
     transition: opacity .3s;
     z-index: 1;
 
@@ -544,7 +545,7 @@
     height: 14px;
     font-size: 1.4rem;
 
-    a{
+    a {
         height: 16px;
         width: 16px;
         display: flex;
@@ -795,7 +796,7 @@ aside {
         font-weight: 700;
         letter-spacing: -0.025em;
         line-height: 1;
-        
+
     }
 
     .old-price {
