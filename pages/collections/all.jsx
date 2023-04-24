@@ -24,7 +24,7 @@ function AllProduct(props) {
 
       {/* <ShopBanner category={null} /> */}
 
-      <div className="page-content mb-10 pb-3">
+      <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
             <SidebarFilterOne categories={sideBarCategories} />
