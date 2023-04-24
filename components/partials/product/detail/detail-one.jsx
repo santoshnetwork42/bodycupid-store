@@ -344,7 +344,7 @@ function DetailOne(props) {
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= product.rating;
 
-            return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+            return <Star size={16} color={isFilled ? "#d26e4b" : "#D9D9D9"} />;
           })}
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}

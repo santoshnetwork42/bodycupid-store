@@ -466,6 +466,7 @@
         display: inline-block;
         position: relative;
     }
+
     .close {
         position: absolute;
         top: -5px;
@@ -483,8 +484,8 @@
 
     .review-section {
         display: flex;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
         width: 100%;
         justify-content: center;
         flex-direction: row;
@@ -492,15 +493,18 @@
         align-items: center;
 
         .percent {
-            width: 5rem;
+            width: 6rem;
         }
 
         .total-review {
-
-            display: flex;
-            flex-direction: column;
+            display: flex !important;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+        }
+
+        .review-bar {
+            min-width: 150px;
         }
     }
 
@@ -866,9 +870,10 @@ aside {
         background-color: $white-color;
         padding-top: 1.5rem;
         border-radius: 1rem;
-        box-shadow: 0 2rem 1rem rgba(0,0,0,.05), 0 0 5px rgba(0,0,0,.05);
-    }   
-    .owl-stage-outer{
+        box-shadow: 0 2rem 1rem rgba(0, 0, 0, .05), 0 0 5px rgba(0, 0, 0, .05);
+    }
+
+    .owl-stage-outer {
         padding-bottom: 3rem;
     }
 }
@@ -1035,14 +1040,25 @@ aside {
         display: block !important;
 
 
-
         .review-wrapper {
             margin-top: 3rem;
             display: block !important;
         }
 
+        .buttons {
+            width: 100%;
+        }
+
+        .total-review {
+            flex-direction: row !important;
+            align-items: start !important;
+            justify-content: start !important;
+        }
+        .comment-user{
+            
+        }
+
         .rating {
-            margin-top: 3rem;
             text-align: center;
             width: 100%;
             display: flex;
@@ -1051,10 +1067,6 @@ aside {
 
         }
 
-        .buttons {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-        }
     }
 }
 

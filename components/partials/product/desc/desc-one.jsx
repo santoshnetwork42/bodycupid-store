@@ -11,14 +11,12 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
-import ProductSpecifications from "../product-specifications";
-import Specifications from "~/lib/specifications.json";
-import { fadeIn } from "~/utils/data/keyframes";
 import Accordion from "~/components/features/accordion/accordion";
 import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import SkillBar from "~/components/features/skill-bar";
 const reviewDefault = {
   rating: 5,
   comment: "",
@@ -26,6 +24,8 @@ const reviewDefault = {
   email: "",
   images: [],
 };
+
+const reviewColor = ["#76DB98", "#B7EA83", "#F6D757", "#FBB851", "#F17A54"];
 
 function DescOne(props) {
   const { product, openModal, user, productFAQs, productReviews } = props;
@@ -77,7 +77,14 @@ function DescOne(props) {
         const data = item.result.buckets
           .sort((a, b) => +a.key - +b.key)
           .reverse();
-        setReviewAnalytics(data);
+        const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
+
+        const analytics = data.map((d) => ({
+          ...d,
+          percentage: getPer(total, +d.doc_count),
+        }));
+
+        setReviewAnalytics(analytics);
       }
     } catch (e) {
       console.log("e", e);
@@ -253,44 +260,51 @@ function DescOne(props) {
           <div className="product-tab-reviews">
             <div className="reply mt-8 mb-8">
               <div className="title-wrapper text-left">
-                <h3 className="title title-simple text-left text-normal">
+                <h3 className="title title-simple text-uppercase text-left">
                   {reviews.length > 0
-                    ? "Add a Review"
+                    ? "CUSTOMER REVIEWS"
                     : "Be The First To Review “" + title + "”"}
                 </h3>{" "}
                 {!!reviews.length && (
                   <div className="review-section">
-                    <div className="total-review w-100">
-                      <h4>{rating}</h4>
-                      <RatingStar value={rating} />
+                    <div className="total-review mb-2 w-100">
+                      <div>
+                        <h2 className="mb-1 lh-1 ml-1">{rating}</h2>
+                        <RatingStar value={rating} />
+                      </div>
+
                       {!!product?.totalRatings && (
-                        <span>Based on {product.totalRatings} reviews</span>
+                        <span className="mt-2">Based on {product.totalRatings} reviews</span>
                       )}
                     </div>
                     <div className="rating w-100">
-                      {reviewAnalytics.map((r) => (
+                      {reviewAnalytics.map((r, i) => (
                         <div
-                          className="d-flex align-items-center justify-content-center mt-2"
+                          className="d-flex w-100 align-items-center  justify-content-center mt-2"
                           key={r.key}
                         >
-                          <RatingStar value={+r.key} />
-                          <div className="ml-1 percent">
-                            ({getPer(total, +r.doc_count)}%)
-                          </div>
-                          <span className="ml-1">{+r.doc_count}</span>
+                          <span className="mr-2 d-flex flex-column percent">
+                            {5 - i} Star
+                          </span>
+                          <SkillBar
+                            color={reviewColor[i]}
+                            className="review-bar"
+                            percentage={r.percentage}
+                          />
+                          <div className="ml-1 percent">{r.percentage}%</div>
                         </div>
                       ))}
                     </div>
                     <div className="w-100 d-flex align-items-center justify-content-center">
-                      <div className="buttons">
-                        <div className="justify-content-end">
+                      <div className="buttons  ml-1 mr-1 ">
+                        <div className="justify-content-end w-100">
                           <button
-                            className="btn btn-primary  btn-rounded mb-2"
+                            className="btn w-100  btn-rounded mb-2"
                             onClick={() => {
                               setShowReview(!showReview);
                             }}
                           >
-                            Add Review
+                            Write a review
                           </button>
                         </div>
                       </div>
