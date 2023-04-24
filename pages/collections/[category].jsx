@@ -26,7 +26,6 @@ function Categories(props) {
     products,
     categoryId,
     tag,
-    sideBarCategories,
     pageFilter,
     subCategories,
   } = props;

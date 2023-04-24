@@ -116,7 +116,7 @@ export default function ToolBox(props) {
   };
 
   return (
-    <>
+    <div>
       <nav
         className={`toolbox sticky-toolbox sticky-content fix-top ${
           type === "horizontal" ? "toolbox-horizontal" : ""
@@ -240,6 +240,6 @@ export default function ToolBox(props) {
           })}
         </div>
       )}
-    </>
+    </div>
   );
 }

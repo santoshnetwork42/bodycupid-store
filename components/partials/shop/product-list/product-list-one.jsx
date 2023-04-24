@@ -133,14 +133,11 @@ function ProductListOne(props) {
   useEffect(() => {
     getProducts(true);
     resetFilter(true);
-    return () => {
-      resetFilter(false);
-    };
   }, [filters]);
 
   if (loading) {
     return (
-      <>
+      <div>
         <br />
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
@@ -161,7 +158,7 @@ function ProductListOne(props) {
             ))}
           </div>
         )}
-      </>
+      </div>
     );
   }
 
