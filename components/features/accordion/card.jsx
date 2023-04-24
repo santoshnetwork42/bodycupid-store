@@ -13,6 +13,7 @@ export default function Card(props) {
     iconClass,
     type = "normal",
     url,
+    onLinkClick = () => {},
     ...restProps
   } = props;
 
@@ -22,6 +23,7 @@ export default function Card(props) {
         <div className={`card ${adClass}`}>
           <div className={`card-header`} onClick={onToggle}>
             <ALink
+              onClick={onLinkClick}
               href="#"
               className={`toggle-button ${toggleState.toLowerCase()}`}
             >
@@ -62,13 +64,14 @@ export default function Card(props) {
     <SlideToggle collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <>
-          <ALink href={url ? url : "#"}>
+          <ALink onClick={onLinkClick} href={url ? url : "#"}>
             {title}
             <span
               className={`toggle-btn ${toggleState.toLowerCase()}`}
               onClick={(e) => {
-                onToggle();
+                e.stopPropagation();
                 e.preventDefault();
+                onToggle();
               }}
             >
               {["expanded", "expanding"].includes(toggleState.toLowerCase()) ? (

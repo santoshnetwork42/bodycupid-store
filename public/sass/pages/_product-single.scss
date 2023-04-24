@@ -453,7 +453,6 @@
     }
 
     .read-more {
-        color: black;
         text-decoration: underline;
     }
 
@@ -865,17 +864,15 @@ aside {
     }
 }
 
-.product-card-wrapper {
-    .product-card {
-        background-color: $white-color;
-        padding-top: 1.5rem;
-        border-radius: 1rem;
-        box-shadow: 0 2rem 1rem rgba(0, 0, 0, .05), 0 0 5px rgba(0, 0, 0, .05);
-    }
+.product-card {
+    background-color: $white-color;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 2rem 1rem rgba(0, 0, 0, .05), 0 0 5px rgba(0, 0, 0, .05);
+}
 
-    .owl-stage-outer {
-        padding-bottom: 3rem;
-    }
+.owl-stage-outer {
+    padding-bottom: 3rem;
 }
 
 

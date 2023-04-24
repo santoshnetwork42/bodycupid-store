@@ -93,7 +93,7 @@ function ProductDefault(props) {
 
       {!!product && (
         <>
-          <div className='page-content bg-white'>
+          <div className="page-content bg-white">
             <div className="container vertical">
               <div className="product product-single row ">
                 <div className="mt-3 d-sm-show">
@@ -115,7 +115,7 @@ function ProductDefault(props) {
               </div>
             </div>
           </div>
-          <div className='page-content pb-10'>
+          <div className="page-content pb-10">
             <div className="container vertical">
               <LinkedProducts product={product} />
               <DescOne product={product} productFAQs={productFAQs} />
@@ -208,6 +208,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {
+const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
 })(ProductDefault);
+// Component.showStickyCheckout = true;
+
+export default Component;
