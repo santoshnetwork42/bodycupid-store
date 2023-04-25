@@ -246,12 +246,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+                id: response.id,
+                shoppingcartId: id,
+                productId: response.productId,
+                variantId: response.variantId,
+                quantity: response.quantity,
+              }
             : p
         );
 
@@ -314,45 +314,45 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
-    const { cart, user } = yield select();
-    const { cart: cartResponse } = cart;
-    const { data: userResponse } = user;
-    if (cartResponse && userResponse) {
-      const { products = [] } = cartResponse || {};
-      const { products: currProducts } = e.payload;
+      const { cart, user } = yield select();
+      const { cart: cartResponse } = cart;
+      const { data: userResponse } = user;
+      if (cartResponse && userResponse) {
+        const { products = [] } = cartResponse || {};
+        const { products: currProducts } = e.payload;
 
-      if (Array.isArray(products) && products.length) {
-        const promise = [];
-        const updatedProducts = currProducts.map((p) => {
-          const product = products.find(
-            (prd) =>
-              prd.productId === p.id &&
-              (!prd.variantId || p.variantId === prd.variantId)
-          );
-
-          if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
-            product.quantity = parseInt(p.qty);
-            promise.push(
-              call([API, API.graphql], {
-                query: updateShoppingCartProduct,
-                variables: {
-                  input: {
-                    id: product.id,
-                    quantity: parseInt(p.qty),
-                  },
-                },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
-              })
+        if (Array.isArray(products) && products.length) {
+          const promise = [];
+          const updatedProducts = currProducts.map((p) => {
+            const product = products.find(
+              (prd) =>
+                prd.productId === p.id &&
+                (!prd.variantId || p.variantId === prd.variantId)
             );
-          }
-          return product;
-        });
-        yield all(promise);
-        yield put({
-          type: actionTypes.SET_CART,
-          payload: { products: updatedProducts },
-        });
-      }
+
+            if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
+              product.quantity = parseInt(p.qty);
+              promise.push(
+                call([API, API.graphql], {
+                  query: updateShoppingCartProduct,
+                  variables: {
+                    input: {
+                      id: product.id,
+                      quantity: parseInt(p.qty),
+                    },
+                  },
+                  authMode: "AMAZON_COGNITO_USER_POOLS",
+                })
+              );
+            }
+            return product;
+          });
+          yield all(promise);
+          yield put({
+            type: actionTypes.SET_CART,
+            payload: { products: updatedProducts },
+          });
+        }
     }
   });
 

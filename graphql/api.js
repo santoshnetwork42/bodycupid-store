@@ -508,6 +508,7 @@ export const getFeaturedCoupon = /* GraphQL */ `
         id
         code
         discount
+        expirationDate
         isActive
         isFeatured
         couponType
@@ -884,6 +885,7 @@ export const findProducts = /* GraphQL */ `
         variants {
           items {
             id
+            title
             price
             position
             listingPrice
@@ -1563,33 +1565,33 @@ export const listCollections = /* GraphQL */ `
 `;
 
 export const getCollectionsBySlug = /* GraphQL */ `
-query SearchCollections(
-  $filter: SearchableCollectionFilterInput
-  $sort: [SearchableCollectionSortInput]
-  $limit: Int
-  $nextToken: String
-  $from: Int
-  $aggregates: [SearchableCollectionAggregationInput]
-) {
-  searchCollections(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-    from: $from
-    aggregates: $aggregates
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
   ) {
-    items {
-      slug
-      parent
-      name
-      description
-      showInMenu
-      priority
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        showInMenu
+        priority
+      }
+      nextToken
     }
-    nextToken
   }
-}
 `;
 export const searchShippingTiers = /* GraphQL */ `
   query SearchShippingTiers(

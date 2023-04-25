@@ -3,9 +3,7 @@
 ---------------------------------------------- */
 .shop-table {
     text-align: left;
-    tbody {
-        border-bottom: 1px solid $border-color;
-    }
+
     td {
         padding: 1.5rem 1rem 1.5rem 0;
         border-top: 1px solid $border-color;
@@ -113,9 +111,7 @@
         text-align: center;
         thead { display: none; }
         tbody, tr, td { display: block; }
-        tbody {
-            border: 1px solid $border-color;
-        }
+       
         tr {
             position: relative;
             padding: 4rem 1rem 4rem;
