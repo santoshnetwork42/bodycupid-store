@@ -22,8 +22,11 @@
             text-decoration: underline;
         }
     }
-    .dashboard p {
-        color: #777;
+    .dashboard {
+      
+        p {
+            color: #777;
+        }
     }
     .btn.btn-dark {
         padding: 0.93em 1.97em;
@@ -76,7 +79,7 @@
         text-align: left;
         th {
             padding: 1.5rem 0;
-            background-color: #f4f4f4;
+            // background-color: #f4f4f4;
         }
     }
     tbody {
@@ -84,7 +87,7 @@
             padding: 1.5rem 1rem 1.5rem 0;
         }
         tr:nth-child(2n) td {
-            background-color: #f4f4f4;
+            // background-color: #f4f4f4;
         }
     }
     td:first-child {
@@ -145,7 +148,8 @@
     span {
         display: inline-block;
         padding: .1rem .5rem;
-        background-color: $light-color;
+        background-color: $dark-green;
+        color: $white-color;
         border-radius: .3rem;
         line-height: 1.9;
     }
@@ -183,6 +187,6 @@
 }
 @include mq(xs, max) {
     .order-action, .order-table thead th:last-child {
-        display: none;
+        // display: none;
     }
 }

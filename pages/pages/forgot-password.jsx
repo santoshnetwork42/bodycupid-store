@@ -64,7 +64,7 @@ function ForgotPassword({ store }) {
           </ul>
         </div>
       </nav>
-      <div className="page-content mt-6 pb-2 mb-10">
+      <div className="page-content mt-6 pb-2 mb-10 bg-white">
         <div className="container">
           <div className="login-popup">
             <div className="form-box">

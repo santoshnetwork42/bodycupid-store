@@ -829,9 +829,6 @@
 }
 
 @include mq(lg) {
-    .toolbox{
-       justify-content: space-between;
-    }
     .toolbox .sidebar-content {
         max-width: none;
     }
