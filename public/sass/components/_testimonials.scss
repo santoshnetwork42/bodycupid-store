@@ -144,14 +144,14 @@
 
     blockquote {
         max-width: 86rem;
-        color:#6F4632;
+        color:$text-color-1;
     }
     cite {
         text-transform: uppercase;
         font-weight: 600;
-        color: #6F4632;
+        color: $text-color-1;
         span {
-            color: #6F4632;
+            color: $text-color-1;
         }
     }
 }

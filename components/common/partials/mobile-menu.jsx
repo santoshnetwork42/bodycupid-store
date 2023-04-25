@@ -12,7 +12,6 @@ import { getSortedCategoryAndSubCategory } from "~/utils/helper";
 import OptimizedImage from "~/components/features/optimized-image";
 
 function MobileMenu({ user }) {
-  const [search, setSearch] = useState("");
   const router = useRouter();
   const [categories, setCategories] = useState([]);
 
@@ -44,9 +43,7 @@ function MobileMenu({ user }) {
     };
   }, []);
 
-  useEffect(() => {
-    setSearch("");
-  }, [router.query.slug]);
+
 
   const hideMobileMenuHandler = () => {
     if (window.innerWidth > 991) {
@@ -58,9 +55,6 @@ function MobileMenu({ user }) {
     document.querySelector("body").classList.remove("mmenu-active");
   };
 
-  function onSearchChange(e) {
-    setSearch(e.target.value);
-  }
 
   function onBodyClick(e) {
     if (e.target.closest(".header-search"))
@@ -77,16 +71,7 @@ function MobileMenu({ user }) {
         .classList.remove("show-results");
   }
 
-  async function onSubmitSearchForm(e) {
-    e.preventDefault();
-    await router.push({
-      pathname: "/collections/all",
-      query: {
-        search: search,
-      },
-    });
-    hideMobileMenu();
-  }
+
 
   const handleLogout = useCallback(async () => {
     await Auth.signOut();
@@ -125,7 +110,8 @@ function MobileMenu({ user }) {
                 <Card
                   title={category.name}
                   type="mobile"
-                  url={`/collections/${category.slug}`}
+                  onLinkClick={hideMobileMenu}
+                  url={`/collections/${category.slug}`} 
                 >
                   <ul>
                     {category.subCategory.items.map((item) => (
@@ -134,6 +120,7 @@ function MobileMenu({ user }) {
                           href={
                             "/collections/" + category.slug + "/" + item.slug
                           }
+                          onClick={hideMobileMenu}
                         >
                           {item.name}
                         </ALink>

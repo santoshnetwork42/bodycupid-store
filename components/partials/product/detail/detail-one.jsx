@@ -33,12 +33,10 @@ function DetailOne(props) {
     data: product,
     isStickyCart = false,
     adClass = "",
-    isNav = true,
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => { },
     user,
-    applyCoupon,
     toggleWishlist,
     addToCart,
     wishlist,
@@ -65,8 +63,7 @@ function DetailOne(props) {
   useEffect(() => {
     getFeaturedCoupons();
   }, []);
-
-  const { maxDiscountCoupon } = useMemo(() => {
+  const { maxDiscountCoupon, couponList } = useMemo(() => {
     let selectedProduct = product;
     if (sizes.length) {
       selectedProduct = product?.variants?.items.find(
@@ -74,37 +71,29 @@ function DetailOne(props) {
       );
     }
     if (!!featuredCoupons?.length && selectedProduct) {
-      const discountCoupon = featuredCoupons.reduce((prev, current) => {
-        const first = getProductCouponTotal(prev, selectedProduct);
+      const list = featuredCoupons.filter((f) => f.couponType !== "BOGO");
+
+      const couponList = list.reduce((prev, current) => {
         const second = getProductCouponTotal(current, selectedProduct);
-        return first > second
-          ? {
-            ...prev,
-            price: selectedProduct?.price,
-            totalDiscount: getProductCouponTotal(prev, selectedProduct),
-          }
-          : {
-            ...current,
-            price: selectedProduct?.price,
-            totalDiscount: getProductCouponTotal(current, selectedProduct),
-          };
-      }, {});
-      return { maxDiscountCoupon: discountCoupon };
+        prev.push({
+          ...current,
+          price: selectedProduct?.price,
+          totalDiscount: second,
+        });
+        return prev;
+      }, []);
+
+      const res = couponList
+        .sort((a, b) => b.totalDiscount - a.totalDiscount)
+        .filter((c) => c.totalDiscount);
+      return { maxDiscountCoupon: res[0], couponList: res.slice(1, 4) };
     }
     return {
       maxDiscountCoupon: null,
+      couponList: [],
     };
   }, [product?.slug, featuredCoupons, selectedVariant]);
 
-  const applyCouponCode = useCallback(async () => {
-    try {
-      if (!!maxDiscountCoupon && !appliedCoupon?.isFeatured) {
-        applyCoupon(maxDiscountCoupon);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  }, [maxDiscountCoupon, user, appliedCoupon]);
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
@@ -220,7 +209,6 @@ function DetailOne(props) {
           price: product.price,
         });
       }
-      applyCouponCode();
     }
   };
 
@@ -252,7 +240,6 @@ function DetailOne(props) {
               : item;
           })
         );
-        applyCouponCode();
       } else {
         removeFromCart({ ...product, variantId: selectedVariant });
       }
@@ -295,7 +282,7 @@ function DetailOne(props) {
       </div>
 
       <h2 className="detail-product-name text-uppercase">{product.title}</h2>
- 
+
       {!!product?.tags && (
         <div className="mb-1">
           <label className="product-tag">
@@ -315,12 +302,12 @@ function DetailOne(props) {
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-2 d-flex">
-            {listingPrice > price && (
+           <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
+           {listingPrice > price && (
               <>
                 <del className="old-price mr-2">₹{listingPrice}</del>{" "}
               </>
             )}
-            <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
             {!!save && (
               <ins className="product-save">(₹{listingPrice - price} OFF)</ins>
             )}
@@ -357,7 +344,7 @@ function DetailOne(props) {
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= product.rating;
 
-            return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+            return <Star size={16} color={isFilled ? "#d26e4b" : "#D9D9D9"} />;
           })}
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}
@@ -373,9 +360,8 @@ function DetailOne(props) {
           </div>
         )}
       </div>
-
       {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
-        <ProductBestPrice {...maxDiscountCoupon} />
+        <ProductBestPrice {...maxDiscountCoupon} couponList={couponList} />
       )}
 
       <p className="product-short-desc">{product.productDescription}</p>
@@ -563,26 +549,6 @@ function DetailOne(props) {
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
 
-      <div className="product-footer">
-        <a
-          href="#"
-          className={`btn-product btn-wishlist`}
-          title={isWishlisted ? "Browse wishlist" : "Add to wishlist"}
-          onClick={wishlistHandler}
-        >
-          <i>
-            {isWishlisted ? (
-              <HeartFilled size={18} color="currentColor" />
-            ) : (
-              <Heart size={18} color="currentColor" />
-            )}
-          </i>
-          {/* <i
-            className={isWishlisted ? "d-icon-heart-full" : "d-icon-heart"}
-          ></i> */}
-          {isWishlisted ? "Browse wishlist" : "Add to Wishlist"}
-        </a>
-      </div>
     </div>
   );
 }
@@ -601,7 +567,6 @@ export default connect(mapStateToProps, {
   toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
-  applyCoupon: cartActions.applyCoupon,
   removeFromCart: cartActions.removeFromCart,
   getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(DetailOne);

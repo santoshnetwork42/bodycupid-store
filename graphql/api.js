@@ -800,6 +800,7 @@ export const getBasicSubCategory = /* GraphQL */ `
       items {
         id
         name
+        description
         slug
         bannerUrl
         categoryID
@@ -828,6 +829,7 @@ export const getBasicCategory = /* GraphQL */ `
       items {
         id
         name
+        description
         slug
       }
     }

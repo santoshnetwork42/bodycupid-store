@@ -16,6 +16,7 @@
 @include set-default((product: (font-family: $font-family,
             font-size: 1.4rem,
             color: #999,
+            background-color:$white-color,
             body: (padding-top: 1.4rem,
                 padding-bottom: 2rem),
             label: (margin-bottom: .5rem,
@@ -258,14 +259,14 @@
 .product-label-group {
     position: absolute;
     right: 0px;
-    top: -15px;
+    top: 0px;
     max-width: 10rem;
 }
 
 .product-tags-group {
     position: absolute;
     left: 0px;
-    top: -15px;
+    top: 0px;
     max-width: 10rem;
 }
 
@@ -274,18 +275,20 @@
     text-align: center;
     padding: 0.5rem 0.7rem;
     font-size: 1.1rem;
-    letter-spacing: 0.5px;  
+    letter-spacing: 0.5px;
     line-height: 1;
     color: #fff;
 
     &.label-new {
         @include print_css(product, label, new);
     }
+
     &.label-sold {
         border-top-left-radius: 0.5rem;
         border-bottom-right-radius: 0.5rem;
         @include print_css(product, label, sold);
     }
+
     &.label-best-seller {
         border-top-left-radius: 1rem;
         border-bottom-right-radius: 1rem;
@@ -293,7 +296,7 @@
     }
 
     &.label-sale {
-       border-top-right-radius: 1rem;
+        border-top-right-radius: 1rem;
         border-bottom-left-radius: 1rem;
         @include print_css(product, label, sale);
     }
@@ -364,8 +367,7 @@
     justify-content: center;
     flex: 1;
     padding: 1.14em 0;
-    background-color: $primary-color;
-    color: #fff;
+
     font-family: $font-family;
 
     font: {
@@ -378,9 +380,7 @@
     text-transform: uppercase;
     transition: opacity .3s;
 
-    &:hover {
-        color: #fff;
-    }
+
 }
 
 // QuickView Button
@@ -405,6 +405,7 @@
     background-color: rgb(249, 232, 232);
     color: #C20000;
     letter-spacing: 1px;
+
     &:hover {
         color: #C20000;
     }
@@ -492,6 +493,7 @@
         opacity: 1;
         visibility: visible;
     }
+
     .product-tags {
         font-size: 1.2rem;
         color: $success-color;
@@ -560,6 +562,7 @@
     .new-price,
     .product-save {
         text-decoration: none;
+
         span {
             font-weight: 400;
         }
@@ -571,9 +574,11 @@
     display: flex;
     align-items: center;
     @include print_css(product, rating);
+
     .rating-product-list {
         padding-bottom: 3px;
     }
+
     .rating {
         font-size: 1.3rem;
         text-align: center;
@@ -634,6 +639,7 @@
     letter-spacing: 0;
     text-transform: capitalize;
     line-height: 1;
+
     &:hover {
         color: $primary-color;
     }
@@ -1158,7 +1164,7 @@
             }
         }
 
-        
+
 
         .product-name {
             padding-left: 2rem;
@@ -1439,12 +1445,13 @@
     }
 }
 
-@include mq(xs, max){
-    .product{
+@include mq(xs, max) {
+    .product {
         .product-sm {
             .old-price {
                 font-size: 1.3rem;
             }
+
             .new-price {
                 font-size: 1.3rem;
             }

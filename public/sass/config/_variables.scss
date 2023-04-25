@@ -3,11 +3,12 @@
 ------------------------------------------- */
 
 // 1. Colors
-$primary-color: #000 !default;
+$primary-color: #1A181E !default;
 $primary-color-dark:  #222 !default;
-$secondary-color: #d26e4b !default;
+$primary-button-color:  #FFD613 !default;
+$secondary-color: #E50B20	 !default;
 $alert-color: #b10001 !default; 
-$success-color: #a8c26e !default;
+$success-color: #057508 !default;
 $info-color: #26c !default;
 $body-color: #666 !default;
 $dark-color: #222 !default;
@@ -19,13 +20,15 @@ $white-color: #fff !default;
 $light-success-color: #F3FCE2 !default;
 $dark-green : #17B31B !default;
 $sold-out-back: #C20000 !default;
-$new-primary-color:#F9F6E6 !default;
+$background-color-1:#F9F6E6 !default;
+$background-color-2:#E9DBC4 !default;
+$text-color-1:#6F4632 !default;
 
 
 // 2. Font-families
 $alt-font-family: sans-serif !default;
 $second-font-family: Poppins, $alt-font-family !default;
-$font-family: Poppins, $alt-font-family !default;
+$font-family: Manrope, $alt-font-family !default;
 $third-font-family: 'Open Sans', $alt-font-family !default;
 
 // 3. Breakpoints

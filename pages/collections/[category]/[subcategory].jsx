@@ -15,6 +15,7 @@ import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
 import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
+import CategoryHeader from "~/components/common/category-header";
 
 function Categories(props) {
   const {
@@ -43,12 +44,15 @@ function Categories(props) {
 
       {/* <ShopBanner category={subCategory} /> */}
 
-      <div className="page-content mb-10 pb-3">
+      <div className="page-content pb-3">
         <div className="container">
+        <CategoryHeader
+            name={subCategory?.name}
+            description={subCategory?.description}
+          />
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne categories={sideBarCategories} />
 
-            <div className="col-lg-9 main-content">
+            <div className="col-lg-12 main-content">
               <ProductListOne
                 category={subCategory}
                 categoryId={categoryId}

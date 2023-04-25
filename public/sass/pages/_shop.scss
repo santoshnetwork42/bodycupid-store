@@ -72,10 +72,9 @@
     line-height: 1.5;   
     padding: 3.5rem .2rem 1rem;
     transition: margin .4s;
-    background-color: #fff;
 
     &.sticky-toolbox {
-        padding-top: 3rem;
+        padding-top: 1rem;
     }
 
     &, &-left, &-right {
@@ -140,7 +139,7 @@
     }
    
     .selected-sub-category-tag {
-        background-color: $dark-color;
+        background-color: $text-color-1;
         color: $white-color;
     }
     .selected-filter-tags {
@@ -170,7 +169,7 @@
 .toolbox-item {
     flex-wrap: nowrap;
     margin-bottom: 1rem;
-    label { color: $dark-color; }
+    label { color: inherit; }
 }
 .toolbox-item-full {
     flex-basis: 100%;
@@ -198,7 +197,7 @@
 
 // Select Menu
 .select-menu {
-    color: #222;
+    color: inherit;
 
     &::before {
         right: 1.25em;

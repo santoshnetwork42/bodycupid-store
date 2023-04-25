@@ -1,0 +1,14 @@
+.skillbar-container {
+    width: 100%;
+    height: 1.5rem;
+    border-radius: 4px;
+    background-color: #ddd;
+    overflow: hidden;
+
+    .skills {
+        text-align: right;
+        height: 100%;
+        color: white;
+    }
+
+}

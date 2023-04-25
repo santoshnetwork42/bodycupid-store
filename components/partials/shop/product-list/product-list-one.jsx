@@ -20,7 +20,7 @@ const gridClasses = {
 
 function ProductListOne(props) {
   const {
-    itemsPerRow = 3,
+    itemsPerRow = 4,
     type = "left",
     isToolbox = true,
     products: initialData,
@@ -32,8 +32,15 @@ function ProductListOne(props) {
   } = props;
   const router = useRouter();
   const { query } = router;
-  
-  const { minprice, maxprice, type: gridType = "grid", search, sortby,category } = query;
+
+  const {
+    minprice,
+    maxprice,
+    type: gridType = "grid",
+    search,
+    sortby,
+    category,
+  } = query;
 
   const [applyFilters, resetFilter] = useState(
     !!sortby || !!search?.trim() || minprice || maxprice
@@ -65,19 +72,25 @@ function ProductListOne(props) {
     } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
       filter.price = { lte: Number(maxprice) };
     }
-
-    if (sortby === "popularity") {
-      sortBy.push({ field: "rating", direction: "desc" });
-    } else if (sortby === "price-low") {
-      sortBy.push({ field: "price", direction: "asc" });
-    } else if (sortby === "price-high") {
-      sortBy.push({ field: "price", direction: "desc" });
-    } else if (sortBy === "best-seller") {
-      sortBy.push({ field: "totalOrders", direction: "desc" });
+    switch (sortby) {
+      case "popularity":
+        sortBy.push({ field: "rating", direction: "desc" });
+        break;
+      case "price-low":
+        sortBy.push({ field: "price", direction: "asc" });
+        break;
+      case "price-high":
+        sortBy.push({ field: "price", direction: "desc" });
+        break;
+      case "best-seller":
+        filter.collections = { eq: "best-seller" };
+        break;
+      default:
     }
 
     return { filter, limit: perPage, sort: sortBy };
   }, [perPage, maxprice, minprice, search, sortby]);
+
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -124,7 +137,7 @@ function ProductListOne(props) {
 
   if (loading) {
     return (
-      <>
+      <div>
         <br />
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
@@ -145,7 +158,7 @@ function ProductListOne(props) {
             ))}
           </div>
         )}
-      </>
+      </div>
     );
   }
 

@@ -92,32 +92,38 @@ function ProductDefault(props) {
       <h1 className="d-none">{product?.title}</h1>
 
       {!!product && (
-        <div className={`page-content mb-10 pb-6`}>
-          <div className="container vertical">
-            <div className="product product-single row mb-7">
-              <div className="mt-3 d-sm-show">
-                <ProductBreadcrumbs {...product} />
-              </div>
-              <div className="col-md-6 sticky-sidebar-wrapper mt-3">
-                <MediaOne product={product} variantId={selectedVariant} />
-              </div>
+        <>
+          <div className="page-content bg-white">
+            <div className="container vertical">
+              <div className="product product-single row ">
+                <div className="mt-3 d-sm-show">
+                  <ProductBreadcrumbs {...product} />
+                </div>
+                <div className="col-md-6 sticky-sidebar-wrapper mt-3">
+                  <MediaOne product={product} variantId={selectedVariant} />
+                </div>
 
-              <div className="col-md-6">
-                <DetailOne
-                  data={product}
-                  defaultVariant={defaultVariantId}
-                  variantId={selectedVariant}
-                  setVariant={setVariant}
-                  isNav={true}
-                />
+                <div className="col-md-6">
+                  <DetailOne
+                    data={product}
+                    defaultVariant={defaultVariantId}
+                    variantId={selectedVariant}
+                    setVariant={setVariant}
+                    isNav={true}
+                  />
+                </div>
               </div>
             </div>
-            <LinkedProducts product={product} />
-            <DescOne product={product} productFAQs={productFAQs} />
-
-            <RelatedProducts products={relatedProducts} />
           </div>
-        </div>
+          <div className="page-content pb-10">
+            <div className="container vertical">
+              <LinkedProducts product={product} />
+              <DescOne product={product} productFAQs={productFAQs} />
+
+              <RelatedProducts products={relatedProducts} />
+            </div>
+          </div>
+        </>
       )}
     </main>
   );
@@ -202,6 +208,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {
+const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
 })(ProductDefault);
+// Component.showStickyCheckout = true;
+
+export default Component;

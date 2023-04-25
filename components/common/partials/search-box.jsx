@@ -89,12 +89,10 @@ function SearchForm({ type = "input" }) {
   }
 
   function onSearchClick(e) {
-    e.preventDefault();
     e.stopPropagation();
     e.currentTarget.parentNode.classList.toggle("show");
   }
  function onSearchExpand(e) {
-    e.preventDefault();
     e.currentTarget.parentNode.classList.toggle("show");
   }
 
@@ -125,6 +123,7 @@ function SearchForm({ type = "input" }) {
         search: search,
       },
     });
+    e.currentTarget.parentNode.classList.toggle("show");
   }
 
   return (

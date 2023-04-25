@@ -24,12 +24,11 @@ function AllProduct(props) {
 
       {/* <ShopBanner category={null} /> */}
 
-      <div className="page-content mb-10 pb-3">
+      <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne categories={sideBarCategories} />
 
-            <div className="col-lg-9 main-content">
+            <div className="col-lg-12 main-content">
               <ProductListOne products={products} pageFilter={pageFilter} />
             </div>
           </div>
