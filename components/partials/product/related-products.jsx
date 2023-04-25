@@ -15,7 +15,7 @@ export default function RelatedProducts(props) {
   return (
     products &&
     products.length > 0 && (
-      <section className={`${adClass} product-card-wrapper`}>
+      <section className={`${adClass}`}>
         <div className="d-flex justify-content-between mb-5">
           <h2 className="capitalize-title m-0">{heading}</h2>
           <ALink href="#">
