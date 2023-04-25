@@ -70,11 +70,19 @@
     }
 
     .owl-dots {
+        .owl-dot {
+            span {
+                background-color: $white-color;
+                border-color: $white-color;
+                opacity: 0.8;
+            }
+        }
         .owl-dot{
             &.active {
                 span {
                     background-color: $primary-color;
                     border-color: $primary-color;
+                    opacity: 1;
                 }
             }
 
@@ -490,4 +498,30 @@
             font-size: 24px;
         }
     }
+}
+
+.owl-theme .owl-dots {
+    line-height: 0;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent
+}
+
+.owl-theme .owl-dots .owl-dot {
+    display: inline-block;
+    zoom: 1
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 5px 6px;
+    border: .1rem solid #d7d7d7;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: all .3s ease;
+    border-radius: 30px
+}
+
+.owl-theme .owl-dots .owl-dot.active span {
+    width: 18px;
 }
