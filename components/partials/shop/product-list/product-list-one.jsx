@@ -20,7 +20,7 @@ const gridClasses = {
 
 function ProductListOne(props) {
   const {
-    itemsPerRow = 3,
+    itemsPerRow = 4,
     type = "left",
     isToolbox = true,
     products: initialData,
@@ -137,7 +137,7 @@ function ProductListOne(props) {
 
   if (loading) {
     return (
-      <>
+      <div>
         <br />
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
@@ -158,7 +158,7 @@ function ProductListOne(props) {
             ))}
           </div>
         )}
-      </>
+      </div>
     );
   }
 
