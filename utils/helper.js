@@ -77,7 +77,7 @@ export const removeHoverEffect = () => {
           }
         }
       }
-    } catch (ex) {}
+    } catch (ex) { }
   }
 };
 
@@ -120,20 +120,21 @@ export const copyText = (copyText, message) => {
   }
 };
 
-export const getUpdatedCart = (cartList, recordKey, field, value) => {
-  return cartList.map((c) => {
+export const getUpdatedCart = (cartList, recordKey, payload) => {
+  return [...cartList].map((c) => {
     if (recordKey === c.recordKey) {
-      return {
-        ...c,
-        [field]: value,
-      };
-    } else {
-      return c;
+      return { ...c, ...payload, };
     }
+    return c;
   });
 };
 
 export const getRecordKey = (product, variantId) => {
-  if (variantId) return `${product.id}-${variantId}`;
-  return product.id;
+  const { id } = product;
+  if (variantId) return `${id}-${variantId}`;
+
+  const firstVariant = getFirstVariantId(product);
+  if (firstVariant) return `${id}-${firstVariant}`;
+
+  return id;
 };

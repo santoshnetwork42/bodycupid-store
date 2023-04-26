@@ -72,13 +72,9 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.REMOVE_FROM_CART:
       tmpProduct = { ...action.payload.product };
-      if (!tmpProduct.variantId) {
-        tmpProduct.variantId = getFirstVariantId(tmpProduct);
-      }
-      recordKey = tmpProduct.recordKey;
       let cart = state.data.reduce((cartAcc, product) => {
-        if (recordKey !== product.recordKey) {
-          cartAcc.push(tmpProduct);
+        if (tmpProduct.recordKey !== product.recordKey) {
+          cartAcc.push(product);
         }
         return cartAcc;
       }, []);
@@ -242,12 +238,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-                id: response.id,
-                shoppingcartId: id,
-                productId: response.productId,
-                variantId: response.variantId,
-                quantity: response.quantity,
-              }
+              id: response.id,
+              shoppingcartId: id,
+              productId: response.productId,
+              variantId: response.variantId,
+              quantity: response.quantity,
+            }
             : p
         );
 

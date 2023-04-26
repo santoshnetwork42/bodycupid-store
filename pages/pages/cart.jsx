@@ -33,6 +33,7 @@ function Cart(props) {
   useEffect(() => {
     getShippingTiers();
   }, []);
+
   const getCartDataWithCoupon = () => {
     const item = cartList.reduce((prev, curr) => {
       return prev.price < curr.price ? prev : curr;
@@ -79,27 +80,35 @@ function Cart(props) {
 
   const onChangeQty = (item, qty) => {
     if (qty) {
-      const recordKey = getRecordKey(item, item.variantId);
-      const cartData = getUpdatedCart(cartList, recordKey, "qty", qty);
+      const cartData = getUpdatedCart(cartList, item.recordKey, { qty });
       updateCart(cartData);
     } else {
       removeFromCart(item);
     }
   };
+
   const changeVariant = (e, item) => {
     const { id } = item;
     const variant = item.variants.items.find((c) => c.id === e.target.value);
-    const cart = cartList.map((i) => {
-      return id === i.id
-        ? {
-            ...i,
-            variantId: e.target.value,
-            price: variant.price,
-            listingPrice: variant.listingPrice,
-          }
-        : i;
-    });
-    updateCart(cart);
+    const recordKey = `${id}-${e.target.value}`;
+
+    const cartItem = cartList.find((c) => c.recordKey === recordKey);
+    if (cartItem) {
+      const updatedCart = [...cartList]
+        .filter((c) => c.recordKey !== item.recordKey)
+        .map((c) => {
+          if (c.recordKey === recordKey) return { ...c, qty: c.qty + item.qty };
+          return c;
+        });
+      updateCart(updatedCart);
+    } else {
+      const updatedCart = getUpdatedCart(cartList, item.recordKey, {
+        recordKey,
+        price: variant.price,
+        variantId: e.target.value,
+      });
+      updateCart(updatedCart);
+    }
   };
 
   const checkAuth = useCallback(() => {
@@ -115,7 +124,7 @@ function Cart(props) {
   const getVariantSelect = (item) => {
     return (
       <select
-        name="state"
+        name={`${item.recordKey}`}
         className="form-control"
         value={item.variantId}
         onChange={(e) => {
@@ -183,7 +192,7 @@ function Cart(props) {
                     </thead>
                     <tbody>
                       {cartItems.map((item) => (
-                        <Fragment key={"cart" + item.title}>
+                        <Fragment key={item.recordKey}>
                           <tr className="d-sm-none">
                             <td className="product-thumbnail">
                               <figure>

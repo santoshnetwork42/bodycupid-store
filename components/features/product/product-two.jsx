@@ -88,22 +88,22 @@ function ProductTwo(props) {
     });
   };
 
-  const isCartItem = useMemo(
-    () => cartList.some((cl) => cl.id === id),
-    [cartList]
-  );
+  const cartItem = useMemo(() => {
+    const recordKey = getRecordKey(product);
+    return cartList.find((cl) => cl.recordKey === recordKey);
+  }, [cartList]);
 
   const { thumbImage, secondaryImage, discount } = getProductMeta(product);
 
   function changeQty(qty) {
-    setQuantity(qty);
-    if (isCartItem) {
+    if (cartItem) {
       if (qty) {
-        const recordKey = getRecordKey(product, getFirstVariantId(product));
-        const cartData = getUpdatedCart(cartList, recordKey, "qty", qty);
+        setQuantity(qty);
+        const recordKey = getRecordKey(product);
+        const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
       } else {
-        removeFromCart(product);
+        removeFromCart({ ...cartItem });
       }
     }
   }
@@ -220,7 +220,7 @@ function ProductTwo(props) {
         <div className="product-action">
           {!!hasInventory ? (
             <>
-              {isCartItem ? (
+              {!!cartItem ? (
                 <Quantity
                   isProductList={true}
                   qty={quantity}

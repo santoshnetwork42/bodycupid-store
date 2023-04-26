@@ -72,6 +72,7 @@ function DetailOne(props) {
   useEffect(() => {
     getFeaturedCoupons();
   }, []);
+
   const { maxDiscountCoupon, couponList } = useMemo(() => {
     let selectedProduct = product;
     if (sizes.length) {
@@ -121,16 +122,17 @@ function DetailOne(props) {
       } else {
         setQuantity(1);
       }
+
       return cartItem;
     }
     return;
   }, [cartList, selectedVariant]);
 
   // decide if the product is wishlisted
-  const isWishlisted = useMemo(
-    () => wishlist.some((i) => i.id === product?.id),
-    [wishlist, product?.id]
-  );
+  // const isWishlisted = useMemo(
+  //   () => wishlist.some((i) => i.id === product?.id),
+  //   [wishlist, product?.id]
+  // );
 
   useEffect(() => {
     return () => {
@@ -166,21 +168,21 @@ function DetailOne(props) {
     }
   }, [selectedVariant, product]);
 
-  const wishlistHandler = (e) => {
-    e.preventDefault();
+  // const wishlistHandler = (e) => {
+  //   e.preventDefault();
 
-    if (toggleWishlist && !isWishlisted) {
-      let currentTarget = e.currentTarget;
-      currentTarget.classList.add("load-more-overlay", "loading");
-      toggleWishlist(product);
+  //   if (toggleWishlist && !isWishlisted) {
+  //     let currentTarget = e.currentTarget;
+  //     currentTarget.classList.add("load-more-overlay", "loading");
+  //     toggleWishlist(product);
 
-      setTimeout(() => {
-        currentTarget.classList.remove("load-more-overlay", "loading");
-      }, 1000);
-    } else {
-      router.push("/pages/wishlist");
-    }
-  };
+  //     setTimeout(() => {
+  //       currentTarget.classList.remove("load-more-overlay", "loading");
+  //     }, 1000);
+  //   } else {
+  //     router.push("/pages/wishlist");
+  //   }
+  // };
 
   const setVariantHandler = (variant) => {
     if (setVariant) {
@@ -197,10 +199,14 @@ function DetailOne(props) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
-        if (curIndex > -1) {
-          const variant = product.variants.items[curIndex];
-          tmpName = `${tmpName} - ${variant.title}`;
-          tmpPrice = variant.price;
+        if (selectedVariant) {
+          const variant = product.variants.items.find(
+            (i) => i.id === selectedVariant
+          );
+          if (variant) {
+            tmpName = `${tmpName} - ${variant.title}`;
+            tmpPrice = variant.price;
+          }
         }
 
         addToCart({
@@ -237,14 +243,14 @@ function DetailOne(props) {
   };
 
   function changeQty(qty) {
-    setQuantity(qty);
     if (cartItem) {
       if (qty) {
-        const recordKey = getRecordKey(product,product.variantId)
-        const cartData = getUpdatedCart(cartList, recordKey, "qty", qty);
+        setQuantity(qty);
+        const recordKey = getRecordKey(product, selectedVariant);
+        const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
       } else {
-        removeFromCart({ ...product, variantId: selectedVariant });
+        removeFromCart({ ...cartItem });
       }
     }
   }
@@ -296,9 +302,9 @@ function DetailOne(props) {
 
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
-          {product?.benefits.map((benefit) => {
-            return <lable>{benefit}</lable>;
-          })}
+          {product?.benefits.map((benefit) => (
+            <lable key={benefit}>{benefit}</lable>
+          ))}
         </div>
       )}
 
@@ -347,7 +353,13 @@ function DetailOne(props) {
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= product.rating;
 
-            return <Star size={16} color={isFilled ? "#d26e4b" : "#D9D9D9"} />;
+            return (
+              <Star
+                key={`rs-${product.id}-${index}`}
+                size={16}
+                color={isFilled ? "#d26e4b" : "#D9D9D9"}
+              />
+            );
           })}
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}
