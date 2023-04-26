@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import { getFirstVariantId } from "./products";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -117,4 +118,22 @@ export const copyText = (copyText, message) => {
     navigator.clipboard.writeText(copyText);
     toast(<AlertPopup message={message} status="info" />);
   }
+};
+
+export const getUpdatedCart = (cartList, recordKey, field, value) => {
+  return cartList.map((c) => {
+    if (recordKey === c.recordKey) {
+      return {
+        ...c,
+        [field]: value,
+      };
+    } else {
+      return c;
+    }
+  });
+};
+
+export const getRecordKey = (product, variantId) => {
+  if (variantId) return `${product.id}-${variantId}`;
+  return product.id;
 };

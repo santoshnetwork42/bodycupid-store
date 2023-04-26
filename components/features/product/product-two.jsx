@@ -15,6 +15,7 @@ import {
 } from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 import Quantity from "../quantity";
+import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
 function ProductTwo(props) {
   const {
@@ -27,7 +28,7 @@ function ProductTwo(props) {
     openQuickview,
     updateCart,
     removeFromCart,
-    slug:tagSlug,
+    slug: tagSlug,
   } = props;
 
   const {
@@ -98,14 +99,11 @@ function ProductTwo(props) {
     setQuantity(qty);
     if (isCartItem) {
       if (qty) {
-        updateCart(
-          cartList.map((item) => {
-            return item.id === product.id ? { ...item, qty: qty } : item;
-          })
-        );
+        const recordKey = getRecordKey(product, getFirstVariantId(product));
+        const cartData = getUpdatedCart(cartList, recordKey, "qty", qty);
+        updateCart(cartData);
       } else {
-        const id = getFirstVariantId(product);
-        removeFromCart({ ...product, variantId: id });
+        removeFromCart(product);
       }
     }
   }

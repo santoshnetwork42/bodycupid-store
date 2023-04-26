@@ -15,9 +15,18 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
+import {
+  deliveryRemainingTime,
+  getRecordKey,
+  getUpdatedCart,
+  scrollWithOffset,
+} from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
-import { getProductInventory, getProductCouponTotal } from "~/utils/products";
+import {
+  getProductInventory,
+  getProductCouponTotal,
+  getFirstVariantId,
+} from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
@@ -35,7 +44,7 @@ function DetailOne(props) {
     adClass = "",
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
-    setVariant = () => { },
+    setVariant = () => {},
     user,
     toggleWishlist,
     addToCart,
@@ -93,7 +102,6 @@ function DetailOne(props) {
       couponList: [],
     };
   }, [product?.slug, featuredCoupons, selectedVariant]);
-
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
@@ -232,14 +240,9 @@ function DetailOne(props) {
     setQuantity(qty);
     if (cartItem) {
       if (qty) {
-        updateCart(
-          cartList.map((item) => {
-            return item.id === product.id &&
-              (!selectedVariant || selectedVariant === item.variantId)
-              ? { ...item, qty: qty }
-              : item;
-          })
-        );
+        const recordKey = getRecordKey(product,product.variantId)
+        const cartData = getUpdatedCart(cartList, recordKey, "qty", qty);
+        updateCart(cartData);
       } else {
         removeFromCart({ ...product, variantId: selectedVariant });
       }
@@ -302,8 +305,8 @@ function DetailOne(props) {
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-2 d-flex">
-           <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
-           {listingPrice > price && (
+            <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
+            {listingPrice > price && (
               <>
                 <del className="old-price mr-2">₹{listingPrice}</del>{" "}
               </>
@@ -457,8 +460,9 @@ function DetailOne(props) {
 
                     {cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                          }`}
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
                         onClick={() => {
                           router.push("/pages/cart");
                         }}
@@ -471,8 +475,9 @@ function DetailOne(props) {
                     )}
                     {!cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                          }`}
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
                         onClick={addToCartHandler}
                       >
                         <i>
@@ -503,8 +508,9 @@ function DetailOne(props) {
                 />
                 {cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                      }`}
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                      cartActive ? "" : "disabled"
+                    }`}
                     onClick={(e) => {
                       e.preventDefault();
                       router.push("/pages/cart");
@@ -518,8 +524,9 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                      }`}
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                      cartActive ? "" : "disabled"
+                    }`}
                     onClick={addToCartHandler}
                   >
                     <i>
@@ -543,12 +550,13 @@ function DetailOne(props) {
           </>
         )}
         {hasInventory && currentInventory < 100 && (
-          <span className="text-secondary">Last {currentInventory} units left</span>
+          <span className="text-secondary">
+            Last {currentInventory} units left
+          </span>
         )}
       </div>
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
-
     </div>
   );
 }

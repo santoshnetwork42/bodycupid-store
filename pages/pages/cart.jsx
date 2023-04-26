@@ -9,8 +9,9 @@ import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
 import { systemActions } from "~/store/system";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { scrollWithOffset } from "~/utils/helper";
+import { getRecordKey, getUpdatedCart, scrollWithOffset } from "~/utils/helper";
 import { Close, Cross, RightAngle } from "~/components/icons";
+import { getFirstVariantId } from "~/utils/products";
 
 function Cart(props) {
   const {
@@ -78,13 +79,9 @@ function Cart(props) {
 
   const onChangeQty = (item, qty) => {
     if (qty) {
-      const { id, variantId } = item;
-      const cart = cartList.map((item) => {
-        return item.id === id && (!variantId || variantId === item.variantId)
-          ? { ...item, qty: qty }
-          : item;
-      });
-      updateCart(cart);
+      const recordKey = getRecordKey(item, item.variantId);
+      const cartData = getUpdatedCart(cartList, recordKey, "qty", qty);
+      updateCart(cartData);
     } else {
       removeFromCart(item);
     }
@@ -115,6 +112,31 @@ function Cart(props) {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
 
+  const getVariantSelect = (item) => {
+    return (
+      <select
+        name="state"
+        className="form-control"
+        value={item.variantId}
+        onChange={(e) => {
+          changeVariant(e, item);
+        }}
+      >
+        {item?.variants?.items.map((v) => (
+          <option key={v.id} value={v.id}>
+            {v.title}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
+  const getBogoTag = () => (
+    <div className="summary-saving-lable-container mb-1  qty-label ">
+      <p className="m-0 saving-lable">1 qty is Free</p>
+    </div>
+  );
+
   return (
     <main className="main cart bg-white">
       <div className="page-content pt-7 pb-5">
@@ -142,7 +164,7 @@ function Cart(props) {
           <div className="row">
             {cartItems.length > 0 ? (
               <>
-                <div className="col-lg-8 col-md-12 pt-2 cart-table-wrapper pr-lg-4">
+                <div className="col-lg-8 col-md-12 pt-4 cart-table-wrapper pl-lg-4 pr-lg-4">
                   <table className="shop-table pt-3 cart-table ">
                     <thead>
                       <tr>
@@ -178,26 +200,36 @@ function Cart(props) {
                               </figure>
                             </td>
                             <td className="product-name">
-                              <div className="product-name-section">
+                              <div className="product-name-section mobile-specific-cart-product-container">
                                 <ALink href={"/product/" + item.slug}>
                                   {item.title}
                                 </ALink>
+                                {!!item?.variants?.items.length &&
+                                  getVariantSelect(item)}
                               </div>
                             </td>
                             <td className="product-subtotal">
-                              <span className="amount">
-                                ₹{toDecimal(item.price)}
-                              </span>
+                              {!(item.isBogo && item.qty === 1) && (
+                                <span className="amount">
+                                  ₹{toDecimal(item.price)}
+                                </span>
+                              )}
                               <p className="m-0 product-discount-listing">
                                 {item.price < item.listingPrice && (
                                   <del className="summary-subtotal-listingprice">
                                     ₹{toDecimal(item.listingPrice)}
                                   </del>
                                 )}
-                                <span className={`discount-percetage ml-2`}>
-                                  {productDiscountPercentage(item) > 0 &&
-                                    `${productDiscountPercentage(item)}% off`}
-                                </span>
+                                {item.isBogo && item.qty === 1 ? (
+                                  <span className="text-success ml-1">
+                                    Free
+                                  </span>
+                                ) : (
+                                  <span className={`discount-percetage ml-2`}>
+                                    {productDiscountPercentage(item) > 0 &&
+                                      `${productDiscountPercentage(item)}% off`}
+                                  </span>
+                                )}
                               </p>
                             </td>
 
@@ -262,7 +294,9 @@ function Cart(props) {
                                         </del>
                                       )}
                                       {item.isBogo && item.qty === 1 ? (
-                                        <span className="text-success ml-1">Free</span>
+                                        <span className="text-success ml-1">
+                                          Free
+                                        </span>
                                       ) : (
                                         <span
                                           className={`discount-percetage ml-2`}
@@ -288,31 +322,10 @@ function Cart(props) {
                                       />
                                     </div>
 
-                                    {!!item?.variants?.items.length && (
-                                      <select
-                                        name="state"
-                                        className="form-control"
-                                        value={item.variantId}
-                                        onChange={(e) => {
-                                          changeVariant(e, item);
-                                        }}
-                                      >
-                                        {item?.variants?.items.map((v) => (
-                                          <option key={v.id} value={v.id}>
-                                            {v.title}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    )}
+                                    {!!item?.variants?.items.length &&
+                                      getVariantSelect(item)}
                                   </div>
-                                  {item.isBogo && item.qty > 1 && (
-                                    <div className="summary-saving-lable-container mb-1  qty-label ">
-                                      {" "}
-                                      <p className="m-0 saving-lable">
-                                        1 qty is Free
-                                      </p>
-                                    </div>
-                                  )}
+                                  {item.isBogo && item.qty > 1 && getBogoTag()}
                                 </div>
                                 <div className="product-close">
                                   <ALink
@@ -342,7 +355,7 @@ function Cart(props) {
                     data-sticky-options="{'bottom': 20}"
                   >
                     <Coupons />
-                    <div className="summary mb-4 bg-white">
+                    <div className="summary bg-white">
                       <h3 className="summary-title text-left d-sm-none">
                         Cart Totals
                       </h3>
