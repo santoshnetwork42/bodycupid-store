@@ -973,7 +973,6 @@ export const getProductInventory = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1427,7 +1426,10 @@ export const getProduct = /* GraphQL */ `
       rating
       totalRatings
       totalOrders
-      additionalInfo
+      additionalInfo {
+        label
+        value
+      }
       thumbImages
       isTaxEnabled
       isInventoryEnabled
@@ -1495,7 +1497,6 @@ export const listProducts = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1563,7 +1564,6 @@ export const bycategoryIdProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1631,7 +1631,6 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1699,7 +1698,6 @@ export const bystoreIdProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1767,7 +1765,6 @@ export const byslugProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1835,7 +1832,6 @@ export const searchProducts = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1907,7 +1903,6 @@ export const getLinkedProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -2773,7 +2768,6 @@ export const getOrderProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3283,7 +3277,6 @@ export const getReview = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3553,7 +3546,6 @@ export const getWishlistProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3792,7 +3784,6 @@ export const getShoppingCartProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled

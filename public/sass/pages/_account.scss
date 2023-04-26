@@ -119,6 +119,10 @@
     .order-action .btn {
         padding: 0;
     }
+    .account-active-link {
+        border-right: 4px solid $primary-color;
+        background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0.08167016806722693) 100%);
+    }
 }
 
 .downloads, .card-address {
@@ -131,6 +135,28 @@
     font-size: 1.4rem;
 }
 
+.mobile-account-tab {
+    justify-content: space-between;
+    padding: 1.55rem 8px;
+    margin: 0px 10px;
+    border-bottom: 1px solid $border-color;
+    .tab-label {
+        font-size: 1.6rem;
+        line-height: 1;
+        margin-left: 10px !important;
+    }
+}
+.mobile-tab-header {
+    padding: 1.55rem 8px;
+    .header-label {
+        font-size: 1.6rem;
+        line-height: 1;
+        margin-left: 10px !important;
+    }
+}
+.mobile-tabs-content {
+    padding: 1rem 1rem 5rem 1rem !important;
+}
 
 .order-number {
     width: 11.4rem;

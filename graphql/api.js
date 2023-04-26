@@ -314,7 +314,10 @@ export const getQuickViewProduct = /* GraphQL */ `
         blockedInventory
         rating
         totalOrders
-        additionalInfo
+        additionalInfo {
+          label
+          value
+        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -434,7 +437,10 @@ export const getProductBySlug = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
+        additionalInfo {
+          label
+          value
+        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -690,7 +696,6 @@ export const getOrder = /* GraphQL */ `
           onHold
           facilityCode
           gstin
-          additionalInfo
           centralGstPercentage
           compensationCessPercentage
           integratedGstPercentage
@@ -1217,22 +1222,13 @@ export const updateUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
-      totalOrders
-      totalSpent
-      walletBalance
-      walletSpent
-      totalStoreCredit
-      isCognitoConfirmed
+      authProvider
+      isAdmin
       profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
       createdAt
       updatedAt
     }
@@ -1563,33 +1559,33 @@ export const listCollections = /* GraphQL */ `
 `;
 
 export const getCollectionsBySlug = /* GraphQL */ `
-query SearchCollections(
-  $filter: SearchableCollectionFilterInput
-  $sort: [SearchableCollectionSortInput]
-  $limit: Int
-  $nextToken: String
-  $from: Int
-  $aggregates: [SearchableCollectionAggregationInput]
-) {
-  searchCollections(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-    from: $from
-    aggregates: $aggregates
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
   ) {
-    items {
-      slug
-      parent
-      name
-      description
-      showInMenu
-      priority
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        showInMenu
+        priority
+      }
+      nextToken
     }
-    nextToken
   }
-}
 `;
 export const searchShippingTiers = /* GraphQL */ `
   query SearchShippingTiers(

@@ -2,8 +2,8 @@ import React from "react";
 
 import AccountsTabs from "~/components/partials/account/account";
 
-function Account() {
+function Addresses() {
   return <AccountsTabs />;
 }
 
-export default Account;
+export default Addresses;
