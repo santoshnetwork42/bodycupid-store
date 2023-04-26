@@ -43,7 +43,6 @@ function ProductTwo(props) {
     collections,
   } = product || {};
 
-  const [quantity, setQuantity] = useState(1);
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -80,6 +79,7 @@ function ProductTwo(props) {
     }
     return;
   }, [collections]);
+
   const addToCartHandler = () => {
     addToCart({
       ...product,
@@ -98,7 +98,6 @@ function ProductTwo(props) {
   function changeQty(qty) {
     if (cartItem) {
       if (qty) {
-        setQuantity(qty);
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
@@ -223,7 +222,7 @@ function ProductTwo(props) {
               {!!cartItem ? (
                 <Quantity
                   isProductList={true}
-                  qty={quantity}
+                  qty={cartItem.qty}
                   max={currentInventory}
                   product={product}
                   onChangeQty={changeQty}

@@ -53,7 +53,6 @@ function DetailOne(props) {
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
   const today = new Date();
 
@@ -112,12 +111,6 @@ function DetailOne(props) {
           cl.id === product.id &&
           (!cl.variantId || selectedVariant === cl.variantId)
       );
-
-      if (cartItem && cartItem.qty) {
-        setQuantity(cartItem.qty);
-      } else {
-        setQuantity(1);
-      }
 
       return cartItem;
     }
@@ -208,14 +201,14 @@ function DetailOne(props) {
         addToCart({
           ...product,
           name: tmpName,
-          qty: quantity,
+          qty: 1,
           price: tmpPrice,
           variantId: selectedVariant,
         });
       } else {
         addToCart({
           ...product,
-          qty: quantity,
+          qty: 1,
           price: product.price,
         });
       }
@@ -241,10 +234,8 @@ function DetailOne(props) {
   function changeQty(qty) {
     if (cartItem) {
       if (qty) {
-        setQuantity(qty);
         const recordKey = getRecordKey(product, selectedVariant);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
-        console.log('cartData', cartData)
         updateCart(cartData);
       } else {
         removeFromCart({ ...cartItem });
@@ -459,12 +450,14 @@ function DetailOne(props) {
                 <div className="product-form product-qty pb-0">
                   <label className="d-none">QTY:</label>
                   <div className="product-form-group ">
-                    <Quantity
-                      max={currentInventory}
-                      qty={quantity}
-                      product={product}
-                      onChangeQty={changeQty}
-                    />
+                    {!!cartItem && (
+                      <Quantity
+                        max={currentInventory}
+                        qty={cartItem?.qty}
+                        product={product}
+                        onChangeQty={changeQty}
+                      />
+                    )}
 
                     {cartItem && (
                       <button
@@ -508,13 +501,15 @@ function DetailOne(props) {
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
               <div className="product-form-group cart-button-wrapper">
-                <Quantity
-                  qty={quantity}
-                  max={currentInventory}
-                  product={product}
-                  onChangeQty={changeQty}
-                />
-                {cartItem && (
+                {!!cartItem && (
+                  <Quantity
+                    qty={cartItem?.qty}
+                    max={currentInventory}
+                    product={product}
+                    onChangeQty={changeQty}
+                  />
+                )}
+                {!!cartItem && (
                   <button
                     className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
