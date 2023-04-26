@@ -240,7 +240,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-          parallax.offsetTop +
+        parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -344,24 +344,20 @@ export const getCartTotals = (
   let totalListingprice = 0;
   const shippingTotal = getShippingPrice(cartItems, prepaid, shippingTiers);
   const couponTotal = getCouponTotal(appliedCoupon, cartItems);
+
   for (let i = 0; i < cartItems.length; i++) {
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
     totalListingprice +=
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
+
   const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
-  const codDiscount = 0;
+  const totalDiscount = couponTotal + prepaidDiscount;
 
-  const grandTotal = totalPrice + shippingTotal - couponTotal - prepaidDiscount;
-
-  const gradTotalWithoutDiscount =
-    totalPrice + shippingTotal - couponTotal - codDiscount;
-
-  const amoutSaved =
-    totalListingprice - totalPrice + couponTotal + prepaidDiscount;
-
-  const amoutSavedWithoutDiscout =
-    totalListingprice - totalPrice + couponTotal + codDiscount;
+  const grandTotal = totalPrice + shippingTotal - totalDiscount;
+  const gradTotalWithoutPrepaidDiscount = totalPrice + shippingTotal - couponTotal;
+  const amoutSaved = totalListingprice - totalPrice + totalDiscount;
+  const amoutSavedWithoutPrepaidDiscout = totalListingprice - totalPrice + couponTotal;
 
   return {
     totalPrice,
@@ -369,10 +365,11 @@ export const getCartTotals = (
     shippingTotal,
     couponTotal,
     prepaidDiscount,
+    totalDiscount,
     amoutSaved,
     grandTotal,
-    gradTotalWithoutDiscount,
-    amoutSavedWithoutDiscout,
+    gradTotalWithoutPrepaidDiscount,
+    amoutSavedWithoutPrepaidDiscout,
   };
 };
 

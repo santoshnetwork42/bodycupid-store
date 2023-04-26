@@ -3,10 +3,10 @@ import ALink from "~/components/features/custom-link";
 import OptimizedImage from "~/components/features/optimized-image";
 export default function StorySection({ categories }) {
   return (
-    <section className="ellipse-section d-sm-show mt-2">
+    <section className="ellipse-section d-sm-show story-section">
       <div className="container">
         <div className=" elements">
-          <div className="d-flex story-wrapper pt-2">
+          <div className="d-flex story-wrapper pt-3 pb-3 m-0">
             {categories.map((category) => {
               return (
                 <div key={category.id} className=" category">

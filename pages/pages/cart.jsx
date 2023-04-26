@@ -69,8 +69,8 @@ function Cart(props) {
     totalPrice,
     shippingTotal,
     couponTotal,
-    gradTotalWithoutDiscount,
-    amoutSavedWithoutDiscout,
+    gradTotalWithoutPrepaidDiscount,
+    amoutSavedWithoutPrepaidDiscout,
   } = useMemo(
     () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
     [cartItems, appliedCoupon, shippingTiers]
@@ -415,7 +415,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(gradTotalWithoutDiscount)}
+                                ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                               </p>
                             </td>
                           </tr>
@@ -430,11 +430,11 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!amoutSavedWithoutDiscout && (
+                              {!!amoutSavedWithoutPrepaidDiscout && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
                                     <span>{`₹${toDecimal(
-                                      amoutSavedWithoutDiscout
+                                      amoutSavedWithoutPrepaidDiscout
                                     )} `}</span>
                                     saved so far on this order
                                   </p>
@@ -454,7 +454,7 @@ function Cart(props) {
                       <div className="d-none stick-bottom-button d-sm-show">
                         <div className="lh-2">
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(gradTotalWithoutDiscount)}
+                            ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                           </p>
                           <ALink
                             onClick={() => {

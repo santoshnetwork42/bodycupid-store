@@ -328,7 +328,10 @@ padding: 3rem;
     margin-bottom: 0.9rem;
   }
 }
-
+.story-section {
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+}
 .story-wrapper {
   display: flex;
   width: 95vw;

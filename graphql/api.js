@@ -314,7 +314,10 @@ export const getQuickViewProduct = /* GraphQL */ `
         blockedInventory
         rating
         totalOrders
-        additionalInfo
+        additionalInfo {
+          label
+          value
+        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -434,7 +437,10 @@ export const getProductBySlug = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
+        additionalInfo {
+          label
+          value
+        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -691,7 +697,6 @@ export const getOrder = /* GraphQL */ `
           onHold
           facilityCode
           gstin
-          additionalInfo
           centralGstPercentage
           compensationCessPercentage
           integratedGstPercentage
