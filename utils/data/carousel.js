@@ -457,7 +457,6 @@ export const categorySlider = {
     0: {
       items: 4.5,
     },
-   
   },
 };
 

@@ -7,7 +7,7 @@ function CategorySection({ categories = [] }) {
   return (
     <section className="ellipse-section mt-10">
       <div className="container">
-        <h2 className="title title-center capitalize-title">Browse Our Categories</h2>
+        <h2 className="title capitalize-title">Browse Our Categories</h2>
         <div className="row elements">
           {categories.map((category) => {
             return (

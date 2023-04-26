@@ -98,6 +98,10 @@
 }
 
 
+.product-widget-wrapper:nth-child(odd) {
+    background-color: $background-color-2;
+}
+
 // Product Shadow
 .product-shadow {
     transition: box-shadow .3s;

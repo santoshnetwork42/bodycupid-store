@@ -7,10 +7,16 @@ import ProductTwo from "~/components/features/product/product-two";
 import { productSlider } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
-function ProductCollection({ products = [],title='',slug,redirectTo }) {
+function ProductCollection({ products = [], title = "", slug, redirectTo }) {
   return (
-    <Reveal keyframes={fadeIn} delay={300} duration={1200} triggerOnce>
-      <section className="product-wrapper product-collection container mt-6 mt-md-10 pt-4 product-card-wrapper">
+    <Reveal
+      keyframes={fadeIn}
+      delay={300}
+      duration={1200}
+      triggerOnce
+      className="product-widget-wrapper"
+    >
+      <section className="product-wrapper product-collection container mt-4 mt-md-10 pt-4 pb-2">
         <div className="d-flex justify-content-between mb-5">
           <h2 className="capitalize-title m-0">{title}</h2>
           <ALink href={redirectTo}>
