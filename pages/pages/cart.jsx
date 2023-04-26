@@ -6,6 +6,7 @@ import Quantity from "~/components/features/quantity";
 import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
+import { eventActions } from "~/store/events";
 import { toDecimal, getCartTotals } from "~/utils";
 import { systemActions } from "~/store/system";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -23,6 +24,7 @@ function Cart(props) {
     openLogin,
     shippingTiers,
     getShippingTiers,
+    viewCart,
   } = props;
 
   const [cartItems, setCartItems] = useState([]);
@@ -31,6 +33,7 @@ function Cart(props) {
   }, [cartList]);
 
   useEffect(() => {
+    viewCart();
     getShippingTiers();
   }, []);
 
@@ -458,4 +461,5 @@ export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
   getShippingTiers: systemActions.getShippingTiers,
+  viewCart: eventActions.viewCart,
 })(Cart);

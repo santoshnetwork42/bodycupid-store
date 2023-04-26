@@ -284,17 +284,22 @@ export const getQuickViewProduct = /* GraphQL */ `
       items {
         id
         title
-        brand
-        vendor
         isFeatured
+        categoryId
+        subCategoryId
+        category {
+          id
+          name
+          slug
+        }
+        subCategory {
+          id
+          name
+          slug
+        }
         productType
-        createdAt
         slug
         productDescription
-        longDescription
-        updatedAt
-        isPublished
-        publishedAt
         price
         sku
         size
@@ -314,10 +319,6 @@ export const getQuickViewProduct = /* GraphQL */ `
         blockedInventory
         rating
         totalOrders
-        additionalInfo {
-          label
-          value
-        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -362,11 +363,6 @@ export const getQuickViewProduct = /* GraphQL */ `
             isThumb
           }
           nextToken
-        }
-        reviews {
-          items {
-            id
-          }
         }
       }
       nextToken

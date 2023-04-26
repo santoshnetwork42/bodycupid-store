@@ -27,7 +27,8 @@ function ProductTwo(props) {
     openQuickview,
     updateCart,
     removeFromCart,
-    slug:tagSlug,
+    slug: tagSlug,
+    section,
   } = props;
 
   const {
@@ -79,9 +80,11 @@ function ProductTwo(props) {
     }
     return;
   }, [collections]);
+
   const addToCartHandler = () => {
     addToCart({
       ...product,
+      section,
       qty: 1,
       price: price,
     });

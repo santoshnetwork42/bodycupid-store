@@ -14,6 +14,7 @@ import Layout from "~/components/layout";
 import { rootActions } from "~/store";
 import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
+import { eventActions } from "~/store/events";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 import awsconfig from "~/aws-exports";
@@ -131,8 +132,10 @@ const App = ({ Component, pageProps }) => {
       } = authEvent;
       if (event === "signOut") {
         destroySession();
+        store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
         initSession();
+        store.dispatch(rootActions.auth("login"));
       }
     });
     initSession();

@@ -43,6 +43,7 @@ function Checkout(props) {
     shippingTiers,
     getShippingTiers,
     placeOrder: onPlaceOrder,
+    startCheckout,
   } = props;
 
   const { name } = store;
@@ -57,6 +58,7 @@ function Checkout(props) {
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   useEffect(() => {
+    startCheckout();
     getShippingTiers();
   }, []);
 
@@ -657,6 +659,7 @@ const Component = connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   getShippingTiers: systemActions.getShippingTiers,
   placeOrder: eventActions.placeOrder,
+  startCheckout: eventActions.startCheckout,
 })(Checkout);
 
 Component.hideFooter = true;
