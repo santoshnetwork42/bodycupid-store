@@ -116,7 +116,6 @@ function SearchForm({ type = "input" }) {
   }
 
   function onSubmitSearchForm(e) {
-    e.preventDefault();
     router.push({
       pathname: "/collections/all",
       query: {
@@ -159,7 +158,7 @@ function SearchForm({ type = "input" }) {
 
         <button
           className="btn btn-search"
-          onClick={onSearchExpand}
+          onClick={onSubmitSearchForm}
           type="submit"
           aria-label="search"
         >

@@ -54,13 +54,13 @@ function HomePage({
         <ProductCollection
           products={bestSellerProducts}
           title="Best sellers"
-          slug='best-seller'
+          slug="best-seller"
           redirectTo="/collections/best-seller"
         />
         <ProductCollection
           products={featuredProducts}
           title="Our featured"
-          slug='featured'
+          slug="featured"
           redirectTo="/collections/featured"
         />
         <CategorySection categories={categories} />
