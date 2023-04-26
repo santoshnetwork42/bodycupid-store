@@ -45,12 +45,8 @@ function DetailOne(props) {
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
     setVariant = () => {},
-    user,
-    toggleWishlist,
     addToCart,
-    wishlist,
     removeFromCart,
-    coupon: appliedCoupon,
     featuredCoupons,
     getFeaturedCoupons,
   } = props;
@@ -248,13 +244,13 @@ function DetailOne(props) {
         setQuantity(qty);
         const recordKey = getRecordKey(product, selectedVariant);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
+        console.log('cartData', cartData)
         updateCart(cartData);
       } else {
         removeFromCart({ ...cartItem });
       }
     }
   }
-
   const { price, listingPrice, save } = useMemo(() => {
     const {
       price,

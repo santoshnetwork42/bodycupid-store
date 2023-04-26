@@ -238,12 +238,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+                id: response.id,
+                shoppingcartId: id,
+                productId: response.productId,
+                variantId: response.variantId,
+                quantity: response.quantity,
+              }
             : p
         );
 
@@ -306,8 +306,8 @@ export function* cartSaga() {
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
     const { cart, user } = yield select();
-    const { cart: cartResponse } = cart;
-    const { data: userResponse } = user;
+    const { cart: cartResponse = {} } = cart || {};
+    const { data: userResponse = {} } = user || {};
     if (cartResponse && userResponse) {
       const { products = [] } = cartResponse || {};
       const { products: currProducts } = e.payload;
