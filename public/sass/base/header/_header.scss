@@ -16,10 +16,11 @@
   (
     header: (
       font-family: $font-family,
-      letter-spacing: -0.025em,
+      letter-spacing: 0.025em,
       color: false,
       background: #fff,
       // Link's color
+      
       _link-color: false,
       // Link's color when it is hover or active
       _link-active-color: $primary-color,
@@ -631,6 +632,7 @@
   &.hs-simple {
     flex: 1;
     margin-right: 2rem;
+    margin: 0 auto;
     @include css(max-width, header, search, round, width);
 
     .input-wrapper {

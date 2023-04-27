@@ -55,7 +55,7 @@ function MainMenu() {
               ${category?.subCategory?.items?.length ? "submenu" : ""}
             `}
           >
-            <ALink href={`/collections/${category.slug}`}>
+            <ALink className='text-uppercase' href={`/collections/${category.slug}`}>
               {category.name}
               <i>
                 <DownAngle color="currentColor" size={12} />

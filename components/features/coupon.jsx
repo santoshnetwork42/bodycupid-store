@@ -10,7 +10,7 @@ import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { Close, Discount, RightAngle } from "../icons";
+import { CheckBadge, Close, Discount, RightAngle } from "../icons";
 
 function Coupon(props) {
   const {
@@ -70,16 +70,20 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box mb-2 bg-white text-primary"
+          className="cart-coupon-box mb-2 pb-5 bg-white text-primary lh-default"
           onClick={() => !appliedCoupon && setOpen(true)}
         >
           <div className="cart-coupon-container d-flex">
             <div className="d-flex">
-              <span className="mt-1">
-                <Discount color="#17b31b" size={22} />
+              <span className="mt-1 sm-product-remove">
+                {!!appliedCoupon ? (
+                  <CheckBadge color="#17b31b" size={22} />
+                ) : (
+                  <Discount color="#17b31b" size={22} />
+                )}
               </span>
               <div>
-                <p className="ml-2 coupon-title mb-0 p-0 ls-m">
+                <p className="ml-2 coupon-title mb-1 p-0 ls-m">
                   {!!appliedCoupon
                     ? `"${appliedCoupon.code}" applied`
                     : "Coupons and offers"}
@@ -150,7 +154,7 @@ function Coupon(props) {
         <main className="main ">
           <div className="page-content mt-6 pb-2 bg-white text-primary mb-2">
             <div className="container">
-              <div className="cart-coupon-modal m-8">
+              <div className="cart-coupon-modal m-8 lh-default">
                 <h5 className="title coupon-title text-uppercase ls-m">
                   Coupons and offers
                 </h5>
@@ -180,7 +184,6 @@ function Coupon(props) {
                 <span className="coupon-error-lable">{error}</span>
                 {!!featured?.length && (
                   <div className="mt-2">
-                    <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {
                       let className = "btn btn-md  btn-rounded btn-link m l-2";
                       const discount = getCouponTotal(c, cartList);

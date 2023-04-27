@@ -101,7 +101,7 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
                 </>
               ) : (
                 <>
-                  <span className="sm-product-amount mr-2">
+                  <span className="sm-product-amount mr-2  font-weight-semi-bold ">
                     ₹{toDecimal(price)}
                   </span>
 
@@ -119,9 +119,9 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
                 </>
               )}
             </div>
-            <div className="d-flex">
+            <div className="">
               {bogo !== "SECONDARY" && (
-                <div className="product-quantity w-0">
+                <div className="product-quantity w-0 mb-1">
                   <Quantity
                     product={item}
                     qty={qty}

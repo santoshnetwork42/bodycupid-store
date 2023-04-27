@@ -22,6 +22,7 @@ import {
 } from "~/utils/getStaticData";
 import { eventActions } from "~/store/events";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
+import ProductCollection from "~/components/partials/home/product-collection";
 import { errorHandler } from "~/utils/errorHandler";
 
 function ProductDefault(props) {
@@ -120,11 +121,14 @@ function ProductDefault(props) {
             </div>
           </div>
           <div className="page-content pb-10">
-            <div className="container vertical pt-3">
+            <div className="container vertical pt-3 lh-default">
               <LinkedProducts product={product} />
               <DescOne product={product} productFAQs={productFAQs} />
+              <ProductCollection
+                products={relatedProducts}
+                title="Related products"
 
-              <RelatedProducts products={relatedProducts} />
+              />
             </div>
           </div>
         </>

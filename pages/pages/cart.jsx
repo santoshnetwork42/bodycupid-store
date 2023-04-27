@@ -67,7 +67,7 @@ function Cart(props) {
 
   return (
     <main className="main cart bg-white">
-      <div className="page-content pt-7 pb-5">
+      <div className="page-content pt-7 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
@@ -88,12 +88,12 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container sm-container mt-7 mb-2 ">
+        <div className="container p-0 sm-container mt-7 mb-2 ">
           <div className="row">
             {cartItems.length > 0 ? (
               <>
                 <div className="col-lg-8 col-md-12 ">
-                  <div className="shop-table cart-table ">
+                  <div className="shop-table cart-table lh-default ">
                     <div>
                       {cartItems.map((item) => (
                         <React.Fragment key={`${item.recordKey}-cart-item`}>
@@ -198,13 +198,13 @@ function Cart(props) {
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle lh-1">
+                              <h4 className="summary-subtitle font-weight-semi-bold  lh-1">
                                 Total{" "}
                                 <p className="m-0">Inclusive of all taxes</p>
                               </h4>
                             </td>
                             <td>
-                              <p className="summary-total-price ls-s">
+                              <p className="summary-total-price font-weight-semi-bold  ls-s">
                                 ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                               </p>
                             </td>
@@ -298,7 +298,7 @@ function mapStateToProps(state) {
     shippingTiers: state.system.shippingTiers,
   };
 }
-export default connect(mapStateToProps, {
+const Component =connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
@@ -306,3 +306,7 @@ export default connect(mapStateToProps, {
   getShippingTiers: systemActions.getShippingTiers,
   viewCart: eventActions.viewCart,
 })(Cart);
+
+Component.hideFooter=true;
+
+export default Component;
