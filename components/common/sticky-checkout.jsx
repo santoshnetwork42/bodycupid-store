@@ -14,7 +14,7 @@ function StickyFooter(props) {
   if (!cartList.length || !showStickyCheckout) return <></>;
   return (
     <div className="stick-bottom-button btn-dark pl-5 pr-5 d-sm-show">
-      <div className="lh-default">
+      <div className="lh-default text-primary">
         <span href="#">
           {cartList.length}&nbsp;
           {cartList.length > 1 ? "Items" : "Item"}

@@ -2,8 +2,6 @@ import React from "react";
 import Reveal from "react-awesome-reveal";
 
 import OptimizedImage from "~/components/features/optimized-image";
-import OwlCarousel from "~/components/features/owl-carousel";
-import { brandSlider } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function BrandSection({ brands }) {
@@ -11,7 +9,7 @@ function BrandSection({ brands }) {
     <Reveal keyframes={fadeIn} duration={1200} delay={300} triggerOnce>
       <section className="mt-2 pb-6 pt-4 pb-md-10">
         <div className="container">
-          <h2 className="title capitalize-title mb-1">As featured in</h2>
+          <h2 className="title capitalize-title mb-2">As featured in</h2>
           <div className="row brand-carousel">
             {brands.map((brand) => (
               <figure
