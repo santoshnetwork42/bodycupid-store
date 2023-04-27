@@ -12,7 +12,7 @@ function CategorySection({ categories = [] }) {
           {categories.map((category) => {
             return (
               <div key={category.id} className=" col-3">
-                <div className="category category-spacing category-ellipse text-capitalize">
+                <div className="category category-spacing category-ellipse text-uppercase">
                   <ALink
                     href={`/collections/${category.category.slug}/${category.slug}`}
                   >
@@ -25,7 +25,7 @@ function CategorySection({ categories = [] }) {
                     </figure>
                   </ALink>
                   <div className="category-content">
-                    <h4 className="category-name">
+                    <h4 className="category-name text-uppercase">
                       <ALink
                         href={`/collections/${category.category.slug}/${category.slug}`}
                       >
