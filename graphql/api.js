@@ -510,6 +510,7 @@ export const getFeaturedCoupon = /* GraphQL */ `
         id
         code
         discount
+        expirationDate
         isActive
         isFeatured
         couponType
@@ -885,6 +886,7 @@ export const findProducts = /* GraphQL */ `
         variants {
           items {
             id
+            title
             price
             position
             listingPrice

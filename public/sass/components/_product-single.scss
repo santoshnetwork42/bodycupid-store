@@ -603,7 +603,7 @@
         }
 
         &:hover:not(.disabled) {
-            background-color: darken($primary-color, 7%);
+            background-color: darken($primary-button-color, 7%);
         }
     }
 }
