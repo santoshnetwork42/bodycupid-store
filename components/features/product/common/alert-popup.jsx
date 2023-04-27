@@ -6,6 +6,7 @@ const className = {
   success: "alert-success",
   warning: "alert-warning",
   info: "alert-primary",
+  transparent: "alert-transparent",
 };
 
 export default function AlertPopup(props) {

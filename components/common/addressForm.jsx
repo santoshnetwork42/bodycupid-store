@@ -79,10 +79,10 @@ const AddressForm = (props) => {
   );
 
   return (
-    <div>
+    <div className="container bg-white pt-3 pb-3 border-regular">
       <form className="form" onSubmit={addAddress}>
         <div className="row">
-          <div className="col-lg-12  mb-6 mb-lg-0 pr-lg-4">
+          <div className="col-lg-12  mb-lg-0 pr-lg-4">
             <div className="row">
               <div className="col-xs-6">
                 <label>First Name *</label>
@@ -245,16 +245,14 @@ const AddressForm = (props) => {
             </div>
           )}
 
-          {!onAddress && (
-            <button
-              className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
-              type="submit"
-              disabled={loading}
-            >
-              {address.id ? "Save Address" : "Add Address"}
-              {loading && <div className="spin-loader ml-2" />}
-            </button>
-          )}
+          <button
+            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+            type="submit"
+            disabled={loading}
+          >
+            {address.id ? "Save Address" : "Add Address"}
+            {loading && <div className="spin-loader ml-2" />}
+          </button>
         </div>
       </form>
     </div>

@@ -205,6 +205,34 @@
 	}
 }
 
+.mobile-checkout-address {
+    padding: 1.5rem 2.2rem;
+    align-items: center;
+    justify-content: space-between;
+    color: $primary-color;
+    .mobile-address-heading {
+        .address-user-name{
+            color: $primary-color;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+    }
+    .mobile-address-label {
+        color: $grey-color;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+    }
+    .btn-change {
+       padding: .8rem !important;
+    }
+}
+
+
 @include mq(md, max) {
     .account {
         .nav-tabs { width: 100%; }
