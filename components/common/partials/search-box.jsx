@@ -92,7 +92,7 @@ function SearchForm({ type = "input" }) {
     e.stopPropagation();
     e.currentTarget.parentNode.classList.toggle("show");
   }
- function onSearchExpand(e) {
+  function onSearchExpand(e) {
     e.currentTarget.parentNode.classList.toggle("show");
   }
 
@@ -115,14 +115,13 @@ function SearchForm({ type = "input" }) {
     setSearch(e.target.value);
   }
 
-  function onSubmitSearchForm(e) {
-    router.push({
+  async function onSubmitSearchForm(e) {
+    document.querySelector(".header-search")?.classList.toggle("show");
+    await router.push({
       pathname: "/collections/all",
-      query: {
-        search: search,
-      },
+      query: { search },
     });
-    e.currentTarget.parentNode.classList.toggle("show");
+    return false;
   }
 
   return (
@@ -131,26 +130,26 @@ function SearchForm({ type = "input" }) {
         type === "icon" ? "hs-toggle d-block" : "hs-simple"
       }`}
     >
-      <a
-        href="#"
-        className="search-toggle"
-        role="button"
-        onClick={onSearchClick}
-      >
-        {type === "icon" ? <Search /> : <i className="icon-search-3"></i>}
-      </a>
-      <form
-        action="#"
-        method="get"
-        onSubmit={onSubmitSearchForm}
-        className="input-wrapper"
-      >
+      {type === "icon" && (
+        <a
+          href="#"
+          className="search-toggle"
+          role="button"
+          onClick={onSearchClick}
+        >
+          <Search />
+        </a>
+      )}
+      <div className="input-wrapper">
         <input
           type="text"
           className="form-control"
           name="search"
           autoComplete="off"
           value={search}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") onSubmitSearchForm(e);
+          }}
           onChange={onSearchChange}
           placeholder="Search..."
           required
@@ -158,9 +157,9 @@ function SearchForm({ type = "input" }) {
 
         <button
           className="btn btn-search"
-          onClick={onSubmitSearchForm}
           type="submit"
           aria-label="search"
+          onClick={onSubmitSearchForm}
         >
           <MagnifyingGlass color="currentColor" size={20} />
         </button>
@@ -202,9 +201,9 @@ function SearchForm({ type = "input" }) {
               );
             })}
         </div>
-      </form>
+      </div>
     </div>
   );
 }
 
-export default React.memo(SearchForm);
+export default SearchForm;

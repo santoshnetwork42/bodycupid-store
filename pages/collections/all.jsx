@@ -27,7 +27,6 @@ function AllProduct(props) {
       <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
-
             <div className="col-lg-12 main-content">
               <ProductListOne products={products} pageFilter={pageFilter} />
             </div>
@@ -73,6 +72,7 @@ export const getStaticProps = async () => {
       },
     };
   } catch (error) {
+    console.log(error);
     return {
       notFound: true,
     };
