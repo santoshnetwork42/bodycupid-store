@@ -8,7 +8,6 @@ export default function RatingStar({
   value: defValue = 0,
 }) {
   const [value, setValue] = useState(defValue);
-
   if (!editable) {
     return (
       <div className="ratings-container m-0 pointer-none">
@@ -17,7 +16,7 @@ export default function RatingStar({
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= value;
 
-            return <Star size={16} color={isFilled ? "#d26e4b" : "#999"} />;
+            return <Star size={16} color={isFilled ? "#FAB73B" : "#D9D9D9"} />;
           })}
         </div>
       </div>
@@ -42,7 +41,7 @@ export default function RatingStar({
           }}
           key={"star-" + index}
         >
-          {num}
+          <Star size={16} color={num <= value ? "#FAB73B" : "#D9D9D9"} />
         </a>
       ))}
     </span>

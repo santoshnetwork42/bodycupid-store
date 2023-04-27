@@ -7,7 +7,6 @@ import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
-import { STORE_ID } from "~/config";
 import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
 
@@ -22,39 +21,41 @@ const gridClasses = {
 
 function ProductListOne(props) {
   const {
-    itemsPerRow = 3,
+    itemsPerRow = 4,
     type = "left",
     isToolbox = true,
     products: initialData,
     categoryId,
     subCategoryId,
+    tag,
+    pageFilter = {},
+    subCategories,
   } = props;
-
   const router = useRouter();
+  const { query } = router;
 
-  const [applyFilters, resetFilter] = useState(false);
+  const {
+    minprice,
+    maxprice,
+    type: gridType = "grid",
+    search,
+    sortby,
+    category,
+  } = query;
+
+  const [applyFilters, resetFilter] = useState(
+    !!sortby || !!search?.trim() || minprice || maxprice
+  );
   const [token, setToken] = useState(null);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const { query } = router;
-  const { minprice, maxprice, type: gridType = "grid", search, sortby } = query;
-
   const perPage = 50;
 
   const filters = useMemo(() => {
     const sortBy = [];
-    const filter = { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } };
-
-    if (categoryId) {
-      filter.categoryId = { eq: categoryId };
-    }
-
-    if (subCategoryId) {
-      filter.subCategoryId = { eq: subCategoryId };
-    }
-
+    const filter = {};
     if (!!search?.trim()) {
       filter.title = { matchPhrasePrefix: search };
     }
@@ -72,13 +73,20 @@ function ProductListOne(props) {
     } else if (!Number.isNaN(Number(maxprice)) && Number(maxprice)) {
       filter.price = { lte: Number(maxprice) };
     }
-
-    if (sortby === "popularity") {
-      sortBy.push({ field: "rating", direction: "desc" });
-    } else if (sortby === "price-low") {
-      sortBy.push({ field: "price", direction: "asc" });
-    } else if (sortby === "price-high") {
-      sortBy.push({ field: "price", direction: "desc" });
+    switch (sortby) {
+      case "popularity":
+        sortBy.push({ field: "rating", direction: "desc" });
+        break;
+      case "price-low":
+        sortBy.push({ field: "price", direction: "asc" });
+        break;
+      case "price-high":
+        sortBy.push({ field: "price", direction: "desc" });
+        break;
+      case "best-seller":
+        filter.collections = { eq: "best-seller" };
+        break;
+      default:
     }
 
     return { filter, limit: perPage, sort: sortBy };
@@ -96,6 +104,7 @@ function ProductListOne(props) {
         } = await API.graphql(
           graphqlOperation(findProducts, {
             ...filters,
+            filter: { ...filters.filter, ...pageFilter },
             nextToken: reset ? null : token,
           })
         );
@@ -120,7 +129,7 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId]);
+  }, [categoryId, subCategoryId, tag]);
 
   useEffect(() => {
     getProducts(true);
@@ -129,7 +138,7 @@ function ProductListOne(props) {
 
   if (loading) {
     return (
-      <>
+      <div>
         <br />
         {gridType === "grid" ? (
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
@@ -150,13 +159,13 @@ function ProductListOne(props) {
             ))}
           </div>
         )}
-      </>
+      </div>
     );
   }
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} />}
+      {isToolbox && <ToolBox type={type} subCategories={subCategories} />}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}
@@ -171,7 +180,7 @@ function ProductListOne(props) {
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {products.map((item) => (
               <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo product={item} />
+                <ProductTwo slug={category} product={item} />
               </div>
             ))}
           </div>

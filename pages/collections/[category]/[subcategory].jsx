@@ -8,13 +8,14 @@ import {
   getAllSubcategoriesPath,
   findProducts,
   getSideBarFilterCategories,
+  getSubCategoriesByCategoryID,
 } from "~/graphql/api";
-import ShopBanner from "~/components/partials/shop/shop-banner";
+// import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
-import { CATEGORY_REVALIDATE_DURATION } from "~/constant";
 import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
+import CategoryHeader from "~/components/common/category-header";
 
 function Categories(props) {
   const {
@@ -24,6 +25,8 @@ function Categories(props) {
     categoryId,
     subCategoryId,
     sideBarCategories,
+    pageFilter,
+    subCategories,
   } = props;
   const { name } = store;
 
@@ -39,19 +42,24 @@ function Categories(props) {
         {name} - {subCategory.name}
       </h1>
 
-      <ShopBanner category={subCategory} />
+      {/* <ShopBanner category={subCategory} /> */}
 
-      <div className="page-content mb-10 pb-3">
+      <div className="page-content pb-3">
         <div className="container">
+        <CategoryHeader
+            name={subCategory?.name}
+            description={subCategory?.description}
+          />
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne categories={sideBarCategories} />
 
-            <div className="col-lg-9 main-content">
+            <div className="col-lg-12 main-content">
               <ProductListOne
                 category={subCategory}
                 categoryId={categoryId}
                 subCategoryId={subCategoryId}
                 products={products}
+                pageFilter={pageFilter}
+                subCategories={subCategories}
               />
             </div>
           </div>
@@ -111,6 +119,11 @@ export const getStaticProps = async (context) => {
     // Get Product By Sub Category
     if (subCategory) {
       const { id, categoryID } = subCategory;
+      const filter = {
+        subCategoryId: { eq: id },
+        status: { eq: "ENABLED" },
+        storeId: { eq: STORE_ID },
+      };
 
       // Get SideBar Categories
       const getSidebarCategory = fetchData(getSideBarFilterCategories, {
@@ -118,20 +131,34 @@ export const getStaticProps = async (context) => {
       });
 
       const getProduct = fetchData(findProducts, {
-        filter: {
-          subCategoryId: { eq: id },
-          status: { eq: "ENABLED" },
-          storeId: { eq: STORE_ID },
-        },
-        limit: 50,
+        filter,
+        limit: 18,
       });
 
-      const [{ searchProductCategories }, { searchProducts }] =
-        await Promise.all([getSidebarCategory, getProduct]);
+      // Get Product Sub-Category By Category ID
+      const getSubCategoriesByCategory = fetchData(
+        getSubCategoriesByCategoryID,
+        {
+          filter: { storeId: { eq: STORE_ID }, categoryID: { eq: categoryID } },
+        }
+      );
 
+      const [
+        { searchProductCategories },
+        { searchProducts },
+        { searchProductSubCategories },
+      ] = await Promise.all([
+        getSidebarCategory,
+        getProduct,
+        getSubCategoriesByCategory,
+      ]);
+
+      const { items: subCategories } = searchProductSubCategories;
       const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
-      const products = await Promise.all(items.map(optimizeProduct));
+      const products = await Promise.all(
+        items.map((product) => optimizeProduct(product, { partial: true }))
+      );
       const optimizedSubCategory = await optimizeCategory(subCategory);
 
       return {
@@ -141,8 +168,9 @@ export const getStaticProps = async (context) => {
           subCategoryId: id,
           products: { ...searchProducts, items: products },
           sideBarCategories: categories,
+          subCategories,
+          pageFilter: filter,
         },
-        revalidate: CATEGORY_REVALIDATE_DURATION,
       };
     }
   } catch (error) {
@@ -160,6 +188,5 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(React.memo(Categories));
-Component.showMobileSearchBar = true;
 
 export default Component;

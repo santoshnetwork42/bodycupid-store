@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import AlertPopup from "~/components/features/product/common/alert-popup";
+
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
   return number;
@@ -85,4 +88,33 @@ export const getSplitedArray = (array, size) => {
     result.push([...array].splice(i, size));
   }
   return result;
+};
+
+export const getSortedCategory = (items) => {
+  if (Array.isArray(items))
+    return items.sort((a, b) => a.priority - b.priority);
+  return [];
+};
+
+export const getSortedCategoryAndSubCategory = (items) => {
+  const result = items.map((i) => {
+    if (i.subCategory) {
+      return {
+        ...i,
+        subCategory: {
+          ...i.subCategory,
+          items: getSortedCategory(i.subCategory.items),
+        },
+      };
+    }
+    return i;
+  });
+  return result;
+};
+
+export const copyText = (copyText, message) => {
+  if (copyText && navigator?.clipboard) {
+    navigator.clipboard.writeText(copyText);
+    toast(<AlertPopup message={message} status="info" />);
+  }
 };

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Phone, Heart, User } from "~/components/icons";
+import { Heart, User, Hamburger } from "~/components/icons";
 import CartMenu from "~/components/common/partials/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
@@ -11,9 +11,8 @@ import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
 import OptimizedImage from "~/components/features/optimized-image";
 
-function Header({ navbar, auth, openLogin }) {
+function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
-
   useEffect(() => {
     let header = document.querySelector("header");
     if (header) {
@@ -33,7 +32,7 @@ function Header({ navbar, auth, openLogin }) {
 
   return (
     <header className="header header-border">
-      <div className=" sticky-header fix-top sticky-content">
+      <div className="sticky-header fix-top sticky-content">
         <div className="header-middle">
           <div className="container">
             <div className="header-left">
@@ -42,7 +41,7 @@ function Header({ navbar, auth, openLogin }) {
                 className="mobile-menu-toggle"
                 onClick={showMobileMenu}
               >
-                <i className="d-icon-bars2"></i>
+                <Hamburger />
               </ALink>
 
               <ALink href="/" className="logo">
@@ -70,73 +69,48 @@ function Header({ navbar, auth, openLogin }) {
             </div>
 
             <div className="header-right">
-              <ALink href="tel:#" className="icon-box d-sm-none  p-0 mr-3">
-                <div className="icon-box-icon mr-0 mr-lg-2">
-                  <Phone />
-                </div>
-                <div className="icon-box-content d-lg-show">
-                  <h4 className="icon-box-title">Call Us Now:</h4>
-                  <p>8042896000</p>
-                </div>
-              </ALink>
-              <span className="divider"></span>
-              <ALink href="/pages/wishlist" className="wishlist mr-3 d-sm-none">
+              {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
               </ALink>
-              <span className="divider"></span>
-
-              <CartMenu />
-              <span className="divider"></span>
+              <span className="divider"></span> */}
               {!!auth && (
-                <ALink
-                  href="/pages/account"
-                  className={`account wishlist ${
-                    !navbar.showMobileSearchBar && "d-sm-none"
-                  }`}
-                >
+                <ALink href="/pages/account" className="account wishlist mr-2">
                   <User />
                 </ALink>
-              )}
-              {!navbar.showMobileSearchBar && (
-                <div className="d-sm-show">
-                  <SearchBox type="icon" />
-                </div>
               )}
               {!auth && (
                 <ALink
                   href="#"
-                  className="label-block wishlist d-sm-none"
-                  onClick={() => openLogin(false)}
+                  className="label-block wishlist mr-2"
+                  onClick={() => openPasswordLess(false)}
                 >
                   <User />
                 </ALink>
               )}
-              {!auth && (
+              {/* {!auth && (
                 <ALink
                   href="/pages/login"
-                  className={`label-block wishlist d-sm-show ${
-                    !navbar.showMobileSearchBar && "d-sm-none"
-                  }`}
+                  className='label-block wishlist d-sm-show'
                 >
                   <User />
                 </ALink>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="header-bottom d-lg-show sticky-header fix-top sticky-content">
-          <div className="container">
-            <div className="header-left">
-              <MainMenu />
+              )} */}
+              <span className="divider"></span>
+              <CartMenu />
+              <div className="d-sm-show search-container ">
+                <SearchBox type="icon" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {navbar.showMobileSearchBar && (
-        <div className="bottom-search d-sm-show">
-          <SearchBox />
+      <div className="header-bottom d-lg-show  fix-top sticky-content">
+        <div className="container">
+          <div className="header-left">
+            <MainMenu />
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
@@ -148,5 +122,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  openLogin: modalActions.openLoginModal,
+  openPasswordLess: modalActions.openPasswordlessModal,
 })(Header);

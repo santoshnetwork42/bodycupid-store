@@ -4,9 +4,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-
+import { MagnifyingGlass, Search } from "~/components/icons";
 import { searchProductsBasic } from "~/graphql/api";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
@@ -92,8 +91,10 @@ function SearchForm({ type = "input" }) {
   }
 
   function onSearchClick(e) {
-    e.preventDefault();
     e.stopPropagation();
+    e.currentTarget.parentNode.classList.toggle("show");
+  }
+  function onSearchExpand(e) {
     e.currentTarget.parentNode.classList.toggle("show");
   }
 
@@ -117,14 +118,13 @@ function SearchForm({ type = "input" }) {
   }
 
   function onSubmitSearchForm(e) {
-    e.preventDefault();
     router.push({
-      pathname: "/collections/[category]",
+      pathname: "/collections/all",
       query: {
-        category: "all",
         search: search,
       },
     });
+    e.currentTarget.parentNode.classList.toggle("show");
   }
 
   return (
@@ -139,11 +139,7 @@ function SearchForm({ type = "input" }) {
         role="button"
         onClick={onSearchClick}
       >
-        {type === "icon" ? (
-          <i className="d-icon-search"></i>
-        ) : (
-          <i className="icon-search-3"></i>
-        )}
+        {type === "icon" ? <Search /> : <i className="icon-search-3"></i>}
       </a>
       <form
         action="#"
@@ -162,8 +158,13 @@ function SearchForm({ type = "input" }) {
           required
         />
 
-        <button className="btn btn-search" type="submit" aria-label="search">
-          <i className="d-icon-search"></i>
+        <button
+          className="btn btn-search"
+          onClick={onSubmitSearchForm}
+          type="submit"
+          aria-label="search"
+        >
+          <MagnifyingGlass color="currentColor" size={20} />
         </button>
 
         <div className="live-search-list bg-white scrollable">

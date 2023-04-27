@@ -19,7 +19,9 @@ function ServiceBox(props) {
             triggerOnce
           >
             <div className="icon-box icon-box-side icon-box1">
-              <Shipping size={46} />
+              <i className="icon-box-icon" >
+                <Shipping size={46} />
+              </i>
 
               <div className="icon-box-content">
                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">
@@ -38,7 +40,9 @@ function ServiceBox(props) {
             triggerOnce
           >
             <div className="icon-box icon-box-side icon-box2">
-              <Customer size={46} />
+              <i className="icon-box-icon" >
+                <Customer size={46} />
+              </i>
 
               <div className="icon-box-content">
                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">
@@ -57,7 +61,9 @@ function ServiceBox(props) {
             triggerOnce
           >
             <div className="icon-box icon-box-side icon-box3">
-              <Payment size={46} />
+              <i className="icon-box-icon" >
+                <Payment size={46} />
+              </i>
 
               <div className="icon-box-content">
                 <h4 className="icon-box-title text-capitalize ls-normal lh-1">

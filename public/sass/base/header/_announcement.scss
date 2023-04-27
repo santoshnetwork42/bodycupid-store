@@ -1,0 +1,16 @@
+.announcement-bar{
+    background-color: $primary-button-color;
+    .owl-stage{
+        display: flex;
+        align-items: center;
+    }
+    .announcement {
+        .announcement-text {
+            letter-spacing: 2.5px;
+            font-weight: 400;
+            color: $dark-color;
+            text-align: center;
+        }
+    }
+    
+}

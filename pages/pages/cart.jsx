@@ -7,8 +7,10 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
+import { systemActions } from "~/store/system";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { scrollWithOffset } from "~/utils/helper";
+import { Cross, RightAngle } from "~/components/icons";
 
 function Cart(props) {
   const {
@@ -19,23 +21,29 @@ function Cart(props) {
     removeCoupon,
     user,
     openLogin,
+    shippingTiers,
+    getShippingTiers,
   } = props;
-  const [cartItems, setCartItems] = useState([]);
 
+  const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     setCartItems([...cartList]);
   }, [cartList]);
+
+  useEffect(() => {
+    getShippingTiers();
+  }, []);
 
   const {
     totalListingprice,
     totalPrice,
     shippingTotal,
-    amoutSaved,
     couponTotal,
-    grandTotal,
+    gradTotalWithoutPrepaidDiscount,
+    amoutSavedWithoutPrepaidDiscout,
   } = useMemo(
-    () => getCartTotals(cartItems, appliedCoupon),
-    [cartItems, appliedCoupon]
+    () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
+    [cartItems, appliedCoupon, shippingTiers]
   );
 
   const onChangeQty = (item, qty) => {
@@ -85,11 +93,17 @@ function Cart(props) {
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
+            <i>
+              <RightAngle size={18} color="currentColor" />
+            </i>
           </h3>
           <h3 className="title title-simple title-step">
             <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
               2. Checkout
             </ALink>
+            <i>
+              <RightAngle size={18} color="currentColor" />
+            </i>
           </h3>
           <h3 className="title title-simple title-step">
             <ALink href="#">3. Order Complete</ALink>
@@ -179,7 +193,9 @@ function Cart(props) {
                                 title="Remove this product"
                                 onClick={() => removeFromCart(item)}
                               >
-                                <i className="fas fa-times"></i>
+                                <i>
+                                  <Cross size={12} color="currentColor" />
+                                </i>
                               </ALink>
                             </td>
                           </tr>
@@ -288,7 +304,7 @@ function Cart(props) {
                               <tr className="summary-subtotal">
                                 <td>
                                   <h4 className="summary-subtitle">Coupons</h4>
-                                  <p>
+                                  <div>
                                     <div className="d-flex">
                                       <span className="mr-1">
                                         {appliedCoupon.code}
@@ -303,7 +319,7 @@ function Cart(props) {
                                         <i className="fas fa-times"></i>
                                       </ALink>
                                     </div>
-                                  </p>
+                                  </div>
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
@@ -343,7 +359,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price ls-s">
-                                ₹{toDecimal(grandTotal)}
+                                ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                               </p>
                             </td>
                           </tr>
@@ -358,10 +374,12 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!amoutSaved && (
+                              {!!amoutSavedWithoutPrepaidDiscout && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
-                                    <span>{`₹${toDecimal(amoutSaved)} `}</span>
+                                    <span>{`₹${toDecimal(
+                                      amoutSavedWithoutPrepaidDiscout
+                                    )} `}</span>
                                     saved so far on this order
                                   </p>
                                 </div>
@@ -380,7 +398,7 @@ function Cart(props) {
                       <div className="d-none stick-bottom-button d-sm-show">
                         <div className="lh-2">
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(grandTotal)}
+                            ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                           </p>
                           <ALink
                             onClick={() => {
@@ -431,12 +449,13 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
+    shippingTiers: state.system.shippingTiers,
   };
 }
-
 export default connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
+  getShippingTiers: systemActions.getShippingTiers,
 })(Cart);

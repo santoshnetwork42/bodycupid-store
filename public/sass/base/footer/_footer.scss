@@ -16,7 +16,7 @@
             font-family: $font-family,
             font-size: 1.3rem,
             letter-spacing: false,
-            background: #222,
+            background: #FAFAFA,
             color: false,
             _link-active-color: #fff,
 
@@ -46,7 +46,7 @@
                     ),
                     body: (
                         padding: 8px 0 0,
-                        color: #999,
+                        color: $primary-color
                     ),
                     list-item: (
                         line-height: 1.2,
@@ -241,7 +241,7 @@
 
 // Responsive
 @include mq('lg', 'max') {
-    .footer-top {
+    .footer-middle {
         .logo-footer {
             margin-bottom: 2.7rem;
 
@@ -250,6 +250,7 @@
                 margin-right: auto;
             }
         }
+       
     }
     .newsletter-info {
         margin-bottom: 2rem;
@@ -466,6 +467,13 @@
 @include mq(lg, max) {
     .footer-middle .row > div:last-child .widget {
         margin-bottom: 1rem;
+    }
+    .footer-middle{
+        .widget{
+           display: flex;
+           align-items: center;
+           justify-content: center;
+        }
     }
 }
 @include mq(sm, max) {

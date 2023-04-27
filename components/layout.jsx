@@ -28,6 +28,8 @@ import {
   resizeHandler,
 } from "~/utils";
 import { removeHoverEffect } from "~/utils/helper";
+import Announcement from "./common/announcement";
+import StickyCheckout from "./common/sticky-checkout";
 
 function Layout({
   children,
@@ -98,12 +100,20 @@ function Layout({
           type="text/css"
           href="/vendor/fontawesome-free/css/all.min.css"
         /> */}
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="vendor/owl-carousel/owl.carousel.min.css"
+        />
       </Head>
       <div className="page-wrapper">
+        <Announcement showTopRUnner={navbar.showTopRunner} />
+
         <Header navbar={navbar} />
 
         {children}
 
+        <StickyCheckout showStickyCheckout={footer.showStickyCheckout} />
         <Footer footer={footer} />
       </div>
 

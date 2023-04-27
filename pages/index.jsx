@@ -3,32 +3,40 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
-import ServiceBox from "~/components/partials/home/service-section";
 import CategorySection from "~/components/partials/home/category-section";
-import BestCollection from "~/components/partials/home/best-collection";
-import FeaturedCollection from "~/components/partials/home/featured-collection";
+
 import BlogSection from "~/components/partials/home/blog-section";
 
 import {
   getHomePageBlogs,
   getHomePageCategories,
-  getHomePageProducts,
+  findProducts,
   getStoreBanners,
 } from "~/graphql/api";
 import optimizeImage from "~/utils/optimizeImage";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
-import { HOME_REVALIDATE_DURATION } from "~/constant";
 import {
   optimizeCategory,
   optimizeProduct,
   optimizeStore,
   optimizedBlogs,
 } from "~/utils/getStaticData";
+import BrandSection from "~/components/partials/home/brand-section";
+import ReviewSection from "~/components/partials/home/review-section";
+import StorySection from "~/components/partials/home/story-section";
+import ProductCollection from "~/components/partials/home/product-collection";
 
-
-function HomePage({ hero, products, blogs, categories, brands, store }) {
-  const { name } = store;
+function HomePage({
+  hero,
+  bestSellerProducts,
+  featuredProducts,
+  blogs,
+  categories,
+  brands,
+  store,
+}) {
+  const { name } = store || {};
 
   return (
     <main className="main home searchBar">
@@ -37,22 +45,31 @@ function HomePage({ hero, products, blogs, categories, brands, store }) {
       </Head>
 
       <h1 className="d-none">{name} - Homepage</h1>
-
-      <div className="page-content">
+      <StorySection categories={categories} />
+      <div className="page-content page-content-wrapper">
         <div className="intro-section">
           <IntroSection {...hero} />
-          <ServiceBox />
         </div>
 
+        <ProductCollection
+          products={bestSellerProducts}
+          title="Best sellers"
+          slug="best-seller"
+          redirectTo="/collections/best-seller"
+        />
+        <ProductCollection
+          products={featuredProducts}
+          title="Our featured"
+          slug="featured"
+          redirectTo="/collections/featured"
+        />
         <CategorySection categories={categories} />
-        <BestCollection products={products} />
         {/* <DealSection /> */}
         <BlogSection posts={blogs} />
-        <FeaturedCollection products={products} />
         {/* <CtaSection /> */}
-        {/* <BrandSection brands={brands} /> */}
-
-        {/* <SmallCollection
+        <ReviewSection />
+        <BrandSection brands={brands} />
+        {/* <SmallCollection  
           featured={featured}
           latest={latest}
           bestSelling={bestSelling}
@@ -88,12 +105,18 @@ export const getStaticProps = async () => {
       filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
     });
 
-    const getSearchProducts = fetchData(getHomePageProducts, {
-      filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
-      limit: 8,
-    });
+    const getSearchProducts = (filter) =>
+      fetchData(findProducts, {
+        filter: {
+          storeId: { eq: STORE_ID },
+          status: { eq: "ENABLED" },
+          ...filter,
+        },
+        limit: 8,
+      });
+
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
-      limit: 4,
+      limit: 8,
       filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
       sort: [{ field: "priority", direction: "asc" }],
     });
@@ -102,27 +125,36 @@ export const getStaticProps = async () => {
 
     const [
       { searchBlogs },
-      { searchProducts },
+      { searchProducts: searchBestSellerProducts },
+      { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
     ] = await Promise.all([
       getSearchBlogs,
-      getSearchProducts,
+      getSearchProducts({ collections: { eq: "best-seller" } }),
+      getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
     ]);
 
-    const { banners = [] } = store;
-    const { items } = searchProducts;
+    const getOptimizedProduct = (items) =>
+      Promise.all(
+        (items || []).map((product) =>
+          optimizeProduct(product, { partial: true })
+        )
+      );
+
+    const { items: bestSellerItems } = searchBestSellerProducts;
+    const { items: featuredItems } = searchFeaturedProducts;
     const { items: categoriesData } = searchProductSubCategories;
     const { items: blogsData } = searchBlogs;
 
     const blogs = await Promise.all((blogsData || []).map(optimizedBlogs));
-    const optimizedStoreBanners = await Promise.all(
-      (banners || []).map(optimizeStore)
-    );
 
-    const products = await Promise.all((items || []).map(optimizeProduct));
+    const { banners } = await optimizeStore(store);
+
+    const bestSellerProducts = await getOptimizedProduct(bestSellerItems);
+    const featuredProducts = await getOptimizedProduct(featuredItems);
 
     const categories = await Promise.all(
       (categoriesData || []).map(optimizeCategory)
@@ -131,10 +163,10 @@ export const getStaticProps = async () => {
     const brands = [
       "/images/brands/1.png",
       "/images/brands/2.png",
-      "/images/brands/3.png",
-      "/images/brands/4.png",
-      "/images/brands/5.png",
       "/images/brands/6.png",
+      "/images/brands/7.png",
+      "/images/brands/8.png",
+      "/images/brands/9.png",
     ];
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
@@ -154,9 +186,10 @@ export const getStaticProps = async () => {
           logo: optimizedLogoImage,
         },
         hero: {
-          banners: optimizedStoreBanners,
+          banners,
         },
-        products,
+        bestSellerProducts,
+        featuredProducts,
         blogs,
         categories,
         brands,
@@ -164,7 +197,7 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: HOME_REVALIDATE_DURATION,
+      revalidate: 300,
     };
   } catch (e) {
     return {
@@ -173,9 +206,10 @@ export const getStaticProps = async () => {
   }
 };
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
+Component.showTopRunner = true;
 export default Component;

@@ -2,17 +2,16 @@ import React from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
-import ShopBanner from "~/components/partials/shop/shop-banner";
+// import ShopBanner from "~/components/partials/shop/shop-banner";
 import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import { findProducts, getSideBarFilterCategories } from "~/graphql/api";
-import { CATEGORY_REVALIDATE_DURATION } from "~/constant";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import { optimizeProduct } from "~/utils/getStaticData";
 
 function AllProduct(props) {
-  const { store, products, sideBarCategories } = props;
+  const { store, products, sideBarCategories, pageFilter } = props;
   const { name } = store;
 
   return (
@@ -23,15 +22,14 @@ function AllProduct(props) {
 
       <h1 className="d-none">{name} - All Products</h1>
 
-      <ShopBanner category={null} />
+      {/* <ShopBanner category={null} /> */}
 
-      <div className="page-content mb-10 pb-3">
+      <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
-            <SidebarFilterOne categories={sideBarCategories} />
 
-            <div className="col-lg-9 main-content">
-              <ProductListOne products={products} />
+            <div className="col-lg-12 main-content">
+              <ProductListOne products={products} pageFilter={pageFilter} />
             </div>
           </div>
         </div>
@@ -42,13 +40,15 @@ function AllProduct(props) {
 
 export const getStaticProps = async () => {
   try {
+    const filter = {
+      status: { eq: "ENABLED" },
+      storeId: { eq: STORE_ID },
+    };
+
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {
-      filter: {
-        status: { eq: "ENABLED" },
-        storeId: { eq: STORE_ID },
-      },
-      limit: 50,
+      filter,
+      limit: 24,
     });
 
     // Get SideBar Categories
@@ -59,7 +59,9 @@ export const getStaticProps = async () => {
     });
 
     const { items } = searchProducts;
-    const products = await Promise.all(items.map(optimizeProduct));
+    const products = await Promise.all(
+      items.map((product) => optimizeProduct(product, { partial: true }))
+    );
 
     return {
       props: {
@@ -67,8 +69,8 @@ export const getStaticProps = async () => {
         products: { ...searchProducts, items: products },
         categorySlug: null,
         sideBarCategories: categories,
+        pageFilter: filter,
       },
-      revalidate: CATEGORY_REVALIDATE_DURATION,
     };
   } catch (error) {
     return {
@@ -84,6 +86,6 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(React.memo(AllProduct));
-Component.showMobileSearchBar = true;
+Component.showStickyCheckout = true;
 
 export default Component;

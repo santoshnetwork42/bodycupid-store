@@ -1,7 +1,7 @@
 import React from "react";
 
 import ALink from "~/components/features/custom-link";
-import { DownAngle } from "~/components/icons";
+import { DownAngle, RightAngle } from "~/components/icons";
 
 import SlideToggle from "react-slide-toggle";
 
@@ -13,6 +13,7 @@ export default function Card(props) {
     iconClass,
     type = "normal",
     url,
+    onLinkClick = () => {},
     ...restProps
   } = props;
 
@@ -22,6 +23,7 @@ export default function Card(props) {
         <div className={`card ${adClass}`}>
           <div className={`card-header`} onClick={onToggle}>
             <ALink
+              onClick={onLinkClick}
               href="#"
               className={`toggle-button ${toggleState.toLowerCase()}`}
             >
@@ -62,15 +64,22 @@ export default function Card(props) {
     <SlideToggle collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <>
-          <ALink href={url ? url : "#"}>
+          <ALink onClick={onLinkClick} href={url ? url : "#"}>
             {title}
             <span
               className={`toggle-btn ${toggleState.toLowerCase()}`}
               onClick={(e) => {
-                onToggle();
+                e.stopPropagation();
                 e.preventDefault();
+                onToggle();
               }}
-            ></span>
+            >
+              {["expanded", "expanding"].includes(toggleState.toLowerCase()) ? (
+                <DownAngle size={12} color="currentColor" />
+              ) : (
+                <RightAngle size={12} color="currentColor" />
+              )}
+            </span>
           </ALink>
 
           <div ref={setCollapsibleElement} className="overflow-hidden">

@@ -14,7 +14,7 @@
                 font-size: 1.3rem,
                 font-weight: 400,
                 letter-spacing: -.025em),
-            price: (color: $secondary-color,
+            price: (color: $dark-color,
                 font-size: 3rem,
                 font-weight: 700,
                 letter-spacing: -.025em),
@@ -203,12 +203,17 @@
     }
 
     .product-tag {
-        font-size:1.5rem;
+        font-size: 1.5rem;
         text-overflow: ellipsis;
-        color:$success-color;
-        text-align: center !important;
+        color: $success-color;
+        text-align: start !important;
         font-weight: 100;
         text-transform: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+         overflow: hidden;
+         text-overflow: ellipsis;
     }
 
     .product-price {
@@ -442,7 +447,7 @@
     }
 
     .remian-time-lable {
-        color: #167221;
+        color: $success-color;
         padding: .3rem;
         text-align: center;
         border-radius: .3rem;
@@ -451,26 +456,32 @@
     }
 
     .notify-container {
-        padding-bottom:20px;
+        padding-bottom: 20px;
+
         label {
             font-weight: 500;
             text-transform: none;
             color: $dark-color;
         }
+
         .out-of-stock {
-            margin-bottom: 2rem ;
+            margin-bottom: 2rem;
+
             p:first-child {
                 font-size: 2rem;
                 font-weight: 600;
                 color: $alert-color;
             }
+
             p {
                 padding: 0;
             }
         }
+
         .notify-btn {
             padding: 1.2rem 0px;
         }
+
         .check-mark {
             font-size: 2rem;
             color: $success-color;
@@ -565,8 +576,8 @@
         min-width: 13rem;
         font-size: 1.4rem;
         border-radius: .3rem;
-        background-color: $primary-color;
-        color: #fff;
+        background-color: $primary-button-color;
+        color: $primary-color;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -747,30 +758,67 @@
 }
 
 .product-best-price-container {
-    background-color: #ffffff;
+    background: rgba(23, 179, 27, 0.05);
     padding: 1.2rem;
     border-radius: 5px;
     border-style: solid;
-    border-top-width:  1px;
-    border-bottom-width:  1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
     border-color: $success-color;
+
     .product-top-content {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 0;
 
-        i{
+        i {
             font-size: 1.4rem;
             margin-right: 0.5rem;
             color: $primary-color;
         }
+
         p {
             margin: 0;
             color: $primary-color;
         }
     }
-    p{
+
+    .card {
+        background:none !important;
+        border-radius: 6px;
+    }
+
+    .coupon-list {
+        color: inherit !important;
+        font-size: 1.2rem;
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0px;
+            text-align: right;
+
+            .toggle-button {
+                padding: 1rem 0.5rem !important;
+            }
+
+        }
+
+        .coupon-subtext {
+            font-size: 1.2rem !important;
+        }
+
+        .card-body {
+            padding: 0;
+
+            span {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    p {
         margin: 0;
         color: $primary-color;
     }
@@ -781,7 +829,7 @@
     }
 }
 
-@include mq(sm,max) {
+@include mq(sm, max) {
     .product-details {
         .detail-product-name {
 
@@ -789,7 +837,8 @@
         }
     }
 }
-@include mq(xs, max){
+
+@include mq(xs, max) {
     .product-price {
         .old-price {
             font-size: 1.8rem;

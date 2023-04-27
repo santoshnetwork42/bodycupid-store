@@ -1,3 +1,4 @@
+import ALink from "~/components/features/custom-link";
 import OwlCarousel from "~/components/features/owl-carousel";
 
 import ProductTwo from "~/components/features/product/product-two";
@@ -15,7 +16,12 @@ export default function RelatedProducts(props) {
     products &&
     products.length > 0 && (
       <section className={`${adClass}`}>
-        <h2 className="title justify-content-center">{heading}</h2>
+        <div className="d-flex justify-content-between mb-5">
+          <h2 className="capitalize-title m-0">{heading}</h2>
+          <ALink href="#">
+            <p className="view-all  text-underline m-0">VIEW ALL</p>
+          </ALink>
+        </div>
 
         <OwlCarousel
           adClass="owl-carousel owl-theme owl-nav-full"

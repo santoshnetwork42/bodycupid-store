@@ -162,7 +162,7 @@ function Passwordless({
       className="auth-popup bg-img"
     >
       <main className="main">
-        <div className="page-content mt-6 pb-2 mb-2">
+        <div className="page-content mt-6 pb-2 mb-2 bg-white">
           <div className="container">
             <div className="login-popup">
               <div className="form-box">
@@ -210,7 +210,7 @@ function Passwordless({
                             </div>
 
                             <button
-                              className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
+                              className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                               type="submit"
                               disabled={loading}
                             >
@@ -274,7 +274,7 @@ function Passwordless({
                             </div>
                           )}
                           <button
-                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
+                            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
                             disabled={loading}
                           >

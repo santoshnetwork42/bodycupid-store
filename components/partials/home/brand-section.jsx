@@ -10,16 +10,18 @@ function BrandSection({ brands }) {
   return (
     <Reveal keyframes={fadeIn} duration={1200} delay={300} triggerOnce>
       <section className="mt-2 pb-6 pt-10 pb-md-10">
-        <h2 className="title d-none">Our Brand</h2>
-
         <div className="container">
-          <OwlCarousel adClass="owl-theme brand-carousel" options={brandSlider}>
+          <h2 className="title capitalize-title">As featured in</h2>
+          <div className="row brand-carousel">
             {brands.map((brand) => (
-              <figure key={brand.originalUrl}>
+              <figure
+                className="col-6 col-md-4 col-lg-2 "
+                key={brand.originalUrl}
+              >
                 <OptimizedImage optimizedData={brand} alt="Brand" />
               </figure>
             ))}
-          </OwlCarousel>
+          </div>
         </div>
       </section>
     </Reveal>

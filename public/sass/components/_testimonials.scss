@@ -139,19 +139,19 @@
     background-color: transparent;
 
     .testimonial-author-thumbnail {
-        margin-bottom: 2.3rem;
+        margin-bottom: 2rem;
     }
 
     blockquote {
         max-width: 86rem;
-        color: rgba( 255, 255, 255, .8);
+        color:$text-color-1;
     }
     cite {
         text-transform: uppercase;
         font-weight: 600;
-        color: #fff;
+        color: $text-color-1;
         span {
-            color: rgba( 255, 255, 255, .8);
+            color: $text-color-1;
         }
     }
 }

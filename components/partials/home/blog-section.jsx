@@ -10,6 +10,9 @@ import PostSeven from "~/components/features/post/post-seven";
 function BlogSection(props) {
   const { posts } = props;
 
+  if (!posts.length) {
+    return <></>;
+  }
   return (
     <section className="blog-post-wrapper mt-6 mt-md-10 pt-7">
       <Reveal keyframes={fadeIn} duration={1000} triggerOnce>

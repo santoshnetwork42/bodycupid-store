@@ -1,11 +1,14 @@
 import { getPublicImageURL } from "./getPublicImageUrl";
 import optimizeImage from "./optimizeImage";
 
-export const optimizeProduct = async (product) => {
-  const { images } = product;
+export const optimizeProduct = async (product, { partial = false } = {}) => {
+  const { images } = { ...product };
+
+  const sortedImages = Array.isArray(images?.items) ? images.items.sort((a, b) => a.position - b.position) : [];
 
   const optimizedImages = await Promise.all(
-    images.items.map(async (image) => {
+    sortedImages.map(async (image, index) => {
+      if (partial && index > 1) return image;
       const imageUrl = getPublicImageURL(image.imageKey);
       const optimizedProductImage = await optimizeImage({
         src: imageUrl,
@@ -53,21 +56,30 @@ export const optimizeCategory = async (category) => {
   return { ...categoryDetails };
 };
 
-export const optimizeStore = async (banner) => {
-  if (banner) {
-    const { webKey, mobileKey } = banner;
+export const optimizeStore = async (store) => {
+  const storeData = { ...store };
 
-    const webUrl = getPublicImageURL(webKey);
-    const webImage = await optimizeImage({
-      src: webUrl,
-    });
-    const mobileUrl = getPublicImageURL(mobileKey);
-    const mobileImage = await optimizeImage({
-      src: mobileUrl,
-    });
-    return { ...banner, webImage, mobileImage };
-  }
-  return { ...banner };
+  const { banners } = storeData;
+
+  const optimizeBanners = await Promise.all(
+    (banners || [])
+      .filter((item) => !!item.webKey)
+      .map(async (item) => {
+        const { webKey, mobileKey } = item;
+        const webUrl = getPublicImageURL(webKey);
+        const webImage = await optimizeImage({
+          src: webUrl,
+        });
+        const mobileUrl = getPublicImageURL(mobileKey || webKey);
+        const mobileImage = await optimizeImage({
+          src: mobileUrl,
+        });
+
+        return { ...item, webImage, mobileImage };
+      })
+  );
+
+  return { ...storeData, banners: optimizeBanners };
 };
 
 export const variantImageOptimization = async (variants) => {

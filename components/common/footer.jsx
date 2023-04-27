@@ -13,15 +13,15 @@ function Footer({ footer, store }) {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-top">
-          <div className="row align-items-center">
-            <div className="col-lg-3">
+        <div className="footer-middle">
+          <div className="row d-flex justify-content-between">
+            <div className="col-lg-3 mb-5 col-sm-12 col-md-6">
               <ALink href="/" className="logo-footer">
                 {footer?.logo ? (
                   <OptimizedImage
                     optimizedData={{
                       ...footer.logo,
-                      width: 154,
+                      width: 100,
                       height: 43,
                     }}
                     loading="lazy"
@@ -29,78 +29,17 @@ function Footer({ footer, store }) {
                   />
                 ) : (
                   <img
-                    src="/images/logo-footer.png"
+                    src="/images/logo.png"
                     alt="logo-footer"
-                    width="154"
+                    width="100"
                     height="43"
                   />
                 )}
               </ALink>
             </div>
-            <div className="col-lg-9">
-              <div className="widget widget-newsletter form-wrapper form-wrapper-inline">
-                <div className="newsletter-info mx-auto mr-lg-2 ml-lg-4">
-                  <h4 className="widget-title">Subscribe to our Newsletter</h4>
-                  <p>Get all the latest information, Sales and Offers.</p>
-                </div>
-                <form
-                  action="#"
-                  className="input-wrapper footer-email input-wrapper-inline"
-                >
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    placeholder="Email address here..."
-                    required
-                  />
-                  <button
-                    className="btn btn-primary btn-rounded btn-md ml-2"
-                    type="submit"
-                  >
-                    subscribe
-                    <RightArrow size={19} color="#fff" />
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div className="footer-middle">
-          <div className="row d-flex justify-content-between">
-            <div className="col-lg-3 col-md-6">
-              <div className="widget widget-info">
-                <h4 className="widget-title">Contact Info</h4>
-                <ul className="widget-body">
-                  <li>
-                    <label>Phone: </label>
-                    <ALink href="tel:#">+91-80-42896000</ALink>
-                  </li>
-                  <li>
-                    <label>Email: </label>
-                    <ALink href="mail@riode.com">support@buywow.in</ALink>
-                  </li>
-                  <li>
-                    <label>Address: </label>
-                    <ALink href="#">
-                      Body Cupid Pvt Ltd. #51, IndiQube Penta, 5th Floor,
-                      Richmond Road, Bengaluru 560025, Karnataka, India.
-                    </ALink>
-                  </li>
-                  <li>
-                    <label>WORKING DAYS / HOURS: </label>
-                  </li>
-                  <li>
-                    <ALink href="#">Mon - Sun / 9:00 AM - 8:00 PM</ALink>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="col-lg-3 col-md-6">
-              <div className="widget  ml-lg-4">
+            <div className="col-lg-3 col-sm-12 col-md-6">
+              <div className="widget">
                 {/* <h4 className="widget-title">Contact Info</h4> */}
                 <ul className="widget-body">
                   <li>
@@ -132,7 +71,7 @@ function Footer({ footer, store }) {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6"></div>
+            <div className="col-lg-6 col-md-0"></div>
           </div>
         </div>
 
@@ -153,7 +92,7 @@ function Footer({ footer, store }) {
                 href="https://www.instagram.com/wowlifescienceindia/"
                 target={"_blank"}
               >
-                <Instagram size={18} color="currentColor" />
+                <Instagram size={16} color="currentColor" />
               </a>
               <a
                 title={`${name} on Facebook`}
@@ -161,7 +100,7 @@ function Footer({ footer, store }) {
                 className="social-link"
                 target={"_blank"}
               >
-                <Facebook size={22} color="currentColor" />
+                <Facebook size={16} color="currentColor" />
               </a>
               <a
                 title={`${name} on YouTube`}
@@ -169,7 +108,7 @@ function Footer({ footer, store }) {
                 className="social-link"
                 target={"_blank"}
               >
-                <Youtube size={18} color="currentColor" />
+                <Youtube size={16} color="currentColor" />
               </a>
             </div>
           </div>

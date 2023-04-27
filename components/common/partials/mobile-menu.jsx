@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { API, graphqlOperation } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { getSortedCategoryAndSubCategory } from "~/utils/helper";
+import OptimizedImage from "~/components/features/optimized-image";
 import { errorHandler } from "~/utils/errorHandler";
 
 function MobileMenu({ user }) {
-  const [search, setSearch] = useState("");
   const router = useRouter();
   const [categories, setCategories] = useState([]);
 
@@ -18,6 +20,7 @@ function MobileMenu({ user }) {
     API.graphql(
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
+        sort: [{ field: "priority", direction: "asc" }],
       })
     )
       .then(
@@ -26,12 +29,11 @@ function MobileMenu({ user }) {
             searchProductCategories: { items },
           },
         }) => {
-          setCategories(items);
+          const sortedItems = getSortedCategoryAndSubCategory(items);
+          setCategories(sortedItems);
         }
       )
-      .catch((error) => {
-        errorHandler(error);
-      });
+      .catch(errorHandler);
   }, []);
 
   useEffect(() => {
@@ -44,10 +46,6 @@ function MobileMenu({ user }) {
     };
   }, []);
 
-  useEffect(() => {
-    setSearch("");
-  }, [router.query.slug]);
-
   const hideMobileMenuHandler = () => {
     if (window.innerWidth > 991) {
       document.querySelector("body").classList.remove("mmenu-active");
@@ -57,10 +55,6 @@ function MobileMenu({ user }) {
   const hideMobileMenu = () => {
     document.querySelector("body").classList.remove("mmenu-active");
   };
-
-  function onSearchChange(e) {
-    setSearch(e.target.value);
-  }
 
   function onBodyClick(e) {
     if (e.target.closest(".header-search"))
@@ -77,85 +71,62 @@ function MobileMenu({ user }) {
         .classList.remove("show-results");
   }
 
-  async function onSubmitSearchForm(e) {
-    e.preventDefault();
-    await router.push({
-      pathname: "/collections/all",
-      query: {
-        search: search,
-      },
-    });
-    hideMobileMenu();
-  }
+  const handleLogout = useCallback(async () => {
+    await Auth.signOut();
+    router.push("/");
+  }, []);
 
   return (
     <div className="mobile-menu-wrapper">
       <div className="mobile-menu-overlay" onClick={hideMobileMenu}></div>
 
       <ALink className="mobile-menu-close" href="#" onClick={hideMobileMenu}>
-        <i className="d-icon-times"></i>
+        <i>
+          <Cross color="currentColor" />
+        </i>
       </ALink>
 
       <div className="mobile-menu-container scrollable">
-        <form
-          action="#"
-          className="input-wrapper"
-          onSubmit={onSubmitSearchForm}
-        >
-          <input
-            type="text"
-            className="form-control"
-            name="search"
-            autoComplete="off"
-            value={search}
-            onChange={onSearchChange}
-            placeholder="Search your keyword..."
-            required
-          />
-          <button className="btn btn-search" type="submit">
-            <i className="d-icon-search"></i>
-          </button>
-        </form>
-
+        <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
+          <ALink href="/" className="logo-footer">
+            <OptimizedImage
+              optimizedData={{
+                width: 60,
+                height: 60,
+              }}
+              src="/images/logo.png"
+              loading="eager"
+              alt="logo"
+            />
+          </ALink>
+        </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
-            <ALink href="/">Home</ALink>
-          </li>
-
-          <li>
-            <Card title="categories" type="mobile" url="/collections/all">
-              <ul>
-                {categories.map((category) => (
-                  <li key={category.id}>
-                    {!category.subCategory.items.length && (
-                      <ALink href={"/collections/" + category.slug}>
-                        {category.name}
-                      </ALink>
-                    )}
-                    {category.subCategory.items.length > 0 && (
-                      <Card title={category.name} type="mobile">
-                        <ul>
-                          {category.subCategory.items.map((item) => (
-                            <li key={item.id}>
-                              <ALink
-                                href={
-                                  "/collections/" +
-                                  category.slug +
-                                  "/" +
-                                  item.slug
-                                }
-                              >
-                                {item.name}
-                              </ALink>
-                            </li>
-                          ))}
-                        </ul>
-                      </Card>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Card>
+            {categories.map((category) => (
+              <div key={category?.id}>
+                <Card
+                  title={category.name}
+                  type="mobile"
+                  onLinkClick={hideMobileMenu}
+                  url={`/collections/${category.slug}`}
+                >
+                  <ul>
+                    {category.subCategory.items.map((item) => (
+                      <li key={item.id}>
+                        <ALink
+                          href={
+                            "/collections/" + category.slug + "/" + item.slug
+                          }
+                          onClick={hideMobileMenu}
+                        >
+                          {item.name}
+                        </ALink>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </div>
+            ))}
           </li>
 
           {/* <li>
@@ -277,15 +248,11 @@ function MobileMenu({ user }) {
           )}
           {!!user && (
             <li>
-              <ALink href={"/pages/account"}>Account</ALink>
+              <ALink href={"/"} onClick={handleLogout}>
+                Logout
+              </ALink>
             </li>
           )}
-          <li>
-            <ALink href={"/pages/cart"}>My Cart</ALink>
-          </li>
-          <li>
-            <ALink href={"/pages/wishlist"}>Wishlist</ALink>
-          </li>
         </ul>
       </div>
     </div>

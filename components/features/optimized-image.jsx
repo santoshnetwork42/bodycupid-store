@@ -5,23 +5,29 @@ const OptimizedImage = ({
   src,
   alt,
   spanAttributes,
-  resizeMobile = true,
+  resize = true,
   ...props
 }) => {
   const { originalUrl = src, placeholder, width, height } = optimizedData || {};
   const imageRef = useRef(null);
 
   const fetchImage = async () => {
-
     const { width: imageWidth } = imageRef.current?.getBoundingClientRect();
+    if (!imageWidth) return;
 
     window.imagesReplaced = true;
     const image = new Image();
-    image.src =  `${originalUrl}${resizeMobile ? `?resize=${imageWidth.toFixed(0)}` : ""}`;
+    image.src = originalUrl;
+
+    if (resize) {
+      image.src = `${originalUrl}?resize=${imageWidth.toFixed(0)}`;
+    }
+
     image.width = width;
     image.height = height;
     image.alt = alt;
-    image.addEventListener("load", (e) => {
+
+    image.addEventListener("load", () => {
       if (!imageRef.current) return;
       imageRef.current.innerHTML = "";
       imageRef.current.replaceWith(image);

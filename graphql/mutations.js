@@ -8,20 +8,6 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-      }
       owner
       firstName
       lastName
@@ -29,47 +15,20 @@ export const deleteUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
       authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isAdmin
-      isCognitoConfirmed
-      profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -84,7 +43,6 @@ export const updateOrderComment = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -92,26 +50,20 @@ export const updateOrderComment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -133,10 +85,9 @@ export const deleteWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -163,10 +114,9 @@ export const createShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -194,10 +144,9 @@ export const deleteShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -319,20 +268,6 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-      }
       owner
       firstName
       lastName
@@ -340,47 +275,20 @@ export const createUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
       authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isAdmin
-      isCognitoConfirmed
-      profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -391,20 +299,6 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-      }
       owner
       firstName
       lastName
@@ -412,47 +306,20 @@ export const updateUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
       authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isAdmin
-      isCognitoConfirmed
-      profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -543,10 +410,9 @@ export const createProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -583,10 +449,9 @@ export const updateProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -623,10 +488,9 @@ export const deleteProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -662,10 +526,9 @@ export const createProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -714,10 +577,9 @@ export const updateProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -766,10 +628,9 @@ export const deleteProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -815,16 +676,19 @@ export const createStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
-      products {
-        nextToken
+      announcements
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -842,16 +706,19 @@ export const updateStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
-      products {
-        nextToken
+      announcements
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -869,16 +736,19 @@ export const deleteStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
-      products {
-        nextToken
+      announcements
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -899,10 +769,9 @@ export const createWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -936,10 +805,9 @@ export const updateWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -973,10 +841,9 @@ export const deleteWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1010,6 +877,7 @@ export const createProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1044,7 +912,6 @@ export const createProductInventory = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1071,6 +938,7 @@ export const updateProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1105,7 +973,6 @@ export const updateProductInventory = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1132,6 +999,7 @@ export const deleteProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1166,7 +1034,6 @@ export const deleteProductInventory = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1174,6 +1041,186 @@ export const deleteProductInventory = /* GraphQL */ `
         hasFaq
       }
       currentQuantity
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createShippingTier = /* GraphQL */ `
+  mutation CreateShippingTier(
+    $input: CreateShippingTierInput!
+    $condition: ModelShippingTierConditionInput
+  ) {
+    createShippingTier(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      paymentType
+      amount
+      minOrderValue
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateShippingTier = /* GraphQL */ `
+  mutation UpdateShippingTier(
+    $input: UpdateShippingTierInput!
+    $condition: ModelShippingTierConditionInput
+  ) {
+    updateShippingTier(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      paymentType
+      amount
+      minOrderValue
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteShippingTier = /* GraphQL */ `
+  mutation DeleteShippingTier(
+    $input: DeleteShippingTierInput!
+    $condition: ModelShippingTierConditionInput
+  ) {
+    deleteShippingTier(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      paymentType
+      amount
+      minOrderValue
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCollection = /* GraphQL */ `
+  mutation CreateCollection(
+    $input: CreateCollectionInput!
+    $condition: ModelCollectionConditionInput
+  ) {
+    createCollection(input: $input, condition: $condition) {
+      slug
+      parent
+      name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCollection = /* GraphQL */ `
+  mutation UpdateCollection(
+    $input: UpdateCollectionInput!
+    $condition: ModelCollectionConditionInput
+  ) {
+    updateCollection(input: $input, condition: $condition) {
+      slug
+      parent
+      name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCollection = /* GraphQL */ `
+  mutation DeleteCollection(
+    $input: DeleteCollectionInput!
+    $condition: ModelCollectionConditionInput
+  ) {
+    deleteCollection(input: $input, condition: $condition) {
+      slug
+      parent
+      name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
       createdAt
       updatedAt
     }
@@ -1189,6 +1236,7 @@ export const createProduct = /* GraphQL */ `
       title
       brand
       vendor
+      collections
       categoryId
       category {
         id
@@ -1227,10 +1275,9 @@ export const createProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1265,7 +1312,10 @@ export const createProduct = /* GraphQL */ `
       rating
       totalRatings
       totalOrders
-      additionalInfo
+      additionalInfo {
+        label
+        value
+      }
       thumbImages
       isTaxEnabled
       isInventoryEnabled
@@ -1296,6 +1346,7 @@ export const updateProduct = /* GraphQL */ `
       title
       brand
       vendor
+      collections
       categoryId
       category {
         id
@@ -1334,10 +1385,9 @@ export const updateProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1372,7 +1422,10 @@ export const updateProduct = /* GraphQL */ `
       rating
       totalRatings
       totalOrders
-      additionalInfo
+      additionalInfo {
+        label
+        value
+      }
       thumbImages
       isTaxEnabled
       isInventoryEnabled
@@ -1403,6 +1456,7 @@ export const deleteProduct = /* GraphQL */ `
       title
       brand
       vendor
+      collections
       categoryId
       category {
         id
@@ -1441,10 +1495,9 @@ export const deleteProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1479,7 +1532,10 @@ export const deleteProduct = /* GraphQL */ `
       rating
       totalRatings
       totalOrders
-      additionalInfo
+      additionalInfo {
+        label
+        value
+      }
       thumbImages
       isTaxEnabled
       isInventoryEnabled
@@ -1514,6 +1570,7 @@ export const createLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1548,7 +1605,6 @@ export const createLinkedProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1574,6 +1630,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1608,7 +1665,6 @@ export const updateLinkedProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1634,6 +1690,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1668,7 +1725,6 @@ export const deleteLinkedProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1841,7 +1897,6 @@ export const createProductLog = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -1849,26 +1904,20 @@ export const createProductLog = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -1887,7 +1936,6 @@ export const updateProductLog = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -1895,26 +1943,20 @@ export const updateProductLog = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -1933,7 +1975,6 @@ export const deleteProductLog = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -1941,26 +1982,20 @@ export const deleteProductLog = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -1983,17 +2018,15 @@ export const createOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2001,26 +2034,20 @@ export const createOrder = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       channelName
       shippingAddress {
@@ -2123,17 +2150,15 @@ export const updateOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2141,26 +2166,20 @@ export const updateOrder = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       channelName
       shippingAddress {
@@ -2263,17 +2282,15 @@ export const deleteOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2281,26 +2298,20 @@ export const deleteOrder = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       channelName
       shippingAddress {
@@ -2399,7 +2410,6 @@ export const createOrderComment = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2407,26 +2417,20 @@ export const createOrderComment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -2445,7 +2449,6 @@ export const deleteOrderComment = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2453,26 +2456,20 @@ export const deleteOrderComment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -2494,6 +2491,7 @@ export const createOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2528,7 +2526,6 @@ export const createOrderProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -2612,6 +2609,7 @@ export const updateOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2646,7 +2644,6 @@ export const updateOrderProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -2730,6 +2727,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2764,7 +2762,6 @@ export const deleteOrderProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -2848,17 +2845,15 @@ export const createPayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2866,26 +2861,20 @@ export const createPayment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       orderId
       method
@@ -2911,17 +2900,15 @@ export const updatePayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2929,26 +2916,20 @@ export const updatePayment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       orderId
       method
@@ -2974,17 +2955,15 @@ export const deletePayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2992,26 +2971,20 @@ export const deletePayment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       orderId
       method
@@ -3033,7 +3006,6 @@ export const createReview = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -3041,26 +3013,20 @@ export const createReview = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       reviewer {
         name
@@ -3073,6 +3039,7 @@ export const createReview = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3107,7 +3074,6 @@ export const createReview = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3134,7 +3100,6 @@ export const updateReview = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -3142,26 +3107,20 @@ export const updateReview = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       reviewer {
         name
@@ -3174,6 +3133,7 @@ export const updateReview = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3208,7 +3168,6 @@ export const updateReview = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3235,7 +3194,6 @@ export const deleteReview = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -3243,26 +3201,20 @@ export const deleteReview = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       reviewer {
         name
@@ -3275,6 +3227,7 @@ export const deleteReview = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3309,7 +3262,6 @@ export const deleteReview = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3340,10 +3292,9 @@ export const createWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3370,10 +3321,9 @@ export const updateWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3400,6 +3350,7 @@ export const createWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3434,7 +3385,6 @@ export const createWishlistProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3485,6 +3435,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3519,7 +3470,6 @@ export const updateWishlistProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3570,6 +3520,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3604,7 +3555,6 @@ export const deleteWishlistProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3655,10 +3605,9 @@ export const updateShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3686,6 +3635,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3720,7 +3670,6 @@ export const createShoppingCartProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3772,6 +3721,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3806,7 +3756,6 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3858,6 +3807,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3892,7 +3842,6 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3946,17 +3895,15 @@ export const createCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -3964,26 +3911,20 @@ export const createCouponCode = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       discount
       expirationDate
@@ -4017,17 +3958,15 @@ export const updateCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -4035,26 +3974,20 @@ export const updateCouponCode = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       discount
       expirationDate
@@ -4088,17 +4021,15 @@ export const deleteCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -4106,26 +4037,20 @@ export const deleteCouponCode = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       discount
       expirationDate
@@ -4385,17 +4310,15 @@ export const applyCoupon = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -4403,26 +4326,20 @@ export const applyCoupon = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       discount
       expirationDate
@@ -4470,10 +4387,9 @@ export const createStoreShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -4508,6 +4424,14 @@ export const addProductNotification = /* GraphQL */ `
 export const createBulkCoupons = /* GraphQL */ `
   mutation CreateBulkCoupons($input: CreateBulkCouponInput!, $count: Int!) {
     createBulkCoupons(input: $input, count: $count) {
+      success
+      message
+    }
+  }
+`;
+export const exportProducts = /* GraphQL */ `
+  mutation ExportProducts($input: ExportProductInput!) {
+    exportProducts(input: $input) {
       success
       message
     }

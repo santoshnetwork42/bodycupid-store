@@ -5,20 +5,6 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
-      storeId
-      store {
-        id
-        name
-        description
-        isActive
-        webUrl
-        appId
-        host
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-      }
       owner
       firstName
       lastName
@@ -26,47 +12,20 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
       authProvider
+      isAdmin
+      profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
+      createdAt
+      updatedAt
       totalOrders
       totalSpent
       walletBalance
       walletSpent
       totalStoreCredit
-      isAdmin
-      isCognitoConfirmed
-      profilePhotoUrl
-      wishlists {
-        nextToken
-      }
-      shopingcarts {
-        nextToken
-      }
-      reviews {
-        nextToken
-      }
-      orders {
-        nextToken
-      }
-      payments {
-        nextToken
-      }
-      userAddress {
-        nextToken
-      }
-      couponCodes {
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -79,7 +38,6 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        storeId
         owner
         firstName
         lastName
@@ -87,78 +45,20 @@ export const listUsers = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const bystoreIdUser = /* GraphQL */ `
-  query BystoreIdUser(
-    $storeId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdUser(
-      storeId: $storeId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        storeId
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
-        isActive
-        authProvider
-        totalOrders
-        totalSpent
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -183,7 +83,6 @@ export const searchUsers = /* GraphQL */ `
     ) {
       items {
         id
-        storeId
         owner
         firstName
         lastName
@@ -191,26 +90,20 @@ export const searchUsers = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       nextToken
       total
@@ -383,10 +276,9 @@ export const getProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -415,41 +307,6 @@ export const listProductCategories = /* GraphQL */ `
     $nextToken: String
   ) {
     listProductCategories(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        storeId
-        description
-        slug
-        isFeatured
-        totalProducts
-        priority
-        imageUrl
-        bannerUrl
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const bynameProductCategory = /* GraphQL */ `
-  query BynameProductCategory(
-    $name: String!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bynameProductCategory(
-      name: $name
-      createdAt: $createdAt
-      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -603,10 +460,9 @@ export const getProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -682,42 +538,6 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
   ) {
     bystoreIdProductSubCategory(
       storeId: $storeId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        storeId
-        name
-        description
-        categoryID
-        slug
-        isFeatured
-        totalProducts
-        priority
-        imageUrl
-        bannerUrl
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const bynameProductSubCategory = /* GraphQL */ `
-  query BynameProductSubCategory(
-    $name: String!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductSubCategoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bynameProductSubCategory(
-      name: $name
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -874,16 +694,19 @@ export const getStore = /* GraphQL */ `
       description
       isActive
       webUrl
-      appId
-      host
-      priority
       imageUrl
+      darkImageUrl
       banners {
         webKey
         mobileKey
       }
-      products {
-        nextToken
+      announcements
+      socialLinks {
+        instagram
+        facebook
+        twitter
+        youtube
+        pinterest
       }
       createdAt
       updatedAt
@@ -903,10 +726,9 @@ export const listStores = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -937,10 +759,9 @@ export const searchStores = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -974,10 +795,9 @@ export const getWarehouse = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1118,6 +938,7 @@ export const getProductInventory = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1152,7 +973,6 @@ export const getProductInventory = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1290,6 +1110,239 @@ export const searchProductInventories = /* GraphQL */ `
     }
   }
 `;
+export const getShippingTier = /* GraphQL */ `
+  query GetShippingTier($id: ID!) {
+    getShippingTier(id: $id) {
+      id
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      paymentType
+      amount
+      minOrderValue
+      maxOrderValue
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listShippingTiers = /* GraphQL */ `
+  query ListShippingTiers(
+    $filter: ModelShippingTierFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listShippingTiers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchShippingTiers = /* GraphQL */ `
+  query SearchShippingTiers(
+    $filter: SearchableShippingTierFilterInput
+    $sort: [SearchableShippingTierSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableShippingTierAggregationInput]
+  ) {
+    searchShippingTiers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const getCollection = /* GraphQL */ `
+  query GetCollection($slug: ID!) {
+    getCollection(slug: $slug) {
+      slug
+      parent
+      name
+      description
+      storeId
+      store {
+        id
+        name
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      showInMenu
+      priority
+      imageUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCollections = /* GraphQL */ `
+  query ListCollections(
+    $slug: ID
+    $filter: ModelCollectionFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCollections(
+      slug: $slug
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const bystoreIdCollections = /* GraphQL */ `
+  query BystoreIdCollections(
+    $storeId: ID!
+    $priority: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bystoreIdCollections(
+      storeId: $storeId
+      priority: $priority
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchCollections = /* GraphQL */ `
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
+  ) {
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
@@ -1297,6 +1350,7 @@ export const getProduct = /* GraphQL */ `
       title
       brand
       vendor
+      collections
       categoryId
       category {
         id
@@ -1335,10 +1389,9 @@ export const getProduct = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -1373,7 +1426,10 @@ export const getProduct = /* GraphQL */ `
       rating
       totalRatings
       totalOrders
-      additionalInfo
+      additionalInfo {
+        label
+        value
+      }
       thumbImages
       isTaxEnabled
       isInventoryEnabled
@@ -1406,6 +1462,7 @@ export const listProducts = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1440,74 +1497,6 @@ export const listProducts = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        hasVarient
-        hasFaq
-      }
-      nextToken
-    }
-  }
-`;
-export const bytitleProduct = /* GraphQL */ `
-  query BytitleProduct(
-    $title: String!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bytitleProduct(
-      title: $title
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        brand
-        vendor
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        productDescription
-        longDescription
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1540,6 +1529,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1574,7 +1564,6 @@ export const bycategoryIdProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1607,6 +1596,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1641,7 +1631,6 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1674,6 +1663,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1708,7 +1698,6 @@ export const bystoreIdProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1741,6 +1730,7 @@ export const byslugProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1775,7 +1765,6 @@ export const byslugProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1808,6 +1797,7 @@ export const searchProducts = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1842,7 +1832,6 @@ export const searchProducts = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1879,6 +1868,7 @@ export const getLinkedProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -1913,7 +1903,6 @@ export const getLinkedProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -2219,7 +2208,6 @@ export const getProductLog = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2227,26 +2215,20 @@ export const getProductLog = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -2314,17 +2296,15 @@ export const getOrder = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2332,26 +2312,20 @@ export const getOrder = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       channelName
       shippingAddress {
@@ -2672,7 +2646,6 @@ export const getOrderComment = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -2680,26 +2653,20 @@ export const getOrderComment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       comment
       createdAt
@@ -2766,6 +2733,7 @@ export const getOrderProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -2800,7 +2768,6 @@ export const getOrderProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3072,17 +3039,15 @@ export const getPayment = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -3090,26 +3055,20 @@ export const getPayment = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       orderId
       method
@@ -3250,7 +3209,6 @@ export const getReview = /* GraphQL */ `
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -3258,26 +3216,20 @@ export const getReview = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       reviewer {
         name
@@ -3290,6 +3242,7 @@ export const getReview = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3324,7 +3277,6 @@ export const getReview = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3348,40 +3300,6 @@ export const listReviews = /* GraphQL */ `
     $nextToken: String
   ) {
     listReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userId
-        flagged
-        productId
-        rating
-        comment
-        title
-        images
-        verified
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const byUseridcreatedAtReview = /* GraphQL */ `
-  query ByUseridcreatedAtReview(
-    $userId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelReviewFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byUseridcreatedAtReview(
-      userId: $userId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
       items {
         id
         userId
@@ -3493,10 +3411,9 @@ export const getWishlist = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3594,6 +3511,7 @@ export const getWishlistProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3628,7 +3546,6 @@ export const getWishlistProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -3728,10 +3645,9 @@ export const getShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
@@ -3793,35 +3709,6 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
     }
   }
 `;
-export const byuserIdcreatedAtShoppingCart = /* GraphQL */ `
-  query ByuserIdcreatedAtShoppingCart(
-    $userId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelShoppingCartFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byuserIdcreatedAtShoppingCart(
-      userId: $userId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        storeId
-        userId
-        couponCodeId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
   query ByuserIdSoreIdShoppingCart(
     $userId: ID!
@@ -3862,6 +3749,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         categoryId
         subCategoryId
         storeId
@@ -3896,7 +3784,6 @@ export const getShoppingCartProduct = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -4001,17 +3888,15 @@ export const getCouponCode = /* GraphQL */ `
         description
         isActive
         webUrl
-        appId
-        host
-        priority
         imageUrl
+        darkImageUrl
+        announcements
         createdAt
         updatedAt
       }
       userId
       user {
         id
-        storeId
         owner
         firstName
         lastName
@@ -4019,26 +3904,20 @@ export const getCouponCode = /* GraphQL */ `
         phone
         gender
         dob
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
         isActive
         authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
         totalOrders
         totalSpent
         walletBalance
         walletSpent
         totalStoreCredit
-        isAdmin
-        isCognitoConfirmed
-        profilePhotoUrl
-        createdAt
-        updatedAt
       }
       discount
       expirationDate

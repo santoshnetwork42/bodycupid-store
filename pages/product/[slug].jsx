@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
+import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
@@ -11,20 +12,20 @@ import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import {
   getProductBySlug,
-  getHomePageProducts,
   searchProductFaqs,
   getProductSlug,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
-import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import {
   optimizeProduct,
   variantImageOptimization,
 } from "~/utils/getStaticData";
+import { eventActions } from "~/store/events";
+import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import { errorHandler } from "~/utils/errorHandler";
 
 function ProductDefault(props) {
-  const { product, productFAQs = [] } = props;
+  const { product, productFAQs = [], viewItem, slug } = props;
   const router = useRouter();
   const { query, isReady } = router;
   const { variantId } = query;
@@ -32,39 +33,42 @@ function ProductDefault(props) {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
+    viewItem({
+      ...product,
+      section: { id: "product-detail", name: "Product Detail" },
+    });
     if (!!isReady) {
       getRelatedProducts();
     }
-  }, []);
+  }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
-    if (!!product) {
-      const { id, categoryId, subCategoryId } = product || {};
-      const filter = {
-        id: { ne: id },
-        storeId: { eq: STORE_ID },
-        status: { eq: "ENABLED" },
-      };
-      if (subCategoryId) {
-        filter.subCategoryId = { eq: subCategoryId };
-      } else {
-        filter.categoryId = { eq: categoryId };
-      }
-
-      try {
+    try {
+      if (!!product) {
+        const { id, categoryId, subCategoryId } = product || {};
+        const filter = {
+          id: { ne: id },
+          storeId: { eq: STORE_ID },
+          status: { eq: "ENABLED" },
+        };
+        if (subCategoryId) {
+          filter.subCategoryId = { eq: subCategoryId };
+        } else {
+          filter.categoryId = { eq: categoryId };
+        }
         const {
           data: {
             searchProducts: { items },
           },
         } = await API.graphql(
-          graphqlOperation(getHomePageProducts, { filter, limit: 4 })
+          graphqlOperation(findProducts, { filter, limit: 4 })
         );
         if (items.length) {
           setRelatedProducts(items);
         }
-      } catch (error) {
-        errorHandler(error);
       }
+    } catch (error) {
+      errorHandler(error);
     }
   }, [product]);
 
@@ -92,38 +96,50 @@ function ProductDefault(props) {
       <h1 className="d-none">{product?.title}</h1>
 
       {!!product && (
-        <div className={`page-content mb-10 pb-6`}>
-          <div className="container vertical">
-            <div className="product product-single row mb-7">
-              <div className="mb-2 mt-2">
-                <ProductBreadcrumbs {...product} />
-              </div>
-              <div className="col-md-6 sticky-sidebar-wrapper">
-                <MediaOne product={product} variantId={selectedVariant} />
-              </div>
+        <>
+          <div className="page-content bg-white">
+            <div className="container vertical">
+              <div className="product product-single row ">
+                <div className="mt-3 d-sm-show">
+                  <ProductBreadcrumbs {...product} />
+                </div>
+                <div className="col-md-6 sticky-sidebar-wrapper mt-3">
+                  <MediaOne product={product} variantId={selectedVariant} />
+                </div>
 
-              <div className="col-md-6">
-                <DetailOne
-                  data={product}
-                  defaultVariant={defaultVariantId}
-                  variantId={selectedVariant}
-                  setVariant={setVariant}
-                  isNav={true}
-                />
+                <div className="col-md-6">
+                  <DetailOne
+                    data={product}
+                    defaultVariant={defaultVariantId}
+                    variantId={selectedVariant}
+                    setVariant={setVariant}
+                    isNav={true}
+                  />
+                </div>
               </div>
             </div>
-            <LinkedProducts product={product} />
-            <DescOne product={product} productFAQs={productFAQs} />
-
-            <RelatedProducts products={relatedProducts} />
           </div>
-        </div>
+          <div className="page-content pb-10">
+            <div className="container vertical">
+              <LinkedProducts product={product} />
+              <DescOne product={product} productFAQs={productFAQs} />
+
+              <RelatedProducts products={relatedProducts} />
+            </div>
+          </div>
+        </>
       )}
     </main>
   );
 }
 
 export const getStaticPaths = async () => {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
   const {
     searchProducts: { items },
   } = await fetchData(getProductSlug, {
@@ -138,7 +154,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -149,17 +165,18 @@ export const getStaticProps = async (context) => {
 
     // get Product By Slug
     const {
-      byslugProduct: { items },
+      byslugProduct: {
+        items: [product],
+      },
     } = await fetchData(getProductBySlug, {
       slug,
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
     });
-    const [product] = items;
-    if (!!product) {
-      const { id, variants } = product || {};
 
-      const [optimizedProducts] = await Promise.all(items.map(optimizeProduct));
+    if (product) {
+      const { id, variants } = product;
 
+      const optimizedProduct = await optimizeProduct(product);
       const { variants: optimizedVariants } = await variantImageOptimization(
         variants
       );
@@ -175,7 +192,8 @@ export const getStaticProps = async (context) => {
 
       return {
         props: {
-          product: { ...optimizedProducts, variants: optimizedVariants },
+          slug,
+          product: { ...optimizedProduct, variants: optimizedVariants },
           productFAQs: faqS,
         },
       };
@@ -188,4 +206,15 @@ export const getStaticProps = async (context) => {
   };
 };
 
-export default ProductDefault;
+function mapStateToProps(state) {
+  return {
+    store: state.system.store,
+  };
+}
+
+const Component = connect(mapStateToProps, {
+  viewItem: eventActions.viewItem,
+})(ProductDefault);
+// Component.showStickyCheckout = true;
+
+export default Component;

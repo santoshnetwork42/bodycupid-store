@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getCartTotals } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
+import { eventActions } from "~/store/events";
 import Addresses from "~/components/common/addresses";
 import Coupons from "~/components/features/coupon";
 import loadScript from "~/utils/loadScript";
@@ -29,6 +30,7 @@ import { validateAddress, getProperAddress } from "~/utils/address";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
+import { systemActions } from "~/store/system";
 
 function Checkout(props) {
   const {
@@ -39,7 +41,11 @@ function Checkout(props) {
     removeCoupon,
     store,
     metadata,
+    shippingTiers,
+    getShippingTiers,
+    placeOrder: onPlaceOrder,
   } = props;
+
   const { name } = store;
   const router = useRouter();
   const [isFirst, setFirst] = useState(true);
@@ -51,6 +57,10 @@ function Checkout(props) {
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
+  useEffect(() => {
+    getShippingTiers();
+  }, []);
+
   const {
     totalListingprice,
     totalPrice,
@@ -59,14 +69,15 @@ function Checkout(props) {
     couponTotal,
     grandTotal,
     prepaidDiscount,
+    totalDiscount,
   } = useMemo(
-    () => getCartTotals(cartList, appliedCoupon, isFirst),
-    [cartList, appliedCoupon, isFirst]
+    () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
+    [cartList, appliedCoupon, isFirst, shippingTiers]
   );
 
   const handlePayment = useCallback(
-    async ({ orderId, paymentId, address }) => {
-      const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+    async ({ order, paymentId, address }) => {
+      const { id: orderId } = order;
 
       const [
         rzpEnabled,
@@ -78,7 +89,7 @@ function Checkout(props) {
         API.graphql({
           query: createTransaction,
           variables: { orderId },
-          authMode,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
         }),
       ]);
 
@@ -93,6 +104,7 @@ function Checkout(props) {
           image: getPublicImageURL(store.imageUrl),
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
+            onPlaceOrder(order, [...cartList], appliedCoupon);
             setOrderId(orderId);
             setPaymentId(razorpay_payment_id);
             setPaymentLoading(true);
@@ -187,16 +199,20 @@ function Checkout(props) {
         try {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
-          const authMode = user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY";
+
+          const orderDate = new Date();
+          const sla = new Date();
+          sla.setDate(sla.getDate() + 2);
+
           const payload = {
             storeId: STORE_ID,
             userId: user?.id,
             status: isFirst ? "PENDING" : "CONFIRMED",
             totalAmount: grandTotal,
-            totalDiscount: couponTotal + prepaidDiscount,
+            totalDiscount,
             totalShippingCharges: shippingTotal,
-            orderDate: new Date().toISOString(),
-            sla: new Date().toISOString(),
+            orderDate: orderDate.toISOString(),
+            sla: sla.toISOString(),
             paymentType: isFirst ? "PREPAID" : "COD",
             shippingAddress: restAddress,
             billingAddress: restAddress,
@@ -205,14 +221,14 @@ function Checkout(props) {
           };
 
           const {
-            data: {
-              createOrder: { id: orderId },
-            },
+            data: { createOrder: order },
           } = await API.graphql({
             query: createOrder,
             variables: { input: payload },
-            authMode,
+            authMode: "AMAZON_COGNITO_USER_POOLS",
           });
+
+          const { id: orderId } = order;
 
           const promise = [
             API.graphql({
@@ -226,10 +242,15 @@ function Checkout(props) {
                   amount: grandTotal,
                 },
               },
-              authMode,
+              authMode: "AMAZON_COGNITO_USER_POOLS",
             }),
-            ...cartList.map((p) =>
-              API.graphql({
+            ...cartList.map((p) => {
+              const itemtotal = parseInt(p.qty) * parseInt(p.price);
+              const itemDiscount = (totalDiscount * itemtotal) / totalPrice;
+              const itemShippingCharges =
+                (shippingTotal * itemtotal) / totalPrice;
+
+              return API.graphql({
                 query: createOrderProduct,
                 variables: {
                   input: {
@@ -239,13 +260,15 @@ function Checkout(props) {
                     quantity: p.qty,
                     price: p.price,
                     title: p.title,
-                    totalPrice: parseInt(p.qty) * parseInt(p.price),
+                    discount: itemDiscount,
+                    shippingCharges: itemShippingCharges,
+                    totalPrice: itemtotal + itemShippingCharges - itemDiscount,
                     sku: p.sku,
                   },
                 },
-                authMode,
-              })
-            ),
+                authMode: "AMAZON_COGNITO_USER_POOLS",
+              });
+            }),
           ];
 
           promise.push(addUserAddress());
@@ -258,11 +281,12 @@ function Checkout(props) {
 
           if (isFirst) {
             handlePayment({
-              orderId,
+              order,
               paymentId: payment.id,
               address: restAddress,
             });
           } else {
+            onPlaceOrder(order, [...cartList], appliedCoupon);
             await router.push(`/order/${orderId}`);
             await emptyCart();
             setLoading(false);
@@ -289,6 +313,8 @@ function Checkout(props) {
       couponTotal,
       prepaidDiscount,
       metadata,
+      totalDiscount,
+      totalPrice,
     ]
   );
 
@@ -631,12 +657,15 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
     metadata: state.system.meta,
+    shippingTiers: state.system.shippingTiers,
   };
 }
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
+  getShippingTiers: systemActions.getShippingTiers,
+  placeOrder: eventActions.placeOrder,
 })(Checkout);
 
 Component.hideFooter = true;

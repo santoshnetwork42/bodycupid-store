@@ -5,7 +5,6 @@ import SlideToggle from "react-slide-toggle";
 import ALink from "~/components/features/custom-link";
 import { DownAngle, RightArrow, LeftArrow } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
-import { scrollTopHandler } from "~/utils";
 import { cleanQuery } from "~/utils/helper";
 import { useDebounce } from "~/utils/hooks/useDebounce";
 
@@ -45,10 +44,6 @@ function SidebarFilterOne(props) {
       max: maxprice ? parseInt(maxprice) : 3000,
       min: minprice ? parseInt(minprice) : 0,
     });
-
-    if (category !== "all") {
-      scrollTopHandler();
-    }
   }, [query]);
 
   const filterByPrice = useCallback(() => {
@@ -164,7 +159,6 @@ function SidebarFilterOne(props) {
                   onClick={toggleSidebar}
                 >
                   Filter
-
                   {type === "left" || type === "off-canvas" ? (
                     <i>
                       <LeftArrow size={16} color="currentColor" />

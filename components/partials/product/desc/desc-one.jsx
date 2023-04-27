@@ -11,14 +11,14 @@ import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
-import ProductSpecifications from "../product-specifications";
-import Specifications from "~/lib/specifications.json";
-import { fadeIn } from "~/utils/data/keyframes";
 import Accordion from "~/components/features/accordion/accordion";
 import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
+import useWindowDimensions from "~/utils/getWindowDimension";
+import SkillBar from "~/components/features/skill-bar";
+
 const reviewDefault = {
   rating: 5,
   comment: "",
@@ -27,21 +27,13 @@ const reviewDefault = {
   images: [],
 };
 
-function DescOne(props) {
-  const { product, openModal, user, productFAQs, productReviews } = props;
-  const {
-    id,
-    totalRatings,
-    longDescription,
-    brand,
-    vendor,
-    weight,
-    weightUnit,
-    video,
-    title,
-    rating,
-  } = product;
+const reviewColor = ["#76DB98", "#B7EA83", "#F6D757", "#FBB851", "#F17A54"];
 
+function DescOne(props) {
+  const { product, openModal, user, productFAQs } = props;
+  const { id, totalRatings, longDescription, title, rating } = product;
+
+  const { width } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
@@ -76,7 +68,14 @@ function DescOne(props) {
         const data = item.result.buckets
           .sort((a, b) => +a.key - +b.key)
           .reverse();
-        setReviewAnalytics(data);
+        const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
+
+        const analytics = data.map((d) => ({
+          ...d,
+          percentage: getPer(total, +d.doc_count),
+        }));
+
+        setReviewAnalytics(analytics);
       }
     } catch (e) {
       errorHandler(e);
@@ -140,11 +139,11 @@ function DescOne(props) {
     }
   };
 
-  const showVideoModalHandler = (e) => {
-    e.preventDefault();
-    let link = e.currentTarget.closest(".btn-play").getAttribute("data");
-    openModal(link);
-  };
+  // const showVideoModalHandler = (e) => {
+  //   e.preventDefault();
+  //   let link = e.currentTarget.closest(".btn-play").getAttribute("data");
+  //   openModal(link);
+  // };
 
   const submitReview = useCallback(
     async (e) => {
@@ -209,9 +208,15 @@ function DescOne(props) {
   };
 
   return (
-    <div className="col-md-12 mb-6">
+    <div className="col-md-12 mb-6 product-description">
       <Accordion adClass="accordion-simple">
-        <Card title="Description" adClass="border-no" noDisplayStyle>
+        <Card
+          title="Description"
+          expanded={width > 450}
+          adClass="border-no"
+          noDisplayStyle
+          collapseEvent
+        >
           <div className="row">
             <div className="col-md-12">
               {!!longDescription && (
@@ -224,66 +229,6 @@ function DescOne(props) {
                       __html: longDescription,
                     }}
                   />
-                </>
-              )}
-            </div>
-          </div>
-        </Card>
-
-        <Card title="Specifications" noDisplayStyle>
-          <div className="row mt-6">
-            <div className="pl-md-6 pt-4 pt-md-0">
-              <div className="all-options-container d-flex flex-wrap align-item-center justify-content-center">
-                {Specifications.map((options, index) => (
-                  <ProductSpecifications key={index} {...options} />
-                ))}
-              </div>
-              <hr className="product-divider"></hr>
-              <h5 className="description-title mb-3 font-weight-semi-bold ls-m">
-                Specifications
-              </h5>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <th className="font-weight-semi-bold text-dark pl-0 text-left">
-                      Brand
-                    </th>
-                    <td className="pl-4">{brand || vendor}</td>
-                  </tr>
-                  {!!(weight && weightUnit) && (
-                    <tr>
-                      <th className="font-weight-semi-bold text-dark pl-0">
-                        Weight
-                      </th>
-                      <td className="pl-4">{weight + " " + weightUnit}</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-            <div className="pl-md-6 pt-4 pt-md-0">
-              {!!video && (
-                <>
-                  <h5 className="description-title font-weight-semi-bold ls-m mb-5">
-                    Video Description
-                  </h5>
-                  <figure className="p-relative d-inline-block mb-3">
-                    <img
-                      src="/images/product.jpg"
-                      width="559"
-                      height="370"
-                      alt="Product"
-                    />
-
-                    <a
-                      className="btn-play btn-iframe"
-                      href="#"
-                      data={video}
-                      onClick={showVideoModalHandler}
-                    >
-                      <i className="d-icon-play-solid"></i>
-                    </a>
-                  </figure>
                 </>
               )}
             </div>
@@ -305,44 +250,53 @@ function DescOne(props) {
           <div className="product-tab-reviews">
             <div className="reply mt-8 mb-8">
               <div className="title-wrapper text-left">
-                <h3 className="title title-simple text-left text-normal">
+                <h3 className="title title-simple text-uppercase text-left">
                   {reviews.length > 0
-                    ? "Add a Review"
+                    ? "CUSTOMER REVIEWS"
                     : "Be The First To Review “" + title + "”"}
                 </h3>{" "}
                 {!!reviews.length && (
                   <div className="review-section">
-                    <div className="total-review w-100">
-                      <h4>{rating}</h4>
-                      <RatingStar value={rating} />
+                    <div className="total-review mb-2 w-100">
+                      <div>
+                        <h2 className="mb-1 lh-1 ml-1">{rating}</h2>
+                        <RatingStar value={rating} />
+                      </div>
+
                       {!!product?.totalRatings && (
-                        <span>Based on {product.totalRatings} reviews</span>
+                        <span className="mt-2">
+                          Based on {product.totalRatings} reviews
+                        </span>
                       )}
                     </div>
                     <div className="rating w-100">
-                      {reviewAnalytics.map((r) => (
+                      {reviewAnalytics.map((r, i) => (
                         <div
-                          className="d-flex align-items-center justify-content-center mt-2"
+                          className="d-flex w-100 align-items-center  justify-content-center mt-2"
                           key={r.key}
                         >
-                          <RatingStar value={+r.key} />
-                          <div className="ml-1 percent">
-                            ({getPer(total, +r.doc_count)}%)
-                          </div>
-                          <span className="ml-1">{+r.doc_count}</span>
+                          <span className="mr-2 d-flex flex-column percent">
+                            {5 - i} Star
+                          </span>
+                          <SkillBar
+                            color={reviewColor[i]}
+                            className="review-bar"
+                            percentage={r.percentage}
+                          />
+                          <div className="ml-1 percent">{r.percentage}%</div>
                         </div>
                       ))}
                     </div>
                     <div className="w-100 d-flex align-items-center justify-content-center">
-                      <div className="buttons">
-                        <div className="justify-content-end">
+                      <div className="buttons  ml-1 mr-1 ">
+                        <div className="justify-content-end w-100">
                           <button
-                            className="btn btn-primary  btn-rounded mb-2"
+                            className="btn w-100  btn-rounded mb-2"
                             onClick={() => {
                               setShowReview(!showReview);
                             }}
                           >
-                            Add Review
+                            Write a review
                           </button>
                         </div>
                       </div>

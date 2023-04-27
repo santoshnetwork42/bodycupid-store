@@ -6,6 +6,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 
+import "~/public/sass/style.scss";
+import "react-owl-carousel2/lib/styles.css";
+
 import { wrapper } from "../store/index.js";
 import Layout from "~/components/layout";
 import { rootActions } from "~/store";
@@ -13,14 +16,10 @@ import { userActions } from "~/store/user";
 import { systemActions } from "~/store/system";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
-
 import awsconfig from "~/aws-exports";
-
-import "~/public/sass/style.scss";
-import "react-owl-carousel2/lib/styles.css";
 import { getUser, getStore } from "~/graphql/api";
-import Scripts from "~/components/scripts.jsx";
 import { errorHandler } from "~/utils/errorHandler.js";
+import Scripts from "~/components/scripts";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -34,11 +33,13 @@ const App = ({ Component, pageProps }) => {
   const navbarProps = {
     ...navbar,
     showMobileSearchBar: !!Component.showMobileSearchBar,
+    showTopRunner: !!Component.showTopRunner,
   };
 
   const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
+    showStickyCheckout: !!Component.showStickyCheckout,
   };
 
   const storeName = useMemo(() => {
@@ -76,27 +77,21 @@ const App = ({ Component, pageProps }) => {
   }, [store]);
 
   const setStore = useCallback(async () => {
-    const state = store.getState();
     try {
-    } catch (error) {
-      errorHandler(error);
-    }
-    if (!state.system.store) {
+      const state = store.getState();
       if (wowStore) {
         store.dispatch(systemActions.setStore(wowStore));
-      } else {
-        try {
-          const {
-            data: { getStore: getStoreResponse },
-          } = await API.graphql({
-            query: getStore,
-            variables: { id: STORE_ID },
-          });
-          store.dispatch(systemActions.setStore(getStoreResponse));
-        } catch (error) {
-          errorHandler(error);
-        }
+      } else if (!state.system.store) {
+        const {
+          data: { getStore: getStoreResponse },
+        } = await API.graphql({
+          query: getStore,
+          variables: { id: STORE_ID },
+        });
+        store.dispatch(systemActions.setStore(getStoreResponse));
       }
+    } catch (error) {
+      errorHandler(error);
     }
   }, [store, wowStore]);
 

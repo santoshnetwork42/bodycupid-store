@@ -64,6 +64,7 @@
 @import 'components/quickview';
 @import 'components/social-icons';
 @import 'components/sidebar';
+@import 'components/skillbar';
 @import 'components/sidebar-shop';
 @import 'components/skeleton';
 @import 'components/store';
@@ -74,11 +75,13 @@
 @import 'components/titles';
 @import 'components/vendor';
 @import 'components/widgets';
+@import 'components/quantity';
 
 /* 6. header */
 @import 'base/header/header';
 @import 'base/header/dropdown';
 @import 'base/header/menu';
+@import 'base/header/announcement';
 
 /* 7. footer */
 @import 'base/footer/footer';
