@@ -209,7 +209,7 @@ function Passwordless({
                             </div>
 
                             <button
-                              className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
+                              className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                               type="submit"
                               disabled={loading}
                             >
@@ -273,7 +273,7 @@ function Passwordless({
                             </div>
                           )}
                           <button
-                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
+                            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
                             disabled={loading}
                           >

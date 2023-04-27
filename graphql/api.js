@@ -1224,22 +1224,13 @@ export const updateUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
-      totalOrders
-      totalSpent
-      walletBalance
-      walletSpent
-      totalStoreCredit
-      isCognitoConfirmed
+      authProvider
+      isAdmin
       profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
       createdAt
       updatedAt
     }

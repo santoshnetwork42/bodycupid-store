@@ -135,7 +135,7 @@ function Addresses({ user, onAddressChange }) {
                     <div className="add-bottom-btn mt-2">
                       <ALink
                         href="#"
-                        className="btn btn-link btn-secondary btn-underline"
+                        className="btn btn-link btn-secondary btn-underline btn-link-black"
                         onClick={() => {
                           setDefaultAddress({ ...adr });
                           setOpen(true);
