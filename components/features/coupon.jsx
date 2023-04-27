@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-
 import { systemActions } from "~/store/system";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
-import { Close, Discount, LeftArrow, RightAngle } from "../icons";
+import { errorHandler } from "~/utils/errorHandler";
+import { Close, Discount, RightAngle } from "../icons";
 
 function Coupon(props) {
   const {
@@ -35,28 +35,32 @@ function Coupon(props) {
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
       setLoading(true);
-      const {
-        data: { applyCoupon: response },
-      } = await API.graphql({
-        query: applyCouponMutation,
-        variables: { code: couponCode },
-        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-      });
-      if (response) {
-        const discount = getCouponTotal(response, cartList);
-        if (discount) {
-          setCoupon("");
-          applyCoupon(response);
-          setOpen(false);
-          setError("");
+      try {
+        const {
+          data: { applyCoupon: response },
+        } = await API.graphql({
+          query: applyCouponMutation,
+          variables: { code: couponCode },
+          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        });
+        if (response) {
+          const discount = getCouponTotal(response, cartList);
+          if (discount) {
+            setCoupon("");
+            applyCoupon(response);
+            setOpen(false);
+            setError("");
+          } else {
+            setError("Coupon cannot be applied");
+          }
+          setLoading(false);
         } else {
-          setError("Coupon cannot be applied");
+          setCoupon("");
+          setError("Coupon not found");
+          setLoading(false);
         }
-        setLoading(false);
-      } else {
-        setCoupon("");
-        setError("Coupon not found");
-        setLoading(false);
+      } catch (error) {
+        errorHandler(error);
       }
     },
     [coupon, user]
@@ -98,7 +102,10 @@ function Coupon(props) {
               <a
                 className="coupon-offer d-flex align-items-center"
                 type="button"
-              >{`${featured?.length} Offers`}<RightAngle size={14}/></a>
+              >
+                {`${featured?.length} Offers`}
+                <RightAngle size={14} />
+              </a>
             )}
             {!!appliedCoupon && (
               <ALink
@@ -175,8 +182,7 @@ function Coupon(props) {
                   <div className="mt-2">
                     <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {
-                      let className =
-                        "btn btn-md  btn-rounded btn-link m l-2";
+                      let className = "btn btn-md  btn-rounded btn-link m l-2";
                       const discount = getCouponTotal(c, cartList);
                       if (!discount) {
                         className = `${className} btn-disabled`;

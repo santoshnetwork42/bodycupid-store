@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
@@ -15,8 +15,10 @@ import Accordion from "~/components/features/accordion/accordion";
 import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { errorHandler } from "~/utils/errorHandler";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import SkillBar from "~/components/features/skill-bar";
+
 const reviewDefault = {
   rating: 5,
   comment: "",
@@ -28,19 +30,8 @@ const reviewDefault = {
 const reviewColor = ["#76DB98", "#B7EA83", "#F6D757", "#FBB851", "#F17A54"];
 
 function DescOne(props) {
-  const { product, openModal, user, productFAQs, productReviews } = props;
-  const {
-    id,
-    totalRatings,
-    longDescription,
-    brand,
-    vendor,
-    weight,
-    weightUnit,
-    video,
-    title,
-    rating,
-  } = product;
+  const { product, openModal, user, productFAQs } = props;
+  const { id, totalRatings, longDescription, title, rating } = product;
 
   const { width } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
@@ -87,7 +78,7 @@ function DescOne(props) {
         setReviewAnalytics(analytics);
       }
     } catch (e) {
-      console.log("e", e);
+      errorHandler(e);
     }
   };
 
@@ -120,8 +111,8 @@ function DescOne(props) {
           }
         )
         .catch((err) => {
+          errorHandler(err);
           setLoading(false);
-          console.log("err", err);
         });
     },
     [product, token]
@@ -148,11 +139,11 @@ function DescOne(props) {
     }
   };
 
-  const showVideoModalHandler = (e) => {
-    e.preventDefault();
-    let link = e.currentTarget.closest(".btn-play").getAttribute("data");
-    openModal(link);
-  };
+  // const showVideoModalHandler = (e) => {
+  //   e.preventDefault();
+  //   let link = e.currentTarget.closest(".btn-play").getAttribute("data");
+  //   openModal(link);
+  // };
 
   const submitReview = useCallback(
     async (e) => {
@@ -200,8 +191,7 @@ function DescOne(props) {
           />
         );
       } catch (error) {
-        toast(<AlertPopup message={error.message} status="error" />);
-        console.log(error);
+        errorHandler(error);
       }
       return false;
     },
@@ -274,7 +264,9 @@ function DescOne(props) {
                       </div>
 
                       {!!product?.totalRatings && (
-                        <span className="mt-2">Based on {product.totalRatings} reviews</span>
+                        <span className="mt-2">
+                          Based on {product.totalRatings} reviews
+                        </span>
                       )}
                     </div>
                     <div className="rating w-100">

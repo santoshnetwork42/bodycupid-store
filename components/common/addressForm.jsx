@@ -9,6 +9,7 @@ import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import AlertPopup from "../features/product/common/alert-popup";
 import { validateAddress, getProperAddress } from "~/utils/address";
+import { errorHandler } from "~/utils/errorHandler";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit } = props;
@@ -69,9 +70,8 @@ const AddressForm = (props) => {
         }
         setLoading(false);
       } catch (errors) {
-        console.log(errors);
+        errorHandler(errors)
         setLoading(false);
-        toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
     },

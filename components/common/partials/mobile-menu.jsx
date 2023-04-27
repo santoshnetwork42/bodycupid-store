@@ -10,6 +10,7 @@ import { getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import { getSortedCategoryAndSubCategory } from "~/utils/helper";
 import OptimizedImage from "~/components/features/optimized-image";
+import { errorHandler } from "~/utils/errorHandler";
 
 function MobileMenu({ user }) {
   const router = useRouter();
@@ -21,16 +22,18 @@ function MobileMenu({ user }) {
         filter: { storeId: { eq: STORE_ID } },
         sort: [{ field: "priority", direction: "asc" }],
       })
-    ).then(
-      ({
-        data: {
-          searchProductCategories: { items },
-        },
-      }) => {
-        const sortedItems = getSortedCategoryAndSubCategory(items);
-        setCategories(sortedItems);
-      }
-    );
+    )
+      .then(
+        ({
+          data: {
+            searchProductCategories: { items },
+          },
+        }) => {
+          const sortedItems = getSortedCategoryAndSubCategory(items);
+          setCategories(sortedItems);
+        }
+      )
+      .catch(errorHandler);
   }, []);
 
   useEffect(() => {
@@ -43,8 +46,6 @@ function MobileMenu({ user }) {
     };
   }, []);
 
-
-
   const hideMobileMenuHandler = () => {
     if (window.innerWidth > 991) {
       document.querySelector("body").classList.remove("mmenu-active");
@@ -54,7 +55,6 @@ function MobileMenu({ user }) {
   const hideMobileMenu = () => {
     document.querySelector("body").classList.remove("mmenu-active");
   };
-
 
   function onBodyClick(e) {
     if (e.target.closest(".header-search"))
@@ -70,8 +70,6 @@ function MobileMenu({ user }) {
         .querySelector(".header-search.show-results")
         .classList.remove("show-results");
   }
-
-
 
   const handleLogout = useCallback(async () => {
     await Auth.signOut();
@@ -90,18 +88,17 @@ function MobileMenu({ user }) {
 
       <div className="mobile-menu-container scrollable">
         <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
-        <ALink href="/" className="logo-footer">
-          <OptimizedImage
-            optimizedData={{
-              width: 60,
-              height: 60,
-            }}
-            src="/images/logo.png"
-            loading="eager"
-            alt="logo"
-          />
-        </ALink>
-          
+          <ALink href="/" className="logo-footer">
+            <OptimizedImage
+              optimizedData={{
+                width: 60,
+                height: 60,
+              }}
+              src="/images/logo.png"
+              loading="eager"
+              alt="logo"
+            />
+          </ALink>
         </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
@@ -111,7 +108,7 @@ function MobileMenu({ user }) {
                   title={category.name}
                   type="mobile"
                   onLinkClick={hideMobileMenu}
-                  url={`/collections/${category.slug}`} 
+                  url={`/collections/${category.slug}`}
                 >
                   <ul>
                     {category.subCategory.items.map((item) => (

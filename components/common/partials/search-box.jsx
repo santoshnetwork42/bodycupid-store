@@ -4,14 +4,12 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { MagnifyingGlass } from "~/components/icons";
-
+import { MagnifyingGlass, Search } from "~/components/icons";
 import { searchProductsBasic } from "~/graphql/api";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
-import { Search } from "~/components/icons";
+import { errorHandler } from "~/utils/errorHandler";
 
 function SearchForm({ type = "input", defaultSearch = "" }) {
   const router = useRouter();
@@ -20,20 +18,24 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
   const [data, setData] = useState([]);
 
   const searchProducts = useCallback(async (searchTerm) => {
-    const {
-      data: {
-        searchProducts: { items },
-      },
-    } = await API.graphql(
-      graphqlOperation(searchProductsBasic, {
-        filter: {
-          storeId: { eq: STORE_ID },
-          status: { eq: "ENABLED" },
-          title: { matchPhrasePrefix: searchTerm },
+    try {
+      const {
+        data: {
+          searchProducts: { items },
         },
-      })
-    );
-    setData(items);
+      } = await API.graphql(
+        graphqlOperation(searchProductsBasic, {
+          filter: {
+            storeId: { eq: STORE_ID },
+            status: { eq: "ENABLED" },
+            title: { matchPhrasePrefix: searchTerm },
+          },
+        })
+      );
+      setData(items);
+    } catch (error) {
+      errorHandler(error);
+    }
   }, []);
 
   useEffect(() => {

@@ -1,17 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
-import { Star, Bag, Heart, HeartFilled, BigDot } from "~/components/icons";
+import { Star, Bag, BigDot } from "~/components/icons";
 import Quantity from "~/components/features/quantity";
-
-import ProductNav from "~/components/partials/product/product-nav";
-
 import { wishlistActions } from "~/store/wishlist";
 import { cartActions } from "~/store/cart";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
@@ -22,11 +18,7 @@ import {
   scrollWithOffset,
 } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
-import {
-  getProductInventory,
-  getProductCouponTotal,
-  getFirstVariantId,
-} from "~/utils/products";
+import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
@@ -36,6 +28,7 @@ function DetailOne(props) {
   const {
     query: { review },
   } = router;
+
   const {
     cartList,
     updateCart,
