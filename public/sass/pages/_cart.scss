@@ -530,7 +530,7 @@
     }
 
     .product-quantity {
-        width: 135px;
+        width: 120px;
 
         .input-group {
             height: 3.5rem !important;
@@ -545,6 +545,7 @@
             min-height: 3.5rem !important;
             padding: 0rem 1rem !important;
             font-size: 1.2rem;
+            max-width: 140px;
             border: 1px solid #eee !important;
         }
 
@@ -695,9 +696,7 @@
             width: 11rem;
         }
 
-        .product-quantity {
-            width: 17.7rem
-        }
+
 
         .product-subtotal {
             width: 13.2rem;

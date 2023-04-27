@@ -96,7 +96,7 @@ function Coupon(props) {
 
             {!!featured?.length && !appliedCoupon && (
               <a
-                className="coupon-offer d-flex"
+                className="coupon-offer d-flex align-items-center"
                 type="button"
               >{`${featured?.length} Offers`}<RightAngle size={14}/></a>
             )}

@@ -1,17 +1,14 @@
 import { connect } from "react-redux";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import {  useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
-import Quantity from "~/components/features/quantity";
 import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { toDecimal, getCartTotals } from "~/utils";
 import { systemActions } from "~/store/system";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getRecordKey, getUpdatedCart, scrollWithOffset } from "~/utils/helper";
-import { Close, Cross, RightAngle } from "~/components/icons";
-import { getFirstVariantId } from "~/utils/products";
+import { RightAngle } from "~/components/icons";
+import CartProduct from "~/components/partials/cart/cart-product";
 
 function Cart(props) {
   const {
@@ -78,15 +75,6 @@ function Cart(props) {
     [cartItems, appliedCoupon, shippingTiers]
   );
 
-  const onChangeQty = (item, qty) => {
-    if (qty) {
-      const cartData = getUpdatedCart(cartList, item.recordKey, { qty });
-      updateCart(cartData);
-    } else {
-      removeFromCart(item);
-    }
-  };
-
   const changeVariant = (e, item) => {
     const { id } = item;
     const variant = item.variants.items.find((c) => c.id === e.target.value);
@@ -117,35 +105,12 @@ function Cart(props) {
     return false;
   }, [user]);
 
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
+  const removeCoupon = (item) => {
+    if (item && item.qty > 1) {
+      return { ...item, qty: item.qty - 1,isBogo:false, bogo: 'PRIMARY' };
+    }
+    return null;
   };
-
-  const getVariantSelect = (item) => {
-    return (
-      <select
-        name={`${item.recordKey}`}
-        className="form-control"
-        value={item.variantId}
-        onChange={(e) => {
-          changeVariant(e, item);
-        }}
-      >
-        {item?.variants?.items.map((v) => (
-          <option key={v.id} value={v.id}>
-            {v.title}
-          </option>
-        ))}
-      </select>
-    );
-  };
-
-  const getBogoTag = () => (
-    <div className="summary-saving-lable-container mb-1  qty-label ">
-      <p className="m-0 saving-lable">1 qty is Free</p>
-    </div>
-  );
-
   return (
     <main className="main cart bg-white">
       <div className="page-content pt-7 pb-5">
@@ -173,188 +138,30 @@ function Cart(props) {
           <div className="row">
             {cartItems.length > 0 ? (
               <>
-                <div className="col-lg-8 col-md-12 pt-4 cart-table-wrapper pl-lg-4 pr-lg-4">
-                  <table className="shop-table pt-3 cart-table ">
-                    <thead>
-                      <tr>
-                        <th>
-                          <span>Product</span>
-                        </th>
-                        <th></th>
-                        <th>
-                          <span>Price</span>
-                        </th>
-                        <th>
-                          <span>quantity</span>
-                        </th>
-                        <th>Subtotal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartItems.map((item) => (
-                        <Fragment key={item.recordKey}>
-                          <tr className="d-sm-none">
-                            <td className="product-thumbnail">
-                              <figure>
-                                <ALink href={"/product/" + item.slug}>
-                                  <img
-                                    src={getPublicImageURL(
-                                      item.images.items[0]?.imageKey
-                                    )}
-                                    width="100"
-                                    height="100"
-                                    alt={item.images.items[0]?.alt}
-                                  />
-                                </ALink>
-                              </figure>
-                            </td>
-                            <td className="product-name">
-                              <div className="product-name-section mobile-specific-cart-product-container">
-                                <ALink href={"/product/" + item.slug}>
-                                  {item.title}
-                                </ALink>
-                                {!!item?.variants?.items.length &&
-                                  getVariantSelect(item)}
-                              </div>
-                            </td>
-                            <td className="product-subtotal">
-                              {!(item.isBogo && item.qty === 1) && (
-                                <span className="amount">
-                                  ₹{toDecimal(item.price)}
-                                </span>
-                              )}
-                              <p className="m-0 product-discount-listing">
-                                {item.price < item.listingPrice && (
-                                  <del className="summary-subtotal-listingprice">
-                                    ₹{toDecimal(item.listingPrice)}
-                                  </del>
-                                )}
-                                 {item.isBogo && item.qty > 1 && getBogoTag()}
-                                {item.isBogo && item.qty === 1 ? (
-                                  <span className="text-success ml-1">
-                                    Free
-                                  </span>
-                                ) : (
-                                  <span className={`discount-percetage ml-2`}>
-                                    {productDiscountPercentage(item) > 0 &&
-                                      `${productDiscountPercentage(item)}% off`}
-                                  </span>
-                                )}
-                                
-                              </p>
-                            </td>
-
-                            <td className="product-quantity">
-                              <Quantity
-                                product={item}
-                                qty={item.qty}
-                                max={item.inventory}
-                                onChangeQty={(qty) => onChangeQty(item, qty)}
-                              />
-                            </td>
-                            <td className="product-price">
-                              <span className="amount">
-                                ₹{toDecimal(item.price * item.qty)}
-                              </span>
-                            </td>
-                            <td className="product-close">
-                              <ALink
-                                href="#"
-                                className="product-remove"
-                                title="Remove this product"
-                                onClick={() => removeFromCart(item)}
-                              >
-                                <i>
-                                  <Cross size={12} color="currentColor" />
-                                </i>
-                              </ALink>
-                            </td>
-                          </tr>
-                          <tr className="m-0 p-0 border-no d-sm-show">
-                            <td className="m-0 p-0">
-                              <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
-                                <figure>
-                                  <ALink href={"/product/" + item.slug}>
-                                    <img
-                                      src={getPublicImageURL(
-                                        item.images.items[0]?.imageKey
-                                      )}
-                                      width="100"
-                                      height="100"
-                                      alt={item.images.items[0]?.alt}
-                                    />
-                                  </ALink>
-                                </figure>
-                                <div className="text-left text-primary w-100  mr-1 ml-2">
-                                  <div className="mr-5 ">
-                                    <ALink href={"/product/" + item.slug}>
-                                      {item.title}
-                                    </ALink>
-                                  </div>
-                                  <div className="product-subtotal mt-1">
-                                    {!(item.isBogo && item.qty === 1) && (
-                                      <span className="sm-product-amount">
-                                        ₹{toDecimal(item.price)}
-                                      </span>
-                                    )}
-
-                                    <p className="m-0 product-discount-listing">
-                                      {item.price < item.listingPrice && (
-                                        <del className="summary-subtotal-listingprice">
-                                          ₹{toDecimal(item.listingPrice)}
-                                        </del>
-                                      )}
-                                      {item.isBogo && item.qty === 1 ? (
-                                        <span className="text-success ml-1">
-                                          Free
-                                        </span>
-                                      ) : (
-                                        <span
-                                          className={`discount-percetage ml-2`}
-                                        >
-                                          {productDiscountPercentage(item) >
-                                            0 &&
-                                            `${productDiscountPercentage(
-                                              item
-                                            )}% off`}
-                                        </span>
-                                      )}
-                                    </p>
-                                  </div>{" "}
-                                  <div className="d-flex">
-                                    <div className="product-quantity w-0">
-                                      <Quantity
-                                        product={item}
-                                        qty={item.qty}
-                                        max={item.inventory}
-                                        onChangeQty={(qty) =>
-                                          onChangeQty(item, qty)
-                                        }
-                                      />
-                                    </div>
-
-                                    {!!item?.variants?.items.length &&
-                                      getVariantSelect(item)}
-                                  </div>
-                                  {item.isBogo && item.qty > 1 && getBogoTag()}
-                                </div>
-                                <div className="product-close">
-                                  <ALink
-                                    href="#"
-                                    className="sm-product-remove"
-                                    title="Remove this product"
-                                    onClick={() => removeFromCart(item)}
-                                  >
-                                    <Close size={18} color="grey" />
-                                  </ALink>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </Fragment>
-                      ))}
-                    </tbody>
-                  </table>
+                <div className="col-lg-8 col-md-12 ">
+                  <div className="shop-table cart-table ">
+                    <div>
+                      {cartItems.map((item) =>
+                        item.isBogo ? (
+                          <>
+                            <CartProduct
+                              removeFromCart={removeFromCart}
+                              item={removeCoupon(item)}
+                            />
+                            <CartProduct
+                              removeFromCart={removeFromCart}
+                              item={item}
+                            />
+                          </>
+                        ) : (
+                          <CartProduct
+                            removeFromCart={removeFromCart}
+                            item={item}
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 <aside
