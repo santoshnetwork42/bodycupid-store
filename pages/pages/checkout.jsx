@@ -389,22 +389,24 @@ function Checkout(props) {
                     <div className="summary pt-5 p-0 border-no">
                       <div
                         onClick={() => setIsCollapse(!isCollapse)}
-                        className="checkout-summary-btn d-flex bg-white border-regular align-items-center mb-2 d-xl-none"
+                        className="checkout-summary-btn d-flex bg-white border-regular align-items-center mb-2"
                       >
-                        <div className="d-flex align-items-center">
-                          <ShoppingCart size={20} />
-                          <p className="checkout-summary-label m-0">
-                            Show order summary
+                        <div className="d-sm-show w-100">
+                          <div className="d-flex align-items-center">
+                            <ShoppingCart size={20} />
+                            <p className="checkout-summary-label m-0">
+                              Show order summary
+                            </p>
+                            {isCollapse ? (
+                              <UpAngle size={17} color="currentColor" />
+                            ) : (
+                              <DownAngle color="currentColor" size={16} />
+                            )}
+                          </div>
+                          <p className="m-0 checkout-summary-total">
+                            ₹{toDecimal(grandTotal)}
                           </p>
-                          {isCollapse ? (
-                            <UpAngle size={17} color="currentColor" />
-                          ) : (
-                            <DownAngle color="currentColor" size={16} />
-                          )}
                         </div>
-                        <p className="m-0 checkout-summary-total">
-                          ₹{toDecimal(grandTotal)}
-                        </p>
                       </div>
                       <Collapse in={isCollapse}>
                         <div className="collapsible-checkout-wrapper mb-2">
