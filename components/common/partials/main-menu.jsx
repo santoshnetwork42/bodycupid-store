@@ -43,7 +43,7 @@ function MainMenu() {
         {categories.map((category) => (
           <li
             key={category.id}
-            className={`Our featured
+            className={`
               ${
                 pathname.includes(`/collections/${category.slug}`)
                   ? "active"

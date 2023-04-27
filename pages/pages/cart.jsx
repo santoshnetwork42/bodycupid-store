@@ -67,7 +67,7 @@ function Cart(props) {
 
   return (
     <main className="main cart bg-white">
-      <div className="page-content pt-7 pb-5">
+      <div className="page-content pt-7 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
@@ -88,12 +88,12 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container sm-container mt-7 mb-2 ">
+        <div className="container p-0 sm-container mt-7 mb-2 ">
           <div className="row">
             {cartItems.length > 0 ? (
               <>
                 <div className="col-lg-8 col-md-12 ">
-                  <div className="shop-table cart-table ">
+                  <div className="shop-table cart-table lh-default ">
                     <div>
                       {cartItems.map((item) => (
                         <React.Fragment key={`${item.recordKey}-cart-item`}>

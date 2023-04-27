@@ -511,7 +511,7 @@ function DetailOne(props) {
                 )}
                 {!!cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={(e) => {

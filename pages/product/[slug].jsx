@@ -117,7 +117,7 @@ function ProductDefault(props) {
             </div>
           </div>
           <div className="page-content pb-10">
-            <div className="container vertical pt-3">
+            <div className="container vertical pt-3 lh-default">
               <LinkedProducts product={product} />
               <DescOne product={product} productFAQs={productFAQs} />
               <ProductCollection
