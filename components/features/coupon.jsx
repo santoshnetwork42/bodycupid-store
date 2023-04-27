@@ -184,7 +184,6 @@ function Coupon(props) {
                 <span className="coupon-error-lable">{error}</span>
                 {!!featured?.length && (
                   <div className="mt-2">
-                    <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {
                       let className = "btn btn-md  btn-rounded btn-link m l-2";
                       const discount = getCouponTotal(c, cartList);

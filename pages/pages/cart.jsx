@@ -198,13 +198,13 @@ function Cart(props) {
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle lh-1">
+                              <h4 className="summary-subtitle font-weight-semi-bold  lh-1">
                                 Total{" "}
                                 <p className="m-0">Inclusive of all taxes</p>
                               </h4>
                             </td>
                             <td>
-                              <p className="summary-total-price ls-s">
+                              <p className="summary-total-price font-weight-semi-bold  ls-s">
                                 ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                               </p>
                             </td>
@@ -298,7 +298,7 @@ function mapStateToProps(state) {
     shippingTiers: state.system.shippingTiers,
   };
 }
-export default connect(mapStateToProps, {
+const Component =connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
@@ -306,3 +306,7 @@ export default connect(mapStateToProps, {
   getShippingTiers: systemActions.getShippingTiers,
   viewCart: eventActions.viewCart,
 })(Cart);
+
+Component.hideFooter=true;
+
+export default Component;

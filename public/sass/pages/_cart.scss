@@ -315,7 +315,7 @@
 }
 
 .summary-total-price {
-    letter-spacing: -0.025em;
+    letter-spacing: 0.025em;
     font-weight: 700;
     color: $dark-color;
     // padding: 10px 0;
@@ -327,7 +327,7 @@
 }
 
 .total .summary-subtitle {
-    padding: 2.4rem 0 2.3rem;
+    padding: 1.4rem 0 1.3rem;
 }
 
 .empty-cart {
@@ -609,6 +609,7 @@
 
 .cart-coupon-modal {
     padding: 2rem;
+    letter-spacing: 0.0225rem !important;
 
     .d-flex {
         align-items: baseline;
