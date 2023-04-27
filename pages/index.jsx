@@ -200,14 +200,13 @@ export const getStaticProps = async () => {
       revalidate: 300,
     };
   } catch (e) {
-    console.log("error >>", e);
     return {
       notFound: true,
     };
   }
 };
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 const Component = connect(mapStateToProps)(HomePage);

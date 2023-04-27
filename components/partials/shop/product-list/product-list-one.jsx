@@ -9,6 +9,7 @@ import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
 import Loader from "~/components/common/partials/loader";
+import { errorHandler } from "~/utils/errorHandler";
 import { eventActions } from "~/store/events";
 
 const gridClasses = {
@@ -131,7 +132,7 @@ function ProductListOne(props) {
         setTotal(total);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     },
     [filters, products, token, applyFilters, sectionId]

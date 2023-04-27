@@ -19,6 +19,7 @@ import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 import awsconfig from "~/aws-exports";
 import { getUser, getStore } from "~/graphql/api";
+import { errorHandler } from "~/utils/errorHandler.js";
 import Scripts from "~/components/scripts";
 
 Amplify.configure({ ...awsconfig, ssr: true });
@@ -32,7 +33,7 @@ const App = ({ Component, pageProps }) => {
 
   const navbarProps = {
     ...navbar,
-    showMobileSearchBar: !!Component.showMobileSearchBar,
+    hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
   };
 
@@ -71,23 +72,27 @@ const App = ({ Component, pageProps }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
       destroySession();
     }
   }, [store]);
 
   const setStore = useCallback(async () => {
-    const state = store.getState();
-    if (wowStore) {
-      store.dispatch(systemActions.setStore(wowStore));
-    } else if (!state.system.store) {
-      const {
-        data: { getStore: getStoreResponse },
-      } = await API.graphql({
-        query: getStore,
-        variables: { id: STORE_ID },
-      });
-      store.dispatch(systemActions.setStore(getStoreResponse));
+    try {
+      const state = store.getState();
+      if (wowStore) {
+        store.dispatch(systemActions.setStore(wowStore));
+      } else if (!state.system.store) {
+        const {
+          data: { getStore: getStoreResponse },
+        } = await API.graphql({
+          query: getStore,
+          variables: { id: STORE_ID },
+        });
+        store.dispatch(systemActions.setStore(getStoreResponse));
+      }
+    } catch (error) {
+      errorHandler(error);
     }
   }, [store, wowStore]);
 

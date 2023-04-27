@@ -15,6 +15,7 @@ import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
@@ -31,12 +32,16 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
   }, []);
 
   const fetchOrder = useCallback(async () => {
-    const response = await API.graphql({
-      query: getOrder,
-      variables: { id: orderId },
-    });
-    if (!!response.data.getOrder) {
-      setOrder(response.data.getOrder);
+    try {
+      const response = await API.graphql({
+        query: getOrder,
+        variables: { id: orderId },
+      });
+      if (!!response.data.getOrder) {
+        setOrder(response.data.getOrder);
+      }
+    } catch (error) {
+      errorHandler(error);
     }
   }, [orderId]);
 

@@ -12,30 +12,35 @@ import RatingStar from "./rating-star";
 import ALink from "~/components/features/custom-link";
 import { modalActions } from "~/store/modal";
 import { getProductMeta } from "~/utils/products";
+import { errorHandler } from "~/utils/errorHandler";
 
 function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
   const [linkedProduct, setLinkedProduct] = useState([]);
   const router = useRouter();
 
   const getLinkedProduct = useCallback(async () => {
-    const {
-      data: {
-        byProductIdLinkedProduct: { items: response },
-      },
-    } = await API.graphql({
-      query: getLinkedProducts,
-      variables: { productId: product.id },
-    });
-    if (response.length) {
-      const data = response.map((lp) => lp.linkedProduct);
+    try {
+      const {
+        data: {
+          byProductIdLinkedProduct: { items: response },
+        },
+      } = await API.graphql({
+        query: getLinkedProducts,
+        variables: { productId: product.id },
+      });
+      if (response.length) {
+        const data = response.map((lp) => lp.linkedProduct);
 
-      const productData = [product, ...data].map((d) => ({
-        ...d,
-        thumbImage: getProductMeta(d).thumbImage,
-        checked: true,
-      }));
+        const productData = [product, ...data].map((d) => ({
+          ...d,
+          thumbImage: getProductMeta(d).thumbImage,
+          checked: true,
+        }));
 
-      setLinkedProduct(productData);
+        setLinkedProduct(productData);
+      }
+    } catch (error) {
+      errorHandler(error);
     }
   });
 

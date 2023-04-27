@@ -7,7 +7,6 @@ import {
   getBasicCategory,
   getAllCategoriesPath,
   findProducts,
-  getSideBarFilterCategories,
   getSubCategoriesByCategoryID,
   listCollections,
   getCollectionsBySlug,
@@ -127,11 +126,6 @@ export const getStaticProps = async (context) => {
       const { id } = category;
       filter.categoryId = { eq: id };
 
-      // Get SideBar Categories
-      const getSidebarCategory = fetchData(getSideBarFilterCategories, {
-        filter: { storeId: { eq: STORE_ID } },
-      });
-
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
         filter,
@@ -145,17 +139,10 @@ export const getStaticProps = async (context) => {
           filter: { storeId: { eq: STORE_ID }, categoryID: { eq: id } },
         }
       );
-      const [
-        { searchProductCategories },
-        { searchProducts },
-        { searchProductSubCategories },
-      ] = await Promise.all([
-        getSidebarCategory,
-        getProducts,
-        getSubCategoriesByCategory,
-      ]);
+
+      const [{ searchProducts }, { searchProductSubCategories }] =
+        await Promise.all([getProducts, getSubCategoriesByCategory]);
       const { items: subCategories } = searchProductSubCategories;
-      const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
       const products = await Promise.all(
         items.map((product) => optimizeProduct(product, { partial: true }))
@@ -167,7 +154,7 @@ export const getStaticProps = async (context) => {
           categoryId: id,
           category: optimizedCategory,
           products: { ...searchProducts, items: products },
-          sideBarCategories: categories,
+          // sideBarCategories: categories,
           subCategories,
           filter,
         },
@@ -199,7 +186,7 @@ export const getStaticProps = async (context) => {
           tagId: slug,
           products: { ...searchProducts, items: products },
           pageFilter: filter,
-          sideBarCategories: [],
+          // sideBarCategories: [],
         },
       };
     }

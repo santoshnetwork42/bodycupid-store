@@ -4,36 +4,38 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { MagnifyingGlass } from "~/components/icons";
-
+import { MagnifyingGlass, Search } from "~/components/icons";
 import { searchProductsBasic } from "~/graphql/api";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
-import { Search } from "~/components/icons";
+import { errorHandler } from "~/utils/errorHandler";
 
-function SearchForm({ type = "input" }) {
+function SearchForm({ type = "input", defaultSearch = "" }) {
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
   const [data, setData] = useState([]);
 
   const searchProducts = useCallback(async (searchTerm) => {
-    const {
-      data: {
-        searchProducts: { items },
-      },
-    } = await API.graphql(
-      graphqlOperation(searchProductsBasic, {
-        filter: {
-          storeId: { eq: STORE_ID },
-          status: { eq: "ENABLED" },
-          title: { matchPhrasePrefix: searchTerm },
+    try {
+      const {
+        data: {
+          searchProducts: { items },
         },
-      })
-    );
-    setData(items);
+      } = await API.graphql(
+        graphqlOperation(searchProductsBasic, {
+          filter: {
+            storeId: { eq: STORE_ID },
+            status: { eq: "ENABLED" },
+            title: { matchPhrasePrefix: searchTerm },
+          },
+        })
+      );
+      setData(items);
+    } catch (error) {
+      errorHandler(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ function SearchForm({ type = "input" }) {
   }, []);
 
   useEffect(() => {
-    setSearch("");
+    setSearch(defaultSearch);
   }, [router.query.slug]);
 
   useEffect(() => {
@@ -92,7 +94,7 @@ function SearchForm({ type = "input" }) {
     e.stopPropagation();
     e.currentTarget.parentNode.classList.toggle("show");
   }
- function onSearchExpand(e) {
+  function onSearchExpand(e) {
     e.currentTarget.parentNode.classList.toggle("show");
   }
 
@@ -115,14 +117,13 @@ function SearchForm({ type = "input" }) {
     setSearch(e.target.value);
   }
 
-  function onSubmitSearchForm(e) {
-    router.push({
-      pathname: "/collections/all",
-      query: {
-        search: search,
-      },
+  async function onSubmitSearchForm(e) {
+    document.querySelector(".header-search")?.classList.toggle("show");
+    await router.push({
+      pathname: "/collections/search",
+      query: { search },
     });
-    e.currentTarget.parentNode.classList.toggle("show");
+    return false;
   }
 
   return (
@@ -131,26 +132,26 @@ function SearchForm({ type = "input" }) {
         type === "icon" ? "hs-toggle d-block" : "hs-simple"
       }`}
     >
-      <a
-        href="#"
-        className="search-toggle"
-        role="button"
-        onClick={onSearchClick}
-      >
-        {type === "icon" ? <Search /> : <i className="icon-search-3"></i>}
-      </a>
-      <form
-        action="#"
-        method="get"
-        onSubmit={onSubmitSearchForm}
-        className="input-wrapper"
-      >
+      {type === "icon" && (
+        <a
+          href="#"
+          className="search-toggle"
+          role="button"
+          onClick={onSearchClick}
+        >
+          <Search />
+        </a>
+      )}
+      <div className="input-wrapper">
         <input
           type="text"
           className="form-control"
           name="search"
           autoComplete="off"
           value={search}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") onSubmitSearchForm(e);
+          }}
           onChange={onSearchChange}
           placeholder="Search..."
           required
@@ -158,9 +159,9 @@ function SearchForm({ type = "input" }) {
 
         <button
           className="btn btn-search"
-          onClick={onSubmitSearchForm}
           type="submit"
           aria-label="search"
+          onClick={onSubmitSearchForm}
         >
           <MagnifyingGlass color="currentColor" size={20} />
         </button>
@@ -202,9 +203,9 @@ function SearchForm({ type = "input" }) {
               );
             })}
         </div>
-      </form>
+      </div>
     </div>
   );
 }
 
-export default React.memo(SearchForm);
+export default SearchForm;

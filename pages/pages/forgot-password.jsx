@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
+import { errorHandler } from "~/utils/errorHandler";
 
 function ForgotPassword({ store }) {
   const { name } = store;
@@ -35,7 +36,7 @@ function ForgotPassword({ store }) {
           router.push("/pages/login");
         }
       } catch (error) {
-        console.log("error signin:", error);
+        errorHandler(error);
       }
       return false;
     },

@@ -7,6 +7,7 @@ import AddressForm from "./addressForm";
 import { deleteUserAddress } from "~/graphql/mutations";
 import { findUserAddresses } from "~/graphql/api";
 import Modal from "~/components/common/modal";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Addresses({ user, onAddressChange }) {
   const [loading, setLoading] = useState(!!user);
@@ -16,19 +17,23 @@ function Addresses({ user, onAddressChange }) {
   const [defaultAddress, setDefaultAddress] = useState({});
 
   const getUserAddress = useCallback(async () => {
-    const {
-      data: { searchUserAddresses: userAddresses },
-    } = await API.graphql({
-      query: findUserAddresses,
-      variables: {
-        filter: { userID: { eq: user.id } },
-      },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    });
+    try {
+      const {
+        data: { searchUserAddresses: userAddresses },
+      } = await API.graphql({
+        query: findUserAddresses,
+        variables: {
+          filter: { userID: { eq: user.id } },
+        },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
 
-    setAddresses(userAddresses.items);
-    setLoading(false);
-    setSelected(userAddresses.items[0]?.id);
+      setAddresses(userAddresses.items);
+      setLoading(false);
+      setSelected(userAddresses.items[0]?.id);
+    } catch (error) {
+      errorHandler(error);
+    }
   }, [user]);
 
   useEffect(() => {
