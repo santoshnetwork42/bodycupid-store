@@ -407,7 +407,7 @@ export const getCouponTotal = (coupon, cartItems = []) => {
   if (coupon) {
     const total = getTotalPrice(cartItems);
     const { couponType, discount, minOrderValue, maxDiscount } = coupon;
-    if (!minOrderValue || minOrderValue > total) {
+    if (!minOrderValue || minOrderValue <= total) {
       let amount = discount;
       if (couponType === "PERCENTAGE") {
         amount = (total * discount) / 100;

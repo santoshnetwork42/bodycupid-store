@@ -409,6 +409,7 @@
 }
 
 .btn-dark {
+    color: #fff !important;
     @include button-variant($dark-color);
 }
 

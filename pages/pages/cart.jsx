@@ -10,7 +10,7 @@ import { toDecimal, getCartTotals } from "~/utils";
 import { systemActions } from "~/store/system";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { scrollWithOffset } from "~/utils/helper";
-import { Cross, RightAngle } from "~/components/icons";
+import { Close, Cross, RightAngle } from "~/components/icons";
 
 function Cart(props) {
   const {
@@ -18,7 +18,6 @@ function Cart(props) {
     removeFromCart,
     updateCart,
     appliedCoupon,
-    removeCoupon,
     user,
     openLogin,
     shippingTiers,
@@ -33,6 +32,37 @@ function Cart(props) {
   useEffect(() => {
     getShippingTiers();
   }, []);
+  const getCartDataWithCoupon = () => {
+    const item = cartList.reduce((prev, curr) => {
+      return prev.price < curr.price ? prev : curr;
+    });
+    if (item.price > appliedCoupon.minOrderValue) {
+      return [...cartList].map((c) =>
+        c.id === item.id
+          ? {
+              ...c,
+              isBogo: true,
+            }
+          : {
+              ...c,
+              isBogo: false,
+            }
+      );
+    }
+  };
+
+  const setCartData = () => {
+    if (appliedCoupon?.code === "BOGO" && cartList.length) {
+      const data = getCartDataWithCoupon(cartList);
+      setCartItems(data);
+    } else {
+      setCartItems(cartList);
+    }
+  };
+
+  useEffect(() => {
+    setCartData();
+  }, [appliedCoupon, cartList]);
 
   const {
     totalListingprice,
@@ -49,7 +79,7 @@ function Cart(props) {
   const onChangeQty = (item, qty) => {
     if (qty) {
       const { id, variantId } = item;
-      const cart = cartItems.map((item) => {
+      const cart = cartList.map((item) => {
         return item.id === id && (!variantId || variantId === item.variantId)
           ? { ...item, qty: qty }
           : item;
@@ -59,23 +89,21 @@ function Cart(props) {
       removeFromCart(item);
     }
   };
-
-  // const compareItems = () => {
-  //   if (cartItems.length !== cartList.length) return false;
-
-  //   for (let index = 0; index < cartItems.length; index++) {
-  //     if (cartItems[index].qty !== cartList[index].qty) return false;
-  //   }
-
-  //   return true;
-  // };
-
-  // const update = () => {
-  //   if (!compareItems()) {
-  //     updateCart(cartItems);
-  //   }
-  //   return true;
-  // };
+  const changeVariant = (e, item) => {
+    const { id } = item;
+    const variant = item.variants.items.find((c) => c.id === e.target.value);
+    const cart = cartList.map((i) => {
+      return id === i.id
+        ? {
+            ...i,
+            variantId: e.target.value,
+            price: variant.price,
+            listingPrice: variant.listingPrice,
+          }
+        : i;
+    });
+    updateCart(cart);
+  };
 
   const checkAuth = useCallback(() => {
     if (user) return true;
@@ -88,8 +116,8 @@ function Cart(props) {
   };
 
   return (
-    <main className="main cart">
-      <div className="page-content pt-7 pb-10">
+    <main className="main cart bg-white">
+      <div className="page-content pt-7 pb-5">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
@@ -110,12 +138,12 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container sm-container mt-7 mb-2">
+        <div className="container sm-container mt-7 mb-2 ">
           <div className="row">
             {cartItems.length > 0 ? (
               <>
-                <div className="col-lg-8 col-md-12 pr-lg-4 mb-4">
-                  <table className="shop-table cart-table">
+                <div className="col-lg-8 col-md-12 pt-2 cart-table-wrapper pr-lg-4">
+                  <table className="shop-table pt-3 cart-table ">
                     <thead>
                       <tr>
                         <th>
@@ -201,7 +229,7 @@ function Cart(props) {
                           </tr>
                           <tr className="m-0 p-0 border-no d-sm-show">
                             <td className="m-0 p-0">
-                              <div className="mobile-specific-cart-product-container d-flex">
+                              <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                 <figure>
                                   <ALink href={"/product/" + item.slug}>
                                     <img
@@ -214,42 +242,79 @@ function Cart(props) {
                                     />
                                   </ALink>
                                 </figure>
-                                <div className="text-left mr-3 ml-2">
+                                <div className="text-left text-primary w-100 mr-5 ml-2">
                                   <div className="">
                                     <ALink href={"/product/" + item.slug}>
                                       {item.title}
                                     </ALink>
                                   </div>
                                   <div className="product-subtotal mt-1">
-                                    <span className="sm-product-amount">
-                                      ₹{toDecimal(item.price)}
-                                    </span>
+                                    {!(item.isBogo && item.qty === 1) && (
+                                      <span className="sm-product-amount">
+                                        ₹{toDecimal(item.price)}
+                                      </span>
+                                    )}
+
                                     <p className="m-0 product-discount-listing">
                                       {item.price < item.listingPrice && (
                                         <del className="summary-subtotal-listingprice">
                                           ₹{toDecimal(item.listingPrice)}
                                         </del>
                                       )}
-                                      <span
-                                        className={`discount-percetage ml-2`}
-                                      >
-                                        {productDiscountPercentage(item) > 0 &&
-                                          `${productDiscountPercentage(
-                                            item
-                                          )}% off`}
-                                      </span>
+                                      {item.isBogo && item.qty === 1 ? (
+                                        <span className="text-success ml-1">
+                                          Free
+                                        </span>
+                                      ) : (
+                                        <span
+                                          className={`discount-percetage ml-2`}
+                                        >
+                                          {productDiscountPercentage(item) >
+                                            0 &&
+                                            `${productDiscountPercentage(
+                                              item
+                                            )}% off`}
+                                        </span>
+                                      )}
                                     </p>
+                                  </div>{" "}
+                                  <div className="d-flex">
+                                    <div className="product-quantity w-0">
+                                      <Quantity
+                                        product={item}
+                                        qty={item.qty}
+                                        max={item.inventory}
+                                        onChangeQty={(qty) =>
+                                          onChangeQty(item, qty)
+                                        }
+                                      />
+                                    </div>
+
+                                    {!!item?.variants?.items.length && (
+                                      <select
+                                        name="state"
+                                        className="form-control"
+                                        value={item.variantId}
+                                        onChange={(e) => {
+                                          changeVariant(e, item);
+                                        }}
+                                      >
+                                        {item?.variants?.items.map((v) => (
+                                          <option key={v.id} value={v.id}>
+                                            {v.title}
+                                          </option>
+                                        ))}
+                                      </select>
+                                    )}
                                   </div>
-                                  <div className="product-quantity w-0">
-                                    <Quantity
-                                      product={item}
-                                      qty={item.qty}
-                                      max={item.inventory}
-                                      onChangeQty={(qty) =>
-                                        onChangeQty(item, qty)
-                                      }
-                                    />
-                                  </div>
+                                  {item.isBogo && item.qty > 1 && (
+                                    <div className="summary-saving-lable-container mb-1  qty-label ">
+                                      {" "}
+                                      <p className="m-0 saving-lable">
+                                        1 qty is Free
+                                      </p>
+                                    </div>
+                                  )}
                                 </div>
                                 <div className="product-close">
                                   <ALink
@@ -258,7 +323,7 @@ function Cart(props) {
                                     title="Remove this product"
                                     onClick={() => removeFromCart(item)}
                                   >
-                                    <i className="fas fa-times"></i>
+                                    <Close size={18} color="grey" />
                                   </ALink>
                                 </div>
                               </div>
@@ -271,21 +336,25 @@ function Cart(props) {
                 </div>
 
                 <aside
-                  id="cart-details"
-                  className="col-lg-4 sticky-sidebar-wrapper"
+                  id="cart-details "
+                  className="col-lg-4 text-primary sticky-sidebar-wrapper"
                 >
                   <div
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
                     <Coupons />
-                    <div className="summary mb-4">
-                      <h3 className="summary-title text-left">Cart Totals</h3>
+                    <div className="summary mb-4 bg-white">
+                      <h3 className="summary-title text-left d-sm-none">
+                        Cart Totals
+                      </h3>
                       <table className="shipping">
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle">Subtotal</h4>
+                              <h4 className="summary-subtitle lh-1">
+                                Subtotal
+                              </h4>
                             </td>
                             <td>
                               <p className="summary-subtotal-price">
@@ -302,28 +371,15 @@ function Cart(props) {
                           {!!appliedCoupon && (
                             <>
                               <tr className="summary-subtotal">
-                                <td>
-                                  <h4 className="summary-subtitle">Coupons</h4>
-                                  <div>
-                                    <div className="d-flex">
-                                      <span className="mr-1">
-                                        {appliedCoupon.code}
-                                      </span>
-                                      <ALink
-                                        key={appliedCoupon.id}
-                                        href="#"
-                                        className="product-remove"
-                                        title="Remove coupon"
-                                        onClick={() => removeCoupon()}
-                                      >
-                                        <i className="fas fa-times"></i>
-                                      </ALink>
-                                    </div>
-                                  </div>
+                                <td className="d-flex align-items-center">
+                                  <h4 className="summary-subtitle lh-1">
+                                    Discounts
+                                  </h4>
+                                  &nbsp; ( {appliedCoupon.code})
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
-                                    {`₹${toDecimal(couponTotal)}`}
+                                    -{`₹${toDecimal(couponTotal)}`}
                                   </p>
                                 </td>
                               </tr>
@@ -332,7 +388,9 @@ function Cart(props) {
 
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle">Shipping</h4>
+                              <h4 className="summary-subtitle lh-1">
+                                Shipping
+                              </h4>
                             </td>
                             <td>
                               <p
@@ -352,7 +410,7 @@ function Cart(props) {
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle">
+                              <h4 className="summary-subtitle lh-1">
                                 Total{" "}
                                 <p className="m-0">Inclusive of all taxes</p>
                               </h4>

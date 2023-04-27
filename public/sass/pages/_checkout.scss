@@ -160,8 +160,6 @@
 
     .btn-order {
         width: 100%;
-        border-color: #333;
-        background-color: #333;
         transition: opacity .3s;
         &:hover {
             opacity: .9;
@@ -231,6 +229,12 @@
         font-family: $font-family;
     }
 
+    .product-subtotal {
+        margin-bottom: 0.5rem;
+        .discount-percetage {
+            color: $success-color;
+        }
+    }
     .product-quantity {
         margin-left: .4rem;
     }
@@ -260,7 +264,20 @@
         left: .5rem;
         background: #666;
     }
+    .product-discount-listing {
+        display: inline;
+    }
+    .summary-subtotal-listingprice {
+        margin-left: 1rem;
+    }
+    .payment-card {
+        padding: 1rem;
+    }
+    .check-payment-detail {
+        padding: 0rem 2rem 1rem;
+    }
 }
+
 
 .summary .title {
     margin-bottom: 1.9rem;
@@ -277,7 +294,7 @@
     }
     td {
         padding-bottom: 0.6rem;
-        line-height: 2.2;
+        line-height: 1.6;
         time {
             display: -webkit-box;
             overflow: hidden;
@@ -309,7 +326,7 @@
     }
     .summary-subtotal { 
         
-        border-top: 1px solid $border-color; 
+        // border-top: 1px solid $border-color; 
         td:first-child {
             padding: .4rem 0 .3rem;
         }

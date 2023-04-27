@@ -10,6 +10,7 @@ import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
+import { Close, Discount } from "../icons";
 
 function Coupon(props) {
   const {
@@ -65,27 +66,32 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box mb-4"
+          className="cart-coupon-box mb-2 bg-white text-primary"
           onClick={() => !appliedCoupon && setOpen(true)}
         >
           <div className="cart-coupon-container d-flex">
-            <div>
-              <h4 className="title coupon-title text-uppercase ls-m">
-                {!!appliedCoupon
-                  ? `"${appliedCoupon.code}" applied`
-                  : "Coupons and offers"}
-              </h4>
-              {!appliedCoupon && (
-                <span className="coupon-subtitle">
-                  Save more with coupon and offers
-                </span>
-              )}
-              {!!appliedCoupon && (
-                <span className="coupon-subtitle">
-                  You saved additional ₹
-                  {toDecimal(getCouponTotal(appliedCoupon, cartList))}
-                </span>
-              )}
+            <div className="d-flex">
+              <span className="mt-1">
+                <Discount color="#17b31b" size={22} />
+              </span>
+              <div>
+                <p className="ml-2 coupon-title mb-0 p-0 ls-m">
+                  {!!appliedCoupon
+                    ? `"${appliedCoupon.code}" applied`
+                    : "Coupons and offers"}
+                </p>
+                {!appliedCoupon && (
+                  <span className="ml-2 coupon-subtitle">
+                    Save more with coupon and offers
+                  </span>
+                )}
+                {!!appliedCoupon && (
+                  <span className="ml-2 coupon-subtitle">
+                    You saved additional ₹
+                    {toDecimal(getCouponTotal(appliedCoupon, cartList))}
+                  </span>
+                )}
+              </div>
             </div>
 
             {!!featured?.length && !appliedCoupon && (
@@ -98,11 +104,11 @@ function Coupon(props) {
               <ALink
                 key={appliedCoupon.id}
                 href="#"
-                className="product-remove"
+                className="mt-1"
                 title="Remove coupon"
                 onClick={() => removeCoupon()}
               >
-                <i className="fas fa-times"></i>
+                <Close color="grey" size={18} />
               </ALink>
             )}
           </div>
@@ -135,7 +141,7 @@ function Coupon(props) {
         className="auth-popup bg-img"
       >
         <main className="main ">
-          <div className="page-content mt-6 pb-2 mb-2">
+          <div className="page-content mt-6 pb-2 bg-white text-primary mb-2">
             <div className="container">
               <div className="cart-coupon-modal m-8">
                 <h5 className="title coupon-title text-uppercase ls-m">
@@ -170,7 +176,7 @@ function Coupon(props) {
                     <h6 className="mb-2">Available coupons</h6>
                     {featured.map((c) => {
                       let className =
-                        "btn btn-md btn-dark btn-rounded btn-link m l-2";
+                        "btn btn-md  btn-rounded btn-link m l-2";
                       const discount = getCouponTotal(c, cartList);
                       if (!discount) {
                         className = `${className} btn-disabled`;
