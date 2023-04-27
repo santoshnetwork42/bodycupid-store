@@ -11,6 +11,7 @@ import { modalActions } from "~/store/modal";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Passwordless({
   auth,
@@ -103,7 +104,7 @@ function Passwordless({
           }
         }
       } catch (error) {
-        console.log("error signup confirm:", error);
+        errorHandler(error);
         setOtpError(true);
       }
       setLoading(false);
@@ -161,7 +162,7 @@ function Passwordless({
       className="auth-popup bg-img"
     >
       <main className="main">
-        <div className="page-content mt-6 pb-2 mb-2">
+        <div className="page-content mt-6 pb-2 bg-white mb-2">
           <div className="container">
             <div className="login-popup">
               <div className="form-box">
@@ -209,7 +210,7 @@ function Passwordless({
                             </div>
 
                             <button
-                              className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
+                              className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                               type="submit"
                               disabled={loading}
                             >
@@ -273,7 +274,7 @@ function Passwordless({
                             </div>
                           )}
                           <button
-                            className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
+                            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
                             type="submit"
                             disabled={loading}
                           >

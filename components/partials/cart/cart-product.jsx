@@ -1,0 +1,177 @@
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+
+import ALink from "~/components/features/custom-link";
+import Quantity from "~/components/features/quantity";
+import { Close } from "~/components/icons";
+import { cartActions } from "~/store/cart";
+import { toDecimal } from "~/utils";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getUpdatedCart } from "~/utils/helper";
+
+function CartProduct({ cartList, item, removeFromCart, updateCart }) {
+  const {
+    id,
+    bogo,
+    variants,
+    recordKey,
+    qty,
+    inventory,
+    slug,
+    images,
+    title,
+    price,
+    listingPrice,
+    variantId,
+  } = item;
+
+  const productDiscountPercentage = ({ price, listingPrice }) => {
+    return Math.round(((listingPrice - price) / listingPrice) * 100);
+  };
+
+  const changeVariant = (e) => {
+    const variant = variants.items.find((c) => c.id === e.target.value);
+    const newRecordKey = `${id}-${e.target.value}`;
+
+    const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
+    if (cartItem) {
+      const updatedCart = [...cartList]
+        .filter((c) => c.recordKey !== recordKey)
+        .map((c) => {
+          if (c.recordKey === newRecordKey) return { ...c, qty: c.qty + qty };
+          return c;
+        });
+      updateCart(updatedCart);
+    } else {
+      const updatedCart = getUpdatedCart(cartList, recordKey, {
+        recordKey: newRecordKey,
+        listingPrice: variant.listingPrice,
+        price: variant.price,
+        variantId: e.target.value,
+      });
+      updateCart(updatedCart);
+    }
+  };
+
+  const onChangeQty = (newQty) => {
+    const finalQty = bogo === "PRIMARY" ? newQty + 1 : newQty;
+    if (finalQty) {
+      const cartData = getUpdatedCart(cartList, recordKey, {
+        qty: finalQty,
+      });
+      updateCart(cartData);
+    } else {
+      removeFromCart(item);
+    }
+  };
+
+  const onRemove = () => {
+    if (bogo === "PRIMARY") {
+      onChangeQty(0);
+    } else {
+      removeFromCart(item);
+    }
+  };
+
+  return (
+    <div className="m-0 p-0 border-no ">
+      <div className="m-0 p-0">
+        <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
+          <figure>
+            <ALink href={"/product/" + slug}>
+              <img
+                src={getPublicImageURL(images.items[0]?.imageKey)}
+                width="100"
+                height="100"
+                alt={images.items[0]?.alt}
+              />
+            </ALink>
+          </figure>
+          <div className="text-left text-primary w-100  mr-1 ml-2">
+            <div className="mr-5 ">
+              <ALink href={"/product/" + slug}>{title}</ALink>
+            </div>
+            <div className="mt-1 d-flex mb-1 align-items-center">
+              {bogo === "SECONDARY" ? (
+                <>
+                  <del className="summary-subtotal-listingprice">
+                    ₹{toDecimal(price)}
+                  </del>
+                  <span className="discount-percentage ml-1">Free</span>
+                </>
+              ) : (
+                <>
+                  <span className="sm-product-amount mr-2  font-weight-semi-bold ">
+                    ₹{toDecimal(price)}
+                  </span>
+
+                  <p className="m-0 product-discount-listing">
+                    {price < listingPrice && (
+                      <del className="summary-subtotal-listingprice">
+                        ₹{toDecimal(listingPrice)}
+                      </del>
+                    )}
+                    <span className={`discount-percentage ml-2`}>
+                      {productDiscountPercentage(item) > 0 &&
+                        `${productDiscountPercentage(item)}% off`}
+                    </span>
+                  </p>
+                </>
+              )}
+            </div>
+            <div className="">
+              {bogo !== "SECONDARY" && (
+                <div className="product-quantity w-0 mb-1">
+                  <Quantity
+                    product={item}
+                    qty={qty}
+                    max={inventory}
+                    onChangeQty={onChangeQty}
+                  />
+                </div>
+              )}
+
+              {!!item?.variants?.items.length && (
+                <select
+                  name={`${recordKey}`}
+                  className="form-control"
+                  value={variantId}
+                  onChange={(e) => {
+                    changeVariant(e);
+                  }}
+                >
+                  {variants.items.map((v) => (
+                    <option key={v.id} value={v.id}>
+                      {v.title}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+          </div>
+          <div className="product-close">
+            <ALink
+              href="#"
+              className="sm-product-remove"
+              title="Remove this product"
+              onClick={onRemove}
+            >
+              <Close size={18} color="grey" />
+            </ALink>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function mapStateToProps(state) {
+  return {
+    cartList: state.cart.data,
+  };
+}
+
+export default connect(mapStateToProps, {
+  updateCart: cartActions.updateCart,
+  removeFromCart: cartActions.removeFromCart,
+})(CartProduct);

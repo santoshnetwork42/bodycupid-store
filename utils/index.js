@@ -404,13 +404,15 @@ export const getCouponTotal = (coupon, cartItems = []) => {
   if (coupon) {
     const total = getTotalPrice(cartItems);
     const { couponType, discount, minOrderValue, maxDiscount } = coupon;
-    if (!minOrderValue || minOrderValue > total) {
+
+    if (!minOrderValue || minOrderValue <= total) {
       let amount = discount;
       if (couponType === "PERCENTAGE") {
         amount = (total * discount) / 100;
       } else if (couponType === "BOGO") {
         amount = 0;
-        if (cartItems.length > 1) {
+        const totalQty = cartItems.reduce((a, b) => a + b.qty, 0);
+        if (totalQty > 1) {
           amount = cartItems.reduce((a, b) => {
             if (!a) return b.price;
             return Math.min(a, b.price);

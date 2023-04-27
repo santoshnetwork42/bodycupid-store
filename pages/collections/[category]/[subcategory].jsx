@@ -7,11 +7,10 @@ import {
   getBasicSubCategory,
   getAllSubcategoriesPath,
   findProducts,
-  getSideBarFilterCategories,
   getSubCategoriesByCategoryID,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
-import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
+// import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
 import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
@@ -24,7 +23,6 @@ function Categories(props) {
     products,
     categoryId,
     subCategoryId,
-    sideBarCategories,
     pageFilter,
     subCategories,
   } = props;
@@ -46,12 +44,11 @@ function Categories(props) {
 
       <div className="page-content pb-3">
         <div className="container">
-        <CategoryHeader
+          <CategoryHeader
             name={subCategory?.name}
             description={subCategory?.description}
           />
           <div className="row main-content-wrap gutter-lg">
-
             <div className="col-lg-12 main-content">
               <ProductListOne
                 category={subCategory}
@@ -125,11 +122,6 @@ export const getStaticProps = async (context) => {
         storeId: { eq: STORE_ID },
       };
 
-      // Get SideBar Categories
-      const getSidebarCategory = fetchData(getSideBarFilterCategories, {
-        filter: { storeId: { eq: STORE_ID } },
-      });
-
       const getProduct = fetchData(findProducts, {
         filter,
         limit: 18,
@@ -143,18 +135,10 @@ export const getStaticProps = async (context) => {
         }
       );
 
-      const [
-        { searchProductCategories },
-        { searchProducts },
-        { searchProductSubCategories },
-      ] = await Promise.all([
-        getSidebarCategory,
-        getProduct,
-        getSubCategoriesByCategory,
-      ]);
+      const [{ searchProducts }, { searchProductSubCategories }] =
+        await Promise.all([getProduct, getSubCategoriesByCategory]);
 
       const { items: subCategories } = searchProductSubCategories;
-      const { items: categories } = searchProductCategories;
       const { items } = searchProducts;
       const products = await Promise.all(
         items.map((product) => optimizeProduct(product, { partial: true }))
@@ -167,7 +151,6 @@ export const getStaticProps = async (context) => {
           categoryId: categoryID,
           subCategoryId: id,
           products: { ...searchProducts, items: products },
-          sideBarCategories: categories,
           subCategories,
           pageFilter: filter,
         },
@@ -188,5 +171,5 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(React.memo(Categories));
-
+Component.showStickyCheckout = true;
 export default Component;

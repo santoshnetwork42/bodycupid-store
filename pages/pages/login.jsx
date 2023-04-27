@@ -9,6 +9,7 @@ import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import { errorHandler } from "~/utils/errorHandler";
 
 function Login({
   auth,
@@ -52,8 +53,7 @@ function Login({
         });
         setConfirmSignUp("SIGNUP");
       } catch (error) {
-        console.log("error signing up:", error);
-        toast(<AlertPopup message={error.message} status="error" />);
+        errorHandler(error);
       }
       return false;
     },
@@ -80,8 +80,7 @@ function Login({
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.log("error signup confirm:", error);
-        toast(<AlertPopup message={error.message} status="error" />);
+        errorHandler(error);
       }
       return false;
     },
@@ -108,7 +107,7 @@ function Login({
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
         } else {
-          toast(<AlertPopup message={error.message} status="error" />);
+          errorHandler(error);
         }
         setLoading(false);
       }
@@ -125,7 +124,7 @@ function Login({
 
   return (
     <main className="main">
-      <div className="page-content mt-6 pb-2 mb-2">
+      <div className="page-content mt-6 pb-2 bg-white mb-2">
         <div className="container">
           <div className="login-popup">
             <div className="form-box">

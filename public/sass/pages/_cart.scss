@@ -114,7 +114,7 @@
         background-color: #fff;
         color: $dark-color;
 
-        i{
+        i {
             height: 12px;
             width: 12px;
             display: flex;
@@ -140,10 +140,10 @@
             padding-bottom: .3rem;
         }
     }
-    .product-subtotal {
-        .discount-percetage {
-         color:$success-color;
-        }
+
+    .discount-percentage {
+        font-weight: 600;
+        color: $success-color;
     }
 }
 
@@ -161,7 +161,7 @@
         text-transform: uppercase;
         font-weight: 700;
         color: $body-color;
-        letter-spacing: -0.5px;
+        letter-spacing: 0.5px;
         padding: .4rem 0;
 
         &:not(:last-child) i {
@@ -174,7 +174,6 @@
             font-family: 'Font Awesome 5 Free';
             font-weight: 700;
             font-size: 1.7rem;
-            background-color: #fff;
             color: $light-color;
         }
 
@@ -207,7 +206,7 @@
 }
 
 .summary {
-    padding: 2.4rem 3rem 3rem;
+    padding: 1rem 3rem 1rem;
     border: 1px solid #e1e1e1;
     border-radius: 2px;
 
@@ -228,17 +227,26 @@
 
 .summary-saving-lable-container {
     padding: 2.5px 10px;
-    margin:1.2rem 0px 0px 0px;
+    margin: 1.2rem 0px 0px 0px;
     text-align: center;
     background-color: $light-success-color;
     border-radius: 0.3rem;
+
     .saving-lable {
         margin: 0px;
-        color: #167221;
-        span{
+        color: $success-color;
+
+        span {
             font-weight: bold;
         }
     }
+}
+
+.qty-label {
+    width: fit-content;
+    border-radius: 14px;
+    margin-top: 0;
+
 }
 
 .summary-title {
@@ -256,18 +264,21 @@
 .summary-subtotal {
     border-bottom: 1px solid #e1e1e1;
 }
-.summary-subtotal-saving{
+
+.summary-subtotal-saving {
     border-bottom: 1px solid #e1e1e1;
 }
+
 //?
 .summary-subtitle {
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 400;
     letter-spacing: -.01em;
     color: $dark-color;
     margin-bottom: 0;
-    padding: 2rem 0;
-    p{
+    padding: 1.5rem 0;
+
+    p {
         color: $body-color;
         font-size: 1.2rem;
     }
@@ -281,20 +292,22 @@
     font-family: $font-family;
 }
 
-.summary-subtotal-listingprice{
+.summary-subtotal-listingprice {
     color: #aaa;
 }
-.discount-price-color{
+
+.discount-price-color {
     color: $success-color;
 }
 
-.avg-delivery-lable-container{
+.avg-delivery-lable-container {
     text-align: start;
 
-    p{
+    p {
         color: $body-color;
         font-size: 1.2rem;
-        span{
+
+        span {
             font-weight: 500;
             color: $primary-color;
         }
@@ -302,8 +315,7 @@
 }
 
 .summary-total-price {
-    font-size: 2rem;
-    letter-spacing: -0.025em;
+    letter-spacing: 0.025em;
     font-weight: 700;
     color: $dark-color;
     // padding: 10px 0;
@@ -315,7 +327,7 @@
 }
 
 .total .summary-subtitle {
-    padding: 2.4rem 0 2.3rem;
+    padding: 1.4rem 0 1.3rem;
 }
 
 .empty-cart {
@@ -349,12 +361,22 @@
             ;
         }
     }
+
     .cart-coupon-box {
         .summary {
             padding: 2.4rem 3rem 0 !important;
         }
     }
 }
+
+
+@include mq('md') {
+    .cart-table-wrapper {
+        background-color: white !important;
+        border: 1px solid #e1e1e1;
+    }
+}
+
 
 @include mq(md, max) {
     .product-name-section {
@@ -378,13 +400,11 @@
         &.product-price {
             display: block;
             width: 100%;
-            text-align: center;   
+            text-align: center;
         }
     }
 
-    .summary-subtotal-listingprice{
-        margin-left: 1rem;
-    }
+   
     .product-discount-listing {
         display: inline;
     }
@@ -401,9 +421,10 @@
     .cart .shop-table {
 
         .product-subtotal,
-        .product-thumbnail,
-        .product-quantity {
+        .product-thumbnail {
             margin-bottom: .5rem;
+
+
         }
     }
 
@@ -505,23 +526,35 @@
     }
 
     .product-quantity {
-        width: 135px;
+        width: 120px;
+
+        .input-group {
+            height: 3.5rem !important;
+        }
     }
 
     .mobile-specific-cart-product-container {
-       padding: 2rem 2rem 2rem .5rem;
-       .sm-product-amount{
-            font-size: 1.7rem;
-            font-weight: 500;
-       }
-       .sm-product-remove{
-            padding: 2px 6.5px;   
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            color:$dark-color;
-            text-align: center;
+        padding: 2rem 2rem 2rem .5rem;
+
+        .form-control {
+            height: 3.5rem !important;
+            min-height: 3.5rem !important;
+            padding: 0rem 1rem !important;
             font-size: 1.2rem;
-       }
+            max-width: 110px;
+            border: 1px solid #eee !important;
+        }
+
+        .sm-product-amount {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .sm-product-remove {
+            position: absolute;
+            right: 2.5rem;
+            top: 2.5rem;
+        }
     }
 
     .product-subtotal {
@@ -576,20 +609,25 @@
 
 .cart-coupon-modal {
     padding: 2rem;
+    letter-spacing: 0.0225rem !important;
 
     .d-flex {
         align-items: baseline;
     }
-    .coupon-tagline{
+
+    .coupon-tagline {
         color: $success-color;
     }
+
     .coupon-apply-btn {
         min-width: 11rem;
         padding: 1.2rem 1.5rem !important;
     }
+
     .coupon-error-box-border {
         border: 1px solid $alert-color;
     }
+
     .coupon-error-lable {
         color: $alert-color;
     }
@@ -599,7 +637,8 @@
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e1e1e1;
-    .featured-coupon-text-content{
+
+    .featured-coupon-text-content {
         margin-right: 2rem;
     }
 }
@@ -607,8 +646,8 @@
 .cart-coupon-box {
     display: flex;
     flex-direction: column;
-    padding: 2.4rem 3rem;
-    border:1px solid #e1e1e1;
+    padding: 1.4rem 3rem;
+    border: 1px solid #e1e1e1;
     border-radius: 2px;
     cursor: pointer;
 
@@ -619,7 +658,7 @@
     .coupon-title {
         margin-bottom: 1rem;
         padding-top: .8rem;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
     .coupon-subtitle {
@@ -627,9 +666,11 @@
     }
 
     .coupon-offer {
+    height: fit-content;
+    white-space: nowrap;
         cursor: pointer;
     }
-    
+
 }
 
 #coupon_code {
@@ -652,9 +693,7 @@
             width: 11rem;
         }
 
-        .product-quantity {
-            width: 17.7rem
-        }
+
 
         .product-subtotal {
             width: 13.2rem;
@@ -664,9 +703,10 @@
             width: 2.3rem;
         }
     }
+
     .coupon-modal-container {
         .auth-popup {
-           width: 55rem;
+            width: 55rem;
         }
     }
 }
@@ -674,7 +714,7 @@
 @include mq('md') {
     .coupon-modal-container {
         .auth-popup {
-           width: 55rem;
+            width: 55rem;
         }
     }
 }
@@ -683,6 +723,7 @@
     .sm-container {
         margin-top: 0px !important;
     }
+
     .stick-bottom-button {
         width: 100vw;
         display: flex !important;
@@ -703,9 +744,12 @@
         }
 
     }
+    .card-title{
+        font-size: 1.6rem;
+    }
 
     .checkout {
-        font-size: 16px;
+        font-size: 1.4rem;
         font-weight: 500;
         line-height: 24px;
         letter-spacing: 0px;

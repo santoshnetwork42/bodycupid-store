@@ -48,7 +48,7 @@ export const validateAddress = async (address, paymentType = "ALL") => {
     phone,
     pinCode,
     address: streetAddress,
-  } = address;
+  } = address || {};
   const error = {};
 
   const isValidPinCode = await validateZipCode(pinCode, paymentType);

@@ -34,32 +34,29 @@ const initialState = {
 };
 
 function cartReducer(state = initialState, action) {
+  let tmpProduct, recordKey;
+
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
-      let tmpProduct = { ...action.payload.product };
+      tmpProduct = { ...action.payload.product };
       if (!tmpProduct.variantId) {
         tmpProduct.variantId = getFirstVariantId(tmpProduct);
       }
+      recordKey = tmpProduct.id;
+      if (tmpProduct.variantId) {
+        recordKey = `${tmpProduct.id}-${tmpProduct.variantId}`;
+      }
 
-      if (
-        state.data.some(
-          (item) =>
-            item.id === tmpProduct.id &&
-            ((!tmpProduct.variantId && !item.variantId) ||
-              item.variantId === tmpProduct.variantId)
-        )
-      ) {
+      if (state.data.some((item) => item.recordKey === recordKey)) {
         let tmpData = state.data.reduce((acc, cur) => {
-          if (
-            cur.id === tmpProduct.id &&
-            (!tmpProduct.variantId || cur.variantId === tmpProduct.variantId)
-          ) {
+          if (cur.recordKey === recordKey) {
             acc.push({
               ...cur,
+              recordKey,
               qty: parseInt(cur.qty) + parseInt(tmpProduct.qty),
             });
           } else {
-            acc.push(cur);
+            acc.push({ ...cur, recordKey });
           }
 
           return acc;
@@ -67,26 +64,18 @@ function cartReducer(state = initialState, action) {
 
         return { ...state, data: tmpData };
       } else {
-        return { ...state, data: [...state.data, tmpProduct] };
+        return {
+          ...state,
+          data: [...state.data, { ...tmpProduct, recordKey }],
+        };
       }
 
     case actionTypes.REMOVE_FROM_CART:
+      tmpProduct = { ...action.payload.product };
       let cart = state.data.reduce((cartAcc, product) => {
-        let tmpProduct = product;
-        if (!tmpProduct.variantId) {
-          tmpProduct.variantId = getFirstVariantId(tmpProduct);
+        if (tmpProduct.recordKey !== product.recordKey) {
+          cartAcc.push(product);
         }
-        if (tmpProduct.id !== action.payload.product.id) {
-          cartAcc.push(tmpProduct);
-        } else {
-          if (
-            tmpProduct.variantId &&
-            tmpProduct.variantId !== action.payload.product.variantId
-          ) {
-            cartAcc.push(tmpProduct);
-          }
-        }
-
         return cartAcc;
       }, []);
 
@@ -183,6 +172,11 @@ export function* cartSaga() {
         currProduct.variantId = getFirstVariantId(currProduct);
       }
 
+      let recordKey = currProduct.id;
+      if (currProduct.variantId) {
+        recordKey = `${currProduct.id}-${currProduct.variantId}`;
+      }
+
       if (!cartResponse) {
         ({
           data: { createStoreShoppingCart: cartResponse },
@@ -197,12 +191,10 @@ export function* cartSaga() {
 
       const { products = [], id } = cartResponse;
 
-      let product = products.find(
-        (p) =>
-          p.productId === currProduct.id &&
-          (!currProduct.variantId || currProduct.variantId === p.variantId) &&
-          p.shoppingcartId === id
-      );
+      let product = products.find((p) => {
+        const pKey = p.variantId ? `${p.id}-${p.variantId}` : `${p.id}`;
+        return pKey === recordKey;
+      });
 
       if (!product) {
         const {
@@ -274,42 +266,41 @@ export function* cartSaga() {
       if (!e.payload.product.variantId) {
         curProduct.variantId = getFirstVariantId(curProduct);
       }
-      const { id, variantId } = curProduct;
+      const { recordKey } = curProduct;
 
-      const product = products.find(
-        (p) => p.productId === id && (!p.variantId || variantId === p.variantId)
-      );
-
-      yield call([API, API.graphql], {
-        query: deleteShoppingCartProduct,
-        variables: {
-          input: { id: product.id },
-        },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
+      const product = products.find((p) => {
+        const pKey = p.variantId ? `${p.id}-${p.variantId}` : `${p.id}`;
+        return pKey === recordKey;
       });
 
-      const updatedProducts = products.reduce((cartAcc, product) => {
-        if (product.productId !== id) {
-          cartAcc.push(product);
-        } else {
-          if (product.variantId && product.variantId !== variantId) {
-            cartAcc.push(product);
-          }
-        }
-        return cartAcc;
-      }, []);
+      if (product) {
+        yield call([API, API.graphql], {
+          query: deleteShoppingCartProduct,
+          variables: {
+            input: { id: product.id },
+          },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
 
-      if (!updatedProducts.length) {
+        const updatedProducts = products.reduce((cartAcc, prd) => {
+          if (prd.id !== product.id) {
+            cartAcc.push(prd);
+          }
+          return cartAcc;
+        }, []);
+
+        if (!updatedProducts.length) {
+          yield put({
+            type: actionTypes.REMOVE_COUPON,
+            payload: {},
+          });
+        }
+
         yield put({
-          type: actionTypes.REMOVE_COUPON,
-          payload: {},
+          type: actionTypes.SET_CART,
+          payload: { products: updatedProducts },
         });
       }
-
-      yield put({
-        type: actionTypes.SET_CART,
-        payload: { products: updatedProducts },
-      });
     }
   });
 
@@ -318,17 +309,17 @@ export function* cartSaga() {
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
     if (cartResponse && userResponse) {
-      const { products = [] } = cartResponse || {};
+      const { products = [] } = cartResponse;
       const { products: currProducts } = e.payload;
 
       if (Array.isArray(products) && products.length) {
         const promise = [];
         const updatedProducts = currProducts.map((p) => {
-          const product = products.find(
-            (prd) =>
-              prd.productId === p.id &&
-              (!prd.variantId || p.variantId === prd.variantId)
-          );
+
+          const product = products.find((cp) => {
+            const pKey = cp.variantId ? `${cp.productId}-${cp.variantId}` : `${cp.productId}`;
+            return pKey === p.recordKey;
+          });
 
           if (product && parseInt(product.quantity) !== parseInt(p.qty)) {
             product.quantity = parseInt(p.qty);

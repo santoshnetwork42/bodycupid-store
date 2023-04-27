@@ -1,21 +1,22 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
-import { Star, Bag, Heart, HeartFilled, BigDot } from "~/components/icons";
+import { Star, Bag, BigDot } from "~/components/icons";
 import Quantity from "~/components/features/quantity";
-
-import ProductNav from "~/components/partials/product/product-nav";
-
 import { wishlistActions } from "~/store/wishlist";
 import { cartActions } from "~/store/cart";
-
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import ProductVariant from "../product-variant";
-import { deliveryRemainingTime, scrollWithOffset } from "~/utils/helper";
+import {
+  deliveryRemainingTime,
+  getRecordKey,
+  getUpdatedCart,
+  scrollWithOffset,
+} from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
 import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
@@ -27,6 +28,7 @@ function DetailOne(props) {
   const {
     query: { review },
   } = router;
+
   const {
     cartList,
     updateCart,
@@ -35,20 +37,15 @@ function DetailOne(props) {
     adClass = "",
     defaultVariant,
     variantId: selectedVariant = defaultVariant,
-    setVariant = () => { },
-    user,
-    toggleWishlist,
+    setVariant = () => {},
     addToCart,
-    wishlist,
     removeFromCart,
-    coupon: appliedCoupon,
     featuredCoupons,
     getFeaturedCoupons,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
   const today = new Date();
 
@@ -63,6 +60,7 @@ function DetailOne(props) {
   useEffect(() => {
     getFeaturedCoupons();
   }, []);
+
   const { maxDiscountCoupon, couponList } = useMemo(() => {
     let selectedProduct = product;
     if (sizes.length) {
@@ -94,7 +92,6 @@ function DetailOne(props) {
     };
   }, [product?.slug, featuredCoupons, selectedVariant]);
 
-
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product, selectedVariant),
     [selectedVariant, sizes, product?.slug]
@@ -108,21 +105,16 @@ function DetailOne(props) {
           (!cl.variantId || selectedVariant === cl.variantId)
       );
 
-      if (cartItem && cartItem.qty) {
-        setQuantity(cartItem.qty);
-      } else {
-        setQuantity(1);
-      }
       return cartItem;
     }
     return;
   }, [cartList, selectedVariant]);
 
   // decide if the product is wishlisted
-  const isWishlisted = useMemo(
-    () => wishlist.some((i) => i.id === product?.id),
-    [wishlist, product?.id]
-  );
+  // const isWishlisted = useMemo(
+  //   () => wishlist.some((i) => i.id === product?.id),
+  //   [wishlist, product?.id]
+  // );
 
   useEffect(() => {
     return () => {
@@ -158,21 +150,21 @@ function DetailOne(props) {
     }
   }, [selectedVariant, product]);
 
-  const wishlistHandler = (e) => {
-    e.preventDefault();
+  // const wishlistHandler = (e) => {
+  //   e.preventDefault();
 
-    if (toggleWishlist && !isWishlisted) {
-      let currentTarget = e.currentTarget;
-      currentTarget.classList.add("load-more-overlay", "loading");
-      toggleWishlist(product);
+  //   if (toggleWishlist && !isWishlisted) {
+  //     let currentTarget = e.currentTarget;
+  //     currentTarget.classList.add("load-more-overlay", "loading");
+  //     toggleWishlist(product);
 
-      setTimeout(() => {
-        currentTarget.classList.remove("load-more-overlay", "loading");
-      }, 1000);
-    } else {
-      router.push("/pages/wishlist");
-    }
-  };
+  //     setTimeout(() => {
+  //       currentTarget.classList.remove("load-more-overlay", "loading");
+  //     }, 1000);
+  //   } else {
+  //     router.push("/pages/wishlist");
+  //   }
+  // };
 
   const setVariantHandler = (variant) => {
     if (setVariant) {
@@ -189,23 +181,27 @@ function DetailOne(props) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
-        if (curIndex > -1) {
-          const variant = product.variants.items[curIndex];
-          tmpName = `${tmpName} - ${variant.title}`;
-          tmpPrice = variant.price;
+        if (selectedVariant) {
+          const variant = product.variants.items.find(
+            (i) => i.id === selectedVariant
+          );
+          if (variant) {
+            tmpName = `${tmpName} - ${variant.title}`;
+            tmpPrice = variant.price;
+          }
         }
 
         addToCart({
           ...product,
           name: tmpName,
-          qty: quantity,
+          qty: 1,
           price: tmpPrice,
           variantId: selectedVariant,
         });
       } else {
         addToCart({
           ...product,
-          qty: quantity,
+          qty: 1,
           price: product.price,
         });
       }
@@ -229,23 +225,16 @@ function DetailOne(props) {
   };
 
   function changeQty(qty) {
-    setQuantity(qty);
     if (cartItem) {
       if (qty) {
-        updateCart(
-          cartList.map((item) => {
-            return item.id === product.id &&
-              (!selectedVariant || selectedVariant === item.variantId)
-              ? { ...item, qty: qty }
-              : item;
-          })
-        );
+        const recordKey = getRecordKey(product, selectedVariant);
+        const cartData = getUpdatedCart(cartList, recordKey, { qty });
+        updateCart(cartData);
       } else {
-        removeFromCart({ ...product, variantId: selectedVariant });
+        removeFromCart({ ...cartItem });
       }
     }
   }
-
   const { price, listingPrice, save } = useMemo(() => {
     const {
       price,
@@ -293,17 +282,17 @@ function DetailOne(props) {
 
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
-          {product?.benefits.map((benefit) => {
-            return <lable>{benefit}</lable>;
-          })}
+          {product?.benefits.map((benefit) => (
+            <lable key={benefit}>{benefit}</lable>
+          ))}
         </div>
       )}
 
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-2 d-flex">
-           <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
-           {listingPrice > price && (
+            <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
+            {listingPrice > price && (
               <>
                 <del className="old-price mr-2">₹{listingPrice}</del>{" "}
               </>
@@ -344,7 +333,13 @@ function DetailOne(props) {
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= product.rating;
 
-            return <Star size={16} color={isFilled ? "#d26e4b" : "#D9D9D9"} />;
+            return (
+              <Star
+                key={`rs-${product.id}-${index}`}
+                size={16}
+                color={isFilled ? "#FAB73B" : "#D9D9D9"}
+              />
+            );
           })}
           <span className="tooltiptext tooltip-top">
             {toDecimal(product.rating)}
@@ -387,7 +382,7 @@ function DetailOne(props) {
       )}
 
       {today.getHours() > 8 && today.getHours() < 15 && (
-        <p className="remian-time-lable mb-4">
+        <p className="remian-time-lable mb-0">
           For Fastest delivery, order within {deliveryRemainingTime()}
         </p>
       )}
@@ -448,17 +443,20 @@ function DetailOne(props) {
                 <div className="product-form product-qty pb-0">
                   <label className="d-none">QTY:</label>
                   <div className="product-form-group ">
-                    <Quantity
-                      max={currentInventory}
-                      qty={quantity}
-                      product={product}
-                      onChangeQty={changeQty}
-                    />
+                    {!!cartItem && (
+                      <Quantity
+                        max={currentInventory}
+                        qty={cartItem?.qty}
+                        product={product}
+                        onChangeQty={changeQty}
+                      />
+                    )}
 
                     {cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                          }`}
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
                         onClick={() => {
                           router.push("/pages/cart");
                         }}
@@ -471,8 +469,9 @@ function DetailOne(props) {
                     )}
                     {!cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                          }`}
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
                         onClick={addToCartHandler}
                       >
                         <i>
@@ -495,16 +494,19 @@ function DetailOne(props) {
             <div className="product-form product-qty pb-0">
               <label className="d-none">QTY:</label>
               <div className="product-form-group cart-button-wrapper">
-                <Quantity
-                  qty={quantity}
-                  max={currentInventory}
-                  product={product}
-                  onChangeQty={changeQty}
-                />
-                {cartItem && (
+                {!!cartItem && (
+                  <Quantity
+                    qty={cartItem?.qty}
+                    max={currentInventory}
+                    product={product}
+                    onChangeQty={changeQty}
+                  />
+                )}
+                {!!cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                      }`}
+                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
+                      cartActive ? "" : "disabled"
+                    }`}
                     onClick={(e) => {
                       e.preventDefault();
                       router.push("/pages/cart");
@@ -518,8 +520,9 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${cartActive ? "" : "disabled"
-                      }`}
+                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                      cartActive ? "" : "disabled"
+                    }`}
                     onClick={addToCartHandler}
                   >
                     <i>
@@ -543,12 +546,13 @@ function DetailOne(props) {
           </>
         )}
         {hasInventory && currentInventory < 100 && (
-          <span className="text-secondary">Last {currentInventory} units left</span>
+          <span className="text-secondary">
+            Last {currentInventory} units left
+          </span>
         )}
       </div>
 
       <hr className="product-divider mb-3 d-sm-none"></hr>
-
     </div>
   );
 }

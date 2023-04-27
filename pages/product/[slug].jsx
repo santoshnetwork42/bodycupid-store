@@ -12,7 +12,6 @@ import DescOne from "~/components/partials/product/desc/desc-one";
 import RelatedProducts from "~/components/partials/product/related-products";
 import {
   getProductBySlug,
-  findProducts,
   searchProductFaqs,
   getProductSlug,
 } from "~/graphql/api";
@@ -23,6 +22,8 @@ import {
 } from "~/utils/getStaticData";
 import { eventActions } from "~/store/events";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
+import ProductCollection from "~/components/partials/home/product-collection";
+import { errorHandler } from "~/utils/errorHandler";
 
 function ProductDefault(props) {
   const { product, productFAQs = [], viewItem, slug } = props;
@@ -43,28 +44,32 @@ function ProductDefault(props) {
   }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
-    if (!!product) {
-      const { id, categoryId, subCategoryId } = product || {};
-      const filter = {
-        id: { ne: id },
-        storeId: { eq: STORE_ID },
-        status: { eq: "ENABLED" },
-      };
-      if (subCategoryId) {
-        filter.subCategoryId = { eq: subCategoryId };
-      } else {
-        filter.categoryId = { eq: categoryId };
+    try {
+      if (!!product) {
+        const { id, categoryId, subCategoryId } = product || {};
+        const filter = {
+          id: { ne: id },
+          storeId: { eq: STORE_ID },
+          status: { eq: "ENABLED" },
+        };
+        if (subCategoryId) {
+          filter.subCategoryId = { eq: subCategoryId };
+        } else {
+          filter.categoryId = { eq: categoryId };
+        }
+        const {
+          data: {
+            searchProducts: { items },
+          },
+        } = await API.graphql(
+          graphqlOperation(findProducts, { filter, limit: 4 })
+        );
+        if (items.length) {
+          setRelatedProducts(items);
+        }
       }
-      const {
-        data: {
-          searchProducts: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(findProducts, { filter, limit: 4 })
-      );
-      if (items.length) {
-        setRelatedProducts(items);
-      }
+    } catch (error) {
+      errorHandler(error);
     }
   }, [product]);
 
@@ -116,11 +121,14 @@ function ProductDefault(props) {
             </div>
           </div>
           <div className="page-content pb-10">
-            <div className="container vertical">
+            <div className="container vertical pt-3 lh-default">
               <LinkedProducts product={product} />
               <DescOne product={product} productFAQs={productFAQs} />
+              <ProductCollection
+                products={relatedProducts}
+                title="Related products"
 
-              <RelatedProducts products={relatedProducts} />
+              />
             </div>
           </div>
         </>

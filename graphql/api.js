@@ -284,17 +284,22 @@ export const getQuickViewProduct = /* GraphQL */ `
       items {
         id
         title
-        brand
-        vendor
         isFeatured
+        categoryId
+        subCategoryId
+        category {
+          id
+          name
+          slug
+        }
+        subCategory {
+          id
+          name
+          slug
+        }
         productType
-        createdAt
         slug
         productDescription
-        longDescription
-        updatedAt
-        isPublished
-        publishedAt
         price
         sku
         size
@@ -314,10 +319,6 @@ export const getQuickViewProduct = /* GraphQL */ `
         blockedInventory
         rating
         totalOrders
-        additionalInfo {
-          label
-          value
-        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -362,11 +363,6 @@ export const getQuickViewProduct = /* GraphQL */ `
             isThumb
           }
           nextToken
-        }
-        reviews {
-          items {
-            id
-          }
         }
       }
       nextToken
@@ -514,6 +510,7 @@ export const getFeaturedCoupon = /* GraphQL */ `
         id
         code
         discount
+        expirationDate
         isActive
         isFeatured
         couponType
@@ -598,125 +595,6 @@ export const getOrder = /* GraphQL */ `
       priority
       orderDate
       status
-      products {
-        items {
-          id
-          orderId
-          productId
-          product {
-            id
-            title
-            brand
-            vendor
-            isFeatured
-            productType
-            createdAt
-            slug
-            productDescription
-            longDescription
-            updatedAt
-            isPublished
-            publishedAt
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            taxable
-            barcode
-            tags
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-            rating
-            totalOrders
-            additionalInfo
-            thumbImages
-            isTaxEnabled
-            isInventoryEnabled
-            hasVarient
-            images {
-              items {
-                id
-                productId
-                position
-                createdAt
-                updatedAt
-                alt
-                width
-                height
-                imageKey
-                isThumb
-              }
-              nextToken
-            }
-          }
-          variantId
-          variant {
-            id
-            productId
-            title
-            price
-            sku
-            size
-            color
-            status
-            position
-            currency
-            costPrice
-            listingPrice
-            createdAt
-            updatedAt
-            taxable
-            barcode
-            imageUrl
-            weight
-            weightUnit
-            inventory
-            blockedInventory
-          }
-          sku
-          returnReason
-          returnDate
-          returnAWB
-          returnShippingProvider
-          title
-          shippingMethodCode
-          cashOnDeliveryCharges
-          sellingPrice
-          shippingCharges
-          discount
-          totalPrice
-          currency
-          onHold
-          facilityCode
-          gstin
-          centralGstPercentage
-          compensationCessPercentage
-          integratedGstPercentage
-          stateGstPercentage
-          taxRate
-          unionTerritoryGstPercentage
-          deliveryPartner
-          dispatchDate
-          invoiceDate
-          invoiceNumber
-          tentativeDeliveryDate
-          trackingId
-          cancelledQuantity
-          quantity
-          price
-          status
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       payments {
         items {
           id
@@ -889,6 +767,7 @@ export const findProducts = /* GraphQL */ `
         variants {
           items {
             id
+            title
             price
             position
             listingPrice
@@ -1222,22 +1101,13 @@ export const updateUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
-      totalOrders
-      totalSpent
-      walletBalance
-      walletSpent
-      totalStoreCredit
-      isCognitoConfirmed
+      authProvider
+      isAdmin
       profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
       createdAt
       updatedAt
     }
@@ -1568,33 +1438,33 @@ export const listCollections = /* GraphQL */ `
 `;
 
 export const getCollectionsBySlug = /* GraphQL */ `
-query SearchCollections(
-  $filter: SearchableCollectionFilterInput
-  $sort: [SearchableCollectionSortInput]
-  $limit: Int
-  $nextToken: String
-  $from: Int
-  $aggregates: [SearchableCollectionAggregationInput]
-) {
-  searchCollections(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-    from: $from
-    aggregates: $aggregates
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
   ) {
-    items {
-      slug
-      parent
-      name
-      description
-      showInMenu
-      priority
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        description
+        showInMenu
+        priority
+      }
+      nextToken
     }
-    nextToken
   }
-}
 `;
 export const searchShippingTiers = /* GraphQL */ `
   query SearchShippingTiers(

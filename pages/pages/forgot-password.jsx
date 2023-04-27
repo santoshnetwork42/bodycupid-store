@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
+import { errorHandler } from "~/utils/errorHandler";
 
 function ForgotPassword({ store }) {
   const { name } = store;
@@ -35,7 +36,7 @@ function ForgotPassword({ store }) {
           router.push("/pages/login");
         }
       } catch (error) {
-        console.log("error signin:", error);
+        errorHandler(error);
       }
       return false;
     },
@@ -64,7 +65,7 @@ function ForgotPassword({ store }) {
           </ul>
         </div>
       </nav>
-      <div className="page-content mt-6 pb-2 mb-10">
+      <div className="page-content mt-6 pb-2 mb-10 bg-white">
         <div className="container">
           <div className="login-popup">
             <div className="form-box">

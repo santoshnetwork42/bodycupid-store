@@ -57,9 +57,9 @@
                 font-size: 1.4rem,
                 font-weight: 400,
                 line-height: false,
-                letter-spacing: -.01em,
+                letter-spacing: .02rem,
                 text-transform: false,
-                color: $body-color,
+                color: $dark-color,
                 padding-right: 20px),
             price: (display: block,
                 align-items: center,
@@ -380,7 +380,6 @@
     }
 
     line-height: 1.2;
-    letter-spacing: -.025em;
     text-transform: uppercase;
     transition: opacity .3s;
 
@@ -460,7 +459,7 @@
 .product-details {
     position: relative;
     @include print_css(product, body);
-    padding: 1rem 1.5rem 2rem;
+    padding: 1rem 1.5rem 1rem;
 
     >.btn-wishlist {
         position: absolute;
@@ -506,7 +505,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        min-height: 3.8rem;
+        min-height: 3.5rem;
     }
 }
 
@@ -700,7 +699,7 @@
     }
 
     figure {
-        padding: 2.5rem;
+        padding: 1rem;
     }
 }
 
@@ -1053,7 +1052,7 @@
             weight: 600;
         }
 
-        letter-spacing: -.025em;
+        letter-spacing: .025em;
         color: $dark-color;
     }
 
@@ -1070,7 +1069,7 @@
         text-transform: none;
         font-size: 1.4rem;
         line-height: 1.78;
-        color: #666;
+        color: inherit;
     }
 
     &:hover {
@@ -1352,7 +1351,7 @@
     // }
 
     .btn-quickview {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .btn-sold-out {
@@ -1457,7 +1456,10 @@
             }
 
             .new-price {
-                font-size: 1.3rem;
+                span{
+                    font-size: 1.3rem !important;
+                }
+                font-size: 1.6rem;
             }
         }
     }

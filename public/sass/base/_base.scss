@@ -47,6 +47,7 @@ body {
   overflow-x: hidden !important;
   overflow-y: scroll !important;
   touch-action: pan-x pan-y;
+  line-height: 0.0225rem !important;
 }
 
 main {
@@ -82,7 +83,7 @@ body:not(.loaded) * {
 
 .page-content {
   background-color: $background-color-1;
-  color:$text-color-1;
+  color: $text-color-1;
 }
 
 table {
@@ -659,10 +660,24 @@ button {
   }
 }
 
-.overflow-ellipsis{
+.overflow-ellipsis {
   display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//border 
+.border-regular {
+  border: 1px solid #e1e1e1;
+}
+
+.border-cricle {
+  border: 1px solid #e1e1e1;
+  border-radius: 50%;
+}
+
+.text-align-start {
+  text-align: start !important;
 }

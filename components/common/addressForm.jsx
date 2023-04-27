@@ -9,6 +9,7 @@ import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import AlertPopup from "../features/product/common/alert-popup";
 import { validateAddress, getProperAddress } from "~/utils/address";
+import { errorHandler } from "~/utils/errorHandler";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit } = props;
@@ -69,9 +70,8 @@ const AddressForm = (props) => {
         }
         setLoading(false);
       } catch (errors) {
-        console.log(errors);
+        errorHandler(errors)
         setLoading(false);
-        toast(<AlertPopup message={"Something went wrong"} status="error" />);
       }
       return false;
     },
@@ -79,10 +79,10 @@ const AddressForm = (props) => {
   );
 
   return (
-    <div>
+    <div className="container bg-white pt-3 pb-3 border-regular">
       <form className="form" onSubmit={addAddress}>
         <div className="row">
-          <div className="col-lg-12  mb-6 mb-lg-0 pr-lg-4">
+          <div className="col-lg-12  mb-lg-0 pr-lg-4">
             <div className="row">
               <div className="col-xs-6">
                 <label>First Name *</label>
@@ -245,16 +245,14 @@ const AddressForm = (props) => {
             </div>
           )}
 
-          {!onAddress && (
-            <button
-              className="btn btn-dark btn-block btn-rounded d-flex justify-content-center align-items-center"
-              type="submit"
-              disabled={loading}
-            >
-              {address.id ? "Save Address" : "Add Address"}
-              {loading && <div className="spin-loader ml-2" />}
-            </button>
-          )}
+          <button
+            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+            type="submit"
+            disabled={loading}
+          >
+            {address.id ? "Save Address" : "Add Address"}
+            {loading && <div className="spin-loader ml-2" />}
+          </button>
         </div>
       </form>
     </div>

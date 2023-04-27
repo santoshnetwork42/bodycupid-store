@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
 import { API } from "aws-amplify";
-import Collapse from "react-bootstrap/Collapse";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
@@ -20,7 +19,6 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
 import Addresses from "~/components/common/addresses";
-import Coupons from "~/components/features/coupon";
 import loadScript from "~/utils/loadScript";
 import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -29,7 +27,11 @@ import Passwordless from "~/components/common/partials/passwordless";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
+import { errorHandler } from "~/utils/errorHandler";
 import { systemActions } from "~/store/system";
+import { Cross, DownAngle, ShoppingCart, UpAngle } from "~/components/icons";
+import { Collapse } from "react-bootstrap";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 function Checkout(props) {
   const {
@@ -43,11 +45,13 @@ function Checkout(props) {
     shippingTiers,
     getShippingTiers,
     placeOrder: onPlaceOrder,
+    startCheckout,
   } = props;
+  const { width } = useWindowDimensions();
 
   const { name } = store;
   const router = useRouter();
-  const [isFirst, setFirst] = useState(true);
+  const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -55,8 +59,12 @@ function Checkout(props) {
   const [paymentId, setPaymentId] = useState(null);
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
+  const [isCollapse, setIsCollapse] = useState(width > 500 ? true : false);
+  const [showAddressModal, setAddressModal] = useState(false);
+  const isFirst = payMethod === "PREPAID";
 
   useEffect(() => {
+    startCheckout();
     getShippingTiers();
   }, []);
 
@@ -138,18 +146,22 @@ function Checkout(props) {
 
   const fetchPaymentStatus = useCallback(async () => {
     if (orderId && paymentId) {
-      const {
-        data: {
-          validateTransaction: { success },
-        },
-      } = await API.graphql({
-        query: validateTransaction,
-        variables: { orderId, razorpayPaymentId: paymentId },
-      });
-      if (success) {
-        await emptyCart();
-        await router.push(`/order/${orderId}?paymentId=${paymentId}`);
-        setPaymentLoading(false);
+      try {
+        const {
+          data: {
+            validateTransaction: { success },
+          },
+        } = await API.graphql({
+          query: validateTransaction,
+          variables: { orderId, razorpayPaymentId: paymentId },
+        });
+        if (success) {
+          await emptyCart();
+          await router.push(`/order/${orderId}?paymentId=${paymentId}`);
+          setPaymentLoading(false);
+        }
+      } catch (error) {
+        errorHandler(error);
       }
     }
   }, [orderId, paymentId]);
@@ -169,11 +181,15 @@ function Checkout(props) {
     const tempAddress = getProperAddress(shippingAddress);
     const { id: ignoreId, ...restAddress } = tempAddress;
     if (user && !ignoreId) {
-      await API.graphql({
-        query: createUserAddress,
-        variables: { input: { ...restAddress, userID: user.id } },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
+      try {
+        await API.graphql({
+          query: createUserAddress,
+          variables: { input: { ...restAddress, userID: user.id } },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+      } catch (error) {
+        errorHandler(error);
+      }
     }
 
     return Promise.resolve(null);
@@ -182,7 +198,19 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+
+      if (payMethod === "NONE") {
+        toast(
+          <AlertPopup
+            message={"Please select payment method"}
+            status="transparent"
+          />
+        );
+        return;
+      }
+
       setLoading(true);
+
       const paymentType = isFirst ? "PREPAID" : "COD";
       const formErrors = await validateAddress(shippingAddress, paymentType);
       setFormErorr(formErrors);
@@ -283,7 +311,7 @@ function Checkout(props) {
             setLoading(false);
           }
         } catch (error) {
-          console.log(error);
+          errorHandler(error);
         }
       }
       setLoading(false);
@@ -313,6 +341,9 @@ function Checkout(props) {
     () => appliedCoupon?.couponType === "ONLINE",
     [appliedCoupon]
   );
+  const productDiscountPercentage = ({ price, listingPrice }) => {
+    return Math.round(((listingPrice - price) / listingPrice) * 100);
+  };
 
   return (
     <main className="main checkout">
@@ -324,12 +355,8 @@ function Checkout(props) {
 
       {!user && <Passwordless forceOpen redirect={false} />}
 
-      <div
-        className={`page-content pt-7 pb-10 ${
-          cartList.length > 0 ? "mb-10" : "mb-2"
-        }`}
-      >
-        <div className="step-by pr-4 pl-4 d-sm-none">
+      <div className={`checkout-page-content page-content pb-10`}>
+        <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
           </h3>
@@ -338,14 +365,17 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
-        <div className="container mt-md-7">
+        <div className="container mt-0 md-7">
           {cartList.length > 0 ? (
             <>
-              {!appliedCoupon && <Coupons layout="checkout" />}
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
-                <div className="col-lg-7 mb-6 mb-lg-0 pr-lg-4">
-                  <Addresses onAddressChange={setAddress} />
+                <div className="col-lg-7 mb-4 mb-lg-0 pr-lg-4 p-0 d-sm-none">
+                  <Addresses
+                    // key={`address-${addressKey}`}
+                    onAddressChange={setAddress}
+                    variant="CHECKOUT"
+                  />
                 </div>
 
                 <aside
@@ -356,230 +386,300 @@ function Checkout(props) {
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 50}"
                   >
-                    <div className="summary pt-5">
-                      <h3 className="title title-simple text-left text-uppercase">
-                        Your Order
-                      </h3>
-                      <table className="order-table">
-                        <thead>
-                          <tr>
-                            <th>Product</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {cartList.map((item, index) => (
-                            <tr key={"checkout-" + item.title + "-" + index}>
-                              <td colSpan={2} className="product-name pr-0">
-                                <div className="d-flex justify-content-between">
-                                  <div className="d-flex">
-                                    <ALink
-                                      className="order-image"
-                                      href={"/product/" + item.slug}
-                                    >
-                                      <img
-                                        src={getPublicImageURL(
-                                          item.images?.items[0]?.imageKey
-                                        )}
-                                        alt={item?.images.items[0]?.alt}
-                                        width="80"
-                                        height="88"
-                                      />
-                                    </ALink>
-                                    <div className="text-left lh-default">
-                                      {item.title}{" "}
-                                      <span className="product-quantity">
-                                        ×&nbsp;{item.qty}
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="product-total text-body">
-                                    ₹{toDecimal(item.price * item.qty)}
-                                  </div>{" "}
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
-
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle">Subtotal</h4>
-                            </td>
-                            <td>
-                              <p className="summary-subtotal-price">
-                                {totalPrice < totalListingprice && (
-                                  <del className="summary-subtotal-listingprice mr-2">
-                                    ₹{toDecimal(totalListingprice)}
-                                  </del>
-                                )}
-                                ₹{toDecimal(totalPrice)}
-                              </p>
-                            </td>
-                          </tr>
-
-                          {!!appliedCoupon && (
-                            <>
-                              <tr className="summary-subtotal-saving">
-                                <td>
-                                  <h4 className="summary-subtitle">Coupons</h4>
-                                  <p>
-                                    <span className="d-flex">
-                                      <span className="mr-1">
-                                        {appliedCoupon.code}
-                                      </span>
-                                      <ALink
-                                        key={appliedCoupon.id}
-                                        href="#"
-                                        className="product-remove"
-                                        title="Remove coupon"
-                                        onClick={() => removeCoupon()}
-                                      >
-                                        <i className="fas fa-times"></i>
-                                      </ALink>
-                                    </span>
-                                  </p>
-                                </td>
-                                <td>
-                                  <p className="summary-subtotal-price discount-price-color">
-                                    {`₹${toDecimal(couponTotal)}`}
-                                  </p>
-                                </td>
+                    <div className="summary pt-5 p-0 border-no">
+                      <div
+                        onClick={() => setIsCollapse(!isCollapse)}
+                        className="checkout-summary-btn d-flex bg-white border-regular align-items-center mb-2 d-xl-none"
+                      >
+                        <div className="d-flex align-items-center">
+                          <ShoppingCart size={20} />
+                          <p className="checkout-summary-label m-0">
+                            Show order summary
+                          </p>
+                          {isCollapse ? (
+                            <UpAngle size={17} color="currentColor" />
+                          ) : (
+                            <DownAngle color="currentColor" size={16} />
+                          )}
+                        </div>
+                        <p className="m-0 checkout-summary-total">
+                          ₹{toDecimal(grandTotal)}
+                        </p>
+                      </div>
+                      <Collapse in={isCollapse}>
+                        <div className="collapsible-checkout-wrapper mb-2">
+                          <table className="order-table cart-table">
+                            <thead>
+                              <tr>
+                                <th className="p-0"></th>
                               </tr>
-                            </>
-                          )}
+                            </thead>
+                            <tbody>
+                              {cartList.map((item) => (
+                                <tr className="m-0 p-0 border-no">
+                                  <td className="m-0 p-0">
+                                    <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
+                                      <figure>
+                                        <ALink href={"/product/" + item.slug}>
+                                          <img
+                                            src={getPublicImageURL(
+                                              item.images.items[0]?.imageKey
+                                            )}
+                                            width="100"
+                                            height="100"
+                                            alt={item.images.items[0]?.alt}
+                                          />
+                                        </ALink>
+                                      </figure>
+                                      <div className="text-left text-primary w-100 mr-5 ml-2">
+                                        <div>
+                                          <ALink href={"/product/" + item.slug}>
+                                            {item.title}
+                                          </ALink>
+                                        </div>
+                                        <div className="product-subtotal mt-1">
+                                          {!(item.isBogo && item.qty === 1) && (
+                                            <span className="sm-product-amount">
+                                              ₹{toDecimal(item.price)}
+                                            </span>
+                                          )}
 
-                          {isFirst && (
-                            <tr className="summary-subtotal">
-                              <td>
-                                <h4 className="summary-subtitle">
-                                  5% Online Payment Discount
-                                </h4>
-                              </td>
-                              <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
-                                {`₹${toDecimal(prepaidDiscount)}`}
-                              </td>
-                            </tr>
-                          )}
+                                          <p className="m-0 product-discount-listing">
+                                            {item.price < item.listingPrice && (
+                                              <del className="summary-subtotal-listingprice">
+                                                ₹{toDecimal(item.listingPrice)}
+                                              </del>
+                                            )}
+                                            {item.isBogo && item.qty === 1 ? (
+                                              <span className="text-success ml-1">
+                                                Free
+                                              </span>
+                                            ) : (
+                                              <span
+                                                className={`discount-percetage ml-2`}
+                                              >
+                                                {productDiscountPercentage(
+                                                  item
+                                                ) > 0 &&
+                                                  `${productDiscountPercentage(
+                                                    item
+                                                  )}% off`}
+                                              </span>
+                                            )}
+                                          </p>
+                                        </div>{" "}
+                                        {item.isBogo && item.qty > 1 && (
+                                          <div className="summary-saving-lable-container mb-1  qty-label ">
+                                            {" "}
+                                            <p className="m-0 saving-lable">
+                                              1 qty is Free
+                                            </p>
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                          <div className="check-payment-detail border-regular bg-white">
+                            <table className="order-table cart-table">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr className="summary-subtotal">
+                                  <td>
+                                    <h4 className="summary-subtitle">
+                                      Subtotal
+                                    </h4>
+                                  </td>
+                                  <td>
+                                    <p className="summary-subtotal-price">
+                                      {totalPrice < totalListingprice && (
+                                        <del className="summary-subtotal-listingprice mr-2">
+                                          ₹{toDecimal(totalListingprice)}
+                                        </del>
+                                      )}
+                                      ₹{toDecimal(totalPrice)}
+                                    </p>
+                                  </td>
+                                </tr>
 
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle">Shipping</h4>
-                            </td>
-                            <td
-                              className={`summary-subtotal-price pb-0 pt-0 ${
-                                !shippingTotal && "discount-price-color"
-                              }`}
-                            >
-                              {!!shippingTotal
-                                ? `₹${toDecimal(shippingTotal)}`
-                                : "Free"}
-                            </td>
-                          </tr>
+                                {!!appliedCoupon && (
+                                  <>
+                                    <tr className="summary-subtotal-saving">
+                                      <td>
+                                        <h4 className="summary-subtitle">
+                                          Coupons
+                                        </h4>
+                                        <p className="m-0">
+                                          <span className="d-flex">
+                                            <span className="mr-1">
+                                              {appliedCoupon.code}
+                                            </span>
+                                            <ALink
+                                              key={appliedCoupon.id}
+                                              href="#"
+                                              className="pr-1 pl-1 border-cricle lh-default d-flex align-items-center"
+                                              title="Remove coupon"
+                                              onClick={() => removeCoupon()}
+                                            >
+                                              <Cross
+                                                size={12}
+                                                color="currentColor"
+                                              />
+                                            </ALink>
+                                          </span>
+                                        </p>
+                                      </td>
+                                      <td>
+                                        <p className="summary-subtotal-price discount-price-color">
+                                          {`₹${toDecimal(couponTotal)}`}
+                                        </p>
+                                      </td>
+                                    </tr>
+                                  </>
+                                )}
 
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle">
-                                Total{" "}
-                                <p className="m-0">Inclusive of all taxes</p>
-                              </h4>
-                            </td>
-                            <td>
-                              <p className="summary-total-price ls-s">
-                                ₹{toDecimal(grandTotal)}
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colSpan={2}>
-                              <div
-                                className={"avg-delivery-lable-container mt-3"}
-                              >
-                                <p className="m-0">
-                                  Average delivery time: <span>3-5 days</span>
-                                </p>
-                              </div>
-                              {!!amoutSaved && (
-                                <div className="summary-saving-lable-container">
-                                  <p className="saving-lable">
-                                    <span>{`₹${toDecimal(amoutSaved)}`}</span>{" "}
-                                    saved so far on this order
-                                  </p>
-                                </div>
-                              )}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div className="payment accordion radio-type">
-                        <h4 className="summary-subtitle ls-m pb-3">
+                                {isFirst && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        5% Online Payment Discount
+                                      </h4>
+                                    </td>
+                                    <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
+                                      {`₹${toDecimal(prepaidDiscount)}`}
+                                    </td>
+                                  </tr>
+                                )}
+
+                                <tr className="summary-subtotal">
+                                  <td>
+                                    <h4 className="summary-subtitle">
+                                      Shipping
+                                    </h4>
+                                  </td>
+                                  <td
+                                    className={`summary-subtotal-price pb-0 pt-0 ${
+                                      !shippingTotal && "discount-price-color"
+                                    }`}
+                                  >
+                                    {!!shippingTotal
+                                      ? `₹${toDecimal(shippingTotal)}`
+                                      : "Free"}
+                                  </td>
+                                </tr>
+
+                                <tr className="summary-subtotal">
+                                  <td>
+                                    <h4 className="summary-subtitle">
+                                      Total{" "}
+                                      <p className="m-0">
+                                        Inclusive of all taxes
+                                      </p>
+                                    </h4>
+                                  </td>
+                                  <td>
+                                    <p className="summary-total-price ls-s">
+                                      ₹{toDecimal(grandTotal)}
+                                    </p>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colSpan={2}>
+                                    <div
+                                      className={
+                                        "avg-delivery-lable-container mt-3"
+                                      }
+                                    >
+                                      <p className="m-0">
+                                        Average delivery time:{" "}
+                                        <span>3-5 days</span>
+                                      </p>
+                                    </div>
+                                    {!!amoutSaved && (
+                                      <div className="summary-saving-lable-container">
+                                        <p className="saving-lable">
+                                          <span>{`₹${toDecimal(
+                                            amoutSaved
+                                          )}`}</span>{" "}
+                                          saved so far on this order
+                                        </p>
+                                      </div>
+                                    )}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </Collapse>
+                      <div className="col-lg-6 mb-lg-0 pr-lg-4 p-0 d-sm-show">
+                        <Addresses
+                          onAddressChange={setAddress}
+                          variant="CHECKOUT"
+                          showModal={showAddressModal}
+                          onModalClose={() => setAddressModal(false)}
+                        />
+                      </div>
+                      <div
+                        className="payment accordion radio-type "
+                        id="payment-method"
+                      >
+                        <h4 className="summary-subtitle ls-default pb-1 pt-1 mt-2 pl-2">
                           Payment Methods
                         </h4>
-
                         <div className="checkbox-group">
-                          <div className="card-header d-flex align-items-center">
-                            <ALink
-                              href="#"
-                              className={`text-body text-normal ls-m mr-2 ${
-                                isFirst ? "collapse" : ""
-                              }`}
-                              onClick={() => {
-                                !isFirst && setFirst(!isFirst);
-                              }}
-                            >
-                              Pay Online
-                            </ALink>
-                            <p className="extra-lable m-0">EXTRA 5% OFF</p>
-                          </div>
-
-                          <Collapse in={isFirst}>
-                            <div className="card-wrapper">
-                              <div className="card-body ls-m overflow-hidden">
-                                Use credit/debit card, net-banking, UPI, wallets
-                                to complete the payment.
-                              </div>
+                          <div className="bg-white border-regular payment-card mt-2">
+                            <div className="card-header d-flex align-items-center">
+                              <ALink
+                                href="#"
+                                className={`text-body text-normal ls-m mr-2 ${
+                                  payMethod === "PREPAID" ? "collapse" : ""
+                                }`}
+                                onClick={() => {
+                                  !isFirst && setFirst("PREPAID");
+                                }}
+                              >
+                                Pay Online
+                              </ALink>
+                              <p className="extra-lable m-0">EXTRA 5% OFF</p>
                             </div>
-                          </Collapse>
 
-                          <div className="card-header">
-                            <ALink
-                              href="#"
-                              className={`text-body text-normal ls-m ${
-                                !isFirst ? "collapse" : ""
-                              }`}
-                              onClick={() => {
-                                !codDisabled && isFirst && setFirst(!isFirst);
-                              }}
-                            >
-                              Cash on delivery
-                            </ALink>
-                          </div>
-
-                          <Collapse in={!isFirst}>
-                            <div className="card-wrapper">
-                              <div className="card-body ls-m overflow-hidden">
-                                Pay in cash or pay in person at the time of
-                                delivery with GPay/PayTM/PhonePe.
-                              </div>
+                            <div className="card-body ls-m overflow-hidden payment-subtitle">
+                              Use credit/debit card, net-banking, UPI, wallets
+                              to complete the payment.
                             </div>
-                          </Collapse>
+                          </div>
+                          <div className="bg-white mt-2 border-regular payment-card">
+                            <div className="card-header">
+                              <ALink
+                                href="#"
+                                className={`text-body text-normal ls-m ${
+                                  payMethod === "COD" ? "collapse" : ""
+                                }`}
+                                onClick={() => {
+                                  !codDisabled && isFirst && setFirst("COD");
+                                }}
+                              >
+                                Cash on delivery
+                              </ALink>
+                            </div>
+
+                            <div className="card-body ls-m overflow-hidden payment-subtitle">
+                              Pay in cash or pay in person at the time of
+                              delivery with GPay/PayTM/PhonePe.
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      {/* <div className="form-checkbox mt-4 mb-5">
-                        <input
-                          type="checkbox"
-                          className="custom-checkbox"
-                          id="terms-condition"
-                          name="terms-condition"
-                          required
-                        />
-                        <label
-                          className="form-control-label"
-                          htmlFor="terms-condition"
-                        >
-                          I have read and agree to the website{" "}
-                          <ALink href="#">terms and conditions </ALink>*
-                        </label>
-                      </div> */}
+
                       {!!formErorr && (
                         <div className="overflow-hidden mb-4 mt-4">
                           <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
@@ -593,7 +693,7 @@ function Checkout(props) {
                       )}
                       <div className="stick-bottom-button">
                         <div className="d-sm-show lh-2">
-                          <p className="summary-total-price ls-s text-primary">
+                          <p className="summary-total-price ls-s text-primary text-align-start">
                             ₹{toDecimal(grandTotal)}
                           </p>
                           <ALink
@@ -606,13 +706,24 @@ function Checkout(props) {
                             View details
                           </ALink>
                         </div>
-                        <button
-                          onClick={placeOrder}
-                          className="btn btn-dark btn-rounded btn-order d-flex justify-content-center align-items-center"
-                        >
-                          Place Order
-                          {loading && <div className="spin-loader ml-2" />}
-                        </button>
+                        {!shippingAddress?.address && payMethod === "NONE" && (
+                          <button
+                            onClick={() => setAddressModal(true)}
+                            className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
+                          >
+                            Add new address
+                            {loading && <div className="spin-loader ml-2" />}
+                          </button>
+                        )}
+                        {!!shippingAddress?.address && (
+                          <button
+                            onClick={placeOrder}
+                            className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
+                          >
+                            Place Order
+                            {loading && <div className="spin-loader ml-2" />}
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -627,7 +738,7 @@ function Checkout(props) {
               <p className="return-to-shop mb-0">
                 <ALink
                   className="button wc-backward btn btn-dark btn-md"
-                  href="/shop"
+                  href="/collections/all"
                 >
                   Return to shop
                 </ALink>
@@ -657,6 +768,7 @@ const Component = connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   getShippingTiers: systemActions.getShippingTiers,
   placeOrder: eventActions.placeOrder,
+  startCheckout: eventActions.startCheckout,
 })(Checkout);
 
 Component.hideFooter = true;

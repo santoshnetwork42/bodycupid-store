@@ -8,7 +8,7 @@ export default function CategoryHeader({ name, description }) {
       <h4 className="text-uppercase mb-0">{name}</h4>
       {!!description && (
         <ReadMore>
-          <p className="mb-0">{description}</p>
+          <p className="mb-0 mt-1">{description}</p>
         </ReadMore>
       )}
     </div>

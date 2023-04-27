@@ -16,14 +16,13 @@ function ProductBestPrice(props) {
           <i>%</i>
           <p>
             Best price :{" "}
-            <span className="font-weight-semi-bold">
+            <span className=" font-weight-semi-bold">
               {toDecimal(price - totalDiscount)}
             </span>{" "}
           </p>
         </div>
-        <p>T&C</p>
       </div>
-      <div className="d-flex">
+      <div className="d-flex align-items-center">
         Use coupon{" "}
         <p id="coupon-code" className="font-weight-semi-bold ml-1">
           {code}

@@ -14,7 +14,7 @@ export default function ReadMore({ children }) {
       setIsShowMore(false);
     }
   }, []);
-  console.log("pref", pref.current?.clientHeight);
+
   const onChange = () => {
     if (!pref.current) return;
     setRead(!read);

@@ -7,6 +7,7 @@ import TokenPagination from "~/components/features/token-pagination";
 import { formateDate, toDecimal } from "~/utils";
 import { searchOrders } from "~/graphql/api";
 import { STORE_ID } from "~/config";
+import { errorHandler } from "~/utils/errorHandler";
 
 function AccountOrders({ user }) {
   const [orders, setOrders] = useState([]);
@@ -42,7 +43,9 @@ function AccountOrders({ user }) {
         }
         setTotalOrder(total);
         setToken(nextToken);
-      } catch (error) {}
+      } catch (error) {
+        errorHandler(error);
+      }
     },
     [user, orders, token]
   );
@@ -55,7 +58,7 @@ function AccountOrders({ user }) {
 
   return (
     <div>
-      <table className="order-table">
+      <table className="order-table mb-3">
         <thead>
           <tr>
             <th className="pl-2">Order</th>
@@ -83,7 +86,7 @@ function AccountOrders({ user }) {
               <td className="order-action">
                 <ALink
                   href={`/order/${order.id}`}
-                  className="btn btn-primary btn-link btn-underline"
+                  className="btn btn-link btn-underline"
                 >
                   View
                 </ALink>
