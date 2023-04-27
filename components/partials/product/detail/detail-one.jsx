@@ -344,7 +344,7 @@ function DetailOne(props) {
               <Star
                 key={`rs-${product.id}-${index}`}
                 size={16}
-                color={isFilled ? "#d26e4b" : "#D9D9D9"}
+                color={isFilled ? "#FAB73B" : "#D9D9D9"}
               />
             );
           })}
@@ -389,7 +389,7 @@ function DetailOne(props) {
       )}
 
       {today.getHours() > 8 && today.getHours() < 15 && (
-        <p className="remian-time-lable mb-4">
+        <p className="remian-time-lable mb-0">
           For Fastest delivery, order within {deliveryRemainingTime()}
         </p>
       )}

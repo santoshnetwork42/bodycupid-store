@@ -84,8 +84,8 @@
 .product-image-full {
     display: block;
     position: absolute;
-    padding: 1rem;
-    right: 1rem;
+    padding: 0rem;
+    right: 0rem;
     top: 1rem;
     bottom: 4rem;
     width: fit-content;
@@ -1045,7 +1045,7 @@ aside {
 
         .total-review {
             flex-direction: row !important;
-            align-items: start !important;
+            align-items: flex-start !important;
             justify-content: start !important;
         }
         .comment-user{

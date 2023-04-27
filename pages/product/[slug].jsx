@@ -23,6 +23,7 @@ import {
 } from "~/utils/getStaticData";
 import { eventActions } from "~/store/events";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
+import ProductCollection from "~/components/partials/home/product-collection";
 
 function ProductDefault(props) {
   const { product, productFAQs = [], viewItem, slug } = props;
@@ -119,8 +120,11 @@ function ProductDefault(props) {
             <div className="container vertical pt-3">
               <LinkedProducts product={product} />
               <DescOne product={product} productFAQs={productFAQs} />
-
-              <RelatedProducts products={relatedProducts} />
+              <ProductCollection
+                products={relatedProducts}
+                title="Related products"
+                
+              />
             </div>
           </div>
         </>

@@ -20,15 +20,17 @@ function ProductCollection({ products = [], title = "", slug, redirectTo }) {
       <section className="product-wrapper product-collection container  pt-6 pb-3">
         <div className="d-flex justify-content-between mb-4">
           <h2 className="capitalize-title m-0">{title}</h2>
-          <ALink href={redirectTo}>
-            <p className="view-all  text-underline m-0">VIEW ALL</p>
-          </ALink>
+          {!!redirectTo && (
+            <ALink href={redirectTo}>
+              <p className="view-all  text-underline m-0">VIEW ALL</p>
+            </ALink>
+          )}
         </div>
 
         <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
           {products.map((item) => (
             <ProductTwo
-              adClass="mb-4"
+              adClass="mb-4 text-center"
               slug={slug}
               product={item}
               key={`top-selling-product-${item.id}`}
