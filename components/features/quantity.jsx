@@ -47,13 +47,13 @@ export default function Quantity({ qty = 1, ...props }) {
   return (
     <div className={adClass}>
       <button
-        className="quantity-minus d-flex justify-content-center align-items-center"
+        className="quantity-minus d-flex justify-content-center w-100 align-items-center"
         onClick={minusQuantity}
       >
         <Minus size={12} color="currentColor" />
       </button>
       <input
-        className="quantity-cart"
+        className="quantity-cart w-100"
         type="number"
         min="1"
         max={props.max}
@@ -61,7 +61,7 @@ export default function Quantity({ qty = 1, ...props }) {
         onChange={changeQty}
       />
       <button
-        className="quantity-plus d-flex justify-content-center align-items-center"
+        className="quantity-plus w-100 d-flex justify-content-center align-items-center"
         onClick={plusQuantity}
       >
         <Plus size={12} color="currentColor" />

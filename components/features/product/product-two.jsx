@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -8,13 +8,10 @@ import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import {
-  getProductMeta,
-  getProductInventory,
-  getFirstVariantId,
-} from "~/utils/products";
+import { getProductMeta, getProductInventory } from "~/utils/products";
 import OptimizedImage from "../optimized-image";
 import Quantity from "../quantity";
+import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
 function ProductTwo(props) {
   const {
@@ -27,7 +24,8 @@ function ProductTwo(props) {
     openQuickview,
     updateCart,
     removeFromCart,
-    slug:tagSlug,
+    slug: tagSlug,
+    section,
   } = props;
 
   const {
@@ -42,7 +40,6 @@ function ProductTwo(props) {
     collections,
   } = product || {};
 
-  const [quantity, setQuantity] = useState(1);
   // decide if the product is wishlisted
   let isWishlisted;
   isWishlisted =
@@ -79,33 +76,31 @@ function ProductTwo(props) {
     }
     return;
   }, [collections]);
+
   const addToCartHandler = () => {
     addToCart({
       ...product,
+      section,
       qty: 1,
       price: price,
     });
   };
 
-  const isCartItem = useMemo(
-    () => cartList.some((cl) => cl.id === id),
-    [cartList]
-  );
+  const cartItem = useMemo(() => {
+    const recordKey = getRecordKey(product);
+    return cartList.find((cl) => cl.recordKey === recordKey);
+  }, [cartList]);
 
   const { thumbImage, secondaryImage, discount } = getProductMeta(product);
 
   function changeQty(qty) {
-    setQuantity(qty);
-    if (isCartItem) {
+    if (cartItem) {
       if (qty) {
-        updateCart(
-          cartList.map((item) => {
-            return item.id === product.id ? { ...item, qty: qty } : item;
-          })
-        );
+        const recordKey = getRecordKey(product);
+        const cartData = getUpdatedCart(cartList, recordKey, { qty });
+        updateCart(cartData);
       } else {
-        const id = getFirstVariantId(product);
-        removeFromCart({ ...product, variantId: id });
+        removeFromCart({ ...cartItem });
       }
     }
   }
@@ -222,10 +217,10 @@ function ProductTwo(props) {
         <div className="product-action">
           {!!hasInventory ? (
             <>
-              {isCartItem ? (
+              {!!cartItem ? (
                 <Quantity
                   isProductList={true}
-                  qty={quantity}
+                  qty={cartItem.qty}
                   max={currentInventory}
                   product={product}
                   onChangeQty={changeQty}

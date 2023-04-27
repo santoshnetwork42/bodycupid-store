@@ -89,9 +89,18 @@ export function* systemSaga() {
           },
         },
       });
+
+      const today = new Date().setHours(0, 0, 0, 0);
+      const result = items.filter((i) => {
+        if (i.isActive) {
+          if (!i.expirationDate || Date.parse(i.expirationDate) >= today) {
+            return i;
+          }
+        }
+      });
       yield put({
         type: actionTypes.SET_FEATURED_COUPONS,
-        payload: { coupons: items },
+        payload: { coupons: result },
       });
     }
   });

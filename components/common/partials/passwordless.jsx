@@ -162,7 +162,7 @@ function Passwordless({
       className="auth-popup bg-img"
     >
       <main className="main">
-        <div className="page-content mt-6 pb-2 mb-2 bg-white">
+        <div className="page-content mt-6 pb-2 bg-white mb-2">
           <div className="container">
             <div className="login-popup">
               <div className="form-box">
