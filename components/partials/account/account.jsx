@@ -20,54 +20,49 @@ import {
 
 const MOBILE_TABS = [
   {
-    id: 1,
     tabName: "My orders",
     svg: <ListRadio size={16} />,
     href: "/pages/orders",
+    activeTab: 0,
   },
   {
-    id: 2,
     tabName: "My addresses",
     svg: <LocationDot size={16} />,
     href: "/pages/addresses",
+    activeTab: 1,
   },
   {
-    id: 3,
-    tabName: "My orders",
+    tabName: "Account Details",
     svg: <User size={16} />,
     href: "/pages/account-details",
+    activeTab: 2,
   },
 ];
 
 function AccountsTabs({ user, store }) {
-  const { name } = store;
   const router = useRouter();
-  const { query, route } = router;
-  const { activeTabIndex } = query;
 
-  const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
+  const { name } = store;
+  const { pathname } = router;
 
-  const routeName = route.slice(route.lastIndexOf("/") + 1);
+  // const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
 
-  useEffect(() => {
-    if (routeName === "orders") {
-      setActiveTab(0);
-    } else if (routeName === "addresses") {
-      setActiveTab(1);
-    } else if (routeName === "account-details") {
-      setActiveTab(2);
-    }
-  }, [route]);
+  // useEffect(() => {
+  //   if (pathname === "orders") {
+  //     setActiveTab(0);
+  //   } else if (pathname === "addresses") {
+  //     setActiveTab(1);
+  //   } else if (pathname === "account-details") {
+  //     setActiveTab(2);
+  //   }
+  // }, [route]);
 
-  const headerLable = useMemo(() => {
-    if (routeName === "orders") {
-      return "My Orders";
-    } else if (routeName === "addresses") {
-      return "My Addresses";
-    } else if (routeName === "account-details") {
-      return "Account Details";
-    }
-  }, [routeName]);
+  const currentTab = useMemo(
+    () => MOBILE_TABS.find((t) => t.href === pathname),
+    [pathname]
+  );
+
+  const { tabName: headerLabel, activeTab } = currentTab || {};
 
   useEffect(() => {
     (async function () {
@@ -85,9 +80,9 @@ function AccountsTabs({ user, store }) {
     return true;
   }, []);
 
-  const onActiveTabIndexChange = (index) => {
-    setActiveTab(index);
-  };
+  // const onActiveTabIndexChange = (index) => {
+  //   setActiveTab(index);
+  // };
 
   if (!user) return <></>;
 
@@ -106,44 +101,23 @@ function AccountsTabs({ user, store }) {
             selectedTabPanelClassName="active"
             className="tab tab-vertical gutter-lg"
             selectedIndex={activeTab}
-            onSelect={(index) => {
-              onActiveTabIndexChange(index);
-            }}
           >
             <TabList
               className="nav nav-tabs mb-4 col-lg-3 col-md-4"
               role="tablist"
             >
-              <Tab className="nav-item">
-                <ALink
-                  className={`nav-link ${
-                    activeTab === 0 && "account-active-link"
-                  }`}
-                  href="/pages/orders"
-                >
-                  My Orders
-                </ALink>
-              </Tab>
-              <Tab className="nav-item">
-                <ALink
-                  className={`nav-link ${
-                    activeTab === 1 && "account-active-link"
-                  }`}
-                  href="/pages/addresses"
-                >
-                  My Address
-                </ALink>
-              </Tab>
-              <Tab className="nav-item">
-                <ALink
-                  className={`nav-link ${
-                    activeTab === 2 && "account-active-link"
-                  }`}
-                  href="/pages/account-details"
-                >
-                  Account details
-                </ALink>
-              </Tab>
+              {MOBILE_TABS.map((tab) => (
+                <Tab className="nav-item" key={tab.href}>
+                  <ALink
+                    className={`nav-link ${
+                      activeTab === tab.activeTab && "account-active-link"
+                    }`}
+                    href={tab.href}
+                  >
+                    {tab.tabName}
+                  </ALink>
+                </Tab>
+              ))}
               <Tab className="nav-item">
                 <ALink className="nav-link" href="/" onClick={handleLogout}>
                   Logout
@@ -170,12 +144,12 @@ function AccountsTabs({ user, store }) {
         </div>
       </div>
 
-      {routeName === "account" && (
+      {pathname === "/pages/account" && (
         <div className="mobile-tabs d-sm-show mt-5 mb-5">
           {MOBILE_TABS.map((item) => {
             return (
               <ALink
-                key={item.id}
+                key={item.href}
                 href={item.href}
                 className="d-flex mobile-account-tab align-items-center "
               >
@@ -201,18 +175,18 @@ function AccountsTabs({ user, store }) {
       )}
 
       <div className="d-xl-none d-sm-show">
-        {!!headerLable && (
+        {!!headerLabel && (
           <div className="d-flex align-items-center mobile-tab-header">
             <ALink href="/pages/account" className="d-flex align-items-center">
               <ArrowLeft size={20} />
             </ALink>
-            <p className="m-0 header-label">{headerLable}</p>
+            <p className="m-0 header-label">{headerLabel}</p>
           </div>
         )}
 
         <div className="mobile-tabs-content">
-          {routeName === "orders" && <AccountOrders />}
-          {routeName === "addresses" && (
+          {pathname === "/pages/orders" && <AccountOrders />}
+          {pathname === "/pages/addresses" && (
             <div>
               <p className="mb-2">
                 The following addresses can be used on the checkout page.
@@ -220,7 +194,7 @@ function AccountsTabs({ user, store }) {
               <Addresses />
             </div>
           )}
-          {routeName === "account-details" && <AccountDetails />}
+          {pathname === "/pages/account-details" && <AccountDetails />}
         </div>
       </div>
     </main>
