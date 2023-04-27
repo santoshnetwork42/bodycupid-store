@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Heart, User, Hamburger } from "~/components/icons";
+import { User, Hamburger } from "~/components/icons";
 import CartMenu from "~/components/common/partials/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
@@ -97,9 +97,11 @@ function Header({ navbar, auth, openPasswordLess }) {
               )} */}
               <span className="divider"></span>
               <CartMenu />
-              <div className="d-sm-show search-container ">
-                <SearchBox type="icon" />
-              </div>
+              {!navbar?.hideSearch && (
+                <div className="d-sm-show search-container ">
+                  <SearchBox type="icon" />
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -13,9 +13,9 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
 import { Search } from "~/components/icons";
 
-function SearchForm({ type = "input" }) {
+function SearchForm({ type = "input", defaultSearch = "" }) {
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
   const [data, setData] = useState([]);
 
@@ -45,7 +45,7 @@ function SearchForm({ type = "input" }) {
   }, []);
 
   useEffect(() => {
-    setSearch("");
+    setSearch(defaultSearch);
   }, [router.query.slug]);
 
   useEffect(() => {
@@ -118,7 +118,7 @@ function SearchForm({ type = "input" }) {
   async function onSubmitSearchForm(e) {
     document.querySelector(".header-search")?.classList.toggle("show");
     await router.push({
-      pathname: "/collections/all",
+      pathname: "/collections/search",
       query: { search },
     });
     return false;

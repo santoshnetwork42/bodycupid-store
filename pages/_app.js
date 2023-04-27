@@ -32,7 +32,7 @@ const App = ({ Component, pageProps }) => {
 
   const navbarProps = {
     ...navbar,
-    showMobileSearchBar: !!Component.showMobileSearchBar,
+    hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
   };
 

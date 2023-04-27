@@ -14,6 +14,16 @@ module.exports = {
                 source: '/shop/:slug*',
                 destination: '/collections/all',
                 permanent: true
+            },
+            {
+                source: '/elements',
+                destination: '/',
+                permanent: true
+            },
+            {
+                source: '/elements/:any',
+                destination: '/',
+                permanent: true
             }
         ];
     },
