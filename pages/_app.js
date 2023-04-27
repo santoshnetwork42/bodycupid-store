@@ -140,7 +140,7 @@ const App = ({ Component, pageProps }) => {
         store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
         initSession();
-        store.dispatch(rootActions.auth("login"));
+        store.dispatch(eventActions.auth("login"));
       }
     });
     initSession();
