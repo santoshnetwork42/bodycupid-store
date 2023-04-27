@@ -13,7 +13,7 @@ function StickyFooter(props) {
 
   if (!cartList.length || !showStickyCheckout) return <></>;
   return (
-    <div className="stick-bottom-button pl-5 pr-5 d-sm-show">
+    <div className="stick-bottom-button btn-dark pl-5 pr-5 d-sm-show">
       <div className="lh-default">
         <span href="#">
           {cartList.length}&nbsp;
@@ -26,7 +26,7 @@ function StickyFooter(props) {
 
       <ALink
         href="/pages/cart"
-        className="btn btn-primary btn-rounded btn-checkout"
+        className="btn btn-dark btn-rounded btn-checkout"
       >
         View cart
       </ALink>

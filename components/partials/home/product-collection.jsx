@@ -8,8 +8,8 @@ import { productSlider } from "~/utils/data/carousel";
 
 function ProductCollection({ products = [], title = "", slug, redirectTo }) {
   return (
-    <section className="product-wrapper product-collection container mt-4 mt-md-10 pt-4 pb-2">
-      <div className="d-flex justify-content-between mb-5">
+    <section className="product-wrapper product-collection container mt-md-10 pt-4 pb-2">
+      <div className="d-flex justify-content-between mb-4">
         <h2 className="capitalize-title m-0">{title}</h2>
         <ALink href={redirectTo}>
           <p className="view-all  text-underline m-0">VIEW ALL</p>

@@ -7,7 +7,7 @@ export default function ReviewSection() {
   return (
     <section className="parallax pb-3">
       <div className="container ">
-        <OwlCarousel adClass="owl-theme owl-dot-white" options={mainSlider4}>
+        <OwlCarousel adClass="owl-theme" options={mainSlider4}>
           <div className="testimonial testimonial-centered testimonial-bg">
             <div className="testimonial-info">
               <figure className="testimonial-author-thumbnail">
@@ -19,7 +19,7 @@ export default function ReviewSection() {
                 />
               </figure>
               <div className="d-flex align-item-center mb-2 justify-content-center">
-                <RatingStar value={3} />
+                <RatingStar value={5} />
               </div>
               <blockquote>
                 “This is the best plant store I have ever ordered from! My

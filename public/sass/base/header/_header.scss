@@ -16,7 +16,7 @@
   (
     header: (
       font-family: $font-family,
-      letter-spacing: -0.025em,
+      letter-spacing: 0.025em,
       color: false,
       background: #fff,
       // Link's color
@@ -631,6 +631,7 @@
   &.hs-simple {
     flex: 1;
     margin-right: 2rem;
+    margin: 0 auto;
     @include css(max-width, header, search, round, width);
 
     .input-wrapper {

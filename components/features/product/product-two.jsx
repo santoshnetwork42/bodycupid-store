@@ -186,20 +186,11 @@ function ProductTwo(props) {
           <ALink href={`/product/${slug}`}>{title}</ALink>
         </h3>
 
-        <div className="product-tags">
+        <div className="product-tags lh-default">
           {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
         </div>
 
-        <div className="product-price product-sm mt-1 lh-1">
-          <ins className="new-price mr-2">
-            <span>MRP</span> ₹{toDecimal(price || 0)}
-          </ins>
-          {price < listingPrice && listingPrice && (
-            <del className="old-price">₹{toDecimal(listingPrice || 0)}</del>
-          )}
-        </div>
-
-        <div className="ratings-container">
+        <div className="ratings-container mb-0">
           <div className="ratings-full d-flex rating-product-list">
             <Star size={20} color={"#FAB73B"} />
           </div>
@@ -213,6 +204,17 @@ function ProductTwo(props) {
           >
             ( {totalRatings || 0} reviews )
           </ALink>
+        </div>
+        <div className="product-price product-sm mt-1 mb-2 lh-1">
+          <ins className="new-price ">
+            {price === listingPrice && <span>MRP</span>} ₹
+            {toDecimal(price || 0)}
+          </ins>
+          {price < listingPrice && listingPrice && (
+            <span className="old-price ml-1 ">
+              <span >MRP</span>&nbsp;<del >₹{toDecimal(listingPrice || 0)}</del>
+            </span>
+          )}
         </div>
         <div className="product-action">
           {!!hasInventory ? (

@@ -87,9 +87,9 @@ function Layout({
       <Head>
         <link rel="icon" href="images/icons/favicon.png" />
         <link
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap"
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900;SegoeScript:700&display=swap"
-        />
+        ></link>
         {/* <link
           rel="stylesheet"
           type="text/css"
