@@ -1,123 +1,177 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 import { Close } from "~/components/icons";
+import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getUpdatedCart } from "~/utils/helper";
 
-export default function CartProduct({ item,removeFromCart }) {
+function CartProduct({ cartList, item, removeFromCart, updateCart }) {
+  const {
+    id,
+    bogo,
+    isBogo,
+    variants,
+    recordKey,
+    qty,
+    inventory,
+    slug,
+    images,
+    title,
+    price,
+    listingPrice,
+    variantId,
+  } = item;
+
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
 
-  const onChangeQty = (item, qty) => {
-    if (qty) {
-      const cartData = getUpdatedCart(cartList, item.recordKey, { qty });
+  const changeVariant = (e) => {
+    const variant = variants.items.find((c) => c.id === e.target.value);
+    const recordKey = `${id}-${e.target.value}`;
+
+    const cartItem = cartList.find((c) => c.recordKey === recordKey);
+    if (cartItem) {
+      const updatedCart = [...cartList]
+        .filter((c) => c.recordKey !== recordKey)
+        .map((c) => {
+          if (c.recordKey === recordKey) return { ...c, qty: c.qty + qty };
+          return c;
+        });
+      updateCart(updatedCart);
+    } else {
+      const updatedCart = getUpdatedCart(cartList, recordKey, {
+        recordKey,
+        price: variant.price,
+        variantId: e.target.value,
+      });
+      updateCart(updatedCart);
+    }
+  };
+
+  const onChangeQty = (newQty) => {
+    const finalQty = bogo === "PRIMARY" ? newQty + 1 : newQty;
+    if (finalQty) {
+      const cartData = getUpdatedCart(cartList, recordKey, {
+        qty: finalQty,
+      });
       updateCart(cartData);
     } else {
-
       removeFromCart(item);
     }
   };
 
-  const getVariantSelect = (item) => {
-    return (
-      <select
-        name={`${item.recordKey}`}
-        className="form-control"
-        value={item.variantId}
-        onChange={(e) => {
-          changeVariant(e, item);
-        }}
-      >
-        {item?.variants?.items.map((v) => (
-          <option key={v.id} value={v.id}>
-            {v.title}
-          </option>
-        ))}
-      </select>
-    );
+  const onRemove = () => {
+    if (bogo === "PRIMARY") {
+      onChangeQty(0);
+    } else {
+      removeFromCart(item);
+    }
   };
 
-  if (!item) return <></>;
-
   return (
-    <div>
-      <Fragment key={item.recordKey}>
-        <div className="m-0 p-0 border-no ">
-          <div className="m-0 p-0">
-            <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
-              <figure>
-                <ALink href={"/product/" + item.slug}>
-                  <img
-                    src={getPublicImageURL(item.images.items[0]?.imageKey)}
-                    width="100"
-                    height="100"
-                    alt={item.images.items[0]?.alt}
-                  />
-                </ALink>
-              </figure>
-              <div className="text-left text-primary w-100  mr-1 ml-2">
-                <div className="mr-5 ">
-                  <ALink href={"/product/" + item.slug}>{item.title}</ALink>
-                </div>
-                <div className="product-subtotal mt-1 d-flex mb-1 align-items-center">
-                  {item.isBogo ? (
-                    <>
+    <div className="m-0 p-0 border-no ">
+      <div className="m-0 p-0">
+        <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
+          <figure>
+            <ALink href={"/product/" + slug}>
+              <img
+                src={getPublicImageURL(images.items[0]?.imageKey)}
+                width="100"
+                height="100"
+                alt={images.items[0]?.alt}
+              />
+            </ALink>
+          </figure>
+          <div className="text-left text-primary w-100  mr-1 ml-2">
+            <div className="mr-5 ">
+              <ALink href={"/product/" + slug}>{title}</ALink>
+            </div>
+            <div className="product-subtotal mt-1 d-flex mb-1 align-items-center">
+              {isBogo ? (
+                <>
+                  <del className="summary-subtotal-listingprice">
+                    ₹{toDecimal(listingPrice)}
+                  </del>
+                  <span className="text-success ml-1">Free</span>
+                </>
+              ) : (
+                <>
+                  <span className="sm-product-amount mr-2">
+                    ₹{toDecimal(price)}
+                  </span>
+
+                  <p className="m-0 product-discount-listing">
+                    {price < listingPrice && (
                       <del className="summary-subtotal-listingprice">
-                        ₹{toDecimal(item.listingPrice)}
+                        ₹{toDecimal(listingPrice)}
                       </del>
-                      <span className="text-success ml-1">Free</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="sm-product-amount mr-2">
-                        ₹{toDecimal(item.price)}
-                      </span>
-
-                      <p className="m-0 product-discount-listing">
-                        {item.price < item.listingPrice && (
-                          <del className="summary-subtotal-listingprice">
-                            ₹{toDecimal(item.listingPrice)}
-                          </del>
-                        )}
-                        <span className={`discount-percetage ml-2`}>
-                          {productDiscountPercentage(item) > 0 &&
-                            `${productDiscountPercentage(item)}% off`}
-                        </span>
-                      </p>
-                    </>
-                  )}
+                    )}
+                    <span className={`discount-percetage ml-2`}>
+                      {productDiscountPercentage(item) > 0 &&
+                        `${productDiscountPercentage(item)}% off`}
+                    </span>
+                  </p>
+                </>
+              )}
+            </div>
+            <div className="d-flex">
+              {bogo !== "SECONDARY" && (
+                <div className="product-quantity w-0">
+                  <Quantity
+                    product={item}
+                    qty={qty}
+                    max={inventory}
+                    onChangeQty={onChangeQty}
+                  />
                 </div>
-                <div className="d-flex">
-                  {!item.isBogo && (
-                    <div className="product-quantity w-0">
-                      <Quantity
-                        product={item}
-                        qty={item.qty}
-                        max={item.inventory}
-                        onChangeQty={(qty) => onChangeQty(item, qty)}
-                      />
-                    </div>
-                  )}
+              )}
 
-                  {!!item?.variants?.items.length && getVariantSelect(item)}
-                </div>
-              </div>
-              <div className="product-close">
-                <ALink
-                  href="#"
-                  className="sm-product-remove"
-                  title="Remove this product"
-                  onClick={() => removeFromCart(item)}
+              {!!item?.variants?.items.length && (
+                <select
+                  name={`${recordKey}`}
+                  className="form-control"
+                  value={variantId}
+                  onChange={(e) => {
+                    changeVariant(e);
+                  }}
                 >
-                  <Close size={18} color="grey" />
-                </ALink>
-              </div>
+                  {variants.items.map((v) => (
+                    <option key={v.id} value={v.id}>
+                      {v.title}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           </div>
+          <div className="product-close">
+            <ALink
+              href="#"
+              className="sm-product-remove"
+              title="Remove this product"
+              onClick={onRemove}
+            >
+              <Close size={18} color="grey" />
+            </ALink>
+          </div>
         </div>
-      </Fragment>
+      </div>
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    cartList: state.cart.data,
+  };
+}
+
+export default connect(mapStateToProps, {
+  updateCart: cartActions.updateCart,
+  removeFromCart: cartActions.removeFromCart,
+})(CartProduct);

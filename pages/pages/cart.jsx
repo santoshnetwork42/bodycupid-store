@@ -1,5 +1,6 @@
+import React from "react";
 import { connect } from "react-redux";
-import {  useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
@@ -13,8 +14,6 @@ import CartProduct from "~/components/partials/cart/cart-product";
 function Cart(props) {
   const {
     cartList,
-    removeFromCart,
-    updateCart,
     appliedCoupon,
     user,
     openLogin,
@@ -22,46 +21,28 @@ function Cart(props) {
     getShippingTiers,
   } = props;
 
-  const [cartItems, setCartItems] = useState([]);
-  useEffect(() => {
-    setCartItems([...cartList]);
-  }, [cartList]);
-
   useEffect(() => {
     getShippingTiers();
   }, []);
 
-  const getCartDataWithCoupon = () => {
-    const item = cartList.reduce((prev, curr) => {
-      return prev.price < curr.price ? prev : curr;
-    });
-    if (item.price > appliedCoupon.minOrderValue) {
-      return [...cartList].map((c) =>
-        c.id === item.id
-          ? {
-              ...c,
-              isBogo: true,
-            }
-          : {
-              ...c,
-              isBogo: false,
-            }
-      );
-    }
-  };
+  const cartItems = useMemo(() => {
+    if (appliedCoupon?.couponType === "BOGO") {
+      const totalQty = cartList.reduce((a, b) => a + b.qty, 0);
+      if (totalQty > 1) {
+        const item = cartList.reduce((prev, curr) => {
+          return prev.price < curr.price ? prev : curr;
+        });
 
-  const setCartData = () => {
-    if (appliedCoupon?.code === "BOGO" && cartList.length) {
-      const data = getCartDataWithCoupon(cartList);
-      setCartItems(data);
-    } else {
-      setCartItems(cartList);
+        if (item.price > appliedCoupon.minOrderValue) {
+          return [...cartList].map((c) =>
+            c.id === item.id ? { ...c, isBogo: true } : c
+          );
+        }
+      }
     }
-  };
 
-  useEffect(() => {
-    setCartData();
-  }, [appliedCoupon, cartList]);
+    return cartList;
+  }, [cartList, appliedCoupon]);
 
   const {
     totalListingprice,
@@ -75,42 +56,12 @@ function Cart(props) {
     [cartItems, appliedCoupon, shippingTiers]
   );
 
-  const changeVariant = (e, item) => {
-    const { id } = item;
-    const variant = item.variants.items.find((c) => c.id === e.target.value);
-    const recordKey = `${id}-${e.target.value}`;
-
-    const cartItem = cartList.find((c) => c.recordKey === recordKey);
-    if (cartItem) {
-      const updatedCart = [...cartList]
-        .filter((c) => c.recordKey !== item.recordKey)
-        .map((c) => {
-          if (c.recordKey === recordKey) return { ...c, qty: c.qty + item.qty };
-          return c;
-        });
-      updateCart(updatedCart);
-    } else {
-      const updatedCart = getUpdatedCart(cartList, item.recordKey, {
-        recordKey,
-        price: variant.price,
-        variantId: e.target.value,
-      });
-      updateCart(updatedCart);
-    }
-  };
-
   const checkAuth = useCallback(() => {
     if (user) return true;
     openLogin(true);
     return false;
   }, [user]);
 
-  const removeCoupon = (item) => {
-    if (item && item.qty > 1) {
-      return { ...item, qty: item.qty - 1,isBogo:false, bogo: 'PRIMARY' };
-    }
-    return null;
-  };
   return (
     <main className="main cart bg-white">
       <div className="page-content pt-7 pb-5">
@@ -141,25 +92,31 @@ function Cart(props) {
                 <div className="col-lg-8 col-md-12 ">
                   <div className="shop-table cart-table ">
                     <div>
-                      {cartItems.map((item) =>
-                        item.isBogo ? (
-                          <>
-                            <CartProduct
-                              removeFromCart={removeFromCart}
-                              item={removeCoupon(item)}
-                            />
-                            <CartProduct
-                              removeFromCart={removeFromCart}
-                              item={item}
-                            />
-                          </>
-                        ) : (
-                          <CartProduct
-                            removeFromCart={removeFromCart}
-                            item={item}
-                          />
-                        )
-                      )}
+                      {cartItems.map((item) => (
+                        <React.Fragment key={`${item.recordKey}-cart-item`}>
+                          {item.isBogo ? (
+                            <>
+                              {item.qty > 1 && (
+                                <CartProduct
+                                  key={`${item.recordKey}-primary`}
+                                  item={{
+                                    ...item,
+                                    qty: item.qty - 1,
+                                    isBogo: false,
+                                    bogo: "PRIMARY",
+                                  }}
+                                />
+                              )}
+                              <CartProduct
+                                key={`${item.recordKey}-secondary`}
+                                item={{ ...item, bogo: "SECONDARY" }}
+                              />
+                            </>
+                          ) : (
+                            <CartProduct key={item.recordKey} item={item} />
+                          )}
+                        </React.Fragment>
+                      ))}
                     </div>
                   </div>
                 </div>
