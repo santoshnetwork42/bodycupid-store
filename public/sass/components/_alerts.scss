@@ -48,6 +48,15 @@
     }
 }
 
+// alert yellow
+
+.alert-transparent {
+    color: $primary-color !important;
+    background: $primary-button-color !important;
+    border: $primary-button-color !important;
+}
+
+
 // Color types
 .alert-primary {
     background-color: $info-color;

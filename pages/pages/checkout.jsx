@@ -198,15 +198,17 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+
       if (payMethod === "NONE") {
         toast(
           <AlertPopup
-            message={"please select payment method"}
-            status="warning"
+            message={"Please select payment method"}
+            status="transparent"
           />
         );
         return;
       }
+
       setLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
@@ -704,7 +706,7 @@ function Checkout(props) {
                             View details
                           </ALink>
                         </div>
-                        {!shippingAddress?.address || payMethod === "NONE" ? (
+                        {!shippingAddress?.address && payMethod === "NONE" && (
                           <button
                             onClick={() => setAddressModal(true)}
                             className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
@@ -712,7 +714,8 @@ function Checkout(props) {
                             Add new address
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
-                        ) : (
+                        )}
+                        {!!shippingAddress?.address && (
                           <button
                             onClick={placeOrder}
                             className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
