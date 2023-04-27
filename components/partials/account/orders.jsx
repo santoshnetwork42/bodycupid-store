@@ -55,7 +55,7 @@ function AccountOrders({ user }) {
 
   return (
     <div>
-      <table className="order-table">
+      <table className="order-table mb-3">
         <thead>
           <tr>
             <th className="pl-2">Order</th>
@@ -83,7 +83,7 @@ function AccountOrders({ user }) {
               <td className="order-action">
                 <ALink
                   href={`/order/${order.id}`}
-                  className="btn btn-primary btn-link btn-underline"
+                  className="btn btn-link btn-underline"
                 >
                   View
                 </ALink>
