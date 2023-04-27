@@ -141,10 +141,9 @@
         }
     }
 
-    .product-subtotal {
-        .discount-percetage {
-            color: $success-color;
-        }
+    .discount-percentage {
+        font-weight: 600;
+        color: $success-color;
     }
 }
 

@@ -91,13 +91,13 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
             <div className="mr-5 ">
               <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
-            <div className="product-subtotal mt-1 d-flex mb-1 align-items-center">
+            <div className="mt-1 d-flex mb-1 align-items-center">
               {bogo === "SECONDARY" ? (
                 <>
                   <del className="summary-subtotal-listingprice">
                     ₹{toDecimal(price)}
                   </del>
-                  <span className="text-success ml-1">Free</span>
+                  <span className="discount-percentage ml-1">Free</span>
                 </>
               ) : (
                 <>
@@ -111,7 +111,7 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
                         ₹{toDecimal(listingPrice)}
                       </del>
                     )}
-                    <span className={`discount-percetage ml-2`}>
+                    <span className={`discount-percentage ml-2`}>
                       {productDiscountPercentage(item) > 0 &&
                         `${productDiscountPercentage(item)}% off`}
                     </span>
