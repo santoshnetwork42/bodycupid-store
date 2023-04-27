@@ -13,7 +13,6 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
   const {
     id,
     bogo,
-    isBogo,
     variants,
     recordKey,
     qty,
@@ -32,20 +31,21 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
 
   const changeVariant = (e) => {
     const variant = variants.items.find((c) => c.id === e.target.value);
-    const recordKey = `${id}-${e.target.value}`;
+    const newRecordKey = `${id}-${e.target.value}`;
 
-    const cartItem = cartList.find((c) => c.recordKey === recordKey);
+    const cartItem = cartList.find((c) => c.recordKey === newRecordKey);
     if (cartItem) {
       const updatedCart = [...cartList]
         .filter((c) => c.recordKey !== recordKey)
         .map((c) => {
-          if (c.recordKey === recordKey) return { ...c, qty: c.qty + qty };
+          if (c.recordKey === newRecordKey) return { ...c, qty: c.qty + qty };
           return c;
         });
       updateCart(updatedCart);
     } else {
       const updatedCart = getUpdatedCart(cartList, recordKey, {
-        recordKey,
+        recordKey: newRecordKey,
+        listingPrice: variant.listingPrice,
         price: variant.price,
         variantId: e.target.value,
       });
@@ -92,10 +92,10 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
               <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="product-subtotal mt-1 d-flex mb-1 align-items-center">
-              {isBogo ? (
+              {bogo === "SECONDARY" ? (
                 <>
                   <del className="summary-subtotal-listingprice">
-                    ₹{toDecimal(listingPrice)}
+                    ₹{toDecimal(price)}
                   </del>
                   <span className="text-success ml-1">Free</span>
                 </>

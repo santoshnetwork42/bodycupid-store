@@ -102,7 +102,6 @@ function Cart(props) {
                                   item={{
                                     ...item,
                                     qty: item.qty - 1,
-                                    isBogo: false,
                                     bogo: "PRIMARY",
                                   }}
                                 />
