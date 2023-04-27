@@ -176,7 +176,7 @@
 }
 
 .mobile-checkout-address {
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 2.2rem;
     align-items: center;
     justify-content: space-between;
     color: $primary-color;
@@ -198,13 +198,10 @@
         font-size: 1.25rem;
     }
     .btn-change {
-       padding: .91rem !important;
+       padding: .8rem !important;
     }
 }
 
-.all-address-popup {
-    padding: 2rem 0rem;
-}
 
 @include mq(md, max) {
     .account {

@@ -139,9 +139,6 @@ function Account({ user, store }) {
                 <AccountOrders />
               </TabPanel>
               <TabPanel className="tab-pane addresses">
-                <p className="mb-2">
-                  The following addresses can be used on the checkout page.
-                </p>
                 <Addresses />
               </TabPanel>
               <TabPanel className="tab-pane account">
