@@ -2,12 +2,15 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { connect } from "react-redux";
 
 import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
 import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
 import Loader from "~/components/common/partials/loader";
+import { errorHandler } from "~/utils/errorHandler";
+import { eventActions } from "~/store/events";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -26,10 +29,15 @@ function ProductListOne(props) {
     products: initialData,
     categoryId,
     subCategoryId,
-    tag,
+    tagId,
     pageFilter = {},
     subCategories,
+    recordSearch,
+    viewList,
   } = props;
+
+  const sectionId = tagId || subCategoryId || categoryId;
+
   const router = useRouter();
   const { query } = router;
 
@@ -41,6 +49,12 @@ function ProductListOne(props) {
     sortby,
     category,
   } = query;
+
+  useEffect(() => {
+    if (search?.trim()) {
+      recordSearch(search?.trim());
+    }
+  }, [search]);
 
   const [applyFilters, resetFilter] = useState(
     !!sortby || !!search?.trim() || minprice || maxprice
@@ -111,16 +125,17 @@ function ProductListOne(props) {
         if (reset) {
           setProducts(response);
         } else {
+          viewList(sectionId, "PLP", response);
           setProducts([...products, ...response]);
         }
         setToken(nextToken);
         setTotal(total);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     },
-    [filters, products, token, applyFilters]
+    [filters, products, token, applyFilters, sectionId]
   );
 
   useEffect(() => {
@@ -128,7 +143,8 @@ function ProductListOne(props) {
     setProducts(items);
     setToken(nextToken);
     setTotal(total);
-  }, [categoryId, subCategoryId, tag]);
+    viewList(sectionId, "PLP", items);
+  }, [categoryId, subCategoryId, tagId]);
 
   useEffect(() => {
     getProducts(true);
@@ -179,7 +195,14 @@ function ProductListOne(props) {
           <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
             {products.map((item) => (
               <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo slug={category} product={item} />
+                <ProductTwo
+                  slug={category}
+                  product={item}
+                  section={{
+                    id: tagId || subCategoryId || categoryId,
+                    name: "PLP",
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -201,4 +224,11 @@ function ProductListOne(props) {
   );
 }
 
-export default ProductListOne;
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, {
+  recordSearch: eventActions.search,
+  viewList: eventActions.viewList,
+})(ProductListOne);

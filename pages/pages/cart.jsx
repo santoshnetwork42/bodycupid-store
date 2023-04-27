@@ -1,109 +1,63 @@
+import React from "react";
 import { connect } from "react-redux";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import ALink from "~/components/features/custom-link";
-import Quantity from "~/components/features/quantity";
 import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
+import { eventActions } from "~/store/events";
 import { toDecimal, getCartTotals } from "~/utils";
 import { systemActions } from "~/store/system";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { scrollWithOffset } from "~/utils/helper";
-import { Close, Cross, RightAngle } from "~/components/icons";
+import { RightAngle } from "~/components/icons";
+import CartProduct from "~/components/partials/cart/cart-product";
 
 function Cart(props) {
   const {
     cartList,
-    removeFromCart,
-    updateCart,
     appliedCoupon,
     user,
     openLogin,
     shippingTiers,
     getShippingTiers,
+    viewCart,
   } = props;
 
-  const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
-    setCartItems([...cartList]);
-  }, [cartList]);
-
-  useEffect(() => {
+    viewCart();
     getShippingTiers();
   }, []);
-  const getCartDataWithCoupon = () => {
-    const item = cartList.reduce((prev, curr) => {
-      return prev.price < curr.price ? prev : curr;
-    });
-    if (item.price > appliedCoupon.minOrderValue) {
-      return [...cartList].map((c) =>
-        c.id === item.id
-          ? {
-              ...c,
-              isBogo: true,
-            }
-          : {
-              ...c,
-              isBogo: false,
-            }
-      );
-    }
-  };
 
-  const setCartData = () => {
-    if (appliedCoupon?.code === "BOGO" && cartList.length) {
-      const data = getCartDataWithCoupon(cartList);
-      setCartItems(data);
-    } else {
-      setCartItems(cartList);
-    }
-  };
+  const cartItems = useMemo(() => {
+    if (appliedCoupon?.couponType === "BOGO") {
+      const totalQty = cartList.reduce((a, b) => a + b.qty, 0);
+      if (totalQty > 1) {
+        const item = cartList.reduce((prev, curr) => {
+          return prev.price < curr.price ? prev : curr;
+        });
 
-  useEffect(() => {
-    setCartData();
-  }, [appliedCoupon, cartList]);
+        if (item.price > appliedCoupon.minOrderValue) {
+          return [...cartList].map((c) =>
+            c.id === item.id ? { ...c, isBogo: true } : c
+          );
+        }
+      }
+    }
+
+    return cartList;
+  }, [cartList, appliedCoupon]);
 
   const {
     totalListingprice,
     totalPrice,
     shippingTotal,
     couponTotal,
-    gradTotalWithoutDiscount,
-    amoutSavedWithoutDiscout,
+    gradTotalWithoutPrepaidDiscount,
+    amoutSavedWithoutPrepaidDiscout,
   } = useMemo(
     () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
     [cartItems, appliedCoupon, shippingTiers]
   );
-
-  const onChangeQty = (item, qty) => {
-    if (qty) {
-      const { id, variantId } = item;
-      const cart = cartList.map((item) => {
-        return item.id === id && (!variantId || variantId === item.variantId)
-          ? { ...item, qty: qty }
-          : item;
-      });
-      updateCart(cart);
-    } else {
-      removeFromCart(item);
-    }
-  };
-  const changeVariant = (e, item) => {
-    const { id } = item;
-    const variant = item.variants.items.find((c) => c.id === e.target.value);
-    const cart = cartList.map((i) => {
-      return id === i.id
-        ? {
-            ...i,
-            variantId: e.target.value,
-            price: variant.price,
-            listingPrice: variant.listingPrice,
-          }
-        : i;
-    });
-    updateCart(cart);
-  };
 
   const checkAuth = useCallback(() => {
     if (user) return true;
@@ -111,13 +65,9 @@ function Cart(props) {
     return false;
   }, [user]);
 
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
-  };
-
   return (
     <main className="main cart bg-white">
-      <div className="page-content pt-7 pb-5">
+      <div className="page-content pt-7 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
@@ -138,201 +88,39 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container sm-container mt-7 mb-2 ">
+        <div className="container p-0 sm-container mt-7 mb-2 ">
           <div className="row">
             {cartItems.length > 0 ? (
               <>
-                <div className="col-lg-8 col-md-12 pt-2 cart-table-wrapper pr-lg-4">
-                  <table className="shop-table pt-3 cart-table ">
-                    <thead>
-                      <tr>
-                        <th>
-                          <span>Product</span>
-                        </th>
-                        <th></th>
-                        <th>
-                          <span>Price</span>
-                        </th>
-                        <th>
-                          <span>quantity</span>
-                        </th>
-                        <th>Subtotal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+                <div className="col-lg-8 col-md-12 ">
+                  <div className="shop-table cart-table lh-default ">
+                    <div>
                       {cartItems.map((item) => (
-                        <Fragment key={"cart" + item.title}>
-                          <tr className="d-sm-none">
-                            <td className="product-thumbnail">
-                              <figure>
-                                <ALink href={"/product/" + item.slug}>
-                                  <img
-                                    src={getPublicImageURL(
-                                      item.images.items[0]?.imageKey
-                                    )}
-                                    width="100"
-                                    height="100"
-                                    alt={item.images.items[0]?.alt}
-                                  />
-                                </ALink>
-                              </figure>
-                            </td>
-                            <td className="product-name">
-                              <div className="product-name-section">
-                                <ALink href={"/product/" + item.slug}>
-                                  {item.title}
-                                </ALink>
-                              </div>
-                            </td>
-                            <td className="product-subtotal">
-                              <span className="amount">
-                                ₹{toDecimal(item.price)}
-                              </span>
-                              <p className="m-0 product-discount-listing">
-                                {item.price < item.listingPrice && (
-                                  <del className="summary-subtotal-listingprice">
-                                    ₹{toDecimal(item.listingPrice)}
-                                  </del>
-                                )}
-                                <span className={`discount-percetage ml-2`}>
-                                  {productDiscountPercentage(item) > 0 &&
-                                    `${productDiscountPercentage(item)}% off`}
-                                </span>
-                              </p>
-                            </td>
-
-                            <td className="product-quantity">
-                              <Quantity
-                                product={item}
-                                qty={item.qty}
-                                max={item.inventory}
-                                onChangeQty={(qty) => onChangeQty(item, qty)}
+                        <React.Fragment key={`${item.recordKey}-cart-item`}>
+                          {item.isBogo ? (
+                            <>
+                              {item.qty > 1 && (
+                                <CartProduct
+                                  key={`${item.recordKey}-primary`}
+                                  item={{
+                                    ...item,
+                                    qty: item.qty - 1,
+                                    bogo: "PRIMARY",
+                                  }}
+                                />
+                              )}
+                              <CartProduct
+                                key={`${item.recordKey}-secondary`}
+                                item={{ ...item, bogo: "SECONDARY" }}
                               />
-                            </td>
-                            <td className="product-price">
-                              <span className="amount">
-                                ₹{toDecimal(item.price * item.qty)}
-                              </span>
-                            </td>
-                            <td className="product-close">
-                              <ALink
-                                href="#"
-                                className="product-remove"
-                                title="Remove this product"
-                                onClick={() => removeFromCart(item)}
-                              >
-                                <i>
-                                  <Cross size={12} color="currentColor" />
-                                </i>
-                              </ALink>
-                            </td>
-                          </tr>
-                          <tr className="m-0 p-0 border-no d-sm-show">
-                            <td className="m-0 p-0">
-                              <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
-                                <figure>
-                                  <ALink href={"/product/" + item.slug}>
-                                    <img
-                                      src={getPublicImageURL(
-                                        item.images.items[0]?.imageKey
-                                      )}
-                                      width="100"
-                                      height="100"
-                                      alt={item.images.items[0]?.alt}
-                                    />
-                                  </ALink>
-                                </figure>
-                                <div className="text-left text-primary w-100 mr-5 ml-2">
-                                  <div className="">
-                                    <ALink href={"/product/" + item.slug}>
-                                      {item.title}
-                                    </ALink>
-                                  </div>
-                                  <div className="product-subtotal mt-1">
-                                    {!(item.isBogo && item.qty === 1) && (
-                                      <span className="sm-product-amount">
-                                        ₹{toDecimal(item.price)}
-                                      </span>
-                                    )}
-
-                                    <p className="m-0 product-discount-listing">
-                                      {item.price < item.listingPrice && (
-                                        <del className="summary-subtotal-listingprice">
-                                          ₹{toDecimal(item.listingPrice)}
-                                        </del>
-                                      )}
-                                      {item.isBogo && item.qty === 1 ? (
-                                        <span className="text-success ml-1">
-                                          Free
-                                        </span>
-                                      ) : (
-                                        <span
-                                          className={`discount-percetage ml-2`}
-                                        >
-                                          {productDiscountPercentage(item) >
-                                            0 &&
-                                            `${productDiscountPercentage(
-                                              item
-                                            )}% off`}
-                                        </span>
-                                      )}
-                                    </p>
-                                  </div>{" "}
-                                  <div className="d-flex">
-                                    <div className="product-quantity w-0">
-                                      <Quantity
-                                        product={item}
-                                        qty={item.qty}
-                                        max={item.inventory}
-                                        onChangeQty={(qty) =>
-                                          onChangeQty(item, qty)
-                                        }
-                                      />
-                                    </div>
-
-                                    {!!item?.variants?.items.length && (
-                                      <select
-                                        name="state"
-                                        className="form-control"
-                                        value={item.variantId}
-                                        onChange={(e) => {
-                                          changeVariant(e, item);
-                                        }}
-                                      >
-                                        {item?.variants?.items.map((v) => (
-                                          <option key={v.id} value={v.id}>
-                                            {v.title}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    )}
-                                  </div>
-                                  {item.isBogo && item.qty > 1 && (
-                                    <div className="summary-saving-lable-container mb-1  qty-label ">
-                                      {" "}
-                                      <p className="m-0 saving-lable">
-                                        1 qty is Free
-                                      </p>
-                                    </div>
-                                  )}
-                                </div>
-                                <div className="product-close">
-                                  <ALink
-                                    href="#"
-                                    className="sm-product-remove"
-                                    title="Remove this product"
-                                    onClick={() => removeFromCart(item)}
-                                  >
-                                    <Close size={18} color="grey" />
-                                  </ALink>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </Fragment>
+                            </>
+                          ) : (
+                            <CartProduct key={item.recordKey} item={item} />
+                          )}
+                        </React.Fragment>
                       ))}
-                    </tbody>
-                  </table>
+                    </div>
+                  </div>
                 </div>
 
                 <aside
@@ -344,7 +132,7 @@ function Cart(props) {
                     data-sticky-options="{'bottom': 20}"
                   >
                     <Coupons />
-                    <div className="summary mb-4 bg-white">
+                    <div className="summary bg-white">
                       <h3 className="summary-title text-left d-sm-none">
                         Cart Totals
                       </h3>
@@ -410,14 +198,14 @@ function Cart(props) {
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>
-                              <h4 className="summary-subtitle lh-1">
+                              <h4 className="summary-subtitle font-weight-semi-bold  lh-1">
                                 Total{" "}
                                 <p className="m-0">Inclusive of all taxes</p>
                               </h4>
                             </td>
                             <td>
-                              <p className="summary-total-price ls-s">
-                                ₹{toDecimal(gradTotalWithoutDiscount)}
+                              <p className="summary-total-price font-weight-semi-bold  ls-s">
+                                ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                               </p>
                             </td>
                           </tr>
@@ -432,11 +220,11 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!amoutSavedWithoutDiscout && (
+                              {!!amoutSavedWithoutPrepaidDiscout && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
                                     <span>{`₹${toDecimal(
-                                      amoutSavedWithoutDiscout
+                                      amoutSavedWithoutPrepaidDiscout
                                     )} `}</span>
                                     saved so far on this order
                                   </p>
@@ -456,7 +244,7 @@ function Cart(props) {
                       <div className="d-none stick-bottom-button d-sm-show">
                         <div className="lh-2">
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(gradTotalWithoutDiscount)}
+                            ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
                           </p>
                           <ALink
                             onClick={() => {
@@ -510,10 +298,15 @@ function mapStateToProps(state) {
     shippingTiers: state.system.shippingTiers,
   };
 }
-export default connect(mapStateToProps, {
+const Component =connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
   getShippingTiers: systemActions.getShippingTiers,
+  viewCart: eventActions.viewCart,
 })(Cart);
+
+Component.hideFooter=true;
+
+export default Component;

@@ -15,7 +15,7 @@ function Footer({ footer, store }) {
       <div className="container">
         <div className="footer-middle">
           <div className="row d-flex justify-content-between">
-            <div className="col-lg-3 mb-5 col-sm-12 col-md-6">
+            <div className="col-lg-3 col-sm-12 col-md-6">
               <ALink href="/" className="logo-footer">
                 {footer?.logo ? (
                   <OptimizedImage

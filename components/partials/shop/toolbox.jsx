@@ -123,7 +123,7 @@ export default function ToolBox(props) {
         }`}
       >
         {type === "horizontal" ? <SidebarFilterThree /> : ""}
-        <div className="toolbox-left d-flex" style={{ alignSelf: "flex-end" }}>
+        <div className="toolbox-left d-flex">
           <div
             className={`toolbox-item toolbox-sort ${
               type === "boxed" || type === "banner"
@@ -147,55 +147,6 @@ export default function ToolBox(props) {
               </select>
             </div>
           </div>
-        </div>
-
-        <div className="toolbox-right">
-          <div
-            className={`toolbox-item toolbox-layout ${
-              type === "right" ? "mr-lg-0" : ""
-            }`}
-          >
-            <ALink
-              href={{
-                pathname: router.pathname,
-                query: { ...query, type: "list" },
-              }}
-              scroll={false}
-              className={`btn-layout ${
-                gridType === "list" ? "active" : ""
-              } mr-1`}
-            >
-              <i>
-                <List size={20} color="currentColor" />
-              </i>
-            </ALink>
-            <ALink
-              href={{
-                pathname: router.pathname,
-                query: { ...query, type: "grid" },
-              }}
-              scroll={false}
-              className={`d-icon-mode-grid btn-layout ${
-                gridType !== "list" ? "active" : ""
-              }`}
-            >
-              <i>
-                <Grid size={18} color="currentColor" />
-              </i>
-            </ALink>
-          </div>
-
-          {type === "right" ? (
-            <ALink
-              href="#"
-              className="toolbox-item right-sidebar-toggle btn btn-sm btn-outline btn-primary btn-rounded btn-icon-right d-lg-none"
-              onClick={showSidebar}
-            >
-              Filter<i className="d-icon-arrow-left"></i>
-            </ALink>
-          ) : (
-            ""
-          )}
         </div>
       </nav>
       {!!subCategories?.length && (

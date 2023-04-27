@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import AlertPopup from "~/components/features/product/common/alert-popup";
+import { getFirstVariantId } from "./products";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -76,7 +77,7 @@ export const removeHoverEffect = () => {
           }
         }
       }
-    } catch (ex) {}
+    } catch (ex) { }
   }
 };
 
@@ -117,4 +118,23 @@ export const copyText = (copyText, message) => {
     navigator.clipboard.writeText(copyText);
     toast(<AlertPopup message={message} status="info" />);
   }
+};
+
+export const getUpdatedCart = (cartList, recordKey, payload) => {
+  return [...cartList].map((c) => {
+    if (recordKey === c.recordKey) {
+      return { ...c, ...payload, };
+    }
+    return c;
+  });
+};
+
+export const getRecordKey = (product, variantId) => {
+  const { id } = product;
+  if (variantId) return `${id}-${variantId}`;
+
+  const firstVariant = getFirstVariantId(product);
+  if (firstVariant) return `${id}-${firstVariant}`;
+
+  return id;
 };

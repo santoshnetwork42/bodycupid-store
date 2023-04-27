@@ -10,6 +10,7 @@ import {
   getSortedCategoryAndSubCategory,
   getSplitedArray,
 } from "~/utils/helper";
+import { errorHandler } from "~/utils/errorHandler";
 
 function MainMenu() {
   const { pathname } = useRouter();
@@ -25,16 +26,18 @@ function MainMenu() {
         filter: { storeId: { eq: STORE_ID } },
         sort: [{ field: "priority", direction: "asc" }],
       })
-    ).then(
-      ({
-        data: {
-          searchProductCategories: { items },
-        },
-      }) => {
-        const sortedItems = getSortedCategoryAndSubCategory(items);
-        setCategories(sortedItems);
-      }
-    );
+    )
+      .then(
+        ({
+          data: {
+            searchProductCategories: { items },
+          },
+        }) => {
+          const sortedItems = getSortedCategoryAndSubCategory(items);
+          setCategories(sortedItems);
+        }
+      )
+      .catch(errorHandler);
   }, []);
 
   return (
@@ -52,38 +55,34 @@ function MainMenu() {
               ${category?.subCategory?.items?.length ? "submenu" : ""}
             `}
           >
-            <ALink href={`/collections/${category.slug}`}>
+            <ALink className='text-uppercase' href={`/collections/${category.slug}`}>
               {category.name}
               <i>
                 <DownAngle color="currentColor" size={12} />
               </i>
             </ALink>
             {!!category?.subCategory?.items?.length && (
-              <div className="megamenu" >
+              <div className="megamenu">
                 <div className="d-flex">
                   {getSplitedArray(category?.subCategory?.items, 10).map(
                     (cat, i) => (
-                      <div className="ml-2 mr-2" key={`cat-${i}`}>
-                        {!!cat.length && (
-                          <ul>
-                            {cat.map((item) => (
-                              <li key={`sub-categories-${item.id}`}>
-                                <ALink
-                                  className="cat-name"
-                                  href={
-                                    "/collections/" +
-                                    category.slug +
-                                    "/" +
-                                    item.slug
-                                  }
-                                >
-                                  {item.name}
-                                </ALink>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
+                      <ul className="ml-2 mr-2" key={`cat-${i}`}>
+                        {cat.map((item) => (
+                          <li key={`sub-categories-${item.id}`}>
+                            <ALink
+                              className="cat-name"
+                              href={
+                                "/collections/" +
+                                category.slug +
+                                "/" +
+                                item.slug
+                              }
+                            >
+                              {item.name}
+                            </ALink>
+                          </li>
+                        ))}
+                      </ul>
                     )
                   )}
                 </div>

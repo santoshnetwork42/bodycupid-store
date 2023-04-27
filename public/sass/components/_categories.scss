@@ -262,11 +262,11 @@ padding: 3rem;
   }
  
   .category-content {
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
   .category-name {
-    letter-spacing: -0.025em;
-    color: #222;
+    letter-spacing: 0.035em;
+    color:inherit;
     &:hover {
       color: $primary-color;
     }
@@ -331,6 +331,8 @@ padding: 3rem;
 .story-section {
   border-top: 1px solid #E5E5E5;
   border-bottom: 1px solid #E5E5E5;
+  background-color: $background-color-1;
+  color: $text-color-1;
 }
 .story-wrapper {
   display: flex;

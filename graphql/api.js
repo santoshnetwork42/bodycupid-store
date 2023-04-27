@@ -284,17 +284,22 @@ export const getQuickViewProduct = /* GraphQL */ `
       items {
         id
         title
-        brand
-        vendor
         isFeatured
+        categoryId
+        subCategoryId
+        category {
+          id
+          name
+          slug
+        }
+        subCategory {
+          id
+          name
+          slug
+        }
         productType
-        createdAt
         slug
         productDescription
-        longDescription
-        updatedAt
-        isPublished
-        publishedAt
         price
         sku
         size
@@ -314,7 +319,6 @@ export const getQuickViewProduct = /* GraphQL */ `
         blockedInventory
         rating
         totalOrders
-        additionalInfo
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -359,11 +363,6 @@ export const getQuickViewProduct = /* GraphQL */ `
             isThumb
           }
           nextToken
-        }
-        reviews {
-          items {
-            id
-          }
         }
       }
       nextToken
@@ -434,7 +433,10 @@ export const getProductBySlug = /* GraphQL */ `
         rating
         totalRatings
         totalOrders
-        additionalInfo
+        additionalInfo {
+          label
+          value
+        }
         thumbImages
         isTaxEnabled
         isInventoryEnabled
@@ -1099,22 +1101,13 @@ export const updateUser = /* GraphQL */ `
       phone
       gender
       dob
-      country
-      state
-      city
-      pinCode
-      landmark
-      address
-      location
-      area
       isActive
-      totalOrders
-      totalSpent
-      walletBalance
-      walletSpent
-      totalStoreCredit
-      isCognitoConfirmed
+      authProvider
+      isAdmin
       profilePhotoUrl
+      emailVerified
+      phoneVerified
+      isCognitoConfirmed
       createdAt
       updatedAt
     }

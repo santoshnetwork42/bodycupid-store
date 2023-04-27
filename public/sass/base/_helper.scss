@@ -157,6 +157,9 @@
     .d-xl-show {
         display: none !important;
     }
+    .d-xl-none {
+        display: none !important;
+    }
 }
 
 @include mq(lg, max) {
@@ -283,19 +286,19 @@
 
 // Letter Spacing
 .ls-md {
-    letter-spacing: -.03em !important;
+    letter-spacing: .03em !important;
 }
 
 .ls-s {
-    letter-spacing: -.01em !important;
+    letter-spacing: .01em !important;
 }
 
 .ls-m {
-    letter-spacing: -.025em !important;
+    letter-spacing: .025em !important;
 }
 
 .ls-l {
-    letter-spacing: -.05em !important;
+    letter-spacing: .05em !important;
 }
 
 .ls-normal {

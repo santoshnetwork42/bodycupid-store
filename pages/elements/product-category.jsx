@@ -306,7 +306,7 @@ function Cta() {
             </div>
           </section>
 
-          <section className="ellipse-section mt-10">
+          <section className="ellipse-section mt-6">
             <h2 className="title title-center">Ellipse Style</h2>
 
             <OwlCarousel adClass="owl-theme" options={mainSlider9}>
