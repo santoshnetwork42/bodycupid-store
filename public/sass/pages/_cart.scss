@@ -544,11 +544,12 @@
             height: 3.5rem !important;
             min-height: 3.5rem !important;
             padding: 0rem 1rem !important;
+            font-size: 1.2rem;
             border: 1px solid #eee !important;
         }
 
         .sm-product-amount {
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             font-weight: 500;
         }
 
@@ -667,6 +668,8 @@
     }
 
     .coupon-offer {
+    height: fit-content;
+    white-space: nowrap;
         cursor: pointer;
     }
 

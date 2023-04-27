@@ -229,6 +229,7 @@ function Cart(props) {
                                     ₹{toDecimal(item.listingPrice)}
                                   </del>
                                 )}
+                                 {item.isBogo && item.qty > 1 && getBogoTag()}
                                 {item.isBogo && item.qty === 1 ? (
                                   <span className="text-success ml-1">
                                     Free
@@ -239,6 +240,7 @@ function Cart(props) {
                                       `${productDiscountPercentage(item)}% off`}
                                   </span>
                                 )}
+                                
                               </p>
                             </td>
 
@@ -283,8 +285,8 @@ function Cart(props) {
                                     />
                                   </ALink>
                                 </figure>
-                                <div className="text-left text-primary w-100 mr-5 ml-2">
-                                  <div className="">
+                                <div className="text-left text-primary w-100  mr-1 ml-2">
+                                  <div className="mr-5 ">
                                     <ALink href={"/product/" + item.slug}>
                                       {item.title}
                                     </ALink>

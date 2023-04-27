@@ -10,7 +10,7 @@ import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
 import { getCouponMessage } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
-import { Close, Discount } from "../icons";
+import { Close, Discount, LeftArrow, RightAngle } from "../icons";
 
 function Coupon(props) {
   const {
@@ -96,9 +96,9 @@ function Coupon(props) {
 
             {!!featured?.length && !appliedCoupon && (
               <a
-                className="coupon-offer"
+                className="coupon-offer d-flex"
                 type="button"
-              >{`${featured?.length} Offers >`}</a>
+              >{`${featured?.length} Offers`}<RightAngle size={14}/></a>
             )}
             {!!appliedCoupon && (
               <ALink
