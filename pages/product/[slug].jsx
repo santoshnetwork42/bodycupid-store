@@ -14,6 +14,7 @@ import {
   getProductBySlug,
   searchProductFaqs,
   getProductSlug,
+  findProducts,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
 import {
