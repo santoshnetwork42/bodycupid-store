@@ -171,7 +171,7 @@
 		align-items: center;
 		margin-bottom: 2rem;
 		text-transform: uppercase;
-		letter-spacing: -.025em;
+		letter-spacing: .025em;
 		line-height: 1;
 	}
 	// notice: used only 6th, 18th demo's shop-sidebar
@@ -277,7 +277,7 @@
 	border: 1px solid $light-color;
 	font-size: 1.2rem;
 	line-height: 1.35;
-	letter-spacing: -.01em;
+	letter-spacing: .01em;
 	transition: color .3s, border-color .3s;
 
 	&:hover, &.active {
@@ -367,7 +367,7 @@
 		padding: 2.6rem .3rem 1.8rem;
 		font-size: 1.8rem;
 		font-weight: 600;
-		letter-spacing: -.03em;
+		letter-spacing: .03em;
 		text-transform: none;
 		border: none;
 		transition: padding .3s;
@@ -526,6 +526,6 @@
 	.btn {
 		margin: .8rem 0 1.2rem;
 		padding: 0.8em 1.65em;
-		letter-spacing: -.025em;
+		letter-spacing: .025em;
 	}
 }

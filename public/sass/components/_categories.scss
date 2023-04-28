@@ -96,7 +96,7 @@ padding: 3rem;
   .category-name {
     margin-bottom: 0;
     color: $dark-color;
-    letter-spacing: -0.025em;
+    letter-spacing: 0.025em;
   }
 }
 .category-default1 {
@@ -377,7 +377,7 @@ padding: 3rem;
       weight: 700;
     }
     color: #222;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.01em;
   }
   .category-list {
     font: {
@@ -450,7 +450,7 @@ padding: 3rem;
     margin-bottom: 0;
     padding: 0 0.8rem;
     text-align: center;
-    letter-spacing: -0.025em;
+    letter-spacing: 0.025em;
     text-transform: uppercase;
     color: #fff;
   }
@@ -520,7 +520,7 @@ padding: 3rem;
       weight: 700;
       family: inherit;
     }
-    letter-spacing: -0.025em;
+    letter-spacing: 0.025em;
   }
   .category-count {
     visibility: visible;
