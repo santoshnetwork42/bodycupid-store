@@ -6,18 +6,18 @@
 @include set-default((product-single: (name: (margin-bottom: .6rem,
                 font-size: 2.6rem,
                 font-weight: 700,
-                letter-spacing: .025rem,
+                letter-spacing: .1rem,
                 white-space: normal,
                 color: $dark-color,
             ),
             categories: (color: #999,
                 font-size: 1.3rem,
                 font-weight: 400,
-                letter-spacing: .025rem),
+                letter-spacing: .05rem),
             price: (color: $dark-color,
                 font-size: 3rem,
                 font-weight: 700,
-                letter-spacing: .025rem),
+                letter-spacing: .05rem),
             old-price: (font-size: 2.4rem,
                 font-weight: 600,
                 text-decoration: false,
@@ -522,7 +522,7 @@
         text-transform: capitalize;
         font-size: 16px;
         font-weight: 400;
-        letter-spacing: 0.025em;
+        letter-spacing: 0.05em;
     }
 
     // select box type
@@ -651,7 +651,7 @@
         color: #222;
         font-size: 2.4rem;
         font-weight: 700;
-        letter-spacing: .025rem;
+        letter-spacing: .05rem;
     }
 }
 
