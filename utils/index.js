@@ -240,7 +240,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-        parallax.offsetTop +
+          parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -342,7 +342,14 @@ export const getCartTotals = (
 ) => {
   let totalPrice = 0;
   let totalListingprice = 0;
-  const shippingTotal = getShippingPrice(cartItems, prepaid, shippingTiers);
+  const prepaidShippingCharge = getShippingPrice(
+    cartItems,
+    shippingTiers,
+    "PREPAID"
+  );
+  const codShippingCharge = getShippingPrice(cartItems, shippingTiers, "COD");
+
+  const shippingTotal = prepaid ? prepaidShippingCharge : codShippingCharge;
   const couponTotal = getCouponTotal(appliedCoupon, cartItems);
 
   for (let i = 0; i < cartItems.length; i++) {
@@ -355,9 +362,14 @@ export const getCartTotals = (
   const totalDiscount = couponTotal + prepaidDiscount;
 
   const grandTotal = totalPrice + shippingTotal - totalDiscount;
-  const gradTotalWithoutPrepaidDiscount = totalPrice + shippingTotal - couponTotal;
+  const gradTotalWithoutPrepaidDiscount =
+    totalPrice + shippingTotal - couponTotal;
   const amoutSaved = totalListingprice - totalPrice + totalDiscount;
-  const amoutSavedWithoutPrepaidDiscout = totalListingprice - totalPrice + couponTotal;
+  const amoutSavedWithoutPrepaidDiscout =
+    totalListingprice - totalPrice + couponTotal;
+  const prepaidTotalAmount =
+    totalPrice + prepaidShippingCharge - ((totalPrice - couponTotal) / 100) * 5;
+  const codTotalAmount = totalPrice + codShippingCharge;
 
   return {
     totalPrice,
@@ -370,19 +382,21 @@ export const getCartTotals = (
     grandTotal,
     gradTotalWithoutPrepaidDiscount,
     amoutSavedWithoutPrepaidDiscout,
+    prepaidTotalAmount,
+    codTotalAmount,
   };
 };
 
 /**
  * utils to get Shipping Price of products in cart.
  */
+
 export const getShippingPrice = (
   cartItems = [],
-  prepaid = false,
-  shippingTiers = []
+  shippingTiers = [],
+  paymentMethod
 ) => {
   const total = getTotalPrice(cartItems);
-  const paymentMethod = prepaid ? "PREPAID" : "COD";
   if (!!shippingTiers?.length) {
     const shippingTier = shippingTiers.find((element) => {
       const { minOrderValue, maxOrderValue, paymentType } = element;

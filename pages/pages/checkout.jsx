@@ -24,7 +24,11 @@ import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 import Passwordless from "~/components/common/partials/passwordless";
-import { validateAddress, getProperAddress } from "~/utils/address";
+import {
+  validateAddress,
+  getProperAddress,
+  isValidAddress,
+} from "~/utils/address";
 import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
@@ -32,6 +36,7 @@ import { systemActions } from "~/store/system";
 import { Cross, DownAngle, ShoppingCart, UpAngle } from "~/components/icons";
 import { Collapse } from "react-bootstrap";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import PaymentMethods from "~/components/features/payment-radio";
 
 function Checkout(props) {
   const {
@@ -51,7 +56,7 @@ function Checkout(props) {
 
   const { name } = store;
   const router = useRouter();
-  const [payMethod, setFirst] = useState("NONE");
+  const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -59,7 +64,7 @@ function Checkout(props) {
   const [paymentId, setPaymentId] = useState(null);
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
-  const [isCollapse, setIsCollapse] = useState(width > 500 ? true : false);
+  const [isCollapse, setIsCollapse] = useState(false);
   const [showAddressModal, setAddressModal] = useState(false);
   const isFirst = payMethod === "PREPAID";
 
@@ -77,6 +82,8 @@ function Checkout(props) {
     grandTotal,
     prepaidDiscount,
     totalDiscount,
+    prepaidTotalAmount,
+    codTotalAmount,
   } = useMemo(
     () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
     [cartList, appliedCoupon, isFirst, shippingTiers]
@@ -198,16 +205,6 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-
-      if (payMethod === "NONE") {
-        toast(
-          <AlertPopup
-            message={"Please select payment method"}
-            status="transparent"
-          />
-        );
-        return;
-      }
 
       setLoading(true);
 
@@ -365,17 +362,13 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
-        <div className="container mt-0 md-7">
+        <div className={"container mt-0 md-7"}>
           {cartList.length > 0 ? (
             <>
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 <div className="col-lg-7 mb-4 mb-lg-0 pr-lg-4 p-0 d-sm-none">
-                  <Addresses
-                    // key={`address-${addressKey}`}
-                    onAddressChange={setAddress}
-                    variant="CHECKOUT"
-                  />
+                  <Addresses onAddressChange={setAddress} variant="CHECKOUT" />
                 </div>
 
                 <aside
@@ -387,24 +380,26 @@ function Checkout(props) {
                     data-sticky-options="{'bottom': 50}"
                   >
                     <div className="summary pt-5 p-0 border-no">
-                      <div
-                        onClick={() => setIsCollapse(!isCollapse)}
-                        className="checkout-summary-btn d-flex bg-white border-regular align-items-center mb-2 d-xl-none"
-                      >
-                        <div className="d-flex align-items-center">
-                          <ShoppingCart size={20} />
-                          <p className="checkout-summary-label m-0">
-                            Show order summary
+                      <div className="">
+                        <div
+                          onClick={() => setIsCollapse(!isCollapse)}
+                          className="checkout-summary-btn d-flex bg-white border-regular align-items-center mb-2 "
+                        >
+                          <div className="d-flex align-items-center">
+                            <ShoppingCart size={20} />
+                            <p className="checkout-summary-label m-0">
+                              Order Summary
+                            </p>
+                            {isCollapse ? (
+                              <UpAngle size={17} color="currentColor" />
+                            ) : (
+                              <DownAngle color="currentColor" size={16} />
+                            )}
+                          </div>
+                          <p className="m-0 checkout-summary-total font-weight-semi-bold">
+                            ₹{toDecimal(grandTotal)}
                           </p>
-                          {isCollapse ? (
-                            <UpAngle size={17} color="currentColor" />
-                          ) : (
-                            <DownAngle color="currentColor" size={16} />
-                          )}
                         </div>
-                        <p className="m-0 checkout-summary-total">
-                          ₹{toDecimal(grandTotal)}
-                        </p>
                       </div>
                       <Collapse in={isCollapse}>
                         <div className="collapsible-checkout-wrapper mb-2">
@@ -416,7 +411,10 @@ function Checkout(props) {
                             </thead>
                             <tbody>
                               {cartList.map((item) => (
-                                <tr className="m-0 p-0 border-no">
+                                <tr
+                                  className="m-0 p-0 border-no"
+                                  key={item?.id}
+                                >
                                   <td className="m-0 p-0">
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
@@ -632,51 +630,28 @@ function Checkout(props) {
                         className="payment accordion radio-type "
                         id="payment-method"
                       >
-                        <h4 className="summary-subtitle ls-default pb-1 pt-1 mt-2 pl-2">
-                          Payment Methods
-                        </h4>
-                        <div className="checkbox-group">
-                          <div className="bg-white border-regular payment-card mt-2">
-                            <div className="card-header d-flex align-items-center">
-                              <ALink
-                                href="#"
-                                className={`text-body text-normal ls-m mr-2 ${
-                                  payMethod === "PREPAID" ? "collapse" : ""
-                                }`}
-                                onClick={() => {
-                                  !isFirst && setFirst("PREPAID");
-                                }}
-                              >
-                                Pay Online
-                              </ALink>
-                              <p className="extra-lable m-0">EXTRA 5% OFF</p>
-                            </div>
+                        <h4 className="payment-heading">Payment Methods</h4>
 
-                            <div className="card-body ls-m overflow-hidden payment-subtitle">
-                              Use credit/debit card, net-banking, UPI, wallets
-                              to complete the payment.
-                            </div>
-                          </div>
-                          <div className="bg-white mt-2 border-regular payment-card">
-                            <div className="card-header">
-                              <ALink
-                                href="#"
-                                className={`text-body text-normal ls-m ${
-                                  payMethod === "COD" ? "collapse" : ""
-                                }`}
-                                onClick={() => {
-                                  !codDisabled && isFirst && setFirst("COD");
-                                }}
-                              >
-                                Cash on delivery
-                              </ALink>
-                            </div>
-
-                            <div className="card-body ls-m overflow-hidden payment-subtitle">
-                              Pay in cash or pay in person at the time of
-                              delivery with GPay/PayTM/PhonePe.
-                            </div>
-                          </div>
+                        <div className="checkbox-group mb-3">
+                          <PaymentMethods
+                            title="Pay Online"
+                            tag={"EXTRA 5% OFF"}
+                            isSelected={payMethod === "PREPAID"}
+                            description="Use credit/debit card, net-banking, UPI, wallets to complete the payment."
+                            onClick={() => {
+                              !isFirst && setFirst("PREPAID");
+                            }}
+                            amount={prepaidTotalAmount}
+                          />
+                          <PaymentMethods
+                            title=" Cash On Delivery"
+                            isSelected={payMethod === "COD"}
+                            description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
+                            onClick={() => {
+                              !codDisabled && isFirst && setFirst("COD");
+                            }}
+                            amount={codTotalAmount}
+                          />
                         </div>
                       </div>
 
@@ -706,7 +681,7 @@ function Checkout(props) {
                             View details
                           </ALink>
                         </div>
-                        {!shippingAddress?.address && payMethod === "NONE" && (
+                        {!isValidAddress(shippingAddress) && width < 500 && (
                           <button
                             onClick={() => setAddressModal(true)}
                             className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
@@ -715,10 +690,16 @@ function Checkout(props) {
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
-                        {!!shippingAddress?.address && (
+
+                        {(!!isValidAddress(shippingAddress) || width > 500) && (
                           <button
                             onClick={placeOrder}
-                            className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
+                            disabled={!isValidAddress(shippingAddress)}
+                            className={`btn btn-rounded btn-order d-flex justify-content-center align-items-center  ${
+                              !!isValidAddress(shippingAddress)
+                                ? "btn-primary"
+                                : "btn-disabled"
+                            }`}
                           >
                             Place Order
                             {loading && <div className="spin-loader ml-2" />}

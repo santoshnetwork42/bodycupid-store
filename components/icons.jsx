@@ -930,3 +930,41 @@ export const ArrowLeft = ({
     </svg>
   );
 };
+
+export const Cricle = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        fill={color}
+        d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 480c-123.5 0-224-100.5-224-224s100.5-224 224-224s224 100.5 224 224S379.5 480 256 480z"
+      />
+    </svg>
+  );
+};
+
+export const CricleDot = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        fill={color}
+        d="M256 160C203 160 160 203 160 256c0 52.95 43.05 96 96 96s96-43.05 96-96C352 203 308.1 160 256 160zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464z"
+      />
+    </svg>
+  );
+};

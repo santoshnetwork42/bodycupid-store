@@ -171,7 +171,7 @@
         line-height: 3rem;
         text-transform: capitalize;
         font-weight: 400;
-        
+        flex-direction: row;
         a {
             padding: 0 0 0 2.5rem;
             &::before,
@@ -209,7 +209,7 @@
         }
     }
     .card-body {
-        padding: 0.2rem 0 1.1rem 2.9rem;
+        padding: 0.8rem 0 1.1rem 2.9rem;
         line-height: 1.4;
     }
 
@@ -272,21 +272,38 @@
     }
     .payment-card {
         padding: 1rem;
+        gap: 1rem;
+        cursor: pointer;
+        .checkout-payment-lables {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: $primary-color !important;
+        }
         .payment-subtitle {
             color: $grey-color;
+        }
+        .payment-card-amount {
+            color: $primary-color;
+            font-size: 1.6rem;
         }
     }
     .check-payment-detail {
         padding: 0rem 2rem 1rem;
     }
+
+    .payment-heading {
+        font-size: 2rem;
+        margin-bottom: 1rem !important;
+        margin-top: 2rem !important;
+    }
+    
 }
 
-.checkout-page-content {
-    height: 120vh;
-    .container {
-        padding: 0 !important;
-    }
+.checkout-address-form{
+    padding: 20px;
 }
+
+
 
 .checkout-add-address-btn {
     padding: 2rem;
@@ -304,18 +321,17 @@
 .checkout-summary-btn {
     color: $primary-color;
     font-size: 3rem;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     justify-content: space-between;
     .checkout-summary-label{
-        font-size: 1.8rem;
-        font-weight: 500;
-        line-height: 1;
-        margin: 0px 5px !important;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 0px 12px 0px 8px !important;
     }
     .checkout-summary-total {
-        font-size: 1.6rem;
+        font-size: 2rem;
         line-height: 1;
-        font-weight: 600;
+        font-weight: bold;
     }
 }
 
@@ -439,5 +455,18 @@
                 padding-bottom: 2rem;
             }
         }
+    }
+}
+
+@include mq(sm,'max'){
+    .checkout-page-content {
+        
+        .container {
+            padding: 0 !important;
+        }
+    }
+    .payment-heading {
+        margin-top: 1rem !important;
+        padding-left: 1.5rem;
     }
 }

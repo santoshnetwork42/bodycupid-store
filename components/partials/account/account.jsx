@@ -87,14 +87,14 @@ function AccountsTabs({ user, store }) {
   if (!user) return <></>;
 
   return (
-    <main className="main account">
+    <main className="main account bg-white">
       <Head>
         <title>{name} | Account</title>
       </Head>
 
       <h1 className="d-none">{name} - Account</h1>
 
-      <div className="page-content mt-4 mb-5 pb-1 bg-white d-sm-none">
+      <div className="page-content pt-4 pb-5 pb-1 bg-white d-sm-none">
         <div className="container">
           <Tabs
             selectedTabClassName="show"
@@ -130,9 +130,6 @@ function AccountsTabs({ user, store }) {
                 <AccountOrders />
               </TabPanel>
               <TabPanel className="tab-pane addresses">
-                <p className="mb-2">
-                  The following addresses can be used on the checkout page.
-                </p>
                 <Addresses />
               </TabPanel>
               <TabPanel className="tab-pane account">
@@ -145,7 +142,7 @@ function AccountsTabs({ user, store }) {
       </div>
 
       {pathname === "/pages/account" && (
-        <div className="mobile-tabs d-sm-show mt-5 mb-5">
+        <div className="mobile-tabs d-sm-show pt-5 pb-5">
           {MOBILE_TABS.map((item) => {
             return (
               <ALink
@@ -188,9 +185,6 @@ function AccountsTabs({ user, store }) {
           {pathname === "/pages/orders" && <AccountOrders />}
           {pathname === "/pages/addresses" && (
             <div>
-              <p className="mb-2">
-                The following addresses can be used on the checkout page.
-              </p>
               <Addresses />
             </div>
           )}

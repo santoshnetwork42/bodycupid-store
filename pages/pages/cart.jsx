@@ -66,7 +66,7 @@ function Cart(props) {
   }, [user]);
 
   return (
-    <main className="main cart bg-white">
+    <main className="main cart">
       <div className="page-content pt-7 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
@@ -298,7 +298,7 @@ function mapStateToProps(state) {
     shippingTiers: state.system.shippingTiers,
   };
 }
-const Component =connect(mapStateToProps, {
+const Component = connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
@@ -307,6 +307,6 @@ const Component =connect(mapStateToProps, {
   viewCart: eventActions.viewCart,
 })(Cart);
 
-Component.hideFooter=true;
+Component.hideFooter = true;
 
 export default Component;
