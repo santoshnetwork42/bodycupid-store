@@ -189,6 +189,14 @@
 .card-address {
     position: relative;
     .add-lables-values {
+        .checkout-email-lable {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2 !important;
+            width: 23rem;
+            overflow: hidden;
+            display: block;   
+        }
         span {
             color: #666;
         }
