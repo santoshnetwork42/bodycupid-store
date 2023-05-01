@@ -529,6 +529,15 @@
         color: $primary-color;
     }
 }
+.single-product{
+    .product-widget-wrapper {
+        .collection-title{
+
+            margin-left: -15px !important;
+        }
+        
+    }
+}
 
 // Rating Form (new)
 .rating-form {
