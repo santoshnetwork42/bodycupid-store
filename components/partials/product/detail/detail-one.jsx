@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
 
 import ALink from "~/components/features/custom-link";
-import { Star, Bag, BigDot } from "~/components/icons";
+import { Star, Bag, BigDot, Clock } from "~/components/icons";
 import Quantity from "~/components/features/quantity";
 import { wishlistActions } from "~/store/wishlist";
 import { cartActions } from "~/store/cart";
@@ -381,10 +381,14 @@ function DetailOne(props) {
         </>
       )}
 
-      {today.getHours() > 8 && today.getHours() < 15 && (
-        <p className="remian-time-lable mb-0">
+      {today.getHours() > 8 && today.getHours() < 15  && (
+        <div className="d-flex align-items-center">
+        <Clock size={16}/>
+        <p className="text-primary ml-1 mb-0">
           For Fastest delivery, order within {deliveryRemainingTime()}
         </p>
+        </div>
+        
       )}
 
 
@@ -463,7 +467,7 @@ function DetailOne(props) {
                         <i>
                           <Bag color="currentColor" size={20} />
                         </i>
-                        View Cart
+                        Go To Cart
                       </button>
                     )}
                     {!cartItem && (
@@ -503,7 +507,7 @@ function DetailOne(props) {
                 )}
                 {!!cartItem && (
                   <button
-                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart  text-uppercase ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={(e) => {
@@ -514,7 +518,7 @@ function DetailOne(props) {
                     <i>
                       <Bag color="currentColor" size={20} />
                     </i>
-                    View Cart
+                    Go To Cart
                   </button>
                 )}
                 {!cartItem && (

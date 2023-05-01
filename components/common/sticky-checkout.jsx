@@ -28,7 +28,7 @@ function StickyFooter(props) {
         href="/pages/cart"
         className="btn btn-dark btn-rounded btn-checkout"
       >
-        View cart
+        Go To Cart
       </ALink>
     </div>
   );
