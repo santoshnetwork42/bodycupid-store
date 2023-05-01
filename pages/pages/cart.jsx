@@ -52,8 +52,8 @@ function Cart(props) {
     totalPrice,
     shippingTotal,
     couponTotal,
-    gradTotalWithoutPrepaidDiscount,
-    amoutSavedWithoutPrepaidDiscout,
+    cartGrandTotal,
+    cartAmmountSaved,
   } = useMemo(
     () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
     [cartItems, appliedCoupon, shippingTiers]
@@ -66,7 +66,7 @@ function Cart(props) {
   }, [user]);
 
   return (
-    <main className="main cart bg-white">
+    <main className="main cart">
       <div className="page-content pt-7 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
@@ -205,7 +205,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price font-weight-semi-bold  ls-s">
-                                ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
+                                ₹{toDecimal(cartGrandTotal)}
                               </p>
                             </td>
                           </tr>
@@ -220,11 +220,11 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!amoutSavedWithoutPrepaidDiscout && (
+                              {!!cartAmmountSaved && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
                                     <span>{`₹${toDecimal(
-                                      amoutSavedWithoutPrepaidDiscout
+                                      cartAmmountSaved
                                     )} `}</span>
                                     saved so far on this order
                                   </p>
@@ -244,7 +244,7 @@ function Cart(props) {
                       <div className="d-none stick-bottom-button d-sm-show">
                         <div className="lh-2">
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(gradTotalWithoutPrepaidDiscount)}
+                            ₹{toDecimal(cartGrandTotal)}
                           </p>
                           <ALink
                             onClick={() => {
@@ -298,7 +298,7 @@ function mapStateToProps(state) {
     shippingTiers: state.system.shippingTiers,
   };
 }
-const Component =connect(mapStateToProps, {
+const Component = connect(mapStateToProps, {
   removeCoupon: cartActions.removeCoupon,
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
@@ -307,6 +307,6 @@ const Component =connect(mapStateToProps, {
   viewCart: eventActions.viewCart,
 })(Cart);
 
-Component.hideFooter=true;
+Component.hideFooter = true;
 
 export default Component;
