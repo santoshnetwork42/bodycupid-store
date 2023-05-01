@@ -30,8 +30,7 @@
 .product-gallery {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
-    padding-bottom: 3rem;
+    margin-bottom: 2rem;
     position: sticky;
 
     .container-fluid &.product-gallery-vertical {
@@ -852,9 +851,7 @@ aside {
             }
         }
 
-        .comment-body {
-            padding-left: 1.5rem;
-        }
+       
     }
 
     .product-tab-additional label {
