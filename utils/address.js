@@ -39,6 +39,29 @@ export const validateZipCode = async (pincode, paymentType) => {
   return null;
 };
 
+export const isValidAddress = (address) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    city,
+    pinCode,
+    address: streetAddress,
+  } = address || {};
+
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !streetAddress ||
+    !city ||
+    !pinCode
+  ) {
+    return false;
+  }
+  return true;
+};
+
 export const validateAddress = async (address, paymentType = "ALL") => {
   const {
     firstName,

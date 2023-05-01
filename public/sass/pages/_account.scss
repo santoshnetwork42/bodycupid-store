@@ -123,6 +123,11 @@
         border-right: 4px solid $primary-color;
         background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,0,0,0.08167016806722693) 100%);
     }
+
+}
+
+.radio-icon {
+    margin-top: 4px;
 }
 
 .downloads, .card-address {
@@ -184,6 +189,14 @@
 .card-address {
     position: relative;
     .add-lables-values {
+        .checkout-email-lable {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2 !important;
+            width: 23rem;
+            overflow: hidden;
+            display: block;   
+        }
         span {
             color: #666;
         }
@@ -206,13 +219,13 @@
 }
 
 .mobile-checkout-address {
-    padding: 1.5rem 2.2rem;
+    padding: 1.5rem 1.5rem;
     align-items: center;
     justify-content: space-between;
     color: $primary-color;
     .mobile-address-heading {
         .address-user-name{
-            color: $primary-color;
+            color: $primary-color !important;
             font-size: 1.5rem;
             font-weight: 600;
         }

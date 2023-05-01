@@ -18,7 +18,7 @@ function ProductCollection({ products = [], title = "", slug, redirectTo }) {
       className="product-widget-wrapper"
     >
       <section className="product-wrapper product-collection container  pt-6 pb-3">
-        <div className="d-flex justify-content-between mb-4">
+        <div className="d-flex justify-content-between collection-title mb-4">
           <h2 className="capitalize-title m-0">{title}</h2>
           {!!redirectTo && (
             <ALink href={redirectTo}>

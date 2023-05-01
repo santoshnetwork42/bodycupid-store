@@ -67,13 +67,23 @@ function DescOne(props) {
       if (item) {
         const data = item.result.buckets
           .sort((a, b) => +a.key - +b.key)
-          .reverse();
         const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
+     
+        const final = Array(5)
+          .fill({ key: "", doc_count: 0 })
+          .map((item, index) => {
+            const inputIndex = data.findIndex(
+              (i) => i.key === String(index + 1)
+            );
+            return inputIndex !== -1
+              ? data[inputIndex]
+              : { ...item, key: (index + 1).toString() };
+          }).reverse();
 
-        const analytics = data.map((d) => ({
-          ...d,
-          percentage: getPer(total, +d.doc_count),
-        }));
+          const analytics = final.map((d) => ({
+            ...d,
+            percentage: getPer(total, +d.doc_count),
+          }));
 
         setReviewAnalytics(analytics);
       }
@@ -221,9 +231,6 @@ function DescOne(props) {
             <div className="col-md-12">
               {!!longDescription && (
                 <>
-                  <h5 className="description-title mb-4 font-weight-semi-bold ls-m">
-                    Features
-                  </h5>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: longDescription,
@@ -236,7 +243,7 @@ function DescOne(props) {
         </Card>
 
         <Card
-          title={`Reviews  ${
+          title={`Customer Reviews  ${
             product?.totalRatings ? `(${product.totalRatings})` : ""
           }`}
           noDisplayStyle
@@ -248,46 +255,46 @@ function DescOne(props) {
           }}
         >
           <div className="product-tab-reviews">
-            <div className="reply mt-8 mb-8">
+            <div className="reply mb-8">
               <div className="title-wrapper text-left">
-                <h3 className="title title-simple text-uppercase text-left">
-                  {reviews.length > 0
-                    ? "CUSTOMER REVIEWS"
-                    : "Be The First To Review “" + title + "”"}
-                </h3>{" "}
                 {!!reviews.length && (
                   <div className="review-section">
                     <div className="total-review mb-2 w-100">
                       <div>
-                        <h2 className="mb-1 lh-1 ml-1">{rating}</h2>
+                        <div className="d-flex align-items-end">
+                          {" "}
+                          <h2 className="mb-1 lh-1 ml-1">{rating}</h2>{" "}
+                          {!!product?.totalRatings && (
+                            <span className="mt-2 mb-1 ml-1">
+                              Based on {product.totalRatings} reviews
+                            </span>
+                          )}
+                        </div>
+
                         <RatingStar value={rating} />
                       </div>
-
-                      {!!product?.totalRatings && (
-                        <span className="mt-2">
-                          Based on {product.totalRatings} reviews
-                        </span>
-                      )}
                     </div>
                     <div className="rating w-100">
+                      {console.log("reviewAnalytics", reviewAnalytics)}
                       {reviewAnalytics.map((r, i) => (
                         <div
                           className="d-flex w-100 align-items-center  justify-content-center mt-2"
                           key={r.key}
                         >
                           <span className="mr-2 d-flex flex-column percent">
-                            {5 - i} Star
+                            {r.key} Star
                           </span>
                           <SkillBar
-                            color={reviewColor[i]}
+                            color={reviewColor[+r.key]}
                             className="review-bar"
-                            percentage={r.percentage}
+                            percentage={r.doc_count}
                           />
+                          
                           <div className="ml-1 percent">{r.percentage}%</div>
                         </div>
                       ))}
                     </div>
-                    <div className="w-100 d-flex align-items-center justify-content-center">
+                    <div className="w-100 d-flex align-items-center justify-content-end">
                       <div className="buttons  ml-1 mr-1 ">
                         <div className="justify-content-end w-100">
                           <button

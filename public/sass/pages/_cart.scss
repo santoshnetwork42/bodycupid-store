@@ -323,7 +323,7 @@
     line-height: 1;
     margin-bottom: 0;
     font-family: $font-family;
-
+    font-size: 2rem;
 }
 
 .total .summary-subtitle {
@@ -740,7 +740,7 @@
         padding-right: 15px;
 
         .btn-order {
-            width: unset !important;
+            width: 60% !important;
         }
 
     }

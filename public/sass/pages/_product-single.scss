@@ -484,7 +484,7 @@
     .review-section {
         display: flex;
         margin-bottom: 2rem;
-        margin-top: 2rem;
+        margin-top: 1rem;
         width: 100%;
         justify-content: center;
         flex-direction: row;
@@ -498,7 +498,7 @@
         .total-review {
             display: flex !important;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             flex-direction: column;
         }
 
@@ -527,6 +527,15 @@
 .product-details {
     .collapse::after {
         color: $primary-color;
+    }
+}
+.single-product{
+    .product-widget-wrapper {
+        .collection-title{
+
+            margin-left: -15px !important;
+        }
+        
     }
 }
 

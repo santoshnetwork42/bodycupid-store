@@ -4,26 +4,29 @@ import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 
 const actionTypes = {
-  OPEN_MODAL: 'OPEN_MODAL',
-  CLOSE_MODAL: 'CLOSE_MODAL',
-  OPEN_QUICKVIEW: 'OPEN_QUICKVIEW',
-  CLOSE_QUICKVIEW: 'CLOSE_QUICKVIEW',
-  OPEN_LOGIN: 'OPEN_LOGIN',
-  CLOSE_LOGIN: 'CLOSE_LOGIN',
-  OPEN_PASSWORDLESS: 'OPEN_PASSWORDLESS',
-  CLOSE_PASSWORDLESS: 'CLOSE_PASSWORDLESS',
-  REFRESH_MODAL: 'REFRESH_MODAL'
-}
+  OPEN_MODAL: "OPEN_MODAL",
+  CLOSE_MODAL: "CLOSE_MODAL",
+  OPEN_QUICKVIEW: "OPEN_QUICKVIEW",
+  CLOSE_QUICKVIEW: "CLOSE_QUICKVIEW",
+  OPEN_LOGIN: "OPEN_LOGIN",
+  CLOSE_LOGIN: "CLOSE_LOGIN",
+  OPEN_PASSWORDLESS: "OPEN_PASSWORDLESS",
+  CLOSE_PASSWORDLESS: "CLOSE_PASSWORDLESS",
+  REFRESH_MODAL: "REFRESH_MODAL",
+  OPEN_ALL_ADDRESS_MODAL: "OPEN_ALL_ADDRESS_MODAL",
+  CLOSE_ALL_ADDRESS_MODAL: "CLOSE_ALL_ADDRESS_MODAL",
+};
 
 const initialState = {
-  type: 'video',
+  type: "video",
   openModal: false,
   quickview: false,
   login: false,
-  singleSlug: '',
+  singleSlug: "",
   loginRedirect: true,
   passwordless: false,
-}
+  allAddressModal: false,
+};
 
 function modalReducer(state = initialState, action) {
   switch (action.type) {
@@ -44,8 +47,8 @@ function modalReducer(state = initialState, action) {
       return {
         ...state,
         singleSlug: action.payload.slug,
-        openModal: true
-      }
+        openModal: true,
+      };
 
     case actionTypes.CLOSE_MODAL:
       return {
@@ -60,10 +63,26 @@ function modalReducer(state = initialState, action) {
       return { ...state, login: false, loginRedirect: true };
 
     case actionTypes.OPEN_PASSWORDLESS:
-      return { ...state, passwordless: true, loginRedirect: action.payload.redirect };
+      return {
+        ...state,
+        passwordless: true,
+        loginRedirect: action.payload.redirect,
+      };
 
     case actionTypes.CLOSE_PASSWORDLESS:
       return { ...state, passwordless: false, loginRedirect: true };
+
+    case actionTypes.OPEN_ALL_ADDRESS_MODAL:
+      return {
+        ...state,
+        allAddressModal: true,
+      };
+
+    case actionTypes.CLOSE_ALL_ADDRESS_MODAL:
+      return {
+        ...state,
+        allAddressModal: false,
+      };
 
     case actionTypes.REFRESH_MODAL:
       return initialState;
@@ -74,14 +93,32 @@ function modalReducer(state = initialState, action) {
 }
 
 export const modalActions = {
-  openModal: slug => ({ type: actionTypes.OPEN_MODAL, payload: { slug } }),
-  closeModal: modalType => ({ type: actionTypes.CLOSE_MODAL, payload: { modalType } }),
-  openQuickview: slug => ({ type: actionTypes.OPEN_QUICKVIEW, payload: { slug } }),
+  openModal: (slug) => ({ type: actionTypes.OPEN_MODAL, payload: { slug } }),
+  closeModal: (modalType) => ({
+    type: actionTypes.CLOSE_MODAL,
+    payload: { modalType },
+  }),
+  openQuickview: (slug) => ({
+    type: actionTypes.OPEN_QUICKVIEW,
+    payload: { slug },
+  }),
   closeQuickview: () => ({ type: actionTypes.CLOSE_QUICKVIEW }),
-  openLoginModal: (redirect = true) => ({ type: actionTypes.OPEN_LOGIN, payload: { redirect } }),
+  openLoginModal: (redirect = true) => ({
+    type: actionTypes.OPEN_LOGIN,
+    payload: { redirect },
+  }),
   closeLoginModal: () => ({ type: actionTypes.CLOSE_LOGIN }),
-  openPasswordlessModal: (redirect = false) => ({ type: actionTypes.OPEN_PASSWORDLESS, payload: { redirect } }),
-  closePasswordlessModal: () => ({ type: actionTypes.CLOSE_PASSWORDLESS })
+  openPasswordlessModal: (redirect = false) => ({
+    type: actionTypes.OPEN_PASSWORDLESS,
+    payload: { redirect },
+  }),
+  closePasswordlessModal: () => ({ type: actionTypes.CLOSE_PASSWORDLESS }),
+  openAllAddressModal: () => ({
+    type: actionTypes.OPEN_ALL_ADDRESS_MODAL,
+  }),
+  closeAllAddressModal: () => ({
+    type: actionTypes.CLOSE_ALL_ADDRESS_MODAL,
+  }),
 };
 
 const persistConfig = {
