@@ -9,27 +9,22 @@ import { findUserAddresses } from "~/graphql/api";
 import Modal from "~/components/common/modal";
 import { Cricle, CricleDot, Plus } from "../icons";
 import { errorHandler } from "~/utils/errorHandler";
+import { modalActions } from "~/store/modal";
 
 function Addresses({
   user,
   onAddressChange,
   variant = "CARD",
-  showModal,
-  onModalClose,
+  isAddressesModal,
+  openAllAddressModal,
+  closeAllAddressModal,
 }) {
   const [loading, setLoading] = useState(!!user);
   const [selected, setSelected] = useState(null);
   const [addresses, setAddresses] = useState([]);
   const [isOpen, setOpen] = useState(false);
-  const [isAllAddressModal, setIsAllAddressModal] = useState(false);
   const [defaultAddress, setDefaultAddress] = useState({});
   const [isAddressFormVisible, setIsAddressFormVisible] = useState(false);
-
-  useEffect(() => {
-    if (showModal) {
-      setIsAllAddressModal(true);
-    }
-  }, [showModal]);
 
   const getUserAddress = useCallback(async () => {
     try {
@@ -101,6 +96,8 @@ function Addresses({
           location: adr.location,
           area: adr.area,
         });
+      } else {
+        onAddressChange(null);
       }
     }
   }, [selected, addresses]);
@@ -233,7 +230,7 @@ function Addresses({
             </div>
             <button
               onClick={() => {
-                setIsAllAddressModal(true);
+                openAllAddressModal();
               }}
               className="btn btn-primary btn-change"
             >
@@ -248,7 +245,7 @@ function Addresses({
           <div
             className={`bg-white border-regular d-flex checkout-add-address-btn`}
             onClick={() => {
-              setIsAllAddressModal(true);
+              openAllAddressModal();
             }}
           >
             <Plus size={16} color="currentColor" />
@@ -270,15 +267,18 @@ function Addresses({
         overlayClassName="address-modal-overlay"
         className="address-popup bg-img"
       >
-        <AddressForm defaultAddress={defaultAddress} onSubmit={onAddress} />
+        <AddressForm
+          defaultAddress={defaultAddress}
+          onSubmit={onAddress}
+          onAddress={onAddressChange}
+        />
       </Modal>
 
       <Modal
-        isOpen={isAllAddressModal}
+        isOpen={isAddressesModal}
         onRequestClose={() => {
-          setIsAllAddressModal(false);
+          closeAllAddressModal();
           setIsAddressFormVisible(false);
-          onModalClose();
         }}
         shouldReturnFocusAfterClose={false}
         overlayClassName="all-address-modal-overlay"
@@ -297,8 +297,7 @@ function Addresses({
                       }`}
                       onClick={() => {
                         setSelected(adr);
-                        setIsAllAddressModal(false);
-                        onModalClose();
+                        closeAllAddressModal();
                       }}
                     >
                       <h5 className="card-title text-uppercase m-0">
@@ -334,8 +333,7 @@ function Addresses({
             <AddressForm
               onSubmit={(response) => {
                 setIsAddressFormVisible(false);
-                setIsAllAddressModal(false);
-                onModalClose();
+                closeAllAddressModal();
                 onAddress(response);
               }}
               onAddress={onAddressChange}
@@ -350,7 +348,11 @@ function Addresses({
 function mapStateToProps(state) {
   return {
     user: state.user.data,
+    isAddressesModal: state.modal.allAddressModal,
   };
 }
 
-export default connect(mapStateToProps)(Addresses);
+export default connect(mapStateToProps, {
+  openAllAddressModal: modalActions.openAllAddressModal,
+  closeAllAddressModal: modalActions.closeAllAddressModal,
+})(Addresses);

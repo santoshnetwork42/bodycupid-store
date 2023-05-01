@@ -358,18 +358,19 @@ export const getCartTotals = (
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
 
-  const prepaidDiscount = prepaid ? ((totalPrice - couponTotal) / 100) * 5 : 0;
-  const totalDiscount = couponTotal + prepaidDiscount;
+  const prepaidDiscount = ((totalPrice - couponTotal) / 100) * 5;
+  const totalPrepaidDiscount = couponTotal + prepaidDiscount;
+  const totalCodDiscount = couponTotal;
+  const totalDiscount = prepaid ? totalPrepaidDiscount : totalCodDiscount;
 
-  const grandTotal = totalPrice + shippingTotal - totalDiscount;
-  const gradTotalWithoutPrepaidDiscount =
-    totalPrice + shippingTotal - couponTotal;
-  const amoutSaved = totalListingprice - totalPrice + totalDiscount;
-  const amoutSavedWithoutPrepaidDiscout =
-    totalListingprice - totalPrice + couponTotal;
-  const prepaidTotalAmount =
-    totalPrice + prepaidShippingCharge - ((totalPrice - couponTotal) / 100) * 5;
-  const codTotalAmount = totalPrice + codShippingCharge;
+  const totalAmoutSaved = totalListingprice - totalPrice + totalDiscount;
+  const prepaidGrandTotal =
+    totalPrice + prepaidShippingCharge - totalPrepaidDiscount;
+  const codGrandTotal = totalPrice + codShippingCharge - totalCodDiscount;
+  const grandTotal = prepaid ? prepaidGrandTotal : codGrandTotal;
+
+  const cartGrandTotal = grandTotal + prepaidDiscount;
+  const cartAmmountSaved = totalAmoutSaved - prepaidDiscount;
 
   return {
     totalPrice,
@@ -378,12 +379,12 @@ export const getCartTotals = (
     couponTotal,
     prepaidDiscount,
     totalDiscount,
-    amoutSaved,
+    totalAmoutSaved,
+    cartAmmountSaved,
+    codGrandTotal,
+    prepaidGrandTotal,
+    cartGrandTotal,
     grandTotal,
-    gradTotalWithoutPrepaidDiscount,
-    amoutSavedWithoutPrepaidDiscout,
-    prepaidTotalAmount,
-    codTotalAmount,
   };
 };
 
