@@ -12,6 +12,7 @@ import {
   createTransaction,
   createPayment,
   validateTransaction,
+  getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getCartTotals } from "~/utils";
@@ -29,7 +30,6 @@ import {
   getProperAddress,
   isValidAddress,
 } from "~/utils/address";
-import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { systemActions } from "~/store/system";
@@ -155,6 +155,40 @@ function Checkout(props) {
       }
     },
     [store, user]
+  );
+
+  const handleCodPayments = (orderId) => {
+    const intervalId = setInterval(() => {
+      getOrders(intervalId, orderId);
+    }, 2000);
+    return () => clearInterval(intervalId);
+  };
+
+  const getOrders = useCallback(
+    async (intervalId, orderId) => {
+      setPaymentLoading(true);
+      try {
+        const {
+          data: { getOrder },
+        } = await API.graphql({
+          query: getOrderStatus,
+          variables: { id: orderId },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+        const { code } = getOrder;
+        if (code) {
+          clearInterval(intervalId);
+          await router.push(`/order/${orderId}`);
+          await emptyCart();
+          setLoading(false);
+          setPaymentLoading(false);
+        }
+      } catch (error) {
+        setPaymentLoading(false);
+        errorHandler(error);
+      }
+    },
+    [user]
   );
 
   const fetchPaymentStatus = useCallback(async () => {
@@ -309,9 +343,7 @@ function Checkout(props) {
             });
           } else {
             onPlaceOrder(order, [...cartList], appliedCoupon);
-            await router.push(`/order/${orderId}`);
-            await emptyCart();
-            setLoading(false);
+            handleCodPayments(orderId);
           }
         } catch (error) {
           errorHandler(error);
@@ -566,8 +598,9 @@ function Checkout(props) {
                                   <td>
                                     <h4 className="summary-subtitle">
                                       Shipping
-                                      <p className="m-0">For prepaid orders only</p>
-
+                                      <p className="m-0">
+                                        For prepaid orders only
+                                      </p>
                                     </h4>
                                   </td>
                                   <td

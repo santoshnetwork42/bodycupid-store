@@ -13,10 +13,9 @@ export default function PaymentLoader({ loading = false, message = 'Processing y
         >
             <div className=" text-center mr-auto ml-auto">
                 <img
-                    className='ml-4'
                     src="/images/logo.png"
                     alt="logo"
-                    width="153"
+                    width="100"
                     height="44"
                 />
                 <div className='w-100 d-flex justify-content-center mt-3'>

@@ -633,6 +633,7 @@ export const getOrder = /* GraphQL */ `
             imageUrl
           }
           sku
+          cancelledQuantity
           quantity
           price
           status
@@ -651,6 +652,15 @@ export const getOrder = /* GraphQL */ `
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const getOrderStatus = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      code
+      status
     }
   }
 `;

@@ -16,7 +16,7 @@ import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
-import Checkmark from "~/components/icons";
+import Checkmark, { Cross } from "~/components/icons";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
@@ -134,7 +134,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </h3>
         </div>
 
-        <div className="container mt-8">
+        <div className="container pt-1">
           <Checkmark />
 
           <div className="text-center ">
@@ -142,7 +142,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
             <p className="text-grey"> Thank you for shopping with us.</p>
             <ALink
               href="/collections/all"
-              className="btn btn-icon-left btn-primary btn-back btn-rounded btn-md"
+              className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md"
             >
               Continue Shopping
             </ALink>
@@ -153,7 +153,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </h2>
           <div className="order-details bg-white">
             <table className="order-details-table">
-           
               <tbody>
                 <tr className="summary-subtotal">
                   <td>
@@ -185,12 +184,11 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     {order?.shippingAddress?.address}
                     {!!order?.shippingAddress?.location &&
                       order?.shippingAddress?.location}
-
                     {
                       (order?.shippingAddress?.city + ", ",
                       state + ", " + country)
                     }
-                    {order?.shippingAddress?.pinCode}
+                    , {order?.shippingAddress?.pinCode}
                   </td>
                 </tr>
               </tbody>
@@ -201,14 +199,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </h2>
           <div className="order-details bg-white mb-3">
             <table className="order-details-table">
-              <thead>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h3 className="summary-subtitle">Product</h3>
-                  </td>
-                  <td></td>
-                </tr>
-              </thead>
               <tbody>
                 {order?.products?.items?.map((item) => (
                   <tr key={"order-" + item.id}>
@@ -228,10 +218,10 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                               height="88"
                             />
                           </ALink>
-                          <div>
+                          <div className="d-flex h-fit-content align-items-center ">
                             {`${item.product.title} `}
-                            <span>
-                              <i className="fas fa-times"></i>
+                            <span className="d-flex align-items-center flex-row">
+                              <Cross size={14} /> 
                               {` ${item.quantity || item.cancelledQuantity}`}
                             </span>
                             {item.cancelledQuantity > 0 &&
@@ -246,7 +236,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                               <Tag type={getStatusType(item.status)}>
                                 {item.status}
                               </Tag>
-                            )}
+                            )} &nbsp;
                             {item.variant && (
                               <p className="mb-0">
                                 <strong>{item.variant.title}</strong>
@@ -286,7 +276,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                       <h4 className="summary-subtitle">Discount:</h4>
                     </td>
                     <td className="summary-subtotal-price">
-                      ₹{toDecimal(order?.totalDiscount)}
+                      -₹{toDecimal(order?.totalDiscount)}
                     </td>
                   </tr>
                 )}
@@ -322,7 +312,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                 },
               }}
               as="/pages/account"
-              className="btn btn-icon-left btn-primary mr-2 btn-back btn-rounded btn-md  "
+              className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
             >
               Your Orders
             </ALink>
