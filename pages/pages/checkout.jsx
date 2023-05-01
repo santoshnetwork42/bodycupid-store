@@ -33,7 +33,13 @@ import { scrollWithOffset } from "~/utils/helper";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { systemActions } from "~/store/system";
-import { Cross, DownAngle, ShoppingCart, UpAngle } from "~/components/icons";
+import {
+  Cross,
+  DownAngle,
+  RightAngle,
+  ShoppingCart,
+  UpAngle,
+} from "~/components/icons";
 import { Collapse } from "react-bootstrap";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import PaymentMethods from "~/components/features/payment-radio";
@@ -356,9 +362,15 @@ function Checkout(props) {
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
+            <i>
+              <RightAngle size={18} color="currentColor" />
+            </i>
           </h3>
           <h3 className="title title-simple title-step active">
             <ALink href="#">2. Checkout</ALink>
+            <i>
+              <RightAngle size={18} color="currentColor" />
+            </i>
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
@@ -667,7 +679,7 @@ function Checkout(props) {
                             onClick={() => {
                               openAllAddressModal();
                             }}
-                            className="btn btn-primary btn-rounded d-flex justify-content-center align-items-center checkout-sticky-btn"
+                            className="btn btn-primary btn-rounded d-flex justify-content-center align-items-center btn-order"
                           >
                             Add new address
                             {loading && <div className="spin-loader ml-2" />}
@@ -678,7 +690,7 @@ function Checkout(props) {
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded d-flex justify-content-center align-items-center checkout-sticky-btn ${
+                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
                                 : "btn-disabled"
