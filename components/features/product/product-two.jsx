@@ -212,7 +212,7 @@ function ProductTwo(props) {
           </ins>
           {price < listingPrice && listingPrice && (
             <span className="old-price ml-1 ">
-              <span >MRP</span>&nbsp;<del >₹{toDecimal(listingPrice || 0)}</del>
+              <span>MRP</span>&nbsp;<del>₹{toDecimal(listingPrice || 0)}</del>
             </span>
           )}
         </div>

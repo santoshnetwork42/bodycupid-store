@@ -21,6 +21,7 @@ import awsconfig from "~/aws-exports";
 import { getUser, getStore } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler.js";
 import Scripts from "~/components/scripts";
+import Loader from "~/components/common/partials/loader.jsx";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -150,16 +151,7 @@ const App = ({ Component, pageProps }) => {
     <Provider store={store}>
       <PersistGate
         persistor={store.__persistor}
-        loading={
-          <div className="loading-overlay">
-            <div className="bounce-loader">
-              <div className="bounce1"></div>
-              <div className="bounce2"></div>
-              <div className="bounce3"></div>
-              <div className="bounce4"></div>
-            </div>
-          </div>
-        }
+        loading={<Loader loading={true} />}
       >
         <Head>
           <meta charSet="UTF-8" />

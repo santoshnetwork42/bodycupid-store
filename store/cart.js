@@ -15,6 +15,9 @@ import {
 import { getFirstVariantId } from "~/utils/products";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
+// import useWindowDimensions from "~/utils/getWindowDimension";
+import { toast } from "react-toastify";
+import AlertPopup from "~/components/features/product/common/alert-popup";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -161,8 +164,16 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
-    // toast(<CartPopup product={e.payload.product} />);
-
+    if (window?.innerWidth > 500)
+      toast(
+        <AlertPopup
+          message="Product added to cart successfully"
+          status="success"
+        />,
+        {
+          position: "bottom-center",
+        }
+      );
     const { user, cart } = yield select();
     let { cart: cartResponse } = cart;
     const { data } = user;
@@ -238,12 +249,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
+                id: response.id,
+                shoppingcartId: id,
+                productId: response.productId,
+                variantId: response.variantId,
+                quantity: response.quantity,
+              }
             : p
         );
 
@@ -315,9 +326,10 @@ export function* cartSaga() {
       if (Array.isArray(products) && products.length) {
         const promise = [];
         const updatedProducts = currProducts.map((p) => {
-
           const product = products.find((cp) => {
-            const pKey = cp.variantId ? `${cp.productId}-${cp.variantId}` : `${cp.productId}`;
+            const pKey = cp.variantId
+              ? `${cp.productId}-${cp.variantId}`
+              : `${cp.productId}`;
             return pKey === p.recordKey;
           });
 

@@ -18,7 +18,7 @@
 // Default
 .alert {
     position: relative;
-    padding: 1.6rem 3.8rem 1.6rem 1.8rem;
+    padding: 1.6rem 1.8rem 1.6rem 1.8rem;
     border:  1px solid #222;
     font-size: 1.4rem;
     line-height: 1.75;
@@ -185,13 +185,12 @@
     }
 }
 .alert.alert-inline {
-    padding-right: 4rem;
     .alert-title {
         display: inline-block;
         margin: 0 .8rem 0 0 ;
     }
     &.error-height{
-        width: 350px;
+        width: fit-content;
         height: 40px;
         display: flex;
         align-items: center;

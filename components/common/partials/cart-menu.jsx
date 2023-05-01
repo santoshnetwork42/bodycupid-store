@@ -60,7 +60,7 @@ function CartMenu(props) {
     <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
       <ALink
         href="/pages/cart"
-        className="cart-toggle label-block link mr-3 p-relative"
+        className="cart-toggle label-block link p-relative"
        //  onClick={showCartMenu}
       >
         <div className="cart-label d-lg-show">
