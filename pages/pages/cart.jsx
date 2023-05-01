@@ -67,7 +67,7 @@ function Cart(props) {
 
   return (
     <main className="main cart">
-      <div className="page-content pt-7 pb-5 lh-default">
+      <div className="page-content pt-lg-7 pt-2 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
             <ALink href="#">1. Shopping Cart</ALink>
@@ -163,7 +163,7 @@ function Cart(props) {
                                   <h4 className="summary-subtitle lh-1">
                                     Discounts
                                   </h4>
-                                  &nbsp; ( {appliedCoupon.code})
+                                  &nbsp; ({appliedCoupon.code})
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
