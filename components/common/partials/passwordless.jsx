@@ -173,9 +173,9 @@ function Passwordless({
                   >
                     <TabList className="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5 flex-no-wrap">
                       <Tab className="nav-item">
-                        <span className="nav-link border-no lh-1 ls-normal">
+                        <span className="nav-link border-no lh-1 ls-default">
                           {confirmSignUp
-                            ? "OTP verification"
+                            ? "OTP Verification"
                             : "Enter Mobile Number"}
                         </span>
                       </Tab>

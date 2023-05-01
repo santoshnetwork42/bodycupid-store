@@ -109,9 +109,11 @@ function Header({ navbar, auth, openPasswordLess }) {
       </div>
       <div className="header-bottom d-lg-show  fix-top sticky-content">
         <div className="container">
-          <div className="header-left justify-content-center">
-            <MainMenu />
-          </div>
+          {!navbar?.hideMainMenu && (
+            <div className="header-left justify-content-center">
+              <MainMenu />
+            </div>
+          )}
         </div>
       </div>
     </header>

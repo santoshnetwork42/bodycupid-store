@@ -595,6 +595,49 @@ export const getOrder = /* GraphQL */ `
       priority
       orderDate
       status
+      products {
+        items {
+          id
+          productId
+          product {
+            id
+            title
+            slug
+            productDescription
+            price
+            sku
+            status
+            costPrice
+            listingPrice
+            totalOrders
+            images {
+              items {
+                id
+                alt
+                width
+                height
+                imageKey
+                isThumb
+              }
+            }
+          }
+          variantId
+          variant {
+            id
+            productId
+            title
+            price
+            status
+            costPrice
+            listingPrice
+            imageUrl
+          }
+          sku
+          quantity
+          price
+          status
+        }
+      }
       payments {
         items {
           id

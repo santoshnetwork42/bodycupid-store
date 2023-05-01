@@ -23,7 +23,7 @@
     .order-results {
         display: flex;
         flex-wrap: wrap;
-        margin: 4.8rem 0 1.9rem;
+        margin: 3rem 0 1.9rem;
     }
 
     .overview-item {
@@ -136,7 +136,6 @@
 
     tbody tr:first-child {
         td { 
-            padding-top: 3.2rem;
 
             &.product-price {
                 padding-top: 2.8rem;
