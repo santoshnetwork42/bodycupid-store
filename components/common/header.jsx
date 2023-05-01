@@ -67,7 +67,7 @@ function Header({ navbar, auth, openPasswordLess }) {
 
               <SearchBox />
             </div>
-
+ 
             <div className="header-right">
               {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
