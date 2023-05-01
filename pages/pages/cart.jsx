@@ -178,6 +178,7 @@ function Cart(props) {
                             <td>
                               <h4 className="summary-subtitle lh-1">
                                 Shipping
+                                <p className="m-0">For prepaid orders only</p>
                               </h4>
                             </td>
                             <td>

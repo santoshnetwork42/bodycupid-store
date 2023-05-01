@@ -554,6 +554,8 @@ function Checkout(props) {
                                   <td>
                                     <h4 className="summary-subtitle">
                                       Shipping
+                                      <p className="m-0">For prepaid orders only</p>
+
                                     </h4>
                                   </td>
                                   <td

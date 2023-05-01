@@ -221,9 +221,6 @@ function DescOne(props) {
             <div className="col-md-12">
               {!!longDescription && (
                 <>
-                  <h5 className="description-title mb-4 font-weight-semi-bold ls-m">
-                    Features
-                  </h5>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: longDescription,
@@ -236,7 +233,7 @@ function DescOne(props) {
         </Card>
 
         <Card
-          title={`Reviews  ${
+          title={`Customer Reviews  ${
             product?.totalRatings ? `(${product.totalRatings})` : ""
           }`}
           noDisplayStyle
@@ -248,26 +245,24 @@ function DescOne(props) {
           }}
         >
           <div className="product-tab-reviews">
-            <div className="reply mt-8 mb-8">
+            <div className="reply mb-8">
               <div className="title-wrapper text-left">
-                <h3 className="title title-simple text-uppercase text-left">
-                  {reviews.length > 0
-                    ? "CUSTOMER REVIEWS"
-                    : "Be The First To Review “" + title + "”"}
-                </h3>{" "}
                 {!!reviews.length && (
                   <div className="review-section">
                     <div className="total-review mb-2 w-100">
                       <div>
-                        <h2 className="mb-1 lh-1 ml-1">{rating}</h2>
+                        <div className="d-flex align-items-end">
+                          {" "}
+                          <h2 className="mb-1 lh-1 ml-1">{rating}</h2>{" "}
+                          {!!product?.totalRatings && (
+                            <span className="mt-2 mb-1 ml-1">
+                              Based on {product.totalRatings} reviews
+                            </span>
+                          )}
+                        </div>
+
                         <RatingStar value={rating} />
                       </div>
-
-                      {!!product?.totalRatings && (
-                        <span className="mt-2">
-                          Based on {product.totalRatings} reviews
-                        </span>
-                      )}
                     </div>
                     <div className="rating w-100">
                       {reviewAnalytics.map((r, i) => (

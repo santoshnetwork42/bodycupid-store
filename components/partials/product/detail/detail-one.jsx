@@ -387,7 +387,6 @@ function DetailOne(props) {
         </p>
       )}
 
-      <hr className="product-divider d-sm-none"></hr>
 
       {isStickyCart ? (
         <>
@@ -552,7 +551,6 @@ function DetailOne(props) {
         )}
       </div>
 
-      <hr className="product-divider mb-3 d-sm-none"></hr>
     </div>
   );
 }
