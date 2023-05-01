@@ -29,11 +29,7 @@ const AddressForm = (props) => {
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    if (onAddress) {
-      onAddress(address);
-    }
-  }, [address]);
+
   useEffect(() => {
     if (defaultAddress && defaultAddress.name) {
       setAddress({
@@ -53,6 +49,9 @@ const AddressForm = (props) => {
         if (!formErrors) {
           if (user) {
             const tempAddress = getProperAddress(address);
+            if (onAddress) {
+              onAddress(tempAddress);
+            }
             const key = address.id ? "updateUserAddress" : "createUserAddress";
             const {
               data: { [key]: response },
@@ -70,7 +69,7 @@ const AddressForm = (props) => {
         }
         setLoading(false);
       } catch (errors) {
-        errorHandler(errors)
+        errorHandler(errors);
         setLoading(false);
       }
       return false;

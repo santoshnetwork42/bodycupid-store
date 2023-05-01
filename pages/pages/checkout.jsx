@@ -51,9 +51,10 @@ function Checkout(props) {
     getShippingTiers,
     placeOrder: onPlaceOrder,
     startCheckout,
+    openAllAddressModal,
   } = props;
   const { width } = useWindowDimensions();
-
+  const isMobile = width < 500;
   const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -65,7 +66,6 @@ function Checkout(props) {
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
-  const [showAddressModal, setAddressModal] = useState(false);
   const isFirst = payMethod === "PREPAID";
 
   useEffect(() => {
@@ -77,13 +77,13 @@ function Checkout(props) {
     totalListingprice,
     totalPrice,
     shippingTotal,
-    amoutSaved,
+    totalAmoutSaved,
     couponTotal,
     grandTotal,
     prepaidDiscount,
     totalDiscount,
-    prepaidTotalAmount,
-    codTotalAmount,
+    codGrandTotal,
+    prepaidGrandTotal,
   } = useMemo(
     () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
     [cartList, appliedCoupon, isFirst, shippingTiers]
@@ -367,9 +367,14 @@ function Checkout(props) {
             <>
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
-                <div className="col-lg-7 mb-4 mb-lg-0 pr-lg-4 p-0 d-sm-none">
-                  <Addresses onAddressChange={setAddress} variant="CHECKOUT" />
-                </div>
+                {!isMobile && (
+                  <div className="col-lg-7 mb-4 mb-lg-0 pr-lg-4 p-0 d-sm-none">
+                    <Addresses
+                      onAddressChange={setAddress}
+                      variant="CHECKOUT"
+                    />
+                  </div>
+                )}
 
                 <aside
                   id="checkout-details"
@@ -520,24 +525,12 @@ function Checkout(props) {
                                             <span className="mr-1">
                                               {appliedCoupon.code}
                                             </span>
-                                            <ALink
-                                              key={appliedCoupon.id}
-                                              href="#"
-                                              className="pr-1 pl-1 border-cricle lh-default d-flex align-items-center"
-                                              title="Remove coupon"
-                                              onClick={() => removeCoupon()}
-                                            >
-                                              <Cross
-                                                size={12}
-                                                color="currentColor"
-                                              />
-                                            </ALink>
                                           </span>
                                         </p>
                                       </td>
                                       <td>
                                         <p className="summary-subtotal-price discount-price-color">
-                                          {`₹${toDecimal(couponTotal)}`}
+                                          - {`₹${toDecimal(couponTotal)}`}
                                         </p>
                                       </td>
                                     </tr>
@@ -552,7 +545,7 @@ function Checkout(props) {
                                       </h4>
                                     </td>
                                     <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
-                                      {`₹${toDecimal(prepaidDiscount)}`}
+                                      - {`₹${toDecimal(prepaidDiscount)}`}
                                     </td>
                                   </tr>
                                 )}
@@ -601,11 +594,11 @@ function Checkout(props) {
                                         <span>3-5 days</span>
                                       </p>
                                     </div>
-                                    {!!amoutSaved && (
+                                    {!!totalAmoutSaved && (
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
                                           <span>{`₹${toDecimal(
-                                            amoutSaved
+                                            totalAmoutSaved
                                           )}`}</span>{" "}
                                           saved so far on this order
                                         </p>
@@ -618,14 +611,14 @@ function Checkout(props) {
                           </div>
                         </div>
                       </Collapse>
-                      <div className="col-lg-6 mb-lg-0 pr-lg-4 p-0 d-sm-show">
-                        <Addresses
-                          onAddressChange={setAddress}
-                          variant="CHECKOUT"
-                          showModal={showAddressModal}
-                          onModalClose={() => setAddressModal(false)}
-                        />
-                      </div>
+                      {!!isMobile && (
+                        <div className="col-lg-6 mb-lg-0 pr-lg-4 p-0 d-sm-show">
+                          <Addresses
+                            onAddressChange={setAddress}
+                            variant="CHECKOUT"
+                          />
+                        </div>
+                      )}
                       <div
                         className="payment accordion radio-type "
                         id="payment-method"
@@ -641,7 +634,7 @@ function Checkout(props) {
                             onClick={() => {
                               !isFirst && setFirst("PREPAID");
                             }}
-                            amount={prepaidTotalAmount}
+                            amount={prepaidGrandTotal}
                           />
                           <PaymentMethods
                             title=" Cash On Delivery"
@@ -650,7 +643,7 @@ function Checkout(props) {
                             onClick={() => {
                               !codDisabled && isFirst && setFirst("COD");
                             }}
-                            amount={codTotalAmount}
+                            amount={codGrandTotal}
                           />
                         </div>
                       </div>
@@ -666,36 +659,24 @@ function Checkout(props) {
                           </div>
                         </div>
                       )}
-                      <div className="stick-bottom-button">
-                        <div className="d-sm-show lh-2">
-                          <p className="summary-total-price ls-s text-primary text-align-start">
-                            ₹{toDecimal(grandTotal)}
-                          </p>
-                          <ALink
-                            onClick={() => {
-                              scrollWithOffset("checkout-details", 130);
-                            }}
-                            className="text-underline"
-                            href="#"
-                          >
-                            View details
-                          </ALink>
-                        </div>
-                        {!isValidAddress(shippingAddress) && width < 500 && (
+                      <div className="stick-bottom-button d-flex justify-content-center">
+                        {!isValidAddress(shippingAddress) && !!isMobile && (
                           <button
-                            onClick={() => setAddressModal(true)}
-                            className="btn btn-primary btn-rounded btn-order d-flex justify-content-center align-items-center"
+                            onClick={() => {
+                              openAllAddressModal();
+                            }}
+                            className="btn btn-primary btn-rounded d-flex justify-content-center align-items-center checkout-sticky-btn"
                           >
                             Add new address
                             {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
 
-                        {(!!isValidAddress(shippingAddress) || width > 500) && (
+                        {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded btn-order d-flex justify-content-center align-items-center  ${
+                            className={`btn btn-rounded d-flex justify-content-center align-items-center checkout-sticky-btn ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
                                 : "btn-disabled"
@@ -750,6 +731,7 @@ const Component = connect(mapStateToProps, {
   getShippingTiers: systemActions.getShippingTiers,
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,
+  openAllAddressModal: modalActions.openAllAddressModal,
 })(Checkout);
 
 Component.hideFooter = true;
