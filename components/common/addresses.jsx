@@ -146,10 +146,11 @@ function Addresses({
                           </h5>
                           <div className="add-lables-values">
                             {adr?.email && (
-                              <span>
+                              <span className="checkout-email-lable">
                                 {adr?.email} <br />
                               </span>
                             )}
+
                             {adr?.phone && (
                               <span>
                                 {adr?.phone} <br />
