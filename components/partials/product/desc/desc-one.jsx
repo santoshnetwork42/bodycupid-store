@@ -67,13 +67,23 @@ function DescOne(props) {
       if (item) {
         const data = item.result.buckets
           .sort((a, b) => +a.key - +b.key)
-          .reverse();
         const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
+     
+        const final = Array(5)
+          .fill({ key: "", doc_count: 0 })
+          .map((item, index) => {
+            const inputIndex = data.findIndex(
+              (i) => i.key === String(index + 1)
+            );
+            return inputIndex !== -1
+              ? data[inputIndex]
+              : { ...item, key: (index + 1).toString() };
+          }).reverse();
 
-        const analytics = data.map((d) => ({
-          ...d,
-          percentage: getPer(total, +d.doc_count),
-        }));
+          const analytics = final.map((d) => ({
+            ...d,
+            percentage: getPer(total, +d.doc_count),
+          }));
 
         setReviewAnalytics(analytics);
       }
@@ -265,24 +275,26 @@ function DescOne(props) {
                       </div>
                     </div>
                     <div className="rating w-100">
+                      {console.log("reviewAnalytics", reviewAnalytics)}
                       {reviewAnalytics.map((r, i) => (
                         <div
                           className="d-flex w-100 align-items-center  justify-content-center mt-2"
                           key={r.key}
                         >
                           <span className="mr-2 d-flex flex-column percent">
-                            {5 - i} Star
+                            {r.key} Star
                           </span>
                           <SkillBar
-                            color={reviewColor[i]}
+                            color={reviewColor[+r.key]}
                             className="review-bar"
-                            percentage={r.percentage}
+                            percentage={r.doc_count}
                           />
+                          
                           <div className="ml-1 percent">{r.percentage}%</div>
                         </div>
                       ))}
                     </div>
-                    <div className="w-100 d-flex align-items-center justify-content-center">
+                    <div className="w-100 d-flex align-items-center justify-content-end">
                       <div className="buttons  ml-1 mr-1 ">
                         <div className="justify-content-end w-100">
                           <button

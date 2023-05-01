@@ -16,6 +16,7 @@ import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
+import Checkmark from "~/components/icons";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
@@ -120,7 +121,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
 
       <h1 className="d-none">{name}- Order</h1>
 
-      <div className="order-page-content page-content pt-7 pb-10 mb-10 bg-white lh-default">
+      <div className="order-page-content page-content pt-7 pb-3 lh-default bg-white text-primary">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step">
             <ALink href="/pages/cart">1. Shopping Cart</ALink>
@@ -132,31 +133,73 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
             <ALink href="#">3. Order Complete</ALink>
           </h3>
         </div>
-        <div className="container mt-8">
-          <div className="order-results">
-            <div className="overview-item">
-              <span>Order number:</span>
-              <strong>#{order?.code || order?.id}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Status:</span>
-              <strong>{order?.status}</strong>
-            </div>
-            <div className="overview-item">
-              <span>Date:</span>
-              <strong>{formateDate(order?.createdAt)}</strong>
-            </div>
 
-            <div className="overview-item">
-              <span>Total:</span>
-              <strong>₹{toDecimal(order?.totalAmount)}</strong>
-            </div>
+        <div className="container mt-8">
+          <Checkmark />
+
+          <div className="text-center ">
+            <h3 className="mb-1"> Your order is complete!</h3>
+            <p className="text-grey"> Thank you for shopping with us.</p>
+            <ALink
+              href="/collections/all"
+              className="btn btn-icon-left btn-primary btn-back btn-rounded btn-md"
+            >
+              Continue Shopping
+            </ALink>
           </div>
 
-          <h2 className="title title-simple text-left pt-4 font-weight-bold text-uppercase">
+          <h2 className="title title-simple text-left pt-7 font-weight-bold text-uppercase">
             Order Details
           </h2>
-          <div className="order-details">
+          <div className="order-details bg-white">
+            <table className="order-details-table">
+           
+              <tbody>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Order number:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    #{order?.code || order?.id}
+                  </td>
+                </tr>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Status:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">{order?.status}</td>
+                </tr>{" "}
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Date:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {formateDate(order?.createdAt)}
+                  </td>
+                </tr>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Shipping Address:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.shippingAddress?.address}
+                    {!!order?.shippingAddress?.location &&
+                      order?.shippingAddress?.location}
+
+                    {
+                      (order?.shippingAddress?.city + ", ",
+                      state + ", " + country)
+                    }
+                    {order?.shippingAddress?.pinCode}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h2 className="title title-simple text-left pt-7 font-weight-bold text-uppercase">
+            Product Details
+          </h2>
+          <div className="order-details bg-white mb-3">
             <table className="order-details-table">
               <thead>
                 <tr className="summary-subtotal">
@@ -173,7 +216,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                       <div className="d-flex justify-content-between">
                         <div className="d-flex">
                           <ALink
-                            className="order-image"
+                            className="order-image mr-2"
                             href={"/product/" + item.slug}
                           >
                             <img
@@ -270,80 +313,26 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
               </tbody>
             </table>
           </div>
-          <div className="d-flex flex-wrap address-info pb-8 mb-6 pt-10">
-            <div className="mr-8">
-              <h2 className="title title-simple text-left">Billing Address</h2>
-              <div className="">
-                <p className="address-detail">
-                  {order?.billingAddress?.name}
-                  <br />
-                  {order?.billingAddress?.address}
-                  {!!order?.billingAddress?.location && (
-                    <>
-                      <br />
-                      {order?.billingAddress?.location}
-                    </>
-                  )}
-                  <br />
-                  {(order?.billingAddress?.city + ", ", state + ", " + country)}
-                  <br />
-                  {order?.billingAddress?.pinCode}
-                </p>
-                <p className="email">
-                  {order?.billingAddress?.email}
-                  <br />
-                  {order?.billingAddress?.phone}
-                </p>
-              </div>
-            </div>
-            <div>
-              <h2 className="title title-simple text-left">Shipping Address</h2>
-              <div className="">
-                <p className="address-detail">
-                  {order?.shippingAddress?.name}
-                  <br />
-                  {order?.shippingAddress?.address}
-                  {!!order?.shippingAddress?.location && (
-                    <>
-                      <br />
-                      {order?.shippingAddress?.location}
-                    </>
-                  )}
-                  <br />
-                  {
-                    (order?.shippingAddress?.city + ", ",
-                    state + ", " + country)
-                  }
-                  <br />
-                  {order?.shippingAddress?.pinCode}
-                </p>
-                <p className="email">
-                  {order?.shippingAddress?.email}
-                  <br />
-                  {order?.shippingAddress?.phone}
-                </p>
-              </div>
-            </div>
+          <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
+            <ALink
+              href={{
+                pathname: "/pages/account",
+                query: {
+                  activeTabIndex: 1,
+                },
+              }}
+              as="/pages/account"
+              className="btn btn-icon-left btn-primary mr-2 btn-back btn-rounded btn-md  "
+            >
+              Your Orders
+            </ALink>
+            <ALink
+              href="/pages/contact"
+              className="btn btn-icon-left btn btn-back btn-rounded btn-md"
+            >
+              Contact us
+            </ALink>
           </div>
-
-          <ALink
-            href="/collections/all"
-            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 mr-3"
-          >
-            Continue Shopping
-          </ALink>
-          <ALink
-            href={{
-              pathname: "/pages/account",
-              query: {
-                activeTabIndex: 1,
-              },
-            }}
-            as="/pages/account"
-            className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md mb-4 "
-          >
-            Your Orders
-          </ALink>
 
           <PaymentLoader loading={isPaymentProcessing} />
         </div>
@@ -382,5 +371,6 @@ function mapStateToProps(state) {
     store: state.system.store,
   };
 }
-
-export default connect(mapStateToProps)(Order);
+const Component = connect(mapStateToProps)(Order);
+Component.hideMainMenu = true;
+export default Component;
