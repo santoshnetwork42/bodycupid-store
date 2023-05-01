@@ -376,7 +376,7 @@ function DetailOne(props) {
                   </div>
                 ))}
               </div>
-            </div>#F17A54
+            </div>
           </div>
         </>
       )}
