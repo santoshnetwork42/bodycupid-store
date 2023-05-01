@@ -6,17 +6,17 @@
     line-height: 2.15;
     .title {
         font-size: 3rem;
-        letter-spacing: -.035em;
+        letter-spacing: .035em;
     }
     p {
         font-family: $font-family;
         line-height: 2.15;
-        letter-spacing: -.017em;
+        letter-spacing: .017em;
         span {
             color: #333;
         }
         &:first-child {
-            letter-spacing: -.005em;
+            letter-spacing: .005em;
         }
         .link-to-tab {
             text-decoration: underline;
@@ -60,7 +60,7 @@
             padding: 1.7rem .8rem 1.6rem;
             margin: 0;
             font-weight: 600;
-            letter-spacing: -.015em;
+            letter-spacing: .015em;
             line-height: 1;
             text-transform: none;
         }

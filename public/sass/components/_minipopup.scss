@@ -73,7 +73,7 @@
             color: #000;
             font-weight: 400;
             line-height: 1.4;
-            letter-spacing: -.025em;
+            letter-spacing: .025em;
 
             &:hover {
                 color: $primary-color;
@@ -127,7 +127,7 @@
     .btn.btn-sm {
         padding: 0.92em 2.07em;
         font-weight: 600;
-        letter-spacing: -.025em;
+        letter-spacing: .025em;
         border-width: 1px;
     }
     .btn.btn-outline {
@@ -142,7 +142,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
-    letter-spacing: -.035em;
+    letter-spacing: .035em;
     line-height: 1;
 
     .btn {

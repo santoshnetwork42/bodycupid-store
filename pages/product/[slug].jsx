@@ -9,11 +9,11 @@ import fetchData from "~/utils/fetchData";
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
-import RelatedProducts from "~/components/partials/product/related-products";
 import {
   getProductBySlug,
   searchProductFaqs,
   getProductSlug,
+  findProducts,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
 import {
