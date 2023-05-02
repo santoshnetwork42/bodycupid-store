@@ -13,6 +13,16 @@ export const itemMapper = (product, coupon) => {
 
   return {
     value: price * qty,
+    attribue: {
+      content_category: category?.name,
+      content_subcategory: subCategory?.name,
+      content_ids: [id],
+      content_name: title,
+      content_type: "product_group",
+      currency: "INR",
+      num_items: 1,
+      value: price,
+    },
     attributes: {
       item_id: id,
       item_name: title,
@@ -50,12 +60,26 @@ export const itemMapper = (product, coupon) => {
 };
 
 export const orderMapper = (products, coupon) => {
-  return products.reduce(({ value, attributes, items }, product, index) => {
-    const { items: [item], attributes: dt, value: v } = itemMapper(product, coupon);
+  const defaultAttribute = {
+    content_ids: [],
+    content_type: "product_group",
+    currency: "INR",
+    num_items: 0,
+    value: 0,
+  };
+
+  return products.reduce(({ value, attributes, items, attribue }, product, index) => {
+    const { items: [item], attributes: dt, value: v, attribue: a } = itemMapper(product, coupon);
     return {
+      attribue: {
+        ...attribue,
+        content_ids: [...attribue.content_ids, ...a.content_ids],
+        num_items: attribue.num_items + a.num_items,
+        value: attribue.value + a.value
+      },
       value: value + v,
       attributes: [...attributes, dt],
       items: [...items, { ...item, index }]
     }
-  }, { value: 0, attributes: [], items: [] });
+  }, { value: 0, attributes: [], items: [], attribue: defaultAttribute });
 };
