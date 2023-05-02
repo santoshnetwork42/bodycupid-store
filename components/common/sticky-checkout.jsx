@@ -6,7 +6,7 @@ import { getCartTotals, toDecimal } from "~/utils";
 
 function StickyFooter(props) {
   const { cartList, appliedCoupon, showStickyCheckout } = props;
-  const { grandTotal } = useMemo(
+  const { totalPrice } = useMemo(
     () => getCartTotals(cartList, appliedCoupon),
     [appliedCoupon, cartList]
   );
@@ -15,12 +15,12 @@ function StickyFooter(props) {
   return (
     <div className="stick-bottom-button btn-dark pl-5 pr-5 d-sm-show">
       <div className="lh-default text-primary">
-        <span href="#">
+        <span>
           {cartList.length}&nbsp;
           {cartList.length > 1 ? "Items" : "Item"}
         </span>
         <p className="summary-total-price text-left ls-s">
-          ₹ {toDecimal(grandTotal)}
+          ₹ {toDecimal(totalPrice)}
         </p>
       </div>
 
