@@ -338,10 +338,11 @@ export const getCartTotals = (
   cartItems = [],
   appliedCoupon = null,
   shippingTiers = [],
-  prepaid = true
+  prepaid = false
 ) => {
+  console.log("2", cartItems, appliedCoupon, shippingTiers, prepaid);
   let totalPrice = 0;
-  let totalListingprice = 0;
+  let totalListingPrice = 0;
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
     shippingTiers,
@@ -354,7 +355,7 @@ export const getCartTotals = (
 
   for (let i = 0; i < cartItems.length; i++) {
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
-    totalListingprice +=
+    totalListingPrice +=
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
   }
 
@@ -363,28 +364,28 @@ export const getCartTotals = (
   const totalCodDiscount = couponTotal;
   const totalDiscount = prepaid ? totalPrepaidDiscount : totalCodDiscount;
 
-  const totalAmoutSaved = totalListingprice - totalPrice + totalDiscount;
+  const totalAmountSaved = totalListingPrice - totalPrice + totalDiscount;
   const prepaidGrandTotal =
     totalPrice + prepaidShippingCharge - totalPrepaidDiscount;
   const codGrandTotal = totalPrice + codShippingCharge - totalCodDiscount;
   const grandTotal = prepaid ? prepaidGrandTotal : codGrandTotal;
 
-  const cartGrandTotal = grandTotal + prepaidDiscount;
-  const cartAmmountSaved = totalAmoutSaved - prepaidDiscount;
+  const cartGrandTotal = codGrandTotal;
+  const cartAmountSaved = totalAmountSaved - prepaidDiscount;
 
   return {
     totalPrice,
-    totalListingprice,
+    totalListingPrice,
     shippingTotal,
     couponTotal,
     prepaidDiscount,
     totalDiscount,
-    totalAmoutSaved,
-    cartAmmountSaved,
+    totalAmountSaved,
+    cartAmountSaved,
     codGrandTotal,
     prepaidGrandTotal,
     cartGrandTotal,
-    grandTotal,
+    grandTotal: grandTotal.toFixed(),
   };
 };
 

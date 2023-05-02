@@ -363,7 +363,7 @@ function DetailOne(props) {
 
       {sizes.length > 1 && (
         <>
-          <div className="product-form product-variations product-size mb-0 pb-2">
+          <div className="product-form product-variations product-size mb-0 ">
             <div className="product-form-group overflow-auto">
               <div className="d-flex">
                 {sizes.map((item) => (
@@ -382,7 +382,7 @@ function DetailOne(props) {
       )}
 
       {today.getHours() > 8 && today.getHours() < 15  && (
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center mb-2">
         <Clock size={16}/>
         <p className="text-primary ml-1 mb-0">
           For Fastest delivery, order within {deliveryRemainingTime()}
@@ -507,7 +507,7 @@ function DetailOne(props) {
                 )}
                 {!!cartItem && (
                   <button
-                    className={`btn-product btn-cart  text-uppercase ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart dark  text-uppercase ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={(e) => {
@@ -523,7 +523,7 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={addToCartHandler}

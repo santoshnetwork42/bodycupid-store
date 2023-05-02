@@ -63,7 +63,7 @@ function Checkout(props) {
   const isMobile = width < 500;
   const { name } = store;
   const router = useRouter();
-  const [payMethod, setFirst] = useState("PREPAID");
+  const [payMethod, setFirst] = useState("COD");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -598,9 +598,11 @@ function Checkout(props) {
                                   <td>
                                     <h4 className="summary-subtitle">
                                       Shipping
-                                      <p className="m-0">
-                                        For prepaid orders only
-                                      </p>
+                                      {payMethod === "PREPAID" && (
+                                        <p className="m-0">
+                                          For prepaid orders only
+                                        </p>
+                                      )}
                                     </h4>
                                   </td>
                                   <td
@@ -672,7 +674,7 @@ function Checkout(props) {
                       >
                         <h4 className="payment-heading">Payment Methods</h4>
 
-                        <div className="checkbox-group mb-3">
+                        <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
                             tag={"EXTRA 5% OFF"}
@@ -696,7 +698,7 @@ function Checkout(props) {
                       </div>
 
                       {!!formErorr && (
-                        <div className="overflow-hidden mb-4 mt-4">
+                        <div className="overflow-hidden mb-4 ">
                           <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                             <ul className="m-0">
                               {Object.values(formErorr).map((val) => (

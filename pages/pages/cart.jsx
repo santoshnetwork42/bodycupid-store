@@ -132,7 +132,7 @@ function Cart(props) {
                     data-sticky-options="{'bottom': 20}"
                   >
                     <Coupons />
-                    <div className="summary bg-white">
+                    <div className="summary bg-white mb-9">
                       <h3 className="summary-title text-left d-sm-none">
                         Cart Totals
                       </h3>
@@ -173,7 +173,6 @@ function Cart(props) {
                               </tr>
                             </>
                           )}
-
                           <tr className="summary-subtotal">
                             <td>
                               <h4 className="summary-subtitle lh-1">
@@ -242,20 +241,15 @@ function Cart(props) {
                       >
                         Proceed to checkout
                       </ALink>
-                      <div className="d-none stick-bottom-button d-sm-show">
-                        <div className="lh-2">
+                      <div className="stick-bottom-button d-sm-show">
+                        <div className="lh-default">
+                          <span>
+                            {cartList.length}&nbsp;
+                            {cartList.length > 1 ? "Items" : "Item"}
+                          </span>
                           <p className="summary-total-price text-left ls-s">
                             ₹{toDecimal(cartGrandTotal)}
                           </p>
-                          <ALink
-                            onClick={() => {
-                              scrollWithOffset("cart-details", 130);
-                            }}
-                            className="text-underline"
-                            href="#"
-                          >
-                            View details
-                          </ALink>
                         </div>
 
                         <ALink
