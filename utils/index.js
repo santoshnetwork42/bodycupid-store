@@ -340,7 +340,6 @@ export const getCartTotals = (
   shippingTiers = [],
   prepaid = false
 ) => {
-  console.log("2", cartItems, appliedCoupon, shippingTiers, prepaid);
   let totalPrice = 0;
   let totalListingPrice = 0;
   const prepaidShippingCharge = getShippingPrice(
