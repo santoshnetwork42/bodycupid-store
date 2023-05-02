@@ -159,7 +159,6 @@ export const resizeHandler = function (
 ) {
   let bodyClasses =
     document.querySelector("body") && document.querySelector("body").classList;
-    console.log('bodyClasses', bodyClasses)
   bodyClasses = bodyClasses.value
     .split(" ")
     .filter((item) => item !== "home" && item !== "loaded");
