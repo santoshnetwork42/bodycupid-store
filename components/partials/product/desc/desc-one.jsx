@@ -2,12 +2,10 @@ import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
-import { toast } from "react-toastify";
 import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
 import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
@@ -18,6 +16,11 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import SkillBar from "~/components/features/skill-bar";
+<<<<<<< Updated upstream
+=======
+import Loader from "~/components/common/partials/loader";
+import { alertToaster } from "../../../../utils/popupHelper";
+>>>>>>> Stashed changes
 
 const reviewDefault = {
   rating: 5,
@@ -194,12 +197,11 @@ function DescOne(props) {
         ]);
         setShowReview(!showReview);
         getStarAnalytics();
-        toast(
-          <AlertPopup
-            message="Review submitted successfully"
-            status="success"
-          />
+        alertToaster(
+          "Review submitted successfully",
+          "success"
         );
+        
       } catch (error) {
         errorHandler(error);
       }

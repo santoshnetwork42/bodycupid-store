@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import { errorHandler } from "~/utils/errorHandler";
 
 function Login({

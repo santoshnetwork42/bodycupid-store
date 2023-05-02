@@ -2,11 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
-import { toast } from "react-toastify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import { getOrder, validateTransaction } from "~/graphql/api";
 import States from "~/lib/states.json";
 import { toDecimal, getOrderTotal, formateDate } from "~/utils";
@@ -17,6 +15,7 @@ import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
 import Checkmark, { Cross } from "~/components/icons";
+import { alertToaster } from "../../utils/popupHelper";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
@@ -58,12 +57,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
       });
       if (success) {
         fetchOrder();
-        toast(
-          <AlertPopup
-            message="Thank you! Your order has been confirmed."
-            status="success"
-          />
-        );
+        alertToaster("Thank you! Your order has been confirmed.", "success");
       }
     }
   }, [orderId, paymentId, fetchOrder]);
@@ -75,12 +69,8 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
 
   useEffect(() => {
     if (isPaymentProcessing) {
-      toast(
-        <AlertPopup
-          message="Hold On! We're updating your payment status..."
-          status="info"
-        />
-      );
+      alertToaster("Hold On! We're updating your payment status...", "info");
+
       if (timer) clearTimeout(timer);
       const timerId = setTimeout(() => {
         fetchPaymentStatus();
@@ -221,7 +211,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                           <div className="d-flex h-fit-content align-items-center ">
                             {`${item.product.title} `}
                             <span className="d-flex align-items-center flex-row">
-                              <Cross size={14} /> 
+                              <Cross size={14} />
                               {` ${item.quantity || item.cancelledQuantity}`}
                             </span>
                             {item.cancelledQuantity > 0 &&
@@ -236,7 +226,8 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                               <Tag type={getStatusType(item.status)}>
                                 {item.status}
                               </Tag>
-                            )} &nbsp;
+                            )}
+                            &nbsp;
                             {item.variant && (
                               <p className="mb-0">
                                 <strong>{item.variant.title}</strong>

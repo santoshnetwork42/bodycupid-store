@@ -1,5 +1,4 @@
-import { toast } from "react-toastify";
-import AlertPopup from "~/components/features/product/common/alert-popup";
+import { alertToaster } from "./popupHelper";
 import { getFirstVariantId } from "./products";
 
 export const addPhonePrefix = (number) => {
@@ -77,7 +76,7 @@ export const removeHoverEffect = () => {
           }
         }
       }
-    } catch (ex) { }
+    } catch (ex) {}
   }
 };
 
@@ -116,14 +115,14 @@ export const getSortedCategoryAndSubCategory = (items) => {
 export const copyText = (copyText, message) => {
   if (copyText && navigator?.clipboard) {
     navigator.clipboard.writeText(copyText);
-    toast(<AlertPopup message={message} status="info" />);
+    alertToaster(message, "info");
   }
 };
 
 export const getUpdatedCart = (cartList, recordKey, payload) => {
   return [...cartList].map((c) => {
     if (recordKey === c.recordKey) {
-      return { ...c, ...payload, };
+      return { ...c, ...payload };
     }
     return c;
   });

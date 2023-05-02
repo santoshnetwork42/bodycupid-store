@@ -1,11 +1,10 @@
 import { API } from "aws-amplify";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
 
 import { addProductNotification } from "~/graphql/mutations";
 import { errorHandler } from "~/utils/errorHandler";
-import AlertPopup from "./product/common/alert-popup";
+import { alertToaster } from "../../utils/popupHelper";
 
 function ProductNotify(props) {
   const { user, productId, variantId } = props;
@@ -37,20 +36,21 @@ function ProductNotify(props) {
           authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         });
         if (response?.success) {
-          toast(
-            <AlertPopup
-              message="We'll notify you when this product is back in stock"
-              status="success"
-            />
+          alertToaster(
+            "We'll notify you when this product is back in stock",
+            "success"
           );
         } else {
-          toast(<AlertPopup message="Something went wrong" status="error" />);
+          alertToaster(
+            "Something went wrong",
+            "error"
+          );
         }
         setAllreadyNotify(true);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-       errorHandler(error)
+        errorHandler(error);
       }
     },
     [notifyEmail, productId, variantId, user]
