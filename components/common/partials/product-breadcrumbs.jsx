@@ -16,7 +16,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
             </i>
           </ALink>
         </li>
-        {category && (
+        {!!category && (
           <li>
             <i>
               <RightAngle color="currentColor" size={10} />
@@ -32,7 +32,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
             </ALink>
           </li>
         )}
-        {subCategory && (
+        {!!subCategory && (
           <li>
             <i>
               <RightAngle color="currentColor" size={10} />

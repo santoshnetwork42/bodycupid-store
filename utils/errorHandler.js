@@ -3,6 +3,6 @@ import { toast } from "react-toastify";
 import AlertPopup from "~/components/features/product/common/alert-popup";
 
 export const errorHandler = (error) => {
-  Sentry.captureException(error);
+  Sentry.captureException(JSON.stringify(error));
   toast(<AlertPopup message={error?.message || error} status="error" />);
 };
