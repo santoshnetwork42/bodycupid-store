@@ -240,7 +240,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-          parallax.offsetTop +
+        parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -384,7 +384,7 @@ export const getCartTotals = (
     codGrandTotal,
     prepaidGrandTotal,
     cartGrandTotal,
-    grandTotal: grandTotal.toFixed(),
+    grandTotal,
   };
 };
 

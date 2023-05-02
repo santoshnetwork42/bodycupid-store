@@ -80,10 +80,10 @@ function Checkout(props) {
   }, []);
 
   const {
-    totalListingprice,
+    totalListingPrice,
     totalPrice,
     shippingTotal,
-    totalAmoutSaved,
+    totalAmountSaved,
     couponTotal,
     grandTotal,
     prepaidDiscount,
@@ -547,9 +547,9 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-subtotal-price">
-                                      {totalPrice < totalListingprice && (
+                                      {totalPrice < totalListingPrice && (
                                         <del className="summary-subtotal-listingprice mr-2">
-                                          ₹{toDecimal(totalListingprice)}
+                                          ₹{toDecimal(totalListingPrice)}
                                         </del>
                                       )}
                                       ₹{toDecimal(totalPrice)}
@@ -643,11 +643,11 @@ function Checkout(props) {
                                         <span>3-5 days</span>
                                       </p>
                                     </div>
-                                    {!!totalAmoutSaved && (
+                                    {!!totalAmountSaved && (
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
                                           <span>{`₹${toDecimal(
-                                            totalAmoutSaved
+                                            totalAmountSaved
                                           )}`}</span>{" "}
                                           saved so far on this order
                                         </p>

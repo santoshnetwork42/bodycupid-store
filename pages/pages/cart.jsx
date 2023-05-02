@@ -48,12 +48,12 @@ function Cart(props) {
   }, [cartList, appliedCoupon]);
 
   const {
-    totalListingprice,
+    totalListingPrice,
     totalPrice,
     shippingTotal,
     couponTotal,
     cartGrandTotal,
-    cartAmmountSaved,
+    cartAmountSaved,
   } = useMemo(
     () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
     [cartItems, appliedCoupon, shippingTiers]
@@ -146,9 +146,9 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-subtotal-price">
-                                {totalPrice < totalListingprice && (
+                                {totalPrice < totalListingPrice && (
                                   <del className="summary-subtotal-listingprice mr-2">
-                                    ₹{toDecimal(totalListingprice)}
+                                    ₹{toDecimal(totalListingPrice)}
                                   </del>
                                 )}
                                 ₹{toDecimal(totalPrice)}
@@ -220,11 +220,11 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!cartAmmountSaved && (
+                              {!!cartAmountSaved && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
                                     <span>{`₹${toDecimal(
-                                      cartAmmountSaved
+                                      cartAmountSaved
                                     )} `}</span>
                                     saved so far on this order
                                   </p>
