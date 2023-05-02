@@ -16,11 +16,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
 import useWindowDimensions from "~/utils/getWindowDimension";
 import SkillBar from "~/components/features/skill-bar";
-<<<<<<< Updated upstream
-=======
-import Loader from "~/components/common/partials/loader";
 import { alertToaster } from "../../../../utils/popupHelper";
->>>>>>> Stashed changes
 
 const reviewDefault = {
   rating: 5,
