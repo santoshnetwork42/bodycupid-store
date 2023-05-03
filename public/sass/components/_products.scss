@@ -57,7 +57,7 @@
                 font-size: 1.4rem,
                 font-weight: 400,
                 line-height: false,
-                letter-spacing: .02rem,
+                letter-spacing: .05rem,
                 text-transform: false,
                 color: $dark-color,
                 padding-right: 20px),
@@ -461,6 +461,10 @@
     @include print_css(product, body);
     padding: 1rem 1.5rem 1rem;
 
+    .details-wrapper{
+        height: 5rem;
+        margin-bottom: 2rem;
+    }
     >.btn-wishlist {
         position: absolute;
         top: 1.2rem;
@@ -536,7 +540,6 @@
 
 .product-card-title {
     font-size: 1.4rem !important;
-    min-height: 4rem;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
@@ -586,7 +589,6 @@
         font-size: 1.3rem;
         text-align: center;
         line-height: 1;
-        margin: 0px 0.8rem 0px .5rem;
     }
 }
 

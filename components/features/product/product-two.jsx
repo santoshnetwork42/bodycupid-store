@@ -178,44 +178,40 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details">
-        {/* <div className="product-tags">
-          {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-        </div> */}
-
-        <h3 className="product-name text-uppercase product-card-title p-0">
-          <ALink href={`/product/${slug}`}>{title}</ALink>
-        </h3>
-
-        <div className="product-tags lh-default">
-          {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
-        </div>
-
-        <div className="ratings-container mb-0">
-          <div className="ratings-full d-flex rating-product-list">
-            <Star size={20} color={"#FAB73B"} />
+        <div className="details-wrapper">
+          <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
+            <ALink href={`/product/${slug}`}>{title}</ALink>
+          </h3>
+          {/* <div className="product-tags lh-default">
+            {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
+          </div> */}
+          <div className="ratings-container mb-0">
+            <div className="ratings-full d-flex rating-product-list mr-1">
+              <Star size={20} color={"#FAB73B"} />
+            </div>
+            <span className="rating">{rating}</span>
+            <ALink
+              href={{
+                pathname: `/product/${slug}`,
+                query: { review: true },
+              }}
+              className="rating-reviews"
+            >
+              ({totalRatings || 0} reviews)
+            </ALink>
           </div>
-          <span className="rating">{rating}</span>
-          <ALink
-            href={{
-              pathname: `/product/${slug}`,
-              query: { review: true },
-            }}
-            className="rating-reviews"
-          >
-            ( {totalRatings || 0} reviews )
-          </ALink>
+        
         </div>
-        <div className="product-price product-sm mt-1 mb-2 lh-1">
-          <ins className="new-price ">
-            {price === listingPrice && <span>MRP</span>} ₹
-            {toDecimal(price || 0)}
-          </ins>
-          {price < listingPrice && listingPrice && (
-            <span className="old-price ml-1 ">
-              <span>MRP</span>&nbsp;<del>₹{toDecimal(listingPrice || 0)}</del>
-            </span>
-          )}
-        </div>
+  <div className="product-price product-sm mt-2 mb-2 lh-1">
+            <ins className="new-price ">
+               ₹{toDecimal(price || 0)}
+            </ins>
+            {price < listingPrice && listingPrice && (
+              <span className="old-price ml-1 ">
+                <del>₹{toDecimal(listingPrice || 0)}</del>
+              </span>
+            )}
+          </div>
         <div className="product-action">
           {!!hasInventory ? (
             <>
