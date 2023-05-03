@@ -143,11 +143,7 @@
     p {
         font-size: inherit;
     }
-    a:not(.social-link) {   
-        &:hover {
-            @include css( color, footer, _link-active-color );
-        }
-    }
+    
     .social-link {
         display: flex;
         align-items: center;

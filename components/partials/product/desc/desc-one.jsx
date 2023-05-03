@@ -2,12 +2,10 @@ import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
-import { toast } from "react-toastify";
 import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
 import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
@@ -17,6 +15,7 @@ import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
 import SkillBar from "~/components/features/skill-bar";
+import { alertToaster } from "../../../../utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const reviewDefault = {
@@ -31,7 +30,7 @@ const reviewColor = ["#76DB98", "#B7EA83", "#F6D757", "#FBB851", "#F17A54"];
 
 function DescOne(props) {
   const { product, openModal, user, productFAQs } = props;
-  const { id, totalRatings, longDescription, title, rating } = product;
+  const { id, totalRatings, longDescription, rating } = product;
 
   const { width } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
@@ -65,7 +64,7 @@ function DescOne(props) {
         })
       );
       if (item) {
-        const data = item.result.buckets
+        const data = item.result?.buckets
           .sort((a, b) => +a.key - +b.key)
         const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
      
@@ -88,6 +87,7 @@ function DescOne(props) {
         setReviewAnalytics(analytics);
       }
     } catch (e) {
+      console.log('e :>> ', e);
       errorHandler(e);
     }
   };
@@ -121,6 +121,7 @@ function DescOne(props) {
           }
         )
         .catch((err) => {
+          console.log('err :>> ', err);
           errorHandler(err);
           setLoading(false);
         });
@@ -194,12 +195,11 @@ function DescOne(props) {
         ]);
         setShowReview(!showReview);
         getStarAnalytics();
-        toast(
-          <AlertPopup
-            message="Review submitted successfully"
-            status="success"
-          />
+        alertToaster(
+          "Review submitted successfully",
+          "success"
         );
+        
       } catch (error) {
         errorHandler(error);
       }
@@ -249,7 +249,7 @@ function DescOne(props) {
           noDisplayStyle
           onExpanded={() => {
             if (!reviews.length) {
-              getProductReviews();
+               getProductReviews();
               getStarAnalytics();
             }
           }}
@@ -274,12 +274,12 @@ function DescOne(props) {
                         <RatingStar value={rating} />
                       </div>
                     </div>
+                    {console.log('reviewAnalytics :>> ', reviewAnalytics)}
                     <div className="rating w-100">
-                      {console.log("reviewAnalytics", reviewAnalytics)}
-                      {reviewAnalytics.map((r, i) => (
+                      {reviewAnalytics.map((r) => (
                         <div
                           className="d-flex w-100 align-items-center  justify-content-center mt-2"
-                          key={r.key}
+                          key={+r.key}
                         >
                           <span className="mr-2 d-flex flex-column percent">
                             {r.key} Star

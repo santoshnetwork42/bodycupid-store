@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -23,7 +22,6 @@ import Addresses from "~/components/common/addresses";
 import loadScript from "~/utils/loadScript";
 import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import Passwordless from "~/components/common/partials/passwordless";
 import {
   validateAddress,
@@ -42,6 +40,7 @@ import {
 } from "~/components/icons";
 import { Collapse } from "react-bootstrap";
 import PaymentMethods from "~/components/features/payment-radio";
+import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 function Checkout(props) {
@@ -145,12 +144,7 @@ function Checkout(props) {
         var rzp1 = new Razorpay(options);
         rzp1.open();
       } else {
-        toast(
-          <AlertPopup
-            message="Something went wrong. Try Again!"
-            status="error"
-          />
-        );
+        alertToaster("Something went wrong. Try Again!", "error");
       }
     },
     [store, user]

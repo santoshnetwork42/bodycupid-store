@@ -2,16 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import getRandomString from "~/utils/getRandomString";
 import { modalActions } from "~/store/modal";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 import { errorHandler } from "~/utils/errorHandler";
+import { alertToaster } from "~/utils/popupHelper";
 
 function Passwordless({
   auth,
@@ -74,7 +73,7 @@ function Passwordless({
       setConfirmSignUp("SIGNUP");
     } catch (error) {
       console.log("error signing up:", error);
-      toast(<AlertPopup message={error.message} status="error" />);
+      alertToaster(error.message,"error")
     }
     return false;
   }, [state]);
@@ -133,7 +132,7 @@ function Passwordless({
         } else if (error.code === "UserNotFoundException") {
           await handleSignup();
         } else {
-          toast(<AlertPopup message={error.message} status="error" />);
+          alertToaster(error.message,"error")
         }
         setLoading(false);
       }

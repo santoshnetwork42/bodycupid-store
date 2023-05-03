@@ -6,7 +6,6 @@ import { House, RightAngle } from "~/components/icons";
 function ProductBreadcrumbs({ category, subCategory }) {
   const { slug, name } = category || {};
   const { slug: subCatSlug, name: subCatName } = subCategory || {};
-
   return (
     <div>
       <ul className="breadcrumb breadcrumb-lg">
