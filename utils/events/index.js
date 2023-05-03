@@ -1,7 +1,7 @@
 import { getFirstVariantId } from "~/utils/products";
 
 export const itemMapper = (product, coupon) => {
-  let { variantId, id, title, category, subCategory, section, price, listingPrice, qty = 1, vendor } = product;
+  let { variantId, id, title, category, subCategory, section, price, listingPrice, qty = 1, vendor, sku } = product;
 
   if (!variantId) {
     variantId = getFirstVariantId(product);
@@ -16,7 +16,7 @@ export const itemMapper = (product, coupon) => {
     attribue: {
       content_category: category?.name,
       content_subcategory: subCategory?.name,
-      content_ids: [id],
+      content_ids: [sku],
       content_name: title,
       content_type: "product_group",
       currency: "INR",

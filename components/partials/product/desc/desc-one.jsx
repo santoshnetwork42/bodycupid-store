@@ -14,9 +14,9 @@ import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
-import useWindowDimensions from "~/utils/getWindowDimension";
 import SkillBar from "~/components/features/skill-bar";
 import { alertToaster } from "../../../../utils/popupHelper";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const reviewDefault = {
   rating: 5,
@@ -30,7 +30,7 @@ const reviewColor = ["#76DB98", "#B7EA83", "#F6D757", "#FBB851", "#F17A54"];
 
 function DescOne(props) {
   const { product, openModal, user, productFAQs } = props;
-  const { id, totalRatings, longDescription, title, rating } = product;
+  const { id, totalRatings, longDescription, rating } = product;
 
   const { width } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
@@ -64,7 +64,7 @@ function DescOne(props) {
         })
       );
       if (item) {
-        const data = item.result.buckets
+        const data = item.result?.buckets
           .sort((a, b) => +a.key - +b.key)
         const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
      
@@ -87,6 +87,7 @@ function DescOne(props) {
         setReviewAnalytics(analytics);
       }
     } catch (e) {
+      console.log('e :>> ', e);
       errorHandler(e);
     }
   };
@@ -120,6 +121,7 @@ function DescOne(props) {
           }
         )
         .catch((err) => {
+          console.log('err :>> ', err);
           errorHandler(err);
           setLoading(false);
         });
@@ -247,12 +249,12 @@ function DescOne(props) {
           noDisplayStyle
           onExpanded={() => {
             if (!reviews.length) {
-              getProductReviews();
+               getProductReviews();
               getStarAnalytics();
             }
           }}
         >
-          <div className="product-tab-reviews">
+          {/* <div className="product-tab-reviews">
             <div className="reply mb-8">
               <div className="title-wrapper text-left">
                 {!!reviews.length && (
@@ -272,12 +274,12 @@ function DescOne(props) {
                         <RatingStar value={rating} />
                       </div>
                     </div>
+                    {console.log('reviewAnalytics :>> ', reviewAnalytics)}
                     <div className="rating w-100">
-                      {console.log("reviewAnalytics", reviewAnalytics)}
-                      {reviewAnalytics.map((r, i) => (
+                      {reviewAnalytics.map((r) => (
                         <div
                           className="d-flex w-100 align-items-center  justify-content-center mt-2"
-                          key={r.key}
+                          key={+r.key}
                         >
                           <span className="mr-2 d-flex flex-column percent">
                             {r.key} Star
@@ -466,7 +468,7 @@ function DescOne(props) {
               nextToken={token}
               content="reviews"
             />
-          </div>
+          </div> */}
         </Card>
 
         {!!product.hasFaq && (

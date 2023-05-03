@@ -39,9 +39,9 @@ import {
   UpAngle,
 } from "~/components/icons";
 import { Collapse } from "react-bootstrap";
-import useWindowDimensions from "~/utils/getWindowDimension";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 function Checkout(props) {
   const {
@@ -58,8 +58,7 @@ function Checkout(props) {
     startCheckout,
     openAllAddressModal,
   } = props;
-  const { width } = useWindowDimensions();
-  const isMobile = width < 500;
+  const { isSmallSize: isMobile } = useWindowDimensions();
   const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("COD");
