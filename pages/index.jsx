@@ -26,6 +26,7 @@ import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
 import StorySection from "~/components/partials/home/story-section";
 import ProductCollection from "~/components/partials/home/product-collection";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 function HomePage({
   hero,
@@ -37,7 +38,8 @@ function HomePage({
   store,
 }) {
   const { name } = store || {};
-
+  const { isSmallSize } = useWindowDimensions();
+  
   return (
     <main className="main home searchBar">
       <Head>
@@ -50,13 +52,13 @@ function HomePage({
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
-
-        <ProductCollection
-          products={bestSellerProducts}
-          title="Best sellers"
-          slug="best-seller"
-          redirectTo="/collections/best-seller"
-        />
+          <ProductCollection
+            products={bestSellerProducts}
+            title="Best sellers"
+           disableCarousel={isSmallSize}
+            slug="best-seller"
+            redirectTo="/collections/best-seller"
+          />
         <ProductCollection
           products={featuredProducts}
           title="Our featured"

@@ -16,8 +16,8 @@ import Card from "~/components/features/accordion/card";
 import { uploadImages } from "~/utils/imageupload";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
-import useWindowDimensions from "~/utils/getWindowDimension";
 import SkillBar from "~/components/features/skill-bar";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const reviewDefault = {
   rating: 5,

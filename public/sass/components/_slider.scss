@@ -23,6 +23,22 @@
     }
 }
 
+.remove-carousel{
+    overflow-x: hidden;
+    .owl-stage{
+        transform: none !important;
+        width: fit-content;
+        display: grid !important;
+        grid-template-columns: 50vw 50vw !important;
+    }
+    .owl-next{
+        display: none !important;
+    }
+    .owl-dots{
+        display: none;
+    }
+}
+
 .owl-theme {
     .owl-nav.disabled+.owl-dots {
         margin-top: 1.5rem;
