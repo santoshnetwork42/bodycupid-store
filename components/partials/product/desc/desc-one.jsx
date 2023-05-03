@@ -254,7 +254,7 @@ function DescOne(props) {
             }
           }}
         >
-          {/* <div className="product-tab-reviews">
+          <div className="product-tab-reviews">
             <div className="reply mb-8">
               <div className="title-wrapper text-left">
                 {!!reviews.length && (
@@ -468,7 +468,7 @@ function DescOne(props) {
               nextToken={token}
               content="reviews"
             />
-          </div> */}
+          </div>
         </Card>
 
         {!!product.hasFaq && (
