@@ -390,7 +390,7 @@ export const getCartTotals = (
 
 /**
  * utils to get Shipping Price of products in cart.
- */
+ */ 
 
 export const getShippingPrice = (
   cartItems = [],
