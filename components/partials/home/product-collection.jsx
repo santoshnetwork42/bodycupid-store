@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
@@ -8,7 +8,25 @@ import ProductTwo from "~/components/features/product/product-two";
 import { productSlider } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
-function ProductCollection({ products = [], title = "", slug, redirectTo }) {
+function ProductCollection({
+  products = [],
+  title = "",
+  slug,
+  redirectTo,
+  disableCarousel,
+}) {
+  useEffect(() => {
+    const ele = document.getElementById("product-carousel");
+    if (ele) {
+      if (disableCarousel) {
+        ele.classList.remove("owl-carousel");
+        ele.classList.add("remove-carousel");
+      } else {
+        ele.classList.add("owl-carousel");
+        ele.classList.remove("remove-carousel");
+      }
+    }
+  }, [disableCarousel]);
   return (
     <Reveal
       keyframes={fadeIn}
@@ -27,7 +45,11 @@ function ProductCollection({ products = [], title = "", slug, redirectTo }) {
           )}
         </div>
 
-        <OwlCarousel adClass="owl-theme owl-nav-full" options={productSlider}>
+        <OwlCarousel
+          id="product-carousel"
+          adClass="owl-theme owl-nav-full"
+          options={productSlider}
+        >
           {products.map((item) => (
             <ProductTwo
               adClass="mb-4 text-center"
