@@ -240,7 +240,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-        parallax.offsetTop +
+          parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -370,7 +370,7 @@ export const getCartTotals = (
   const grandTotal = prepaid ? prepaidGrandTotal : codGrandTotal;
 
   const cartGrandTotal = codGrandTotal;
-  const cartAmountSaved = totalAmountSaved - prepaidDiscount;
+  const cartAmountSaved = totalAmountSaved;
 
   return {
     totalPrice,
@@ -390,7 +390,7 @@ export const getCartTotals = (
 
 /**
  * utils to get Shipping Price of products in cart.
- */
+ */ 
 
 export const getShippingPrice = (
   cartItems = [],
