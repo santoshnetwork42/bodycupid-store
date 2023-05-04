@@ -388,9 +388,13 @@ export const getCartTotals = (
   };
 };
 
+export const toFixed = (number) => {
+  return parseInt(number.toFixed());
+};
+
 /**
  * utils to get Shipping Price of products in cart.
- */ 
+ */
 
 export const getShippingPrice = (
   cartItems = [],

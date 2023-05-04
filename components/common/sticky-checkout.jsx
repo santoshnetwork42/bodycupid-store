@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { getCartTotals, toDecimal } from "~/utils";
+import { getCartTotals, toFixed } from "~/utils";
 
 function StickyFooter(props) {
   const { cartList, appliedCoupon, showStickyCheckout } = props;
@@ -20,7 +20,7 @@ function StickyFooter(props) {
           {cartList.length > 1 ? "Items" : "Item"}
         </span>
         <p className="summary-total-price text-left ls-s">
-          ₹ {toDecimal(totalPrice)}
+          ₹ {toFixed(totalPrice)}
         </p>
       </div>
 

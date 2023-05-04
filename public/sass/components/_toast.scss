@@ -50,7 +50,9 @@
 
 @include mq(xs, max) {
     .toast-container.Toastify__toast-container {
+        position: absolute;
         left: 1rem;
+        right: 1rem;
     }
 
     .Toastify__toast:not(:last-child) {

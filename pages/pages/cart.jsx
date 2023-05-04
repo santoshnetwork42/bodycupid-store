@@ -7,7 +7,7 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { toDecimal, getCartTotals } from "~/utils";
+import { getCartTotals, toFixed } from "~/utils";
 import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
@@ -148,10 +148,10 @@ function Cart(props) {
                               <p className="summary-subtotal-price">
                                 {totalPrice < totalListingPrice && (
                                   <del className="summary-subtotal-listingprice mr-2">
-                                    ₹{toDecimal(totalListingPrice)}
+                                    ₹{toFixed(totalListingPrice)}
                                   </del>
                                 )}
-                                ₹{toDecimal(totalPrice)}
+                                ₹{toFixed(totalPrice)}
                               </p>
                             </td>
                           </tr>
@@ -167,7 +167,7 @@ function Cart(props) {
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
-                                    -{`₹${toDecimal(couponTotal)}`}
+                                    -{`₹${toFixed(couponTotal)}`}
                                   </p>
                                 </td>
                               </tr>
@@ -177,7 +177,6 @@ function Cart(props) {
                             <td>
                               <h4 className="summary-subtitle lh-1">
                                 Shipping
-                                <p className="m-0">For prepaid orders only</p>
                               </h4>
                             </td>
                             <td>
@@ -187,7 +186,7 @@ function Cart(props) {
                                 }`}
                               >
                                 {!!shippingTotal
-                                  ? `₹${toDecimal(shippingTotal)}`
+                                  ? `₹${toFixed(shippingTotal)}`
                                   : "FREE"}
                               </p>
                             </td>
@@ -205,7 +204,7 @@ function Cart(props) {
                             </td>
                             <td>
                               <p className="summary-total-price font-weight-semi-bold  ls-s">
-                                ₹{toDecimal(cartGrandTotal)}
+                                ₹{toFixed(cartGrandTotal)}
                               </p>
                             </td>
                           </tr>
@@ -223,7 +222,7 @@ function Cart(props) {
                               {!!cartAmountSaved && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
-                                    <span>{`₹${toDecimal(
+                                    <span>{`₹${toFixed(
                                       cartAmountSaved
                                     )} `}</span>
                                     saved so far on this order
@@ -248,7 +247,7 @@ function Cart(props) {
                             {cartList.length > 1 ? "Items" : "Item"}
                           </span>
                           <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(cartGrandTotal)}
+                            ₹{toFixed(cartGrandTotal)}
                           </p>
                         </div>
 
