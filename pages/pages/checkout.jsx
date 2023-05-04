@@ -14,7 +14,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { getCartTotals, toFixed } from "~/utils";
+import { getCartTotals, toInteger, toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -442,7 +442,7 @@ function Checkout(props) {
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
-                            ₹{toFixed(grandTotal)}
+                            ₹{toInteger(grandTotal)}
                           </p>
                         </div>
                       </div>
@@ -483,14 +483,14 @@ function Checkout(props) {
                                         <div className="product-subtotal mt-1">
                                           {!(item.isBogo && item.qty === 1) && (
                                             <span className="sm-product-amount">
-                                              ₹{toFixed(item.price)}
+                                              ₹{toDecimal(item.price)}
                                             </span>
                                           )}
 
                                           <p className="m-0 product-discount-listing">
                                             {item.price < item.listingPrice && (
                                               <del className="summary-subtotal-listingprice">
-                                                ₹{toFixed(item.listingPrice)}
+                                                ₹{toDecimal(item.listingPrice)}
                                               </del>
                                             )}
                                             {item.isBogo && item.qty === 1 ? (
@@ -545,10 +545,10 @@ function Checkout(props) {
                                     <p className="summary-subtotal-price">
                                       {totalPrice < totalListingPrice && (
                                         <del className="summary-subtotal-listingprice mr-2">
-                                          ₹{toFixed(totalListingPrice)}
+                                          ₹{toDecimal(totalListingPrice)}
                                         </del>
                                       )}
-                                      ₹{toFixed(totalPrice)}
+                                      ₹{toDecimal(totalPrice)}
                                     </p>
                                   </td>
                                 </tr>
@@ -570,7 +570,7 @@ function Checkout(props) {
                                       </td>
                                       <td>
                                         <p className="summary-subtotal-price discount-price-color">
-                                          - {`₹${toFixed(couponTotal)}`}
+                                          - {`₹${toDecimal(couponTotal)}`}
                                         </p>
                                       </td>
                                     </tr>
@@ -585,7 +585,7 @@ function Checkout(props) {
                                       </h4>
                                     </td>
                                     <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
-                                      - {`₹${toFixed(prepaidDiscount)}`}
+                                      - {`₹${toDecimal(prepaidDiscount)}`}
                                     </td>
                                   </tr>
                                 )}
@@ -607,7 +607,7 @@ function Checkout(props) {
                                     }`}
                                   >
                                     {!!shippingTotal
-                                      ? `₹${toFixed(shippingTotal)}`
+                                      ? `₹${toDecimal(shippingTotal)}`
                                       : "Free"}
                                   </td>
                                 </tr>
@@ -623,7 +623,7 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-total-price ls-s">
-                                      ₹{toFixed(grandTotal)}
+                                      ₹{toInteger(grandTotal)}
                                     </p>
                                   </td>
                                 </tr>
@@ -642,7 +642,7 @@ function Checkout(props) {
                                     {!!totalAmountSaved && (
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
-                                          <span>{`₹${toFixed(
+                                          <span>{`₹${toDecimal(
                                             totalAmountSaved
                                           )}`}</span>{" "}
                                           saved so far on this order
@@ -677,7 +677,7 @@ function Checkout(props) {
                             isSelected={payMethod === "PREPAID"}
                             description="Use credit/debit card, net-banking, UPI, wallets to complete the payment."
                             onClick={() => {
-                              !isFirst && setFirst("PREPAID");
+                              setFirst("PREPAID");
                             }}
                             amount={prepaidGrandTotal}
                           />
@@ -687,10 +687,7 @@ function Checkout(props) {
                             isSelected={payMethod === "COD"}
                             description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
                             onClick={() => {
-                              !codDisabled &&
-                                (payMethod === "NONE" ||
-                                  payMethod === "PREPAID") &&
-                                setFirst("COD");
+                              !codDisabled && setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />
