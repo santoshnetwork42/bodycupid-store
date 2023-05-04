@@ -89,7 +89,7 @@ function DescOne(props) {
         setReviewLoading(false);
       }
     } catch (e) {
-       setReviewLoading(false);
+      setReviewLoading(false);
       errorHandler(e);
     }
   };
@@ -199,11 +199,7 @@ function DescOne(props) {
         ]);
         setShowReview(!showReview);
         getStarAnalytics();
-        alertToaster(
-          "Review submitted successfully",
-          "success"
-        );
-
+        alertToaster("Review submitted successfully", "success");
       } catch (error) {
         errorHandler(error);
       }
@@ -222,7 +218,10 @@ function DescOne(props) {
   };
 
   return (
-    <div className="col-md-12 mb-6 product-description" key={`desc-${product.id}`}>
+    <div
+      className="col-md-12 mb-6 product-description"
+      key={`desc-${product.id}`}
+    >
       <Accordion adClass="accordion-simple">
         <Card
           title="Description"
@@ -253,7 +252,7 @@ function DescOne(props) {
           noDisplayStyle
           onExpanded={() => {
             if (!reviews.length) {
-               getProductReviews();
+              getProductReviews();
               getStarAnalytics();
             }
           }}
@@ -280,138 +279,137 @@ function DescOne(props) {
                             )}
                           </div>
 
-                        <RatingStar value={rating} />
-                      </div>
-                    </div>
-                    <div className="rating w-100">
-                      {console.log("reviewAnalytics", reviewAnalytics)}
-                      {reviewAnalytics.map((r, i) => (
-                        <div
-                          className="d-flex w-100 align-items-center  justify-content-center mt-2"
-                          key={r.key}
-                        >
-                          <span className="mr-2 d-flex flex-column percent">
-                            {r.key} Star
-                          </span>
-                          <SkillBar
-                            color={reviewColor[+r.key]}
-                            className="review-bar"
-                            percentage={r.doc_count}
-                          />
-                          
-                          <div className="ml-1 percent">{r.percentage}%</div>
+                          <RatingStar value={rating} />
                         </div>
-                      ))}
-                    </div>
-                    <div className="w-100 d-flex align-items-center justify-content-end">
-                      <div className="buttons  ml-1 mr-1 ">
-                        <div className="justify-content-end w-100">
-                          <button
-                            className="btn w-100  btn-rounded mb-2"
-                            onClick={() => {
-                              setShowReview(!showReview);
-                            }}
+                      </div>
+                      <div className="rating w-100">
+                        {reviewAnalytics.map((r, i) => (
+                          <div
+                            className="d-flex w-100 align-items-center  justify-content-center mt-2"
+                            key={r.key}
                           >
-                            Write a review
-                          </button>
+                            <span className="mr-2 d-flex flex-column percent">
+                              {r.key} Star
+                            </span>
+                            <SkillBar
+                              color={reviewColor[+r.key - 1]}
+                              className="review-bar"
+                              percentage={r.doc_count}
+                            />
+
+                            <div className="ml-1 percent">{r.percentage}%</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="w-100 d-flex align-items-center justify-content-end">
+                        <div className="buttons  ml-1 mr-1 ">
+                          <div className="justify-content-end w-100">
+                            <button
+                              className="btn w-100  btn-rounded mb-2"
+                              onClick={() => {
+                                setShowReview(!showReview);
+                              }}
+                            >
+                              Write a review
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                  {showReview && (
+                    <>
+                      <hr className="product-divider"></hr>
+                      <p>
+                        Your email address will not be published. Required
+                        fields are marked *
+                      </p>
+                    </>
+                  )}
+                </div>
                 {showReview && (
-                  <>
-                    <hr className="product-divider"></hr>
-                    <p>
-                      Your email address will not be published. Required fields
-                      are marked *
-                    </p>
-                  </>
-                )}
-              </div>
-              {showReview && (
-                <form action="#" onSubmit={submitReview}>
-                  <div className="row">
-                    <div className="col-md-6 mb-5">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="reply-name"
-                        name="reply-name"
-                        placeholder="Name *"
-                        required
-                        value={reviewState.name}
-                        onChange={(e) =>
-                          setReview({ ...reviewState, name: e.target.value })
-                        }
-                        onBlur={(e) =>
-                          setReview({
-                            ...reviewState,
-                            name: e.target.value.trim(),
-                          })
-                        }
+                  <form action="#" onSubmit={submitReview}>
+                    <div className="row">
+                      <div className="col-md-6 mb-5">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="reply-name"
+                          name="reply-name"
+                          placeholder="Name *"
+                          required
+                          value={reviewState.name}
+                          onChange={(e) =>
+                            setReview({ ...reviewState, name: e.target.value })
+                          }
+                          onBlur={(e) =>
+                            setReview({
+                              ...reviewState,
+                              name: e.target.value.trim(),
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="col-md-6 mb-5">
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="reply-email"
+                          name="reply-email"
+                          placeholder="Email *"
+                          required
+                          value={reviewState.email}
+                          onChange={(e) =>
+                            setReview({ ...reviewState, email: e.target.value })
+                          }
+                          onBlur={(e) =>
+                            setReview({
+                              ...reviewState,
+                              email: e.target.value.trim(),
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div className="rating-form">
+                      <label htmlFor="rating" className="text-dark">
+                        Your rating *{" "}
+                      </label>
+                      <RatingStar
+                        onClick={(num) => {
+                          setReview({ ...reviewState, rating: num });
+                        }}
+                        value={reviewState.rating}
+                        editable
                       />
                     </div>
-                    <div className="col-md-6 mb-5">
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="reply-email"
-                        name="reply-email"
-                        placeholder="Email *"
-                        required
-                        value={reviewState.email}
-                        onChange={(e) =>
-                          setReview({ ...reviewState, email: e.target.value })
-                        }
-                        onBlur={(e) =>
-                          setReview({
-                            ...reviewState,
-                            email: e.target.value.trim(),
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-                  <div className="rating-form">
-                    <label htmlFor="rating" className="text-dark">
-                      Your rating *{" "}
-                    </label>
-                    <RatingStar
-                      onClick={(num) => {
-                        setReview({ ...reviewState, rating: num });
-                      }}
-                      value={reviewState.rating}
-                      editable
+                    <textarea
+                      id="reply-message"
+                      cols="30"
+                      rows="6"
+                      className="form-control mb-4"
+                      placeholder="Comment *"
+                      required
+                      value={reviewState.comment}
+                      onChange={(e) =>
+                        setReview({ ...reviewState, comment: e.target.value })
+                      }
+                      onBlur={(e) =>
+                        setReview({
+                          ...reviewState,
+                          comment: e.target.value.trim(),
+                        })
+                      }
                     />
-                  </div>
-                  <textarea
-                    id="reply-message"
-                    cols="30"
-                    rows="6"
-                    className="form-control mb-4"
-                    placeholder="Comment *"
-                    required
-                    value={reviewState.comment}
-                    onChange={(e) =>
-                      setReview({ ...reviewState, comment: e.target.value })
-                    }
-                    onBlur={(e) =>
-                      setReview({
-                        ...reviewState,
-                        comment: e.target.value.trim(),
-                      })
-                    }
-                  />
-                  <div className="d-flex w-100 img-wrapper justify-content-end">
-                    <div className=" img-wrapper">
-                      {reviewState.images.map((img, index) => (
-                        <div className="img_wrp mr-2" key={img}>
-                          <img
-                            src={getPublicImageURL(img)}
-                            className="img-preview"
-                            alt=""
-                          />
+                    <div className="d-flex w-100 img-wrapper justify-content-end">
+                      <div className=" img-wrapper">
+                        {reviewState.images.map((img, index) => (
+                          <div className="img_wrp mr-2" key={img}>
+                            <img
+                              src={getPublicImageURL(img)}
+                              className="img-preview"
+                              alt=""
+                            />
 
                             <i
                               className="d-icon-close close"
@@ -445,9 +443,7 @@ function DescOne(props) {
                       >
                         <div className="d-flex justify-content-center align-items-center">
                           Submit
-                          {loading && (
-                            <div className="spin-loader ml-2" />
-                          )}
+                          {loading && <div className="spin-loader ml-2" />}
                         </div>
                       </button>
                     </div>
