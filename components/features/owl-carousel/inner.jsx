@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import Carousel from "react-owl-carousel2";
 
 function OwlCarousel(props) {
-  const { adClass, options } = props;
+  const { adClass, options, id } = props;
   const carouselRef = useRef(null);
   const defaultOptions = {
     items: 1,
@@ -44,6 +44,7 @@ function OwlCarousel(props) {
     props.children.length > 0 ||
     (props.children && props.children.length === undefined) ? (
       <Carousel
+        id={id}
         ref={carouselRef}
         className={`owl-carousel ${adClass}`}
         options={settings}

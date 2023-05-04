@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -23,7 +22,6 @@ import Addresses from "~/components/common/addresses";
 import loadScript from "~/utils/loadScript";
 import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import Passwordless from "~/components/common/partials/passwordless";
 import {
   validateAddress,
@@ -41,8 +39,9 @@ import {
   UpAngle,
 } from "~/components/icons";
 import { Collapse } from "react-bootstrap";
-import useWindowDimensions from "~/utils/getWindowDimension";
 import PaymentMethods from "~/components/features/payment-radio";
+import { alertToaster } from "~/utils/popupHelper";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 function Checkout(props) {
   const {
@@ -59,11 +58,10 @@ function Checkout(props) {
     startCheckout,
     openAllAddressModal,
   } = props;
-  const { width } = useWindowDimensions();
-  const isMobile = width < 500;
+  const { isSmallSize: isMobile } = useWindowDimensions();
   const { name } = store;
   const router = useRouter();
-  const [payMethod, setFirst] = useState("PREPAID");
+  const [payMethod, setFirst] = useState("COD");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -80,10 +78,10 @@ function Checkout(props) {
   }, []);
 
   const {
-    totalListingprice,
+    totalListingPrice,
     totalPrice,
     shippingTotal,
-    totalAmoutSaved,
+    totalAmountSaved,
     couponTotal,
     grandTotal,
     prepaidDiscount,
@@ -146,12 +144,7 @@ function Checkout(props) {
         var rzp1 = new Razorpay(options);
         rzp1.open();
       } else {
-        toast(
-          <AlertPopup
-            message="Something went wrong. Try Again!"
-            status="error"
-          />
-        );
+        alertToaster("Something went wrong. Try Again!", "error");
       }
     },
     [store, user]
@@ -547,9 +540,9 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-subtotal-price">
-                                      {totalPrice < totalListingprice && (
+                                      {totalPrice < totalListingPrice && (
                                         <del className="summary-subtotal-listingprice mr-2">
-                                          ₹{toDecimal(totalListingprice)}
+                                          ₹{toDecimal(totalListingPrice)}
                                         </del>
                                       )}
                                       ₹{toDecimal(totalPrice)}
@@ -598,9 +591,11 @@ function Checkout(props) {
                                   <td>
                                     <h4 className="summary-subtitle">
                                       Shipping
-                                      <p className="m-0">
-                                        For prepaid orders only
-                                      </p>
+                                      {payMethod === "PREPAID" && (
+                                        <p className="m-0">
+                                          For prepaid orders only
+                                        </p>
+                                      )}
                                     </h4>
                                   </td>
                                   <td
@@ -641,11 +636,11 @@ function Checkout(props) {
                                         <span>3-5 days</span>
                                       </p>
                                     </div>
-                                    {!!totalAmoutSaved && (
+                                    {!!totalAmountSaved && (
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
                                           <span>{`₹${toDecimal(
-                                            totalAmoutSaved
+                                            totalAmountSaved
                                           )}`}</span>{" "}
                                           saved so far on this order
                                         </p>
@@ -672,7 +667,7 @@ function Checkout(props) {
                       >
                         <h4 className="payment-heading">Payment Methods</h4>
 
-                        <div className="checkbox-group mb-3">
+                        <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
                             tag={"EXTRA 5% OFF"}
@@ -696,7 +691,7 @@ function Checkout(props) {
                       </div>
 
                       {!!formErorr && (
-                        <div className="overflow-hidden mb-4 mt-4">
+                        <div className="overflow-hidden mb-4 ">
                           <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
                             <ul className="m-0">
                               {Object.values(formErorr).map((val) => (

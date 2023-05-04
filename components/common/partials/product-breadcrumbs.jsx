@@ -4,8 +4,8 @@ import ALink from "~/components/features/custom-link";
 import { House, RightAngle } from "~/components/icons";
 
 function ProductBreadcrumbs({ category, subCategory }) {
-  const { slug, name } = category;
-  const { slug: subCatSlug, name: subCatName } = subCategory;
+  const { slug, name } = category || {};
+  const { slug: subCatSlug, name: subCatName } = subCategory || {};
   return (
     <div>
       <ul className="breadcrumb breadcrumb-lg">
@@ -16,7 +16,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
             </i>
           </ALink>
         </li>
-        {category && (
+        {!!category && (
           <li>
             <i>
               <RightAngle color="currentColor" size={10} />
@@ -32,7 +32,7 @@ function ProductBreadcrumbs({ category, subCategory }) {
             </ALink>
           </li>
         )}
-        {subCategory && (
+        {!!subCategory && (
           <li>
             <i>
               <RightAngle color="currentColor" size={10} />

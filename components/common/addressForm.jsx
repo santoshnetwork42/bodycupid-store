@@ -2,12 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
-import AlertPopup from "../features/product/common/alert-popup";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { errorHandler } from "~/utils/errorHandler";
 

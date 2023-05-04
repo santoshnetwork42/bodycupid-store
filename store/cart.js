@@ -16,8 +16,7 @@ import { getFirstVariantId } from "~/utils/products";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 // import useWindowDimensions from "~/utils/getWindowDimension";
-import { toast } from "react-toastify";
-import AlertPopup from "~/components/features/product/common/alert-popup";
+import { alertToaster } from "~/utils/popupHelper";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -164,16 +163,10 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
-    if (window?.innerWidth > 500)
-      toast(
-        <AlertPopup
-          message="Product added to cart successfully"
-          status="success"
-        />,
-        {
-          position: "bottom-center",
-        }
-      );
+    if (window?.innerWidth > 500) {
+      alertToaster("Product added to cart successfully", "info");
+    }
+
     const { user, cart } = yield select();
     let { cart: cartResponse } = cart;
     const { data } = user;
@@ -316,6 +309,9 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
+    if (window?.innerWidth > 500) {
+      alertToaster("Cart updated successfully", "info");
+    }
     const { cart, user } = yield select();
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;

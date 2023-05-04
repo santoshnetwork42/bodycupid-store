@@ -1,10 +1,9 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { toast } from "react-toastify";
 
-import AlertPopup from "~/components/features/product/common/alert-popup";
 import { EMAIl_REGEX, PHONE_REGEX } from "~/constant";
 import { getZipCode } from "~/graphql/api";
 import { addPhonePrefix, removePhonePrefix } from "./helper";
+import { alertToaster } from "./popupHelper";
 
 export const getProperAddress = (address) => {
   if (address.firstName || address.lastName) {
@@ -34,7 +33,7 @@ export const validateZipCode = async (pincode, paymentType) => {
       }
     }
   } catch (error) {
-    toast(<AlertPopup message={"Something went wrong"} status="error" />);
+    alertToaster("Something went wrong", "error");
   }
   return null;
 };
