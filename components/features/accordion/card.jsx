@@ -14,6 +14,7 @@ export default function Card(props) {
     type = "normal",
     url,
     onLinkClick = () => {},
+    id,
     ...restProps
   } = props;
 
@@ -21,8 +22,9 @@ export default function Card(props) {
     <SlideToggle {...restProps} collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <div className={`card ${adClass}`}>
-          <div className={`card-header`} onClick={onToggle}>
+          <div  id={id} className={`card-header`} onClick={onToggle}>
             <ALink
+             
               onClick={onLinkClick}
               href="#"
               className={`toggle-button ${toggleState.toLowerCase()}`}

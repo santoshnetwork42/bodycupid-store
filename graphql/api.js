@@ -1254,7 +1254,6 @@ export const getReviews = /* GraphQL */ `
         userId
         reviewer {
           name
-          email
         }
         productId
         rating

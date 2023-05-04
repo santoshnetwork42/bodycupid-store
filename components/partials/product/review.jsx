@@ -6,7 +6,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { Star } from "~/components/icons";
 import ReadMore from "~/components/layouts/read-more";
 
-export default function Review({ review }) {
+export default function Review({ review = {} }) {
   return (
     <li key={review.id}>
       <div className="comment">
@@ -14,24 +14,22 @@ export default function Review({ review }) {
           <div className="comment-rating ratings-container mb-0"></div>
           <div className="comment-user">
             <h4>
-              <ALink href="#">{review.reviewer.name}</ALink>
+              <ALink href="#">{review?.reviewer?.name}</ALink>
             </h4>
           </div>
           <div className="ratings-full d-flex align-items-center ">
             <div className="d-flex align-items-center">
-               {Array.from({ length: 5 }).map((_, index) => {
-              const isFilled = index + 1 <= review.rating;
+              {Array.from({ length: 5 }).map((_, index) => {
+                const isFilled = index + 1 <= review.rating;
 
-              return (
-                <Star size={16} color={isFilled ? "#FAB73B" : "#D9D9D9"} />
-              );
-            })}
+                return (
+                  <Star size={16} key={`${review.id}-${index}`}  color={isFilled ? "#FAB73B" : "#D9D9D9"} />
+                );
+              })}
             </div>
-           
-          <div className="mt-1 ml-2">
-            {formateDate(review.createdAt)}
-          </div> </div>
-         
+            <div className="mt-1 ml-2">{formateDate(review.createdAt)}</div>{" "}
+          </div>
+
           <div className="comment-content">
             <ReadMore>
               <p>{review.comment}</p>

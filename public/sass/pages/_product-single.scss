@@ -411,9 +411,7 @@
             margin-bottom: 0;
         }
 
-        li {
-            margin-left: 3rem;
-        }
+       
     }
 
     .comment p {
@@ -528,13 +526,14 @@
         color: $primary-color;
     }
 }
-.single-product{
+
+.single-product {
     .product-widget-wrapper {
-        .collection-title{
+        .collection-title {
 
             margin-left: -15px !important;
         }
-        
+
     }
 }
 
@@ -851,11 +850,19 @@ aside {
             }
         }
 
-       
+
     }
 
     .product-tab-additional label {
         min-width: 13rem;
+    }
+}
+
+.review-loading-wrapper {
+    height: 70px;
+
+    .d-loading {
+        top: 50% !important
     }
 }
 
@@ -1054,9 +1061,8 @@ aside {
             align-items: flex-start !important;
             justify-content: flex-start !important;
         }
-        .comment-user{
-            
-        }
+
+        .comment-user {}
 
         .rating {
             text-align: center;
