@@ -102,10 +102,14 @@ function ProductDefault(props) {
             <div className="container vertical">
               <div className="product product-single row ">
                 <div className="mt-3 d-sm-show">
-                  <ProductBreadcrumbs {...product} />
+                  <ProductBreadcrumbs key={`br-${product.id}`} {...product} />
                 </div>
                 <div className="col-md-6 sticky-sidebar-wrapper mt-3">
-                  <MediaOne product={product} variantId={selectedVariant} />
+                  <MediaOne
+                    key={`media-${product.id}`}
+                    product={product}
+                    variantId={selectedVariant}
+                  />
                 </div>
 
                 <div className="col-md-6">
@@ -122,12 +126,17 @@ function ProductDefault(props) {
           </div>
           <div className="page-content pb-10 bg-white">
             <div className="container  vertical pt-3 lh-default bg-white ">
+              
               <LinkedProducts product={product} />
-              <DescOne product={product} productFAQs={productFAQs} />
+
+              <DescOne
+                key={`desc-one=${product.id}`}
+                product={product}
+                productFAQs={productFAQs}
+              />
               <ProductCollection
                 products={relatedProducts}
                 title="Related products"
-
               />
             </div>
           </div>

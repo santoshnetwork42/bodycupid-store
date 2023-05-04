@@ -388,7 +388,7 @@ export const getCartTotals = (
   };
 };
 
-export const toFixed = (number) => {
+export const toInteger = (number) => {
   return parseInt(number.toFixed());
 };
 

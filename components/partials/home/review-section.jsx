@@ -19,7 +19,7 @@ export default function ReviewSection() {
                 />
               </figure>
               <div className="d-flex align-item-center mb-2 justify-content-center">
-                <RatingStar value={5} />
+                <RatingStar key='rating-star' value={5} />
               </div>
               <blockquote>
                 “This is the best plant store I have ever ordered from! My

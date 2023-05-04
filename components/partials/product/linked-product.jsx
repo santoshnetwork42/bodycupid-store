@@ -123,7 +123,7 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
                   )}
                 </div>
 
-                <RatingStar value={lp.rating} />
+                <RatingStar key={lp.id} value={lp.rating} />
               </div>
             </div>
           </ALink>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Cricle, CricleDot } from "../icons";
-import { toFixed } from "~/utils";
+import { toInteger } from "~/utils";
 
 const PaymentMethods = ({
   title,
@@ -29,7 +29,7 @@ const PaymentMethods = ({
         </div>
       </div>
       <p className="payment-card-amount m-0 font-weight-semi-bold">
-        ₹{toFixed(amount)}
+        ₹{toInteger(amount)}
       </p>
     </div>
   );
