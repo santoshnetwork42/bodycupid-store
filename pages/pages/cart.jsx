@@ -7,7 +7,7 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { toDecimal, getCartTotals } from "~/utils";
+import { getCartTotals, toDecimal } from "~/utils";
 import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
@@ -177,7 +177,6 @@ function Cart(props) {
                             <td>
                               <h4 className="summary-subtitle lh-1">
                                 Shipping
-                                <p className="m-0">For prepaid orders only</p>
                               </h4>
                             </td>
                             <td>
