@@ -14,7 +14,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { toDecimal, getCartTotals } from "~/utils";
+import { getCartTotals, toInteger, toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -61,7 +61,7 @@ function Checkout(props) {
   const { isSmallSize: isMobile } = useWindowDimensions();
   const { name } = store;
   const router = useRouter();
-  const [payMethod, setFirst] = useState("COD");
+  const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -238,7 +238,10 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-
+      if (payMethod === "NONE") {
+        alertToaster("Please select payment method", "error");
+        return;
+      }
       setLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
@@ -439,7 +442,7 @@ function Checkout(props) {
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
-                            ₹{toDecimal(grandTotal)}
+                            ₹{toInteger(grandTotal)}
                           </p>
                         </div>
                       </div>
@@ -620,7 +623,7 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-total-price ls-s">
-                                      ₹{toDecimal(grandTotal)}
+                                      ₹{toInteger(grandTotal)}
                                     </p>
                                   </td>
                                 </tr>
@@ -674,16 +677,17 @@ function Checkout(props) {
                             isSelected={payMethod === "PREPAID"}
                             description="Use credit/debit card, net-banking, UPI, wallets to complete the payment."
                             onClick={() => {
-                              !isFirst && setFirst("PREPAID");
+                              setFirst("PREPAID");
                             }}
                             amount={prepaidGrandTotal}
                           />
+
                           <PaymentMethods
                             title=" Cash On Delivery"
                             isSelected={payMethod === "COD"}
                             description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
                             onClick={() => {
-                              !codDisabled && isFirst && setFirst("COD");
+                              !codDisabled && setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />

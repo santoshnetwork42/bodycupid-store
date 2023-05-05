@@ -381,16 +381,14 @@ function DetailOne(props) {
         </>
       )}
 
-      {today.getHours() > 8 && today.getHours() < 15  && (
+      {today.getHours() > 8 && today.getHours() < 15 && (
         <div className="d-flex align-items-center mb-2">
-        <Clock size={16}/>
-        <p className="text-primary ml-1 mb-0">
-          For Fastest delivery, order within {deliveryRemainingTime()}
-        </p>
+          <Clock size={16} />
+          <p className="text-primary ml-1 mb-0">
+            For Fastest delivery, order within {deliveryRemainingTime()}
+          </p>
         </div>
-        
       )}
-
 
       {isStickyCart ? (
         <>
@@ -523,7 +521,7 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart  ls-normal font-weight-semi-bold m-0  ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={addToCartHandler}
@@ -554,7 +552,6 @@ function DetailOne(props) {
           </span>
         )}
       </div>
-
     </div>
   );
 }
