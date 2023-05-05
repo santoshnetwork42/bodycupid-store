@@ -4351,6 +4351,15 @@ export const createBulkAction = /* GraphQL */ `
     }
   }
 `;
+export const checkInventory = /* GraphQL */ `
+  mutation CheckInventory($input: [CheckInventoryInput!]!) {
+    checkInventory(input: $input) {
+      productId
+      variantId
+      inventory
+    }
+  }
+`;
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon($code: String!) {
     applyCoupon(code: $code) {
