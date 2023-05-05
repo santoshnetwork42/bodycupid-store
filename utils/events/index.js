@@ -2,12 +2,14 @@ import { getFirstVariantId } from "~/utils/products";
 
 export const itemMapper = (product, coupon) => {
   let { variantId, id, title, category, subCategory, section, price, listingPrice, qty = 1, vendor, sku } = product;
+  let contentType = "product_group";
 
   if (!variantId) {
     variantId = getFirstVariantId(product);
   }
 
   if (!variantId) {
+    contentType = "product";
     variantId = id;
   }
 
@@ -18,7 +20,7 @@ export const itemMapper = (product, coupon) => {
       content_subcategory: subCategory?.name,
       content_ids: [sku],
       content_name: title,
-      content_type: "product_group",
+      content_type: contentType,
       currency: "INR",
       num_items: 1,
       value: price,
@@ -73,6 +75,7 @@ export const orderMapper = (products, coupon) => {
     return {
       attribue: {
         ...attribue,
+        content_type: "product_group",
         content_ids: [...attribue.content_ids, ...a.content_ids],
         num_items: attribue.num_items + a.num_items,
         value: attribue.value + a.value
