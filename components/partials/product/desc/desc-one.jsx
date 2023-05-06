@@ -17,7 +17,6 @@ import { errorHandler } from "~/utils/errorHandler";
 import SkillBar from "~/components/features/skill-bar";
 import Loader from "~/components/common/partials/loader";
 import { alertToaster } from "../../../../utils/popupHelper";
-import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const reviewDefault = {
   rating: 5,
@@ -31,7 +30,7 @@ const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
 
 function DescOne(props) {
   const { product, user, productFAQs } = props;
-  const { id, totalRatings, longDescription, rating } = product;
+  const { id, totalRatings, rating } = product;
 
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
@@ -239,7 +238,10 @@ function DescOne(props) {
                 <>
                   {product.additionalInfo.map((info) => {
                     return (
-                      <div className="additional-info-container">
+                      <div
+                        className="additional-info-container"
+                        key={info.label}
+                      >
                         <h6 className="additional-info-label m-0">
                           {info.label}
                         </h6>
