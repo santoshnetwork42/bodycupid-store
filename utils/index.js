@@ -342,6 +342,7 @@ export const getCartTotals = (
 ) => {
   let totalPrice = 0;
   let totalListingPrice = 0;
+  let totalItems = 0;
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
     shippingTiers,
@@ -356,6 +357,7 @@ export const getCartTotals = (
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
     totalListingPrice +=
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
+    totalItems += parseInt(cartItems[i].qty, 10);
   }
 
   const prepaidDiscount = ((totalPrice - couponTotal) / 100) * 5;
@@ -373,6 +375,7 @@ export const getCartTotals = (
   const cartAmountSaved = totalAmountSaved;
 
   return {
+    totalItems,
     totalPrice,
     totalListingPrice,
     shippingTotal,
@@ -464,19 +467,6 @@ export const getOrderTotal = (cartItems = [], ...restAmount) => {
       total += cartItems[i].price * parseInt(cartItems[i].quantity, 10);
     }
   }
-  return total;
-};
-
-/**
- * utils to get number of products in cart
- */
-export const getCartCount = (cartItems = []) => {
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    total += parseInt(cartItems[i].qty, 10);
-  }
-
   return total;
 };
 

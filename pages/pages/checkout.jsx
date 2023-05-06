@@ -32,7 +32,6 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { systemActions } from "~/store/system";
 import {
-  Cross,
   DownAngle,
   RightAngle,
   ShoppingCart,
@@ -42,7 +41,7 @@ import { Collapse } from "react-bootstrap";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { useInventoryCheck } from "~/utils/hooks/useInventoryCheck";
+import { useInventory } from "~/utils/hooks/useInventory";
 
 function Checkout(props) {
   const {
@@ -50,7 +49,6 @@ function Checkout(props) {
     user,
     emptyCart,
     appliedCoupon,
-    removeCoupon,
     store,
     metadata,
     shippingTiers,
@@ -59,8 +57,9 @@ function Checkout(props) {
     startCheckout,
     openAllAddressModal,
   } = props;
+
   const { isSmallSize: isMobile } = useWindowDimensions();
-  const productWithInventory = useInventoryCheck(cartList);
+  const inventoryMapping = useInventory(cartList);
   const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
@@ -95,8 +94,8 @@ function Checkout(props) {
     [cartList, appliedCoupon, isFirst, shippingTiers]
   );
 
-  const isCartHasInventory = useMemo(() =>
-    cartList.every((c) => c.qty <= productWithInventory[c.recordKey])
+  const inventorySuccess = useMemo(() =>
+    cartList.every((c) => c.qty <= inventoryMapping[c.recordKey])
   );
 
   const handlePayment = useCallback(
@@ -153,7 +152,7 @@ function Checkout(props) {
         alertToaster("Something went wrong. Try Again!", "error");
       }
     },
-    [store, user, isCartHasInventory]
+    [store, user, inventorySuccess]
   );
 
   const handleCodPayments = (orderId) => {
@@ -244,17 +243,19 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      if (!isCartHasInventory) {
+      if (!inventorySuccess) {
         alertToaster(
           "Some product goes out of stock, Please remove from cart.",
           "error"
         );
         return;
       }
+
       if (payMethod === "NONE") {
         alertToaster("Please select payment method", "error");
         return;
       }
+
       setLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
@@ -495,7 +496,7 @@ function Checkout(props) {
                                           </ALink>
                                         </div>
                                         {item.qty >=
-                                        productWithInventory[item.recordKey] ? (
+                                          inventoryMapping[item.recordKey] ? (
                                           <div className="outofstock-tag mt-2">
                                             <p className="m-0 outofstock-label">
                                               out of stock
@@ -506,19 +507,19 @@ function Checkout(props) {
                                             {!(
                                               item.isBogo && item.qty === 1
                                             ) && (
-                                              <span className="sm-product-amount">
-                                                ₹{toDecimal(item.price)}
-                                              </span>
-                                            )}
+                                                <span className="sm-product-amount">
+                                                  ₹{toDecimal(item.price)}
+                                                </span>
+                                              )}
 
                                             <p className="m-0 product-discount-listing">
                                               {item.price <
                                                 item.listingPrice && (
-                                                <del className="summary-subtotal-listingprice">
-                                                  ₹
-                                                  {toDecimal(item.listingPrice)}
-                                                </del>
-                                              )}
+                                                  <del className="summary-subtotal-listingprice">
+                                                    ₹
+                                                    {toDecimal(item.listingPrice)}
+                                                  </del>
+                                                )}
                                               {item.isBogo && item.qty === 1 ? (
                                                 <span className="text-success ml-1">
                                                   Free
@@ -629,9 +630,8 @@ function Checkout(props) {
                                     </h4>
                                   </td>
                                   <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${
-                                      !shippingTotal && "discount-price-color"
-                                    }`}
+                                    className={`summary-subtotal-price pb-0 pt-0 ${!shippingTotal && "discount-price-color"
+                                      }`}
                                   >
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
@@ -749,11 +749,10 @@ function Checkout(props) {
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${
-                              !!isValidAddress(shippingAddress)
-                                ? "btn-primary"
-                                : "btn-disabled"
-                            }`}
+                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${!!isValidAddress(shippingAddress)
+                              ? "btn-primary"
+                              : "btn-disabled"
+                              }`}
                           >
                             Place Order
                             {loading && <div className="spin-loader ml-2" />}

@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { getFirstVariantId } from "../products";
-import { errorHandler } from "../errorHandler";
 import { API } from "aws-amplify";
-import { checkInventory } from "~/graphql/api";
-import { getRecordKey } from "../helper";
 
-export const useInventoryCheck = (cartList) => {
+import { getFirstVariantId } from "~/utils/products";
+import { errorHandler } from "../errorHandler";
+import { checkInventory } from "~/graphql/api";
+import { getRecordKey } from "~/utils/helper";
+
+export const useInventory = (cartList) => {
   const [productWithInventory, setProductWithInventory] = useState({});
+
   const payload = useMemo(() => {
     return cartList.map(
       (product) => {
@@ -18,7 +20,8 @@ export const useInventoryCheck = (cartList) => {
       [cartList]
     );
   });
-  useEffect(async () => {
+
+  const callGetInventory = async () => {
     try {
       const {
         data: { checkInventory: response },
@@ -28,15 +31,20 @@ export const useInventoryCheck = (cartList) => {
           input: payload,
         },
       });
-      const data = {};
-      response.forEach((d) => {
-        let key = getRecordKey({ id: d.productId }, d.variantId);
-        data[key] = d.inventory;
-      });
-      setProductWithInventory(data);
+
+      const inventoryMapping = response.reduce((acc, { productId, variantId, inventory }) => {
+        const recordKey = getRecordKey({ id: productId }, variantId);
+        return { ...acc, [recordKey]: inventory };
+      }, {});
+
+      setProductWithInventory(inventoryMapping);
     } catch (error) {
       errorHandler(error);
     }
+  };
+
+  useEffect(() => {
+    callGetInventory();
   }, [cartList]);
 
   return productWithInventory;

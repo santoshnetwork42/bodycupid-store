@@ -1,19 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { getCartCount, getCartTotals, toDecimal } from "~/utils";
+import { getCartTotals, toDecimal } from "~/utils";
 import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
-import { useInventoryCheck } from "~/utils/hooks/useInventoryCheck";
+import { useInventory } from "~/utils/hooks/useInventory";
 import { alertToaster } from "~/utils/popupHelper";
-import { useRouter } from "next/router";
 
 function Cart(props) {
   const {
@@ -25,8 +25,9 @@ function Cart(props) {
     getShippingTiers,
     viewCart,
   } = props;
+
   const router = useRouter();
-  const productWithInventory = useInventoryCheck(cartList);
+  const inventoryMapping = useInventory(cartList);
 
   useEffect(() => {
     viewCart();
@@ -53,6 +54,7 @@ function Cart(props) {
   }, [cartList, appliedCoupon]);
 
   const {
+    totalItems,
     totalListingPrice,
     totalPrice,
     shippingTotal,
@@ -64,25 +66,28 @@ function Cart(props) {
     [cartItems, appliedCoupon, shippingTiers]
   );
 
-  const isCartHasInventory = useMemo(
-    () => cartList.every((c) => c.qty <= productWithInventory[c.recordKey]),
-    [productWithInventory, cartList]
+  const inventorySuccess = useMemo(
+    () => cartList.every((c) => c.qty <= inventoryMapping[c.recordKey]),
+    [inventoryMapping, cartList]
   );
 
   const checkAuth = useCallback(() => {
-    if (user) {
-      if (isCartHasInventory) {
-        router.push("/pages/checkout");
-        return;
-      }
+    if (!inventorySuccess) {
       alertToaster(
         "Some product goes out of stock, Please remove from cart.",
         "error"
       );
-      return;
+      return false;
     }
+
+    if (user) {
+      router.push("/pages/checkout");
+      return true;
+    }
+
     openLogin(true);
-  }, [user, isCartHasInventory]);
+    return false;
+  }, [user, inventorySuccess]);
 
   return (
     <main className="main cart">
@@ -95,9 +100,9 @@ function Cart(props) {
             </i>
           </h3>
           <h3 className="title title-simple title-step">
-            <div className="step-by-btn" onClick={checkAuth}>
+            <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
               2. Checkout
-            </div>
+            </ALink>
             <i>
               <RightAngle size={18} color="currentColor" />
             </i>
@@ -137,7 +142,7 @@ function Cart(props) {
                             <CartProduct
                               key={item.recordKey}
                               outOfStock={
-                                productWithInventory[item.recordKey] < item.qty
+                                inventoryMapping[item.recordKey] < item.qty
                               }
                               item={item}
                             />
@@ -206,9 +211,8 @@ function Cart(props) {
                             </td>
                             <td>
                               <p
-                                className={`summary-subtotal-price ${
-                                  !shippingTotal && "discount-price-color"
-                                }`}
+                                className={`summary-subtotal-price ${!shippingTotal && "discount-price-color"
+                                  }`}
                               >
                                 {!!shippingTotal
                                   ? `₹${toDecimal(shippingTotal)}`
@@ -267,8 +271,7 @@ function Cart(props) {
                       <div className="stick-bottom-button d-sm-show">
                         <div className="lh-default">
                           <span>
-                            {getCartCount(cartList)}&nbsp;
-                            {getCartCount(cartList) > 1 ? "Items" : "Item"}
+                            {totalItems > 1 ? `${totalItems} Items` : "1 Item"}
                           </span>
                           <p className="summary-total-price text-left ls-s">
                             ₹{toDecimal(cartGrandTotal)}
