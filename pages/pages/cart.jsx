@@ -100,7 +100,7 @@ function Cart(props) {
             </i>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
+            <ALink href={user && inventorySuccess ? "/pages/checkout" : "#"} onClick={checkAuth}>
               2. Checkout
             </ALink>
             <i>
