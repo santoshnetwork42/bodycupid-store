@@ -496,7 +496,7 @@ function Checkout(props) {
                                           </ALink>
                                         </div>
                                         {item.qty >=
-                                          inventoryMapping[item.recordKey] ? (
+                                        inventoryMapping[item.recordKey] ? (
                                           <div className="outofstock-tag mt-2">
                                             <p className="m-0 outofstock-label">
                                               out of stock
@@ -507,19 +507,19 @@ function Checkout(props) {
                                             {!(
                                               item.isBogo && item.qty === 1
                                             ) && (
-                                                <span className="sm-product-amount">
-                                                  ₹{toDecimal(item.price)}
-                                                </span>
-                                              )}
+                                              <span className="sm-product-amount">
+                                                ₹{toDecimal(item.price)}
+                                              </span>
+                                            )}
 
                                             <p className="m-0 product-discount-listing">
                                               {item.price <
                                                 item.listingPrice && (
-                                                  <del className="summary-subtotal-listingprice">
-                                                    ₹
-                                                    {toDecimal(item.listingPrice)}
-                                                  </del>
-                                                )}
+                                                <del className="summary-subtotal-listingprice">
+                                                  ₹
+                                                  {toDecimal(item.listingPrice)}
+                                                </del>
+                                              )}
                                               {item.isBogo && item.qty === 1 ? (
                                                 <span className="text-success ml-1">
                                                   Free
@@ -630,8 +630,9 @@ function Checkout(props) {
                                     </h4>
                                   </td>
                                   <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${!shippingTotal && "discount-price-color"
-                                      }`}
+                                    className={`summary-subtotal-price pb-0 pt-0 ${
+                                      !shippingTotal && "discount-price-color"
+                                    }`}
                                   >
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
@@ -702,7 +703,7 @@ function Checkout(props) {
                             title="Pay Online"
                             tag={"EXTRA 5% OFF"}
                             isSelected={payMethod === "PREPAID"}
-                            description="Use credit/debit card, net-banking, UPI, wallets to complete the payment."
+                            description="Pay using credit/debit cards, net-banking, UPI, or digital wallets."
                             onClick={() => {
                               setFirst("PREPAID");
                             }}
@@ -712,7 +713,7 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Cash On Delivery"
                             isSelected={payMethod === "COD"}
-                            description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
+                            description="Pay using Cash on Delivery"
                             onClick={() => {
                               !codDisabled && setFirst("COD");
                             }}
@@ -749,10 +750,11 @@ function Checkout(props) {
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${!!isValidAddress(shippingAddress)
-                              ? "btn-primary"
-                              : "btn-disabled"
-                              }`}
+                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${
+                              !!isValidAddress(shippingAddress)
+                                ? "btn-primary"
+                                : "btn-disabled"
+                            }`}
                           >
                             Place Order
                             {loading && <div className="spin-loader ml-2" />}
