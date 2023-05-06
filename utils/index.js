@@ -471,6 +471,20 @@ export const getOrderTotal = (cartItems = [], ...restAmount) => {
 };
 
 /**
+ * utils to get number of products in cart
+ */
+export const getCartCount = (cartItems = []) => {
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    total += parseInt(cartItems[i].qty, 10);
+  }
+
+  return total;
+};
+
+
+/**
  * utils to show number to n places of decimals
  */
 export const toDecimal = (price, fixedCount = 2) => {
