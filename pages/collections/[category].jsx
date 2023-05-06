@@ -156,7 +156,7 @@ export const getStaticProps = async (context) => {
           products: { ...searchProducts, items: products },
           // sideBarCategories: categories,
           subCategories,
-          filter,
+          pageFilter: filter,
         },
       };
     }
