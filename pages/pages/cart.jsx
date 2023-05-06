@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
@@ -11,6 +12,8 @@ import { getCartTotals, toDecimal } from "~/utils";
 import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
+import { useInventory } from "~/utils/hooks/useInventory";
+import { alertToaster } from "~/utils/popupHelper";
 
 function Cart(props) {
   const {
@@ -22,6 +25,9 @@ function Cart(props) {
     getShippingTiers,
     viewCart,
   } = props;
+
+  const router = useRouter();
+  const inventoryMapping = useInventory(cartList);
 
   useEffect(() => {
     viewCart();
@@ -48,6 +54,7 @@ function Cart(props) {
   }, [cartList, appliedCoupon]);
 
   const {
+    totalItems,
     totalListingPrice,
     totalPrice,
     shippingTotal,
@@ -59,11 +66,28 @@ function Cart(props) {
     [cartItems, appliedCoupon, shippingTiers]
   );
 
+  const inventorySuccess = useMemo(
+    () => cartList.every((c) => c.qty <= inventoryMapping[c.recordKey]),
+    [inventoryMapping, cartList]
+  );
+
   const checkAuth = useCallback(() => {
-    if (user) return true;
+    if (!inventorySuccess) {
+      alertToaster(
+        "Some product goes out of stock, Please remove from cart.",
+        "error"
+      );
+      return false;
+    }
+
+    if (user) {
+      router.push("/pages/checkout");
+      return true;
+    }
+
     openLogin(true);
     return false;
-  }, [user]);
+  }, [user, inventorySuccess]);
 
   return (
     <main className="main cart">
@@ -76,7 +100,7 @@ function Cart(props) {
             </i>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href={user ? "/pages/checkout" : "#"} onClick={checkAuth}>
+            <ALink href={user && inventorySuccess ? "/pages/checkout" : "#"} onClick={checkAuth}>
               2. Checkout
             </ALink>
             <i>
@@ -115,7 +139,13 @@ function Cart(props) {
                               />
                             </>
                           ) : (
-                            <CartProduct key={item.recordKey} item={item} />
+                            <CartProduct
+                              key={item.recordKey}
+                              outOfStock={
+                                inventoryMapping[item.recordKey] < item.qty
+                              }
+                              item={item}
+                            />
                           )}
                         </React.Fragment>
                       ))}
@@ -181,9 +211,8 @@ function Cart(props) {
                             </td>
                             <td>
                               <p
-                                className={`summary-subtotal-price ${
-                                  !shippingTotal && "discount-price-color"
-                                }`}
+                                className={`summary-subtotal-price ${!shippingTotal && "discount-price-color"
+                                  }`}
                               >
                                 {!!shippingTotal
                                   ? `₹${toDecimal(shippingTotal)}`
@@ -233,31 +262,28 @@ function Cart(props) {
                           </tr>
                         </tbody>
                       </table>
-                      <ALink
+                      <button
                         onClick={checkAuth}
-                        href={user ? "/pages/checkout" : "#"}
-                        className="btn btn-dark d-sm-none btn-rounded btn-checkout"
+                        className="btn btn-dark d-sm-none btn-rounded btn-checkout w-100"
                       >
                         Proceed to checkout
-                      </ALink>
+                      </button>
                       <div className="stick-bottom-button d-sm-show">
                         <div className="lh-default">
                           <span>
-                            {cartList.length}&nbsp;
-                            {cartList.length > 1 ? "Items" : "Item"}
+                            {totalItems > 1 ? `${totalItems} Items` : "1 Item"}
                           </span>
                           <p className="summary-total-price text-left ls-s">
                             ₹{toDecimal(cartGrandTotal)}
                           </p>
                         </div>
 
-                        <ALink
+                        <button
                           onClick={checkAuth}
-                          href={user ? "/pages/checkout" : "#"}
                           className="btn btn-dark btn-rounded  btn-checkout"
                         >
                           Proceed to checkout
-                        </ALink>
+                        </button>
                       </div>
                     </div>
                   </div>

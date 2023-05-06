@@ -272,13 +272,13 @@ function DetailOne(props) {
 
       <h2 className="detail-product-name text-uppercase">{product.title}</h2>
 
-      {!!product?.tags && (
+      {/* {!!product?.tags && (
         <div className="mb-1">
           <label className="product-tag">
             {product?.tags.split(",").join(" | ")}
           </label>
         </div>
-      )}
+      )} */}
 
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
@@ -521,7 +521,7 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart  ls-normal font-weight-semi-bold m-0  ${
+                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={addToCartHandler}

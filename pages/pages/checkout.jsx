@@ -32,7 +32,6 @@ import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { systemActions } from "~/store/system";
 import {
-  Cross,
   DownAngle,
   RightAngle,
   ShoppingCart,
@@ -42,6 +41,7 @@ import { Collapse } from "react-bootstrap";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { useInventory } from "~/utils/hooks/useInventory";
 
 function Checkout(props) {
   const {
@@ -49,7 +49,6 @@ function Checkout(props) {
     user,
     emptyCart,
     appliedCoupon,
-    removeCoupon,
     store,
     metadata,
     shippingTiers,
@@ -58,7 +57,9 @@ function Checkout(props) {
     startCheckout,
     openAllAddressModal,
   } = props;
+
   const { isSmallSize: isMobile } = useWindowDimensions();
+  const inventoryMapping = useInventory(cartList);
   const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
@@ -91,6 +92,10 @@ function Checkout(props) {
   } = useMemo(
     () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
     [cartList, appliedCoupon, isFirst, shippingTiers]
+  );
+
+  const inventorySuccess = useMemo(() =>
+    cartList.every((c) => c.qty <= inventoryMapping[c.recordKey])
   );
 
   const handlePayment = useCallback(
@@ -147,7 +152,7 @@ function Checkout(props) {
         alertToaster("Something went wrong. Try Again!", "error");
       }
     },
-    [store, user]
+    [store, user, inventorySuccess]
   );
 
   const handleCodPayments = (orderId) => {
@@ -238,10 +243,19 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+      if (!inventorySuccess) {
+        alertToaster(
+          "Some product goes out of stock, Please remove from cart.",
+          "error"
+        );
+        return;
+      }
+
       if (payMethod === "NONE") {
         alertToaster("Please select payment method", "error");
         return;
       }
+
       setLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
@@ -365,6 +379,7 @@ function Checkout(props) {
       metadata,
       totalDiscount,
       totalPrice,
+      payMethod,
     ]
   );
 
@@ -480,37 +495,50 @@ function Checkout(props) {
                                             {item.title}
                                           </ALink>
                                         </div>
-                                        <div className="product-subtotal mt-1">
-                                          {!(item.isBogo && item.qty === 1) && (
-                                            <span className="sm-product-amount">
-                                              ₹{toDecimal(item.price)}
-                                            </span>
-                                          )}
+                                        {item.qty >=
+                                          inventoryMapping[item.recordKey] ? (
+                                          <div className="outofstock-tag mt-2">
+                                            <p className="m-0 outofstock-label">
+                                              out of stock
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <div className="product-subtotal mt-1">
+                                            {!(
+                                              item.isBogo && item.qty === 1
+                                            ) && (
+                                                <span className="sm-product-amount">
+                                                  ₹{toDecimal(item.price)}
+                                                </span>
+                                              )}
 
-                                          <p className="m-0 product-discount-listing">
-                                            {item.price < item.listingPrice && (
-                                              <del className="summary-subtotal-listingprice">
-                                                ₹{toDecimal(item.listingPrice)}
-                                              </del>
-                                            )}
-                                            {item.isBogo && item.qty === 1 ? (
-                                              <span className="text-success ml-1">
-                                                Free
-                                              </span>
-                                            ) : (
-                                              <span
-                                                className={`discount-percetage ml-2`}
-                                              >
-                                                {productDiscountPercentage(
-                                                  item
-                                                ) > 0 &&
-                                                  `${productDiscountPercentage(
+                                            <p className="m-0 product-discount-listing">
+                                              {item.price <
+                                                item.listingPrice && (
+                                                  <del className="summary-subtotal-listingprice">
+                                                    ₹
+                                                    {toDecimal(item.listingPrice)}
+                                                  </del>
+                                                )}
+                                              {item.isBogo && item.qty === 1 ? (
+                                                <span className="text-success ml-1">
+                                                  Free
+                                                </span>
+                                              ) : (
+                                                <span
+                                                  className={`discount-percetage ml-2`}
+                                                >
+                                                  {productDiscountPercentage(
                                                     item
-                                                  )}% off`}
-                                              </span>
-                                            )}
-                                          </p>
-                                        </div>{" "}
+                                                  ) > 0 &&
+                                                    `${productDiscountPercentage(
+                                                      item
+                                                    )}% off`}
+                                                </span>
+                                              )}
+                                            </p>
+                                          </div>
+                                        )}
                                         {item.isBogo && item.qty > 1 && (
                                           <div className="summary-saving-lable-container mb-1  qty-label ">
                                             {" "}
@@ -602,9 +630,8 @@ function Checkout(props) {
                                     </h4>
                                   </td>
                                   <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${
-                                      !shippingTotal && "discount-price-color"
-                                    }`}
+                                    className={`summary-subtotal-price pb-0 pt-0 ${!shippingTotal && "discount-price-color"
+                                      }`}
                                   >
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
@@ -683,7 +710,7 @@ function Checkout(props) {
                           />
 
                           <PaymentMethods
-                            title=" Cash On Delivery"
+                            title="Cash On Delivery"
                             isSelected={payMethod === "COD"}
                             description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
                             onClick={() => {
@@ -722,11 +749,10 @@ function Checkout(props) {
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${
-                              !!isValidAddress(shippingAddress)
-                                ? "btn-primary"
-                                : "btn-disabled"
-                            }`}
+                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${!!isValidAddress(shippingAddress)
+                              ? "btn-primary"
+                              : "btn-disabled"
+                              }`}
                           >
                             Place Order
                             {loading && <div className="spin-loader ml-2" />}

@@ -50,7 +50,7 @@
 
 @include mq(xs, max) {
     .toast-container.Toastify__toast-container {
-        position: absolute;
+        position: fixed;
         left: 1rem;
         right: 1rem;
     }
