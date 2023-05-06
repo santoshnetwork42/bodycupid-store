@@ -547,7 +547,7 @@ function DetailOne(props) {
       <div className="d-flex text-success align-items-center mb-3 lh-default">
         {product.totalOrders > 1000 && (
           <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
-            1000+ units sold -
+            {product.totalOrders}+ units sold -
           </p>
         )}
         {hasInventory && currentInventory < 100 && (
