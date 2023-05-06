@@ -231,13 +231,22 @@ function DescOne(props) {
         >
           <div className="row">
             <div className="col-md-12">
-              {!!longDescription && (
+              <div className="additional-info-container">
+                <h6 className="additional-info-label m-0">Model Name</h6>
+                <p className="additional-info-value">{product.title}</p>
+              </div>
+              {!!product?.additionalInfo && (
                 <>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: longDescription,
-                    }}
-                  />
+                  {product.additionalInfo.map((info) => {
+                    return (
+                      <div className="additional-info-container">
+                        <h6 className="additional-info-label m-0">
+                          {info.label}
+                        </h6>
+                        <p className="additional-info-value">{info.value}</p>
+                      </div>
+                    );
+                  })}
                 </>
               )}
             </div>
