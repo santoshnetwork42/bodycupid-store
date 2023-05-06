@@ -2368,23 +2368,24 @@ export const getOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -3905,6 +3906,7 @@ export const getCouponCode = /* GraphQL */ `
     getCouponCode(id: $id) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -3944,20 +3946,20 @@ export const getCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
-      buyX
-      productId
-      collection
-      autoApply
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -3974,23 +3976,24 @@ export const listCouponCodes = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -4019,23 +4022,24 @@ export const bycodeCouponCode = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -4064,23 +4068,24 @@ export const byuserIdCouponCode = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -4109,23 +4114,24 @@ export const searchCouponCodes = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt

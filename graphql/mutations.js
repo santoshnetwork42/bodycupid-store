@@ -2092,23 +2092,24 @@ export const createOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -2228,23 +2229,24 @@ export const updateOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -2364,23 +2366,24 @@ export const deleteOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
-        buyX
-        productId
-        collection
-        autoApply
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -3928,6 +3931,7 @@ export const createCouponCode = /* GraphQL */ `
     createCouponCode(input: $input, condition: $condition) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -3967,20 +3971,20 @@ export const createCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
-      buyX
-      productId
-      collection
-      autoApply
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -3995,6 +3999,7 @@ export const updateCouponCode = /* GraphQL */ `
     updateCouponCode(input: $input, condition: $condition) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -4034,20 +4039,20 @@ export const updateCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
-      buyX
-      productId
-      collection
-      autoApply
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -4062,6 +4067,7 @@ export const deleteCouponCode = /* GraphQL */ `
     deleteCouponCode(input: $input, condition: $condition) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -4101,20 +4107,20 @@ export const deleteCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
-      buyX
-      productId
-      collection
-      autoApply
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -4365,6 +4371,7 @@ export const applyCoupon = /* GraphQL */ `
     applyCoupon(code: $code) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -4404,20 +4411,20 @@ export const applyCoupon = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
-      buyX
-      productId
-      collection
-      autoApply
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -4483,14 +4490,6 @@ export const addProductNotification = /* GraphQL */ `
       userId: $userId
       email: $email
     ) {
-      success
-      message
-    }
-  }
-`;
-export const createBulkCoupons = /* GraphQL */ `
-  mutation CreateBulkCoupons($input: CreateBulkCouponInput!, $count: Int!) {
-    createBulkCoupons(input: $input, count: $count) {
       success
       message
     }
