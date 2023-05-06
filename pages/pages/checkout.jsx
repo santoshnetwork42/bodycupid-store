@@ -153,7 +153,7 @@ function Checkout(props) {
         alertToaster("Something went wrong. Try Again!", "error");
       }
     },
-    [store, user,isCartHasInventory]
+    [store, user, isCartHasInventory]
   );
 
   const handleCodPayments = (orderId) => {
@@ -378,6 +378,7 @@ function Checkout(props) {
       metadata,
       totalDiscount,
       totalPrice,
+      payMethod,
     ]
   );
 
@@ -709,7 +710,7 @@ function Checkout(props) {
                           />
 
                           <PaymentMethods
-                            title=" Cash On Delivery"
+                            title="Cash On Delivery"
                             isSelected={payMethod === "COD"}
                             description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
                             onClick={() => {

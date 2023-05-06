@@ -82,7 +82,7 @@ function Cart(props) {
       return;
     }
     openLogin(true);
-  }, [user,isCartHasInventory]);
+  }, [user, isCartHasInventory]);
 
   return (
     <main className="main cart">
