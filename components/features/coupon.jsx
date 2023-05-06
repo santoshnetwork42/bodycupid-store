@@ -11,6 +11,7 @@ import { getCouponMessage } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "../icons";
+import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 
 function Coupon(props) {
   const {
@@ -23,10 +24,14 @@ function Coupon(props) {
     featured = [],
     getFeaturedCoupons,
   } = props;
+
   const [coupon, setCoupon] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const featuredCoupons = useFeaturedCoupons(featured, cartList);
+  console.log(featuredCoupons, featured);
 
   useEffect(() => {
     getFeaturedCoupons();
@@ -141,6 +146,7 @@ function Coupon(props) {
           </div>
         </div>
       )}
+
       <Modal
         isOpen={isOpen}
         onRequestClose={() => {
@@ -182,25 +188,26 @@ function Coupon(props) {
                   </button>
                 </div>
                 <span className="coupon-error-lable">{error}</span>
-                {!!featured?.length && (
+                {!!featuredCoupons?.length && (
                   <div className="mt-2">
-                    {featured.map((c) => {
+                    {featuredCoupons.map((c) => {
                       let className = "btn btn-md  btn-rounded btn-link m l-2";
-                      const discount = getCouponTotal(c, cartList);
-                      if (!discount) {
+                      if (!c.allowed) {
                         className = `${className} btn-disabled`;
                       }
+
                       return (
                         <div key={c.id} className="featured-coupon">
                           <div className="d-flex justify-content-between ">
                             <div className="featured-coupon-text-content">
                               <strong>{c.code}</strong>
-                              {!!discount && (
-                                <div className="coupon-tagline">
-                                  You will save ₹{toDecimal(discount)} with this
-                                  coupon
-                                </div>
-                              )}
+                              <div
+                                className={`coupon-tagline ${
+                                  !c.allowed && "text-secondary"
+                                }`}
+                              >
+                                {c.message}
+                              </div>
                             </div>
                             <button
                               onClick={() => applyCouponCode(c.code)}

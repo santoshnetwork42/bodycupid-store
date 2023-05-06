@@ -508,15 +508,20 @@ export const getFeaturedCoupon = /* GraphQL */ `
     ) {
       items {
         id
+        description
         code
-        discount
-        expirationDate
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
       }
     }
@@ -843,6 +848,63 @@ export const findProducts = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const getProductById = /* GraphQL */ `
+  query GetProduct($id: ID!) {
+    getProduct(id: $id) {
+      id
+      title
+      collections
+      vendor
+      subCategory {
+        name
+        slug
+      }
+      isFeatured
+      category {
+        name
+        slug
+      }
+      slug
+      price
+      sku
+      position
+      listingPrice
+      tags
+      inventory
+      blockedInventory
+      continueSellingOutOfStock
+      rating
+      totalRatings
+      thumbImages
+      isInventoryEnabled
+      totalOrders
+      variants {
+        items {
+          id
+          title
+          price
+          position
+          listingPrice
+          imageUrl
+          inventory
+          blockedInventory
+        }
+      }
+      images {
+        items {
+          id
+          position
+          alt
+          width
+          height
+          imageKey
+          isThumb
+        }
+      }
     }
   }
 `;
