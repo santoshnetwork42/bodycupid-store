@@ -12,7 +12,7 @@ const PaymentMethods = ({
 }) => {
   return (
     <div
-      className="bg-white border-regular payment-card mt-2 d-flex align-items-center"
+      className="bg-white border-regular payment-card mt-2 d-flex align-items-center justify-content-between"
       onClick={onClick}
     >
       <div>
