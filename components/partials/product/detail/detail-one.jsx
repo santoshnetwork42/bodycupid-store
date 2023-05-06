@@ -283,7 +283,7 @@ function DetailOne(props) {
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
           {product?.benefits.map((benefit) => (
-            <lable key={benefit}>{benefit}</lable>
+            <label key={benefit}>{benefit}</label>
           ))}
         </div>
       )}
@@ -355,15 +355,20 @@ function DetailOne(props) {
           </div>
         )}
       </div>
-      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
-        <ProductBestPrice {...maxDiscountCoupon} couponList={couponList} />
-      )}
 
-      <p className="product-short-desc">{product.productDescription}</p>
+      <p className="product-short-desc mb-3 lh-1">
+        {product.productDescription}
+      </p>
+
+      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
+        <div className="mb-3">
+          <ProductBestPrice {...maxDiscountCoupon} couponList={couponList} />
+        </div>
+      )}
 
       {sizes.length > 1 && (
         <>
-          <div className="product-form product-variations product-size mb-0 ">
+          <div className="product-form product-variations product-size mb-1 mt-3">
             <div className="product-form-group overflow-auto">
               <div className="d-flex">
                 {sizes.map((item) => (
@@ -382,9 +387,9 @@ function DetailOne(props) {
       )}
 
       {today.getHours() > 8 && today.getHours() < 15 && (
-        <div className="d-flex align-items-center mb-2">
+        <div className="d-flex mb-3">
           <Clock size={16} />
-          <p className="text-primary ml-1 mb-0">
+          <p className="text-primary ml-2 mb-0 lh-1">
             For Fastest delivery, order within {deliveryRemainingTime()}
           </p>
         </div>
@@ -539,15 +544,14 @@ function DetailOne(props) {
           )}
         </>
       )}
-      <div className="d-flex text-success align-items-center mb-3 pointer-none">
+      <div className="d-flex text-success align-items-center mb-3 lh-default">
         {product.totalOrders > 1000 && (
-          <>
-            <div className="d-flex">1000+ units sold</div>
-            <BigDot color="#17B31B" />
-          </>
+          <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
+            1000+ units sold -
+          </p>
         )}
         {hasInventory && currentInventory < 100 && (
-          <span className="text-secondary">
+          <span className="text-secondary font-weight-semi-bold">
             Last {currentInventory} units left
           </span>
         )}
