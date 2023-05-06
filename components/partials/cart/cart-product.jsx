@@ -9,7 +9,13 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
 
-function CartProduct({ cartList, item, removeFromCart, updateCart }) {
+function CartProduct({
+  cartList,
+  item,
+  outOfStock,
+  removeFromCart,
+  updateCart,
+}) {
   const {
     id,
     bogo,
@@ -119,35 +125,41 @@ function CartProduct({ cartList, item, removeFromCart, updateCart }) {
                 </>
               )}
             </div>
-            <div className="">
-              {bogo !== "SECONDARY" && (
-                <div className="product-quantity w-0 mb-1">
-                  <Quantity
-                    product={item}
-                    qty={qty}
-                    max={inventory}
-                    onChangeQty={onChangeQty}
-                  />
-                </div>
-              )}
+            {outOfStock ? (
+              <div className="outofstock-tag">
+                <p className="m-0 outofstock-label">out of stock</p>
+              </div>
+            ) : (
+              <div className="">
+                {bogo !== "SECONDARY" && (
+                  <div className="product-quantity w-0 mb-1">
+                    <Quantity
+                      product={item}
+                      qty={qty}
+                      max={inventory}
+                      onChangeQty={onChangeQty}
+                    />
+                  </div>
+                )}
 
-              {!!item?.variants?.items.length && (
-                <select
-                  name={`${recordKey}`}
-                  className="form-control"
-                  value={variantId}
-                  onChange={(e) => {
-                    changeVariant(e);
-                  }}
-                >
-                  {variants.items.map((v) => (
-                    <option key={v.id} value={v.id}>
-                      {v.title}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
+                {!!item?.variants?.items.length && (
+                  <select
+                    name={`${recordKey}`}
+                    className="form-control"
+                    value={variantId}
+                    onChange={(e) => {
+                      changeVariant(e);
+                    }}
+                  >
+                    {variants.items.map((v) => (
+                      <option key={v.id} value={v.id}>
+                        {v.title}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            )}
           </div>
           <div className="product-close">
             <ALink

@@ -1548,3 +1548,13 @@ export const searchShippingTiers = /* GraphQL */ `
     }
   }
 `;
+
+export const checkInventory = /* GraphQL */ `
+  mutation CheckInventory($input: [CheckInventoryInput!]!) {
+    checkInventory(input: $input) {
+      productId
+      variantId
+      inventory
+    }
+  }
+`;

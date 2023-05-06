@@ -42,6 +42,7 @@ import { Collapse } from "react-bootstrap";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { useInventoryCheck } from "~/utils/hooks/useInventoryCheck";
 
 function Checkout(props) {
   const {
@@ -59,6 +60,7 @@ function Checkout(props) {
     openAllAddressModal,
   } = props;
   const { isSmallSize: isMobile } = useWindowDimensions();
+  const productWithInventory = useInventoryCheck(cartList);
   const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
@@ -91,6 +93,10 @@ function Checkout(props) {
   } = useMemo(
     () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
     [cartList, appliedCoupon, isFirst, shippingTiers]
+  );
+
+  const isCartHasInventory = useMemo(() =>
+    cartList.every((c) => c.qty <= productWithInventory[c.recordKey])
   );
 
   const handlePayment = useCallback(
@@ -147,7 +153,7 @@ function Checkout(props) {
         alertToaster("Something went wrong. Try Again!", "error");
       }
     },
-    [store, user]
+    [store, user,isCartHasInventory]
   );
 
   const handleCodPayments = (orderId) => {
@@ -238,6 +244,13 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
+      if (!isCartHasInventory) {
+        alertToaster(
+          "Some product goes out of stock, Please remove from cart.",
+          "error"
+        );
+        return;
+      }
       if (payMethod === "NONE") {
         alertToaster("Please select payment method", "error");
         return;
@@ -480,37 +493,50 @@ function Checkout(props) {
                                             {item.title}
                                           </ALink>
                                         </div>
-                                        <div className="product-subtotal mt-1">
-                                          {!(item.isBogo && item.qty === 1) && (
-                                            <span className="sm-product-amount">
-                                              ₹{toDecimal(item.price)}
-                                            </span>
-                                          )}
+                                        {item.qty >=
+                                        productWithInventory[item.recordKey] ? (
+                                          <div className="outofstock-tag mt-2">
+                                            <p className="m-0 outofstock-label">
+                                              out of stock
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          <div className="product-subtotal mt-1">
+                                            {!(
+                                              item.isBogo && item.qty === 1
+                                            ) && (
+                                              <span className="sm-product-amount">
+                                                ₹{toDecimal(item.price)}
+                                              </span>
+                                            )}
 
-                                          <p className="m-0 product-discount-listing">
-                                            {item.price < item.listingPrice && (
-                                              <del className="summary-subtotal-listingprice">
-                                                ₹{toDecimal(item.listingPrice)}
-                                              </del>
-                                            )}
-                                            {item.isBogo && item.qty === 1 ? (
-                                              <span className="text-success ml-1">
-                                                Free
-                                              </span>
-                                            ) : (
-                                              <span
-                                                className={`discount-percetage ml-2`}
-                                              >
-                                                {productDiscountPercentage(
-                                                  item
-                                                ) > 0 &&
-                                                  `${productDiscountPercentage(
+                                            <p className="m-0 product-discount-listing">
+                                              {item.price <
+                                                item.listingPrice && (
+                                                <del className="summary-subtotal-listingprice">
+                                                  ₹
+                                                  {toDecimal(item.listingPrice)}
+                                                </del>
+                                              )}
+                                              {item.isBogo && item.qty === 1 ? (
+                                                <span className="text-success ml-1">
+                                                  Free
+                                                </span>
+                                              ) : (
+                                                <span
+                                                  className={`discount-percetage ml-2`}
+                                                >
+                                                  {productDiscountPercentage(
                                                     item
-                                                  )}% off`}
-                                              </span>
-                                            )}
-                                          </p>
-                                        </div>{" "}
+                                                  ) > 0 &&
+                                                    `${productDiscountPercentage(
+                                                      item
+                                                    )}% off`}
+                                                </span>
+                                              )}
+                                            </p>
+                                          </div>
+                                        )}
                                         {item.isBogo && item.qty > 1 && (
                                           <div className="summary-saving-lable-container mb-1  qty-label ">
                                             {" "}

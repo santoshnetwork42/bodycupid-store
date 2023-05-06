@@ -22,14 +22,14 @@ function ProductBestPrice(props) {
           </p>
         </div>
       </div>
-      <div className="d-flex align-items-center">
-        Use coupon{" "}
-        <p id="coupon-code" className="font-weight-semi-bold ml-1">
+      <div className="d-flex align-items-center flex-wrap">
+        <span className="mr-1">Use coupon </span>
+        <p id="coupon-code" className="font-weight-semi-bold mr-1">
           {code}
         </p>{" "}
         <ALink
           href="#"
-          className="copy-code  cursor-pointer ml-1"
+          className="copy-code cursor-pointer"
           onClick={() => {
             copyText(code, `Coupon code copied: ${code}`);
           }}
@@ -49,7 +49,7 @@ function ProductBestPrice(props) {
             {couponList.map((coupon) => (
               <div
                 key={coupon.key}
-                className="d-flex w-full mb-2 lh-default align-items-center justify-content-between pl-1 pr-1"
+                className="d-flex w-full mb-2 lh-default align-items-center justify-content-between  pr-1"
               >
                 <div>
                   <span className="coupon-subtext">
@@ -58,15 +58,15 @@ function ProductBestPrice(props) {
                       {toDecimal(price - coupon.totalDiscount)}
                     </span>{" "}
                   </span>
-                  <div>
-                    Use coupon
-                    <span className="text-dark font-weight-semi-bold ">
+                  <div className="d-flex align-items-center flex-wrap">
+                    <span className="mr-1">Use coupon</span>
+                    <span className="text-dark font-weight-semi-bold mr-1">
                       {" "}
                       {coupon.code}
                     </span>{" "}
                     <ALink
                       href="#"
-                      className="copy-code  cursor-pointer ml-1"
+                      className="copy-code  cursor-pointer"
                       onClick={() => {
                         copyText(code, `Coupon code copied: ${code}`);
                       }}
