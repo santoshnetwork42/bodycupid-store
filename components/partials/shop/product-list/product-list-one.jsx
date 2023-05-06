@@ -132,6 +132,7 @@ function ProductListOne(props) {
         setTotal(total);
         setLoading(false);
       } catch (error) {
+        setLoading(false);
         errorHandler(error);
       }
     },
