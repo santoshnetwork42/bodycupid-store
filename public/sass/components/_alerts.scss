@@ -18,7 +18,7 @@
 // Default
 .alert {
     position: relative;
-    padding: 1.6rem 1.8rem 1.6rem 1.8rem;
+    padding: 1rem 1.8rem 1rem 1.8rem;
     border:  1px solid #222;
     font-size: 1.4rem;
     line-height: 1.75;
@@ -84,6 +84,7 @@
     border-color: $alert-color;
     color: $alert-color;
     //.btn-close { color: $alert-color; }
+    // text-align: center;
 }
 
 .alert-black {
@@ -190,8 +191,8 @@
         margin: 0 .8rem 0 0 ;
     }
     &.error-height{
-        width: fit-content;
-        height: 40px;
+        width: 100%;
+        height: auto;
         display: flex;
         align-items: center;
     }

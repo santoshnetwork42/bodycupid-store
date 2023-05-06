@@ -171,6 +171,7 @@ export const updateBulkAction = /* GraphQL */ `
       userId
       action
       csvKey
+      csv
       status
       message
       completedAt
@@ -190,6 +191,7 @@ export const deleteBulkAction = /* GraphQL */ `
       userId
       action
       csvKey
+      csv
       status
       message
       completedAt
@@ -915,6 +917,7 @@ export const createProductInventory = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -976,6 +979,7 @@ export const updateProductInventory = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1037,6 +1041,7 @@ export const deleteProductInventory = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1319,6 +1324,7 @@ export const createProduct = /* GraphQL */ `
       thumbImages
       isTaxEnabled
       isInventoryEnabled
+      googleCategory
       hasVarient
       hasFaq
       variants {
@@ -1429,6 +1435,7 @@ export const updateProduct = /* GraphQL */ `
       thumbImages
       isTaxEnabled
       isInventoryEnabled
+      googleCategory
       hasVarient
       hasFaq
       variants {
@@ -1539,6 +1546,7 @@ export const deleteProduct = /* GraphQL */ `
       thumbImages
       isTaxEnabled
       isInventoryEnabled
+      googleCategory
       hasVarient
       hasFaq
       variants {
@@ -1608,6 +1616,7 @@ export const createLinkedProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1668,6 +1677,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1728,6 +1738,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -2081,19 +2092,24 @@ export const createOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -2213,19 +2229,24 @@ export const updateOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -2345,19 +2366,24 @@ export const deleteOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -2529,6 +2555,7 @@ export const createOrderProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -2647,6 +2674,7 @@ export const updateOrderProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -2765,6 +2793,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3003,6 +3032,7 @@ export const createReview = /* GraphQL */ `
   ) {
     createReview(input: $input, condition: $condition) {
       id
+      bulkActionId
       userId
       user {
         id
@@ -3077,12 +3107,14 @@ export const createReview = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
       rating
       comment
       title
+      source
       images
       verified
       createdAt
@@ -3097,6 +3129,7 @@ export const updateReview = /* GraphQL */ `
   ) {
     updateReview(input: $input, condition: $condition) {
       id
+      bulkActionId
       userId
       user {
         id
@@ -3171,12 +3204,14 @@ export const updateReview = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
       rating
       comment
       title
+      source
       images
       verified
       createdAt
@@ -3191,6 +3226,7 @@ export const deleteReview = /* GraphQL */ `
   ) {
     deleteReview(input: $input, condition: $condition) {
       id
+      bulkActionId
       userId
       user {
         id
@@ -3265,12 +3301,14 @@ export const deleteReview = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
       rating
       comment
       title
+      source
       images
       verified
       createdAt
@@ -3388,6 +3426,7 @@ export const createWishlistProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3473,6 +3512,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3558,6 +3598,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3673,6 +3714,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3759,6 +3801,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3845,6 +3888,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3887,6 +3931,7 @@ export const createCouponCode = /* GraphQL */ `
     createCouponCode(input: $input, condition: $condition) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -3926,16 +3971,20 @@ export const createCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -3950,6 +3999,7 @@ export const updateCouponCode = /* GraphQL */ `
     updateCouponCode(input: $input, condition: $condition) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -3989,16 +4039,20 @@ export const updateCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -4013,6 +4067,7 @@ export const deleteCouponCode = /* GraphQL */ `
     deleteCouponCode(input: $input, condition: $condition) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -4052,16 +4107,20 @@ export const deleteCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -4289,6 +4348,7 @@ export const createBulkAction = /* GraphQL */ `
       userId
       action
       csvKey
+      csv
       status
       message
       completedAt
@@ -4297,11 +4357,21 @@ export const createBulkAction = /* GraphQL */ `
     }
   }
 `;
+export const checkInventory = /* GraphQL */ `
+  mutation CheckInventory($input: [CheckInventoryInput!]!) {
+    checkInventory(input: $input) {
+      productId
+      variantId
+      inventory
+    }
+  }
+`;
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon($code: String!) {
     applyCoupon(code: $code) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -4341,16 +4411,20 @@ export const applyCoupon = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -4416,14 +4490,6 @@ export const addProductNotification = /* GraphQL */ `
       userId: $userId
       email: $email
     ) {
-      success
-      message
-    }
-  }
-`;
-export const createBulkCoupons = /* GraphQL */ `
-  mutation CreateBulkCoupons($input: CreateBulkCouponInput!, $count: Int!) {
-    createBulkCoupons(input: $input, count: $count) {
       success
       message
     }

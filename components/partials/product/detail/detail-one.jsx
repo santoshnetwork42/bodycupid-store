@@ -272,13 +272,13 @@ function DetailOne(props) {
 
       <h2 className="detail-product-name text-uppercase">{product.title}</h2>
 
-      {!!product?.tags && (
+      {/* {!!product?.tags && (
         <div className="mb-1">
           <label className="product-tag">
             {product?.tags.split(",").join(" | ")}
           </label>
         </div>
-      )}
+      )} */}
 
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
@@ -381,16 +381,14 @@ function DetailOne(props) {
         </>
       )}
 
-      {today.getHours() > 8 && today.getHours() < 15  && (
+      {today.getHours() > 8 && today.getHours() < 15 && (
         <div className="d-flex align-items-center mb-2">
-        <Clock size={16}/>
-        <p className="text-primary ml-1 mb-0">
-          For Fastest delivery, order within {deliveryRemainingTime()}
-        </p>
+          <Clock size={16} />
+          <p className="text-primary ml-1 mb-0">
+            For Fastest delivery, order within {deliveryRemainingTime()}
+          </p>
         </div>
-        
       )}
-
 
       {isStickyCart ? (
         <>
@@ -554,7 +552,6 @@ function DetailOne(props) {
           </span>
         )}
       </div>
-
     </div>
   );
 }

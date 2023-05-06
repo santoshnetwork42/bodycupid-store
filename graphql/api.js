@@ -409,7 +409,6 @@ export const getProductBySlug = /* GraphQL */ `
         createdAt
         slug
         productDescription
-        longDescription
         updatedAt
         isPublished
         publishedAt
@@ -1545,6 +1544,16 @@ export const searchShippingTiers = /* GraphQL */ `
         createdAt
         updatedAt
       }
+    }
+  }
+`;
+
+export const checkInventory = /* GraphQL */ `
+  mutation CheckInventory($input: [CheckInventoryInput!]!) {
+    checkInventory(input: $input) {
+      productId
+      variantId
+      inventory
     }
   }
 `;

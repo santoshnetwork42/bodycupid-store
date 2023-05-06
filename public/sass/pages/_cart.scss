@@ -202,6 +202,9 @@
         &:last-child {
             margin-right: 0;
         }
+        .step-by-btn {
+            cursor: pointer;
+        }
     }
 }
 
@@ -555,6 +558,16 @@
             right: 2.5rem;
             top: 2.5rem;
         }
+        .outofstock-tag {
+            background-color: rgb(249, 232, 232);
+            color: #C20000;
+            width: fit-content;
+            padding: 0px .7rem;
+            border-radius: .5rem;
+            .outofstock-label {
+                font-size: 1.5rem;
+            }
+        }
     }
 
     .product-subtotal {
@@ -730,7 +743,7 @@
         justify-content: space-between;
         align-items: center;
         position: fixed;
-        bottom: 0;
+        bottom: -1px;
         left: 0;
         background: #fff;
         z-index: 99;

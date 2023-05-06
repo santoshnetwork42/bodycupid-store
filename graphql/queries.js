@@ -976,6 +976,7 @@ export const getProductInventory = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1433,6 +1434,7 @@ export const getProduct = /* GraphQL */ `
       thumbImages
       isTaxEnabled
       isInventoryEnabled
+      googleCategory
       hasVarient
       hasFaq
       variants {
@@ -1500,6 +1502,7 @@ export const listProducts = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1567,6 +1570,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1634,6 +1638,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1701,6 +1706,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1768,6 +1774,7 @@ export const byslugProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1835,6 +1842,7 @@ export const searchProducts = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -1906,6 +1914,7 @@ export const getLinkedProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -2023,18 +2032,18 @@ export const listVariants = /* GraphQL */ `
     }
   }
 `;
-export const byProductIdCreatedAtVariant = /* GraphQL */ `
-  query ByProductIdCreatedAtVariant(
+export const byProductIdVariant = /* GraphQL */ `
+  query ByProductIdVariant(
     $productId: ID!
-    $createdAt: ModelStringKeyConditionInput
+    $position: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelVariantFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byProductIdCreatedAtVariant(
+    byProductIdVariant(
       productId: $productId
-      createdAt: $createdAt
+      position: $position
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -2167,18 +2176,18 @@ export const listProductImages = /* GraphQL */ `
     }
   }
 `;
-export const byProductIdProductImage = /* GraphQL */ `
-  query ByProductIdProductImage(
+export const byProductIdImage = /* GraphQL */ `
+  query ByProductIdImage(
     $productId: ID!
-    $createdAt: ModelStringKeyConditionInput
+    $position: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelProductImageFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byProductIdProductImage(
+    byProductIdImage(
       productId: $productId
-      createdAt: $createdAt
+      position: $position
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -2359,19 +2368,24 @@ export const getOrder = /* GraphQL */ `
       coupon {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -2771,6 +2785,7 @@ export const getOrderProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3206,6 +3221,7 @@ export const getReview = /* GraphQL */ `
   query GetReview($id: ID!) {
     getReview(id: $id) {
       id
+      bulkActionId
       userId
       user {
         id
@@ -3280,12 +3296,14 @@ export const getReview = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
       rating
       comment
       title
+      source
       images
       verified
       createdAt
@@ -3302,12 +3320,14 @@ export const listReviews = /* GraphQL */ `
     listReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        bulkActionId
         userId
         flagged
         productId
         rating
         comment
         title
+        source
         images
         verified
         createdAt
@@ -3336,12 +3356,14 @@ export const byProductidcreatedAtReview = /* GraphQL */ `
     ) {
       items {
         id
+        bulkActionId
         userId
         flagged
         productId
         rating
         comment
         title
+        source
         images
         verified
         createdAt
@@ -3370,12 +3392,14 @@ export const searchReviews = /* GraphQL */ `
     ) {
       items {
         id
+        bulkActionId
         userId
         flagged
         productId
         rating
         comment
         title
+        source
         images
         verified
         createdAt
@@ -3549,6 +3573,7 @@ export const getWishlistProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3787,6 +3812,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        googleCategory
         hasVarient
         hasFaq
       }
@@ -3880,6 +3906,7 @@ export const getCouponCode = /* GraphQL */ `
     getCouponCode(id: $id) {
       id
       groupId
+      description
       code
       storeId
       store {
@@ -3919,16 +3946,20 @@ export const getCouponCode = /* GraphQL */ `
         walletSpent
         totalStoreCredit
       }
-      discount
-      expirationDate
-      maxUse
-      totalUsed
-      isActive
-      isFeatured
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
+      expirationDate
+      isActive
+      isFeatured
+      autoApply
+      applicableCollections
+      applicableProducts
       paymentMethod
       createdAt
       updatedAt
@@ -3945,19 +3976,24 @@ export const listCouponCodes = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -3986,19 +4022,24 @@ export const bycodeCouponCode = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -4027,19 +4068,24 @@ export const byuserIdCouponCode = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -4068,19 +4114,24 @@ export const searchCouponCodes = /* GraphQL */ `
       items {
         id
         groupId
+        description
         code
         storeId
         userId
-        discount
-        expirationDate
-        maxUse
-        totalUsed
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
         createdAt
         updatedAt
@@ -4552,6 +4603,7 @@ export const getBulkAction = /* GraphQL */ `
       userId
       action
       csvKey
+      csv
       status
       message
       completedAt
@@ -4573,6 +4625,7 @@ export const listBulkActions = /* GraphQL */ `
         userId
         action
         csvKey
+        csv
         status
         message
         completedAt

@@ -342,6 +342,7 @@ export const getCartTotals = (
 ) => {
   let totalPrice = 0;
   let totalListingPrice = 0;
+  let totalItems = 0;
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
     shippingTiers,
@@ -356,6 +357,7 @@ export const getCartTotals = (
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
     totalListingPrice +=
       cartItems[i].listingPrice * parseInt(cartItems[i].qty, 10);
+    totalItems += parseInt(cartItems[i].qty, 10);
   }
 
   const prepaidDiscount = ((totalPrice - couponTotal) / 100) * 5;
@@ -373,6 +375,7 @@ export const getCartTotals = (
   const cartAmountSaved = totalAmountSaved;
 
   return {
+    totalItems,
     totalPrice,
     totalListingPrice,
     shippingTotal,
@@ -388,9 +391,13 @@ export const getCartTotals = (
   };
 };
 
+export const toInteger = (number) => {
+  return parseInt(number.toFixed());
+};
+
 /**
  * utils to get Shipping Price of products in cart.
- */ 
+ */
 
 export const getShippingPrice = (
   cartItems = [],
@@ -475,6 +482,7 @@ export const getCartCount = (cartItems = []) => {
 
   return total;
 };
+
 
 /**
  * utils to show number to n places of decimals
