@@ -110,6 +110,10 @@ function DetailOne(props) {
     return;
   }, [cartList, selectedVariant]);
 
+  const totalOrderCount = useMemo(() => {
+    return Math.ceil(product.totalOrders / 1000) * 1000;
+  });
+
   // decide if the product is wishlisted
   // const isWishlisted = useMemo(
   //   () => wishlist.some((i) => i.id === product?.id),
@@ -356,9 +360,9 @@ function DetailOne(props) {
         )}
       </div>
 
-      <p className="product-short-desc mb-3 lh-1">
+      {/* <p className="product-short-desc mb-3 lh-1">
         {product.productDescription}
-      </p>
+      </p> */}
 
       {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
         <div className="mb-3">
@@ -544,10 +548,11 @@ function DetailOne(props) {
           )}
         </>
       )}
+
       <div className="d-flex text-success align-items-center mb-3 lh-default">
-        {product.totalOrders > 1000 && (
+        {!!product.totalOrders && (
           <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
-            {product.totalOrders}+ units sold -
+            {totalOrderCount}+ units sold -
           </p>
         )}
         {hasInventory && currentInventory < 100 && (
