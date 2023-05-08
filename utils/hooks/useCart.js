@@ -22,38 +22,37 @@ export const useCartItems = () => {
       if (allowed) {
         const sortedItems = cartList.sort((a, b) => a.price > b.price ? 1 : -1);
 
-        let buyXQuantity = appliedCoupon.buyXQuantity;
         let getYQuantity = appliedCoupon.getYQuantity;
         let remainingDiscount = appliedCoupon.maxDiscount || Infinity;
 
         const updatedCartItems = sortedItems.reduce((acc, item) => {
-          if (item.price > remainingDiscount) {
-            return [...acc, item];
-          }
-
           const itemQty = parseInt(item.qty, 10);
-          const maxFreeQty = parseInt((getYQuantity * item.price) / remainingDiscount, 10);
-          const freeQty = Math.min(itemQty, maxFreeQty);
+          const freeQty = remainingDiscount === Infinity
+            ? Math.min(itemQty, Math.max(0, getYQuantity))
+            : Math.min(parseInt(remainingDiscount / item.price, 10), itemQty, Math.max(0, getYQuantity));
           getYQuantity -= freeQty;
 
+          console.log(freeQty, itemQty, getYQuantity);
+
+          if (!freeQty) {
+            return [...acc, { ...item, itemKey: `${item.recordKey}-full-paid` }];
+          }
+
           if (freeQty === itemQty) {
-            return [...acc, { ...item, itemKey: `${p.recordKey}-full-item-free`, cartItemType: "FREEPRODUCT" }];
+            return [...acc, { ...item, itemKey: `${item.recordKey}-full-item-free`, cartItemType: "FREEPRODUCT" }];
           }
 
           return [
             ...acc,
-            { ...item, qty: freeQty, itemKey: `${p.recordKey}-partial-item-free`, cartItemType: "FREEPRODUCT" },
-            { ...item, qty: itemQty - freeQty, itemKey: `${p.recordKey}-${freeQty}-partial-item-paid}` },
+            { ...item, qty: freeQty, itemKey: `${item.recordKey}-partial-item-free`, cartItemType: "FREEPRODUCT" },
+            { ...item, qty: itemQty - freeQty, itemKey: `${item.recordKey}-${freeQty}-partial-item-paid}` },
           ];
-
-          return acc;
         }, []);
 
-        // return sortedItems;
-        // return [
-        //   ...updatedCartItems.map(p => ({ ...p, itemKey: p.recordKey })),
-        //   ...freeProducts.map(p => ({ ...p, itemKey: `${p.id}-free`, cartItemType: "FREEPRODUCT" }))
-        // ];
+        return [
+          ...updatedCartItems,
+          ...freeProducts.map(p => ({ ...p, itemKey: `${p.id}-free`, cartItemType: "FREEPRODUCT" }))
+        ];
       }
     }
 

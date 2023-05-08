@@ -29,6 +29,7 @@ function CartProduct({
     price,
     listingPrice,
     variantId,
+    cartItemType,
   } = item;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
@@ -98,11 +99,8 @@ function CartProduct({
               <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {bogo === "SECONDARY" ? (
+              {cartItemType === "FREEPRODUCT" ? (
                 <>
-                  <del className="summary-subtotal-listingprice">
-                    ₹{toDecimal(price)}
-                  </del>
                   <span className="discount-percentage ml-1">Free</span>
                 </>
               ) : (
@@ -131,7 +129,7 @@ function CartProduct({
               </div>
             ) : (
               <div className="">
-                {bogo !== "SECONDARY" && (
+                {cartItemType !== "FREEPRODUCT" && (
                   <div className="product-quantity w-0 mb-1">
                     <Quantity
                       product={item}
