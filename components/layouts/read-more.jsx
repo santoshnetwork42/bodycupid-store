@@ -36,11 +36,13 @@ export default function ReadMore({ children, position = "center" }) {
       >
         {!read ? (
           <>
-            Read more <DownAngle size={14} color={"currentColor"} />
+            <span className="mr-1">Read more</span>
+            <DownAngle size={14} color={"currentColor"} />
           </>
         ) : (
           <>
-            Read less <UpAngle size={14} color={"currentColor"} />
+            <span className="mr-1">Read less</span>
+            <UpAngle size={14} color={"currentColor"} />
           </>
         )}
       </span>
