@@ -158,14 +158,19 @@ function Passwordless({
     }
   }, [state.confirmationCode]);
 
-  const handleChange = (ele, index) => {
-    setState({
-      ...state,
-      confirmationCode: [
-        ...state.confirmationCode.map((o, i) => (i === index ? ele.value : o)),
-      ],
-    });
-  };
+  const handleChange = useCallback(
+    (ele, index) => {
+      setState({
+        ...state,
+        confirmationCode: [
+          ...state.confirmationCode.map((o, i) =>
+            i === index ? ele.value : o
+          ),
+        ],
+      });
+    },
+    [state]
+  );
 
   const inputFocus = (ele) => {
     if (ele.key === "Delete" || ele.key === "Backspace") {
@@ -281,6 +286,7 @@ function Passwordless({
                           <div className="d-flex otp-container mb-3">
                             {state.confirmationCode.map((ele, index) => (
                               <input
+                                key={index}
                                 id={`otp${index + 1}`}
                                 name={`otp${index + 1}`}
                                 type="number"
