@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -18,7 +18,6 @@ function CartProduct({
 }) {
   const {
     id,
-    bogo,
     variants,
     recordKey,
     qty,
@@ -30,6 +29,8 @@ function CartProduct({
     listingPrice,
     variantId,
     cartItemType,
+    extraQty = 0,
+    hideQty = false,
   } = item;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
@@ -61,7 +62,7 @@ function CartProduct({
   };
 
   const onChangeQty = (newQty) => {
-    const finalQty = bogo === "PRIMARY" ? newQty + 1 : newQty;
+    const finalQty = newQty + extraQty;
     if (finalQty) {
       const cartData = getUpdatedCart(cartList, recordKey, {
         qty: finalQty,
@@ -129,7 +130,7 @@ function CartProduct({
               </div>
             ) : (
               <div className="">
-                {cartItemType !== "FREEPRODUCT" && (
+                {!hideQty && (
                   <div className="product-quantity w-0 mb-1">
                     <Quantity
                       product={item}

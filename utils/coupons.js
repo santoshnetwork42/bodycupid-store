@@ -1,14 +1,38 @@
 import { getCartCount, getTotalPrice, toDecimal } from "~/utils";
 
-export const getCouponMessage = ({ couponType, getYAmount, getYPercentage, getYQuantity, paymentMethod }) => {
-  let discoutMsg =
-    "Lowest value item in the cart will be discounted off on the item total.";
+export const getCouponMessage = ({
+  couponType,
+  getYAmount,
+  getYPercentage,
+  getYQuantity,
+  paymentMethod,
+  getYStoreProduct,
+  minOrderValue,
+  maxDiscount,
+}) => {
+  let discountMsg =
+    "Lowest value item in the cart will be discounted off on the item total";
+
   if (couponType === "FIXED") {
-    discoutMsg = `₹${getYAmount} off on item total.`;
+    discountMsg = `₹${getYAmount} off on item total`;
   } else if (couponType === "PERCENTAGE") {
-    discoutMsg = `${getYPercentage}% off on item total.`;
+    discountMsg = `${getYPercentage}% off on item total`;
+    if (maxDiscount) {
+      discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
+    }
   } else if (couponType === "BUY_X_GET_Y" && getYQuantity > 1) {
-    discoutMsg = `Lowest value ${getYQuantity} items in the cart will be discounted off on the item total.`;
+    discountMsg = `Lowest value ${getYQuantity} items in the cart will be discounted off on the item total`;
+    if (maxDiscount) {
+      discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
+    }
+  } else if (couponType === "PRODUCT") {
+    discountMsg = `FREE ${getYStoreProduct?.title} WORTH ₹${getYStoreProduct?.price}`;
+  }
+
+  if (minOrderValue) {
+    discountMsg = `${discountMsg} on orders above ₹${minOrderValue}.`;
+  } else {
+    discountMsg = `${discountMsg}.`;
   }
 
   let paymentTypeMsg = "Applicable on both online payment and COD.";
@@ -18,7 +42,11 @@ export const getCouponMessage = ({ couponType, getYAmount, getYPercentage, getYQ
     paymentTypeMsg = "Applicable on online payment.";
   }
 
-  return `${discoutMsg} ${paymentTypeMsg}`;
+  return {
+    message: `${discountMsg} ${paymentTypeMsg}`,
+    paymentTypeMsg,
+    discountMsg,
+  };
 };
 
 export const getCouponDiscount = (coupon, cartList) => {
@@ -32,6 +60,7 @@ export const getCouponDiscount = (coupon, cartList) => {
     getYAmount,
     getYPercentage,
     getYQuantity,
+    getYStoreProduct,
   } = coupon;
 
   const totalAmount = getTotalPrice(cartList);
@@ -40,16 +69,20 @@ export const getCouponDiscount = (coupon, cartList) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${minOrderValue - totalAmount} more in the cart`,
+      message: `Add product worth ₹${
+        minOrderValue - totalAmount
+      } more in the cart`,
     };
   }
 
   const totalItems = getCartCount(cartList);
-  if ((buyXQuantity + getYQuantity) > totalItems) {
+  if (buyXQuantity + getYQuantity > totalItems) {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${buyXQuantity + getYQuantity - totalItems} more items in the cart`,
+      message: `Add ${
+        buyXQuantity + getYQuantity - totalItems
+      } more items in the cart`,
     };
   }
 
@@ -67,10 +100,7 @@ export const getCouponDiscount = (coupon, cartList) => {
     }
   }
 
-  if (
-    Array.isArray(applicableCollections) &&
-    applicableCollections.length
-  ) {
+  if (Array.isArray(applicableCollections) && applicableCollections.length) {
     const hasCollection = cartList.some((c) =>
       applicableCollections.some((ac) => (c.collections || []).includes(ac))
     );
@@ -84,13 +114,17 @@ export const getCouponDiscount = (coupon, cartList) => {
     }
   }
 
+  const { discountMsg } = getCouponMessage(coupon);
+
   if (couponType === "FIXED") {
-    const discount = maxDiscount ? Math.min(maxDiscount, getYAmount) : getYAmount;
+    const discount = maxDiscount
+      ? Math.min(maxDiscount, getYAmount)
+      : getYAmount;
     return {
       ...coupon,
       allowed: true,
       discount,
-      message: `You will save ₹${toDecimal(discount)} with this coupon`,
+      message: discountMsg,
     };
   }
 
@@ -103,16 +137,16 @@ export const getCouponDiscount = (coupon, cartList) => {
       ...coupon,
       allowed: true,
       discount,
-      message: `You will save ₹${toDecimal(discount)} with this coupon`,
+      message: discountMsg,
     };
   }
 
   if (couponType === "PRODUCT") {
     return {
       ...coupon,
-      allowed: true,
+      allowed: !!getYStoreProduct?.title,
       discount: 0,
-      message: '',
+      message: getCouponMessage(coupon).discountMsg,
     };
   }
 
@@ -131,6 +165,6 @@ export const getCouponDiscount = (coupon, cartList) => {
     ...coupon,
     allowed: true,
     discount,
-    message: `You will save ₹${toDecimal(discount)} with this coupon`,
+    message: discountMsg,
   };
 };

@@ -95,13 +95,15 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container p-0 sm-container mt-7 mb-2 ">
+        <div
+          className="container p-0 sm-container mt-7 mb-2 " 
+        >
           <div className="row">
             {cartItems.length > 0 ? (
               <>
                 <div className="col-lg-8 col-md-12 ">
                   <div className="shop-table cart-table lh-default ">
-                    <div>
+                    <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
                         <CartProduct
                           key={`${item.itemKey}`}
@@ -109,6 +111,7 @@ function Cart(props) {
                           outOfStock={
                             inventoryMapping[item.recordKey] < Number(item.qty)
                           }
+                          cartItems={cartItems}
                         />
                       ))}
                     </div>
@@ -151,8 +154,8 @@ function Cart(props) {
                           {!!appliedCoupon && (
                             <>
                               <tr className="summary-subtotal">
-                                <td className="d-flex align-items-center">
-                                  <h4 className="summary-subtitle lh-1">
+                                <td className="d-flex align-items-center no-wrap">
+                                  <h4 className="summary-subtitle lh-1 ">
                                     Discounts
                                   </h4>
                                   &nbsp; ({appliedCoupon.code})

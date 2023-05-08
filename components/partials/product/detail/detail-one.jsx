@@ -22,6 +22,7 @@ import { getProductInventory, getProductCouponTotal } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
+import { useProductCoupons } from "~/utils/hooks/useCoupon";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -40,62 +41,10 @@ function DetailOne(props) {
     setVariant = () => {},
     addToCart,
     removeFromCart,
-    featuredCoupons,
-    getFeaturedCoupons,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
-
-  const today = new Date();
-
-  const sizes = useMemo(
-    () =>
-      (product?.variants?.items || [])
-        .sort((a, b) => a.position - b.position)
-        .map((item) => ({ ...item })),
-    [product?.variants?.items]
-  );
-
-  useEffect(() => {
-    getFeaturedCoupons();
-  }, []);
-
-  const { maxDiscountCoupon, couponList } = useMemo(() => {
-    let selectedProduct = product;
-    if (sizes.length) {
-      selectedProduct = product?.variants?.items.find(
-        (v) => v.id === selectedVariant
-      );
-    }
-    if (!!featuredCoupons?.length && selectedProduct) {
-      const list = featuredCoupons.filter((f) => f.couponType !== "BOGO");
-
-      const couponList = list.reduce((prev, current) => {
-        const second = getProductCouponTotal(current, selectedProduct);
-        prev.push({
-          ...current,
-          price: selectedProduct?.price,
-          totalDiscount: second,
-        });
-        return prev;
-      }, []);
-
-      const res = couponList
-        .sort((a, b) => b.totalDiscount - a.totalDiscount)
-        .filter((c) => c.totalDiscount);
-      return { maxDiscountCoupon: res[0], couponList: res.slice(1, 4) };
-    }
-    return {
-      maxDiscountCoupon: null,
-      couponList: [],
-    };
-  }, [product?.slug, featuredCoupons, selectedVariant]);
-
-  const { hasInventory, currentInventory } = useMemo(
-    () => getProductInventory(product, selectedVariant),
-    [selectedVariant, sizes, product?.slug]
-  );
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -109,6 +58,26 @@ function DetailOne(props) {
     }
     return;
   }, [cartList, selectedVariant]);
+
+  const { productCoupons, bestCoupon } = useProductCoupons(
+    product,
+    selectedVariant
+  );
+
+  const today = new Date();
+
+  const sizes = useMemo(
+    () =>
+      (product?.variants?.items || [])
+        .sort((a, b) => a.position - b.position)
+        .map((item) => ({ ...item })),
+    [product?.variants?.items]
+  );
+
+  const { hasInventory, currentInventory } = useMemo(
+    () => getProductInventory(product, selectedVariant),
+    [selectedVariant, sizes, product?.slug]
+  );
 
   // decide if the product is wishlisted
   // const isWishlisted = useMemo(
@@ -355,8 +324,13 @@ function DetailOne(props) {
           </div>
         )}
       </div>
-      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
-        <ProductBestPrice {...maxDiscountCoupon} couponList={couponList} />
+
+      {!!hasInventory && !!bestCoupon && (
+        <ProductBestPrice
+          {...bestCoupon}
+          price={price}
+          couponList={productCoupons}
+        />
       )}
 
       <p className="product-short-desc">{product.productDescription}</p>

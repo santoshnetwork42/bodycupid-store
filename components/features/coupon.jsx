@@ -208,7 +208,7 @@ function Coupon(props) {
                               Apply
                             </button>
                           </div>
-                          <p className="m-0">{getCouponMessage(c)}</p>
+                          <p className="m-0">{getCouponMessage(c).message}</p>
                         </div>
                       );
                     })}

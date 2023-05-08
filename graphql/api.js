@@ -516,6 +516,11 @@ export const getFeaturedCoupon = /* GraphQL */ `
         getYPercentage
         getYQuantity
         getYProduct
+        getYStoreProduct {
+          id
+          title
+          price
+        }
         minOrderValue
         maxDiscount
         expirationDate
@@ -543,7 +548,7 @@ export const applyCoupon = /* GraphQL */ `
       maxDiscount
       applicableCollections
       applicableProducts
-      paymentMethod 
+      paymentMethod
     }
   }
 `;
