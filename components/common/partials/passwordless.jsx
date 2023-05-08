@@ -23,7 +23,7 @@ function Passwordless({
   const router = useRouter();
   const [state, setState] = useState({
     phone: "",
-    confirmationCode: "",
+    confirmationCode: new Array(6).fill(""),
   });
 
   const [confirmSignUp, setConfirmSignUp] = useState(null);
@@ -46,7 +46,7 @@ function Passwordless({
 
   useEffect(() => {
     if (!isOpen) {
-      setState({ phone: "", confirmationCode: "" });
+      setState({ phone: "", confirmationCode: new Array(6).fill("") });
       setConfirmSignUp(null);
       setCurrentUser(null);
       setOtpError(false);
@@ -73,7 +73,7 @@ function Passwordless({
       setConfirmSignUp("SIGNUP");
     } catch (error) {
       console.log("error signing up:", error);
-      alertToaster(error.message,"error")
+      alertToaster(error.message, "error");
     }
     return false;
   }, [state]);
@@ -86,14 +86,14 @@ function Passwordless({
         if (confirmSignUp === "SIGNUP") {
           await Auth.confirmSignUp(
             addPhonePrefix(state.phone),
-            state.confirmationCode
+            state.confirmationCode.join("")
           );
           closeModal();
           if (redirect) router.push("/pages/checkout");
         } else {
           const { signInUserSession } = await Auth.sendCustomChallengeAnswer(
             currentUser,
-            state.confirmationCode
+            state.confirmationCode.join("")
           );
           if (!!signInUserSession) {
             closeModal();
@@ -132,7 +132,7 @@ function Passwordless({
         } else if (error.code === "UserNotFoundException") {
           await handleSignup();
         } else {
-          alertToaster(error.message,"error")
+          alertToaster(error.message, "error");
         }
         setLoading(false);
       }
@@ -146,10 +146,41 @@ function Passwordless({
   }, [auth]);
 
   useEffect(() => {
-    if (state.confirmationCode.length === 6) {
+    const input = document.querySelector("#otp1");
+    if (input) {
+      input.focus();
+    }
+  }, [isOpen, confirmSignUp]);
+
+  useEffect(() => {
+    if (state.confirmationCode.join("").length === 6) {
       handleConfirmSignUp();
     }
   }, [state.confirmationCode]);
+
+  const handleChange = (ele, index) => {
+    setState({
+      ...state,
+      confirmationCode: [
+        ...state.confirmationCode.map((o, i) => (i === index ? ele.value : o)),
+      ],
+    });
+  };
+
+  const inputFocus = (ele) => {
+    if (ele.key === "Delete" || ele.key === "Backspace") {
+      ele.target?.previousSibling?.focus();
+    } else {
+      ele.target?.nextSibling?.focus();
+    }
+  };
+
+  const handlePaste = (event) => {
+    event.preventDefault();
+    const pastedData = event.clipboardData.getData("Text");
+    const otpArray = pastedData.split("").slice(0, 6);
+    setState({ ...state, confirmationCode: otpArray });
+  };
 
   return (
     <Modal
@@ -239,31 +270,32 @@ function Passwordless({
 
                       {confirmSignUp && (
                         <form onSubmit={handleConfirmSignUp}>
-                          <div className="form-group">
+                          <div className="form-group mb-1">
                             <label
                               htmlFor="confirm-code-2"
                               className="number-otp-label"
                             >
                               Enter 6-Digit OTP sent to +91{state.phone}
                             </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="confirm-code-2"
-                              name="confirm-code"
-                              placeholder="Confirmation Code *"
-                              required
-                              value={state.confirmationCode}
-                              onChange={(e) =>
-                                setState({
-                                  ...state,
-                                  confirmationCode: e.target.value?.substring(
-                                    0,
-                                    6
-                                  ),
-                                })
-                              }
-                            />
+                          </div>
+                          <div className="d-flex otp-container mb-3">
+                            {state.confirmationCode.map((ele, index) => (
+                              <input
+                                id={`otp${index + 1}`}
+                                name={`otp${index + 1}`}
+                                type="number"
+                                autoComplete="one-time-code"
+                                className="otpInput"
+                                value={ele}
+                                maxLength="1"
+                                onChange={(e) => {
+                                  handleChange(e.target, index);
+                                }}
+                                onFocus={(e) => e.target.select()}
+                                onKeyUp={(e) => inputFocus(e, index)}
+                                onPaste={handlePaste}
+                              />
+                            ))}
                           </div>
                           {otpError && (
                             <div className="overflow-hidden mb-4">
