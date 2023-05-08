@@ -158,6 +158,9 @@ export const getHomePageProducts = /* GraphQL */ `
     $nextToken: String
     $from: Int
     $aggregates: [SearchableProductAggregationInput]
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
   ) {
     searchProducts(
       filter: $filter
@@ -188,7 +191,7 @@ export const getHomePageProducts = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
-        variants {
+        variants(filter: $variantFilter, limit: $variantLimit) {
           items {
             id
             productId
@@ -217,7 +220,7 @@ export const getHomePageProducts = /* GraphQL */ `
             id
           }
         }
-        images {
+        images(limit: $imageLimit) {
           items {
             id
             position
@@ -280,6 +283,7 @@ export const getQuickViewProduct = /* GraphQL */ `
       filter: $filter
       limit: $limit
       nextToken: $nextToken
+      $variantFilter: ModelVariantFilterInput
     ) {
       items {
         id
@@ -323,7 +327,7 @@ export const getQuickViewProduct = /* GraphQL */ `
         isTaxEnabled
         isInventoryEnabled
         hasVarient
-        variants {
+        variants(filter: $variantFilter) {
           items {
             id
             productId
@@ -378,6 +382,7 @@ export const getProductBySlug = /* GraphQL */ `
     $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
+    $variantFilter: ModelVariantFilterInput
   ) {
     byslugProduct(
       slug: $slug
@@ -442,7 +447,7 @@ export const getProductBySlug = /* GraphQL */ `
         continueSellingOutOfStock
         hasVarient
         hasFaq
-        variants {
+        variants(filter: $variantFilter) {
           items {
             id
             productId
@@ -779,6 +784,9 @@ export const findProducts = /* GraphQL */ `
     $nextToken: String
     $from: Int
     $aggregates: [SearchableProductAggregationInput]
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
   ) {
     searchProducts(
       filter: $filter
@@ -816,7 +824,7 @@ export const findProducts = /* GraphQL */ `
         thumbImages
         isInventoryEnabled
         totalOrders
-        variants {
+        variants(filter: $variantFilter, limit: $variantLimit) {
           items {
             id
             title
@@ -828,7 +836,7 @@ export const findProducts = /* GraphQL */ `
             blockedInventory
           }
         }
-        images {
+        images(limit: $imageLimit) {
           items {
             id
             position
@@ -896,7 +904,7 @@ export const searchProductsBasic = /* GraphQL */ `
         sku
         listingPrice
         thumbImages
-        images {
+        images(limit: $imageLimit) {
           items {
             id
             position
@@ -1341,6 +1349,9 @@ export const getLinkedProducts = /* GraphQL */ `
     $filter: ModelLinkedProductFilterInput
     $limit: Int
     $nextToken: String
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
   ) {
     byProductIdLinkedProduct(
       productId: $productId
@@ -1378,7 +1389,7 @@ export const getLinkedProducts = /* GraphQL */ `
           isTaxEnabled
           isInventoryEnabled
           hasVarient
-          variants {
+          variants(filter: $variantFilter, limit: $variantLimit) {
             items {
               id
               title
@@ -1391,7 +1402,7 @@ export const getLinkedProducts = /* GraphQL */ `
               imageUrl
             }
           }
-          images {
+          images(limit: $imageLimit) {
             items {
               id
               productId

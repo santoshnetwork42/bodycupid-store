@@ -62,7 +62,14 @@ function ProductDefault(props) {
             searchProducts: { items },
           },
         } = await API.graphql(
-          graphqlOperation(findProducts, { filter, limit: 4 })
+          graphqlOperation(findProducts, {
+            filter,
+            sort: [{ field: "position", direction: "asc" }],
+            variantFilter: { status: { eq: "ENABLED" } },
+            variantLimit: 1,
+            imageLimit: 1,
+            limit: 4,
+          })
         );
         if (items.length) {
           setRelatedProducts(items);
@@ -126,7 +133,6 @@ function ProductDefault(props) {
           </div>
           <div className="page-content pb-10 bg-white">
             <div className="container  vertical pt-3 lh-default bg-white ">
-              
               <LinkedProducts product={product} />
 
               <DescOne
@@ -184,6 +190,7 @@ export const getStaticProps = async (context) => {
     } = await fetchData(getProductBySlug, {
       slug,
       filter: { storeId: { eq: STORE_ID }, status: { eq: "ENABLED" } },
+      variantFilter: { status: { eq: "ENABLED" } },
     });
 
     if (product) {

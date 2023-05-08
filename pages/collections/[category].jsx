@@ -129,7 +129,10 @@ export const getStaticProps = async (context) => {
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
         filter,
-        limit: 18,
+        sort: [{ field: "position", direction: "asc" }],
+        variantFilter: { status: { eq: "ENABLED" } },
+        variantLimit: 1,
+        imageLimit: 1,
       });
 
       // Get Product Sub-Category By Category ID
@@ -173,8 +176,12 @@ export const getStaticProps = async (context) => {
       // Get Product By tag
       const { searchProducts } = await fetchData(findProducts, {
         filter,
-        limit: 18,
+        sort: [{ field: "position", direction: "asc" }],
+        variantFilter: { status: { eq: "ENABLED" } },
+        variantLimit: 1,
+        imageLimit: 1,
       });
+
       const products = await Promise.all(
         searchProducts?.items.map((product) =>
           optimizeProduct(product, { partial: true })

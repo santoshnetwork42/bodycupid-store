@@ -11,7 +11,7 @@ import fetchData from "~/utils/fetchData";
 import { optimizeProduct } from "~/utils/getStaticData";
 
 function AllProduct(props) {
-  const { store, products, sideBarCategories, pageFilter } = props;
+  const { store, products, pageFilter } = props;
   const { name } = store;
 
   return (
@@ -47,7 +47,10 @@ export const getStaticProps = async () => {
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {
       filter,
-      limit: 24,
+      sort: [{ field: "position", direction: "asc" }],
+      variantFilter: { status: { eq: "ENABLED" } },
+      variantLimit: 1,
+      imageLimit: 1,
     });
 
     const { items } = searchProducts;
@@ -62,6 +65,7 @@ export const getStaticProps = async () => {
         categorySlug: null,
         pageFilter: filter,
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.log(error);

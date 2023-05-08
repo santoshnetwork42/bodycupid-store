@@ -39,7 +39,7 @@ function HomePage({
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
-  
+
   return (
     <main className="main home searchBar">
       <Head>
@@ -52,13 +52,13 @@ function HomePage({
         <div className="intro-section">
           <IntroSection {...hero} />
         </div>
-          <ProductCollection
-            products={bestSellerProducts}
-            title="Best sellers"
-           disableCarousel={isSmallSize}
-            slug="best-seller"
-            redirectTo="/collections/best-seller"
-          />
+        <ProductCollection
+          products={bestSellerProducts}
+          title="Best sellers"
+          disableCarousel={isSmallSize}
+          slug="best-seller"
+          redirectTo="/collections/best-seller"
+        />
         <ProductCollection
           products={featuredProducts}
           title="Our featured"
@@ -115,6 +115,12 @@ export const getStaticProps = async () => {
           ...filter,
         },
         limit: 8,
+        sort: [{ field: "position", direction: "asc" }],
+        variantFilter: {
+          status: { eq: "ENABLED" },
+        },
+        variantLimit: 1,
+        imageLimit: 1,
       });
 
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
@@ -199,7 +205,7 @@ export const getStaticProps = async () => {
           logo: optimizedFooterImage,
         },
       },
-      revalidate: 300,
+      revalidate: 43200,
     };
   } catch (e) {
     return {

@@ -55,7 +55,11 @@ export const getStaticProps = async () => {
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {
       filter,
-      limit: 24,
+      sort: [{ field: "position", direction: "asc" }],
+      variantFilter: { status: { eq: "ENABLED" } },
+      variantLimit: 1,
+      imageLimit: 1,
+      limit: 16,
     });
 
     const { items } = searchProducts;

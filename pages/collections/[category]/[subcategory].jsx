@@ -124,7 +124,10 @@ export const getStaticProps = async (context) => {
 
       const getProduct = fetchData(findProducts, {
         filter,
-        limit: 18,
+        sort: [{ field: "position", direction: "asc" }],
+        variantFilter: { status: { eq: "ENABLED" } },
+        variantLimit: 1,
+        imageLimit: 1,
       });
 
       // Get Product Sub-Category By Category ID
