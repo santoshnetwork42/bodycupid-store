@@ -20,454 +20,481 @@ function Terms({ store }) {
           </section>
 
           <section className="mt-10 pt-2">
+            <h2 className="title title-center">OVERVIEW</h2>
             <p className="text-grey">
-              The domain name www.wow.health (hereinafter referred to as
-              “Website”) is owned by Bodycupid Healthcare Private Limited, a
-              company incorporated under the Companies Act, 2013 with its
-              registered office at 4th Floor, Prestige Dotcom, Field Marshal
-              Cariappa Road, Srinivas Nagar, Shanthala Nagar, Ashok Nagar,
-              Bengaluru – 560025, Karnataka, India. For the purpose of these
-              terms of use, wherever the context so requires “you”, “yourself”,
-              “client” or “user” or similar terminology are all in use in
-              reference to the individual user of this Website. The terms “we”,
-              “us”, “our”, “ours” shall refer to Bodycupid. Bodycupid provides
-              its services to you subject to the notices, terms, and conditions
-              set forth in this agreement (hereinafter referred to as the
-              “Terms”). In addition, when you use any www.wow.health service,
-              you will be subject to the rules, guidelines, policies, terms,
-              conditions and documents applicable to such service, and they are
-              incorporated into these Terms by this reference. By mere use of
-              the Website, you shall be contracting with Bodycupid and these
-              Terms including the policies represent a binding contract between
-              you and us. Therefore, you should read these Terms carefully
-              before you start to use the Services. Bodycupid retains the right
-              to deny access to anyone who we believe has violated any of these
-              Terms. ACCESSING, BROWSING OR OTHERWISE USING THIS WEBSITE
-              INDICATES YOUR AGREEMENT TO THESE TERMS, SO YOU ARE ADVISED TO
-              READ THIS AGREEMENT CAREFULLY BEFORE PROCEEDING.
+              This website is operated by Body Cupid Private Limited. Throughout
+              the site, the terms “we”, “us” and “our” refer to Body Cupid
+              Private Limited. Body Cupid Private Limited offers this website,
+              including all information, tools and services available from this
+              site to you, the user, conditioned upon your acceptance of all
+              terms, conditions, policies and notices stated here.
+            </p>
+            <p className="text-grey">
+              By visiting our site and/ or purchasing something from us, you
+              engage in our “Service” and agree to be bound by the following
+              terms and conditions (“Terms of Service”, “Terms”), including
+              those additional terms and conditions and policies referenced
+              herein and/or available by hyperlink. These Terms of Service apply
+              to all users of the site, including without limitation users who
+              are browsers, vendors, customers, merchants, and/ or contributors
+              of content.
+            </p>
+            <p className="text-grey">
+              Please read these Terms of Service carefully before accessing or
+              using our website. By accessing or using any part of the site, you
+              agree to be bound by these Terms of Service. If you do not agree
+              to all the terms and conditions of this agreement, then you may
+              not access the website or use any services. If these Terms of
+              Service are considered an offer, acceptance is expressly limited
+              to these Terms of Service.
+            </p>
+            <p className="text-grey">
+              Any new features or tools which are added to the current store
+              shall also be subject to the Terms of Service. You can review the
+              most current version of the Terms of Service at any time on this
+              page. We reserve the right to update, change or replace any part
+              of these Terms of Service by posting updates and/or changes to our
+              website. It is your responsibility to check this page periodically
+              for changes. Your continued use of or access to the website
+              following the posting of any changes constitutes acceptance of
+              those changes.
+            </p>
+            <p className="text-grey">
+              Our store is hosted on Shopify Inc. They provide us with the
+              online e-commerce platform that allows us to sell our products and
+              services to you.
             </p>
           </section>
+
           <section className="mt-10 pt-2">
-            <h2 className="title title-simple">1. CHANGES TO THESE TERMS</h2>
+            <h2 className="title title-simple">1.ONLINE STORE TERMS</h2>
             <p className="text-grey">
-              We reserve the unilateral right to revise these Terms from time to
-              time and at any time without providing any intimation to you and
-              in our sole discretion. We will post the new version of these
-              Terms or any policies on this Website and any change or
-              modification to these Terms shall be effective immediately from
-              the date of such upload of the revised Terms on the Website. Your
-              continued use of the Website following the modifications to the
-              Terms and policies constitutes your acceptance of the modified
-              terms and conditions whether or not you have read them and shall
-              be binding on you. For this reason, you are advised to frequently
-              review these Terms, and other policies.
+              By agreeing to these Terms of Service, you represent that you are
+              at least the age of majority in your state or province of
+              residence, or that you are the age of majority in your state or
+              province of residence and you have given us your consent to allow
+              any of your minor dependents to use this site. You may not use our
+              products for any illegal or unauthorized purpose nor may you, in
+              the use of the Service, violate any laws in your jurisdiction
+              (including but not limited to copyright laws). You must not
+              transmit any worms or viruses or any code of a destructive nature.
+              A breach or violation of any of the Terms will result in an
+              immediate termination of your Services.
             </p>
           </section>
+
           <section className="mt-10 pt-2">
-            <h2 className="title title-simple">2. CHANGES TO WEBSITE</h2>
+            <h2 className="title title-simple">2.GENERAL CONDITIONS</h2>
             <p className="text-grey">
-              In order to optimize and improve your experience, we may update
-              the Website from time to time, and may change the content, display
-              or form at any time without prior notice. We do not guarantee that
-              the Website, or any content provided or displayed on it, will be
-              free from errors or omissions. Further, we are under no obligation
-              to update the Website or any of the content provided on it.
+              We reserve the right to refuse service to anyone for any reason at
+              any time. You understand that your content (not including credit
+              card information), may be transferred unencrypted and involve (a)
+              transmissions over various networks; and (b) changes to conform
+              and adapt to technical requirements of connecting networks or
+              devices. Credit card information is always encrypted during
+              transfer over networks. You agree not to reproduce, duplicate,
+              copy, sell, resell or exploit any portion of the Service, use of
+              the Service, or access to the Service or any contact on the
+              website through which the service is provided, without express
+              written permission by us. The headings used in this agreement are
+              included for convenience only and will not limit or otherwise
+              affect these Terms.
             </p>
           </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">3. ELIGIBILITY</h2>
-            <p className="text-grey">
-              You must be 18 (eighteen) years or older and capable of entering
-              into a legally binding agreement (as per the Indian Contract Act,
-              1872) in order to use Website. If you are under 18 (eighteen)
-              years of age, you may use this Website only with the involvement
-              of a parent or guardian.
-            </p>
-          </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">4. TERMS OF SERVICES</h2>
-            <p className="text-grey">
-              <p className="text-grey">
-                4.1. Registration and Information. In order to use Website and
-                avail the services, you are required to sign up by creating an
-                account. The account information will not be used for any other
-                purpose except with your prior consent. You must read, agree
-                with and accept all of the terms and conditions contained in
-                these Terms, including the Privacy Policy. You will be
-                responsible for maintaining confidentiality of your account,
-                password, and restricting access to your computer, and you
-                hereby accept responsibility for all activities that occur under
-                your account and password.
-              </p>
-              <p className="text-grey">
-                4.2. During the registration process you are also required to
-                submit your personal information, which may include information
-                relating to your name, age, gender, mobile device, location etc.
-                You agree that the information provided by you upon registration
-                and at all times thereafter will be true, accurate, current, and
-                complete. You agree to maintain and update this information to
-                keep it true, accurate and complete at all times while using
-                Website and availing the services. You also acknowledge that the
-                information you provide, in any manner whatsoever, is not
-                confidential or proprietary and does not infringe any rights of
-                a third party in whatsoever nature.
-              </p>
-              <p className="text-grey">
-                4.3. If you are accessing, browsing, and using the Website or
-                availing the services on someone else’s behalf, you represent
-                that you have the authority to bind that person to all the terms
-                and conditions herein. In the event that the person refuses to
-                be bound as the principal to these Terms, you agree to accept
-                liability for any harm cause by any wrongful use of the Website
-                resulting from such access or use of the Website in whatsoever
-                nature.
-              </p>
-              <p className="text-grey">
-                4.4. If you know or have reason to believe that the security of
-                your account has been breached, you should contact us
-                immediately at the ‘Contact Information’ provided on the
-                Website. If we have found a breach or suspected breach of the
-                security of your account, we may require you to change your
-                password, temporarily or permanently block or suspend your
-                account without any liability to Bodycupid.
-              </p>
-              <p className="text-grey">
-                4.5. Prohibited Uses. You shall not use the Website for any
-                illegal, unlawful, unauthorized or prohibited purposes
-                (“Prohibited Uses”) nor may you, in the use of the Website,
-                violate any laws in your jurisdiction (including but not limited
-                to copyright or trademark laws). You will comply with all
-                applicable laws, rules and regulations in your use of the
-                Website. In the event you use Website for any Prohibited Uses,
-                we reserve the right to immediately and without notice,
-                suspend/delete your account and ban you from accessing Website
-                in future.
-              </p>
-              <p className="text-grey">
-                4.6. We reserve the right to refuse service and/or terminate
-                accounts without prior notice if these Terms are violated or if
-                we decide, in our sole discretion, that it would be in
-                Bodycupid’s best interests to do so. You are solely responsible
-                for all contents that you upload, post, email or otherwise
-                transmit via the Website. The information provided to us shall
-                be maintained by us in accordance with our Privacy Policy.
-              </p>
-            </p>
-          </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">5. USER CONTENT</h2>
-            <p className="text-grey">
-              <p className="text-grey">
-                {" "}
-                5.1. You retain ownership and sole responsibility for any text,
-                messages, chat communications, billboard postings, software,
-                photos, drawings, graphics, profiles, opinions, ideas, images,
-                videos, audio files or other materials or information posted,
-                uploaded, emailed, transmitted or otherwise made available to
-                the Website by you (collectively “User Content”). Therefore, you
-                are responsible for User Content and you must ensure that you
-                have all the rights and permissions needed to use User Content
-                on the Website.
-              </p>{" "}
-              <p className="text-grey">
-                {" "}
-                5.2. By using the Website you grant us a worldwide, perpetual,
-                unrestricted, royalty free license to use, reproduce,
-                distribute, modify, adapt, create derivative works, make
-                publicly available, and otherwise exploit User Content, but only
-                for the limited purposes of providing the services to you and as
-                otherwise permitted by our privacy policies. This license
-                continues even after you stop using our Website. You acknowledge
-                that this license includes the right for us to make User Content
-                available to other users of the Website, who may use User
-                Content subject to these Terms.
-              </p>{" "}
-              <p className="text-grey">
-                {" "}
-                5.3. You can remove your content by deleting it, however in
-                certain circumstances User Content may not be completely
-                removed, and copies of User Content may continue to exist on the
-                Website. We are not responsible or liable for the removal or
-                deletion of (or failure to remove or delete) any of User
-                Content.
-              </p>{" "}
-              <p className="text-grey">
-                {" "}
-                5.4. Bodycupid does not endorse or control the User Content
-                transmitted or posted on the Website and therefore, accuracy,
-                integrity or quality of User Content is not guaranteed by
-                Bodycupid. You understand that by using the Website, you may be
-                exposed to User Content that is offensive, indecent or
-                objectionable to you. Under no circumstances will Bodycupid be
-                liable in any manner whatsoever for any User Content, including
-                without limitation, for any errors or omissions in any User
-                Content, or for any loss or damage of any kind incurred by you
-                as a result of the use of any User Content. You hereby waive all
-                rights to any claims against Bodycupid for any alleged or actual
-                infringements of any proprietary rights, rights of privacy and
-                publicity, moral rights, and rights of attribution in connection
-                with User Content.
-              </p>{" "}
-              <p className="text-grey">
-                {" "}
-                5.5. You hereby acknowledge that Bodycupid has the right, but
-                not the obligation, in its sole discretion to refuse to post or
-                to remove any User Content and further reserves the right to
-                change, condense, or delete any User Content.
-              </p>
-            </p>
-          </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">6. TERMINATION</h2>
-            <p className="text-grey">
-              6.1. These Terms are effective unless and until terminated by
-              either you or Bodycupid.{" "}
-            </p>
-            <p className="text-grey">
-              6.2. You agree that Bodycupid, in its sole discretion, for any or
-              no reason, and without penalty or notice, may suspend or terminate
-              your account (or any part thereof) or your use of the Website at
-              any time.{" "}
-            </p>
-            <p className="text-grey">
-              6.3. You agree that any termination of your access to the Website
-              or any account you may have or portion thereof may be without
-              prior notice, and you agree that Bodycupid will not be liable to
-              you or any third party for any such termination.{" "}
-            </p>
-            <p className="text-grey">
-              6.4. Any suspected fraudulent, abusive or illegal activity may be
-              referred to appropriate law enforcement authorities. These
-              remedies are in addition to any other remedies that Bodycupid may
-              have at law or in equity.{" "}
-            </p>
-            <p className="text-grey">
-              6.5. Upon termination for any reason of the Terms by either you or
-              Bodycupid, you must promptly destroy all materials downloaded or
-              otherwise obtained from this Website, as well as all copies of
-              such materials, whether made under the Terms of Use or otherwise.
-              Any such termination of these Terms shall not cancel your
-              obligation to pay for the product already ordered from the Website
-              or affect any liability that may have arisen under these Terms.
-            </p>
-          </section>
+
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              7. DISCLAIMER OR WARRANTY AND LIMITATION OF LIABILITY
+              3. ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION
             </h2>
             <p className="text-grey">
-              7.1. The Website is presented “as is” and “as available” basis
-              without any warranty or condition, express, implied or statutory.
-              Neither we nor our affiliates, partners, directors, employers,
-              agents, licensors or suppliers make any representations or
-              warranties of any kind whatsoever, express or implied, in
-              connection with these terms and conditions or this Website or any
-              of the content, including but not limited to warranties of
-              merchantability, non-infringement or fitness for a particular
-              purpose, except to the extent such representations and warranties
-              are not legally excludable.
-            </p>{" "}
+              We are not responsible if information made available on this site
+              is not accurate, complete or current. The material on this site is
+              provided for general information only and should not be relied
+              upon or used as the sole basis for making decisions without
+              consulting primary, more accurate, more complete or more timely
+              sources of information. Any reliance on the material on this site
+              is at your own risk.
+            </p>
             <p className="text-grey">
-              7.2. You agree that in no event will Bodycupid or its affiliates,
-              directors, employees, agents, licensors, partners, suppliers be
-              liable to you for any special, indirect, incidental,
-              consequential, punitive, reliance, or exemplary damages (including
-              without limitation lost business opportunities, lost revenues, or
-              loss of anticipated profits or any other pecuniary or
-              non-pecuniary loss or damage of any nature whatsoever) arising out
-              of or relating to: (i) these Terms; (ii) the Website; or (iii)
-              your use or inability to use the Website.
-            </p>{" "}
-            <p className="text-grey">
-              7.3. In no event will Bodycupid or any of its contractors,
-              directors, employees, agents, third party partners, licensors or
-              suppliers' total liability to you for all damages, liabilities,
-              losses, and causes of action arising out of or relating to: (i)
-              these Terms; (ii) the Website; (iii) your use or inability to use
-              the Website; or (iv) any other interactions with Bodycupid,
-              howsoever caused and whether arising in contract, tort including
-              negligence, warranty or otherwise, exceed the amount paid by you,
-              if any, for using the portion of the Services or Website.
-            </p>{" "}
-            <p className="text-grey">
-              7.4. In no event will Bodycupid or any of its contractors,
-              directors, employees, agents, third party partners, licensors or
-              suppliers be liable to you for any losses, damage, liabilities,
-              and causes of action arising out of any act, omission or
-              negligence to which you contributed.
-            </p>{" "}
-            <p className="text-grey">
-              7.5. Bodycupid does not warrant that the access or usage of the
-              Website will be uninterrupted, timely, secure, or error-free.
-            </p>{" "}
-            <p className="text-grey">
-              7.6. Bodycupid does not warrant that the results that may be
-              obtained from the use of the Website will be accurate or reliable.
-            </p>{" "}
-            <p className="text-grey">
-              7.7. You agree that no claims or action arising out of, or related
-              to, the use of the Website or these Terms may be brought by you
-              more than 1 (one) year after the cause of action relating to such
-              claim or action arose. If you have a dispute with us or are
-              dissatisfied with the Website, termination of your use of the
-              Website is your sole remedy. We have no other obligation,
-              liability, or responsibility to you.
-            </p>{" "}
-            <p className="text-grey">
-              7.8. Health Disclaimer. Any statements on this Website or any
-              materials or supplements distributed or sold on this Website has
-              not been evaluated by the Food and Drug Administration (FDA). The
-              products on the Website are not intended to diagnose, treat, cure
-              or prevent any disease. If you are pregnant, nursing, taking
-              medication, or have a history of heart conditions, we suggest that
-              you should consult with a physician before using any of our
-              products. The results on all products available on the Website are
-              not typical and not everyone will experience these results.
+              This site may contain certain historical information. Historical
+              information, necessarily, is not current and is provided for your
+              reference only. We reserve the right to modify the contents of
+              this site at any time, but we have no obligation to update any
+              information on our site. You agree that it is your responsibility
+              to monitor changes to our site.
             </p>
           </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">8. INDEMNIFICATION</h2>
-            <p className="text-grey">
-              You agree to defend, indemnify and hold Bodycupid and its
-              affiliates, contractors, employees, officers, directors, agents
-              and third party partners harmless from any and all claims, losses,
-              damages, liabilities, costs and expenses, including without
-              limitation, legal fees and expenses, caused by or arising out of
-              claims based upon your actions or inactions or related to your use
-              or misuse of the Website, any violation of these Terms or any of
-              the covenants made by you herein, which may result in any loss or
-              liability to Bodycupid or any third party.
-            </p>
-          </section>
+
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              9. INTELLECTUAL PROPERTY RIGHTS
+              4. MODIFICATIONS TO THE SERVICE AND PRICES
             </h2>
             <p className="text-grey">
-              All material and content on the Website, including images,
-              illustrations, text, graphics, logos, button icons, images, audio
-              clips, digital downloads, data compilations and software, is our
-              property, or the property of our affiliates or content suppliers,
-              and is protected by Indian and international intellectual property
-              law, including copyright, authors’ rights, database rights laws,
-              trademarks, and other intellectual property rights that are owned
-              and controlled by us or by other parties that have licensed their
-              material to us. The compilation of all content on Website is our
-              exclusive property, and is protected by laws of India and
-              international copyright and database right laws. All software used
-              on Website is also our exclusive property, or the property of our
-              affiliates or software suppliers, and is protected by Indian and
-              international copyright, authors’ rights law and other
-              intellectual property rights. You hereby agree to not copy,
-              reproduce, republish, upload, post, transmit or distribute such
-              material in any way, including by e-mail or other electronic means
-              whether directly or indirectly and you must not assist any other
-              person to do so. Without the prior written consent of the owner,
-              modification of the materials, use of the materials on any other
-              web site or use of the materials for any purpose other than
-              personal, non-commercial use is a violation of the copyrights,
-              trademarks and other proprietary rights, and is prohibited.
+              Prices for our products are subject to change without notice. We
+              reserve the right at any time to modify or discontinue the Service
+              (or any part or content thereof) without notice at any time. We
+              shall not be liable to you or to any third-party for any
+              modification, price change, suspension or discontinuance of the
+              Service.
             </p>
           </section>
+
           <section className="mt-10 pt-2">
-            <h2 className="title title-simple">10. LICENSE TO USE WEBSITE</h2>
+            <h2 className="title title-simple">
+              5. PRODUCTS OR SERVICES (IF APPLICABLE)
+            </h2>
             <p className="text-grey">
-              10.1. We grant you a limited license to access and make personal
-              use of Website, but not to modify it, or any portion of it, except
-              with our written consent. This license does not include any resale
-              or commercial use of the Website or its contents; any derivative
-              use of the Website or its contents; any downloading or copying of
-              account information for the benefit of another user, or any use of
-              data mining, robots or similar data gathering and extraction
-              tools.
+              Certain products or services may be available exclusively online
+              through the website. These products or services may have limited
+              quantities and are subject to return or exchange only according to
+              our Return Policy. We have made every effort to display as
+              accurately as possible the colors and images of our products that
+              appear at the store. We cannot guarantee that your computer
+              monitor's display of any color will be accurate. We reserve the
+              right, but are not obligated, to limit the sales of our products
+              or Services to any person, geographic region or jurisdiction. We
+              may exercise this right on a case-by-case basis. We reserve the
+              right to limit the quantities of any products or services that we
+              offer. All descriptions of products or product pricing are subject
+              to change at anytime without notice, at the sole discretion of us.
+              We reserve the right to discontinue any product at any time. Any
+              offer for any product or service made on this site is void where
+              prohibited.
+            </p>
+            <p className="text-grey">
+              We do not warrant that the quality of any products, services,
+              information, or other material purchased or obtained by you will
+              meet your expectations, or that any errors in the Service will be
+              corrected.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">
+              6. ACCURACY OF BILLING AND ACCOUNT INFORMATION
+            </h2>
+            <p className="text-grey">
+              We reserve the right to refuse any order you place with us. We
+              may, in our sole discretion, limit or cancel quantities purchased
+              per person, per household or per order. These restrictions may
+              include orders placed by or under the same customer account, the
+              same credit card, and/or orders that use the same billing and/or
+              shipping address. In the event that we make a change to or cancel
+              an order, we may attempt to notify you by contacting the e-mail
+              and/or billing address/phone number provided at the time the order
+              was made. We reserve the right to limit or prohibit orders that,
+              in our sole judgment, appear to be placed by dealers, resellers or
+              distributors.
+            </p>
+            <p className="text-grey">
+              You agree to provide current, complete and accurate purchase and
+              account information for all purchases made at our store. You agree
+              to promptly update your account and other information, including
+              your email address and credit card numbers and expiration dates,
+              so that we can complete your transactions and contact you as
+              needed.
+            </p>
+            <p className="text-grey">
+              For more detail, please review our Returns Policy.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">7. OPTIONAL TOOLS</h2>
+            <p className="text-grey">
+              We may provide you with access to third-party tools over which we
+              neither monitor nor have any control nor input.
             </p>{" "}
             <p className="text-grey">
-              {" "}
-              10.2. Website or any portion thereof (including but not limited to
-              any copyrighted material, trademarks, or other proprietary
-              information) may not be reproduced, duplicated, copied, sold,
-              resold, visited, distributed or otherwise exploited for any
-              commercial purpose without our express written consent.
-            </p>
+              You acknowledge and agree that we provide access to such tools ”as
+              is” and “as available” without any warranties, representations or
+              conditions of any kind and without any endorsement. We shall have
+              no liability whatsoever arising from or relating to your use of
+              optional third-party tools. Any use by you of optional tools
+              offered through the site is entirely at your own risk and
+              discretion and you should ensure that you are familiar with and
+              approve of the terms on which tools are provided by the relevant
+              third-party provider(s).
+            </p>{" "}
+            <p className="text-grey">
+              We may also, in the future, offer new services and/or features
+              through the website (including, the release of new tools and
+              resources). Such new features and/or services shall also be
+              subject to these Terms of Service.
+            </p>{" "}
           </section>
+
           <section className="mt-10 pt-2">
-            <h2 className="title title-simple">11. PRIVACY</h2>
+            <h2 className="title title-simple">8. THIRD-PARTY LINKS</h2>
             <p className="text-grey">
-              By using the Website, you agree to our Privacy Policy
-              https://www.wow.health/policies/privacy-policy, the terms of which
-              are incorporated into, and form a crucial part of, these Terms.
-              Our Privacy Policy sets out the terms on which we process any
-              personal or financial data we collect from you, or that you
-              provide to us. Our Privacy Policy shall also apply to your use of
-              Website and by using Website, you consent to such processing and
-              you warrant that all data provided by you is accurate.
+              Certain content, products and services available via our Service
+              may include materials from third-parties. Third-party links on
+              this site may direct you to third-party websites that are not
+              affiliated with us. We are not responsible for examining or
+              evaluating the content or accuracy and we do not warrant and will
+              not have any liability or responsibility for any third-party
+              materials or websites, or for any other materials, products, or
+              services of third-parties.
+            </p>
+            <p className="text-grey">
+              We are not liable for any harm or damages related to the purchase
+              or use of goods, services, resources, content, or any other
+              transactions made in connection with any third-party websites.
+              Please review carefully the third-party's policies and practices
+              and make sure you understand them before you engage in any
+              transaction. Complaints, claims, concerns, or questions regarding
+              third-party products should be directed to the third-party.
             </p>
           </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">
-              12. CANCELLATIONS, REFUNDS AND RETURNS
-            </h2>
-            <p className="text-grey">
-              Please refer to our Cancellation, Refunds and Returns Policy for
-              details with respect to cancellations, refunds and returns of our
-              products.
-            </p>
-          </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">13. SHIPPING AND DELIVERY</h2>
-            <p className="text-grey">
-              Please refer to our Shipping and Delivery Policy for details with
-              respect to shipping and delivery of our products.
-            </p>
-          </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">
-              14. PRICES AND AVAILABILITY OF PRODUCTS
-            </h2>
-            <p className="text-grey">
-              14.1. Without limiting the generality of Clause 14 (Cancellations,
-              Refunds and Returns), if a product/ service is listed at an
-              incorrect price or with incorrect information due to any technical
-              error, Bodycupid shall have the right, at it sole discretion, to
-              refuse or cancel any orders placed for that product/service,
-              unless the product has already been delivered or the service
-              already been availed by you. In the event that an item is wrongly
-              priced, Bodycupid may, in its sole discretion either contact you
-              for instructions or cancel your order and notify you of such
-              cancellation. Unless the product ordered by you has been delivered
-              and the services availed, your offer will not be deemed accepted
-              and Bodycupid will have the right to modify the price of the
-              product/service and contact you for further instructions using the
-              contact details provided by you.{" "}
-            </p>
-            <p className="text-grey">
-              {" "}
-              14.2. Prices and availability of the products and service provided
-              or offered on the Website are subject to change without prior
-              notice and at the sole discretion of Bodycupid and Bodycupid may
-              revise and cease to make available any product/service at any
-              time.
-            </p>
-          </section>
+
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">
-              15. GOVERNING LAW AND JURISDICITON
+              9. USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS
             </h2>
             <p className="text-grey">
-              These Terms are governed by and construed in accordance with the
-              laws of India. You agree, as we do, to submit to the exclusive
-              jurisdiction of courts in Bangalore, India.
+              If, at our request, you send certain specific submissions (for
+              example contest entries) or without a request from us you send
+              creative ideas, suggestions, proposals, plans, or other materials,
+              whether online, by email, by postal mail, or otherwise
+              (collectively, 'comments'), you agree that we may, at any time,
+              without restriction, edit, copy, publish, distribute, translate
+              and otherwise use in any medium any comments that you forward to
+              us. We are and shall be under no obligation (1) to maintain any
+              comments in confidence; (2) to pay compensation for any comments;
+              or (3) to respond to any comments.
+            </p>
+            <p className="text-grey">
+              We may, but have no obligation to, monitor, edit or remove content
+              that we determine in our sole discretion are unlawful, offensive,
+              threatening, libelous, defamatory, pornographic, obscene or
+              otherwise objectionable or violates any party’s intellectual
+              property or these Terms of Service. You agree that your comments
+              will not violate any right of any third-party, including
+              copyright, trademark, privacy, personality or other personal or
+              proprietary right. You further agree that your comments will not
+              contain libelous or otherwise unlawful, abusive or obscene
+              material, or contain any computer virus or other malware that
+              could in any way affect the operation of the Service or any
+              related website. You may not use a false e-mail address, pretend
+              to be someone other than yourself, or otherwise mislead us or
+              third-parties as to the origin of any comments. You are solely
+              responsible for any comments you make and their accuracy. We take
+              no responsibility and assume no liability for any comments posted
+              by you or any third-party.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">10. PERSONAL INFORMATION</h2>
+            <p className="text-grey">
+              Your submission of personal information through the store is
+              governed by our Privacy Policy. To view our Privacy Policy.
+            </p>{" "}
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">
+              11. ERRORS, INACCURACIES AND OMISSIONS
+            </h2>
+            <p className="text-grey">
+              Occasionally there may be information on our site or in the
+              Service that contains typographical errors, inaccuracies or
+              omissions that may relate to product descriptions, pricing,
+              promotions, offers, product shipping charges, transit times and
+              availability. We reserve the right to correct any errors,
+              inaccuracies or omissions, and to change or update information or
+              cancel orders if any information in the Service or on any related
+              website is inaccurate at any time without prior notice (including
+              after you have submitted your order).
+            </p>
+            <p className="text-grey">
+              We undertake no obligation to update, amend or clarify information
+              in the Service or on any related website, including without
+              limitation, pricing information, except as required by law. No
+              specified update or refresh date applied in the Service or on any
+              related website, should be taken to indicate that all information
+              in the Service or on any related website has been modified or
+              updated.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">12. PROHIBITED USES</h2>
+            <p className="text-grey">
+              In addition to other prohibitions as set forth in the Terms of
+              Service, you are prohibited from using the site or its content:
+              (a) for any unlawful purpose; (b) to solicit others to perform or
+              participate in any unlawful acts; (c) to violate any
+              international, federal, provincial or state regulations, rules,
+              laws, or local ordinances; (d) to infringe upon or violate our
+              intellectual property rights or the intellectual property rights
+              of others; (e) to harass, abuse, insult, harm, defame, slander,
+              disparage, intimidate, or discriminate based on gender, sexual
+              orientation, religion, ethnicity, race, age, national origin, or
+              disability; (f) to submit false or misleading information; (g) to
+              upload or transmit viruses or any other type of malicious code
+              that will or may be used in any way that will affect the
+              functionality or operation of the Service or of any related
+              website, other websites, or the Internet; (h) to collect or track
+              the personal information of others; (i) to spam, phish, pharm,
+              pretext, spider, crawl, or scrape; (j) for any obscene or immoral
+              purpose; or (k) to interfere with or circumvent the security
+              features of the Service or any related website, other websites, or
+              the Internet. We reserve the right to terminate your use of the
+              Service or any related website for violating any of the prohibited
+              uses.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">
+              13. DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY
+            </h2>
+            <p className="text-grey">
+              We do not guarantee, represent or warrant that your use of our
+              service will be uninterrupted, timely, secure or error-free.
+            </p>
+            <p className="text-grey">
+              We do not warrant that the results that may be obtained from the
+              use of the service will be accurate or reliable.
+            </p>
+            <p className="text-grey">
+              You agree that from time to time we may remove the service for
+              indefinite periods of time or cancel the service at any time,
+              without notice to you. You expressly agree that your use of, or
+              inability to use, the service is at your sole risk. The service
+              and all products and services delivered to you through the service
+              are (except as expressly stated by us) provided 'as is' and 'as
+              available' for your use, without any representation, warranties or
+              conditions of any kind, either express or implied, including all
+              implied warranties or conditions of merchantability, merchantable
+              quality, fitness for a particular purpose, durability, title, and
+              non-infringement.
+            </p>
+            <p className="text-grey">
+              In no case shall Body Cupid Private Limited, our directors,
+              officers, employees, affiliates, agents, contractors, interns,
+              suppliers, service providers or licensors be liable for any
+              injury, loss, claim, or any direct, indirect, incidental,
+              punitive, special, or consequential damages of any kind,
+              including, without limitation lost profits, lost revenue, lost
+              savings, loss of data, replacement costs, or any similar damages,
+              whether based in contract, tort (including negligence), strict
+              liability or otherwise, arising from your use of any of the
+              service or any products procured using the service, or for any
+              other claim related in any way to your use of the service or any
+              product, including, but not limited to, any errors or omissions in
+              any content, or any loss or damage of any kind incurred as a
+              result of the use of the service or any content (or product)
+              posted, transmitted, or otherwise made available via the service,
+              even if advised of their possibility. Because some states or
+              jurisdictions do not allow the exclusion or the limitation of
+              liability for consequential or incidental damages, in such states
+              or jurisdictions, our liability shall be limited to the maximum
+              extent permitted by law.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">14. INDEMNIFICATION</h2>
+            <p className="text-grey">
+              You agree to indemnify, defend and hold harmless Body Cupid
+              Private Limited and our parent, subsidiaries, affiliates,
+              partners, officers, directors, agents, contractors, licensors,
+              service providers, subcontractors, suppliers, interns and
+              employees, harmless from any claim or demand, including reasonable
+              attorneys’ fees, made by any third-party due to or arising out of
+              your breach of these Terms of Service or the documents they
+              incorporate by reference, or your violation of any law or the
+              rights of a third-party.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">15. SEVERABILITY</h2>
+            <p className="text-grey">
+              In the event that any provision of these Terms of Service is
+              determined to be unlawful, void or unenforceable, such provision
+              shall nonetheless be enforceable to the fullest extent permitted
+              by applicable law, and the unenforceable portion shall be deemed
+              to be severed from these Terms of Service, such determination
+              shall not affect the validity and enforceability of any other
+              remaining provisions.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">16. TERMINATION</h2>
+            <p className="text-grey">
+              The obligations and liabilities of the parties incurred prior to
+              the termination date shall survive the termination of this
+              agreement for all purposes. These Terms of Service are effective
+              unless and until terminated by either you or us. You may terminate
+              these Terms of Service at any time by notifying us that you no
+              longer wish to use our Services, or when you cease using our site.
+            </p>
+            <p className="text-grey">
+              If in our sole judgment you fail, or we suspect that you have
+              failed, to comply with any term or provision of these Terms of
+              Service, we also may terminate this agreement at any time without
+              notice and you will remain liable for all amounts due up to and
+              including the date of termination; and/or accordingly may deny you
+              access to our Services (or any part thereof).
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">17. ENTIRE AGREEMENT</h2>
+            <p className="text-grey">
+              The failure of us to exercise or enforce any right or provision of
+              these Terms of Service shall not constitute a waiver of such right
+              or provision. These Terms of Service and any policies or operating
+              rules posted by us on this site or in respect to The Service
+              constitutes the entire agreement and understanding between you and
+              us and govern your use of the Service, superseding any prior or
+              contemporaneous agreements, communications and proposals, whether
+              oral or written, between you and us (including, but not limited
+              to, any prior versions of the Terms of Service). Any ambiguities
+              in the interpretation of these Terms of Service shall not be
+              construed against the drafting party.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">18. GOVERNING LAW</h2>
+            <p className="text-grey">
+              These Terms of Service and any separate agreements whereby we
+              provide you Services shall be governed by and construed in
+              accordance with the laws of Office No. 303, Palms Square, 2nd
+              Floor, Brigade Road, Opposite To Brigade Tower,
+              Bangalore,Karnataka - 560025.
+            </p>
+          </section>
+
+          <section className="mt-10 pt-2">
+            <h2 className="title title-simple">
+              19. CHANGES TO TERMS OF SERVICE
+            </h2>
+            <p className="text-grey">
+              You can review the most current version of the Terms of Service at
+              any time at this page.
+            </p>
+            <p className="text-grey">
+              We reserve the right, at our sole discretion, to update, change or
+              replace any part of these Terms of Service by posting updates and
+              changes to our website. It is your responsibility to check our
+              website periodically for changes. Your continued use of or access
+              to our website or the Service following the posting of any changes
+              to these Terms of Service constitutes acceptance of those changes.
             </p>
           </section>
           <section className="mt-10 pt-2">
-            <h2 className="title title-simple">16. GRIEVANCE OFFICER</h2>
+            <h2 className="title title-simple">20. CONTACT INFORMATION</h2>
             <p className="text-grey">
-              The name and contact details of Our Grievance Officer are as
-              follows: Grievance Officer: Md. Naseer Contact info: 080-42896000
-              E-mail at : support@buywow.in The Grievance Officer can be
-              contacted to report abuse, or to complain against any content
-              hosted, transmitted, published, updated or shared on Website.
+              Questions about the Terms of Service should be sent to us at
+              karan@fitandglow.in.
             </p>
+            <p className="text-grey">--------------------------------------</p>
           </section>
         </div>
       </div>
