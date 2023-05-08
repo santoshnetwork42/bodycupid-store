@@ -224,16 +224,16 @@ function DescOne(props) {
       key={`desc-${product.id}`}
     >
       <Accordion adClass="accordion-simple">
-        <Card
-          expanded={!isMobile}
-          title="PRODUCT DESCRIPTION"
-          adClass="border-no"
-          noDisplayStyle
-          collapseEvent
-        >
-          <div className="row mb-2">
-            <div className="col-md-12">
-              {!!longDescription && (
+        {!!longDescription && (
+          <Card
+            expanded={!isMobile}
+            title="PRODUCT DESCRIPTION"
+            adClass="border-no"
+            noDisplayStyle
+            collapseEvent
+          >
+            <div className="row mb-2">
+              <div className="col-md-12">
                 <ReadMore position="start">
                   <div
                     dangerouslySetInnerHTML={{
@@ -241,11 +241,10 @@ function DescOne(props) {
                     }}
                   />
                 </ReadMore>
-              )}
+              </div>
             </div>
-          </div>
-        </Card>
-
+          </Card>
+        )}
         <Card
           expanded={!isMobile}
           title="PRODUCT DETAILS"

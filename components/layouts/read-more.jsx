@@ -7,7 +7,7 @@ export default function ReadMore({ children, position = "center" }) {
   const pref = useRef(null);
 
   useEffect(() => {
-    if (pref.current?.clientHeight > 60) {
+    if (pref.current?.clientHeight > 80) {
       pref.current.className = "overflow-ellipsis";
       setIsShowMore(true);
     } else {
