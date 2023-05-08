@@ -14,64 +14,58 @@ function AboutUs({ store }) {
       <h1 className="d-none">About Us - {name}</h1>
 
       <div className="page-content">
-        <div className="container">
+        <div className="container pb-5">
           <section className="mt-10 pt-3">
             <h2 className="title title-center">ABOUT US</h2>
           </section>
           <section className="mt-10 pt-2">
-            <h2 className="title title-simple">
-              {name}: Your one-stop destination for all health & Supplement
-              needs
-            </h2>
-            <p className="text-grey">
-              Based in Bangalore, India, we are known and trusted for our
-              premium quality products. Our mammoth product portfolio includes
-              supplements, herbal blends, creams, serums, lotions, shampoos,
-              bath & body products, men’s grooming products, essential oils,
-              massagers and more. However vast our range of products may be, it
-              is unified by being pure, natural, health-friendly and easy-to-use
-              for the everyday convenience of the modern urban life.
+            <p className="text-grey mb-2">
+              Body Cupid is a premium and luxury bath and body range inspired by
+              the belief that your body deserves as much tender loving care as
+              your face does.
             </p>
           </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">
-              {name}: Naturally and holistically better than the rest
-            </h2>
-            <p className="text-grey">
-              Thousands of our regular and devoted customers trust us for one
-              good reason. At {name}, they are assured of getting only the
-              purest and the most premium quality products powered by natural
-              bio-active ingredients and unsullied by artificial additives or
-              harmful synthetic chemicals. Our dietary supplements all deliver
-              such positive results that after trying out WOW products, our
-              customers seldom go anywhere else for their health and supplement
-              needs.
+          <section className="pt-2">
+            <p className="text-grey mb-2">
+              You will agree that to feel truly beautiful, you need to look and
+              feel good from tip to toe. That’s why, at Body cupid, we have
+              created a wide range of truly excellent bath and body products –
+              body scrubs, bath & shower gels, body butters, body polishes, bath
+              salts, and moisturizers – that lovingly indulge, pamper and
+              nurture your skin to make you feel extra special and extra
+              radiant.
             </p>
           </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">
-              {name}: Not just the best products, peerless service too
-            </h2>
-            <p className="text-grey">
-              We understand that the way to a customer’s heart passes through
-              two milestones – outstanding product quality that fulfils their
-              needs and attentive and courteous customer service that shows we
-              care. {name} scores at both these front. We match (and often
-              exceed) highest industry standards in both these domains.
+          <section className="pt-2">
+            <p className="text-grey mb-2">
+              Body Cupid fuses millennia-old holistic aromatherapeutic
+              principles with modern botanical science to present a premium
+              range of products that gently yet effectively heals the everyday
+              damages unleashed by pollution and stress on your skin to restore
+              wellness and glow. Every formulation comes enriched with purest,
+              therapeutic grade essential oils and other premium botanicals that
+              cleanse, refresh and relax you body, mind and soul. To ensure
+              truly good and deeply nourishing products, we do not put any
+              harmful parabens or sulphates or mineral oils in any of our
+              formulations. We also do not indulge in animal testing and all our
+              products are guaranteed vegetarian.
             </p>
-            <p className="text-grey">
-              Not only are our products the best you can find, our customer
-              service too is unparalleled. Our team of experts is always a call
-              or an email away from providing more information and spot-on
-              advice to recommend and help you choose the best WOW products for
-              improving your health, wellbeing and appearance. Get in touch; we
-              are waiting to hear from you!
+          </section>
+          <section className="pt-2">
+            <p className="text-grey mb-2">
+              There is another feature that makes Body Cupid extra special,
+              extra desirable. Our products are made in an ultra-modern,
+              quality-assured plant amidst pure and pristine environs of the
+              Himalayas, the mightiest mountains in the world and nature’s
+              tallest gift to the mankind. Think of it, not just the active
+              ingredients, even the water and air that go in our products are
+              utterly clean and totally pollution-free!
             </p>
-            <p className="text-grey">
-              Being responsible sellers, we believe in being customer-oriented
-              first. Foremost priority is always to give our customers
-              absolutely the best and the most healthful quality that makes them
-              our loyal clientele for always.
+          </section>
+          <section className="pt-2">
+            <p className="text-grey mb-2">
+              Make Body Cupid a part of your everyday life and let it pamper you
+              gently, lovingly, naturally!
             </p>
           </section>
         </div>

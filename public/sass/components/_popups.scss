@@ -406,6 +406,16 @@ button.mfp-close {
             border-color: $border-color;
         }  
     }
+    .otp-container{
+        justify-content: space-between;
+        .otpInput {
+            border: 1px solid #e3e3e3;
+            min-height: 4.5rem;
+            width: 4.5rem;
+            text-align: center;
+            color: $grey-color;
+        }
+    }
 
     
     .form-footer {
