@@ -13,7 +13,6 @@ import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
-import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 

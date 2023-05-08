@@ -42,6 +42,7 @@ import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
+import { useCartItems } from "~/utils/hooks/useCart";
 
 function Checkout(props) {
   const {
@@ -59,7 +60,7 @@ function Checkout(props) {
   } = props;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
-  const inventoryMapping = useInventory(cartList);
+  const inventoryMapping = useInventory();
   const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
@@ -93,6 +94,7 @@ function Checkout(props) {
     () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
     [cartList, appliedCoupon, isFirst, shippingTiers]
   );
+  const cartItems = useCartItems();
 
   const inventorySuccess = useMemo(() =>
     cartList.every((c) => c.qty <= inventoryMapping[c.recordKey])
@@ -470,7 +472,7 @@ function Checkout(props) {
                               </tr>
                             </thead>
                             <tbody>
-                              {cartList.map((item) => (
+                              {cartItems.map((item) => (
                                 <tr
                                   className="m-0 p-0 border-no"
                                   key={item?.id}
@@ -496,7 +498,7 @@ function Checkout(props) {
                                           </ALink>
                                         </div>
                                         {item.qty >=
-                                          inventoryMapping[item.recordKey] ? (
+                                        inventoryMapping[item.recordKey] ? (
                                           <div className="outofstock-tag mt-2">
                                             <p className="m-0 outofstock-label">
                                               out of stock
@@ -504,26 +506,33 @@ function Checkout(props) {
                                           </div>
                                         ) : (
                                           <div className="product-subtotal mt-1">
-                                            {!(
-                                              item.isBogo && item.qty === 1
-                                            ) && (
-                                                <span className="sm-product-amount">
-                                                  ₹{toDecimal(item.price)}
-                                                </span>
-                                              )}
+                                            {item?.cartItemType !==
+                                              "FREEPRODUCT" && (
+                                              <span className="sm-product-amount">
+                                                ₹{toDecimal(item.price)}
+                                              </span>
+                                            )}
 
                                             <p className="m-0 product-discount-listing">
                                               {item.price <
                                                 item.listingPrice && (
-                                                  <del className="summary-subtotal-listingprice">
-                                                    ₹
-                                                    {toDecimal(item.listingPrice)}
-                                                  </del>
-                                                )}
-                                              {item.isBogo && item.qty === 1 ? (
-                                                <span className="text-success ml-1">
-                                                  Free
-                                                </span>
+                                                <del className="summary-subtotal-listingprice">
+                                                  ₹
+                                                  {toDecimal(item.listingPrice)}
+                                                </del>
+                                              )}
+                                              {item?.cartItemType ===
+                                              "FREEPRODUCT" ? (
+                                                <>
+                                                  <span className="text-success ">
+                                                    Free
+                                                  </span>
+                                                  {item?.qty && (
+                                                    <div className="text-grey">
+                                                      Qty:{item.qty}
+                                                    </div>
+                                                  )}
+                                                </>
                                               ) : (
                                                 <span
                                                   className={`discount-percetage ml-2`}
@@ -536,14 +545,6 @@ function Checkout(props) {
                                                     )}% off`}
                                                 </span>
                                               )}
-                                            </p>
-                                          </div>
-                                        )}
-                                        {item.isBogo && item.qty > 1 && (
-                                          <div className="summary-saving-lable-container mb-1  qty-label ">
-                                            {" "}
-                                            <p className="m-0 saving-lable">
-                                              1 qty is Free
                                             </p>
                                           </div>
                                         )}
@@ -630,8 +631,9 @@ function Checkout(props) {
                                     </h4>
                                   </td>
                                   <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${!shippingTotal && "discount-price-color"
-                                      }`}
+                                    className={`summary-subtotal-price pb-0 pt-0 ${
+                                      !shippingTotal && "discount-price-color"
+                                    }`}
                                   >
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
@@ -749,10 +751,11 @@ function Checkout(props) {
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${!!isValidAddress(shippingAddress)
-                              ? "btn-primary"
-                              : "btn-disabled"
-                              }`}
+                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${
+                              !!isValidAddress(shippingAddress)
+                                ? "btn-primary"
+                                : "btn-disabled"
+                            }`}
                           >
                             Place Order
                             {loading && <div className="spin-loader ml-2" />}

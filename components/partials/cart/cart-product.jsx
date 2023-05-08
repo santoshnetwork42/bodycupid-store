@@ -74,11 +74,7 @@ function CartProduct({
   };
 
   const onRemove = () => {
-    if (bogo === "PRIMARY") {
-      onChangeQty(0);
-    } else {
-      removeFromCart(item);
-    }
+    removeFromCart(item);
   };
 
   return (
