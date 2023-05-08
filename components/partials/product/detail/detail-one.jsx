@@ -505,16 +505,18 @@ function DetailOne(props) {
               <label className="d-none">QTY:</label>
               <div className="product-form-group cart-button-wrapper">
                 {!!cartItem && (
-                  <Quantity
-                    qty={cartItem?.qty}
-                    max={currentInventory}
-                    product={product}
-                    onChangeQty={changeQty}
-                  />
+                  <div className="m-0">
+                    <Quantity
+                      qty={cartItem?.qty}
+                      max={currentInventory}
+                      product={product}
+                      onChangeQty={changeQty}
+                    />
+                  </div>
                 )}
                 {!!cartItem && (
                   <button
-                    className={`btn-product btn-cart dark  text-uppercase ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart dark text-uppercase ls-normal font-weight-semi-bold m-0 ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={(e) => {
@@ -530,7 +532,7 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart ls-normal font-weight-semi-bold m-0 ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={addToCartHandler}
