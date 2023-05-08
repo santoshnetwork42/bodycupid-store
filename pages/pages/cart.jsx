@@ -28,9 +28,8 @@ function Cart(props) {
   } = props;
 
   const router = useRouter();
-  const inventoryMapping = useInventory(cartList);
+  const inventoryMapping = useInventory();
   const cartItems = useCartItems();
-
   useEffect(() => {
     viewCart();
     getShippingTiers();
