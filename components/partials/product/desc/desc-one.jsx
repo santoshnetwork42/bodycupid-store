@@ -223,6 +223,7 @@ function DescOne(props) {
     >
       <Accordion adClass="accordion-simple">
         <Card
+          expanded={true}
           title="Description"
           adClass="border-no"
           noDisplayStyle
