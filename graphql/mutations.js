@@ -3977,6 +3977,53 @@ export const createCouponCode = /* GraphQL */ `
       getYPercentage
       getYQuantity
       getYProduct
+      getYStoreProduct {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+      }
       minOrderValue
       maxDiscount
       expirationDate
@@ -4045,6 +4092,53 @@ export const updateCouponCode = /* GraphQL */ `
       getYPercentage
       getYQuantity
       getYProduct
+      getYStoreProduct {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+      }
       minOrderValue
       maxDiscount
       expirationDate
@@ -4113,6 +4207,53 @@ export const deleteCouponCode = /* GraphQL */ `
       getYPercentage
       getYQuantity
       getYProduct
+      getYStoreProduct {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+      }
       minOrderValue
       maxDiscount
       expirationDate
@@ -4417,6 +4558,53 @@ export const applyCoupon = /* GraphQL */ `
       getYPercentage
       getYQuantity
       getYProduct
+      getYStoreProduct {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        productDescription
+        longDescription
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+      }
       minOrderValue
       maxDiscount
       expirationDate
