@@ -414,6 +414,7 @@ export const getProductBySlug = /* GraphQL */ `
         createdAt
         slug
         productDescription
+        longDescription
         updatedAt
         isPublished
         publishedAt
