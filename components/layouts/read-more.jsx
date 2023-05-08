@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DownAngle, UpAngle } from "../icons";
-export default function ReadMore({ children }) {
+export default function ReadMore({ children, position = "center" }) {
   const [read, setRead] = useState(false);
   const [isShowMore, setIsShowMore] = useState(false);
 
@@ -29,19 +29,18 @@ export default function ReadMore({ children }) {
     <div>
       <div ref={pref}>{children}</div>
       <span
-        className={` read-more  align-items-center justify-content-center text-underline cursor-pointer ${
+        className={` read-more  align-items-center justify-content-${position} text-underline cursor-pointer ${
           !isShowMore ? "d-none" : "d-flex"
         }`}
         onClick={onChange}
       >
-        Read{" "}
         {!read ? (
           <>
-            more <DownAngle size={14} color={"currentColor"} />
+            Read more <DownAngle size={14} color={"currentColor"} />
           </>
         ) : (
           <>
-            less <UpAngle size={14} color={"currentColor"} />
+            Read less <UpAngle size={14} color={"currentColor"} />
           </>
         )}
       </span>

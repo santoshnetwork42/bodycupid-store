@@ -17,6 +17,8 @@ import { errorHandler } from "~/utils/errorHandler";
 import SkillBar from "~/components/features/skill-bar";
 import Loader from "~/components/common/partials/loader";
 import { alertToaster } from "../../../../utils/popupHelper";
+import ReadMore from "~/components/layouts/read-more";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const reviewDefault = {
   rating: 5,
@@ -31,7 +33,7 @@ const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
 function DescOne(props) {
   const { product, user, productFAQs } = props;
   const { id, totalRatings, longDescription, additionalInfo, rating } = product;
-
+  const { isSmallSize: isMobile } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
   const [total, setTotal] = useState(0);
@@ -223,21 +225,35 @@ function DescOne(props) {
     >
       <Accordion adClass="accordion-simple">
         <Card
-          title="Description"
+          expanded={!isMobile}
+          title="PRODUCT DESCRIPTION"
           adClass="border-no"
+          noDisplayStyle
+          collapseEvent
+        >
+          <div className="row mb-2">
+            <div className="col-md-12">
+              {!!longDescription && (
+                <ReadMore position="start">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: longDescription,
+                    }}
+                  />
+                </ReadMore>
+              )}
+            </div>
+          </div>
+        </Card>
+
+        <Card
+          expanded={!isMobile}
+          title="PRODUCT DETAILS"
           noDisplayStyle
           collapseEvent
         >
           <div className="row">
             <div className="col-md-12">
-              {!!longDescription && (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: longDescription,
-                  }}
-                  className="mb-2"
-                />
-              )}
               <div className="additional-info-container">
                 <h6 className="additional-info-label m-0">Model Name</h6>
                 <p className="additional-info-value">{product.title}</p>
@@ -264,7 +280,7 @@ function DescOne(props) {
         </Card>
 
         <Card
-          title={`Customer Reviews  ${
+          title={`CUSTOMER REVIEWS  ${
             product?.totalRatings ? `(${product.totalRatings})` : ""
           }`}
           id="product-review"
