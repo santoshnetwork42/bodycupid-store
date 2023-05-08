@@ -30,7 +30,7 @@ const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
 
 function DescOne(props) {
   const { product, user, productFAQs } = props;
-  const { id, totalRatings, rating } = product;
+  const { id, totalRatings, longDescription, additionalInfo, rating } = product;
 
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
@@ -230,13 +230,21 @@ function DescOne(props) {
         >
           <div className="row">
             <div className="col-md-12">
+              {!!longDescription && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: longDescription,
+                  }}
+                  className="mb-2"
+                />
+              )}
               <div className="additional-info-container">
                 <h6 className="additional-info-label m-0">Model Name</h6>
                 <p className="additional-info-value">{product.title}</p>
               </div>
-              {!!product?.additionalInfo && (
+              {!!additionalInfo && (
                 <>
-                  {product.additionalInfo.map((info) => {
+                  {additionalInfo.map((info) => {
                     return (
                       <div
                         className="additional-info-container"
