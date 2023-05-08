@@ -533,12 +533,17 @@ export const applyCoupon = /* GraphQL */ `
     applyCoupon(code: $code) {
       id
       code
-      discount
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
       minOrderValue
       maxDiscount
-      description
-      paymentMethod
+      applicableCollections
+      applicableProducts
+      paymentMethod 
     }
   }
 `;

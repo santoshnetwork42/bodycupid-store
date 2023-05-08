@@ -19,9 +19,10 @@ import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 import awsconfig from "~/aws-exports";
 import { getUser, getStore } from "~/graphql/api";
-import { errorHandler } from "~/utils/errorHandler.js";
+import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
-import Loader from "~/components/common/partials/loader.jsx";
+import Loader from "~/components/common/partials/loader";
+import CouponProvider from "~/utils/contexts/coupons.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -166,9 +167,11 @@ const App = ({ Component, pageProps }) => {
           <meta name="description" content={storeName} />
         </Head>
         <Scripts />
-        <Layout navbar={navbarProps} footer={footerProps}>
-          <Component {...pageProps} />
-        </Layout>
+        <CouponProvider>
+          <Layout navbar={navbarProps} footer={footerProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </CouponProvider>
       </PersistGate>
     </Provider>
   );

@@ -1,3 +1,5 @@
+import { getCouponDiscount } from "~/utils/coupons";
+
 /**
  * utils to parse options string to object
  * @param {string} options
@@ -240,7 +242,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-          parallax.offsetTop +
+        parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -424,25 +426,8 @@ export const getShippingPrice = (
  */
 export const getCouponTotal = (coupon, cartItems = []) => {
   if (coupon) {
-    const total = getTotalPrice(cartItems);
-    const { couponType, discount, minOrderValue, maxDiscount } = coupon;
-
-    if (!minOrderValue || minOrderValue <= total) {
-      let amount = discount;
-      if (couponType === "PERCENTAGE") {
-        amount = (total * discount) / 100;
-      } else if (couponType === "BOGO") {
-        amount = 0;
-        const totalQty = cartItems.reduce((a, b) => a + b.qty, 0);
-        if (totalQty > 1) {
-          amount = cartItems.reduce((a, b) => {
-            if (!a) return b.price;
-            return Math.min(a, b.price);
-          }, 0);
-        }
-      }
-      return maxDiscount ? Math.min(amount, maxDiscount) : amount;
-    }
+    const { discount = 0 } = getCouponDiscount(coupon, cartItems);
+    return discount;
   }
   return 0;
 };

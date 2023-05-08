@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { API } from "aws-amplify";
+import { useSelector } from "react-redux";
 
 import { getFirstVariantId } from "~/utils/products";
 import { errorHandler } from "../errorHandler";
 import { checkInventory } from "~/graphql/api";
 import { getRecordKey } from "~/utils/helper";
 
-export const useInventory = (cartList) => {
+export const useInventory = () => {
+  const cartList = useSelector(state => state.cart.data || []);
   const [productWithInventory, setProductWithInventory] = useState({});
 
   const payload = useMemo(() => {
