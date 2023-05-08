@@ -29,7 +29,7 @@ export const deliveryRemainingTime = () => {
   var mm = parseInt(pad((remain / 60) % 60));
   if (hh >= 0) {
     return hh > 0
-      ? `${hh} ${hh >= 1 ? "hour" : "hours"} ${mm} minutes`
+      ? `${hh} ${hh > 1 ? "hours" : "hour"} ${mm} minutes`
       : `${mm} minutes`;
   }
 };
