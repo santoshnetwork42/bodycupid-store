@@ -64,7 +64,6 @@ function Checkout(props) {
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
-  const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
   const [orderId, setOrderId] = useState(null);
   const [paymentId, setPaymentId] = useState(null);
@@ -116,7 +115,7 @@ function Checkout(props) {
         }),
       ]);
 
-      setLoading(false);
+      setPaymentLoading(false);
 
       if (rzpEnabled && transaction) {
         const options = {
@@ -164,7 +163,6 @@ function Checkout(props) {
 
   const getOrders = useCallback(
     async (intervalId, orderId) => {
-      setPaymentLoading(true);
       try {
         const {
           data: { getOrder },
@@ -178,7 +176,6 @@ function Checkout(props) {
           clearInterval(intervalId);
           await router.push(`/order/${orderId}`);
           await emptyCart();
-          setLoading(false);
           setPaymentLoading(false);
         }
       } catch (error) {
@@ -256,7 +253,7 @@ function Checkout(props) {
         return;
       }
 
-      setLoading(true);
+      setPaymentLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
       const formErrors = await validateAddress(shippingAddress, paymentType);
@@ -359,7 +356,7 @@ function Checkout(props) {
           errorHandler(error);
         }
       }
-      setLoading(false);
+      setPaymentLoading(false);
       return false;
     },
     [
@@ -742,7 +739,6 @@ function Checkout(props) {
                             className="btn btn-primary btn-rounded d-flex justify-content-center align-items-center btn-order"
                           >
                             Add new address
-                            {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
 
@@ -757,7 +753,6 @@ function Checkout(props) {
                             }`}
                           >
                             Place Order
-                            {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
                       </div>
