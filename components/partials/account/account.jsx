@@ -62,7 +62,7 @@ function AccountsTabs({ user, store }) {
     [pathname]
   );
 
-  const { tabName: headerLabel, activeTab } = currentTab || {};
+  const { tabName: headerLabel, activeTab = 0 } = currentTab || {};
 
   useEffect(() => {
     (async function () {

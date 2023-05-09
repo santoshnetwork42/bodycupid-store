@@ -30,6 +30,7 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
             status: { eq: "ENABLED" },
             title: { matchPhrasePrefix: searchTerm },
           },
+          imageLimit: 1,
         })
       );
       setData(items);

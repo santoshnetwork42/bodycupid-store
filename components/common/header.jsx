@@ -86,7 +86,7 @@ function Header({ navbar, auth, openPasswordLess }) {
               {!auth && (
                 <ALink
                   href="#"
-                  className="label-block wishlist"
+                  className="label-block wishlist mr-1"
                   onClick={() => openPasswordLess(false)}
                 >
                   <User />

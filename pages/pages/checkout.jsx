@@ -776,7 +776,11 @@ function Checkout(props) {
                           </div>
                         </div>
                       )}
-                      <div className="stick-bottom-button d-flex justify-content-center">
+                      <div
+                        className={`d-flex justify-content-center ${
+                          isMobile ? "stick-bottom-button" : ""
+                        }`}
+                      >
                         {!isValidAddress(shippingAddress) && !!isMobile && (
                           <button
                             onClick={() => {

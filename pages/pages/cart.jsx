@@ -233,22 +233,26 @@ function Cart(props) {
                       >
                         Proceed to checkout
                       </button>
-                      <div className="stick-bottom-button d-sm-show">
-                        <div className="lh-default">
-                          <span>
-                            {totalItems > 1 ? `${totalItems} Items` : "1 Item"}
-                          </span>
-                          <p className="summary-total-price text-left ls-s">
-                            ₹{toDecimal(cartGrandTotal)}
-                          </p>
-                        </div>
+                      <div className="d-sm-show stick">
+                        <div className=" d-sm-show stick-bottom-button">
+                          <div className="lh-default">
+                            <span>
+                              {totalItems > 1
+                                ? `${totalItems} Items`
+                                : "1 Item"}
+                            </span>
+                            <p className="summary-total-price text-left ls-s">
+                              ₹{toDecimal(cartGrandTotal)}
+                            </p>
+                          </div>
 
-                        <button
-                          onClick={checkAuth}
-                          className="btn btn-dark btn-rounded  btn-checkout"
-                        >
-                          Proceed to checkout
-                        </button>
+                          <button
+                            onClick={checkAuth}
+                            className="btn btn-dark btn-rounded  btn-checkout"
+                          >
+                            Proceed to checkout
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
