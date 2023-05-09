@@ -58,18 +58,21 @@ function Checkout(props) {
     openAllAddressModal,
   } = props;
 
+  const { name } = store;
+
   const { isSmallSize: isMobile } = useWindowDimensions();
   const inventoryMapping = useInventory(cartList);
-  const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
+  const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
   const [orderId, setOrderId] = useState(null);
   const [paymentId, setPaymentId] = useState(null);
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
+
   const isFirst = payMethod === "PREPAID";
 
   useEffect(() => {
@@ -115,7 +118,7 @@ function Checkout(props) {
         }),
       ]);
 
-      setPaymentLoading(false);
+      setLoading(false);
 
       if (rzpEnabled && transaction) {
         const options = {
@@ -155,6 +158,7 @@ function Checkout(props) {
   );
 
   const handleCodPayments = (orderId) => {
+    setPaymentLoading(true);
     const intervalId = setInterval(() => {
       getOrders(intervalId, orderId);
     }, 2000);
@@ -163,6 +167,7 @@ function Checkout(props) {
 
   const getOrders = useCallback(
     async (intervalId, orderId) => {
+      setPaymentLoading(true);
       try {
         const {
           data: { getOrder },
@@ -176,6 +181,7 @@ function Checkout(props) {
           clearInterval(intervalId);
           await router.push(`/order/${orderId}`);
           await emptyCart();
+          setLoading(false);
           setPaymentLoading(false);
         }
       } catch (error) {
@@ -253,7 +259,7 @@ function Checkout(props) {
         return;
       }
 
-      setPaymentLoading(true);
+      setLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
       const formErrors = await validateAddress(shippingAddress, paymentType);
@@ -356,7 +362,7 @@ function Checkout(props) {
           errorHandler(error);
         }
       }
-      setPaymentLoading(false);
+      setLoading(false);
       return false;
     },
     [
@@ -739,6 +745,7 @@ function Checkout(props) {
                             className="btn btn-primary btn-rounded d-flex justify-content-center align-items-center btn-order"
                           >
                             Add new address
+                            {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
 
@@ -753,6 +760,7 @@ function Checkout(props) {
                             }`}
                           >
                             Place Order
+                            {loading && <div className="spin-loader ml-2" />}
                           </button>
                         )}
                       </div>
