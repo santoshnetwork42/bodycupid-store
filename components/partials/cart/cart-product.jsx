@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -18,7 +18,6 @@ function CartProduct({
 }) {
   const {
     id,
-    bogo,
     variants,
     recordKey,
     qty,
@@ -29,6 +28,9 @@ function CartProduct({
     price,
     listingPrice,
     variantId,
+    cartItemType,
+    extraQty = 0,
+    hideQty = false,
   } = item;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
@@ -60,7 +62,7 @@ function CartProduct({
   };
 
   const onChangeQty = (newQty) => {
-    const finalQty = bogo === "PRIMARY" ? newQty + 1 : newQty;
+    const finalQty = newQty + extraQty;
     if (finalQty) {
       const cartData = getUpdatedCart(cartList, recordKey, {
         qty: finalQty,
@@ -72,11 +74,7 @@ function CartProduct({
   };
 
   const onRemove = () => {
-    if (bogo === "PRIMARY") {
-      onChangeQty(0);
-    } else {
-      removeFromCart(item);
-    }
+    onChangeQty(0);
   };
 
   return (
@@ -98,11 +96,8 @@ function CartProduct({
               <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {bogo === "SECONDARY" ? (
+              {cartItemType === "FREEPRODUCT" ? (
                 <>
-                  <del className="summary-subtotal-listingprice">
-                    ₹{toDecimal(price)}
-                  </del>
                   <span className="discount-percentage ml-1">Free</span>
                 </>
               ) : (
@@ -131,7 +126,7 @@ function CartProduct({
               </div>
             ) : (
               <div className="">
-                {bogo !== "SECONDARY" && (
+                {!hideQty && (
                   <div className="product-quantity w-0 mb-1">
                     <Quantity
                       product={item}
@@ -141,7 +136,6 @@ function CartProduct({
                     />
                   </div>
                 )}
-
                 {!!item?.variants?.items.length && (
                   <select
                     name={`${recordKey}`}
@@ -161,16 +155,18 @@ function CartProduct({
               </div>
             )}
           </div>
-          <div className="product-close">
-            <ALink
-              href="#"
-              className="sm-product-remove"
-              title="Remove this product"
-              onClick={onRemove}
-            >
-              <Close size={18} color="grey" />
-            </ALink>
-          </div>
+          {(cartItemType !== "FREEPRODUCT" || !hideQty) && (
+            <div className="product-close">
+              <ALink
+                href="#"
+                className="sm-product-remove"
+                title="Remove this product"
+                onClick={onRemove}
+              >
+                <Close size={18} color="grey" />
+              </ALink>
+            </div>
+          )}
         </div>
       </div>
     </div>

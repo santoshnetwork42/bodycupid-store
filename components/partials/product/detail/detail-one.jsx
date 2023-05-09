@@ -18,10 +18,11 @@ import {
   scrollWithOffset,
 } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
-import { getProductInventory, getProductCouponTotal } from "~/utils/products";
+import { getProductInventory } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
+import { useProductCoupons } from "~/utils/hooks/useCoupon";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -40,62 +41,10 @@ function DetailOne(props) {
     setVariant = () => {},
     addToCart,
     removeFromCart,
-    featuredCoupons,
-    getFeaturedCoupons,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
-
-  const today = new Date();
-
-  const sizes = useMemo(
-    () =>
-      (product?.variants?.items || [])
-        .sort((a, b) => a.position - b.position)
-        .map((item) => ({ ...item })),
-    [product?.variants?.items]
-  );
-
-  useEffect(() => {
-    getFeaturedCoupons();
-  }, []);
-
-  const { maxDiscountCoupon, couponList } = useMemo(() => {
-    let selectedProduct = product;
-    if (sizes.length) {
-      selectedProduct = product?.variants?.items.find(
-        (v) => v.id === selectedVariant
-      );
-    }
-    if (!!featuredCoupons?.length && selectedProduct) {
-      const list = featuredCoupons.filter((f) => f.couponType !== "BOGO");
-
-      const couponList = list.reduce((prev, current) => {
-        const second = getProductCouponTotal(current, selectedProduct);
-        prev.push({
-          ...current,
-          price: selectedProduct?.price,
-          totalDiscount: second,
-        });
-        return prev;
-      }, []);
-
-      const res = couponList
-        .sort((a, b) => b.totalDiscount - a.totalDiscount)
-        .filter((c) => c.totalDiscount);
-      return { maxDiscountCoupon: res[0], couponList: res.slice(1, 4) };
-    }
-    return {
-      maxDiscountCoupon: null,
-      couponList: [],
-    };
-  }, [product?.slug, featuredCoupons, selectedVariant]);
-
-  const { hasInventory, currentInventory } = useMemo(
-    () => getProductInventory(product, selectedVariant),
-    [selectedVariant, sizes, product?.slug]
-  );
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -110,9 +59,25 @@ function DetailOne(props) {
     return;
   }, [cartList, selectedVariant]);
 
-  const totalOrderCount = useMemo(() => {
-    return Math.ceil(product.totalOrders / 1000) * 1000;
-  });
+  const { productCoupons, bestCoupon } = useProductCoupons(
+    product,
+    selectedVariant
+  );
+
+  const today = new Date();
+
+  const sizes = useMemo(
+    () =>
+      (product?.variants?.items || [])
+        .sort((a, b) => a.position - b.position)
+        .map((item) => ({ ...item })),
+    [product?.variants?.items]
+  );
+
+  const { hasInventory, currentInventory } = useMemo(
+    () => getProductInventory(product, selectedVariant),
+    [selectedVariant, sizes, product?.slug]
+  );
 
   // decide if the product is wishlisted
   // const isWishlisted = useMemo(
@@ -262,6 +227,10 @@ function DetailOne(props) {
     };
   }, [product, curIndex]);
 
+  const totalOrderCount = useMemo(() => {
+    return Math.ceil(product.totalOrders / 1000) * 1000;
+  });
+
   return (
     <div className={`product-details ${adClass}`}>
       {/* {isNav && (
@@ -360,14 +329,12 @@ function DetailOne(props) {
         )}
       </div>
 
-      {/* <p className="product-short-desc mb-3 lh-1">
-        {product.productDescription}
-      </p> */}
-
-      {!!hasInventory && !!maxDiscountCoupon?.totalDiscount && (
-        <div className="mb-3">
-          <ProductBestPrice {...maxDiscountCoupon} couponList={couponList} />
-        </div>
+      {!!hasInventory && !!bestCoupon && (
+        <ProductBestPrice
+          {...bestCoupon}
+          price={price}
+          couponList={productCoupons}
+        />
       )}
 
       {sizes.length > 1 && (
@@ -554,13 +521,16 @@ function DetailOne(props) {
       <div className="d-flex text-success align-items-center mb-3 lh-default">
         {!!product.totalOrders && (
           <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
-            {totalOrderCount}+ units sold -
+            {totalOrderCount}+ units sold
           </p>
         )}
         {hasInventory && currentInventory < 100 && (
-          <span className="text-secondary font-weight-semi-bold">
-            Last {currentInventory} units left
-          </span>
+          <>
+            <BigDot color="red" size={20} />
+            <span className="text-secondary font-weight-semi-bold">
+              Last {currentInventory} units left
+            </span>
+          </>
         )}
       </div>
     </div>

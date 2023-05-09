@@ -8,11 +8,12 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { getCartTotals, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
+import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 
 function Cart(props) {
@@ -21,37 +22,17 @@ function Cart(props) {
     appliedCoupon,
     user,
     openLogin,
-    shippingTiers,
     getShippingTiers,
     viewCart,
   } = props;
 
   const router = useRouter();
-  const inventoryMapping = useInventory(cartList);
-
+  const inventoryMapping = useInventory();
+  const cartItems = useCartItems();
   useEffect(() => {
     viewCart();
     getShippingTiers();
   }, []);
-
-  const cartItems = useMemo(() => {
-    if (appliedCoupon?.couponType === "BOGO") {
-      const totalQty = cartList.reduce((a, b) => a + b.qty, 0);
-      if (totalQty > 1) {
-        const item = cartList.reduce((prev, curr) => {
-          return prev.price < curr.price ? prev : curr;
-        });
-
-        if (item.price > appliedCoupon.minOrderValue) {
-          return [...cartList].map((c) =>
-            c.id === item.id ? { ...c, isBogo: true } : c
-          );
-        }
-      }
-    }
-
-    return cartList;
-  }, [cartList, appliedCoupon]);
 
   const {
     totalItems,
@@ -61,10 +42,7 @@ function Cart(props) {
     couponTotal,
     cartGrandTotal,
     cartAmountSaved,
-  } = useMemo(
-    () => getCartTotals(cartItems, appliedCoupon, shippingTiers),
-    [cartItems, appliedCoupon, shippingTiers]
-  );
+  } = useCartTotal();
 
   const inventorySuccess = useMemo(
     () => cartList.every((c) => c.qty <= inventoryMapping[c.recordKey]),
@@ -100,7 +78,10 @@ function Cart(props) {
             </i>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href={user && inventorySuccess ? "/pages/checkout" : "#"} onClick={checkAuth}>
+            <ALink
+              href={user && inventorySuccess ? "/pages/checkout" : "#"}
+              onClick={checkAuth}
+            >
               2. Checkout
             </ALink>
             <i>
@@ -112,42 +93,23 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div className="container p-0 sm-container mt-7 mb-2 ">
+        <div
+          className="container p-0 sm-container mt-7 mb-2 " 
+        >
           <div className="row">
             {cartItems.length > 0 ? (
               <>
                 <div className="col-lg-8 col-md-12 ">
                   <div className="shop-table cart-table lh-default ">
-                    <div>
+                    <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
-                        <React.Fragment key={`${item.recordKey}-cart-item`}>
-                          {item.isBogo ? (
-                            <>
-                              {item.qty > 1 && (
-                                <CartProduct
-                                  key={`${item.recordKey}-primary`}
-                                  item={{
-                                    ...item,
-                                    qty: item.qty - 1,
-                                    bogo: "PRIMARY",
-                                  }}
-                                />
-                              )}
-                              <CartProduct
-                                key={`${item.recordKey}-secondary`}
-                                item={{ ...item, bogo: "SECONDARY" }}
-                              />
-                            </>
-                          ) : (
-                            <CartProduct
-                              key={item.recordKey}
-                              outOfStock={
-                                inventoryMapping[item.recordKey] < item.qty
-                              }
-                              item={item}
-                            />
-                          )}
-                        </React.Fragment>
+                        <CartProduct
+                          key={`${item.itemKey}`}
+                          item={item}
+                          outOfStock={
+                            inventoryMapping[item.recordKey] < Number(item.qty)
+                          }
+                        />
                       ))}
                     </div>
                   </div>
@@ -189,8 +151,8 @@ function Cart(props) {
                           {!!appliedCoupon && (
                             <>
                               <tr className="summary-subtotal">
-                                <td className="d-flex align-items-center">
-                                  <h4 className="summary-subtitle lh-1">
+                                <td className="d-flex align-items-center no-wrap">
+                                  <h4 className="summary-subtitle lh-1 ">
                                     Discounts
                                   </h4>
                                   &nbsp; ({appliedCoupon.code})
@@ -211,8 +173,9 @@ function Cart(props) {
                             </td>
                             <td>
                               <p
-                                className={`summary-subtotal-price ${!shippingTotal && "discount-price-color"
-                                  }`}
+                                className={`summary-subtotal-price ${
+                                  !shippingTotal && "discount-price-color"
+                                }`}
                               >
                                 {!!shippingTotal
                                   ? `₹${toDecimal(shippingTotal)}`
@@ -316,6 +279,7 @@ function mapStateToProps(state) {
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
     shippingTiers: state.system.shippingTiers,
+    featuredCoupons: state.system.featuredCoupon || [],
   };
 }
 const Component = connect(mapStateToProps, {

@@ -513,15 +513,25 @@ export const getFeaturedCoupon = /* GraphQL */ `
     ) {
       items {
         id
+        description
         code
-        discount
-        expirationDate
-        isActive
-        isFeatured
         couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        getYStoreProduct {
+          id
+          title
+          price
+        }
         minOrderValue
         maxDiscount
-        description
+        expirationDate
+        autoApply
+        applicableCollections
+        applicableProducts
         paymentMethod
       }
     }
@@ -529,15 +539,77 @@ export const getFeaturedCoupon = /* GraphQL */ `
 `;
 
 export const applyCoupon = /* GraphQL */ `
-  mutation ApplyCoupon($code: String!) {
+  mutation ApplyCoupon(
+    $code: String!, 
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
+  ) {
     applyCoupon(code: $code) {
       id
       code
-      discount
       couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
+      getYStoreProduct {
+        id
+        title
+        collections
+        vendor
+        subCategory {
+          name
+          slug
+        }
+        isFeatured
+        category {
+          name
+          slug
+        }
+        slug
+        price
+        sku
+        position
+        listingPrice
+        tags
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        thumbImages
+        isInventoryEnabled
+        totalOrders
+        variants(filter: $variantFilter, limit: $variantLimit) {
+          items {
+            id
+            title
+            price
+            position
+            listingPrice
+            imageUrl
+            inventory
+            blockedInventory
+          }
+        }
+        images(limit: $imageLimit) {
+          items {
+            id
+            position
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+        }
+      }
       minOrderValue
       maxDiscount
-      description
+      applicableCollections
+      applicableProducts
       paymentMethod
     }
   }
@@ -851,6 +923,63 @@ export const findProducts = /* GraphQL */ `
       }
       nextToken
       total
+    }
+  }
+`;
+
+export const getProductById = /* GraphQL */ `
+  query GetProduct($id: ID!) {
+    getProduct(id: $id) {
+      id
+      title
+      collections
+      vendor
+      subCategory {
+        name
+        slug
+      }
+      isFeatured
+      category {
+        name
+        slug
+      }
+      slug
+      price
+      sku
+      position
+      listingPrice
+      tags
+      inventory
+      blockedInventory
+      continueSellingOutOfStock
+      rating
+      totalRatings
+      thumbImages
+      isInventoryEnabled
+      totalOrders
+      variants {
+        items {
+          id
+          title
+          price
+          position
+          listingPrice
+          imageUrl
+          inventory
+          blockedInventory
+        }
+      }
+      images {
+        items {
+          id
+          position
+          alt
+          width
+          height
+          imageKey
+          isThumb
+        }
+      }
     }
   }
 `;

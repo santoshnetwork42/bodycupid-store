@@ -34,7 +34,6 @@ export default function ProductVariant({ item, onSelect, selected }) {
       <div className="product-detail">
         <div className="product-title">
           <div>{item.title}</div>
-          <div className="product-desc mt-1">{item.title}</div>
         </div>
 
         <div className="product-price mb-2 d-flex">

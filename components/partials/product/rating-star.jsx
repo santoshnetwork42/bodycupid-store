@@ -12,11 +12,16 @@ export default function RatingStar({
     return (
       <div className="ratings-container m-0 pointer-none">
         <div className="ratings-full">
-
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= value;
 
-            return <Star size={16} color={isFilled ? "#FAB73B" : "#D9D9D9"} />;
+            return (
+              <Star
+                key={`star-${index}`}
+                size={16}
+                color={isFilled ? "#FAB73B" : "#D9D9D9"}
+              />
+            );
           })}
         </div>
       </div>

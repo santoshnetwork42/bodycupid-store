@@ -1,16 +1,16 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
-import { systemActions } from "~/store/system";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
 import Modal from "~/components/common/modal";
-import { getCouponMessage } from "~/utils/coupons";
+import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { getCouponTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { CheckBadge, Close, Discount, RightAngle } from "../icons";
+import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
+import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 
 function Coupon(props) {
   const {
@@ -19,51 +19,55 @@ function Coupon(props) {
     applyCoupon,
     removeCoupon,
     appliedCoupon,
+    addToCart,
     layout = "cart",
-    featured = [],
-    getFeaturedCoupons,
   } = props;
+
   const [coupon, setCoupon] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getFeaturedCoupons();
-  }, []);
+  const featuredCoupons = useFeaturedCoupons();
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
       setLoading(true);
-      try {
-        const {
-          data: { applyCoupon: response },
-        } = await API.graphql({
-          query: applyCouponMutation,
-          variables: { code: couponCode },
-          authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-        });
-        if (response) {
-          const discount = getCouponTotal(response, cartList);
-          if (discount) {
-            setCoupon("");
-            applyCoupon(response);
-            setOpen(false);
-            setError("");
-          } else {
-            setError("Coupon cannot be applied");
+
+      const response = await API.graphql({
+        query: applyCouponMutation,
+        variables: {
+          code: couponCode,
+          variantFilter: { status: { ne: "DISABLED" } },
+          variantLimit: 1,
+          imageLmit: 1,
+        },
+        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+      })
+        .then((data) => data.data.applyCoupon)
+        .catch(errorHandler);
+
+      setCoupon("");
+      setLoading(false);
+
+      if (response) {
+        const { allowed, message, couponType, getYStoreProduct } =
+          await getCouponDiscount(response, cartList);
+
+        if (allowed) {
+          applyCoupon(response);
+          setOpen(false);
+          if (couponType === "PRODUCT") {
+            addToCart({ ...getYStoreProduct, qty: 1 });
           }
-          setLoading(false);
         } else {
-          setCoupon("");
-          setError("Coupon not found");
-          setLoading(false);
+          setError(message);
         }
-      } catch (error) {
-        errorHandler(error);
+      } else {
+        setError("Coupon not found");
       }
     },
-    [coupon, user]
+    [coupon, user, cartList]
   );
 
   return (
@@ -102,12 +106,12 @@ function Coupon(props) {
               </div>
             </div>
 
-            {!!featured?.length && !appliedCoupon && (
+            {!!featuredCoupons.length && !appliedCoupon && (
               <a
                 className="coupon-offer d-flex align-items-center"
                 type="button"
               >
-                {`${featured?.length} Offers`}
+                {`${featuredCoupons.length} Offers`}
                 <RightAngle size={14} />
               </a>
             )}
@@ -141,6 +145,7 @@ function Coupon(props) {
           </div>
         </div>
       )}
+
       <Modal
         isOpen={isOpen}
         onRequestClose={() => {
@@ -182,25 +187,26 @@ function Coupon(props) {
                   </button>
                 </div>
                 <span className="coupon-error-lable">{error}</span>
-                {!!featured?.length && (
-                  <div className="mt-2">
-                    {featured.map((c) => {
+                {!!featuredCoupons?.length && (
+                  <div className="mt-8">
+                    {featuredCoupons.map((c) => {
                       let className = "btn btn-md  btn-rounded btn-link m l-2";
-                      const discount = getCouponTotal(c, cartList);
-                      if (!discount) {
+                      if (!c.allowed) {
                         className = `${className} btn-disabled`;
                       }
+
                       return (
                         <div key={c.id} className="featured-coupon">
                           <div className="d-flex justify-content-between ">
                             <div className="featured-coupon-text-content">
                               <strong>{c.code}</strong>
-                              {!!discount && (
-                                <div className="coupon-tagline">
-                                  You will save ₹{toDecimal(discount)} with this
-                                  coupon
-                                </div>
-                              )}
+                              <div
+                                className={`coupon-tagline ${
+                                  !c.allowed && "text-secondary"
+                                }`}
+                              >
+                                {c.message}
+                              </div>
                             </div>
                             <button
                               onClick={() => applyCouponCode(c.code)}
@@ -209,7 +215,7 @@ function Coupon(props) {
                               Apply
                             </button>
                           </div>
-                          <p className="m-0">{getCouponMessage(c)}</p>
+                          <p className="m-0">{getCouponMessage(c).message}</p>
                         </div>
                       );
                     })}
@@ -229,12 +235,11 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
-    featured: state.system.featuredCoupon,
   };
 }
 
 export default connect(mapStateToProps, {
+  addToCart: cartActions.addToCart,
   applyCoupon: cartActions.applyCoupon,
   removeCoupon: cartActions.removeCoupon,
-  getFeaturedCoupons: systemActions.getFeaturedCoupon,
 })(Coupon);

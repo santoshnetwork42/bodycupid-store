@@ -14,7 +14,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { getCartTotals, toInteger, toDecimal } from "~/utils";
+import { toInteger, toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -42,6 +42,8 @@ import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
+import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
+import { useFreeProducts } from "~/utils/hooks/useCoupon";
 
 function Checkout(props) {
   const {
@@ -61,7 +63,8 @@ function Checkout(props) {
   const { name } = store;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
-  const inventoryMapping = useInventory(cartList);
+  const inventoryMapping = useInventory();
+  const freeProducts = useFreeProducts();
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
@@ -91,10 +94,9 @@ function Checkout(props) {
     totalDiscount,
     codGrandTotal,
     prepaidGrandTotal,
-  } = useMemo(
-    () => getCartTotals(cartList, appliedCoupon, shippingTiers, isFirst),
-    [cartList, appliedCoupon, isFirst, shippingTiers]
-  );
+  } = useCartTotal();
+
+  const cartItems = useCartItems();
 
   const inventorySuccess = useMemo(() =>
     cartList.every((c) => c.qty <= inventoryMapping[c.recordKey])
@@ -273,12 +275,17 @@ function Checkout(props) {
           const sla = new Date();
           sla.setDate(sla.getDate() + 2);
 
+          const freeProductTotal = freeProducts.reduce(
+            (a, b) => a + b.price,
+            0
+          );
+
           const payload = {
             storeId: STORE_ID,
             userId: user?.id,
             status: isFirst ? "PENDING" : "CONFIRMED",
             totalAmount: grandTotal,
-            totalDiscount,
+            totalDiscount: totalDiscount + freeProductTotal,
             totalShippingCharges: shippingTotal,
             orderDate: orderDate.toISOString(),
             sla: sla.toISOString(),
@@ -315,9 +322,13 @@ function Checkout(props) {
             }),
             ...cartList.map((p) => {
               const itemtotal = parseInt(p.qty) * parseInt(p.price);
-              const itemDiscount = (totalDiscount * itemtotal) / totalPrice;
+
+              const itemDiscount =
+                ((totalDiscount + freeProductTotal) * itemtotal) /
+                (totalPrice + freeProductTotal);
+
               const itemShippingCharges =
-                (shippingTotal * itemtotal) / totalPrice;
+                (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
               return API.graphql({
                 query: createOrderProduct,
@@ -327,6 +338,36 @@ function Checkout(props) {
                     productId: p.id,
                     variantId: p.variantId,
                     quantity: p.qty,
+                    price: p.price,
+                    title: p.title,
+                    discount: itemDiscount,
+                    shippingCharges: itemShippingCharges,
+                    totalPrice: itemtotal + itemShippingCharges - itemDiscount,
+                    sku: p.sku,
+                  },
+                },
+                authMode: "AMAZON_COGNITO_USER_POOLS",
+              });
+            }),
+
+            ...freeProducts.map((p) => {
+              const itemtotal = 1 * parseInt(p.price);
+
+              const itemDiscount =
+                ((totalDiscount + freeProductTotal) * itemtotal) /
+                (totalPrice + freeProductTotal);
+
+              const itemShippingCharges =
+                (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
+
+              return API.graphql({
+                query: createOrderProduct,
+                variables: {
+                  input: {
+                    orderId,
+                    productId: p.id,
+                    variantId: p.variantId,
+                    quantity: 1,
                     price: p.price,
                     title: p.title,
                     discount: itemDiscount,
@@ -355,7 +396,7 @@ function Checkout(props) {
               address: restAddress,
             });
           } else {
-            onPlaceOrder(order, [...cartList], appliedCoupon);
+            onPlaceOrder(order, [...cartList, ...freeProducts], appliedCoupon);
             handleCodPayments(orderId);
           }
         } catch (error) {
@@ -383,6 +424,7 @@ function Checkout(props) {
       totalDiscount,
       totalPrice,
       payMethod,
+      freeProducts,
     ]
   );
 
@@ -473,7 +515,7 @@ function Checkout(props) {
                               </tr>
                             </thead>
                             <tbody>
-                              {cartList.map((item) => (
+                              {cartItems.map((item) => (
                                 <tr
                                   className="m-0 p-0 border-no"
                                   key={item?.id}
@@ -498,7 +540,8 @@ function Checkout(props) {
                                             {item.title}
                                           </ALink>
                                         </div>
-                                        {item.qty >=
+
+                                        {item.qty >
                                         inventoryMapping[item.recordKey] ? (
                                           <div className="outofstock-tag mt-2">
                                             <p className="m-0 outofstock-label">
@@ -507,27 +550,28 @@ function Checkout(props) {
                                           </div>
                                         ) : (
                                           <div className="product-subtotal mt-1">
-                                            {!(
-                                              item.isBogo && item.qty === 1
-                                            ) && (
-                                              <span className="sm-product-amount">
-                                                ₹{toDecimal(item.price)}
+                                            {item?.cartItemType ===
+                                              "FREEPRODUCT" && (
+                                              <span className="text-success ">
+                                                Free
                                               </span>
                                             )}
 
-                                            <p className="m-0 product-discount-listing">
-                                              {item.price <
-                                                item.listingPrice && (
-                                                <del className="summary-subtotal-listingprice">
-                                                  ₹
-                                                  {toDecimal(item.listingPrice)}
-                                                </del>
-                                              )}
-                                              {item.isBogo && item.qty === 1 ? (
-                                                <span className="text-success ml-1">
-                                                  Free
+                                            {item?.cartItemType !==
+                                              "FREEPRODUCT" && (
+                                              <p className="m-0 product-discount-listing">
+                                                <span className="sm-product-amount">
+                                                  ₹{toDecimal(item.price)}
                                                 </span>
-                                              ) : (
+                                                {item.price <
+                                                  item.listingPrice && (
+                                                  <del className="summary-subtotal-listingprice">
+                                                    ₹
+                                                    {toDecimal(
+                                                      item.listingPrice
+                                                    )}
+                                                  </del>
+                                                )}
                                                 <span
                                                   className={`discount-percetage ml-2`}
                                                 >
@@ -538,16 +582,12 @@ function Checkout(props) {
                                                       item
                                                     )}% off`}
                                                 </span>
-                                              )}
-                                            </p>
-                                          </div>
-                                        )}
-                                        {item.isBogo && item.qty > 1 && (
-                                          <div className="summary-saving-lable-container mb-1  qty-label ">
-                                            {" "}
-                                            <p className="m-0 saving-lable">
-                                              1 qty is Free
-                                            </p>
+                                              </p>
+                                            )}
+
+                                            <div className="text-grey">
+                                              Qty:{item.qty || 1}
+                                            </div>
                                           </div>
                                         )}
                                       </div>
