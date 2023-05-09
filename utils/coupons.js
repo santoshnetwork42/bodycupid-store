@@ -69,9 +69,8 @@ export const getCouponDiscount = (coupon, cartList) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${
-        minOrderValue - totalAmount
-      } more in the cart`,
+      message: `Add product worth ₹${minOrderValue - totalAmount
+        } more in the cart`,
     };
   }
 
@@ -80,9 +79,8 @@ export const getCouponDiscount = (coupon, cartList) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${
-        buyXQuantity + getYQuantity - totalItems
-      } more items in the cart`,
+      message: `Add ${buyXQuantity + getYQuantity - totalItems
+        } more items in the cart`,
     };
   }
 
@@ -145,7 +143,7 @@ export const getCouponDiscount = (coupon, cartList) => {
     return {
       ...coupon,
       allowed: !!getYStoreProduct?.title,
-      discount: 0,
+      discount: getYStoreProduct?.price,
       message: getCouponMessage(coupon).discountMsg,
     };
   }

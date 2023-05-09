@@ -6,7 +6,8 @@ import { copyText } from "~/utils/helper";
 import Card from "~/components/features/accordion/card";
 
 function ProductBestPrice(props) {
-  const { price, code, discount, message, couponList } = props;
+  const { price, code, discount, couponType, autoApply, message, couponList } =
+    props;
 
   return (
     <div className="product-best-price-container">
@@ -16,26 +17,30 @@ function ProductBestPrice(props) {
           <p>
             Best price:&nbsp;
             <span className=" font-weight-semi-bold">
-              {toDecimal(price - discount)}
+              {couponType === "PRODUCT"
+                ? toDecimal(price)
+                : toDecimal(price - discount)}
             </span>
           </p>
         </div>
       </div>
-      <div className="d-flex align-items-center flex-wrap">
-        <span className="mr-1 text-primary">Use coupon </span>
-        <p id="coupon-code" className="font-weight-semi-bold mr-1">
-          {code}
-        </p>
-        <ALink
-          href="#"
-          className="copy-code cursor-pointer"
-          onClick={() => {
-            copyText(code, `Coupon code copied: ${code}`);
-          }}
-        >
-          Copy code
-        </ALink>
-      </div>
+      {!autoApply && (
+        <div className="d-flex align-items-center flex-wrap">
+          <span className="mr-1 text-primary">Use coupon </span>
+          <p id="coupon-code" className="font-weight-semi-bold mr-1">
+            {code}
+          </p>
+          <ALink
+            href="#"
+            className="copy-code cursor-pointer"
+            onClick={() => {
+              copyText(code, `Coupon code copied: ${code}`);
+            }}
+          >
+            Copy code
+          </ALink>
+        </div>
+      )}
       <p className="text-success">{message}</p>
       {couponList.length > 0 && (
         <Card
@@ -57,11 +62,13 @@ function ProductBestPrice(props) {
                     <span className="coupon-subtext text-primary">
                       BEST PRICE:&nbsp;
                       <span className="font-weight-semi-bold text-dark">
-                        {toDecimal(price - coupon.discount)}
+                        {coupon.couponType === "PRODUCT"
+                          ? toDecimal(price)
+                          : toDecimal(price - coupon.discount)}
                       </span>
                     </span>
                     <div className="d-flex align-items-center flex-wrap">
-                      {!(coupon.autoApply && coupon.couponType==='PRODUCT') && (
+                      {!coupon.autoApply && (
                         <>
                           <span className="mr-1 text-primary">Use coupon</span>
                           <span className="text-dark font-weight-semi-bold mr-1">

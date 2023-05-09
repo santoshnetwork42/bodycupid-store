@@ -539,7 +539,12 @@ export const getFeaturedCoupon = /* GraphQL */ `
 `;
 
 export const applyCoupon = /* GraphQL */ `
-  mutation ApplyCoupon($code: String!) {
+  mutation ApplyCoupon(
+    $code: String!, 
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
+  ) {
     applyCoupon(code: $code) {
       id
       code
@@ -549,6 +554,58 @@ export const applyCoupon = /* GraphQL */ `
       getYPercentage
       getYQuantity
       getYProduct
+      getYStoreProduct {
+        id
+        title
+        collections
+        vendor
+        subCategory {
+          name
+          slug
+        }
+        isFeatured
+        category {
+          name
+          slug
+        }
+        slug
+        price
+        sku
+        position
+        listingPrice
+        tags
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        thumbImages
+        isInventoryEnabled
+        totalOrders
+        variants(filter: $variantFilter, limit: $variantLimit) {
+          items {
+            id
+            title
+            price
+            position
+            listingPrice
+            imageUrl
+            inventory
+            blockedInventory
+          }
+        }
+        images(limit: $imageLimit) {
+          items {
+            id
+            position
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+        }
+      }
       minOrderValue
       maxDiscount
       applicableCollections

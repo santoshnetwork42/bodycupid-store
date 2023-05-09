@@ -19,6 +19,7 @@ function Coupon(props) {
     applyCoupon,
     removeCoupon,
     appliedCoupon,
+    addToCart,
     layout = "cart",
   } = props;
 
@@ -35,7 +36,12 @@ function Coupon(props) {
 
       const response = await API.graphql({
         query: applyCouponMutation,
-        variables: { code: couponCode },
+        variables: {
+          code: couponCode,
+          variantFilter: { status: { ne: "DISABLED" } },
+          variantLimit: 1,
+          imageLmit: 1,
+        },
         authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       })
         .then((data) => data.data.applyCoupon)
@@ -45,14 +51,15 @@ function Coupon(props) {
       setLoading(false);
 
       if (response) {
-        const { allowed, message } = await getCouponDiscount(
-          response,
-          cartList
-        );
+        const { allowed, message, couponType, getYStoreProduct } =
+          await getCouponDiscount(response, cartList);
 
         if (allowed) {
           applyCoupon(response);
           setOpen(false);
+          if (couponType === "PRODUCT") {
+            addToCart({ ...getYStoreProduct, qty: 1 });
+          }
         } else {
           setError(message);
         }
@@ -232,6 +239,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
+  addToCart: cartActions.addToCart,
   applyCoupon: cartActions.applyCoupon,
   removeCoupon: cartActions.removeCoupon,
 })(Coupon);

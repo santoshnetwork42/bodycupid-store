@@ -227,6 +227,10 @@ function DetailOne(props) {
     };
   }, [product, curIndex]);
 
+  const totalOrderCount = useMemo(() => {
+    return Math.ceil(product.totalOrders / 1000) * 1000;
+  });
+
   return (
     <div className={`product-details ${adClass}`}>
       {/* {isNav && (
@@ -517,13 +521,16 @@ function DetailOne(props) {
       <div className="d-flex text-success align-items-center mb-3 lh-default">
         {!!product.totalOrders && (
           <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
-            {totalOrderCount}+ units sold -
+            {totalOrderCount}+ units sold
           </p>
         )}
         {hasInventory && currentInventory < 100 && (
-          <span className="text-secondary font-weight-semi-bold">
-            Last {currentInventory} units left
-          </span>
+          <>
+            <BigDot color="red" size={20} />
+            <span className="text-secondary font-weight-semi-bold">
+              Last {currentInventory} units left
+            </span>
+          </>
         )}
       </div>
     </div>
