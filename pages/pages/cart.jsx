@@ -67,6 +67,8 @@ function Cart(props) {
     return false;
   }, [user, inventorySuccess]);
 
+  console.log('cartItems :>> ', cartItems);
+
   return (
     <main className="main cart">
       <div className="page-content pt-lg-7 pt-2 pb-5 lh-default">

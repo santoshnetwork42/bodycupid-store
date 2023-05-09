@@ -11,6 +11,7 @@ import { getCouponTotal, toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
+import { getRecordKey } from "~/utils/helper";
 
 function Coupon(props) {
   const {
@@ -20,6 +21,7 @@ function Coupon(props) {
     removeCoupon,
     appliedCoupon,
     addToCart,
+    removeFromCart,
     layout = "cart",
   } = props;
 
@@ -58,7 +60,12 @@ function Coupon(props) {
           applyCoupon(response);
           setOpen(false);
           if (couponType === "PRODUCT") {
-            addToCart({ ...getYStoreProduct, qty: 1 });
+            addToCart({
+              ...getYStoreProduct,
+              qty: 1,
+              hideQty: true,
+              cartItemSource: "COUPON",
+            });
           }
         } else {
           setError(message);
@@ -69,6 +76,18 @@ function Coupon(props) {
     },
     [coupon, user, cartList]
   );
+
+  const onCouponRemove = () => {
+    if (appliedCoupon?.couponType === "PRODUCT" && appliedCoupon?.getYProduct) {
+      cartList.forEach((item) => {
+        if (item.cartItemSource === "COUPON") {
+          removeFromCart(item);
+        }
+      });
+    }
+
+    removeCoupon();
+  };
 
   return (
     <>
@@ -121,7 +140,7 @@ function Coupon(props) {
                 href="#"
                 className="mt-1"
                 title="Remove coupon"
-                onClick={() => removeCoupon()}
+                onClick={onCouponRemove}
               >
                 <Close color="grey" size={18} />
               </ALink>
@@ -240,6 +259,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   addToCart: cartActions.addToCart,
+  removeFromCart: cartActions.removeFromCart,
   applyCoupon: cartActions.applyCoupon,
   removeCoupon: cartActions.removeCoupon,
 })(Coupon);
