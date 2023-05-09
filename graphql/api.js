@@ -540,7 +540,7 @@ export const getFeaturedCoupon = /* GraphQL */ `
 
 export const applyCoupon = /* GraphQL */ `
   mutation ApplyCoupon(
-    $code: String!, 
+    $code: String!
     $variantFilter: ModelVariantFilterInput
     $variantLimit: Int
     $imageLimit: Int
@@ -1016,6 +1016,7 @@ export const searchProductsBasic = /* GraphQL */ `
     $nextToken: String
     $from: Int
     $aggregates: [SearchableProductAggregationInput]
+    $imageLimit: Int
   ) {
     searchProducts(
       filter: $filter
