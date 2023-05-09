@@ -30,7 +30,7 @@ function Coupon(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const featuredCoupons = useFeaturedCoupons();
+  const featuredCoupons = useFeaturedCoupons(); 
 
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
