@@ -15,6 +15,8 @@ function CartProduct({
   outOfStock,
   removeFromCart,
   updateCart,
+  appliedCoupon,
+  removeCoupon,
 }) {
   const {
     id,
@@ -31,6 +33,7 @@ function CartProduct({
     cartItemType,
     extraQty = 0,
     hideQty = false,
+    cartItemSource,
   } = item;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
@@ -75,6 +78,9 @@ function CartProduct({
 
   const onRemove = () => {
     onChangeQty(0);
+    if (cartItemSource === "COUPON" && appliedCoupon?.getYProduct === id) {
+      removeCoupon();
+    }
   };
 
   return (
@@ -96,7 +102,7 @@ function CartProduct({
               <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {cartItemType === "FREEPRODUCT" ? (
+              {cartItemType === "FREEPRODUCT" || cartItemSource === "COUPON" ? (
                 <>
                   <span className="discount-percentage ml-1">Free</span>
                 </>
@@ -176,10 +182,12 @@ function CartProduct({
 function mapStateToProps(state) {
   return {
     cartList: state.cart.data,
+    appliedCoupon: state.cart.coupon,
   };
 }
 
 export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,
+  removeCoupon: cartActions.removeCoupon,
 })(CartProduct);

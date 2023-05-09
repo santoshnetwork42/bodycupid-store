@@ -48,6 +48,10 @@ function cartReducer(state = initialState, action) {
         recordKey = `${tmpProduct.id}-${tmpProduct.variantId}`;
       }
 
+      if (tmpProduct.cartItemSource) {
+        recordKey = `${recordKey}-${tmpProduct.cartItemSource}`;
+      }
+
       if (state.data.some((item) => item.recordKey === recordKey)) {
         let tmpData = state.data.reduce((acc, cur) => {
           if (cur.recordKey === recordKey) {
@@ -57,7 +61,7 @@ function cartReducer(state = initialState, action) {
               qty: parseInt(cur.qty) + parseInt(tmpProduct.qty),
             });
           } else {
-            acc.push({ ...cur, recordKey });
+            acc.push({ ...cur });
           }
 
           return acc;

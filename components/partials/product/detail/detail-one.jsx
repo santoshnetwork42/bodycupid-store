@@ -48,15 +48,11 @@ function DetailOne(props) {
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
-      const cartItem = cartList.find(
-        (cl) =>
-          cl.id === product.id &&
-          (!cl.variantId || selectedVariant === cl.variantId)
-      );
-
+      const recordKey = getRecordKey(product, selectedVariant);
+      const cartItem = cartList.find((cl) => cl.recordKey === recordKey);
       return cartItem;
     }
-    return;
+    return null;
   }, [cartList, selectedVariant]);
 
   const { productCoupons, bestCoupon } = useProductCoupons(

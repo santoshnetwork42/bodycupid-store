@@ -5,14 +5,14 @@ import { getCartTotals } from "~/utils";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { getCouponDiscount } from "~/utils/coupons";
 
-export const useCartTotal = () => {
+export const useCartTotal = (prepaid = false) => {
   const { data, coupon } = useSelector((state) => state.cart);
   const shippingTiers = useSelector(
     (state) => state.system.shippingTiers || []
   );
   const cartTotals = useMemo(
-    () => getCartTotals(data, coupon, shippingTiers),
-    [data, coupon, shippingTiers]
+    () => getCartTotals(data, coupon, shippingTiers, prepaid),
+    [data, coupon, shippingTiers, prepaid]
   );
   return cartTotals;
 };
