@@ -160,22 +160,32 @@ function Passwordless({
 
   const handleChange = useCallback(
     (ele, index) => {
-      setState({
-        ...state,
-        confirmationCode: [
-          ...state.confirmationCode.map((o, i) =>
-            i === index ? ele.value : o
-          ),
-        ],
-      });
+      const { value } = ele;
+      if (value?.length <= 1) {
+        setState({
+          ...state,
+          confirmationCode: [
+            ...state.confirmationCode.map((o, i) => (i === index ? value : o)),
+          ],
+        });
+      } else if (value?.length > 1) {
+        const otpArray = value.split("");
+        setState({
+          ...state,
+          confirmationCode: Array(6)
+            .fill("")
+            .map((_x, i) => otpArray[i] || ""),
+        });
+      }
     },
     [state]
   );
 
   const inputFocus = (ele) => {
+    const regex = /^[0-9]+$/;
     if (ele.key === "Delete" || ele.key === "Backspace") {
       ele.target?.previousSibling?.focus();
-    } else {
+    } else if (regex.test(ele.key)) {
       ele.target?.nextSibling?.focus();
     }
   };
@@ -183,8 +193,13 @@ function Passwordless({
   const handlePaste = (event) => {
     event.preventDefault();
     const pastedData = event.clipboardData.getData("Text");
-    const otpArray = pastedData.split("").slice(0, 6);
-    setState({ ...state, confirmationCode: otpArray });
+    const otpArray = pastedData.split("");
+    setState({
+      ...state,
+      confirmationCode: Array(6)
+        .fill("")
+        .map((_x, i) => otpArray[i] || ""),
+    });
   };
 
   return (
@@ -293,7 +308,7 @@ function Passwordless({
                                 autoComplete="one-time-code"
                                 className="otpInput"
                                 value={ele}
-                                maxLength="1"
+                                maxLength={1}
                                 onChange={(e) => {
                                   handleChange(e.target, index);
                                 }}
