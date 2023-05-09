@@ -94,7 +94,7 @@ function Checkout(props) {
     totalDiscount,
     codGrandTotal,
     prepaidGrandTotal,
-  } = useCartTotal();
+  } = useCartTotal(isFirst);
 
   const cartItems = useCartItems();
 
