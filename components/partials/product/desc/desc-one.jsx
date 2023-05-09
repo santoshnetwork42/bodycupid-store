@@ -19,6 +19,7 @@ import Loader from "~/components/common/partials/loader";
 import { alertToaster } from "../../../../utils/popupHelper";
 import ReadMore from "~/components/layouts/read-more";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { Close } from "~/components/icons";
 
 const reviewDefault = {
   rating: 5,
@@ -444,11 +445,9 @@ function DescOne(props) {
                               className="img-preview"
                               alt=""
                             />
-
-                            <i
-                              className="d-icon-close close"
-                              onClick={() => removeImage(index)}
-                            ></i>
+                            <span className="close">
+                              <Close color="grey" size={18} />
+                            </span>
                           </div>
                         ))}
                       </div>
