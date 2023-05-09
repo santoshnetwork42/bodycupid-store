@@ -6,7 +6,6 @@ import { useCoupons } from "~/utils/contexts/coupons";
 import { getCouponDiscount } from "~/utils/coupons";
 import { getTotalPrice, getCartCount } from "~/utils";
 import { getProductById } from "~/graphql/api";
-import { getRecordKey } from "../helper";
 
 export const useFeaturedCoupons = () => {
   const coupons = useCoupons();
