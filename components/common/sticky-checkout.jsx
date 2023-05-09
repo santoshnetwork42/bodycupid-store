@@ -13,11 +13,9 @@ function StickyFooter(props) {
 
   if (!cartList.length || !showStickyCheckout) return <></>;
   return (
-    <div className="stick-bottom-button btn-dark pl-5 pr-5 d-sm-show">
+    <div className="stick-bottom-button">
       <div className="lh-default text-primary">
-        <span>
-          {totalItems > 1 ? `${totalItems} Items` : `1 Item`}
-        </span>
+        <span>{totalItems > 1 ? `${totalItems} Items` : `1 Item`}</span>
         <p className="summary-total-price text-left ls-s">
           ₹ {toDecimal(totalPrice)}
         </p>
