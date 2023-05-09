@@ -1,12 +1,18 @@
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { RightArrow, Instagram, Facebook, Youtube } from "~/components/icons";
+import {
+  Instagram,
+  Facebook,
+  Youtube,
+  Twitter,
+  Pinterest,
+} from "~/components/icons";
 import OptimizedImage from "~/components/features/optimized-image";
 import PaymentLogos from "./partials/payment-logos";
 
 function Footer({ footer, store }) {
-  const { name } = store || {};
+  const { name, socialLinks } = store || {};
 
   if (footer.hideFooter) return <></>;
 
@@ -86,30 +92,56 @@ function Footer({ footer, store }) {
           </div>
           <div className="footer-right">
             <div className="social-links">
-              <a
-                title={`${name} on Instagram`}
-                className="social-link"
-                href="https://www.instagram.com/wowlifescienceindia/"
-                target={"_blank"}
-              >
-                <Instagram size={16} color="currentColor" />
-              </a>
-              <a
-                title={`${name} on Facebook`}
-                href="https://www.facebook.com/wowlifescienceindia/"
-                className="social-link"
-                target={"_blank"}
-              >
-                <Facebook size={16} color="currentColor" />
-              </a>
-              <a
-                title={`${name} on YouTube`}
-                href="https://www.youtube.com/@WOWLifeScience"
-                className="social-link"
-                target={"_blank"}
-              >
-                <Youtube size={16} color="currentColor" />
-              </a>
+              {socialLinks.instagram && (
+                <a
+                  title={`${name} on Instagram`}
+                  className="social-link social-insta"
+                  href={socialLinks.instagram}
+                  target={"_blank"}
+                >
+                  <Instagram size={16} color="currentColor" />
+                </a>
+              )}
+              {socialLinks.facebook && (
+                <a
+                  title={`${name} on Facebook`}
+                  href={socialLinks.facebook}
+                  className="social-link social-facebook"
+                  target={"_blank"}
+                >
+                  <Facebook size={16} color="currentColor" />
+                </a>
+              )}
+              {socialLinks.youtube && (
+                <a
+                  title={`${name} on YouTube`}
+                  href={socialLinks.youtube}
+                  className="social-link social-youtube"
+                  target={"_blank"}
+                >
+                  <Youtube size={16} color="currentColor" />
+                </a>
+              )}
+              {socialLinks.twitter && (
+                <a
+                  title={`${name} on twitter`}
+                  href={socialLinks.twitter}
+                  className="social-link social-twitter"
+                  target={"_blank"}
+                >
+                  <Twitter size={16} color="currentColor" />
+                </a>
+              )}
+              {socialLinks.pinterest && (
+                <a
+                  title={`${name} on pinterest`}
+                  href={socialLinks.pinterest}
+                  className="social-link social-pinterest"
+                  target={"_blank"}
+                >
+                  <Pinterest size={16} color="currentColor" />
+                </a>
+              )}
             </div>
           </div>
         </div>
