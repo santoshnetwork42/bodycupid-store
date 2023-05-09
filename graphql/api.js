@@ -275,6 +275,7 @@ export const getQuickViewProduct = /* GraphQL */ `
     $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
+    $variantFilter: ModelVariantFilterInput
   ) {
     byslugProduct(
       slug: $slug
@@ -283,7 +284,6 @@ export const getQuickViewProduct = /* GraphQL */ `
       filter: $filter
       limit: $limit
       nextToken: $nextToken
-      $variantFilter: ModelVariantFilterInput
     ) {
       items {
         id

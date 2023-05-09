@@ -43,7 +43,12 @@ function Quickview(props) {
               items: [response],
             },
           },
-        } = await API.graphql(graphqlOperation(getQuickViewProduct, { slug }));
+        } = await API.graphql(
+          graphqlOperation(getQuickViewProduct, {
+            slug,
+            variantFilter: { status: { eq: "ENABLED" } },
+          })
+        );
         setProduct(response);
         setVariant(response.variants.items[0]?.id);
       })();
