@@ -632,13 +632,13 @@
 
 .stick-bottom-button {
   width: 100vw;
-  max-width: 400px;
+  max-width: 500px;
   display: flex !important;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   bottom: 35px;
-  left: calc(50vw - 20rem);
+  left: calc(50vw - 25rem);
   background: #fff;
   border-radius: 5px;
   z-index: 99;
