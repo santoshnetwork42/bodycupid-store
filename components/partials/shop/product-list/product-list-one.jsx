@@ -87,6 +87,9 @@ function ProductListOne(props) {
       filter.price = { lte: Number(maxprice) };
     }
     switch (sortby) {
+      case "latest":
+        sortBy.push({ field: "createdAt", direction: "desc" });
+        break;
       case "popularity":
         sortBy.push({ field: "rating", direction: "desc" });
         break;
@@ -100,6 +103,7 @@ function ProductListOne(props) {
         filter.collections = { eq: "best-seller" };
         break;
       default:
+        sortBy.push({ field: "position", direction: "asc" });
     }
 
     return { filter, limit: perPage, sort: sortBy };
@@ -132,6 +136,7 @@ function ProductListOne(props) {
         setTotal(total);
         setLoading(false);
       } catch (error) {
+        setLoading(false);
         errorHandler(error);
       }
     },

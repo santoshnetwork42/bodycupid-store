@@ -59,9 +59,10 @@ function Checkout(props) {
     openAllAddressModal,
   } = props;
 
+  const { name } = store;
+
   const { isSmallSize: isMobile } = useWindowDimensions();
   const inventoryMapping = useInventory();
-  const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
@@ -72,6 +73,7 @@ function Checkout(props) {
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
+
   const isFirst = payMethod === "PREPAID";
 
   useEffect(() => {
@@ -158,6 +160,7 @@ function Checkout(props) {
   );
 
   const handleCodPayments = (orderId) => {
+    setPaymentLoading(true);
     const intervalId = setInterval(() => {
       getOrders(intervalId, orderId);
     }, 2000);
@@ -704,7 +707,7 @@ function Checkout(props) {
                             title="Pay Online"
                             tag={"EXTRA 5% OFF"}
                             isSelected={payMethod === "PREPAID"}
-                            description="Use credit/debit card, net-banking, UPI, wallets to complete the payment."
+                            description="Pay using credit/debit cards, net-banking, UPI, or digital wallets."
                             onClick={() => {
                               setFirst("PREPAID");
                             }}
@@ -714,7 +717,7 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Cash On Delivery"
                             isSelected={payMethod === "COD"}
-                            description="Pay in cash or pay in person at the time of delivery with GPay/PayTM/PhonePe."
+                            description="Pay using Cash on Delivery"
                             onClick={() => {
                               !codDisabled && setFirst("COD");
                             }}

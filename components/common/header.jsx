@@ -32,7 +32,7 @@ function Header({ navbar, auth, openPasswordLess }) {
 
   return (
     <header className="header header-border">
-      <div className="sticky-header fix-top sticky-content">
+      <div className="fix-top sticky-content">
         <div className="header-middle">
           <div className="container">
             <div className="header-left">
@@ -67,13 +67,13 @@ function Header({ navbar, auth, openPasswordLess }) {
 
               <SearchBox />
             </div>
- 
+
             <div className="header-right">
               {/* <ALink href="/pages/wishlist" className="wishlist  mr-3 ">
                 <Heart />
               </ALink>
               <span className="divider"></span> */}
-                {!navbar?.hideSearch && (
+              {!navbar?.hideSearch && (
                 <div className="d-sm-show search-container mr-2">
                   <SearchBox type="icon" />
                 </div>
@@ -102,7 +102,6 @@ function Header({ navbar, auth, openPasswordLess }) {
               )} */}
               <span className="divider"></span>
               <CartMenu />
-            
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Star, MagnifyingGlass, Heart, HeartFilled } from "~/components/icons";
+import { Star, MagnifyingGlass } from "~/components/icons";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
@@ -18,7 +18,6 @@ function ProductTwo(props) {
     cartList,
     product,
     adClass = "text-center",
-    toggleWishlist,
     wishlist,
     addToCart,
     openQuickview,
@@ -53,20 +52,6 @@ function ProductTwo(props) {
     () => getProductInventory(product),
     [product]
   );
-
-  const wishlistHandler = (e) => {
-    if (toggleWishlist) {
-      toggleWishlist({ ...product, notWishlisted: !isWishlisted });
-    }
-
-    e.preventDefault();
-    let currentTarget = e.currentTarget;
-    currentTarget.classList.add("load-more-overlay", "loading");
-
-    setTimeout(() => {
-      currentTarget.classList.remove("load-more-overlay", "loading");
-    }, 1000);
-  };
 
   const tag = useMemo(() => {
     if (!collections) return;
@@ -162,18 +147,6 @@ function ProductTwo(props) {
           >
             <MagnifyingGlass color="currentColor" size={18} />
           </ALink>
-          <a
-            href="#"
-            className="btn-product-icon btn-wishlist"
-            title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-            onClick={wishlistHandler}
-          >
-            {isWishlisted ? (
-              <HeartFilled color="currentColor" size={18} />
-            ) : (
-              <Heart color="currentColor" size={18} />
-            )}
-          </a>
         </div>
       </figure>
 
@@ -200,18 +173,15 @@ function ProductTwo(props) {
               ({totalRatings || 0} reviews)
             </ALink>
           </div>
-        
         </div>
-  <div className="product-price product-sm mt-2 mb-2 lh-1">
-            <ins className="new-price ">
-               ₹{toDecimal(price || 0)}
-            </ins>
-            {price < listingPrice && listingPrice && (
-              <span className="old-price ml-1 ">
-                <del>₹{toDecimal(listingPrice || 0)}</del>
-              </span>
-            )}
-          </div>
+        <div className="product-price product-sm mt-2 mb-2 lh-1">
+          <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
+          {price < listingPrice && listingPrice && (
+            <span className="old-price ml-1 ">
+              <del>₹{toDecimal(listingPrice || 0)}</del>
+            </span>
+          )}
+        </div>
         <div className="product-action">
           {!!hasInventory ? (
             <>

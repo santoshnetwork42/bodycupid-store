@@ -252,7 +252,7 @@ function DetailOne(props) {
       {!!product?.benefits && (
         <div className="product-benefits mb-2">
           {product?.benefits.map((benefit) => (
-            <lable key={benefit}>{benefit}</lable>
+            <label key={benefit}>{benefit}</label>
           ))}
         </div>
       )}
@@ -333,11 +333,9 @@ function DetailOne(props) {
         />
       )}
 
-      <p className="product-short-desc">{product.productDescription}</p>
-
       {sizes.length > 1 && (
         <>
-          <div className="product-form product-variations product-size mb-0 ">
+          <div className="product-form product-variations product-size mb-1 mt-3">
             <div className="product-form-group overflow-auto">
               <div className="d-flex">
                 {sizes.map((item) => (
@@ -356,9 +354,9 @@ function DetailOne(props) {
       )}
 
       {today.getHours() > 8 && today.getHours() < 15 && (
-        <div className="d-flex align-items-center mb-2">
+        <div className="d-flex mb-3">
           <Clock size={16} />
-          <p className="text-primary ml-1 mb-0">
+          <p className="text-primary ml-2 mb-0 lh-1">
             For Fastest delivery, order within {deliveryRemainingTime()}
           </p>
         </div>
@@ -470,16 +468,18 @@ function DetailOne(props) {
               <label className="d-none">QTY:</label>
               <div className="product-form-group cart-button-wrapper">
                 {!!cartItem && (
-                  <Quantity
-                    qty={cartItem?.qty}
-                    max={currentInventory}
-                    product={product}
-                    onChangeQty={changeQty}
-                  />
+                  <div className="m-0">
+                    <Quantity
+                      qty={cartItem?.qty}
+                      max={currentInventory}
+                      product={product}
+                      onChangeQty={changeQty}
+                    />
+                  </div>
                 )}
                 {!!cartItem && (
                   <button
-                    className={`btn-product btn-cart dark  text-uppercase ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart dark text-uppercase ls-normal font-weight-semi-bold m-0 ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={(e) => {
@@ -495,7 +495,7 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart  text-normal ls-normal font-weight-semi-bold ${
+                    className={`btn-product btn-cart ls-normal font-weight-semi-bold m-0 ${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={addToCartHandler}
@@ -513,15 +513,15 @@ function DetailOne(props) {
           )}
         </>
       )}
-      <div className="d-flex text-success align-items-center mb-3 pointer-none">
-        {product.totalOrders > 1000 && (
-          <>
-            <div className="d-flex">1000+ units sold</div>
-            <BigDot color="#17B31B" />
-          </>
+
+      <div className="d-flex text-success align-items-center mb-3 lh-default">
+        {!!product.totalOrders && (
+          <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
+            {totalOrderCount}+ units sold -
+          </p>
         )}
         {hasInventory && currentInventory < 100 && (
-          <span className="text-secondary">
+          <span className="text-secondary font-weight-semi-bold">
             Last {currentInventory} units left
           </span>
         )}
