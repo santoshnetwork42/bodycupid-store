@@ -74,7 +74,7 @@ function CartProduct({
   };
 
   const onRemove = () => {
-    removeFromCart(item);
+    onChangeQty(0);
   };
 
   return (
@@ -136,7 +136,6 @@ function CartProduct({
                     />
                   </div>
                 )}
-
                 {!!item?.variants?.items.length && (
                   <select
                     name={`${recordKey}`}
@@ -156,16 +155,18 @@ function CartProduct({
               </div>
             )}
           </div>
-          <div className="product-close">
-            <ALink
-              href="#"
-              className="sm-product-remove"
-              title="Remove this product"
-              onClick={onRemove}
-            >
-              <Close size={18} color="grey" />
-            </ALink>
-          </div>
+          {(cartItemType !== "FREEPRODUCT" || !hideQty) && (
+            <div className="product-close">
+              <ALink
+                href="#"
+                className="sm-product-remove"
+                title="Remove this product"
+                onClick={onRemove}
+              >
+                <Close size={18} color="grey" />
+              </ALink>
+            </div>
+          )}
         </div>
       </div>
     </div>

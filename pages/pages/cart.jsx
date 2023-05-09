@@ -109,7 +109,6 @@ function Cart(props) {
                           outOfStock={
                             inventoryMapping[item.recordKey] < Number(item.qty)
                           }
-                          cartItems={cartItems}
                         />
                       ))}
                     </div>
