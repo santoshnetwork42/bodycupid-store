@@ -92,7 +92,7 @@ function Footer({ footer, store }) {
           </div>
           <div className="footer-right">
             <div className="social-links">
-              {socialLinks.instagram && (
+              {!!socialLinks.instagram && (
                 <a
                   title={`${name} on Instagram`}
                   className="social-link social-insta"
@@ -102,7 +102,7 @@ function Footer({ footer, store }) {
                   <Instagram size={16} color="currentColor" />
                 </a>
               )}
-              {socialLinks.facebook && (
+              {!!socialLinks.facebook && (
                 <a
                   title={`${name} on Facebook`}
                   href={socialLinks.facebook}
@@ -112,7 +112,7 @@ function Footer({ footer, store }) {
                   <Facebook size={16} color="currentColor" />
                 </a>
               )}
-              {socialLinks.youtube && (
+              {!!socialLinks.youtube && (
                 <a
                   title={`${name} on YouTube`}
                   href={socialLinks.youtube}
@@ -122,7 +122,7 @@ function Footer({ footer, store }) {
                   <Youtube size={16} color="currentColor" />
                 </a>
               )}
-              {socialLinks.twitter && (
+              {!!socialLinks.twitter && (
                 <a
                   title={`${name} on twitter`}
                   href={socialLinks.twitter}
@@ -132,7 +132,7 @@ function Footer({ footer, store }) {
                   <Twitter size={16} color="currentColor" />
                 </a>
               )}
-              {socialLinks.pinterest && (
+              {!!socialLinks.pinterest && (
                 <a
                   title={`${name} on pinterest`}
                   href={socialLinks.pinterest}
