@@ -58,9 +58,10 @@ function Checkout(props) {
     openAllAddressModal,
   } = props;
 
+  const { name } = store;
+
   const { isSmallSize: isMobile } = useWindowDimensions();
   const inventoryMapping = useInventory(cartList);
-  const { name } = store;
   const router = useRouter();
   const [payMethod, setFirst] = useState("NONE");
   const [shippingAddress, setAddress] = useState(null);
@@ -71,6 +72,7 @@ function Checkout(props) {
   const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
+
   const isFirst = payMethod === "PREPAID";
 
   useEffect(() => {
@@ -156,6 +158,7 @@ function Checkout(props) {
   );
 
   const handleCodPayments = (orderId) => {
+    setPaymentLoading(true);
     const intervalId = setInterval(() => {
       getOrders(intervalId, orderId);
     }, 2000);
