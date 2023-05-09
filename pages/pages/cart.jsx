@@ -67,7 +67,6 @@ function Cart(props) {
     return false;
   }, [user, inventorySuccess]);
 
-  console.log('cartItems :>> ', cartItems);
 
   return (
     <main className="main cart">
