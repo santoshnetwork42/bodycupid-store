@@ -296,7 +296,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
             <ALink
               href={{
-                pathname: "/pages/account",
+                pathname: "/pages/orders",
                 query: {
                   activeTabIndex: 1,
                 },
