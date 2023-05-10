@@ -102,7 +102,7 @@ function CartProduct({
               <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {cartItemType === "FREEPRODUCT" || cartItemSource === "COUPON" ? (
+              {cartItemType === "FREEPRODUCT" ? (
                 <>
                   <span className="discount-percentage ml-1">Free</span>
                 </>

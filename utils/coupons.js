@@ -49,7 +49,11 @@ export const getCouponMessage = ({
   };
 };
 
-export const getCouponDiscount = (coupon, cartList) => {
+export const getCouponDiscount = (coupon, cartItems) => {
+  if (!coupon) {
+    return { allowed: true, discount: 0 };
+  }
+
   const {
     minOrderValue,
     couponType,
@@ -63,6 +67,7 @@ export const getCouponDiscount = (coupon, cartList) => {
     getYStoreProduct,
   } = coupon;
 
+  const cartList = cartItems.filter((item) => item.cartItemSource !== "COUPON");
   const totalAmount = getTotalPrice(cartList);
 
   if (minOrderValue && minOrderValue > totalAmount) {

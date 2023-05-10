@@ -40,10 +40,10 @@ export const useCartItems = () => {
             remainingDiscount === Infinity
               ? Math.min(itemQty, Math.max(0, getYQuantity))
               : Math.min(
-                  parseInt(remainingDiscount / item.price, 10),
-                  itemQty,
-                  Math.max(0, getYQuantity)
-                );
+                parseInt(remainingDiscount / item.price, 10),
+                itemQty,
+                Math.max(0, getYQuantity)
+              );
           getYQuantity -= freeQty;
 
           if (!freeQty) {
@@ -70,18 +70,16 @@ export const useCartItems = () => {
               ...item,
               qty: freeQty,
               extraQty: itemQty - freeQty,
-              itemKey: `${item.recordKey}-${
-                itemQty - freeQty
-              }-partial-item-free`,
+              itemKey: `${item.recordKey}-${itemQty - freeQty
+                }-partial-item-free`,
               cartItemType: "FREEPRODUCT",
             },
             {
               ...item,
               qty: itemQty - freeQty,
               extraQty: freeQty,
-              itemKey: `${item.recordKey}-${
-                itemQty - freeQty
-              }-partial-item-paid`,
+              itemKey: `${item.recordKey}-${itemQty - freeQty
+                }-partial-item-paid`,
             },
           ];
         }, []);
@@ -99,7 +97,11 @@ export const useCartItems = () => {
     }
 
     return [
-      ...cartList.map((p) => ({ ...p, itemKey: p.recordKey })),
+      ...cartList.map((p) => ({
+        ...p,
+        itemKey: p.recordKey,
+        cartItemType: p.cartItemSource === "COUPON" ? "FREEPRODUCT" : null
+      })),
       ...freeProducts.map((p) => ({
         ...p,
         itemKey: `${p.id}-free`,
