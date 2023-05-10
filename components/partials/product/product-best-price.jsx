@@ -51,8 +51,8 @@ function ProductBestPrice(props) {
           collapseEvent
         >
           <div>
-            {couponList.map((coupon) => (
-              <>
+            {couponList.map((coupon,i) => (
+              <div key={i}>
                 <hr className="mb-2" />
                 <div
                   key={coupon.id}
@@ -92,7 +92,7 @@ function ProductBestPrice(props) {
                     <p className="text-success">{coupon.message}</p>
                   </div>
                 </div>
-              </>
+              </div>
             ))}
           </div>
         </Card>

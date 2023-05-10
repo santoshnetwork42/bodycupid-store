@@ -133,7 +133,7 @@ function Coupon(props) {
               <ALink
                 key={appliedCoupon.id}
                 href="#"
-                className="mt-1"
+                className="mt-1 mr-1"
                 title="Remove coupon"
                 onClick={onCouponRemove}
               >
