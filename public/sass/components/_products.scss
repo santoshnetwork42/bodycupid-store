@@ -135,14 +135,7 @@
     @include print_css(product);
     transition: .3s;
 
-    &:hover {
-
-        .product-action,
-        .product-action-vertical {
-            visibility: visible;
-            opacity: 1;
-        }
-    }
+   
 }
 
 .product-media:hover {
@@ -999,6 +992,16 @@
 @include mq(xs, max) {
     .product-image-gap .product-details {
         padding: 1.8rem 0 1rem;
+    }
+}@include mq(lg) {
+    .product{
+        &:hover {
+           .product-action,
+           .product-action-vertical {
+               visibility: visible;
+               opacity: 1;
+           }
+        }
     }
 }
 
