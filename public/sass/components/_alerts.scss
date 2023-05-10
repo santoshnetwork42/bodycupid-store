@@ -26,8 +26,8 @@
     .btn-close {
         display: inline-block;
         position: absolute;
-        top: 50%;
-        right: 2.1rem;
+        top: 2.3rem;
+        right: 1rem;
         transform: translateY(-50%);
         margin-top: -.1rem;
         font-size: 1.5rem;
@@ -188,7 +188,7 @@
 .alert.alert-inline {
     .alert-title {
         display: inline-block;
-        margin: 0 .8rem 0 0 ;
+        margin: 0 1.5rem 0 0 ;
     }
     &.error-height{
         width: 100%;

@@ -208,12 +208,9 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                               height="88"
                             />
                           </ALink>
-                          <div className="d-flex h-fit-content align-items-center ">
+                          <div className="h-fit-content font-weight-semi-bold">
                             {`${item.product.title} `}
-                            <span className="d-flex align-items-center flex-row">
-                              <Cross size={14} />
-                              {` ${item.quantity || item.cancelledQuantity}`}
-                            </span>
+
                             {item.cancelledQuantity > 0 &&
                               item.status === "CREATED" && (
                                 <Tag type="cancel">
@@ -227,16 +224,18 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                                 {item.status}
                               </Tag>
                             )}
-                            &nbsp;
+
                             {item.variant && (
-                              <p className="mb-0">
-                                <strong>{item.variant.title}</strong>
-                              </p>
+                              <p className="mb-0">{item.variant.title}</p>
                             )}
+                            <div className="d-flex align-items-center text-grey">
+                              Qty:{" "}
+                              {` ${item.quantity || item.cancelledQuantity}`}
+                            </div>
                           </div>
                         </div>
 
-                        <div className="product-price">
+                        <div className="product-price ">
                           ₹{toDecimal(item.quantity * item.price)}
                         </div>
                       </div>
@@ -286,7 +285,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     <h4 className="summary-subtitle">Total:</h4>
                   </td>
                   <td>
-                    <p className="summary-total-price">
+                    <p className="summary-total-price pr-2">
                       ₹{toDecimal(order?.totalAmount)}
                     </p>
                   </td>

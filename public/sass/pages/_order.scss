@@ -116,12 +116,14 @@
     .summary-subtotal-price { 
         font-weight: 600; 
         color: $body-color;
+        padding-right: 1rem;
     }
     .order-image {
         min-width: 8rem;
     }
 
     .product-price {
+        padding-right: 1rem;
         min-width: 6rem;
         font-size: 1.4rem;
         color: #666;
@@ -195,6 +197,14 @@
             font-size: 1.6rem;
         }
     }
+    .order-details{
+         .product-name{
+        .product-details{
+            display: block;
+        }
+    }
+    }
+   
 }
 
 @include mq(xs, 'max') {

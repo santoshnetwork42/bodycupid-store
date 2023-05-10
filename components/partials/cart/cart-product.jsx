@@ -99,7 +99,7 @@ function CartProduct({
           </figure>
           <div className="text-left text-primary w-100  mr-1 ml-2">
             <div className="mr-5 ">
-              <ALink href={"/product/" + slug}>{recordKey}</ALink>
+              <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
               {cartItemType === "FREEPRODUCT" ? (
