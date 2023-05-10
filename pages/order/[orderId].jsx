@@ -295,13 +295,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </div>
           <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
             <ALink
-              href={{
-                pathname: "/pages/orders",
-                query: {
-                  activeTabIndex: 1,
-                },
-              }}
-              as="/pages/orders"
+              href="/pages/orders"
               className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
             >
               Your Orders
