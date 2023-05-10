@@ -59,7 +59,9 @@ function Addresses({
         variables: { input: { id } },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-      setAddresses(addresses.filter((a) => a.id !== id));
+      const remainingAddress = addresses.filter((a) => a.id !== id);
+      setAddresses(remainingAddress);
+      setSelected(remainingAddress[0]);
     },
     [addresses]
   );
@@ -71,8 +73,8 @@ function Addresses({
       );
     } else {
       setAddresses([...addresses, response]);
-      setSelected(response);
     }
+    setSelected(response);
     setOpen(false);
     setDefaultAddress(null);
   };
@@ -306,7 +308,7 @@ function Addresses({
                       </h5>
                     </ALink>
                   </div>
-                  <div className="checkout card-body  cursor-pointer bg-white">
+                  <div className="checkout card-body  cursor-pointer bg-white pl-5">
                     <div className="add-lables-values">
                       {adr?.phone && (
                         <span>
@@ -316,6 +318,25 @@ function Addresses({
                       {adr?.address && <span>{adr?.address}</span>}
                       {adr?.pincode && <span>{adr?.pinCode}</span>}
                     </div>
+                  </div>
+                  <div className="add-bottom-btn pl-5 mb-1">
+                    <ALink
+                      href="#"
+                      className="btn btn-link btn-secondary btn-underline btn-link-black"
+                      onClick={() => {
+                        setDefaultAddress({ ...adr });
+                        setIsAddressFormVisible(true);
+                      }}
+                    >
+                      Edit <i className="far fa-edit"></i>
+                    </ALink>
+                    <ALink
+                      href="#"
+                      className="btn btn-link btn-secondary btn-underline ml-3"
+                      onClick={() => removeAddress(adr.id)}
+                    >
+                      Delete <i className="far fa-trash-alt"></i>
+                    </ALink>
                   </div>
                 </div>
               ))}
@@ -332,6 +353,7 @@ function Addresses({
             </>
           ) : (
             <AddressForm
+              defaultAddress={defaultAddress}
               onSubmit={(response) => {
                 setIsAddressFormVisible(false);
                 closeAllAddressModal();
