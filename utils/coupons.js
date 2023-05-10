@@ -74,8 +74,9 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${minOrderValue - totalAmount
-        } more in the cart`,
+      message: `Add product worth ₹${
+        minOrderValue - totalAmount
+      } more in the cart`,
     };
   }
 
@@ -84,15 +85,14 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${buyXQuantity + getYQuantity - totalItems
-        } more items in the cart`,
+      message: `Add ${
+        buyXQuantity + getYQuantity - totalItems
+      } more items in the cart`,
     };
   }
 
   if (Array.isArray(applicableProducts) && applicableProducts.length) {
-    const hasProduct = cartList.some((c) =>
-      applicableProducts.includes(c.productId)
-    );
+    const hasProduct = cartList.some((c) => applicableProducts.includes(c.id));
 
     if (!hasProduct) {
       return {

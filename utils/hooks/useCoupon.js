@@ -71,7 +71,9 @@ export const useFreeProducts = () => {
           if (couponType !== "PRODUCT") return false;
           if (!autoApply) return false;
 
-          const cartList = cartItems.filter(item => item.cartItemSource !== "COUPON");
+          const cartList = cartItems.filter(
+            (item) => item.cartItemSource !== "COUPON"
+          );
           const total = getTotalPrice(cartList);
           if (minOrderValue && minOrderValue > total) return false;
 
@@ -80,16 +82,16 @@ export const useFreeProducts = () => {
 
           const hasProduct =
             Array.isArray(applicableProducts) && applicableProducts.length
-              ? cartList.some((c) => applicableProducts.includes(c.productId))
+              ? cartList.some((c) => applicableProducts.includes(c.id))
               : true;
 
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                applicableCollections.some((ac) =>
-                  (c.collections || []).includes(ac)
+                  applicableCollections.some((ac) =>
+                    (c.collections || []).includes(ac)
+                  )
                 )
-              )
               : true;
 
           return hasCollection && hasProduct;

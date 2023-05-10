@@ -247,6 +247,7 @@ function Coupon(props) {
                             <button
                               onClick={() => applyCouponCode(c.code)}
                               className={className}
+                              disabled={!c.allowed}
                             >
                               Apply
                             </button>
