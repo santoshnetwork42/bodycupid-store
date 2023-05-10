@@ -301,7 +301,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                   activeTabIndex: 1,
                 },
               }}
-              as="/pages/account"
+              as="/pages/orders"
               className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
             >
               Your Orders
