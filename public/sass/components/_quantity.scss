@@ -26,14 +26,16 @@
         text-align: center !important;
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
+        border-radius: 0 !important;
         font-weight: 600;
     }
 }
 
 @include mq(sm,'max'){
     .quntity-container {
-        button {
+        button,input {
             padding:1.2rem 0;
+            border-radius: 0 !important;
             font-size: 1rem;
         }
     }
