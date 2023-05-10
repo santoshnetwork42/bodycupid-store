@@ -15,6 +15,7 @@ import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
+import { getRecordKey } from "~/utils/helper";
 
 function Cart(props) {
   const {
@@ -29,6 +30,7 @@ function Cart(props) {
   const router = useRouter();
   const inventoryMapping = useInventory();
   const cartItems = useCartItems();
+
   useEffect(() => {
     viewCart();
     getShippingTiers();
@@ -45,11 +47,23 @@ function Cart(props) {
   } = useCartTotal();
 
   const inventorySuccess = useMemo(
-    () => cartList.every((c) => c.qty <= inventoryMapping[c.recordKey]),
+    () =>
+      cartList.every((c) => {
+        const itemRecordKey = getRecordKey(c, c.variantId);
+        return c.qty <= inventoryMapping[itemRecordKey];
+      }),
     [inventoryMapping, cartList]
   );
 
-  const checkAuth = useCallback(() => {
+  const validateAndGoToCheckout = useCallback(() => {
+    if (!inventorySuccess) {
+      alertToaster(
+        "Some product goes out of stock, Please remove from cart.",
+        "error"
+      );
+      return false;
+    }
+
     if (!inventorySuccess) {
       alertToaster(
         "Some product goes out of stock, Please remove from cart.",
@@ -65,8 +79,12 @@ function Cart(props) {
 
     openLogin(true);
     return false;
-  }, [user, inventorySuccess]);
+  }, [user, inventorySuccess, appliedCoupon, cartList]);
 
+  // const appliedCouponStatus = useMemo(
+  //   () => getCouponDiscount(appliedCoupon, cartList),
+  //   [appliedCoupon, cartList]
+  // );
 
   return (
     <main className="main cart">
@@ -79,12 +97,7 @@ function Cart(props) {
             </i>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink
-              href={user && inventorySuccess ? "/pages/checkout" : "#"}
-              onClick={checkAuth}
-            >
-              2. Checkout
-            </ALink>
+            <ALink href="#">2. Checkout</ALink>
             <i>
               <RightAngle size={18} color="currentColor" />
             </i>
@@ -94,9 +107,7 @@ function Cart(props) {
           </h3>
         </div>
 
-        <div
-          className="container p-0 sm-container mt-7 mb-2 " 
-        >
+        <div className="container p-0 sm-container mt-7 mb-2 ">
           <div className="row">
             {cartItems.length > 0 ? (
               <>
@@ -149,7 +160,7 @@ function Cart(props) {
                             </td>
                           </tr>
 
-                          {!!appliedCoupon && (
+                          {!!appliedCoupon && !!couponTotal && (
                             <>
                               <tr className="summary-subtotal">
                                 <td className="d-flex align-items-center no-wrap">
@@ -227,7 +238,7 @@ function Cart(props) {
                         </tbody>
                       </table>
                       <button
-                        onClick={checkAuth}
+                        onClick={validateAndGoToCheckout}
                         className="btn btn-dark d-sm-none btn-rounded btn-checkout w-100"
                       >
                         Proceed to checkout
@@ -246,7 +257,7 @@ function Cart(props) {
                           </div>
 
                           <button
-                            onClick={checkAuth}
+                            onClick={validateAndGoToCheckout}
                             className="btn btn-dark btn-rounded  btn-checkout"
                           >
                             Proceed to checkout

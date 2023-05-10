@@ -44,6 +44,7 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { getRecordKey } from "~/utils/helper";
 
 function Checkout(props) {
   const {
@@ -53,7 +54,6 @@ function Checkout(props) {
     appliedCoupon,
     store,
     metadata,
-    shippingTiers,
     getShippingTiers,
     placeOrder: onPlaceOrder,
     startCheckout,
@@ -98,8 +98,13 @@ function Checkout(props) {
 
   const cartItems = useCartItems();
 
-  const inventorySuccess = useMemo(() =>
-    cartList.every((c) => c.qty <= inventoryMapping[c.recordKey])
+  const inventorySuccess = useMemo(
+    () =>
+      cartList.every((c) => {
+        const itemRecordKey = getRecordKey(c, c.variantId);
+        return c.qty <= inventoryMapping[itemRecordKey];
+      }),
+    [inventoryMapping, cartList]
   );
 
   const handlePayment = useCallback(
@@ -506,6 +511,7 @@ function Checkout(props) {
                           </p>
                         </div>
                       </div>
+
                       <Collapse in={isCollapse}>
                         <div className="collapsible-checkout-wrapper mb-2">
                           <table className="order-table cart-table">
@@ -523,23 +529,17 @@ function Checkout(props) {
                                   <td className="m-0 p-0">
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
-                                        <ALink href={"/product/" + item.slug}>
-                                          <img
-                                            src={getPublicImageURL(
-                                              item.images.items[0]?.imageKey
-                                            )}
-                                            width="100"
-                                            height="100"
-                                            alt={item.images.items[0]?.alt}
-                                          />
-                                        </ALink>
+                                        <img
+                                          src={getPublicImageURL(
+                                            item.images.items[0]?.imageKey
+                                          )}
+                                          width="100"
+                                          height="100"
+                                          alt={item.images.items[0]?.alt}
+                                        />
                                       </figure>
                                       <div className="text-left text-primary w-100 mr-5 ml-2">
-                                        <div>
-                                          <ALink href={"/product/" + item.slug}>
-                                            {item.title}
-                                          </ALink>
-                                        </div>
+                                        <div>{item.title}</div>
 
                                         {item.qty >
                                         inventoryMapping[item.recordKey] ? (
@@ -727,6 +727,7 @@ function Checkout(props) {
                           </div>
                         </div>
                       </Collapse>
+
                       {!!isMobile && (
                         <div className="col-lg-6 mb-lg-0 pr-lg-4 p-0 d-sm-show">
                           <Addresses

@@ -73,9 +73,9 @@
 }
 
 .alert-warning {
-    background-color: $secondary-color;
-    border-color: $secondary-color;
-    color: $secondary-color;
+    background-color: $warning-color;
+    border-color: $warning-color;
+    color: $warning-color-dark !important;
     //.btn-close { color: $secondary-color; }
 }
 

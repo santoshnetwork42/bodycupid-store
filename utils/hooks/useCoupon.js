@@ -51,7 +51,7 @@ export const useProductCoupons = (product, variant) => {
 
 export const useFreeProducts = () => {
   const coupons = useCoupons();
-  const cartList = useSelector((state) => state.cart.data || []);
+  const cartItems = useSelector((state) => state.cart.data || []);
   const [products, setProducts] = useState([]);
 
   const freeProductIds = useMemo(
@@ -71,6 +71,7 @@ export const useFreeProducts = () => {
           if (couponType !== "PRODUCT") return false;
           if (!autoApply) return false;
 
+          const cartList = cartItems.filter(item => item.cartItemSource !== "COUPON");
           const total = getTotalPrice(cartList);
           if (minOrderValue && minOrderValue > total) return false;
 
@@ -94,7 +95,7 @@ export const useFreeProducts = () => {
           return hasCollection && hasProduct;
         })
         .map((coupon) => coupon.getYProduct),
-    [coupons, cartList]
+    [coupons, cartItems]
   );
 
   const getProduct = async () => {
