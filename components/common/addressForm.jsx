@@ -45,8 +45,8 @@ const AddressForm = (props) => {
       try {
         const formErrors = await validateAddress(address, "ALL");
         if (!formErrors) {
+          const tempAddress = getProperAddress(address);
           if (user) {
-            const tempAddress = getProperAddress(address);
             if (onAddress) {
               onAddress(tempAddress);
             }
