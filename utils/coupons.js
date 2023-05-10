@@ -89,7 +89,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
         buyXQuantity + getYQuantity - totalItems
       } more items in the cart`,
     };
-  }
+  } 
 
   if (Array.isArray(applicableProducts) && applicableProducts.length) {
     const hasProduct = cartList.some((c) => applicableProducts.includes(c.id));
