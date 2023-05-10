@@ -445,7 +445,10 @@ function DescOne(props) {
                               className="img-preview"
                               alt=""
                             />
-                            <span className="close">
+                            <span
+                              className="close"
+                              onClick={() => removeImage(index)}
+                            >
                               <Close color="grey" size={18} />
                             </span>
                           </div>
