@@ -235,13 +235,22 @@ function DescOne(props) {
           >
             <div className="row mb-2">
               <div className="col-md-12">
-                <ReadMore position="start">
+                {isMobile && (
+                  <ReadMore position="start">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: longDescription,
+                      }}
+                    />
+                  </ReadMore>
+                )}
+                {!isMobile && (
                   <div
                     dangerouslySetInnerHTML={{
                       __html: longDescription,
                     }}
                   />
-                </ReadMore>
+                )}
               </div>
             </div>
           </Card>
