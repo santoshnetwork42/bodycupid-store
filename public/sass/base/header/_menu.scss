@@ -54,7 +54,7 @@
             ),
             // MegaMenu
             megamenu: (
-                padding: 1.5rem 2.2rem 1.5rem 1.5rem,
+                padding: 1rem 0.8rem,
                 min-width: 61.8rem,
                 background: #fff,
                 title: (
@@ -280,6 +280,9 @@
         > a {
             position: relative;
             display: block;
+        }
+        &:hover{
+            font-weight: 800 !important;
         }
     }
     > .submenu {
