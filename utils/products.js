@@ -13,15 +13,17 @@ export const getProductMeta = (product) => {
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
 
-  const sortedImages = Array.isArray(allImages) ? allImages.sort((a, b) => a.position - b.position) : [];
-  const thumbImage = sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
+  const sortedImages = Array.isArray(allImages)
+    ? allImages.sort((a, b) => a.position - b.position)
+    : [];
+  const thumbImage =
+    sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
   const [, secondaryImage] = sortedImages;
 
   const discount = !!(product.listingPrice && product.price)
-    ? parseInt(
-      ((product.listingPrice - product.price) * 100) / product.listingPrice,
-      10
-    )
+    ? Math.round(
+        ((product.listingPrice - product.price) * 100) / product.listingPrice
+      )
     : 0;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);
@@ -75,4 +77,3 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     currentInventory: 1000,
   };
 };
-

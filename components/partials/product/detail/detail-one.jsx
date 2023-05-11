@@ -18,7 +18,7 @@ import {
   scrollWithOffset,
 } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
-import { getProductInventory } from "~/utils/products";
+import { getProductInventory, getProductMeta } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
@@ -267,7 +267,7 @@ function DetailOne(props) {
               </>
             )}
             {!!save && (
-              <ins className="product-save">(₹{listingPrice - price} OFF)</ins>
+              <ins className="product-save">({save}% OFF)</ins>
             )}
           </div>
         )}
@@ -287,7 +287,7 @@ function DetailOne(props) {
                   <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
                   {!!save && (
                     <ins className="product-save">
-                      (₹{listingPrice - price} OFF)
+                      ({save}% OFF)
                     </ins>
                   )}
                 </div>

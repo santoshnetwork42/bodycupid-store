@@ -228,7 +228,7 @@
 
     .product-save {
         display: block;
-        color: $success-color;
+        color: $secondary-color;
         @include css(font-size, product-single, old-price, font-size);
         @include css(font-weight, product-single, old-price, font-weight);
         @include css(letter-spacing, product-single, price, letter-spacing);
