@@ -125,19 +125,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
         </div>
 
         <div className="container pt-1">
-          <Checkmark />
-
-          <div className="text-center ">
-            <h3 className="mb-1"> Your order is complete!</h3>
-            <p className="text-grey"> Thank you for shopping with us.</p>
-            <ALink
-              href="/collections/all"
-              className="btn btn-icon-left btn-dark btn-back btn-rounded btn-md"
-            >
-              Continue Shopping
-            </ALink>
-          </div>
-
           <h2 className="title title-simple text-left pt-7 font-weight-bold text-uppercase">
             Order Details
           </h2>

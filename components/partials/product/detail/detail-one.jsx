@@ -276,7 +276,8 @@ function DetailOne(props) {
           <div className="card-wrapper">
             {curIndex > -1 && (
               <div className="single-product-price">
-                <div className="product-price mb-0 d-flex">
+                <div className="product-price mb-1 d-flex">
+                  <ins className="new-price mr-2">MRP: ₹{toDecimal(price)}</ins>
                   {listingPrice > price && (
                     <>
                       <del className="old-price mr-2">
@@ -284,7 +285,6 @@ function DetailOne(props) {
                       </del>{" "}
                     </>
                   )}
-                  <ins className="new-price mr-2">₹{toDecimal(price)}</ins>
                   {!!save && (
                     <ins className="product-save">
                       (₹{listingPrice - price} OFF)
@@ -296,6 +296,8 @@ function DetailOne(props) {
           </div>
         </Collapse>
       </div>
+
+      <p className="mb-1 lh-default text-dark">Inclusive of all taxes</p>
 
       <div className="ratings-container">
         <div className="ratings-full" onClick={onReviewClick}>
@@ -495,7 +497,7 @@ function DetailOne(props) {
                 )}
                 {!cartItem && (
                   <button
-                    className={`btn-product btn-cart ls-normal font-weight-semi-bold m-0 ${
+                    className={`btn-product btn-cart ls-normal font-weight-semi-bold m-0 btn-cart-width${
                       cartActive ? "" : "disabled"
                     }`}
                     onClick={addToCartHandler}
