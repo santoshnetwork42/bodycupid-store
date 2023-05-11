@@ -17,6 +17,7 @@ import {
   RightAngle,
   User,
 } from "~/components/icons";
+import { modalActions } from "~/store/modal";
 
 const MOBILE_TABS = [
   {
@@ -39,7 +40,7 @@ const MOBILE_TABS = [
   },
 ];
 
-function AccountsTabs({ user, store }) {
+function AccountsTabs({ user, store, openPasswordLess }) {
   const router = useRouter();
 
   const { name } = store;
@@ -69,7 +70,7 @@ function AccountsTabs({ user, store }) {
       try {
         await Auth.currentAuthenticatedUser();
       } catch {
-        router.push("/pages/login");
+        openPasswordLess();
       }
     })();
   }, []);
@@ -202,4 +203,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AccountsTabs);
+export default connect(mapStateToProps, {
+  openPasswordLess: modalActions.openPasswordlessModal,
+})(AccountsTabs);
