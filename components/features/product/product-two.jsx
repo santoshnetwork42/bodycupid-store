@@ -151,7 +151,7 @@ function ProductTwo(props) {
       </figure>
 
       <div className="product-details card">
-        <div className="  ">
+        <div className="details-wrapper">
           <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
             <ALink href={`/product/${slug}`}>{title}</ALink>
           </h3>
