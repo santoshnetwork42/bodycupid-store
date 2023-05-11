@@ -303,7 +303,7 @@ function Passwordless({
                                 key={index}
                                 id={`otp${index + 1}`}
                                 name={`otp${index + 1}`}
-                                type="tel"
+                                type="number"
                                 autoComplete="one-time-code"
                                 className="otpInput"
                                 value={ele}
