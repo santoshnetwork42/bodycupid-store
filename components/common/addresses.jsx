@@ -62,6 +62,7 @@ function Addresses({
       const remainingAddress = addresses.filter((a) => a.id !== id);
       setAddresses(remainingAddress);
       setSelected(remainingAddress[0]);
+      setDefaultAddress(null);
     },
     [addresses]
   );
