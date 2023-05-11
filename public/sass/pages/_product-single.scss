@@ -112,6 +112,14 @@
         color: $text-color-2;
     }
 }
+
+.manufacturer-value{
+    font-size: 1.6rem;
+    .manufacturer-label {
+        font-weight: 600;
+        margin-right: .5rem;
+    }
+}
 // Product Navigation
 .product-navigation {
     display: flex;

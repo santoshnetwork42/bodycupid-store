@@ -50,7 +50,6 @@ function Layout({
   }, [router.pathname]);
 
   useEffect(() => {
-    window.addEventListener("scroll", showScrollTopHandler, { passive: true });
     window.addEventListener("scroll", stickyHeaderHandler, { passive: true });
     window.addEventListener("scroll", stickyFooterHandler, { passive: true });
     window.addEventListener("resize", stickyHeaderHandler);
@@ -58,7 +57,6 @@ function Layout({
     window.addEventListener("resize", resizeHandler);
 
     return () => {
-      window.removeEventListener("scroll", showScrollTopHandler);
       window.removeEventListener("scroll", stickyHeaderHandler);
       window.removeEventListener("scroll", stickyFooterHandler);
       window.removeEventListener("resize", stickyHeaderHandler);
@@ -116,17 +114,6 @@ function Layout({
         <StickyCheckout showStickyCheckout={footer.showStickyCheckout} />
         <Footer footer={footer} />
       </div>
-
-      <ALink
-        id="scroll-top"
-        href="#"
-        title="Top"
-        role="button"
-        className="scroll-top"
-        onClick={() => scrollTopHandler(false)}
-      >
-        <UpArrow size={27} />
-      </ALink>
 
       <MobileMenu />
 

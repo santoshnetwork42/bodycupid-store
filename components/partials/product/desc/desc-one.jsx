@@ -31,6 +31,34 @@ const reviewDefault = {
 
 const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
 
+const ManufacturerInformation = [
+  {
+    label: "Manufacturer Name :",
+    value: "",
+  },
+  {
+    label: "Country of Origin :",
+    value: "India",
+  },
+  {
+    label: "Marketed By & Contact details :",
+    value:
+      "4th Floor, Prestige Dotcom, Field Marshal Cariappa Road, Srinivas Nagar, Shanthala Nagar, Ashok Nagar, Bengaluru – 560025, Karnataka, India.",
+  },
+  {
+    label: "Customer Care Details",
+    value: "",
+  },
+  {
+    label: "E-mail :",
+    value: "support@bodycupid.com",
+  },
+  {
+    label: "Phone Number :",
+    value: "+91-9543000200",
+  },
+];
+
 function DescOne(props) {
   const { product, user, productFAQs } = props;
   const { id, totalRatings, longDescription, additionalInfo, rating } = product;
@@ -246,6 +274,7 @@ function DescOne(props) {
             </div>
           </Card>
         )}
+
         <Card
           expanded={!isMobile}
           title="PRODUCT DETAILS"
@@ -553,6 +582,21 @@ function DescOne(props) {
             </div>
           </Card>
         )}
+
+        <Card title="MANUFACTURER INFORMATION" noDisplayStyle collapseEvent>
+          <div className="row mb-2">
+            <div className="col-md-12">
+              {ManufacturerInformation.map((item, index) => {
+                return (
+                  <p className="mb-2 manufacturer-value" key={item.label}>
+                    <strong className="manufacturer-label">{item.label}</strong>
+                    {index === 0 ? product.title : item.value}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+        </Card>
       </Accordion>
     </div>
   );

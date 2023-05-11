@@ -800,7 +800,7 @@ function Checkout(props) {
                           <button
                             onClick={placeOrder}
                             disabled={!isValidAddress(shippingAddress)}
-                            className={`btn btn-rounded d-flex justify-content-center align-items-center btn-order ${
+                            className={`btn d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
                                 : "btn-disabled"
