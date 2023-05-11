@@ -23,7 +23,11 @@ export default function Review({ review = {} }) {
                 const isFilled = index + 1 <= review.rating;
 
                 return (
-                  <Star size={16} key={`${review.id}-${index}`}  color={isFilled ? "#FAB73B" : "#D9D9D9"} />
+                  <Star
+                    size={16}
+                    key={`${review.id}-${index}`}
+                    color={isFilled ? "#FAB73B" : "#D9D9D9"}
+                  />
                 );
               })}
             </div>

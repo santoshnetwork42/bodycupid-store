@@ -4,6 +4,7 @@ import { toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
 import { copyText } from "~/utils/helper";
 import Card from "~/components/features/accordion/card";
+import { Discount } from "~/components/icons";
 
 function ProductBestPrice(props) {
   const { price, code, discount, couponType, autoApply, message, couponList } =
@@ -13,8 +14,8 @@ function ProductBestPrice(props) {
     <div className="product-best-price-container">
       <div className="product-top-content">
         <div className="d-flex align-items-center">
-          <i>%</i>
-          <p>
+          <Discount color="#17b31b" size={20} />
+          <p className="ml-1">
             Best price:&nbsp;
             <span className=" font-weight-semi-bold">
               {couponType === "PRODUCT"
@@ -51,7 +52,7 @@ function ProductBestPrice(props) {
           collapseEvent
         >
           <div>
-            {couponList.map((coupon,i) => (
+            {couponList.map((coupon, i) => (
               <div key={i}>
                 <hr className="mb-2" />
                 <div
