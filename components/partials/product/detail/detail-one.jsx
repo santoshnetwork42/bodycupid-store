@@ -516,7 +516,7 @@ function DetailOne(props) {
 
       <div className="d-flex text-success align-items-center mb-3 lh-default">
         {!!product.totalOrders && (
-          <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
+          <p className="text-success font-weight-semi-bold mb-0 lh-1">
             {totalOrderCount}+ units sold
           </p>
         )}

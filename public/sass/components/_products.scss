@@ -459,8 +459,10 @@
 .product-details {
     position: relative;
     @include print_css(product, body);
-    padding: 1rem 1.5rem 1rem;
-
+    padding: 1rem 0 1rem;
+    &.card{
+        padding: 1rem 1.5rem 1rem;
+    }
     .details-wrapper{
         height: 5rem;
         margin-bottom: 2rem;

@@ -315,7 +315,7 @@ function DescOne(props) {
                       <div className="total-review mb-2 w-100">
                         <div>
                           <div className="d-flex align-items-end">
-                            <h2 className="mb-1 lh-1 ml-1">{rating}</h2>{" "}
+                            <h2 className="mb-1 lh-1">{rating.toFixed(1)}</h2>
                             {!!product?.totalRatings && (
                               <span className="mt-2 mb-1 ml-1">
                                 Based on {product.totalRatings} reviews
@@ -338,7 +338,7 @@ function DescOne(props) {
                             <SkillBar
                               color={reviewColor[+r.key - 1]}
                               className="review-bar"
-                              percentage={r.doc_count}
+                              percentage={r.percentage}
                             />
 
                             <div className="ml-1 percent">{r.percentage}%</div>
@@ -346,7 +346,7 @@ function DescOne(props) {
                         ))}
                       </div>
                       <div className="w-100 d-flex align-items-center justify-content-end">
-                        <div className="buttons  ml-1 mr-1 ">
+                        <div className="buttons   mr-1 ">
                           <div className="justify-content-end w-100">
                             <button
                               className="btn w-100  btn-rounded mb-2"
