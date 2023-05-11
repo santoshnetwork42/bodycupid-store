@@ -296,6 +296,7 @@ function DetailOne(props) {
           </div>
         </Collapse>
       </div>
+
       <p className="mb-1 lh-default text-dark">Inclusive of all taxes</p>
 
       <div className="ratings-container">
