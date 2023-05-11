@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Star, MagnifyingGlass, Eye } from "~/components/icons";
+import { Star, Eye } from "~/components/icons";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { wishlistActions } from "~/store/wishlist";
