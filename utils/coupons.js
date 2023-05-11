@@ -67,16 +67,31 @@ export const getCouponDiscount = (coupon, cartItems) => {
     getYStoreProduct,
   } = coupon;
 
-  const cartList = cartItems.filter((item) => item.cartItemSource !== "COUPON");
+  const cartList = cartItems.filter((c) => {
+    const isCartItem = c.cartItemSource !== "COUPON";
+    if (!isCartItem) return false;
+
+    const isProductApplicable = Array.isArray(applicableProducts) && applicableProducts.length
+      ? applicableProducts.includes(c.id)
+      : true
+
+    if (!isProductApplicable) return false;
+
+    const isCollectionApplicable = Array.isArray(applicableCollections) && applicableCollections.length
+      ? applicableCollections.some(ac => (c.collections || []).includes(ac))
+      : true;
+
+    return isCollectionApplicable;
+  });
+
   const totalAmount = getTotalPrice(cartList);
 
   if (minOrderValue && minOrderValue > totalAmount) {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${
-        minOrderValue - totalAmount
-      } more in the cart`,
+      message: `Add product worth ₹${minOrderValue - totalAmount
+        } more in the cart`,
     };
   }
 
@@ -85,14 +100,13 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${
-        buyXQuantity + getYQuantity - totalItems
-      } more items in the cart`,
+      message: `Add ${buyXQuantity + getYQuantity - totalItems
+        } more items in the cart`,
     };
-  } 
+  }
 
   if (Array.isArray(applicableProducts) && applicableProducts.length) {
-    const hasProduct = cartList.some((c) => applicableProducts.includes(c.id));
+    const hasProduct = cartItems.filter(c => c.cartItemSource !== "COUPON").some((c) => applicableProducts.includes(c.id));
 
     if (!hasProduct) {
       return {
@@ -104,7 +118,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (Array.isArray(applicableCollections) && applicableCollections.length) {
-    const hasCollection = cartList.some((c) =>
+    const hasCollection = cartItems.filter(c => c.cartItemSource !== "COUPON").some((c) =>
       applicableCollections.some((ac) => (c.collections || []).includes(ac))
     );
 

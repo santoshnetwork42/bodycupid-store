@@ -551,14 +551,16 @@ function Checkout(props) {
                                         ) : (
                                           <div className="product-subtotal mt-1">
                                             {item?.cartItemType ===
-                                              "FREEPRODUCT" && (
-                                              <span className="text-success ">
-                                                Free
-                                              </span>
-                                            )}
+                                              "FREEPRODUCT" &&
+                                              !!couponTotal && (
+                                                <span className="text-success ">
+                                                  Free
+                                                </span>
+                                              )}
 
-                                            {item?.cartItemType !==
-                                              "FREEPRODUCT" && (
+                                            {(item?.cartItemType !==
+                                              "FREEPRODUCT" ||
+                                              !couponTotal) && (
                                               <p className="m-0 product-discount-listing">
                                                 <span className="sm-product-amount">
                                                   ₹{toDecimal(item.price)}
@@ -624,7 +626,7 @@ function Checkout(props) {
                                   </td>
                                 </tr>
 
-                                {!!appliedCoupon && (
+                                {!!appliedCoupon && !!couponTotal && (
                                   <>
                                     <tr className="summary-subtotal-saving">
                                       <td>

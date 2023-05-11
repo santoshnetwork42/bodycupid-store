@@ -52,7 +52,18 @@ export const useProductCoupons = (product, variant) => {
 export const useFreeProducts = () => {
   const coupons = useCoupons();
   const cartItems = useSelector((state) => state.cart.data || []);
+  const appliedCoupon = useSelector((state) => state.cart.coupon);
   const [products, setProducts] = useState([]);
+
+  const { total, totalItems, cartList } = useMemo(() => {
+    const cartItemsList = cartItems.filter(
+      (item) => item.cartItemSource !== "COUPON"
+    );
+    const cartTotal = getTotalPrice(cartItems);
+    const { discount } = getCouponDiscount(appliedCoupon, cartItemsList);
+    const totalItems = getCartCount(cartItemsList);
+    return { total: cartTotal - discount, totalItems, cartList: cartItemsList };
+  }, [appliedCoupon, cartItems]);
 
   const freeProductIds = useMemo(
     () =>
@@ -70,14 +81,7 @@ export const useFreeProducts = () => {
 
           if (couponType !== "PRODUCT") return false;
           if (!autoApply) return false;
-
-          const cartList = cartItems.filter(
-            (item) => item.cartItemSource !== "COUPON"
-          );
-          const total = getTotalPrice(cartList);
           if (minOrderValue && minOrderValue > total) return false;
-
-          const totalItems = getCartCount(cartList);
           if (buyXQuantity + getYQuantity > totalItems) return false;
 
           const hasProduct =
@@ -88,16 +92,16 @@ export const useFreeProducts = () => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
                 )
+              )
               : true;
 
           return hasCollection && hasProduct;
         })
         .map((coupon) => coupon.getYProduct),
-    [coupons, cartItems]
+    [coupons, cartItems, total, totalItems]
   );
 
   const getProduct = async () => {

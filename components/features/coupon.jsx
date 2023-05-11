@@ -11,7 +11,6 @@ import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
-import AlertPopup from "./product/common/alert-popup";
 
 function Coupon(props) {
   const {
@@ -30,7 +29,7 @@ function Coupon(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const { discount: couponTotal, message: couponMessage } = useMemo(
+  const { discount: couponTotal } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
@@ -143,7 +142,7 @@ function Coupon(props) {
           </div>
 
           <div>
-            {!appliedCoupon && (
+            {!showAppliedCoupon && (
               <span className="ml-2 coupon-subtitle">
                 Save more with coupon and offers
               </span>
@@ -153,7 +152,7 @@ function Coupon(props) {
                 You saved additional ₹{toDecimal(couponTotal)}
               </span>
             )}
-            {!!appliedCoupon && !showAppliedCoupon && (
+            {/* {!!appliedCoupon && !showAppliedCoupon && (
               <div className="mt-1">
                 <AlertPopup
                   message={couponMessage}
@@ -161,7 +160,7 @@ function Coupon(props) {
                   onClick={onCouponRemove}
                 />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       )}

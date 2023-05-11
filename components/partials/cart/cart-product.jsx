@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -33,6 +33,7 @@ function CartProduct({
     cartItemType,
     extraQty = 0,
     hideQty = false,
+    hideRemove = false,
     cartItemSource,
   } = item;
 
@@ -161,7 +162,7 @@ function CartProduct({
               </div>
             )}
           </div>
-          {(cartItemType !== "FREEPRODUCT" || !hideQty) && (
+          {!hideRemove && (
             <div className="product-close">
               <ALink
                 href="#"
