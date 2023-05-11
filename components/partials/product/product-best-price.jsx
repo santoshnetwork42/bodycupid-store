@@ -19,8 +19,8 @@ function ProductBestPrice(props) {
             Best price:&nbsp;
             <span className=" font-weight-semi-bold">
               {couponType === "PRODUCT"
-                ? toDecimal(price)
-                : toDecimal(price - discount)}
+                ? `₹${toDecimal(price)}`
+                : `₹${toDecimal(price - discount)}`}
             </span>
           </p>
         </div>
@@ -64,8 +64,8 @@ function ProductBestPrice(props) {
                       BEST PRICE:&nbsp;
                       <span className="font-weight-semi-bold text-dark">
                         {coupon.couponType === "PRODUCT"
-                          ? toDecimal(price)
-                          : toDecimal(price - coupon.discount)}
+                          ? `₹${toDecimal(price)}`
+                          : `₹${toDecimal(price - coupon.discount)}`}
                       </span>
                     </span>
                     <div className="d-flex align-items-center flex-wrap">
