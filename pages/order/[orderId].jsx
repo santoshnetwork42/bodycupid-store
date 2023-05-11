@@ -125,7 +125,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
         </div>
 
         <div className="container pt-1">
-          <Checkmark />
+          {/* <Checkmark />
 
           <div className="text-center ">
             <h3 className="mb-1"> Your order is complete!</h3>
@@ -136,7 +136,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
             >
               Continue Shopping
             </ALink>
-          </div>
+          </div> */}
 
           <h2 className="title title-simple text-left pt-7 font-weight-bold text-uppercase">
             Order Details
