@@ -18,7 +18,7 @@ import {
   scrollWithOffset,
 } from "~/utils/helper";
 import ProductNotify from "~/components/features/product-notify";
-import { getProductInventory, getProductMeta } from "~/utils/products";
+import { getProductInventory } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
