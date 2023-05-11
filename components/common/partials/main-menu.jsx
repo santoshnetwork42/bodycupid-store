@@ -46,27 +46,29 @@ function MainMenu() {
         {categories.map((category) => (
           <li
             key={category.id}
-            className={`
-              ${
-                pathname.includes(`/collections/${category.slug}`)
-                  ? "active"
-                  : ""
-              }
-              ${category?.subCategory?.items?.length ? "submenu" : ""}
+            className={`${
+              pathname.includes(`/collections/${category.slug}`) ? "active" : ""
+            } ${category?.subCategory?.items?.length ? "submenu" : ""}
             `}
           >
-            <ALink className='text-uppercase' href={`/collections/${category.slug}`}>
+            <ALink
+              className="text-uppercase"
+              href={`/collections/${category.slug}`}
+            >
               {category.name}
-              <i>
-                <DownAngle color="currentColor" size={12} />
-              </i>
+              {!!category?.subCategory?.items?.length && (
+                <i>
+                  <DownAngle color="currentColor" size={12} />
+                </i>
+              )}
             </ALink>
+
             {!!category?.subCategory?.items?.length && (
               <div className="megamenu">
                 <div className="d-flex">
                   {getSplitedArray(category?.subCategory?.items, 10).map(
                     (cat, i) => (
-                      <ul className="ml-2 mr-2" key={`cat-${i}`}>
+                      <ul key={`cat-${i}`}>
                         {cat.map((item) => (
                           <li key={`sub-categories-${item.id}`}>
                             <ALink

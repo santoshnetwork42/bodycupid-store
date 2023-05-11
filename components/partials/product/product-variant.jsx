@@ -19,7 +19,11 @@ export default function ProductVariant({ item, onSelect, selected }) {
       }`}
       onClick={() => onSelect(item.id)}
     >
-      {save > 0 && <div className="product-save">-{save}%</div>}
+      <div className="product-label-group">
+        {save > 0 && (
+          <label className="product-label label-sale">-{save}%</label>
+        )}
+      </div>
 
       <div className="image-wrapper">
         <img

@@ -140,11 +140,11 @@ function ProductDefault(props) {
                 product={product}
                 productFAQs={productFAQs}
               />
-              <ProductCollection
-                products={relatedProducts}
-                title="Related products"
-              />
             </div>
+            <ProductCollection
+              products={relatedProducts}
+              title="Related products"
+            />
           </div>
         </>
       )}

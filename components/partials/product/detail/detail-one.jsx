@@ -267,7 +267,7 @@ function DetailOne(props) {
               </>
             )}
             {!!save && (
-              <ins className="product-save">(₹{listingPrice - price} OFF)</ins>
+              <ins className="product-save">({save}% OFF)</ins>
             )}
           </div>
         )}
@@ -287,7 +287,7 @@ function DetailOne(props) {
                   )}
                   {!!save && (
                     <ins className="product-save">
-                      (₹{listingPrice - price} OFF)
+                      ({save}% OFF)
                     </ins>
                   )}
                 </div>
@@ -518,7 +518,7 @@ function DetailOne(props) {
 
       <div className="d-flex text-success align-items-center mb-3 lh-default">
         {!!product.totalOrders && (
-          <p className="text-success font-weight-semi-bold mb-0 lh-1 mr-1">
+          <p className="text-success font-weight-semi-bold mb-0 lh-1">
             {totalOrderCount}+ units sold
           </p>
         )}

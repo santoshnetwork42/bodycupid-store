@@ -848,7 +848,8 @@
   img {
     width: 40px;
     height: 40px;
-    border-radius: 20px;
+    border-radius: 2px;
+    border:1px solid $grey-color;
     margin-right: 10px;
     object-fit: cover;
 
