@@ -11,8 +11,9 @@ import { STORE_ID } from "~/config";
 import { getSortedCategoryAndSubCategory } from "~/utils/helper";
 import OptimizedImage from "~/components/features/optimized-image";
 import { errorHandler } from "~/utils/errorHandler";
+import { modalActions } from "~/store/modal";
 
-function MobileMenu({ user }) {
+function MobileMenu({ user, openPasswordLess }) {
   const router = useRouter();
   const [categories, setCategories] = useState([]);
 
@@ -243,7 +244,15 @@ function MobileMenu({ user }) {
 
           {!user && (
             <li>
-              <ALink href={"/pages/login"}>Login</ALink>
+              <ALink
+                href={"#"}
+                onClick={() => {
+                  openPasswordLess();
+                  hideMobileMenu();
+                }}
+              >
+                Login
+              </ALink>
             </li>
           )}
           {!!user && (
@@ -265,4 +274,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(MobileMenu);
+export default connect(mapStateToProps, {
+  openPasswordLess: modalActions.openPasswordlessModal,
+})(MobileMenu);
