@@ -182,10 +182,9 @@ function Passwordless({
   );
 
   const inputFocus = (ele) => {
-    const regex = /^[0-9]+$/;
     if (ele.key === "Delete" || ele.key === "Backspace") {
       ele.target?.previousSibling?.focus();
-    } else if (regex.test(ele.key)) {
+    } else {
       ele.target?.nextSibling?.focus();
     }
   };
