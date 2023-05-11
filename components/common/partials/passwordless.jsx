@@ -182,10 +182,9 @@ function Passwordless({
   );
 
   const inputFocus = (ele) => {
-    const regex = /^[0-9]+$/;
     if (ele.key === "Delete" || ele.key === "Backspace") {
       ele.target?.previousSibling?.focus();
-    } else if (regex.test(ele.key)) {
+    } else {
       ele.target?.nextSibling?.focus();
     }
   };
@@ -304,7 +303,7 @@ function Passwordless({
                                 key={index}
                                 id={`otp${index + 1}`}
                                 name={`otp${index + 1}`}
-                                type="number"
+                                type="tel"
                                 autoComplete="one-time-code"
                                 className="otpInput"
                                 value={ele}
