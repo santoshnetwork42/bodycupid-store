@@ -628,6 +628,13 @@
   .coupon-error-lable {
     color: $alert-color;
   }
+  .all-coupons-container {
+    max-height: 550px;
+    overflow: scroll;
+  }
+  .all-coupons-container::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .stick-bottom-button {

@@ -254,10 +254,7 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       if (!inventorySuccess) {
-        alertToaster(
-          "Some product goes out of stock, Please remove from cart.",
-          "error"
-        );
+        alertToaster("Please remove out of stock product from cart", "error");
         return;
       }
 

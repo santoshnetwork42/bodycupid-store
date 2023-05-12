@@ -139,7 +139,7 @@ export default function ToolBox(props) {
                 defaultValue={query.sortby ? query.sortby : "default"}
                 onChange={(e) => onChangeAttri(e, "sortby")}
               >
-                <option value="default">Default</option>
+                <option value="default">Recommended</option>
                 <option value="latest">Latest</option>
                 <option value="best-seller">Best sellers</option>
                 <option value="popularity">Highest rated</option>
