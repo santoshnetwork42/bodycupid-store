@@ -119,7 +119,6 @@ export const getStaticProps = async () => {
         variantFilter: {
           status: { eq: "ENABLED" },
         },
-        variantLimit: 1,
         imageLimit: 1,
       });
 

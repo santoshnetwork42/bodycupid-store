@@ -49,7 +49,6 @@ export const getStaticProps = async () => {
       filter,
       sort: [{ field: "position", direction: "asc" }],
       variantFilter: { status: { eq: "ENABLED" } },
-      variantLimit: 1,
       imageLimit: 1,
     });
 

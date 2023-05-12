@@ -86,7 +86,7 @@ export const useCartItems = () => {
             {
               ...item,
               itemKey: `${item.recordKey}-full-item-free`,
-              cartItemType: "FREEPRODUCT",
+              cartItemType: "FREE_PRODUCT",
             },
           ];
         }
@@ -99,7 +99,7 @@ export const useCartItems = () => {
             extraQty: itemQty - freeQty,
             itemKey: `${item.recordKey}-${itemQty - freeQty
               }-partial-item-free`,
-            cartItemType: "FREEPRODUCT",
+            cartItemType: "FREE_PRODUCT",
           },
           {
             ...item,
@@ -120,7 +120,7 @@ export const useCartItems = () => {
         ...freeProducts.map((p) => ({
           ...p,
           itemKey: `${p.id}-free`,
-          cartItemType: "FREEPRODUCT",
+          cartItemType: "AUTO_FREE_PRODUCT",
           hideQty: true,
           hideRemove: true,
         })),
@@ -131,12 +131,12 @@ export const useCartItems = () => {
       ...cartList.map((p) => ({
         ...p,
         itemKey: p.recordKey,
-        cartItemType: p.cartItemSource === "COUPON" && allowed ? "FREEPRODUCT" : null
+        cartItemType: p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null
       })),
       ...freeProducts.map((p) => ({
         ...p,
         itemKey: `${p.id}-free`,
-        cartItemType: "FREEPRODUCT",
+        cartItemType: "AUTO_FREE_PRODUCT",
         hideQty: true,
         hideRemove: true,
       })),

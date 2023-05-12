@@ -550,8 +550,10 @@ function Checkout(props) {
                                           </div>
                                         ) : (
                                           <div className="product-subtotal mt-1">
-                                            {item?.cartItemType ===
-                                              "FREEPRODUCT" &&
+                                            {(item?.cartItemType ===
+                                              "FREE_PRODUCT" ||
+                                              item?.cartItemType ===
+                                                "AUTO_FREE_PRODUCT") &&
                                               !!couponTotal && (
                                                 <span className="text-success ">
                                                   Free
@@ -559,7 +561,9 @@ function Checkout(props) {
                                               )}
 
                                             {(item?.cartItemType !==
-                                              "FREEPRODUCT" ||
+                                              "FREE_PRODUCT" ||
+                                              item?.cartItemType !==
+                                                "AUTO_FREE_PRODUCT" ||
                                               !couponTotal) && (
                                               <p className="m-0 product-discount-listing">
                                                 <span className="sm-product-amount">

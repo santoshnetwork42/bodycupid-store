@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
-import { Close } from "~/components/icons";
+import { Close, Discount } from "~/components/icons";
 import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -22,6 +22,7 @@ function CartProduct({
     id,
     variants,
     recordKey,
+    collections,
     qty,
     inventory,
     slug,
@@ -36,6 +37,29 @@ function CartProduct({
     hideRemove = false,
     cartItemSource,
   } = item;
+
+  const isCouponApplied = useMemo(() => {
+    if (!appliedCoupon) return false;
+    if (cartItemType === "AUTO_FREE_PRODUCT") return false;
+    if (cartItemType === "FREE_PRODUCT") return true;
+
+    const { applicableProducts, applicableCollections, couponType } =
+      appliedCoupon;
+
+    if (couponType === "BXGY" || couponType === "PRODUCT") return false;
+
+    const isProductApplicable =
+      Array.isArray(applicableProducts) && applicableProducts.length
+        ? applicableProducts.includes(id)
+        : true;
+
+    const isCollectionApplicable =
+      Array.isArray(applicableCollections) && applicableCollections.length
+        ? applicableCollections.some((ac) => (collections || []).includes(ac))
+        : true;
+
+    return isProductApplicable && isCollectionApplicable;
+  }, [cartItemType]);
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
@@ -100,10 +124,14 @@ function CartProduct({
           </figure>
           <div className="text-left text-primary w-100  mr-1 ml-2">
             <div className="mr-5 ">
-              <ALink href={"/product/" + slug}>{title}</ALink>
+              <ALink href={"/product/" + slug}>
+                {title}
+                {isCouponApplied && <Discount color="#17b31b" size={14} />}
+              </ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {cartItemType === "FREEPRODUCT" ? (
+              {cartItemType === "FREE_PRODUCT" ||
+              cartItemType === "AUTO_FREE_PRODUCT" ? (
                 <>
                   <span className="discount-percentage ml-1">Free</span>
                 </>

@@ -45,7 +45,6 @@ function Coupon(props) {
         variables: {
           code: couponCode,
           variantFilter: { status: { ne: "DISABLED" } },
-          variantLimit: 1,
           imageLmit: 1,
         },
         authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",

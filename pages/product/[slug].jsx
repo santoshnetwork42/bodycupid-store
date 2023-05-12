@@ -66,7 +66,6 @@ function ProductDefault(props) {
             filter,
             sort: [{ field: "position", direction: "asc" }],
             variantFilter: { status: { eq: "ENABLED" } },
-            variantLimit: 1,
             imageLimit: 1,
             limit: 4,
           })
