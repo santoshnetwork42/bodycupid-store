@@ -40,25 +40,23 @@ function Addresses({
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
 
+      if (!userAddresses.items.length && isMobile) {
+        openAllAddressModal();
+      }
+
       setAddresses(userAddresses.items);
       setLoading(false);
       setSelected(userAddresses.items[0]);
     } catch (error) {
       errorHandler(error);
     }
-  }, [user]);
+  }, [user, isMobile]);
 
   useEffect(() => {
     if (user) {
       getUserAddress();
     }
   }, [user]);
-
-  useEffect(() => {
-    if (!addresses.length && !!isMobile) {
-      openAllAddressModal();
-    }
-  }, [isMobile, addresses]);
 
   const removeAddress = useCallback(
     async (id) => {
