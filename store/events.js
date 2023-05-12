@@ -55,7 +55,7 @@ export function* eventsSaga() {
     const { attributes, items, value, attribute } = itemMapper(product);
     const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: eventName,
       eventID: uuid(),
@@ -72,7 +72,7 @@ export function* eventsSaga() {
   yield takeEvery(cartActions.REMOVE_FROM_CART, function* saga(e) {
     const { product } = e.payload;
     const { attributes, items, value, attribute } = itemMapper(product);
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "remove_from_cart",
       eventID: uuid(),
@@ -89,7 +89,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
     const { product } = e.payload;
     const { attributes, items, value, attribute } = itemMapper(product);
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "view_item",
       eventID: uuid(),
@@ -108,7 +108,7 @@ export function* eventsSaga() {
     const { id, totalShippingCharges, totalAmount } = order;
 
     const { attributes, items, attribute } = orderMapper(products, coupon);
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
@@ -155,7 +155,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.CHECKOUT_STARTED, function* saga(e) {
     const { cart: { data, coupon } } = yield select();
     const { attributes, items, value, attribute } = orderMapper(data, coupon);
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "begin_checkout",
       eventID: uuid(),
@@ -189,7 +189,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_CART, function* saga(e) {
     const { cart: { data, coupon } } = yield select();
     const { attributes, items, value, attribute } = orderMapper(data, coupon);
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "view_cart",
       eventID: uuid(),
@@ -223,7 +223,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
     const { id, name, products } = e.payload;
     const { attributes, items, attribute } = orderMapper(products);
-    dataLayer.push({ ecommerce: null });
+    dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "view_item_list",
       eventID: uuid(),
