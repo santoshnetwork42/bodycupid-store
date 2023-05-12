@@ -72,7 +72,7 @@ function Passwordless({
       setSeconds(30);
       setConfirmSignUp("SIGNUP");
     } catch (error) {
-      console.log("error signing up:", error);
+      console.log("err signing up:", error);
       alertToaster(error.message, "error");
     }
     return false;
