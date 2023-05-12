@@ -223,9 +223,9 @@ function Coupon(props) {
                 </div>
                 <span className="coupon-error-lable">{error}</span>
                 {!!featuredCoupons?.length && (
-                  <div className="mt-8">
+                  <div className="mt-8 all-coupons-container">
                     {featuredCoupons.map((c) => {
-                      let className = "btn btn-md  btn-rounded btn-link m l-2";
+                      let className = "btn btn-link ml-2 btn-apply";
                       if (!c.allowed) {
                         className = `${className} btn-disabled`;
                       }
@@ -234,7 +234,9 @@ function Coupon(props) {
                         <div key={c.id} className="featured-coupon">
                           <div className="d-flex justify-content-between ">
                             <div className="featured-coupon-text-content">
-                              <strong>{c.code}</strong>
+                              <div className="coupon-tag">
+                                <strong>{c.code}</strong>
+                              </div>
                               <div
                                 className={`coupon-tagline ${
                                   !c.allowed && "text-secondary"
