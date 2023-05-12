@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export const useWindowDimensions = () => {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
-    height: window.in,
+    height: window.innerHeight,
   });
   useEffect(() => {
     function handleResize() {
