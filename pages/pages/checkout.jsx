@@ -430,10 +430,13 @@ function Checkout(props) {
     ]
   );
 
-  const codDisabled = useMemo(
-    () => appliedCoupon?.couponType === "ONLINE",
-    [appliedCoupon]
-  );
+  const { codDisabled, onlineDisabled } = useMemo(() => {
+    return {
+      codDisabled: appliedCoupon?.paymentMethod !== "COD",
+      onlineDisabled: appliedCoupon?.paymentMethod !== "ONLINE",
+    };
+  }, [appliedCoupon]);
+
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
@@ -747,8 +750,9 @@ function Checkout(props) {
                             tag={"EXTRA 5% OFF"}
                             isSelected={payMethod === "PREPAID"}
                             description="Pay using credit/debit cards, net-banking, UPI, or digital wallets."
+                            disabled={onlineDisabled && !codDisabled}
                             onClick={() => {
-                              setFirst("PREPAID");
+                              codDisabled && setFirst("PREPAID");
                             }}
                             amount={prepaidGrandTotal}
                           />
@@ -757,8 +761,9 @@ function Checkout(props) {
                             title="Cash On Delivery"
                             isSelected={payMethod === "COD"}
                             description="Pay using Cash on Delivery"
+                            disabled={!onlineDisabled && codDisabled}
                             onClick={() => {
-                              !codDisabled && setFirst("COD");
+                              onlineDisabled && setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />

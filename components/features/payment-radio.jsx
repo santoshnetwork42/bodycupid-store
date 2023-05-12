@@ -9,16 +9,19 @@ const PaymentMethods = ({
   tag,
   onClick,
   amount,
+  disabled,
 }) => {
   return (
     <div
-      className="bg-white border-regular payment-card mt-2 d-flex align-items-center justify-content-between"
+      className={`bg-white border-regular payment-card mt-2 d-flex align-items-center justify-content-between ${
+        disabled && "btn-disabled"
+      }`}
       onClick={onClick}
     >
       <div>
         <div className="card-header d-flex align-items-center">
           {!!isSelected ? <CricleDot size={18} /> : <Cricle size={18} />}
-          <span className="text-body text-normal ls-m ml-2 mr-2 checkout-payment-lables lh-default">
+          <span className="text-body text-normal ls-m ml-2 mr-2 checkout-payment-labels lh-default">
             {title}
           </span>
           {!!tag && <p className="extra-lable m-0">EXTRA 5% OFF</p>}
