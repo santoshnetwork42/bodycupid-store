@@ -126,7 +126,9 @@ function CartProduct({
             <div className="mr-5 ">
               <ALink href={"/product/" + slug}>
                 {title}
-                {isCouponApplied && <Discount color="#17b31b" size={14} />}
+                {isCouponApplied && (
+                    <Discount className="pt-1" color="#17b31b" size={17} />
+                )}
               </ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
@@ -190,6 +192,7 @@ function CartProduct({
               </div>
             )}
           </div>
+
           {!hideRemove && (
             <div className="product-close">
               <ALink
