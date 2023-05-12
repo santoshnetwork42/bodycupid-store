@@ -259,16 +259,14 @@ function DetailOne(props) {
 
       <div className="product-variation-price">
         {curIndex < 0 && (
-          <div className="product-price mb-2 d-flex">
+          <div className="product-price mb-0 d-flex">
             <ins className="new-price mr-2"> MRP: ₹{toDecimal(price)}</ins>
             {listingPrice > price && (
               <>
                 <del className="old-price mr-2">₹{listingPrice}</del>{" "}
               </>
             )}
-            {!!save && (
-              <ins className="product-save">({save}% OFF)</ins>
-            )}
+            {!!save && <ins className="product-save">({save}% OFF)</ins>}
           </div>
         )}
 
@@ -276,7 +274,7 @@ function DetailOne(props) {
           <div className="card-wrapper">
             {curIndex > -1 && (
               <div className="single-product-price">
-                <div className="product-price mb-1 d-flex">
+                <div className="product-price mb-0 d-flex">
                   <ins className="new-price mr-2">MRP: ₹{toDecimal(price)}</ins>
                   {listingPrice > price && (
                     <>
@@ -285,11 +283,7 @@ function DetailOne(props) {
                       </del>{" "}
                     </>
                   )}
-                  {!!save && (
-                    <ins className="product-save">
-                      ({save}% OFF)
-                    </ins>
-                  )}
+                  {!!save && <ins className="product-save">({save}% OFF)</ins>}
                 </div>
               </div>
             )}
@@ -297,7 +291,7 @@ function DetailOne(props) {
         </Collapse>
       </div>
 
-      <p className="mb-1 lh-default text-dark">Inclusive of all taxes</p>
+      <p className="mb-2 lh-default text-dark">Inclusive of all taxes</p>
 
       <div className="ratings-container">
         <div className="ratings-full" onClick={onReviewClick}>
