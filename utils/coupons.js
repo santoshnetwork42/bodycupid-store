@@ -14,14 +14,14 @@ export const getCouponMessage = ({
     "Lowest value item in the cart will be discounted off on the item total";
 
   if (couponType === "FIXED") {
-    discountMsg = `₹${getYAmount} off on item total`;
+    discountMsg = `₹${getYAmount} off from total`;
   } else if (couponType === "PERCENTAGE") {
-    discountMsg = `${getYPercentage}% off on item total`;
+    discountMsg = `${getYPercentage}% off from total`;
     if (maxDiscount) {
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
   } else if (couponType === "BUY_X_GET_Y" && getYQuantity > 1) {
-    discountMsg = `Lowest value ${getYQuantity} items in the cart will be discounted off on the item total`;
+    discountMsg = `${getYQuantity} items with the lowest value will be given away for free!`;
     if (maxDiscount) {
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
@@ -35,7 +35,7 @@ export const getCouponMessage = ({
     discountMsg = `${discountMsg}.`;
   }
 
-  let paymentTypeMsg = "Applicable on both online payment and COD.";
+  let paymentTypeMsg = "Applicable on both COD and online payment.";
   if (paymentMethod === "COD") {
     paymentTypeMsg = "Applicable on COD.";
   } else if (paymentMethod === "PREPAID") {
@@ -91,7 +91,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       ...coupon,
       allowed: false,
       message: `Add product worth ₹${minOrderValue - totalAmount
-        } more in the cart`,
+        } more to the cart`,
     };
   }
 
@@ -101,7 +101,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       ...coupon,
       allowed: false,
       message: `Add ${buyXQuantity + getYQuantity - totalItems
-        } more items in the cart`,
+        } more items to the cart`,
     };
   }
 
