@@ -98,60 +98,61 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box mb-2 pb-5 bg-white text-primary lh-default"
+          className="cart-coupon-box mb-2 pb-5 bg-white text-primary flex-row lh-default"
           onClick={() => !showAppliedCoupon && setOpen(true)}
         >
-          <div className="cart-coupon-container d-flex">
-            <div className="d-flex">
-              <span className="mt-1 sm-product-remove">
-                {showAppliedCoupon ? (
-                  <CheckBadge color="#17b31b" size={22} />
-                ) : (
-                  <Discount color="#17b31b" size={22} />
+          <span className="mt-1 sm-product-remove">
+            {showAppliedCoupon ? (
+              <CheckBadge color="#17b31b" size={22} />
+            ) : (
+              <Discount color="#17b31b" size={22} />
+            )}
+          </span>{" "}
+          <div className="w-100">
+            <div>
+              <div className="cart-coupon-container d-flex">
+                <div className="d-flex">
+                  <p className="ml-1 coupon-title mb-0 p-0 ls-m">
+                    {showAppliedCoupon
+                      ? `"${appliedCoupon.code}" applied`
+                      : "Coupons and offers"}
+                  </p>
+                </div>
+
+                {!!featuredCoupons.length && !showAppliedCoupon && (
+                  <a
+                    className="coupon-offer d-flex align-items-center"
+                    type="button"
+                  >
+                    {`${featuredCoupons.length} Offers`}
+                    <RightAngle size={14} />
+                  </a>
                 )}
-              </span>
+                {showAppliedCoupon && (
+                  <ALink
+                    key={appliedCoupon.id}
+                    href="#"
+                    className="mt-1 mr-1"
+                    title="Remove coupon"
+                    onClick={onCouponRemove}
+                  >
+                    <Close color="grey" size={18} />
+                  </ALink>
+                )}
+              </div>
 
-              <p className="ml-2 coupon-title mb-1 p-0 ls-m">
-                {showAppliedCoupon
-                  ? `"${appliedCoupon.code}" applied`
-                  : "Coupons and offers"}
-              </p>
-            </div>
-
-            {!!featuredCoupons.length && !showAppliedCoupon && (
-              <a
-                className="coupon-offer d-flex align-items-center"
-                type="button"
-              >
-                {`${featuredCoupons.length} Offers`}
-                <RightAngle size={14} />
-              </a>
-            )}
-            {showAppliedCoupon && (
-              <ALink
-                key={appliedCoupon.id}
-                href="#"
-                className="mt-1 mr-1"
-                title="Remove coupon"
-                onClick={onCouponRemove}
-              >
-                <Close color="grey" size={18} />
-              </ALink>
-            )}
-          </div>
-
-          <div>
-            {!showAppliedCoupon && (
-              <span className="ml-2 coupon-subtitle">
-                Save more with coupon and offers
-              </span>
-            )}
-            {showAppliedCoupon && (
-              <span className="ml-2 coupon-subtitle">
-                You saved additional ₹{toDecimal(couponTotal)}
-              </span>
-            )}
-            {/* {!!appliedCoupon && !showAppliedCoupon && (
+              <div>
+                {!showAppliedCoupon && (
+                  <span className="ml-1 coupon-subtitle">
+                    Save more with coupon and offers
+                  </span>
+                )}
+                {showAppliedCoupon && (
+                  <span className="ml-1 coupon-subtitle">
+                    You saved additional ₹{toDecimal(couponTotal)}
+                  </span>
+                )}
+                {/* {!!appliedCoupon && !showAppliedCoupon && (
               <div className="mt-1">
                 <AlertPopup
                   message={couponMessage}
@@ -160,6 +161,8 @@ function Coupon(props) {
                 />
               </div>
             )} */}
+              </div>
+            </div>
           </div>
         </div>
       )}
