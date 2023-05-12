@@ -50,7 +50,7 @@ function Addresses({
     } catch (error) {
       errorHandler(error);
     }
-  }, [user, isMobile]);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
