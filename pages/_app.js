@@ -121,19 +121,20 @@ const App = ({ Component, pageProps }) => {
       utmTerm: term || meta?.utmTerm || null,
     };
 
-    Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
+    if (JSON.stringify(metadata) !== cookieMeta) {
+      Cookie.set(`${STORE_PREFIX}_metadata`, JSON.stringify(metadata));
+    }
     store.dispatch(systemActions.setMeta(metadata));
   }, [store, query]);
 
   const initSession = useCallback(async () => {
     setStore();
     setUser();
-    setMetaData();
-  }, [setStore, setUser, setMetaData]);
+  }, [setStore, setUser]);
 
   useEffect(() => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
-    Hub.listen("auth", async (authEvent) => {
+    const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
       const {
         payload: { event },
       } = authEvent;
@@ -145,8 +146,15 @@ const App = ({ Component, pageProps }) => {
         store.dispatch(eventActions.auth("login"));
       }
     });
+
     initSession();
+
+    return () => hubListenerCancelToken();
   }, []);
+
+  useEffect(() => {
+    setMetaData();
+  }, [query]);
 
   return (
     <Provider store={store}>
