@@ -6,11 +6,7 @@ export default function CategoryHeader({ name, description }) {
   return (
     <div className="category-header pt-3 pb-3 text-center">
       <h4 className="text-uppercase mb-0">{name}</h4>
-      {!!description && (
-        <ReadMore>
-          <p className="mb-0 mt-1">{description}</p>
-        </ReadMore>
-      )}
+      {!!description && <ReadMore content={description} />}
     </div>
   );
 }

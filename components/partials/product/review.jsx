@@ -35,9 +35,7 @@ export default function Review({ review = {} }) {
           </div>
 
           <div className="comment-content">
-            <ReadMore>
-              <p>{review.comment}</p>
-            </ReadMore>
+            <ReadMore content={review.comment} />
           </div>
         </div>
       </div>
