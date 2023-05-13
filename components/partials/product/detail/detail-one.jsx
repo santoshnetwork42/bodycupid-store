@@ -294,7 +294,7 @@ function DetailOne(props) {
       <p className="mb-2 lh-default text-dark">Inclusive of all taxes</p>
 
       <div className="ratings-container">
-        <div className="ratings-full" onClick={onReviewClick}>
+        <div className="ratings-full mt-0 lh-1" onClick={onReviewClick}>
           {Array.from({ length: 5 }).map((_, index) => {
             const isFilled = index + 1 <= product.rating;
 
