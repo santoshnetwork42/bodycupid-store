@@ -1,7 +1,8 @@
 import React from "react";
+import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
-import OptimizedImage from "~/components/features/optimized-image";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CategorySection({ categories = [] }) {
   return (
@@ -11,18 +12,19 @@ function CategorySection({ categories = [] }) {
         <div className="row elements">
           {categories.map((category) => {
             return (
-              <div key={category.id} className=" col-3">
+              <div key={category.id} className="col-3">
                 <div className="category category-spacing category-ellipse text-uppercase">
                   <ALink
                     href={`/collections/${category.category.slug}/${category.slug}`}
                   >
-                    <figure className="category-media">
-                      <OptimizedImage
-                        optimizedData={category.image}
-                        alt={category.name}
-                        loading="lazy"
-                      />
-                    </figure>
+                    <Image
+                      src={getPublicImageURL(category.imageUrl)}
+                      alt={category.name}
+                      height={360}
+                      width={360}
+                      quality={90}
+                      className="category-media"
+                    />
                   </ALink>
                   <div className="category-content">
                     <h4 className="category-name text-uppercase">

@@ -4,21 +4,14 @@ import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
 import CategorySection from "~/components/partials/home/category-section";
-import BlogSection from "~/components/partials/home/blog-section";
 import {
-  getHomePageBlogs,
   getHomePageCategories,
   findProducts,
   getStoreBanners,
 } from "~/graphql/api";
-import optimizeImage from "~/utils/optimizeImage";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
-import {
-  optimizeCategory,
-  optimizeStore,
-  optimizedBlogs,
-} from "~/utils/getStaticData";
+import { optimizeStore } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
 import StorySection from "~/components/partials/home/story-section";
@@ -29,7 +22,6 @@ function HomePage({
   hero,
   bestSellerProducts,
   featuredProducts,
-  blogs,
   categories,
   brands,
   store,
@@ -63,7 +55,6 @@ function HomePage({
           redirectTo="/collections/featured"
         />
         <CategorySection categories={categories} />
-        <BlogSection posts={blogs} />
         <ReviewSection />
         <BrandSection brands={brands} />
       </div>
@@ -73,27 +64,6 @@ function HomePage({
 
 export const getStaticProps = async () => {
   try {
-    const optimizedLogoImage = await optimizeImage({
-      src: "/images/logo.png",
-      options: {
-        resize: 150,
-        blur: 2,
-      },
-      type: "self-hosted",
-    });
-    const optimizedFooterImage = await optimizeImage({
-      src: "/images/logo-footer.png",
-      options: {
-        resize: 150,
-        blur: 2,
-      },
-      type: "self-hosted",
-    });
-
-    const getSearchBlogs = fetchData(getHomePageBlogs, {
-      filter: { storeId: { eq: STORE_ID }, isVisible: { eq: true } },
-    });
-
     const getSearchProducts = (filter) =>
       fetchData(findProducts, {
         filter: {
@@ -118,13 +88,11 @@ export const getStaticProps = async () => {
     const getStoreData = fetchData(getStoreBanners, { id: STORE_ID });
 
     const [
-      { searchBlogs },
       { searchProducts: searchBestSellerProducts },
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
     ] = await Promise.all([
-      getSearchBlogs,
       getSearchProducts({ collections: { eq: "best-seller" } }),
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
@@ -133,19 +101,12 @@ export const getStaticProps = async () => {
 
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
-    const { items: categoriesData } = searchProductSubCategories;
-    const { items: blogsData } = searchBlogs;
-
-    const blogs = await Promise.all((blogsData || []).map(optimizedBlogs));
+    const { items: categories } = searchProductSubCategories;
 
     const { banners } = await optimizeStore(store);
 
     const bestSellerProducts = bestSellerItems;
     const featuredProducts = featuredItems;
-
-    const categories = await Promise.all(
-      (categoriesData || []).map(optimizeCategory)
-    );
 
     const brands = [
       "/images/brands/1.png",
@@ -156,38 +117,18 @@ export const getStaticProps = async () => {
       "/images/brands/9.png",
     ];
 
-    for (const brand in brands) {
-      const optimizedBrand = await optimizeImage({
-        src: brands[brand],
-        type: "self-hosted",
-        options: {
-          resize: 200,
-          blur: 3,
-        },
-      });
-      brands[brand] = optimizedBrand;
-    }
-
     return {
       props: {
-        navbar: {
-          logo: optimizedLogoImage,
-        },
-        hero: {
-          banners,
-        },
+        hero: { banners },
         bestSellerProducts,
         featuredProducts,
-        blogs,
         categories,
         brands,
-        footer: {
-          logo: optimizedFooterImage,
-        },
       },
       revalidate: 43200,
     };
   } catch (e) {
+    console.log(e);
     return {
       notFound: true,
     };

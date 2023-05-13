@@ -1,6 +1,9 @@
 import React from "react";
+import Image from "next/image";
+
 import ALink from "~/components/features/custom-link";
-import OptimizedImage from "~/components/features/optimized-image";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+
 export default function StorySection({ categories }) {
   return (
     <section className="ellipse-section d-sm-show story-section">
@@ -14,13 +17,15 @@ export default function StorySection({ categories }) {
                     <ALink
                       href={`/collections/${category.category.slug}/${category.slug}`}
                     >
-                      <figure className="category-media">
-                        <OptimizedImage
-                          optimizedData={category.image}
-                          alt={category.name}
-                          loading="lazy"
-                        />
-                      </figure>
+                      <Image
+                        src={getPublicImageURL(category.imageUrl)}
+                        alt={category.name}
+                        height={70}
+                        width={70}
+                        priority
+                        objectFit="contain"
+                        className="category-media"
+                      />
                     </ALink>
                     <div className="category-content">
                       <h4 className="category-name">

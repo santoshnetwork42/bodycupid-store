@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -9,7 +10,6 @@ import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
-import OptimizedImage from "~/components/features/optimized-image";
 
 function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
@@ -45,24 +45,14 @@ function Header({ navbar, auth, openPasswordLess }) {
               </ALink>
 
               <ALink href="/" className="logo">
-                {navbar?.logo ? (
-                  <OptimizedImage
-                    optimizedData={{
-                      ...navbar.logo,
-                      width: 153,
-                      height: 44,
-                    }}
-                    loading="eager"
-                    alt="logo"
-                  />
-                ) : (
-                  <img
-                    src="/images/logo.png"
-                    alt="logo"
-                    width="153"
-                    height="44"
-                  />
-                )}
+                <Image
+                  src="/images/logo.png"
+                  alt="logo"
+                  width="100"
+                  height="100"
+                  priority
+                  objectFit="contain"
+                />
               </ALink>
 
               <SearchBox />
