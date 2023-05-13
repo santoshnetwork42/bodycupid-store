@@ -266,6 +266,7 @@ function DescOne(props) {
                 {isMobile && (
                   <ReadMore position="start">
                     <div
+                      className="product-longdescription-wrapper"
                       dangerouslySetInnerHTML={{
                         __html: longDescription,
                       }}
@@ -274,6 +275,7 @@ function DescOne(props) {
                 )}
                 {!isMobile && (
                   <div
+                    className="product-longdescription-wrapper"
                     dangerouslySetInnerHTML={{
                       __html: longDescription,
                     }}
