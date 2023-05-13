@@ -58,7 +58,7 @@ export const getStaticProps = async () => {
     });
 
     const collections = [
-      { name: "All", path: "/ranges" },
+      { name: "All", path: "/ranges/all" },
       ...collectionsRes.map((col) => ({
         ...col,
         path: `/ranges/${col.slug}`,

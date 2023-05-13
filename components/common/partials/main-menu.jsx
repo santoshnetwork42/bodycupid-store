@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import ALink from "~/components/features/custom-link";
 import { DownAngle } from "~/components/icons";
 
-import { getSplitedArray } from "~/utils/helper";
 import { useMenu } from "~/utils/contexts/navbar";
 
 function MainMenu() {
