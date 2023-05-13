@@ -282,6 +282,15 @@
         .payment-subtitle {
             color: $grey-color;
         }
+        .payment-alert {
+            color: $secondary-color !important;
+            a {
+                width: fit-content;
+                text-decoration: underline;
+                display: block;
+                cursor: pointer;
+            }
+        }
         .payment-card-amount {
             color: $primary-color;
             font-size: 1.6rem;

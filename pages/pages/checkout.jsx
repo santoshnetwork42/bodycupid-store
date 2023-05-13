@@ -749,7 +749,11 @@ function Checkout(props) {
                             title="Pay Online"
                             tag={"EXTRA 5% OFF"}
                             isSelected={payMethod === "PREPAID"}
-                            description="Pay using credit/debit cards, net-banking, UPI, or digital wallets."
+                            description={
+                              onlineDisabled
+                                ? `Online payment disabled for you coupon ${appliedCoupon?.code}`
+                                : "Pay using credit/debit cards, net-banking, UPI, or digital wallets."
+                            }
                             disabled={onlineDisabled}
                             onClick={() => {
                               !onlineDisabled && setFirst("PREPAID");
@@ -760,7 +764,11 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Cash On Delivery"
                             isSelected={payMethod === "COD"}
-                            description="Pay using Cash on Delivery"
+                            description={
+                              codDisabled
+                                ? `COD payment disabled for you coupon ${appliedCoupon?.code}`
+                                : "Pay using Cash on Delivery"
+                            }
                             disabled={codDisabled}
                             onClick={() => {
                               !codDisabled && setFirst("COD");

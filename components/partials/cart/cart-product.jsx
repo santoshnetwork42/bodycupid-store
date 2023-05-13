@@ -105,7 +105,7 @@ function CartProduct({
             <div className="mt-1 d-flex mb-1 align-items-center">
               {cartItemType === "FREEPRODUCT" ? (
                 <>
-                  <span className="discount-percentage ml-1">Free</span>
+                  <span className="discount-percentage">Free</span>
                 </>
               ) : (
                 <>

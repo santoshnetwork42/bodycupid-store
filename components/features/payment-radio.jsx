@@ -1,6 +1,7 @@
 import React from "react";
 import { Cricle, CricleDot } from "../icons";
 import { toInteger } from "~/utils";
+import ALink from "./custom-link";
 
 const PaymentMethods = ({
   title,
@@ -27,8 +28,19 @@ const PaymentMethods = ({
           {!!tag && <p className="extra-lable m-0">EXTRA 5% OFF</p>}
         </div>
 
-        <div className="card-body ls-m overflow-hidden payment-subtitle ml-0 d-flex align-items-center">
-          {description}
+        <div
+          className={`card-body ls-m overflow-hidden payment-subtitle ml-0 d-flex align-items-center ${
+            disabled && "payment-alert"
+          }`}
+        >
+          <p>
+            {description}
+            {disabled && (
+              <ALink href={"/pages/cart"} className="lh-1">
+                Update coupon
+              </ALink>
+            )}
+          </p>
         </div>
       </div>
       <p className="payment-card-amount m-0 font-weight-semi-bold">
