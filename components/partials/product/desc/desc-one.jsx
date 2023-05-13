@@ -284,12 +284,7 @@ function DescOne(props) {
           </Card>
         )}
 
-        <Card
-          expanded={!isMobile}
-          title="PRODUCT DETAILS"
-          noDisplayStyle
-          collapseEvent
-        >
+        <Card title="PRODUCT DETAILS" noDisplayStyle collapseEvent>
           <div className="row">
             <div className="col-md-12">
               <div className="additional-info-container">
