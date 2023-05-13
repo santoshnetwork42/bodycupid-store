@@ -98,6 +98,7 @@ function ProductTwo(props) {
           <Image
             src={getPublicImageURL(thumbImage?.imageKey)}
             layout="fill"
+            quality={90}
           />
         </ALink>
 
