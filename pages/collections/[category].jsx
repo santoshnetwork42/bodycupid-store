@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
@@ -26,12 +26,12 @@ function Categories(props) {
     tag,
     tagId,
     pageFilter,
-    subCategories,
+    collections = [],
+    subCategories = [],
   } = props;
-
   const { name } = store;
+  console.log('collections :>> ', collections);
   const collectionType = category || tag;
-
   return (
     <main className="main searchBar">
       <Head>
@@ -59,7 +59,8 @@ function Categories(props) {
                 categoryId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
-                subCategories={subCategories}
+                basePath={`/collections/${category ? "all" : "ranges"}`}
+                filterItems={category ? subCategories : collections}
               />
             </div>
           </div>
@@ -144,7 +145,12 @@ export const getStaticProps = async (context) => {
 
       const [{ searchProducts }, { searchProductSubCategories }] =
         await Promise.all([getProducts, getSubCategoriesByCategory]);
-      const { items: subCategories } = searchProductSubCategories;
+      const { items: subCategoriesRes } = searchProductSubCategories;
+
+      const subCategories = subCategoriesRes.map((sub) => ({
+        ...sub,
+        path: `/collections/${category.slug}/${sub.slug}`,
+      }));
       const { items } = searchProducts;
       const products = await Promise.all(
         items.map((product) => optimizeProduct(product, { partial: true }))
@@ -171,7 +177,18 @@ export const getStaticProps = async (context) => {
     });
     if (tag) {
       filter.collections = { eq: slug };
-
+      const {
+        listCollections: { items: collectionsRes },
+      } = await fetchData(listCollections, {
+        filter: {
+          storeId: { eq: STORE_ID },
+        },
+        sort: [{ field: "position", direction: "asc" }],
+      });
+      const collections = collectionsRes.map((col) => ({
+        ...col,
+        path: `/collections/${col.slug}`,
+      }));
       // Get Product By tag
       const { searchProducts } = await fetchData(findProducts, {
         filter,
@@ -191,6 +208,7 @@ export const getStaticProps = async (context) => {
           tagId: slug,
           products: { ...searchProducts, items: products },
           pageFilter: filter,
+          collections,
           // sideBarCategories: [],
         },
       };

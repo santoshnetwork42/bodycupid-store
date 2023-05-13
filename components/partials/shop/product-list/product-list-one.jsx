@@ -31,12 +31,14 @@ function ProductListOne(props) {
     subCategoryId,
     tagId,
     pageFilter = {},
-    subCategories,
     recordSearch,
+    filterItems,
     viewList,
+    basePath,
   } = props;
 
   const sectionId = tagId || subCategoryId || categoryId;
+  const isRanges = !categoryId && !subCategoryId;
 
   const router = useRouter();
   const { query } = router;
@@ -185,7 +187,14 @@ function ProductListOne(props) {
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} subCategories={subCategories} />}
+      {isToolbox && (
+        <ToolBox
+          type={type}
+          isRanges={isRanges}
+          basePath={basePath}
+          filterItems={filterItems}
+        />
+      )}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}

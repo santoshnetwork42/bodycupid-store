@@ -2,19 +2,20 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { Grid, List } from "~/components/icons";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
 import { cleanQuery } from "~/utils/helper";
 
 export default function ToolBox(props) {
-  const { type = "left", subCategories } = props;
+  const { type = "left", filterItems, isRanges, basePath } = props;
   const router = useRouter();
   const query = router.query;
+  const { asPath } = router;
   const { grid } = query;
   const { category, subcategory, ...filterQuery } = query;
   const gridType = query.type ? query.type : "grid";
   let tmp = 0;
+  const isCollection = asPath.includes;
 
   useEffect(() => {
     window.addEventListener("scroll", stickyToolboxHandler);
@@ -150,43 +151,39 @@ export default function ToolBox(props) {
           </div>
         </div>
       </nav>
-      {!!subCategories?.length && (
+      {!!filterItems?.length && (
         <div className="filters-container d-flex mb-5 align-items-center">
           <ALink
             href={{
-              pathname: "/collections/[category]",
+              pathname: `/collections/${isRanges ? "ranges" : "all"}`,
               query: cleanQuery({
                 ...filterQuery,
-                category: category,
-                grid: grid,
                 type: router.query.type || null,
               }),
             }}
             className={`sub-category-tag ${
-              !subcategory && "selected-sub-category-tag"
+              asPath.includes(basePath) && "selected-sub-category-tag"
             }`}
           >
             <p className="m-0">All</p>
           </ALink>
-          {subCategories.map((subcat) => {
+          {filterItems.map((item) => {
             return (
               <ALink
-                key={subcat.id}
+                key={item.id}
                 className={`sub-category-tag ${
-                  subcategory === subcat.slug && "selected-sub-category-tag"
+                  asPath.includes(item.path) && "selected-sub-category-tag"
                 }`}
                 href={{
-                  pathname: "/collections/[category]/[subcategory]",
+                  pathname: item.path,
                   query: cleanQuery({
                     ...filterQuery,
-                    category: subcat.category.slug,
-                    subcategory: subcat.slug,
                     grid: grid,
                     type: router.query.type || null,
                   }),
                 }}
               >
-                <p className="m-0">{subcat.name}</p>
+                <p className="m-0">{item.name}</p>
               </ALink>
             );
           })}

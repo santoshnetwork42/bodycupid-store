@@ -1,92 +1,50 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
-import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { DownAngle } from "~/components/icons";
-import { getMenuCategories } from "~/graphql/api";
-import { STORE_ID } from "~/config";
-import {
-  getSortedCategoryAndSubCategory,
-  getSplitedArray,
-} from "~/utils/helper";
-import { errorHandler } from "~/utils/errorHandler";
+
+import { getSplitedArray } from "~/utils/helper";
+import { useMenu } from "~/utils/contexts/navbar";
 
 function MainMenu() {
   const { pathname } = useRouter();
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-  const getCategories = useCallback(() => {
-    API.graphql(
-      graphqlOperation(getMenuCategories, {
-        filter: { storeId: { eq: STORE_ID } },
-        sort: [{ field: "priority", direction: "asc" }],
-      })
-    )
-      .then(
-        ({
-          data: {
-            searchProductCategories: { items },
-          },
-        }) => {
-          const sortedItems = getSortedCategoryAndSubCategory(items);
-          setCategories(sortedItems);
-        }
-      )
-      .catch(errorHandler);
-  }, []);
-
+  const menu = useMenu();
   return (
     <nav className="main-nav">
       <ul className="menu">
-        {categories.map((category) => (
+        {menu.map((item) => (
           <li
-            key={category.id}
-            className={`${
-              pathname.includes(`/collections/${category.slug}`) ? "active" : ""
-            } ${category?.subCategory?.items?.length ? "submenu" : ""}
+            key={item.slug}
+            className={`${pathname.includes(item.link) ? "active" : ""} ${
+              item?.subMenu?.length ? "submenu" : ""
+            }
             `}
           >
-            <ALink
-              className="text-uppercase"
-              href={`/collections/${category.slug}`}
-            >
-              {category.name}
-              {!!category?.subCategory?.items?.length && (
+            <ALink className="text-uppercase" href={item.link}>
+              {item.label}
+              {!!item?.subMenu?.length && (
                 <i>
                   <DownAngle color="currentColor" size={12} />
                 </i>
               )}
             </ALink>
 
-            {!!category?.subCategory?.items?.length && (
+            {!!item?.subMenu?.length && (
               <div className="megamenu">
                 <div className="d-flex">
-                  {getSplitedArray(category?.subCategory?.items, 10).map(
-                    (cat, i) => (
-                      <ul key={`cat-${i}`}>
-                        {cat.map((item) => (
-                          <li key={`sub-categories-${item.id}`}>
-                            <ALink
-                              className="cat-name"
-                              href={
-                                "/collections/" +
-                                category.slug +
-                                "/" +
-                                item.slug
-                              }
-                            >
-                              {item.name}
-                            </ALink>
-                          </li>
-                        ))}
-                      </ul>
-                    )
-                  )}
+                  {getSplitedArray(item?.subMenu, 10).map((cat, i) => (
+                    <ul key={`cat-${i}`}>
+                      {cat.map((subItem) => (
+                        <li key={`sub-categories-${subItem.slug}`}>
+                          <ALink className="cat-name" href={subItem.link}>
+                            {subItem.label}
+                          </ALink>
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
                 </div>
               </div>
             )}

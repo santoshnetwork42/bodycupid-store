@@ -1623,6 +1623,7 @@ export const listCollections = /* GraphQL */ `
       sortDirection: $sortDirection
     ) {
       items {
+        name
         slug
       }
       nextToken
