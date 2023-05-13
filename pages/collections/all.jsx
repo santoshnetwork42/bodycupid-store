@@ -31,7 +31,7 @@ function AllProduct(props) {
                 products={products}
                 filterItems={categories}
                 pageFilter={pageFilter}
-                basePath='/collections/all'
+                basePath="/collections/all"
               />
             </div>
           </div>
@@ -54,10 +54,13 @@ export const getStaticProps = async () => {
       filter: { storeId: { eq: STORE_ID } },
       sort: [{ field: "priority", direction: "asc" }],
     });
-    const categories = categoriesRes.map((cat) => ({
-      ...cat,
-      path: `/collections/${cat.slug}`,
-    }));
+    const categories = [
+      { name: "all", path: "/collections/all" },
+      ...categoriesRes.map((cat) => ({
+        ...cat,
+        path: `/collections/${cat.slug}`,
+      })),
+    ];
 
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {

@@ -34,17 +34,15 @@ function MainMenu() {
             {!!item?.subMenu?.length && (
               <div className="megamenu">
                 <div className="d-flex">
-                  {getSplitedArray(item?.subMenu, 10).map((cat, i) => (
-                    <ul key={`cat-${i}`}>
-                      {cat.map((subItem) => (
-                        <li key={`sub-categories-${subItem.slug}`}>
-                          <ALink className="cat-name" href={subItem.link}>
-                            {subItem.label}
-                          </ALink>
-                        </li>
-                      ))}
-                    </ul>
-                  ))}
+                  <ul>
+                    {item?.subMenu.map((subItem) => (
+                      <li key={`sub-categories-${subItem.slug}`}>
+                        <ALink className="cat-name" href={subItem.link}>
+                          {subItem.label}
+                        </ALink>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             )}

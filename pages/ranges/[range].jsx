@@ -1,53 +1,46 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import {
-  getBasicCategory,
   getAllCategoriesPath,
   findProducts,
-  getSubCategoriesByCategoryID,
   listCollections,
+  getCollectionsBySlug,
 } from "~/graphql/api";
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
-import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
+import { optimizeProduct } from "~/utils/getStaticData";
 import CategoryHeader from "~/components/common/category-header";
 
 function Categories(props) {
   const {
     store,
-    category,
     products,
     categoryId,
     tag,
     tagId,
     pageFilter,
     collections = [],
-    subCategories = [],
   } = props;
   const { name } = store;
   return (
     <main className="main searchBar">
       <Head>
         <title>
-          {name} - {category?.name}
+          {name} - {tag?.name}
         </title>
       </Head>
 
       <h1 className="d-none">
-        {name} - {category?.name}
+        {name} - {tag?.name}
       </h1>
 
-      {/* <ShopBanner category={category} /> */}
       <div className="page-content  pb-3">
         <div className="container">
-          <CategoryHeader
-            name={category?.name}
-            description={category?.description}
-          />
+          <CategoryHeader name={tag?.name} description={tag?.description} />
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
@@ -56,7 +49,7 @@ function Categories(props) {
                 categoryId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
-                filterItems={subCategories}
+                filterItems={collections}
               />
             </div>
           </div>
@@ -102,69 +95,57 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   try {
     const { params } = context;
-    const { category: slug } = params;
-
-    // Category By Slug
-    let {
-      byslugProductCategory: {
-        items: [category],
-      },
-    } = await fetchData(getBasicCategory, {
-      slug,
-      filter: { storeId: { eq: STORE_ID } },
-    });
-
+    const { range: slug } = params;
     const filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
     };
 
-    if (category) {
-      const { id } = category;
-      filter.categoryId = { eq: id };
-
-      // Get Product By Category
-      const getProducts = fetchData(findProducts, {
+    const {
+      searchCollections: {
+        items: [tag],
+      },
+    } = await fetchData(getCollectionsBySlug, {
+      filter: { slug: { eq: slug } },
+    });
+    if (tag) {
+      filter.collections = { eq: slug };
+      const {
+        listCollections: { items: collectionsRes },
+      } = await fetchData(listCollections, {
+        filter: {
+          storeId: { eq: STORE_ID },
+        },
+        sort: [{ field: "position", direction: "asc" }],
+      });
+      const collections = [
+        { name: "all", path: "/ranges/all" },
+        ...collectionsRes.map((col) => ({
+          ...col,
+          path: `/ranges/${col.slug}`,
+        })),
+      ];
+      // Get Product By tag
+      const { searchProducts } = await fetchData(findProducts, {
         filter,
         sort: [{ field: "position", direction: "asc" }],
         variantFilter: { status: { eq: "ENABLED" } },
         imageLimit: 1,
       });
 
-      // Get Product Sub-Category By Category ID
-      const getSubCategoriesByCategory = fetchData(
-        getSubCategoriesByCategoryID,
-        {
-          filter: { storeId: { eq: STORE_ID }, categoryID: { eq: id } },
-        }
-      );
-
-      const [{ searchProducts }, { searchProductSubCategories }] =
-        await Promise.all([getProducts, getSubCategoriesByCategory]);
-      const { items: subCategoriesRes } = searchProductSubCategories;
-
-      const subCategories = [
-        { name: "All", path: `/collections/${category.slug}` },
-        ...subCategoriesRes.map((sub) => ({
-          ...sub,
-          path: `/collections/${category.slug}/${sub.slug}`,
-        })),
-      ];
-      const { items } = searchProducts;
       const products = await Promise.all(
-        items.map((product) => optimizeProduct(product, { partial: true }))
+        searchProducts?.items.map((product) =>
+          optimizeProduct(product, { partial: true })
+        )
       );
-      const optimizedCategory = await optimizeCategory(category);
-
       return {
         props: {
-          categoryId: id,
-          category: optimizedCategory,
-
+          tag,
+          tagId: slug,
           products: { ...searchProducts, items: products },
-          // sideBarCategories: categories,
-          subCategories,
           pageFilter: filter,
+          collections,
+          // sideBarCategories: [],
         },
       };
     }

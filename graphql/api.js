@@ -872,7 +872,7 @@ export const findProducts = /* GraphQL */ `
       items {
         id
         title
-        collections
+        collections 
         vendor
         subCategory {
           name

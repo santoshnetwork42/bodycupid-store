@@ -7,7 +7,7 @@ import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filte
 import { cleanQuery } from "~/utils/helper";
 
 export default function ToolBox(props) {
-  const { type = "left", filterItems, isRanges, basePath } = props;
+  const { type = "left", filterItems } = props;
   const router = useRouter();
   const query = router.query;
   const { asPath } = router;
@@ -15,7 +15,6 @@ export default function ToolBox(props) {
   const { category, subcategory, ...filterQuery } = query;
   const gridType = query.type ? query.type : "grid";
   let tmp = 0;
-  const isCollection = asPath.includes;
 
   useEffect(() => {
     window.addEventListener("scroll", stickyToolboxHandler);
@@ -153,34 +152,15 @@ export default function ToolBox(props) {
       </nav>
       {!!filterItems?.length && (
         <div className="filters-container d-flex mb-5 align-items-center">
-          <ALink
-            href={{
-              pathname: `/collections/${isRanges ? "ranges" : "all"}`,
-              query: cleanQuery({
-                ...filterQuery,
-                type: router.query.type || null,
-              }),
-            }}
-            className={`sub-category-tag ${
-              asPath.includes(basePath) && "selected-sub-category-tag"
-            }`}
-          >
-            <p className="m-0">All</p>
-          </ALink>
           {filterItems.map((item) => {
             return (
               <ALink
                 key={item.id}
                 className={`sub-category-tag ${
-                  asPath.includes(item.path) && "selected-sub-category-tag"
+                  asPath === item.path && "selected-sub-category-tag"
                 }`}
                 href={{
                   pathname: item.path,
-                  query: cleanQuery({
-                    ...filterQuery,
-                    grid: grid,
-                    type: router.query.type || null,
-                  }),
                 }}
               >
                 <p className="m-0">{item.name}</p>

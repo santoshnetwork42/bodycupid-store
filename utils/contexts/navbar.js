@@ -84,17 +84,17 @@ export const useMenu = () => {
   if (collections.length) {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
-      link: `/collections/${col.slug}`,
+      link: `/ranges/${col.slug}`,
     }));
 
     menu.push({
       label: "Ranges",
-      link: "/collections/ranges",
+      link: "/ranges",
       subMenu: collectionsMenu,
     });
   }
 
-  menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
+  menu.push({ label: "Combos & Gifts", link: `/ranges/combos-and-gifts` });
   return menu;
 };
 

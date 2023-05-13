@@ -31,7 +31,6 @@ function AllCollection(props) {
               <ProductListOne
                 products={products}
                 isToolbox
-                basePath="/collections/ranges"
                 filterItems={collections}
                 pageFilter={pageFilter}
               />
@@ -45,7 +44,7 @@ function AllCollection(props) {
 
 export const getStaticProps = async () => {
   try {
-    const   filter = {
+    const filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
       collections: { exists: true },
@@ -58,10 +57,13 @@ export const getStaticProps = async () => {
       sort: [{ field: "position", direction: "asc" }],
     });
 
-    const collections = collectionsRes.map((col) => ({
-      ...col,
-      path: `/collections/${col.slug}`,
-    }));
+    const collections = [
+      { name: "All", path: "/ranges" },
+      ...collectionsRes.map((col) => ({
+        ...col,
+        path: `/ranges/${col.slug}`,
+      })),
+    ];
 
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {

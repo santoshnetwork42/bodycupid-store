@@ -20,6 +20,7 @@ function Categories(props) {
   const {
     store,
     subCategory,
+    category,
     products,
     categoryId,
     subCategoryId,
@@ -27,6 +28,7 @@ function Categories(props) {
     subCategories,
   } = props;
   const { name } = store;
+  console.log("categoryId :>> ", category);
 
   return (
     <main className="main searchBar">
@@ -56,6 +58,7 @@ function Categories(props) {
                 subCategoryId={subCategoryId}
                 products={products}
                 pageFilter={pageFilter}
+                basePath={`/collections/${category}`}
                 filterItems={subCategories}
               />
             </div>
@@ -102,7 +105,6 @@ export const getStaticProps = async (context) => {
   try {
     const { params } = context;
     const { subcategory: slug, category } = params || {};
-
     // Sub Category By Slug
     let {
       byslugProductSubCategory: {
@@ -146,10 +148,13 @@ export const getStaticProps = async (context) => {
         items.map((product) => optimizeProduct(product, { partial: true }))
       );
       const optimizedSubCategory = await optimizeCategory(subCategory);
-      const subCategories = res?.map((sub) => ({
-        ...sub,
-        path: `/collections/${category}/${sub.slug}`,
-      }));
+      const subCategories = [
+        { name: "all", path: `/collections/${category}` },
+        ...res?.map((sub) => ({
+          ...sub,
+          path: `/collections/${category}/${sub.slug}`,
+        })),
+      ];
 
       return {
         props: {
@@ -159,6 +164,7 @@ export const getStaticProps = async (context) => {
           products: { ...searchProducts, items: products },
           subCategories,
           pageFilter: filter,
+          category,
         },
       };
     }
