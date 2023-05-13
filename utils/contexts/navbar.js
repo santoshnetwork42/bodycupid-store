@@ -89,7 +89,7 @@ export const useMenu = () => {
 
     menu.push({
       label: "Ranges",
-      link: "/ranges",
+      link: "/ranges/all",
       subMenu: collectionsMenu,
     });
   }

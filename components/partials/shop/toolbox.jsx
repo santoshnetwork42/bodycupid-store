@@ -118,12 +118,33 @@ export default function ToolBox(props) {
   return (
     <div>
       <nav
-        className={`toolbox sticky-toolbox sticky-content fix-top ${
+        className={`toolbox sticky-toolbox sticky-content fix-top mt-5 ${
           type === "horizontal" ? "toolbox-horizontal" : ""
         }`}
       >
         {type === "horizontal" ? <SidebarFilterThree /> : ""}
-        <div className="toolbox-left d-flex">
+        <div className="toolbox-left d-flex justify-content-between w-100">
+          {!!filterItems?.length && (
+            <div className="filters-container d-flex mb-5 align-items-center">
+              {filterItems.map((item) => {
+                return (
+                  <ALink
+                    key={item.id}
+                    className={`sub-category-tag ${
+                      (asPath === item.path ||
+                        asPath.includes(`${item.path}?`)) &&
+                      "selected-sub-category-tag"
+                    }`}
+                    href={{
+                      pathname: item.path,
+                    }}
+                  >
+                    <p className="m-0">{item.name}</p>
+                  </ALink>
+                );
+              })}
+            </div>
+          )}
           <div
             className={`toolbox-item toolbox-sort ${
               type === "boxed" || type === "banner"
@@ -150,25 +171,6 @@ export default function ToolBox(props) {
           </div>
         </div>
       </nav>
-      {!!filterItems?.length && (
-        <div className="filters-container d-flex mb-5 align-items-center">
-          {filterItems.map((item) => {
-            return (
-              <ALink
-                key={item.id}
-                className={`sub-category-tag ${
-                  asPath === item.path && "selected-sub-category-tag"
-                }`}
-                href={{
-                  pathname: item.path,
-                }}
-              >
-                <p className="m-0">{item.name}</p>
-              </ALink>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 }
