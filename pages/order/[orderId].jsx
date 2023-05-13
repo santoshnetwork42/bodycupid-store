@@ -14,7 +14,6 @@ import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
-import Checkmark, { Cross } from "~/components/icons";
 import { alertToaster } from "../../utils/popupHelper";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
