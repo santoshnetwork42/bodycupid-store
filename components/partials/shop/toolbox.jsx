@@ -126,10 +126,10 @@ export default function ToolBox(props) {
         <div className="toolbox-left d-flex justify-content-between w-100">
           {!!filterItems?.length && (
             <div className="filters-container d-flex mb-5 align-items-center">
-              {filterItems.map((item) => {
+              {filterItems.map((item, i) => {
                 return (
                   <ALink
-                    key={item.id}
+                    key={`${i}-${item.pathname}`}
                     className={`sub-category-tag ${
                       (asPath === item.path ||
                         asPath.includes(`${item.path}?`)) &&

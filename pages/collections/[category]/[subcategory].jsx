@@ -28,7 +28,6 @@ function Categories(props) {
     subCategories,
   } = props;
   const { name } = store;
-  console.log("categoryId :>> ", category);
 
   return (
     <main className="main searchBar">
@@ -58,7 +57,6 @@ function Categories(props) {
                 subCategoryId={subCategoryId}
                 products={products}
                 pageFilter={pageFilter}
-                basePath={`/collections/${category}`}
                 filterItems={subCategories}
               />
             </div>
