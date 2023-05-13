@@ -124,6 +124,12 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
       pathname: "/collections/search",
       query: { search },
     });
+
+    document.querySelector(".header-search.show-results") &&
+      document
+        .querySelector(".header-search.show-results")
+        .classList.remove("show-results");
+
     return false;
   }
 
