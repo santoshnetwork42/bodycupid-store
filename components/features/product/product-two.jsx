@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
+import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import { Star, Eye } from "~/components/icons";
@@ -94,45 +95,22 @@ function ProductTwo(props) {
     <div className={`product text-left ${adClass} product-card`}>
       <figure className="product-media">
         <ALink href={`/product/${slug}`}>
-          <OptimizedImage
-            optimizedData={thumbImage?.image}
+          <Image
             src={getPublicImageURL(thumbImage?.imageKey)}
-            alt={thumbImage?.alt}
+            layout="fill"
           />
-          {!!secondaryImage && (
-            <OptimizedImage
-              optimizedData={secondaryImage.image}
-              src={getPublicImageURL(secondaryImage.imageKey)}
-              alt={secondaryImage.alt}
-              spanAttributes={{
-                className: "product-image-hover",
-              }}
-            />
-          )}
         </ALink>
 
         <div className="product-label-group">
-          {isFeatured ? (
-            <label className="product-label label-new">New</label>
-          ) : (
-            ""
-          )}
-          {isFeatured ? (
-            <label className="product-label label-top">Top</label>
-          ) : (
-            ""
-          )}
-          {discount > 0 ? (
-            product.variants?.items?.length < 2 ? (
+          {discount > 0 &&
+            (product.variants?.items?.length < 2 ? (
               <label className="product-label label-sale">-{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
-            )
-          ) : (
-            ""
-          )}
+            ))}
         </div>
-        {tag && (
+
+        {!!tag && (
           <div className="product-tags-group">
             <label className="product-label label-best-seller">{tag}</label>
           </div>

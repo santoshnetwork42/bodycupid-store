@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
 import CategorySection from "~/components/partials/home/category-section";
-
 import BlogSection from "~/components/partials/home/blog-section";
-
 import {
   getHomePageBlogs,
   getHomePageCategories,
@@ -18,7 +16,6 @@ import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 import {
   optimizeCategory,
-  optimizeProduct,
   optimizeStore,
   optimizedBlogs,
 } from "~/utils/getStaticData";
@@ -66,20 +63,10 @@ function HomePage({
           redirectTo="/collections/featured"
         />
         <CategorySection categories={categories} />
-        {/* <DealSection /> */}
         <BlogSection posts={blogs} />
-        {/* <CtaSection /> */}
         <ReviewSection />
         <BrandSection brands={brands} />
-        {/* <SmallCollection  
-          featured={featured}
-          latest={latest}
-          bestSelling={bestSelling}
-          onSale={onSale}
-          loading={loading}
-        /> */}
       </div>
-      {/* <NewsletterModal /> */}
     </main>
   );
 }
@@ -144,13 +131,6 @@ export const getStaticProps = async () => {
       getStoreData,
     ]);
 
-    const getOptimizedProduct = (items) =>
-      Promise.all(
-        (items || []).map((product) =>
-          optimizeProduct(product, { partial: true })
-        )
-      );
-
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categoriesData } = searchProductSubCategories;
@@ -160,8 +140,8 @@ export const getStaticProps = async () => {
 
     const { banners } = await optimizeStore(store);
 
-    const bestSellerProducts = await getOptimizedProduct(bestSellerItems);
-    const featuredProducts = await getOptimizedProduct(featuredItems);
+    const bestSellerProducts = bestSellerItems;
+    const featuredProducts = featuredItems;
 
     const categories = await Promise.all(
       (categoriesData || []).map(optimizeCategory)
@@ -175,6 +155,7 @@ export const getStaticProps = async () => {
       "/images/brands/8.png",
       "/images/brands/9.png",
     ];
+
     for (const brand in brands) {
       const optimizedBrand = await optimizeImage({
         src: brands[brand],

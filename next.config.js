@@ -33,10 +33,20 @@ module.exports = {
             }
         ];
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'd3pvtru6vse1kf.cloudfront.net',
+                port: '',
+                pathname: '/public/**',
+            },
+        ],
+    },
 }
 
 module.exports = withSentryConfig(
-  module.exports,
-  { silent: true },
-  { hideSourcemaps: true },
+    module.exports,
+    { silent: true },
+    { hideSourcemaps: true },
 );
