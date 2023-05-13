@@ -45,7 +45,7 @@ function AllCollection(props) {
 
 export const getStaticProps = async () => {
   try {
-    const filter = {
+    const   filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
       collections: { exists: true },
