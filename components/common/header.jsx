@@ -48,8 +48,9 @@ function Header({ navbar, auth, openPasswordLess }) {
                 <Image
                   src="/images/logo.png"
                   alt="logo"
-                  width="100"
-                  height="100"
+                  width={100}
+                  height={100}
+                  quality={100}
                   priority
                   objectFit="contain"
                 />

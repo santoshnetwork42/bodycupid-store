@@ -11,7 +11,6 @@ import {
 } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
-import { optimizeStore } from "~/utils/getStaticData";
 import BrandSection from "~/components/partials/home/brand-section";
 import ReviewSection from "~/components/partials/home/review-section";
 import StorySection from "~/components/partials/home/story-section";
@@ -36,9 +35,9 @@ function HomePage({
       </Head>
 
       <h1 className="d-none">{name} - Homepage</h1>
-      <StorySection categories={categories} />
       <div className="page-content page-content-wrapper">
         <div className="intro-section">
+          <StorySection categories={categories} />
           <IntroSection {...hero} />
         </div>
         <ProductCollection
@@ -102,8 +101,7 @@ export const getStaticProps = async () => {
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categories } = searchProductSubCategories;
-
-    const { banners } = await optimizeStore(store);
+    const { banners } = store;
 
     const bestSellerProducts = bestSellerItems;
     const featuredProducts = featuredItems;

@@ -37,11 +37,12 @@ module.exports = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'd3pvtru6vse1kf.cloudfront.net',
-                port: '',
+                hostname: process.env.NEXT_PUBLIC_MEDIA_URL,
+                // port: '',
                 pathname: '/public/**',
             },
         ],
+        minimumCacheTTL: 60 * 60 * 24 * 30,
     },
 }
 

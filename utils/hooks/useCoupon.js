@@ -101,25 +101,25 @@ export const useFreeProducts = () => {
           return hasCollection && hasProduct;
         })
         .map((coupon) => coupon.getYProduct),
-    [coupons, cartItems, total, totalItems]
+    [coupons, total, totalItems, cartList]
   );
 
-  const getProduct = async () => {
-    const response = await Promise.all(
-      freeProductIds.map((productId) =>
-        API.graphql({
-          query: getProductById,
-          variables: { id: productId },
-        }).then(({ data }) => data.getProduct)
-      )
-    );
-
-    if (Array.isArray(response)) {
-      setProducts(response);
-    }
-  };
-
   useEffect(() => {
+    const getProduct = async () => {
+      const response = await Promise.all(
+        freeProductIds.map((productId) =>
+          API.graphql({
+            query: getProductById,
+            variables: { id: productId },
+          }).then(({ data }) => data.getProduct)
+        )
+      );
+
+      if (Array.isArray(response)) {
+        setProducts(response);
+      }
+    };
+
     getProduct();
   }, [freeProductIds]);
 
