@@ -28,10 +28,10 @@ function AllProduct(props) {
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
+                sectionId="All"
                 products={products}
                 filterItems={categories}
                 pageFilter={pageFilter}
-                basePath="/collections/all"
               />
             </div>
           </div>
@@ -47,19 +47,21 @@ export const getStaticProps = async () => {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
     };
+
     //get all categories
-    const {
-      searchProductCategories: { items: categoriesRes },
-    } = await fetchData(getMenuCategories, {
+    const { searchProductCategories } = await fetchData(getMenuCategories, {
       filter: { storeId: { eq: STORE_ID } },
       sort: [{ field: "priority", direction: "asc" }],
     });
+
     const categories = [
       { name: "all", path: "/collections/all" },
-      ...categoriesRes.map((cat) => ({
+      ...searchProductCategories.items.map((cat) => ({
         ...cat,
         path: `/collections/${cat.slug}`,
       })),
+      { name: "Ranges", path: "/ranges/all" },
+      { name: "Combos & Gifts", path: "/ranges/combos-and-gifts" },
     ];
 
     // Get all Product
@@ -77,10 +79,8 @@ export const getStaticProps = async () => {
 
     return {
       props: {
-        category: null,
         categories,
         products: { ...searchProducts, items: products },
-        categorySlug: null,
         pageFilter: filter,
       },
       revalidate: 60,

@@ -9,8 +9,6 @@ import {
   findProducts,
   getSubCategoriesByCategoryID,
 } from "~/graphql/api";
-// import ShopBanner from "~/components/partials/shop/shop-banner";
-// import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
 import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
@@ -20,9 +18,7 @@ function Categories(props) {
   const {
     store,
     subCategory,
-    category,
     products,
-    categoryId,
     subCategoryId,
     pageFilter,
     subCategories,
@@ -41,8 +37,6 @@ function Categories(props) {
         {name} - {subCategory.name}
       </h1>
 
-      {/* <ShopBanner category={subCategory} /> */}
-
       <div className="page-content pb-3">
         <div className="container">
           <CategoryHeader
@@ -52,9 +46,7 @@ function Categories(props) {
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
-                category={subCategory}
-                categoryId={categoryId}
-                subCategoryId={subCategoryId}
+                sectionId={subCategoryId}
                 products={products}
                 pageFilter={pageFilter}
                 filterItems={subCategories}
@@ -75,13 +67,14 @@ export const getStaticPaths = async () => {
     };
   }
 
-  const {
-    searchProductSubCategories: { items: response },
-  } = await fetchData(getAllSubcategoriesPath, {
-    filter: { storeId: { eq: STORE_ID }, categoryID: { exists: true } },
-  });
+  const { searchProductSubCategories } = await fetchData(
+    getAllSubcategoriesPath,
+    {
+      filter: { storeId: { eq: STORE_ID }, categoryID: { exists: true } },
+    }
+  );
 
-  const paths = response.reduce((obj, cur) => {
+  const paths = searchProductSubCategories.items.reduce((obj, cur) => {
     if (cur.category) {
       obj.push({
         params: {
@@ -103,6 +96,7 @@ export const getStaticProps = async (context) => {
   try {
     const { params } = context;
     const { subcategory: slug, category } = params || {};
+
     // Sub Category By Slug
     let {
       byslugProductSubCategory: {
@@ -142,6 +136,7 @@ export const getStaticProps = async (context) => {
 
       const { items: res } = searchProductSubCategories;
       const { items } = searchProducts;
+
       const products = await Promise.all(
         items.map((product) => optimizeProduct(product, { partial: true }))
       );
@@ -157,12 +152,10 @@ export const getStaticProps = async (context) => {
       return {
         props: {
           subCategory: optimizedSubCategory,
-          categoryId: categoryID,
           subCategoryId: id,
           products: { ...searchProducts, items: products },
           subCategories,
           pageFilter: filter,
-          category,
         },
       };
     }

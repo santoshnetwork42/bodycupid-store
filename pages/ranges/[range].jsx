@@ -1,31 +1,22 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import {
-  getAllCategoriesPath,
   findProducts,
-  listCollections,
   getCollectionsBySlug,
+  listCollections as listCollectionsMutation,
 } from "~/graphql/api";
-// import ShopBanner from "~/components/partials/shop/shop-banner";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
 import { optimizeProduct } from "~/utils/getStaticData";
 import CategoryHeader from "~/components/common/category-header";
 
 function Categories(props) {
-  const {
-    store,
-    products,
-    categoryId,
-    tag,
-    tagId,
-    pageFilter,
-    collections = [],
-  } = props;
+  const { store, products, tag, tagId, pageFilter, collections = [] } = props;
   const { name } = store;
+
   return (
     <main className="main searchBar">
       <Head>
@@ -44,9 +35,8 @@ function Categories(props) {
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
-                tag={tag}
-                tagId={tagId}
-                categoryId={categoryId}
+                isToolbox
+                sectionId={tagId}
                 products={products}
                 pageFilter={pageFilter}
                 filterItems={collections}
@@ -66,26 +56,14 @@ export const getStaticPaths = async () => {
       fallback: "blocking",
     };
   }
-  const {
-    searchProductCategories: { items: response },
-  } = await fetchData(getAllCategoriesPath, {
-    filter: { storeId: { eq: STORE_ID } },
-  });
 
-  const {
-    listCollections: { items: collectionRes },
-  } = await fetchData(listCollections);
-
-  const data = [
-    ...new Map(
-      [...collectionRes, ...response].map((v) => [v.slug, v])
-    ).values(),
-  ];
-  const paths = data.map((c) => {
+  const { listCollections } = await fetchData(listCollections);
+  const paths = listCollections.items.map((c) => {
     return {
-      params: { category: c.slug },
+      params: { range: c.slug },
     };
   });
+
   return {
     paths,
     fallback: "blocking",
@@ -96,6 +74,7 @@ export const getStaticProps = async (context) => {
   try {
     const { params } = context;
     const { range: slug } = params;
+
     const filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },
@@ -108,24 +87,27 @@ export const getStaticProps = async (context) => {
     } = await fetchData(getCollectionsBySlug, {
       filter: { slug: { eq: slug } },
     });
+
     if (tag) {
-      filter.collections = { eq: slug };
-      const {
-        listCollections: { items: collectionsRes },
-      } = await fetchData(listCollections, {
+      const { listCollections } = await fetchData(listCollectionsMutation, {
         filter: {
           storeId: { eq: STORE_ID },
+          showInMenu: { eq: true },
         },
         sort: [{ field: "position", direction: "asc" }],
       });
+
       const collections = [
-        { name: "all", path: "/ranges/all" },
-        ...collectionsRes.map((col) => ({
+        { name: "All", path: "/ranges/all" },
+        ...listCollections.items.map((col) => ({
           ...col,
           path: `/ranges/${col.slug}`,
         })),
+        { name: "Combos & Gifts", path: "/ranges/combos-and-gifts" },
       ];
+
       // Get Product By tag
+      filter.collections = { eq: slug };
       const { searchProducts } = await fetchData(findProducts, {
         filter,
         sort: [{ field: "position", direction: "asc" }],
@@ -138,6 +120,7 @@ export const getStaticProps = async (context) => {
           optimizeProduct(product, { partial: true })
         )
       );
+
       return {
         props: {
           tag,
@@ -145,7 +128,6 @@ export const getStaticProps = async (context) => {
           products: { ...searchProducts, items: products },
           pageFilter: filter,
           collections,
-          // sideBarCategories: [],
         },
       };
     }
@@ -164,7 +146,5 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(Categories);
-
 Component.showStickyCheckout = true;
-
 export default Component;

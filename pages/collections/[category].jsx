@@ -8,9 +8,7 @@ import {
   getAllCategoriesPath,
   findProducts,
   getSubCategoriesByCategoryID,
-  listCollections,
 } from "~/graphql/api";
-// import ShopBanner from "~/components/partials/shop/shop-banner";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
 import { optimizeCategory, optimizeProduct } from "~/utils/getStaticData";
@@ -22,13 +20,11 @@ function Categories(props) {
     category,
     products,
     categoryId,
-    tag,
-    tagId,
     pageFilter,
-    collections = [],
     subCategories = [],
   } = props;
   const { name } = store;
+
   return (
     <main className="main searchBar">
       <Head>
@@ -41,7 +37,6 @@ function Categories(props) {
         {name} - {category?.name}
       </h1>
 
-      {/* <ShopBanner category={category} /> */}
       <div className="page-content  pb-3">
         <div className="container">
           <CategoryHeader
@@ -51,9 +46,8 @@ function Categories(props) {
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
-                tag={tag}
-                tagId={tagId}
-                categoryId={categoryId}
+                isToolbox
+                sectionId={categoryId}
                 products={products}
                 pageFilter={pageFilter}
                 filterItems={subCategories}
@@ -73,26 +67,16 @@ export const getStaticPaths = async () => {
       fallback: "blocking",
     };
   }
-  const {
-    searchProductCategories: { items: response },
-  } = await fetchData(getAllCategoriesPath, {
+  const { searchProductCategories } = await fetchData(getAllCategoriesPath, {
     filter: { storeId: { eq: STORE_ID } },
   });
 
-  const {
-    listCollections: { items: collectionRes },
-  } = await fetchData(listCollections);
-
-  const data = [
-    ...new Map(
-      [...collectionRes, ...response].map((v) => [v.slug, v])
-    ).values(),
-  ];
-  const paths = data.map((c) => {
+  const paths = searchProductCategories.items.map((c) => {
     return {
       params: { category: c.slug },
     };
   });
+
   return {
     paths,
     fallback: "blocking",
@@ -160,9 +144,7 @@ export const getStaticProps = async (context) => {
         props: {
           categoryId: id,
           category: optimizedCategory,
-
           products: { ...searchProducts, items: products },
-          // sideBarCategories: categories,
           subCategories,
           pageFilter: filter,
         },
@@ -183,7 +165,5 @@ function mapStateToProps(state) {
 }
 
 const Component = connect(mapStateToProps)(Categories);
-
 Component.showStickyCheckout = true;
-
 export default Component;

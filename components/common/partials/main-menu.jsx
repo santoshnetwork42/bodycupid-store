@@ -15,7 +15,7 @@ function MainMenu() {
       <ul className="menu">
         {menu.map((item) => (
           <li
-            key={item.slug}
+            key={item.link}
             className={`${pathname.includes(item.link) ? "active" : ""} ${
               item?.subMenu?.length ? "submenu" : ""
             }
@@ -35,7 +35,7 @@ function MainMenu() {
                 <div className="d-flex">
                   <ul>
                     {item?.subMenu.map((subItem) => (
-                      <li key={`sub-categories-${subItem.slug}`}>
+                      <li key={`sub-categories-${subItem.link}`}>
                         <ALink className="cat-name" href={subItem.link}>
                           {subItem.label}
                         </ALink>

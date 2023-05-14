@@ -27,17 +27,12 @@ function ProductListOne(props) {
     type = "left",
     isToolbox = true,
     products: initialData,
-    categoryId,
-    subCategoryId,
-    tagId,
     pageFilter = {},
     recordSearch,
     filterItems,
     viewList,
-    basePath,
+    sectionId,
   } = props;
-
-  const sectionId = tagId || subCategoryId || categoryId;
 
   const router = useRouter();
   const { query } = router;
@@ -150,7 +145,7 @@ function ProductListOne(props) {
     setToken(nextToken);
     setTotal(total);
     viewList(sectionId, "PLP", items);
-  }, [categoryId, subCategoryId, tagId]);
+  }, [sectionId]);
 
   useEffect(() => {
     getProducts(true);
@@ -205,7 +200,7 @@ function ProductListOne(props) {
                   slug={category}
                   product={item}
                   section={{
-                    id: tagId || subCategoryId || categoryId,
+                    id: sectionId,
                     name: "PLP",
                   }}
                 />

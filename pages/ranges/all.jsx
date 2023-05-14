@@ -2,8 +2,6 @@ import React from "react";
 import Head from "next/head";
 import { connect } from "react-redux";
 
-// import ShopBanner from "~/components/partials/shop/shop-banner";
-// import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import { findProducts, listCollections } from "~/graphql/api";
 import { STORE_ID } from "~/config";
@@ -19,16 +17,13 @@ function AllCollection(props) {
       <Head>
         <title>{name} - All Products</title>
       </Head>
-
       <h1 className="d-none">{name} - All Products</h1>
-
-      {/* <ShopBanner category={null} /> */}
-
       <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
+                sectionId="All Ranges"
                 products={products}
                 isToolbox
                 filterItems={collections}
