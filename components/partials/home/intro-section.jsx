@@ -14,11 +14,11 @@ function IntroSection({ banners = [] }) {
         options={introSlider}
       >
         {banners.map((banner) => {
-          const { webKey, mobileKey } = banner;
+          const { webKey, mobileKey, link } = banner;
           return (
             <div className="intro-slide2" key={webKey}>
               <ALink
-                href="/collections/all"
+                href={link || "/collections/all"}
                 className={`d-sm-none intro-slider-link`} //for desktop size
               >
                 <Image
@@ -33,7 +33,7 @@ function IntroSection({ banners = [] }) {
                 />
               </ALink>
               <ALink
-                href="/collections/all"
+                href={link || "/collections/all"}
                 className="d-none d-sm-show intro-slider-link" //for mobile size
               >
                 <Image

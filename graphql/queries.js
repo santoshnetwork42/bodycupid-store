@@ -699,6 +699,7 @@ export const getStore = /* GraphQL */ `
       banners {
         webKey
         mobileKey
+        link
       }
       announcements
       socialLinks {

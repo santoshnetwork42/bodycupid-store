@@ -90,7 +90,6 @@ function ProductTwo(props) {
             src={getPublicImageURL(thumbImage?.imageKey)}
             layout="fill"
             quality={95}
-            priority={priority}
             loading={priority ? "eager" : "lazy"}
           />
         </ALink>
