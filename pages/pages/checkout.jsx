@@ -500,15 +500,23 @@ function Checkout(props) {
                           onClick={() => setIsCollapse(!isCollapse)}
                           className="checkout-summary-btn d-flex bg-white border-regular align-items-center mb-2 "
                         >
-                          <div className="d-flex align-items-center">
-                            <ShoppingCart size={20} />
-                            <p className="checkout-summary-label m-0">
-                              Order Summary
-                            </p>
-                            {isCollapse ? (
-                              <UpAngle size={17} color="currentColor" />
-                            ) : (
-                              <DownAngle color="currentColor" size={16} />
+                          <div>
+                            <div className="d-flex align-items-center">
+                              <ShoppingCart size={20} />
+                              <p className="checkout-summary-label m-0">
+                                Order Summary &nbsp;
+                                {isCollapse ? (
+                                  <UpAngle size={17} color="currentColor" />
+                                ) : (
+                                  <DownAngle color="currentColor" size={16} />
+                                )}
+                              </p>
+                            </div>
+                            {!!totalSaved && (
+                              <p className="saving-lable mb-0 ml-6 text-success">
+                                <span>{`₹${toDecimal(totalSaved)} `}</span>
+                                saved so far on this order
+                              </p>
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
@@ -693,6 +701,11 @@ function Checkout(props) {
                                       !shippingTotal && "discount-price-color"
                                     }`}
                                   >
+                                    {shippingTotal < 50 && (
+                                      <del className="summary-subtotal-listingprice mr-2">
+                                        ₹{toDecimal(50)}
+                                      </del>
+                                    )}
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
                                       : "Free"}

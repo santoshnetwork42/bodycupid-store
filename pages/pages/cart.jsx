@@ -188,6 +188,11 @@ function Cart(props) {
                                   !shippingTotal && "discount-price-color"
                                 }`}
                               >
+                                {shippingTotal < 50 && (
+                                  <del className="summary-subtotal-listingprice mr-2">
+                                    ₹{toDecimal(50)}
+                                  </del>
+                                )}
                                 {!!shippingTotal
                                   ? `₹${toDecimal(shippingTotal)}`
                                   : "FREE"}
