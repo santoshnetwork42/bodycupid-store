@@ -375,8 +375,8 @@ export const getCartTotals = (
   const totalPrepaidDiscount = couponTotal + prepaidDiscount;
   const totalCodDiscount = couponTotal;
   const totalDiscount = prepaid ? totalPrepaidDiscount : totalCodDiscount;
-
-  const totalAmountSaved = totalListingPrice - totalPrice + totalDiscount;
+  const shippingAmountSaved = Math.max(0, 50 - shippingTotal);
+  const totalAmountSaved = totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved;
   const prepaidGrandTotal =
     totalPrice + prepaidShippingCharge - totalPrepaidDiscount;
   const codGrandTotal = totalPrice + codShippingCharge - totalCodDiscount;
