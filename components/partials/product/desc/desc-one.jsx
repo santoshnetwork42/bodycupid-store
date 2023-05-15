@@ -31,10 +31,10 @@ const reviewDefault = {
 
 const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
 
-const ManufacturerInformation = [
+const getManufacturerInformation = (product) => [
   {
     label: "Manufacturer Name :",
-    value: "",
+    value: product.title,
   },
   {
     label: "Country of Origin :",
@@ -246,6 +246,8 @@ function DescOne(props) {
       images: temp,
     });
   };
+
+  const manufacturerInformation = getManufacturerInformation(product);
 
   return (
     <div
@@ -585,13 +587,11 @@ function DescOne(props) {
         <Card title="MANUFACTURER INFORMATION" noDisplayStyle collapseEvent>
           <div className="row mb-2">
             <div className="col-md-12">
-              {ManufacturerInformation.map((item, index) => {
+              {manufacturerInformation.map((item) => {
                 return (
                   <div className="additional-info-container" key={item.label}>
                     <h6 className="additional-info-label m-0">{item.label}</h6>
-                    <p className="additional-info-value">
-                      {index === 0 ? product.title : item.value}
-                    </p>
+                    <p className="additional-info-value">{item.value}</p>
                   </div>
                 );
               })}
