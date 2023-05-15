@@ -26,6 +26,7 @@ function ProductTwo(props) {
     removeFromCart,
     slug: tagSlug,
     section,
+    priority,
   } = props;
 
   const {
@@ -34,16 +35,10 @@ function ProductTwo(props) {
     listingPrice,
     title,
     slug,
-    isFeatured,
     rating,
     totalRatings,
     collections,
   } = product || {};
-
-  // decide if the product is wishlisted
-  let isWishlisted;
-  isWishlisted =
-    wishlist.findIndex((item) => item.id === id) > -1 ? true : false;
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
@@ -77,7 +72,7 @@ function ProductTwo(props) {
     return cartList.find((cl) => cl.recordKey === recordKey);
   }, [cartList]);
 
-  const { thumbImage, secondaryImage, discount } = getProductMeta(product);
+  const { thumbImage, discount } = getProductMeta(product);
 
   function changeQty(qty) {
     if (cartItem) {
@@ -99,6 +94,7 @@ function ProductTwo(props) {
             src={getPublicImageURL(thumbImage?.imageKey)}
             layout="fill"
             quality={95}
+            priority={priority}
           />
         </ALink>
 

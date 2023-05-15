@@ -71,6 +71,7 @@ export const getStaticProps = async () => {
         products: { ...searchProducts, items: products },
         pageFilter: filter,
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.log(error);

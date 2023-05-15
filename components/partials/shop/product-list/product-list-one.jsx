@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 import ToolBox from "~/components/partials/shop/toolbox";
 import ProductTwo from "~/components/features/product/product-two";
-import ProductEight from "~/components/features/product/product-eight";
 import { findProducts } from "~/graphql/api";
 import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
@@ -43,7 +42,7 @@ function ProductListOne(props) {
     type: gridType = "grid",
     search,
     sortby,
-    category,
+    slug,
   } = query;
 
   useEffect(() => {
@@ -192,28 +191,21 @@ function ProductListOne(props) {
         hasMore={products.length < total}
         loader={<Loader loading small />}
       >
-        {gridType === "grid" ? (
-          <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
-            {products.map((item) => (
-              <div className="product-wrap" key={"shop-" + item.id}>
-                <ProductTwo
-                  slug={category}
-                  product={item}
-                  section={{
-                    id: sectionId,
-                    name: "PLP",
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="product-lists product-wrapper">
-            {products.map((item) => (
-              <ProductEight product={item} key={"shop-list-" + item.id} />
-            ))}
-          </div>
-        )}
+        <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
+          {products.map((item, index) => (
+            <div className="product-wrap" key={"shop-" + item.id}>
+              <ProductTwo
+                priority={index < 8}
+                slug={slug}
+                product={item}
+                section={{
+                  id: sectionId,
+                  name: "PLP",
+                }}
+              />
+            </div>
+          ))}
+        </div>
 
         {!total && (
           <p className="ml-1">
