@@ -132,7 +132,7 @@ function Addresses({
                   onClick={() => setSelected(adr)}
                 >
                   <div className={`card card-address w-100`}>
-                    <div className="card-body pr-4 pl-3 pt-2 cursor-pointer bg-white">
+                    <div className="card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
                       <div className="d-flex">
                         {variant === "CHECKOUT" && (
                           <i className="radio-icon">

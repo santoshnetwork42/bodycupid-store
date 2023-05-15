@@ -15,7 +15,7 @@ const AddressForm = (props) => {
   const [address, setAddress] = useSetState({
     firstName: firstName || "",
     lastName: lastName || "",
-    email: email || "",
+    email: email || null,
     phone: phone,
     address: "",
     state: "AN",
@@ -133,7 +133,6 @@ const AddressForm = (props) => {
                   type="email"
                   className="form-control"
                   name="email-address"
-                  required
                   value={address?.email}
                   onChange={(e) => setAddress({ email: e.target.value.trim() })}
                 />
