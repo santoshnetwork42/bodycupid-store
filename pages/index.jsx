@@ -40,6 +40,7 @@ function HomePage({
           <StorySection categories={categories} />
           <IntroSection {...hero} />
         </div>
+
         <ProductCollection
           products={bestSellerProducts}
           title="Best sellers"
@@ -47,6 +48,7 @@ function HomePage({
           slug="best-seller"
           redirectTo="/collections/best-seller"
         />
+
         <ProductCollection
           products={featuredProducts}
           title="Our featured"
