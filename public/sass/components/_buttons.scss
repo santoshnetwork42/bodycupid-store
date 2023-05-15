@@ -339,7 +339,7 @@
 
 // Other Button Styles
 .btn-disabled {
-    cursor: not-allowed;
+    cursor: not-allowed !important;
     background-color: #e4eaec !important;
     color: #999 !important;
     border-color: #e4eaec !important;
