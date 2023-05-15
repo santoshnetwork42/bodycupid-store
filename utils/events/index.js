@@ -1,11 +1,11 @@
-import { getFirstVariantId } from "~/utils/products";
+import { getFirstVariant } from "~/utils/products";
 
 export const itemMapper = (product, coupon) => {
   let { variantId, id, title, category, subCategory, section, price, listingPrice, qty = 1, vendor, sku } = product;
   let contentType = "product_group";
 
   if (!variantId) {
-    variantId = getFirstVariantId(product);
+    variantId = getFirstVariant(product)?.id;
   }
 
   if (!variantId) {

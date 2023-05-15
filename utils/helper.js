@@ -1,5 +1,5 @@
 import { alertToaster } from "./popupHelper";
-import { getFirstVariantId } from "./products";
+import { getFirstVariant } from "./products";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -78,7 +78,7 @@ export const removeHoverEffect = () => {
           }
         }
       }
-    } catch (ex) {}
+    } catch (ex) { }
   }
 };
 
@@ -134,8 +134,8 @@ export const getRecordKey = (product, variantId) => {
   const { id } = product;
   if (variantId) return `${id}-${variantId}`;
 
-  const firstVariant = getFirstVariantId(product);
-  if (firstVariant) return `${id}-${firstVariant}`;
+  const firstVariant = getFirstVariant(product);
+  if (firstVariant) return `${id}-${firstVariant.id}`;
 
   return id;
 };

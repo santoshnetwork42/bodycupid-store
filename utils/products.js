@@ -1,8 +1,9 @@
-export const getFirstVariantId = (product) => {
+export const getFirstVariant = (product) => {
   if (product) {
     const { variants = {} } = product;
     const { items = [] } = variants;
-    return items[0]?.id;
+    const [variant] = items;
+    return variant;
   }
   return null;
 };
@@ -22,8 +23,8 @@ export const getProductMeta = (product) => {
 
   const discount = !!(product.listingPrice && product.price)
     ? Math.round(
-        ((product.listingPrice - product.price) * 100) / product.listingPrice
-      )
+      ((product.listingPrice - product.price) * 100) / product.listingPrice
+    )
     : 0;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);
