@@ -10,6 +10,7 @@ import Modal from "~/components/common/modal";
 import { Cricle, CricleDot, Plus } from "../icons";
 import { errorHandler } from "~/utils/errorHandler";
 import { modalActions } from "~/store/modal";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 function Addresses({
   user,
@@ -19,6 +20,7 @@ function Addresses({
   openAllAddressModal,
   closeAllAddressModal,
 }) {
+  const { isSmallSize: isMobile } = useWindowDimensions();
   const [loading, setLoading] = useState(!!user);
   const [selected, setSelected] = useState(null);
   const [addresses, setAddresses] = useState([]);
@@ -37,6 +39,10 @@ function Addresses({
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
+
+      if (!userAddresses.items.length && isMobile) {
+        openAllAddressModal();
+      }
 
       setAddresses(userAddresses.items);
       setLoading(false);

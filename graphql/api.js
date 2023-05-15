@@ -1393,6 +1393,7 @@ export const getReviews = /* GraphQL */ `
         comment
         title
         images
+        createdAt
       }
       nextToken
       total
