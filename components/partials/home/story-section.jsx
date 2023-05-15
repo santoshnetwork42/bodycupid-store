@@ -14,9 +14,7 @@ export default function StorySection({ categories }) {
               return (
                 <div key={category.id} className=" category">
                   <div className=" category-spacing category-ellipse">
-                    <ALink
-                      href={`/collections/${category.category.slug}/${category.slug}`}
-                    >
+                    <ALink href={`/collections/${category.slug}`}>
                       <Image
                         src={getPublicImageURL(category.imageUrl)}
                         alt={category.name}
@@ -29,9 +27,7 @@ export default function StorySection({ categories }) {
                     </ALink>
                     <div className="category-content">
                       <h4 className="category-name">
-                        <ALink
-                          href={`/collections/${category.category.slug}/${category.slug}`}
-                        >
+                        <ALink href={`/collections/${category.slug}`}>
                           {category.name}
                         </ALink>
                       </h4>

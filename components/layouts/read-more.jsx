@@ -1,51 +1,43 @@
-import React, { useEffect, useRef, useState } from "react";
-import { DownAngle, UpAngle } from "../icons";
-export default function ReadMore({ children, position = "center" }) {
-  const [read, setRead] = useState(false);
-  const [isShowMore, setIsShowMore] = useState(false);
+import React, { useState } from "react";
 
-  const pref = useRef(null);
+import { DownAngle, UpAngle } from "~/components/icons";
 
-  useEffect(() => {
-    if (pref.current?.clientHeight > 80) {
-      pref.current.className = "overflow-ellipsis";
-      setIsShowMore(true);
-    } else {
-      setIsShowMore(false);
-    }
-  }, []);
+export default function ReadMore({
+  content,
+  maxCharacterCount = 300,
+  position = "center",
+}) {
+  const text = content;
+  const [isTruncated, setIsTruncated] = useState(true);
 
-  const onChange = () => {
-    if (!pref.current) return;
-    setRead(!read);
-    if (read) {
-      pref.current.className = "overflow-ellipsis";
-    } else {
-      pref.current.className = "";
-    }
-  };
+  const resultString =
+    isTruncated && text ? `${text.slice(0, maxCharacterCount)}...` : text;
+
+  function toggleIsTruncated() {
+    setIsTruncated(!isTruncated);
+  }
 
   return (
     <div>
-      <div ref={pref}>{children}</div>
-      <span
-        className={` read-more  align-items-center justify-content-${position} text-underline cursor-pointer ${
-          !isShowMore ? "d-none" : "d-flex"
-        }`}
-        onClick={onChange}
+      <div dangerouslySetInnerHTML={{ __html: resultString }} />
+
+      <div
+        onClick={toggleIsTruncated}
+        className={`mt-1 d-flex align-items-center justify-content-${position} text-underline cursor-pointer`}
       >
-        {!read ? (
-          <>
-            <span className="mr-1">Read more</span>
-            <DownAngle size={14} color={"currentColor"} />
-          </>
-        ) : (
-          <>
-            <span className="mr-1">Read less</span>
-            <UpAngle size={14} color={"currentColor"} />
-          </>
-        )}
-      </span>
+        {text.length > maxCharacterCount &&
+          (!isTruncated ? (
+            <>
+              Read more
+              <DownAngle size={14} color={"currentColor"} />
+            </>
+          ) : (
+            <>
+              Read less
+              <UpAngle size={14} color={"currentColor"} />
+            </>
+          ))}
+      </div>
     </div>
   );
 }

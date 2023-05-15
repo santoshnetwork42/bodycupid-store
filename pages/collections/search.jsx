@@ -3,8 +3,6 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 
-// import ShopBanner from "~/components/partials/shop/shop-banner";
-// import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import { findProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
@@ -27,8 +25,6 @@ function AllProduct(props) {
 
       <h1 className="d-none">{name} - All Products</h1>
 
-      {/* <ShopBanner category={null} /> */}
-
       <div className="page-content pb-3">
         <div className="container">
           <div className="row main-content-wrap gutter-lg">
@@ -36,7 +32,11 @@ function AllProduct(props) {
               <SearchBox defaultSearch={search} />
             </div>
             <div className="col-lg-12 main-content">
-              <ProductListOne products={products} pageFilter={pageFilter} />
+              <ProductListOne
+                sectionId="Search"
+                products={products}
+                pageFilter={pageFilter}
+              />
             </div>
           </div>
         </div>
@@ -68,9 +68,7 @@ export const getStaticProps = async () => {
 
     return {
       props: {
-        category: null,
         products: { ...searchProducts, items: products },
-        categorySlug: null,
         pageFilter: filter,
       },
     };

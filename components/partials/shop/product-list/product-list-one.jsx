@@ -27,16 +27,12 @@ function ProductListOne(props) {
     type = "left",
     isToolbox = true,
     products: initialData,
-    categoryId,
-    subCategoryId,
-    tagId,
     pageFilter = {},
-    subCategories,
     recordSearch,
+    filterItems,
     viewList,
+    sectionId,
   } = props;
-
-  const sectionId = tagId || subCategoryId || categoryId;
 
   const router = useRouter();
   const { query } = router;
@@ -149,7 +145,7 @@ function ProductListOne(props) {
     setToken(nextToken);
     setTotal(total);
     viewList(sectionId, "PLP", items);
-  }, [categoryId, subCategoryId, tagId]);
+  }, [sectionId]);
 
   useEffect(() => {
     getProducts(true);
@@ -185,7 +181,7 @@ function ProductListOne(props) {
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} subCategories={subCategories} />}
+      {isToolbox && <ToolBox type={type} filterItems={filterItems} />}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}
@@ -204,7 +200,7 @@ function ProductListOne(props) {
                   slug={category}
                   product={item}
                   section={{
-                    id: tagId || subCategoryId || categoryId,
+                    id: sectionId,
                     name: "PLP",
                   }}
                 />

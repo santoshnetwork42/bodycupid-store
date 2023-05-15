@@ -43,7 +43,7 @@ const ManufacturerInformation = [
   {
     label: "Marketed By & Contact details :",
     value:
-      "4th Floor, Prestige Dotcom, Field Marshal Cariappa Road, Srinivas Nagar, Shanthala Nagar, Ashok Nagar, Bengaluru – 560025, Karnataka, India.",
+      "Body Cupid Pvt Ltd - 4th Floor, Prestige Dotcom, Field Marshal Cariappa Road, Srinivas Nagar, Shanthala Nagar, Ashok Nagar, Bengaluru – 560025, Karnataka, India.",
   },
   {
     label: "Customer Care Details",
@@ -264,14 +264,7 @@ function DescOne(props) {
             <div className="row mb-2">
               <div className="col-md-12">
                 {isMobile && (
-                  <ReadMore position="start">
-                    <div
-                      className="product-longdescription-wrapper"
-                      dangerouslySetInnerHTML={{
-                        __html: longDescription,
-                      }}
-                    />
-                  </ReadMore>
+                  <ReadMore position="start" content={longDescription} />
                 )}
                 {!isMobile && (
                   <div
@@ -594,10 +587,12 @@ function DescOne(props) {
             <div className="col-md-12">
               {ManufacturerInformation.map((item, index) => {
                 return (
-                  <p className="mb-2 manufacturer-value" key={item.label}>
-                    <strong className="manufacturer-label">{item.label}</strong>
-                    {index === 0 ? product.title : item.value}
-                  </p>
+                  <div className="additional-info-container" key={item.label}>
+                    <h6 className="additional-info-label m-0">{item.label}</h6>
+                    <p className="additional-info-value">
+                      {index === 0 ? product.title : item.value}
+                    </p>
+                  </div>
                 );
               })}
             </div>

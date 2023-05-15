@@ -23,6 +23,7 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import Loader from "~/components/common/partials/loader";
 import CouponProvider from "~/utils/contexts/coupons.js";
+import NavbarProvider from "~/utils/contexts/navbar.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -175,11 +176,13 @@ const App = ({ Component, pageProps }) => {
           <meta name="description" content={storeName} />
         </Head>
         <Scripts />
-        <CouponProvider>
-          <Layout navbar={navbarProps} footer={footerProps}>
-            <Component {...pageProps} />
-          </Layout>
-        </CouponProvider>
+        <NavbarProvider>
+          <CouponProvider>
+            <Layout navbar={navbarProps} footer={footerProps}>
+              <Component {...pageProps} />
+            </Layout>
+          </CouponProvider>
+        </NavbarProvider>
       </PersistGate>
     </Provider>
   );

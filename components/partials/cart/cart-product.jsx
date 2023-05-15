@@ -135,7 +135,7 @@ function CartProduct({
               {cartItemType === "FREE_PRODUCT" ||
               cartItemType === "AUTO_FREE_PRODUCT" ? (
                 <>
-                  <span className="discount-percentage ml-1">Free</span>
+                  <span className="discount-percentage">Free</span>
                 </>
               ) : (
                 <>

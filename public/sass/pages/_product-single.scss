@@ -115,7 +115,17 @@
         text-transform: uppercase;
         margin: 1rem 0rem;
     }
-
+    img {
+        width: 300px;
+        display: block;
+        margin: 20px auto;
+    }
+    blockquote {
+        margin: 1rem 0rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .additional-info-container {
@@ -131,13 +141,6 @@
     }
 }
 
-.manufacturer-value{
-    font-size: 1.6rem;
-    .manufacturer-label {
-        font-weight: 600;
-        margin-right: .5rem;
-    }
-}
 // Product Navigation
 .product-navigation {
     display: flex;

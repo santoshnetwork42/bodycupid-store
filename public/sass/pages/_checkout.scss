@@ -274,13 +274,22 @@
         padding: 1rem;
         gap: 1rem;
         cursor: pointer;
-        .checkout-payment-lables {
+        .checkout-payment-labels {
             font-size: 1.6rem;
             font-weight: 600;
             color: $primary-color !important;
         }
         .payment-subtitle {
             color: $grey-color;
+        }
+        .payment-alert {
+            color: $secondary-color !important;
+            a {
+                width: fit-content;
+                text-decoration: underline;
+                display: block;
+                cursor: pointer;
+            }
         }
         .payment-card-amount {
             color: $primary-color;
