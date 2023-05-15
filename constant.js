@@ -2,3 +2,5 @@ export const PHONE_REGEX = /^\d{10}$/;
 
 export const EMAIl_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+export const MAX_PREPAID_DISCOUNT = 500;

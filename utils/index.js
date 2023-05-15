@@ -1,3 +1,4 @@
+import { MAX_PREPAID_DISCOUNT } from "~/constant";
 import { getCouponDiscount } from "~/utils/coupons";
 
 /**
@@ -336,6 +337,14 @@ export const getTotalPrice = (cartItems = []) => {
   return total;
 };
 
+const getPrepaidDiscount = (totalPrice, couponTotal) => {
+  const prepaidDiscount = ((totalPrice - couponTotal) / 100) * 5;
+  if (prepaidDiscount >= MAX_PREPAID_DISCOUNT) {
+    return MAX_PREPAID_DISCOUNT;
+  }
+  return prepaidDiscount;
+};
+
 export const getCartTotals = (
   cartItems = [],
   appliedCoupon = null,
@@ -362,7 +371,7 @@ export const getCartTotals = (
     totalItems += parseInt(cartItems[i].qty, 10);
   }
 
-  const prepaidDiscount = ((totalPrice - couponTotal) / 100) * 5;
+  const prepaidDiscount = getPrepaidDiscount(totalPrice, couponTotal);
   const totalPrepaidDiscount = couponTotal + prepaidDiscount;
   const totalCodDiscount = couponTotal;
   const totalDiscount = prepaid ? totalPrepaidDiscount : totalCodDiscount;
