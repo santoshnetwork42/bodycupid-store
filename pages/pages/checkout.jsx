@@ -72,7 +72,6 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderId, setOrderId] = useState(null);
   const [paymentId, setPaymentId] = useState(null);
-  const [timer, setTimer] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [isCollapse, setIsCollapse] = useState(false);
 
@@ -171,15 +170,7 @@ function Checkout(props) {
 
   const handleCodPayments = (orderId) => {
     setPaymentLoading(true);
-    const intervalId = setInterval(() => {
-      getOrders(intervalId, orderId);
-    }, 2000);
-    return () => clearInterval(intervalId);
-  };
-
-  const getOrders = useCallback(
-    async (intervalId, orderId) => {
-      setPaymentLoading(true);
+    const intervalId = setInterval(async () => {
       try {
         const {
           data: { getOrder },
@@ -200,42 +191,37 @@ function Checkout(props) {
         setPaymentLoading(false);
         errorHandler(error);
       }
-    },
-    [user]
-  );
+    }, 2000);
+    return () => clearInterval(intervalId);
+  };
 
-  const fetchPaymentStatus = useCallback(async () => {
-    if (orderId && paymentId) {
-      try {
-        const {
-          data: {
-            validateTransaction: { success },
-          },
-        } = await API.graphql({
-          query: validateTransaction,
-          variables: { orderId, razorpayPaymentId: paymentId },
-        });
-        if (success) {
-          await emptyCart();
-          await router.push(`/order/${orderId}?paymentId=${paymentId}`);
-          setPaymentLoading(false);
-        }
-      } catch (error) {
-        errorHandler(error);
-      }
-    }
-  }, [orderId, paymentId]);
 
   useEffect(() => {
-    if (paymentLoading) {
-      if (timer) clearTimeout(timer);
-      const timerId = setTimeout(() => {
-        fetchPaymentStatus();
-        setTimer(null);
-      }, [2000]);
-      setTimer(timerId);
+    if (paymentLoading && isFirst) {
+      const intervalId = setInterval(async () => {
+        if (orderId && paymentId) {
+          try {
+            const {
+              data: {
+                validateTransaction: { success },
+              },
+            } = await API.graphql({
+              query: validateTransaction,
+              variables: { orderId, razorpayPaymentId: paymentId },
+            });
+            if (success) {
+              await emptyCart();
+              clearInterval(intervalId);
+              await router.push(`/order/${orderId}?paymentId=${paymentId}`);
+              setPaymentLoading(false);
+            }
+          } catch (error) {
+            errorHandler(error);
+          }
+        }
+      }, 2000);
     }
-  }, [orderId, paymentId, paymentLoading]);
+  }, [paymentLoading]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
