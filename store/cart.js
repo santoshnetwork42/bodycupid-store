@@ -12,7 +12,7 @@ import {
   updateShoppingCartProduct,
   deleteShoppingCartProduct,
 } from "~/graphql/api";
-import { getFirstVariantId } from "~/utils/products";
+import { getFirstVariant } from "~/utils/products";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 // import useWindowDimensions from "~/utils/getWindowDimension";
@@ -41,7 +41,12 @@ function cartReducer(state = initialState, action) {
     case actionTypes.ADD_TO_CART:
       tmpProduct = { ...action.payload.product };
       if (!tmpProduct.variantId) {
-        tmpProduct.variantId = getFirstVariantId(tmpProduct);
+        const variant = getFirstVariant(tmpProduct);
+        if (variant) {
+          tmpProduct.variantId = variant.id;
+          tmpProduct.price = variant.price;
+          tmpProduct.listingPrice = variant.listingPrice;
+        }
       }
       recordKey = tmpProduct.id;
       if (tmpProduct.variantId) {
@@ -173,7 +178,10 @@ export function* cartSaga() {
     if (data) {
       const { product: currProduct } = e.payload;
       if (!currProduct.variantId) {
-        currProduct.variantId = getFirstVariantId(currProduct);
+        const variant = getFirstVariant(currProduct);
+        if (variant) {
+          currProduct.variantId = variant.id;
+        }
       }
 
       let recordKey = currProduct.id;
@@ -242,12 +250,12 @@ export function* cartSaga() {
         const updatedProducts = products.map((p) =>
           p.id === product.id
             ? {
-                id: response.id,
-                shoppingcartId: id,
-                productId: response.productId,
-                variantId: response.variantId,
-                quantity: response.quantity,
-              }
+              id: response.id,
+              shoppingcartId: id,
+              productId: response.productId,
+              variantId: response.variantId,
+              quantity: response.quantity,
+            }
             : p
         );
 
@@ -268,7 +276,10 @@ export function* cartSaga() {
       const { products } = cartResponse;
       let curProduct = e.payload.product;
       if (!e.payload.product.variantId) {
-        curProduct.variantId = getFirstVariantId(curProduct);
+        const variant = getFirstVariant(curProduct);
+        if (variant) {
+          curProduct.variantId = variant.id;
+        }
       }
       const { recordKey } = curProduct;
 

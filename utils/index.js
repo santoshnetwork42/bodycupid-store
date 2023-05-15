@@ -243,7 +243,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-          parallax.offsetTop +
+        parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -402,10 +402,6 @@ export const getCartTotals = (
   };
 };
 
-export const toInteger = (number) => {
-  return parseInt(number.toFixed());
-};
-
 /**
  * utils to get Shipping Price of products in cart.
  */
@@ -502,4 +498,16 @@ export const formateDate = (date) => {
   const yyyy = dt.getFullYear();
   const ap = dt.getHours() >= 12 ? "pm" : "am";
   return `${dd} ${monthName} ${yyyy}, ${hh}:${mm} ${ap}`;
+};
+
+export const getFreeProductTotal = (cartList) => {
+  const filteredCart = cartList.filter(
+    (c) =>
+      c.cartItemType === "AUTO_FREE_PRODUCT"
+  );
+
+  return filteredCart.reduce(
+    (a, b) => (a += b.price * (parseInt(b?.qty, 10) || 1)),
+    0
+  );
 };

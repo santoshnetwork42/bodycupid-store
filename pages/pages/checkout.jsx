@@ -14,7 +14,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { toInteger, toDecimal } from "~/utils";
+import { toDecimal, getFreeProductTotal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -66,7 +66,7 @@ function Checkout(props) {
   const inventoryMapping = useInventory();
   const freeProducts = useFreeProducts();
   const router = useRouter();
-  const [payMethod, setFirst] = useState("NONE");
+  const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -162,6 +162,11 @@ function Checkout(props) {
       }
     },
     [store, user, inventorySuccess]
+  );
+
+  const totalSaved = useMemo(
+    () => getFreeProductTotal(cartItems) + totalAmountSaved,
+    [totalAmountSaved, cartItems]
   );
 
   const handleCodPayments = (orderId) => {
@@ -507,7 +512,7 @@ function Checkout(props) {
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
-                            ₹{toInteger(grandTotal)}
+                            ₹{toDecimal(grandTotal, 0)}
                           </p>
                         </div>
                       </div>
@@ -555,15 +560,20 @@ function Checkout(props) {
                                               item?.cartItemType ===
                                                 "AUTO_FREE_PRODUCT") &&
                                               !!couponTotal && (
-                                                <span className="text-success ">
+                                                <span className="text-success mr-1">
+                                                  {!!item.price && (
+                                                    <del className="summary-subtotal-listingprice ml-0 mr-1">
+                                                      ₹{toDecimal(item.price)}
+                                                    </del>
+                                                  )}
                                                   Free
                                                 </span>
                                               )}
 
-                                            {(item?.cartItemType !==
-                                              "FREE_PRODUCT" ||
+                                            {((item?.cartItemType !==
+                                              "FREE_PRODUCT" &&
                                               item?.cartItemType !==
-                                                "AUTO_FREE_PRODUCT" ||
+                                                "AUTO_FREE_PRODUCT") ||
                                               !couponTotal) && (
                                               <p className="m-0 product-discount-listing">
                                                 <span className="sm-product-amount">
@@ -686,6 +696,7 @@ function Checkout(props) {
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
                                       : "Free"}
+                                    &nbsp;
                                   </td>
                                 </tr>
 
@@ -700,7 +711,7 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-total-price ls-s">
-                                      ₹{toInteger(grandTotal)}
+                                      ₹{toDecimal(grandTotal, 0)}
                                     </p>
                                   </td>
                                 </tr>
@@ -716,11 +727,11 @@ function Checkout(props) {
                                         <span>3-5 days</span>
                                       </p>
                                     </div>
-                                    {!!totalAmountSaved && (
+                                    {!!totalSaved && (
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
                                           <span>{`₹${toDecimal(
-                                            totalAmountSaved
+                                            totalSaved
                                           )}`}</span>{" "}
                                           saved so far on this order
                                         </p>
