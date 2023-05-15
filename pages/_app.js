@@ -5,6 +5,7 @@ import { Amplify, Hub, Auth, API } from "aws-amplify";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
+import { Analytics } from '@vercel/analytics/react';
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -180,6 +181,7 @@ const App = ({ Component, pageProps }) => {
           <CouponProvider>
             <Layout navbar={navbarProps} footer={footerProps}>
               <Component {...pageProps} />
+              <Analytics />
             </Layout>
           </CouponProvider>
         </NavbarProvider>
