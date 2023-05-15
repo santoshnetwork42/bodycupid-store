@@ -507,12 +507,12 @@ export const formateDate = (date) => {
 export const getFreeProductTotal = (cartList) => {
   const filteredCart = cartList.filter(
     (c) =>
-      c.cartItemType === "AUTO_FREE_PRODUCT" ||
-      c.cartItemType === "FREE_PRODUCT"
+      c?.cartItemType === "AUTO_FREE_PRODUCT" ||
+      c?.cartItemType === "FREE_PRODUCT"
   );
 
-  return filteredCart.reduce((a, b) => {
-    a = a + b.price * (parseInt(b?.qty, 10) || 1);
-    return a;
-  }, 0);
+  return filteredCart.reduce(
+    (a, b) => (a += b.price * (parseInt(b?.qty, 10) || 1)),
+    0
+  );
 };

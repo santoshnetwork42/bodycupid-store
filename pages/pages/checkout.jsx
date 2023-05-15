@@ -166,7 +166,7 @@ function Checkout(props) {
 
   const totalSaved = useMemo(
     () => getFreeProductTotal(cartItems) + totalAmountSaved,
-    [totalSaved]
+    [totalSaved, cartItems]
   );
 
   const handleCodPayments = (orderId) => {
@@ -561,14 +561,19 @@ function Checkout(props) {
                                                 "AUTO_FREE_PRODUCT") &&
                                               !!couponTotal && (
                                                 <span className="text-success mr-1">
-                                                  Free 
+                                                  {!!item.price && (
+                                                    <del className="summary-subtotal-listingprice ml-0 mr-1">
+                                                      ₹{toDecimal(item.price)}
+                                                    </del>
+                                                  )}
+                                                  Free
                                                 </span>
                                               )}
 
-                                            {(item?.cartItemType !==
-                                              "FREE_PRODUCT" ||
+                                            {((item?.cartItemType !==
+                                              "FREE_PRODUCT" &&
                                               item?.cartItemType !==
-                                                "AUTO_FREE_PRODUCT" ||
+                                                "AUTO_FREE_PRODUCT") ||
                                               !couponTotal) && (
                                               <p className="m-0 product-discount-listing">
                                                 <span className="sm-product-amount">
@@ -722,7 +727,7 @@ function Checkout(props) {
                                         <span>3-5 days</span>
                                       </p>
                                     </div>
-                                    {!!totalAmountSaved && (
+                                    {!!totalSaved && (
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
                                           <span>{`₹${toDecimal(
