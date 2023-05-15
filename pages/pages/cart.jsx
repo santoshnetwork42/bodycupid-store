@@ -48,9 +48,9 @@ function Cart(props) {
 
   const totalSaved = useMemo(
     () => getFreeProductTotal(cartItems) + cartAmountSaved,
-    [cartAmountSaved]
+    [cartAmountSaved,cartItems]
   );
-
+console.log('totalSaved :>> ', totalSaved);
   const inventorySuccess = useMemo(
     () =>
       cartList.every((c) => {
