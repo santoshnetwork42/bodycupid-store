@@ -17,7 +17,7 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 import fetchData from "~/utils/fetchData";
 import CategoryHeader from "~/components/common/category-header";
 
-function Categories(props) {
+function CollectionPage(props) {
   const {
     store,
     products,
@@ -270,6 +270,6 @@ function mapStateToProps(state) {
   };
 }
 
-const Component = connect(mapStateToProps)(Categories);
+const Component = connect(mapStateToProps)(CollectionPage);
 Component.showStickyCheckout = true;
 export default Component;

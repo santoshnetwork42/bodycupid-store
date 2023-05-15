@@ -9,8 +9,9 @@ import { modalActions } from "~/store/modal";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getProductInventory } from "~/utils/products";
-import Quantity from "../quantity";
+import Quantity from "~/components/features/quantity";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
+import { useProductPrice } from "~/utils/hooks/useProduct";
 
 function ProductTwo(props) {
   const {
@@ -26,15 +27,9 @@ function ProductTwo(props) {
     priority,
   } = props;
 
-  const {
-    price,
-    listingPrice,
-    title,
-    slug,
-    rating,
-    totalRatings,
-    collections,
-  } = product || {};
+  const { title, slug, rating, totalRatings, collections } = product || {};
+
+  const { price, listingPrice } = useProductPrice(product);
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
