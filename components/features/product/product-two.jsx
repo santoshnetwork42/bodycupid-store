@@ -12,6 +12,7 @@ import { getProductMeta, getProductInventory } from "~/utils/products";
 import Quantity from "~/components/features/quantity";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 import { useProductPrice } from "~/utils/hooks/useProduct";
+import { PRODUCT_TAG_LIST } from "~/constant";
 
 function ProductTwo(props) {
   const {
@@ -41,8 +42,11 @@ function ProductTwo(props) {
   );
 
   const tag = useMemo(() => {
+    if (PRODUCT_TAG_LIST.includes(tagSlug)) {
+      return tagSlug.replace("-", " ").toUpperCase();
+    }
     if (!collections) return;
-    const result = collections.find((c) => c !== tagSlug);
+    const [result] = collections.filter((c) => PRODUCT_TAG_LIST.includes(c));
     if (result) {
       return result.replace("-", " ").toUpperCase();
     }
