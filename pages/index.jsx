@@ -45,13 +45,13 @@ function HomePage({
           title="Best sellers"
           disableCarousel={isSmallSize}
           slug="best-seller"
-          redirectTo="/ranges/best-seller"
+          redirectTo="/collections/best-seller"
         />
         <ProductCollection
           products={featuredProducts}
           title="Our featured"
           slug="featured"
-          redirectTo="/ranges/featured"
+          redirectTo="/collections/featured"
         />
         <CategorySection categories={categories} />
         <ReviewSection />

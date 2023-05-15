@@ -91,6 +91,7 @@ function ProductTwo(props) {
             layout="fill"
             quality={95}
             priority={priority}
+            loading={priority ? "eager" : "lazy"}
           />
         </ALink>
 

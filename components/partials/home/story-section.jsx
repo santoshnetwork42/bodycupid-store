@@ -21,6 +21,7 @@ export default function StorySection({ categories }) {
                         height={70}
                         width={70}
                         priority
+                        loading="eager"
                         objectFit="contain"
                         className="category-media"
                       />

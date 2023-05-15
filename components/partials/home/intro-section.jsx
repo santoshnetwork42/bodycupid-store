@@ -25,6 +25,7 @@ function IntroSection({ banners = [] }) {
                   src={getPublicImageURL(webKey)}
                   alt="WOW"
                   priority
+                  loading="eager"
                   quality={95}
                   width={1920}
                   height={800}
@@ -39,6 +40,7 @@ function IntroSection({ banners = [] }) {
                   src={getPublicImageURL(mobileKey)}
                   alt="WOW"
                   priority
+                  loading="eager"
                   quality={95}
                   width={575}
                   height={320}
