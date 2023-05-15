@@ -38,29 +38,6 @@ function CartProduct({
     cartItemSource,
   } = item;
 
-  const isCouponApplied = useMemo(() => {
-    if (!appliedCoupon) return false;
-    if (cartItemType === "AUTO_FREE_PRODUCT") return false;
-    if (cartItemType === "FREE_PRODUCT") return true;
-
-    const { applicableProducts, applicableCollections, couponType } =
-      appliedCoupon;
-
-    if (couponType === "BXGY" || couponType === "PRODUCT") return false;
-
-    const isProductApplicable =
-      Array.isArray(applicableProducts) && applicableProducts.length
-        ? applicableProducts.includes(id)
-        : true;
-
-    const isCollectionApplicable =
-      Array.isArray(applicableCollections) && applicableCollections.length
-        ? applicableCollections.some((ac) => (collections || []).includes(ac))
-        : true;
-
-    return isProductApplicable && isCollectionApplicable;
-  }, [cartItemType]);
-
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
@@ -130,7 +107,12 @@ function CartProduct({
               {cartItemType === "FREE_PRODUCT" ||
               cartItemType === "AUTO_FREE_PRODUCT" ? (
                 <>
-                  <span className="discount-percentage">Free</span>
+                  {!!price && (
+                    <del className="summary-subtotal-listingprice">
+                      ₹{toDecimal(price)}
+                    </del>
+                  )}
+                  <span className="discount-percentage ml-1">Free</span>
                 </>
               ) : (
                 <>
