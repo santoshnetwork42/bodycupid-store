@@ -141,12 +141,20 @@ function CartProduct({
               <div className="">
                 {!hideQty && (
                   <div className="product-quantity w-0 mb-1">
-                    <Quantity
-                      product={item}
-                      qty={qty}
-                      max={inventory}
-                      onChangeQty={onChangeQty}
-                    />
+                    {cartItemType === "FREE_PRODUCT" ? (
+                      <>
+                        {!!qty && (
+                          <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>
+                        )}
+                      </>
+                    ) : (
+                      <Quantity
+                        product={item}
+                        qty={qty}
+                        max={inventory}
+                        onChangeQty={onChangeQty}
+                      />
+                    )}
                   </div>
                 )}
                 {!!item?.variants?.items.length && (
