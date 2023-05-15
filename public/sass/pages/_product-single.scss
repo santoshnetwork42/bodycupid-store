@@ -115,7 +115,17 @@
         text-transform: uppercase;
         margin: 1rem 0rem;
     }
-
+    img {
+        width: 300px;
+        display: block;
+        margin: 20px auto;
+    }
+    blockquote {
+        margin: 1rem 0rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .additional-info-container {

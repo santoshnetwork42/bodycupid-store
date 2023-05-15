@@ -13,9 +13,7 @@ function CategorySection({ categories = [] }) {
             return (
               <div key={category.id} className=" col-3">
                 <div className="category category-spacing category-ellipse text-uppercase">
-                  <ALink
-                    href={`/collections/${category.category.slug}/${category.slug}`}
-                  >
+                  <ALink href={`/collections/${category.slug}`}>
                     <figure className="category-media">
                       <OptimizedImage
                         optimizedData={category.image}
@@ -26,9 +24,7 @@ function CategorySection({ categories = [] }) {
                   </ALink>
                   <div className="category-content">
                     <h4 className="category-name text-uppercase">
-                      <ALink
-                        href={`/collections/${category.category.slug}/${category.slug}`}
-                      >
+                      <ALink href={`/collections/${category.slug}`}>
                         {category.name}
                       </ALink>
                     </h4>

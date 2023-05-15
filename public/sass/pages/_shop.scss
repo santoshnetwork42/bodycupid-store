@@ -77,11 +77,6 @@
         padding-top: 1rem;
     }
 
-    &, &-left, &-right {
-        > *:not(:last-child) {
-            margin-right: 1.8rem;
-        }
-    }
 
     label {
         margin-right: .8rem;
@@ -168,7 +163,7 @@
 
 .toolbox-item {
     flex-wrap: nowrap;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     label { color: inherit; }
 }
 .toolbox-item-full {

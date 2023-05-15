@@ -23,8 +23,8 @@ function ProductBreadcrumbs({ category, subCategory }) {
             </i>
             <ALink
               href={{
-                pathname: "/collections/[category]",
-                query: { category: slug },
+                pathname: "/collections/[slug]",
+                query: { slug },
               }}
               className="active"
             >
@@ -39,10 +39,9 @@ function ProductBreadcrumbs({ category, subCategory }) {
             </i>
             <ALink
               href={{
-                pathname: "/collections/[category]/[subcategory]",
+                pathname: "/collections/[slug]",
                 query: {
-                  category: slug,
-                  subcategory: subCatSlug,
+                  slug: subCatSlug,
                 },
               }}
               className="active"

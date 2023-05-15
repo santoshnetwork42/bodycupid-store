@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
-import { Grid, List } from "~/components/icons";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
 import { cleanQuery } from "~/utils/helper";
 
 export default function ToolBox(props) {
-  const { type = "left", subCategories } = props;
+  const { type = "left", filterItems } = props;
   const router = useRouter();
   const query = router.query;
+  const { asPath } = router;
   const { grid } = query;
   const { category, subcategory, ...filterQuery } = query;
   const gridType = query.type ? query.type : "grid";
@@ -118,12 +118,33 @@ export default function ToolBox(props) {
   return (
     <div>
       <nav
-        className={`toolbox sticky-toolbox sticky-content fix-top ${
+        className={`toolbox sticky-toolbox sticky-content fix-top mt-5 ${
           type === "horizontal" ? "toolbox-horizontal" : ""
         }`}
       >
         {type === "horizontal" ? <SidebarFilterThree /> : ""}
-        <div className="toolbox-left d-flex">
+        <div className="toolbox-left d-flex justify-content-between w-100">
+          {!!filterItems?.length && (
+            <div className="filters-container d-flex mb-5 align-items-center">
+              {filterItems.map((item, i) => {
+                return (
+                  <ALink
+                    key={`${i}-${item.pathname}`}
+                    className={`sub-category-tag ${
+                      (asPath === item.path ||
+                        asPath.includes(`${item.path}?`)) &&
+                      "selected-sub-category-tag"
+                    }`}
+                    href={{
+                      pathname: item.path,
+                    }}
+                  >
+                    <p className="m-0">{item.name}</p>
+                  </ALink>
+                );
+              })}
+            </div>
+          )}
           <div
             className={`toolbox-item toolbox-sort ${
               type === "boxed" || type === "banner"
@@ -150,48 +171,6 @@ export default function ToolBox(props) {
           </div>
         </div>
       </nav>
-      {!!subCategories?.length && (
-        <div className="filters-container d-flex mb-5 align-items-center">
-          <ALink
-            href={{
-              pathname: "/collections/[category]",
-              query: cleanQuery({
-                ...filterQuery,
-                category: category,
-                grid: grid,
-                type: router.query.type || null,
-              }),
-            }}
-            className={`sub-category-tag ${
-              !subcategory && "selected-sub-category-tag"
-            }`}
-          >
-            <p className="m-0">All</p>
-          </ALink>
-          {subCategories.map((subcat) => {
-            return (
-              <ALink
-                key={subcat.id}
-                className={`sub-category-tag ${
-                  subcategory === subcat.slug && "selected-sub-category-tag"
-                }`}
-                href={{
-                  pathname: "/collections/[category]/[subcategory]",
-                  query: cleanQuery({
-                    ...filterQuery,
-                    category: subcat.category.slug,
-                    subcategory: subcat.slug,
-                    grid: grid,
-                    type: router.query.type || null,
-                  }),
-                }}
-              >
-                <p className="m-0">{subcat.name}</p>
-              </ALink>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 }
