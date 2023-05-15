@@ -1,6 +1,6 @@
 import React from "react";
 import { Cricle, CricleDot } from "../icons";
-import { toInteger } from "~/utils";
+import { toDecimal } from "~/utils";
 import ALink from "./custom-link";
 
 const PaymentMethods = ({
@@ -44,7 +44,7 @@ const PaymentMethods = ({
         </div>
       </div>
       <p className="payment-card-amount m-0 font-weight-semi-bold">
-        ₹{toInteger(amount)}
+        ₹{toDecimal(amount, 0)}
       </p>
     </div>
   );

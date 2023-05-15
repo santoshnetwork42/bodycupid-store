@@ -22,7 +22,6 @@ function CartProduct({
     id,
     variants,
     recordKey,
-    collections,
     qty,
     inventory,
     slug,

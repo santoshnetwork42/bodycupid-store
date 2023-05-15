@@ -14,7 +14,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { toInteger, toDecimal, getFreeProductTotal } from "~/utils";
+import { toDecimal, getFreeProductTotal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -66,7 +66,7 @@ function Checkout(props) {
   const inventoryMapping = useInventory();
   const freeProducts = useFreeProducts();
   const router = useRouter();
-  const [payMethod, setFirst] = useState("NONE");
+  const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
   const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
@@ -166,7 +166,7 @@ function Checkout(props) {
 
   const totalSaved = useMemo(
     () => getFreeProductTotal(cartItems) + totalAmountSaved,
-    [totalSaved, cartItems]
+    [totalAmountSaved, cartItems]
   );
 
   const handleCodPayments = (orderId) => {
@@ -512,7 +512,7 @@ function Checkout(props) {
                             )}
                           </div>
                           <p className="m-0 checkout-summary-total font-weight-semi-bold">
-                            ₹{toInteger(grandTotal)}
+                            ₹{toDecimal(grandTotal, 0)}
                           </p>
                         </div>
                       </div>
@@ -711,7 +711,7 @@ function Checkout(props) {
                                   </td>
                                   <td>
                                     <p className="summary-total-price ls-s">
-                                      ₹{toInteger(grandTotal)}
+                                      ₹{toDecimal(grandTotal, 0)}
                                     </p>
                                   </td>
                                 </tr>
