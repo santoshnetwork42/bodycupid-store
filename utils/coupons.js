@@ -91,7 +91,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       ...coupon,
       allowed: false,
       message: `Add product worth ₹${minOrderValue - totalAmount
-        } more to the cart`,
+        } more to the cart.`,
     };
   }
 
@@ -101,7 +101,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       ...coupon,
       allowed: false,
       message: `Add ${buyXQuantity + getYQuantity - totalItems
-        } more items to the cart`,
+        } more items to the cart.`,
     };
   }
 
@@ -112,7 +112,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       return {
         ...coupon,
         allowed: false,
-        message: `Not applicable on the products in the cart`,
+        message: `Not applicable on the products in the cart.`,
       };
     }
   }
@@ -126,7 +126,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       return {
         ...coupon,
         allowed: false,
-        message: `Not applicable on the products in the cart`,
+        message: `Not applicable on the products in the cart.`,
       };
     }
   }
