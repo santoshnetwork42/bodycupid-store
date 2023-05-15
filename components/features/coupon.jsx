@@ -232,6 +232,11 @@ function Coupon(props) {
                         className = `${className} btn-disabled`;
                       }
 
+                      const showAsterik = !!(
+                        c.applicableProducts?.length ||
+                        c.applicableCollections?.length
+                      );
+
                       return (
                         <div key={c.id} className="featured-coupon">
                           <div className="d-flex justify-content-between ">
@@ -245,6 +250,7 @@ function Coupon(props) {
                                 }`}
                               >
                                 {c.message}
+                                {showAsterik && "*"}
                               </div>
                             </div>
                             <button
@@ -261,6 +267,10 @@ function Coupon(props) {
                     })}
                   </div>
                 )}
+
+                <p className="font-italic text-grey">
+                  *Appicable on certain products
+                </p>
               </div>
             </div>
           </div>
