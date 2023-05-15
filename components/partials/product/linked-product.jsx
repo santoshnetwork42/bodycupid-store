@@ -96,15 +96,13 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
       <div className="d-flex d-sm-column linked-product-wrapper align-items-center justify-content-center w-full">
         {selected.map((lp, i) => (
           <ALink
+            key={lp.id}
             href="#"
             onClick={() =>
               lp.id !== product.id && showQuickviewHandler(lp.slug)
             }
           >
-            <div
-              key={lp.id}
-              className="d-flex d-sm-column mt-sm-2 product align-items-center ml-6 "
-            >
+            <div className="d-flex d-sm-column mt-sm-2 product align-items-center ml-6 ">
               {i > 0 && <i className="fas fa-plus mr-6"></i>}
               <div className="image-wrapper">
                 <img

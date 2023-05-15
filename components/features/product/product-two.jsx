@@ -1,15 +1,14 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
+import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import { Star, Eye } from "~/components/icons";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
-import { wishlistActions } from "~/store/wishlist";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getProductInventory } from "~/utils/products";
-import OptimizedImage from "../optimized-image";
 import Quantity from "../quantity";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
@@ -18,31 +17,24 @@ function ProductTwo(props) {
     cartList,
     product,
     adClass = "text-center",
-    wishlist,
     addToCart,
     openQuickview,
     updateCart,
     removeFromCart,
     slug: tagSlug,
     section,
+    priority,
   } = props;
 
   const {
-    id,
     price,
     listingPrice,
     title,
     slug,
-    isFeatured,
     rating,
     totalRatings,
     collections,
   } = product || {};
-
-  // decide if the product is wishlisted
-  let isWishlisted;
-  isWishlisted =
-    wishlist.findIndex((item) => item.id === id) > -1 ? true : false;
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
@@ -76,7 +68,7 @@ function ProductTwo(props) {
     return cartList.find((cl) => cl.recordKey === recordKey);
   }, [cartList]);
 
-  const { thumbImage, secondaryImage, discount } = getProductMeta(product);
+  const { thumbImage, discount } = getProductMeta(product);
 
   function changeQty(qty) {
     if (cartItem) {
@@ -94,45 +86,24 @@ function ProductTwo(props) {
     <div className={`product text-left ${adClass} product-card`}>
       <figure className="product-media">
         <ALink href={`/product/${slug}`}>
-          <OptimizedImage
-            optimizedData={thumbImage?.image}
+          <Image
             src={getPublicImageURL(thumbImage?.imageKey)}
-            alt={thumbImage?.alt}
+            layout="fill"
+            quality={95}
+            loading={priority ? "eager" : "lazy"}
           />
-          {!!secondaryImage && (
-            <OptimizedImage
-              optimizedData={secondaryImage.image}
-              src={getPublicImageURL(secondaryImage.imageKey)}
-              alt={secondaryImage.alt}
-              spanAttributes={{
-                className: "product-image-hover",
-              }}
-            />
-          )}
         </ALink>
 
         <div className="product-label-group">
-          {isFeatured ? (
-            <label className="product-label label-new">New</label>
-          ) : (
-            ""
-          )}
-          {isFeatured ? (
-            <label className="product-label label-top">Top</label>
-          ) : (
-            ""
-          )}
-          {discount > 0 ? (
-            product.variants?.items?.length < 2 ? (
+          {discount > 0 &&
+            (product.variants?.items?.length < 2 ? (
               <label className="product-label label-sale">-{discount}%</label>
             ) : (
               <label className="product-label label-sale">Sale</label>
-            )
-          ) : (
-            ""
-          )}
+            ))}
         </div>
-        {tag && (
+
+        {!!tag && (
           <div className="product-tags-group">
             <label className="product-label label-best-seller">{tag}</label>
           </div>
@@ -221,13 +192,11 @@ function ProductTwo(props) {
 
 function mapStateToProps(state) {
   return {
-    wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
   };
 }
 
 export default connect(mapStateToProps, {
-  toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,

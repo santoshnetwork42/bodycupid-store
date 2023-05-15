@@ -6,7 +6,6 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 import { findProducts, listCollections } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
-import { optimizeProduct } from "~/utils/getStaticData";
 
 function AllCollection(props) {
   const { store, products, pageFilter, collections } = props;
@@ -69,14 +68,9 @@ export const getStaticProps = async () => {
       imageLimit: 1,
     });
 
-    const { items } = searchProducts;
-    const products = await Promise.all(
-      items.map((product) => optimizeProduct(product, { partial: true }))
-    );
-
     return {
       props: {
-        products: { ...searchProducts, items: products },
+        products: searchProducts,
         pageFilter: filter,
         collections,
       },

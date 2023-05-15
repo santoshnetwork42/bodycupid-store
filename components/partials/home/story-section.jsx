@@ -1,6 +1,8 @@
 import React from "react";
+import Image from "next/image";
+
 import ALink from "~/components/features/custom-link";
-import OptimizedImage from "~/components/features/optimized-image";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 export default function StorySection({ categories }) {
   return (
@@ -13,13 +15,16 @@ export default function StorySection({ categories }) {
                 <div key={category.id} className=" category">
                   <div className=" category-spacing category-ellipse">
                     <ALink href={`/collections/${category.slug}`}>
-                      <figure className="category-media">
-                        <OptimizedImage
-                          optimizedData={category.image}
-                          alt={category.name}
-                          loading="lazy"
-                        />
-                      </figure>
+                      <Image
+                        src={getPublicImageURL(category.imageUrl)}
+                        alt={category.name}
+                        height={70}
+                        width={70}
+                        priority
+                        loading="eager"
+                        objectFit="contain"
+                        className="category-media"
+                      />
                     </ALink>
                     <div className="category-content">
                       <h4 className="category-name">

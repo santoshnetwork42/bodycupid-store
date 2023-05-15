@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
@@ -26,7 +27,7 @@ function Error404({ store }) {
       <div className="page-content">
         <section className="error-section d-flex flex-column justify-content-center align-items-center text-center pl-3 pr-3">
           <h1 className="mb-2 ls-m">Error 404</h1>
-          <img
+          <Image
             src="/images/subpages/404.png"
             alt="error 404"
             width="609"

@@ -7,7 +7,6 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 import { findProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
-import { optimizeProduct } from "~/utils/getStaticData";
 import SearchBox from "~/components/common/partials/search-box";
 
 function AllProduct(props) {
@@ -61,16 +60,12 @@ export const getStaticProps = async () => {
       limit: 16,
     });
 
-    const { items } = searchProducts;
-    const products = await Promise.all(
-      items.map((product) => optimizeProduct(product, { partial: true }))
-    );
-
     return {
       props: {
-        products: { ...searchProducts, items: products },
+        products: searchProducts,
         pageFilter: filter,
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.log(error);

@@ -8,7 +8,6 @@ import ProductListOne from "~/components/partials/shop/product-list/product-list
 import { findProducts, getMenuCategories } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
-import { optimizeProduct } from "~/utils/getStaticData";
 
 function AllProduct(props) {
   const { store, products, pageFilter, categories } = props;
@@ -72,15 +71,10 @@ export const getStaticProps = async () => {
       imageLimit: 1,
     });
 
-    const { items } = searchProducts;
-    const products = await Promise.all(
-      items.map((product) => optimizeProduct(product, { partial: true }))
-    );
-
     return {
       props: {
         categories,
-        products: { ...searchProducts, items: products },
+        products: searchProducts,
         pageFilter: filter,
       },
       revalidate: 60,

@@ -85,7 +85,7 @@ export const getStaticPaths = async () => {
 
   const paths = [
     ...searchProductCategories.items,
-    ...searchProductSubCategories.item,
+    ...searchProductSubCategories.items,
     ...listCollections.items,
   ].map((c) => {
     return {

@@ -683,6 +683,7 @@ export const createStore = /* GraphQL */ `
       banners {
         webKey
         mobileKey
+        link
       }
       announcements
       socialLinks {
@@ -713,6 +714,7 @@ export const updateStore = /* GraphQL */ `
       banners {
         webKey
         mobileKey
+        link
       }
       announcements
       socialLinks {
@@ -743,6 +745,7 @@ export const deleteStore = /* GraphQL */ `
       banners {
         webKey
         mobileKey
+        link
       }
       announcements
       socialLinks {

@@ -1631,7 +1631,6 @@ export const getCollection = /* GraphQL */ `
   query GetCollection($slug: ID!) {
     getCollection(slug: $slug) {
       slug
-      parent
       name
       description
       showInMenu

@@ -50,7 +50,7 @@ const App = ({ Component, pageProps }) => {
     if (wowStore) return wowStore.name;
     const state = store.getState();
     return state?.system?.store?.name;
-  }, [wowStore]);
+  }, [wowStore, store]);
 
   const destroySession = useCallback(() => {
     store.__persistor.purge();
@@ -78,7 +78,7 @@ const App = ({ Component, pageProps }) => {
       errorHandler(error);
       destroySession();
     }
-  }, [store]);
+  }, [store, destroySession]);
 
   const setStore = useCallback(async () => {
     try {
@@ -151,11 +151,11 @@ const App = ({ Component, pageProps }) => {
     initSession();
 
     return () => hubListenerCancelToken();
-  }, []);
+  }, [destroySession, initSession, store]);
 
   useEffect(() => {
     setMetaData();
-  }, [query]);
+  }, [query, setMetaData]);
 
   return (
     <Provider store={store}>

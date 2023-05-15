@@ -33,10 +33,21 @@ module.exports = {
             }
         ];
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: process.env.NEXT_PUBLIC_MEDIA_URL,
+                // port: '',
+                pathname: '/public/**',
+            },
+        ],
+        minimumCacheTTL: 60 * 60 * 24 * 30,
+    },
 }
 
 module.exports = withSentryConfig(
-  module.exports,
-  { silent: true },
-  { hideSourcemaps: true },
+    module.exports,
+    { silent: true },
+    { hideSourcemaps: true },
 );

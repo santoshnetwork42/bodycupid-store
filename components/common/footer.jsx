@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -8,7 +9,6 @@ import {
   Twitter,
   Pinterest,
 } from "~/components/icons";
-import OptimizedImage from "~/components/features/optimized-image";
 import PaymentLogos from "./partials/payment-logos";
 
 function Footer({ footer, store }) {
@@ -23,24 +23,13 @@ function Footer({ footer, store }) {
           <div className="row d-flex justify-content-between">
             <div className="col-lg-3 col-sm-12 col-md-6">
               <ALink href="/" className="logo-footer">
-                {footer?.logo ? (
-                  <OptimizedImage
-                    optimizedData={{
-                      ...footer.logo,
-                      width: 100,
-                      height: 43,
-                    }}
-                    loading="lazy"
-                    alt="Footer logo"
-                  />
-                ) : (
-                  <img
-                    src="/images/logo.png"
-                    alt="logo-footer"
-                    width="100"
-                    height="43"
-                  />
-                )}
+                <Image
+                  src="/images/logo.png"
+                  alt="logo-footer"
+                  width="100"
+                  height="100"
+                  objectFit="contain"
+                />
               </ALink>
             </div>
 

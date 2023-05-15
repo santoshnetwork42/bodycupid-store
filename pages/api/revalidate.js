@@ -1,6 +1,6 @@
 const { REVALIDATE_SECRET = "secret" } = process.env;
 
-export default async (req, res) => {
+export default async function Revalidate(req, res) {
   if (req.query.secret !== REVALIDATE_SECRET) {
     return res.status(401).json({ message: "Invalid token" });
   }
