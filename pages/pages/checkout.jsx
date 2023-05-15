@@ -755,7 +755,7 @@ function Checkout(props) {
                             isSelected={payMethod === "PREPAID"}
                             description={
                               onlineDisabled
-                                ? `Online payment disabled for you coupon ${appliedCoupon?.code}`
+                                ? `Online payment disabled for you coupon "${appliedCoupon?.code}"`
                                 : "Pay using credit/debit cards, net-banking, UPI, or digital wallets."
                             }
                             disabled={onlineDisabled}
@@ -770,7 +770,7 @@ function Checkout(props) {
                             isSelected={payMethod === "COD"}
                             description={
                               codDisabled
-                                ? `COD payment disabled for you coupon ${appliedCoupon?.code}`
+                                ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
                                 : "Pay using Cash on Delivery"
                             }
                             disabled={codDisabled}
