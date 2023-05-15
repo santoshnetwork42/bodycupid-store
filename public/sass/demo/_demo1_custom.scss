@@ -53,6 +53,9 @@
 }
 
 .intro-slide2 {
+    display: flex;
+    justify-content: center;
+    
     img { object-position: 80%; }
     .banner-content { 
         max-width: 38rem; 
