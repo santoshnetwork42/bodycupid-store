@@ -6,7 +6,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CategorySection({ categories = [] }) {
   return (
-    <section className="ellipse-section mt-4">
+    <section className="ellipse-section pt-6">
       <div className="container">
         <h2 className="title capitalize-title">Browse Our Categories</h2>
         <div className="row elements">
