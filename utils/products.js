@@ -1,8 +1,17 @@
-export const getFirstVariant = (product) => {
+export const getFirstVariant = (product, variantId) => {
   if (product) {
     const { variants = {} } = product;
     const { items = [] } = variants;
-    const [variant] = items;
+
+    let variant;
+    if (variantId) {
+      variant = items.find(v => v.id === variantId);
+    }
+
+    if (!variant) {
+      ([variant] = items);
+    }
+
     return variant;
   }
   return null;

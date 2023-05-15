@@ -58,7 +58,6 @@ function ProductTwo(props) {
       ...product,
       section,
       qty: 1,
-      price: price,
     });
   };
 

@@ -40,13 +40,11 @@ function cartReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
       tmpProduct = { ...action.payload.product };
-      if (!tmpProduct.variantId) {
-        const variant = getFirstVariant(tmpProduct);
-        if (variant) {
-          tmpProduct.variantId = variant.id;
-          tmpProduct.price = variant.price;
-          tmpProduct.listingPrice = variant.listingPrice;
-        }
+      const variant = getFirstVariant(tmpProduct, tmpProduct.variantId);
+      if (variant) {
+        tmpProduct.variantId = variant.id;
+        tmpProduct.price = variant.price;
+        tmpProduct.listingPrice = variant.listingPrice;
       }
       recordKey = tmpProduct.id;
       if (tmpProduct.variantId) {
@@ -177,11 +175,9 @@ export function* cartSaga() {
     const { data } = user;
     if (data) {
       const { product: currProduct } = e.payload;
-      if (!currProduct.variantId) {
-        const variant = getFirstVariant(currProduct);
-        if (variant) {
-          currProduct.variantId = variant.id;
-        }
+      const variant = getFirstVariant(currProduct, currProduct.variantId);
+      if (variant) {
+        currProduct.variantId = variant.id;
       }
 
       let recordKey = currProduct.id;

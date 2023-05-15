@@ -62,7 +62,7 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
 
   const addToCartHandler = () => {
     selected.map((product) => {
-      addToCart({ ...product, qty: 1, price: product.price });
+      addToCart({ ...product, qty: 1 });
     });
   };
 
