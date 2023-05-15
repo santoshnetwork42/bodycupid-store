@@ -283,7 +283,7 @@ function DescOne(props) {
           <div className="row">
             <div className="col-md-12">
               <div className="additional-info-container">
-                <h6 className="additional-info-label m-0">Model Name</h6>
+                <h6 className="additional-info-label m-0">Product Name</h6>
                 <p className="additional-info-value">{product.title}</p>
               </div>
               {!!additionalInfo && (
