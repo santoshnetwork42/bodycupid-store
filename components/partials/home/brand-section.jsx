@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Reveal from "react-awesome-reveal";
 
-import OptimizedImage from "~/components/features/optimized-image";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function BrandSection({ brands }) {
@@ -13,7 +12,7 @@ function BrandSection({ brands }) {
           <h2 className="title capitalize-title mb-2">As featured in</h2>
           <div className="row brand-carousel">
             {brands.map((brand) => (
-              <div className="col-6 col-md-4 col-lg-2 " key={brand.originalUrl}>
+              <div className="col-6 col-md-4 col-lg-2 " key={brand}>
                 <figure>
                   <Image
                     src={brand}

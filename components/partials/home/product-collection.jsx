@@ -16,7 +16,7 @@ function ProductCollection({
   disableCarousel,
 }) {
   useEffect(() => {
-    const ele = document.getElementById("product-carousel");
+    const ele = document.getElementById(`product-carousel-${slug}`);
     if (ele) {
       if (disableCarousel) {
         ele.classList.remove("owl-carousel");
@@ -27,6 +27,7 @@ function ProductCollection({
       }
     }
   }, [disableCarousel]);
+
   return (
     <Reveal
       keyframes={fadeIn}
@@ -46,7 +47,7 @@ function ProductCollection({
         </div>
 
         <OwlCarousel
-          id="product-carousel"
+          id={`product-carousel-${slug}`}
           adClass="owl-theme owl-nav-full"
           options={productSlider}
         >
