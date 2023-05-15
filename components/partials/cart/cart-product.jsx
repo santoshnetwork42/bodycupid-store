@@ -38,29 +38,6 @@ function CartProduct({
     cartItemSource,
   } = item;
 
-  const isCouponApplied = useMemo(() => {
-    if (!appliedCoupon) return false;
-    if (cartItemType === "AUTO_FREE_PRODUCT") return false;
-    if (cartItemType === "FREE_PRODUCT") return true;
-
-    const { applicableProducts, applicableCollections, couponType } =
-      appliedCoupon;
-
-    if (couponType === "BXGY" || couponType === "PRODUCT") return false;
-
-    const isProductApplicable =
-      Array.isArray(applicableProducts) && applicableProducts.length
-        ? applicableProducts.includes(id)
-        : true;
-
-    const isCollectionApplicable =
-      Array.isArray(applicableCollections) && applicableCollections.length
-        ? applicableCollections.some((ac) => (collections || []).includes(ac))
-        : true;
-
-    return isProductApplicable && isCollectionApplicable;
-  }, [cartItemType]);
-
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
@@ -124,18 +101,18 @@ function CartProduct({
           </figure>
           <div className="text-left text-primary w-100  mr-1 ml-2">
             <div className="mr-5 ">
-              <ALink href={"/product/" + slug}>
-                {title}
-                {isCouponApplied && (
-                    <Discount className="pt-1" color="#17b31b" size={17} />
-                )}
-              </ALink>
+              <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
               {cartItemType === "FREE_PRODUCT" ||
               cartItemType === "AUTO_FREE_PRODUCT" ? (
                 <>
-                  <span className="discount-percentage">Free</span>
+                  {!!price && (
+                    <del className="summary-subtotal-listingprice">
+                      ₹{toDecimal(price)}
+                    </del>
+                  )}
+                  <span className="discount-percentage ml-1">Free</span>
                 </>
               ) : (
                 <>
