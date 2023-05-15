@@ -16,10 +16,6 @@ import {
   findProducts,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
-import {
-  optimizeProduct,
-  variantImageOptimization,
-} from "~/utils/getStaticData";
 import { eventActions } from "~/store/events";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import ProductCollection from "~/components/partials/home/product-collection";
@@ -193,12 +189,7 @@ export const getStaticProps = async (context) => {
     });
 
     if (product) {
-      const { id, variants } = product;
-
-      const optimizedProduct = await optimizeProduct(product);
-      const { variants: optimizedVariants } = await variantImageOptimization(
-        variants
-      );
+      const { id } = product;
 
       // get Product FAQ
       const {
@@ -212,7 +203,7 @@ export const getStaticProps = async (context) => {
       return {
         props: {
           slug,
-          product: { ...optimizedProduct, variants: optimizedVariants },
+          product,
           productFAQs: faqS,
         },
       };
@@ -234,6 +225,5 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
 })(ProductDefault);
-// Component.showStickyCheckout = true;
 
 export default Component;

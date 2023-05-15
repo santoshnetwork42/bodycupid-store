@@ -6,11 +6,9 @@ import ALink from "~/components/features/custom-link";
 import { Star, Eye } from "~/components/icons";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
-import { wishlistActions } from "~/store/wishlist";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getProductInventory } from "~/utils/products";
-import OptimizedImage from "../optimized-image";
 import Quantity from "../quantity";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 
@@ -19,7 +17,6 @@ function ProductTwo(props) {
     cartList,
     product,
     adClass = "text-center",
-    wishlist,
     addToCart,
     openQuickview,
     updateCart,
@@ -30,7 +27,6 @@ function ProductTwo(props) {
   } = props;
 
   const {
-    id,
     price,
     listingPrice,
     title,
@@ -196,13 +192,11 @@ function ProductTwo(props) {
 
 function mapStateToProps(state) {
   return {
-    wishlist: state.wishlist.data ? state.wishlist.data : [],
     cartList: state.cart.data || [],
   };
 }
 
 export default connect(mapStateToProps, {
-  toggleWishlist: wishlistActions.toggleWishlist,
   addToCart: cartActions.addToCart,
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,
