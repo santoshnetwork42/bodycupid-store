@@ -60,8 +60,8 @@ export const getStaticProps = async () => {
         ...cat,
         path: `/collections/${cat.slug}`,
       })),
-      { name: "Ranges", path: "/ranges/all" },
-      { name: "Combos & Gifts", path: "/ranges/combos-and-gifts" },
+      { name: "Ranges", path: "/collections/ranges" },
+      { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];
 
     // Get all Product

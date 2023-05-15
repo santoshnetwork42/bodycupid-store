@@ -3,7 +3,6 @@ import React, {
   useState,
   useContext,
   useEffect,
-  useCallback,
 } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 
@@ -37,7 +36,7 @@ function NavbarProvider({ children }) {
       .catch(errorHandler);
   };
 
-  const getCategories = useCallback(() => {
+  const getCategories = () => {
     API.graphql(
       graphqlOperation(getMenuCategories, {
         filter: { storeId: { eq: STORE_ID } },
@@ -55,7 +54,7 @@ function NavbarProvider({ children }) {
         }
       )
       .catch(errorHandler);
-  }, []);
+  };
 
   useEffect(() => {
     getCategories();
@@ -77,24 +76,24 @@ export const useMenu = () => {
     link: `/collections/${category.slug}`,
     subMenu: category?.subCategory?.items.map((subCat) => ({
       label: subCat.name,
-      link: `/collections/${category.slug}/${subCat.slug}`,
+      link: `/collections/${subCat.slug}`,
     })),
   }));
 
   if (collections.length) {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
-      link: `/ranges/${col.slug}`,
+      link: `/collections/${col.slug}`,
     }));
 
     menu.push({
       label: "Ranges",
-      link: "/ranges/all",
+      link: "/collections/ranges",
       subMenu: collectionsMenu,
     });
   }
 
-  menu.push({ label: "Combos & Gifts", link: `/ranges/combos-and-gifts` });
+  menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
   return menu;
 };
 

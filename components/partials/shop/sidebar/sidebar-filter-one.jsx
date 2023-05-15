@@ -217,10 +217,10 @@ function SidebarFilterOne(props) {
                             <>
                               <ALink
                                 href={{
-                                  pathname: "/collections/[category]",
+                                  pathname: "/collections/[slug]",
                                   query: cleanQuery({
                                     ...filterQuery,
-                                    category: item.slug,
+                                    slug: item.slug,
                                     grid: grid,
                                     type: router.query.type || null,
                                   }),
@@ -256,12 +256,10 @@ function SidebarFilterOne(props) {
                                           <ALink
                                             scroll={false}
                                             href={{
-                                              pathname:
-                                                "/collections/[category]/[subcategory]",
+                                              pathname: "/collections/[slug]",
                                               query: cleanQuery({
                                                 ...filterQuery,
-                                                category: item.slug,
-                                                subcategory: subItem.slug,
+                                                slug: subItem.slug,
                                                 grid: grid,
                                                 type: router.query.type || null,
                                               }),
@@ -286,9 +284,9 @@ function SidebarFilterOne(props) {
                       >
                         <ALink
                           href={{
-                            pathname: "/collections/[category]",
+                            pathname: "/collections/[slug]",
                             query: cleanQuery({
-                              category: item.slug,
+                              slug: item.slug,
                               grid: grid,
                               type: router.query.type || null,
                             }),

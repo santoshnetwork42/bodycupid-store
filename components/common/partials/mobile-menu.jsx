@@ -116,7 +116,7 @@ function MobileMenu({ user, openPasswordLess }) {
                       <li key={item.id}>
                         <ALink
                           href={
-                            "/collections/" + category.slug + "/" + item.slug
+                            "/collections/" + item.slug
                           }
                           onClick={hideMobileMenu}
                         >

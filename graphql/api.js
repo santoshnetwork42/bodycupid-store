@@ -53,11 +53,6 @@ export const getSubCategoriesByCategoryID = /* GraphQL */ `
       items {
         id
         name
-        category {
-          id
-          name
-          slug
-        }
         slug
       }
       nextToken
@@ -85,9 +80,6 @@ export const getAllSubcategoriesPath = /* GraphQL */ `
     ) {
       items {
         slug
-        category {
-          slug
-        }
       }
     }
   }
@@ -817,6 +809,9 @@ export const getBasicSubCategory = /* GraphQL */ `
         slug
         bannerUrl
         categoryID
+        category {
+          slug
+        }
       }
     }
   }
@@ -1631,35 +1626,19 @@ export const listCollections = /* GraphQL */ `
   }
 `;
 
-export const getCollectionsBySlug = /* GraphQL */ `
-  query SearchCollections(
-    $filter: SearchableCollectionFilterInput
-    $sort: [SearchableCollectionSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableCollectionAggregationInput]
-  ) {
-    searchCollections(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        slug
-        parent
-        name
-        description
-        showInMenu
-        priority
-      }
-      nextToken
+export const getCollection = /* GraphQL */ `
+  query GetCollection($slug: ID!) {
+    getCollection(slug: $slug) {
+      slug
+      parent
+      name
+      description
+      showInMenu
+      priority
     }
   }
 `;
+
 export const searchShippingTiers = /* GraphQL */ `
   query SearchShippingTiers(
     $filter: SearchableShippingTierFilterInput

@@ -53,11 +53,12 @@ export const getStaticProps = async () => {
     });
 
     const collections = [
-      { name: "All", path: "/ranges/all" },
+      { name: "All", path: "/collections/ranges" },
       ...collectionsRes.map((col) => ({
         ...col,
-        path: `/ranges/${col.slug}`,
+        path: `/collections/${col.slug}`,
       })),
+      { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];
 
     // Get all Product
@@ -75,9 +76,7 @@ export const getStaticProps = async () => {
 
     return {
       props: {
-        category: null,
         products: { ...searchProducts, items: products },
-        categorySlug: null,
         pageFilter: filter,
         collections,
       },
