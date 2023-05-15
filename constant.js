@@ -4,3 +4,5 @@ export const EMAIl_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 export const MAX_PREPAID_DISCOUNT = 500;
+
+export const PRODUCT_TAG_LIST = ["best-seller", "featured", "trending"];
