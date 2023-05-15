@@ -8,7 +8,7 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { toDecimal } from "~/utils";
+import { getFreeProductTotal, toDecimal } from "~/utils";
 import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
@@ -45,6 +45,11 @@ function Cart(props) {
     cartGrandTotal,
     cartAmountSaved,
   } = useCartTotal();
+
+  const totalSaved = useMemo(
+    () => getFreeProductTotal(cartItems) + cartAmountSaved,
+    [cartAmountSaved]
+  );
 
   const inventorySuccess = useMemo(
     () =>
@@ -217,12 +222,10 @@ function Cart(props) {
                                   Average delivery time: <span>3-5 days</span>
                                 </p>
                               </div>
-                              {!!cartAmountSaved && (
+                              {!!totalSaved && (
                                 <div className="summary-saving-lable-container mb-4">
                                   <p className="saving-lable">
-                                    <span>{`₹${toDecimal(
-                                      cartAmountSaved
-                                    )} `}</span>
+                                    <span>{`₹${toDecimal(totalSaved)} `}</span>
                                     saved so far on this order
                                   </p>
                                 </div>

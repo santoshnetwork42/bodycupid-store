@@ -14,7 +14,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { toInteger, toDecimal } from "~/utils";
+import { toInteger, toDecimal, getFreeProductTotal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -162,6 +162,11 @@ function Checkout(props) {
       }
     },
     [store, user, inventorySuccess]
+  );
+
+  const totalSaved = useMemo(
+    () => getFreeProductTotal(cartItems) + totalAmountSaved,
+    [totalSaved]
   );
 
   const handleCodPayments = (orderId) => {
@@ -555,8 +560,8 @@ function Checkout(props) {
                                               item?.cartItemType ===
                                                 "AUTO_FREE_PRODUCT") &&
                                               !!couponTotal && (
-                                                <span className="text-success ">
-                                                  Free
+                                                <span className="text-success mr-1">
+                                                  Free 
                                                 </span>
                                               )}
 
@@ -686,6 +691,7 @@ function Checkout(props) {
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
                                       : "Free"}
+                                    &nbsp;
                                   </td>
                                 </tr>
 
@@ -720,7 +726,7 @@ function Checkout(props) {
                                       <div className="summary-saving-lable-container">
                                         <p className="saving-lable">
                                           <span>{`₹${toDecimal(
-                                            totalAmountSaved
+                                            totalSaved
                                           )}`}</span>{" "}
                                           saved so far on this order
                                         </p>
