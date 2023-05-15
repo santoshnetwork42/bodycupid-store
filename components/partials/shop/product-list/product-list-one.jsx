@@ -101,7 +101,13 @@ function ProductListOne(props) {
         sortBy.push({ field: "position", direction: "asc" });
     }
 
-    return { filter, limit: perPage, sort: sortBy };
+    return {
+      filter,
+      limit: perPage,
+      sort: sortBy,
+      variantFilter: { status: { eq: "ENABLED" } },
+      imageLimit: 1,
+    };
   }, [perPage, maxprice, minprice, search, sortby]);
 
   const getProducts = useCallback(
