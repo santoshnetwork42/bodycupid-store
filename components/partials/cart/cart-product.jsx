@@ -142,7 +142,11 @@ function CartProduct({
                 {!hideQty && (
                   <div className="product-quantity w-0 mb-1">
                     {cartItemType === "FREE_PRODUCT" ? (
-                      <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>
+                      <>
+                        {qty && (
+                          <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>
+                        )}
+                      </>
                     ) : (
                       <Quantity
                         product={item}
