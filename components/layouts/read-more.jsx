@@ -28,13 +28,13 @@ export default function ReadMore({
         {text.length > maxCharacterCount &&
           (!isTruncated ? (
             <>
-              Read more
-              <DownAngle size={14} color={"currentColor"} />
+              Read less
+              <UpAngle size={14} color={"currentColor"} />
             </>
           ) : (
             <>
-              Read less
-              <UpAngle size={14} color={"currentColor"} />
+              Read more
+              <DownAngle size={14} color={"currentColor"} />
             </>
           ))}
       </div>

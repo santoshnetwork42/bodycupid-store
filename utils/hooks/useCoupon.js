@@ -18,8 +18,9 @@ export const useFeaturedCoupons = () => {
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
-
-  return featuredCoupons;
+    return featuredCoupons.sort(
+    (a, b) => b.discount - a.discount || b.allowed - a.allowed
+  );
 };
 
 export const useProductCoupons = (product, variant) => {
@@ -92,10 +93,10 @@ export const useFreeProducts = () => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                applicableCollections.some((ac) =>
-                  (c.collections || []).includes(ac)
+                  applicableCollections.some((ac) =>
+                    (c.collections || []).includes(ac)
+                  )
                 )
-              )
               : true;
 
           return hasCollection && hasProduct;
