@@ -124,12 +124,7 @@ function CartProduct({
           </figure>
           <div className="text-left text-primary w-100  mr-1 ml-2">
             <div className="mr-5 ">
-              <ALink href={"/product/" + slug}>
-                {title}
-                {isCouponApplied && (
-                    <Discount className="pt-1" color="#17b31b" size={17} />
-                )}
-              </ALink>
+              <ALink href={"/product/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
               {cartItemType === "FREE_PRODUCT" ||
@@ -165,12 +160,16 @@ function CartProduct({
               <div className="">
                 {!hideQty && (
                   <div className="product-quantity w-0 mb-1">
-                    <Quantity
-                      product={item}
-                      qty={qty}
-                      max={inventory}
-                      onChangeQty={onChangeQty}
-                    />
+                    {cartItemType === "FREE_PRODUCT" ? (
+                      <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>
+                    ) : (
+                      <Quantity
+                        product={item}
+                        qty={qty}
+                        max={inventory}
+                        onChangeQty={onChangeQty}
+                      />
+                    )}
                   </div>
                 )}
                 {!!item?.variants?.items.length && (
