@@ -2,80 +2,37 @@ import React from "react";
 import OwlCarousel from "~/components/features/owl-carousel";
 import { mainSlider4 } from "~/utils/data/carousel";
 import RatingStar from "../product/rating-star";
+import { TESTIMONIAL } from "~/constant";
 
 export default function ReviewSection() {
   return (
     <section className="parallax pb-3">
       <div className="container ">
         <OwlCarousel adClass="owl-theme" options={mainSlider4}>
-          <div className="testimonial testimonial-centered testimonial-bg">
-            <div className="testimonial-info">
-              <figure className="testimonial-author-thumbnail">
-                <img
-                  src="/images/agents/4.jpg"
-                  alt="user"
-                  width="50"
-                  height="50"
-                />
-              </figure>
-              <div className="d-flex align-item-center mb-2 justify-content-center">
-                <RatingStar key='rating-star' value={5} />
+          {TESTIMONIAL.map((testimonial) => (
+            <div
+              className="testimonial testimonial-centered testimonial-bg"
+              key={testimonial.says.substring(0, 10)}
+            >
+              <div className="testimonial-info">
+                <figure className="testimonial-author-thumbnail">
+                  <img
+                    src={testimonial.userImage}
+                    alt="user"
+                    width="50"
+                    height="50"
+                  />
+                </figure>
+                <div className="d-flex align-item-center mb-2 justify-content-center">
+                  <RatingStar key="rating-star" value={5} />
+                </div>
+                <blockquote>{testimonial.says}</blockquote>
+                <cite>
+                  {testimonial.name} <span>Customer</span>
+                </cite>
               </div>
-              <blockquote>
-                “This is the best plant store I have ever ordered from! My
-                plants were shipped/delivered so fast. When I had a question,
-                Bloomscape got back to me right away, and they were so
-                friendly!”
-              </blockquote>
-              <cite>
-                Dilshad Khan <span>Customer</span>
-              </cite>
             </div>
-          </div>
-          <div className="testimonial testimonial-centered testimonial-bg">
-            <div className="testimonial-info">
-              <figure className="testimonial-author-thumbnail">
-                <img
-                  src="/images/agents/5.jpg"
-                  alt="user"
-                  width="50"
-                  height="50"
-                />
-              </figure>
-              <blockquote>
-                “ Donec nec justo eget felis facilisis fermentum. Aliquam
-                porttitor mauris sit amet orci. Aenean dignissim pellentesque
-                felis. Morbi in sem quis dui placerat ornare. Pellentesque odio
-                nisi, euismod in, pharetra ”
-              </blockquote>
-              <cite>
-                Herman Beck
-                <span>Investor</span>
-              </cite>
-            </div>
-          </div>
-          <div className="testimonial testimonial-centered testimonial-bg">
-            <div className="testimonial-info">
-              <figure className="testimonial-author-thumbnail">
-                <img
-                  src="/images/agents/2.jpg"
-                  alt="user"
-                  width="50"
-                  height="50"
-                />
-              </figure>
-              <blockquote>
-                “ Donec nec justo eget felis facilisis fermentum. Aliquam
-                porttitor mauris sit amet orci. Aenean dignissim pellentesque
-                felis. Morbi in sem quis dui placerat ornare. Pellentesque odio
-                nisi, euismod in, pharetra ”
-              </blockquote>
-              <cite>
-                Herman Beck
-                <span>Investor</span>
-              </cite>
-            </div>
-          </div>
+          ))}
         </OwlCarousel>
       </div>
     </section>
