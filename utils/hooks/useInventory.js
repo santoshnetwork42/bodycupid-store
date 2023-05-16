@@ -57,5 +57,5 @@ export const useInventory = () => {
     [cartList, productWithInventory]
   );
 
-  return { ready: !!productWithInventory, success: inventorySuccess };
+  return { ready: !!productWithInventory, success: inventorySuccess, inventoryMapping: productWithInventory };
 };

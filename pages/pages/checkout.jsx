@@ -44,7 +44,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
-import { getRecordKey } from "~/utils/helper";
 
 function Checkout(props) {
   const {
@@ -63,8 +62,11 @@ function Checkout(props) {
   const { name } = store;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
-  const { ready: isInventoryCheckReady, success: isInventoryCheckSuccess } =
-    useInventory();
+  const {
+    ready: isInventoryCheckReady,
+    success: isInventoryCheckSuccess,
+    inventoryMapping,
+  } = useInventory();
   const freeProducts = useFreeProducts();
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -532,8 +534,9 @@ function Checkout(props) {
                                       <div className="text-left text-primary w-100 mr-5 ml-2">
                                         <div>{item.title}</div>
 
-                                        {item.qty >
-                                        inventoryMapping[item.recordKey] ? (
+                                        {inventoryMapping &&
+                                        item.qty >
+                                          inventoryMapping[item.recordKey] ? (
                                           <div className="outofstock-tag mt-2">
                                             <p className="m-0 outofstock-label">
                                               out of stock

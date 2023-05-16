@@ -15,7 +15,6 @@ import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
-import { getRecordKey } from "~/utils/helper";
 
 function Cart(props) {
   const {
@@ -29,8 +28,11 @@ function Cart(props) {
 
   const router = useRouter();
   const cartItems = useCartItems();
-  const { ready: isInventoryCheckReady, success: isInventoryCheckSuccess } =
-    useInventory();
+  const {
+    ready: isInventoryCheckReady,
+    success: isInventoryCheckSuccess,
+    inventoryMapping,
+  } = useInventory();
 
   useEffect(() => {
     viewCart();
@@ -105,6 +107,7 @@ function Cart(props) {
                           key={`${item.itemKey}`}
                           item={item}
                           outOfStock={
+                            inventoryMapping &&
                             inventoryMapping[item.recordKey] < Number(item.qty)
                           }
                         />
