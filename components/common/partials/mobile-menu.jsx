@@ -1,41 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
 import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
-import { getMenuCategories } from "~/graphql/api";
-import { STORE_ID } from "~/config";
-import { getSortedCategoryAndSubCategory } from "~/utils/helper";
 import OptimizedImage from "~/components/features/optimized-image";
 import { errorHandler } from "~/utils/errorHandler";
 import { modalActions } from "~/store/modal";
+import { useMenu } from "~/utils/contexts/navbar";
 
 function MobileMenu({ user, openPasswordLess }) {
   const router = useRouter();
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    API.graphql(
-      graphqlOperation(getMenuCategories, {
-        filter: { storeId: { eq: STORE_ID } },
-        sort: [{ field: "priority", direction: "asc" }],
-      })
-    )
-      .then(
-        ({
-          data: {
-            searchProductCategories: { items },
-          },
-        }) => {
-          const sortedItems = getSortedCategoryAndSubCategory(items);
-          setCategories(sortedItems);
-        }
-      )
-      .catch(errorHandler);
-  }, []);
+  const menu = useMenu();
 
   useEffect(() => {
     window.addEventListener("resize", hideMobileMenuHandler);
@@ -103,24 +82,20 @@ function MobileMenu({ user, openPasswordLess }) {
         </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
-            {categories.map((category) => (
-              <div key={category?.id}>
+            {menu.map((item) => (
+              <div key={item?.id}>
                 <Card
-                  title={category.name}
+                  title={item.label}
                   type="mobile"
                   onLinkClick={hideMobileMenu}
-                  url={`/collections/${category.slug}`}
+                  url={item.link}
+                  hideDropDown={!item?.subMenu?.length}
                 >
                   <ul>
-                    {category.subCategory.items.map((item) => (
+                    {item?.subMenu?.map((subItem) => (
                       <li key={item.id}>
-                        <ALink
-                          href={
-                            "/collections/" + item.slug
-                          }
-                          onClick={hideMobileMenu}
-                        >
-                          {item.name}
+                        <ALink href={subItem.link} onClick={hideMobileMenu}>
+                          {subItem.label}
                         </ALink>
                       </li>
                     ))}
@@ -129,118 +104,6 @@ function MobileMenu({ user, openPasswordLess }) {
               </div>
             ))}
           </li>
-
-          {/* <li>
-            <Card
-              title="Products"
-              type="mobile"
-              url="/product/fashionable-leather-satchel"
-            >
-              <ul>
-                <li>
-                  <Card title="Product Pages" type="mobile">
-                    <ul>
-                      {mainMenu.product.pages.map((item, index) => (
-                        <li key={`product-${item.title}`}>
-                          <ALink href={"/" + item.url}>
-                            {item.title}
-                            {item.hot ? (
-                              <span className="tip tip-hot">Hot</span>
-                            ) : (
-                              ""
-                            )}
-                          </ALink>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </li>
-
-                <li>
-                  <Card title="Product Layouts" type="mobile">
-                    <ul>
-                      {mainMenu.product.layout.map((item, index) => (
-                        <li key={`product-${item.title}`}>
-                          <ALink href={"/" + item.url}>
-                            {item.title}
-                            {item.new ? (
-                              <span className="tip tip-new">New</span>
-                            ) : (
-                              ""
-                            )}
-                          </ALink>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </li>
-              </ul>
-            </Card>
-          </li> */}
-
-          {/* <li>
-            <Card title="Pages" type="mobile" url="/pages/about-us">
-              <ul>
-                {mainMenu.other.map((item, index) => (
-                  <li key={`other-${item.title}`}>
-                    <ALink href={"/" + item.url}>
-                      {item.title}
-                      {item.new ? <span className="tip tip-new">New</span> : ""}
-                    </ALink>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </li>
-
-          <li>
-            <Card title="Blog" type="mobile" url="/blog/classic">
-              <ul>
-                {mainMenu.blog.map((item, index) =>
-                  item.subPages ? (
-                    <li key={"blog" + item.title}>
-                      <Card
-                        title={item.title}
-                        url={"/" + item.url}
-                        type="mobile"
-                      >
-                        <ul>
-                          {item.subPages.map((item, index) => (
-                            <li key={`blog-${item.title}`}>
-                              <ALink href={"/" + item.url}>{item.title}</ALink>
-                            </li>
-                          ))}
-                        </ul>
-                      </Card>
-                    </li>
-                  ) : (
-                    <li
-                      key={"blog" + item.title}
-                      className={item.subPages ? "submenu" : ""}
-                    >
-                      <ALink href={"/" + item.url}>{item.title}</ALink>
-                    </li>
-                  )
-                )}
-              </ul>
-            </Card>
-          </li>
-
-          <li>
-            <Card title="elements" type="mobile" url="/elements">
-              <ul>
-                {mainMenu.element.map((item, index) => (
-                  <li key={`elements-${item.title}`}>
-                    <ALink href={"/" + item.url}>{item.title}</ALink>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </li> */}
-
-          {/* <li className="mb-4 border-no">
-            <a href="https://d-themes.com/buynow/riodereact">Buy Wow!</a>
-          </li> */}
 
           {!user && (
             <li>
