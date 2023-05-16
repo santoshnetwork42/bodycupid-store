@@ -11,7 +11,9 @@ export default function ReadMore({
   const [isTruncated, setIsTruncated] = useState(true);
 
   const resultString =
-    isTruncated && text ? `${text.slice(0, maxCharacterCount)}...` : text;
+    isTruncated && text.length > maxCharacterCount
+      ? `${text.slice(0, maxCharacterCount)}...`
+      : text;
 
   function toggleIsTruncated() {
     setIsTruncated(!isTruncated);

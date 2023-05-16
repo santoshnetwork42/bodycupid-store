@@ -118,7 +118,7 @@ export default function ToolBox(props) {
   return (
     <div>
       <nav
-        className={`toolbox sticky-toolbox sticky-content fix-top ${
+        className={`toolbox sticky-toolbox sticky-content fix-top mt-4 ${
           type === "horizontal" ? "toolbox-horizontal" : ""
         }`}
       >
