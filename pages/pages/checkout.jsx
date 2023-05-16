@@ -63,7 +63,8 @@ function Checkout(props) {
   const { name } = store;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
-  const inventoryMapping = useInventory();
+  const { ready: isInventoryCheckReady, success: isInventoryCheckSuccess } =
+    useInventory();
   const freeProducts = useFreeProducts();
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -96,15 +97,6 @@ function Checkout(props) {
   } = useCartTotal(isFirst);
 
   const cartItems = useCartItems();
-
-  const inventorySuccess = useMemo(
-    () =>
-      cartList.every((c) => {
-        const itemRecordKey = getRecordKey(c, c.variantId);
-        return c.qty <= inventoryMapping[itemRecordKey];
-      }),
-    [inventoryMapping, cartList]
-  );
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -160,7 +152,7 @@ function Checkout(props) {
         alertToaster("Something went wrong. Try Again!", "error");
       }
     },
-    [store, user, inventorySuccess]
+    [store, user]
   );
 
   const totalSaved = useMemo(
@@ -194,7 +186,6 @@ function Checkout(props) {
     }, 2000);
     return () => clearInterval(intervalId);
   };
-
 
   useEffect(() => {
     if (paymentLoading && isFirst) {
@@ -244,7 +235,7 @@ function Checkout(props) {
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
-      if (!inventorySuccess) {
+      if (!isInventoryCheckSuccess) {
         alertToaster("Please remove out of stock product from cart", "error");
         return;
       }
@@ -418,6 +409,7 @@ function Checkout(props) {
       totalPrice,
       payMethod,
       freeProducts,
+      isInventoryCheckSuccess,
     ]
   );
 
@@ -823,7 +815,10 @@ function Checkout(props) {
                         {(!!isValidAddress(shippingAddress) || !isMobile) && (
                           <button
                             onClick={placeOrder}
-                            disabled={!isValidAddress(shippingAddress)}
+                            disabled={
+                              !isValidAddress(shippingAddress) ||
+                              !isInventoryCheckReady
+                            }
                             className={`btn d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
