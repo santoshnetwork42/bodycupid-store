@@ -100,10 +100,7 @@ function Coupon(props) {
       {layout === "cart" && (
         <div
           className="cart-coupon-box mb-2 pb-5 bg-white text-primary flex-row lh-default"
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpen(true);
-          }}
+          onClick={() => setOpen(true)}
         >
           <span className="mt-1 sm-product-remove">
             {showAppliedCoupon ? (
