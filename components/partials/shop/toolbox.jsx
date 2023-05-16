@@ -129,7 +129,7 @@ export default function ToolBox(props) {
               {filterItems.map((item, i) => {
                 return (
                   <ALink
-                    key={`${i}-${item.pathname}`}
+                    key={`${i}-${item.path}`}
                     className={`sub-category-tag ${
                       (asPath === item.path ||
                         asPath.includes(`${item.path}?`)) &&
