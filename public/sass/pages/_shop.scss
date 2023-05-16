@@ -124,6 +124,7 @@
     padding-left: 2px;
     overflow-y: scroll;
     white-space: nowrap;
+    max-width: 80%;
     .sub-category-tag {
         padding: 0.3rem 1rem;
         border-radius: 1rem;
@@ -726,6 +727,9 @@
         > *:not(:last-child) {
             margin-bottom: 1rem;
         }
+    }
+    .filters-container {
+        max-width: 100% !important;
     }
 }
 
