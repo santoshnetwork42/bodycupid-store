@@ -21,7 +21,9 @@ const Announcement = ({ store, showTopRunner }) => {
                   key={announcement}
                   className="announcement d-flex justify-content-center align-items-center"
                 >
-                  <p className="announcement-text m-0">{announcement}</p>
+                  <p className="announcement-text pt-1 pb-1 m-0">
+                    {announcement}
+                  </p>
                 </div>
               );
             })}
