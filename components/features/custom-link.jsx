@@ -15,7 +15,7 @@ export default function ALink({
     }
 
     if (props.onClick) {
-      props.onClick();
+      props.onClick(e);
     }
   };
 

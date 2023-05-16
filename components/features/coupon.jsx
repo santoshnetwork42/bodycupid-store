@@ -80,7 +80,8 @@ function Coupon(props) {
     [coupon, user, cartList]
   );
 
-  const onCouponRemove = () => {
+  const onCouponRemove = (e) => {
+    e.stopPropagation();
     if (appliedCoupon?.couponType === "PRODUCT" && appliedCoupon?.getYProduct) {
       cartList.forEach((item) => {
         if (item.cartItemSource === "COUPON") {
@@ -99,7 +100,10 @@ function Coupon(props) {
       {layout === "cart" && (
         <div
           className="cart-coupon-box mb-2 pb-5 bg-white text-primary flex-row lh-default"
-          onClick={() => !showAppliedCoupon && setOpen(true)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen(true);
+          }}
         >
           <span className="mt-1 sm-product-remove">
             {showAppliedCoupon ? (
