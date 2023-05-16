@@ -252,6 +252,7 @@ function Cart(props) {
                           <button
                             onClick={validateAndGoToCheckout}
                             className="btn btn-dark btn-rounded  btn-checkout"
+                            disabled={!isInventoryCheckReady}
                           >
                             Proceed to checkout
                           </button>
