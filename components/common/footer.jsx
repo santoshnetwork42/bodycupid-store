@@ -47,7 +47,7 @@ function Footer({ footer, store }) {
                   </li>
                   <li>
                     <ALink href="/policies/terms-of-service">
-                      Terms & Condition
+                      Terms Of Service
                     </ALink>
                   </li>
                   <li>

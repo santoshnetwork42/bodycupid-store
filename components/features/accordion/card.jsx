@@ -15,6 +15,7 @@ export default function Card(props) {
     url,
     onLinkClick = () => {},
     id,
+    hideDropDown,
     ...restProps
   } = props;
 
@@ -22,18 +23,19 @@ export default function Card(props) {
     <SlideToggle {...restProps} collapsed={expanded ? false : true}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <div className={`card ${adClass}`}>
-          <div  id={id} className={`card-header`} onClick={onToggle}>
+          <div id={id} className={`card-header`} onClick={onToggle}>
             <ALink
-             
               onClick={onLinkClick}
               href="#"
               className={`toggle-button ${toggleState.toLowerCase()}`}
             >
               {iconClass ? <i className={iconClass}></i> : ""}
               {title ? title : ""}
-              <i className="icon">
-                <DownAngle size={12} color="currentColor" />
-              </i>
+              {!hideDropDown && (
+                <i className="icon">
+                  <DownAngle size={12} color="currentColor" />
+                </i>
+              )}
             </ALink>
           </div>
 
@@ -76,11 +78,14 @@ export default function Card(props) {
                 onToggle();
               }}
             >
-              {["expanded", "expanding"].includes(toggleState.toLowerCase()) ? (
-                <DownAngle size={12} color="currentColor" />
-              ) : (
-                <RightAngle size={12} color="currentColor" />
-              )}
+              {!hideDropDown &&
+                (["expanded", "expanding"].includes(
+                  toggleState.toLowerCase()
+                ) ? (
+                  <DownAngle size={12} color="currentColor" />
+                ) : (
+                  <RightAngle size={12} color="currentColor" />
+                ))}
             </span>
           </ALink>
 
