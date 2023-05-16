@@ -19,14 +19,14 @@ function AboutUs({ store }) {
             <h2 className="title title-center">ABOUT US</h2>
           </section>
           <section className="mt-10 pt-2">
-            <p className="text-grey mb-2">
+            <p className="text-brown mb-2">
               Body Cupid is a premium and luxury bath and body range inspired by
               the belief that your body deserves as much tender loving care as
               your face does.
             </p>
           </section>
           <section className="pt-2">
-            <p className="text-grey mb-2">
+            <p className="text-brown mb-2">
               You will agree that to feel truly beautiful, you need to look and
               feel good from tip to toe. That’s why, at Body cupid, we have
               created a wide range of truly excellent bath and body products –
@@ -37,7 +37,7 @@ function AboutUs({ store }) {
             </p>
           </section>
           <section className="pt-2">
-            <p className="text-grey mb-2">
+            <p className="text-brown mb-2">
               Body Cupid fuses millennia-old holistic aromatherapeutic
               principles with modern botanical science to present a premium
               range of products that gently yet effectively heals the everyday
@@ -52,7 +52,7 @@ function AboutUs({ store }) {
             </p>
           </section>
           <section className="pt-2">
-            <p className="text-grey mb-2">
+            <p className="text-brown mb-2">
               There is another feature that makes Body Cupid extra special,
               extra desirable. Our products are made in an ultra-modern,
               quality-assured plant amidst pure and pristine environs of the
@@ -63,7 +63,7 @@ function AboutUs({ store }) {
             </p>
           </section>
           <section className="pt-2">
-            <p className="text-grey mb-2">
+            <p className="text-brown mb-2">
               Make Body Cupid a part of your everyday life and let it pamper you
               gently, lovingly, naturally!
             </p>
