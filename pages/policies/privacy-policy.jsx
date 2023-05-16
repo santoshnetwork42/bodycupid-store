@@ -18,7 +18,7 @@ function AboutUs({ store }) {
           <section className="mt-10 pt-3">
             <h2 className="title title-center">PRIVACY POLICY</h2>
 
-            <p className="text-brown">
+            <p>
               Body Cupid Private Limited has created this web site Privacy
               Policy in order to demonstrate that it is committed to
               implementing measures designed to protect the privacy of those
@@ -29,7 +29,7 @@ function AboutUs({ store }) {
               Procedures and Sensitive Personal Date or Information) Rules, 2011
               (“IT Rules”).
             </p>
-            <p className="text-brown">
+            <p>
               The domain name www.bodycupid.com (hereinafter referred to as
               “Website”) is owned by Bodycupid, a company incorporated under the
               Companies Act, 2013 with its registered office at 4th Floor,
@@ -37,7 +37,7 @@ function AboutUs({ store }) {
               Shanthala Nagar, Ashok Nagar, Bengaluru – 560025, Karnataka,
               India.
             </p>
-            <p className="text-brown">
+            <p>
               It is clarified that “Bodycupid” shall include its affiliates and
               associate companies, directors, officers or employees. The
               following discloses our information gathering, usage and
@@ -52,7 +52,7 @@ function AboutUs({ store }) {
               personal information or sensitive personal information to
               Bodycupid.
             </p>
-            <p className="text-brown">
+            <p>
               Throughout this document, “we”, “us”, “our”, “ours” refer to
               Bodycupid. The terms “client”, “user”, “you”, “your” and
               “yourself” or similar terminology are all in use in reference to
@@ -64,7 +64,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               1. INFORMATION WE MAY COLLECT
             </h2>
-            <p className="text-brown">
+            <p>
               Bodycupid may collect (i) personally identifiable information like
               name, telephone number, e-mail address, etc.; (ii) personal
               information; and (iii) sensitive personal information. While you
@@ -75,14 +75,14 @@ function AboutUs({ store }) {
               and acquire information about you for our present and/or future
               affiliates.
             </p>
-            <p className="text-brown">
+            <p>
               The IT Act and the IT Rules define personal information as any
               information that relates to a natural person, which, either
               directly or indirectly, in combination with other information
               available or likely to be available with a body corporate is
               capable of identifying such person.
             </p>
-            <p className="text-brown">
+            <p>
               The IT Act and the IT Rules define sensitive personal date or
               information of a person as meaning such personal information which
               consists of information relating to: (i) password, (ii) financial
@@ -99,13 +99,13 @@ function AboutUs({ store }) {
               shall not be regarded as sensitive personal date or information
               for the purposes of the IT Rules.
             </p>
-            <p className="text-brown">
+            <p>
               If you decide to purchase our products or avail our services, our
               third-party services providers may need to collect certain
               additional information, like your credit or debit card number and
               expiration date, bank routing and account number.
             </p>
-            <p className="text-brown">
+            <p>
               Device Information. When you are connected to our services via
               custom applications (apps), we may collect device-specific
               information such as your device model, operating system, unique
@@ -123,7 +123,7 @@ function AboutUs({ store }) {
               activity, hardware settings, browser type, browser language, the
               date and time of your request and referral URL.
             </p>
-            <p className="text-brown">
+            <p>
               Specialized Information. We may collect and store information
               (including personal information) locally on your device using
               mechanisms such as browser web storage (including HTML 5) and
@@ -135,7 +135,7 @@ function AboutUs({ store }) {
               may also collect and process information about your actual
               location.
             </p>
-            <p className="text-brown">
+            <p>
               At other times, Bodycupid may collect information that cannot be
               used to identify you. For example, we may aggregate non-personal
               information about you and other customers who visit our Website.
@@ -148,7 +148,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               2. HOW WE COLLECT INFORMATION
             </h2>
-            <p className="text-brown">
+            <p>
               Bodycupid may use any number of tools to collect information about
               you, your computer access points, mobile devices, and the web
               browser that you use to connect to our Website or digital
@@ -165,7 +165,7 @@ function AboutUs({ store }) {
               settings to ensure that the settings reflect your consent for
               Bodycupid to place cookies on your devices.
             </p>
-            <p className="text-brown">
+            <p>
               Bodycupid may also collect additional information from your web
               browser each time you visit our Website. We may collect
               information about the pages that you visit and the time spent on
@@ -176,7 +176,7 @@ function AboutUs({ store }) {
               that your browser was used to access our Website, and the
               referring web site’s address.
             </p>
-            <p className="text-brown">
+            <p>
               Our Internet service providers may also use other standard
               web-based technologies to analyze your movements while accessing
               our Website. The technologies include web “beacons,” “pixel tags,”
@@ -193,7 +193,7 @@ function AboutUs({ store }) {
 
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">3. CHOICE</h2>
-            <p className="text-brown">
+            <p>
               Bodycupid allows you to choose (opt out) whether your information
               is to be disclosed to a non-related third party for purposes other
               than Bodycupid related communications, business or services. For
@@ -205,7 +205,7 @@ function AboutUs({ store }) {
               sensitive personal information received from an individual the
               same as the individual would treat it.
             </p>
-            <p className="text-brown">
+            <p>
               For Users in India. You have the right to withdraw your consent to
               the use, disclosure or transfer of your information. However, in
               such event we reserve the right to refuse or limit your access and
@@ -216,7 +216,7 @@ function AboutUs({ store }) {
               communicating the same to our Privacy/Grievance Officer using the
               contact details given in this Privacy Policy.
             </p>
-            <p className="text-brown">
+            <p>
               The information contained on our Website is for general
               information purposes only. While we endeavour to keep the
               information up to date and correct, we make no representations or
@@ -227,7 +227,7 @@ function AboutUs({ store }) {
               purpose. Any reliance you place on such information is therefore
               strictly at your own risk.
             </p>
-            <p className="text-brown">
+            <p>
               In no event will we be liable for any loss or damage including
               without limitation, indirect or consequential loss or damage, or
               any loss or damage whatsoever arising from loss of data or profits
@@ -244,7 +244,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               4. USE AND DISCLOSURE OF YOUR PERSONAL INFORMATION
             </h2>
-            <p className="text-brown">
+            <p>
               At times Bodycupid may use the services of independent companies
               to provide certain services to you, including, without limitation,
               website hosting services, credit card processing, product
@@ -256,7 +256,7 @@ function AboutUs({ store }) {
               extent necessary to complete your request for products and
               services offered through our Website.
             </p>
-            <p className="text-brown">
+            <p>
               Bodycupid may use your personal information to contact you via
               mail, e-mail, landline or mobile device in order to give you
               updates about Bodycupid’s special events, new services, payment
@@ -269,7 +269,7 @@ function AboutUs({ store }) {
               or unique devices identification numbers to help protect Bodycupid
               and our Internet service providers from fraud.
             </p>
-            <p className="text-brown">
+            <p>
               Additional uses of your non-personal and personal information will
               allow us to tailor products and services specific to your needs,
               to help organize and manage our relationship with you or your
@@ -279,7 +279,7 @@ function AboutUs({ store }) {
               We reserve the right to provide non-personal identifying
               information, such as aggregate data, to third parties.
             </p>
-            <p className="text-brown">
+            <p>
               We may also use non-personal aggregate information to improve our
               Website. For example, our Internet Service providers may report to
               us that there were a particular number of visitors to a certain
@@ -289,7 +289,7 @@ function AboutUs({ store }) {
               to analyze the effectiveness of our business and advertising
               models.
             </p>
-            <p className="text-brown">
+            <p>
               We may share your information, including personal information and
               sensitive personal information among our subsidiaries, group
               companies, affiliates, vendors, suppliers and subcontractors for
@@ -299,7 +299,7 @@ function AboutUs({ store }) {
               suppliers and subcontractors may be located within or outside
               India.
             </p>
-            <p className="text-brown">
+            <p>
               Bodycupid may also disclose your personal information as is
               necessary to: (a) comply with a subpoena or court order; (b)
               cooperate with law enforcement or other government agencies; (c)
@@ -318,7 +318,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               5. DISPOSAL OF PERSONAL INFORMATION
             </h2>
-            <p className="text-brown">
+            <p>
               We will only use your Personal Information for those purposes and
               will make sure that your privacy is protected. We shall take
               reasonable steps to delete or permanently de-identify Personal
@@ -328,7 +328,7 @@ function AboutUs({ store }) {
 
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">6. DATA STORAGE AND SECURITY</h2>
-            <p className="text-brown">
+            <p>
               Bodycupid implements a variety of security measures to maintain
               the safety of your personal information when you place an order.
               These security measures include: (i) password protected
@@ -338,7 +338,7 @@ function AboutUs({ store }) {
               securely or PCI Scanning to actively protect our servers from
               hackers and other vulnerabilities.
             </p>
-            <p className="text-brown">
+            <p>
               Bodycupid makes reasonable efforts to ensure that our Internet
               service providers have implemented physical, electronic, and
               procedural security measures to assist with safeguarding your
@@ -363,7 +363,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               7. CHILDREN AND DATA COLLECTION
             </h2>
-            <p className="text-brown">
+            <p>
               Our Website is directed to be used by adults only and our
               Website’s content is not directed toward collecting information
               from anyone who is under the age of 18 (eighteen). We do not
@@ -382,7 +382,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               8. ACCESS TO AND MODIFICATION OF THE INFORMATION COLLECTED
             </h2>
-            <p className="text-brown">
+            <p>
               The first time that you provide us with registration information
               through our Website, you may be offered the opportunity to
               subscribe to and receive additional information about our products
@@ -398,16 +398,14 @@ function AboutUs({ store }) {
               For any grievances related to the use of your personal information
               or sensitive personal information, you may contact us at:
             </p>
-            <p className="text-brown">
-              Bodycupid, Attn: Md. Naseer, Privacy/Grievance Officer
-            </p>
-            <p className="text-brown">Contact info: +91-9543000200</p>
-            <p className="text-brown">E-mail at : support@bodycupid.com</p>
+            <p>Bodycupid, Attn: Md. Naseer, Privacy/Grievance Officer</p>
+            <p>Contact info: +91-9543000200</p>
+            <p>E-mail at : support@bodycupid.com</p>
           </section>
 
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">9. DATA INTEGRITY</h2>
-            <p className="text-brown">
+            <p>
               Bodycupid will only process personal information and sensitive
               personal information in a way that is compatible with and relevant
               for the purpose for which it was collected or authorized by you.
@@ -416,7 +414,7 @@ function AboutUs({ store }) {
 
           <section className="mt-10 pt-2">
             <h2 className="title title-simple">10. ENFORCEMENT</h2>
-            <p className="text-brown">
+            <p>
               Bodycupid uses a self-assessment approach to assure compliance
               with this Privacy Policy and periodically verifies that the policy
               is accurate, comprehensive for the information intended to be
@@ -433,7 +431,7 @@ function AboutUs({ store }) {
             <h2 className="title title-simple">
               11. GENERAL INFORMATION AND PRIVACY SUPPORT CONTACT
             </h2>
-            <p className="text-brown">
+            <p>
               Bodycupid may update this Privacy Policy from time to time, and
               you should take the time to review it each time that you visit our
               Website. By using our Website or providing us with personal

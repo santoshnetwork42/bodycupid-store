@@ -18,7 +18,7 @@ function Shiiping({ store }) {
             <h2 className="title title-center">SHIPPING AND DELIVERY POLICY</h2>
           </section>
           <section className="mt-10 pt-2">
-            <p className="text-brown">
+            <p>
               The standard ground mail service is shipped via
               Gojavas/BlueDart/Aramex/Ecom/IndiaPost. We try to dispatch all our
               orders within 24-48 hours in normal business days. Please be
