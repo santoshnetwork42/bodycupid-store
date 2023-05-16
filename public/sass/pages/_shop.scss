@@ -125,6 +125,7 @@
     overflow-y: scroll;
     white-space: nowrap;
     max-width: 80%;
+    flex-wrap: wrap;
     .sub-category-tag {
         padding: 0.3rem 1rem;
         border-radius: 1rem;
@@ -241,7 +242,7 @@
     padding: .8rem 4rem .8rem 1.4rem;
     font-size: 1.2rem;
     line-height: 1.5;
-    letter-spacing: .03em;
+    letter-spacing: .05em;
 }
 
 .select-menu-toggle {
@@ -730,6 +731,7 @@
     }
     .filters-container {
         max-width: 100% !important;
+        flex-wrap: unset !important;
     }
 }
 
