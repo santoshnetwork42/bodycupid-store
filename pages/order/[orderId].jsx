@@ -113,10 +113,10 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
       <div className="order-page-content page-content pt-7 pb-3 lh-default bg-white text-primary">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/cart">1. Shopping Cart</ALink>
+            <ALink href="#">1. Shopping Cart</ALink>
           </h3>
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/checkout">2. Checkout</ALink>
+            <ALink href="#">2. Checkout</ALink>
           </h3>
           <h3 className="title title-simple title-step active">
             <ALink href="#">3. Order Complete</ALink>
@@ -157,14 +157,16 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     <h4 className="summary-subtitle">Shipping Address:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                    {order?.shippingAddress?.address}
-                    {!!order?.shippingAddress?.location &&
-                      order?.shippingAddress?.location}
-                    {
-                      (order?.shippingAddress?.city + ", ",
-                      state + ", " + country)
-                    }
-                    , {order?.shippingAddress?.pinCode}
+                    {[
+                      order?.shippingAddress?.address,
+                      order?.shippingAddress?.location,
+                      order?.shippingAddress?.city,
+                      state,
+                      country,
+                      order?.shippingAddress?.pinCode,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
                   </td>
                 </tr>
               </tbody>
