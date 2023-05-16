@@ -105,7 +105,7 @@ function Layout({
         />
       </Head>
       <div className="page-wrapper">
-        <Announcement showTopRUnner={navbar.showTopRunner} />
+        <Announcement showTopRunner={navbar.showTopRunner} />
 
         <Header navbar={navbar} />
 

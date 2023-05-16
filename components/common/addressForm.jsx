@@ -128,7 +128,7 @@ const AddressForm = (props) => {
                 </div>
               </div>
               <div className="col-xs-6">
-                <label>Email Address *</label>
+                <label>Email Address</label>
                 <input
                   type="email"
                   className="form-control"
