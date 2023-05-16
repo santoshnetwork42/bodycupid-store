@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { API } from "aws-amplify";
 import { useSelector } from "react-redux";
 
@@ -8,11 +8,16 @@ import { getRecordKey } from "~/utils/helper";
 
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
-  const [productWithInventory, setProductWithInventory] = useState({});
+  const [productWithInventory, setProductWithInventory] = useState(null);
 
+  const inventoryPayload = useMemo(() => cartList.map(
+    (product) => ({
+      productId: product.id,
+      variantId: product.variantId,
+    }),
+  ), [cartList]);
 
   useEffect(() => {
-
     const callGetInventory = async () => {
       try {
         const {
@@ -20,13 +25,7 @@ export const useInventory = () => {
         } = await API.graphql({
           query: checkInventory,
           variables: {
-            input: cartList.map(
-              (product) => ({
-                productId: product.id,
-                variantId: product.variantId,
-              }),
-              [cartList]
-            ),
+            input: inventoryPayload,
           },
         });
 
@@ -45,7 +44,18 @@ export const useInventory = () => {
     };
 
     callGetInventory();
-  }, [cartList]);
+  }, [inventoryPayload]);
 
-  return productWithInventory;
+  const inventorySuccess = useMemo(
+    () =>
+      productWithInventory
+        ? cartList.every((c) => {
+          const itemRecordKey = getRecordKey(c, c.variantId);
+          return c.qty <= productWithInventory[itemRecordKey];
+        })
+        : false,
+    [cartList, productWithInventory]
+  );
+
+  return { ready: !!productWithInventory, success: inventorySuccess, inventoryMapping: productWithInventory };
 };

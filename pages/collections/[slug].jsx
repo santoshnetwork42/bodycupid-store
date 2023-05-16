@@ -227,7 +227,8 @@ export const getStaticProps = async (context) => {
       });
 
       const collections = [
-        { name: "All", path: "/collections/ranges" },
+        { name: "All", path: "/collections/all" },
+        { name: "Ranges", path: "/collections/ranges" },
         ...listCollections.items.map((col) => ({
           ...col,
           path: `/collections/${col.slug}`,

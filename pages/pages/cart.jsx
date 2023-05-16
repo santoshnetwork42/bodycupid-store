@@ -15,7 +15,6 @@ import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
-import { getRecordKey } from "~/utils/helper";
 
 function Cart(props) {
   const {
@@ -28,8 +27,12 @@ function Cart(props) {
   } = props;
 
   const router = useRouter();
-  const inventoryMapping = useInventory();
   const cartItems = useCartItems();
+  const {
+    ready: isInventoryCheckReady,
+    success: isInventoryCheckSuccess,
+    inventoryMapping,
+  } = useInventory();
 
   useEffect(() => {
     viewCart();
@@ -51,22 +54,8 @@ function Cart(props) {
     [cartAmountSaved, cartItems]
   );
 
-  const inventorySuccess = useMemo(
-    () =>
-      cartList.every((c) => {
-        const itemRecordKey = getRecordKey(c, c.variantId);
-        return c.qty <= inventoryMapping[itemRecordKey];
-      }),
-    [inventoryMapping, cartList]
-  );
-
   const validateAndGoToCheckout = useCallback(() => {
-    if (!inventorySuccess) {
-      alertToaster("Please remove out of stock product from cart", "error");
-      return false;
-    }
-
-    if (!inventorySuccess) {
+    if (!isInventoryCheckSuccess) {
       alertToaster("Please remove out of stock product from cart", "error");
       return false;
     }
@@ -78,7 +67,7 @@ function Cart(props) {
 
     openLogin(true);
     return false;
-  }, [user, inventorySuccess, appliedCoupon, cartList]);
+  }, [user, isInventoryCheckSuccess, appliedCoupon, cartList]);
 
   // const appliedCouponStatus = useMemo(
   //   () => getCouponDiscount(appliedCoupon, cartList),
@@ -118,6 +107,7 @@ function Cart(props) {
                           key={`${item.itemKey}`}
                           item={item}
                           outOfStock={
+                            inventoryMapping &&
                             inventoryMapping[item.recordKey] < Number(item.qty)
                           }
                         />
@@ -242,6 +232,7 @@ function Cart(props) {
                       <button
                         onClick={validateAndGoToCheckout}
                         className="btn btn-dark d-sm-none btn-rounded btn-checkout w-100"
+                        disabled={!isInventoryCheckReady}
                       >
                         Proceed to checkout
                       </button>
@@ -261,6 +252,7 @@ function Cart(props) {
                           <button
                             onClick={validateAndGoToCheckout}
                             className="btn btn-dark btn-rounded  btn-checkout"
+                            disabled={!isInventoryCheckReady}
                           >
                             Proceed to checkout
                           </button>
