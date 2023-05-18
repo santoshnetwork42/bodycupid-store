@@ -1,14 +1,17 @@
 import React from "react";
 import Head from "next/head";
 
-function NextHead({ siteName, title, description, image }) {
+function NextHead({ siteName, title, description, image, webUrl }) {
   return (
     <Head>
+      <meta charSet="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1"
+        content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
       />
-      <link rel="canonical" id="canonical" href="#" />
+      <meta name="HandheldFriendly" content="true" />
+      <link rel="canonical" id="canonical" href={webUrl} />
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />

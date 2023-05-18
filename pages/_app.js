@@ -2,10 +2,9 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API, Analytics } from "aws-amplify";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import { Analytics as VecelAnalytics } from '@vercel/analytics/react';
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -82,8 +81,7 @@ const App = ({ Component, pageProps }) => {
               firstName: [getUserResponse.firstName || null],
               lastName: [getUserResponse.lastName || null],
             },
-          })
-            .catch(() => null);
+          }).catch(() => null);
         }
       }
     } catch (error) {
@@ -175,24 +173,12 @@ const App = ({ Component, pageProps }) => {
         persistor={store.__persistor}
         loading={<Loader loading={true} />}
       >
-        <Head>
-          <meta charSet="UTF-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
-          />
-          <meta name="HandheldFriendly" content="true" />
-          <title>{storeName}</title>
-          <meta name="keywords" content="WOW" />
-          <meta name="description" content={storeName} />
-        </Head>
         <Scripts />
         <NavbarProvider>
           <CouponProvider>
             <Layout navbar={navbarProps} footer={footerProps}>
               <Component {...pageProps} />
-              <VecelAnalytics />
+              <VercelAnalytics />
             </Layout>
           </CouponProvider>
         </NavbarProvider>

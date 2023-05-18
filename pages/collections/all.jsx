@@ -86,7 +86,7 @@ export const getStaticProps = async () => {
           siteName: name,
           title,
           description,
-          path: webUrl,
+          path: `${webUrl}/collections/all`,
           image: getPublicImageURL(imageUrl),
         },
       },

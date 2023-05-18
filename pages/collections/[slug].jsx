@@ -33,7 +33,7 @@ function CollectionPage(props) {
 
   return (
     <main className="main searchBar">
-       <NextHead {...pageMeta} />
+      <NextHead {...pageMeta} />
 
       <h1 className="d-none">
         {name} - {data.name}
@@ -109,7 +109,7 @@ export const getStaticProps = async (context) => {
     };
 
     const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
-    const { webUrl ,name} = getStore;
+    const { webUrl, name } = getStore;
 
     // Category By Slug
     const [category] = await fetchData(getBasicCategory, {
@@ -164,7 +164,7 @@ export const getStaticProps = async (context) => {
             siteName: name,
             title,
             description,
-            path: webUrl,
+            path: `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(imageUrl),
           },
         },
@@ -225,7 +225,7 @@ export const getStaticProps = async (context) => {
             siteName: name,
             title,
             description,
-            path: webUrl,
+            path: `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(imageUrl),
           },
         },
@@ -279,7 +279,7 @@ export const getStaticProps = async (context) => {
             siteName: name,
             title,
             description,
-            path: webUrl,
+            path: `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(imageUrl),
           },
         },
