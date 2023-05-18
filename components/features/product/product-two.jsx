@@ -83,7 +83,7 @@ function ProductTwo(props) {
   return (
     <div className={`product text-left ${adClass} product-card`}>
       <figure className="product-media">
-        <ALink href={`/product/${slug}`}>
+        <ALink href={`/products/${slug}`}>
           <Image
             src={getPublicImageURL(thumbImage?.imageKey)}
             layout="fill"
@@ -122,7 +122,7 @@ function ProductTwo(props) {
       <div className="product-details card">
         <div className="details-wrapper">
           <h3 className="product-name text-uppercase product-card-title p-0 font-weight-semi-bold">
-            <ALink href={`/product/${slug}`}>{title}</ALink>
+            <ALink href={`/products/${slug}`}>{title}</ALink>
           </h3>
           {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
@@ -134,7 +134,7 @@ function ProductTwo(props) {
             <span className="rating">{rating}</span>
             <ALink
               href={{
-                pathname: `/product/${slug}`,
+                pathname: `/products/${slug}`,
                 query: { review: true },
               }}
               className="rating-reviews"

@@ -40,7 +40,7 @@ export default function ProductVariant({ item, onSelect, selected }) {
           <div>{item.title}</div>
         </div>
 
-        <div className="product-price mb-2 d-flex">
+        <div className="product-price mb-2 d-flex mt-2">
           <ins className="new-price mr-2">₹{toDecimal(price)}</ins>{" "}
           {listingPrice > price && (
             <>

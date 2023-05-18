@@ -89,7 +89,7 @@ function CartProduct({
       <div className="m-0 p-0">
         <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
           <figure>
-            <ALink href={"/product/" + slug}>
+            <ALink href={"/products/" + slug}>
               <img
                 src={getPublicImageURL(images.items[0]?.imageKey)}
                 width="100"
@@ -100,7 +100,7 @@ function CartProduct({
           </figure>
           <div className="text-left text-primary w-100  mr-1 ml-2">
             <div className="mr-5 ">
-              <ALink href={"/product/" + slug}>{title}</ALink>
+              <ALink href={"/products/" + slug}>{title}</ALink>
             </div>
             <div className="mt-1 d-flex mb-1 align-items-center">
               {cartItemType === "FREE_PRODUCT" ||
