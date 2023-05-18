@@ -34,7 +34,8 @@ module.exports = {
             {
                 source: '/robots.txt',
                 destination: '/api/robots',
-            }
+                permanent: false,
+            },
         ];
     },
     images: {
