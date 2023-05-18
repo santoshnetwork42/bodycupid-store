@@ -31,10 +31,10 @@ export default function ReviewSection() {
     <section className="parallax pb-3">
       <div className="container ">
         <OwlCarousel adClass="owl-theme" options={mainSlider4}>
-          {TESTIMONIAL.map((testimonial) => (
+          {TESTIMONIAL.map((testimonial, index) => (
             <div
               className="testimonial testimonial-centered testimonial-bg"
-              key={testimonial.says.substring(0, 10)}
+              key={`${testimonial.name} + ${index}`}
             >
               <div className="testimonial-info">
                 <figure className="testimonial-author-thumbnail">
