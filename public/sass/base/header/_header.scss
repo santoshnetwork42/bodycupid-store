@@ -20,7 +20,6 @@
       color: false,
       background: #fff,
       // Link's color
-      
       _link-color: false,
       // Link's color when it is hover or active
       _link-active-color: $primary-color,
@@ -41,7 +40,7 @@
           font-family: false,
           font-size: 1.2rem,
           font-weight: false,
-          letter-spacing: 0.0 5em,
+          letter-spacing: 0 5em,
           text-transform: false,
           _links-gap: 2.3rem,
           wishlist: (
@@ -524,7 +523,7 @@
     .input-wrapper {
       position: absolute;
       right: -9rem;
-      top:-3rem ;
+      top: -3rem;
       min-width: 100vw !important;
       @include css(min-width, header, search, toggle, width);
       padding: 1.5rem;
@@ -684,7 +683,6 @@
       opacity: 1;
     }
   }
-
 }
 
 .mobile-search {
@@ -849,7 +847,7 @@
     width: 40px;
     height: 40px;
     border-radius: 2px;
-    border:1px solid $grey-color;
+    border: 1px solid $grey-color;
     margin-right: 10px;
     object-fit: cover;
 
@@ -968,6 +966,12 @@
 @include mq(lg, max) {
   .sticky-wrapper {
     height: auto !important;
+  }
+}
+
+.category-header {
+  h1 {
+    font-size: 2.5rem;
   }
 }
 

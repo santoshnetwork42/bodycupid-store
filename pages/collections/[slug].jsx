@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
@@ -12,10 +11,13 @@ import {
   getSubCategoriesByCategoryID,
   getBasicSubCategory,
   getCollection,
+  getStoreBanners,
 } from "~/graphql/api";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
 import CategoryHeader from "~/components/common/category-header";
+import NextHead from "~/components/common/next-head";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function CollectionPage(props) {
   const {
@@ -25,16 +27,13 @@ function CollectionPage(props) {
     pageFilter,
     filterItems = [],
     data,
+    pageMeta,
   } = props;
   const { name } = store;
 
   return (
     <main className="main searchBar">
-      <Head>
-        <title>
-          {name} - {data.name}
-        </title>
-      </Head>
+      <NextHead {...pageMeta} />
 
       <h1 className="d-none">
         {name} - {data.name}
@@ -109,6 +108,9 @@ export const getStaticProps = async (context) => {
       storeId: { eq: STORE_ID },
     };
 
+    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { webUrl, name } = getStore;
+
     // Category By Slug
     const [category] = await fetchData(getBasicCategory, {
       slug,
@@ -117,6 +119,7 @@ export const getStaticProps = async (context) => {
 
     if (category) {
       filter.categoryId = { eq: category.id };
+      const { title, description, imageUrl, name: categoryName } = category;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
@@ -157,6 +160,13 @@ export const getStaticProps = async (context) => {
           products: searchProducts,
           filterItems,
           pageFilter: filter,
+          pageMeta: {
+            siteName: name,
+            title: title || categoryName,
+            description,
+            canonical: `${webUrl}/collections/${slug}`,
+            image: getPublicImageURL(imageUrl),
+          },
         },
       };
     }
@@ -169,6 +179,13 @@ export const getStaticProps = async (context) => {
 
     if (subCategory) {
       filter.subCategoryId = { eq: subCategory.id };
+
+      const {
+        title,
+        description,
+        imageUrl,
+        name: subCategoryName,
+      } = subCategory;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
@@ -209,6 +226,13 @@ export const getStaticProps = async (context) => {
           products: searchProducts,
           filterItems,
           pageFilter: filter,
+          pageMeta: {
+            siteName: name,
+            title: title || subCategoryName,
+            description,
+            canonical: `${webUrl}/collections/${slug}`,
+            image: getPublicImageURL(imageUrl),
+          },
         },
       };
     }
@@ -218,6 +242,8 @@ export const getStaticProps = async (context) => {
     }).then((resp) => resp.getCollection);
 
     if (collection) {
+      const { title, description, imageUrl, name: collectionName } = collection;
+
       const { listCollections } = await fetchData(listCollectionsQuery, {
         filter: {
           storeId: { eq: STORE_ID },
@@ -254,6 +280,13 @@ export const getStaticProps = async (context) => {
           products: searchProducts,
           pageFilter: filter,
           filterItems: collections,
+          pageMeta: {
+            siteName: name,
+            title: title || collectionName,
+            description,
+            canonical: `${webUrl}/collections/${slug}`,
+            image: getPublicImageURL(imageUrl),
+          },
         },
       };
     }

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
 import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
 
@@ -14,15 +13,19 @@ import {
   searchProductFaqs,
   getProductSlug,
   findProducts,
+  getStoreBanners,
 } from "~/graphql/api";
 import LinkedProducts from "~/components/partials/product/linked-product";
 import { eventActions } from "~/store/events";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import ProductCollection from "~/components/partials/home/product-collection";
 import { errorHandler } from "~/utils/errorHandler";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { getProductMeta } from "~/utils/products";
+import NextHead from "~/components/common/next-head";
 
 function ProductDefault(props) {
-  const { product, productFAQs = [], viewItem, slug } = props;
+  const { product, productFAQs = [], pageMeta, viewItem, slug } = props;
   const router = useRouter();
   const { query, isReady } = router;
   const { variantId } = query;
@@ -92,9 +95,7 @@ function ProductDefault(props) {
 
   return (
     <main className="main single-product">
-      <Head>
-        <title>{product?.title}</title>
-      </Head>
+      <NextHead {...pageMeta} />
 
       <h1 className="d-none">{product?.title}</h1>
 
@@ -177,6 +178,9 @@ export const getStaticProps = async (context) => {
     const { params } = context;
     const { slug } = params;
 
+    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { webUrl, name } = getStore;
+
     // get Product By Slug
     const {
       byslugProduct: {
@@ -189,7 +193,8 @@ export const getStaticProps = async (context) => {
     });
 
     if (product) {
-      const { id } = product;
+      const { id, pageTitle, productDescription, title } = product;
+      const { thumbImage } = getProductMeta(product);
 
       // get Product FAQ
       const {
@@ -205,6 +210,13 @@ export const getStaticProps = async (context) => {
           slug,
           product,
           productFAQs: faqS,
+          pageMeta: {
+            siteName: name,
+            title: pageTitle || title,
+            description: productDescription,
+            canonical: `${webUrl}/products/${slug}`,
+            image: getPublicImageURL(thumbImage?.imageKey),
+          },
         },
       };
     }

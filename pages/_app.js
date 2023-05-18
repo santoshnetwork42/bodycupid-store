@@ -2,10 +2,9 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API, Analytics } from "aws-amplify";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import { Analytics as VecelAnalytics } from '@vercel/analytics/react';
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -22,6 +21,7 @@ import awsconfig from "~/aws-exports";
 import { getUser, getStore } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
+import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
 import CouponProvider from "~/utils/contexts/coupons.js";
 import NavbarProvider from "~/utils/contexts/navbar.js";
@@ -33,7 +33,7 @@ const App = ({ Component, pageProps }) => {
   const router = useRouter();
 
   const { query } = router;
-  const { navbar, footer, store: wowStore } = pageProps;
+  const { navbar, footer, store: wowStore, pageMeta } = pageProps;
 
   const navbarProps = {
     ...navbar,
@@ -82,8 +82,7 @@ const App = ({ Component, pageProps }) => {
               firstName: [getUserResponse.firstName || null],
               lastName: [getUserResponse.lastName || null],
             },
-          })
-            .catch(() => null);
+          }).catch(() => null);
         }
       }
     } catch (error) {
@@ -170,34 +169,25 @@ const App = ({ Component, pageProps }) => {
   }, [query, setMetaData]);
 
   return (
-    <Provider store={store}>
-      <PersistGate
-        persistor={store.__persistor}
-        loading={<Loader loading={true} />}
-      >
-        <Head>
-          <meta charSet="UTF-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
-          />
-          <meta name="HandheldFriendly" content="true" />
-          <title>{storeName}</title>
-          <meta name="keywords" content="WOW" />
-          <meta name="description" content={storeName} />
-        </Head>
-        <Scripts />
-        <NavbarProvider>
-          <CouponProvider>
-            <Layout navbar={navbarProps} footer={footerProps}>
-              <Component {...pageProps} />
-              <VecelAnalytics />
-            </Layout>
-          </CouponProvider>
-        </NavbarProvider>
-      </PersistGate>
-    </Provider>
+    <>
+      {!!pageMeta && <NextHead {...pageMeta} />}
+      <Provider store={store}>
+        <PersistGate
+          persistor={store.__persistor}
+          loading={<Loader loading={true} />}
+        >
+          <Scripts />
+          <NavbarProvider>
+            <CouponProvider>
+              <Layout navbar={navbarProps} footer={footerProps}>
+                <Component {...pageProps} />
+                <VercelAnalytics />
+              </Layout>
+            </CouponProvider>
+          </NavbarProvider>
+        </PersistGate>
+      </Provider>
+    </>
   );
 };
 
