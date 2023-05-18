@@ -77,7 +77,7 @@ function Wishlist(props) {
                   {currentList.map((item) => (
                     <tr key={"wishlist-" + item.title}>
                       <td className="product-thumbnail">
-                        <ALink href={"/product/" + item.slug}>
+                        <ALink href={"/products/" + item.slug}>
                           <figure>
                             <img
                               src={getPublicImageURL(
@@ -91,7 +91,7 @@ function Wishlist(props) {
                         </ALink>
                       </td>
                       <td className="product-name">
-                        <ALink href={"/product/" + item.slug}>
+                        <ALink href={"/products/" + item.slug}>
                           {item.name}
                         </ALink>
                       </td>
