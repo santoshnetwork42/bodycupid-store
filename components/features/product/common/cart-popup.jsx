@@ -15,7 +15,7 @@ export default function CartPopup(props) {
 
         <div className="product product-purchased  product-cart mb-0">
           <figure className="product-media pure-media">
-            <ALink href={`/product/${product.slug}`}>
+            <ALink href={`/products/${product.slug}`}>
               <img
                 src={getPublicImageURL(product.images.items[0]?.imageKey)}
                 alt={product.images.items[0]?.alt}
@@ -25,7 +25,7 @@ export default function CartPopup(props) {
             </ALink>
           </figure>
           <div className="product-detail">
-            <ALink href={`/product/${product.slug}`} className="product-name">
+            <ALink href={`/products/${product.slug}`} className="product-name">
               {product.title}
             </ALink>
             <span className="price-box">

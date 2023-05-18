@@ -54,13 +54,7 @@ $page-header-background: #C8C3BF !default;
         display: flex;
         align-items: center;
         
-        &:not(:last-child) {
-            a, i{
-                color: #999;
-                transition: color .3s;
-            }
-
-        }
+       
         &:hover {
             &:not(:last-child) a {
                 color: #222;

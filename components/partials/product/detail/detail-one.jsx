@@ -369,7 +369,7 @@ function DetailOne(props) {
               <div className="container">
                 <div className="sticky-product-details">
                   <figure className="product-image">
-                    <ALink href={"/product/" + product.slug}>
+                    <ALink href={"/products/" + product.slug}>
                       <img
                         src={getPublicImageURL(
                           product.images.items[0]?.imageKey
@@ -382,7 +382,7 @@ function DetailOne(props) {
                   </figure>
                   <div>
                     <h4 className="product-title">
-                      <ALink href={"/product/" + product.slug}>
+                      <ALink href={"/products/" + product.slug}>
                         {product.title}
                       </ALink>
                     </h4>
