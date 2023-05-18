@@ -809,6 +809,8 @@ export const getBasicSubCategory = /* GraphQL */ `
         title
         description
         slug
+        bannerUrl
+        categoryID
         imageUrl
         category {
           slug
