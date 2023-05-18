@@ -180,7 +180,7 @@ export const getStaticProps = async (context) => {
     if (subCategory) {
       filter.subCategoryId = { eq: subCategory.id };
 
-      const { title, description, imageUrl } = collection;
+      const { title, description, imageUrl } = subCategory;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
