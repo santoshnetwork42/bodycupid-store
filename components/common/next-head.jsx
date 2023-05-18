@@ -20,7 +20,13 @@ function NextHead({ siteName, title, description, image, canonical }) {
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
+      <meta property="og:url" content={canonical} />
       {!!image && <meta property="og:image" content={image} />}
+
+      <meta property="twitter:image" content={image} />
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
     </Head>
   );
 }
