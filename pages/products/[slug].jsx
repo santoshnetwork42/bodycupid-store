@@ -95,7 +95,7 @@ function ProductDefault(props) {
 
   return (
     <main className="main single-product">
-      <NextHead {...pageMeta}/>
+      <NextHead {...pageMeta} />
 
       <h1 className="d-none">{product?.title}</h1>
 
@@ -193,7 +193,7 @@ export const getStaticProps = async (context) => {
     });
 
     if (product) {
-      const { id, pageTitle, productDescription, images } = product;
+      const { id, pageTitle, productDescription, title } = product;
       const { thumbImage } = getProductMeta(product);
 
       // get Product FAQ
@@ -212,7 +212,7 @@ export const getStaticProps = async (context) => {
           productFAQs: faqS,
           pageMeta: {
             siteName: name,
-            title: pageTitle,
+            title: pageTitle || title,
             description: productDescription,
             canonical: `${webUrl}/products/${slug}`,
             image: getPublicImageURL(thumbImage?.imageKey),

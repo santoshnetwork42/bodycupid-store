@@ -119,7 +119,7 @@ export const getStaticProps = async (context) => {
 
     if (category) {
       filter.categoryId = { eq: category.id };
-      const { title, description, imageUrl } = category;
+      const { title, description, imageUrl, name: categoryName } = category;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
@@ -162,7 +162,7 @@ export const getStaticProps = async (context) => {
           pageFilter: filter,
           pageMeta: {
             siteName: name,
-            title,
+            title: title || categoryName,
             description,
             canonical: `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(imageUrl),
@@ -180,7 +180,12 @@ export const getStaticProps = async (context) => {
     if (subCategory) {
       filter.subCategoryId = { eq: subCategory.id };
 
-      const { title, description, imageUrl } = subCategory;
+      const {
+        title,
+        description,
+        imageUrl,
+        name: subCategoryName,
+      } = subCategory;
 
       // Get Product By Category
       const getProducts = fetchData(findProducts, {
@@ -223,7 +228,7 @@ export const getStaticProps = async (context) => {
           pageFilter: filter,
           pageMeta: {
             siteName: name,
-            title,
+            title: title || subCategoryName,
             description,
             canonical: `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(imageUrl),
@@ -237,7 +242,7 @@ export const getStaticProps = async (context) => {
     }).then((resp) => resp.getCollection);
 
     if (collection) {
-      const { title, description, imageUrl } = collection;
+      const { title, description, imageUrl, name: collectionName } = collection;
 
       const { listCollections } = await fetchData(listCollectionsQuery, {
         filter: {
@@ -277,7 +282,7 @@ export const getStaticProps = async (context) => {
           filterItems: collections,
           pageMeta: {
             siteName: name,
-            title,
+            title: title || collectionName,
             description,
             canonical: `${webUrl}/collections/${slug}`,
             image: getPublicImageURL(imageUrl),
