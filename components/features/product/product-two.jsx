@@ -82,42 +82,44 @@ function ProductTwo(props) {
 
   return (
     <div className={`product text-left ${adClass} product-card`}>
-      <figure className="product-media">
-        <ALink href={`/products/${slug}`}>
-          <Image
-            src={getPublicImageURL(thumbImage?.imageKey)}
-            layout="fill"
-            quality={95}
-            loading={priority ? "eager" : "lazy"}
-          />
+      {/* <figure className="product-media"> */}
+      <ALink href={`/products/${slug}`}>
+        <Image
+          src={getPublicImageURL(thumbImage?.imageKey)}
+          height={360}
+          width={360}
+          quality={95}
+          objectFit="contain"
+          loading={priority ? "eager" : "lazy"}
+        />
+      </ALink>
+
+      <div className="product-label-group">
+        {discount > 0 &&
+          (product.variants?.items?.length < 2 ? (
+            <label className="product-label label-sale">-{discount}%</label>
+          ) : (
+            <label className="product-label label-sale">Sale</label>
+          ))}
+      </div>
+
+      {!!tag && (
+        <div className="product-tags-group">
+          <label className="product-label label-best-seller">{tag}</label>
+        </div>
+      )}
+
+      <div className="product-action-vertical">
+        <ALink
+          href="#"
+          className="btn-product-icon btn-cart"
+          title="Quick View"
+          onClick={showQuickviewHandler}
+        >
+          <Eye color="currentColor" size={18} />
         </ALink>
-
-        <div className="product-label-group">
-          {discount > 0 &&
-            (product.variants?.items?.length < 2 ? (
-              <label className="product-label label-sale">-{discount}%</label>
-            ) : (
-              <label className="product-label label-sale">Sale</label>
-            ))}
-        </div>
-
-        {!!tag && (
-          <div className="product-tags-group">
-            <label className="product-label label-best-seller">{tag}</label>
-          </div>
-        )}
-
-        <div className="product-action-vertical">
-          <ALink
-            href="#"
-            className="btn-product-icon btn-cart"
-            title="Quick View"
-            onClick={showQuickviewHandler}
-          >
-            <Eye color="currentColor" size={18} />
-          </ALink>
-        </div>
-      </figure>
+      </div>
+      {/* </figure> */}
 
       <div className="product-details card">
         <div className="details-wrapper">
