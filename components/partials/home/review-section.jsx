@@ -1,7 +1,8 @@
 import React from "react";
+
 import OwlCarousel from "~/components/features/owl-carousel";
 import { mainSlider4 } from "~/utils/data/carousel";
-import RatingStar from "../product/rating-star";
+import RatingStar from "~/components/partials/product/rating-star";
 import Image from "next/image";
 
 const TESTIMONIAL = [

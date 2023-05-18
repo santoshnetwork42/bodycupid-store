@@ -93,7 +93,7 @@ function CartMenu(props) {
                 <div key={"cart-menu-product-" + index}>
                   <div className="product product-cart">
                     <figure className="product-media pure-media">
-                      <ALink href={"/product/" + item.slug}>
+                      <ALink href={"/products/" + item.slug}>
                         <img
                           src={getPublicImageURL(
                             item.images.items[0]?.imageKey
@@ -116,7 +116,7 @@ function CartMenu(props) {
                     </figure>
                     <div className="product-detail">
                       <ALink
-                        href={"/product/" + item.slug}
+                        href={"/products/" + item.slug}
                         className="product-name"
                       >
                         {item.title}
