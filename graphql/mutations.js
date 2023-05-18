@@ -82,6 +82,7 @@ export const deleteWishlist = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -111,6 +112,7 @@ export const createShoppingCart = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -141,6 +143,7 @@ export const deleteShoppingCart = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -409,6 +412,7 @@ export const createProductCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -418,6 +422,7 @@ export const createProductCategory = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       description
       slug
       isFeatured
@@ -448,6 +453,7 @@ export const updateProductCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -457,6 +463,7 @@ export const updateProductCategory = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       description
       slug
       isFeatured
@@ -487,6 +494,7 @@ export const deleteProductCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -496,6 +504,7 @@ export const deleteProductCategory = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       description
       slug
       isFeatured
@@ -525,6 +534,7 @@ export const createProductSubCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -535,12 +545,14 @@ export const createProductSubCategory = /* GraphQL */ `
         updatedAt
       }
       name
+      title
       description
       categoryID
       category {
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -576,6 +588,7 @@ export const updateProductSubCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -586,12 +599,14 @@ export const updateProductSubCategory = /* GraphQL */ `
         updatedAt
       }
       name
+      title
       description
       categoryID
       category {
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -627,6 +642,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -637,12 +653,14 @@ export const deleteProductSubCategory = /* GraphQL */ `
         updatedAt
       }
       name
+      title
       description
       categoryID
       category {
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -675,6 +693,7 @@ export const createStore = /* GraphQL */ `
     createStore(input: $input, condition: $condition) {
       id
       name
+      title
       description
       isActive
       webUrl
@@ -706,6 +725,7 @@ export const updateStore = /* GraphQL */ `
     updateStore(input: $input, condition: $condition) {
       id
       name
+      title
       description
       isActive
       webUrl
@@ -737,6 +757,7 @@ export const deleteStore = /* GraphQL */ `
     deleteStore(input: $input, condition: $condition) {
       id
       name
+      title
       description
       isActive
       webUrl
@@ -771,6 +792,7 @@ export const createWarehouse = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -807,6 +829,7 @@ export const updateWarehouse = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -843,6 +866,7 @@ export const deleteWarehouse = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -891,8 +915,10 @@ export const createProductInventory = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -953,8 +979,10 @@ export const updateProductInventory = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1015,8 +1043,10 @@ export const deleteProductInventory = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1065,6 +1095,7 @@ export const createShippingTier = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1094,6 +1125,7 @@ export const updateShippingTier = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1123,6 +1155,7 @@ export const deleteShippingTier = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1150,11 +1183,13 @@ export const createCollection = /* GraphQL */ `
       slug
       parent
       name
+      title
       description
       storeId
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1181,11 +1216,13 @@ export const updateCollection = /* GraphQL */ `
       slug
       parent
       name
+      title
       description
       storeId
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1212,11 +1249,13 @@ export const deleteCollection = /* GraphQL */ `
       slug
       parent
       name
+      title
       description
       storeId
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1250,6 +1289,7 @@ export const createProduct = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -1265,6 +1305,7 @@ export const createProduct = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -1280,6 +1321,7 @@ export const createProduct = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1294,8 +1336,10 @@ export const createProduct = /* GraphQL */ `
       productType
       createdAt
       slug
+      pageTitle
       productDescription
       longDescription
+      manufacturer
       updatedAt
       isPublished
       publishedAt
@@ -1361,6 +1405,7 @@ export const updateProduct = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -1376,6 +1421,7 @@ export const updateProduct = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -1391,6 +1437,7 @@ export const updateProduct = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1405,8 +1452,10 @@ export const updateProduct = /* GraphQL */ `
       productType
       createdAt
       slug
+      pageTitle
       productDescription
       longDescription
+      manufacturer
       updatedAt
       isPublished
       publishedAt
@@ -1472,6 +1521,7 @@ export const deleteProduct = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -1487,6 +1537,7 @@ export const deleteProduct = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -1502,6 +1553,7 @@ export const deleteProduct = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1516,8 +1568,10 @@ export const deleteProduct = /* GraphQL */ `
       productType
       createdAt
       slug
+      pageTitle
       productDescription
       longDescription
+      manufacturer
       updatedAt
       isPublished
       publishedAt
@@ -1590,8 +1644,10 @@ export const createLinkedProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1651,8 +1707,10 @@ export const updateLinkedProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1712,8 +1770,10 @@ export const deleteLinkedProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -2029,6 +2089,7 @@ export const createOrder = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -2166,6 +2227,7 @@ export const updateOrder = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -2303,6 +2365,7 @@ export const deleteOrder = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -2529,8 +2592,10 @@ export const createOrderProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -2648,8 +2713,10 @@ export const updateOrderProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -2767,8 +2834,10 @@ export const deleteOrderProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -2874,6 +2943,7 @@ export const createPayment = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -2929,6 +2999,7 @@ export const updatePayment = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -2984,6 +3055,7 @@ export const deletePayment = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3081,8 +3153,10 @@ export const createReview = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3178,8 +3252,10 @@ export const updateReview = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3275,8 +3351,10 @@ export const deleteReview = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3330,6 +3408,7 @@ export const createWishlist = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3359,6 +3438,7 @@ export const updateWishlist = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3400,8 +3480,10 @@ export const createWishlistProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3486,8 +3568,10 @@ export const updateWishlistProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3572,8 +3656,10 @@ export const deleteWishlistProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3646,6 +3732,7 @@ export const updateShoppingCart = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3688,8 +3775,10 @@ export const createShoppingCartProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3775,8 +3864,10 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3862,8 +3953,10 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3940,6 +4033,7 @@ export const createCouponCode = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3994,8 +4088,10 @@ export const createCouponCode = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -4055,6 +4151,7 @@ export const updateCouponCode = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -4109,8 +4206,10 @@ export const updateCouponCode = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -4170,6 +4269,7 @@ export const deleteCouponCode = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -4224,8 +4324,10 @@ export const deleteCouponCode = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -4521,6 +4623,7 @@ export const applyCoupon = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -4575,8 +4678,10 @@ export const applyCoupon = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -4649,6 +4754,7 @@ export const createStoreShoppingCart = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
