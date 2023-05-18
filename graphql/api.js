@@ -405,6 +405,7 @@ export const getProductBySlug = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
         updatedAt
@@ -805,10 +806,10 @@ export const getBasicSubCategory = /* GraphQL */ `
       items {
         id
         name
+        title
         description
         slug
-        bannerUrl
-        categoryID
+        imageUrl
         category {
           slug
         }
@@ -837,8 +838,10 @@ export const getBasicCategory = /* GraphQL */ `
       items {
         id
         name
+        title
         description
         slug
+        imageUrl
       }
     }
   }
@@ -867,7 +870,7 @@ export const findProducts = /* GraphQL */ `
       items {
         id
         title
-        collections 
+        collections
         vendor
         subCategory {
           name
@@ -1333,6 +1336,11 @@ export const getStore = /* GraphQL */ `
 export const getStoreBanners = /* GraphQL */ `
   query GetStore($id: ID!) {
     getStore(id: $id) {
+      title
+      name
+      description
+      webUrl
+      imageUrl
       banners {
         webKey
         mobileKey
@@ -1631,10 +1639,13 @@ export const getCollection = /* GraphQL */ `
   query GetCollection($slug: ID!) {
     getCollection(slug: $slug) {
       slug
+      parent
       name
+      title
       description
       showInMenu
       priority
+      imageUrl
     }
   }
 `;

@@ -1,21 +1,20 @@
 import React from "react";
-import Head from "next/head";
 import { connect } from "react-redux";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import { findProducts, listCollections } from "~/graphql/api";
+import { findProducts, getStoreBanners, listCollections } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
+import NextHead from "~/components/common/next-head";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function AllCollection(props) {
-  const { store, products, pageFilter, collections } = props;
+  const { store, products, pageFilter, collections ,pageMeta} = props;
   const { name } = store;
 
   return (
     <main className="main">
-      <Head>
-        <title>{name} - All Products</title>
-      </Head>
+          <NextHead {...pageMeta} />
       <h1 className="d-none">{name} - All Products</h1>
       <div className="page-content pb-3">
         <div className="container">
@@ -43,6 +42,9 @@ export const getStaticProps = async () => {
       storeId: { eq: STORE_ID },
       collections: { exists: true },
     };
+
+    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { title, name, description, webUrl, imageUrl } = getStore;
 
     const {
       listCollections: { items: collectionsRes },
@@ -74,6 +76,13 @@ export const getStaticProps = async () => {
         products: searchProducts,
         pageFilter: filter,
         collections,
+        pageMeta: {
+          siteName: name,
+          title,
+          description,
+          path: webUrl,
+          image: getPublicImageURL(imageUrl),
+        },
       },
       revalidate: 60,
     };

@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import { connect } from "react-redux";
 
 import IntroSection from "~/components/partials/home/intro-section";
@@ -16,6 +15,8 @@ import ReviewSection from "~/components/partials/home/review-section";
 import StorySection from "~/components/partials/home/story-section";
 import ProductCollection from "~/components/partials/home/product-collection";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import NextHead from "~/components/common/next-head";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function HomePage({
   hero,
@@ -24,15 +25,14 @@ function HomePage({
   categories,
   brands,
   store,
+  pageMeta,
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
 
   return (
     <main className="main home searchBar">
-      <Head>
-        <title>{name} - Home</title>
-      </Head>
+      <NextHead {...pageMeta}></NextHead>
 
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
@@ -117,6 +117,8 @@ export const getStaticProps = async () => {
       "/images/brands/9.png",
     ];
 
+    const { title, name, description, webUrl, imageUrl } = store;
+
     return {
       props: {
         hero: { banners },
@@ -124,6 +126,13 @@ export const getStaticProps = async () => {
         featuredProducts,
         categories,
         brands,
+        pageMeta: {
+          siteName: name,
+          title,
+          description,
+          path: webUrl,
+          image: getPublicImageURL(imageUrl),
+        },
       },
       revalidate: 43200,
     };
