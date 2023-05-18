@@ -21,6 +21,7 @@ import awsconfig from "~/aws-exports";
 import { getUser, getStore } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
+import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
 import CouponProvider from "~/utils/contexts/coupons.js";
 import NavbarProvider from "~/utils/contexts/navbar.js";
@@ -32,7 +33,7 @@ const App = ({ Component, pageProps }) => {
   const router = useRouter();
 
   const { query } = router;
-  const { navbar, footer, store: wowStore } = pageProps;
+  const { navbar, footer, store: wowStore, pageMeta } = pageProps;
 
   const navbarProps = {
     ...navbar,
@@ -168,22 +169,25 @@ const App = ({ Component, pageProps }) => {
   }, [query, setMetaData]);
 
   return (
-    <Provider store={store}>
-      <PersistGate
-        persistor={store.__persistor}
-        loading={<Loader loading={true} />}
-      >
-        <Scripts />
-        <NavbarProvider>
-          <CouponProvider>
-            <Layout navbar={navbarProps} footer={footerProps}>
-              <Component {...pageProps} />
-              <VercelAnalytics />
-            </Layout>
-          </CouponProvider>
-        </NavbarProvider>
-      </PersistGate>
-    </Provider>
+    <>
+      {!!pageMeta && <NextHead {...pageMeta} />}
+      <Provider store={store}>
+        <PersistGate
+          persistor={store.__persistor}
+          loading={<Loader loading={true} />}
+        >
+          <Scripts />
+          <NavbarProvider>
+            <CouponProvider>
+              <Layout navbar={navbarProps} footer={footerProps}>
+                <Component {...pageProps} />
+                <VercelAnalytics />
+              </Layout>
+            </CouponProvider>
+          </NavbarProvider>
+        </PersistGate>
+      </Provider>
+    </>
   );
 };
 

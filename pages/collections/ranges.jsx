@@ -80,7 +80,7 @@ export const getStaticProps = async () => {
           siteName: name,
           title,
           description,
-          path: `${webUrl}/collections/ranges`,
+          canonical: `${webUrl}/collections/ranges`,
           image: getPublicImageURL(imageUrl),
         },
       },

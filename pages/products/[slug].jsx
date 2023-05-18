@@ -214,7 +214,7 @@ export const getStaticProps = async (context) => {
             siteName: name,
             title: pageTitle,
             description: productDescription,
-            path: `${webUrl}/products/${slug}`,
+            canonical: `${webUrl}/products/${slug}`,
             image: getPublicImageURL(thumbImage?.imageKey),
           },
         },
