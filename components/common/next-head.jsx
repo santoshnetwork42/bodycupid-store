@@ -23,7 +23,7 @@ function NextHead({ siteName, title, description, image, canonical }) {
       <meta property="og:url" content={canonical} />
       {!!image && <meta property="og:image" content={image} />}
 
-      <meta property="twitter:image" content={image} />
+      {!!image && <meta property="twitter:image" content={image} />}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
