@@ -34,7 +34,7 @@ const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
 const getManufacturerInformation = (product) => [
   {
     label: "Manufacturer Name :",
-    value: product.title,
+    value: product.manufacturer,
   },
   {
     label: "Country of Origin :",
@@ -592,8 +592,14 @@ function DescOne(props) {
               {manufacturerInformation.map((item) => {
                 return (
                   <div className="additional-info-container" key={item.label}>
-                    <h6 className="additional-info-label m-0">{item.label}</h6>
-                    <p className="additional-info-value">{item.value}</p>
+                    {!!(item.value && item.label) && (
+                      <>
+                        <h6 className="additional-info-label m-0">
+                          {item.label}
+                        </h6>
+                        <p className="additional-info-value">{item.value}</p>
+                      </>
+                    )}
                   </div>
                 );
               })}

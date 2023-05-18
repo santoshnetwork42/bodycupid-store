@@ -408,6 +408,7 @@ export const getProductBySlug = /* GraphQL */ `
         pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
