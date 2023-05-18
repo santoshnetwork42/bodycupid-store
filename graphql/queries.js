@@ -273,6 +273,7 @@ export const getProductCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -282,6 +283,7 @@ export const getProductCategory = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       description
       slug
       isFeatured
@@ -315,6 +317,7 @@ export const listProductCategories = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -350,6 +353,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -385,6 +389,7 @@ export const byslugProductCategory = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -420,6 +425,7 @@ export const searchProductCategories = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -457,6 +463,7 @@ export const getProductSubCategory = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -467,12 +474,14 @@ export const getProductSubCategory = /* GraphQL */ `
         updatedAt
       }
       name
+      title
       description
       categoryID
       category {
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -512,6 +521,7 @@ export const listProductSubCategories = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -548,6 +558,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -584,6 +595,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -620,6 +632,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -656,6 +669,7 @@ export const searchProductSubCategories = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -691,6 +705,7 @@ export const getStore = /* GraphQL */ `
     getStore(id: $id) {
       id
       name
+      title
       description
       isActive
       webUrl
@@ -724,6 +739,7 @@ export const listStores = /* GraphQL */ `
       items {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -757,6 +773,7 @@ export const searchStores = /* GraphQL */ `
       items {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -793,6 +810,7 @@ export const getWarehouse = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -948,8 +966,10 @@ export const getProductInventory = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1120,6 +1140,7 @@ export const getShippingTier = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1211,11 +1232,13 @@ export const getCollection = /* GraphQL */ `
       slug
       parent
       name
+      title
       description
       storeId
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1252,6 +1275,7 @@ export const listCollections = /* GraphQL */ `
         slug
         parent
         name
+        title
         description
         storeId
         showInMenu
@@ -1285,6 +1309,7 @@ export const bystoreIdCollections = /* GraphQL */ `
         slug
         parent
         name
+        title
         description
         storeId
         showInMenu
@@ -1318,6 +1343,7 @@ export const searchCollections = /* GraphQL */ `
         slug
         parent
         name
+        title
         description
         storeId
         showInMenu
@@ -1358,6 +1384,7 @@ export const getProduct = /* GraphQL */ `
         id
         name
         storeId
+        title
         description
         slug
         isFeatured
@@ -1373,6 +1400,7 @@ export const getProduct = /* GraphQL */ `
         id
         storeId
         name
+        title
         description
         categoryID
         slug
@@ -1388,6 +1416,7 @@ export const getProduct = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -1402,8 +1431,10 @@ export const getProduct = /* GraphQL */ `
       productType
       createdAt
       slug
+      pageTitle
       productDescription
       longDescription
+      manufacturer
       updatedAt
       isPublished
       publishedAt
@@ -1474,8 +1505,10 @@ export const listProducts = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1542,8 +1575,10 @@ export const bycategoryIdProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1610,8 +1645,10 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1678,8 +1715,10 @@ export const bystoreIdProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1746,8 +1785,10 @@ export const byslugProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1814,8 +1855,10 @@ export const searchProducts = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -1886,8 +1929,10 @@ export const getLinkedProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -2303,6 +2348,7 @@ export const getOrder = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -2757,8 +2803,10 @@ export const getOrderProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3052,6 +3100,7 @@ export const getPayment = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3268,8 +3317,10 @@ export const getReview = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3433,6 +3484,7 @@ export const getWishlist = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3545,8 +3597,10 @@ export const getWishlistProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3668,6 +3722,7 @@ export const getShoppingCart = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3784,8 +3839,10 @@ export const getShoppingCartProduct = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt
@@ -3913,6 +3970,7 @@ export const getCouponCode = /* GraphQL */ `
       store {
         id
         name
+        title
         description
         isActive
         webUrl
@@ -3967,8 +4025,10 @@ export const getCouponCode = /* GraphQL */ `
         productType
         createdAt
         slug
+        pageTitle
         productDescription
         longDescription
+        manufacturer
         updatedAt
         isPublished
         publishedAt

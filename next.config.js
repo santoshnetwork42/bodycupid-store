@@ -30,6 +30,10 @@ module.exports = {
                 source: '/elements/:any',
                 destination: '/',
                 permanent: true
+            },
+            {
+                source: '/robots.txt',
+                destination: '/api/robots',
             }
         ];
     },

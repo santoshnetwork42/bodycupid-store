@@ -185,7 +185,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                         <div className="d-flex">
                           <ALink
                             className="order-image mr-2"
-                            href={"/product/" + item.slug}
+                            href={"/products/" + item.slug}
                           >
                             <img
                               src={getPublicImageURL(

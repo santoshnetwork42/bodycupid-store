@@ -184,7 +184,7 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
                 images[0] || { imageKey: product.imageUrl };
               return (
                 <ALink
-                  href={`/product/${product.slug}`}
+                  href={`/products/${product.slug}`}
                   className="autocomplete-suggestion"
                   key={`search-result-${index}`}
                 >

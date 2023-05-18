@@ -1,23 +1,26 @@
 import React from "react";
-import Head from "next/head";
 import { connect } from "react-redux";
 
 // import ShopBanner from "~/components/partials/shop/shop-banner";
 // import SidebarFilterOne from "~/components/partials/shop/sidebar/sidebar-filter-one";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import { findProducts, getMenuCategories } from "~/graphql/api";
+import {
+  findProducts,
+  getMenuCategories,
+  getStoreBanners,
+} from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
+import NextHead from "~/components/common/next-head";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function AllProduct(props) {
-  const { store, products, pageFilter, categories } = props;
+  const { store, products, pageFilter, categories, pageMeta } = props;
   const { name } = store;
 
   return (
     <main className="main">
-      <Head>
-        <title>{name} - All Products</title>
-      </Head>
+      <NextHead {...pageMeta} />
 
       <h1 className="d-none">{name} - All Products</h1>
 
@@ -53,6 +56,9 @@ export const getStaticProps = async () => {
       sort: [{ field: "priority", direction: "asc" }],
     });
 
+    const { getStore } = await fetchData(getStoreBanners, { id: STORE_ID });
+    const { title, name, description, webUrl, imageUrl } = getStore;
+
     const categories = [
       { name: "all", path: "/collections/all" },
       ...searchProductCategories.items.map((cat) => ({
@@ -76,6 +82,13 @@ export const getStaticProps = async () => {
         categories,
         products: searchProducts,
         pageFilter: filter,
+        pageMeta: {
+          siteName: name,
+          title,
+          description,
+          canonical: `${webUrl}/collections/all`,
+          image: getPublicImageURL(imageUrl),
+        },
       },
       revalidate: 60,
     };
