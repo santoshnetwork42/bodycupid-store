@@ -1,4 +1,5 @@
-import { getCartCount, getTotalPrice, toDecimal } from "~/utils";
+import { getCartCount, getCartTotals, getTotalPrice, toDecimal } from "~/utils";
+import { getBxGyFreeQuantity } from "./helper";
 
 export const getCouponMessage = ({
   couponType,
@@ -71,15 +72,17 @@ export const getCouponDiscount = (coupon, cartItems) => {
     const isCartItem = c.cartItemSource !== "COUPON";
     if (!isCartItem) return false;
 
-    const isProductApplicable = Array.isArray(applicableProducts) && applicableProducts.length
-      ? applicableProducts.includes(c.id)
-      : true
+    const isProductApplicable =
+      Array.isArray(applicableProducts) && applicableProducts.length
+        ? applicableProducts.includes(c.id)
+        : true;
 
     if (!isProductApplicable) return false;
 
-    const isCollectionApplicable = Array.isArray(applicableCollections) && applicableCollections.length
-      ? applicableCollections.some(ac => (c.collections || []).includes(ac))
-      : true;
+    const isCollectionApplicable =
+      Array.isArray(applicableCollections) && applicableCollections.length
+        ? applicableCollections.some((ac) => (c.collections || []).includes(ac))
+        : true;
 
     return isCollectionApplicable;
   });
@@ -90,8 +93,9 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${minOrderValue - totalAmount
-        } more to the cart.`,
+      message: `Add product worth ₹${
+        minOrderValue - totalAmount
+      } more to the cart.`,
     };
   }
 
@@ -100,13 +104,16 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${buyXQuantity + getYQuantity - totalItems
-        } more items to the cart.`,
+      message: `Add ${
+        buyXQuantity + getYQuantity - totalItems
+      } more items to the cart.`,
     };
   }
 
   if (Array.isArray(applicableProducts) && applicableProducts.length) {
-    const hasProduct = cartItems.filter(c => c.cartItemSource !== "COUPON").some((c) => applicableProducts.includes(c.id));
+    const hasProduct = cartItems
+      .filter((c) => c.cartItemSource !== "COUPON")
+      .some((c) => applicableProducts.includes(c.id));
 
     if (!hasProduct) {
       return {
@@ -118,9 +125,11 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (Array.isArray(applicableCollections) && applicableCollections.length) {
-    const hasCollection = cartItems.filter(c => c.cartItemSource !== "COUPON").some((c) =>
-      applicableCollections.some((ac) => (c.collections || []).includes(ac))
-    );
+    const hasCollection = cartItems
+      .filter((c) => c.cartItemSource !== "COUPON")
+      .some((c) =>
+        applicableCollections.some((ac) => (c.collections || []).includes(ac))
+      );
 
     if (!hasCollection) {
       return {
@@ -173,9 +182,14 @@ export const getCouponDiscount = (coupon, cartItems) => {
     cartAmounts.push(...Array(parseInt(c.qty, 10)).fill(c.price));
   });
 
+  const discountedQty = getBxGyFreeQuantity(
+    getYQuantity,
+    buyXQuantity,
+    cartList
+  );
+
   cartAmounts.sort((a, b) => (b > a ? 1 : -1));
-  cartAmounts.splice(0, buyXQuantity);
-  const discountedItems = cartAmounts.slice(-getYQuantity);
+  const discountedItems = cartAmounts.slice(-discountedQty);
   const amt = discountedItems.reduce((a, b) => a + b, 0);
   const discount = maxDiscount ? Math.min(maxDiscount, amt) : amt;
   return {
