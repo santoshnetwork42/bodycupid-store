@@ -104,7 +104,7 @@ function Cart(props) {
                     <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
                         <CartProduct
-                          key={`${item.itemKey}`}
+                          key={`${item.itemKey}-${item.extraQty}`}
                           item={item}
                           outOfStock={
                             inventoryMapping &&
