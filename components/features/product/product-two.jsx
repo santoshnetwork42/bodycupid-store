@@ -86,8 +86,8 @@ function ProductTwo(props) {
       <ALink href={`/products/${slug}`}>
         <Image
           src={getPublicImageURL(thumbImage?.imageKey)}
-          height={360}
-          width={360}
+          height={300}
+          width={300}
           quality={95}
           objectFit="contain"
           loading={priority ? "eager" : "lazy"}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
@@ -7,7 +7,6 @@ import ALink from "~/components/features/custom-link";
 import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import OptimizedImage from "~/components/features/optimized-image";
-import { errorHandler } from "~/utils/errorHandler";
 import { modalActions } from "~/store/modal";
 import { useMenu } from "~/utils/contexts/navbar";
 
@@ -83,7 +82,7 @@ function MobileMenu({ user, openPasswordLess }) {
         <ul className="mobile-menu mmenu-anim">
           <li>
             {menu.map((item) => (
-              <div key={item?.id}>
+              <div key={item?.label}>
                 <Card
                   title={item.label}
                   type="mobile"
@@ -93,7 +92,7 @@ function MobileMenu({ user, openPasswordLess }) {
                 >
                   <ul>
                     {item?.subMenu?.map((subItem) => (
-                      <li key={item.id}>
+                      <li key={`${item.label}-${subItem.label}`}>
                         <ALink href={subItem.link} onClick={hideMobileMenu}>
                           {subItem.label}
                         </ALink>
