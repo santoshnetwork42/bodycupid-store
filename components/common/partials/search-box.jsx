@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import NextImage from "next/image";
 import { API, graphqlOperation } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
@@ -188,12 +188,13 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
                   className="autocomplete-suggestion"
                   key={`search-result-${index}`}
                 >
-                  <LazyLoadImage
-                    effect="opacity"
+                  <NextImage
                     src={getPublicImageURL(thumbImage.imageKey)}
                     width={40}
                     height={40}
                     alt={thumbImage.alt}
+                    loading="eager"
+                    priority
                   />
                   <div
                     className="search-name ml-1"

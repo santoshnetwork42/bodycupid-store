@@ -1,4 +1,4 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import NextImage from "next/image";
 import Head from "next/head";
 import ALink from "~/components/features/custom-link";
 import { getBlog } from "~/graphql/queries";
@@ -37,12 +37,13 @@ function PostSingle({ blog: post }) {
               <div className="post post-single ">
                 <figure className="post-media">
                   <ALink href="#">
-                    <LazyLoadImage
+                    <NextImage
                       src={getPublicImageURL(featuredImage)}
-                      alt="post image"
-                      width="900"
+                      alt={title}
+                      width={900}
                       height={500}
-                      style={{ backgroundColor: "#DEE6E8" }}
+                      loading="eager"
+                      priority
                     />
                   </ALink>
                 </figure>

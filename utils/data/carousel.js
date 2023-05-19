@@ -41,20 +41,8 @@ export const mainSlider2 = {
 
 export const mainSlider3 = {
   autoHeight: false,
-  dots: false,
+  dots: true,
   nav: true,
-  responsive: {
-    0: {
-      dots: true,
-    },
-    768: {
-      dots: false,
-    },
-    992: {
-      dots: false,
-    },
-  },
-  // dotsContainer: ".product-thumbs"
 };
 
 export const mainSlider4 = {

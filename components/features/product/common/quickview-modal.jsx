@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Magnifier } from "react-image-magnifiers";
-import imagesLoaded from "imagesloaded";
+import NextImage from "next/image";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { getQuickViewProduct } from "~/graphql/api";
@@ -12,29 +11,16 @@ import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import Modal from "~/components/common/modal";
 
-const customStyles = {
-  content: {
-    position: "relative",
-  },
-  overlay: {
-    background: "rgba(0,0,0,.4)",
-    zIndex: "10000",
-    overflowX: "hidden",
-    overflowY: "auto",
-  },
-};
-
 function Quickview(props) {
   const { slug, closeQuickview, isOpen } = props;
 
   if (!isOpen) return <div></div>;
 
-  const [loaded, setLoadingState] = useState(false);
   const [product, setProduct] = useState(null);
   const [variant, setVariant] = useState(null);
 
   useEffect(() => {
-    if (slug) {
+    if (slug && isOpen) {
       setProduct(null);
       (async function () {
         const {
@@ -53,35 +39,15 @@ function Quickview(props) {
         setVariant(response.variants.items[0]?.id);
       })();
     }
-  }, [slug]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (product && isOpen && document.querySelector(".quickview-modal"))
-        imagesLoaded(".quickview-modal")
-          .on("done", function () {
-            setLoadingState(true);
-            window
-              .jQuery(".quickview-modal .product-single-carousel")
-              .trigger("refresh.owl.carousel");
-          })
-          .on("progress", function () {
-            setLoadingState(false);
-          })
-          .on("fail", function () {
-            setLoadingState(true);
-          });
-    }, 200);
-  }, [product, isOpen]);
-
-  if (!slug || !product) return "";
+  }, [slug, isOpen]);
 
   const closeQuick = () => {
     document.querySelector(".ReactModal__Overlay").classList.add("removed");
     document.querySelector(".quickview-modal").classList.add("removed");
-    setLoadingState(false);
     setTimeout(() => {
       closeQuickview();
+      setProduct(null);
+      setVariant(null);
     }, 330);
   };
 
@@ -103,6 +69,8 @@ function Quickview(props) {
     );
   }
 
+  if (!slug) return <></>;
+
   return (
     <Modal
       isOpen={isOpen}
@@ -112,16 +80,10 @@ function Quickview(props) {
       className="product product-single row product-popup quickview-modal"
       id="product-quickview"
     >
-      <div className={`row p-0 m-0 ${loaded ? "" : "d-none"}`}>
+      <div className={`row p-0 m-0 ${!!product ? "" : "d-none"}`}>
         <div className="col-md-6">
           <div className="product-gallery mb-md-0 pb-0">
             <div className="product-label-group">
-              {product?.isNew && (
-                <label className="product-label label-new">New</label>
-              )}
-              {product?.isFeatured && (
-                <label className="product-label label-top">Top</label>
-              )}
               {discount > 0 &&
                 (product?.variants.items.length === 0 ? (
                   <label className="product-label label-sale">
@@ -137,15 +99,15 @@ function Quickview(props) {
               options={mainSlider3}
             >
               {lgImages.map((item) => (
-                <Magnifier
+                <NextImage
                   key={item.id}
-                  imageSrc={getPublicImageURL(item.imageKey)}
+                  src={getPublicImageURL(item.imageKey)}
                   imageAlt={item.alt}
-                  largeImageSrc={getPublicImageURL(item.imageKey)}
-                  dragToMove={false}
-                  mouseActivation="hover"
-                  cursorStyleActive="crosshair"
-                  className="product-image large-image"
+                  height={500}
+                  width={500}
+                  objectFit="contain"
+                  priority
+                  loading="eager"
                 />
               ))}
             </OwlCarousel>
@@ -164,7 +126,7 @@ function Quickview(props) {
           )}
         </div>
       </div>
-      {!loaded && (
+      {!product && (
         <div className="product row p-0 m-0 skeleton-body mfp-product">
           <div className="col-md-6">
             <div className="skel-pro-gallery"></div>
