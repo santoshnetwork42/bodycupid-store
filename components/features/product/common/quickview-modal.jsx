@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Magnifier } from "react-image-magnifiers";
+import NextImage from "next/image";
 import imagesLoaded from "imagesloaded";
 import { API, graphqlOperation } from "aws-amplify";
 
@@ -11,18 +11,6 @@ import { modalActions } from "~/store/modal";
 import { mainSlider3 } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import Modal from "~/components/common/modal";
-
-const customStyles = {
-  content: {
-    position: "relative",
-  },
-  overlay: {
-    background: "rgba(0,0,0,.4)",
-    zIndex: "10000",
-    overflowX: "hidden",
-    overflowY: "auto",
-  },
-};
 
 function Quickview(props) {
   const { slug, closeQuickview, isOpen } = props;
@@ -116,12 +104,6 @@ function Quickview(props) {
         <div className="col-md-6">
           <div className="product-gallery mb-md-0 pb-0">
             <div className="product-label-group">
-              {product?.isNew && (
-                <label className="product-label label-new">New</label>
-              )}
-              {product?.isFeatured && (
-                <label className="product-label label-top">Top</label>
-              )}
               {discount > 0 &&
                 (product?.variants.items.length === 0 ? (
                   <label className="product-label label-sale">
@@ -137,15 +119,15 @@ function Quickview(props) {
               options={mainSlider3}
             >
               {lgImages.map((item) => (
-                <Magnifier
+                <NextImage
                   key={item.id}
-                  imageSrc={getPublicImageURL(item.imageKey)}
+                  src={getPublicImageURL(item.imageKey)}
                   imageAlt={item.alt}
-                  largeImageSrc={getPublicImageURL(item.imageKey)}
-                  dragToMove={false}
-                  mouseActivation="hover"
-                  cursorStyleActive="crosshair"
-                  className="product-image large-image"
+                  height={500}
+                  width={500}
+                  objectFit="contain"
+                  priority
+                  loading="eager"
                 />
               ))}
             </OwlCarousel>
