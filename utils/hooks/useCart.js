@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getCartTotals } from "~/utils";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { getCouponDiscount } from "~/utils/coupons";
+import { getBxGyFreeQuantity } from "../helper";
 
 export const useCartTotal = (prepaid = false) => {
   const { data, coupon } = useSelector((state) => state.cart);
@@ -57,8 +58,13 @@ export const useCartItems = () => {
       const sortedItems = couponApplicableCartList.sort((a, b) =>
         a.price > b.price ? 1 : -1
       );
+      
+      const getYQuantity = getBxGyFreeQuantity(
+        appliedCoupon.getYQuantity,
+        appliedCoupon.buyXQuantity,
+        sortedItems
+      );
 
-      let getYQuantity = appliedCoupon.getYQuantity;
       let remainingDiscount = appliedCoupon.maxDiscount || Infinity;
 
       const updatedCartItems = sortedItems.reduce((acc, item) => {

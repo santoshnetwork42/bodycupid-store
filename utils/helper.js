@@ -1,3 +1,4 @@
+import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
 
@@ -78,7 +79,7 @@ export const removeHoverEffect = () => {
           }
         }
       }
-    } catch (ex) { }
+    } catch (ex) {}
   }
 };
 
@@ -138,4 +139,15 @@ export const getRecordKey = (product, variantId) => {
   if (firstVariant) return `${id}-${firstVariant.id}`;
 
   return id;
+};
+
+export const getBxGyFreeQuantity = (getYQuantity, buyXQuantity, cartList) => {
+  const { totalItems } = getCartTotals(cartList);
+  return (
+    Math.floor(
+      (totalItems -
+        (totalItems * buyXQuantity) / (buyXQuantity + getYQuantity)) /
+        getYQuantity
+    ) * getYQuantity
+  );
 };
