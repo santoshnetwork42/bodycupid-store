@@ -27,7 +27,7 @@ function ProductCollection({
       }
     }
   }, [disableCarousel]);
-  
+
   return (
     <Reveal
       keyframes={fadeIn}
