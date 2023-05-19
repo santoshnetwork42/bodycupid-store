@@ -169,6 +169,19 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                       .join(", ")}
                   </td>
                 </tr>
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Contact Details:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                  {[
+                      order?.shippingAddress?.phone,
+                      order?.shippingAddress?.email,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -185,7 +198,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                         <div className="d-flex">
                           <ALink
                             className="order-image mr-2"
-                            href={"/products/" + item.slug}
+                            href={"/products/" + item.product.slug}
                           >
                             <img
                               src={getPublicImageURL(
