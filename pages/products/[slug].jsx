@@ -137,10 +137,12 @@ function ProductDefault(props) {
                 productFAQs={productFAQs}
               />
             </div>
-            <ProductCollection
-              products={relatedProducts}
-              title="Related products"
-            />
+            {relatedProducts.length > 0 && (
+              <ProductCollection
+                products={relatedProducts}
+                title="Related products"
+              />
+            )}
           </div>
         </>
       )}

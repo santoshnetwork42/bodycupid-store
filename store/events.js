@@ -2,6 +2,7 @@ import { takeEvery, select } from "redux-saga/effects";
 import { Analytics } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { v4 as uuid } from "uuid";
+import vercelAnalytics from "@vercel/analytics";
 
 import storage from "~/utils/storage";
 import { actionTypes as cartActions } from "~/store/cart";
@@ -41,12 +42,14 @@ export function* eventsSaga() {
     const { term } = e.payload;
     dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
     Analytics.record({ name: "search", attributes: { search_term: term } });
+    vercelAnalytics.track("search", { searchTerm: term });
   });
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
     dataLayer.push({ event: action, eventID: uuid() });
     Analytics.record({ name: action });
+    vercelAnalytics.track(action);
   });
 
   yield takeEvery(cartActions.ADD_TO_CART, function* saga(e) {
@@ -67,6 +70,7 @@ export function* eventsSaga() {
       }
     });
     Analytics.record({ name: eventName, attributes, metrics: { value } });
+    vercelAnalytics.track(eventName, attribute);
   });
 
   yield takeEvery(cartActions.REMOVE_FROM_CART, function* saga(e) {
@@ -84,6 +88,7 @@ export function* eventsSaga() {
       }
     });
     Analytics.record({ name: "remove_from_cart", attributes, metrics: { value } });
+    vercelAnalytics.track("remove_from_cart", attribute);
   });
 
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
@@ -101,55 +106,84 @@ export function* eventsSaga() {
       }
     });
     Analytics.record({ name: "view_item", attributes, metrics: { value } });
+    vercelAnalytics.track("view_item", attribute);
   });
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     const { order, products, coupon } = e.payload;
-    const { id, totalShippingCharges, totalAmount } = order;
+    const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
     const { attributes, items, attribute } = orderMapper(products, coupon);
+    const attributeData = {
+      ...attribute,
+      value: totalAmount,
+    };
+
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
-      attribute: {
-        ...attribute,
-        value: totalAmount,
-      },
+      attribute: attributeData,
       ecommerce: {
         transaction_id: id,
         value: totalAmount,
         tax: 0,
+        discount: totalDiscount,
         shipping: totalShippingCharges,
         currency: "INR",
         coupon: coupon?.code || "",
         items
       }
     });
+
     Analytics.record({
       name: "purchase",
       attributes: {
         transaction_id: id,
         value: totalAmount.toString(),
         tax: "0",
+        discount: totalDiscount.toString(),
         shipping: totalShippingCharges.toString(),
         currency: "INR",
         coupon: coupon?.code || "",
       },
       metrics: { value: totalAmount }
     });
-    attributes.forEach(attribute => Analytics.record({
-      name: "purchase_item",
-      attributes: {
-        ...attribute,
+
+    vercelAnalytics.track("purchase", {
+      transaction_id: id,
+      value: totalAmount,
+      tax: 0,
+      discount: totalDiscount,
+      shipping: totalShippingCharges,
+      currency: "INR",
+      coupon: coupon?.code || "",
+    });
+
+    attributes.forEach(attr => {
+      Analytics.record({
+        name: "purchase_item",
+        attributes: {
+          ...attr,
+          transaction_id: id,
+          value: totalAmount.toString(),
+          tax: "0",
+          shipping: totalShippingCharges.toString(),
+          currency: "INR",
+          coupon: coupon?.code || "",
+        },
+      });
+
+      vercelAnalytics.track("purchase_item", {
+        ...attr,
         transaction_id: id,
-        value: totalAmount.toString(),
-        tax: "0",
-        shipping: totalShippingCharges.toString(),
+        value: totalAmount,
+        tax: 0,
+        shipping: totalShippingCharges,
         currency: "INR",
         coupon: coupon?.code || "",
-      },
-    }));
+      });
+    });
   });
 
   yield takeEvery(actionTypes.CHECKOUT_STARTED, function* saga(e) {
@@ -167,6 +201,7 @@ export function* eventsSaga() {
         items
       }
     });
+
     Analytics.record({
       name: "begin_checkout",
       attributes: {
@@ -175,15 +210,27 @@ export function* eventsSaga() {
       },
       metrics: { value }
     });
-    attributes.forEach(attribute => Analytics.record({
-      name: "begin_chekout_item",
-      attributes: {
-        ...attribute,
-        value: value.toString(),
+
+    vercelAnalytics.track("begin_checkout", attribute);
+
+    attributes.forEach(attr => {
+      Analytics.record({
+        name: "begin_chekout_item",
+        attributes: {
+          ...attr,
+          value: value.toString(),
+          currency: "INR",
+          coupon: coupon?.code || "",
+        },
+      });
+
+      vercelAnalytics.track("begin_chekout_item", {
+        ...attr,
+        value,
         currency: "INR",
         coupon: coupon?.code || "",
-      },
-    }));
+      });
+    });
   });
 
   yield takeEvery(actionTypes.VIEW_CART, function* saga(e) {
@@ -201,6 +248,7 @@ export function* eventsSaga() {
         items
       }
     });
+
     Analytics.record({
       name: "view_cart",
       attributes: {
@@ -209,15 +257,27 @@ export function* eventsSaga() {
       },
       metrics: { value }
     });
-    attributes.forEach(attribute => Analytics.record({
-      name: "view_cart_item",
-      attributes: {
-        ...attribute,
-        value: value.toString(),
+
+    vercelAnalytics.track("view_cart", attribute);
+
+    attributes.forEach(attr => {
+      Analytics.record({
+        name: "view_cart_item",
+        attributes: {
+          ...attr,
+          value: value.toString(),
+          currency: "INR",
+          coupon: coupon?.code || "",
+        },
+      });
+
+      vercelAnalytics.track("view_cart_item", {
+        ...attr,
+        value,
         currency: "INR",
         coupon: coupon?.code || "",
-      },
-    }));
+      });
+    });
   });
 
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
@@ -234,6 +294,7 @@ export function* eventsSaga() {
         items
       }
     });
+
     Analytics.record({
       name: "view_item_list",
       attributes: {
@@ -241,14 +302,25 @@ export function* eventsSaga() {
         item_list_name: name
       },
     });
-    attributes.forEach(attribute => Analytics.record({
-      name: "view_item_list_item",
-      attributes: {
-        ...attribute,
+
+    vercelAnalytics.track("view_item_list", attribute);
+
+    attributes.forEach(attr => {
+      Analytics.record({
+        name: "view_item_list_item",
+        attributes: {
+          ...attr,
+          item_list_id: id,
+          item_list_name: name
+        },
+      });
+
+      vercelAnalytics.track("view_item_list_item", {
+        ...attr,
         item_list_id: id,
         item_list_name: name
-      },
-    }));
+      });
+    });
   });
 }
 

@@ -324,6 +324,21 @@ function DetailOne(props) {
           </div>
         )}
       </div>
+      <div className="d-flex text-success align-items-center mb-3 lh-default">
+        {!!product.totalOrders && (
+          <p className="text-success font-weight-semi-bold mb-0 lh-1">
+            {totalOrderCount}+ units sold
+          </p>
+        )}
+        {hasInventory && currentInventory < 100 && (
+          <>
+            <BigDot color="red" size={20} />
+            <span className="text-secondary font-weight-semi-bold">
+              Last {currentInventory} units left
+            </span>
+          </>
+        )}
+      </div>
 
       {!!hasInventory && !!bestCoupon && (
         <ProductBestPrice
@@ -513,22 +528,6 @@ function DetailOne(props) {
           )}
         </>
       )}
-
-      <div className="d-flex text-success align-items-center mb-3 lh-default">
-        {!!product.totalOrders && (
-          <p className="text-success font-weight-semi-bold mb-0 lh-1">
-            {totalOrderCount}+ units sold
-          </p>
-        )}
-        {hasInventory && currentInventory < 100 && (
-          <>
-            <BigDot color="red" size={20} />
-            <span className="text-secondary font-weight-semi-bold">
-              Last {currentInventory} units left
-            </span>
-          </>
-        )}
-      </div>
     </div>
   );
 }

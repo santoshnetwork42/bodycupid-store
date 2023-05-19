@@ -2,11 +2,11 @@ import React, { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
+import NextImage from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
-import OptimizedImage from "~/components/features/optimized-image";
 import { modalActions } from "~/store/modal";
 import { useMenu } from "~/utils/contexts/navbar";
 
@@ -68,14 +68,12 @@ function MobileMenu({ user, openPasswordLess }) {
       <div className="mobile-menu-container scrollable">
         <div className="pt-2 pb-1 d-flex align-items-center justify-content-center">
           <ALink href="/" className="logo-footer">
-            <OptimizedImage
-              optimizedData={{
-                width: 60,
-                height: 60,
-              }}
+            <NextImage
               src="/images/logo.png"
               loading="eager"
               alt="logo"
+              height={60}
+              width={60}
             />
           </ALink>
         </div>
