@@ -27,8 +27,6 @@ function ProductCollection({
       }
     }
   }, [disableCarousel]);
-
-  if (!products.length) return <></>;
   
   return (
     <Reveal
