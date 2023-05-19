@@ -5,7 +5,7 @@ function NextHead({ siteName, title, description, image, canonical }) {
   return (
     <Head>
       <meta charSet="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
@@ -15,7 +15,8 @@ function NextHead({ siteName, title, description, image, canonical }) {
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
-      {/* <meta name="keywords" content={pageContents?.metakeywords} /> */}
+      <meta name="keywords" content={siteName} />
+
       <meta property="og:site_name" content={siteName} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} key="ogtitle" />
@@ -23,10 +24,10 @@ function NextHead({ siteName, title, description, image, canonical }) {
       <meta property="og:url" content={canonical} />
       {!!image && <meta property="og:image" content={image} />}
 
-      {!!image && <meta property="twitter:image" content={image} />}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
+      {!!image && <meta property="twitter:image" content={image} />}
     </Head>
   );
 }

@@ -1,22 +1,34 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { connect } from "react-redux";
 
-import IntroSection from "~/components/partials/home/intro-section";
-import CategorySection from "~/components/partials/home/category-section";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
+import fetchData from "~/utils/fetchData";
+import { STORE_ID } from "~/config";
+
 import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
 } from "~/graphql/api";
-import fetchData from "~/utils/fetchData";
-import { STORE_ID } from "~/config";
-import BrandSection from "~/components/partials/home/brand-section";
-import ReviewSection from "~/components/partials/home/review-section";
-import StorySection from "~/components/partials/home/story-section";
-import ProductCollection from "~/components/partials/home/product-collection";
-import { useWindowDimensions } from "~/utils/getWindowDimension";
+
 import NextHead from "~/components/common/next-head";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import IntroSection from "~/components/partials/home/intro-section";
+import StorySection from "~/components/partials/home/story-section";
+
+const CategorySection = dynamic(() =>
+  import("~/components/partials/home/category-section")
+);
+const BrandSection = dynamic(() =>
+  import("~/components/partials/home/brand-section")
+);
+const ReviewSection = dynamic(() =>
+  import("~/components/partials/home/review-section")
+);
+const ProductCollection = dynamic(() =>
+  import("~/components/partials/home/product-collection")
+);
 
 function HomePage({
   hero,
@@ -32,7 +44,7 @@ function HomePage({
 
   return (
     <main className="main home searchBar">
-      <NextHead {...pageMeta}></NextHead>
+      <NextHead {...pageMeta} />
 
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
@@ -147,6 +159,7 @@ export const getStaticProps = async () => {
 function mapStateToProps() {
   return {};
 }
+
 const Component = connect(mapStateToProps)(HomePage);
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;

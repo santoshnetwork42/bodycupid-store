@@ -3,9 +3,11 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 const { withSentryConfig } = require('@sentry/nextjs');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+});
 
-
-module.exports = {
+const nextConfig = withBundleAnalyzer({
     // basePath: '/react/riode/demo-1',
     // distDir: 'build',
     reactStrictMode: true,
@@ -49,10 +51,10 @@ module.exports = {
         ],
         minimumCacheTTL: 60 * 60 * 24 * 30,
     },
-}
+});
 
 module.exports = withSentryConfig(
-    module.exports,
+    nextConfig,
     { silent: true },
     { hideSourcemaps: true },
 );

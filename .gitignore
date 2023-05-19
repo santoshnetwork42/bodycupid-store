@@ -68,3 +68,6 @@ amplifytools.xcconfig
 
 # Sentry
 next.config.original.js
+
+# Analyzer
+analyze
