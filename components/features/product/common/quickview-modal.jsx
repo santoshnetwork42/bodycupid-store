@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import NextImage from "next/image";
-import imagesLoaded from "imagesloaded";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { getQuickViewProduct } from "~/graphql/api";
@@ -17,12 +16,11 @@ function Quickview(props) {
 
   if (!isOpen) return <div></div>;
 
-  const [loaded, setLoadingState] = useState(false);
   const [product, setProduct] = useState(null);
   const [variant, setVariant] = useState(null);
 
   useEffect(() => {
-    if (slug) {
+    if (slug && isOpen) {
       setProduct(null);
       (async function () {
         const {
@@ -41,35 +39,15 @@ function Quickview(props) {
         setVariant(response.variants.items[0]?.id);
       })();
     }
-  }, [slug]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (product && isOpen && document.querySelector(".quickview-modal"))
-        imagesLoaded(".quickview-modal")
-          .on("done", function () {
-            setLoadingState(true);
-            window
-              .jQuery(".quickview-modal .product-single-carousel")
-              .trigger("refresh.owl.carousel");
-          })
-          .on("progress", function () {
-            setLoadingState(false);
-          })
-          .on("fail", function () {
-            setLoadingState(true);
-          });
-    }, 200);
-  }, [product, isOpen]);
-
-  if (!slug || !product) return "";
+  }, [slug, isOpen]);
 
   const closeQuick = () => {
     document.querySelector(".ReactModal__Overlay").classList.add("removed");
     document.querySelector(".quickview-modal").classList.add("removed");
-    setLoadingState(false);
     setTimeout(() => {
       closeQuickview();
+      setProduct(null);
+      setVariant(null);
     }, 330);
   };
 
@@ -91,6 +69,8 @@ function Quickview(props) {
     );
   }
 
+  if (!slug) return <></>;
+
   return (
     <Modal
       isOpen={isOpen}
@@ -100,7 +80,7 @@ function Quickview(props) {
       className="product product-single row product-popup quickview-modal"
       id="product-quickview"
     >
-      <div className={`row p-0 m-0 ${loaded ? "" : "d-none"}`}>
+      <div className={`row p-0 m-0 ${!!product ? "" : "d-none"}`}>
         <div className="col-md-6">
           <div className="product-gallery mb-md-0 pb-0">
             <div className="product-label-group">
@@ -146,7 +126,7 @@ function Quickview(props) {
           )}
         </div>
       </div>
-      {!loaded && (
+      {!product && (
         <div className="product row p-0 m-0 skeleton-body mfp-product">
           <div className="col-md-6">
             <div className="skel-pro-gallery"></div>
