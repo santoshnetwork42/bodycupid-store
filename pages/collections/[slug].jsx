@@ -248,19 +248,26 @@ export const getStaticProps = async (context) => {
         filter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
+          slug: { ne: slug },
         },
         sort: [{ field: "position", direction: "asc" }],
       });
 
       const collections = [
-        { name: "All", path: "/collections/all" },
-        { name: "Ranges", path: "/collections/ranges" },
+        { name: "All", path: "/collections/ranges" },
+        { name: collectionName, path: `/collections/${slug}` },
         ...listCollections.items.map((col) => ({
           ...col,
           path: `/collections/${col.slug}`,
         })),
-        { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
       ];
+
+      if (slug !== "combos-and-gifts") {
+        collections.push({
+          name: "Combos & Gifts",
+          path: "/collections/combos-and-gifts",
+        });
+      }
 
       // Get Product By tag
       filter.collections = { eq: slug };

@@ -46,16 +46,22 @@ export const useInventory = () => {
     callGetInventory();
   }, [inventoryPayload]);
 
-  const inventorySuccess = useMemo(
+  const outOfStockItems = useMemo(
     () =>
-      productWithInventory
-        ? cartList.every((c) => {
+      productWithInventory ?
+        cartList.filter((c) => {
           const itemRecordKey = getRecordKey(c, c.variantId);
-          return c.qty <= productWithInventory[itemRecordKey];
+          return c.qty > productWithInventory[itemRecordKey];
         })
-        : false,
+        : []
+    ,
     [cartList, productWithInventory]
   );
 
-  return { ready: !!productWithInventory, success: inventorySuccess, inventoryMapping: productWithInventory };
+  return {
+    ready: !!productWithInventory,
+    success: !outOfStockItems.length,
+    inventoryMapping: productWithInventory,
+    outOfStockItems,
+  };
 };
