@@ -57,6 +57,7 @@ function Checkout(props) {
     placeOrder: onPlaceOrder,
     startCheckout,
     openAllAddressModal,
+    recordOutOfStock,
   } = props;
 
   const { name } = store;
@@ -66,6 +67,7 @@ function Checkout(props) {
     ready: isInventoryCheckReady,
     success: isInventoryCheckSuccess,
     inventoryMapping,
+    outOfStockItems,
   } = useInventory();
   const freeProducts = useFreeProducts();
   const router = useRouter();
@@ -238,6 +240,7 @@ function Checkout(props) {
     async (e) => {
       e.preventDefault();
       if (!isInventoryCheckSuccess) {
+        recordOutOfStock(outOfStockItems, inventoryMapping);
         alertToaster("Please remove out of stock product from cart", "error");
         return;
       }
@@ -412,6 +415,8 @@ function Checkout(props) {
       payMethod,
       freeProducts,
       isInventoryCheckSuccess,
+      outOfStockItems,
+      inventoryMapping,
     ]
   );
 
@@ -878,6 +883,7 @@ const Component = connect(mapStateToProps, {
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,
   openAllAddressModal: modalActions.openAllAddressModal,
+  recordOutOfStock: eventActions.outOfStock,
 })(Checkout);
 
 Component.hideFooter = true;

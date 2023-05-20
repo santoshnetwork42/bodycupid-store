@@ -8,6 +8,7 @@ import storage from "~/utils/storage";
 import { actionTypes as cartActions } from "~/store/cart";
 import { itemMapper, orderMapper } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
+import { getRecordKey } from "~/utils/helper";
 
 export const actionTypes = {
   VIEW_ITEM: "VIEW_ITEM",
@@ -17,6 +18,7 @@ export const actionTypes = {
   AUTH: "AUTH",
   SEARCH: "SEARCH",
   VIEW_LIST_ITEM: "VIEW_LIST_ITEM",
+  OUT_OF_STOCK: "OUT_OF_STOCK",
 };
 
 const initialState = {
@@ -34,10 +36,34 @@ export const eventActions = {
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
   auth: (action) => ({ type: actionTypes.AUTH, payload: { action } }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
-  viewList: (id, name, products) => ({ type: actionTypes.VIEW_LIST_ITEM, payload: { id, name, products } })
+  viewList: (id, name, products) => ({ type: actionTypes.VIEW_LIST_ITEM, payload: { id, name, products } }),
+  outOfStock: (products, inventory) => ({ type: actionTypes.OUT_OF_STOCK, payload: { products, inventory } }),
 };
 
 export function* eventsSaga() {
+  yield takeEvery(actionTypes.OUT_OF_STOCK, function* saga(e) {
+    const { products, inventory } = e.payload;
+    if (Array.isArray(products)) {
+      products.forEach(product => {
+        const recordKey = getRecordKey(product, product.variantId);
+        const payload = {
+          productId: product.id,
+          variantId: product.variantId,
+          cartQty: product.qty,
+          inventoryQty: inventory[recordKey]
+        };
+
+        dataLayer.push({
+          event: "out_of_stock",
+          eventID: uuid(),
+          ...payload,
+        });
+        Analytics.record({ name: "out_of_stock", attributes: payload });
+        vercelAnalytics.track("out_of_stock", payload);
+      });
+    }
+  });
+
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
     dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
@@ -211,7 +237,10 @@ export function* eventsSaga() {
       metrics: { value }
     });
 
-    vercelAnalytics.track("begin_checkout", attribute);
+    vercelAnalytics.track("begin_checkout", {
+      currency: "INR",
+      coupon: coupon?.code || "",
+    });
 
     attributes.forEach(attr => {
       Analytics.record({
@@ -258,7 +287,10 @@ export function* eventsSaga() {
       metrics: { value }
     });
 
-    vercelAnalytics.track("view_cart", attribute);
+    vercelAnalytics.track("view_cart", {
+      currency: "INR",
+      coupon: coupon?.code || "",
+    });
 
     attributes.forEach(attr => {
       Analytics.record({
@@ -303,7 +335,10 @@ export function* eventsSaga() {
       },
     });
 
-    vercelAnalytics.track("view_item_list", attribute);
+    vercelAnalytics.track("view_item_list", {
+      item_list_id: id,
+      item_list_name: name
+    });
 
     attributes.forEach(attr => {
       Analytics.record({

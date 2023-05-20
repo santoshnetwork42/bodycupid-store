@@ -24,6 +24,7 @@ function Cart(props) {
     openLogin,
     getShippingTiers,
     viewCart,
+    recordOutOfStock,
   } = props;
 
   const router = useRouter();
@@ -32,6 +33,7 @@ function Cart(props) {
     ready: isInventoryCheckReady,
     success: isInventoryCheckSuccess,
     inventoryMapping,
+    outOfStockItems,
   } = useInventory();
 
   useEffect(() => {
@@ -56,6 +58,7 @@ function Cart(props) {
 
   const validateAndGoToCheckout = useCallback(() => {
     if (!isInventoryCheckSuccess) {
+      recordOutOfStock(outOfStockItems, inventoryMapping);
       alertToaster("Please remove out of stock product from cart", "error");
       return false;
     }
@@ -67,7 +70,14 @@ function Cart(props) {
 
     openLogin(true);
     return false;
-  }, [user, isInventoryCheckSuccess, appliedCoupon, cartList]);
+  }, [
+    user,
+    isInventoryCheckSuccess,
+    appliedCoupon,
+    cartList,
+    outOfStockItems,
+    inventoryMapping,
+  ]);
 
   // const appliedCouponStatus = useMemo(
   //   () => getCouponDiscount(appliedCoupon, cartList),
@@ -299,6 +309,7 @@ const Component = connect(mapStateToProps, {
   openLogin: modalActions.openPasswordlessModal,
   getShippingTiers: systemActions.getShippingTiers,
   viewCart: eventActions.viewCart,
+  recordOutOfStock: eventActions.outOfStock,
 })(Cart);
 
 Component.hideFooter = true;
