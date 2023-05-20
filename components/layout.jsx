@@ -83,7 +83,7 @@ function Layout({
   return (
     <>
       <Head>
-        <link rel="icon" href="images/icons/favicon.png" />
+        <link rel="icon" href="/images/icons/favicon.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap"
           rel="stylesheet"
@@ -101,7 +101,7 @@ function Layout({
         <link
           rel="stylesheet"
           type="text/css"
-          href="vendor/owl-carousel/owl.carousel.min.css"
+          href="/vendor/owl-carousel/owl.carousel.min.css"
         />
       </Head>
       <div className="page-wrapper">
