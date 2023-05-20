@@ -1,7 +1,7 @@
 .checkmark__circle {
     stroke-dasharray: 166;
     stroke-dashoffset: 166;
-    stroke-width: 2;
+    stroke-width: 4;
     stroke-miterlimit: 10;
     stroke: $success-color;
     fill: none;
@@ -9,14 +9,13 @@
   }
   
   .checkmark {
-    width: 80px;
-    height: 80px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: block;
-    stroke-width: 2;
+    stroke-width: 4;
     stroke: $success-color;
     stroke-miterlimit: 10;
-    margin: 3rem auto;
     box-shadow: inset 0px 0px 0px $success-color;
     animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
   }
@@ -25,7 +24,7 @@
     transform-origin: 50% 50%;
     stroke-dasharray: 48;
     stroke-dashoffset: 48;
-    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+    animation: stroke 1s cubic-bezier(0.65, 0, 0.45, 1) 0.8s infinite;
   }
   
   @keyframes stroke {

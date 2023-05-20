@@ -15,6 +15,7 @@ import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "../../utils/popupHelper";
+import Checkmark from "~/components/icons";
 
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
@@ -123,10 +124,20 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
           </h3>
         </div>
 
-        <div className="container pt-1">
-          <h2 className="title title-simple text-left pt-7 font-weight-bold text-uppercase">
-            Order Details
-          </h2>
+        <div className="container pt-7">
+          <div className="d-flex justify-content-between">
+            <h2 className="title title-simple text-left mr-2 mt-1 font-weight-bold text-uppercase">
+              Order Details
+            </h2>
+            {order?.status === "CONFIRMED" && (
+              <div className="d-flex">
+                <Checkmark size={15} />
+                <p className="text-success ml-2 font-weight-bold mt-1 lh-1">
+                  Thank you. Your order is confirmed.
+                </p>
+              </div>
+            )}
+          </div>
           <div className="order-details bg-white">
             <table className="order-details-table">
               <tbody>
@@ -142,7 +153,14 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                   <td>
                     <h4 className="summary-subtitle">Status:</h4>
                   </td>
-                  <td className="summary-subtotal-price">{order?.status}</td>
+                  <td
+                    className="summary-subtotal-price"
+                    style={{
+                      color: order?.status === "CONFIRMED" ? "green" : "",
+                    }}
+                  >
+                    {order?.status}
+                  </td>
                 </tr>{" "}
                 <tr className="summary-subtotal">
                   <td>
@@ -174,7 +192,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     <h4 className="summary-subtitle">Contact Details:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                  {[
+                    {[
                       order?.shippingAddress?.phone,
                       order?.shippingAddress?.email,
                     ]

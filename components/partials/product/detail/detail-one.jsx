@@ -330,6 +330,7 @@ function DetailOne(props) {
             {totalOrderCount}+ units sold
           </p>
         )}
+
         {hasInventory && currentInventory < 100 && (
           <>
             <BigDot color="red" size={20} />
@@ -339,6 +340,9 @@ function DetailOne(props) {
           </>
         )}
       </div>
+
+      {price > 0 && (
+  <>
 
       {!!hasInventory && !!bestCoupon && (
         <ProductBestPrice
@@ -527,6 +531,8 @@ function DetailOne(props) {
             <ProductNotify productId={product.id} variantId={selectedVariant} />
           )}
         </>
+      )}
+      </>
       )}
     </div>
   );

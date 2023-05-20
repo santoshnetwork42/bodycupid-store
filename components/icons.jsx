@@ -465,6 +465,7 @@ export const Clock = ({ size = defaultIconSize, color = defaultIconColor }) => {
 export default function Checkmark() {
   return (
     <div>
+      
       <svg
         className="checkmark"
         xmlns="http://www.w3.org/2000/svg"
