@@ -168,9 +168,11 @@ function ProductTwo(props) {
               ) : (
                 <ALink
                   href="#"
-                  className="btn-product btn-primary btn-quickview m-0"
+                  className={`btn-product btn-primary btn-quickview m-0 ${price <= 0 ? 'disabled' : ''}`}
                   title="Add to cart"
-                  onClick={addToCartHandler}
+                  onClick={price > 0 ? addToCartHandler : undefined}
+                  style={{ backgroundColor: price <= 0 ? '#ccc' : '' }}
+
                 >
                   Add to cart
                 </ALink>
