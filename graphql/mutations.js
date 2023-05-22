@@ -4603,6 +4603,48 @@ export const createBulkAction = /* GraphQL */ `
     }
   }
 `;
+export const createPageRedirects = /* GraphQL */ `
+  mutation CreatePageRedirects(
+    $input: CreatePageRedirectsInput!
+    $condition: ModelPageRedirectsConditionInput
+  ) {
+    createPageRedirects(input: $input, condition: $condition) {
+      id
+      slug
+      redirect
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePageRedirects = /* GraphQL */ `
+  mutation UpdatePageRedirects(
+    $input: UpdatePageRedirectsInput!
+    $condition: ModelPageRedirectsConditionInput
+  ) {
+    updatePageRedirects(input: $input, condition: $condition) {
+      id
+      slug
+      redirect
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePageRedirects = /* GraphQL */ `
+  mutation DeletePageRedirects(
+    $input: DeletePageRedirectsInput!
+    $condition: ModelPageRedirectsConditionInput
+  ) {
+    deletePageRedirects(input: $input, condition: $condition) {
+      id
+      slug
+      redirect
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const checkInventory = /* GraphQL */ `
   mutation CheckInventory($input: [CheckInventoryInput!]!) {
     checkInventory(input: $input) {

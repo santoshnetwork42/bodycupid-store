@@ -1693,3 +1693,23 @@ export const checkInventory = /* GraphQL */ `
     }
   }
 `;
+
+export const getPageRedirects = /* GraphQL */ `
+  query GetPageRedirects($slug: String!) {
+    getPageRedirects(slug: $slug) {
+      slug
+      redirect
+    }
+  }
+`;
+
+export const createPageRedirects = /* GraphQL */ `
+  mutation CreatePageRedirects(
+    $input: CreatePageRedirectsInput!
+    $condition: ModelPageRedirectsConditionInput
+  ) {
+    createPageRedirects(input: $input, condition: $condition) {
+      id
+    }
+  }
+`;

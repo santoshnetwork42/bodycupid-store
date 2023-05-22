@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
+import handleRedirect from "~/utils/handleRedirect";
 import MediaOne from "~/components/partials/product/media/media-one";
 import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
@@ -222,6 +223,8 @@ export const getStaticProps = async (context) => {
         },
       };
     }
+
+    return await handleRedirect(`/products/${slug}`, `/`);
   } catch (error) {
     console.log("slug", error);
   }
