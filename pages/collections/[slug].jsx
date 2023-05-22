@@ -178,6 +178,7 @@ export const getStaticProps = async (context) => {
     }).then((resp) => resp.byslugProductSubCategory.items);
 
     if (subCategory) {
+      filter.categoryId = { eq: subCategory.categoryID };
       filter.subCategoryId = { eq: subCategory.id };
 
       const {
