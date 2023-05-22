@@ -223,7 +223,7 @@ export const getStaticProps = async (context) => {
       };
     }
   } catch (error) {
-    console.log("slug", error);
+    logger.error("error while fetching product based on slug", error);
   }
   return {
     notFound: true,

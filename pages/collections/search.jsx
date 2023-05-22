@@ -68,7 +68,7 @@ export const getStaticProps = async () => {
       revalidate: 60,
     };
   } catch (error) {
-    console.log(error);
+    logger.error("Error while searching a product", error);
     return {
       notFound: true,
     };

@@ -96,7 +96,7 @@ export const getStaticProps = async (context) => {
       },
     };
   } catch (error) {
-    console.log("blog error", error);
+    Logger.error("error in fetching of blog", error);
   }
   return {
     notFound: true,

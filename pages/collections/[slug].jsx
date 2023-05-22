@@ -298,7 +298,7 @@ export const getStaticProps = async (context) => {
       };
     }
   } catch (error) {
-    console.log("category", error);
+    logger.error("Error in fetching product according to category", error);
   }
   return {
     notFound: true,

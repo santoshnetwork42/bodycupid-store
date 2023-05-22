@@ -350,7 +350,7 @@ Order.getInitialProps = async (context) => {
       };
     }
   } catch (error) {
-    console.log(error);
+    Logger.error(error);
   }
   return {
     order: null,
