@@ -6,6 +6,7 @@ export const getMenuCategories = /* GraphQL */ `
     $nextToken: String
     $from: Int
     $aggregates: [SearchableProductCategoryAggregationInput]
+    $subCategoryFilter: ModelProductSubCategoryFilterInput
   ) {
     searchProductCategories(
       filter: $filter
@@ -20,7 +21,7 @@ export const getMenuCategories = /* GraphQL */ `
         name
         slug
         priority
-        subCategory {
+        subCategory(filter: $subCategoryFilter) {
           items {
             id
             name

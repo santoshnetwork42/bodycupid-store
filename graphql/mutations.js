@@ -430,6 +430,7 @@ export const createProductCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -471,6 +472,7 @@ export const updateProductCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -512,6 +514,7 @@ export const deleteProductCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -560,6 +563,7 @@ export const createProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -569,6 +573,7 @@ export const createProductSubCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -614,6 +619,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -623,6 +629,7 @@ export const updateProductSubCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -668,6 +675,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -677,6 +685,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -1297,6 +1306,7 @@ export const createProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1314,6 +1324,7 @@ export const createProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1413,6 +1424,7 @@ export const updateProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1430,6 +1442,7 @@ export const updateProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1529,6 +1542,7 @@ export const deleteProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1546,6 +1560,7 @@ export const deleteProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
