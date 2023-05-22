@@ -320,7 +320,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
               Your Orders
             </ALink>
             <ALink
-              href="/pages/contacts"
+              href="/pages/contact-us"
               className="btn btn-icon-left btn btn-back btn-rounded btn-md"
             >
               Contact us

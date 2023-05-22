@@ -61,7 +61,7 @@ function Footer({ footer, store }) {
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/contacts">Contact</ALink>
+                    <ALink href="/pages/contact-us">Contact</ALink>
                   </li>
                 </ul>
               </div>
