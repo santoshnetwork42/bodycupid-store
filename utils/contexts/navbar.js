@@ -39,7 +39,8 @@ function NavbarProvider({ children }) {
   const getCategories = () => {
     API.graphql(
       graphqlOperation(getMenuCategories, {
-        filter: { storeId: { eq: STORE_ID } },
+        filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
+        subCategoryFilter: { showInMenu: { eq: true } },
         sort: [{ field: "priority", direction: "asc" }],
       })
     )

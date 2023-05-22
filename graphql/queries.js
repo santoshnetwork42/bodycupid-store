@@ -291,6 +291,7 @@ export const getProductCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -325,6 +326,7 @@ export const listProductCategories = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -361,6 +363,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -397,6 +400,7 @@ export const byslugProductCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -433,6 +437,7 @@ export const searchProductCategories = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -489,6 +494,7 @@ export const getProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -498,6 +504,7 @@ export const getProductSubCategory = /* GraphQL */ `
       priority
       imageUrl
       bannerUrl
+      showInMenu
       products {
         nextToken
       }
@@ -530,6 +537,7 @@ export const listProductSubCategories = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -567,6 +575,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -604,6 +613,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -641,6 +651,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -678,6 +689,7 @@ export const searchProductSubCategories = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1392,6 +1404,7 @@ export const getProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
@@ -1409,6 +1422,7 @@ export const getProduct = /* GraphQL */ `
         priority
         imageUrl
         bannerUrl
+        showInMenu
         createdAt
         updatedAt
       }
