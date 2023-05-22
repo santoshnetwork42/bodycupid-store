@@ -4841,3 +4841,83 @@ export const searchOrderNotifications = /* GraphQL */ `
     }
   }
 `;
+export const getPageRedirects = /* GraphQL */ `
+  query GetPageRedirects($slug: String!) {
+    getPageRedirects(slug: $slug) {
+      id
+      slug
+      redirect
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPageRedirects = /* GraphQL */ `
+  query ListPageRedirects(
+    $slug: String
+    $filter: ModelPageRedirectsFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listPageRedirects(
+      slug: $slug
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        slug
+        redirect
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchPageRedirects = /* GraphQL */ `
+  query SearchPageRedirects(
+    $filter: SearchablePageRedirectsFilterInput
+    $sort: [SearchablePageRedirectsSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchablePageRedirectsAggregationInput]
+  ) {
+    searchPageRedirects(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        redirect
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;

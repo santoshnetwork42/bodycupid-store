@@ -15,6 +15,7 @@ import {
 } from "~/graphql/api";
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import fetchData from "~/utils/fetchData";
+import handleRedirect from "~/utils/handleRedirect";
 import CategoryHeader from "~/components/common/category-header";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
@@ -298,6 +299,8 @@ export const getStaticProps = async (context) => {
         },
       };
     }
+
+    return await handleRedirect(`/collections/${slug}`);
   } catch (error) {
     console.log("category", error);
   }
