@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import { API, graphqlOperation } from "aws-amplify";
-
+import { useDispatch } from 'react-redux';
+import { eventActions } from "~/store/events";
 import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
 import { searchProductsBasic } from "~/graphql/api";
@@ -16,6 +17,7 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
   const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   const searchProducts = useCallback(async (searchTerm) => {
     try {
@@ -119,6 +121,8 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
   }
 
   async function onSubmitSearchForm(e) {
+    e.preventDefault();
+    dispatch(eventActions.search(search));
     document.querySelector(".header-search")?.classList.toggle("show");
     await router.push({
       pathname: "/collections/search",

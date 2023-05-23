@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
+import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -45,6 +46,8 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
 
+const logger = new Logger("Checkout");
+
 function Checkout(props) {
   const {
     cartList,
@@ -85,6 +88,7 @@ function Checkout(props) {
   useEffect(() => {
     startCheckout();
     getShippingTiers();
+    logger.verbose("Checkout component initialized");
   }, []);
 
   const {
@@ -152,8 +156,10 @@ function Checkout(props) {
         };
         var rzp1 = new Razorpay(options);
         rzp1.open();
+        logger.verbose("Razorpay initialization")
       } else {
         alertToaster("Something went wrong. Try Again!", "error");
+        logger.error("Something went wrong with Razorpay initialization");
       }
     },
     [store, user]
@@ -163,9 +169,11 @@ function Checkout(props) {
     () => getFreeProductTotal(cartItems) + totalAmountSaved,
     [totalAmountSaved, cartItems]
   );
+  logger.debug("Total saved amount", totalSaved)
 
   const handleCodPayments = (orderId) => {
     setPaymentLoading(true);
+    logger.verbose("Cod payment initialized")
     const intervalId = setInterval(async () => {
       try {
         const {
@@ -186,6 +194,7 @@ function Checkout(props) {
       } catch (error) {
         setPaymentLoading(false);
         errorHandler(error);
+        logger.error('Error while processing COD payment', error);
       }
     }, 2000);
     return () => clearInterval(intervalId);
@@ -205,6 +214,7 @@ function Checkout(props) {
               variables: { orderId, razorpayPaymentId: paymentId },
             });
             if (success) {
+              logger.info("Payment completion")
               await emptyCart();
               clearInterval(intervalId);
               await router.push(`/order/${orderId}?paymentId=${paymentId}`);
@@ -212,6 +222,7 @@ function Checkout(props) {
             }
           } catch (error) {
             errorHandler(error);
+            logger.error('Error while validating transaction', error);
           }
         }
       }, 2000);
@@ -230,6 +241,7 @@ function Checkout(props) {
         });
       } catch (error) {
         errorHandler(error);
+        logger.error('Error while adding user address', error);
       }
     }
 
@@ -242,17 +254,20 @@ function Checkout(props) {
       if (!isInventoryCheckSuccess) {
         recordOutOfStock(outOfStockItems, inventoryMapping);
         alertToaster("Please remove out of stock product from cart", "error");
+        logger.error("Out of stock product added in cart", error);
         return;
       }
 
       if (payMethod === "NONE") {
         alertToaster("Please select payment method", "error");
+        logger.error("No payment method selected by user")
         return;
       }
 
       setLoading(true);
 
       const paymentType = isFirst ? "PREPAID" : "COD";
+      logger.verbose('Selected payment method :', paymentType);
       const formErrors = await validateAddress(shippingAddress, paymentType);
       setFormErorr(formErrors);
       if (!formErrors) {
@@ -292,6 +307,7 @@ function Checkout(props) {
             variables: { input: payload },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
+          logger.debug('Created order:', order);
 
           const { id: orderId } = order;
 
@@ -377,6 +393,8 @@ function Checkout(props) {
               data: { createPayment: payment },
             },
           ] = await Promise.all(promise);
+
+          logger.info('Done with payment:', payment);
 
           if (isFirst) {
             handlePayment({

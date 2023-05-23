@@ -1,16 +1,19 @@
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { Bag, Cross } from "~/components/icons";
+import Quantity from "~/components/features/quantity";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 
 import { getTotalPrice, getCartCount, toDecimal, getCartTotals } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import Quantity from "~/components/features/quantity";
+
+const logger = new Logger("CartMenu");
 
 function CartMenu(props) {
   const { cartList, removeFromCart, updateCart, user, openLogin } = props;
@@ -33,6 +36,7 @@ function CartMenu(props) {
 
   const removeCart = (item) => {
     removeFromCart(item);
+    logger.verbose("Item removed from cart:", item);
   };
   const onChangeQty = (item, qty) => {
     if (qty) {
@@ -44,6 +48,7 @@ function CartMenu(props) {
             : item;
         })
       );
+      logger.debug("Cart item quantity updated:", item, "New quantity:", qty);
     } else {
       removeCart(item);
     }
@@ -53,6 +58,7 @@ function CartMenu(props) {
     hideCartMenu();
     if (user) return true;
     openLogin(true);
+    logger.info("User authentication required");
     return false;
   };
 
@@ -61,7 +67,7 @@ function CartMenu(props) {
       <ALink
         href="/pages/cart"
         className="cart-toggle label-block link p-relative"
-       //  onClick={showCartMenu}
+        //  onClick={showCartMenu}
       >
         <div className="cart-label d-lg-show">
           <span className="cart-name">Shopping Cart:</span>

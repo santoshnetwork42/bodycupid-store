@@ -9,6 +9,10 @@ import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import SearchBox from "~/components/common/partials/search-box";
 
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('search');
+
 function AllProduct(props) {
   const { store, products, pageFilter } = props;
   const { name } = store;
@@ -68,7 +72,7 @@ export const getStaticProps = async () => {
       revalidate: 60,
     };
   } catch (error) {
-    console.log(error);
+    logger.error("Error while searching a product", error);
     return {
       notFound: true,
     };

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { Auth } from "aws-amplify";
+import { Auth, Logger } from "aws-amplify";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -9,6 +9,8 @@ import ALink from "~/components/features/custom-link";
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import { modalActions } from "~/store/modal";
 import { errorHandler } from "~/utils/errorHandler";
+
+const logger = new Logger('Login');
 
 function Login({
   auth,
@@ -52,6 +54,7 @@ function Login({
         });
         setConfirmSignUp("SIGNUP");
       } catch (error) {
+        logger.error('Error signing up:', error);
         errorHandler(error);
       }
       return false;
@@ -77,8 +80,10 @@ function Login({
           setConfirmSignUp(null);
         }
         setLoading(false);
+        logger.verbose('User confirmed sign up successfully');
       } catch (error) {
         setLoading(false);
+        logger.error('Error confirming sign up:', error);
         errorHandler(error);
       }
       return false;
@@ -101,10 +106,11 @@ function Login({
         }
         setLoading(false);
       } catch (error) {
-        console.log("error signin:", error);
+        logger.error('Error signing in:', error);
         if (error.code === "UserNotConfirmedException") {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNIN");
+          logger.info('User signed up successfully');
         } else {
           errorHandler(error);
         }
