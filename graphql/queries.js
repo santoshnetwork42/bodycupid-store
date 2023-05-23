@@ -4855,10 +4855,11 @@ export const searchOrderNotifications = /* GraphQL */ `
     }
   }
 `;
-export const getPageRedirects = /* GraphQL */ `
-  query GetPageRedirects($slug: String!) {
-    getPageRedirects(slug: $slug) {
+export const getRedirects = /* GraphQL */ `
+  query GetRedirects($slug: String!, $storeId: ID!) {
+    getRedirects(slug: $slug, storeId: $storeId) {
       id
+      storeId
       slug
       redirect
       createdAt
@@ -4866,16 +4867,18 @@ export const getPageRedirects = /* GraphQL */ `
     }
   }
 `;
-export const listPageRedirects = /* GraphQL */ `
-  query ListPageRedirects(
+export const listRedirects = /* GraphQL */ `
+  query ListRedirects(
     $slug: String
-    $filter: ModelPageRedirectsFilterInput
+    $storeId: ModelIDKeyConditionInput
+    $filter: ModelRedirectsFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listPageRedirects(
+    listRedirects(
       slug: $slug
+      storeId: $storeId
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -4883,6 +4886,7 @@ export const listPageRedirects = /* GraphQL */ `
     ) {
       items {
         id
+        storeId
         slug
         redirect
         createdAt
@@ -4892,16 +4896,16 @@ export const listPageRedirects = /* GraphQL */ `
     }
   }
 `;
-export const searchPageRedirects = /* GraphQL */ `
-  query SearchPageRedirects(
-    $filter: SearchablePageRedirectsFilterInput
-    $sort: [SearchablePageRedirectsSortInput]
+export const searchRedirects = /* GraphQL */ `
+  query SearchRedirects(
+    $filter: SearchableRedirectsFilterInput
+    $sort: [SearchableRedirectsSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchablePageRedirectsAggregationInput]
+    $aggregates: [SearchableRedirectsAggregationInput]
   ) {
-    searchPageRedirects(
+    searchRedirects(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -4911,6 +4915,7 @@ export const searchPageRedirects = /* GraphQL */ `
     ) {
       items {
         id
+        storeId
         slug
         redirect
         createdAt
