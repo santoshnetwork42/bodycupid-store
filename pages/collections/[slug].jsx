@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import { STORE_ID } from "~/config";
 import {
@@ -13,15 +14,16 @@ import {
   getCollection,
   getStoreBanners,
 } from "~/graphql/api";
+
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import fetchData from "~/utils/fetchData";
-import handleRedirect from "~/utils/handleRedirect";
 import CategoryHeader from "~/components/common/category-header";
 import NextHead from "~/components/common/next-head";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { Logger } from 'aws-amplify';
 
-const logger = new Logger('All collections');
+import fetchData from "~/utils/fetchData";
+import handleRedirect from "~/utils/handleRedirect";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+
+const logger = new Logger("All collections");
 
 function CollectionPage(props) {
   const {
@@ -207,6 +209,7 @@ export const getStaticProps = async (context) => {
           filter: {
             storeId: { eq: STORE_ID },
             categoryID: { eq: subCategory.categoryID },
+            slug: { ne: slug },
           },
         }
       );
@@ -216,6 +219,7 @@ export const getStaticProps = async (context) => {
 
       const filterItems = [
         { name: "All", path: `/collections/${subCategory.category.slug}` },
+        { name: subCategoryName, path: `/collections/${slug}` },
         ...searchProductSubCategories.items.map((sub) => ({
           ...sub,
           path: `/collections/${sub.slug}`,
@@ -305,7 +309,7 @@ export const getStaticProps = async (context) => {
 
     return await handleRedirect(`/collections/${slug}`);
   } catch (error) {
-    logger.error("error", error)
+    logger.error("error", error);
   }
   return {
     notFound: true,
