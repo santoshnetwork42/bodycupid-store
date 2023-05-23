@@ -103,6 +103,12 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
     }
   };
 
+  const orderStatus = order?.products?.items.some(
+    (p) => p.status === "DISPATCHED"
+  )
+    ? "IN TRANSIT"
+    : order?.status;
+
   return (
     <main className="main order">
       <Head>
@@ -154,12 +160,11 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     <h4 className="summary-subtitle">Status:</h4>
                   </td>
                   <td
-                    className="summary-subtotal-price"
-                    style={{
-                      color: order?.status === "CONFIRMED" ? "green" : "",
-                    }}
+                    className={`summary-subtotal-price ${
+                      orderStatus === "CONFIRMED" && "text-success"
+                    }`}
                   >
-                    {order?.status}
+                    {orderStatus}
                   </td>
                 </tr>{" "}
                 <tr className="summary-subtotal">
@@ -342,7 +347,7 @@ Order.getInitialProps = async (context) => {
       id: orderId,
     });
 
-    if (response?.storeId === STORE_ID) {
+    if (response?.storeId === STORE_ID && response?.status !== "PENDING") {
       return {
         order: response,
         paymentId,

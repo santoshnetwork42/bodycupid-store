@@ -18,8 +18,8 @@ function CategorySection({ categories = [] }) {
                     <Image
                       src={getPublicImageURL(category.imageUrl)}
                       alt={category.name}
-                      height={360}
-                      width={360}
+                      height={220}
+                      width={220}
                       quality={90}
                       className="category-media"
                     />

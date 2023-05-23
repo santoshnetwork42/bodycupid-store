@@ -10,7 +10,7 @@ export default function StorySection({ categories }) {
       <div className="container">
         <div className=" elements">
           <div className="d-flex story-wrapper pt-3 pb-3 m-0">
-            {categories.map((category) => {
+            {categories.map((category, index) => {
               return (
                 <div key={category.id} className=" category">
                   <div className=" category-spacing category-ellipse">
@@ -18,10 +18,9 @@ export default function StorySection({ categories }) {
                       <Image
                         src={getPublicImageURL(category.imageUrl)}
                         alt={category.name}
-                        height={70}
-                        width={70}
-                        priority
-                        loading="eager"
+                        height={60}
+                        width={60}
+                        priority={index < 5}
                         objectFit="contain"
                         className="category-media"
                       />

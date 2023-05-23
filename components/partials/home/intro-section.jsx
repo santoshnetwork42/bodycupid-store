@@ -13,7 +13,7 @@ function IntroSection({ banners = [] }) {
         adClass="owl-theme owl-dot-inner owl-dot-white intro-slider animation-slider intro-slider-container"
         options={introSlider}
       >
-        {banners.map((banner) => {
+        {banners.map((banner, index) => {
           const { webKey, mobileKey, link } = banner;
           return (
             <div className="intro-slide2" key={webKey}>
@@ -24,9 +24,8 @@ function IntroSection({ banners = [] }) {
                 <Image
                   src={getPublicImageURL(webKey)}
                   alt="WOW"
-                  priority
-                  loading="eager"
-                  quality={95}
+                  priority={!index}
+                  quality={90}
                   width={1920}
                   height={800}
                   objectFit="cover"
@@ -39,8 +38,7 @@ function IntroSection({ banners = [] }) {
                 <Image
                   src={getPublicImageURL(mobileKey)}
                   alt="WOW"
-                  priority
-                  loading="eager"
+                  priority={!index}
                   quality={95}
                   width={575}
                   height={320}

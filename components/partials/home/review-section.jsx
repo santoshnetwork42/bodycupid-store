@@ -41,9 +41,9 @@ export default function ReviewSection() {
                 <figure className="testimonial-author-thumbnail">
                   <Image
                     src={testimonial.userImage}
-                    alt="user"
-                    width="70"
-                    height="70"
+                    alt={testimonial.name}
+                    width={70}
+                    height={70}
                   />
                 </figure>
                 <div className="d-flex align-item-center mb-2 justify-content-center">

@@ -87,11 +87,11 @@ function ProductTwo(props) {
         <Image
           src={getPublicImageURL(thumbImage?.imageKey)}
           alt={title}
-          height={300}
-          width={300}
+          height={280}
+          width={280}
           quality={95}
           objectFit="contain"
-          loading={priority ? "eager" : "lazy"}
+          priority={!!priority}
         />
       </ALink>
 
@@ -168,11 +168,12 @@ function ProductTwo(props) {
               ) : (
                 <ALink
                   href="#"
-                  className={`btn-product btn-primary btn-quickview m-0 ${price <= 0 ? 'disabled' : ''}`}
+                  className={`btn-product btn-primary btn-quickview m-0 ${
+                    price <= 0 ? "disabled" : ""
+                  }`}
                   title="Add to cart"
                   onClick={price > 0 ? addToCartHandler : undefined}
-                  style={{ backgroundColor: price <= 0 ? '#ccc' : '' }}
-
+                  style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
                 >
                   Add to cart
                 </ALink>
