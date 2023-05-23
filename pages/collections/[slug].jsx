@@ -307,7 +307,8 @@ export const getStaticProps = async (context) => {
 
     return await handleRedirect(`/collections/${slug}`);
   } catch (error) {
-    logger.error("error", error);
+
+    logger.error("error", error)
   }
   return {
     notFound: true,
