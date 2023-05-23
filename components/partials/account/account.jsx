@@ -18,6 +18,7 @@ import {
   User,
 } from "~/components/icons";
 import { modalActions } from "~/store/modal";
+import { rootActions } from "~/store";
 
 const MOBILE_TABS = [
   {
@@ -40,7 +41,7 @@ const MOBILE_TABS = [
   },
 ];
 
-function AccountsTabs({ user, store, openPasswordLess }) {
+function AccountsTabs({ user, store, openPasswordLess, destroySession }) {
   const router = useRouter();
 
   const { name } = store;
@@ -70,6 +71,7 @@ function AccountsTabs({ user, store, openPasswordLess }) {
       try {
         await Auth.currentAuthenticatedUser();
       } catch {
+        destroySession();
         openPasswordLess();
       }
     })();
@@ -205,4 +207,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   openPasswordLess: modalActions.openPasswordlessModal,
+  destroySession: rootActions.destroySession,
 })(AccountsTabs);

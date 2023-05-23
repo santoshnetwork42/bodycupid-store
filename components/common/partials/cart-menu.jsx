@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
+import { Logger } from 'aws-amplify';
+
 import ALink from "~/components/features/custom-link";
 import { Bag, Cross } from "~/components/icons";
 

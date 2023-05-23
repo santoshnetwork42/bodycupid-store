@@ -44,6 +44,10 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { Logger } from "aws-amplify";
+
+const logger = new Logger("Checkout");
+
 
 import { Logger } from "aws-amplify";
 

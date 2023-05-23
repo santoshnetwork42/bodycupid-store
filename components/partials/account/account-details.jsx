@@ -1,11 +1,13 @@
 import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
-
+import { Logger } from 'aws-amplify';
 import { updateUser as updateUserMutation } from "~/graphql/api";
 import { removePhonePrefix } from "~/utils/helper";
 import { userActions } from "~/store/user";
 import { errorHandler } from "~/utils/errorHandler";
+
+const logger = new Logger('AccountDetails');
 
 function AccountDetails({ user, updateUserData }) {
   const [userDetail, setUser] = useState({ ...user });
@@ -29,10 +31,13 @@ function AccountDetails({ user, updateUserData }) {
         .then(({ data: { updateUser } }) => {
           updateUserData(updateUser);
           setLoading(false);
+          logger.info('User data updated');
+          logger.debug('User data updated:', updateUser);
         })
         .catch((_err) => {
           errorHandler(_err)
           setLoading(false);
+          logger.error('Failed to update user data:', _err);
         });
       return false;
     },

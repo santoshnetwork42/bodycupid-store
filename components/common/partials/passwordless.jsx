@@ -13,6 +13,9 @@ import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "~/utils/popupHelper";
+import { Logger } from "aws-amplify";
+
+const logger = new Logger("Login-without-password");
 
 const logger = new Logger("Login-without-password");
 

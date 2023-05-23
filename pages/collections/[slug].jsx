@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import { STORE_ID } from "~/config";
 import {
@@ -19,7 +20,6 @@ import handleRedirect from "~/utils/handleRedirect";
 import CategoryHeader from "~/components/common/category-header";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { Logger } from "aws-amplify";
 
 const logger = new Logger("All collections");
 
@@ -304,7 +304,7 @@ export const getStaticProps = async (context) => {
         },
       };
     }
-    
+
     return await handleRedirect(`/collections/${slug}`);
   } catch (error) {
     logger.error("error", error);

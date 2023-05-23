@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-
-import { Logger } from "aws-amplify"; 
+import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
@@ -11,7 +10,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
 
-const logger = new Logger('Cart-products');
+const logger = new Logger("Cart-products");
 
 function CartProduct({
   cartList,

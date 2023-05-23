@@ -15,6 +15,9 @@ import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
+import { Logger } from "aws-amplify";
+
+const logger = new Logger("Cart");
 
 import { Logger } from "aws-amplify";
 

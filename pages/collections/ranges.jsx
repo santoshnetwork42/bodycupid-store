@@ -8,6 +8,10 @@ import fetchData from "~/utils/fetchData";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('Ranges collection');
+
 function AllCollection(props) {
   const { store, products, pageFilter, collections ,pageMeta} = props;
   const { name } = store;
@@ -87,7 +91,7 @@ export const getStaticProps = async () => {
       revalidate: 60,
     };
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     return {
       notFound: true,
     };
