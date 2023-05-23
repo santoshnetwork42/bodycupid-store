@@ -262,9 +262,11 @@
         > .container {
             display: block;
         }
-        .footer-left,
+        .footer-left {justify-content: center;}
         .footer-right {
             justify-content: center;
+            padding-bottom: 3.2rem;
+            
         }
         .footer-left,
         .footer-center {
