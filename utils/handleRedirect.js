@@ -1,20 +1,22 @@
 import { Logger } from "aws-amplify";
 
+import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
-import { getPageRedirects, createPageRedirects } from "~/graphql/api";
+import { getRedirects, createRedirects } from "~/graphql/api";
 
 const logger = new Logger("HandleRedirect");
 
 const handleRedirect = async (path, defaultRedirect = "/collections/all") => {
   logger.verbose("Triggered handleRedirect", path, defaultRedirect);
-  const pageRedirect = await fetchData(getPageRedirects, {
+  const pageRedirect = await fetchData(getRedirects, {
     slug: path,
-  }).then((resp) => resp.getPageRedirects);
+    storeId: STORE_ID,
+  }).then((resp) => resp.getRedirects);
 
 
   logger.verbose("handleRedirect > pageRedirect", pageRedirect);
-  logger.info("handleRedirect > should redirect", pageRedirect && pageRedirect.redirect !== path);
-  if (pageRedirect && pageRedirect.redirect !== path) {
+  logger.info("handleRedirect > should redirect", !!pageRedirect?.redirect);
+  if (!!pageRedirect?.redirect && pageRedirect.redirect !== path) {
     return {
       redirect: {
         destination: pageRedirect.redirect,
@@ -24,11 +26,11 @@ const handleRedirect = async (path, defaultRedirect = "/collections/all") => {
   }
 
   if (!pageRedirect) {
-    logger.verbose("handleRedirect > createPageRedirects");
-    await fetchData(createPageRedirects, {
+    logger.verbose("handleRedirect > createRedirects");
+    await fetchData(createRedirects, {
       input: {
+        storeId: STORE_ID,
         slug: path,
-        redirect: path,
       },
     });
   }

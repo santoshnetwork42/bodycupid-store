@@ -4618,13 +4618,14 @@ export const createBulkAction = /* GraphQL */ `
     }
   }
 `;
-export const createPageRedirects = /* GraphQL */ `
-  mutation CreatePageRedirects(
-    $input: CreatePageRedirectsInput!
-    $condition: ModelPageRedirectsConditionInput
+export const createRedirects = /* GraphQL */ `
+  mutation CreateRedirects(
+    $input: CreateRedirectsInput!
+    $condition: ModelRedirectsConditionInput
   ) {
-    createPageRedirects(input: $input, condition: $condition) {
+    createRedirects(input: $input, condition: $condition) {
       id
+      storeId
       slug
       redirect
       createdAt
@@ -4632,13 +4633,14 @@ export const createPageRedirects = /* GraphQL */ `
     }
   }
 `;
-export const updatePageRedirects = /* GraphQL */ `
-  mutation UpdatePageRedirects(
-    $input: UpdatePageRedirectsInput!
-    $condition: ModelPageRedirectsConditionInput
+export const updateRedirects = /* GraphQL */ `
+  mutation UpdateRedirects(
+    $input: UpdateRedirectsInput!
+    $condition: ModelRedirectsConditionInput
   ) {
-    updatePageRedirects(input: $input, condition: $condition) {
+    updateRedirects(input: $input, condition: $condition) {
       id
+      storeId
       slug
       redirect
       createdAt
@@ -4646,13 +4648,14 @@ export const updatePageRedirects = /* GraphQL */ `
     }
   }
 `;
-export const deletePageRedirects = /* GraphQL */ `
-  mutation DeletePageRedirects(
-    $input: DeletePageRedirectsInput!
-    $condition: ModelPageRedirectsConditionInput
+export const deleteRedirects = /* GraphQL */ `
+  mutation DeleteRedirects(
+    $input: DeleteRedirectsInput!
+    $condition: ModelRedirectsConditionInput
   ) {
-    deletePageRedirects(input: $input, condition: $condition) {
+    deleteRedirects(input: $input, condition: $condition) {
       id
+      storeId
       slug
       redirect
       createdAt

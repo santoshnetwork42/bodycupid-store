@@ -1695,21 +1695,21 @@ export const checkInventory = /* GraphQL */ `
   }
 `;
 
-export const getPageRedirects = /* GraphQL */ `
-  query GetPageRedirects($slug: String!) {
-    getPageRedirects(slug: $slug) {
+export const getRedirects = /* GraphQL */ `
+  query GetRedirects($slug: String!, $storeId: ID!) {
+    getRedirects(slug: $slug, storeId: $storeId) {
       slug
       redirect
     }
   }
 `;
 
-export const createPageRedirects = /* GraphQL */ `
-  mutation CreatePageRedirects(
-    $input: CreatePageRedirectsInput!
-    $condition: ModelPageRedirectsConditionInput
+export const createRedirects = /* GraphQL */ `
+  mutation CreateRedirects(
+    $input: CreateRedirectsInput!
+    $condition: ModelRedirectsConditionInput
   ) {
-    createPageRedirects(input: $input, condition: $condition) {
+    createRedirects(input: $input, condition: $condition) {
       id
     }
   }
