@@ -16,6 +16,10 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 
+import { Logger } from "aws-amplify";
+
+const logger = new Logger("Cart");
+
 function Cart(props) {
   const {
     cartList,
@@ -39,6 +43,7 @@ function Cart(props) {
   useEffect(() => {
     viewCart();
     getShippingTiers();
+    logger.verbose("View Cart");
   }, []);
 
   const {
@@ -60,15 +65,18 @@ function Cart(props) {
     if (!isInventoryCheckSuccess) {
       recordOutOfStock(outOfStockItems, inventoryMapping);
       alertToaster("Please remove out of stock product from cart", "error");
+      logger.error("Out of stock product found in cart");
       return false;
     }
 
     if (user) {
       router.push("/pages/checkout");
+      logger.verbose("Redirecting to checkout page");
       return true;
     }
 
     openLogin(true);
+    logger.verbose("Opening login modal");
     return false;
   }, [
     user,

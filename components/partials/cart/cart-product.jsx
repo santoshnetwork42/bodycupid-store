@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
 
+import { Logger } from "aws-amplify"; 
+
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
 import { Close, Discount } from "~/components/icons";
@@ -8,6 +10,8 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
+
+const logger = new Logger('Cart-products');
 
 function CartProduct({
   cartList,
@@ -83,6 +87,12 @@ function CartProduct({
       removeCoupon();
     }
   };
+
+  useMemo(() => {
+    logger.verbose("Rendering CartProduct");
+    logger.debug("Item:", item);
+    logger.debug("CartList:", cartList);
+  }, [item, cartList]);
 
   return (
     <div className="m-0 p-0 border-no ">
