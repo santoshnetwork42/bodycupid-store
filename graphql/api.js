@@ -1348,6 +1348,7 @@ export const getStoreBanners = /* GraphQL */ `
       banners {
         webKey
         mobileKey
+        link
       }
     }
   }
