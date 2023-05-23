@@ -149,7 +149,6 @@ export const getStaticProps = async () => {
       revalidate: 43200,
     };
   } catch (e) {
-    logger.error(e);
     return {
       notFound: true,
     };
