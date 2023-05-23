@@ -1,12 +1,13 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-
 import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
-import { Close, Discount } from "~/components/icons";
+import { Close } from "~/components/icons";
+
 import { cartActions } from "~/store/cart";
+
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";

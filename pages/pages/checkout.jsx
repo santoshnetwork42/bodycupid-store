@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
+import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -44,7 +45,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
-import { Logger } from "aws-amplify";
 
 const logger = new Logger("Checkout");
 

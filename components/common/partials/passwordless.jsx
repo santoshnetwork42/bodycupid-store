@@ -3,16 +3,17 @@ import { connect } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
-
 import { Logger } from "aws-amplify";
 
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import getRandomString from "~/utils/getRandomString";
-import { modalActions } from "~/store/modal";
-import Modal from "~/components/common/modal";
-import ALink from "~/components/features/custom-link";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "~/utils/popupHelper";
+
+import { modalActions } from "~/store/modal";
+
+import Modal from "~/components/common/modal";
+import ALink from "~/components/features/custom-link";
 
 const logger = new Logger("Login-without-password");
 
