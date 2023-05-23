@@ -9,6 +9,10 @@ import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import SearchBox from "~/components/common/partials/search-box";
 
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('search');
+
 function AllProduct(props) {
   const { store, products, pageFilter } = props;
   const { name } = store;

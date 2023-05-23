@@ -14,6 +14,10 @@ import fetchData from "~/utils/fetchData";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('All collections');
+
 function AllProduct(props) {
   const { store, products, pageFilter, categories, pageMeta } = props;
   const { name } = store;
@@ -93,7 +97,7 @@ export const getStaticProps = async () => {
       revalidate: 60,
     };
   } catch (error) {
-    Logger.error(error);
+    logger.error(error);
     return {
       notFound: true,
     };

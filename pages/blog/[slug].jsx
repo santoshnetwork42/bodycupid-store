@@ -5,6 +5,10 @@ import { getBlog } from "~/graphql/queries";
 import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('All Blogs');
+
 function PostSingle({ blog: post }) {
   const { seo, featuredImage, createdAt, title, content } = post;
 
@@ -96,7 +100,7 @@ export const getStaticProps = async (context) => {
       },
     };
   } catch (error) {
-    Logger.error("error in fetching of blog", error);
+    logger.error("error in fetching of blog", error);
   }
   return {
     notFound: true,

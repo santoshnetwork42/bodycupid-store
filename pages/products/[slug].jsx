@@ -23,6 +23,9 @@ import { errorHandler } from "~/utils/errorHandler";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/products";
 import NextHead from "~/components/common/next-head";
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('products slug page');
 
 function ProductDefault(props) {
   const { product, productFAQs = [], pageMeta, viewItem, slug } = props;

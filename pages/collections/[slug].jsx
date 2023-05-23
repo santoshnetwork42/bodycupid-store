@@ -18,6 +18,9 @@ import fetchData from "~/utils/fetchData";
 import CategoryHeader from "~/components/common/category-header";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('All collections');
 
 function CollectionPage(props) {
   const {
@@ -298,7 +301,7 @@ export const getStaticProps = async (context) => {
       };
     }
   } catch (error) {
-    logger.error("Error in fetching product according to category", error);
+    logger.error("error", error)
   }
   return {
     notFound: true,
