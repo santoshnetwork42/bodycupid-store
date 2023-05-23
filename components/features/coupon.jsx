@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
-
+import { eventActions } from "~/store/events";
 import ALink from "~/components/features/custom-link";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
@@ -11,6 +11,9 @@ import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('Coupon');
 
 function Coupon(props) {
   const {
@@ -70,11 +73,14 @@ function Coupon(props) {
               cartItemSource: "COUPON",
             });
           }
+          logger.info('Applied coupon:', response);
         } else {
           setError(message);
+          logger.error('Failed to apply coupon:', message);
         }
       } else {
         setError("Coupon not found");
+        logger.error('Coupon not found');
       }
     },
     [coupon, user, cartList]
@@ -91,9 +97,15 @@ function Coupon(props) {
     }
 
     removeCoupon();
+    logger.info('Removed coupon');
   };
 
   const showAppliedCoupon = !!(appliedCoupon && couponTotal);
+
+  const openCouponModal = () => {
+    setOpen(true);
+    logger.verbose('Opened coupon modal');
+  };
 
   return (
     <>
@@ -175,7 +187,7 @@ function Coupon(props) {
             <span className="text-body">Have a coupon?</span>{" "}
             <ALink
               href="#"
-              onClick={() => setOpen(true)}
+              onClick={openCouponModal}
               className="text-primary collapse"
             >
               Click here to apply
