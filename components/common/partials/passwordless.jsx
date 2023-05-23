@@ -11,6 +11,9 @@ import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "~/utils/popupHelper";
+import { Logger } from "aws-amplify";
+
+const logger = new Logger("Login-without-password");
 
 function Passwordless({
   auth,
@@ -72,7 +75,7 @@ function Passwordless({
       setSeconds(30);
       setConfirmSignUp("SIGNUP");
     } catch (error) {
-      console.log("err signing up:", error);
+      logger.error("error signing up:", error);
       alertToaster(error.message, "error");
     }
     return false;
@@ -125,7 +128,7 @@ function Passwordless({
         setSeconds(30);
         setLoading(false);
       } catch (error) {
-        console.log("error signin:", error);
+        logger.error("error in signin:", error);
         if (error.code === "UserNotConfirmedException") {
           await Auth.resendSignUp(addPhonePrefix(state.phone));
           setConfirmSignUp("SIGNUP");

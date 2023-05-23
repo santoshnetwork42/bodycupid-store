@@ -19,6 +19,9 @@ import handleRedirect from "~/utils/handleRedirect";
 import CategoryHeader from "~/components/common/category-header";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('All collections');
 
 function CollectionPage(props) {
   const {
@@ -302,7 +305,7 @@ export const getStaticProps = async (context) => {
 
     return await handleRedirect(`/collections/${slug}`);
   } catch (error) {
-    console.log("category", error);
+    logger.error("error", error)
   }
   return {
     notFound: true,

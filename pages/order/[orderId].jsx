@@ -17,6 +17,9 @@ import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "../../utils/popupHelper";
 import Checkmark from "~/components/icons";
 
+import { Logger } from 'aws-amplify';
+
+const logger = new Logger('Orders');
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
   const { name } = store;
@@ -355,7 +358,7 @@ Order.getInitialProps = async (context) => {
       };
     }
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
   return {
     order: null,

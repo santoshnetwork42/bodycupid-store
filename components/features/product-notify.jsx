@@ -1,10 +1,12 @@
 import { API } from "aws-amplify";
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-
+import { Logger } from 'aws-amplify';
 import { addProductNotification } from "~/graphql/mutations";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "../../utils/popupHelper";
+
+const logger = new Logger('ProductNotify');
 
 function ProductNotify(props) {
   const { user, productId, variantId } = props;
@@ -40,17 +42,20 @@ function ProductNotify(props) {
             "We'll notify you when this product is back in stock",
             "success"
           );
+          logger.info('Product notification added:', response);
         } else {
           alertToaster(
             "Something went wrong",
             "error"
           );
+          logger.error('Failed to add product notification');
         }
         setAllreadyNotify(true);
         setLoading(false);
       } catch (error) {
         setLoading(false);
         errorHandler(error);
+        logger.error('Failed to add product notification:', error);
       }
     },
     [notifyEmail, productId, variantId, user]
