@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { Logger } from "aws-amplify";
 
 import { STORE_ID } from "~/config";

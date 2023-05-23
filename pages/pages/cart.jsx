@@ -19,10 +19,6 @@ import { Logger } from "aws-amplify";
 
 const logger = new Logger("Cart");
 
-import { Logger } from "aws-amplify";
-
-const logger = new Logger("Cart");
-
 function Cart(props) {
   const {
     cartList,

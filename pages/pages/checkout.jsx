@@ -48,12 +48,6 @@ import { Logger } from "aws-amplify";
 
 const logger = new Logger("Checkout");
 
-
-import { Logger } from "aws-amplify";
-
-const logger = new Logger("Checkout");
-
-
 function Checkout(props) {
   const {
     cartList,

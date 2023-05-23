@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
+
 import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";

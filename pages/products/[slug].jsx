@@ -28,10 +28,6 @@ import { Logger } from 'aws-amplify';
 
 const logger = new Logger('products slug page');
 
-import { Logger } from 'aws-amplify';
-
-const logger = new Logger('products slug page');
-
 function ProductDefault(props) {
   const { product, productFAQs = [], pageMeta, viewItem, slug } = props;
   const router = useRouter();
