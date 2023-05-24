@@ -254,7 +254,7 @@ function Passwordless({
                                   onChange={(e) => {
                                     setState({
                                       ...state,
-                                      phone: e.target.value
+                                      phone: (e.target.value || "")
                                         .replaceAll(/[^0-9]+/g, "")
                                         .trim(),
                                     });
