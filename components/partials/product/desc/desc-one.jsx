@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
-import Reveal from "react-awesome-reveal";
 
 import { modalActions } from "~/store/modal";
 import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
@@ -60,8 +59,9 @@ const getManufacturerInformation = (product) => [
 ];
 
 function DescOne(props) {
-  const { product, user, productFAQs } = props;
+  const { product, user } = props;
   const { id, totalRatings, longDescription, additionalInfo, rating } = product;
+
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [reviewState, setReview] = useSetState({ ...reviewDefault });
   const [reviews, setReviews] = useState([]);
@@ -543,7 +543,7 @@ function DescOne(props) {
           )}
         </Card>
 
-        {!!product.hasFaq && (
+        {/* {!!product.hasFaq && (
           <Card title="FAQs" noDisplayStyle>
             <div className="col-md-12">
               <Reveal
@@ -584,7 +584,7 @@ function DescOne(props) {
               </Reveal>
             </div>
           </Card>
-        )}
+        )} */}
 
         <Card title="MANUFACTURER INFORMATION" noDisplayStyle collapseEvent>
           <div className="row mb-2">

@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 
 import { getCartTotals } from "~/utils";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { useShippingTiers } from "~/utils/contexts/navbar";
 import { getCouponDiscount } from "~/utils/coupons";
 import { getBxGyFreeQuantity } from "../helper";
 
 export const useCartTotal = (prepaid = false) => {
   const { data, coupon } = useSelector((state) => state.cart);
-  const shippingTiers = useSelector(
-    (state) => state.system.shippingTiers || []
-  );
+  const shippingTiers = useShippingTiers();
+
   const cartTotals = useMemo(
     () => getCartTotals(data, coupon, shippingTiers, prepaid),
     [data, coupon, shippingTiers, prepaid]
@@ -58,7 +58,7 @@ export const useCartItems = () => {
       const sortedItems = couponApplicableCartList.sort((a, b) =>
         a.price > b.price ? 1 : -1
       );
-      
+
       const getYQuantity = getBxGyFreeQuantity(
         appliedCoupon.getYQuantity,
         appliedCoupon.buyXQuantity,
