@@ -1715,3 +1715,32 @@ export const createRedirects = /* GraphQL */ `
     }
   }
 `;
+
+export const searchConfigurations = /* GraphQL */ `
+  query SearchConfigurations(
+    $filter: SearchableConfigurationFilterInput
+    $sort: [SearchableConfigurationSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableConfigurationAggregationInput]
+  ) {
+    searchConfigurations(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
 
@@ -13,6 +13,7 @@ import {
   createPayment,
   validateTransaction,
   getOrderStatus,
+  searchConfigurations,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getFreeProductTotal } from "~/utils";
@@ -80,6 +81,7 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
+  const [configureShipping, setConfigureShipping] = useState(null);
 
   const isFirst = payMethod === "PREPAID";
 
@@ -89,25 +91,65 @@ function Checkout(props) {
     logger.verbose("Checkout component initialized");
   }, []);
 
+  useEffect(() => {
+    getConfigurationData();
+  }, []);
+
+  const getConfigurationData = async () => {
+    try {
+      API.graphql(
+        graphqlOperation(searchConfigurations, {
+          filter: {
+            storeId: { eq: STORE_ID },
+          },
+        })
+      )
+        .then((res) => res.data.searchConfigurations.items[0])
+        .then(setConfigureShipping);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   const {
     totalListingPrice,
     totalPrice,
     shippingTotal,
     totalAmountSaved,
     couponTotal,
-    grandTotal,
+    grandTotal: gTotal,
     prepaidDiscount,
     totalDiscount,
-    codGrandTotal,
+    codGrandTotal: codGTotal,
     prepaidGrandTotal,
   } = useCartTotal(isFirst);
 
   const cartItems = useCartItems();
 
-  const totalSaved = useMemo(
-    () => getFreeProductTotal(cartItems) + totalAmountSaved,
-    [totalAmountSaved, cartItems]
-  );
+  const { grandTotal, codGrandTotal, isCodCharges } = useMemo(() => {
+    const { key, value } = configureShipping || {};
+    if (key === "SHIPPING") {
+      return {
+        grandTotal: isFirst ? gTotal : gTotal + value,
+        codGrandTotal: codGTotal + value,
+        isCodCharges: key === "SHIPPING" && !isFirst,
+      };
+    }
+    return {
+      grandTotal: gTotal,
+      codGrandTotal: codGTotal,
+      isCodCharges: key === "SHIPPING" && !isFirst,
+    };
+  }, [isFirst, configureShipping]);
+
+  const totalSaved = useMemo(() => {
+    const { value } = configureShipping || {};
+    const savedAmt = getFreeProductTotal(cartItems) + totalAmountSaved;
+    if (!isCodCharges) {
+      return savedAmt + value;
+    }
+    return savedAmt;
+  }, [totalAmountSaved, cartItems, configureShipping]);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -639,7 +681,6 @@ function Checkout(props) {
                                     </p>
                                   </td>
                                 </tr>
-
                                 {!!appliedCoupon && !!couponTotal && (
                                   <>
                                     <tr className="summary-subtotal-saving">
@@ -663,7 +704,6 @@ function Checkout(props) {
                                     </tr>
                                   </>
                                 )}
-
                                 {isFirst && (
                                   <tr className="summary-subtotal">
                                     <td>
@@ -676,7 +716,6 @@ function Checkout(props) {
                                     </td>
                                   </tr>
                                 )}
-
                                 <tr className="summary-subtotal">
                                   <td>
                                     <h4 className="summary-subtitle">
@@ -700,6 +739,31 @@ function Checkout(props) {
                                     )}
                                     {!!shippingTotal
                                       ? `₹${toDecimal(shippingTotal)}`
+                                      : "Free"}
+                                    &nbsp;
+                                  </td>
+                                </tr>
+
+                                <tr className="summary-subtotal">
+                                  <td>
+                                    <h4 className="summary-subtitle">
+                                      COD Charges
+                                    </h4>
+                                  </td>
+                                  <td
+                                    className={`summary-subtotal-price pb-0 pt-0 ${
+                                      !isCodCharges && "discount-price-color"
+                                    }`}
+                                  >
+                                    {!isCodCharges && (
+                                      <del className="summary-subtotal-listingprice mr-2">
+                                        ₹{configureShipping?.value}
+                                      </del>
+                                    )}
+                                    {isCodCharges
+                                      ? `₹${toDecimal(
+                                          configureShipping?.value
+                                        )}`
                                       : "Free"}
                                     &nbsp;
                                   </td>
