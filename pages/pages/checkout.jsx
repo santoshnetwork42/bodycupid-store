@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API, graphqlOperation } from "aws-amplify";
+import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
 
@@ -13,7 +13,6 @@ import {
   createPayment,
   validateTransaction,
   getOrderStatus,
-  searchConfigurations,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal, getFreeProductTotal } from "~/utils";
@@ -32,7 +31,6 @@ import {
 } from "~/utils/address";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
-import { systemActions } from "~/store/system";
 import {
   DownAngle,
   RightAngle,
@@ -46,6 +44,7 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { useConfiguration } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Checkout");
 
@@ -72,6 +71,7 @@ function Checkout(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
+  const configuration = useConfiguration();
   const freeProducts = useFreeProducts();
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -80,7 +80,6 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
-  const [configureShipping, setConfigureShipping] = useState(null);
 
   const isFirst = payMethod === "PREPAID";
 
@@ -88,26 +87,6 @@ function Checkout(props) {
     startCheckout();
     logger.verbose("Checkout component initialized");
   }, []);
-
-  useEffect(() => {
-    getConfigurationData();
-  }, []);
-
-  const getConfigurationData = async () => {
-    try {
-      API.graphql(
-        graphqlOperation(searchConfigurations, {
-          filter: {
-            storeId: { eq: STORE_ID },
-          },
-        })
-      )
-        .then((res) => res.data.searchConfigurations.items[0])
-        .then(setConfigureShipping);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
 
   const {
     totalListingPrice,
@@ -124,8 +103,15 @@ function Checkout(props) {
 
   const cartItems = useCartItems();
 
+  const codChargesData = useMemo(() => {
+    if (!!configuration) {
+      return configuration.find((item) => item.key === "SHIPPING");
+    }
+    return null;
+  }, [configuration]);
+
   const { grandTotal, codGrandTotal, isCodCharges } = useMemo(() => {
-    const { key, value } = configureShipping || {};
+    const { key, value } = codChargesData || {};
     if (key === "SHIPPING") {
       return {
         grandTotal: isFirst ? gTotal : gTotal + value,
@@ -138,16 +124,16 @@ function Checkout(props) {
       codGrandTotal: codGTotal,
       isCodCharges: key === "SHIPPING" && !isFirst,
     };
-  }, [isFirst, configureShipping]);
+  }, [isFirst, codChargesData]);
 
   const totalSaved = useMemo(() => {
-    const { value } = configureShipping || {};
+    const { value } = codChargesData || {};
     const savedAmt = getFreeProductTotal(cartItems) + totalAmountSaved;
     if (!isCodCharges) {
       return savedAmt + value;
     }
     return savedAmt;
-  }, [totalAmountSaved, cartItems, configureShipping]);
+  }, [totalAmountSaved, cartItems, codChargesData]);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -755,13 +741,11 @@ function Checkout(props) {
                                   >
                                     {!isCodCharges && (
                                       <del className="summary-subtotal-listingprice mr-2">
-                                        ₹{configureShipping?.value}
+                                        ₹{codChargesData?.value}
                                       </del>
                                     )}
                                     {isCodCharges
-                                      ? `₹${toDecimal(
-                                          configureShipping?.value
-                                        )}`
+                                      ? `₹${toDecimal(codChargesData?.value)}`
                                       : "Free"}
                                     &nbsp;
                                   </td>
@@ -954,6 +938,10 @@ const Component = connect(mapStateToProps, {
 })(Checkout);
 
 Component.hideFooter = true;
-Component.navbarConfig = { shippingTier: true, coupons: true };
+Component.navbarConfig = {
+  shippingTier: true,
+  coupons: true,
+  configuration: true,
+};
 
 export default Component;

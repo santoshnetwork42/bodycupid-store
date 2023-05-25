@@ -7,6 +7,7 @@ import {
   listCollections,
   searchShippingTiers,
   getFeaturedCoupon,
+  searchConfigurations,
 } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
@@ -18,6 +19,7 @@ function NavbarProvider({ children, config }) {
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
+  const [configuration, setConfiguration] = useState(null);
 
   const getCollections = () => {
     API.graphql(
@@ -94,6 +96,22 @@ function NavbarProvider({ children, config }) {
       .catch(errorHandler);
   };
 
+  const getConfigurationData = async () => {
+    try {
+      API.graphql(
+        graphqlOperation(searchConfigurations, {
+          filter: {
+            storeId: { eq: STORE_ID },
+          },
+        })
+      )
+        .then((res) => res.data.searchConfigurations.items)
+        .then(setConfiguration);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   useEffect(() => {
     if (config?.shippingTier && !shippingTiers) {
       getShippingTiers();
@@ -107,13 +125,25 @@ function NavbarProvider({ children, config }) {
   }, [config?.coupons]);
 
   useEffect(() => {
+    if (config?.configuration && !configuration) {
+      getConfigurationData();
+    }
+  }, [config?.configuration]);
+
+  useEffect(() => {
     getCategories();
     getCollections();
   }, []);
 
   return (
     <NavbarContext.Provider
-      value={{ categories, collections, shippingTiers, coupons }}
+      value={{
+        categories,
+        collections,
+        shippingTiers,
+        coupons,
+        configuration,
+      }}
     >
       {children}
     </NavbarContext.Provider>
@@ -157,6 +187,11 @@ export const useShippingTiers = () => {
 export const useCoupons = () => {
   const { coupons } = useContext(NavbarContext);
   return coupons;
+};
+
+export const useConfiguration = () => {
+  const { configuration } = useContext(NavbarContext);
+  return configuration;
 };
 
 export default NavbarProvider;
