@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { API } from "aws-amplify";
 
-import { useCoupons } from "~/utils/contexts/coupons";
+import { useCoupons } from "~/utils/contexts/navbar";
 import { getCouponDiscount } from "~/utils/coupons";
 import { getTotalPrice, getCartCount } from "~/utils";
 import { getProductById } from "~/graphql/api";
@@ -13,12 +13,12 @@ export const useFeaturedCoupons = () => {
 
   const featuredCoupons = useMemo(
     () =>
-      coupons
+      (coupons || [])
         .filter((coupon) => !coupon.autoApply)
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
-    return featuredCoupons.sort(
+  return featuredCoupons.sort(
     (a, b) => b.discount - a.discount || b.allowed - a.allowed
   );
 };
@@ -38,7 +38,7 @@ export const useProductCoupons = (product, variant) => {
 
   const productCoupons = useMemo(
     () =>
-      coupons
+      (coupons || [])
         .filter((coupon) => coupon.couponType !== "BUY_X_GET_Y")
         .map((coupon) => getCouponDiscount(coupon, [currentProductItem]))
         .filter((coupon) => coupon.allowed)
@@ -93,10 +93,10 @@ export const useFreeProducts = () => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
                 )
+              )
               : true;
 
           return hasCollection && hasProduct;

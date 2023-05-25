@@ -9,7 +9,6 @@ import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
 import { getFreeProductTotal, toDecimal } from "~/utils";
-import { systemActions } from "~/store/system";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
@@ -25,7 +24,6 @@ function Cart(props) {
     appliedCoupon,
     user,
     openLogin,
-    getShippingTiers,
     viewCart,
     recordOutOfStock,
   } = props;
@@ -41,7 +39,6 @@ function Cart(props) {
 
   useEffect(() => {
     viewCart();
-    getShippingTiers();
     logger.verbose("View Cart");
   }, []);
 
@@ -305,7 +302,6 @@ function mapStateToProps(state) {
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,
-    shippingTiers: state.system.shippingTiers,
     featuredCoupons: state.system.featuredCoupon || [],
   };
 }
@@ -314,11 +310,11 @@ const Component = connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
-  getShippingTiers: systemActions.getShippingTiers,
   viewCart: eventActions.viewCart,
   recordOutOfStock: eventActions.outOfStock,
 })(Cart);
 
 Component.hideFooter = true;
+Component.navbarConfig = { shippingTier: true, coupons: true };
 
 export default Component;
