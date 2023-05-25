@@ -12,8 +12,8 @@ export const useCartTotal = (prepaid = false) => {
   const shippingTiers = useShippingTiers();
 
   const cartTotals = useMemo(
-    () => getCartTotals(data, coupon, shippingTiers, prepaid),
-    [data, coupon, shippingTiers, prepaid]
+    () => getCartTotals(data, coupon, shippingTiers || [], prepaid),
+    [data, coupon, !!shippingTiers, prepaid]
   );
   return cartTotals;
 };

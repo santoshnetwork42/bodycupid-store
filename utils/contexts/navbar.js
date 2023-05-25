@@ -76,7 +76,8 @@ function NavbarProvider({ children, config }) {
               return (!expirationDate || new Date(expirationDate).getTime() >= new Date().getTime());
             })
         );
-      });
+      })
+      .catch(errorHandler);
   };
 
   useEffect(() => {
@@ -135,12 +136,12 @@ export const useMenu = () => {
 
 export const useShippingTiers = () => {
   const { shippingTiers } = useContext(NavbarContext);
-  return shippingTiers || [];
+  return shippingTiers;
 };
 
 export const useCoupons = () => {
   const { coupons } = useContext(NavbarContext);
-  return coupons || [];
+  return coupons;
 };
 
 export default NavbarProvider;
