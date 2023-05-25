@@ -1,21 +1,23 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { STORE_ID } from "~/config";
-import { getMenuCategories, listCollections } from "~/graphql/api";
+import {
+  getMenuCategories,
+  listCollections,
+  searchShippingTiers,
+  getFeaturedCoupon,
+} from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children }) {
+function NavbarProvider({ children, config }) {
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [shippingTiers, setShippingTiers] = useState(null);
+  const [coupons, setCoupons] = useState(null);
 
   const getCollections = () => {
     API.graphql(
@@ -25,14 +27,10 @@ function NavbarProvider({ children }) {
       })
     )
       .then(
-        ({
-          data: {
-            listCollections: { items },
-          },
-        }) => {
-          setCollections(items);
-        }
+        (listCollectionsResponse) =>
+          listCollectionsResponse.data.listCollections.items
       )
+      .then(setCollections)
       .catch(errorHandler);
   };
 
@@ -45,17 +43,68 @@ function NavbarProvider({ children }) {
       })
     )
       .then(
-        ({
-          data: {
-            searchProductCategories: { items },
-          },
-        }) => {
-          const sortedItems = getSortedCategoryAndSubCategory(items);
-          setCategories(sortedItems);
-        }
+        (getCategoriesResponse) =>
+          getCategoriesResponse.data.searchProductCategories.items
       )
+      .then(getSortedCategoryAndSubCategory)
+      .then(setCategories)
       .catch(errorHandler);
   };
+
+  const getShippingTiers = () => {
+    API.graphql(
+      graphqlOperation(searchShippingTiers, {
+        filter: { storeId: { eq: STORE_ID } },
+      })
+    )
+      .then(
+        (getShippingTiersResponse) =>
+          getShippingTiersResponse.data.searchShippingTiers.items
+      )
+      .then(setShippingTiers)
+      .catch(errorHandler);
+  };
+
+  const getCoupons = () => {
+    API.graphql({
+      query: getFeaturedCoupon,
+      variables: {
+        filter: {
+          isFeatured: { eq: true },
+          isActive: { eq: true },
+          storeId: { eq: STORE_ID },
+        },
+      },
+    })
+      .then(
+        (getFeaturedCouponResponse) =>
+          getFeaturedCouponResponse.data.searchCouponCodes.items
+      )
+      .then((items) => {
+        setCoupons(
+          items.filter((coupon) => {
+            const { expirationDate } = coupon;
+            return (
+              !expirationDate ||
+              new Date(expirationDate).getTime() >= new Date().getTime()
+            );
+          })
+        );
+      })
+      .catch(errorHandler);
+  };
+
+  useEffect(() => {
+    if (config?.shippingTier && !shippingTiers) {
+      getShippingTiers();
+    }
+  }, [config?.shippingTier]);
+
+  useEffect(() => {
+    if (config?.coupons && !coupons) {
+      getCoupons();
+    }
+  }, [config?.coupons]);
 
   useEffect(() => {
     getCategories();
@@ -63,7 +112,9 @@ function NavbarProvider({ children }) {
   }, []);
 
   return (
-    <NavbarContext.Provider value={{ categories, collections }}>
+    <NavbarContext.Provider
+      value={{ categories, collections, shippingTiers, coupons }}
+    >
       {children}
     </NavbarContext.Provider>
   );
@@ -96,6 +147,16 @@ export const useMenu = () => {
 
   menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
   return menu;
+};
+
+export const useShippingTiers = () => {
+  const { shippingTiers } = useContext(NavbarContext);
+  return shippingTiers;
+};
+
+export const useCoupons = () => {
+  const { coupons } = useContext(NavbarContext);
+  return coupons;
 };
 
 export default NavbarProvider;

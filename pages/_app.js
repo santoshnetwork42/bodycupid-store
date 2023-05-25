@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API, Analytics } from "aws-amplify";
@@ -23,8 +23,8 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
-import CouponProvider from "~/utils/contexts/coupons.js";
-import NavbarProvider from "~/utils/contexts/navbar.js";
+
+import NavbarProvider from "~/utils/contexts/navbar";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -46,12 +46,6 @@ const App = ({ Component, pageProps }) => {
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
   };
-
-  const storeName = useMemo(() => {
-    if (wowStore) return wowStore.name;
-    const state = store.getState();
-    return state?.system?.store?.name;
-  }, [wowStore, store]);
 
   const destroySession = useCallback(() => {
     store.__persistor.purge();
@@ -177,13 +171,11 @@ const App = ({ Component, pageProps }) => {
           loading={<Loader loading={true} />}
         >
           <Scripts />
-          <NavbarProvider>
-            <CouponProvider>
-              <Layout navbar={navbarProps} footer={footerProps}>
-                <Component {...pageProps} />
-                <VercelAnalytics />
-              </Layout>
-            </CouponProvider>
+          <NavbarProvider config={Component.navbarConfig}>
+            <Layout navbar={navbarProps} footer={footerProps}>
+              <Component {...pageProps} />
+              <VercelAnalytics />
+            </Layout>
           </NavbarProvider>
         </PersistGate>
       </Provider>

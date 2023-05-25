@@ -57,7 +57,6 @@ function Checkout(props) {
     appliedCoupon,
     store,
     metadata,
-    getShippingTiers,
     placeOrder: onPlaceOrder,
     startCheckout,
     openAllAddressModal,
@@ -87,7 +86,6 @@ function Checkout(props) {
 
   useEffect(() => {
     startCheckout();
-    getShippingTiers();
     logger.verbose("Checkout component initialized");
   }, []);
 
@@ -943,14 +941,12 @@ function mapStateToProps(state) {
     appliedCoupon: state.cart.coupon,
     store: state.system.store,
     metadata: state.system.meta,
-    shippingTiers: state.system.shippingTiers,
   };
 }
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   removeCoupon: cartActions.removeCoupon,
-  getShippingTiers: systemActions.getShippingTiers,
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,
   openAllAddressModal: modalActions.openAllAddressModal,
@@ -958,4 +954,6 @@ const Component = connect(mapStateToProps, {
 })(Checkout);
 
 Component.hideFooter = true;
+Component.navbarConfig = { shippingTier: true, coupons: true };
+
 export default Component;

@@ -11,7 +11,6 @@ import DetailOne from "~/components/partials/product/detail/detail-one";
 import DescOne from "~/components/partials/product/desc/desc-one";
 import {
   getProductBySlug,
-  searchProductFaqs,
   getProductSlug,
   findProducts,
   getStoreBanners,
@@ -24,15 +23,17 @@ import { errorHandler } from "~/utils/errorHandler";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/products";
 import NextHead from "~/components/common/next-head";
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('products slug page');
+const logger = new Logger("products slug page");
 
 function ProductDefault(props) {
-  const { product, productFAQs = [], pageMeta, viewItem, slug } = props;
+  const { product, pageMeta, viewItem, slug } = props;
+
   const router = useRouter();
   const { query, isReady } = router;
   const { variantId } = query;
+
   const [selectedVariant, setVariant] = useState(variantId);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -135,11 +136,7 @@ function ProductDefault(props) {
             <div className="container  vertical pt-3 lh-default bg-white ">
               <LinkedProducts product={product} />
 
-              <DescOne
-                key={`desc-one=${product.id}`}
-                product={product}
-                productFAQs={productFAQs}
-              />
+              <DescOne key={`desc-one=${product.id}`} product={product} />
             </div>
             {relatedProducts.length > 0 && (
               <ProductCollection
@@ -202,20 +199,10 @@ export const getStaticProps = async (context) => {
       const { id, pageTitle, productDescription, title } = product;
       const { thumbImage } = getProductMeta(product);
 
-      // get Product FAQ
-      const {
-        searchProductFaqs: { items: faqS },
-      } = await fetchData(searchProductFaqs, {
-        filter: {
-          productId: { eq: id },
-        },
-      });
-
       return {
         props: {
           slug,
           product,
-          productFAQs: faqS,
           pageMeta: {
             siteName: name,
             title: pageTitle || title,
