@@ -3,29 +3,29 @@
 
 const awsmobile = {
     "aws_project_region": "ap-south-1",
-    "aws_mobile_analytics_app_id": "0ed5f304280d4e98bd68293328c1b9e6",
+    "aws_mobile_analytics_app_id": "11e4faa463bf4ad4a4724fd406e71168",
     "aws_mobile_analytics_app_region": "ap-south-1",
     "Analytics": {
         "AWSPinpoint": {
-            "appId": "0ed5f304280d4e98bd68293328c1b9e6",
+            "appId": "11e4faa463bf4ad4a4724fd406e71168",
             "region": "ap-south-1"
         }
     },
-    "aws_appsync_graphqlEndpoint": "https://s7qwhto2nzhk7lt7uwdzz5lxru.appsync-api.ap-south-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://pogjt6ntkvdb7gjbhfxfqkxidu.appsync-api.ap-south-1.amazonaws.com/graphql",
     "aws_appsync_region": "ap-south-1",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-j3wnpgxrxfgxrlbayy3peyrv6i",
+    "aws_appsync_apiKey": "da2-t3l3ygaho5erlaypt27r6vjz5u",
     "aws_cloud_logic_custom": [
         {
             "name": "healthrestapi",
-            "endpoint": "https://ahn50zobze.execute-api.ap-south-1.amazonaws.com/prod",
+            "endpoint": "https://g7hlrlv1wh.execute-api.ap-south-1.amazonaws.com/develop",
             "region": "ap-south-1"
         }
     ],
-    "aws_cognito_identity_pool_id": "ap-south-1:79d9f4ba-123a-445d-b771-7aed350f95c5",
+    "aws_cognito_identity_pool_id": "ap-south-1:549647da-4eae-43fd-a7b7-b659b69be666",
     "aws_cognito_region": "ap-south-1",
-    "aws_user_pools_id": "ap-south-1_SJdorI3gC",
-    "aws_user_pools_web_client_id": "4pv68ovimmafj1920pgu5llc00",
+    "aws_user_pools_id": "ap-south-1_MakqxH3dS",
+    "aws_user_pools_web_client_id": "2uiusjlk3da9sperajkkscvqk4",
     "oauth": {},
     "aws_cognito_username_attributes": [
         "PHONE_NUMBER"
@@ -47,7 +47,7 @@ const awsmobile = {
     "aws_cognito_verification_mechanisms": [
         "PHONE_NUMBER"
     ],
-    "aws_user_files_s3_bucket": "healthstaticbucket123013-prod",
+    "aws_user_files_s3_bucket": "healthstaticbucket92130-develop",
     "aws_user_files_s3_bucket_region": "ap-south-1"
 };
 
