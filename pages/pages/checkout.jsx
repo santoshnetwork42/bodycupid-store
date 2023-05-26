@@ -264,7 +264,6 @@ function Checkout(props) {
         try {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
-          const codCharge = isFirst ? 0 : codCharges;
           const orderDate = new Date();
           const sla = new Date();
           sla.setDate(sla.getDate() + 2);
@@ -281,13 +280,13 @@ function Checkout(props) {
             totalAmount: grandTotal,
             totalDiscount: totalDiscount + freeProductTotal,
             totalShippingCharges: shippingTotal,
+            totalCashOnDeliveryCharges: appliedCODCharges,
             orderDate: orderDate.toISOString(),
             sla: sla.toISOString(),
             paymentType: payMethod,
             shippingAddress: restAddress,
             billingAddress: restAddress,
             couponCodeId: appliedCoupon?.id,
-            totalCashOnDeliveryCharges: codCharge,
             ...metadata,
           };
 
@@ -327,7 +326,8 @@ function Checkout(props) {
                 (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
               const itemCodCharges =
-                (codCharge * itemtotal) / (totalPrice + freeProductTotal);
+                (appliedCODCharges * itemtotal) /
+                (totalPrice + freeProductTotal);
 
               return API.graphql({
                 query: createOrderProduct,
@@ -361,7 +361,8 @@ function Checkout(props) {
                 (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
               const itemCodCharges =
-                (codCharge * itemtotal) / (totalPrice + freeProductTotal);
+                (appliedCODCharges * itemtotal) /
+                (totalPrice + freeProductTotal);
 
               return API.graphql({
                 query: createOrderProduct,
@@ -426,6 +427,7 @@ function Checkout(props) {
       isInventoryCheckSuccess,
       outOfStockItems,
       inventoryMapping,
+      appliedCODCharges,
     ]
   );
 
