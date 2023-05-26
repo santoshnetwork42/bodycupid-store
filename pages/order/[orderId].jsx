@@ -287,16 +287,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     ₹{toDecimal(getOrderTotal(order?.products?.items))}
                   </td>
                 </tr>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Shipping:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {order?.totalShippingCharges
-                      ? `₹${toDecimal(order?.totalShippingCharges)}`
-                      : "Free shipping"}
-                  </td>
-                </tr>
                 {!!order?.totalDiscount && (
                   <tr className="summary-subtotal">
                     <td>
@@ -307,6 +297,16 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     </td>
                   </tr>
                 )}
+                <tr className="summary-subtotal">
+                  <td>
+                    <h4 className="summary-subtitle">Shipping:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.totalShippingCharges
+                      ? `₹${toDecimal(order?.totalShippingCharges)}`
+                      : "Free shipping"}
+                  </td>
+                </tr>
                 {!!order?.totalCashOnDeliveryCharges && (
                   <tr className="summary-subtotal">
                     <td>
