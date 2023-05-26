@@ -168,22 +168,23 @@ function CartProduct({
                     )}
                   </div>
                 )}
-                {!!item?.variants?.items.length && (
-                  <select
-                    name={`${recordKey}`}
-                    className="form-control"
-                    value={variantId}
-                    onChange={(e) => {
-                      changeVariant(e);
-                    }}
-                  >
-                    {variants.items.map((v) => (
-                      <option key={v.id} value={v.id}>
-                        {v.title}
-                      </option>
-                    ))}
-                  </select>
-                )}
+                {!!item?.variants?.items.length &&
+                  cartItemType !== "FREE_PRODUCT" && (
+                    <select
+                      name={`${recordKey}`}
+                      className="form-control"
+                      value={variantId}
+                      onChange={(e) => {
+                        changeVariant(e);
+                      }}
+                    >
+                      {variants.items.map((v) => (
+                        <option key={v.id} value={v.id}>
+                          {v.title}
+                        </option>
+                      ))}
+                    </select>
+                  )}
               </div>
             )}
           </div>
