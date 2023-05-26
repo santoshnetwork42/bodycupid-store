@@ -11,9 +11,9 @@ import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('Coupon');
+const logger = new Logger("Coupon");
 
 function Coupon(props) {
   const {
@@ -69,18 +69,18 @@ function Coupon(props) {
             addToCart({
               ...getYStoreProduct,
               qty: 1,
-              hideQty: true,
+              disableChange: true,
               cartItemSource: "COUPON",
             });
           }
-          logger.info('Applied coupon:', response);
+          logger.info("Applied coupon:", response);
         } else {
           setError(message);
-          logger.error('Failed to apply coupon:', message);
+          logger.error("Failed to apply coupon:", message);
         }
       } else {
         setError("Coupon not found");
-        logger.error('Coupon not found');
+        logger.error("Coupon not found");
       }
     },
     [coupon, user, cartList]
@@ -97,14 +97,14 @@ function Coupon(props) {
     }
 
     removeCoupon();
-    logger.info('Removed coupon');
+    logger.info("Removed coupon");
   };
 
   const showAppliedCoupon = !!(appliedCoupon && couponTotal);
 
   const openCouponModal = () => {
     setOpen(true);
-    logger.verbose('Opened coupon modal');
+    logger.verbose("Opened coupon modal");
   };
 
   return (

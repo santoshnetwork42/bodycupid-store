@@ -255,8 +255,8 @@ function Passwordless({
                                     setState({
                                       ...state,
                                       phone: (e.target.value || "")
-                                        .replaceAll(/[^0-9]+/g, "")
-                                        .trim(),
+                                        ?.replaceAll(/[^0-9]+/g, "")
+                                        ?.trim(),
                                     });
                                   }}
                                 />
