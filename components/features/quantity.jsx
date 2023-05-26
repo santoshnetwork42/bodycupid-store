@@ -10,6 +10,7 @@ export default function Quantity({ qty = 1, ...props }) {
     }`,
     product,
   } = props;
+
   const [quantity, setQuantity] = useState(parseInt(qty));
 
   useEffect(() => {
@@ -17,7 +18,10 @@ export default function Quantity({ qty = 1, ...props }) {
   }, [qty]);
 
   useEffect(() => {
-    props.onChangeQty && qty !== quantity && props.onChangeQty(quantity);
+    props.onChangeQty &&
+      qty !== quantity &&
+      quantity !== "" &&
+      props.onChangeQty(quantity);
   }, [quantity]);
 
   function minusQuantity() {
@@ -33,14 +37,20 @@ export default function Quantity({ qty = 1, ...props }) {
   }
 
   function changeQty(e) {
-    let newQty;
+    const newQty = e.currentTarget.value.trim();
 
-    if (e.currentTarget.value !== "") {
-      newQty = product.isInventoryEnabled
-        ? Math.min(parseInt(e.currentTarget.value), props.max)
-        : parseInt(e.currentTarget.value);
-      newQty = Math.max(newQty, 1);
-      setQuantity(newQty);
+    let parsedQty = "";
+    if (newQty !== "") {
+      parsedQty = parseInt(newQty);
+      parsedQty = Math.min(parsedQty, props.max);
+      parsedQty = Math.max(parsedQty, 1);
+    }
+    setQuantity(parsedQty);
+  }
+
+  function handleBlur() {
+    if (!quantity) {
+      setQuantity(1);
     }
   }
 
@@ -59,6 +69,7 @@ export default function Quantity({ qty = 1, ...props }) {
         max={props.max}
         value={quantity}
         onChange={changeQty}
+        onBlur={handleBlur}
       />
       <button
         className="quantity-plus w-100 d-flex justify-content-center align-items-center"
