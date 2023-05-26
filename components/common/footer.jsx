@@ -61,7 +61,7 @@ function Footer({ footer, store }) {
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/contact-us">Contact</ALink>
+                    <ALink href="/pages/contact-us">Contact Us</ALink>
                   </li>
                   <li>
                     <ALink href="https://bodycupid.clickpost.in/" target="_blank">Track your Order</ALink>
