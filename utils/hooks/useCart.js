@@ -10,14 +10,12 @@ import { getBxGyFreeQuantity } from "../helper";
 export const useCartTotal = (prepaid = "NONE") => {
   const { data, coupon } = useSelector((state) => state.cart);
   const shippingTiers = useShippingTiers();
-  const configuration = useConfiguration();
-  const codChargesData = (configuration || []).find(
-    (item) => item.key === "SHIPPING"
-  );
+  const codCharges = useConfiguration("SHIPPING", 0);
+
   const cartTotals = useMemo(
     () =>
-      getCartTotals(data, coupon, shippingTiers || [], prepaid, codChargesData),
-    [data, coupon, !!shippingTiers, prepaid, codChargesData]
+      getCartTotals(data, coupon, shippingTiers || [], prepaid, codCharges),
+    [data, coupon, !!shippingTiers, prepaid, codCharges]
   );
   return cartTotals;
 };
@@ -46,10 +44,10 @@ export const useCartItems = () => {
 
             const isCollectionApplicable =
               Array.isArray(applicableCollections) &&
-              applicableCollections.length
+                applicableCollections.length
                 ? applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                  (c.collections || []).includes(ac)
+                )
                 : true;
 
             if (isCartItem && isCollectionApplicable && isProductApplicable) {
@@ -88,10 +86,10 @@ export const useCartItems = () => {
           remainingDiscount === Infinity
             ? Math.min(itemQty, Math.max(0, getYQuantity))
             : Math.min(
-                parseInt(remainingDiscount / item.price, 10),
-                itemQty,
-                Math.max(0, getYQuantity)
-              );
+              parseInt(remainingDiscount / item.price, 10),
+              itemQty,
+              Math.max(0, getYQuantity)
+            );
         getYQuantity -= freeQty;
 
         if (!freeQty) {

@@ -313,7 +313,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                       <h4 className="summary-subtitle">Cod Charges:</h4>
                     </td>
                     <td className="summary-subtotal-price">
-                      {order?.totalCashOnDeliveryCharges}
+                      ₹{toDecimal(order?.totalCashOnDeliveryCharges)}
                     </td>
                   </tr>
                 )}

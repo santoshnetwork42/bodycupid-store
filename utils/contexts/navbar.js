@@ -19,7 +19,7 @@ function NavbarProvider({ children, config }) {
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
-  const [configuration, setConfiguration] = useState(null);
+  const [configurations, setConfigurations] = useState([]);
 
   const getCollections = () => {
     API.graphql(
@@ -106,7 +106,7 @@ function NavbarProvider({ children, config }) {
         })
       )
         .then((res) => res.data.searchConfigurations.items)
-        .then(setConfiguration);
+        .then(setConfigurations);
     } catch (error) {
       errorHandler(error);
     }
@@ -125,14 +125,9 @@ function NavbarProvider({ children, config }) {
   }, [config?.coupons]);
 
   useEffect(() => {
-    if (config?.configuration && !configuration) {
-      getConfigurationData();
-    }
-  }, [config?.configuration]);
-
-  useEffect(() => {
     getCategories();
     getCollections();
+    getConfigurationData();
   }, []);
 
   return (
@@ -142,7 +137,7 @@ function NavbarProvider({ children, config }) {
         collections,
         shippingTiers,
         coupons,
-        configuration,
+        configurations,
       }}
     >
       {children}
@@ -189,9 +184,10 @@ export const useCoupons = () => {
   return coupons;
 };
 
-export const useConfiguration = () => {
-  const { configuration } = useContext(NavbarContext);
-  return configuration;
+export const useConfiguration = (key, defaultValue) => {
+  const { configurations } = useContext(NavbarContext);
+  const configuration = configurations.find(configuration => configuration.key === key);
+  return configuration?.value || defaultValue;
 };
 
 export default NavbarProvider;

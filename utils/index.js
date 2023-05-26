@@ -243,7 +243,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-          parallax.offsetTop +
+        parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -350,21 +350,19 @@ export const getCartTotals = (
   appliedCoupon = null,
   shippingTiers = [],
   paymentType = "NONE",
-  codChargesData = {}
+  codCharges = 0
 ) => {
   let totalPrice = 0;
   let totalListingPrice = 0;
   let totalItems = 0;
+  const appliedCODCharges = paymentType === "COD" ? codCharges : 0;
+
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
     shippingTiers,
     "PREPAID"
   );
   const codShippingCharge = getShippingPrice(cartItems, shippingTiers, "COD");
-
-  const { key, value: codCharge } = codChargesData;
-
-  const codCharges = codCharge || 0;
 
   const shippingTotal =
     paymentType === "PREPAID" ? prepaidShippingCharge : codShippingCharge;
@@ -379,39 +377,27 @@ export const getCartTotals = (
   }
 
   const prepaidDiscount = getPrepaidDiscount(totalPrice, couponTotal);
-
   const totalPrepaidDiscount = couponTotal + prepaidDiscount;
 
-  const totalCodDiscount = couponTotal;
-
   const totalDiscount =
-    paymentType === "PREPAID" ? totalPrepaidDiscount : totalCodDiscount;
+    paymentType === "PREPAID" ? totalPrepaidDiscount : couponTotal;
 
   const shippingAmountSaved = Math.max(0, 50 - shippingTotal);
 
   const totalAmountSaved =
-    key === "SHIPPING" && paymentType === "PREPAID"
-      ? totalListingPrice -
-        totalPrice +
-        totalDiscount +
-        shippingAmountSaved +
-        codCharges
+    paymentType === "PREPAID"
+      ? totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved + codCharges
       : totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved;
 
   const prepaidGrandTotal =
     totalPrice + prepaidShippingCharge - totalPrepaidDiscount;
 
-  const codGrandTotal =
-    key === "SHIPPING" && paymentType !== "NONE"
-      ? totalPrice + codShippingCharge - totalCodDiscount + codCharges
-      : totalPrice + codShippingCharge - totalCodDiscount;
+  const codGrandTotal = paymentType !== "NONE"
+    ? totalPrice + codShippingCharge - couponTotal + codCharges
+    : totalPrice + codShippingCharge - couponTotal;
 
   const grandTotal =
     paymentType === "PREPAID" ? prepaidGrandTotal : codGrandTotal;
-
-  const cartGrandTotal = codGrandTotal;
-
-  const cartAmountSaved = totalAmountSaved;
 
   return {
     totalItems,
@@ -422,12 +408,13 @@ export const getCartTotals = (
     prepaidDiscount,
     totalDiscount,
     totalAmountSaved,
-    cartAmountSaved,
+    cartAmountSaved: totalAmountSaved,
     codGrandTotal,
     prepaidGrandTotal,
-    cartGrandTotal,
+    cartGrandTotal: codGrandTotal,
     grandTotal,
     codCharges,
+    appliedCODCharges,
   };
 };
 

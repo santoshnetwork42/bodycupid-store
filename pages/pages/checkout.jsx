@@ -44,7 +44,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
-import { useConfiguration } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Checkout");
 
@@ -71,7 +70,6 @@ function Checkout(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
-  const configuration = useConfiguration();
   const freeProducts = useFreeProducts();
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -100,21 +98,10 @@ function Checkout(props) {
     codGrandTotal,
     prepaidGrandTotal,
     codCharges,
+    appliedCODCharges,
   } = useCartTotal(payMethod);
 
   const cartItems = useCartItems();
-
-  const codChargesData = useMemo(() => {
-    if (!!configuration) {
-      return configuration.find((item) => item.key === "SHIPPING");
-    }
-    return null;
-  }, [configuration]);
-
-  const isCodCharges = useMemo(() => {
-    const { key } = codChargesData || {};
-    return key === "SHIPPING" && !isFirst;
-  }, [isFirst, codChargesData]);
 
   const totalSaved = useMemo(() => {
     return getFreeProductTotal(cartItems) + totalAmountSaved;
@@ -722,7 +709,7 @@ function Checkout(props) {
                                   </td>
                                 </tr>
 
-                                {!!codChargesData?.value && (
+                                {!!codCharges && (
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
@@ -731,16 +718,17 @@ function Checkout(props) {
                                     </td>
                                     <td
                                       className={`summary-subtotal-price pb-0 pt-0 ${
-                                        !isCodCharges && "discount-price-color"
+                                        !appliedCODCharges &&
+                                        "discount-price-color"
                                       }`}
                                     >
-                                      {!isCodCharges && (
+                                      {!appliedCODCharges && (
                                         <del className="summary-subtotal-listingprice mr-2">
                                           ₹{toDecimal(codCharges)}
                                         </del>
                                       )}
-                                      {isCodCharges
-                                        ? `₹${toDecimal(codCharges)}`
+                                      {!!appliedCODCharges
+                                        ? `₹${toDecimal(appliedCODCharges)}`
                                         : "Free"}
                                       &nbsp;
                                     </td>
@@ -830,7 +818,7 @@ function Checkout(props) {
                             description={
                               codDisabled
                                 ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
-                                : "Pay using Cash on Delivery"
+                                : `Pay using Cash on Delivery.`
                             }
                             disabled={codDisabled}
                             onClick={() => {
@@ -937,7 +925,6 @@ Component.hideFooter = true;
 Component.navbarConfig = {
   shippingTier: true,
   coupons: true,
-  configuration: true,
 };
 
 export default Component;
