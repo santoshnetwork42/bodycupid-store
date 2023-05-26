@@ -3,17 +3,19 @@ import { useSelector } from "react-redux";
 
 import { getCartTotals } from "~/utils";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
-import { useShippingTiers } from "~/utils/contexts/navbar";
+import { useConfiguration, useShippingTiers } from "~/utils/contexts/navbar";
 import { getCouponDiscount } from "~/utils/coupons";
 import { getBxGyFreeQuantity } from "../helper";
 
-export const useCartTotal = (prepaid = false) => {
+export const useCartTotal = (prepaid = "NONE") => {
   const { data, coupon } = useSelector((state) => state.cart);
   const shippingTiers = useShippingTiers();
+  const codCharges = useConfiguration("SHIPPING", 0);
 
   const cartTotals = useMemo(
-    () => getCartTotals(data, coupon, shippingTiers || [], prepaid),
-    [data, coupon, !!shippingTiers, prepaid]
+    () =>
+      getCartTotals(data, coupon, shippingTiers || [], prepaid, codCharges),
+    [data, coupon, !!shippingTiers, prepaid, codCharges]
   );
   return cartTotals;
 };
@@ -30,30 +32,41 @@ export const useCartItems = () => {
     if (allowed && appliedCoupon?.couponType === "BUY_X_GET_Y") {
       const { applicableCollections, applicableProducts } = appliedCoupon;
 
-      const { couponApplicableCartList, couponNonApplicableCartList } = cartList.reduce((acc, c) => {
-        const isCartItem = c.cartItemSource !== "COUPON";
+      const { couponApplicableCartList, couponNonApplicableCartList } =
+        cartList.reduce(
+          (acc, c) => {
+            const isCartItem = c.cartItemSource !== "COUPON";
 
-        const isProductApplicable = Array.isArray(applicableProducts) && applicableProducts.length
-          ? applicableProducts.includes(c.id)
-          : true
+            const isProductApplicable =
+              Array.isArray(applicableProducts) && applicableProducts.length
+                ? applicableProducts.includes(c.id)
+                : true;
 
-        const isCollectionApplicable = Array.isArray(applicableCollections) && applicableCollections.length
-          ? applicableCollections.some(ac => (c.collections || []).includes(ac))
-          : true;
+            const isCollectionApplicable =
+              Array.isArray(applicableCollections) &&
+                applicableCollections.length
+                ? applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
+                )
+                : true;
 
-        if (isCartItem && isCollectionApplicable && isProductApplicable) {
-          return {
-            ...acc,
-            couponApplicableCartList: [...acc.couponApplicableCartList, c]
-          };
-        }
+            if (isCartItem && isCollectionApplicable && isProductApplicable) {
+              return {
+                ...acc,
+                couponApplicableCartList: [...acc.couponApplicableCartList, c],
+              };
+            }
 
-        return {
-          ...acc,
-          couponNonApplicableCartList: [...acc.couponNonApplicableCartList, c]
-        };
-      }, { couponApplicableCartList: [], couponNonApplicableCartList: [] });
-
+            return {
+              ...acc,
+              couponNonApplicableCartList: [
+                ...acc.couponNonApplicableCartList,
+                c,
+              ],
+            };
+          },
+          { couponApplicableCartList: [], couponNonApplicableCartList: [] }
+        );
 
       const sortedItems = couponApplicableCartList.sort((a, b) =>
         a.price > b.price ? 1 : -1
@@ -80,10 +93,7 @@ export const useCartItems = () => {
         getYQuantity -= freeQty;
 
         if (!freeQty) {
-          return [
-            ...acc,
-            { ...item, itemKey: `${item.recordKey}-full-paid` },
-          ];
+          return [...acc, { ...item, itemKey: `${item.recordKey}-full-paid` }];
         }
 
         if (freeQty === itemQty) {
@@ -103,16 +113,14 @@ export const useCartItems = () => {
             ...item,
             qty: freeQty,
             extraQty: itemQty - freeQty,
-            itemKey: `${item.recordKey}-${itemQty - freeQty
-              }-partial-item-free`,
+            itemKey: `${item.recordKey}-${itemQty - freeQty}-partial-item-free`,
             cartItemType: "FREE_PRODUCT",
           },
           {
             ...item,
             qty: itemQty - freeQty,
             extraQty: freeQty,
-            itemKey: `${item.recordKey}-${itemQty - freeQty
-              }-partial-item-paid`,
+            itemKey: `${item.recordKey}-${itemQty - freeQty}-partial-item-paid`,
           },
         ];
       }, []);
@@ -127,7 +135,7 @@ export const useCartItems = () => {
           ...p,
           itemKey: `${p.id}-free`,
           cartItemType: "AUTO_FREE_PRODUCT",
-          hideQty: true,
+          disableChange: true,
           hideRemove: true,
         })),
       ];
@@ -137,13 +145,14 @@ export const useCartItems = () => {
       ...cartList.map((p) => ({
         ...p,
         itemKey: p.recordKey,
-        cartItemType: p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null
+        cartItemType:
+          p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null,
       })),
       ...freeProducts.map((p) => ({
         ...p,
         itemKey: `${p.id}-free`,
         cartItemType: "AUTO_FREE_PRODUCT",
-        hideQty: true,
+        disableChange: true,
         hideRemove: true,
       })),
     ];

@@ -20,11 +20,6 @@ export default function ALink({
     }
   };
 
-  const anchorProps = {
-    ...props,
-    ...(target && { target: "_blank" })
-  };
-
   return content ? (
     <Link {...props}>
       <a
@@ -32,14 +27,20 @@ export default function ALink({
         style={style}
         onClick={preventDefault}
         dangerouslySetInnerHTML={parseContent(content)}
-        {...anchorProps}
+        target={target}
+        {...props}
       >
         {children}
       </a>
     </Link>
   ) : (
     <Link {...props}>
-      <a className={className} style={style} onClick={preventDefault} {...anchorProps}>
+      <a
+        className={className}
+        style={style}
+        onClick={preventDefault}
+        target={target}
+      >
         {children}
       </a>
     </Link>

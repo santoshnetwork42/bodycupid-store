@@ -7,6 +7,7 @@ import {
   listCollections,
   searchShippingTiers,
   getFeaturedCoupon,
+  searchConfigurations,
 } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
@@ -18,6 +19,7 @@ function NavbarProvider({ children, config }) {
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
+  const [configurations, setConfigurations] = useState([]);
 
   const getCollections = () => {
     API.graphql(
@@ -94,6 +96,22 @@ function NavbarProvider({ children, config }) {
       .catch(errorHandler);
   };
 
+  const getConfigurationData = async () => {
+    try {
+      API.graphql(
+        graphqlOperation(searchConfigurations, {
+          filter: {
+            storeId: { eq: STORE_ID },
+          },
+        })
+      )
+        .then((res) => res.data.searchConfigurations.items)
+        .then(setConfigurations);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   useEffect(() => {
     if (config?.shippingTier && !shippingTiers) {
       getShippingTiers();
@@ -109,11 +127,18 @@ function NavbarProvider({ children, config }) {
   useEffect(() => {
     getCategories();
     getCollections();
+    getConfigurationData();
   }, []);
 
   return (
     <NavbarContext.Provider
-      value={{ categories, collections, shippingTiers, coupons }}
+      value={{
+        categories,
+        collections,
+        shippingTiers,
+        coupons,
+        configurations,
+      }}
     >
       {children}
     </NavbarContext.Provider>
@@ -157,6 +182,14 @@ export const useShippingTiers = () => {
 export const useCoupons = () => {
   const { coupons } = useContext(NavbarContext);
   return coupons;
+};
+
+export const useConfiguration = (key, defaultValue) => {
+  const { configurations } = useContext(NavbarContext);
+  const configuration = configurations.find(
+    (configuration) => configuration.key === key
+  );
+  return configuration?.value || defaultValue;
 };
 
 export default NavbarProvider;

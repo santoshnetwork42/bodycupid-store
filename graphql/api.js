@@ -1074,6 +1074,7 @@ export const createOrder = /* GraphQL */ `
       totalAmount
       totalDiscount
       totalShippingCharges
+      totalCashOnDeliveryCharges
     }
   }
 `;
@@ -1680,6 +1681,35 @@ export const createRedirects = /* GraphQL */ `
   ) {
     createRedirects(input: $input, condition: $condition) {
       id
+    }
+  }
+`;
+
+export const searchConfigurations = /* GraphQL */ `
+  query SearchConfigurations(
+    $filter: SearchableConfigurationFilterInput
+    $sort: [SearchableConfigurationSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableConfigurationAggregationInput]
+  ) {
+    searchConfigurations(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+      }
     }
   }
 `;

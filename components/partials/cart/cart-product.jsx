@@ -37,7 +37,7 @@ function CartProduct({
     variantId,
     cartItemType,
     extraQty = 0,
-    hideQty = false,
+    disableChange = false,
     hideRemove = false,
     cartItemSource,
   } = item;
@@ -149,8 +149,8 @@ function CartProduct({
                 <p className="m-0 outofstock-label">out of stock</p>
               </div>
             ) : (
-              <div className="">
-                {!hideQty && (
+              <div>
+                {!disableChange && (
                   <div className="product-quantity w-0 mb-1">
                     {cartItemType === "FREE_PRODUCT" ? (
                       <>
@@ -168,23 +168,22 @@ function CartProduct({
                     )}
                   </div>
                 )}
-                {!!item?.variants?.items.length &&
-                  cartItemType !== "FREE_PRODUCT" && (
-                    <select
-                      name={`${recordKey}`}
-                      className="form-control"
-                      value={variantId}
-                      onChange={(e) => {
-                        changeVariant(e);
-                      }}
-                    >
-                      {variants.items.map((v) => (
-                        <option key={v.id} value={v.id}>
-                          {v.title}
-                        </option>
-                      ))}
-                    </select>
-                  )}
+                {!!item?.variants?.items.length && !disableChange && (
+                  <select
+                    name={`${recordKey}`}
+                    className="form-control"
+                    value={variantId}
+                    onChange={(e) => {
+                      changeVariant(e);
+                    }}
+                  >
+                    {variants.items.map((v) => (
+                      <option key={v.id} value={v.id}>
+                        {v.title}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
             )}
           </div>

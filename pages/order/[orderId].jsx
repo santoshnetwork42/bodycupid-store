@@ -17,9 +17,9 @@ import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "../../utils/popupHelper";
 import Checkmark from "~/components/icons";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('Orders');
+const logger = new Logger("Orders");
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
   const { name } = store;
@@ -172,6 +172,16 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                 </tr>{" "}
                 <tr className="summary-subtotal">
                   <td>
+                    <h4 className="summary-subtitle">Payment method:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.paymentType === "COD"
+                      ? "Cash on delivery"
+                      : "Online"}
+                  </td>
+                </tr>
+                <tr className="summary-subtotal">
+                  <td>
                     <h4 className="summary-subtitle">Date:</h4>
                   </td>
                   <td className="summary-subtotal-price">
@@ -277,16 +287,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     ₹{toDecimal(getOrderTotal(order?.products?.items))}
                   </td>
                 </tr>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Shipping:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {order?.totalShippingCharges
-                      ? `₹${toDecimal(order?.totalShippingCharges)}`
-                      : "Free shipping"}
-                  </td>
-                </tr>
                 {!!order?.totalDiscount && (
                   <tr className="summary-subtotal">
                     <td>
@@ -299,14 +299,24 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                 )}
                 <tr className="summary-subtotal">
                   <td>
-                    <h4 className="summary-subtitle">Payment method:</h4>
+                    <h4 className="summary-subtitle">Shipping:</h4>
                   </td>
                   <td className="summary-subtotal-price">
-                    {order?.paymentType === "COD"
-                      ? "Cash on delivery"
-                      : "Online"}
+                    {order?.totalShippingCharges
+                      ? `₹${toDecimal(order?.totalShippingCharges)}`
+                      : "Free shipping"}
                   </td>
                 </tr>
+                {!!order?.totalCashOnDeliveryCharges && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Cod Charges:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      ₹{toDecimal(order?.totalCashOnDeliveryCharges)}
+                    </td>
+                  </tr>
+                )}
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Total:</h4>
