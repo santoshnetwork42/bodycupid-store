@@ -38,7 +38,14 @@ export default function Quantity({ qty = 1, ...props }) {
 
   function changeQty(e) {
     const newQty = e.currentTarget.value.trim();
-    setQuantity(newQty ? parseInt(newQty) : "");
+
+    let parsedQty = "";
+    if (newQty !== "") {
+      parsedQty = parseInt(newQty);
+      parsedQty = Math.min(parsedQty, props.max);
+      parsedQty = Math.max(parsedQty, 1);
+    }
+    setQuantity(parsedQty);
   }
 
   function handleBlur() {
