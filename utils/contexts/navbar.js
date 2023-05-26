@@ -186,7 +186,9 @@ export const useCoupons = () => {
 
 export const useConfiguration = (key, defaultValue) => {
   const { configurations } = useContext(NavbarContext);
-  const configuration = configurations.find(configuration => configuration.key === key);
+  const configuration = configurations.find(
+    (configuration) => configuration.key === key
+  );
   return configuration?.value || defaultValue;
 };
 
