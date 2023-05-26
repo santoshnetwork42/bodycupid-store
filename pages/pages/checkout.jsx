@@ -31,7 +31,6 @@ import {
 } from "~/utils/address";
 import PaymentLoader from "~/components/common/partials/payment-loader";
 import { errorHandler } from "~/utils/errorHandler";
-import { systemActions } from "~/store/system";
 import {
   DownAngle,
   RightAngle,
@@ -98,14 +97,15 @@ function Checkout(props) {
     totalDiscount,
     codGrandTotal,
     prepaidGrandTotal,
-  } = useCartTotal(isFirst);
+    codCharges,
+    appliedCODCharges,
+  } = useCartTotal(payMethod);
 
   const cartItems = useCartItems();
 
-  const totalSaved = useMemo(
-    () => getFreeProductTotal(cartItems) + totalAmountSaved,
-    [totalAmountSaved, cartItems]
-  );
+  const totalSaved = useMemo(() => {
+    return getFreeProductTotal(cartItems) + totalAmountSaved;
+  }, [totalAmountSaved, cartItems]);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -264,7 +264,6 @@ function Checkout(props) {
         try {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
-
           const orderDate = new Date();
           const sla = new Date();
           sla.setDate(sla.getDate() + 2);
@@ -281,6 +280,7 @@ function Checkout(props) {
             totalAmount: grandTotal,
             totalDiscount: totalDiscount + freeProductTotal,
             totalShippingCharges: shippingTotal,
+            totalCashOnDeliveryCharges: appliedCODCharges,
             orderDate: orderDate.toISOString(),
             sla: sla.toISOString(),
             paymentType: payMethod,
@@ -325,6 +325,10 @@ function Checkout(props) {
               const itemShippingCharges =
                 (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
+              const itemCodCharges =
+                (appliedCODCharges * itemtotal) /
+                (totalPrice + freeProductTotal);
+
               return API.graphql({
                 query: createOrderProduct,
                 variables: {
@@ -339,6 +343,7 @@ function Checkout(props) {
                     shippingCharges: itemShippingCharges,
                     totalPrice: itemtotal + itemShippingCharges - itemDiscount,
                     sku: p.sku,
+                    cashOnDeliveryCharges: itemCodCharges,
                   },
                 },
                 authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -355,6 +360,10 @@ function Checkout(props) {
               const itemShippingCharges =
                 (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
+              const itemCodCharges =
+                (appliedCODCharges * itemtotal) /
+                (totalPrice + freeProductTotal);
+
               return API.graphql({
                 query: createOrderProduct,
                 variables: {
@@ -369,6 +378,7 @@ function Checkout(props) {
                     shippingCharges: itemShippingCharges,
                     totalPrice: itemtotal + itemShippingCharges - itemDiscount,
                     sku: p.sku,
+                    cashOnDeliveryCharges: itemCodCharges,
                   },
                 },
                 authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -417,6 +427,7 @@ function Checkout(props) {
       isInventoryCheckSuccess,
       outOfStockItems,
       inventoryMapping,
+      appliedCODCharges,
     ]
   );
 
@@ -637,7 +648,6 @@ function Checkout(props) {
                                     </p>
                                   </td>
                                 </tr>
-
                                 {!!appliedCoupon && !!couponTotal && (
                                   <>
                                     <tr className="summary-subtotal-saving">
@@ -661,7 +671,6 @@ function Checkout(props) {
                                     </tr>
                                   </>
                                 )}
-
                                 {isFirst && (
                                   <tr className="summary-subtotal">
                                     <td>
@@ -674,7 +683,6 @@ function Checkout(props) {
                                     </td>
                                   </tr>
                                 )}
-
                                 <tr className="summary-subtotal">
                                   <td>
                                     <h4 className="summary-subtitle">
@@ -702,6 +710,32 @@ function Checkout(props) {
                                     &nbsp;
                                   </td>
                                 </tr>
+
+                                {!!codCharges && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        COD Charges
+                                      </h4>
+                                    </td>
+                                    <td
+                                      className={`summary-subtotal-price pb-0 pt-0 ${
+                                        !appliedCODCharges &&
+                                        "discount-price-color"
+                                      }`}
+                                    >
+                                      {!appliedCODCharges && (
+                                        <del className="summary-subtotal-listingprice mr-2">
+                                          ₹{toDecimal(codCharges)}
+                                        </del>
+                                      )}
+                                      {!!appliedCODCharges
+                                        ? `₹${toDecimal(appliedCODCharges)}`
+                                        : "Free"}
+                                      &nbsp;
+                                    </td>
+                                  </tr>
+                                )}
 
                                 <tr className="summary-subtotal">
                                   <td>
@@ -786,7 +820,7 @@ function Checkout(props) {
                             description={
                               codDisabled
                                 ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
-                                : "Pay using Cash on Delivery"
+                                : `Pay using Cash on Delivery.`
                             }
                             disabled={codDisabled}
                             onClick={() => {
@@ -890,6 +924,9 @@ const Component = connect(mapStateToProps, {
 })(Checkout);
 
 Component.hideFooter = true;
-Component.navbarConfig = { shippingTier: true, coupons: true };
+Component.navbarConfig = {
+  shippingTier: true,
+  coupons: true,
+};
 
 export default Component;

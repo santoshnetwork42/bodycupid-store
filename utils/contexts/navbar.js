@@ -1,13 +1,14 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { STORE_ID } from "~/config";
-import { getMenuCategories, listCollections, searchShippingTiers, getFeaturedCoupon } from "~/graphql/api";
+import {
+  getMenuCategories,
+  listCollections,
+  searchShippingTiers,
+  getFeaturedCoupon,
+  searchConfigurations,
+} from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 
@@ -18,6 +19,7 @@ function NavbarProvider({ children, config }) {
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
+  const [configurations, setConfigurations] = useState([]);
 
   const getCollections = () => {
     API.graphql(
@@ -26,7 +28,10 @@ function NavbarProvider({ children, config }) {
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
-      .then(listCollectionsResponse => listCollectionsResponse.data.listCollections.items)
+      .then(
+        (listCollectionsResponse) =>
+          listCollectionsResponse.data.listCollections.items
+      )
       .then(setCollections)
       .catch(errorHandler);
   };
@@ -39,7 +44,10 @@ function NavbarProvider({ children, config }) {
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
-      .then(getCategoriesResponse => getCategoriesResponse.data.searchProductCategories.items)
+      .then(
+        (getCategoriesResponse) =>
+          getCategoriesResponse.data.searchProductCategories.items
+      )
       .then(getSortedCategoryAndSubCategory)
       .then(setCategories)
       .catch(errorHandler);
@@ -51,7 +59,10 @@ function NavbarProvider({ children, config }) {
         filter: { storeId: { eq: STORE_ID } },
       })
     )
-      .then(getShippingTiersResponse => getShippingTiersResponse.data.searchShippingTiers.items)
+      .then(
+        (getShippingTiersResponse) =>
+          getShippingTiersResponse.data.searchShippingTiers.items
+      )
       .then(setShippingTiers)
       .catch(errorHandler);
   };
@@ -67,17 +78,38 @@ function NavbarProvider({ children, config }) {
         },
       },
     })
-      .then(getFeaturedCouponResponse => getFeaturedCouponResponse.data.searchCouponCodes.items)
-      .then(items => {
+      .then(
+        (getFeaturedCouponResponse) =>
+          getFeaturedCouponResponse.data.searchCouponCodes.items
+      )
+      .then((items) => {
         setCoupons(
-          items
-            .filter((coupon) => {
-              const { expirationDate } = coupon;
-              return (!expirationDate || new Date(expirationDate).getTime() >= new Date().getTime());
-            })
+          items.filter((coupon) => {
+            const { expirationDate } = coupon;
+            return (
+              !expirationDate ||
+              new Date(expirationDate).getTime() >= new Date().getTime()
+            );
+          })
         );
       })
       .catch(errorHandler);
+  };
+
+  const getConfigurationData = async () => {
+    try {
+      API.graphql(
+        graphqlOperation(searchConfigurations, {
+          filter: {
+            storeId: { eq: STORE_ID },
+          },
+        })
+      )
+        .then((res) => res.data.searchConfigurations.items)
+        .then(setConfigurations);
+    } catch (error) {
+      errorHandler(error);
+    }
   };
 
   useEffect(() => {
@@ -85,7 +117,6 @@ function NavbarProvider({ children, config }) {
       getShippingTiers();
     }
   }, [config?.shippingTier]);
-
 
   useEffect(() => {
     if (config?.coupons && !coupons) {
@@ -96,10 +127,19 @@ function NavbarProvider({ children, config }) {
   useEffect(() => {
     getCategories();
     getCollections();
+    getConfigurationData();
   }, []);
 
   return (
-    <NavbarContext.Provider value={{ categories, collections, shippingTiers, coupons }}>
+    <NavbarContext.Provider
+      value={{
+        categories,
+        collections,
+        shippingTiers,
+        coupons,
+        configurations,
+      }}
+    >
       {children}
     </NavbarContext.Provider>
   );
@@ -142,6 +182,12 @@ export const useShippingTiers = () => {
 export const useCoupons = () => {
   const { coupons } = useContext(NavbarContext);
   return coupons;
+};
+
+export const useConfiguration = (key, defaultValue) => {
+  const { configurations } = useContext(NavbarContext);
+  const configuration = configurations.find(configuration => configuration.key === key);
+  return configuration?.value || defaultValue;
 };
 
 export default NavbarProvider;
