@@ -27,7 +27,9 @@ export const getCouponMessage = ({
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
   } else if (couponType === "PRODUCT") {
-    discountMsg = `FREE ${getYStoreProduct?.title} WORTH ₹${getYStoreProduct?.price}`;
+    discountMsg = `FREE ${getYStoreProduct?.title} ${
+      !!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
+    }`;
   }
 
   if (minOrderValue) {
