@@ -127,7 +127,7 @@ export const useCartItems = () => {
           ...p,
           itemKey: `${p.id}-free`,
           cartItemType: "AUTO_FREE_PRODUCT",
-          hideQty: true,
+          disableChange: true,
           hideRemove: true,
         })),
       ];
@@ -143,7 +143,7 @@ export const useCartItems = () => {
         ...p,
         itemKey: `${p.id}-free`,
         cartItemType: "AUTO_FREE_PRODUCT",
-        hideQty: true,
+        disableChange: true,
         hideRemove: true,
       })),
     ];
