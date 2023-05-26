@@ -17,9 +17,9 @@ import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "../../utils/popupHelper";
 import Checkmark from "~/components/icons";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('Orders');
+const logger = new Logger("Orders");
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
   const { name } = store;
@@ -172,6 +172,16 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                 </tr>{" "}
                 <tr className="summary-subtotal">
                   <td>
+                    <h4 className="summary-subtitle">Payment method:</h4>
+                  </td>
+                  <td className="summary-subtotal-price">
+                    {order?.paymentType === "COD"
+                      ? "Cash on delivery"
+                      : "Online"}
+                  </td>
+                </tr>
+                <tr className="summary-subtotal">
+                  <td>
                     <h4 className="summary-subtitle">Date:</h4>
                   </td>
                   <td className="summary-subtotal-price">
@@ -297,16 +307,16 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                     </td>
                   </tr>
                 )}
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Payment method:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {order?.paymentType === "COD"
-                      ? "Cash on delivery"
-                      : "Online"}
-                  </td>
-                </tr>
+                {!!order?.totalCashOnDeliveryCharges && (
+                  <tr className="summary-subtotal">
+                    <td>
+                      <h4 className="summary-subtitle">Cod Charges:</h4>
+                    </td>
+                    <td className="summary-subtotal-price">
+                      {order?.totalCashOnDeliveryCharges}
+                    </td>
+                  </tr>
+                )}
                 <tr className="summary-subtotal">
                   <td>
                     <h4 className="summary-subtitle">Total:</h4>

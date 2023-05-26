@@ -94,12 +94,13 @@ function Checkout(props) {
     shippingTotal,
     totalAmountSaved,
     couponTotal,
-    grandTotal: gTotal,
+    grandTotal,
     prepaidDiscount,
     totalDiscount,
-    codGrandTotal: codGTotal,
+    codGrandTotal,
     prepaidGrandTotal,
-  } = useCartTotal(isFirst);
+    codCharges,
+  } = useCartTotal(payMethod);
 
   const cartItems = useCartItems();
 
@@ -110,30 +111,14 @@ function Checkout(props) {
     return null;
   }, [configuration]);
 
-  const { grandTotal, codGrandTotal, isCodCharges } = useMemo(() => {
-    const { key, value } = codChargesData || {};
-    if (key === "SHIPPING") {
-      return {
-        grandTotal: isFirst ? gTotal : gTotal + value,
-        codGrandTotal: codGTotal + value,
-        isCodCharges: key === "SHIPPING" && !isFirst,
-      };
-    }
-    return {
-      grandTotal: gTotal,
-      codGrandTotal: codGTotal,
-      isCodCharges: key === "SHIPPING" && !isFirst,
-    };
+  const isCodCharges = useMemo(() => {
+    const { key } = codChargesData || {};
+    return key === "SHIPPING" && !isFirst;
   }, [isFirst, codChargesData]);
 
   const totalSaved = useMemo(() => {
-    const { value } = codChargesData || {};
-    const savedAmt = getFreeProductTotal(cartItems) + totalAmountSaved;
-    if (!isCodCharges) {
-      return savedAmt + value;
-    }
-    return savedAmt;
-  }, [totalAmountSaved, cartItems, codChargesData]);
+    return getFreeProductTotal(cartItems) + totalAmountSaved;
+  }, [totalAmountSaved, cartItems]);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -292,7 +277,7 @@ function Checkout(props) {
         try {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
-
+          const codCharge = isFirst ? 0 : codCharges;
           const orderDate = new Date();
           const sla = new Date();
           sla.setDate(sla.getDate() + 2);
@@ -315,6 +300,7 @@ function Checkout(props) {
             shippingAddress: restAddress,
             billingAddress: restAddress,
             couponCodeId: appliedCoupon?.id,
+            totalCashOnDeliveryCharges: codCharge,
             ...metadata,
           };
 
@@ -353,6 +339,9 @@ function Checkout(props) {
               const itemShippingCharges =
                 (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
+              const itemCodCharges =
+                (codCharge * itemtotal) / (totalPrice + freeProductTotal);
+
               return API.graphql({
                 query: createOrderProduct,
                 variables: {
@@ -367,6 +356,7 @@ function Checkout(props) {
                     shippingCharges: itemShippingCharges,
                     totalPrice: itemtotal + itemShippingCharges - itemDiscount,
                     sku: p.sku,
+                    cashOnDeliveryCharges: itemCodCharges,
                   },
                 },
                 authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -383,6 +373,9 @@ function Checkout(props) {
               const itemShippingCharges =
                 (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
 
+              const itemCodCharges =
+                (codCharge * itemtotal) / (totalPrice + freeProductTotal);
+
               return API.graphql({
                 query: createOrderProduct,
                 variables: {
@@ -397,6 +390,7 @@ function Checkout(props) {
                     shippingCharges: itemShippingCharges,
                     totalPrice: itemtotal + itemShippingCharges - itemDiscount,
                     sku: p.sku,
+                    cashOnDeliveryCharges: itemCodCharges,
                   },
                 },
                 authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -728,28 +722,30 @@ function Checkout(props) {
                                   </td>
                                 </tr>
 
-                                <tr className="summary-subtotal">
-                                  <td>
-                                    <h4 className="summary-subtitle">
-                                      COD Charges
-                                    </h4>
-                                  </td>
-                                  <td
-                                    className={`summary-subtotal-price pb-0 pt-0 ${
-                                      !isCodCharges && "discount-price-color"
-                                    }`}
-                                  >
-                                    {!isCodCharges && (
-                                      <del className="summary-subtotal-listingprice mr-2">
-                                        ₹{codChargesData?.value}
-                                      </del>
-                                    )}
-                                    {isCodCharges
-                                      ? `₹${toDecimal(codChargesData?.value)}`
-                                      : "Free"}
-                                    &nbsp;
-                                  </td>
-                                </tr>
+                                {!!codChargesData?.value && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        COD Charges
+                                      </h4>
+                                    </td>
+                                    <td
+                                      className={`summary-subtotal-price pb-0 pt-0 ${
+                                        !isCodCharges && "discount-price-color"
+                                      }`}
+                                    >
+                                      {!isCodCharges && (
+                                        <del className="summary-subtotal-listingprice mr-2">
+                                          ₹{toDecimal(codCharges)}
+                                        </del>
+                                      )}
+                                      {isCodCharges
+                                        ? `₹${toDecimal(codCharges)}`
+                                        : "Free"}
+                                      &nbsp;
+                                    </td>
+                                  </tr>
+                                )}
 
                                 <tr className="summary-subtotal">
                                   <td>

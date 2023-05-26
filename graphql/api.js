@@ -1074,6 +1074,7 @@ export const createOrder = /* GraphQL */ `
       totalAmount
       totalDiscount
       totalShippingCharges
+      totalCashOnDeliveryCharges
     }
   }
 `;
