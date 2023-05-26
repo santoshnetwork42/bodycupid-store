@@ -42,7 +42,7 @@ function ProductBestPrice(props) {
           </ALink>
         </div>
       )}
-      <p className="text-success">{message}</p>
+      <p className="text-success text-uppercase">{message}</p>
       {couponList.length > 0 && (
         <Card
           title={`${couponList.length} more coupons`}
@@ -90,7 +90,9 @@ function ProductBestPrice(props) {
                         </>
                       )}
                     </div>
-                    <p className="text-success">{coupon.message}</p>
+                    <p className="text-success text-uppercase">
+                      {coupon.message}
+                    </p>
                   </div>
                 </div>
               </div>

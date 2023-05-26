@@ -233,4 +233,6 @@ const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
 })(ProductDefault);
 
+Component.navbarConfig = { coupons: true };
+
 export default Component;
