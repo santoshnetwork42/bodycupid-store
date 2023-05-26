@@ -14,15 +14,7 @@ function ContactUs({ store }) {
       <div className="page-content">
         <div className="container">
           <section className="mt-10 pt-3">
-            <h2 className="title title-center">CONTACT</h2>
-          </section>
-          <section className="mt-10 pt-2">
-            <h2 className="title title-simple">IMPORTANT</h2>
-            <p className="text-center">
-              Would you like to get in touch with us for any reason? Please do
-              fill up the contact form below and we will get back to you at the
-              earliest.
-            </p>
+            <h2 className="title title-center">CONTACT US</h2>
           </section>
           <section>
             <h3 className="title title-center">Address</h3>
