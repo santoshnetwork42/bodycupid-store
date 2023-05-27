@@ -329,6 +329,9 @@ function Checkout(props) {
                 (appliedCODCharges * itemtotal) /
                 (totalPrice + freeProductTotal);
 
+              const finalItemPrice =
+                itemtotal + itemShippingCharges + itemCodCharges - itemDiscount;
+
               return API.graphql({
                 query: createOrderProduct,
                 variables: {
@@ -341,9 +344,9 @@ function Checkout(props) {
                     title: p.title,
                     discount: itemDiscount,
                     shippingCharges: itemShippingCharges,
-                    totalPrice: itemtotal + itemShippingCharges - itemDiscount,
-                    sku: p.sku,
                     cashOnDeliveryCharges: itemCodCharges,
+                    totalPrice: finalItemPrice,
+                    sku: p.sku,
                   },
                 },
                 authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -364,6 +367,9 @@ function Checkout(props) {
                 (appliedCODCharges * itemtotal) /
                 (totalPrice + freeProductTotal);
 
+              const finalItemPrice =
+                itemtotal + itemShippingCharges + itemCodCharges - itemDiscount;
+
               return API.graphql({
                 query: createOrderProduct,
                 variables: {
@@ -376,9 +382,9 @@ function Checkout(props) {
                     title: p.title,
                     discount: itemDiscount,
                     shippingCharges: itemShippingCharges,
-                    totalPrice: itemtotal + itemShippingCharges - itemDiscount,
-                    sku: p.sku,
                     cashOnDeliveryCharges: itemCodCharges,
+                    totalPrice: finalItemPrice,
+                    sku: p.sku,
                   },
                 },
                 authMode: "AMAZON_COGNITO_USER_POOLS",
