@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useStore, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { Amplify, Hub, Auth, API, Analytics } from "aws-amplify";
+import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
@@ -23,11 +23,12 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
-import AppScripts from "~/components/common/app-scripts";
 
 import NavbarProvider from "~/utils/contexts/navbar";
 
 Amplify.configure({ ...awsconfig, ssr: true });
+
+const logger = new Logger("App");
 
 const App = ({ Component, pageProps }) => {
   const store = useStore();
@@ -81,6 +82,7 @@ const App = ({ Component, pageProps }) => {
         }
       }
     } catch (error) {
+      logger.error(error);
       errorHandler(error);
       destroySession();
     }
@@ -146,6 +148,7 @@ const App = ({ Component, pageProps }) => {
         payload: { event },
       } = authEvent;
       if (event === "signOut") {
+        logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
@@ -172,7 +175,6 @@ const App = ({ Component, pageProps }) => {
           loading={<Loader loading={true} />}
         >
           <Scripts />
-          <AppScripts />
           <NavbarProvider config={Component.navbarConfig}>
             <Layout navbar={navbarProps} footer={footerProps}>
               <Component {...pageProps} />
