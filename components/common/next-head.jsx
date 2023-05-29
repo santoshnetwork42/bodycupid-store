@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 
-import AppScripts from "~/components/common/app-scripts";
-
 function NextHead({ siteName, title, description, image, canonical }) {
   return (
     <Head>
@@ -30,8 +28,6 @@ function NextHead({ siteName, title, description, image, canonical }) {
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       {!!image && <meta property="twitter:image" content={image} />}
-
-      <AppScripts />
     </Head>
   );
 }
