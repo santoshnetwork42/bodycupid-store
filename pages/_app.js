@@ -23,6 +23,7 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
+import AppScripts from "~/components/common/app-scripts";
 
 import NavbarProvider from "~/utils/contexts/navbar";
 
@@ -171,6 +172,7 @@ const App = ({ Component, pageProps }) => {
           loading={<Loader loading={true} />}
         >
           <Scripts />
+          <AppScripts />
           <NavbarProvider config={Component.navbarConfig}>
             <Layout navbar={navbarProps} footer={footerProps}>
               <Component {...pageProps} />
