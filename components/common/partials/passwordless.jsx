@@ -310,7 +310,7 @@ function Passwordless({
                                 name={`otp${index + 1}`}
                                 type="number"
                                 autoComplete="one-time-code"
-                                className="otpInput"
+                                className="otpInput prevent-zoom"
                                 value={ele}
                                 maxLength={1}
                                 onChange={(e) => {
