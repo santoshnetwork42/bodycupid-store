@@ -244,7 +244,7 @@ function Passwordless({
                                 <div className="prefix">+91</div>
                                 <input
                                   type="tel"
-                                  className="form-control"
+                                  className="form-control prevent-zoom"            
                                   id="singin-phone-2"
                                   name="singin-phone"
                                   placeholder="Phone number *"
@@ -256,7 +256,7 @@ function Passwordless({
                                       ...state,
                                       phone: (e.target.value || "")
                                         ?.replaceAll(/[^0-9]+/g, "")
-                                        ?.trim(),
+                                        ?.trim(), 
                                     });
                                   }}
                                 />
