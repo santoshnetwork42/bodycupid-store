@@ -6,3 +6,4 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 export const MEDIA_BASE_URL = process.env.NEXT_PUBLIC_MEDIA_URL;
 export const HOTJAR_ID = process.env.NEXT_PUBLIC_HOTJAR_ID;
 export const HOTJAR_SNIPPET_VERSION = process.env.NEXT_PUBLIC_HOTJAR_SNIPPET_VERSION;
+export const OPTIMONK_ID = process.env.NEXT_PUBLIC_OPTIMONK_ID;
