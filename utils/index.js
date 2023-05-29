@@ -156,18 +156,18 @@ export const stickyHeaderHandler = function () {
 /**
  * Add or remove settings when the window is resized
  */
-export const resizeHandler = function (
-  width = 992,
-  attri = "right-sidebar-active"
-) {
-  let bodyClasses =
-    document.querySelector("body") && document.querySelector("body").classList;
-  bodyClasses = bodyClasses.value
-    .split(" ")
-    .filter((item) => item !== "home" && item !== "loaded");
-  for (let i = 0; i < bodyClasses.length; i++) {
-    document.querySelector("body") &&
-      document.querySelector("body").classList.remove(bodyClasses[i]);
+export const resizeHandler = function () {
+  const bodyClasslist = document?.querySelector("body")?.classList;
+  if (bodyClasslist?.value) {
+    const bodyClasses = bodyClasslist.value?.split(" ")?.filter((item) => item !== "home" && item !== "loaded");
+    if (Array.isArray(bodyClasses) && bodyClasses.length) {
+      for (let i = 0; i < bodyClasses.length; i++) {
+        if (bodyClasses[i] && bodyClasslist.contains(bodyClasses[i])) {
+          bodyClasslist.remove(bodyClasses[i])
+        }
+      }
+    }
+
   }
 };
 
