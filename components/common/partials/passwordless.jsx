@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
+import delay from "delay";
 
 import { addPhonePrefix, removePhonePrefix } from "~/utils/helper";
 import getRandomString from "~/utils/getRandomString";
@@ -11,9 +12,12 @@ import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "~/utils/popupHelper";
 
 import { modalActions } from "~/store/modal";
+import { userActions } from "~/store/user";
 
 import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
+
+import { getUser } from "~/graphql/api";
 
 const logger = new Logger("Login-without-password");
 
@@ -21,9 +25,9 @@ function Passwordless({
   auth,
   isOpen,
   closeModal,
-  openLogin,
   forceOpen,
   redirect,
+  setUser,
 }) {
   const router = useRouter();
   const [state, setState] = useState({
@@ -93,6 +97,23 @@ function Passwordless({
             addPhonePrefix(state.phone),
             state.confirmationCode.join("")
           );
+
+          await delay(2000);
+          const user = await Auth.currentAuthenticatedUser().catch(() => null);
+          logger.info("User", user);
+
+          if (user?.attributes?.sub) {
+            const {
+              data: { getUser: getUserResponse },
+            } = await API.graphql({
+              query: getUser,
+              variables: { id: user?.attributes?.sub },
+              authMode: "AMAZON_COGNITO_USER_POOLS",
+            });
+
+            await setUser(getUserResponse);
+          }
+
           closeModal();
           if (redirect) router.push("/pages/checkout");
         } else {
@@ -108,6 +129,7 @@ function Passwordless({
           }
         }
       } catch (error) {
+        logger.error(error);
         errorHandler(error);
         setOtpError(true);
       }
@@ -244,7 +266,7 @@ function Passwordless({
                                 <div className="prefix">+91</div>
                                 <input
                                   type="tel"
-                                  className="form-control prevent-zoom"            
+                                  className="form-control prevent-zoom"
                                   id="singin-phone-2"
                                   name="singin-phone"
                                   placeholder="Phone number *"
@@ -256,7 +278,7 @@ function Passwordless({
                                       ...state,
                                       phone: (e.target.value || "")
                                         ?.replaceAll(/[^0-9]+/g, "")
-                                        ?.trim(), 
+                                        ?.trim(),
                                     });
                                   }}
                                 />
@@ -310,7 +332,7 @@ function Passwordless({
                                 name={`otp${index + 1}`}
                                 type="number"
                                 autoComplete="one-time-code"
-                                className="otpInput"
+                                className="otpInput prevent-zoom"
                                 value={ele}
                                 maxLength={1}
                                 onChange={(e) => {
@@ -373,4 +395,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
   openLogin: modalActions.openLoginModal,
+  setUser: userActions.setUser,
 })(Passwordless);

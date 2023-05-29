@@ -7,8 +7,6 @@ function AppScripts() {
   const hotjar = !!(HOTJAR_ID && HOTJAR_SNIPPET_VERSION);
   const optimonk = !!OPTIMONK_ID;
 
-  console.log({ hotjar, optimonk });
-
   return (
     <>
       {hotjar && (
