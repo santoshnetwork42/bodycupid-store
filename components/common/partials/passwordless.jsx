@@ -245,6 +245,7 @@ function Passwordless({
                                 <input
                                   type="tel"
                                   className="form-control prevent-zoom"
+                                  
                                   id="singin-phone-2"
                                   name="singin-phone"
                                   placeholder="Phone number *"
