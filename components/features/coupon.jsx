@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
 import { eventActions } from "~/store/events";
@@ -39,6 +39,22 @@ function Coupon(props) {
 
   const featuredCoupons = useFeaturedCoupons();
 
+  const autoApplyCoupon = useMemo(() => {
+    const coupons = featuredCoupons.filter((f) => f.autoApply);
+    const sortedCoupons = coupons.sort((a, b) => b.discount - a.discount);
+    if (sortedCoupons.length > 0) {
+      return sortedCoupons[0]; 
+    }
+    return null;
+  }, [featuredCoupons]);
+
+
+  useEffect(() => {
+    if (!appliedCoupon && autoApplyCoupon && autoApplyCoupon.discount > 0) {
+      applyCouponCode(autoApplyCoupon.code);
+    }
+  }, [autoApplyCoupon]);
+
   const applyCouponCode = useCallback(
     async (couponCode = coupon) => {
       setLoading(true);
@@ -69,7 +85,7 @@ function Coupon(props) {
             addToCart({
               ...getYStoreProduct,
               qty: 1,
-              disableChange: true,
+              hideQty: true,
               cartItemSource: "COUPON",
             });
           }
@@ -161,9 +177,20 @@ function Coupon(props) {
                   </span>
                 )}
                 {showAppliedCoupon && (
-                  <span className="ml-1 coupon-subtitle">
-                    You saved additional ₹{toDecimal(couponTotal)}
-                  </span>
+                  <>
+                    <span className="ml-1 coupon-subtitle">
+                      You saved additional ₹{toDecimal(couponTotal)}
+                    </span>
+                    <span>
+                      <a
+                        className="ml-1 pt-2 coupon-offer d-flex align-items-center"
+                        type="button"
+                      >
+                        {`View all ${featuredCoupons.length} Offers`}
+                        <RightAngle size={14} />
+                      </a>
+                    </span>
+                  </>
                 )}
                 {/* {!!appliedCoupon && !showAppliedCoupon && (
               <div className="mt-1">
