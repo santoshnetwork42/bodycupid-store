@@ -41,13 +41,9 @@ function Coupon(props) {
 
   const autoApplyCoupon = useMemo(() => {
     const coupons = featuredCoupons.filter((f) => f.autoApply);
-    const sortedCoupons = coupons.sort((a, b) => b.discount - a.discount);
-    if (sortedCoupons.length > 0) {
-      return sortedCoupons[0]; 
-    }
-    return null;
+    const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
+    return bestCoupon;
   }, [featuredCoupons]);
-
 
   useEffect(() => {
     if (!appliedCoupon && autoApplyCoupon && autoApplyCoupon.discount > 0) {
