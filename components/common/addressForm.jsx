@@ -196,7 +196,7 @@ const AddressForm = (props) => {
                 <label>State *</label>
                 <select
                   name="state"
-                  className="form-control"
+                  className="select-dropdown"
                   required
                   value={address.state}
                   onChange={(e) => {
