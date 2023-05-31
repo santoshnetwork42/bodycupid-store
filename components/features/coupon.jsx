@@ -37,22 +37,33 @@ function Coupon(props) {
     [appliedCoupon, cartList]
   );
 
+  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
+
   const featuredCoupons = useFeaturedCoupons();
 
-  const autoApplyCoupon = useMemo(() => {
-    const coupons = featuredCoupons.filter((f) => f.autoApply);
+  const bestCouponCode = useMemo(() => {
+    const coupons = featuredCoupons.filter(
+      (f) => f.autoApply && !!f.discount && f.allowed
+    );
     const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
-    return bestCoupon;
+    return bestCoupon?.code;
   }, [featuredCoupons]);
 
   useEffect(() => {
-    if (!appliedCoupon && autoApplyCoupon && autoApplyCoupon.discount > 0) {
-      applyCouponCode(autoApplyCoupon.code);
+    if (appliedCoupon?.autoApplied && !bestCouponCode) {
+      removeCoupon();
+    } else if (
+      bestCouponCode &&
+      (!appliedCoupon || appliedCoupon.autoApplied || !showAppliedCoupon)
+    ) {
+      if (appliedCoupon?.code !== bestCouponCode) {
+        applyCouponCode(bestCouponCode, true);
+      }
     }
-  }, [autoApplyCoupon]);
+  }, [bestCouponCode, showAppliedCoupon]);
 
   const applyCouponCode = useCallback(
-    async (couponCode = coupon) => {
+    async (couponCode = coupon, autoApplied = false) => {
       setLoading(true);
 
       const response = await API.graphql({
@@ -75,13 +86,13 @@ function Coupon(props) {
           await getCouponDiscount(response, cartList);
 
         if (allowed) {
-          applyCoupon(response);
+          applyCoupon({ ...response, autoApplied: !!autoApplied });
           setOpen(false);
           if (couponType === "PRODUCT") {
             addToCart({
               ...getYStoreProduct,
               qty: 1,
-              hideQty: true,
+              disableChange: true,
               cartItemSource: "COUPON",
             });
           }
@@ -111,8 +122,6 @@ function Coupon(props) {
     removeCoupon();
     logger.info("Removed coupon");
   };
-
-  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
 
   const openCouponModal = () => {
     setOpen(true);
@@ -182,7 +191,7 @@ function Coupon(props) {
                         className="ml-1 pt-2 coupon-offer d-flex align-items-center"
                         type="button"
                       >
-                        {`View all ${featuredCoupons.length} Offers`}
+                        {`View more offers`}
                         <RightAngle size={14} />
                       </a>
                     </span>
