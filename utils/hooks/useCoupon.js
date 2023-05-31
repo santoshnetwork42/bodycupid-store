@@ -14,6 +14,7 @@ export const useFeaturedCoupons = () => {
   const featuredCoupons = useMemo(
     () =>
       (coupons || [])
+        .filter(coupon => !(coupon.autoApply && coupon.couponType === "PRODUCT"))
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
