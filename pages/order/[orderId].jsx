@@ -106,12 +106,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
     }
   };
 
-  const orderStatus = order?.products?.items.some(
-    (p) => p.status === "DISPATCHED"
-  )
-    ? "IN TRANSIT"
-    : order?.status;
-
   return (
     <main className="main order">
       <Head>
@@ -164,10 +158,10 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                   </td>
                   <td
                     className={`summary-subtotal-price ${
-                      orderStatus === "CONFIRMED" && "text-success"
+                      order?.status === "CONFIRMED" && "text-success"
                     }`}
                   >
-                    {orderStatus}
+                    {order?.status}
                   </td>
                 </tr>{" "}
                 <tr className="summary-subtotal">
@@ -247,15 +241,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                           </ALink>
                           <div className="h-fit-content font-weight-semi-bold">
                             {`${item.product.title} `}
-
-                            {item.cancelledQuantity > 0 &&
-                              item.status === "CREATED" && (
-                                <Tag type="cancel">
-                                  CANCELLED <i className="fas fa-times"></i>
-                                  &nbsp;
-                                  {item.cancelledQuantity}
-                                </Tag>
-                              )}
                             {allStatus.includes(item.status) && (
                               <Tag type={getStatusType(item.status)}>
                                 {item.status}
