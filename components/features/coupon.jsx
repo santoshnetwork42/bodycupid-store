@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
 import { eventActions } from "~/store/events";
@@ -32,15 +32,41 @@ function Coupon(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const featuredCoupons = useFeaturedCoupons();
+
   const { discount: couponTotal } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
 
-  const featuredCoupons = useFeaturedCoupons();
+  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
+
+  const bestCouponCode = useMemo(() => {
+    if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
+      return null;
+
+    const coupons = featuredCoupons.filter(
+      (f) => f.autoApply && !!f.discount && f.allowed
+    );
+    const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
+    return bestCoupon?.code;
+  }, [featuredCoupons, appliedCoupon, showAppliedCoupon]);
+
+  useEffect(() => {
+    if (appliedCoupon?.autoApplied && !bestCouponCode) {
+      removeCoupon();
+    } else if (
+      bestCouponCode &&
+      (!appliedCoupon || appliedCoupon.autoApplied || !showAppliedCoupon)
+    ) {
+      if (appliedCoupon?.code !== bestCouponCode) {
+        applyCouponCode(bestCouponCode, true);
+      }
+    }
+  }, [bestCouponCode]);
 
   const applyCouponCode = useCallback(
-    async (couponCode = coupon) => {
+    async (couponCode = coupon, autoApplied = false) => {
       setLoading(true);
 
       const response = await API.graphql({
@@ -63,7 +89,7 @@ function Coupon(props) {
           await getCouponDiscount(response, cartList);
 
         if (allowed) {
-          applyCoupon(response);
+          applyCoupon({ ...response, autoApplied: !!autoApplied });
           setOpen(false);
           if (couponType === "PRODUCT") {
             addToCart({
@@ -99,8 +125,6 @@ function Coupon(props) {
     removeCoupon();
     logger.info("Removed coupon");
   };
-
-  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
 
   const openCouponModal = () => {
     setOpen(true);
@@ -161,9 +185,20 @@ function Coupon(props) {
                   </span>
                 )}
                 {showAppliedCoupon && (
-                  <span className="ml-1 coupon-subtitle">
-                    You saved additional ₹{toDecimal(couponTotal)}
-                  </span>
+                  <>
+                    <span className="ml-1 coupon-subtitle">
+                      You saved additional ₹{toDecimal(couponTotal)}
+                    </span>
+                    <span>
+                      <a
+                        className="ml-1 pt-2 coupon-offer d-flex align-items-center"
+                        type="button"
+                      >
+                        {`View more offers`}
+                        <RightAngle size={14} />
+                      </a>
+                    </span>
+                  </>
                 )}
                 {/* {!!appliedCoupon && !showAppliedCoupon && (
               <div className="mt-1">
