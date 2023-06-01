@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
 import { removePhonePrefix } from "~/utils/helper";
@@ -27,6 +28,42 @@ const AddressForm = (props) => {
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [resetCityState, setResetCityState] = useState(false);
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+  const fetchCityAndState = useCallback(async (pinCode) => {
+    try {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${pinCode}|country:IN&key=${apiKey}`
+      );
+      const { results } = response.data;
+      if (results.length > 0) {
+        const { address_components } = results[0];
+        const city = address_components.find(
+          (component) =>
+            component.types.includes("locality") ||
+            component.types.includes("administrative_area_level_2")
+        )?.long_name;
+        const state = address_components.find((component) =>
+          component.types.includes("administrative_area_level_1")
+        )?.short_name;
+        setAddress({ city: city || "", state: state || "" });
+        setResetCityState(false);
+      } else {
+        // Reset city and state fields if response is not available or invalid
+        setAddress({ city: "", state: "" });
+        setResetCityState(true);
+      }
+    } catch (error) {
+      console.error("Error fetching city and state:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (address.pinCode.length === 6) {
+      fetchCityAndState(address.pinCode);
+    }
+  }, [address.pinCode, fetchCityAndState]);
 
   useEffect(() => {
     if (defaultAddress && defaultAddress.name) {
@@ -178,6 +215,19 @@ const AddressForm = (props) => {
                 />
               </div>
             </div>
+            <label>Pincode *</label>
+            <input
+              type="text"
+              className="form-control"
+              name="pincode"
+              placeholder="Your pincode"
+              required
+              value={address.pinCode}
+              onChange={(e) => setAddress({ pinCode: e.target.value })}
+              onBlur={(e) => {
+                setAddress({ pinCode: e.target.value.trim() });
+              }}
+            />
             <div className="row">
               <div className="col-xs-6">
                 <label>Town / City *</label>
@@ -187,7 +237,7 @@ const AddressForm = (props) => {
                   name="city"
                   placeholder="Your city"
                   required
-                  value={address.city}
+                  value={resetCityState ? "" : address?.city}
                   onChange={(e) => setAddress({ city: e.target.value })}
                   onBlur={(e) => setAddress({ city: e.target.value.trim() })}
                 />
@@ -198,7 +248,7 @@ const AddressForm = (props) => {
                   name="state"
                   className="select-dropdown"
                   required
-                  value={address.state}
+                  value={resetCityState ? "" : address?.state}
                   onChange={(e) => {
                     setAddress({ state: e.target.value });
                   }}
@@ -211,46 +261,29 @@ const AddressForm = (props) => {
                 </select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-xs-6">
-                <label>Pincode *</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="pincode"
-                  placeholder="Your pincode"
-                  required
-                  value={address.pinCode}
-                  onChange={(e) => setAddress({ pinCode: e.target.value })}
-                  onBlur={(e) => {
-                    setAddress({ pinCode: e.target.value.trim() });
-                  }}
-                />
-              </div>
+          </div>
+        </div>
+
+        {!!errors && (
+          <div className="overflow-hidden mb-4">
+            <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+              <ul className="m-0">
+                {Object.values(errors).map((val) => (
+                  <li key={val}>{val}</li>
+                ))}
+              </ul>
             </div>
           </div>
+        )}
 
-          {!!errors && (
-            <div className="overflow-hidden mb-4">
-              <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
-                <ul className="m-0">
-                  {Object.values(errors).map((val) => (
-                    <li key={val}>{val}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
-
-          <button
-            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
-            type="submit"
-            disabled={loading}
-          >
-            {address.id ? "Save Address" : "Add Address"}
-            {loading && <div className="spin-loader ml-2" />}
-          </button>
-        </div>
+        <button
+          className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+          type="submit"
+          disabled={loading}
+        >
+          {address.id ? "Save Address" : "Add Address"}
+          {loading && <div className="spin-loader ml-2" />}
+        </button>
       </form>
     </div>
   );
