@@ -99,6 +99,7 @@ function Checkout(props) {
     prepaidGrandTotal,
     codCharges,
     appliedCODCharges,
+    prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
   const cartItems = useCartItems();
@@ -677,7 +678,7 @@ function Checkout(props) {
                                     </tr>
                                   </>
                                 )}
-                                {isFirst && (
+                                {isFirst && !!prepaidDiscount && (
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
@@ -806,7 +807,7 @@ function Checkout(props) {
                         <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
-                            tag={"EXTRA 5% OFF"}
+                            tag={`EXTRA ${prepaidDiscountPercent}% OFF`}
                             isSelected={payMethod === "PREPAID"}
                             description={
                               onlineDisabled

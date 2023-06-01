@@ -1,5 +1,6 @@
-import { MAX_PREPAID_DISCOUNT } from "~/constant";
+import { CONFIGURATION_KEY } from "~/constant";
 import { getCouponDiscount } from "~/utils/coupons";
+import { useConfiguration } from "./contexts/navbar";
 
 /**
  * utils to parse options string to object
@@ -159,15 +160,16 @@ export const stickyHeaderHandler = function () {
 export const resizeHandler = function () {
   const bodyClasslist = document?.querySelector("body")?.classList;
   if (bodyClasslist?.value) {
-    const bodyClasses = bodyClasslist.value?.split(" ")?.filter((item) => item !== "home" && item !== "loaded");
+    const bodyClasses = bodyClasslist.value
+      ?.split(" ")
+      ?.filter((item) => item !== "home" && item !== "loaded");
     if (Array.isArray(bodyClasses) && bodyClasses.length) {
       for (let i = 0; i < bodyClasses.length; i++) {
         if (bodyClasses[i] && bodyClasslist.contains(bodyClasses[i])) {
-          bodyClasslist.remove(bodyClasses[i])
+          bodyClasslist.remove(bodyClasses[i]);
         }
       }
     }
-
   }
 };
 
@@ -243,7 +245,7 @@ export const parallaxHandler = function () {
 
       yPos =
         ((parallax.offsetTop - window.pageYOffset) * 50 * parallaxSpeed) /
-        parallax.offsetTop +
+          parallax.offsetTop +
         50;
 
       parallax.style.backgroundPosition = "50% " + yPos + "%";
@@ -337,12 +339,15 @@ export const getTotalPrice = (cartItems = []) => {
   return total;
 };
 
-const getPrepaidDiscount = (totalPrice, couponTotal) => {
-  const prepaidDiscount = ((totalPrice - couponTotal) / 100) * 5;
-  if (prepaidDiscount >= MAX_PREPAID_DISCOUNT) {
-    return MAX_PREPAID_DISCOUNT;
-  }
-  return prepaidDiscount;
+const getPrepaidDiscount = (totalPrice, couponTotal, prepaidPercentage) => {
+  const MaxPrepaidDiscount = useConfiguration(
+    CONFIGURATION_KEY.MAX_PREPAID_DISCOUNT,
+    0
+  );
+
+  const discountedPrice =
+    ((totalPrice - couponTotal) / 100) * prepaidPercentage;
+  return Math.min(discountedPrice, MaxPrepaidDiscount || discountedPrice);
 };
 
 export const getCartTotals = (
@@ -356,7 +361,10 @@ export const getCartTotals = (
   let totalListingPrice = 0;
   let totalItems = 0;
   const appliedCODCharges = paymentType === "COD" ? codCharges : 0;
-
+  const prepaidDiscountPercent = useConfiguration(
+    CONFIGURATION_KEY.PREPAID_DISCOUNT,
+    0
+  );
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
     shippingTiers,
@@ -376,7 +384,11 @@ export const getCartTotals = (
     totalItems += parseInt(cartItems[i].qty, 10);
   }
 
-  const prepaidDiscount = getPrepaidDiscount(totalPrice, couponTotal);
+  const prepaidDiscount = getPrepaidDiscount(
+    totalPrice,
+    couponTotal,
+    prepaidDiscountPercent
+  );
   const totalPrepaidDiscount = couponTotal + prepaidDiscount;
 
   const totalDiscount =
@@ -386,15 +398,20 @@ export const getCartTotals = (
 
   const totalAmountSaved =
     paymentType === "PREPAID"
-      ? totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved + codCharges
+      ? totalListingPrice -
+        totalPrice +
+        totalDiscount +
+        shippingAmountSaved +
+        codCharges
       : totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved;
 
   const prepaidGrandTotal =
     totalPrice + prepaidShippingCharge - totalPrepaidDiscount;
 
-  const codGrandTotal = paymentType !== "NONE"
-    ? totalPrice + codShippingCharge - couponTotal + codCharges
-    : totalPrice + codShippingCharge - couponTotal;
+  const codGrandTotal =
+    paymentType !== "NONE"
+      ? totalPrice + codShippingCharge - couponTotal + codCharges
+      : totalPrice + codShippingCharge - couponTotal;
 
   const grandTotal =
     paymentType === "PREPAID" ? prepaidGrandTotal : codGrandTotal;
@@ -415,6 +432,7 @@ export const getCartTotals = (
     grandTotal,
     codCharges,
     appliedCODCharges,
+    prepaidDiscountPercent,
   };
 };
 
