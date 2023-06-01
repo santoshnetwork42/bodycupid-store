@@ -1,12 +1,9 @@
 import { GOOGLE_MAPS_API_KEY } from "~/config";
 
-
 export const fetchCityAndState = async (pinCode) => {
-    const apiKey = GOOGLE_MAPS_API_KEY;
-
     try {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${pinCode}|country:IN&key=${apiKey}`
+        `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${pinCode}|country:IN&key=${GOOGLE_MAPS_API_KEY}`
       );
       const { results } = await response.json();
       if (results.length > 0) {
