@@ -21,8 +21,6 @@ import MobileMenu from "~/components/common/partials/mobile-menu";
 import { modalActions } from "~/store/modal";
 
 import {
-  showScrollTopHandler,
-  scrollTopHandler,
   stickyHeaderHandler,
   stickyFooterHandler,
   resizeHandler,

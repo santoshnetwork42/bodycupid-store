@@ -7,7 +7,7 @@ import { getCartTotals, toDecimal } from "~/utils";
 function StickyFooter(props) {
   const { cartList, appliedCoupon, showStickyCheckout } = props;
   const { totalPrice, totalItems } = useMemo(
-    () => getCartTotals(cartList, appliedCoupon),
+    () => getCartTotals(cartList, [], appliedCoupon),
     [appliedCoupon, cartList]
   );
 

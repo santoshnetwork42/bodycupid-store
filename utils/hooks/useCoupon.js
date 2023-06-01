@@ -50,7 +50,7 @@ export const useProductCoupons = (product, variant) => {
   return { productCoupons: restCoupons, bestCoupon };
 };
 
-export const useFreeProducts = () => {
+export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
   const coupons = useCoupons();
   const cartItems = useSelector((state) => state.cart.data || []);
   const appliedCoupon = useSelector((state) => state.cart.coupon);
@@ -73,11 +73,36 @@ export const useFreeProducts = () => {
           const {
             autoApply,
             couponType,
+            applicableProducts,
+            applicableCollections,
+            minOrderValue,
+            buyXQuantity,
+            getYQuantity,
           } = coupon;
 
           if (couponType !== "PRODUCT") return false;
           if (!autoApply) return false;
-          return true;
+
+          if (showNonApplicableFreeProducts) return true;
+
+          if (minOrderValue && minOrderValue > total) return false;
+          if (buyXQuantity + getYQuantity > totalItems) return false;
+
+          const hasProduct =
+            Array.isArray(applicableProducts) && applicableProducts.length
+              ? cartList.some((c) => applicableProducts.includes(c.id))
+              : true;
+
+          const hasCollection =
+            Array.isArray(applicableCollections) && applicableCollections.length
+              ? cartList.some((c) =>
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
+                )
+              )
+              : true;
+
+          return hasCollection && hasProduct;
         })
         .map((coupon) => {
           const {

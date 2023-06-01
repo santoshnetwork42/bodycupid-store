@@ -7,25 +7,28 @@ import { useConfiguration, useShippingTiers } from "~/utils/contexts/navbar";
 import { getCouponDiscount } from "~/utils/coupons";
 import { getBxGyFreeQuantity } from "../helper";
 
-export const useCartTotal = (prepaid = "NONE") => {
+export const useCartTotal = (prepaid = "NONE", showNonApplicableFreeProducts = true) => {
   const { data, coupon } = useSelector((state) => state.cart);
   const shippingTiers = useShippingTiers();
   const codCharges = useConfiguration("SHIPPING", 0);
+  const freeProductsResponse = useFreeProducts(showNonApplicableFreeProducts);
+
+  const freeProducts = useMemo(() => freeProductsResponse.filter(f => f.allowed).map(f => f.product), [freeProductsResponse]);
 
   const cartTotals = useMemo(
     () =>
-      getCartTotals(data, coupon, shippingTiers || [], prepaid, codCharges),
-    [data, coupon, !!shippingTiers, prepaid, codCharges]
+      getCartTotals(data, freeProducts, coupon, shippingTiers || [], prepaid, codCharges),
+    [data, coupon, !!shippingTiers, prepaid, codCharges, freeProducts]
   );
   return cartTotals;
 };
 
-export const useCartItems = () => {
+export const useCartItems = (showNonApplicableFreeProducts = true) => {
   const { data: cartList, coupon: appliedCoupon } = useSelector(
     (state) => state.cart
   );
 
-  const freeProducts = useFreeProducts();
+  const freeProducts = useFreeProducts(showNonApplicableFreeProducts);
 
   const cartItems = useMemo(() => {
     const { allowed } = getCouponDiscount(appliedCoupon, cartList);
