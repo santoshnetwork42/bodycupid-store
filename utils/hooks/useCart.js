@@ -15,11 +15,9 @@ import {
 export const useCartTotal = (prepaid = "NONE") => {
   const { data, coupon } = useSelector((state) => state.cart);
   const shippingTiers = useShippingTiers();
-  const configureCharges = {
-    codCharges: useConfiguration(COD_CHARGES, 0),
-    prepaidDiscountPercent: useConfiguration(PREPAID_DISCOUNT, 0),
-    MaxPrepaidDiscount: useConfiguration(MAX_PREPAID_DISCOUNT, 0),
-  };
+  const codCharges = useConfiguration(COD_CHARGES, 0);
+  const prepaidDiscountPercent = useConfiguration(PREPAID_DISCOUNT, 0);
+  const MaxPrepaidDiscount = useConfiguration(MAX_PREPAID_DISCOUNT, 0);
 
   const cartTotals = useMemo(
     () =>
@@ -30,7 +28,17 @@ export const useCartTotal = (prepaid = "NONE") => {
         prepaid,
         configureCharges
       ),
-    [data, coupon, !!shippingTiers, prepaid, configureCharges]
+    [
+      data,
+      coupon,
+      !!shippingTiers,
+      prepaid,
+      {
+        codCharges,
+        prepaidDiscountPercent,
+        MaxPrepaidDiscount,
+      },
+    ]
   );
   return cartTotals;
 };
