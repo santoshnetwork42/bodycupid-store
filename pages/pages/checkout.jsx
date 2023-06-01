@@ -654,27 +654,19 @@ function Checkout(props) {
                                   </td>
                                 </tr>
                                 {!!appliedCoupon && !!couponTotal && (
-                                  <>
-                                    <tr className="summary-subtotal-saving">
-                                      <td>
-                                        <h4 className="summary-subtitle">
-                                          Coupons
-                                        </h4>
-                                        <p className="m-0">
-                                          <span className="d-flex">
-                                            <span className="mr-1">
-                                              {appliedCoupon.code}
-                                            </span>
-                                          </span>
-                                        </p>
-                                      </td>
-                                      <td>
-                                        <p className="summary-subtotal-price discount-price-color">
-                                          - {`₹${toDecimal(couponTotal)}`}
-                                        </p>
-                                      </td>
-                                    </tr>
-                                  </>
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        Coupons
+                                        <span> ({appliedCoupon.code})</span>
+                                      </h4>
+                                    </td>
+                                    <td>
+                                      <p className="summary-subtotal-price discount-price-color">
+                                        - {`₹${toDecimal(couponTotal)}`}
+                                      </p>
+                                    </td>
+                                  </tr>
                                 )}
                                 {isFirst && (
                                   <tr className="summary-subtotal">
