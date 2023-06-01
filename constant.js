@@ -5,8 +5,8 @@ export const EMAIl_REGEX =
 
 export const PRODUCT_TAG_LIST = ["best-seller", "featured", "trending"];
 
-export const CONFIGURATION_KEY = {
-  COD_CHARGES: "COD",
-  MAX_PREPAID_DISCOUNT: "MAX_PREPAID_DISCOUNT",
-  PREPAID_DISCOUNT: "PREPAID_DISCOUNT",
-};
+export const COD_CHARGES = "COD";
+
+export const MAX_PREPAID_DISCOUNT = "MAX_PREPAID_DISCOUNT";
+
+export const PREPAID_DISCOUNT = "PREPAID_DISCOUNT";

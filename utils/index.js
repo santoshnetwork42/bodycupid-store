@@ -1,6 +1,4 @@
-import { CONFIGURATION_KEY } from "~/constant";
 import { getCouponDiscount } from "~/utils/coupons";
-import { useConfiguration } from "./contexts/navbar";
 
 /**
  * utils to parse options string to object
@@ -339,12 +337,12 @@ export const getTotalPrice = (cartItems = []) => {
   return total;
 };
 
-const getPrepaidDiscount = (totalPrice, couponTotal, prepaidPercentage) => {
-  const MaxPrepaidDiscount = useConfiguration(
-    CONFIGURATION_KEY.MAX_PREPAID_DISCOUNT,
-    0
-  );
-
+const getPrepaidDiscount = (
+  totalPrice,
+  couponTotal,
+  prepaidPercentage,
+  MaxPrepaidDiscount
+) => {
   const discountedPrice =
     ((totalPrice - couponTotal) / 100) * prepaidPercentage;
 
@@ -356,16 +354,15 @@ export const getCartTotals = (
   appliedCoupon = null,
   shippingTiers = [],
   paymentType = "NONE",
-  codCharges = 0
+  configureCharges = {}
 ) => {
   let totalPrice = 0;
   let totalListingPrice = 0;
   let totalItems = 0;
   const appliedCODCharges = paymentType === "COD" ? codCharges : 0;
-  const prepaidDiscountPercent = useConfiguration(
-    CONFIGURATION_KEY.PREPAID_DISCOUNT,
-    0
-  );
+  const { codCharges, prepaidDiscountPercent, MaxPrepaidDiscount } =
+    configureCharges;
+
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
     shippingTiers,
@@ -388,7 +385,8 @@ export const getCartTotals = (
   const prepaidDiscount = getPrepaidDiscount(
     totalPrice,
     couponTotal,
-    prepaidDiscountPercent
+    prepaidDiscountPercent,
+    MaxPrepaidDiscount
   );
   const totalPrepaidDiscount = couponTotal + prepaidDiscount;
 

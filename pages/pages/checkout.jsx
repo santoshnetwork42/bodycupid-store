@@ -682,7 +682,8 @@ function Checkout(props) {
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
-                                        5% Online Payment Discount
+                                        {prepaidDiscountPercent}% Online Payment
+                                        Discount
                                       </h4>
                                     </td>
                                     <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
@@ -807,7 +808,10 @@ function Checkout(props) {
                         <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
-                            tag={`EXTRA ${prepaidDiscountPercent}% OFF`}
+                            tag={
+                              !!prepaidDiscountPercent &&
+                              `EXTRA ${prepaidDiscountPercent}% OFF`
+                            }
                             isSelected={payMethod === "PREPAID"}
                             description={
                               onlineDisabled

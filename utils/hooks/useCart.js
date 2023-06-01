@@ -6,16 +6,31 @@ import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useConfiguration, useShippingTiers } from "~/utils/contexts/navbar";
 import { getCouponDiscount } from "~/utils/coupons";
 import { getBxGyFreeQuantity } from "../helper";
-import { CONFIGURATION_KEY } from "~/constant";
+import {
+  COD_CHARGES,
+  MAX_PREPAID_DISCOUNT,
+  PREPAID_DISCOUNT,
+} from "~/constant";
 
 export const useCartTotal = (prepaid = "NONE") => {
   const { data, coupon } = useSelector((state) => state.cart);
   const shippingTiers = useShippingTiers();
-  const codCharges = useConfiguration(CONFIGURATION_KEY.COD_CHARGES, 0);
+  const configureCharges = {
+    codCharges: useConfiguration(COD_CHARGES, 0),
+    prepaidDiscountPercent: useConfiguration(PREPAID_DISCOUNT, 0),
+    MaxPrepaidDiscount: useConfiguration(MAX_PREPAID_DISCOUNT, 0),
+  };
 
   const cartTotals = useMemo(
-    () => getCartTotals(data, coupon, shippingTiers || [], prepaid, codCharges),
-    [data, coupon, !!shippingTiers, prepaid, codCharges]
+    () =>
+      getCartTotals(
+        data,
+        coupon,
+        shippingTiers || [],
+        prepaid,
+        configureCharges
+      ),
+    [data, coupon, !!shippingTiers, prepaid, configureCharges]
   );
   return cartTotals;
 };
