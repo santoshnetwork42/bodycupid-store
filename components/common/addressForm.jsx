@@ -4,7 +4,6 @@ import { API } from "aws-amplify";
 import { connect } from "react-redux";
 
 import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
-import { GOOGLE_MAPS_API_KEY } from "~/config";
 import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import { validateAddress, getProperAddress } from "~/utils/address";
@@ -29,20 +28,19 @@ const AddressForm = (props) => {
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
-  const apiKey = GOOGLE_MAPS_API_KEY;
 
   const fetchCityAndStateData = useCallback(async (pinCode) => {
-    const result = await fetchCityAndState(pinCode, apiKey);
+    const result = await fetchCityAndState(pinCode);
     if (result) {
       setAddress({ city: result.city, state: result.state });
     }
-  }, [apiKey]);
+  }, []);
 
   useEffect(() => {
     if (address.pinCode.length === 6) {
       fetchCityAndStateData(address.pinCode);
     }
-  }, [address.pinCode, fetchCityAndStateData]);
+  }, [address.pinCode]);
 
   useEffect(() => {
     if (defaultAddress && defaultAddress.name) {
@@ -216,7 +214,7 @@ const AddressForm = (props) => {
                   name="city"
                   placeholder="Your city"
                   required
-                  value={address?.city}
+                  value={address.city}
                   onChange={(e) => setAddress({ city: e.target.value })}
                   onBlur={(e) => setAddress({ city: e.target.value.trim() })}
                 />
@@ -227,7 +225,7 @@ const AddressForm = (props) => {
                   name="state"
                   className="select-dropdown"
                   required
-                  value={address?.state}
+                  value={address.state}
                   onChange={(e) => {
                     setAddress({ state: e.target.value });
                   }}

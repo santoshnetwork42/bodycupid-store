@@ -1,4 +1,9 @@
-export const fetchCityAndState = async (pinCode, apiKey) => {
+import { GOOGLE_MAPS_API_KEY } from "~/config";
+
+
+export const fetchCityAndState = async (pinCode) => {
+    const apiKey = GOOGLE_MAPS_API_KEY;
+
     try {
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${pinCode}|country:IN&key=${apiKey}`
