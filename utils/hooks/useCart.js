@@ -21,7 +21,7 @@ export const useCartTotal = (
   const freeProductsResponse = useFreeProducts(showNonApplicableFreeProducts);
   const codCharges = useConfiguration(COD_CHARGES, 0);
   const prepaidDiscountPercent = useConfiguration(PREPAID_DISCOUNT, 0);
-  const MaxPrepaidDiscount = useConfiguration(MAX_PREPAID_DISCOUNT, 0);
+  const maxPrepaidDiscount = useConfiguration(MAX_PREPAID_DISCOUNT, 0);
 
   const freeProducts = useMemo(
     () => freeProductsResponse.filter((f) => f.allowed).map((f) => f.product),
@@ -33,7 +33,7 @@ export const useCartTotal = (
       getCartTotals(data, freeProducts, coupon, shippingTiers || [], prepaid, {
         codCharges,
         prepaidDiscountPercent,
-        MaxPrepaidDiscount,
+        maxPrepaidDiscount,
       }),
     [
       data,
@@ -44,7 +44,7 @@ export const useCartTotal = (
       freeProducts,
       codCharges,
       prepaidDiscountPercent,
-      MaxPrepaidDiscount,
+      maxPrepaidDiscount,
     ]
   );
   return cartTotals;

@@ -341,12 +341,12 @@ const getPrepaidDiscount = (
   totalPrice,
   couponTotal,
   prepaidPercentage,
-  MaxPrepaidDiscount
+  maxPrepaidDiscount
 ) => {
   const discountedPrice =
     ((totalPrice - couponTotal) / 100) * prepaidPercentage;
 
-  return Math.min(discountedPrice, MaxPrepaidDiscount || discountedPrice);
+  return Math.min(discountedPrice, maxPrepaidDiscount || discountedPrice);
 };
 
 export const getCartTotals = (
@@ -360,8 +360,11 @@ export const getCartTotals = (
   let totalPrice = 0;
   let totalListingPrice = 0;
   let totalItems = 0;
-  const { codCharges, prepaidDiscountPercent, MaxPrepaidDiscount } =
-    configureCharges;
+  const {
+    codCharges = 0,
+    prepaidDiscountPercent = 0,
+    maxPrepaidDiscount = 0,
+  } = configureCharges;
   const appliedCODCharges = paymentType === "COD" ? codCharges : 0;
 
   const prepaidShippingCharge = getShippingPrice(
@@ -391,7 +394,7 @@ export const getCartTotals = (
     totalPrice,
     couponTotal,
     prepaidDiscountPercent,
-    MaxPrepaidDiscount
+    maxPrepaidDiscount
   );
   const totalPrepaidDiscount = couponTotal + prepaidDiscount;
 
