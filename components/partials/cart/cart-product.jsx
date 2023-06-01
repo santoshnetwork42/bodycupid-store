@@ -40,6 +40,7 @@ function CartProduct({
     disableChange = false,
     hideRemove = false,
     cartItemSource,
+    couponMessage,
   } = item;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
@@ -96,23 +97,23 @@ function CartProduct({
   }, [item, cartList]);
 
   return (
-    <div className="m-0 p-0 border-no ">
-      <div className="m-0 p-0">
-        <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
-          <figure>
-            <ALink href={"/products/" + slug}>
-              <img
-                src={getPublicImageURL(images.items[0]?.imageKey)}
-                width="100"
-                height="100"
-                alt={images.items[0]?.alt}
-              />
-            </ALink>
-          </figure>
-          <div className="text-left text-primary w-100  mr-1 ml-2">
-            <div className="mr-5 ">
-              <ALink href={"/products/" + slug}>{title}</ALink>
-            </div>
+    <div className="m-0 p-0 border-no">
+      <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
+        <figure>
+          <ALink href={"/products/" + slug}>
+            <img
+              src={getPublicImageURL(images.items[0]?.imageKey)}
+              width="100"
+              height="100"
+              alt={images.items[0]?.alt}
+            />
+          </ALink>
+        </figure>
+        <div className="text-left text-primary w-100  mr-1 ml-2">
+          <div className="mr-5 ">
+            <ALink href={"/products/" + slug}>{title}</ALink>
+          </div>
+          {cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
             <div className="mt-1 d-flex mb-1 align-items-center">
               {cartItemType === "FREE_PRODUCT" ||
               cartItemType === "AUTO_FREE_PRODUCT" ? (
@@ -144,63 +145,68 @@ function CartProduct({
                 </>
               )}
             </div>
-            {outOfStock ? (
-              <div className="outofstock-tag">
-                <p className="m-0 outofstock-label">out of stock</p>
-              </div>
-            ) : (
-              <div>
-                {!disableChange && (
-                  <div className="product-quantity w-0 mb-1">
-                    {cartItemType === "FREE_PRODUCT" ? (
-                      <>
-                        {!!qty && (
-                          <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>
-                        )}
-                      </>
-                    ) : (
-                      <Quantity
-                        product={item}
-                        qty={qty}
-                        max={inventory}
-                        onChangeQty={onChangeQty}
-                      />
-                    )}
-                  </div>
-                )}
-                {!!item?.variants?.items.length && !disableChange && (
-                  <select
-                    name={`${recordKey}`}
-                    className="form-control"
-                    value={variantId}
-                    onChange={(e) => {
-                      changeVariant(e);
-                    }}
-                  >
-                    {variants.items.map((v) => (
-                      <option key={v.id} value={v.id}>
-                        {v.title}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              </div>
-            )}
-          </div>
-
-          {!hideRemove && (
-            <div className="product-close">
-              <ALink
-                href="#"
-                className="sm-product-remove"
-                title="Remove this product"
-                onClick={onRemove}
-              >
-                <Close size={18} color="grey" />
-              </ALink>
+          )}
+          {cartItemType === "AUTO_FREE_PRODUCT_DISABLED" && (
+            <div className="mt-1 d-flex mb-1 align-items-center text-alert">
+              {couponMessage}
+            </div>
+          )}
+          {outOfStock ? (
+            <div className="outofstock-tag">
+              <p className="m-0 outofstock-label">out of stock</p>
+            </div>
+          ) : (
+            <div>
+              {!disableChange && (
+                <div className="product-quantity w-0 mb-1">
+                  {cartItemType === "FREE_PRODUCT" ? (
+                    <>
+                      {!!qty && (
+                        <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>
+                      )}
+                    </>
+                  ) : (
+                    <Quantity
+                      product={item}
+                      qty={qty}
+                      max={inventory}
+                      onChangeQty={onChangeQty}
+                    />
+                  )}
+                </div>
+              )}
+              {!!item?.variants?.items.length && !disableChange && (
+                <select
+                  name={`${recordKey}`}
+                  className="form-control"
+                  value={variantId}
+                  onChange={(e) => {
+                    changeVariant(e);
+                  }}
+                >
+                  {variants.items.map((v) => (
+                    <option key={v.id} value={v.id}>
+                      {v.title}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           )}
         </div>
+
+        {!hideRemove && (
+          <div className="product-close">
+            <ALink
+              href="#"
+              className="sm-product-remove"
+              title="Remove this product"
+              onClick={onRemove}
+            >
+              <Close size={18} color="grey" />
+            </ALink>
+          </div>
+        )}
       </div>
     </div>
   );

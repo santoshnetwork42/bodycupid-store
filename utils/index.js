@@ -351,6 +351,7 @@ const getPrepaidDiscount = (
 
 export const getCartTotals = (
   cartItems = [],
+  freeProducts = [],
   appliedCoupon = null,
   shippingTiers = [],
   paymentType = "NONE",
@@ -359,9 +360,9 @@ export const getCartTotals = (
   let totalPrice = 0;
   let totalListingPrice = 0;
   let totalItems = 0;
-  const appliedCODCharges = paymentType === "COD" ? codCharges : 0;
   const { codCharges, prepaidDiscountPercent, MaxPrepaidDiscount } =
     configureCharges;
+  const appliedCODCharges = paymentType === "COD" ? codCharges : 0;
 
   const prepaidShippingCharge = getShippingPrice(
     cartItems,
@@ -374,6 +375,10 @@ export const getCartTotals = (
     paymentType === "PREPAID" ? prepaidShippingCharge : codShippingCharge;
 
   const couponTotal = getCouponTotal(appliedCoupon, cartItems);
+
+  for (let i = 0; i < freeProducts.length; i++) {
+    totalListingPrice += freeProducts[i].price;
+  }
 
   for (let i = 0; i < cartItems.length; i++) {
     totalPrice += cartItems[i].price * parseInt(cartItems[i].qty, 10);
@@ -446,7 +451,7 @@ export const getShippingPrice = (
 ) => {
   const total = getTotalPrice(cartItems);
   if (!!shippingTiers?.length) {
-    const shippingTier = shippingTiers.find((element) => {
+    const shippingTier = (shippingTiers || []).find((element) => {
       const { minOrderValue, maxOrderValue, paymentType } = element;
       return (
         minOrderValue <= total &&

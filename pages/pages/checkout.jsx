@@ -70,7 +70,7 @@ function Checkout(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
-  const freeProducts = useFreeProducts();
+  const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
@@ -78,6 +78,11 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
+
+  const freeProducts = useMemo(
+    () => freeProductsResponse.map((f) => f.product),
+    [freeProductsResponse]
+  );
 
   const isFirst = payMethod === "PREPAID";
 
@@ -90,7 +95,7 @@ function Checkout(props) {
     totalListingPrice,
     totalPrice,
     shippingTotal,
-    totalAmountSaved,
+    totalAmountSaved: totalSaved,
     couponTotal,
     grandTotal,
     prepaidDiscount,
@@ -102,11 +107,7 @@ function Checkout(props) {
     prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
-  const cartItems = useCartItems();
-
-  const totalSaved = useMemo(() => {
-    return getFreeProductTotal(cartItems) + totalAmountSaved;
-  }, [totalAmountSaved, cartItems]);
+  const cartItems = useCartItems(false);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -165,7 +166,7 @@ function Checkout(props) {
         logger.error("Something went wrong with Razorpay initialization");
       }
     },
-    [store, user, cartList, freeProducts]
+    [store, user, cartList]
   );
 
   useEffect(() => {
@@ -408,6 +409,7 @@ function Checkout(props) {
             setOrderData({ order, paymentId: null });
           }
         } catch (error) {
+          setLoading(false);
           errorHandler(error);
         }
       }
@@ -574,48 +576,46 @@ function Checkout(props) {
                                             {(item?.cartItemType ===
                                               "FREE_PRODUCT" ||
                                               item?.cartItemType ===
-                                                "AUTO_FREE_PRODUCT") &&
-                                              !!couponTotal && (
-                                                <span className="text-success mr-1">
-                                                  {!!item.price && (
-                                                    <del className="summary-subtotal-listingprice ml-0 mr-1">
-                                                      ₹{toDecimal(item.price)}
-                                                    </del>
-                                                  )}
-                                                  Free
-                                                </span>
-                                              )}
-
-                                            {((item?.cartItemType !==
-                                              "FREE_PRODUCT" &&
-                                              item?.cartItemType !==
-                                                "AUTO_FREE_PRODUCT") ||
-                                              !couponTotal) && (
-                                              <p className="m-0 product-discount-listing">
-                                                <span className="sm-product-amount">
-                                                  ₹{toDecimal(item.price)}
-                                                </span>
-                                                {item.price <
-                                                  item.listingPrice && (
-                                                  <del className="summary-subtotal-listingprice">
-                                                    ₹
-                                                    {toDecimal(
-                                                      item.listingPrice
-                                                    )}
+                                                "AUTO_FREE_PRODUCT") && (
+                                              <span className="text-success mr-1">
+                                                {!!item.price && (
+                                                  <del className="summary-subtotal-listingprice ml-0 mr-1">
+                                                    ₹{toDecimal(item.price)}
                                                   </del>
                                                 )}
-                                                <span
-                                                  className={`discount-percetage ml-2`}
-                                                >
-                                                  {productDiscountPercentage(
-                                                    item
-                                                  ) > 0 &&
-                                                    `${productDiscountPercentage(
-                                                      item
-                                                    )}% off`}
-                                                </span>
-                                              </p>
+                                                Free
+                                              </span>
                                             )}
+
+                                            {item?.cartItemType !==
+                                              "FREE_PRODUCT" &&
+                                              item?.cartItemType !==
+                                                "AUTO_FREE_PRODUCT" && (
+                                                <p className="m-0 product-discount-listing">
+                                                  <span className="sm-product-amount">
+                                                    ₹{toDecimal(item.price)}
+                                                  </span>
+                                                  {item.price <
+                                                    item.listingPrice && (
+                                                    <del className="summary-subtotal-listingprice">
+                                                      ₹
+                                                      {toDecimal(
+                                                        item.listingPrice
+                                                      )}
+                                                    </del>
+                                                  )}
+                                                  <span
+                                                    className={`discount-percetage ml-2`}
+                                                  >
+                                                    {productDiscountPercentage(
+                                                      item
+                                                    ) > 0 &&
+                                                      `${productDiscountPercentage(
+                                                        item
+                                                      )}% off`}
+                                                  </span>
+                                                </p>
+                                              )}
 
                                             <div className="text-grey">
                                               Qty:{item.qty || 1}
