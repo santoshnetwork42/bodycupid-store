@@ -1,13 +1,11 @@
 import { persistReducer } from "redux-persist";
-// import { toast } from "react-toastify";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
-// import CartPopup from "~/components/features/product/common/cart-popup";
-// import CouponPopup from "~/components/features/product/common/coupon-popup";
 import {
   createShoppingCart,
   updateShoppingCart,
+  deleteShoppingCart,
   createShoppingCartProduct,
   updateShoppingCartProduct,
   deleteShoppingCartProduct,
@@ -15,7 +13,6 @@ import {
 import { getFirstVariant } from "~/utils/products";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
-// import useWindowDimensions from "~/utils/getWindowDimension";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -26,6 +23,7 @@ export const actionTypes = {
   REMOVE_COUPON: "REMOVE_COUPON",
   SET_CART: "SET_CART",
   EMPTY_CART: "EMPTY_CART",
+  CREATE_CART: "CREATE_CART",
 };
 
 const initialState = {
@@ -129,6 +127,7 @@ export const cartActions = {
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
   setCart: (cart) => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
+  createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
 };
 
 export function* cartSaga() {
@@ -169,12 +168,16 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
-
     const { user, cart } = yield select();
-    let { cart: cartResponse } = cart;
-    const { data } = user;
-    if (data) {
+    let { cart: cartResponse, coupon } = cart;
+    const { data: userData } = user;
+
+    if (userData) {
+      const { id: userId } = userData;
+      const { id: couponId } = coupon || {};
+
       const { product: currProduct } = e.payload;
+
       const variant = getFirstVariant(currProduct, currProduct.variantId);
       if (variant) {
         currProduct.variantId = variant.id;
@@ -184,27 +187,25 @@ export function* cartSaga() {
       if (currProduct.variantId) {
         recordKey = `${currProduct.id}-${currProduct.variantId}`;
       }
-
       if (!cartResponse) {
         ({
-          data: { createStoreShoppingCart: cartResponse },
+          data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
-          variables: { storeId: STORE_ID },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          variables: {
+            input: {
+              storeId: STORE_ID,
+              userId: !!userId ? userId : null,
+              couponCodeId: !!couponId ? couponId : null,
+            },
+          },
         }));
         cartResponse.products = [];
         yield put({ type: actionTypes.SET_CART, payload: { ...cartResponse } });
       }
 
-      const { products = [], id } = cartResponse;
-
-      let product = products.find((p) => {
-        const pKey = p.variantId ? `${p.id}-${p.variantId}` : `${p.id}`;
-        return pKey === recordKey;
-      });
-
-      if (!product) {
+      if (!!cartResponse) {
+        const { products = [], id } = cartResponse;
         const {
           data: { createShoppingCartProduct: response },
         } = yield call([API, API.graphql], {
@@ -217,7 +218,6 @@ export function* cartSaga() {
               quantity: currProduct.qty,
             },
           },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
         });
 
         products.push({
@@ -229,36 +229,6 @@ export function* cartSaga() {
         });
 
         yield put({ type: actionTypes.SET_CART, payload: { products } });
-      } else {
-        const {
-          data: { updateShoppingCartProduct: response },
-        } = yield call([API, API.graphql], {
-          query: updateShoppingCartProduct,
-          variables: {
-            input: {
-              id: product.id,
-              quantity: product.quantity + parseInt(currProduct.qty),
-            },
-          },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
-        });
-
-        const updatedProducts = products.map((p) =>
-          p.id === product.id
-            ? {
-              id: response.id,
-              shoppingcartId: id,
-              productId: response.productId,
-              variantId: response.variantId,
-              quantity: response.quantity,
-            }
-            : p
-        );
-
-        yield put({
-          type: actionTypes.SET_CART,
-          payload: { products: updatedProducts },
-        });
       }
     }
   });
@@ -319,6 +289,7 @@ export function* cartSaga() {
     const { cart, user } = yield select();
     const { cart: cartResponse } = cart;
     const { data: userResponse } = user;
+
     if (cartResponse && userResponse) {
       const { products = [] } = cartResponse;
       const { products: currProducts } = e.payload;
@@ -365,28 +336,79 @@ export function* cartSaga() {
     const { data: userResponse } = user;
 
     if (cartResponse && userResponse) {
-      const { products = [] } = cartResponse;
+      yield call([API, API.graphql], {
+        query: deleteShoppingCart,
+        variables: {
+          input: { id: cartResponse.id },
+        },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+    }
 
-      const promise = [];
-      if (Array.isArray(products)) {
-        products.forEach((product) => {
-          if (product && product.id) {
-            promise.push(
-              call([API, API.graphql], {
-                query: deleteShoppingCartProduct,
-                variables: {
-                  input: { id: product.id },
-                },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
-              })
-            );
-          }
-        });
+    yield put({ type: actionTypes.REFRESH_CART });
+  });
+
+  yield takeEvery(actionTypes.CREATE_CART, function* saga(e) {
+    const { cart } = yield select() || {};
+    let { cart: cartResponse, coupon, data: cartProducts } = cart;
+    const { user } = e.payload;
+    if (user) {
+      const { id: userId } = user;
+      if (!cartResponse) {
+        const { id: couponId } = coupon || {};
+        ({
+          data: { createShoppingCart: cartResponse },
+        } = yield call([API, API.graphql], {
+          query: createShoppingCart,
+          variables: {
+            input: {
+              storeId: STORE_ID,
+              couponCodeId: !!couponId ? couponId : null,
+              userId: !!userId ? userId : null,
+            },
+          },
+        }));
+        cartResponse.products = [];
+        yield put({ type: actionTypes.SET_CART, payload: { ...cartResponse } });
       }
 
-      yield all(promise);
+      if (!!cartResponse) {
+        const { products = [], id } = cartResponse;
+        if (Array.isArray(cartProducts) && !!cartProducts.length) {
+          const promise = [];
+          cartProducts.forEach((product) => {
+            if (product.id) {
+              promise.push(
+                call([API, API.graphql], {
+                  query: createShoppingCartProduct,
+                  variables: {
+                    input: {
+                      shoppingcartId: id,
+                      productId: product.id,
+                      variantId: product.variantId,
+                      quantity: product.qty,
+                    },
+                  },
+                })
+              );
+            }
+          });
+          const [...response] = yield all(promise);
+          if (response.length) {
+            response.forEach((product) => {
+              products.push({
+                id: product.id,
+                shoppingcartId: id,
+                productId: product.productId,
+                variantId: product.variantId,
+                quantity: product.quantity,
+              });
+            });
+            yield put({ type: actionTypes.SET_CART, payload: { products } });
+          }
+        }
+      }
     }
-    yield put({ type: actionTypes.REFRESH_CART });
   });
 }
 
