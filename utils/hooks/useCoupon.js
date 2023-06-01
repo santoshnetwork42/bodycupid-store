@@ -73,17 +73,25 @@ export const useFreeProducts = () => {
           const {
             autoApply,
             couponType,
+          } = coupon;
+
+          if (couponType !== "PRODUCT") return false;
+          if (!autoApply) return false;
+          return true;
+        })
+        .map((coupon) => {
+          const {
             applicableProducts,
             applicableCollections,
             minOrderValue,
             buyXQuantity,
             getYQuantity,
+            getYProduct,
           } = coupon;
 
-          if (couponType !== "PRODUCT") return false;
-          if (!autoApply) return false;
-          if (minOrderValue && minOrderValue > total) return false;
-          if (buyXQuantity + getYQuantity > totalItems) return false;
+          let allowed = true;
+          if (minOrderValue && minOrderValue > total) allowed = false;
+          if (buyXQuantity + getYQuantity > totalItems) allowed = false;
 
           const hasProduct =
             Array.isArray(applicableProducts) && applicableProducts.length
@@ -99,20 +107,21 @@ export const useFreeProducts = () => {
               )
               : true;
 
-          return hasCollection && hasProduct;
-        })
-        .map((coupon) => coupon.getYProduct),
+          allowed = allowed && hasCollection && hasProduct;
+          const { message } = getCouponDiscount(coupon, cartList);
+          return { allowed, message, productId: getYProduct };
+        }),
     [coupons, total, totalItems, cartList]
   );
 
   useEffect(() => {
     const getProduct = async () => {
       const response = await Promise.all(
-        freeProductIds.map((productId) =>
+        freeProductIds.map(({ productId, allowed, message }) =>
           API.graphql({
             query: getProductById,
             variables: { id: productId },
-          }).then(({ data }) => data.getProduct)
+          }).then(({ data }) => ({ allowed, message, product: data.getProduct }))
         )
       );
 

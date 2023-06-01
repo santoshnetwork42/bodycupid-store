@@ -131,12 +131,13 @@ export const useCartItems = () => {
           ...p,
           itemKey: `${p.recordKey}-cooupon-non-applicable`,
         })),
-        ...freeProducts.map((p) => ({
+        ...freeProducts.map(({ product: p, allowed, message }) => ({
           ...p,
-          itemKey: `${p.id}-free`,
-          cartItemType: "AUTO_FREE_PRODUCT",
+          itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,
+          cartItemType: allowed ? "AUTO_FREE_PRODUCT" : "AUTO_FREE_PRODUCT_DISABLED",
           disableChange: true,
           hideRemove: true,
+          couponMessage: message
         })),
       ];
     }
@@ -148,12 +149,13 @@ export const useCartItems = () => {
         cartItemType:
           p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null,
       })),
-      ...freeProducts.map((p) => ({
+      ...freeProducts.map(({ product: p, allowed, message }) => ({
         ...p,
-        itemKey: `${p.id}-free`,
-        cartItemType: "AUTO_FREE_PRODUCT",
+        itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,
+        cartItemType: allowed ? "AUTO_FREE_PRODUCT" : "AUTO_FREE_PRODUCT_DISABLED",
         disableChange: true,
         hideRemove: true,
+        couponMessage: message
       })),
     ];
   }, [cartList, freeProducts, appliedCoupon]);
