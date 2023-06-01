@@ -347,6 +347,7 @@ const getPrepaidDiscount = (totalPrice, couponTotal, prepaidPercentage) => {
 
   const discountedPrice =
     ((totalPrice - couponTotal) / 100) * prepaidPercentage;
+
   return Math.min(discountedPrice, MaxPrepaidDiscount || discountedPrice);
 };
 
