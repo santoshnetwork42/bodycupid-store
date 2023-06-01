@@ -156,7 +156,7 @@ export function* eventsSaga() {
     const { order, products, coupon } = e.payload;
     const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
-    const { pinpoint, ga, pixel } = orderMapper(products, coupon);
+    const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
     const attributeData = {
       attribute: { ...pixel },
       value: totalAmount,
@@ -216,7 +216,9 @@ export function* eventsSaga() {
           coupon: coupon?.code || "",
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("purchase_item", {
         ...attr,
         transaction_id: id,
@@ -233,7 +235,7 @@ export function* eventsSaga() {
     const {
       cart: { data, coupon },
     } = yield select();
-    const { pinpoint, ga, value, pixel } = orderMapper(data, coupon);
+    const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "begin_checkout",
@@ -271,7 +273,9 @@ export function* eventsSaga() {
           coupon: coupon?.code || "",
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("begin_chekout_item", {
         ...attr,
         value,
@@ -285,7 +289,7 @@ export function* eventsSaga() {
     const {
       cart: { data, coupon },
     } = yield select();
-    const { pinpoint, ga, value, pixel } = orderMapper(data, coupon);
+    const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "view_cart",
@@ -323,7 +327,9 @@ export function* eventsSaga() {
           coupon: coupon?.code || "",
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("view_cart_item", {
         ...attr,
         value,
@@ -335,7 +341,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
     const { id, name, products } = e.payload;
-    const { pinpoint, ga, pixel } = orderMapper(products);
+    const { pinpoint, ga, pixel, vercel } = orderMapper(products);
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "view_item_list",
@@ -370,7 +376,9 @@ export function* eventsSaga() {
           item_list_name: name,
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("view_item_list_item", {
         ...attr,
         item_list_id: id,

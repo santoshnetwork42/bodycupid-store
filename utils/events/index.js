@@ -97,13 +97,13 @@ export const orderMapper = (products, coupon) => {
   };
 
   const mappings = products.reduce(
-    ({ value, vercel, pinpoint, ga, pixel }, product, index) => {
+    ({ value, pinpoint, ga, pixel, vercel }, product, index) => {
       const {
         ga: [itemNew],
         pinpoint: pinpointNew,
         value: valueNew,
         pixel: pixelNew,
-        vercel: vercelNew,
+        vercel: vercelNew
       } = itemMapper(product, coupon);
 
       return {
@@ -124,6 +124,7 @@ export const orderMapper = (products, coupon) => {
           value: pixel.value + pixelNew.value,
         },
         pinpoint: [...pinpoint, pinpointNew],
+        vercel: [...vercel, vercelNew],
         items: [...ga, { ...itemNew, index }],
       };
     },
@@ -131,6 +132,7 @@ export const orderMapper = (products, coupon) => {
       value: 0,
       pinpoint: [],
       ga: [],
+      vercel: [],
       pixel: defaultAttribute,
     }
   );
@@ -138,11 +140,6 @@ export const orderMapper = (products, coupon) => {
   mappings.pixel.content_category = mappings.pixel.content_category.join(", ");
   mappings.pixel.content_subcategory =
     mappings.pixel.content_subcategory.join(", ");
-
-  mappings.vercel = {
-    ...mappings.pixel,
-    content_ids: mappings.pixel.content_ids.join(", "),
-  };
 
   return mappings;
 };
