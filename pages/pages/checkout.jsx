@@ -809,7 +809,7 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Pay Online"
                             tag={
-                              !!prepaidDiscountPercent &&
+                              !!prepaidDiscount &&
                               `EXTRA ${prepaidDiscountPercent}% OFF`
                             }
                             isSelected={payMethod === "PREPAID"}
