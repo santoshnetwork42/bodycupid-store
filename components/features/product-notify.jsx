@@ -91,8 +91,9 @@ function ProductNotify(props) {
               onChange={(e) => setNotifyEmail(e.target.value.trim())}
             />
           )}
+          <div className="cart-button-wrapper">
           <button
-            className="notify-btn cart-button-wrapper btn
+            className="notify-btn btn
             btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
             type="submit"
             disabled={loading}
@@ -101,6 +102,7 @@ function ProductNotify(props) {
             Notify me when available
             {loading && <div className="spin-loader ml-2" />}
           </button>
+          </div>
         </form>
       )}
     </div>
