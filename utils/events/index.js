@@ -1,4 +1,5 @@
 import { getFirstVariant } from "~/utils/products";
+import { useProductPrice } from "../hooks/useProduct";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -8,13 +9,13 @@ export const itemMapper = (product, coupon) => {
     category,
     subCategory,
     section,
-    price,
-    listingPrice,
     qty = 1,
     vendor,
     sku,
   } = product;
   let contentType = "product_group";
+
+  const { price, listingPrice } = useProductPrice(product);
 
   if (!variantId) {
     variantId = getFirstVariant(product)?.id;
