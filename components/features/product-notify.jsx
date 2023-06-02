@@ -94,7 +94,7 @@ function ProductNotify(props) {
           <div className="cart-button-wrapper">
           <button
             className="notify-btn btn
-            btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-3"
+            btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-1"
             type="submit"
             disabled={loading}
             
