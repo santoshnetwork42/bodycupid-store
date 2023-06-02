@@ -88,7 +88,7 @@ function ProductNotify(props) {
               onChange={(e) => setNotifyEmail(e.target.value.trim())}
             />
           )}
-          <div className="cart-button-wrapper pl-2 pr-2">
+          <div className="cart-button-wrapper">
             <button
               className="notify-btn btn
             btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-1"
