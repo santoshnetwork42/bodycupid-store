@@ -52,7 +52,7 @@ export const itemMapper = (product, coupon) => {
       item_name: title,
       affiliation: "",
       coupon: coupon?.code || "",
-      discount: listingPrice - price,
+      discount: (listingPrice - price).toString(),
       item_brand: vendor,
       item_category: category?.name || "",
       item_category2: subCategory?.name || "",
@@ -125,7 +125,7 @@ export const orderMapper = (products, coupon) => {
         },
         pinpoint: [...pinpoint, pinpointNew],
         vercel: [...vercel, vercelNew],
-        items: [...ga, { ...itemNew, index }],
+        ga: [...ga, { ...itemNew, index }],
       };
     },
     {

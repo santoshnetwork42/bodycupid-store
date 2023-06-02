@@ -289,7 +289,9 @@ export function* eventsSaga() {
     const {
       cart: { data, coupon },
     } = yield select();
+    
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "view_cart",
