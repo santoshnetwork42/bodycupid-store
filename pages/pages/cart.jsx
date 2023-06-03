@@ -173,8 +173,8 @@ function Cart(props) {
                                 <td className="d-flex align-items-center no-wrap">
                                   <h4 className="summary-subtitle lh-1 ">
                                     Discounts
+                                    <span> ({appliedCoupon.code})</span>
                                   </h4>
-                                  &nbsp; ({appliedCoupon.code})
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
