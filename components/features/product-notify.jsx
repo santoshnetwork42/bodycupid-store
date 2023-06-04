@@ -5,6 +5,7 @@ import { Logger } from "aws-amplify";
 import { addProductNotification } from "~/graphql/mutations";
 import { errorHandler } from "~/utils/errorHandler";
 import { alertToaster } from "../../utils/popupHelper";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const logger = new Logger("ProductNotify");
 
@@ -13,6 +14,7 @@ function ProductNotify(props) {
   const [notifyEmail, setNotifyEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [allreadyNotify, setAllreadyNotify] = useState(false);
+  const { isSmallSize: isMobile } = useWindowDimensions();
 
   useEffect(() => {
     if (user?.email) {
@@ -88,17 +90,17 @@ function ProductNotify(props) {
               onChange={(e) => setNotifyEmail(e.target.value.trim())}
             />
           )}
-          <div className="cart-button-wrapper">
-            <button
-              className="notify-btn btn
-            btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-1"
-              type="submit"
-              disabled={loading}
-            >
-              Notify me when available
-              {loading && <div className="spin-loader ml-2" />}
-            </button>
-          </div>
+          <div className={`cart-button-wrapper ${isMobile ? 'pl-2 pr-2' : ''}`}>
+      <button
+        className="notify-btn btn
+        btn-block btn-rounded d-flex justify-content-center align-items-center text-capitalize font-weight-semi-bold mt-1"
+        type="submit"
+        disabled={loading}
+      >
+        Notify me when available
+        {loading && <div className="spin-loader ml-2" />}
+      </button>
+    </div>
         </form>
       )}
     </div>
