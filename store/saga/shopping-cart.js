@@ -265,7 +265,6 @@ export function* cartSaga() {
         yield put({ type: actionTypes.SET_CART, payload: { ...cartResponse } });
       }
 
-      console.log("cartResponse", cartResponse);
       if (!!cartResponse) {
         const { products = [], id } = cartResponse;
         if (Array.isArray(cartProducts) && !!cartProducts.length) {
