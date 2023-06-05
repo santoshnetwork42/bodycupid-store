@@ -104,6 +104,7 @@ function Checkout(props) {
     prepaidGrandTotal,
     codCharges,
     appliedCODCharges,
+    prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
   const cartItems = useCartItems(false);
@@ -408,6 +409,7 @@ function Checkout(props) {
             setOrderData({ order, paymentId: null });
           }
         } catch (error) {
+          setLoading(false);
           errorHandler(error);
         }
       }
@@ -654,33 +656,26 @@ function Checkout(props) {
                                   </td>
                                 </tr>
                                 {!!appliedCoupon && !!couponTotal && (
-                                  <>
-                                    <tr className="summary-subtotal-saving">
-                                      <td>
-                                        <h4 className="summary-subtitle">
-                                          Coupons
-                                        </h4>
-                                        <p className="m-0">
-                                          <span className="d-flex">
-                                            <span className="mr-1">
-                                              {appliedCoupon.code}
-                                            </span>
-                                          </span>
-                                        </p>
-                                      </td>
-                                      <td>
-                                        <p className="summary-subtotal-price discount-price-color">
-                                          - {`₹${toDecimal(couponTotal)}`}
-                                        </p>
-                                      </td>
-                                    </tr>
-                                  </>
-                                )}
-                                {isFirst && (
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
-                                        5% Online Payment Discount
+                                        Coupons
+                                        <span> ({appliedCoupon.code})</span>
+                                      </h4>
+                                    </td>
+                                    <td>
+                                      <p className="summary-subtotal-price discount-price-color">
+                                        - {`₹${toDecimal(couponTotal)}`}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                )}
+                                {isFirst && !!prepaidDiscount && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        {prepaidDiscountPercent}% Online Payment
+                                        Discount
                                       </h4>
                                     </td>
                                     <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
@@ -805,7 +800,10 @@ function Checkout(props) {
                         <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
-                            tag={"EXTRA 5% OFF"}
+                            tag={
+                              !!prepaidDiscount &&
+                              `EXTRA ${prepaidDiscountPercent}% OFF`
+                            }
                             isSelected={payMethod === "PREPAID"}
                             description={
                               onlineDisabled
