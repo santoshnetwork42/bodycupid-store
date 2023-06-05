@@ -1,5 +1,5 @@
 import { getFirstVariant } from "~/utils/products";
-import { useProductPrice } from "../hooks/useProduct";
+import { getProductPrice } from "~/utils/products";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -13,13 +13,14 @@ export const itemMapper = (product, coupon) => {
     vendor,
     sku,
   } = product;
-  let contentType = "product_group";
 
-  const { price, listingPrice } = useProductPrice(product);
+  let contentType = "product_group";
 
   if (!variantId) {
     variantId = getFirstVariant(product)?.id;
   }
+
+  const { price, listingPrice } = getProductPrice(product, variantId);
 
   if (!variantId) {
     contentType = "product";
@@ -143,4 +144,13 @@ export const orderMapper = (products, coupon) => {
     mappings.pixel.content_subcategory.join(", ");
 
   return mappings;
+};
+
+export const userMapper = (userData) => {
+  if (userData) {
+    const { phone, firstName, lastName, email } = userData;
+    return { phone, firstName, lastName, email };
+  }
+
+  return null;
 };

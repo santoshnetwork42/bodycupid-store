@@ -6,7 +6,7 @@ import vercelAnalytics from "@vercel/analytics";
 
 import storage from "~/utils/storage";
 import { actionTypes as cartActions } from "~/store/cart";
-import { itemMapper, orderMapper } from "~/utils/events";
+import { itemMapper, orderMapper, userMapper } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
 import { getRecordKey } from "~/utils/helper";
 
@@ -96,11 +96,15 @@ export function* eventsSaga() {
     const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
     const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const userData = yield select(state => state.user.data);
+    const user = userMapper(userData);
+
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: eventName,
       eventID: uuid(),
       attribute: pixel,
+      user,
       ecommerce: {
         currency: "INR",
         value,
@@ -157,16 +161,12 @@ export function* eventsSaga() {
     const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
     const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
-    const attributeData = {
-      attribute: { ...pixel },
-      value: totalAmount,
-    };
 
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
-      attribute: attributeData,
+      attribute: { ...pixel, order_id: id, value },
       ecommerce: {
         transaction_id: id,
         value: totalAmount,
@@ -289,7 +289,7 @@ export function* eventsSaga() {
     const {
       cart: { data, coupon },
     } = yield select();
-    
+
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
 
     dataLayer.push({ ecommerce: null, attribute: null });
