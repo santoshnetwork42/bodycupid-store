@@ -29,7 +29,10 @@ export function* cartSaga() {
           },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         });
-        yield put({ type: actionTypes.SET_CART, payload: { couponCodeId: id } });
+        yield put({
+          type: actionTypes.SET_CART,
+          payload: { couponCodeId: id },
+        });
       }
     }
   });
@@ -54,7 +57,8 @@ export function* cartSaga() {
   });
 
   yield takeEvery(actionTypes.ADD_TO_CART, function* saga(e) {
-    const { user, cart } = yield select();
+    const { user, cart, system } = yield select();
+    const { meta } = system;
     let { cart: cartResponse, coupon } = cart;
     const { data: userData } = user;
 
@@ -79,6 +83,7 @@ export function* cartSaga() {
               storeId: STORE_ID,
               userId: userId || null,
               couponCodeId: couponId || null,
+              ...meta,
             },
           },
         }));
@@ -132,7 +137,9 @@ export function* cartSaga() {
       const { recordKey } = curProduct;
 
       const product = products.find((p) => {
-        const pKey = p.variantId ? `${p.productId}-${p.variantId}` : `${p.productId}`;
+        const pKey = p.variantId
+          ? `${p.productId}-${p.variantId}`
+          : `${p.productId}`;
         return pKey === recordKey;
       });
 
@@ -231,7 +238,8 @@ export function* cartSaga() {
   });
 
   yield takeEvery(userActionTypes.SET_USER, function* saga(e) {
-    const { cart } = yield select();
+    const { cart, system } = yield select();
+    const { meta } = system;
     let { cart: cartResponse, coupon, data: cartProducts } = cart;
     const { user } = e.payload;
 
@@ -249,6 +257,7 @@ export function* cartSaga() {
               storeId: STORE_ID,
               couponCodeId: couponId || null,
               userId: userId || null,
+              ...meta,
             },
           },
         }));
@@ -259,7 +268,6 @@ export function* cartSaga() {
       console.log("cartResponse", cartResponse);
       if (!!cartResponse) {
         const { products = [], id } = cartResponse;
-        console.log("cartProducts", cartProducts);
         if (Array.isArray(cartProducts) && !!cartProducts.length) {
           const promise = [];
           cartProducts.forEach((product) => {
@@ -282,15 +290,17 @@ export function* cartSaga() {
 
           const response = yield all(promise);
           if (response.length) {
-            response.forEach(({ data: { createShoppingCartProduct: product } }) => {
-              products.push({
-                id: product.id,
-                shoppingcartId: id,
-                productId: product.productId,
-                variantId: product.variantId,
-                quantity: product.quantity,
-              });
-            });
+            response.forEach(
+              ({ data: { createShoppingCartProduct: product } }) => {
+                products.push({
+                  id: product.id,
+                  shoppingcartId: id,
+                  productId: product.productId,
+                  variantId: product.variantId,
+                  quantity: product.quantity,
+                });
+              }
+            );
             yield put({ type: actionTypes.SET_CART, payload: { products } });
           }
         }
