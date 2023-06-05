@@ -3747,12 +3747,69 @@ export const getShoppingCart = /* GraphQL */ `
         updatedAt
       }
       userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+      }
+      couponCodeId
+      coupon {
+        id
+        groupId
+        description
+        code
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        createdAt
+        updatedAt
+      }
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
+      createdAt
+      updatedAt
       shoppingcartProducts {
         nextToken
       }
-      couponCodeId
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -3768,6 +3825,14 @@ export const listShoppingCarts = /* GraphQL */ `
         storeId
         userId
         couponCodeId
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
         createdAt
         updatedAt
       }
@@ -3797,6 +3862,14 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
         storeId
         userId
         couponCodeId
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
         createdAt
         updatedAt
       }
@@ -3826,6 +3899,14 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
         storeId
         userId
         couponCodeId
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
         createdAt
         updatedAt
       }
@@ -4861,6 +4942,19 @@ export const getRedirects = /* GraphQL */ `
       id
       storeId
       slug
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
       redirect
       createdAt
       updatedAt

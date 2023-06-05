@@ -146,11 +146,12 @@ export const orderMapper = (products, coupon) => {
   return mappings;
 };
 
-export const userMapper = (userData) => {
+export const userMapper = (userData, address) => {
+  const { city, state, country, pinCode } = address || {};
   if (userData) {
-    const { phone, firstName, lastName, email } = userData;
-    return { phone, firstName, lastName, email };
+    const { phone, firstName, lastName, email, gender, dob } = userData;
+    return { phone, firstName, lastName, email, gender, dob, city, state, country, pinCode };
   }
 
-  return null;
+  return { city, state, country, pinCode };
 };
