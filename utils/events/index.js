@@ -1,5 +1,5 @@
-import { getFirstVariant } from "~/utils/products";
-import { getProductPrice } from "~/utils/products";
+import { getFirstVariant, getProductPrice } from "~/utils/products";
+import hashParameters from "~/utils/hash";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -150,8 +150,24 @@ export const userMapper = (userData, address) => {
   const { city, state, country, pinCode } = address || {};
   if (userData) {
     const { phone, firstName, lastName, email, gender, dob } = userData;
-    return { phone, firstName, lastName, email, gender, dob, city, state, country, pinCode };
+    return hashParameters({
+      phone,
+      firstName,
+      lastName,
+      email,
+      gender,
+      dob,
+      city,
+      state,
+      country,
+      pinCode
+    });
   }
 
-  return { city, state, country, pinCode };
+  return hashParameters({
+    city,
+    state,
+    country,
+    pinCode
+  });
 };

@@ -104,7 +104,7 @@ export function* eventsSaga() {
       event: eventName,
       eventID: uuid(),
       attribute: pixel,
-      user,
+      user: { ...user, email: "brijesh@devxconsultancy.com" },
       ecommerce: {
         currency: "INR",
         value,
