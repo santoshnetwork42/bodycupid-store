@@ -34,9 +34,9 @@ export const eventActions = {
     type: actionTypes.VIEW_ITEM,
     payload: { product },
   }),
-  placeOrder: (order, products, coupon) => ({
+  placeOrder: (order, products, coupon, address) => ({
     type: actionTypes.PLACE_ORDER,
-    payload: { order, products, coupon },
+    payload: { order, products, coupon, address },
   }),
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
@@ -104,7 +104,7 @@ export function* eventsSaga() {
       event: eventName,
       eventID: uuid(),
       attribute: pixel,
-      user: { ...user, email: "brijesh@devxconsultancy.com" },
+      user,
       ecommerce: {
         currency: "INR",
         value,
@@ -157,16 +157,20 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
-    const { order, products, coupon } = e.payload;
+    const { order, products, coupon, address } = e.payload;
     const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
     const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
+
+    const userData = yield select(state => state.user.data);
+    const user = userMapper(userData, address);
 
     dataLayer.push({ ecommerce: null, attribute: null });
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
-      attribute: { ...pixel, order_id: id, value },
+      user,
+      attribute: { ...pixel, order_id: id, value: totalAmount },
       ecommerce: {
         transaction_id: id,
         value: totalAmount,

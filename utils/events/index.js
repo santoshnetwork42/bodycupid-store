@@ -1,5 +1,5 @@
 import { getFirstVariant, getProductPrice } from "~/utils/products";
-import hashParameters from "~/utils/hash";
+import { addPhonePrefix } from "~/utils/helper";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -147,27 +147,28 @@ export const orderMapper = (products, coupon) => {
 };
 
 export const userMapper = (userData, address) => {
-  const { city, state, country, pinCode } = address || {};
+  const { city, state, country, pinCode, phone: aP, firstName: aF, lastName: aL, email: aE } = address || {};
+
   if (userData) {
     const { phone, firstName, lastName, email, gender, dob } = userData;
-    return hashParameters({
-      phone,
-      firstName,
-      lastName,
-      email,
+    return {
+      phone: addPhonePrefix(aP || phone),
+      firstName: aF || firstName,
+      lastName: aL || lastName,
+      email: aE || email,
       gender,
       dob,
       city,
       state,
       country,
       pinCode
-    });
+    };
   }
 
-  return hashParameters({
+  return {
     city,
     state,
     country,
     pinCode
-  });
+  };
 };
