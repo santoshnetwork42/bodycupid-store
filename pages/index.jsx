@@ -38,9 +38,7 @@ function HomePage({
   brands,
   store,
   pageMeta,
-  cart,
 }) {
-  console.log("first", cart);
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
 
@@ -171,10 +169,8 @@ export const getStaticProps = async () => {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    cart: state.cart,
-  };
+function mapStateToProps() {
+  return {};
 }
 
 const Component = connect(mapStateToProps)(HomePage);
