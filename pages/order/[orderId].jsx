@@ -199,19 +199,6 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                       .join(", ")}
                   </td>
                 </tr>
-                <tr className="summary-subtotal">
-                  <td>
-                    <h4 className="summary-subtitle">Contact Details:</h4>
-                  </td>
-                  <td className="summary-subtotal-price">
-                    {[
-                      order?.shippingAddress?.phone,
-                      order?.shippingAddress?.email,
-                    ]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -254,6 +241,20 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                               Qty:{" "}
                               {` ${item.quantity || item.cancelledQuantity}`}
                             </div>
+                            {item.status === "DISPATCHED" && (
+                              <div className="mt-1">
+                                <div className="d-flex align-items-center text-grey">
+                                  Tracking Id:{" "}
+                                  {item.trackingId ? item.trackingId : "-"}
+                                </div>
+                                <div className="d-flex align-items-center text-grey">
+                                  Delivery Partner:{" "}
+                                  {item.deliveryPartner
+                                    ? item.deliveryPartner
+                                    : "-"}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
 

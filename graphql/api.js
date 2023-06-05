@@ -626,8 +626,6 @@ export const getOrder = /* GraphQL */ `
       channelName
       shippingAddress {
         name
-        phone
-        email
         country
         state
         city
@@ -639,8 +637,6 @@ export const getOrder = /* GraphQL */ `
       }
       billingAddress {
         name
-        phone
-        email
         country
         state
         city
@@ -709,6 +705,8 @@ export const getOrder = /* GraphQL */ `
           quantity
           price
           status
+          deliveryPartner
+          trackingId
         }
       }
       payments {
