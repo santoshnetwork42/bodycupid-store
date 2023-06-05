@@ -237,21 +237,27 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                             {item.variant && (
                               <p className="mb-0">{item.variant.title}</p>
                             )}
-                            <div className="d-flex align-items-center text-grey">
-                              Qty:{" "}
-                              {` ${item.quantity || item.cancelledQuantity}`}
+                            <div className="text-grey">
+                              <label>
+                                <span>Qty: </span>
+                                {` ${item.quantity || item.cancelledQuantity}`}
+                              </label>
                             </div>
                             {item.status === "DISPATCHED" && (
                               <div className="mt-1">
-                                <div className="d-flex align-items-center text-grey">
-                                  Tracking Id:{" "}
-                                  {item.trackingId ? item.trackingId : "-"}
+                                <div className="text-grey mb-1">
+                                  <label>
+                                    <span>Tracking Id: </span>
+                                    {item.trackingId ? item.trackingId : "-"}
+                                  </label>
                                 </div>
-                                <div className="d-flex align-items-center text-grey">
-                                  Delivery Partner:{" "}
-                                  {item.deliveryPartner
-                                    ? item.deliveryPartner
-                                    : "-"}
+                                <div className="text-grey">
+                                  <label>
+                                    <span>Delivery Partner: </span>
+                                    {item.deliveryPartner
+                                      ? item.deliveryPartner
+                                      : "-"}
+                                  </label>
                                 </div>
                               </div>
                             )}
