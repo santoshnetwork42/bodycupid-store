@@ -96,7 +96,7 @@ export function* eventsSaga() {
     const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
     const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
-    const userData = yield select(state => state.user.data);
+    const userData = yield select((state) => state.user.data);
     const user = userMapper(userData);
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
@@ -166,7 +166,7 @@ export function* eventsSaga() {
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
-      attribute: { ...pixel, order_id: id, value },
+      attribute: { ...pixel, order_id: id, value: totalAmount },
       ecommerce: {
         transaction_id: id,
         value: totalAmount,
