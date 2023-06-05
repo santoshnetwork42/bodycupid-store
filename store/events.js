@@ -119,7 +119,7 @@ export function* eventsSaga() {
     const { product } = e.payload;
     const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
 
-    dataLayer.push({ ecommerce: null, attribute: null });
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "remove_from_cart",
       eventID: uuid(),
@@ -141,7 +141,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
     const { product } = e.payload;
     const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_item",
       eventID: uuid(),
@@ -165,7 +165,7 @@ export function* eventsSaga() {
     const userData = yield select(state => state.user.data);
     const user = userMapper(userData, address);
 
-    dataLayer.push({ ecommerce: null, attribute: null });
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
@@ -240,7 +240,7 @@ export function* eventsSaga() {
       cart: { data, coupon },
     } = yield select();
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "begin_checkout",
       eventID: uuid(),
@@ -296,7 +296,7 @@ export function* eventsSaga() {
 
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
 
-    dataLayer.push({ ecommerce: null, attribute: null });
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_cart",
       eventID: uuid(),
@@ -348,7 +348,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
     const { id, name, products } = e.payload;
     const { pinpoint, ga, pixel, vercel } = orderMapper(products);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_item_list",
       eventID: uuid(),
