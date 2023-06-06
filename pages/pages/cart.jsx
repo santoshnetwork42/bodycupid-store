@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
@@ -20,6 +21,7 @@ const logger = new Logger("Cart");
 
 function Cart(props) {
   const {
+    store,
     cartList,
     appliedCoupon,
     user,
@@ -28,6 +30,7 @@ function Cart(props) {
     recordOutOfStock,
   } = props;
 
+  const { name } = store;
   const router = useRouter();
   const cartItems = useCartItems();
   const {
@@ -49,13 +52,8 @@ function Cart(props) {
     shippingTotal,
     couponTotal,
     cartGrandTotal,
-    cartAmountSaved,
+    cartAmountSaved: totalSaved,
   } = useCartTotal();
-
-  const totalSaved = useMemo(
-    () => getFreeProductTotal(cartItems) + cartAmountSaved,
-    [cartAmountSaved, cartItems]
-  );
 
   const validateAndGoToCheckout = useCallback(() => {
     if (!isInventoryCheckSuccess) {
@@ -90,6 +88,12 @@ function Cart(props) {
 
   return (
     <main className="main cart">
+      <Head>
+        <title>{name} | Cart</title>
+      </Head>
+
+      <h1 className="d-none">{name} - Cart</h1>
+
       <div className="page-content pt-lg-7 pt-2 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
@@ -169,8 +173,8 @@ function Cart(props) {
                                 <td className="d-flex align-items-center no-wrap">
                                   <h4 className="summary-subtitle lh-1 ">
                                     Discounts
+                                    <span> ({appliedCoupon.code})</span>
                                   </h4>
-                                  &nbsp; ({appliedCoupon.code})
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
@@ -299,6 +303,7 @@ function Cart(props) {
 
 function mapStateToProps(state) {
   return {
+    store: state.system.store,
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,

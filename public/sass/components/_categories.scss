@@ -49,6 +49,19 @@ padding: 3rem;
     line-height: 1.2;
   }
 }
+
+.story-category { 
+  .category-img {
+    .category-media {
+      border-radius: 50%;
+    }
+  }
+  .category-name{
+    text-align: center;
+    margin-top: 0.6rem;
+  }
+}
+
 .category-content {
   display: flex;
   align-items: center;

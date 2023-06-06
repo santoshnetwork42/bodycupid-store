@@ -102,7 +102,9 @@
         padding-left: .2rem;
         margin-bottom: 1rem;
         font-size: 1.4rem;
+        letter-spacing: 0.5px;
         line-height: .9;
+        font-weight: 600;
     }
 
     .form .title.title-simple {
@@ -369,7 +371,7 @@
         position: absolute !important;
         bottom: 0;
         width: 100%;
-        max-height: 500px;
+        max-height: 550px;
         overflow: scroll;
     }
     .address-card {
@@ -430,9 +432,9 @@
         }
     }
     .summary-subtotal-price { padding-top: 1rem; }
-    tbody > tr:nth-child(2) td {
-        padding-bottom: 1.6rem;
-    }
+    // tbody > tr:nth-child(2) td {
+    //     padding-bottom: 0.6rem;
+    // }
 }
 
 .sumnary-shipping {
@@ -462,9 +464,9 @@
                 padding-bottom: 2rem;
                 line-height: 1.2;
             }
-            > tr:nth-child(2) td {
-                padding-bottom: 2rem;
-            }
+            // > tr:nth-child(2) td {
+            //     padding-bottom: 0.3rem;
+            // }
         }
     }
 }

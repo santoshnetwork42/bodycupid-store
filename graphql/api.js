@@ -626,8 +626,6 @@ export const getOrder = /* GraphQL */ `
       channelName
       shippingAddress {
         name
-        phone
-        email
         country
         state
         city
@@ -639,8 +637,6 @@ export const getOrder = /* GraphQL */ `
       }
       billingAddress {
         name
-        phone
-        email
         country
         state
         city
@@ -709,6 +705,8 @@ export const getOrder = /* GraphQL */ `
           quantity
           price
           status
+          deliveryPartner
+          trackingId
         }
       }
       payments {
@@ -1146,8 +1144,11 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 `;
 
 export const createShoppingCart = /* GraphQL */ `
-  mutation CreateStoreShoppingCart($storeId: ID!) {
-    createStoreShoppingCart(storeId: $storeId) {
+  mutation CreateShoppingCart(
+    $input: CreateShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    createShoppingCart(input: $input, condition: $condition) {
       id
       storeId
       userId

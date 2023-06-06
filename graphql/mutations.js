@@ -101,68 +101,6 @@ export const deleteWishlist = /* GraphQL */ `
     }
   }
 `;
-export const createShoppingCart = /* GraphQL */ `
-  mutation CreateShoppingCart(
-    $input: CreateShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    createShoppingCart(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-      }
-      userId
-      shoppingcartProducts {
-        nextToken
-      }
-      couponCodeId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteShoppingCart = /* GraphQL */ `
-  mutation DeleteShoppingCart(
-    $input: DeleteShoppingCartInput!
-    $condition: ModelShoppingCartConditionInput
-  ) {
-    deleteShoppingCart(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-      }
-      userId
-      shoppingcartProducts {
-        nextToken
-      }
-      couponCodeId
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const updateBulkAction = /* GraphQL */ `
   mutation UpdateBulkAction(
     $input: UpdateBulkActionInput!
@@ -3736,6 +3674,94 @@ export const deleteWishlistProduct = /* GraphQL */ `
     }
   }
 `;
+export const createShoppingCart = /* GraphQL */ `
+  mutation CreateShoppingCart(
+    $input: CreateShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    createShoppingCart(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+      }
+      couponCodeId
+      coupon {
+        id
+        groupId
+        description
+        code
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        createdAt
+        updatedAt
+      }
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
+      createdAt
+      updatedAt
+      shoppingcartProducts {
+        nextToken
+      }
+    }
+  }
+`;
 export const updateShoppingCart = /* GraphQL */ `
   mutation UpdateShoppingCart(
     $input: UpdateShoppingCartInput!
@@ -3758,12 +3784,157 @@ export const updateShoppingCart = /* GraphQL */ `
         updatedAt
       }
       userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+      }
+      couponCodeId
+      coupon {
+        id
+        groupId
+        description
+        code
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        createdAt
+        updatedAt
+      }
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
+      createdAt
+      updatedAt
       shoppingcartProducts {
         nextToken
       }
+    }
+  }
+`;
+export const deleteShoppingCart = /* GraphQL */ `
+  mutation DeleteShoppingCart(
+    $input: DeleteShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    deleteShoppingCart(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+      }
       couponCodeId
+      coupon {
+        id
+        groupId
+        description
+        code
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        createdAt
+        updatedAt
+      }
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
       createdAt
       updatedAt
+      shoppingcartProducts {
+        nextToken
+      }
     }
   }
 `;
@@ -4627,6 +4798,19 @@ export const createRedirects = /* GraphQL */ `
       id
       storeId
       slug
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
       redirect
       createdAt
       updatedAt
@@ -4642,6 +4826,19 @@ export const updateRedirects = /* GraphQL */ `
       id
       storeId
       slug
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
       redirect
       createdAt
       updatedAt
@@ -4657,6 +4854,19 @@ export const deleteRedirects = /* GraphQL */ `
       id
       storeId
       slug
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+      }
       redirect
       createdAt
       updatedAt
@@ -4825,12 +5035,69 @@ export const createStoreShoppingCart = /* GraphQL */ `
         updatedAt
       }
       userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        walletBalance
+        walletSpent
+        totalStoreCredit
+      }
+      couponCodeId
+      coupon {
+        id
+        groupId
+        description
+        code
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        createdAt
+        updatedAt
+      }
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
+      createdAt
+      updatedAt
       shoppingcartProducts {
         nextToken
       }
-      couponCodeId
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -4855,6 +5122,14 @@ export const addProductNotification = /* GraphQL */ `
 export const exportProducts = /* GraphQL */ `
   mutation ExportProducts($input: ExportProductInput!) {
     exportProducts(input: $input) {
+      success
+      message
+    }
+  }
+`;
+export const exportOrders = /* GraphQL */ `
+  mutation ExportOrders($input: ExportOrderInput!) {
+    exportOrders(input: $input) {
       success
       message
     }

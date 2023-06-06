@@ -25,7 +25,7 @@ const PaymentMethods = ({
           <span className="text-body text-normal ls-m ml-2 mr-2 checkout-payment-labels lh-default">
             {title}
           </span>
-          {!!tag && <p className="extra-lable m-0">EXTRA 5% OFF</p>}
+          {!!tag && <p className="extra-lable m-0">{tag}</p>}
         </div>
 
         <div

@@ -14,7 +14,9 @@ export const useFeaturedCoupons = () => {
   const featuredCoupons = useMemo(
     () =>
       (coupons || [])
-        .filter(coupon => !(coupon.autoApply && coupon.couponType === "PRODUCT"))
+        .filter(
+          (coupon) => !(coupon.autoApply && coupon.couponType === "PRODUCT")
+        )
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
@@ -50,7 +52,7 @@ export const useProductCoupons = (product, variant) => {
   return { productCoupons: restCoupons, bestCoupon };
 };
 
-export const useFreeProducts = () => {
+export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
   const coupons = useCoupons();
   const cartItems = useSelector((state) => state.cart.data || []);
   const appliedCoupon = useSelector((state) => state.cart.coupon);
@@ -80,8 +82,12 @@ export const useFreeProducts = () => {
             getYQuantity,
           } = coupon;
 
+          if (!total) return false;
           if (couponType !== "PRODUCT") return false;
           if (!autoApply) return false;
+
+          if (showNonApplicableFreeProducts) return true;
+
           if (minOrderValue && minOrderValue > total) return false;
           if (buyXQuantity + getYQuantity > totalItems) return false;
 
@@ -93,26 +99,61 @@ export const useFreeProducts = () => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                applicableCollections.some((ac) =>
-                  (c.collections || []).includes(ac)
+                  applicableCollections.some((ac) =>
+                    (c.collections || []).includes(ac)
+                  )
                 )
-              )
               : true;
 
           return hasCollection && hasProduct;
         })
-        .map((coupon) => coupon.getYProduct),
+        .map((coupon) => {
+          const {
+            applicableProducts,
+            applicableCollections,
+            minOrderValue,
+            buyXQuantity,
+            getYQuantity,
+            getYProduct,
+          } = coupon;
+
+          let allowed = true;
+          if (minOrderValue && minOrderValue > total) allowed = false;
+          if (buyXQuantity + getYQuantity > totalItems) allowed = false;
+
+          const hasProduct =
+            Array.isArray(applicableProducts) && applicableProducts.length
+              ? cartList.some((c) => applicableProducts.includes(c.id))
+              : true;
+
+          const hasCollection =
+            Array.isArray(applicableCollections) && applicableCollections.length
+              ? cartList.some((c) =>
+                  applicableCollections.some((ac) =>
+                    (c.collections || []).includes(ac)
+                  )
+                )
+              : true;
+
+          allowed = allowed && hasCollection && hasProduct;
+          const { message } = getCouponDiscount(coupon, cartList);
+          return { allowed, message, productId: getYProduct };
+        }),
     [coupons, total, totalItems, cartList]
   );
 
   useEffect(() => {
     const getProduct = async () => {
       const response = await Promise.all(
-        freeProductIds.map((productId) =>
+        freeProductIds.map(({ productId, allowed, message }) =>
           API.graphql({
             query: getProductById,
             variables: { id: productId },
-          }).then(({ data }) => data.getProduct)
+          }).then(({ data }) => ({
+            allowed,
+            message,
+            product: data.getProduct,
+          }))
         )
       );
 
