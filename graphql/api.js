@@ -1026,6 +1026,7 @@ export const searchProductsBasic = /* GraphQL */ `
       from: $from
       aggregates: $aggregates
     ) {
+      nextToken
       items {
         id
         title
@@ -1035,6 +1036,7 @@ export const searchProductsBasic = /* GraphQL */ `
         sku
         listingPrice
         thumbImages
+        updatedAt
         images(limit: $imageLimit) {
           items {
             id

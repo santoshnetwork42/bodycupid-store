@@ -1,49 +1,53 @@
-import {  searchProductsBasic, } from "~/graphql/api";
+import { searchProductsBasic } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
 const { STORE_ENV } = process.env;
 
-const siteMapLinks = [
-  {
-    loc: "https://bodycupid.com/sitemap_products_1.xml",
-  },
-  {
-    loc: "https://bodycupid.com/sitemap_pages_1.xml",
-  },
-  {
-    loc: "https://bodycupid.com/sitemap_collections_1.xml",
-  },
-  {
-    loc: "https://bodycupid.com/sitemap_blogs_1.xml",
-  },
-];
 export default async function Revalidate(req, res) {
   try {
-    const res = await fetchData(searchProductsBasic, {
+    const response = await fetchData(searchProductsBasic, {
       filter: {
         status: { eq: "ENABLED" },
         storeId: { eq: STORE_ID },
       },
     });
-    const { items } = res.searchProducts;
-    console.log("getProducts :>> ", items);
 
-    const data=items.map((i)=>({
+    const { items } = response.searchProducts;
+    const productUrls = items.map((product) => ({
+      loc: `https://bodycupid.com/product/${product.slug}`,
+      lastmod: product.updatedAt, 
+      changefreq: 'weekly',
+    }));
 
-    }))
-  } catch (e) {
-    console.log("e :>> ", e);
-  }
+    const siteMapLinks = [
+      {
+        loc: "https://bodycupid.com/sitemap_products_1.xml",
+      },
+      {
+        loc: "https://bodycupid.com/sitemap_pages_1.xml",
+      },
+      {
+        loc: "https://bodycupid.com/sitemap_collections_1.xml",
+      },
+      {
+        loc: "https://bodycupid.com/sitemap_blogs_1.xml",
+      },
+      ...productUrls,
+    ];
 
-  if (STORE_ENV !== "production" && false) {
-    const content = ["User-agent: *", "Disallow: /"].join("\n");
-    res.send(content);
-  } else {
-    const sitemapContent = buildSitemapXml(siteMapLinks);
-    res.setHeader("Content-Type", "application/xml");
-    res.write(sitemapContent);
-    res.end();
+    if (STORE_ENV !== "production" && false) {
+      const content = ["User-agent: *", "Disallow: /"].join("\n");
+      res.send(content);
+    } else {
+      const sitemapContent = buildSitemapXml(siteMapLinks);
+      res.setHeader("Content-Type", "application/xml");
+      res.write(sitemapContent);
+      res.end();
+    }
+  } catch (error) {
+    console.log("Error fetching products:", error);
+    res.status(500).send("Error fetching products");
   }
 }
 
@@ -55,7 +59,7 @@ const buildSitemapXml = (fields) => {
         return `<${key}>${value}</${key}>`;
       });
 
-      return `<sitemap>${field.join("")}</sitemap>\n`;
+      return `<url>${field.join("")}</url>\n`;
     })
     .join("");
 
