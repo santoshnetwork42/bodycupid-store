@@ -11,6 +11,14 @@ const nextConfig = withBundleAnalyzer({
     // basePath: '/react/riode/demo-1',
     // distDir: 'build',
     reactStrictMode: true,
+    async rewrites() {
+        return [
+            {
+                source: '/robots.txt',
+                destination: '/api/robots',
+            },
+        ];
+    },
     async redirects() {
         return [
             {
@@ -32,11 +40,6 @@ const nextConfig = withBundleAnalyzer({
                 source: '/elements/:any',
                 destination: '/',
                 permanent: true
-            },
-            {
-                source: '/robots.txt',
-                destination: '/api/robots',
-                permanent: false,
             },
         ];
     },
