@@ -1144,8 +1144,11 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
 `;
 
 export const createShoppingCart = /* GraphQL */ `
-  mutation CreateStoreShoppingCart($storeId: ID!) {
-    createStoreShoppingCart(storeId: $storeId) {
+  mutation CreateShoppingCart(
+    $input: CreateShoppingCartInput!
+    $condition: ModelShoppingCartConditionInput
+  ) {
+    createShoppingCart(input: $input, condition: $condition) {
       id
       storeId
       userId

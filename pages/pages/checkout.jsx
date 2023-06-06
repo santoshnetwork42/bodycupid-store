@@ -175,7 +175,8 @@ function Checkout(props) {
       onPlaceOrder(
         orderData.order,
         [...cartList, ...freeProducts],
-        appliedCoupon
+        appliedCoupon,
+        shippingAddress
       );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
