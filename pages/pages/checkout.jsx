@@ -44,6 +44,8 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { GUEST_CHECKOUT } from "~/constant";
 
 const logger = new Logger("Checkout");
 
@@ -62,6 +64,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store;
+  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -123,7 +126,7 @@ function Checkout(props) {
         API.graphql({
           query: createTransaction,
           variables: { orderId },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         }),
       ]);
 
@@ -228,8 +231,8 @@ function Checkout(props) {
       try {
         await API.graphql({
           query: createUserAddress,
-          variables: { input: { ...restAddress, userID: user.id } },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          variables: { input: { ...restAddress, userID: user?.id } },
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         });
       } catch (error) {
         errorHandler(error);
@@ -298,7 +301,7 @@ function Checkout(props) {
           } = await API.graphql({
             query: createOrder,
             variables: { input: payload },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
+            authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
           });
           logger.debug("Created order:", order);
 
@@ -316,7 +319,7 @@ function Checkout(props) {
                   amount: grandTotal,
                 },
               },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
+              authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
             }),
             ...cartList.map((p) => {
               const itemtotal = parseInt(p.qty) * parseInt(p.price);
@@ -352,7 +355,7 @@ function Checkout(props) {
                     sku: p.sku,
                   },
                 },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
+                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
               });
             }),
 
@@ -390,7 +393,7 @@ function Checkout(props) {
                     sku: p.sku,
                   },
                 },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
+                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
               });
             }),
 
@@ -464,7 +467,9 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && <Passwordless forceOpen redirect={false} />}
+      {!user && guestCheckout !== 1 && (
+        <Passwordless forceOpen redirect={false} />
+      )}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
