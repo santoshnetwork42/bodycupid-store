@@ -9,8 +9,6 @@ import States from "~/lib/states.json";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { errorHandler } from "~/utils/errorHandler";
 import { fetchCityAndState } from "~/utils/addAddress";
-import { useConfiguration } from "~/utils/contexts/navbar";
-import { GUEST_CHECKOUT } from "~/constant";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit } = props;
@@ -30,7 +28,6 @@ const AddressForm = (props) => {
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
-  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
 
   const fetchCityAndStateData = useCallback(async (pinCode) => {
     const result = await fetchCityAndState(pinCode);
@@ -135,7 +132,7 @@ const AddressForm = (props) => {
                     maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
-                    disabled={!!user}                  
+                    disabled={!!user}
                     onChange={(e) =>
                       setAddress({
                         phone: e.target.value.replaceAll(/[^0-9]+/g, "").trim(),
@@ -195,19 +192,19 @@ const AddressForm = (props) => {
                 />
               </div>
             </div>
-                <label>Pincode *</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="pincode"
-                  placeholder="Your pincode"
-                  required
-                  value={address.pinCode}
-                  onChange={(e) => setAddress({ pinCode: e.target.value })}
-                  onBlur={(e) => {
-                    setAddress({ pinCode: e.target.value.trim() });
-                  }}
-                />
+            <label>Pincode *</label>
+            <input
+              type="text"
+              className="form-control"
+              name="pincode"
+              placeholder="Your pincode"
+              required
+              value={address.pinCode}
+              onChange={(e) => setAddress({ pinCode: e.target.value })}
+              onBlur={(e) => {
+                setAddress({ pinCode: e.target.value.trim() });
+              }}
+            />
             <div className="row">
               <div className="col-xs-6">
                 <label>Town / City *</label>
@@ -241,29 +238,29 @@ const AddressForm = (props) => {
                 </select>
               </div>
             </div>
+          </div>
+        </div>
+
+        {!!errors && (
+          <div className="overflow-hidden mb-4">
+            <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
+              <ul className="m-0">
+                {Object.values(errors).map((val) => (
+                  <li key={val}>{val}</li>
+                ))}
+              </ul>
             </div>
           </div>
+        )}
 
-          {!!errors && (
-            <div className="overflow-hidden mb-4">
-              <div className="alert alert-danger alert-summary alert-light alert-message alert-inline">
-                <ul className="m-0">
-                  {Object.values(errors).map((val) => (
-                    <li key={val}>{val}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
-
-          <button
-            className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
-            type="submit"
-            disabled={loading}
-          >
-            {address.id ? "Save Address" : "Add Address"}
-            {loading && <div className="spin-loader ml-2" />}
-          </button>
+        <button
+          className="btn btn-primary btn-block btn-rounded d-flex justify-content-center align-items-center"
+          type="submit"
+          disabled={loading}
+        >
+          {address.id ? "Save Address" : "Add Address"}
+          {loading && <div className="spin-loader ml-2" />}
+        </button>
       </form>
     </div>
   );
