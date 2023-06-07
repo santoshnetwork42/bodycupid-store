@@ -230,7 +230,7 @@ export function* cartSaga() {
         variables: {
           input: { id: cartResponse.id },
         },
-        authMode: "AMAZON_COGNITO_USER_POOLS"
+        authMode: "AMAZON_COGNITO_USER_POOLS",
       });
     }
 
