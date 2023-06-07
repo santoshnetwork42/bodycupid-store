@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Script from "next/script";
+import { connect } from "react-redux";
 
-function CustomerGlu() {
+import { CUSTOMER_GLU_KEY } from "~/config";
+
+function CustomerGlu({ user }) {
+  useEffect(() => {
+    if (user) {
+      if (typeof window !== "undefined" && window.glu) {
+        window.glu.register(CUSTOMER_GLU_KEY, { userId: user.id }, {});
+      }
+    }
+  }, [user]);
+
   return (
     <>
       <Script
@@ -9,7 +20,7 @@ function CustomerGlu() {
         type="text/javascript"
         dangerouslySetInnerHTML={{
           __html: `window["gluConfig"] = {
-            writeKey: "6dc42e8449e1144c4fe8583568cbbf6a44270f9c",  //provided by CustomerGlu
+            writeKey: "${CUSTOMER_GLU_KEY}",  //provided by CustomerGlu
             userIdentification: {
               userId: null
             },
@@ -37,4 +48,10 @@ function CustomerGlu() {
   );
 }
 
-export default React.memo(CustomerGlu);
+function mapStateToProps(state) {
+  return {
+    user: state.user.data,
+  };
+}
+
+export default connect(mapStateToProps)(CustomerGlu);
