@@ -1,6 +1,5 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import { connect } from "react-redux";
 
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
@@ -169,14 +168,6 @@ export const getStaticProps = async () => {
   }
 };
 
-function mapStateToProps(state) {
-  console.log('state', state.cart)
-  return {
-    cart:state.cart
-  };
-}
-
-const Component = connect(mapStateToProps)(HomePage);
-Component.showStickyCheckout = true;
-Component.showTopRunner = true;
-export default Component;
+HomePage.showStickyCheckout = true;
+HomePage.showTopRunner = true;
+export default HomePage;
