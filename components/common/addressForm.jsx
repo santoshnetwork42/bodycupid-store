@@ -9,6 +9,8 @@ import States from "~/lib/states.json";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { errorHandler } from "~/utils/errorHandler";
 import { fetchCityAndState } from "~/utils/addAddress";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { GUEST_CHECKOUT } from "~/constant";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit } = props;
@@ -28,6 +30,7 @@ const AddressForm = (props) => {
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
+  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
 
   const fetchCityAndStateData = useCallback(async (pinCode) => {
     const result = await fetchCityAndState(pinCode);
@@ -132,7 +135,7 @@ const AddressForm = (props) => {
                     maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
-                    
+                    disabled={user}                  
                     onChange={(e) =>
                       setAddress({
                         phone: e.target.value.replaceAll(/[^0-9]+/g, "").trim(),
