@@ -39,23 +39,27 @@ function Addresses({
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-
-      if (!userAddresses.items.length && isMobile) {
-        openAllAddressModal();
-      }
-
       setAddresses(userAddresses.items);
       setLoading(false);
       setSelected(userAddresses.items[0]);
+      return userAddresses.items;
     } catch (error) {
       errorHandler(error);
     }
+    return [];
   }, [user]);
 
   useEffect(() => {
-    if (user) {
-      getUserAddress();
-    }
+    (async function () {
+      if (user) {
+        const userAddresses = await getUserAddress();
+        if (!userAddresses.length && isMobile) {
+          openAllAddressModal();
+        }
+      } else if (isMobile) {
+        openAllAddressModal();
+      }
+    })();
   }, [user]);
 
   const removeAddress = useCallback(
