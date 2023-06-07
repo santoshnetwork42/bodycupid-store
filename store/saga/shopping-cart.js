@@ -164,6 +164,14 @@ export function* cartSaga() {
             type: actionTypes.REMOVE_COUPON,
             payload: {},
           });
+          yield call([API, API.graphql], {
+            query: deleteShoppingCart,
+            variables: {
+              input: { id: cartResponse.id },
+            },
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+          });
+          yield put({ type: actionTypes.REFRESH_CART });
         }
 
         yield put({
