@@ -56,8 +56,6 @@ function Addresses({
         if (!userAddresses.length && isMobile) {
           openAllAddressModal();
         }
-      } else if (isMobile) {
-        openAllAddressModal();
       }
     })();
   }, [user]);
@@ -229,7 +227,7 @@ function Addresses({
       )}
 
       {!!selected && variant === "CHECKOUT" && (
-        <div className="d-sm-show p-0">
+        <div className="row d-sm-show p-0">
           <div className="bg-white mobile-checkout-address d-flex">
             <div className="mobile-address-heading">
               <p className="m-0 lh-default">
@@ -255,7 +253,7 @@ function Addresses({
       )}
 
       {!selected && variant === "CHECKOUT" && (
-        <div className="d-sm-show">
+        <div className="row d-sm-show">
           <div
             className={`bg-white border-regular d-flex checkout-add-address-btn`}
             onClick={() => {
@@ -269,7 +267,7 @@ function Addresses({
       )}
 
       {!addresses.length && (
-        <div className={`${variant === "CHECKOUT" && "d-sm-none"}`}>
+        <div className={`${variant === "CHECKOUT" && "row d-sm-none"}`}>
           <AddressForm onSubmit={onAddress} onAddress={onAddressChange} />
         </div>
       )}
