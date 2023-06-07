@@ -89,6 +89,12 @@ function Checkout(props) {
 
   const isFirst = payMethod === "PREPAID";
 
+  useEffect(()=> {
+    if(!user && !!guestCheckout){
+      openAllAddressModal()
+    }
+  }, [])
+
   useEffect(() => {
     startCheckout();
     logger.verbose("Checkout component initialized");
