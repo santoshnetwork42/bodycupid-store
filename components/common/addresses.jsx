@@ -37,8 +37,9 @@ function Addresses({
         variables: {
           filter: { userID: { eq: user.id } },
         },
-        authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        authMode: "AMAZON_COGNITO_USER_POOLS",
       });
+
       if (!userAddresses.items.length && isMobile) {
         openAllAddressModal();
       }
