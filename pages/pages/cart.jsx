@@ -13,9 +13,11 @@ import { getFreeProductTotal, toDecimal } from "~/utils";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
+import { useConfiguration } from "~/utils/contexts/navbar";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 import { Logger } from "aws-amplify";
+import { GUEST_CHECKOUT } from "~/constant";
 
 const logger = new Logger("Cart");
 
@@ -39,6 +41,7 @@ function Cart(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
+  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
 
   useEffect(() => {
     viewCart();
@@ -63,7 +66,7 @@ function Cart(props) {
       return false;
     }
 
-    if (user) {
+    if (user || guestCheckout === 1) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
       return true;
@@ -74,6 +77,7 @@ function Cart(props) {
     return false;
   }, [
     user,
+    guestCheckout,
     isInventoryCheckSuccess,
     appliedCoupon,
     cartList,
