@@ -17,7 +17,7 @@ const AddressForm = (props) => {
     firstName: firstName || "",
     lastName: lastName || "",
     email: email || null,
-    phone: phone,
+    phone: phone || "",
     address: "",
     state: "AN",
     city: "",
@@ -132,7 +132,7 @@ const AddressForm = (props) => {
                     maxLength={10}
                     value={removePhonePrefix(address.phone)}
                     required
-                    disabled
+                    
                     onChange={(e) =>
                       setAddress({
                         phone: e.target.value.replaceAll(/[^0-9]+/g, "").trim(),
