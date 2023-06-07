@@ -20,24 +20,28 @@ export const useInventory = () => {
   useEffect(() => {
     const callGetInventory = async () => {
       try {
-        const {
-          data: { checkInventory: response },
-        } = await API.graphql({
-          query: checkInventory,
-          variables: {
-            input: inventoryPayload,
-          },
-        });
+        if (inventoryPayload.length) {
+          const {
+            data: { checkInventory: response },
+          } = await API.graphql({
+            query: checkInventory,
+            variables: {
+              input: inventoryPayload,
+            },
+          });
 
-        const inventoryMapping = response.reduce(
-          (acc, { productId, variantId, inventory }) => {
-            const recordKey = getRecordKey({ id: productId }, variantId);
-            return { ...acc, [recordKey]: inventory };
-          },
-          {}
-        );
+          const inventoryMapping = response.reduce(
+            (acc, { productId, variantId, inventory }) => {
+              const recordKey = getRecordKey({ id: productId }, variantId);
+              return { ...acc, [recordKey]: inventory };
+            },
+            {}
+          );
 
-        setProductWithInventory(inventoryMapping);
+          setProductWithInventory(inventoryMapping);
+        } else {
+          setProductWithInventory({});
+        }
       } catch (error) {
         errorHandler(error);
       }

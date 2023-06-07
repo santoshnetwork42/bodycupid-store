@@ -160,10 +160,6 @@ export function* cartSaga() {
         }, []);
 
         if (!updatedProducts.length) {
-          yield put({
-            type: actionTypes.REMOVE_COUPON,
-            payload: {},
-          });
           yield call([API, API.graphql], {
             query: deleteShoppingCart,
             variables: {
@@ -171,13 +167,14 @@ export function* cartSaga() {
             },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
-          yield put({ type: actionTypes.REFRESH_CART });
-        }
 
-        yield put({
-          type: actionTypes.SET_CART,
-          payload: { products: updatedProducts },
-        });
+          yield put({ type: actionTypes.REFRESH_CART });
+        } else {
+          yield put({
+            type: actionTypes.SET_CART,
+            payload: { products: updatedProducts },
+          });
+        }
       }
     }
   });
