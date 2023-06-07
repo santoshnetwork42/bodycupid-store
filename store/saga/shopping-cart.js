@@ -27,7 +27,7 @@ export function* cartSaga() {
           variables: {
             input: { id: cartResponse.id, couponCodeId: id },
           },
-          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+          authMode: "AMAZON_COGNITO_USER_POOLS",
         });
         yield put({
           type: actionTypes.SET_CART,
@@ -47,7 +47,7 @@ export function* cartSaga() {
         variables: {
           input: { id: cartResponse.id, couponCodeId: null },
         },
-        authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        authMode: "AMAZON_COGNITO_USER_POOLS",
       });
       yield put({
         type: actionTypes.SET_CART,
@@ -149,7 +149,7 @@ export function* cartSaga() {
           variables: {
             input: { id: product.id },
           },
-          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+          authMode: "AMAZON_COGNITO_USER_POOLS",
         });
 
         const updatedProducts = products.reduce((cartAcc, prd) => {
@@ -204,7 +204,7 @@ export function* cartSaga() {
                     quantity: parseInt(p.qty),
                   },
                 },
-                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+                authMode: "AMAZON_COGNITO_USER_POOLS",
               })
             );
           }
@@ -230,7 +230,7 @@ export function* cartSaga() {
         variables: {
           input: { id: cartResponse.id },
         },
-        authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
+        authMode: "AMAZON_COGNITO_USER_POOLS"
       });
     }
 

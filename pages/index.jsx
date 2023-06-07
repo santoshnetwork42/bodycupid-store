@@ -169,8 +169,11 @@ export const getStaticProps = async () => {
   }
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  console.log('state', state.cart)
+  return {
+    cart:state.cart
+  };
 }
 
 const Component = connect(mapStateToProps)(HomePage);
