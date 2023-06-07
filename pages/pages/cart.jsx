@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
@@ -12,14 +13,17 @@ import { getFreeProductTotal, toDecimal } from "~/utils";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
+import { useConfiguration } from "~/utils/contexts/navbar";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 import { Logger } from "aws-amplify";
+import { GUEST_CHECKOUT } from "~/constant";
 
 const logger = new Logger("Cart");
 
 function Cart(props) {
   const {
+    store,
     cartList,
     appliedCoupon,
     user,
@@ -28,6 +32,7 @@ function Cart(props) {
     recordOutOfStock,
   } = props;
 
+  const { name } = store;
   const router = useRouter();
   const cartItems = useCartItems();
   const {
@@ -36,6 +41,7 @@ function Cart(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
+  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
 
   useEffect(() => {
     viewCart();
@@ -49,13 +55,8 @@ function Cart(props) {
     shippingTotal,
     couponTotal,
     cartGrandTotal,
-    cartAmountSaved,
+    cartAmountSaved: totalSaved,
   } = useCartTotal();
-
-  const totalSaved = useMemo(
-    () => getFreeProductTotal(cartItems) + cartAmountSaved,
-    [cartAmountSaved, cartItems]
-  );
 
   const validateAndGoToCheckout = useCallback(() => {
     if (!isInventoryCheckSuccess) {
@@ -65,7 +66,7 @@ function Cart(props) {
       return false;
     }
 
-    if (user) {
+    if (user || guestCheckout === 1) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
       return true;
@@ -76,6 +77,7 @@ function Cart(props) {
     return false;
   }, [
     user,
+    guestCheckout,
     isInventoryCheckSuccess,
     appliedCoupon,
     cartList,
@@ -90,6 +92,12 @@ function Cart(props) {
 
   return (
     <main className="main cart">
+      <Head>
+        <title>{name} | Cart</title>
+      </Head>
+
+      <h1 className="d-none">{name} - Cart</h1>
+
       <div className="page-content pt-lg-7 pt-2 pb-5 lh-default">
         <div className="step-by pr-4 pl-4 d-sm-none">
           <h3 className="title title-simple title-step active">
@@ -169,8 +177,8 @@ function Cart(props) {
                                 <td className="d-flex align-items-center no-wrap">
                                   <h4 className="summary-subtitle lh-1 ">
                                     Discounts
+                                    <span> ({appliedCoupon.code})</span>
                                   </h4>
-                                  &nbsp; ({appliedCoupon.code})
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
@@ -299,6 +307,7 @@ function Cart(props) {
 
 function mapStateToProps(state) {
   return {
+    store: state.system.store,
     cartList: state.cart.data ? state.cart.data : [],
     user: state.user.data,
     appliedCoupon: state.cart.coupon,

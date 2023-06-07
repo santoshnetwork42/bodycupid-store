@@ -72,8 +72,9 @@ function MobileMenu({ user, openPasswordLess }) {
               src="/images/logo.png"
               loading="eager"
               alt="logo"
-              height={60}
-              width={60}
+              height={70}
+              width={70}
+              objectFit="contain"
             />
           </ALink>
         </div>

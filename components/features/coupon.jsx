@@ -43,7 +43,7 @@ function Coupon(props) {
 
   const bestCouponCode = useMemo(() => {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
-      return null;
+      return appliedCoupon.code;
 
     const coupons = featuredCoupons.filter(
       (f) => f.autoApply && !!f.discount && f.allowed

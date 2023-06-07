@@ -87,3 +87,24 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     currentInventory: 1000,
   };
 };
+
+export const getProductPrice = (product, variantId) => {
+  const { variants, price: p, listingPrice: lp } = product || {};
+  const { items } = variants || {};
+
+  if (Array.isArray(items) && items.length) {
+    if (variantId) {
+      const currentVariant = items.find(i => i.id === variantId);
+      if (currentVariant) {
+        const { price, listingPrice } = currentVariant;
+        return { price, listingPrice };
+      }
+    }
+
+    const [{ price, listingPrice }] = items;
+    return { price, listingPrice };
+  }
+
+  return { price: p, listingPrice: lp };
+};
+

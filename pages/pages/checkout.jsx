@@ -44,6 +44,8 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { GUEST_CHECKOUT } from "~/constant";
 
 const logger = new Logger("Checkout");
 
@@ -62,6 +64,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store;
+  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -70,7 +73,7 @@ function Checkout(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
-  const freeProducts = useFreeProducts();
+  const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
@@ -78,6 +81,11 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
+
+  const freeProducts = useMemo(
+    () => freeProductsResponse.map((f) => f.product),
+    [freeProductsResponse]
+  );
 
   const isFirst = payMethod === "PREPAID";
 
@@ -90,7 +98,7 @@ function Checkout(props) {
     totalListingPrice,
     totalPrice,
     shippingTotal,
-    totalAmountSaved,
+    totalAmountSaved: totalSaved,
     couponTotal,
     grandTotal,
     prepaidDiscount,
@@ -99,13 +107,10 @@ function Checkout(props) {
     prepaidGrandTotal,
     codCharges,
     appliedCODCharges,
+    prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
-  const cartItems = useCartItems();
-
-  const totalSaved = useMemo(() => {
-    return getFreeProductTotal(cartItems) + totalAmountSaved;
-  }, [totalAmountSaved, cartItems]);
+  const cartItems = useCartItems(false);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -121,7 +126,7 @@ function Checkout(props) {
         API.graphql({
           query: createTransaction,
           variables: { orderId },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         }),
       ]);
 
@@ -164,7 +169,7 @@ function Checkout(props) {
         logger.error("Something went wrong with Razorpay initialization");
       }
     },
-    [store, user, cartList, freeProducts]
+    [store, user, cartList]
   );
 
   useEffect(() => {
@@ -173,7 +178,8 @@ function Checkout(props) {
       onPlaceOrder(
         orderData.order,
         [...cartList, ...freeProducts],
-        appliedCoupon
+        appliedCoupon,
+        shippingAddress
       );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
@@ -225,8 +231,8 @@ function Checkout(props) {
       try {
         await API.graphql({
           query: createUserAddress,
-          variables: { input: { ...restAddress, userID: user.id } },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          variables: { input: { ...restAddress, userID: user?.id } },
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         });
       } catch (error) {
         errorHandler(error);
@@ -295,7 +301,7 @@ function Checkout(props) {
           } = await API.graphql({
             query: createOrder,
             variables: { input: payload },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
+            authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
           });
           logger.debug("Created order:", order);
 
@@ -313,7 +319,7 @@ function Checkout(props) {
                   amount: grandTotal,
                 },
               },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
+              authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
             }),
             ...cartList.map((p) => {
               const itemtotal = parseInt(p.qty) * parseInt(p.price);
@@ -349,7 +355,7 @@ function Checkout(props) {
                     sku: p.sku,
                   },
                 },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
+                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
               });
             }),
 
@@ -387,7 +393,7 @@ function Checkout(props) {
                     sku: p.sku,
                   },
                 },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
+                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
               });
             }),
 
@@ -407,6 +413,7 @@ function Checkout(props) {
             setOrderData({ order, paymentId: null });
           }
         } catch (error) {
+          setLoading(false);
           errorHandler(error);
         }
       }
@@ -460,7 +467,9 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && <Passwordless forceOpen redirect={false} />}
+      {!user && guestCheckout !== 1 && (
+        <Passwordless forceOpen redirect={false} />
+      )}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
@@ -573,48 +582,46 @@ function Checkout(props) {
                                             {(item?.cartItemType ===
                                               "FREE_PRODUCT" ||
                                               item?.cartItemType ===
-                                                "AUTO_FREE_PRODUCT") &&
-                                              !!couponTotal && (
-                                                <span className="text-success mr-1">
-                                                  {!!item.price && (
-                                                    <del className="summary-subtotal-listingprice ml-0 mr-1">
-                                                      ₹{toDecimal(item.price)}
-                                                    </del>
-                                                  )}
-                                                  Free
-                                                </span>
-                                              )}
-
-                                            {((item?.cartItemType !==
-                                              "FREE_PRODUCT" &&
-                                              item?.cartItemType !==
-                                                "AUTO_FREE_PRODUCT") ||
-                                              !couponTotal) && (
-                                              <p className="m-0 product-discount-listing">
-                                                <span className="sm-product-amount">
-                                                  ₹{toDecimal(item.price)}
-                                                </span>
-                                                {item.price <
-                                                  item.listingPrice && (
-                                                  <del className="summary-subtotal-listingprice">
-                                                    ₹
-                                                    {toDecimal(
-                                                      item.listingPrice
-                                                    )}
+                                                "AUTO_FREE_PRODUCT") && (
+                                              <span className="text-success mr-1">
+                                                {!!item.price && (
+                                                  <del className="summary-subtotal-listingprice ml-0 mr-1">
+                                                    ₹{toDecimal(item.price)}
                                                   </del>
                                                 )}
-                                                <span
-                                                  className={`discount-percetage ml-2`}
-                                                >
-                                                  {productDiscountPercentage(
-                                                    item
-                                                  ) > 0 &&
-                                                    `${productDiscountPercentage(
-                                                      item
-                                                    )}% off`}
-                                                </span>
-                                              </p>
+                                                Free
+                                              </span>
                                             )}
+
+                                            {item?.cartItemType !==
+                                              "FREE_PRODUCT" &&
+                                              item?.cartItemType !==
+                                                "AUTO_FREE_PRODUCT" && (
+                                                <p className="m-0 product-discount-listing">
+                                                  <span className="sm-product-amount">
+                                                    ₹{toDecimal(item.price)}
+                                                  </span>
+                                                  {item.price <
+                                                    item.listingPrice && (
+                                                    <del className="summary-subtotal-listingprice">
+                                                      ₹
+                                                      {toDecimal(
+                                                        item.listingPrice
+                                                      )}
+                                                    </del>
+                                                  )}
+                                                  <span
+                                                    className={`discount-percetage ml-2`}
+                                                  >
+                                                    {productDiscountPercentage(
+                                                      item
+                                                    ) > 0 &&
+                                                      `${productDiscountPercentage(
+                                                        item
+                                                      )}% off`}
+                                                  </span>
+                                                </p>
+                                              )}
 
                                             <div className="text-grey">
                                               Qty:{item.qty || 1}
@@ -655,33 +662,26 @@ function Checkout(props) {
                                   </td>
                                 </tr>
                                 {!!appliedCoupon && !!couponTotal && (
-                                  <>
-                                    <tr className="summary-subtotal-saving">
-                                      <td>
-                                        <h4 className="summary-subtitle">
-                                          Coupons
-                                        </h4>
-                                        <p className="m-0">
-                                          <span className="d-flex">
-                                            <span className="mr-1">
-                                              {appliedCoupon.code}
-                                            </span>
-                                          </span>
-                                        </p>
-                                      </td>
-                                      <td>
-                                        <p className="summary-subtotal-price discount-price-color">
-                                          - {`₹${toDecimal(couponTotal)}`}
-                                        </p>
-                                      </td>
-                                    </tr>
-                                  </>
-                                )}
-                                {isFirst && (
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
-                                        5% Online Payment Discount
+                                        Coupons
+                                        <span> ({appliedCoupon.code})</span>
+                                      </h4>
+                                    </td>
+                                    <td>
+                                      <p className="summary-subtotal-price discount-price-color">
+                                        - {`₹${toDecimal(couponTotal)}`}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                )}
+                                {isFirst && !!prepaidDiscount && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        {prepaidDiscountPercent}% Online Payment
+                                        Discount
                                       </h4>
                                     </td>
                                     <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
@@ -806,7 +806,10 @@ function Checkout(props) {
                         <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
-                            tag={"EXTRA 5% OFF"}
+                            tag={
+                              !!prepaidDiscount &&
+                              `EXTRA ${prepaidDiscountPercent}% OFF`
+                            }
                             isSelected={payMethod === "PREPAID"}
                             description={
                               onlineDisabled
