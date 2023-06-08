@@ -4,6 +4,7 @@ import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
+import { Collapse } from "react-bootstrap";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -15,7 +16,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { toDecimal, getFreeProductTotal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -37,7 +38,7 @@ import {
   ShoppingCart,
   UpAngle,
 } from "~/components/icons";
-import { Collapse } from "react-bootstrap";
+import Card from "~/components/features/accordion/card";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
@@ -61,6 +62,7 @@ function Checkout(props) {
     startCheckout,
     openAllAddressModal,
     recordOutOfStock,
+    openLogin,
   } = props;
 
   const { name } = store;
@@ -487,9 +489,28 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
+
         <div className={"container mt-0 md-7"}>
           {cartList.length > 0 ? (
             <>
+              {!user && (
+                <div className="row">
+                  <div className="card accordion col-lg-12">
+                    <Card
+                      type="parse"
+                      title="<div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
+                                <i class='fas fa-exclamation-circle'></i> <span class='text-body'>Returning customer?</span> <a href='#' class='text-primary collapse'>Click here to login</a>
+                            </div>"
+                      onLinkClick={() => openLogin(false)}
+                    >
+                      <div className="alert-body collapsed">
+                        <Passwordless redirect={false} />
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              )}
+
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 {!isMobile && (

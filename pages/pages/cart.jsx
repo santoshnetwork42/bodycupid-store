@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -9,7 +9,7 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { getFreeProductTotal, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
@@ -30,6 +30,7 @@ function Cart(props) {
     openLogin,
     viewCart,
     recordOutOfStock,
+    onProceedToCheckout,
   } = props;
 
   const { name } = store;
@@ -59,6 +60,8 @@ function Cart(props) {
   } = useCartTotal();
 
   const validateAndGoToCheckout = useCallback(() => {
+    onProceedToCheckout();
+
     if (!isInventoryCheckSuccess) {
       recordOutOfStock(outOfStockItems, inventoryMapping);
       alertToaster("Please remove out of stock product from cart", "error");
@@ -321,6 +324,7 @@ const Component = connect(mapStateToProps, {
   openLogin: modalActions.openPasswordlessModal,
   viewCart: eventActions.viewCart,
   recordOutOfStock: eventActions.outOfStock,
+  onProceedToCheckout: eventActions.proceedToCheckout,
 })(Cart);
 
 Component.hideFooter = true;

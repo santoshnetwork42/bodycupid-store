@@ -19,6 +19,7 @@ export const actionTypes = {
   SEARCH: "SEARCH",
   VIEW_LIST_ITEM: "VIEW_LIST_ITEM",
   OUT_OF_STOCK: "OUT_OF_STOCK",
+  PROCEED_TO_CHECKOUT: "PROCEED_TO_CHECKOUT",
 };
 
 const initialState = {
@@ -40,6 +41,7 @@ export const eventActions = {
   }),
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
+  proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action) => ({ type: actionTypes.AUTH, payload: { action } }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   viewList: (id, name, products) => ({
@@ -78,6 +80,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
@@ -85,9 +88,18 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: action, eventID: uuid() });
     Analytics.record({ name: action });
     vercelAnalytics.track(action);
+  });
+
+  yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga() {
+    const userData = yield select((state) => state.user.data);
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
+    dataLayer.push({ event: "proceed_to_checkout", eventID: uuid(), login: userData ? 1 : 0 });
+    Analytics.record({ name: "proceed_to_checkout", login: userData ? "1" : "0" });
+    vercelAnalytics.track("proceed_to_checkout", { login: userData ? 1 : 0 });
   });
 
   yield takeEvery(cartActions.ADD_TO_CART, function* saga(e) {
