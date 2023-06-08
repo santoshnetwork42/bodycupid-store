@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Cookie from "js-cookie";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
@@ -13,11 +14,10 @@ import { toDecimal } from "~/utils";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
-import { useConfiguration } from "~/utils/contexts/navbar";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 import { Logger } from "aws-amplify";
-import { GUEST_CHECKOUT } from "~/constant";
+import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Cart");
 
@@ -42,7 +42,8 @@ function Cart(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
-  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
+
+  const guestCheckout = useGuestCheckout();
 
   useEffect(() => {
     viewCart();
@@ -69,7 +70,7 @@ function Cart(props) {
       return false;
     }
 
-    if (user || guestCheckout === 1) {
+    if (user || guestCheckout) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
       return true;

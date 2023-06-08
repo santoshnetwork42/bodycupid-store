@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
+import Cookie from "js-cookie";
 
 import { STORE_ID } from "~/config";
 import {
@@ -11,6 +12,7 @@ import {
 } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
+import { GUEST_CHECKOUT } from "~/constant";
 
 export const NavbarContext = createContext();
 
@@ -190,6 +192,12 @@ export const useConfiguration = (key, defaultValue) => {
     (configuration) => configuration.key === key
   );
   return configuration?.value || defaultValue;
+};
+
+export const useGuestCheckout = () => {
+  const guestCheck = useConfiguration(GUEST_CHECKOUT, 0);
+  const guestCookie = Cookie.get("guest");
+  if (guestCheck === 1 || guestCookie) return true;
 };
 
 export default NavbarProvider;
