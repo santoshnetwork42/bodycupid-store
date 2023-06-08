@@ -4,10 +4,10 @@
 
 // 1. Colors
 $primary-color: #1A181E !default;
-$primary-color-dark:  #222 !default;
-$primary-button-color:  #FFD613 !default;
-$secondary-color: #E50B20	 !default;
-$alert-color: #b10001 !default; 
+$primary-color-dark: #222 !default;
+$primary-button-color: #FFD613 !default;
+$secondary-color: #E50B20 !default;
+$alert-color: #b10001 !default;
 $success-color: #17b31b !default;
 $info-color: #26c !default;
 $body-color: #666 !default;
@@ -20,10 +20,10 @@ $white-color: #fff !default;
 $light-success-color: #F3FCE2 !default;
 $dark-green : #17B31B !default;
 $sold-out-back: #C20000 !default;
-$background-color-1:#F9F6E6 !default;
-$background-color-2:#E9DBC4 !default;
-$text-color-1:#6F4632 !default;
-$text-color-2:#A37B64 !default;
+$background-color-1: #F9F6E6 !default;
+$background-color-2: #E9DBC4 !default;
+$text-color-1: #6F4632 !default;
+$text-color-2: #A37B64 !default;
 $warning-color: #fff5eb !default;
 $warning-color-dark: #ffa372 !default;
 
@@ -35,8 +35,23 @@ $font-family: Manrope, $alt-font-family !default;
 $third-font-family: 'Open Sans', $alt-font-family !default;
 
 // 3. Breakpoints
-$breakpoints: (xs: 480px, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1600px, xlst: 1920px);
-$max-breakpoints: (xs: 479px, sm: 575px, md: 767px, lg: 991px, xl: 1199px, xxl: 1599px);
+$breakpoints: (
+	xs: 480px,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1600px,
+	xlst: 1920px
+);
+$max-breakpoints: (
+	xs: 479px,
+	sm: 575px,
+	md: 767px,
+	lg: 991px,
+	xl: 1199px,
+	xxl: 1599px
+);
 
 // 4. Link Colors
 $social-facebook: #3b5998;
@@ -52,4 +67,4 @@ $social-whatsapp: #3c8a38;
 $social-xing: #1a7576;
 $social-instagram: #7c4a3a;
 $social-paypal: #1a7576;
-$social-youtube:#FF0000;
+$social-youtube: #FF0000;

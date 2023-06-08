@@ -19,7 +19,7 @@
 .alert {
     position: relative;
     padding: 1rem 1.8rem 1rem 1.8rem;
-    border:  1px solid #222;
+    border: 1px solid #222;
     font-size: 1.4rem;
     line-height: 1.75;
 
@@ -34,6 +34,7 @@
         line-height: 0;
     }
 }
+
 .alert-title {
     font-size: 1.4rem;
     line-height: inherit;
@@ -43,6 +44,7 @@
 
 .btn-close {
     transition: color .3s;
+
     &:hover {
         color: #000;
     }
@@ -107,6 +109,7 @@
 //   Dark
 .alert-dark {
     color: #fff;
+
     .btn-close {
         color: #fff;
     }
@@ -115,10 +118,12 @@
 //  Icon
 .alert-icon {
     padding: 1.5rem 3.9rem 1.5rem 1.9rem;
-    > i {
+
+    >i {
         vertical-align: middle;
         margin-right: 1.2rem;
         line-height: 1;
+
         font: {
             size: 2.4rem;
             weight: 600;
@@ -137,6 +142,7 @@
         background-color: #f6d6d5;
         border-color: #f6d6d5;
         color: #6d1a17;
+
         .btn-close {
             color: #6d1a17;
         }
@@ -152,6 +158,7 @@
 .alert-message {
     display: block;
     padding: 1.9rem 3.9rem 1.9rem 1.9rem;
+
     .btn-close {
         position: absolute;
         transform: translateY(0);
@@ -176,36 +183,41 @@
         p {
             color: #666;
         }
-        
+
         a {
             color: $primary-color;
+
             &:hover {
                 text-decoration: underline;
             }
         }
     }
 }
+
 .alert.alert-inline {
     .alert-title {
         display: inline-block;
-        margin: 0 0 0 0 ;
+        margin: 0 0 0 0;
     }
-    &.error-height{
+
+    &.error-height {
         width: 100%;
         height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    p { 
+
+    p {
         display: inline;
     }
 }
+
 //  Buttons
 .alert-btn {
     &:not(.alert-message) {
         padding: .9rem 3.9rem .9rem .9rem;
-    } 
+    }
 
     .btn:not(.btn-close) {
         margin-right: 1rem;
@@ -225,6 +237,7 @@
                 padding: .7em 1.43em;
                 border-width: 3px;
                 color: #fff;
+
                 &:hover {
                     border-color: #df7f50;
                     background: #df7f50;
@@ -235,10 +248,11 @@
 
     &.alert-light {
         &.alert-warning {
-            .btn:not(.btn-close)  {
-                color:  $secondary-color;
+            .btn:not(.btn-close) {
+                color: $secondary-color;
                 background-color: #fff;
                 border-color: #fff;
+
                 &:hover {
                     color: #fff;
                     background-color: $secondary-color;
@@ -250,21 +264,22 @@
 }
 
 .coupon-tag {
-    background-color: rgba(255, 214, 19,0.3);
+    background-color: rgba(255, 214, 19, 0.3);
     width: fit-content;
     padding: .5rem 1.5rem;
     border: 1px dashed $primary-button-color;
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
-  }
+}
 
 // Summary
 .alert-summary {
-    > i {
-        margin-right:.9rem;
+    >i {
+        margin-right: .9rem;
         font-size: 1.6rem;
         line-height: 1.25;
     }
+
     ul {
         margin: 0rem 0 0 2.7rem;
         list-style-type: disc;

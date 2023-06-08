@@ -23,26 +23,31 @@
     color: #222;
     outline: 0;
     padding: 1.22em 2.78em;
+
     font: {
         weight: 700;
         size: 1.4rem;
         family: $font-family;
     }
+
     letter-spacing: 0.1rem;
     line-height: 1.2;
     text-transform: uppercase;
     text-align: center;
-    transition: color .3s, border-color .3s, background-color .3s, box-shadow .3s;
+    transition: color .3s,
+    border-color .3s,
+    background-color .3s,
+    box-shadow .3s;
     white-space: nowrap;
     cursor: pointer;
 
-    
+
     &:hover,
     &:active,
     &:focus {
         color: #222;
-        border-color:   darken( #e4eaec , 7% );
-        background-color: darken( #e4eaec , 7% );  
+        border-color: darken(#e4eaec, 7%);
+        background-color: darken(#e4eaec, 7%);
     }
 
     i {
@@ -51,23 +56,27 @@
         margin-left: .4rem;
         line-height: 0;
         font-size: 1.9rem;
+
         &::before {
             margin: 0;
         }
     }
 }
+
 .btn-solid {
     background-color: #fff;
     border-color: #fff;
     color: #222;
+
     &:hover,
     &:active,
     &:focus {
-        border-color:   #222;
+        border-color: #222;
         background-color: #222;
         color: #fff;
     }
 }
+
 // Outline Button
 .btn-outline {
     border: 2px solid #e4eaec;
@@ -81,9 +90,9 @@
         background-color: #666;
         color: #fff;
     }
-   
+
     &.btn-outline-light {
-        padding: 1.07em 2.21em; 
+        padding: 1.07em 2.21em;
         border-width: 1px;
     }
 
@@ -97,6 +106,7 @@
 .btn-icon-right,
 .btn-reveal-left,
 .btn-reveal-right {
+
     // display: inline-flex;
     // align-items: center;
     i {
@@ -108,6 +118,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     i {
         margin-left: .7rem;
     }
@@ -117,6 +128,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     i {
         margin-right: .7rem;
         margin-left: 0;
@@ -132,6 +144,7 @@
         margin-right: 0;
         transition: transform .3s, opacity .3s, margin .3s;
     }
+
     &:hover,
     &:active,
     &:focus {
@@ -152,7 +165,7 @@
         margin-left: 0;
         transition: transform .3s, opacity .3s, margin .3s;
     }
-    
+
     &:hover,
     &:active,
     &:focus {
@@ -164,8 +177,10 @@
         }
     }
 }
+
 // Slide Button
 .btn-slide-left {
+
     &:hover,
     &:active,
     &:focus {
@@ -174,7 +189,9 @@
         }
     }
 }
+
 .btn-slide-right {
+
     &:hover,
     &:active,
     &:focus {
@@ -183,7 +200,9 @@
         }
     }
 }
+
 .btn-slide-up {
+
     &:hover,
     &:active,
     &:focus {
@@ -192,7 +211,9 @@
         }
     }
 }
+
 .btn-slide-down {
+
     &:hover,
     &:active,
     &:focus {
@@ -201,6 +222,7 @@
         }
     }
 }
+
 .btn-infinite {
     &:hover {
         i {
@@ -213,20 +235,25 @@
     0% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(-.5em);
     }
+
     100% {
         transform: translateX(0);
     }
 }
+
 @keyframes slideRight {
     0% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(.5em);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -236,20 +263,25 @@
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-.5em);
     }
+
     100% {
         transform: translateY(0);
     }
 }
+
 @keyframes slideDown {
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(.5em);
     }
+
     100% {
         transform: translateY(0);
     }
@@ -257,32 +289,38 @@
 
 // Shadow Button
 .btn-shadow-lg {
-    box-shadow: 0 13px 20px -10px rgba(0,0,0,.15);
+    box-shadow: 0 13px 20px -10px rgba(0, 0, 0, .15);
+
     &:hover,
     &:active,
     &:focus {
-        box-shadow: 0 13px 20px -10px rgba(0,0,0,.2);
+        box-shadow: 0 13px 20px -10px rgba(0, 0, 0, .2);
     }
 }
+
 .btn-shadow {
-    box-shadow: 0 15px 20px -15px rgba(0,0,0,.15);
+    box-shadow: 0 15px 20px -15px rgba(0, 0, 0, .15);
+
     &:hover,
     &:active,
     &:focus {
-        box-shadow: 0 15px 20px -15px rgba(0,0,0,.2);
+        box-shadow: 0 15px 20px -15px rgba(0, 0, 0, .2);
     }
 }
+
 .btn-shadow-sm {
-    box-shadow: 0 17px 20px -20px rgba(0,0,0,.15);
+    box-shadow: 0 17px 20px -20px rgba(0, 0, 0, .15);
+
     &:hover,
     &:active,
     &:focus {
-        box-shadow: 0 17px 20px -20px rgba(0,0,0,.2);
+        box-shadow: 0 17px 20px -20px rgba(0, 0, 0, .2);
     }
 }
 
 // Underline Button
 .btn-underline {
+
     &:hover,
     &:active,
     &:focus {
@@ -290,6 +328,7 @@
             transform: scaleX(1);
         }
     }
+
     &::after {
         display: block;
         margin-top: 1px;
@@ -302,6 +341,7 @@
         transition: transform .3s;
         content: '';
     }
+
     // i {
     //     margin-bottom: 2px;
     // }
@@ -310,6 +350,7 @@
             transform: scaleX(1);
         }
     }
+
     &.btn-underline-width-sm {
         &::after {
             height: 1px;
@@ -317,8 +358,12 @@
         }
     }
 }
-.btn-underline.sm::after { width: 46%; }
-.btn-underline.lg::after { 
+
+.btn-underline.sm::after {
+    width: 46%;
+}
+
+.btn-underline.lg::after {
     margin-left: -16.5%;
     margin-right: -16.5%;
     width: 133%;
@@ -330,6 +375,7 @@
     color: #222;
     border: 0;
     background-color: transparent;
+
     &:hover,
     &:active,
     &:focus {
@@ -344,6 +390,7 @@
     color: #999 !important;
     border-color: #e4eaec !important;
     box-shadow: none !important;
+
     &::before,
     &::after {
         content: none !important;
@@ -353,9 +400,11 @@
         background-color: transparent !important;
     }
 }
+
 .btn {
     &.btn-rounded {
         border-radius: 3px;
+
         &::before,
         &::after {
             border-radius: 3px;
@@ -372,18 +421,21 @@
     &.btn-lg {
         padding: 1.5em 3.42em;
     }
+
     &.btn-md {
         padding: 1.07em 2.15em;
         font-size: 1.3rem;
     }
- 
+
     &.btn-sm {
         padding: 0.92em 1.61em;
         font-size: 1.3rem;
     }
 }
+
 .btn.btn-link {
     padding: 0;
+
     @include only-for-ie() {
         overflow: visible;
     }
@@ -400,11 +452,11 @@
     @include button-variant($secondary-color);
 }
 
-.btn-alert { 
+.btn-alert {
     @include button-variant($alert-color);
 }
 
-.btn-success  {
+.btn-success {
     @include button-variant($success-color);
 }
 
@@ -417,17 +469,20 @@
     color: $dark-color;
     background-color: #fff;
     border-color: #fff;
+
     &:hover,
     &:active,
     &:focus {
         color: $white-color;
         border-color: $primary-color;
-        background-color: $primary-color; 
+        background-color: $primary-color;
     }
+
     &.btn-outline {
         color: #fff;
         background-color: transparent;
         border-color: #fff;
+
         &:hover,
         &:active,
         &:focus {
@@ -435,9 +490,11 @@
             background-color: #fff;
         }
     }
+
     &.btn-link {
         color: #fff;
         background-color: transparent;
+
         &:hover,
         &:active,
         &:focus {
