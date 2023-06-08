@@ -846,6 +846,10 @@ function Checkout(props) {
 
                           <PaymentMethods
                             title="Cash On Delivery"
+                            tagVariant="danger"
+                            tag={
+                              !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
+                            }
                             isSelected={payMethod === "COD"}
                             description={
                               codDisabled
