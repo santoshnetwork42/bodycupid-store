@@ -7,6 +7,7 @@
         justify-content: center;
         text-align: center;
     }
+
     &.grey-section {
         .title-wrapper {
             p {
@@ -14,12 +15,15 @@
             }
         }
     }
+
     &.background-section {
         padding: 6.6rem 0 5rem;
+
         p {
             font-size: 1rem;
         }
     }
+
     .btn {
         margin-bottom: 2rem;
     }
@@ -27,7 +31,7 @@
 
 .btn-wrapper {
     display: flex;
-    align-items:  center;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 
@@ -47,6 +51,7 @@
     .btn-wrapper {
         .btn {
             margin: 1.4rem 0;
+
             &:not(:last-child) {
                 margin-right: 2rem;
             }
@@ -54,7 +59,7 @@
     }
 }
 
-@include mq(xs,max) {
+@include mq(xs, max) {
     .btn {
         font-size: 1.2rem;
     }

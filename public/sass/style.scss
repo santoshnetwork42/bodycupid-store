@@ -15,7 +15,7 @@
 @import 'config/variables';
 
 /* 2. mixins */
-@import 'mixins/breakpoints'; 
+@import 'mixins/breakpoints';
 @import 'mixins/core';
 @import 'mixins/buttons';
 
@@ -88,8 +88,8 @@
 @import 'base/footer/footer';
 
 /* 8. Pages */
-@import 'pages/about';  
-@import 'pages/account';   
+@import 'pages/about';
+@import 'pages/account';
 @import 'pages/buttons';
 @import 'pages/categories';
 @import 'pages/coming';

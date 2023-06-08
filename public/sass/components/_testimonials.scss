@@ -2,7 +2,7 @@
     Testimonial
 ---------------------------------------------- */
 
-.testimonial blockquote {    
+.testimonial blockquote {
     position: relative;
     margin-bottom: 2rem;
     padding: 1.5rem 2rem;
@@ -11,9 +11,10 @@
     color: #666;
     background-color: #f6f7f9;
     overflow: visible;
+
     &::after {
         content: '';
-        position: absolute;  
+        position: absolute;
         bottom: 0;
         left: 30px;
         display: block;
@@ -28,13 +29,15 @@
     display: flex;
     align-items: center;
     padding: 0 2rem;
+
     .testimonial-author-thumbnail {
         margin-right: 1.5rem;
         width: 5rem;
         height: 5rem;
         overflow: hidden;
         border-radius: 50%;
-    } 
+    }
+
     img {
         width: 100%;
         height: 100% !important;
@@ -47,15 +50,19 @@
             weight: 400;
             style: normal;
         }
+
         color: #222;
         line-height: 1;
+
         span {
             display: block;
             margin-top: .7rem;
+
             font: {
                 size: 1.2rem;
                 weight: 400;
             }
+
             text-transform: none;
             color: #999;
             line-height: 1;
@@ -77,6 +84,7 @@
         margin-left: 1.5rem;
         margin-right: 0;
     }
+
     .testimonial-info {
         justify-content: flex-end;
     }
@@ -91,44 +99,52 @@
     padding: 3.8rem 3rem 4rem;
     background-color: #f6f7f9;
     text-align: center;
+
     .testimonial-info {
         display: block;
         margin: 0;
         padding: 0;
     }
+
     .testimonial-author-thumbnail {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 2rem;
         width: 7rem;
         height: 7rem;
-    } 
+    }
 
     blockquote {
         margin-left: auto;
         margin-right: auto;
         background-color: transparent;
+
         &::after {
             content: none;
         }
     }
 
     .testimonial-title {
-        margin-bottom: 2.6rem; 
+        margin-bottom: 2.6rem;
+
         font: {
             size: 1.8rem;
         }
-        letter-spacing: 0;  
+
+        letter-spacing: 0;
         line-height: 1.2;
     }
+
     blockquote {
         padding: 0;
     }
+
     cite {
         span {
             margin-top: .8rem;
         }
     }
+
     &.testimonial-border {
         background-color: transparent;
         box-shadow: 0 0 0 2px #edeef0 inset
@@ -145,12 +161,14 @@
 
     blockquote {
         max-width: 86rem;
-        color:$text-color-1;
+        color: $text-color-1;
     }
+
     cite {
         text-transform: uppercase;
         font-weight: 600;
         color: $text-color-1;
+
         span {
             color: $text-color-1;
         }

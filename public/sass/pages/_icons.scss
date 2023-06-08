@@ -3,8 +3,10 @@
         overflow: hidden;
     }
 }
+
 .sample-icon-circle {
     margin-bottom: 2rem;
+
     i {
         display: flex;
         align-items: center;
@@ -18,14 +20,17 @@
         color: #fff;
     }
 }
+
 .sample-icon {
     display: flex;
     align-items: center;
     line-height: 41px;
+
     span {
         font-size: 12px;
         white-space: nowrap;
     }
+
     i {
         display: inline-block;
         margin-right: 10px;
@@ -33,20 +38,27 @@
         font-size: 20px;
         text-align: center;
     }
+
     &:hover {
         color: $primary-color;
         background: #f2f3f5;
-        i { font-size: 30px; }
+
+        i {
+            font-size: 30px;
+        }
+
         border-radius: 4px;
     }
 }
+
 .sample-icon-list {
     i {
         font-size: 22px;
     }
 }
+
 @include mq(xl) {
-    .cols-xl-12 > * {
+    .cols-xl-12>* {
         flex: 0 0 8.3333%;
         max-width: 8.3333%;
     }

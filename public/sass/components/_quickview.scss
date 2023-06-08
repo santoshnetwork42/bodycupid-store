@@ -6,8 +6,8 @@
     max-width: none;
 }
 
-.quickview-modal { 
-    .btn-close {    
+.quickview-modal {
+    .btn-close {
         transform: rotateZ(45deg);
         transition: transform .3s;
         width: 18px;
@@ -47,14 +47,14 @@
         height: 7px;
         width: 4px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
         margin-right: 2px;
         background: rgba(0, 0, 0, 0.25);
         border-radius: 5px;
         cursor: pointer;
     }
-    
+
     &::-webkit-scrollbar-track {
         background: #fff;
         border-image: 10px;
@@ -64,7 +64,7 @@
 }
 
 .product-popup {
-    .product-details { 
+    .product-details {
         padding: 0;
     }
 }
@@ -102,6 +102,7 @@
             height: auto !important;
         }
     }
+
     .ReactModal__Overlay {
         display: block;
     }
@@ -124,7 +125,7 @@
 }
 
 @supports(-ms-ime-align: auto) {
-.ReactModal__Overlay {
+    .ReactModal__Overlay {
         display: flex !important;
     }
 
