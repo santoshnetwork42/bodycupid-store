@@ -69,6 +69,8 @@ export const getCouponDiscount = (coupon, cartItems) => {
     getYStoreProduct,
   } = coupon;
 
+  const finalGetYQty = couponType === "BUY_X_GET_Y" ? getYQuantity : 0;
+
   const cartList = cartItems.filter((c) => {
     const isCartItem = c.cartItemSource !== "COUPON";
     if (!isCartItem) return false;
@@ -100,7 +102,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   const totalItems = getCartCount(cartList);
-  if (buyXQuantity + getYQuantity > totalItems) {
+  if (buyXQuantity + finalGetYQty > totalItems) {
     return {
       ...coupon,
       allowed: false,
