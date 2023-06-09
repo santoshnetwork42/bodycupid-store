@@ -149,7 +149,7 @@ const App = ({ Component, pageProps }) => {
       const cookieOptions = { expires: expiryDate };
       Cookie.set(`${STORE_PREFIX}_guest`, "1", cookieOptions);
     }
-  }, [GUEST_CHECKOUT_COOKIE_EXPIRY]);
+  }, []);
 
   const initSession = useCallback(async () => {
     setStore();
@@ -183,7 +183,7 @@ const App = ({ Component, pageProps }) => {
 
   useEffect(() => {
     setGuestCheckout();
-  }, [setGuestCheckout]);
+  }, []);
 
   return (
     <>

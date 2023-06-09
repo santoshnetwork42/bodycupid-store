@@ -198,7 +198,7 @@ export const useGuestCheckout = () => {
   const guestCheck = useConfiguration(GUEST_CHECKOUT, 0);
   const guestCookie = Cookie.get(`${STORE_PREFIX}_guest`);
   if (guestCheck === 1 || guestCookie) return true;
-  else return false;
+  return false;
 };
 
 export default NavbarProvider;
