@@ -6,7 +6,7 @@ import vercelAnalytics from "@vercel/analytics";
 
 import storage from "~/utils/storage";
 import { actionTypes as cartActions } from "~/store/cart";
-import { itemMapper, orderMapper } from "~/utils/events";
+import { itemMapper, orderMapper, userMapper } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
 import { getRecordKey } from "~/utils/helper";
 
@@ -19,6 +19,7 @@ export const actionTypes = {
   SEARCH: "SEARCH",
   VIEW_LIST_ITEM: "VIEW_LIST_ITEM",
   OUT_OF_STOCK: "OUT_OF_STOCK",
+  PROCEED_TO_CHECKOUT: "PROCEED_TO_CHECKOUT",
 };
 
 const initialState = {
@@ -30,27 +31,40 @@ function eventReducer(state = initialState) {
 }
 
 export const eventActions = {
-  viewItem: (product) => ({ type: actionTypes.VIEW_ITEM, payload: { product }, }),
-  placeOrder: (order, products, coupon) => ({ type: actionTypes.PLACE_ORDER, payload: { order, products, coupon }, }),
+  viewItem: (product) => ({
+    type: actionTypes.VIEW_ITEM,
+    payload: { product },
+  }),
+  placeOrder: (order, products, coupon, address) => ({
+    type: actionTypes.PLACE_ORDER,
+    payload: { order, products, coupon, address },
+  }),
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
+  proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action) => ({ type: actionTypes.AUTH, payload: { action } }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
-  viewList: (id, name, products) => ({ type: actionTypes.VIEW_LIST_ITEM, payload: { id, name, products } }),
-  outOfStock: (products, inventory) => ({ type: actionTypes.OUT_OF_STOCK, payload: { products, inventory } }),
+  viewList: (id, name, products) => ({
+    type: actionTypes.VIEW_LIST_ITEM,
+    payload: { id, name, products },
+  }),
+  outOfStock: (products, inventory) => ({
+    type: actionTypes.OUT_OF_STOCK,
+    payload: { products, inventory },
+  }),
 };
 
 export function* eventsSaga() {
   yield takeEvery(actionTypes.OUT_OF_STOCK, function* saga(e) {
     const { products, inventory } = e.payload;
     if (Array.isArray(products)) {
-      products.forEach(product => {
+      products.forEach((product) => {
         const recordKey = getRecordKey(product, product.variantId);
         const payload = {
           productId: product.id,
           variantId: product.variantId,
           cartQty: product.qty,
-          inventoryQty: inventory[recordKey]
+          inventoryQty: inventory[recordKey],
         };
 
         dataLayer.push({
@@ -66,6 +80,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
@@ -73,83 +88,101 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: action, eventID: uuid() });
     Analytics.record({ name: action });
     vercelAnalytics.track(action);
   });
 
+  yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga() {
+    const userData = yield select((state) => state.user.data);
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
+    dataLayer.push({ event: "proceed_to_checkout", eventID: uuid(), login: userData ? 1 : 0 });
+    Analytics.record({ name: "proceed_to_checkout", login: userData ? "1" : "0" });
+    vercelAnalytics.track("proceed_to_checkout", { login: userData ? 1 : 0 });
+  });
+
   yield takeEvery(cartActions.ADD_TO_CART, function* saga(e) {
     const { product } = e.payload;
     const { qty } = product;
-    const { attributes, items, value, attribute } = itemMapper(product);
+    const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
     const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const userData = yield select((state) => state.user.data);
+    const user = userMapper(userData);
+
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: eventName,
       eventID: uuid(),
-      attribute,
+      attribute: pixel,
+      user,
       ecommerce: {
         currency: "INR",
         value,
-        items,
-      }
+        items: ga,
+      },
     });
-    Analytics.record({ name: eventName, attributes, metrics: { value } });
-    vercelAnalytics.track(eventName, attribute);
+    Analytics.record({ name: eventName, pinpoint, metrics: { value } });
+    vercelAnalytics.track(eventName, vercel);
   });
 
   yield takeEvery(cartActions.REMOVE_FROM_CART, function* saga(e) {
     const { product } = e.payload;
-    const { attributes, items, value, attribute } = itemMapper(product);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
+
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "remove_from_cart",
       eventID: uuid(),
-      attribute,
+      attribute: pixel,
       ecommerce: {
         currency: "INR",
         value,
-        items
-      }
+        items: ga,
+      },
     });
-    Analytics.record({ name: "remove_from_cart", attributes, metrics: { value } });
-    vercelAnalytics.track("remove_from_cart", attribute);
+    Analytics.record({
+      name: "remove_from_cart",
+      pinpoint,
+      metrics: { value },
+    });
+    vercelAnalytics.track("remove_from_cart", vercel);
   });
 
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
     const { product } = e.payload;
-    const { attributes, items, value, attribute } = itemMapper(product);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_item",
       eventID: uuid(),
-      attribute,
+      attribute: pixel,
       ecommerce: {
         currency: "INR",
         value,
-        items
-      }
+        items: ga,
+      },
     });
-    Analytics.record({ name: "view_item", attributes, metrics: { value } });
-    vercelAnalytics.track("view_item", attribute);
+    Analytics.record({ name: "view_item", pinpoint, metrics: { value } });
+    vercelAnalytics.track("view_item", vercel);
   });
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
-    const { order, products, coupon } = e.payload;
+    const { order, products, coupon, address } = e.payload;
     const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
-    const { attributes, items, attribute } = orderMapper(products, coupon);
-    const attributeData = {
-      ...attribute,
-      value: totalAmount,
-    };
+    const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
 
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const userData = yield select(state => state.user.data);
+    const user = userMapper(userData, address);
+
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "purchase",
       eventID: uuid(),
-      attribute: attributeData,
+      user,
+      attribute: { ...pixel, order_id: id, value: totalAmount },
       ecommerce: {
         transaction_id: id,
         value: totalAmount,
@@ -158,8 +191,8 @@ export function* eventsSaga() {
         shipping: totalShippingCharges,
         currency: "INR",
         coupon: coupon?.code || "",
-        items
-      }
+        items: ga,
+      },
     });
 
     Analytics.record({
@@ -173,7 +206,7 @@ export function* eventsSaga() {
         currency: "INR",
         coupon: coupon?.code || "",
       },
-      metrics: { value: totalAmount }
+      metrics: { value: totalAmount },
     });
 
     vercelAnalytics.track("purchase", {
@@ -186,7 +219,7 @@ export function* eventsSaga() {
       coupon: coupon?.code || "",
     });
 
-    attributes.forEach(attr => {
+    pinpoint.forEach((attr) => {
       Analytics.record({
         name: "purchase_item",
         attributes: {
@@ -199,7 +232,9 @@ export function* eventsSaga() {
           coupon: coupon?.code || "",
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("purchase_item", {
         ...attr,
         transaction_id: id,
@@ -213,19 +248,21 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.CHECKOUT_STARTED, function* saga(e) {
-    const { cart: { data, coupon } } = yield select();
-    const { attributes, items, value, attribute } = orderMapper(data, coupon);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const {
+      cart: { data, coupon },
+    } = yield select();
+    const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "begin_checkout",
       eventID: uuid(),
-      attribute,
+      attribute: pixel,
       ecommerce: {
         value,
         currency: "INR",
         coupon: coupon?.code || "",
-        items
-      }
+        items: ga,
+      },
     });
 
     Analytics.record({
@@ -234,7 +271,7 @@ export function* eventsSaga() {
         currency: "INR",
         coupon: coupon?.code || "",
       },
-      metrics: { value }
+      metrics: { value },
     });
 
     vercelAnalytics.track("begin_checkout", {
@@ -242,7 +279,7 @@ export function* eventsSaga() {
       coupon: coupon?.code || "",
     });
 
-    attributes.forEach(attr => {
+    pinpoint.forEach((attr) => {
       Analytics.record({
         name: "begin_chekout_item",
         attributes: {
@@ -252,7 +289,9 @@ export function* eventsSaga() {
           coupon: coupon?.code || "",
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("begin_chekout_item", {
         ...attr,
         value,
@@ -263,19 +302,23 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.VIEW_CART, function* saga(e) {
-    const { cart: { data, coupon } } = yield select();
-    const { attributes, items, value, attribute } = orderMapper(data, coupon);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const {
+      cart: { data, coupon },
+    } = yield select();
+
+    const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_cart",
       eventID: uuid(),
-      attribute,
+      attribute: pixel,
       ecommerce: {
         value,
         currency: "INR",
         coupon: coupon?.code || "",
-        items
-      }
+        items: ga,
+      },
     });
 
     Analytics.record({
@@ -284,7 +327,7 @@ export function* eventsSaga() {
         currency: "INR",
         coupon: coupon?.code || "",
       },
-      metrics: { value }
+      metrics: { value },
     });
 
     vercelAnalytics.track("view_cart", {
@@ -292,7 +335,7 @@ export function* eventsSaga() {
       coupon: coupon?.code || "",
     });
 
-    attributes.forEach(attr => {
+    pinpoint.forEach((attr) => {
       Analytics.record({
         name: "view_cart_item",
         attributes: {
@@ -302,7 +345,9 @@ export function* eventsSaga() {
           coupon: coupon?.code || "",
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("view_cart_item", {
         ...attr,
         value,
@@ -314,46 +359,48 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
     const { id, name, products } = e.payload;
-    const { attributes, items, attribute } = orderMapper(products);
-    dataLayer.push({ ecommerce: null, attribute: null });
+    const { pinpoint, ga, pixel, vercel } = orderMapper(products);
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_item_list",
       eventID: uuid(),
-      attribute,
+      attribute: pixel,
       ecommerce: {
         item_list_id: id,
         item_list_name: name,
-        items
-      }
+        items: ga,
+      },
     });
 
     Analytics.record({
       name: "view_item_list",
       attributes: {
         item_list_id: id,
-        item_list_name: name
+        item_list_name: name,
       },
     });
 
     vercelAnalytics.track("view_item_list", {
       item_list_id: id,
-      item_list_name: name
+      item_list_name: name,
     });
 
-    attributes.forEach(attr => {
+    pinpoint.forEach((attr) => {
       Analytics.record({
         name: "view_item_list_item",
         attributes: {
           ...attr,
           item_list_id: id,
-          item_list_name: name
+          item_list_name: name,
         },
       });
+    });
 
+    vercel.forEach((attr) => {
       vercelAnalytics.track("view_item_list_item", {
         ...attr,
         item_list_id: id,
-        item_list_name: name
+        item_list_name: name,
       });
     });
   });

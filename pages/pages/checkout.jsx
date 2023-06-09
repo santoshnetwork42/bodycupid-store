@@ -4,6 +4,7 @@ import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
+import { Collapse } from "react-bootstrap";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -15,7 +16,7 @@ import {
   getOrderStatus,
 } from "~/graphql/api";
 import { createUserAddress } from "~/graphql/mutations";
-import { toDecimal, getFreeProductTotal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -37,13 +38,14 @@ import {
   ShoppingCart,
   UpAngle,
 } from "~/components/icons";
-import { Collapse } from "react-bootstrap";
+import Card from "~/components/features/accordion/card";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Checkout");
 
@@ -59,9 +61,12 @@ function Checkout(props) {
     startCheckout,
     openAllAddressModal,
     recordOutOfStock,
+    openLogin,
   } = props;
 
   const { name } = store;
+  
+  const guestCheckout = useGuestCheckout();
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -104,6 +109,7 @@ function Checkout(props) {
     prepaidGrandTotal,
     codCharges,
     appliedCODCharges,
+    prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
   const cartItems = useCartItems(false);
@@ -122,7 +128,7 @@ function Checkout(props) {
         API.graphql({
           query: createTransaction,
           variables: { orderId },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         }),
       ]);
 
@@ -174,7 +180,8 @@ function Checkout(props) {
       onPlaceOrder(
         orderData.order,
         [...cartList, ...freeProducts],
-        appliedCoupon
+        appliedCoupon,
+        shippingAddress
       );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
@@ -226,8 +233,8 @@ function Checkout(props) {
       try {
         await API.graphql({
           query: createUserAddress,
-          variables: { input: { ...restAddress, userID: user.id } },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          variables: { input: { ...restAddress, userID: user?.id } },
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         });
       } catch (error) {
         errorHandler(error);
@@ -296,7 +303,7 @@ function Checkout(props) {
           } = await API.graphql({
             query: createOrder,
             variables: { input: payload },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
+            authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
           });
           logger.debug("Created order:", order);
 
@@ -314,7 +321,7 @@ function Checkout(props) {
                   amount: grandTotal,
                 },
               },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
+              authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
             }),
             ...cartList.map((p) => {
               const itemtotal = parseInt(p.qty) * parseInt(p.price);
@@ -350,7 +357,7 @@ function Checkout(props) {
                     sku: p.sku,
                   },
                 },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
+                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
               });
             }),
 
@@ -388,7 +395,7 @@ function Checkout(props) {
                     sku: p.sku,
                   },
                 },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
+                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
               });
             }),
 
@@ -408,6 +415,7 @@ function Checkout(props) {
             setOrderData({ order, paymentId: null });
           }
         } catch (error) {
+          setLoading(false);
           errorHandler(error);
         }
       }
@@ -461,7 +469,9 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && <Passwordless forceOpen redirect={false} />}
+      {!user && !guestCheckout && (
+        <Passwordless forceOpen redirect={false} />
+      )}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
@@ -479,9 +489,28 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
+
         <div className={"container mt-0 md-7"}>
           {cartList.length > 0 ? (
             <>
+              {!user && (
+                <div className="row">
+                  <div className="card accordion col-lg-12">
+                    <Card
+                      type="parse"
+                      title="<div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
+                                <i class='fas fa-exclamation-circle'></i> <span class='text-body'>Returning customer?</span> <a href='#' class='text-primary collapse'>Click here to login</a>
+                            </div>"
+                      onLinkClick={() => openLogin(false)}
+                    >
+                      <div className="alert-body collapsed">
+                        <Passwordless redirect={false} />
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              )}
+
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 {!isMobile && (
@@ -654,33 +683,26 @@ function Checkout(props) {
                                   </td>
                                 </tr>
                                 {!!appliedCoupon && !!couponTotal && (
-                                  <>
-                                    <tr className="summary-subtotal-saving">
-                                      <td>
-                                        <h4 className="summary-subtitle">
-                                          Coupons
-                                        </h4>
-                                        <p className="m-0">
-                                          <span className="d-flex">
-                                            <span className="mr-1">
-                                              {appliedCoupon.code}
-                                            </span>
-                                          </span>
-                                        </p>
-                                      </td>
-                                      <td>
-                                        <p className="summary-subtotal-price discount-price-color">
-                                          - {`₹${toDecimal(couponTotal)}`}
-                                        </p>
-                                      </td>
-                                    </tr>
-                                  </>
-                                )}
-                                {isFirst && (
                                   <tr className="summary-subtotal">
                                     <td>
                                       <h4 className="summary-subtitle">
-                                        5% Online Payment Discount
+                                        Coupons
+                                        <span> ({appliedCoupon.code})</span>
+                                      </h4>
+                                    </td>
+                                    <td>
+                                      <p className="summary-subtotal-price discount-price-color">
+                                        - {`₹${toDecimal(couponTotal)}`}
+                                      </p>
+                                    </td>
+                                  </tr>
+                                )}
+                                {isFirst && !!prepaidDiscount && (
+                                  <tr className="summary-subtotal">
+                                    <td>
+                                      <h4 className="summary-subtitle">
+                                        {prepaidDiscountPercent}% Online Payment
+                                        Discount
                                       </h4>
                                     </td>
                                     <td className="summary-subtotal-price discount-price-color pb-0 pt-0">
@@ -805,7 +827,10 @@ function Checkout(props) {
                         <div className="checkbox-group ">
                           <PaymentMethods
                             title="Pay Online"
-                            tag={"EXTRA 5% OFF"}
+                            tag={
+                              !!prepaidDiscount &&
+                              `EXTRA ${prepaidDiscountPercent}% OFF`
+                            }
                             isSelected={payMethod === "PREPAID"}
                             description={
                               onlineDisabled
@@ -821,6 +846,10 @@ function Checkout(props) {
 
                           <PaymentMethods
                             title="Cash On Delivery"
+                            tagVariant="danger"
+                            tag={
+                              !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
+                            }
                             isSelected={payMethod === "COD"}
                             description={
                               codDisabled

@@ -4,48 +4,58 @@
 
 .checkout {
     line-height: 1.54;
+
     &.main {
         // border-top: 1px solid #e1e1e1;
     }
+
     .alert.card-header {
         padding-top: 1.2rem;
         padding-bottom: 1.3rem;
         background-color: $white-color;
         border: 1px dashed #cacbcc;
         text-transform: none;
-        & > a {
+
+        &>a {
             display: inline-block;
             padding: 0;
-            &::after, &::before {
+
+            &::after,
+            &::before {
                 content: none;
             }
         }
     }
 
-    .alert-icon > i {
+    .alert-icon>i {
         margin-right: .8rem;
     }
 
     // .parse-content {
-        &.expanded .text-body::after {
-            width: .8rem;
-            height: .8rem;
-            left: .5rem;
-            background: #666;
-        }
+    &.expanded .text-body::after {
+        width: .8rem;
+        height: .8rem;
+        left: .5rem;
+        background: #666;
+    }
+
     // }
 
     .alert-body {
         transition: display .3s;
-        p { 
+
+        p {
             font-size: 1.3rem;
         }
+
         &.expanding {
             display: none;
         }
+
         &.collapsing {
             display: block;
         }
+
         .form-control {
             margin: 0;
         }
@@ -59,6 +69,7 @@
         .btn {
             padding: 1em 2.5em;
         }
+
         span {
             margin: 0 1.1rem;
             font-size: 1.4rem;
@@ -73,14 +84,17 @@
     .social-link {
         border-radius: .3rem;
         color: $white-color;
+
         &.social-google {
             background-color: $social-google;
             border-color: $social-google;
         }
+
         &.social-facebook {
             background-color: $social-facebook;
             border-color: $social-facebook;
         }
+
         &.social-twitter {
             background-color: $social-twitter;
             border-color: $social-twitter;
@@ -91,18 +105,21 @@
         .form-control {
             max-width: 42.5rem;
         }
+
         .btn {
             padding: 1.04em 2.05em;
             border-width: 1px;
         }
     }
-    
+
     label {
         display: block;
         padding-left: .2rem;
         margin-bottom: 1rem;
         font-size: 1.4rem;
+        letter-spacing: 0.5px;
         line-height: .9;
+        font-weight: 600;
     }
 
     .form .title.title-simple {
@@ -112,8 +129,9 @@
 
     .select-box select {
         max-width: 100%;
-        width:100%;
+        width: 100%;
     }
+
     .form-control {
         margin-bottom: 2.1rem;
         padding-left: 1.5rem;
@@ -124,13 +142,16 @@
         color: #999;
         min-height: 4.1rem;
         border-radius: .3rem;
+
         &:not(:focus) {
             background-color: #fff;
         }
+
         &:not(select):focus {
             border-color: #000;
         }
     }
+
     textarea.form-control {
         padding-top: 1.5rem;
     }
@@ -139,12 +160,14 @@
         padding-top: .7rem;
         margin-bottom: 2.8rem;
     }
+
     .form-control-label {
         padding-left: 2.6rem;
         margin-bottom: 0;
         font-size: 1.4rem;
         line-height: 2.58;
     }
+
     .order-image {
         min-width: 8rem;
     }
@@ -152,6 +175,7 @@
     .product-total {
         min-width: 6rem;
     }
+
     .product-name {
         font-size: 1.4rem;
         letter-spacing: 0;
@@ -161,19 +185,26 @@
     .btn-order {
         width: 100%;
         transition: opacity .3s;
+
         &:hover {
             opacity: .9;
         }
     }
-    .card { background: transparent; }
+
+    .card {
+        background: transparent;
+    }
+
     .card-header {
         font-size: 1.4rem;
         line-height: 3rem;
         text-transform: capitalize;
         font-weight: 400;
         flex-direction: row;
+
         a {
             padding: 0 0 0 2.5rem;
+
             &::before,
             &::after {
                 position: absolute;
@@ -183,6 +214,7 @@
                 top: 50%;
                 transform: translateY(-50%);
             }
+
             &::before {
                 left: 0;
                 width: 1.8rem;
@@ -190,6 +222,7 @@
                 background: #fff;
                 border: 1px solid #cdcdcd;
             }
+
             &.collapse::after {
                 width: .8rem;
                 height: .8rem;
@@ -197,17 +230,25 @@
                 background: #666;
             }
         }
-        p{
-            background-color: $success-color;
+
+        p {
             padding: 0px 1rem;
             color: #fafafa;
             border-radius: .3rem;
-            
+
         }
-        .extra-lable{
+
+        .extra-lable {
+            background-color: $success-color;
             font-size: 12px;
+            font-weight: 600;
+
+            &.danger {
+                background-color: $secondary-color;
+            }
         }
     }
+
     .card-body {
         padding: 0.8rem 0 1.1rem 2.9rem;
         line-height: 1.4;
@@ -215,6 +256,7 @@
 
     .payment.accordion {
         padding-bottom: 2rem;
+
         .summary-subtitle {
             font-size: 1.5rem;
         }
@@ -231,10 +273,12 @@
 
     .product-subtotal {
         margin-bottom: 0.5rem;
+
         .discount-percetage {
             color: $success-color;
         }
     }
+
     .product-quantity {
         margin-left: .4rem;
     }
@@ -245,12 +289,15 @@
 
     .summary .form-control-label {
         line-height: 1.4;
+
         &::before {
             top: 0;
             transform: none;
         }
-        a { 
-            color: #000; 
+
+        a {
+            color: #000;
+
             &:hover {
                 color: $primary-color;
             }
@@ -264,26 +311,33 @@
         left: .5rem;
         background: #666;
     }
+
     .product-discount-listing {
         display: inline;
     }
+
     .summary-subtotal-listingprice {
         margin-left: 1rem;
     }
+
     .payment-card {
         padding: 1rem;
         gap: 1rem;
         cursor: pointer;
+
         .checkout-payment-labels {
             font-size: 1.6rem;
             font-weight: 600;
             color: $primary-color !important;
         }
+
         .payment-subtitle {
             color: $grey-color;
         }
+
         .payment-alert {
             color: $secondary-color !important;
+
             a {
                 width: fit-content;
                 text-decoration: underline;
@@ -291,11 +345,13 @@
                 cursor: pointer;
             }
         }
+
         .payment-card-amount {
             color: $primary-color;
             font-size: 1.6rem;
         }
     }
+
     .check-payment-detail {
         padding: 0rem 2rem 1rem;
     }
@@ -305,10 +361,10 @@
         margin-bottom: 1rem !important;
         margin-top: 2rem !important;
     }
-    
+
 }
 
-.checkout-address-form{
+.checkout-address-form {
     padding: 20px;
 }
 
@@ -322,7 +378,8 @@
     justify-content: center;
     gap: .51rem;
     color: $primary-color;
-    .add-address-label{
+
+    .add-address-label {
         font-size: 1.6rem;
         line-height: 1;
         font-weight: bolder;
@@ -334,11 +391,13 @@
     font-size: 3rem;
     padding: 1.5rem 1.5rem;
     justify-content: space-between;
-    .checkout-summary-label{
+
+    .checkout-summary-label {
         font-size: 1.6rem;
         font-weight: 600;
         margin: 0px 12px 0px 8px !important;
     }
+
     .checkout-summary-total {
         font-size: 2rem;
         line-height: 1;
@@ -347,31 +406,33 @@
 }
 
 .collapsible-checkout-wrapper {
-	overflow: hidden;
+    overflow: hidden;
 
-	&.collapse:not(.show) {
+    &.collapse:not(.show) {
         display: none;
-	}
-	
-	&.collapsing {
-		position: relative;  
-		overflow: hidden;
-		height: 0;
-		transition: height .35s ease;
-	}
+    }
+
+    &.collapsing {
+        position: relative;
+        overflow: hidden;
+        height: 0;
+        transition: height .35s ease;
+    }
 }
 
 .all-address-modal-overlay {
     margin: 0px;
     padding: 0px;
+
     .all-address-popup {
         padding: 2rem 2rem;
         position: absolute !important;
         bottom: 0;
         width: 100%;
-        max-height: 500px;
+        max-height: 550px;
         overflow: scroll;
     }
+
     .address-card {
         border-bottom: 1px solid #e1e1e1;
     }
@@ -382,6 +443,7 @@
     padding-bottom: 2.2rem;
     border-bottom: 1px solid #e1e1e1;
 }
+
 .order-table {
     color: #222;
 
@@ -390,9 +452,11 @@
         font-size: 1.6rem;
         font-weight: 600;
     }
+
     td {
         padding-bottom: 0.6rem;
         line-height: 1.6;
+
         time {
             display: -webkit-box;
             overflow: hidden;
@@ -400,6 +464,7 @@
             -webkit-box-orient: vertical;
         }
     }
+
     .order-total {
         td {
             border-bottom: none;
@@ -422,17 +487,22 @@
             cursor: pointer;
         }
     }
-    .summary-subtotal { 
-        
+
+    .summary-subtotal {
+
         // border-top: 1px solid $border-color; 
         td:first-child {
             padding: .4rem 0 .3rem;
         }
     }
-    .summary-subtotal-price { padding-top: 1rem; }
-    tbody > tr:nth-child(2) td {
-        padding-bottom: 1.6rem;
+
+    .summary-subtotal-price {
+        padding-top: 1rem;
     }
+
+    // tbody > tr:nth-child(2) td {
+    //     padding-bottom: 0.6rem;
+    // }
 }
 
 .sumnary-shipping {
@@ -451,31 +521,37 @@
 
 .summary-total {
     border-bottom: 1px solid $border-color;
+
     .summary-subtitle {
         padding: 2.3rem 0 2.1rem;
     }
 }
+
 @include mq(xs, 'max') {
     .order-table {
         tbody {
-            .product-name, .product-total {
+
+            .product-name,
+            .product-total {
                 padding-bottom: 2rem;
                 line-height: 1.2;
             }
-            > tr:nth-child(2) td {
-                padding-bottom: 2rem;
-            }
+
+            // > tr:nth-child(2) td {
+            //     padding-bottom: 0.3rem;
+            // }
         }
     }
 }
 
-@include mq(sm,'max'){
+@include mq(sm, 'max') {
     .checkout-page-content {
-        
+
         .container {
             padding: 0 !important;
         }
     }
+
     .payment-heading {
         margin-top: 1rem !important;
         padding-left: 1.5rem;

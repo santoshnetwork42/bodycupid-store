@@ -6,27 +6,32 @@
 .accordion {
 	overflow: hidden;
 }
+
 .card-header {
 	text-transform: capitalize;
+
 	font: {
 		size: 1.8rem;
 		weight: 600;
 	}
+
 	line-height: 1;
 	color: #222;
-	
+
 	a {
 		display: flex;
 		align-items: center;
 		position: relative;
 		padding: 1.6rem 0rem;
-		.card-title{
+
+		.card-title {
 			p {
 				margin: 0;
 				font-size: 1.6rem;
 				font-weight: 500;
 			}
 		}
+
 		&:hover {
 			color: $primary-color;
 
@@ -34,7 +39,7 @@
 				color: $primary-color;
 			}
 		}
-		
+
 		& i.icon {
 			position: absolute;
 			top: 50%;
@@ -43,12 +48,13 @@
 			transform-origin: center center;
 			height: 12px;
 			width: 12px;
-			
+
 			font: {
 				family: "riode";
 				size: 1.8rem;
 				weight: 400;
 			}
+
 			letter-spacing: .01em;
 			color: #222;
 		}
@@ -85,7 +91,7 @@
 	&.collapse:not(.show) {
 		display: none;
 	}
-	
+
 	&.collapsing {
 		position: relative;
 		height: 0;
@@ -124,12 +130,16 @@
 
 // Toggle Icon Plus
 .accordion-plus {
-	.toggle-button.collapsed, .toggle-button.collapsing {
+
+	.toggle-button.collapsed,
+	.toggle-button.collapsing {
 		&::after {
 			content: '\f2c3';
 		}
 	}
-	.toggle-button.expanded, .toggle-button.expanding {
+
+	.toggle-button.expanded,
+	.toggle-button.expanding {
 		&::after {
 			content: '\f28f';
 		}
@@ -138,6 +148,7 @@
 
 // Boxed Style
 .accordion-boxed {
+
 	.card-header a,
 	.card-body {
 		padding-left: 2rem;
@@ -157,7 +168,8 @@
 // 	}
 // }
 
-.toggle-button.expanded, .toggle-button.expanding {
+.toggle-button.expanded,
+.toggle-button.expanding {
 	& i.icon {
 		transform: rotate(180deg);
 	}
@@ -169,6 +181,7 @@
 		border-width: 1px 1px 0;
 		border-style: solid;
 		border-color: $border-color;
+
 		&:last-child {
 			border-bottom: 1px solid $border-color;
 		}
@@ -177,7 +190,7 @@
 			border-color: $primary-color;
 		}
 	}
-} 
+}
 
 // Background Style
 .accordion-background {
@@ -189,7 +202,8 @@
 
 // Drop Shadow Style
 .accordion-dropshadow {
-	box-shadow: 0 0 15px 0 rgba(0,0,0,.12);
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, .12);
+
 	.card {
 		background-color: #fff;
 		border-color: #fff;
@@ -201,10 +215,12 @@
 	.card-header {
 		i {
 			margin-right: 1.5rem;
+
 			font: {
 				size: 1.8rem;
 				weight: 400;
 			}
+
 			letter-spacing: .01em;
 			line-height: 0;
 		}
@@ -216,6 +232,7 @@
 	.card {
 		border: 1px solid #f2f3f5;
 	}
+
 	.card-header {
 		a {
 			padding-top: 1.7rem;
@@ -223,17 +240,20 @@
 			background-color: #f2f3f5;
 		}
 	}
+
 	&.accordion-primary {
 		.card {
 			border: 0;
 			background-color: #f2f3f5;
 		}
+
 		.card-header {
 			a {
 				padding-top: 1.8rem;
 				padding-bottom: 1.8rem;
 				background-color: #3377cc;
 				color: #fff;
+
 				&::after {
 					color: #fff;
 				}

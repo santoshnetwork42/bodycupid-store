@@ -23,8 +23,10 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
+// import CustomerGlu from "~/components/scripts/cutomer-glu";
 
 import NavbarProvider from "~/utils/contexts/navbar";
+import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -136,6 +138,19 @@ const App = ({ Component, pageProps }) => {
     store.dispatch(systemActions.setMeta(metadata));
   }, [store, query]);
 
+  const setGuestCheckout = useCallback(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestParam = urlParams.get("guest");
+    if (guestParam === "1") {
+      const expiryDate = new Date();
+      expiryDate.setTime(
+        expiryDate.getTime() + GUEST_CHECKOUT_COOKIE_EXPIRY * 60 * 60 * 1000
+      );
+      const cookieOptions = { expires: expiryDate };
+      Cookie.set(`${STORE_PREFIX}_guest`, "1", cookieOptions);
+    }
+  }, []);
+
   const initSession = useCallback(async () => {
     setStore();
     setUser();
@@ -166,6 +181,10 @@ const App = ({ Component, pageProps }) => {
     setMetaData();
   }, [query, setMetaData]);
 
+  useEffect(() => {
+    setGuestCheckout();
+  }, []);
+
   return (
     <>
       {!!pageMeta && <NextHead {...pageMeta} />}
@@ -179,6 +198,7 @@ const App = ({ Component, pageProps }) => {
             <Layout navbar={navbarProps} footer={footerProps}>
               <Component {...pageProps} />
               <VercelAnalytics />
+              {/* <CustomerGlu /> */}
             </Layout>
           </NavbarProvider>
         </PersistGate>

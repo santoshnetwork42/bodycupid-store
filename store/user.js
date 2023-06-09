@@ -3,7 +3,7 @@ import { persistReducer } from "redux-persist";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 
-const actionTypes = {
+export const actionTypes = {
     SET_USER: 'SET_USER',
     REMOVE_USER: 'REMOVE_USER',
     UPDATE_USER: 'UPDATE_USER',

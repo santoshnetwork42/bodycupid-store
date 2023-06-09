@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -9,13 +9,14 @@ import Coupons from "~/components/features/coupon";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { getFreeProductTotal, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 import { Logger } from "aws-amplify";
+import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Cart");
 
@@ -28,6 +29,7 @@ function Cart(props) {
     openLogin,
     viewCart,
     recordOutOfStock,
+    onProceedToCheckout,
   } = props;
 
   const { name } = store;
@@ -39,6 +41,8 @@ function Cart(props) {
     inventoryMapping,
     outOfStockItems,
   } = useInventory();
+
+  const guestCheckout = useGuestCheckout();
 
   useEffect(() => {
     viewCart();
@@ -56,6 +60,8 @@ function Cart(props) {
   } = useCartTotal();
 
   const validateAndGoToCheckout = useCallback(() => {
+    onProceedToCheckout();
+
     if (!isInventoryCheckSuccess) {
       recordOutOfStock(outOfStockItems, inventoryMapping);
       alertToaster("Please remove out of stock product from cart", "error");
@@ -63,7 +69,7 @@ function Cart(props) {
       return false;
     }
 
-    if (user) {
+    if (user || guestCheckout) {
       router.push("/pages/checkout");
       logger.verbose("Redirecting to checkout page");
       return true;
@@ -74,6 +80,7 @@ function Cart(props) {
     return false;
   }, [
     user,
+    guestCheckout,
     isInventoryCheckSuccess,
     appliedCoupon,
     cartList,
@@ -173,8 +180,8 @@ function Cart(props) {
                                 <td className="d-flex align-items-center no-wrap">
                                   <h4 className="summary-subtitle lh-1 ">
                                     Discounts
+                                    <span> ({appliedCoupon.code})</span>
                                   </h4>
-                                  &nbsp; ({appliedCoupon.code})
                                 </td>
                                 <td>
                                   <p className="summary-subtotal-price discount-price-color">
@@ -317,6 +324,7 @@ const Component = connect(mapStateToProps, {
   openLogin: modalActions.openPasswordlessModal,
   viewCart: eventActions.viewCart,
   recordOutOfStock: eventActions.outOfStock,
+  onProceedToCheckout: eventActions.proceedToCheckout,
 })(Cart);
 
 Component.hideFooter = true;

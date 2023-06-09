@@ -569,11 +569,13 @@
     .input-group {
         margin-right: 1rem;
     }
+
     .btn-cart {
-        &.dark{
+        &.dark {
             background-color: $primary-color !important;
             color: white !important;
         }
+
         border: 0;
         flex: 1;
         min-width: 13rem;
@@ -843,7 +845,7 @@
         }
     }
 
-    
+
 
 }
 

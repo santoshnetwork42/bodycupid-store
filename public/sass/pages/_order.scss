@@ -6,20 +6,24 @@
     .order-message {
         max-width: 34rem;
         padding: 3rem;
-        box-shadow: 0 5px 20px 0 rgba(0,0,0,0.1);
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
         border-radius: 1rem;
+
         .icon-box-icon {
-            margin-right: 3.2rem;   
+            margin-right: 3.2rem;
         }
+
         svg {
             width: 5rem;
             height: 5rem;
             stroke: $primary-color;
         }
+
         .icon-box-title {
             font-size: 1.8rem;
         }
     }
+
     .order-results {
         display: flex;
         flex-wrap: wrap;
@@ -32,9 +36,11 @@
         flex-direction: column;
         flex-wrap: wrap;
         margin-bottom: 1.5rem;
+
         &:not(:last-child) {
             margin-right: 3rem;
             padding-right: 3.1rem;
+
             &::after {
                 content: '';
                 position: absolute;
@@ -47,9 +53,11 @@
                 background: #e1e1e1;
             }
         }
+
         span {
             text-transform: uppercase;
         }
+
         strong {
             color: $dark-color;
             font-weight: 600;
@@ -65,9 +73,9 @@
     .summary-subtotal:last-child {
         border-bottom: none;
     }
-    
+
     .address-info {
-        border-bottom: 1px solid #e1e1e1;   
+        border-bottom: 1px solid #e1e1e1;
 
         p {
             color: #666;
@@ -95,29 +103,34 @@
         i {
             font-size: 1rem;
         }
+
         span {
             font-weight: 700;
             color: #222;
         }
     }
 
-    th > .summary-subtitle {
+    th>.summary-subtitle {
         font-size: 1.8rem;
         font-weight: 600;
         text-align: left;
     }
+
     .product-price {
         display: block;
     }
 
-    .summary-subtotal-price, .product-price {
+    .summary-subtotal-price,
+    .product-price {
         text-align: right;
     }
-    .summary-subtotal-price { 
-        font-weight: 600; 
+
+    .summary-subtotal-price {
+        font-weight: 600;
         color: $body-color;
         padding-right: 1rem;
     }
+
     .order-image {
         min-width: 8rem;
     }
@@ -128,16 +141,18 @@
         font-size: 1.4rem;
         color: #666;
         font-weight: 400;
-        }
+    }
+
     thead {
         border-bottom: 1px solid #e1e1e1;
+
         .summary-subtitle {
             font-size: 1.8rem;
         }
     }
 
     tbody tr:first-child {
-        td { 
+        td {
 
             &.product-price {
                 padding-top: 2.8rem;
@@ -151,35 +166,41 @@
         .order-message {
             font-size: 2rem;
         }
-        .order-results{
+
+        .order-results {
             display: grid;
             grid-template-columns: 1fr 0.5fr;
         }
+
         .overview-item {
             &:not(:last-child) {
                 margin-right: 0px;
             }
+
             &:not(:last-child)::after {
                 content: none;
             }
+
             span {
                 margin-right: 2rem;
                 font-size: 1.3rem;
             }
+
             strong {
                 color: $dark-color;
                 font-weight: 600;
                 font-size: 1.5rem;
             }
         }
-        .order-page-content {
-           padding-top: 0px !important;
 
-           .order-results {
+        .order-page-content {
+            padding-top: 0px !important;
+
+            .order-results {
                 padding-top: 20px !important;
             }
         }
-       
+
     }
 }
 
@@ -197,14 +218,15 @@
             font-size: 1.6rem;
         }
     }
-    .order-details{
-         .product-name{
-        .product-details{
-            display: block;
+
+    .order-details {
+        .product-name {
+            .product-details {
+                display: block;
+            }
         }
     }
-    }
-   
+
 }
 
 @include mq(xs, 'max') {
@@ -222,7 +244,7 @@
         }
     }
 
-    .step-by .title.title-step { 
+    .step-by .title.title-step {
         font-size: 1.8rem;
 
         &::after {
