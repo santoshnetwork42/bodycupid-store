@@ -23,7 +23,7 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
-// import CustomerGlu from "~/components/scripts/cutomer-glu";
+import CustomerGlu from "~/components/scripts/cutomer-glu";
 
 import NavbarProvider from "~/utils/contexts/navbar";
 
@@ -180,7 +180,7 @@ const App = ({ Component, pageProps }) => {
             <Layout navbar={navbarProps} footer={footerProps}>
               <Component {...pageProps} />
               <VercelAnalytics />
-              {/* <CustomerGlu /> */}
+              <CustomerGlu />
             </Layout>
           </NavbarProvider>
         </PersistGate>
