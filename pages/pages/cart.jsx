@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Cookie from "js-cookie";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";

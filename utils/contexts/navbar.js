@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import Cookie from "js-cookie";
 
-import { STORE_ID } from "~/config";
+import { STORE_ID, STORE_PREFIX } from "~/config";
 import {
   getMenuCategories,
   listCollections,
@@ -196,8 +196,9 @@ export const useConfiguration = (key, defaultValue) => {
 
 export const useGuestCheckout = () => {
   const guestCheck = useConfiguration(GUEST_CHECKOUT, 0);
-  const guestCookie = Cookie.get("guest");
+  const guestCookie = Cookie.get(`${STORE_PREFIX}_guest`);
   if (guestCheck === 1 || guestCookie) return true;
+  else return false;
 };
 
 export default NavbarProvider;
