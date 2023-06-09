@@ -2428,9 +2428,9 @@ export const getOrder = /* GraphQL */ `
       couponCodeId
       coupon {
         id
-        groupId
-        description
         code
+        description
+        groupId
         storeId
         userId
         couponType
@@ -2485,6 +2485,7 @@ export const getOrder = /* GraphQL */ `
       source
       referrer
       landingPage
+      confirmedViaWebhook
     }
   }
 `;
@@ -2528,6 +2529,7 @@ export const listOrders = /* GraphQL */ `
         source
         referrer
         landingPage
+        confirmedViaWebhook
       }
       nextToken
     }
@@ -2583,6 +2585,7 @@ export const bystoreIdOrder = /* GraphQL */ `
         source
         referrer
         landingPage
+        confirmedViaWebhook
       }
       nextToken
     }
@@ -2638,6 +2641,7 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
         source
         referrer
         landingPage
+        confirmedViaWebhook
       }
       nextToken
     }
@@ -2693,6 +2697,7 @@ export const searchOrders = /* GraphQL */ `
         source
         referrer
         landingPage
+        confirmedViaWebhook
       }
       nextToken
       total
@@ -2901,6 +2906,7 @@ export const getOrderProduct = /* GraphQL */ `
       taxRate
       unionTerritoryGstPercentage
       deliveryPartner
+      shippingCourier
       dispatchDate
       invoiceDate
       invoiceNumber
@@ -2951,6 +2957,7 @@ export const listOrderProducts = /* GraphQL */ `
         taxRate
         unionTerritoryGstPercentage
         deliveryPartner
+        shippingCourier
         dispatchDate
         invoiceDate
         invoiceNumber
@@ -3013,6 +3020,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
         taxRate
         unionTerritoryGstPercentage
         deliveryPartner
+        shippingCourier
         dispatchDate
         invoiceDate
         invoiceNumber
@@ -3075,6 +3083,7 @@ export const searchOrderProducts = /* GraphQL */ `
         taxRate
         unionTerritoryGstPercentage
         deliveryPartner
+        shippingCourier
         dispatchDate
         invoiceDate
         invoiceNumber
@@ -3774,9 +3783,9 @@ export const getShoppingCart = /* GraphQL */ `
       couponCodeId
       coupon {
         id
-        groupId
-        description
         code
+        description
+        groupId
         storeId
         userId
         couponType
@@ -3911,6 +3920,58 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const searchShoppingCarts = /* GraphQL */ `
+  query SearchShoppingCarts(
+    $filter: SearchableShoppingCartFilterInput
+    $sort: [SearchableShoppingCartSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableShoppingCartAggregationInput]
+  ) {
+    searchShoppingCarts(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        storeId
+        userId
+        couponCodeId
+        utmSource
+        utmContent
+        utmMedium
+        utmCampaign
+        utmTerm
+        source
+        referrer
+        landingPage
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -4054,13 +4115,13 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
     }
   }
 `;
-export const getCouponCode = /* GraphQL */ `
-  query GetCouponCode($id: ID!) {
-    getCouponCode(id: $id) {
+export const getCoupon = /* GraphQL */ `
+  query GetCoupon($code: ID!) {
+    getCoupon(code: $code) {
       id
-      groupId
-      description
       code
+      description
+      groupId
       storeId
       store {
         id
@@ -4169,64 +4230,26 @@ export const getCouponCode = /* GraphQL */ `
     }
   }
 `;
-export const listCouponCodes = /* GraphQL */ `
-  query ListCouponCodes(
-    $filter: ModelCouponCodeFilterInput
+export const listCoupons = /* GraphQL */ `
+  query ListCoupons(
+    $code: ID
+    $filter: ModelCouponFilterInput
     $limit: Int
     $nextToken: String
-  ) {
-    listCouponCodes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        groupId
-        description
-        code
-        storeId
-        userId
-        couponType
-        buyXQuantity
-        getYAmount
-        getYPercentage
-        getYQuantity
-        getYProduct
-        minOrderValue
-        maxDiscount
-        expirationDate
-        isActive
-        isFeatured
-        autoApply
-        applicableCollections
-        applicableProducts
-        paymentMethod
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const bycodeCouponCode = /* GraphQL */ `
-  query BycodeCouponCode(
-    $code: String!
-    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelCouponCodeFilterInput
-    $limit: Int
-    $nextToken: String
   ) {
-    bycodeCouponCode(
+    listCoupons(
       code: $code
-      createdAt: $createdAt
-      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
+      sortDirection: $sortDirection
     ) {
       items {
         id
-        groupId
-        description
         code
+        description
+        groupId
         storeId
         userId
         couponType
@@ -4251,53 +4274,7 @@ export const bycodeCouponCode = /* GraphQL */ `
     }
   }
 `;
-export const byuserIdCouponCode = /* GraphQL */ `
-  query ByuserIdCouponCode(
-    $userId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCouponCodeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byuserIdCouponCode(
-      userId: $userId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        groupId
-        description
-        code
-        storeId
-        userId
-        couponType
-        buyXQuantity
-        getYAmount
-        getYPercentage
-        getYQuantity
-        getYProduct
-        minOrderValue
-        maxDiscount
-        expirationDate
-        isActive
-        isFeatured
-        autoApply
-        applicableCollections
-        applicableProducts
-        paymentMethod
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const searchCoupon = /* GraphQL */ `
+export const searchCoupons = /* GraphQL */ `
   query SearchCoupons(
     $filter: SearchableCouponFilterInput
     $sort: [SearchableCouponSortInput]
@@ -4316,9 +4293,9 @@ export const searchCoupon = /* GraphQL */ `
     ) {
       items {
         id
-        groupId
-        description
         code
+        description
+        groupId
         storeId
         userId
         couponType
