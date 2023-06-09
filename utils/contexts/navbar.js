@@ -80,7 +80,7 @@ function NavbarProvider({ children, config }) {
     })
       .then(
         (getFeaturedCouponResponse) =>
-          getFeaturedCouponResponse.data.searchCouponCodes.items
+          getFeaturedCouponResponse.data.searchCoupons.items
       )
       .then((items) => {
         setCoupons(
