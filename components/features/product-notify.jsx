@@ -70,7 +70,6 @@ function ProductNotify(props) {
       </div>
       {!!allreadyNotify ? (
         <div className="d-flex align-items-center">
-          <i className="check-mark fas fa-check-circle mr-2"></i>
           <p className="m-0">
             We'll notify you when this product is back in stock
           </p>
