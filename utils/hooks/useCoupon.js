@@ -43,7 +43,7 @@ export const useProductCoupons = (product, variant) => {
       (coupons || [])
         .filter(
           (coupon) =>
-            coupon.couponType !== "BUY_X_GET_Y" ||
+            coupon.couponType !== "BUY_X_GET_Y" &&
             coupon.couponType !== "PRODUCT"
         )
         .map((coupon) => getCouponDiscount(coupon, [currentProductItem]))
@@ -103,10 +103,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
                 )
+              )
               : true;
 
           return hasCollection && hasProduct;
@@ -133,10 +133,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
                 )
+              )
               : true;
 
           allowed = allowed && hasCollection && hasProduct;

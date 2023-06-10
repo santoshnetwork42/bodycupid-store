@@ -4,7 +4,7 @@ import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
-import { Close, FreeTag } from "~/components/icons";
+import { Close } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
@@ -98,7 +98,9 @@ function CartProduct({
 
   const isFreeProduct = useMemo(
     () =>
-      cartItemType === "FREE_PRODUCT" || cartItemType === "AUTO_FREE_PRODUCT",
+      cartItemType === "FREE_PRODUCT" ||
+      cartItemType === "AUTO_FREE_PRODUCT" ||
+      cartItemType === "AUTO_FREE_PRODUCT_DISABLED",
     [cartItemType]
   );
 
@@ -126,7 +128,8 @@ function CartProduct({
           </div>
           {cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {isFreeProduct ? (
+              {cartItemType === "FREE_PRODUCT" ||
+              cartItemType === "AUTO_FREE_PRODUCT" ? (
                 <>
                   {!!price && (
                     <del className="summary-subtotal-listingprice">
