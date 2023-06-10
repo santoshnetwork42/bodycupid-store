@@ -1,4 +1,4 @@
-import { all, call, put, select, takeEvery } from "redux-saga/effects";
+import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
 import {
@@ -242,13 +242,13 @@ export function* cartSaga() {
     yield put({ type: actionTypes.REFRESH_CART });
   });
 
-  yield takeEvery(userActionTypes.SET_USER, function* saga(e) {
+  yield takeLatest(userActionTypes.SET_USER, function* saga(e) {
     const { cart, system } = yield select();
     const { meta } = system;
     let { cart: cartResponse, coupon, data: cartProducts } = cart;
     const { user } = e.payload;
 
-    if (user) {
+    if (user && Array.isArray(cartProducts) && !!cartProducts.length) {
       const { id: userId } = user;
 
       if (!cartResponse) {
@@ -272,41 +272,39 @@ export function* cartSaga() {
 
       if (!!cartResponse) {
         const { products = [], id } = cartResponse;
-        if (Array.isArray(cartProducts) && !!cartProducts.length) {
-          const promise = [];
-          cartProducts.forEach((product) => {
-            if (product.id) {
-              promise.push(
-                call([API, API.graphql], {
-                  query: createShoppingCartProduct,
-                  variables: {
-                    input: {
-                      shoppingcartId: id,
-                      productId: product.id,
-                      variantId: product.variantId,
-                      quantity: parseInt(product.qty, 10),
-                    },
+        const promise = [];
+        cartProducts.forEach((product) => {
+          if (product.id) {
+            promise.push(
+              call([API, API.graphql], {
+                query: createShoppingCartProduct,
+                variables: {
+                  input: {
+                    shoppingcartId: id,
+                    productId: product.id,
+                    variantId: product.variantId,
+                    quantity: parseInt(product.qty, 10),
                   },
-                })
-              );
-            }
-          });
-
-          const response = yield all(promise);
-          if (response.length) {
-            response.forEach(
-              ({ data: { createShoppingCartProduct: product } }) => {
-                products.push({
-                  id: product.id,
-                  shoppingcartId: id,
-                  productId: product.productId,
-                  variantId: product.variantId,
-                  quantity: product.quantity,
-                });
-              }
+                },
+              })
             );
-            yield put({ type: actionTypes.SET_CART, payload: { products } });
           }
+        });
+
+        const response = yield all(promise);
+        if (response.length) {
+          response.forEach(
+            ({ data: { createShoppingCartProduct: product } }) => {
+              products.push({
+                id: product.id,
+                shoppingcartId: id,
+                productId: product.productId,
+                variantId: product.variantId,
+                quantity: product.quantity,
+              });
+            }
+          );
+          yield put({ type: actionTypes.SET_CART, payload: { products } });
         }
       }
     }

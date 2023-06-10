@@ -41,15 +41,19 @@ export const useProductCoupons = (product, variant) => {
   const productCoupons = useMemo(
     () =>
       (coupons || [])
-        .filter((coupon) => coupon.couponType !== "BUY_X_GET_Y")
+        .filter(
+          (coupon) =>
+            coupon.couponType !== "BUY_X_GET_Y" &&
+            coupon.couponType !== "PRODUCT"
+        )
         .map((coupon) => getCouponDiscount(coupon, [currentProductItem]))
         .filter((coupon) => coupon.allowed)
         .sort((a, b) => (a.discount > b.discount ? -1 : 1)),
     [coupons, currentProductItem]
   );
 
-  const [bestCoupon, ...restCoupons] = productCoupons;
-  return { productCoupons: restCoupons, bestCoupon };
+  const [bestCoupon] = productCoupons;
+  return bestCoupon;
 };
 
 export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
@@ -99,10 +103,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
                 )
+              )
               : true;
 
           return hasCollection && hasProduct;
@@ -129,16 +133,18 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
+                applicableCollections.some((ac) =>
+                  (c.collections || []).includes(ac)
                 )
+              )
               : true;
 
           allowed = allowed && hasCollection && hasProduct;
           const { message } = getCouponDiscount(coupon, cartList);
           return { allowed, message, productId: getYProduct };
-        }),
+        })
+        .sort((a, b) => (a.discount > b.discount ? 1 : -1))
+        .sort((a) => (a.allowed ? -1 : 1)),
     [coupons, total, totalItems, cartList]
   );
 

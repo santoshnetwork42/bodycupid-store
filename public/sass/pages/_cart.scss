@@ -557,26 +557,80 @@
         font-size: 1.5rem;
       }
     }
+
+    .ribbon.top-left {
+      position: absolute;
+      z-index: 100;
+      width: 80px;
+      height: 110px;
+      overflow: hidden;
+      top: -8px;
+      left: -6px;
+
+      >small {
+        background-size: 100%;
+        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5cb85c), color-stop(100%, #3d8b3d));
+        background-image: -moz-linear-gradient(top, #5cb85c 0%, #3d8b3d 100%);
+        background-image: -webkit-linear-gradient(top, #5cb85c 0%, #3d8b3d 100%);
+        background-image: linear-gradient(to bottom, #5cb85c 0%, #3d8b3d 100%);
+        position: absolute;
+        width: 100%;
+        padding: 4px;
+        text-align: center;
+        font-size: 65%;
+        color: #fff;
+        background-color: #5cb85c;
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -moz-box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.5);
+        -webkit-box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.5);
+        top: 12px;
+        left: -20px;
+
+        &::before {
+          position: absolute;
+          content: " ";
+          bottom: -3px;
+          left: 0px;
+          border-top: 3px solid #163216;
+          border-left: 3px solid transparent;
+          border-right: 3px solid transparent;
+        }
+
+        &::after {
+          position: absolute;
+          content: " ";
+          right: 0px;
+          bottom: -3px;
+          border-top: 3px solid #163216;
+          border-left: 3px solid transparent;
+          border-right: 3px solid transparent;
+        }
+      }
+    }
+  }
+}
+
+.product-subtotal {
+  color: $dark-color;
+}
+
+.input-group {
+
+  button,
+  input {
+    border-color: $border-color-light;
   }
 
-  .product-subtotal {
-    color: $dark-color;
+  .quantity-minus {
+    border-radius: 0.3rem 0 0 0.3rem;
   }
 
-  .input-group {
-
-    button,
-    input {
-      border-color: $border-color-light;
-    }
-
-    .quantity-minus {
-      border-radius: 0.3rem 0 0 0.3rem;
-    }
-
-    .quantity-plus {
-      border-radius: 0 0.3rem 0.3rem 0;
-    }
+  .quantity-plus {
+    border-radius: 0 0.3rem 0.3rem 0;
   }
 }
 

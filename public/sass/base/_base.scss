@@ -81,7 +81,7 @@ body:not(.loaded) * {
   @include print_css(base, page-wrapper);
   background-color: $background-color-1;
   min-height: 100vh;
-  
+
 }
 
 .page-content {
