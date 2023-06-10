@@ -45,8 +45,7 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
-import { useConfiguration } from "~/utils/contexts/navbar";
-import { GUEST_CHECKOUT } from "~/constant";
+import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Checkout");
 
@@ -66,7 +65,8 @@ function Checkout(props) {
   } = props;
 
   const { name } = store;
-  const guestCheckout = useConfiguration(GUEST_CHECKOUT, 0);
+  
+  const guestCheckout = useGuestCheckout();
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -469,7 +469,7 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && guestCheckout !== 1 && (
+      {!user && !guestCheckout && (
         <Passwordless forceOpen redirect={false} />
       )}
 

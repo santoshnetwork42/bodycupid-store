@@ -55,7 +55,7 @@ function DetailOne(props) {
     return null;
   }, [cartList, selectedVariant]);
 
-  const { productCoupons, bestCoupon } = useProductCoupons(
+  const bestCoupon = useProductCoupons(
     product,
     selectedVariant
   );
@@ -348,7 +348,6 @@ function DetailOne(props) {
         <ProductBestPrice
           {...bestCoupon}
           price={price}
-          couponList={productCoupons}
         />
       )}
 

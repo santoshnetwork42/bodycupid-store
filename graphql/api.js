@@ -490,15 +490,15 @@ export const getProductBySlug = /* GraphQL */ `
 `;
 
 export const getFeaturedCoupon = /* GraphQL */ `
-  query SearchCouponCodes(
-    $filter: SearchableCouponCodeFilterInput
-    $sort: [SearchableCouponCodeSortInput]
+  query SearchCoupons(
+    $filter: SearchableCouponFilterInput
+    $sort: [SearchableCouponSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableCouponCodeAggregationInput]
+    $aggregates: [SearchableCouponAggregationInput]
   ) {
-    searchCouponCodes(
+    searchCoupons(
       filter: $filter
       sort: $sort
       limit: $limit
