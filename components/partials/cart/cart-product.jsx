@@ -4,7 +4,7 @@ import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import Quantity from "~/components/features/quantity";
-import { Close } from "~/components/icons";
+import { Close, FreeTag } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
@@ -96,9 +96,20 @@ function CartProduct({
     logger.debug("CartList:", cartList);
   }, [item, cartList]);
 
+  const isFreeProduct = useMemo(
+    () =>
+      cartItemType === "FREE_PRODUCT" || cartItemType === "AUTO_FREE_PRODUCT",
+    [cartItemType]
+  );
+
   return (
     <div className="m-0 p-0 border-no">
       <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
+        {isFreeProduct && (
+          <span class="ribbon top-left ribbon-success font-weight-bold">
+            <small>FREE</small>
+          </span>
+        )}
         <figure>
           <ALink href={"/products/" + slug}>
             <img
@@ -115,8 +126,7 @@ function CartProduct({
           </div>
           {cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
             <div className="mt-1 d-flex mb-1 align-items-center">
-              {cartItemType === "FREE_PRODUCT" ||
-              cartItemType === "AUTO_FREE_PRODUCT" ? (
+              {isFreeProduct ? (
                 <>
                   {!!price && (
                     <del className="summary-subtotal-listingprice">
