@@ -1,22 +1,26 @@
 import React, { useEffect } from "react";
 import Script from "next/script";
 import { connect } from "react-redux";
+import awaitGlobal from "await-global";
 
 import { CUSTOMER_GLU_KEY } from "~/config";
 
 function CustomerGlu({ user }) {
   useEffect(() => {
-    if (user) {
-      if (typeof window !== "undefined" && window.glu) {
-        window.glu.register(CUSTOMER_GLU_KEY, { userId: user.id }, {});
+    (async function () {
+      if (user) {
+        const glu = await awaitGlobal("glu");
+        if (glu) {
+          glu.register(CUSTOMER_GLU_KEY, { userId: user.id }, {});
+        }
       }
-    }
+    })();
   }, [user]);
 
   return (
     <>
       <Script
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         type="text/javascript"
         dangerouslySetInnerHTML={{
           __html: `window["gluConfig"] = {
@@ -36,7 +40,7 @@ function CustomerGlu({ user }) {
       />
 
       <Script
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         type="text/javascript"
         dangerouslySetInnerHTML={{
           __html: `
