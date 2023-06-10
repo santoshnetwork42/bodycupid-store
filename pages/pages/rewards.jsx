@@ -9,7 +9,7 @@ function Rewards() {
         glu.open(
           {
             typeId: "EMBEDDED",
-            elementHookId: "#gluapp",
+            elementHookId: "#gluappbc",
             css: ".__glu_container { height: 100% }",
           },
           {
@@ -20,7 +20,7 @@ function Rewards() {
     })();
   }, []);
 
-  return <div id="gluapp"></div>;
+  return <div id="gluappbc"></div>;
 }
 
 export default Rewards;
