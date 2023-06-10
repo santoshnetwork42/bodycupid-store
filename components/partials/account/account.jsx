@@ -16,6 +16,7 @@ import {
   LocationDot,
   RightAngle,
   User,
+  Discount,
 } from "~/components/icons";
 import { modalActions } from "~/store/modal";
 import { rootActions } from "~/store";
@@ -38,6 +39,12 @@ const MOBILE_TABS = [
     svg: <User size={16} />,
     href: "/pages/account-details",
     activeTab: 2,
+  },
+  {
+    tabName: "My rewards",
+    svg: <Discount size={16} />,
+    href: "/pages/rewards",
+    activeTab: 3,
   },
 ];
 
