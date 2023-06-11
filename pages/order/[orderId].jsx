@@ -248,15 +248,13 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                                 <div className="text-grey mb-1">
                                   <label>
                                     <span>Tracking Id: </span>
-                                    {item.trackingId ? item.trackingId : "-"}
+                                    {item.trackingId || "-"}
                                   </label>
                                 </div>
                                 <div className="text-grey">
                                   <label>
                                     <span>Delivery Partner: </span>
-                                    {item.deliveryPartner
-                                      ? item.deliveryPartner
-                                      : "-"}
+                                    {item.shippingCourier || "-"}
                                   </label>
                                 </div>
                               </div>
