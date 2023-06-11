@@ -706,6 +706,7 @@ export const getOrder = /* GraphQL */ `
           price
           status
           deliveryPartner
+          shippingCourier
           trackingId
         }
       }
