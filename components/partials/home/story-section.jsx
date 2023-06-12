@@ -20,7 +20,10 @@ export default function StorySection({ categories }) {
                   className="category-img"
                 >
                   <Image
-                    src={getPublicImageURL(category.imageUrl)}
+                    src={
+                      category.staticImage ||
+                      getPublicImageURL(category.imageUrl)
+                    }
                     alt={category.name}
                     height={60}
                     width={60}
