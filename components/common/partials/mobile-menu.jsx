@@ -117,11 +117,17 @@ function MobileMenu({ user, openPasswordLess }) {
             </li>
           )}
           {!!user && (
-            <li>
-              <ALink href={"/"} onClick={handleLogout}>
-                Logout
-              </ALink>
-            </li>
+            <>
+              <li>
+                <ALink href="/pages/account">
+                  My Account
+                </ALink>
+
+                <ALink href={"/"} onClick={handleLogout}>
+                  Logout
+                </ALink>
+              </li>
+            </>
           )}
         </ul>
       </div>

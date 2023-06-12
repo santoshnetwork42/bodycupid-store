@@ -34,6 +34,7 @@ function HomePage({
   bestSellerProducts,
   featuredProducts,
   categories,
+  storyCategories,
   brands,
   store,
   pageMeta,
@@ -48,7 +49,7 @@ function HomePage({
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
         <div className="intro-section">
-          <StorySection categories={categories} />
+          <StorySection categories={storyCategories} />
           <IntroSection {...hero} />
           <script
             async
@@ -144,12 +145,28 @@ export const getStaticProps = async () => {
 
     const { title, name, description, webUrl, imageUrl } = store;
 
+    const storyCategories = [
+      {
+        category: {
+          slug: "combos-and-gifts",
+        },
+        slug: "combos-and-gifts",
+        id: "combos-and-gifts",
+        name: "Combos and Gifts",
+        staticImage: "/images/categories/combos-and-gifts.jpg",
+        priority: 0,
+      },
+      
+      ...categories,
+    ];
+
     return {
       props: {
         hero: { banners },
         bestSellerProducts,
         featuredProducts,
         categories,
+        storyCategories,
         brands,
         pageMeta: {
           siteName: name,
