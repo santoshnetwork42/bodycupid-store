@@ -146,7 +146,6 @@ function Checkout(props) {
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
             setOrderData({ order, paymentId: razorpay_payment_id });
-            setPaymentData({ order, paymentId: razorpay_payment_id });
           },
           prefill: {
             name: address.name,
@@ -163,10 +162,13 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
+              setPaymentData({ order: null, paymentId: null });
               setLoading(false);
             },
           },
         };
+
+        setPaymentData({ order, paymentId });
         var rzp1 = new Razorpay(options);
         rzp1.open();
         logger.verbose("Razorpay initialization");
@@ -231,7 +233,6 @@ function Checkout(props) {
     };
   }, [!!orderData]);
 
-
   useEffect(() => {
     let intervalId;
 
@@ -240,25 +241,13 @@ function Checkout(props) {
         try {
           const { order, paymentId } = paymentData;
           const { id: orderId } = order;
-          let success;
-
-          if (paymentId) {
-            success = await API.graphql({
-              query: validateTransaction,
-              variables: { orderId, razorpayPaymentId: paymentId },
-            }).then(
-              (validateTransactionResponse) =>
-                validateTransactionResponse.data.validateTransaction.success
-            );
-          } else {
-            success = await API.graphql({
-              query: getOrderStatus,
-              variables: { id: orderId },
-            }).then(
-              (getOrderStatusResponse) =>
-                !!getOrderStatusResponse.data.getOrder.code
-            );
-          }
+          let success = await API.graphql({
+            query: getOrderStatus,
+            variables: { id: orderId },
+          }).then(
+            (getOrderStatusResponse) =>
+              !!getOrderStatusResponse.data.getOrder.code
+          );
 
           if (success) {
             logger.info("Payment completion");
