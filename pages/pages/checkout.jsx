@@ -65,7 +65,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store;
-  
+
   const guestCheckout = useGuestCheckout();
 
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -83,6 +83,10 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
+  const [paymentData, setPaymentData] = useState({
+    order: null,
+    paymentId: null,
+  });
 
   const freeProducts = useMemo(
     () => freeProductsResponse.map((f) => f.product),
@@ -142,6 +146,7 @@ function Checkout(props) {
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
             setOrderData({ order, paymentId: razorpay_payment_id });
+            setPaymentData({ order, paymentId: razorpay_payment_id });
           },
           prefill: {
             name: address.name,
@@ -225,6 +230,57 @@ function Checkout(props) {
       if (intervalId) clearInterval(intervalId);
     };
   }, [!!orderData]);
+
+
+  useEffect(() => {
+    let intervalId;
+
+    if (paymentData.order && paymentData.paymentId) {
+      intervalId = setInterval(async () => {
+        try {
+          const { order, paymentId } = paymentData;
+          const { id: orderId } = order;
+          let success;
+
+          if (paymentId) {
+            success = await API.graphql({
+              query: validateTransaction,
+              variables: { orderId, razorpayPaymentId: paymentId },
+            }).then(
+              (validateTransactionResponse) =>
+                validateTransactionResponse.data.validateTransaction.success
+            );
+          } else {
+            success = await API.graphql({
+              query: getOrderStatus,
+              variables: { id: orderId },
+            }).then(
+              (getOrderStatusResponse) =>
+                !!getOrderStatusResponse.data.getOrder.code
+            );
+          }
+
+          if (success) {
+            logger.info("Payment completion");
+            const orderUrl = paymentId
+              ? `/order/${orderId}?paymentId=${paymentId}`
+              : `/order/${orderId}`;
+
+            await router.push(orderUrl);
+            await emptyCart();
+            clearInterval(intervalId);
+          }
+        } catch (error) {
+          errorHandler(error);
+          logger.error("Error while validating transaction", error);
+        }
+      }, 2000);
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [paymentData]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
@@ -469,9 +525,7 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && !guestCheckout && (
-        <Passwordless forceOpen redirect={false} />
-      )}
+      {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
