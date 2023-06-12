@@ -25,8 +25,8 @@ export default function StorySection({ categories }) {
                       getPublicImageURL(category.imageUrl)
                     }
                     alt={category.name}
-                    height={60}
-                    width={60}
+                    height={90}
+                    width={90}
                     priority={index < 5}
                     objectFit="contain"
                     className="category-media"
