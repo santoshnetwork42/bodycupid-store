@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { toDecimal } from "~/utils";
 import ALink from "~/components/features/custom-link";
 import { copyText } from "~/utils/helper";
-import Card from "~/components/features/accordion/card";
 import { Discount } from "~/components/icons";
 
 function ProductBestPrice(props) {
-  const { price, code, discount, couponType, autoApply, message } = props;
+  const { price, code, discount, autoApply, message } = props;
 
   return (
     <div className="product-best-price-container">

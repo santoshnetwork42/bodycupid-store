@@ -20,10 +20,13 @@ export default function StorySection({ categories }) {
                   className="category-img"
                 >
                   <Image
-                    src={getPublicImageURL(category.imageUrl)}
+                    src={
+                      category.staticImage ||
+                      getPublicImageURL(category.imageUrl)
+                    }
                     alt={category.name}
-                    height={60}
-                    width={60}
+                    height={90}
+                    width={90}
                     priority={index < 5}
                     objectFit="contain"
                     className="category-media"

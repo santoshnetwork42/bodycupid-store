@@ -135,7 +135,9 @@ const AddressForm = (props) => {
                     disabled={!!user}
                     onChange={(e) =>
                       setAddress({
-                        phone: e.target.value.replaceAll(/[^0-9]+/g, "").trim(),
+                        phone: (e.target.value || "")
+                          .replaceAll(/[^0-9]+/g, "")
+                          .trim(),
                       })
                     }
                   />
