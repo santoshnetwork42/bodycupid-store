@@ -96,6 +96,8 @@ export default function MediaOne(props) {
             <GlassMagnifier
               imageSrc={getPublicImageURL(image.imageKey, 480)}
               imageAlt={image.alt}
+              magnifierOffsetX={40}
+              magnifierOffsetY={-40}
               largeImageSrc={getPublicImageURL(image.imageKey)}
               dragToMove={false}
               cursorStyleActive="crosshair"
