@@ -159,6 +159,7 @@ function Checkout(props) {
           modal: {
             ondismiss: function () {
               setLoading(false);
+              setOrderData(null);
             },
           },
         };
@@ -175,7 +176,7 @@ function Checkout(props) {
   );
 
   useEffect(() => {
-    let intervalId;
+    let intervalId = null;
     if (!!orderData && orderData.order) {
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
@@ -197,7 +198,7 @@ function Checkout(props) {
             }).then(
               (getOrderStatusResponse) =>
                 !!getOrderStatusResponse.data.getOrder.code &&
-                !!getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
+                getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
             );
           }
 
@@ -225,6 +226,9 @@ function Checkout(props) {
           logger.error("Error while validating transaction", error);
         }
       }, 2000);
+    } else if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
     }
 
     return () => {
@@ -462,10 +466,6 @@ function Checkout(props) {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
 
-  if (!!orderData) {
-    return <PaymentLoader loading />;
-  }
-
   return (
     <main className="main checkout">
       <Head>
@@ -473,6 +473,8 @@ function Checkout(props) {
       </Head>
 
       <h1 className="d-none">{name} - Checkout</h1>
+
+      {!!orderData && <PaymentLoader loading />}
 
       {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
