@@ -83,7 +83,6 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
-  const [paymentData, setPaymentData] = useState({ order: null });
 
   const freeProducts = useMemo(
     () => freeProductsResponse.map((f) => f.product),
@@ -159,13 +158,10 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
-              setPaymentData({ order: null });
               setLoading(false);
             },
           },
         };
-        setPaymentData({ order });
-        console.log("order", order);
         var rzp1 = new Razorpay(options);
         rzp1.open();
         logger.verbose("Razorpay initialization");
@@ -181,12 +177,6 @@ function Checkout(props) {
   useEffect(() => {
     let intervalId;
     if (!!orderData && orderData.order) {
-      onPlaceOrder(
-        orderData.order,
-        [...cartList, ...freeProducts],
-        appliedCoupon,
-        shippingAddress
-      );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
       intervalId = setInterval(async () => {
@@ -206,12 +196,24 @@ function Checkout(props) {
               variables: { id: orderId },
             }).then(
               (getOrderStatusResponse) =>
-                !!getOrderStatusResponse.data.getOrder.code
+                !!getOrderStatusResponse.data.getOrder.code &&
+                !!getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
             );
           }
 
           if (success) {
             logger.info("Payment completion");
+
+            logger.debug("Purchase event");
+            onPlaceOrder(
+              orderData.order,
+              [...cartList, ...freeProducts],
+              appliedCoupon,
+              shippingAddress
+            );
+
+            logger.debug("Purchase event done");
+            logger.debug("Redirecting to success page");
             const orderUrl = paymentId
               ? `/order/${orderId}?paymentId=${paymentId}`
               : `/order/${orderId}`;
@@ -228,40 +230,7 @@ function Checkout(props) {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [!!orderData]);
-
-  useEffect(() => {
-    let intervalId;
-
-    if (paymentData.order) {
-      intervalId = setInterval(async () => {
-        try {
-          const { order } = paymentData;
-          const { id: orderId } = order;
-          let success = await API.graphql({
-            query: getOrderStatus,
-            variables: { id: orderId },
-          }).then((getOrderStatusResponse) => {
-            const { status: status } = getOrderStatusResponse.data.getOrder;
-            return status;
-          });
-          if (success === "CONFIRMED") {
-            const orderUrl = `/order/${orderId}`;
-            await router.push(orderUrl);
-            await emptyCart();
-            clearInterval(intervalId);
-          }
-        } catch (error) {
-          errorHandler(error);
-          logger.error("Error", error);
-        }
-      }, 2000);
-    }
-
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [paymentData]);
+  }, [orderData?.order, orderData?.paymentId]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
@@ -442,15 +411,13 @@ function Checkout(props) {
           const [paymentResponse] = await Promise.all(promise);
           const payment = paymentResponse.data.createPayment;
 
+          setOrderData({ order, paymentId: null });
           if (isFirst) {
             handlePayment({
               order,
               paymentId: payment.id,
               address: restAddress,
             });
-            setPaymentData({order:null});
-          } else {
-            setOrderData({ order, paymentId: null });
           }
         } catch (error) {
           setLoading(false);
