@@ -10,16 +10,14 @@ function ProductBestPrice(props) {
 
   return (
     <div className="product-best-price-container">
-      <div className="product-top-content">
-        <div className="d-flex align-items-center">
+      <div className="product-top-content d-flex align-items-center">
           <Discount color="#17b31b" size={20} />
-          <p className="ml-1">
+          <p className="ml-1 large-price-text">
             Best price:&nbsp;
-            <span className="font-weight-semi-bold large-price-text">
+            <span className="font-weight-semi-bold">
               ₹{toDecimal(price - discount)}
             </span>
           </p>
-        </div>
       </div>
         <div className="d-flex align-items-center flex-wrap">
           <span className="mr-1 text-primary">Use coupon </span>
