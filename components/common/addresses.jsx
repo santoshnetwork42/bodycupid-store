@@ -236,9 +236,11 @@ function Addresses({
                   {selected.name}, {selected?.pinCode}
                 </span>
               </p>
-              <span className="mobile-address-label">
-                {selected?.address && <span>{selected?.address} &nbsp;</span>}
-              </span>
+              {selected?.address && (
+                <span className="mobile-address-label">
+                  {selected?.address} &nbsp;
+                </span>
+              )}
             </div>
             <button
               onClick={() => {
@@ -246,7 +248,7 @@ function Addresses({
               }}
               className="btn btn-primary btn-change"
             >
-              change
+              Change
             </button>
           </div>
         </div>

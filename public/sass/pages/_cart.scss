@@ -558,9 +558,16 @@
       }
     }
 
+    .cart-product-title {
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+
     .ribbon.top-left {
       position: absolute;
-      z-index: 100;
+      z-index: 98;
       width: 80px;
       height: 110px;
       overflow: hidden;

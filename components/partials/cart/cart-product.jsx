@@ -98,9 +98,7 @@ function CartProduct({
 
   const isFreeProduct = useMemo(
     () =>
-      cartItemType === "FREE_PRODUCT" ||
-      cartItemType === "AUTO_FREE_PRODUCT" ||
-      cartItemType === "AUTO_FREE_PRODUCT_DISABLED",
+      cartItemType === "FREE_PRODUCT" || cartItemType === "AUTO_FREE_PRODUCT",
     [cartItemType]
   );
 
@@ -108,7 +106,7 @@ function CartProduct({
     <div className="m-0 p-0 border-no">
       <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
         {isFreeProduct && (
-          <span class="ribbon top-left ribbon-success font-weight-bold">
+          <span className="ribbon top-left ribbon-success font-weight-bold">
             <small>FREE</small>
           </span>
         )}
@@ -122,8 +120,8 @@ function CartProduct({
             />
           </ALink>
         </figure>
-        <div className="text-left text-primary w-100  mr-1 ml-2">
-          <div className="mr-5 ">
+        <div className="text-left text-primary w-100 mr-1 ml-2">
+          <div className="mr-5 cart-product-title">
             <ALink href={"/products/" + slug}>{title}</ALink>
           </div>
           {cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
