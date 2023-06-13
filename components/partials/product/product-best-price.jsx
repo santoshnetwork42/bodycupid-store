@@ -6,7 +6,7 @@ import { copyText } from "~/utils/helper";
 import { Discount } from "~/components/icons";
 
 function ProductBestPrice(props) {
-  const { price, code, discount, autoApply, message } = props;
+  const { price, code, discount } = props;
 
   return (
     <div className="product-best-price-container">
@@ -15,13 +15,12 @@ function ProductBestPrice(props) {
           <Discount color="#17b31b" size={20} />
           <p className="ml-1">
             Best price:&nbsp;
-            <span className=" font-weight-semi-bold">
+            <span className="font-weight-semi-bold large-price-text">
               ₹{toDecimal(price - discount)}
             </span>
           </p>
         </div>
       </div>
-      {!autoApply && (
         <div className="d-flex align-items-center flex-wrap">
           <span className="mr-1 text-primary">Use coupon </span>
           <p id="coupon-code" className="font-weight-semi-bold mr-1">
@@ -37,8 +36,6 @@ function ProductBestPrice(props) {
             Copy code
           </ALink>
         </div>
-      )}
-      <p className="text-success text-uppercase">{message}</p>
     </div>
   );
 }
