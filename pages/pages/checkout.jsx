@@ -49,6 +49,8 @@ import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Checkout");
 
+let razorpayMethod;
+
 function Checkout(props) {
   const {
     cartList,
@@ -65,7 +67,7 @@ function Checkout(props) {
   } = props;
 
   const { name } = store;
-  
+
   const guestCheckout = useGuestCheckout();
 
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -158,12 +160,16 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
+              razorpayMethod = null;
               setLoading(false);
+              setOrderData(null);
             },
           },
         };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
+
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -175,14 +181,8 @@ function Checkout(props) {
   );
 
   useEffect(() => {
-    let intervalId;
+    let intervalId = null;
     if (!!orderData && orderData.order) {
-      onPlaceOrder(
-        orderData.order,
-        [...cartList, ...freeProducts],
-        appliedCoupon,
-        shippingAddress
-      );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
       intervalId = setInterval(async () => {
@@ -202,12 +202,30 @@ function Checkout(props) {
               variables: { id: orderId },
             }).then(
               (getOrderStatusResponse) =>
-                !!getOrderStatusResponse.data.getOrder.code
+                !!getOrderStatusResponse.data.getOrder.code &&
+                getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
             );
           }
 
           if (success) {
             logger.info("Payment completion");
+
+            logger.debug("Purchase event");
+            onPlaceOrder(
+              orderData.order,
+              [...cartList, ...freeProducts],
+              appliedCoupon,
+              shippingAddress
+            );
+
+            logger.debug("Purchase event done");
+            logger.debug("Redirecting to success page");
+
+            if (razorpayMethod) {
+              logger.debug("Closing razorpay modal");
+              razorpayMethod.close();
+            }
+
             const orderUrl = paymentId
               ? `/order/${orderId}?paymentId=${paymentId}`
               : `/order/${orderId}`;
@@ -219,12 +237,15 @@ function Checkout(props) {
           logger.error("Error while validating transaction", error);
         }
       }, 2000);
+    } else if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
     }
 
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [!!orderData]);
+  }, [orderData?.order, orderData?.paymentId]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
@@ -405,14 +426,13 @@ function Checkout(props) {
           const [paymentResponse] = await Promise.all(promise);
           const payment = paymentResponse.data.createPayment;
 
+          setOrderData({ order, paymentId: null });
           if (isFirst) {
             handlePayment({
               order,
               paymentId: payment.id,
               address: restAddress,
             });
-          } else {
-            setOrderData({ order, paymentId: null });
           }
         } catch (error) {
           setLoading(false);
@@ -457,10 +477,6 @@ function Checkout(props) {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
 
-  if (!!orderData) {
-    return <PaymentLoader loading />;
-  }
-
   return (
     <main className="main checkout">
       <Head>
@@ -469,9 +485,9 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && !guestCheckout && (
-        <Passwordless forceOpen redirect={false} />
-      )}
+      {!!orderData && <PaymentLoader loading />}
+
+      {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
