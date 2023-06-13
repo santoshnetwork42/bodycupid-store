@@ -110,6 +110,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    margin: 5px 0;
 }
 
 .product-thumbs {
@@ -139,7 +140,6 @@
 
 .product-thumb {
     position: relative;
-    margin: 0 .5rem;
     cursor: pointer;
 
     &::before {
@@ -697,10 +697,6 @@
             left: 0;
             right: 0;
             bottom: 0;
-        }
-
-        .product-thumb {
-            margin: 0 0 .9rem;
         }
 
         .thumb-up,
