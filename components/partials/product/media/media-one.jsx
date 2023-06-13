@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { GlassMagnifier } from "react-image-magnifiers";
+import { Magnifier } from "react-image-magnifiers";
 
 import ALink from "~/components/features/custom-link";
 import { Share } from "~/components/icons";
@@ -93,7 +93,7 @@ export default function MediaOne(props) {
       >
         {lgImages.map((image) => (
           <div key={image.imageKey}>
-            <GlassMagnifier
+            <Magnifier
               imageSrc={getPublicImageURL(image.imageKey, 480)}
               imageAlt={image.alt}
               magnifierOffsetX={40}
