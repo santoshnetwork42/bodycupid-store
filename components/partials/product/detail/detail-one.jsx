@@ -23,7 +23,7 @@ import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import { useProductCoupons } from "~/utils/hooks/useCoupon";
-import { useCartTotal } from "~/utils/hooks/useCart";
+// import { useCartTotal } from "~/utils/hooks/useCart";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -31,7 +31,7 @@ function DetailOne(props) {
     query: { review },
   } = router;
 
-  const { cartAmountSaved: totalSaved } = useCartTotal();
+  // const { cartAmountSaved: totalSaved } = useCartTotal();
 
   const {
     cartList,
@@ -484,7 +484,7 @@ function DetailOne(props) {
 
                   {!!cartItem && (
                     <div className="product-form-group cart-button-wrapper flex-column">
-                      <div className="d-flex product-saved-price-container align-items-center lh-1">
+                      {/* <div className="d-flex product-saved-price-container align-items-center lh-1">
                         <Clock size={12} color={"green"} height={8} />
                         <div className="summary-saving-lable-container  mb-0 mt-0 p-0 no-margin ml-1">
                           <p className="saving-lable lh-1">
@@ -492,7 +492,7 @@ function DetailOne(props) {
                             saved so far on this order
                           </p>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="d-flex m-0 w-100 sm-around w-full">
                         <div className="m-0">
                           <Quantity

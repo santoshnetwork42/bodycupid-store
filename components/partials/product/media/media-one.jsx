@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-import { Magnifier } from "react-image-magnifiers";
+// import { Magnifier } from "react-image-magnifiers";
+import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import { Share } from "~/components/icons";
@@ -93,14 +94,13 @@ export default function MediaOne(props) {
       >
         {lgImages.map((image) => (
           <div key={image.imageKey}>
-            <Magnifier
-              imageSrc={getPublicImageURL(image.imageKey, 480)}
-              imageAlt={image.alt}
-              magnifierOffsetX={40}
-              magnifierOffsetY={-40}
-              largeImageSrc={getPublicImageURL(image.imageKey)}
-              dragToMove={false}
-              cursorStyleActive="crosshair"
+            <Image
+              src={getPublicImageURL(image.imageKey)}
+              priority
+              height={480}
+              width={480}
+              quality={95}
+              objectFit="contain"
               className="product-image large-image"
             />
           </div>
