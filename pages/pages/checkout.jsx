@@ -160,6 +160,7 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
+              razorpayMethod = null;
               setLoading(false);
               setOrderData(null);
             },
@@ -221,6 +222,7 @@ function Checkout(props) {
             logger.debug("Redirecting to success page");
 
             if (razorpayMethod) {
+              logger.debug("Closing razorpay modal");
               razorpayMethod.close();
             }
 
