@@ -109,10 +109,6 @@ function DetailOne(props) {
     } else {
       setCartActive(true);
     }
-
-    if (product.isInventoryEnabled && !product.inventory) {
-      setCartActive(false);
-    }
   }, [selectedVariant, product]);
 
   // const wishlistHandler = (e) => {
@@ -142,10 +138,11 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
-    if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
+    if (hasInventory) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
+
         if (selectedVariant) {
           const variant = product.variants.items.find(
             (i) => i.id === selectedVariant
