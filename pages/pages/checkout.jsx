@@ -49,6 +49,8 @@ import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const logger = new Logger("Checkout");
 
+let razorpayMethod;
+
 function Checkout(props) {
   const {
     cartList,
@@ -163,8 +165,10 @@ function Checkout(props) {
             },
           },
         };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
+
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -215,6 +219,11 @@ function Checkout(props) {
 
             logger.debug("Purchase event done");
             logger.debug("Redirecting to success page");
+
+            if (razorpayMethod) {
+              razorpayMethod.close();
+            }
+
             const orderUrl = paymentId
               ? `/order/${orderId}?paymentId=${paymentId}`
               : `/order/${orderId}`;
