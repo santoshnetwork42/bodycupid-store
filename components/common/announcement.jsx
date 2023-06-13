@@ -13,7 +13,7 @@ const Announcement = ({ store, showTopRunner }) => {
   return (
     <>
       {isReady && Array.isArray(announcements) && !!announcements.length && (
-        <div className="announcement-bar">
+        <div className="announcement-bar sticky-header">
           <OwlCarousel adClass="owl-nav-bottom" options={announcementSlider}>
             {announcements.map((announcement) => {
               return (

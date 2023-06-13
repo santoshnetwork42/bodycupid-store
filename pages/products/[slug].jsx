@@ -234,5 +234,6 @@ const Component = connect(mapStateToProps, {
 })(ProductDefault);
 
 Component.navbarConfig = { coupons: true };
+Component.showTopRunner = true;
 
 export default Component;
