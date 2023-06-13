@@ -9,11 +9,13 @@ const Announcement = ({ store, showTopRunner }) => {
   const { announcements } = store || {};
   const router = useRouter();
   const { isReady } = router;
-  if (!showTopRunner) return <></>;
+
   return (
-    <>
-      {isReady && Array.isArray(announcements) && !!announcements.length && (
-        <div className="announcement-bar sticky-header">
+    <div className="announcement-bar sticky-header">
+      {!!showTopRunner &&
+        isReady &&
+        Array.isArray(announcements) &&
+        !!announcements.length && (
           <OwlCarousel adClass="owl-nav-bottom" options={announcementSlider}>
             {announcements.map((announcement) => {
               return (
@@ -28,9 +30,8 @@ const Announcement = ({ store, showTopRunner }) => {
               );
             })}
           </OwlCarousel>
-        </div>
-      )}
-    </>
+        )}
+    </div>
   );
 };
 
