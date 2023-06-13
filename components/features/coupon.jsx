@@ -191,10 +191,10 @@ function Coupon(props) {
                     </span>
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer d-flex align-items-center"
+                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
                         type="button"
                       >
-                        {`View more offers`}
+                        View more offers
                         <RightAngle size={14} />
                       </a>
                     </span>
