@@ -83,10 +83,7 @@ function Checkout(props) {
   const [formErorr, setFormErorr] = useState(null);
   const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
-  const [paymentData, setPaymentData] = useState({
-    order: null,
-    paymentId: null,
-  });
+  const [paymentData, setPaymentData] = useState({ order: null });
 
   const freeProducts = useMemo(
     () => freeProductsResponse.map((f) => f.product),
@@ -162,13 +159,13 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
-              setPaymentData({ order: null, paymentId: null });
+              setPaymentData({ order: null });
               setLoading(false);
             },
           },
         };
-
-        setPaymentData({ order, paymentId });
+        setPaymentData({ order });
+        console.log("order", order);
         var rzp1 = new Razorpay(options);
         rzp1.open();
         logger.verbose("Razorpay initialization");
@@ -236,32 +233,27 @@ function Checkout(props) {
   useEffect(() => {
     let intervalId;
 
-    if (paymentData.order && paymentData.paymentId) {
+    if (paymentData.order) {
       intervalId = setInterval(async () => {
         try {
-          const { order, paymentId } = paymentData;
+          const { order } = paymentData;
           const { id: orderId } = order;
           let success = await API.graphql({
             query: getOrderStatus,
             variables: { id: orderId },
-          }).then(
-            (getOrderStatusResponse) =>
-              !!getOrderStatusResponse.data.getOrder.code
-          );
-
-          if (success) {
-            logger.info("Payment completion");
-            const orderUrl = paymentId
-              ? `/order/${orderId}?paymentId=${paymentId}`
-              : `/order/${orderId}`;
-
+          }).then((getOrderStatusResponse) => {
+            const { status: status } = getOrderStatusResponse.data.getOrder;
+            return status;
+          });
+          if (success === "CONFIRMED") {
+            const orderUrl = `/order/${orderId}`;
             await router.push(orderUrl);
             await emptyCart();
             clearInterval(intervalId);
           }
         } catch (error) {
           errorHandler(error);
-          logger.error("Error while validating transaction", error);
+          logger.error("Error", error);
         }
       }, 2000);
     }
@@ -456,6 +448,7 @@ function Checkout(props) {
               paymentId: payment.id,
               address: restAddress,
             });
+            setPaymentData({order:null});
           } else {
             setOrderData({ order, paymentId: null });
           }
