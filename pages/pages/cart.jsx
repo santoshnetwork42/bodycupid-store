@@ -131,10 +131,7 @@ function Cart(props) {
                         <CartProduct
                           key={`${item.itemKey}-${item.extraQty}`}
                           item={item}
-                          outOfStock={
-                            inventoryMapping &&
-                            inventoryMapping[item.recordKey] < Number(item.qty)
-                          }
+                          inventory={(inventoryMapping || {})[item.recordKey]}
                         />
                       ))}
                     </div>

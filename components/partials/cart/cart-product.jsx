@@ -15,9 +15,9 @@ import { getUpdatedCart } from "~/utils/helper";
 const logger = new Logger("Cart-products");
 
 function CartProduct({
-  cartList,
   item,
-  outOfStock,
+  inventory = 99999,
+  cartList,
   removeFromCart,
   updateCart,
   appliedCoupon,
@@ -28,7 +28,6 @@ function CartProduct({
     variants,
     recordKey,
     qty,
-    inventory,
     slug,
     images,
     title,
@@ -102,6 +101,8 @@ function CartProduct({
     [cartItemType]
   );
 
+  const outOfStock = qty > inventory;
+
   return (
     <div className="m-0 p-0 border-no">
       <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
@@ -121,7 +122,7 @@ function CartProduct({
           </ALink>
         </figure>
         <div className="text-left text-primary w-100 mr-1 ml-2">
-          <div className="mr-5 cart-product-title">
+          <div className="mr-5 cart-product-title" title={title}>
             <ALink href={"/products/" + slug}>{title}</ALink>
           </div>
           {cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
