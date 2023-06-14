@@ -181,13 +181,16 @@ function Checkout(props) {
   );
 
   useEffect(() => {
-    let intervalId = null;
+    let intervalId = null,
+      success = false;
+
     if (!!orderData && orderData.order) {
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
       intervalId = setInterval(async () => {
         try {
-          let success;
+          if (success) return;
+
           if (paymentId) {
             success = await API.graphql({
               query: validateTransaction,
