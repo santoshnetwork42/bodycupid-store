@@ -181,18 +181,18 @@ function Coupon(props) {
 
               <div>
                 {!showAppliedCoupon && (
-                  <span className="ml-1 coupon-subtitle">
+                  <span className="ml-1 coupon-subtitle font-weight-normal">
                     Save more with coupon and offers
                   </span>
                 )}
                 {showAppliedCoupon && (
                   <>
-                    <span className="ml-1 coupon-subtitle">
+                    <span className="ml-1 coupon-subtitle font-weight-normal">
                       You saved additional ₹{toDecimal(couponTotal)}
                     </span>
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer d-flex align-items-center"
+                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
                         type="button"
                       >
                         {`View more offers`}
