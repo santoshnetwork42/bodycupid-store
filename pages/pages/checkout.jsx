@@ -979,7 +979,6 @@ const Component = connect(mapStateToProps, {
 Component.hideFooter = true;
 Component.navbarConfig = {
   shippingTier: true,
-  coupons: true,
 };
 
 export default Component;

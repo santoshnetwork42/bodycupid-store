@@ -25,6 +25,7 @@ function Coupon(props) {
     addToCart,
     removeFromCart,
     layout = "cart",
+    isSmall,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -135,7 +136,7 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box mb-2 pb-5 bg-white text-primary flex-row lh-default"
+          className="cart-coupon-box p-relative mb-2 pb-5 bg-white text-primary flex-row lh-default"
           onClick={() => setOpen(true)}
         >
           <span className="mt-1 sm-product-remove">
@@ -169,7 +170,7 @@ function Coupon(props) {
                   <ALink
                     key={appliedCoupon.id}
                     href="#"
-                    className="mt-1 mr-1"
+                    className={isSmall ? "small-product-remove" : "mt-1 mr-1"}
                     title="Remove coupon"
                     onClick={onCouponRemove}
                   >

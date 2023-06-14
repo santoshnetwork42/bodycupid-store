@@ -121,12 +121,7 @@ function NavbarProvider({ children, config }) {
   }, [config?.shippingTier]);
 
   useEffect(() => {
-    if (config?.coupons && !coupons) {
-      getCoupons();
-    }
-  }, [config?.coupons]);
-
-  useEffect(() => {
+    getCoupons();
     getCategories();
     getCollections();
     getConfigurationData();
