@@ -172,7 +172,7 @@ function CartProduct({
                 <p className="m-0 outofstock-label">out of stock</p>
               </div>
             ) : (
-              <div>
+              <div> 
                 {!disableChange && (
                   <div className="product-quantity w-0 mb-1">
                     {cartItemType === "FREE_PRODUCT" ? (
