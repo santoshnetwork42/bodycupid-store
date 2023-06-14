@@ -543,7 +543,7 @@
     .sm-product-remove {
       position: absolute;
       right: 2.5rem;
-      top: 2.5rem;
+      top: 2rem;
     }
 
     .outofstock-tag {
@@ -634,10 +634,12 @@
 
   .quantity-minus {
     border-radius: 0.3rem 0 0 0.3rem;
+    border: 1px solid #ccc;
   }
 
   .quantity-plus {
     border-radius: 0 0.3rem 0.3rem 0;
+    border: 1px solid #ccc;
   }
 }
 
@@ -725,6 +727,10 @@
   .btn {
     padding: 1em 2em;
   }
+}
+
+.stick-bottom-button-order {
+  padding: 0 !important;
 }
 
 .featured-coupon {

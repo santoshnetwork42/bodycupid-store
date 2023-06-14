@@ -897,7 +897,7 @@ function Checkout(props) {
                       )}
                       <div
                         className={`d-flex justify-content-center ${
-                          isMobile ? "stick-bottom-button" : ""
+                          isMobile ? "stick-bottom-button stick-bottom-button-order" : ""
                         }`}
                       >
                         {!isValidAddress(shippingAddress) && !!isMobile && (
@@ -920,7 +920,7 @@ function Checkout(props) {
                               !isInventoryCheckReady ||
                               loading
                             }
-                            className={`btn d-flex justify-content-center align-items-center btn-order ${
+                            className={`btn pb-4 pt-4 m-0 d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
                                 : "btn-disabled"
