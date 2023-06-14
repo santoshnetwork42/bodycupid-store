@@ -483,6 +483,10 @@
 .side-cart {
     height: calc( 100vh - 65px);
     overflow: auto;
+&::-webkit-scrollbar {
+	width: 0;
+    display: none
+}
 }
 
 @include mq(xs,max) {
