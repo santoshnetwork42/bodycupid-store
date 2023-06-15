@@ -932,8 +932,7 @@ function Checkout(props) {
                             disabled={
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
-                              loading ||
-                              !priceVerified
+                              loading
                             }
                             className={`btn d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
