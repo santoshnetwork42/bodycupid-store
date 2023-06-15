@@ -271,11 +271,10 @@ function Checkout(props) {
   }, [shippingAddress, user]);
 
   const priceVerified = useMemo(() => {
-    if (productWithPrice && Object.keys(productWithPrice).length > 0)
+    if (productWithPrice)
       return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
-    return false;
   }, [productWithPrice, cartList]);
-
+  console.log("priceVerified :>> ", priceVerified);
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
@@ -467,6 +466,7 @@ function Checkout(props) {
       cartList,
       createUserAddress,
       handlePayment,
+      priceVerified,
       grandTotal,
       shippingTotal,
       couponTotal,
@@ -932,7 +932,8 @@ function Checkout(props) {
                             disabled={
                               !isValidAddress(shippingAddress) ||
                               !isInventoryCheckReady ||
-                              loading
+                              loading ||
+                              !priceVerified
                             }
                             className={`btn d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
