@@ -1662,6 +1662,7 @@ export const checkInventory = /* GraphQL */ `
     checkInventory(input: $input) {
       productId
       variantId
+      price
       inventory
     }
   }
