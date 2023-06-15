@@ -339,7 +339,7 @@ function DescOne(props) {
                         <div>
                           <div className="d-flex align-items-end">
                             <h2 className="mb-1 lh-1">{rating.toFixed(1)}</h2>
-                            {(!!product?.totalRatings || total) && (
+                            {!!(product?.totalRatings || total) && (
                               <span className="mt-2 mb-1 ml-1">
                                 Based on {total || product?.totalRatings} reviews
                               </span>
