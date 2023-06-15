@@ -75,7 +75,7 @@ function CartMenu(props) {
             <Cross size={18} />
           </ALink>
         </div>
-        <div className="side-cart">
+        <div className="side-cart ">
           {cartItems.length > 0 ? (
             <>
               <div className=" ">
