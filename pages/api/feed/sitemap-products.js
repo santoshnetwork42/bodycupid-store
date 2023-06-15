@@ -6,19 +6,34 @@ const { STORE_ENV } = process.env;
 
 export default async function Revalidate(req, res) {
   try {
-    const response = await fetchData(searchProductsBasic, {
-      filter: {
-        status: { eq: "ENABLED" },
-        storeId: { eq: STORE_ID },
-      },
-    });
+    let nextToken = null;
+    let productUrls = [];
 
-    const { items } = response.searchProducts;
-    const productUrls = items.map((product) => ({
-      loc: `https://bodycupid.com/product/${product.slug}`,
-      lastmod: product.updatedAt, 
-      changefreq: 'weekly',
-    }));
+    const fetchProductData = async (token) => {
+      const response = await fetchData(searchProductsBasic, {
+        filter: {
+          status: { eq: "ENABLED" },
+          storeId: { eq: STORE_ID },
+        },
+        nextToken: token,
+      });
+
+      const { items, nextToken: newToken } = response.searchProducts;
+      productUrls.push(
+        ...items.map((product) => ({
+          loc: `https://bodycupid.com/product/${product.slug}`,
+          lastmod: product.updatedAt,
+          changefreq: 'weekly',
+        }))
+      );
+
+      if (newToken) {
+        // Call the function recursively with the new token
+        await fetchProductData(newToken);
+      }
+    };
+
+    await fetchProductData(nextToken);
 
     const siteMapLinks = [
       {

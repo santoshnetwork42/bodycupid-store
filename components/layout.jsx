@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import "react-toastify/dist/ReactToastify.min.css";
-import "react-image-lightbox/style.css";
+//import "react-image-lightbox/style.css";
 import "react-input-range/lib/css/index.css";
 
 import ALink from "~/components/features/custom-link";
