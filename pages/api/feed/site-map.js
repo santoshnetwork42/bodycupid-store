@@ -2,16 +2,16 @@ const { STORE_ENV } = process.env;
 
 const siteMapLinks = [
   {
-    loc: "https://bodycupid.com/sitemap_products_1.xml",
+    loc: "https://bodycupid.com/sitemap_products.xml",
   },
   {
-    loc: "https://bodycupid.com/sitemap_pages_1.xml",
+    loc: "https://bodycupid.com/sitemap_pages.xml",
   },
   {
-    loc: "https://bodycupid.com/sitemap_collections_1.xml",
+    loc: "https://bodycupid.com/sitemap_collections.xml",
   },
   {
-    loc: "https://bodycupid.com/sitemap_blogs_1.xml",
+    loc: "https://bodycupid.com/sitemap_blogs.xml",
   },
 ];
 

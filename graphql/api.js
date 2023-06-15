@@ -118,6 +118,55 @@ export const getSideBarFilterCategories = /* GraphQL */ `
     }
   }
 `;
+export const searchCollections = /* GraphQL */ `
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
+  ) {
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export const getAllCategoriesPath = /* GraphQL */ `
   query SearchProductCategories(

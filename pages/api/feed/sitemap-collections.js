@@ -1,4 +1,4 @@
-import { searchProductsBasic } from "~/graphql/api";
+import { searchCollections } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
@@ -7,10 +7,10 @@ const { STORE_ENV } = process.env;
 export default async function Revalidate(req, res) {
   try {
     let nextToken = null;
-    let productUrls = [];
+    let collectionUrls = [];
 
-    const fetchProductData = async (token) => {
-      const response = await fetchData(searchProductsBasic, {
+    const fetchCollectionData = async (token) => {
+      const response = await fetchData(searchCollections, {
         filter: {
           status: { eq: "ENABLED" },
           storeId: { eq: STORE_ID },
@@ -18,25 +18,26 @@ export default async function Revalidate(req, res) {
         nextToken: token,
       });
 
-      const { items, nextToken: newToken } = response.searchProducts;
-      productUrls.push(
-        ...items.map((product) => ({
-          loc: `https://bodycupid.com/product/${product.slug}`,
-          lastmod: product.updatedAt,
+      const { items, nextToken: newToken } = response.searchCollections;
+      console.log("item", items)
+      collectionUrls.push(
+        ...items.map((collection) => ({
+          loc: `https://bodycupid.com/collection/${collection.slug}`,
+          lastmod: "",
           changefreq: 'weekly',
         }))
       );
 
       if (newToken) {
-        await fetchProductData(newToken);
+        await fetchCollectionData(newToken);
       }
     };
 
-    await fetchProductData(nextToken);
+    await fetchCollectionData(nextToken);
 
     const siteMapLinks = [
       {
-        loc: "https://bodycupid.com/sitemap_products.xml",
+        loc: "https://bodycupid.com/sitemap_collections.xml",
       },
       {
         loc: "https://bodycupid.com/sitemap_pages.xml",
@@ -47,7 +48,7 @@ export default async function Revalidate(req, res) {
       {
         loc: "https://bodycupid.com/sitemap_blogs.xml",
       },
-      ...productUrls,
+      ...collectionUrls,
     ];
 
     if (STORE_ENV !== "production" && false) {
@@ -60,8 +61,8 @@ export default async function Revalidate(req, res) {
       res.end();
     }
   } catch (error) {
-    console.log("Error fetching products:", error);
-    res.status(500).send("Error fetching products");
+    console.log("Error fetching collections:", error);
+    res.status(500).send("Error fetching collections");
   }
 }
 
@@ -82,6 +83,6 @@ const buildSitemapXml = (fields) => {
 
 const withXMLTemplate = (content) => {
   return `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!--  This is the parent sitemap linking to additional sitemaps for products as shown below. The sitemap can not be edited manually, but is kept up to date in real time.  -->
+  <!--  This is the parent sitemap linking to additional sitemaps for collections, collections and pages as shown below. The sitemap can not be edited manually, but is kept up to date in real time.  -->
  \n${content}</sitemapindex>`;
 };
