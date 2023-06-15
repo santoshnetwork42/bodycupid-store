@@ -274,7 +274,7 @@ function Checkout(props) {
     if (productWithPrice)
       return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
   }, [productWithPrice, cartList]);
-  console.log("priceVerified :>> ", priceVerified);
+
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
@@ -297,7 +297,7 @@ function Checkout(props) {
 
       if (!priceVerified) {
         alertToaster("Price updated. Add products again", "error");
-        logger.error("No payment method selected by user");
+        logger.error("Price updated. Add products again");
         setLoading(false);
         return;
       }
