@@ -78,7 +78,7 @@
 }
 
 .ReactModal__Overlay {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     padding: 4rem 3rem 2rem;
@@ -110,6 +110,10 @@
 
 
 @include mq(xs, 'max') {
+    .coupon-modal-container {
+        
+        padding: 4rem 0rem 2rem 4rem !important;
+    }
     .ReactModal__Overlay {
         padding: 4rem 1rem 2rem;
 

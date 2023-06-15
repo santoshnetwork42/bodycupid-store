@@ -60,6 +60,7 @@ function Checkout(props) {
     user,
     emptyCart,
     appliedCoupon,
+    setCartVisibility,
     store,
     metadata,
     placeOrder: onPlaceOrder,
@@ -517,7 +518,14 @@ function Checkout(props) {
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/cart">1. Shopping Cart</ALink>
+            <ALink
+              href="#"
+              onClick={() => {
+                setCartVisibility(true);
+              }}
+            >
+              1. Shopping Cart
+            </ALink>
             <i>
               <RightAngle size={18} color="currentColor" />
             </i>
@@ -996,6 +1004,7 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
+  setCartVisibility: modalActions.setCartVisibility,
   removeCoupon: cartActions.removeCoupon,
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,

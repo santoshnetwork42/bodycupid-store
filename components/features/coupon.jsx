@@ -161,7 +161,7 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box p-relative mb-2 pb-5 bg-white text-primary flex-row lh-default"
+          className="cart-coupon-box p-relative mb-2 pb-3 bg-white text-primary flex-row lh-default"
           onClick={() => setOpen(true)}
         >
           <span className="mt-1 sm-product-remove">
@@ -218,7 +218,7 @@ function Coupon(props) {
                     </span>
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
+                        className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${!isSmall && "ml-1 "}`}
                         type="button"
                       >
                         View more offers

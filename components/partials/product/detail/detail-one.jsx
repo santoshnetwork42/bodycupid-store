@@ -446,7 +446,7 @@ function DetailOne(props) {
                               cartActive ? "" : "disabled"
                             }`}
                             onClick={() => {
-                              router.push("/pages/cart");
+                              setCartVisibility(true);
                             }}
                           >
                             <i>
@@ -511,8 +511,7 @@ function DetailOne(props) {
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
-                            router.push("/pages/cart");
-                          }}
+                            setCartVisibility(true)                          }}
                         >
                           <i>
                             <Bag color="currentColor" size={20} />
