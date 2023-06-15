@@ -9,13 +9,16 @@ import { getRecordKey } from "~/utils/helper";
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
   const [productWithInventory, setProductWithInventory] = useState(null);
+  const [productWithPrice, setProductWithPrice] = useState(null);
 
-  const inventoryPayload = useMemo(() => cartList.map(
-    (product) => ({
-      productId: product.id,
-      variantId: product.variantId,
-    }),
-  ), [cartList]);
+  const inventoryPayload = useMemo(
+    () =>
+      cartList.map((product) => ({
+        productId: product.id,
+        variantId: product.variantId,
+      })),
+    [cartList]
+  );
 
   useEffect(() => {
     const callGetInventory = async () => {
@@ -30,17 +33,27 @@ export const useInventory = () => {
             },
           });
 
-          const inventoryMapping = response.reduce(
-            (acc, { productId, variantId, inventory }) => {
+          const { inventoryMapping, priceMapping } = response.reduce(
+            (acc, { productId, variantId, price, inventory }) => {
               const recordKey = getRecordKey({ id: productId }, variantId);
-              return { ...acc, [recordKey]: inventory };
+              return {
+                inventoryMapping: {
+                  ...acc.inventoryMapping,
+                  [recordKey]: inventory,
+                },
+                priceMapping: {
+                  ...acc.priceMapping,
+                  [recordKey]: price,
+                },
+              };
             },
             {}
           );
-
           setProductWithInventory(inventoryMapping);
+          setProductWithPrice(priceMapping);
         } else {
           setProductWithInventory({});
+          setProductWithPrice({});
         }
       } catch (error) {
         errorHandler(error);
@@ -52,13 +65,12 @@ export const useInventory = () => {
 
   const outOfStockItems = useMemo(
     () =>
-      productWithInventory ?
-        cartList.filter((c) => {
-          const itemRecordKey = getRecordKey(c, c.variantId);
-          return c.qty > productWithInventory[itemRecordKey];
-        })
-        : []
-    ,
+      productWithInventory
+        ? cartList.filter((c) => {
+            const itemRecordKey = getRecordKey(c, c.variantId);
+            return c.qty > productWithInventory[itemRecordKey];
+          })
+        : [],
     [cartList, productWithInventory]
   );
 
@@ -67,5 +79,6 @@ export const useInventory = () => {
     success: !outOfStockItems.length,
     inventoryMapping: productWithInventory,
     outOfStockItems,
+    productWithPrice,
   };
 };
