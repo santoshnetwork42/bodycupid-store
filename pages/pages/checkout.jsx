@@ -76,6 +76,7 @@ function Checkout(props) {
     success: isInventoryCheckSuccess,
     inventoryMapping,
     outOfStockItems,
+    productWithPrice,
   } = useInventory();
   const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
@@ -269,6 +270,11 @@ function Checkout(props) {
     return Promise.resolve(null);
   }, [shippingAddress, user]);
 
+  const priceVerified = useMemo(() => {
+    if (productWithPrice)
+      return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
+  }, [productWithPrice, cartList]);
+
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
@@ -285,6 +291,13 @@ function Checkout(props) {
       if (payMethod === "NONE") {
         alertToaster("Please select payment method", "error");
         logger.error("No payment method selected by user");
+        setLoading(false);
+        return;
+      }
+
+      if (!priceVerified) {
+        alertToaster("Price updated. Add products again", "error");
+        logger.error("Price updated. Add products again");
         setLoading(false);
         return;
       }
@@ -453,6 +466,7 @@ function Checkout(props) {
       cartList,
       createUserAddress,
       handlePayment,
+      priceVerified,
       grandTotal,
       shippingTotal,
       couponTotal,
