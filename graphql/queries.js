@@ -23,6 +23,7 @@ export const getUser = /* GraphQL */ `
       updatedAt
       totalOrders
       totalSpent
+      lastOrderDate
       walletBalance
       walletSpent
       totalStoreCredit
@@ -56,6 +57,7 @@ export const listUsers = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -101,6 +103,7 @@ export const searchUsers = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2295,6 +2298,7 @@ export const getProductLog = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2393,6 +2397,7 @@ export const getOrder = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2744,6 +2749,7 @@ export const getOrderComment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3154,6 +3160,7 @@ export const getPayment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3316,6 +3323,7 @@ export const getReview = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3776,6 +3784,7 @@ export const getShoppingCart = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -4157,6 +4166,7 @@ export const getCoupon = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
