@@ -36,7 +36,7 @@ export const useInventory = () => {
           const { inventoryMapping, priceMapping } = response.reduce(
             (acc, { productId, variantId, price, inventory }) => {
               const recordKey = getRecordKey({ id: productId }, variantId);
-              acc = {
+              return {
                 inventoryMapping: {
                   ...acc.inventoryMapping,
                   [recordKey]: inventory,
@@ -46,8 +46,6 @@ export const useInventory = () => {
                   [recordKey]: price,
                 },
               };
-
-              return acc;
             },
             {}
           );
