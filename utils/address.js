@@ -53,7 +53,7 @@ export const isValidAddress = (address) => {
     address: streetAddress,
   } = address || {};
 
-  if (!firstName || !lastName || !streetAddress || !city || !pinCode) {
+  if (!firstName  || !streetAddress || !city || !pinCode) {
     return false;
   }
   return true;
@@ -89,9 +89,9 @@ export const validateAddress = async (address, paymentType = "ALL") => {
   if (!firstName) {
     error.firstname = "Please enter firstname";
   }
-  if (!lastName) {
-    error.lastname = "Please enter lastname";
-  }
+  // if (!lastName) {
+  //   error.lastname = "Please enter lastname";
+  // }
   if (!streetAddress) {
     error.address = "Please enter address";
   }
