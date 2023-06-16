@@ -109,7 +109,7 @@ const AddressForm = (props) => {
                 />
               </div>{" "}
               <div className="col-xs-6">
-                <label>Last Name </label>
+                <label>Last Name *</label>
                 <input
                   type="text"
                   className="form-control"
