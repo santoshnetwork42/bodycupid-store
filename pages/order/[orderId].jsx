@@ -320,19 +320,29 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
               </tbody>
             </table>
           </div>
-          <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
-            <ALink
-              href="/pages/orders"
-              className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
-            >
-              Your Orders
-            </ALink>
-            <ALink
-              href="/pages/contact-us"
-              className="btn btn-icon-left btn btn-back btn-rounded btn-md"
-            >
-              Contact us
-            </ALink>
+          <div className="d-lg-flex justify-content-between ">
+            <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
+              <ALink
+                href="/pages/orders"
+                className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
+              >
+                Your Orders
+              </ALink>
+              <ALink
+                href="/pages/contact-us"
+                className="btn btn-icon-left btn btn-back btn-rounded btn-md"
+              >
+                Contact us
+              </ALink>
+            </div>
+            <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
+              <ALink
+                className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md"
+                href="/collections/all"
+              >
+                Return to shop
+              </ALink>
+            </div>
           </div>
 
           <PaymentLoader loading={isPaymentProcessing} />
