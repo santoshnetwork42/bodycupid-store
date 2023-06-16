@@ -45,7 +45,7 @@ function ProductDefault(props) {
     if (!!isReady) {
       getRelatedProducts();
     }
-  }, [slug]);
+  }, [slug, product, isReady]);
 
   const getRelatedProducts = useCallback(async () => {
     try {
