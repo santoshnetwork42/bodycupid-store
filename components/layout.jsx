@@ -121,7 +121,11 @@ function Layout({
         hideProgressBar={true}
         newestOnTop={true}
       />
-      <CouponDiscountBar couponBanner={navbar.couponBanner} />
+
+      {!!navbar.couponBanner && (
+        <CouponDiscountBar/>
+      )}
+      
 
       <Quickview />
       <LoginModal />

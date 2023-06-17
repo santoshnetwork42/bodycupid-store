@@ -11,22 +11,19 @@ const couponDiscountBar = (props) => {
     ? `Add more items to unlock 'Buy ${bxgyCoupon?.buyXQuantity} get ${bxgyCoupon?.getYQuantity} Offer'`
     : `Congrats! You have unlocked ${bxgyCoupon?.code} Offer`;
 
-  const isCongrats = couponText.includes("Congrats");
-
     return (
       <>
-        {!!cartList.length && bxgyCoupon ? (
+        {!!cartList.length && !!bxgyCoupon && (
           <div className="coupon-discount-bar ">
             <div className="coupon-discount">
             <p className={`coupon-discount-text font-weight-semi-bold pt-1 pb-1 m-0 
-              ${isCongrats ? "animate" : ""}`}>
+              ${bxgyCoupon?.allowed ? "animate" : ""}`}>
               {couponText}
               </p>
             </div>
           </div>
-        ) : (
-          <></>
-        )}
+        )
+        }
       </>
     );
 };
