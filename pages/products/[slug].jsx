@@ -42,10 +42,8 @@ function ProductDefault(props) {
       ...product,
       section: { id: "product-detail", name: "Product Detail" },
     });
-    if (!!isReady) {
-      getRelatedProducts();
-    }
-  }, [slug, product, isReady]);
+    getRelatedProducts();
+  }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
     try {
