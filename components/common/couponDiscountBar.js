@@ -10,7 +10,7 @@ const couponDiscountBar = (props) => {
 
   const couponText = !bxgyCoupon?.allowed
     ? `Add more items to unlock 'Buy ${bxgyCoupon?.buyXQuantity} get ${bxgyCoupon?.getYQuantity} Offer'`
-    : `Congrats, your free products is added to cart!`;
+    : `Congrats, your free product is added to cart!`;
 
     return (
       <>
