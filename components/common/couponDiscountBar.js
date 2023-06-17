@@ -5,7 +5,6 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 const couponDiscountBar = (props) => {
   const { cartList } = props;
   const featuredCoupons = useFeaturedCoupons();
-  console.log(featuredCoupons)
   const bxgyCoupon = featuredCoupons.find((coupon) => coupon.couponType === "BUY_X_GET_Y");
 
   const couponText = !bxgyCoupon?.allowed
