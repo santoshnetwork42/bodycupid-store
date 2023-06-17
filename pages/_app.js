@@ -43,6 +43,7 @@ const App = ({ Component, pageProps }) => {
     ...navbar,
     hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
+    couponBanner: !!Component.couponBanner,
   };
 
   const footerProps = {

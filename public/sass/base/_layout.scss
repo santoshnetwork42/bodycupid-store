@@ -31,3 +31,27 @@
     width: 1px;
     background-color: $border-color;
 }
+
+.coupon-discount-bar {
+    background-color: green;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    .coupon-discount-bar {
+        bottom: 58px; 
+    }
+}
+
+.coupon-discount {
+    .coupon-discount-text {
+        letter-spacing: 2.5px;
+        font-weight: 400;
+        color: white;
+        text-align: center; 
+    }
+}

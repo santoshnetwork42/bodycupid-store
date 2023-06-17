@@ -317,7 +317,7 @@ function Coupon(props) {
                 )}
 
                 <p className="font-italic text-grey">
-                  *Appicable on certain products
+                  *Applicable on certain products
                 </p>
               </div>
             </div>

@@ -235,5 +235,6 @@ const Component = connect(mapStateToProps, {
 
 Component.navbarConfig = { coupons: true };
 Component.showTopRunner = true;
+Component.couponBanner = true;
 
 export default Component;
