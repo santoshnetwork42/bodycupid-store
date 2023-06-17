@@ -42,9 +42,7 @@ function ProductDefault(props) {
       ...product,
       section: { id: "product-detail", name: "Product Detail" },
     });
-    if (!!isReady) {
-      getRelatedProducts();
-    }
+    getRelatedProducts();
   }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
@@ -235,5 +233,6 @@ const Component = connect(mapStateToProps, {
 
 Component.navbarConfig = { coupons: true };
 Component.showTopRunner = true;
+Component.couponBanner = true;
 
 export default Component;
