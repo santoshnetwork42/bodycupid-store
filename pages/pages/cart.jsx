@@ -326,5 +326,6 @@ const Component = connect(mapStateToProps, {
 
 Component.hideFooter = true;
 Component.navbarConfig = { shippingTier: true, coupons: true };
+Component.couponBanner = true;
 
 export default Component;

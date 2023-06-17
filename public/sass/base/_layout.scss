@@ -31,3 +31,43 @@
     width: 1px;
     background-color: $border-color;
 }
+
+.coupon-discount-bar {
+    background-color: #17B31B;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.animate {
+    animation-name: slideIn;
+    animation-duration: 1s;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+@media (max-width: 576px) {
+    .coupon-discount-bar {
+        bottom: 58px; 
+    }
+}
+
+.coupon-discount {
+    .coupon-discount-text {
+        letter-spacing: 1.5px;
+        font-weight: 400;
+        color: white;
+        text-align: center; 
+    }
+}
