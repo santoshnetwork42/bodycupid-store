@@ -495,7 +495,6 @@ function Checkout(props) {
   }, [appliedCoupon]);
 
   const isCODDisabled = codGrandTotal > maxCOD;
-  console.log(codGrandTotal)
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
