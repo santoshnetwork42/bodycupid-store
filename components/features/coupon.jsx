@@ -34,10 +34,6 @@ function Coupon(props) {
   const [loading, setLoading] = useState(false);
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsCouponModalOpen(true);
-  };
-
   const closeModal = () => {
     setIsCouponModalOpen(false);
   };
@@ -73,6 +69,7 @@ function Coupon(props) {
         applyCouponCode(bestCouponCode, true);
       }
     }
+    setIsCouponModalOpen(true);
   }, [bestCouponCode]);
 
   const applyCouponCode = useCallback(
