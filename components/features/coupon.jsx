@@ -12,6 +12,7 @@ import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
+import Checkmark from "~/components/icons";
 
 const logger = new Logger("Coupon");
 
@@ -31,6 +32,15 @@ function Coupon(props) {
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsCouponModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsCouponModalOpen(false);
+  };
 
   const featuredCoupons = useFeaturedCoupons();
 
@@ -91,6 +101,7 @@ function Coupon(props) {
         if (allowed) {
           applyCoupon({ ...response, autoApplied: !!autoApplied });
           setOpen(false);
+          setIsCouponModalOpen(true);
           if (couponType === "PRODUCT") {
             addToCart({
               ...getYStoreProduct,
@@ -229,6 +240,33 @@ function Coupon(props) {
             </ALink>
           </div>
         </div>
+      )}
+
+      {isCouponModalOpen && (
+        <couponModal>
+          <div className="modal-overlay" onClick={closeModal}>
+            <div className="modal-content">
+              <div
+                className="product-close sm-product-remove close-icon"
+                title="Remove this product"
+                onClick={closeModal}
+              >
+                <Close size={18} color="grey" />
+              </div>
+              <div className="modal-icon">
+                <Discount size={35} color="#17b31b" />
+              </div>
+              <h4 className="modal-title">
+                '{appliedCoupon.code}' coupon applied!
+              </h4>
+              <h3 className="modal-amount">₹{toDecimal(couponTotal)} saved</h3>
+              <h6 className="modal-savings">through this coupon</h6>
+              <button className="close-button" onClick={closeModal}>
+                Hurrah!!!
+              </button>
+            </div>
+          </div>
+        </couponModal>
       )}
 
       <Modal
