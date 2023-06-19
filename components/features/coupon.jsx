@@ -33,14 +33,9 @@ function Coupon(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const openModal = () => {
     setIsCouponModalOpen(true);
-    setShowConfetti(true);
-    setTimeout(() => {
-      setShowConfetti(false);
-    }, 3000);
   };
 
   const closeModal = () => {
@@ -251,7 +246,6 @@ function Coupon(props) {
 
       {isCouponModalOpen && (
         <couponModal>
-          {showConfetti && <Confetti width={350} />}
           <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content">
               <div
