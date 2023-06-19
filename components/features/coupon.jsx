@@ -12,7 +12,6 @@ import { errorHandler } from "~/utils/errorHandler";
 import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
-import Checkmark from "~/components/icons";
 
 const logger = new Logger("Coupon");
 
