@@ -15,6 +15,7 @@ import {
   validateTransaction,
   getOrderStatus,
 } from "~/graphql/api";
+
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
@@ -46,6 +47,8 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { MAX_COD_AMOUNT } from "~/constant";
 
 const logger = new Logger("Checkout");
 
@@ -69,6 +72,7 @@ function Checkout(props) {
   const { name } = store;
 
   const guestCheckout = useGuestCheckout();
+  const maxCOD = useConfiguration(MAX_COD_AMOUNT,0);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -490,6 +494,8 @@ function Checkout(props) {
     };
   }, [appliedCoupon]);
 
+  const isCODDisabled = grandTotal > maxCOD;
+
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
@@ -886,10 +892,13 @@ function Checkout(props) {
                             isSelected={payMethod === "COD"}
                             description={
                               codDisabled
-                                ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
-                                : `Pay using Cash on Delivery.`
+                              ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                              : isCODDisabled
+                              ? `COD payment disabled for orders above ${maxCOD}. Please make prepaid payment`
+                              : `Pay using Cash on Delivery.`
+                                
                             }
-                            disabled={codDisabled}
+                            disabled={codDisabled || isCODDisabled}
                             onClick={() => {
                               !codDisabled && setFirst("COD");
                             }}
