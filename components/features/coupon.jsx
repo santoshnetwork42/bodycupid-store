@@ -33,6 +33,15 @@ function Coupon(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const openModal = () => {
+    setIsCouponModalOpen(true);
+    setShowConfetti(true);
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 3000);
+  };
 
   const closeModal = () => {
     setIsCouponModalOpen(false);
@@ -67,9 +76,10 @@ function Coupon(props) {
     ) {
       if (appliedCoupon?.code !== bestCouponCode) {
         applyCouponCode(bestCouponCode, true);
+      } else if (appliedCoupon?.autoApplied && !isCouponModalOpen) {
+        openModal();
       }
     }
-    setIsCouponModalOpen(true);
   }, [bestCouponCode]);
 
   const applyCouponCode = useCallback(
@@ -98,7 +108,7 @@ function Coupon(props) {
         if (allowed) {
           applyCoupon({ ...response, autoApplied: !!autoApplied });
           setOpen(false);
-          setIsCouponModalOpen(true);
+          openModal();
           if (couponType === "PRODUCT") {
             addToCart({
               ...getYStoreProduct,
@@ -241,6 +251,7 @@ function Coupon(props) {
 
       {isCouponModalOpen && (
         <couponModal>
+          {showConfetti && <Confetti width={350} />}
           <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content">
               <div
@@ -259,7 +270,7 @@ function Coupon(props) {
               <h3 className="modal-amount">₹{toDecimal(couponTotal)} saved</h3>
               <h6 className="modal-savings">through this coupon</h6>
               <button className="close-button" onClick={closeModal}>
-                Hurrah!!!
+                Hurrah!
               </button>
             </div>
           </div>
