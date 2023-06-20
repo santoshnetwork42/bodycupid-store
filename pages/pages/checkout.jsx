@@ -15,6 +15,7 @@ import {
   validateTransaction,
   getOrderStatus,
 } from "~/graphql/api";
+
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
@@ -46,6 +47,8 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { MAX_COD_AMOUNT } from "~/constant";
 
 const logger = new Logger("Checkout");
 
@@ -69,6 +72,7 @@ function Checkout(props) {
   const { name } = store;
 
   const guestCheckout = useGuestCheckout();
+  const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -483,12 +487,14 @@ function Checkout(props) {
     ]
   );
 
-  const { codDisabled, onlineDisabled } = useMemo(() => {
+  const { codCouponDisabled, onlineDisabled } = useMemo(() => {
     return {
-      codDisabled: appliedCoupon?.paymentMethod === "ONLINE",
+      codCouponDisabled: appliedCoupon?.paymentMethod === "ONLINE",
       onlineDisabled: appliedCoupon?.paymentMethod === "COD",
     };
   }, [appliedCoupon]);
+
+  const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
@@ -885,13 +891,15 @@ function Checkout(props) {
                             }
                             isSelected={payMethod === "COD"}
                             description={
-                              codDisabled
-                                ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
+                              codCouponDisabled
+                                ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                                : isMaxCODDisabled
+                                ? `COD payment disabled for orders above ₹${maxCOD}.`
                                 : `Pay using Cash on Delivery.`
                             }
-                            disabled={codDisabled}
+                            disabled={codCouponDisabled || isMaxCODDisabled}
                             onClick={() => {
-                              !codDisabled && setFirst("COD");
+                              !codCouponDisabled && setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />
@@ -911,7 +919,9 @@ function Checkout(props) {
                       )}
                       <div
                         className={`d-flex justify-content-center ${
-                          isMobile ? "stick-bottom-button stick-bottom-button-order" : ""
+                          isMobile
+                            ? "stick-bottom-button stick-bottom-button-order"
+                            : ""
                         }`}
                       >
                         {!isValidAddress(shippingAddress) && !!isMobile && (
