@@ -266,11 +266,11 @@ function Coupon(props) {
             <div className="modal-overlay">
               <div className="modal-content">
                 <div
-                  className="product-close sm-product-remove close-icon"
+                  className="close-icon"
                   title="Remove this product"
                   onClick={closeModal}
                 >
-                  <CloseIcon size={25} color="grey" />
+                  <CloseIcon size={20} color="grey" />
                 </div>
                 <div className="modal-icon">
                   <Discount size={35} color="#17b31b" />
