@@ -9,13 +9,7 @@ import Modal from "~/components/common/modal";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import {
-  CheckBadge,
-  Close,
-  CloseButton,
-  Discount,
-  RightAngle,
-} from "~/components/icons";
+import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { Confetti } from "~/components/icons";

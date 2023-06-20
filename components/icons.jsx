@@ -446,7 +446,6 @@ export const Close = ({ size = defaultIconSize, color = defaultIconColor }) => {
     </svg>
   );
 };
-
 export const Clock = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
