@@ -41,7 +41,9 @@ function Coupon(props) {
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
 
   const openModal = () => {
-    setIsCouponModalOpen(true);
+    setTimeout(() => {
+      setIsCouponModalOpen(true);
+    }, 500);
   };
 
   const closeModal = () => {
