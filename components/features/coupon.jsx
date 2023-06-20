@@ -106,7 +106,6 @@ function Coupon(props) {
               cartItemSource: "COUPON",
             });
           }
-
           logger.info("Applied coupon:", response);
         } else {
           setError(message);
