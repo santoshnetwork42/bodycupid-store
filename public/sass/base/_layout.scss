@@ -170,9 +170,8 @@
       z-index: 1000000;
 
       @media (max-width: 768px) {
-          position: absolute;
+          position: fixed;
           height: 300px;
-          top: -50%;
           left: 50%;
         }
     }

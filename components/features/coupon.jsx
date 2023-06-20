@@ -9,7 +9,13 @@ import Modal from "~/components/common/modal";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
+import {
+  CheckBadge,
+  Close,
+  CloseIcon,
+  Discount,
+  RightAngle,
+} from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { Confetti } from "~/components/icons";
@@ -257,7 +263,7 @@ function Coupon(props) {
                   title="Remove this product"
                   onClick={closeModal}
                 >
-                  <Close size={18} color="grey" />
+                  <CloseIcon size={25} color="grey" />
                 </div>
                 <div className="modal-icon">
                   <Discount size={35} color="#17b31b" />
