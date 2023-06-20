@@ -72,7 +72,7 @@ function Checkout(props) {
   const { name } = store;
 
   const guestCheckout = useGuestCheckout();
-  const maxCOD = useConfiguration(MAX_COD_AMOUNT,0);
+  const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -487,14 +487,14 @@ function Checkout(props) {
     ]
   );
 
-  const { codDisabled, onlineDisabled } = useMemo(() => {
+  const { codCouponDisabled, onlineDisabled } = useMemo(() => {
     return {
-      codDisabled: appliedCoupon?.paymentMethod === "ONLINE",
+      codCouponDisabled: appliedCoupon?.paymentMethod === "ONLINE",
       onlineDisabled: appliedCoupon?.paymentMethod === "COD",
     };
   }, [appliedCoupon]);
 
-  const isCODDisabled = codGrandTotal > maxCOD;
+  const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
@@ -891,16 +891,15 @@ function Checkout(props) {
                             }
                             isSelected={payMethod === "COD"}
                             description={
-                              codDisabled
-                              ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
-                              : isCODDisabled
-                              ? `COD payment disabled for orders above ${maxCOD}. Please make prepaid payment`
-                              : `Pay using Cash on Delivery.`
-                                
+                              codCouponDisabled
+                                ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                                : isMaxCODDisabled
+                                ? `COD payment disabled for orders above ₹${maxCOD}.`
+                                : `Pay using Cash on Delivery.`
                             }
-                            disabled={codDisabled || isCODDisabled}
+                            disabled={codCouponDisabled || isMaxCODDisabled}
                             onClick={() => {
-                              !codDisabled && setFirst("COD");
+                              !codCouponDisabled && setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />
@@ -920,7 +919,9 @@ function Checkout(props) {
                       )}
                       <div
                         className={`d-flex justify-content-center ${
-                          isMobile ? "stick-bottom-button stick-bottom-button-order" : ""
+                          isMobile
+                            ? "stick-bottom-button stick-bottom-button-order"
+                            : ""
                         }`}
                       >
                         {!isValidAddress(shippingAddress) && !!isMobile && (
