@@ -107,9 +107,16 @@ function Coupon(props) {
           await getCouponDiscount(response, cartList);
 
         if (allowed) {
+          cartList.forEach((item) => {
+            if (item.cartItemSource === "COUPON") {
+              removeFromCart(item);
+            }
+          });
+
           applyCoupon({ ...response, autoApplied: !!autoApplied });
           setOpen(false);
           openModal();
+
           if (couponType === "PRODUCT") {
             addToCart({
               ...getYStoreProduct,
