@@ -9,9 +9,16 @@ import Modal from "~/components/common/modal";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
+import {
+  CheckBadge,
+  Close,
+  CloseButton,
+  Discount,
+  RightAngle,
+} from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
+import { Confetti } from "~/components/icons";
 
 const logger = new Logger("Coupon");
 
@@ -245,26 +252,33 @@ function Coupon(props) {
 
       {isCouponModalOpen && (
         <couponModal>
-          <div className="modal-overlay" onClick={closeModal}>
-            <div className="modal-content">
-              <div
-                className="product-close sm-product-remove close-icon"
-                title="Remove this product"
-                onClick={closeModal}
-              >
-                <Close size={18} color="grey" />
+          <div onClick={closeModal}>
+            <div>
+              <Confetti />
+            </div>
+            <div className="modal-overlay">
+              <div className="modal-content">
+                <div
+                  className="product-close sm-product-remove close-icon"
+                  title="Remove this product"
+                  onClick={closeModal}
+                >
+                  <Close size={18} color="grey" />
+                </div>
+                <div className="modal-icon">
+                  <Discount size={35} color="#17b31b" />
+                </div>
+                <h4 className="modal-title">
+                  '{appliedCoupon.code}' coupon applied!
+                </h4>
+                <h3 className="modal-amount">
+                  ₹{toDecimal(couponTotal)} saved
+                </h3>
+                <h6 className="modal-savings">through this coupon</h6>
+                <button className="close-button" onClick={closeModal}>
+                  Hurrah!
+                </button>
               </div>
-              <div className="modal-icon">
-                <Discount size={35} color="#17b31b" />
-              </div>
-              <h4 className="modal-title">
-                '{appliedCoupon.code}' coupon applied!
-              </h4>
-              <h3 className="modal-amount">₹{toDecimal(couponTotal)} saved</h3>
-              <h6 className="modal-savings">through this coupon</h6>
-              <button className="close-button" onClick={closeModal}>
-                Hurrah!
-              </button>
             </div>
           </div>
         </couponModal>
