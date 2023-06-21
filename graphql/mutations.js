@@ -26,6 +26,7 @@ export const deleteUser = /* GraphQL */ `
       updatedAt
       totalOrders
       totalSpent
+      lastOrderDate
       walletBalance
       walletSpent
       totalStoreCredit
@@ -75,6 +76,7 @@ export const deleteOrder = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -200,6 +202,7 @@ export const updateOrderComment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -374,6 +377,7 @@ export const deletePayment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -463,6 +467,7 @@ export const deleteCoupon = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -664,6 +669,7 @@ export const createUser = /* GraphQL */ `
       updatedAt
       totalOrders
       totalSpent
+      lastOrderDate
       walletBalance
       walletSpent
       totalStoreCredit
@@ -695,6 +701,7 @@ export const updateUser = /* GraphQL */ `
       updatedAt
       totalOrders
       totalSpent
+      lastOrderDate
       walletBalance
       walletSpent
       totalStoreCredit
@@ -2377,6 +2384,7 @@ export const createProductLog = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2416,6 +2424,7 @@ export const updateProductLog = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2455,6 +2464,7 @@ export const deleteProductLog = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2508,6 +2518,7 @@ export const createOrder = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2647,6 +2658,7 @@ export const updateOrder = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2772,6 +2784,7 @@ export const createOrderComment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -2811,6 +2824,7 @@ export const deleteOrderComment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3107,6 +3121,7 @@ export const createPayment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3163,6 +3178,7 @@ export const updatePayment = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3206,6 +3222,7 @@ export const createReview = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3305,6 +3322,7 @@ export const updateReview = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3404,6 +3422,7 @@ export const deleteReview = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3840,6 +3859,7 @@ export const createShoppingCart = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -3928,6 +3948,7 @@ export const updateShoppingCart = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -4016,6 +4037,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -4374,6 +4396,7 @@ export const createCoupon = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -4492,6 +4515,7 @@ export const updateCoupon = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -4885,6 +4909,7 @@ export const checkInventory = /* GraphQL */ `
       productId
       variantId
       inventory
+      price
     }
   }
 `;
@@ -4930,6 +4955,7 @@ export const applyCoupon = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit
@@ -5061,6 +5087,7 @@ export const createStoreShoppingCart = /* GraphQL */ `
         updatedAt
         totalOrders
         totalSpent
+        lastOrderDate
         walletBalance
         walletSpent
         totalStoreCredit

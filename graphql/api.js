@@ -706,6 +706,7 @@ export const getOrder = /* GraphQL */ `
           price
           status
           deliveryPartner
+          shippingCourier
           trackingId
         }
       }
@@ -1661,6 +1662,7 @@ export const checkInventory = /* GraphQL */ `
     checkInventory(input: $input) {
       productId
       variantId
+      price
       inventory
     }
   }

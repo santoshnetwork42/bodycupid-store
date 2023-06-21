@@ -131,10 +131,7 @@ function Cart(props) {
                         <CartProduct
                           key={`${item.itemKey}-${item.extraQty}`}
                           item={item}
-                          outOfStock={
-                            inventoryMapping &&
-                            inventoryMapping[item.recordKey] < Number(item.qty)
-                          }
+                          inventory={(inventoryMapping || {})[item.recordKey]}
                         />
                       ))}
                     </div>
@@ -329,5 +326,6 @@ const Component = connect(mapStateToProps, {
 
 Component.hideFooter = true;
 Component.navbarConfig = { shippingTier: true, coupons: true };
+Component.couponBanner = true;
 
 export default Component;

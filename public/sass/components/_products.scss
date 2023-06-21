@@ -1427,7 +1427,8 @@
             left: 0;
             background: #fff;
             z-index: 99;
-            padding: 13px 0;
+            padding-top: 13px;
+            padding-bottom: 8px;
             box-shadow: 0 0 10px 1px rgb(0 0 0 / 10%);
 
             .btn-cart {
@@ -1436,7 +1437,6 @@
 
             .btn-cart-width {
                 max-width: 100%;
-                margin: 0px 1.5rem !important;
             }
         }
     }

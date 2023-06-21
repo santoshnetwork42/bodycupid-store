@@ -313,7 +313,7 @@ function DescOne(props) {
 
         <Card
           title={`CUSTOMER REVIEWS  ${
-            product?.totalRatings ? `(${product.totalRatings})` : ""
+            (product?.totalRatings || total) ? `(${total || product?.totalRatings})` : ""
           }`}
           id="product-review"
           noDisplayStyle
@@ -339,9 +339,9 @@ function DescOne(props) {
                         <div>
                           <div className="d-flex align-items-end">
                             <h2 className="mb-1 lh-1">{rating.toFixed(1)}</h2>
-                            {!!product?.totalRatings && (
+                            {!!(product?.totalRatings || total) && (
                               <span className="mt-2 mb-1 ml-1">
-                                Based on {product.totalRatings} reviews
+                                Based on {total || product?.totalRatings} reviews
                               </span>
                             )}
                           </div>

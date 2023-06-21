@@ -112,5 +112,7 @@ function mapStateToProps(state) {
 
 const Component = connect(mapStateToProps)(React.memo(AllProduct));
 Component.showStickyCheckout = true;
+Component.showTopRunner = true;
+Component.couponBanner = true;
 
 export default Component;

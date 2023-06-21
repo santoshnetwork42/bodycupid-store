@@ -15,6 +15,7 @@ import {
   validateTransaction,
   getOrderStatus,
 } from "~/graphql/api";
+
 import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
@@ -46,8 +47,12 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { MAX_COD_AMOUNT } from "~/constant";
 
 const logger = new Logger("Checkout");
+
+let razorpayMethod;
 
 function Checkout(props) {
   const {
@@ -65,8 +70,9 @@ function Checkout(props) {
   } = props;
 
   const { name } = store;
-  
+
   const guestCheckout = useGuestCheckout();
+  const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -74,6 +80,7 @@ function Checkout(props) {
     success: isInventoryCheckSuccess,
     inventoryMapping,
     outOfStockItems,
+    productWithPrice,
   } = useInventory();
   const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
@@ -158,12 +165,16 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
+              razorpayMethod = null;
               setLoading(false);
+              setOrderData(null);
             },
           },
         };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
+
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -175,19 +186,16 @@ function Checkout(props) {
   );
 
   useEffect(() => {
-    let intervalId;
+    let intervalId = null,
+      success = false;
+
     if (!!orderData && orderData.order) {
-      onPlaceOrder(
-        orderData.order,
-        [...cartList, ...freeProducts],
-        appliedCoupon,
-        shippingAddress
-      );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
       intervalId = setInterval(async () => {
         try {
-          let success;
+          if (success) return;
+
           if (paymentId) {
             success = await API.graphql({
               query: validateTransaction,
@@ -202,12 +210,30 @@ function Checkout(props) {
               variables: { id: orderId },
             }).then(
               (getOrderStatusResponse) =>
-                !!getOrderStatusResponse.data.getOrder.code
+                !!getOrderStatusResponse.data.getOrder.code &&
+                getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
             );
           }
 
           if (success) {
             logger.info("Payment completion");
+
+            logger.debug("Purchase event");
+            onPlaceOrder(
+              orderData.order,
+              [...cartList, ...freeProducts],
+              appliedCoupon,
+              shippingAddress
+            );
+
+            logger.debug("Purchase event done");
+            logger.debug("Redirecting to success page");
+
+            if (razorpayMethod) {
+              logger.debug("Closing razorpay modal");
+              razorpayMethod.close();
+            }
+
             const orderUrl = paymentId
               ? `/order/${orderId}?paymentId=${paymentId}`
               : `/order/${orderId}`;
@@ -219,12 +245,15 @@ function Checkout(props) {
           logger.error("Error while validating transaction", error);
         }
       }, 2000);
+    } else if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
     }
 
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [!!orderData]);
+  }, [orderData?.order, orderData?.paymentId]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
@@ -245,6 +274,11 @@ function Checkout(props) {
     return Promise.resolve(null);
   }, [shippingAddress, user]);
 
+  const priceVerified = useMemo(() => {
+    if (productWithPrice)
+      return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
+  }, [productWithPrice, cartList]);
+
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
@@ -261,6 +295,13 @@ function Checkout(props) {
       if (payMethod === "NONE") {
         alertToaster("Please select payment method", "error");
         logger.error("No payment method selected by user");
+        setLoading(false);
+        return;
+      }
+
+      if (!priceVerified) {
+        alertToaster("Price updated. Add products again", "error");
+        logger.error("Price updated. Add products again");
         setLoading(false);
         return;
       }
@@ -405,14 +446,13 @@ function Checkout(props) {
           const [paymentResponse] = await Promise.all(promise);
           const payment = paymentResponse.data.createPayment;
 
+          setOrderData({ order, paymentId: null });
           if (isFirst) {
             handlePayment({
               order,
               paymentId: payment.id,
               address: restAddress,
             });
-          } else {
-            setOrderData({ order, paymentId: null });
           }
         } catch (error) {
           setLoading(false);
@@ -430,6 +470,7 @@ function Checkout(props) {
       cartList,
       createUserAddress,
       handlePayment,
+      priceVerified,
       grandTotal,
       shippingTotal,
       couponTotal,
@@ -446,20 +487,18 @@ function Checkout(props) {
     ]
   );
 
-  const { codDisabled, onlineDisabled } = useMemo(() => {
+  const { codCouponDisabled, onlineDisabled } = useMemo(() => {
     return {
-      codDisabled: appliedCoupon?.paymentMethod === "ONLINE",
+      codCouponDisabled: appliedCoupon?.paymentMethod === "ONLINE",
       onlineDisabled: appliedCoupon?.paymentMethod === "COD",
     };
   }, [appliedCoupon]);
 
+  const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
+
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
   };
-
-  if (!!orderData) {
-    return <PaymentLoader loading />;
-  }
 
   return (
     <main className="main checkout">
@@ -469,9 +508,9 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && !guestCheckout && (
-        <Passwordless forceOpen redirect={false} />
-      )}
+      {!!orderData && <PaymentLoader loading />}
+
+      {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
@@ -852,13 +891,15 @@ function Checkout(props) {
                             }
                             isSelected={payMethod === "COD"}
                             description={
-                              codDisabled
-                                ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
+                              codCouponDisabled
+                                ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                                : isMaxCODDisabled
+                                ? `COD payment disabled for orders above ₹${maxCOD}.`
                                 : `Pay using Cash on Delivery.`
                             }
-                            disabled={codDisabled}
+                            disabled={codCouponDisabled || isMaxCODDisabled}
                             onClick={() => {
-                              !codDisabled && setFirst("COD");
+                              !codCouponDisabled && setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />
@@ -878,7 +919,9 @@ function Checkout(props) {
                       )}
                       <div
                         className={`d-flex justify-content-center ${
-                          isMobile ? "stick-bottom-button" : ""
+                          isMobile
+                            ? "stick-bottom-button stick-bottom-button-order"
+                            : ""
                         }`}
                       >
                         {!isValidAddress(shippingAddress) && !!isMobile && (
@@ -901,7 +944,7 @@ function Checkout(props) {
                               !isInventoryCheckReady ||
                               loading
                             }
-                            className={`btn d-flex justify-content-center align-items-center btn-order ${
+                            className={`btn pb-4 pt-4 m-0 d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
                                 : "btn-disabled"

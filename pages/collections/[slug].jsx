@@ -324,4 +324,7 @@ function mapStateToProps(state) {
 
 const Component = connect(mapStateToProps)(CollectionPage);
 Component.showStickyCheckout = true;
+Component.showTopRunner = true;
+Component.couponBanner = true;
+
 export default Component;

@@ -446,6 +446,97 @@ export const Close = ({ size = defaultIconSize, color = defaultIconColor }) => {
     </svg>
   );
 };
+
+export const GiftBox = () => {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ transform: "translate(-5px, 2px)", marginRight: "3px" }}
+    >
+      <path
+        d="M6 9C6 7.34315 7.34315 6 9 6H24H39C40.6569 6 42 7.34315 42 9V24V39C42 40.6569 40.6569 42 39 42H24H9C7.34315 42 6 40.6569 6 39V24V9Z"
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 24H44"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M24 44V4"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 30V18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M42 30V18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M30 42H18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M30 6H18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M24.0001 23.9999C24.0001 23.9999 31.8972 20.4542 33.0988 19.2526C34.3004 18.051 34.3004 16.1028 33.0988 14.9012C31.8972 13.6996 29.9489 13.6996 28.7473 14.9012C27.5457 16.1028 24.0001 23.9999 24.0001 23.9999ZM24.0001 23.9999C24.0001 23.9999 16.1027 20.4542 14.901 19.2526M24.0001 23.9999C24.0001 23.9999 20.4541 16.1028 19.2525 14.9012M24.0001 23.9999C24.0001 23.9999 31.897 27.5458 33.0986 28.7474M24.0001 23.9999C24.0001 23.9999 27.5455 31.8972 28.7472 33.0988M24.0001 23.9999C24.0001 23.9999 16.1028 27.5458 14.9012 28.7474C13.6996 29.949 13.6996 31.8972 14.9012 33.0988C16.1028 34.3004 18.0511 34.3004 19.2527 33.0988C20.4543 31.8972 24.0001 23.9999 24.0001 23.9999Z"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const CloseIcon = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        fill={color}
+        d="M353.7 158.3l-22.4-22.4-75.8 75.8-75.8-75.8-22.4 22.4 75.8 75.8-75.8 75.8 22.4 22.4 75.8-75.8 75.8 75.8 22.4-22.4-75.8-75.8 75.8-75.8z"
+      />
+    </svg>
+  );
+};
+
 export const Clock = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
@@ -465,7 +556,6 @@ export const Clock = ({ size = defaultIconSize, color = defaultIconColor }) => {
 export default function Checkmark() {
   return (
     <div>
-      
       <svg
         className="checkmark"
         xmlns="http://www.w3.org/2000/svg"
@@ -495,7 +585,7 @@ export const Discount = ({
 }) => {
   return (
     <svg
-    {...rest}
+      {...rest}
       width={size}
       height={size}
       xmlns="http://www.w3.org/2000/svg"
@@ -508,6 +598,114 @@ export const Discount = ({
     </svg>
   );
 };
+
+export const FreeTag = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      id="Layer_10"
+      data-name="Layer 10"
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 192 192"
+    >
+      <path
+        class="cls-1"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        d="M166.23,87.61c2.85,2.59,5.16,5.3,5.16,8.39,0,7.45-13.44,12.69-15.63,19.42-2.26,7,5.45,19.09,1.23,24.9s-18.21,2.25-24.07,6.51-6.65,18.62-13.62,20.88c-6.73,2.19-15.85-8.89-23.3-8.89s-16.57,11.08-23.3,8.89c-7-2.26-7.82-16.66-13.62-20.88s-19.81-.65-24.07-6.51,3.49-17.93,1.23-24.9c-2.19-6.73-15.63-12-15.63-19.42S34.05,83.31,36.24,76.58c2.26-7-5.45-19.09-1.23-24.9s18.21-2.25,24.07-6.51S65.73,26.55,72.7,24.29c6.73-2.19,15.85,8.89,23.3,8.89s16.57-11.08,23.3-8.89c7,2.26,7.82,16.66,13.62,20.88s19.81.65,24.07,6.51c2.53,3.48.77,9.24-.55,14.79"
+      ></path>
+      <polyline
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        points="49.1 107.66 49.1 84.34 64.48 84.34"
+      ></polyline>
+      <line
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        x1="62.35"
+        y1="96.4"
+        x2="49.26"
+        y2="96.4"
+      ></line>
+      <polyline
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        points="117.19 84.34 101.81 84.34 101.81 107.66 117.19 107.66"
+      ></polyline>
+      <line
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        class="cls-2"
+        x1="115.05"
+        y1="96.4"
+        x2="101.96"
+        y2="96.4"
+      ></line>
+      <polyline
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        points="142.9 84.34 127.52 84.34 127.52 107.66 142.9 107.66"
+      ></polyline>
+      <line
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        x1="140.76"
+        y1="96.4"
+        x2="127.68"
+        y2="96.4"
+      ></line>
+      <path
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        d="M75.05,96.4h8.86a5.74,5.74,0,0,1,5.74,5.73v5.53"
+      ></path>
+      <path
+        class="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        d="M74.14,96.4h10a6,6,0,0,0,6-6h0a6,6,0,0,0-6-6H74v23.32"
+      ></path>
+    </svg>
+  );
+};
+
 export const CheckBadge = ({
   size = defaultIconSize,
   color = defaultIconColor,
@@ -718,6 +916,28 @@ export const Cash = ({ size = defaultIconSize, color = defaultIconColor }) => {
         d="M325.1 115.9l55.37-81.13c3.75-7.5 3.375-16.25-1-23.38C375.1 4.375 368.2 0 359.1 0h-208c-8.375 0-16 4.25-20.38 11.38s-4.02 15.87-.22 23.37l55.5 81.13C-9.918 235.6.083 392 .083 412c0 55.25 49.14 100 109.6 100h292.5c60.62 0 109.7-44.75 109.7-100 .017-19.6 8.817-177-186.783-296.1zM314.2 48l-38.25 56h-40L197.7 48h116.5zm88 416H109.7c-34 0-61.63-23.38-61.63-52-.86-81 32.64-175.5 170.03-260h74.13c137.5 84.13 171.5 178.9 170.9 260-.03 28.6-26.93 52-60.93 52zm-75.1-104.2c-4.139 23.88-21.77 40.01-47 45.74V416c0 13.25-10.75 24-24 24s-24-10.75-24-24v-11.4c-9.527-2.219-18.95-5.254-27.44-8.316l-4.656-1.656c-12.47-4.438-19.03-18.16-14.59-30.64s18.12-19 30.66-14.61l4.844 1.75c8.812 3.172 18.78 6.766 26.5 7.922 16.97 2.719 31.19-.61 32.38-7.391.813-4.703 1.312-7.547-30.38-16.61l-6.5-1.875c-18.19-5.359-66.44-19.55-57.91-69.02C189.1 240.3 206.8 224.2 232.1 218.5V208c0-13.25 10.75-24 24-24s24 10.75 24 24v11.25c5.916 1.365 12.23 3.096 19.81 5.732 12.53 4.344 19.16 18.02 14.81 30.55-4.375 12.52-18.12 19.19-30.56 14.8-8.219-2.859-14.62-4.625-19.59-5.406-16.97-2.626-31.07.574-32.27 7.374-.7 4.1-1.3 7.3 24.1 14.8l6.188 1.797C288.1 296.2 335.7 309.8 327.1 359.8z"
       ></path>
     </svg>
+  );
+};
+
+export const Confetti = ({}) => {
+  return (
+    <div>
+      <div class="confetti">
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+        <div class="confetti-piece"></div>
+      </div>
+    </div>
   );
 };
 

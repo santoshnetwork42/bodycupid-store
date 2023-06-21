@@ -4,12 +4,8 @@ import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import "react-toastify/dist/ReactToastify.min.css";
-import "react-image-lightbox/style.css";
 import "react-input-range/lib/css/index.css";
 
-import ALink from "~/components/features/custom-link";
-
-import { UpArrow } from "~/components/icons";
 import Header from "~/components/common/header";
 import Footer from "~/components/common/footer";
 import Passwordless from "~/components/common/partials/passwordless";
@@ -28,6 +24,7 @@ import {
 import { removeHoverEffect } from "~/utils/helper";
 import Announcement from "./common/announcement";
 import StickyCheckout from "./common/sticky-checkout";
+import CouponDiscountBar from "./common/couponDiscountBar";
 
 function Layout({
   children,
@@ -77,7 +74,6 @@ function Layout({
       document.querySelector("body").classList.add("loaded");
     }, 50);
   }, [router.pathname]);
-
   return (
     <>
       <Head>
@@ -125,6 +121,11 @@ function Layout({
         hideProgressBar={true}
         newestOnTop={true}
       />
+
+      {!!navbar.couponBanner && (
+        <CouponDiscountBar/>
+      )}
+      
 
       <Quickview />
       <LoginModal />

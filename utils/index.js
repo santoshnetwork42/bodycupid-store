@@ -113,7 +113,7 @@ export const stickyHeaderHandler = function () {
     height = stickyHeader.offsetHeight;
   }
 
-  if (window.pageYOffset >= top && window.innerWidth >= 992) {
+  if (window.pageYOffset >= top) {
     if (stickyHeader) {
       stickyHeader.classList.add("fixed");
       if (!document.querySelector(".sticky-wrapper")) {
