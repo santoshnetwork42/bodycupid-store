@@ -12,6 +12,7 @@ const PaymentMethods = ({
   onClick,
   amount,
   disabled,
+  showUpdateCoupon,
 }) => {
   return (
     <div
@@ -36,7 +37,7 @@ const PaymentMethods = ({
         >
           <p>
             {description}
-            {disabled && (
+            {showUpdateCoupon && (
               <ALink href={"/pages/cart"} className="lh-1">
                 Update coupon
               </ALink>
