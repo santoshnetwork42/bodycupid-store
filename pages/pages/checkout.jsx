@@ -886,6 +886,7 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Cash On Delivery"
                             tagVariant="danger"
+                            showUpdateCoupon={codCouponDisabled ? true : false}
                             tag={
                               !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
                             }
@@ -894,7 +895,7 @@ function Checkout(props) {
                               codCouponDisabled
                                 ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
                                 : isMaxCODDisabled
-                                ? `COD payment disabled for orders above ₹${maxCOD}.`
+                                ? `COD payment is not allowed for orders above ₹${maxCOD}.`
                                 : `Pay using Cash on Delivery.`
                             }
                             disabled={codCouponDisabled || isMaxCODDisabled}
