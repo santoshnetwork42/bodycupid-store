@@ -132,7 +132,7 @@ function CartProduct({
                 <>
                   {!!price && (
                     <del className="summary-subtotal-listingprice">
-                      ₹{toDecimal(price)}
+                      ₹{toDecimal(listingPrice)}
                     </del>
                   )}
                   <span className="discount-percentage ml-1">Free</span>
