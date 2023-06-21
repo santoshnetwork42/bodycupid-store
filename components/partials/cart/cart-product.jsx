@@ -130,7 +130,7 @@ function CartProduct({
               {cartItemType === "FREE_PRODUCT" ||
               cartItemType === "AUTO_FREE_PRODUCT" ? (
                 <>
-                  {!!price && (
+                  {!!listingPrice && (
                     <del className="summary-subtotal-listingprice">
                       ₹{toDecimal(listingPrice)}
                     </del>
