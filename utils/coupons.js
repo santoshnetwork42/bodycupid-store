@@ -1,5 +1,6 @@
 import { getCartCount, getTotalPrice } from "~/utils";
 import { getBxGyFreeQuantity } from "./helper";
+import { getProductPrice } from "./products";
 
 export const getCouponMessage = ({
   couponType,
@@ -169,10 +170,11 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (couponType === "PRODUCT") {
+    const { listingPrice } = getProductPrice(getYStoreProduct);
     return {
       ...coupon,
       allowed: !!getYStoreProduct?.title,
-      discount: getYStoreProduct?.price,
+      discount: listingPrice,
       message: getCouponMessage(coupon).discountMsg,
     };
   }
