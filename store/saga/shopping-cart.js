@@ -177,7 +177,7 @@ export function* cartSaga() {
         }
       }
     } else {
-      if (!cartList.length) {
+      if (!cartList || !cartList.length) {
           yield put({ type: actionTypes.REFRESH_CART });
       }
      }
