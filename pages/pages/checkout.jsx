@@ -886,7 +886,7 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Cash On Delivery"
                             tagVariant="danger"
-                            showUpdateCoupon={codCouponDisabled ? true : false}
+                            showUpdateCoupon={codCouponDisabled}
                             tag={
                               !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
                             }
