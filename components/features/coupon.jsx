@@ -45,12 +45,6 @@ function Coupon(props) {
     }, 500);
   };
 
-  useEffect(() => {
-    if (appliedCoupon) {
-      openModal();
-    }
-  }, [appliedCoupon?.code]);
-
   const closeModal = () => {
     setIsCouponModalOpen(false);
   };
@@ -119,6 +113,7 @@ function Coupon(props) {
           });
 
           applyCoupon({ ...response, autoApplied: !!autoApplied });
+          openModal();
           setOpen(false);
 
           if (couponType === "PRODUCT") {
