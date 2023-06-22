@@ -73,13 +73,14 @@ function Cart(props) {
                 </div>
 
                 <aside
-                  id="cart-details "
+                  id="cart-details"
                   className="col-lg-4 text-primary sticky-sidebar-wrapper"
                 >
                   <div
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
+                    <div id="bccartoffers"></div>
                     <Coupons />
                     <CartTotal />
                   </div>
@@ -118,5 +119,6 @@ const Component = connect(mapStateToProps, {
 
 Component.hideFooter = true;
 Component.navbarConfig = { shippingTier: true };
+Component.couponBanner = true;
 
 export default Component;

@@ -314,7 +314,7 @@ function CartProduct({
               {!!item?.variants?.items.length && !disableChange && (
                 <select
                   name={`${recordKey}`}
-                  className="form-control"
+                  className="form-control ios-select"
                   value={variantId}
                   onChange={(e) => {
                     changeVariant(e);

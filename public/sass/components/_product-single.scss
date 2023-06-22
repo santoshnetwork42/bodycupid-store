@@ -481,6 +481,7 @@
 
         .notify-btn {
             padding: 1.2rem 0px;
+            background-color: #e4eaec !important; 
         }
 
         .check-mark {
@@ -559,10 +560,12 @@
 
     .quantity-minus {
         font-size: 22px;
+        border: 1px solid #ccc;
     }
 
     .quantity-plus {
         font-size: 22px;
+        border: 1px solid #ccc;
     }
 
     .input-group {

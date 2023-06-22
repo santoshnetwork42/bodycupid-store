@@ -24,6 +24,7 @@ import {
 import { removeHoverEffect } from "~/utils/helper";
 import Announcement from "./common/announcement";
 import StickyCheckout from "./common/sticky-checkout";
+import CouponDiscountBar from "./common/couponDiscountBar";
 
 function Layout({
   children,
@@ -73,7 +74,6 @@ function Layout({
       document.querySelector("body").classList.add("loaded");
     }, 50);
   }, [router.pathname]);
-
   return (
     <>
       <Head>
@@ -121,6 +121,11 @@ function Layout({
         hideProgressBar={true}
         newestOnTop={true}
       />
+
+      {!!navbar.couponBanner && (
+        <CouponDiscountBar/>
+      )}
+      
 
       <Quickview />
       <LoginModal />

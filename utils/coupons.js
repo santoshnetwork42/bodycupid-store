@@ -1,5 +1,6 @@
 import { getCartCount, getTotalPrice } from "~/utils";
 import { getBxGyFreeQuantity } from "./helper";
+import { getProductPrice } from "./products";
 
 export const getCouponMessage = ({
   couponType,
@@ -27,8 +28,9 @@ export const getCouponMessage = ({
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
   } else if (couponType === "PRODUCT") {
-    discountMsg = `FREE ${getYStoreProduct?.title} ${!!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
-      }`;
+    discountMsg = `FREE ${getYStoreProduct?.title} ${
+      !!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
+    }`;
   }
 
   if (minOrderValue) {
@@ -96,8 +98,9 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${minOrderValue - totalAmount
-        } more to the cart.`,
+      message: `Add product worth ₹${
+        minOrderValue - totalAmount
+      } more to the cart.`,
     };
   }
 
@@ -106,8 +109,9 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${buyXQuantity + getYQuantity - totalItems
-        } more items to the cart.`,
+      message: `Add ${
+        buyXQuantity + getYQuantity - totalItems
+      } more items to the cart.`,
     };
   }
 
@@ -169,10 +173,11 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (couponType === "PRODUCT") {
+    const { price } = getProductPrice(getYStoreProduct);
     return {
       ...coupon,
       allowed: !!getYStoreProduct?.title,
-      discount: getYStoreProduct?.price,
+      discount: price,
       message: getCouponMessage(coupon).discountMsg,
     };
   }

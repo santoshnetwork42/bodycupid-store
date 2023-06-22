@@ -122,7 +122,7 @@ export function* cartSaga() {
 
   yield takeEvery(actionTypes.REMOVE_FROM_CART, function* saga(e) {
     const { cart, user } = yield select();
-    const { cart: cartResponse } = cart;
+    const { cart: cartResponse, data: cartList } = cart;
     const { data: userResponse } = user;
 
     if (cartResponse && userResponse) {
@@ -176,7 +176,11 @@ export function* cartSaga() {
           });
         }
       }
-    }
+    } else {
+      if (!cartList || !cartList.length) {
+          yield put({ type: actionTypes.REFRESH_CART });
+      }
+     }
   });
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
