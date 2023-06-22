@@ -18,6 +18,15 @@ function Rewards() {
         );
       }
     })();
+
+    return () => {
+      (async function () {
+        const glu = await awaitGlobal("glu");
+        if (glu) {
+          glu.close();
+        }
+      })();
+    };
   }, []);
 
   return <div id="gluappbc"></div>;

@@ -181,12 +181,13 @@ function Coupon(props) {
                   </p>
                 </div>
 
-                {!!featuredCoupons.length && !showAppliedCoupon && (
+                {!showAppliedCoupon && (
                   <a
                     className="coupon-offer d-flex align-items-center"
                     type="button"
                   >
-                    {`${featuredCoupons.length} Offers`}
+                    {!!featuredCoupons.length &&
+                      `${featuredCoupons.length} Offers`}
                     <RightAngle size={14} />
                   </a>
                 )}
@@ -276,8 +277,14 @@ function Coupon(props) {
               <h4 className="modal-title">
                 '{appliedCoupon.code}' coupon applied!
               </h4>
-              <h3 className="modal-amount">₹{toDecimal(couponTotal)} saved</h3>
-              <h6 className="modal-savings">through this coupon</h6>
+              {couponTotal > 0 && (
+                <>
+                  <h3 className="modal-amount">
+                    ₹{toDecimal(couponTotal)} saved
+                  </h3>
+                  <h6 className="modal-savings">through this coupon</h6>
+                </>
+              )}
               <button className="close-button" onClick={closeModal}>
                 Hurrah!
               </button>
