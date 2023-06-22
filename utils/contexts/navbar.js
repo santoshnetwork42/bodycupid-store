@@ -13,6 +13,7 @@ import {
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
+import { useSelector } from "react-redux";
 
 export const NavbarContext = createContext();
 
@@ -22,6 +23,7 @@ function NavbarProvider({ children, config }) {
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
   const [configurations, setConfigurations] = useState([]);
+  const isCartOpen = useSelector((state) => state.modal.openCart || false);
 
   const getCollections = () => {
     API.graphql(
@@ -118,10 +120,14 @@ function NavbarProvider({ children, config }) {
     if (config?.shippingTier && !shippingTiers) {
       getShippingTiers();
     }
-  }, [config?.shippingTier]);
+
+    if(isCartOpen){
+      getCoupons();
+    }
+  }, [config?.shippingTier,isCartOpen]);
 
   useEffect(() => {
-    getCoupons();
+   
     getCategories();
     getCollections();
     getConfigurationData();

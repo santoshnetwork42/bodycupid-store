@@ -15,6 +15,7 @@ import { useCartItems } from "~/utils/hooks/useCart";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal from "~/components/common/partials/cart-totals";
+import { Logger } from "aws-amplify";
 
 function CartMenu(props) {
   const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
@@ -22,6 +23,12 @@ function CartMenu(props) {
   const router = useRouter();
   const cartItems = useCartItems();
   const { inventoryMapping } = useInventory();
+  const logger = new Logger("Cart");
+
+  useEffect(() => {
+    viewCart();
+    logger.verbose("View Cart");
+  }, []);
 
   useEffect(() => {
     if (isCartOpen) {
