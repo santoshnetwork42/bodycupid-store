@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { Bag, Cross } from "~/components/icons";
@@ -9,6 +8,7 @@ import Coupons from "~/components/features/coupon";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
+import { eventActions } from "~/store/events";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { useCartItems } from "~/utils/hooks/useCart";
@@ -17,13 +17,15 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal from "~/components/common/partials/cart-totals";
 
 function CartMenu(props) {
-  const { cartList, appliedCoupon, isCartOpen, setCartVisibility } = props;
+  const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
+    props;
   const router = useRouter();
   const cartItems = useCartItems();
   const { inventoryMapping } = useInventory();
 
   useEffect(() => {
     if (isCartOpen) {
+      viewCart();
       if (
         !document.querySelector(".cart-dropdown").classList.contains("opened")
       )
@@ -114,8 +116,8 @@ function CartMenu(props) {
                 <ALink
                   className="button wc-backward d-flex justify-content-center btn btn-dark btn-md"
                   href="/collections/all"
-                  onClick={()=>{
-                    setCartVisibility(false)
+                  onClick={() => {
+                    setCartVisibility(false);
                   }}
                 >
                   Return to shop
@@ -143,4 +145,5 @@ export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
   setCartVisibility: modalActions.setCartVisibility,
+  viewCart: eventActions.viewCart,
 })(CartMenu);
