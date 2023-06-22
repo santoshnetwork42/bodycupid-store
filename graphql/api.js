@@ -1660,6 +1660,7 @@ export const searchShippingTiers = /* GraphQL */ `
 export const checkInventory = /* GraphQL */ `
   mutation CheckInventory($input: [CheckInventoryInput!]!) {
     checkInventory(input: $input) {
+      recordKey
       productId
       variantId
       price

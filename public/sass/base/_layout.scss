@@ -95,6 +95,7 @@
     overflow: auto;
     text-align: center;
     position: relative;
+    padding: 16px;
   }
   
   .close-button {
@@ -136,7 +137,8 @@
   
   .close-icon {
     position: absolute;
-    right: 0px;
+    right: 0;
+    top: 0;
     border: none;
     cursor: pointer;
   }

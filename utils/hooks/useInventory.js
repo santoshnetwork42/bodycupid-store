@@ -4,16 +4,15 @@ import { useSelector } from "react-redux";
 
 import { errorHandler } from "../errorHandler";
 import { checkInventory } from "~/graphql/api";
-import { getRecordKey } from "~/utils/helper";
 
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
-  const [productWithInventory, setProductWithInventory] = useState(null);
-  const [productWithPrice, setProductWithPrice] = useState(null);
+  const [cartListMapping, setCartListMapping] = useState(null);
 
   const inventoryPayload = useMemo(
     () =>
       cartList.map((product) => ({
+        recordKey: product.recordKey,
         productId: product.id,
         variantId: product.variantId,
       })),
@@ -33,27 +32,16 @@ export const useInventory = () => {
             },
           });
 
-          const { inventoryMapping, priceMapping } = response.reduce(
-            (acc, { productId, variantId, price, inventory }) => {
-              const recordKey = getRecordKey({ id: productId }, variantId);
-              return {
-                inventoryMapping: {
-                  ...acc.inventoryMapping,
-                  [recordKey]: inventory,
-                },
-                priceMapping: {
-                  ...acc.priceMapping,
-                  [recordKey]: price,
-                },
-              };
-            },
+          const mapping = response.reduce(
+            (acc, { price, inventory, recordKey }) => ({
+              ...acc,
+              [recordKey]: { inventory, price },
+            }),
             {}
           );
-          setProductWithInventory(inventoryMapping);
-          setProductWithPrice(priceMapping);
+          setCartListMapping(mapping);
         } else {
-          setProductWithInventory({});
-          setProductWithPrice({});
+          setCartListMapping({});
         }
       } catch (error) {
         errorHandler(error);
@@ -65,20 +53,37 @@ export const useInventory = () => {
 
   const outOfStockItems = useMemo(
     () =>
-      productWithInventory
-        ? cartList.filter((c) => {
-            const itemRecordKey = getRecordKey(c, c.variantId);
-            return c.qty > productWithInventory[itemRecordKey];
-          })
+      cartListMapping
+        ? cartList.filter((c) => c.qty > cartListMapping[c.recordKey])
         : [],
-    [cartList, productWithInventory]
+    [cartList, cartListMapping]
   );
 
+  const inventoryMapping = cartListMapping
+    ? Object.entries(cartListMapping).reduce(
+        (acc, [recordKey, { inventory }]) => ({
+          ...acc,
+          [recordKey]: inventory,
+        }),
+        {}
+      )
+    : {};
+
+  const productWithPrice = cartListMapping
+    ? Object.entries(cartListMapping).reduce(
+        (acc, [recordKey, { price }]) => ({
+          ...acc,
+          [recordKey]: price,
+        }),
+        {}
+      )
+    : {};
+
   return {
-    ready: !!productWithInventory,
+    ready: !!cartListMapping,
     success: !outOfStockItems.length,
-    inventoryMapping: productWithInventory,
     outOfStockItems,
+    inventoryMapping,
     productWithPrice,
   };
 };
