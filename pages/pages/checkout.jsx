@@ -275,8 +275,10 @@ function Checkout(props) {
   }, [shippingAddress, user]);
 
   const priceVerified = useMemo(() => {
-    if (productWithPrice)
+    if (productWithPrice) {
       return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
+    }
+    return false;
   }, [productWithPrice, cartList]);
 
   const placeOrder = useCallback(
@@ -886,7 +888,7 @@ function Checkout(props) {
                           <PaymentMethods
                             title="Cash On Delivery"
                             tagVariant="danger"
-                            showUpdateCoupon={codCouponDisabled ? true : false}
+                            showUpdateCoupon={codCouponDisabled}
                             tag={
                               !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
                             }

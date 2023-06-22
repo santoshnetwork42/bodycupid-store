@@ -139,13 +139,14 @@ function Cart(props) {
                 </div>
 
                 <aside
-                  id="cart-details "
+                  id="cart-details"
                   className="col-lg-4 text-primary sticky-sidebar-wrapper"
                 >
                   <div
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
+                    <div id="bccartoffers"></div>
                     <Coupons />
                     <div className="summary bg-white mb-9">
                       <h3 className="summary-title text-left d-sm-none">

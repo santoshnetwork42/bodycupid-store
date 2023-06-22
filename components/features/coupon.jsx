@@ -45,12 +45,6 @@ function Coupon(props) {
     }, 500);
   };
 
-  useEffect(() => {
-    if (appliedCoupon) {
-      openModal();
-    }
-  }, [appliedCoupon?.code]);
-
   const closeModal = () => {
     setIsCouponModalOpen(false);
   };
@@ -119,6 +113,7 @@ function Coupon(props) {
           });
 
           applyCoupon({ ...response, autoApplied: !!autoApplied });
+          openModal();
           setOpen(false);
 
           if (couponType === "PRODUCT") {
@@ -186,12 +181,13 @@ function Coupon(props) {
                   </p>
                 </div>
 
-                {!!featuredCoupons.length && !showAppliedCoupon && (
+                {!showAppliedCoupon && (
                   <a
                     className="coupon-offer d-flex align-items-center"
                     type="button"
                   >
-                    {`${featuredCoupons.length} Offers`}
+                    {!!featuredCoupons.length &&
+                      `${featuredCoupons.length} Offers`}
                     <RightAngle size={14} />
                   </a>
                 )}
@@ -221,10 +217,10 @@ function Coupon(props) {
                     </span>
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer d-flex align-items-center"
+                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
                         type="button"
                       >
-                        {`View more offers`}
+                        View more offers
                         <RightAngle size={14} />
                       </a>
                     </span>
@@ -281,8 +277,14 @@ function Coupon(props) {
               <h4 className="modal-title">
                 '{appliedCoupon.code}' coupon applied!
               </h4>
-              <h3 className="modal-amount">₹{toDecimal(couponTotal)} saved</h3>
-              <h6 className="modal-savings">through this coupon</h6>
+              {couponTotal > 0 && (
+                <>
+                  <h3 className="modal-amount">
+                    ₹{toDecimal(couponTotal)} saved
+                  </h3>
+                  <h6 className="modal-savings">through this coupon</h6>
+                </>
+              )}
               <button className="close-button" onClick={closeModal}>
                 Hurrah!
               </button>
