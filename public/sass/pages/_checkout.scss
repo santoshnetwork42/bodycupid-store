@@ -365,12 +365,11 @@
 
 }
 .sticky-checkout{
-    
+z-index: 999999;
  position: fixed;
  bottom: 0px;
  width: 80vw !important;
  max-width: 33rem;
- color: white !important;
 }
 
 .checkout-address-form {
