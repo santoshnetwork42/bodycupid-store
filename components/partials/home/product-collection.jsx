@@ -5,7 +5,7 @@ import ALink from "~/components/features/custom-link";
 
 import OwlCarousel from "~/components/features/owl-carousel";
 import ProductTwo from "~/components/features/product/product-two";
-import { productSlider } from "~/utils/data/carousel";
+import { productSlider, productSliderLarge } from "~/utils/data/carousel";
 import { fadeIn } from "~/utils/data/keyframes";
 
 function ProductCollection({
@@ -14,6 +14,7 @@ function ProductCollection({
   slug,
   redirectTo,
   disableCarousel,
+  large,
 }) {
   useEffect(() => {
     const ele = document.getElementById(`product-carousel-${slug}`);
@@ -28,6 +29,8 @@ function ProductCollection({
     }
   }, [disableCarousel]);
 
+  const productClass = !large ? "product-collection-large" : "";
+
   return (
     <Reveal
       keyframes={fadeIn}
@@ -36,7 +39,9 @@ function ProductCollection({
       triggerOnce
       className="product-widget-wrapper"
     >
-      <section className="product-wrapper product-collection container  pt-6 pb-3">
+      <section
+        className={`product-wrapper product-collection ${productClass} container pt-6 pb-3`}
+      >
         <div className="d-flex justify-content-between collection-title mb-4">
           <h2 className="capitalize-title m-0">{title}</h2>
           {!!redirectTo && (
@@ -49,7 +54,7 @@ function ProductCollection({
         <OwlCarousel
           id={`product-carousel-${slug}`}
           adClass="owl-theme owl-nav-full"
-          options={productSlider}
+          options={!large ? productSlider : productSliderLarge}
         >
           {products.map((item) => (
             <ProductTwo

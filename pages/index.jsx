@@ -70,8 +70,10 @@ function HomePage({
         <ProductCollection
           products={bestSellerProducts}
           title="Best sellers"
+          disableCarousel={isSmallSize}
           slug="best-seller"
           redirectTo="/collections/best-seller"
+          large={false}
         />
 
         <ProductCollection
@@ -79,6 +81,7 @@ function HomePage({
           title="Our featured"
           slug="featured"
           redirectTo="/collections/featured"
+          large={false}
         />
         <CategorySection categories={categories} />
         <ReviewSection />

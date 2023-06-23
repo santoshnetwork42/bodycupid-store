@@ -2,7 +2,6 @@ import React from "react";
 import dynamic from "next/dynamic";
 
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { useWindowDimensions } from "~/utils/getWindowDimension";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
@@ -40,7 +39,6 @@ function V1Page({
   pageMeta,
 }) {
   const { name } = store || {};
-  const { isSmallSize } = useWindowDimensions();
 
   return (
     <main className="main home searchBar">
@@ -72,6 +70,7 @@ function V1Page({
           title="Best sellers"
           slug="best-seller"
           redirectTo="/collections/best-seller"
+          large={true}
         />
 
         <ProductCollection
@@ -79,6 +78,7 @@ function V1Page({
           title="Our featured"
           slug="featured"
           redirectTo="/collections/featured"
+          large={true}
         />
         <CategorySection categories={categories} />
         <ReviewSection />

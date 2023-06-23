@@ -420,6 +420,26 @@ export const productSlider = {
   dots: true,
   autoplay: false,
   loop: false,
+  margin: 20,
+  responsive: {
+    0: {
+      items: 2,
+    },
+    768: {
+      items: 3,
+    },
+    992: {
+      items: 4,
+    },
+  },
+};
+
+export const productSliderLarge = {
+  items: 5,
+  nav: false,
+  dots: true,
+  autoplay: false,
+  loop: false,
   margin: 10,
   responsive: {
     0: {
