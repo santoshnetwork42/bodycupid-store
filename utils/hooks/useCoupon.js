@@ -15,7 +15,12 @@ export const useFeaturedCoupons = () => {
     () =>
       (coupons || [])
         .filter(
-          (coupon) => !(coupon.autoApply && coupon.couponType === "PRODUCT")
+          (coupon) =>
+            !(
+              coupon.autoApply &&
+              coupon.couponType === "PRODUCT" &&
+              !coupon.isExternal
+            )
         )
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
@@ -84,8 +89,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
             minOrderValue,
             buyXQuantity,
             getYQuantity,
+            isExternal,
           } = coupon;
 
+          if (isExternal) return false;
           if (!total) return false;
           if (couponType !== "PRODUCT") return false;
           if (!autoApply) return false;
@@ -103,10 +110,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                applicableCollections.some((ac) =>
-                  (c.collections || []).includes(ac)
+                  applicableCollections.some((ac) =>
+                    (c.collections || []).includes(ac)
+                  )
                 )
-              )
               : true;
 
           return hasCollection && hasProduct;
@@ -133,10 +140,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           const hasCollection =
             Array.isArray(applicableCollections) && applicableCollections.length
               ? cartList.some((c) =>
-                applicableCollections.some((ac) =>
-                  (c.collections || []).includes(ac)
+                  applicableCollections.some((ac) =>
+                    (c.collections || []).includes(ac)
+                  )
                 )
-              )
               : true;
 
           allowed = allowed && hasCollection && hasProduct;
