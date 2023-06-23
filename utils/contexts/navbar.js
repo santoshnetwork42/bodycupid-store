@@ -55,7 +55,7 @@ function NavbarProvider({ children, config }) {
       .then(getSortedCategoryAndSubCategory)
       .then(setCategories)
       .catch(errorHandler);
-  };
+  }; 
 
   const getShippingTiers = () => {
     API.graphql(
