@@ -420,10 +420,10 @@ export const productSlider = {
   dots: true,
   autoplay: false,
   loop: false,
-  margin: 20,
+  margin: 10,
   responsive: {
     0: {
-      items: 2,
+      items: 1.1,
     },
     768: {
       items: 3,

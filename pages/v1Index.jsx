@@ -29,7 +29,7 @@ const ProductCollection = dynamic(() =>
   import("~/components/partials/home/product-collection")
 );
 
-function HomePage({
+function V1Page({
   hero,
   bestSellerProducts,
   featuredProducts,
@@ -46,8 +46,8 @@ function HomePage({
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
 
-      <h1 className="d-none">{name} - Homepage</h1>
-      <div className="page-content page-content-wrapper">
+      <h1 className="d-none">{name} - V1Page</h1>
+      <div className="page-content page-content-wrapper product-collection-large">
         <div className="intro-section">
           {/* <StorySection categories={storyCategories} /> */}
           <IntroSection {...hero} />
@@ -184,7 +184,7 @@ export const getStaticProps = async () => {
   }
 };
 
-HomePage.showStickyCheckout = true;
-HomePage.showTopRunner = true;
-HomePage.couponBanner = true;
-export default HomePage;
+V1Page.showStickyCheckout = true;
+V1Page.showTopRunner = true;
+V1Page.couponBanner = true;
+export default V1Page;
