@@ -29,7 +29,7 @@ function ProductCollection({
     }
   }, [disableCarousel]);
 
-  const productClass = !large ? "product-collection-large" : "";
+  const productClass = large ? "product-collection-large" : "";
 
   return (
     <Reveal
