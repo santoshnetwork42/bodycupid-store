@@ -902,7 +902,9 @@ function Checkout(props) {
                             }
                             disabled={codCouponDisabled || isMaxCODDisabled}
                             onClick={() => {
-                              !codCouponDisabled && setFirst("COD");
+                              !codCouponDisabled &&
+                                !isMaxCODDisabled &&
+                                setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />

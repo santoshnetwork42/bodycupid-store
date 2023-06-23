@@ -5,8 +5,11 @@ import awaitGlobal from "await-global";
 
 import { CUSTOMER_GLU_KEY } from "~/config";
 import { modalActions } from "~/store/modal";
+import { useUpdateUserCoupon } from "~/utils/contexts/navbar";
 
 function CustomerGlu({ user, openLogin }) {
+  const [, updateCoupon] = useUpdateUserCoupon();
+
   useEffect(() => {
     let isScriptLoaded = false;
 
@@ -20,6 +23,13 @@ function CustomerGlu({ user, openLogin }) {
           if (glu.addAnalyticsListener) {
             isScriptLoaded = true;
             glu.addAnalyticsListener((event) => {
+              if (
+                event?.event_name === "GAME_PLAYED" &&
+                event?.campaign_details?.coupon_code
+              ) {
+                updateCoupon(event?.campaign_details?.coupon_code);
+              }
+
               if (
                 event?.event_name === "BUTTON_CLICKED" &&
                 event?.interaction_details?.button_name === "Login To Play"
@@ -42,6 +52,10 @@ function CustomerGlu({ user, openLogin }) {
       if (intervalId) clearInterval(intervalId);
     };
   }, [user]);
+
+  if (!CUSTOMER_GLU_KEY) {
+    return <></>;
+  }
 
   return (
     <>
