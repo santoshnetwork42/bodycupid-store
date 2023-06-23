@@ -759,16 +759,19 @@
     margin-bottom: 1rem;
     padding-top: 0.8rem;
     font-size: 1.5rem;
+    font-weight: 600;
   }
 
   .coupon-subtitle {
     color: $grey-color;
+    font-weight: 600;
   }
 
   .coupon-offer {
     height: fit-content;
     white-space: nowrap;
     cursor: pointer;
+    font-weight: 600;
   }
 }
 

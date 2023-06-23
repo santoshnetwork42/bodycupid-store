@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
-import { eventActions } from "~/store/events";
+
 import ALink from "~/components/features/custom-link";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
@@ -9,7 +9,14 @@ import Modal from "~/components/common/modal";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import { CheckBadge, Close, Discount, RightAngle } from "~/components/icons";
+import {
+  CheckBadge,
+  Close,
+  CloseIcon,
+  Discount,
+  RightAngle,
+  Confetti,
+} from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 
@@ -31,6 +38,17 @@ function Coupon(props) {
   const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+
+  const openModal = () => {
+    setTimeout(() => {
+      setIsCouponModalOpen(true);
+    }, 500);
+  };
+
+  const closeModal = () => {
+    setIsCouponModalOpen(false);
+  };
 
   const featuredCoupons = useFeaturedCoupons();
 
@@ -89,8 +107,16 @@ function Coupon(props) {
           await getCouponDiscount(response, cartList);
 
         if (allowed) {
+          cartList.forEach((item) => {
+            if (item.cartItemSource === "COUPON") {
+              removeFromCart(item);
+            }
+          });
+
           applyCoupon({ ...response, autoApplied: !!autoApplied });
+          openModal();
           setOpen(false);
+
           if (couponType === "PRODUCT") {
             addToCart({
               ...getYStoreProduct,
@@ -156,12 +182,13 @@ function Coupon(props) {
                   </p>
                 </div>
 
-                {!!featuredCoupons.length && !showAppliedCoupon && (
+                {!showAppliedCoupon && (
                   <a
                     className="coupon-offer d-flex align-items-center"
                     type="button"
                   >
-                    {`${featuredCoupons.length} Offers`}
+                    {!!featuredCoupons.length &&
+                      `${featuredCoupons.length} Offers`}
                     <RightAngle size={14} />
                   </a>
                 )}
@@ -191,10 +218,10 @@ function Coupon(props) {
                     </span>
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer d-flex align-items-center"
+                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
                         type="button"
                       >
-                        {`View more offers`}
+                        View more offers
                         <RightAngle size={14} />
                       </a>
                     </span>
@@ -227,6 +254,42 @@ function Coupon(props) {
             >
               Click here to apply
             </ALink>
+          </div>
+        </div>
+      )}
+
+      {isCouponModalOpen && (
+        <div onClick={closeModal}>
+          <div>
+            <Confetti />
+          </div>
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <div
+                className="close-icon"
+                title="Remove this product"
+                onClick={closeModal}
+              >
+                <CloseIcon size={24} color="grey" />
+              </div>
+              <div className="modal-icon">
+                <Discount size={35} color="#17b31b" />
+              </div>
+              <h4 className="modal-title">
+                '{appliedCoupon.code}' coupon applied!
+              </h4>
+              {couponTotal > 0 && (
+                <>
+                  <h3 className="modal-amount">
+                    ₹{toDecimal(couponTotal)} saved
+                  </h3>
+                  <h6 className="modal-savings">through this coupon</h6>
+                </>
+              )}
+              <button className="close-button" onClick={closeModal}>
+                Hurrah!
+              </button>
+            </div>
           </div>
         </div>
       )}

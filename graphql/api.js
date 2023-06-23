@@ -1660,6 +1660,7 @@ export const searchShippingTiers = /* GraphQL */ `
 export const checkInventory = /* GraphQL */ `
   mutation CheckInventory($input: [CheckInventoryInput!]!) {
     checkInventory(input: $input) {
+      recordKey
       productId
       variantId
       price
@@ -1713,6 +1714,34 @@ export const searchConfigurations = /* GraphQL */ `
         createdAt
         updatedAt
       }
+    }
+  }
+`;
+
+export const getCoupon = /* GraphQL */ `
+  query GetCoupon($code: ID!) {
+    getCoupon(code: $code) {
+      id
+      description
+      code
+      couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
+      getYStoreProduct {
+        id
+        title
+        price
+      }
+      minOrderValue
+      maxDiscount
+      expirationDate
+      autoApply
+      applicableCollections
+      applicableProducts
+      paymentMethod
     }
   }
 `;

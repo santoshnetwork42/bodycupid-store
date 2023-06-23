@@ -40,6 +40,7 @@ function cartReducer(state = initialState, action) {
 
       if (tmpProduct.cartItemSource) {
         recordKey = `${recordKey}-${tmpProduct.cartItemSource}`;
+        tmpProduct.listingPrice = tmpProduct.price;
       }
 
       if (state.data.some((item) => item.recordKey === recordKey)) {
