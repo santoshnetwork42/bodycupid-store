@@ -536,6 +536,22 @@
     }
 }
 
+.product-collection-large {
+
+    .product-card-title {
+        font-size: 1.4rem !important;
+        display: -webkit-box !important;
+        // -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .details-wrapper {
+        height: 5rem;
+        margin-bottom: 5rem;
+    }
+}
+
 .product-card-title {
     font-size: 1.4rem !important;
     display: -webkit-box !important;

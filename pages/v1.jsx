@@ -1,8 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import { useWindowDimensions } from "~/utils/getWindowDimension";
-
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
 // import StorySection from "~/components/partials/home/story-section";
@@ -22,7 +20,7 @@ const ProductCollection = dynamic(() =>
 
 export { getStaticProps } from "~/utils/page";
 
-function HomePage({
+function V1Page({
   hero,
   bestSellerProducts,
   featuredProducts,
@@ -33,14 +31,13 @@ function HomePage({
   pageMeta,
 }) {
   const { name } = store || {};
-  const { isSmallSize } = useWindowDimensions();
 
   return (
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
 
-      <h1 className="d-none">{name} - Homepage</h1>
-      <div className="page-content page-content-wrapper">
+      <h1 className="d-none">{name} - V1Page</h1>
+      <div className="page-content page-content-wrapper product-collection-large">
         <div className="intro-section">
           {/* <StorySection categories={storyCategories} /> */}
           <IntroSection {...hero} />
@@ -49,9 +46,9 @@ function HomePage({
         <ProductCollection
           products={bestSellerProducts}
           title="Best sellers"
-          disableCarousel={isSmallSize}
           slug="best-seller"
           redirectTo="/collections/best-seller"
+          large
         />
 
         <ProductCollection
@@ -59,6 +56,7 @@ function HomePage({
           title="Our featured"
           slug="featured"
           redirectTo="/collections/featured"
+          large
         />
         <CategorySection categories={categories} />
         <ReviewSection />
@@ -68,7 +66,7 @@ function HomePage({
   );
 }
 
-HomePage.showStickyCheckout = true;
-HomePage.showTopRunner = true;
-HomePage.couponBanner = true;
-export default HomePage;
+V1Page.showStickyCheckout = true;
+V1Page.showTopRunner = true;
+V1Page.couponBanner = true;
+export default V1Page;
