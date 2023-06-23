@@ -63,9 +63,7 @@ function Coupon(props) {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
       return appliedCoupon.code;
 
-    const coupons = featuredCoupons.filter(
-      (f) => f.autoApply && !!f.discount && f.allowed
-    );
+    const coupons = featuredCoupons.filter((f) => f.autoApply && f.allowed);
     const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
     return bestCoupon?.code;
   }, [featuredCoupons, appliedCoupon, showAppliedCoupon]);
