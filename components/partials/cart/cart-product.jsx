@@ -84,7 +84,7 @@ function CartProduct({
 
   const onRemove = () => {
     onChangeQty(0);
-    if (cartItemSource === "COUPON" && appliedCoupon?.getYProduct === id) {
+    if ((cartItemSource === "COUPON" && appliedCoupon?.getYProduct === id)) {
       removeCoupon();
     }
   };

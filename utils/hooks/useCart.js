@@ -174,6 +174,62 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
       ];
     }
 
+    // if (allowed && appliedCoupon?.couponType === "PRODUCT") {
+    //   // const {
+    //   //   totalPrice,
+    //   // } = useCartTotal();
+      
+    //   if (appliedCoupon?.couponType === "PRODUCT") {
+    //     const cartWithoutFreeProduct = cartList.filter(
+    //       (c) => appliedCoupon.getYProduct !== c.id
+    //     );
+    //     console.log('cartWithoutFreeProduct :>> ', cartWithoutFreeProduct);
+    //     if (
+    //       // appliedCoupon.minOrderValue > totalPrice ||
+    //       appliedCoupon.buyXQuantity > cartWithoutFreeProduct.length
+    //     ) {
+    //       console.log('@@@ :>> ',  [
+    //         ...cartWithoutFreeProduct.map((p) => ({
+    //           ...p,
+    //           itemKey: p.recordKey,
+    //           cartItemType:
+    //             p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null,
+    //         })),
+    //         ...freeProducts.map(({ product: p, allowed, message }) => ({
+    //           ...p,
+    //           itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,
+    //           cartItemType: allowed
+    //             ? "AUTO_FREE_PRODUCT"
+    //             : "AUTO_FREE_PRODUCT_DISABLED",
+    //           disableChange: true,
+    //           hideRemove: true,
+    //           couponMessage: message,
+    //         })),
+    //       ]);
+
+    //       return  [
+    //         ...cartWithoutFreeProduct.map((p) => ({
+    //           ...p,
+    //           itemKey: p.recordKey,
+    //           cartItemType:
+    //             p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null,
+    //         })),
+    //         ...freeProducts.map(({ product: p, allowed, message }) => ({
+    //           ...p,
+    //           itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,
+    //           cartItemType: allowed
+    //             ? "AUTO_FREE_PRODUCT"
+    //             : "AUTO_FREE_PRODUCT_DISABLED",
+    //           disableChange: true,
+    //           hideRemove: true,
+    //           couponMessage: message,
+    //         })),
+    //       ]
+    //       ;
+    //     }
+    //   }
+    // }
+     
     return [
       ...cartList.map((p) => ({
         ...p,
