@@ -532,7 +532,7 @@ function Checkout(props) {
         </div>
 
         <div className={"container mt-0 md-7"}>
-          {cartList.length > 0 ? (
+          {cartList.length > 0 && totalListingPrice > 0 ? (
             <>
               {!user && (
                 <div className="row">
