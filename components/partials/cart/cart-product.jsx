@@ -79,7 +79,21 @@ function CartProduct({
       });
       updateCart(cartData);
     } else {
-      removeFromCart(item);
+      if (appliedCoupon?.couponType === "PRODUCT") {
+        const { totalPrice } = getCartTotals(cartList, [], appliedCoupon);
+        const newCartList = cartList.filter((c) => c.id !== item.id);
+        const freeProduct = cartList.find(
+          (c) => appliedCoupon.getYProduct === c.id
+        );
+        if (
+          freeProduct &&
+          (appliedCoupon.minOrderValue > totalPrice ||
+            appliedCoupon.buyXQuantity > newCartList.length - 1)
+        ) {
+          removeFromCart(freeProduct);
+        }
+      }
+      removeFromCart(item);  
     }
   };
 
@@ -88,20 +102,7 @@ function CartProduct({
     if (cartItemSource === "COUPON" && appliedCoupon?.getYProduct === id) {
       removeCoupon();
     }
-    if (appliedCoupon?.couponType === "PRODUCT") {
-      const { totalPrice } = getCartTotals(cartList, [], appliedCoupon);
-      const newCartList = cartList.filter((c) => c.id !== item.id);
-      const freeProduct = cartList.find(
-        (c) => appliedCoupon.getYProduct === c.id
-      );
-      if (
-        freeProduct &&
-        (appliedCoupon.minOrderValue > totalPrice ||
-          appliedCoupon.buyXQuantity > newCartList.length - 1)
-      ) {
-        removeFromCart(freeProduct);
-      }
-    }
+ 
   };
 
   useMemo(() => {
