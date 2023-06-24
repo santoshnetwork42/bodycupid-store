@@ -11,7 +11,6 @@ import { cartActions } from "~/store/cart";
 import { getCartTotals, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
-import { useCartTotal } from "~/utils/hooks/useCart";
 
 const logger = new Logger("Cart-products");
 
