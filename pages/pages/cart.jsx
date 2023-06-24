@@ -90,21 +90,6 @@ function Cart(props) {
     inventoryMapping,
   ]);
 
-  useEffect(() => {
-    if (appliedCoupon?.couponType === "PRODUCT") {
-      const freeProduct = cartList.find(
-        (c) => appliedCoupon.getYProduct === c.id
-      );
-      if (
-        freeProduct &&
-        (appliedCoupon.minOrderValue > totalPrice ||
-          appliedCoupon.buyXQuantity > cartList.length - 1)
-      ) {
-        removeCoupon()
-        removeFromCart(freeProduct)
-      }
-    }
-  }, [cartList]);
 
   // const appliedCouponStatus = useMemo(
   //   () => getCouponDiscount(appliedCoupon, cartList),
