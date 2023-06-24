@@ -30,8 +30,6 @@ function Cart(props) {
     viewCart,
     recordOutOfStock,
     onProceedToCheckout,
-    removeCoupon,
-    removeFromCart,
   } = props;
 
   const { name } = store;

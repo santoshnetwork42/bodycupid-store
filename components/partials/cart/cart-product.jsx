@@ -91,9 +91,10 @@ function CartProduct({
             appliedCoupon.buyXQuantity > newCartList.length - 1)
         ) {
           removeFromCart(freeProduct);
+          removeCoupon();
         }
       }
-      removeFromCart(item);  
+      removeFromCart(item);
     }
   };
 
@@ -102,7 +103,6 @@ function CartProduct({
     if (cartItemSource === "COUPON" && appliedCoupon?.getYProduct === id) {
       removeCoupon();
     }
- 
   };
 
   useMemo(() => {
