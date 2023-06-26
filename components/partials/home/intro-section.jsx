@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import OwlCarousel from "~/components/features/owl-carousel";
 import { introSlider } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { connect } from "react-redux";
+import { eventActions } from "~/store/events";
 
-function IntroSection({ banners = [] }) {
+function IntroSection({ banners = [], bannerClicked,homeViewed }) {
+
+  useEffect(()=>{
+    homeViewed()
+  },[])
+
   return (
     <div className="banner banner-fixed">
       <OwlCarousel
@@ -19,6 +26,13 @@ function IntroSection({ banners = [] }) {
             <div className="intro-slide2" key={webKey}>
               <ALink
                 href={link || "/collections/all"}
+                onClick={() => {
+                  bannerClicked({
+                    Source: link || "/collections/all",
+                    item_id: index,
+                    banner_name: webKey,
+                  });
+                }}
                 className={`d-sm-none intro-slider-link`} //for desktop size
               >
                 <Image
@@ -53,4 +67,7 @@ function IntroSection({ banners = [] }) {
   );
 }
 
-export default React.memo(IntroSection);
+export default connect(null, {
+  bannerClicked: eventActions.bannerClicked,
+  homeViewed: eventActions.homeViewed,
+})(React.memo(IntroSection));

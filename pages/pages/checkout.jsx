@@ -67,6 +67,7 @@ function Checkout(props) {
     openAllAddressModal,
     recordOutOfStock,
     openLogin,
+    addPaymentInfo
   } = props;
 
   const { name } = store;
@@ -174,7 +175,7 @@ function Checkout(props) {
 
         razorpayMethod = new Razorpay(options);
         razorpayMethod.open();
-
+        addPaymentInfo()
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -223,7 +224,8 @@ function Checkout(props) {
               orderData.order,
               [...cartList, ...freeProducts],
               appliedCoupon,
-              shippingAddress
+              shippingAddress,
+              payMethod
             );
 
             logger.debug("Purchase event done");
@@ -231,6 +233,7 @@ function Checkout(props) {
 
             if (razorpayMethod) {
               logger.debug("Closing razorpay modal");
+
               razorpayMethod.close();
             }
 
@@ -1001,6 +1004,8 @@ const Component = connect(mapStateToProps, {
   startCheckout: eventActions.startCheckout,
   openAllAddressModal: modalActions.openAllAddressModal,
   recordOutOfStock: eventActions.outOfStock,
+  orderCreated: eventActions.orderCreated,
+  addPaymentInfo: eventActions.addPaymentInfo,
 })(Checkout);
 
 Component.hideFooter = true;

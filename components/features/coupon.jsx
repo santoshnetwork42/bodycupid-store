@@ -55,7 +55,10 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const showAppliedCoupon = !!(appliedCoupon && couponTotal);
 
   const bestCouponCode = useMemo(() => {
