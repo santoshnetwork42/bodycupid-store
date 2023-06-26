@@ -562,7 +562,6 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.HOME_VIEWED, function* saga(e) {
 
-    yield call(waitForWindow);
     window?.Moengage?.track_event("Home Viewed", {
       URL: BASE_URL,
     });
@@ -585,11 +584,12 @@ const persistConfig = {
 export default persistReducer(persistConfig, eventReducer);
 
 function waitForWindow() {
-  return new Promise((resolve) => {
-    if (typeof  window !== 'undefined') {
-      resolve();
-    } else {
-      window.addEventListener('load', resolve);
-    }
+  return new Promise(resolve => {
+    const interval = setInterval(() => {
+      if (typeof window !== 'undefined') {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 100);
   });
 }
