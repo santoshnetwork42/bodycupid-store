@@ -57,15 +57,13 @@ function Coupon(props) {
     [appliedCoupon, cartList]
   );
 
-  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
+  const showAppliedCoupon = !!(appliedCoupon);
 
   const bestCouponCode = useMemo(() => {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
       return appliedCoupon.code;
 
-    const coupons = featuredCoupons.filter(
-      (f) => f.autoApply && !!f.discount && f.allowed
-    );
+    const coupons = featuredCoupons.filter((f) => f.autoApply && f.allowed);
     const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
     return bestCoupon?.code;
   }, [featuredCoupons, appliedCoupon, showAppliedCoupon]);
@@ -213,9 +211,9 @@ function Coupon(props) {
                 )}
                 {showAppliedCoupon && (
                   <>
-                    <span className="ml-1 coupon-subtitle">
+                   {!!couponTotal && <span className="ml-1 coupon-subtitle">
                       You saved additional ₹{toDecimal(couponTotal)}
-                    </span>
+                    </span>}
                     <span>
                       <a
                         className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"

@@ -174,6 +174,9 @@ export const useMenu = () => {
   }
 
   menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
+
+  menu.push({ label: "Clearance Sale", link: `/collections/clearance-sale` });
+
   return menu;
 };
 
