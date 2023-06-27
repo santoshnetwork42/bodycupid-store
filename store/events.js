@@ -177,7 +177,6 @@ export function* eventsSaga() {
 
     const userData = yield select((state) => state.user.data);
     const user = userMapper(userData);
-
     window.Moengage.track_event("Add To Cart", moengage.addToCart);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
@@ -560,11 +559,13 @@ export function* eventsSaga() {
     });
   });
 
-  yield takeEvery(actionTypes.HOME_VIEWED, function* saga(e) {
-
-    window?.Moengage?.track_event("Home Viewed", {
-      URL: BASE_URL,
-    });
+  yield takeEvery(actionTypes.HOME_VIEWED, function* () {
+    const moengage = window.Moengage;
+    if (moengage) {
+      moengage.track_event('Home Viewed', {
+        URL: BASE_URL,
+      });
+    }
   });
   yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {
   
@@ -582,14 +583,3 @@ const persistConfig = {
 };
 
 export default persistReducer(persistConfig, eventReducer);
-
-function waitForWindow() {
-  return new Promise(resolve => {
-    const interval = setInterval(() => {
-      if (typeof window !== 'undefined') {
-        clearInterval(interval);
-        resolve();
-      }
-    }, 100);
-  });
-}
