@@ -33,13 +33,11 @@ function CartMenu(props) {
   useEffect(() => {
     if (isCartOpen) {
       viewCart();
-      if (
-        !document.querySelector(".cart-dropdown").classList.contains("opened")
-      )
-        document.querySelector(".cart-dropdown").classList.add("opened");
+      if (!document.querySelector(".side-bar").classList.contains("opened"))
+        document.querySelector(".side-bar").classList.add("opened");
     } else {
-      if (document.querySelector(".cart-dropdown").classList.contains("opened"))
-        document.querySelector(".cart-dropdown").classList.remove("opened");
+      if (document.querySelector(".side-bar").classList.contains("opened"))
+        document.querySelector(".side-bar").classList.remove("opened");
     }
   }, [isCartOpen]);
 
@@ -48,7 +46,7 @@ function CartMenu(props) {
   }, [router.asPath]);
 
   return (
-    <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
+    <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
       <ALink
         href="#"
         className="cart-toggle label-block link p-relative"
@@ -66,13 +64,13 @@ function CartMenu(props) {
         <span className="cart-count">{getCartCount(cartList)}</span>
       </ALink>
       <div
-        className="cart-overlay"
+        className="sidebar-overlay"
         onClick={() => {
           setCartVisibility(false);
         }}
       ></div>
-      <div className="dropdown-box pl-0 pr-0 ">
-        <div className="cart-header">
+      <div className="sidebar-box pl-0 pr-0 ">
+        <div className="sidebar-header pt-4">
           <h4 className="cart-title ml-4">Shopping Cart</h4>
           <ALink
             href="#"
@@ -84,7 +82,7 @@ function CartMenu(props) {
             <Cross size={18} />
           </ALink>
         </div>
-        <div className="side-cart ">
+        <div className="sidebar-products p-relative">
           {cartItems.length > 0 ? (
             <>
               <div className=" ">

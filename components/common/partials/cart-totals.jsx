@@ -75,7 +75,7 @@ function CartTotal({
   ]);
 
   return (
-    <div className="summary bg-white mb-7 border-bottom-none">
+    <div className="summary bg-white mb-3 border-bottom-none">
       <h3 className="summary-title text-left d-sm-none">Cart Totals</h3>
       <table className="shipping">
         <tbody>
@@ -166,15 +166,17 @@ function CartTotal({
           </tr>
         </tbody>
       </table>
-      <button
-        onClick={validateAndGoToCheckout}
-        className={`btn btn-dark  btn-rounded btn-checkout w-100 font-weight-bold ${
-          !isSmall ? "d-sm-none" : "w-100 sticky-checkout"
-        }`}
-        disabled={!isInventoryCheckReady}
-      >
-        begin checkout
-      </button>
+      {isSmall && (
+        <div id="sidebar-footer" className="sidebar-footer">
+          <button
+            onClick={validateAndGoToCheckout}
+            className={`btn btn-dark btn-rounded btn-checkout w-100 font-weight-bold `}
+            disabled={!isInventoryCheckReady}
+          >
+            begin checkout
+          </button>
+        </div>
+      )}
 
       {!isSmall && (
         <div className="d-sm-show stick">

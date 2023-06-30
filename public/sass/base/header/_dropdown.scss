@@ -772,3 +772,128 @@
         }
     }
 }
+
+
+.side-bar {
+    &.opened {
+      .sidebar-box {
+        right: 0;
+      }
+      .cart-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+      .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+      .sidebar-footer {
+        opacity: 1;
+        right: 0 !important;
+        visibility: visible;
+    }
+      .sidebar-header {
+        opacity: 1;
+        right: 0 !important;
+        visibility: visible;
+    }
+
+    }
+    .sidebar-overlay {
+      position: fixed;
+      left: 0;
+      width: 100vw;
+      top: -10vh;
+      height: 110vh;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 2998;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar-header {
+        position: fixed;
+        border-bottom: 1px solid #e1e1e1;
+        transition: right 0.3s;
+        bottom: 20px;
+        z-index: 99;
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+        background: white;
+        max-width: 38rem !important;
+        padding: 10px 15px;
+        width: 90vw !important;
+        top: 0 !important;
+        right: -90vw;
+        border-radius: 0 !important;
+        visibility: hidden;
+        height: 56px;
+
+        .cart-title {
+        margin-bottom: 0;
+        font-size: 1.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    }
+
+    .cart-count {
+        width: 1.9rem;
+        height: 1.9rem;
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+        position: absolute;
+        right: -8px;
+        top: 0;
+        font-size: .9rem;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #1a181e;
+        color: #fff;
+        z-index: 1;
+    }
+
+    .sidebar-footer {
+        position: fixed;
+        transition: right 0.3s;
+        bottom: 20px;
+        z-index: 99;
+        border-top: 1px solid #e1e1e1;
+        background: white;
+        max-width: 38rem !important;
+        padding: 10px 15px;
+        width: 90vw !important;
+        bottom: -1px !important;
+        right: -90vw;
+        border-radius: 0 !important;
+        visibility: hidden;
+      }
+
+      .sidebar-products {
+        position: fixed;
+        top:56px;
+        height: calc(100vh - 56px - 67px);
+        overflow-y: scroll;
+      }
+
+    .sidebar-box {
+      overscroll-behavior: contain;
+      background-color: white;
+      position: fixed;
+      top: 0;
+      right: -100vw;
+      max-width: 38rem;
+      width: 90vw;
+      height: 100vh;
+      min-width: auto;
+      opacity: 1;
+      visibility: visible;
+      transition: right 0.3s;
+      transform: none;
+      z-index: 2999;
+      box-shadow: none;
+    }
+  }
+  

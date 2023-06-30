@@ -218,7 +218,9 @@ function Coupon(props) {
                     </span>
                     <span>
                       <a
-                        className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${!isSmall && "ml-1 "}`}
+                        className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${
+                          !isSmall && "ml-1 "
+                        }`}
                         type="button"
                       >
                         View more offers
