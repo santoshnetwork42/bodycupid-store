@@ -32,12 +32,16 @@ function CartMenu(props) {
 
   useEffect(() => {
     if (isCartOpen) {
+      document.body.classList.add('overflow-hidden');
       viewCart();
       if (!document.querySelector(".side-bar").classList.contains("opened"))
         document.querySelector(".side-bar").classList.add("opened");
     } else {
       if (document.querySelector(".side-bar").classList.contains("opened"))
         document.querySelector(".side-bar").classList.remove("opened");
+    }
+    return ()=> {
+      document.body.classList.remove('overflow-hidden');
     }
   }, [isCartOpen]);
 
@@ -70,11 +74,11 @@ function CartMenu(props) {
         }}
       ></div>
       <div className="sidebar-box pl-0 pr-0 ">
-        <div className="sidebar-header pt-4">
-          <h4 className="cart-title ml-4">Shopping Cart</h4>
+        <div className="sidebar-header pt-3">
+          <h4 className="cart-title ml-1">Shopping Cart</h4>
           <ALink
             href="#"
-            className=" mb-0 mr-1"
+            className=" mb-0 "
             onClick={() => {
               setCartVisibility(false);
             }}

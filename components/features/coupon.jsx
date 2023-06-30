@@ -266,7 +266,8 @@ function Coupon(props) {
             <Confetti />
           </div>
           <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="confetti-modal">
+           <div className="modal-content ">
               <div
                 className="close-icon"
                 title="Remove this product"
@@ -291,7 +292,9 @@ function Coupon(props) {
               <button className="close-button" onClick={closeModal}>
                 Hurrah!
               </button>
+            </div>    
             </div>
+           
           </div>
         </div>
       )}
