@@ -32,6 +32,7 @@ function Coupon(props) {
     addToCart,
     removeFromCart,
     layout = "cart",
+    isSmall,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -159,7 +160,7 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box mb-2 pb-5 bg-white text-primary flex-row lh-default"
+          className="cart-coupon-box p-relative mb-2 pb-3 bg-white text-primary flex-row lh-default"
           onClick={() => setOpen(true)}
         >
           <span className="mt-1 sm-product-remove">
@@ -194,7 +195,7 @@ function Coupon(props) {
                   <ALink
                     key={appliedCoupon.id}
                     href="#"
-                    className="mt-1"
+                    className={isSmall ? "small-product-remove" : "mt-1"}
                     title="Remove coupon"
                     onClick={onCouponRemove}
                   >
@@ -205,18 +206,20 @@ function Coupon(props) {
 
               <div>
                 {!showAppliedCoupon && (
-                  <span className="ml-1 coupon-subtitle">
+                  <span className="ml-1 coupon-subtitle font-weight-normal">
                     Save more with coupon and offers
                   </span>
                 )}
                 {showAppliedCoupon && (
                   <>
-                   {!!couponTotal && <span className="ml-1 coupon-subtitle">
+                   {!!couponTotal && <span className="ml-1 coupon-subtitle font-weight-normal">
                       You saved additional ₹{toDecimal(couponTotal)}
                     </span>}
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
+                        className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${
+                          !isSmall && "ml-1 "
+                        }`}
                         type="button"
                       >
                         View more offers
@@ -262,7 +265,8 @@ function Coupon(props) {
             <Confetti />
           </div>
           <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="confetti-modal">
+           <div className="modal-content ">
               <div
                 className="close-icon"
                 title="Remove this product"
@@ -288,6 +292,8 @@ function Coupon(props) {
                 Hurrah!
               </button>
             </div>
+            </div>
+
           </div>
         </div>
       )}

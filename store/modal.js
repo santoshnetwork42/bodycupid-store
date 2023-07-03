@@ -15,11 +15,13 @@ const actionTypes = {
   REFRESH_MODAL: "REFRESH_MODAL",
   OPEN_ALL_ADDRESS_MODAL: "OPEN_ALL_ADDRESS_MODAL",
   CLOSE_ALL_ADDRESS_MODAL: "CLOSE_ALL_ADDRESS_MODAL",
+  SET_CART_VISIBILITY: "SET_CART_VISIBILITY",
 };
 
 const initialState = {
   type: "video",
   openModal: false,
+  openCart: false,
   quickview: false,
   login: false,
   singleSlug: "",
@@ -41,6 +43,12 @@ function modalReducer(state = initialState, action) {
       return {
         ...state,
         quickview: false,
+      };
+
+    case actionTypes.SET_CART_VISIBILITY:
+      return {
+        ...state,
+        openCart: action.payload,
       };
 
     case actionTypes.OPEN_MODAL:
@@ -98,6 +106,9 @@ export const modalActions = {
     type: actionTypes.CLOSE_MODAL,
     payload: { modalType },
   }),
+
+  setCartVisibility: (payload) => ({ type: actionTypes.SET_CART_VISIBILITY, payload }),
+
   openQuickview: (slug) => ({
     type: actionTypes.OPEN_QUICKVIEW,
     payload: { slug },
