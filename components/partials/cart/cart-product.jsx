@@ -8,7 +8,7 @@ import { Close } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
-import { toDecimal } from "~/utils";
+import { getCartTotals, toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
 
@@ -79,6 +79,21 @@ function CartProduct({
       });
       updateCart(cartData);
     } else {
+      if (appliedCoupon?.couponType === "PRODUCT") {
+        const { totalPrice } = getCartTotals(cartList, [], appliedCoupon);
+        const newCartList = cartList.filter((c) => c.id !== item.id);
+        const freeProduct = cartList.find(
+          (c) => appliedCoupon.getYProduct === c.id
+        );
+        if (
+          freeProduct &&
+          (appliedCoupon.minOrderValue > totalPrice ||
+            appliedCoupon.buyXQuantity > newCartList.length - 1)
+        ) {
+          removeFromCart(freeProduct);
+          removeCoupon();
+        }
+      }
       removeFromCart(item);
     }
   };

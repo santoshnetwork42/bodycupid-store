@@ -9,6 +9,7 @@ import {
   searchShippingTiers,
   getFeaturedCoupon,
   searchConfigurations,
+  getCoupon,
 } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
@@ -100,7 +101,7 @@ function NavbarProvider({ children, config }) {
       .catch(errorHandler);
   };
 
-  const getConfigurationData = async () => {
+  const getConfigurations = async () => {
     try {
       API.graphql(
         graphqlOperation(searchConfigurations, {
@@ -130,8 +131,12 @@ function NavbarProvider({ children, config }) {
    
     getCategories();
     getCollections();
-    getConfigurationData();
+    getConfigurations();
   }, []);
+
+  const addUserCoupon = async (coupon) => {
+    setCoupons([{ ...coupon, autoApply: true, isExternal: true }, ...coupons]);
+  };
 
   return (
     <NavbarContext.Provider
@@ -141,6 +146,7 @@ function NavbarProvider({ children, config }) {
         shippingTiers,
         coupons,
         configurations,
+        addUserCoupon,
       }}
     >
       {children}
@@ -174,6 +180,9 @@ export const useMenu = () => {
   }
 
   menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
+
+  menu.push({ label: "Clearance Sale", link: `/collections/clearance-sale` });
+
   return menu;
 };
 
@@ -200,6 +209,22 @@ export const useGuestCheckout = () => {
   const guestCookie = Cookie.get(`${STORE_PREFIX}_guest`);
   if (guestCheck === 1 || guestCookie) return true;
   return false;
+};
+
+export const useUpdateUserCoupon = () => {
+  const { coupons, addUserCoupon } = useContext(NavbarContext);
+
+  const updateUserCoupon = async (couponCode) => {
+    API.graphql(
+      graphqlOperation(getCoupon, {
+        code: couponCode,
+      })
+    )
+      .then((res) => res.data.getCoupon)
+      .then(addUserCoupon);
+  };
+
+  return [coupons, updateUserCoupon];
 };
 
 export default NavbarProvider;

@@ -1717,3 +1717,31 @@ export const searchConfigurations = /* GraphQL */ `
     }
   }
 `;
+
+export const getCoupon = /* GraphQL */ `
+  query GetCoupon($code: ID!) {
+    getCoupon(code: $code) {
+      id
+      description
+      code
+      couponType
+      buyXQuantity
+      getYAmount
+      getYPercentage
+      getYQuantity
+      getYProduct
+      getYStoreProduct {
+        id
+        title
+        price
+      }
+      minOrderValue
+      maxDiscount
+      expirationDate
+      autoApply
+      applicableCollections
+      applicableProducts
+      paymentMethod
+    }
+  }
+`;
