@@ -613,7 +613,7 @@ export const FreeTag = ({
       viewBox="0 0 192 192"
     >
       <path
-        class="cls-1"
+        className="cls-1"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -622,7 +622,7 @@ export const FreeTag = ({
         d="M166.23,87.61c2.85,2.59,5.16,5.3,5.16,8.39,0,7.45-13.44,12.69-15.63,19.42-2.26,7,5.45,19.09,1.23,24.9s-18.21,2.25-24.07,6.51-6.65,18.62-13.62,20.88c-6.73,2.19-15.85-8.89-23.3-8.89s-16.57,11.08-23.3,8.89c-7-2.26-7.82-16.66-13.62-20.88s-19.81-.65-24.07-6.51,3.49-17.93,1.23-24.9c-2.19-6.73-15.63-12-15.63-19.42S34.05,83.31,36.24,76.58c2.26-7-5.45-19.09-1.23-24.9s18.21-2.25,24.07-6.51S65.73,26.55,72.7,24.29c6.73-2.19,15.85,8.89,23.3,8.89s16.57-11.08,23.3-8.89c7,2.26,7.82,16.66,13.62,20.88s19.81.65,24.07,6.51c2.53,3.48.77,9.24-.55,14.79"
       ></path>
       <polyline
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -631,7 +631,7 @@ export const FreeTag = ({
         points="49.1 107.66 49.1 84.34 64.48 84.34"
       ></polyline>
       <line
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -643,7 +643,7 @@ export const FreeTag = ({
         y2="96.4"
       ></line>
       <polyline
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -657,14 +657,14 @@ export const FreeTag = ({
         strokeLinejoin="round"
         strokeWidth={7}
         stroke={color}
-        class="cls-2"
+        className="cls-2"
         x1="115.05"
         y1="96.4"
         x2="101.96"
         y2="96.4"
       ></line>
       <polyline
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -673,7 +673,7 @@ export const FreeTag = ({
         points="142.9 84.34 127.52 84.34 127.52 107.66 142.9 107.66"
       ></polyline>
       <line
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -685,7 +685,7 @@ export const FreeTag = ({
         y2="96.4"
       ></line>
       <path
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -694,7 +694,7 @@ export const FreeTag = ({
         d="M75.05,96.4h8.86a5.74,5.74,0,0,1,5.74,5.73v5.53"
       ></path>
       <path
-        class="cls-2"
+        className="cls-2"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -922,20 +922,20 @@ export const Cash = ({ size = defaultIconSize, color = defaultIconColor }) => {
 export const Confetti = ({}) => {
   return (
     <div>
-      <div class="confetti">
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
-        <div class="confetti-piece"></div>
+      <div className="confetti">
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
       </div>
     </div>
   );
