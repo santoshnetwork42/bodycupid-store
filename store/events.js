@@ -223,7 +223,9 @@ export function* eventsSaga() {
     const { product } = e.payload;
     const { value, pixel, vercel, pinpoint, ga, moengage } =
       itemMapper(product);
-    window.Moengage.track_event("Product Viewed", moengage.productViewed);
+    if (window.Moengage) {
+      window.Moengage.track_event("Product Viewed", moengage.productViewed);
+    }
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_item",
@@ -333,7 +335,9 @@ export function* eventsSaga() {
     } = yield select();
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
     const { checkoutStarted } = moEngagedOrderMapper(data, coupon);
-    window.Moengage.track_event("Checkout Started", checkoutStarted);
+    if (window.Moengage) {
+      window.Moengage.track_event("Checkout Started", checkoutStarted);
+    }
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
@@ -391,7 +395,10 @@ export function* eventsSaga() {
 
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
     const { cartViewed } = moEngagedOrderMapper(data, coupon);
-    window.Moengage.track_event("Cart Viewed", cartViewed);
+    const moengage = window.Moengage;
+    if (moengage) {
+      window.Moengage.track_event("Cart Viewed", cartViewed);
+    }
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
@@ -492,52 +499,67 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     const { address, totalPrice } = e.payload;
     const { addressAdded } = addressMapper(address, totalPrice);
-    window.Moengage.track_event("Address added", addressAdded);
+    window.Moengage.track_event("Address Added", addressAdded);
   });
 
   yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
     const { address, totalPrice } = e.payload;
     const { addressSelected } = addressMapper(address, totalPrice);
-
-    window.Moengage.track_event("Address added", addressAdded);
+    if (window.Moengage) {
+      window.Moengage.track_event("Address Selected", addressSelected);
+    }
   });
 
   yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
+    if (window.Moengage) {
     window.Moengage.track_event("Category Viewed");
+    }
   });
 
   yield takeEvery(actionTypes.LOGIN, function* saga(e) {
     const { address, totalPrice } = e.payload;
+    if (window.Moengage) {
     window.Moengage.track_event("Customer Logged In", addressAdded);
+    }
   });
 
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
+    if (window.Moengage) {
     window.Moengage.track_event("Add Payment Info", {
       URL: `${BASE_URL}/pages/checkout`,
     });
+  }
   });
 
   yield takeEvery(actionTypes.BANNER_CLICKED, function* saga(e) {
+    if (window.Moengage) {
     window.Moengage.track_event("Banner Clicked", {
       ...e.payload,
     });
+  }
   });
 
   yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
+    if (window.Moengage) {
     window.Moengage.track_event("Category Viewed", {
       ...e.payload,
     });
+  }
   });
 
   yield takeEvery(actionTypes.TILE_CLICKED, function* saga(e) {
+    if (window.Moengage) {
     window.Moengage.track_event("Tile Clicked", {
       ...e.payload,
     });
+  }
   });
   yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {
-    window.Moengage.track_event("Top Navbar clicked", {
-      ...e.payload,
-    });
+    if (window.Moengage) {
+      window.Moengage.track_event("Top Navbar clicked", {
+        ...e.payload,
+      });
+    }
   });
 
   yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {

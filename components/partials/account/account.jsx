@@ -87,7 +87,7 @@ function AccountsTabs({ user, store, openPasswordLess,logout, destroySession }) 
 
   const handleLogout = useCallback(async () => {
     logout({
-      "Customer ID":user.Id,
+      "Customer ID":user?.id,
       URL:window.location.href
     })
     await Auth.signOut();

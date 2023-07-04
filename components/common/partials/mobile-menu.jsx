@@ -13,7 +13,6 @@ import { eventActions } from "~/store/events";
 
 function MobileMenu({ user,logout, openPasswordLess, topNavbarClicked }) {
   const router = useRouter();
-
   const menu = useMenu();
 
   useEffect(() => {
@@ -53,7 +52,7 @@ function MobileMenu({ user,logout, openPasswordLess, topNavbarClicked }) {
 
   const handleLogout = useCallback(async () => {
     logout({
-      "Customer ID":user.Id,
+      "Customer ID":user?.id,
       URL:window.location.href
     })
     await Auth.signOut();
