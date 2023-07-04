@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 
@@ -22,6 +22,7 @@ import NextHead from "~/components/common/next-head";
 import fetchData from "~/utils/fetchData";
 import handleRedirect from "~/utils/handleRedirect";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { eventActions } from "~/store/events";
 
 const logger = new Logger("All collections");
 
@@ -34,8 +35,17 @@ function CollectionPage(props) {
     filterItems = [],
     data,
     pageMeta,
+    categoryViewed,
   } = props;
   const { name } = store;
+
+  useEffect(() => {
+    categoryViewed({
+      URL: window.location.href,
+      "Category Name": data.name,
+      "Item Count": products.items.length,
+    });
+  }, []);
 
   return (
     <main className="main searchBar">
@@ -322,7 +332,9 @@ function mapStateToProps(state) {
   };
 }
 
-const Component = connect(mapStateToProps)(CollectionPage);
+const Component = connect(mapStateToProps, {
+  categoryViewed: eventActions.categoryViewed,
+})(CollectionPage);
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
 Component.couponBanner = true;

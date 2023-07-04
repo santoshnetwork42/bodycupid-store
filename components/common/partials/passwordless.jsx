@@ -18,6 +18,7 @@ import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 
 import { getUser } from "~/graphql/api";
+import { eventActions } from "~/store/events";
 
 const logger = new Logger("Login-without-password");
 
@@ -28,6 +29,7 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
+  login
 }) {
   const router = useRouter();
   const [state, setState] = useState({
@@ -80,6 +82,7 @@ function Passwordless({
       });
       setSeconds(30);
       setConfirmSignUp("SIGNUP");
+      // login( )
     } catch (error) {
       logger.error("error signing up:", error);
       alertToaster(error.message, "error");
@@ -147,10 +150,11 @@ function Passwordless({
         const cu = await Auth.signIn({
           username: addPhonePrefix(state.phone),
         });
-        setCurrentUser(cu);
+        setCurrentUser(cu);  addressAdded: eventActions.addressAdded,
         setConfirmSignUp("SIGNIN");
         setSeconds(30);
         setLoading(false);
+        
       } catch (error) {
         logger.error("error in signin:", error);
         if (error.code === "UserNotConfirmedException") {
@@ -396,4 +400,5 @@ export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
   openLogin: modalActions.openLoginModal,
   setUser: userActions.setUser,
+  login: eventActions.logIn
 })(Passwordless);

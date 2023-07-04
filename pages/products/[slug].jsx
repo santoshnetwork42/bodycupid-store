@@ -231,7 +231,6 @@ const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
 })(ProductDefault);
 
-Component.navbarConfig = { coupons: true };
 Component.showTopRunner = true;
 Component.couponBanner = true;
 
