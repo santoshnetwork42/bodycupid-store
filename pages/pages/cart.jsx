@@ -88,6 +88,7 @@ function Cart(props) {
     inventoryMapping,
   ]);
 
+
   // const appliedCouponStatus = useMemo(
   //   () => getCouponDiscount(appliedCoupon, cartList),
   //   [appliedCoupon, cartList]

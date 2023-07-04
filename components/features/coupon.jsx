@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
+
 import ALink from "~/components/features/custom-link";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
@@ -61,9 +62,7 @@ function Coupon(props) {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
       return appliedCoupon.code;
 
-    const coupons = featuredCoupons.filter(
-      (f) => f.autoApply && !!f.discount && f.allowed
-    );
+    const coupons = featuredCoupons.filter((f) => f.autoApply && f.allowed);
     const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
     return bestCoupon?.code;
   }, [featuredCoupons, appliedCoupon, showAppliedCoupon]);
@@ -180,12 +179,13 @@ function Coupon(props) {
                   </p>
                 </div>
 
-                {!!featuredCoupons.length && !showAppliedCoupon && (
+                {!showAppliedCoupon && (
                   <a
                     className="coupon-offer d-flex align-items-center"
                     type="button"
                   >
-                    {`${featuredCoupons.length} Offers`}
+                    {!!featuredCoupons.length &&
+                      `${featuredCoupons.length} Offers`}
                     <RightAngle size={14} />
                   </a>
                 )}
@@ -210,9 +210,11 @@ function Coupon(props) {
                 )}
                 {showAppliedCoupon && (
                   <>
-                    <span className="ml-1 coupon-subtitle">
-                      You saved additional ₹{toDecimal(couponTotal)}
-                    </span>
+                    {!!couponTotal && (
+                      <span className="ml-1 coupon-subtitle">
+                        You saved additional ₹{toDecimal(couponTotal)}
+                      </span>
+                    )}
                     <span>
                       <a
                         className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
@@ -275,8 +277,14 @@ function Coupon(props) {
               <h4 className="modal-title">
                 '{appliedCoupon.code}' coupon applied!
               </h4>
-              <h3 className="modal-amount">₹{toDecimal(couponTotal)} saved</h3>
-              <h6 className="modal-savings">through this coupon</h6>
+              {couponTotal > 0 && (
+                <>
+                  <h3 className="modal-amount">
+                    ₹{toDecimal(couponTotal)} saved
+                  </h3>
+                  <h6 className="modal-savings">through this coupon</h6>
+                </>
+              )}
               <button className="close-button" onClick={closeModal}>
                 Hurrah!
               </button>
