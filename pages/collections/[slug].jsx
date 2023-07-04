@@ -39,8 +39,6 @@ function CollectionPage(props) {
   } = props;
   const { name } = store;
 
-  console.log('products :>> ', products);
-
   useEffect(() => {
     categoryViewed({
       URL: window.location.href,
