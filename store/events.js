@@ -568,12 +568,6 @@ export function* eventsSaga() {
     });
   });
 
-  yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {
-    window.Moengage.track_event("Top Navbar clicked", {
-      ...e.payload,
-    });
-  });
-
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
     const moengage = window.Moengage;
     if (moengage) {
