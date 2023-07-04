@@ -80,7 +80,7 @@ export const eventActions = {
     type: actionTypes.LOG_OUT,
     payload,
   }),
-  addPaymentInfo: (user) => ({
+  addPaymentInfo: () => ({
     type: actionTypes.ADD_PAYMENT_INFO,
   }),
   bannerClicked: (payload) => ({
@@ -146,7 +146,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
-    
+
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: action, eventID: uuid() });
     Analytics.record({ name: action });
@@ -337,7 +337,6 @@ export function* eventsSaga() {
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
-      event: "begin_checkout",
       event: "begin_checkout",
       eventID: uuid(),
       attribute: pixel,
@@ -547,13 +546,7 @@ export function* eventsSaga() {
     });
   });
 
-  yield takeEvery(actionTypes.TILE_CLICKED, function* saga(e) {
-    window.Moengage.track_event("Tile Clicked", {
-      ...e.payload,
-    });
-  });
-
-  yield takeEvery(actionTypes.TILE_CLICKED, function* saga(e) {
+  yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {
     window.Moengage.track_event("Top Navbar clicked", {
       ...e.payload,
     });
@@ -562,19 +555,17 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
     const moengage = window.Moengage;
     if (moengage) {
-      moengage.track_event('Home Viewed', {
+      moengage.track_event("Home Viewed", {
         URL: BASE_URL,
       });
     }
   });
   yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {
-  
     window.Moengage.track_event("Customer Logged Out", {
-     ...e.payload
+      ...e.payload,
     });
   });
 }
-
 
 const persistConfig = {
   keyPrefix: `${STORE_PREFIX}-`,

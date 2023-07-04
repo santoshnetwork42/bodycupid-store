@@ -8,11 +8,10 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { connect } from "react-redux";
 import { eventActions } from "~/store/events";
 
-function IntroSection({ banners = [], bannerClicked,homeViewed }) {
-
-  useEffect(()=>{
-    homeViewed()
-  },[])
+function IntroSection({ banners = [], bannerClicked, homeViewed }) {
+  useEffect(() => {
+    homeViewed();
+  }, []);
 
   return (
     <div className="banner banner-fixed">
