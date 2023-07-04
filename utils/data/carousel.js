@@ -443,7 +443,8 @@ export const productSliderLarge = {
   margin: 10,
   responsive: {
     0: {
-      items: 1.1,
+      items: 1,
+      stagePadding: 30,
     },
     768: {
       items: 3,

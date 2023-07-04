@@ -23,6 +23,7 @@ import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import { useProductCoupons } from "~/utils/hooks/useCoupon";
+import { modalActions } from "~/store/modal";
 // import { useCartTotal } from "~/utils/hooks/useCart";
 
 function DetailOne(props) {
@@ -36,6 +37,7 @@ function DetailOne(props) {
   const {
     cartList,
     updateCart,
+    setCartVisibility,
     data: product,
     isStickyCart = false,
     adClass = "",
@@ -138,6 +140,7 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
+    setCartVisibility(true);
     if (hasInventory) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
@@ -443,7 +446,7 @@ function DetailOne(props) {
                               cartActive ? "" : "disabled"
                             }`}
                             onClick={() => {
-                              router.push("/pages/cart");
+                              setCartVisibility(true);
                             }}
                           >
                             <i>
@@ -508,8 +511,7 @@ function DetailOne(props) {
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
-                            router.push("/pages/cart");
-                          }}
+                            setCartVisibility(true)                          }}
                         >
                           <i>
                             <Bag color="currentColor" size={20} />
@@ -566,4 +568,5 @@ export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,
   getFeaturedCoupons: systemActions.getFeaturedCoupon,
+  setCartVisibility: modalActions.setCartVisibility,
 })(DetailOne);
