@@ -9,10 +9,10 @@ import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { modalActions } from "~/store/modal";
 import { useMenu } from "~/utils/contexts/navbar";
+import { eventActions } from "~/store/events";
 
-function MobileMenu({ user, openPasswordLess }) {
+function MobileMenu({ user,logout, openPasswordLess, topNavbarClicked }) {
   const router = useRouter();
-
   const menu = useMenu();
 
   useEffect(() => {
@@ -51,6 +51,10 @@ function MobileMenu({ user, openPasswordLess }) {
   }
 
   const handleLogout = useCallback(async () => {
+    logout({
+      "Customer ID":user?.id,
+      URL:window.location.href
+    })
     await Auth.signOut();
     router.push("/");
   }, []);
@@ -85,14 +89,33 @@ function MobileMenu({ user, openPasswordLess }) {
                 <Card
                   title={item.label}
                   type="mobile"
-                  onLinkClick={hideMobileMenu}
+                  onLinkClick={(e) => {
+                    hideMobileMenu(e);
+                    topNavbarClicked({
+                      banner_name: item.label,
+                      item_id: item.slug,
+                      Source: "Mobile",
+                      "Section Name": "Mobile Navbar",
+                    });
+                  }}
                   url={item.link}
                   hideDropDown={!item?.subMenu?.length}
                 >
                   <ul>
                     {item?.subMenu?.map((subItem) => (
                       <li key={`${item.label}-${subItem.label}`}>
-                        <ALink href={subItem.link} onClick={hideMobileMenu}>
+                        <ALink
+                          href={subItem.link}
+                          onClick={(e) => {
+                            hideMobileMenu(e);
+                            topNavbarClicked({
+                              banner_name: subItem.label,
+                              item_id: subItem.id,
+                              Source: "Web",
+                              "Section Name": "Top Navbar",
+                            });
+                          }}
+                        >
                           {subItem.label}
                         </ALink>
                       </li>
@@ -119,9 +142,7 @@ function MobileMenu({ user, openPasswordLess }) {
           {!!user && (
             <>
               <li>
-                <ALink href="/pages/account">
-                  My Account
-                </ALink>
+                <ALink href="/pages/account">My Account</ALink>
 
                 <ALink href={"/"} onClick={handleLogout}>
                   Logout
@@ -143,4 +164,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   openPasswordLess: modalActions.openPasswordlessModal,
+  topNavbarClicked: eventActions.topNavbarClicked,
+  logout: eventActions.logout,
 })(MobileMenu);

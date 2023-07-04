@@ -57,8 +57,7 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
-
-  const showAppliedCoupon = !!(appliedCoupon);
+  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
 
   const bestCouponCode = useMemo(() => {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
@@ -212,9 +211,11 @@ function Coupon(props) {
                 )}
                 {showAppliedCoupon && (
                   <>
-                   {!!couponTotal && <span className="ml-1 coupon-subtitle font-weight-normal">
-                      You saved additional ₹{toDecimal(couponTotal)}
-                    </span>}
+                    {!!couponTotal && (
+                      <span className="ml-1 coupon-subtitle font-weight-normal">
+                        You saved additional ₹{toDecimal(couponTotal)}
+                      </span>
+                    )}
                     <span>
                       <a
                         className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${

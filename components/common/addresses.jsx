@@ -11,6 +11,8 @@ import { Cricle, CricleDot, Plus } from "../icons";
 import { errorHandler } from "~/utils/errorHandler";
 import { modalActions } from "~/store/modal";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { useCartTotal } from "~/utils/hooks/useCart";
+import { eventActions } from "~/store/events";
 
 function Addresses({
   user,
@@ -19,6 +21,7 @@ function Addresses({
   isAddressesModal,
   openAllAddressModal,
   closeAllAddressModal,
+  addressSelected
 }) {
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [loading, setLoading] = useState(!!user);
@@ -27,6 +30,8 @@ function Addresses({
   const [isOpen, setOpen] = useState(false);
   const [defaultAddress, setDefaultAddress] = useState({});
   const [isAddressFormVisible, setIsAddressFormVisible] = useState(false);
+
+  const { totalPrice } = useCartTotal();
 
   const getUserAddress = useCallback(async () => {
     try {
@@ -131,7 +136,10 @@ function Addresses({
                   className={`col-sm-6 mb-4 accordion-border ${
                     variant === "CHECKOUT" && "d-sm-none"
                   }`}
-                  onClick={() => setSelected(adr)}
+                  onClick={() => {
+                    setSelected(adr);
+                    addressSelected(adr, totalPrice);
+                  }}
                 >
                   <div className={`card card-address w-100`}>
                     <div className="card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
@@ -389,4 +397,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   openAllAddressModal: modalActions.openAllAddressModal,
   closeAllAddressModal: modalActions.closeAllAddressModal,
+  addressSelected:eventActions.addressSelected
 })(Addresses);
