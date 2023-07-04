@@ -54,7 +54,7 @@ export const useInventory = () => {
   const outOfStockItems = useMemo(
     () =>
       cartListMapping
-        ? cartList.filter((c) => c.qty > cartListMapping[c.recordKey])
+        ? cartList.filter((c) => c.qty > cartListMapping[c.recordKey].inventory)
         : [],
     [cartList, cartListMapping]
   );
