@@ -18,6 +18,7 @@ const logger = new Logger('Product-details')
 
 function ProductTwo(props) {
   const {
+    setCartVisibility,
     cartList,
     product,
     adClass = "text-center",
@@ -57,6 +58,7 @@ function ProductTwo(props) {
   }, [collections]);
 
   const addToCartHandler = () => {
+    setCartVisibility(true)
     addToCart({
       ...product,
       section,

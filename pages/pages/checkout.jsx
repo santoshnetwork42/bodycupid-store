@@ -60,6 +60,7 @@ function Checkout(props) {
     user,
     emptyCart,
     appliedCoupon,
+    setCartVisibility,
     store,
     metadata,
     placeOrder: onPlaceOrder,
@@ -67,6 +68,7 @@ function Checkout(props) {
     openAllAddressModal,
     recordOutOfStock,
     openLogin,
+    addPaymentInfo
   } = props;
 
   const { name } = store;
@@ -174,7 +176,7 @@ function Checkout(props) {
 
         razorpayMethod = new Razorpay(options);
         razorpayMethod.open();
-
+        addPaymentInfo()
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -223,7 +225,8 @@ function Checkout(props) {
               orderData.order,
               [...cartList, ...freeProducts],
               appliedCoupon,
-              shippingAddress
+              shippingAddress,
+              payMethod
             );
 
             logger.debug("Purchase event done");
@@ -231,6 +234,7 @@ function Checkout(props) {
 
             if (razorpayMethod) {
               logger.debug("Closing razorpay modal");
+
               razorpayMethod.close();
             }
 
@@ -517,7 +521,14 @@ function Checkout(props) {
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/cart">1. Shopping Cart</ALink>
+            <ALink
+              href="#"
+              onClick={() => {
+                setCartVisibility(true);
+              }}
+            >
+              1. Shopping Cart
+            </ALink>
             <i>
               <RightAngle size={18} color="currentColor" />
             </i>
@@ -998,17 +1009,19 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
+  setCartVisibility: modalActions.setCartVisibility,
   removeCoupon: cartActions.removeCoupon,
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,
   openAllAddressModal: modalActions.openAllAddressModal,
   recordOutOfStock: eventActions.outOfStock,
+  orderCreated: eventActions.orderCreated,
+  addPaymentInfo: eventActions.addPaymentInfo,
 })(Checkout);
 
 Component.hideFooter = true;
 Component.navbarConfig = {
   shippingTier: true,
-  coupons: true,
 };
 
 export default Component;
