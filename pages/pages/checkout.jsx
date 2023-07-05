@@ -1020,6 +1020,7 @@ const Component = connect(mapStateToProps, {
 })(Checkout);
 
 Component.hideFooter = true;
+Component.hideChatbot = true;
 Component.navbarConfig = {
   shippingTier: true,
 };
