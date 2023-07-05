@@ -274,7 +274,7 @@ export const moEngagedOrderMapper = (
         "Total Price": Total_Price + valueNew,
         "Product Title": [...Product_Title, product.title],
         "Image URL": [...Image_URL, url],
-        "Total Quantity": Total_Quantity +( product?.qty || 0),
+        "Total Quantity": Total_Quantity + (product?.qty || 0),
         "Product ID": [...Product_ID, product?.id],
         "Product Price": [...Product_Price, product.price],
         "Product Quantity": [...Product_Quantity, product.qty],
@@ -354,4 +354,11 @@ export const addressMapper = (address, totalPrice) => {
       ...basicAttributes,
     },
   };
+};
+
+export const moeEvent = (title, payload) => {
+  const moe = window?.Moengage;
+  if (moe) {
+    moe.track_event(title, payload);
+  }
 };
