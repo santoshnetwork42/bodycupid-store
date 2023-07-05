@@ -30,6 +30,7 @@ export const deleteUser = /* GraphQL */ `
       walletBalance
       walletSpent
       totalStoreCredit
+      __typename
     }
   }
 `;
@@ -54,6 +55,7 @@ export const deleteOrder = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -80,6 +82,7 @@ export const deleteOrder = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       channelName
       shippingAddress {
@@ -94,6 +97,7 @@ export const deleteOrder = /* GraphQL */ `
         address
         location
         area
+        __typename
       }
       billingAddress {
         name
@@ -107,6 +111,7 @@ export const deleteOrder = /* GraphQL */ `
         address
         location
         area
+        __typename
       }
       totalStoreCredit
       couponCodeId
@@ -132,8 +137,10 @@ export const deleteOrder = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       totalAmount
       totalCashOnDeliveryCharges
@@ -152,12 +159,15 @@ export const deleteOrder = /* GraphQL */ `
       status
       products {
         nextToken
+        __typename
       }
       payments {
         nextToken
+        __typename
       }
       comments {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
@@ -170,6 +180,7 @@ export const deleteOrder = /* GraphQL */ `
       referrer
       landingPage
       confirmedViaWebhook
+      __typename
     }
   }
 `;
@@ -206,10 +217,12 @@ export const updateOrderComment = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       comment
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -258,6 +271,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -270,6 +284,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -293,8 +308,10 @@ export const deleteOrderProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       sku
       returnReason
@@ -332,6 +349,7 @@ export const deleteOrderProduct = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -355,6 +373,7 @@ export const deletePayment = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -381,6 +400,7 @@ export const deletePayment = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       orderId
       method
@@ -389,6 +409,7 @@ export const deletePayment = /* GraphQL */ `
       paymentDate
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -412,13 +433,16 @@ export const deleteWishlist = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       wishlistProducts {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -445,6 +469,7 @@ export const deleteCoupon = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -471,6 +496,7 @@ export const deleteCoupon = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponType
       buyXQuantity
@@ -514,6 +540,7 @@ export const deleteCoupon = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -526,6 +553,7 @@ export const deleteCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       minOrderValue
       maxDiscount
@@ -536,8 +564,15 @@ export const deleteCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+      abandonCart
+      abandonCartTemplate {
+        sms
+        whatsapp
+        __typename
+      }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -558,6 +593,7 @@ export const updateBulkAction = /* GraphQL */ `
       completedAt
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -578,6 +614,7 @@ export const deleteBulkAction = /* GraphQL */ `
       completedAt
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -599,6 +636,7 @@ export const createOrderNotifications = /* GraphQL */ `
       updated
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -620,6 +658,7 @@ export const updateOrderNotifications = /* GraphQL */ `
       updated
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -641,6 +680,7 @@ export const deleteOrderNotifications = /* GraphQL */ `
       updated
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -673,6 +713,7 @@ export const createUser = /* GraphQL */ `
       walletBalance
       walletSpent
       totalStoreCredit
+      __typename
     }
   }
 `;
@@ -705,6 +746,7 @@ export const updateUser = /* GraphQL */ `
       walletBalance
       walletSpent
       totalStoreCredit
+      __typename
     }
   }
 `;
@@ -729,6 +771,7 @@ export const createUserAddress = /* GraphQL */ `
       area
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -753,6 +796,7 @@ export const updateUserAddress = /* GraphQL */ `
       area
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -777,6 +821,7 @@ export const deleteUserAddress = /* GraphQL */ `
       area
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -801,6 +846,7 @@ export const createProductCategory = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       title
       description
@@ -813,12 +859,15 @@ export const createProductCategory = /* GraphQL */ `
       showInMenu
       products {
         nextToken
+        __typename
       }
       subCategory {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -843,6 +892,7 @@ export const updateProductCategory = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       title
       description
@@ -855,12 +905,15 @@ export const updateProductCategory = /* GraphQL */ `
       showInMenu
       products {
         nextToken
+        __typename
       }
       subCategory {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -885,6 +938,7 @@ export const deleteProductCategory = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       title
       description
@@ -897,12 +951,15 @@ export const deleteProductCategory = /* GraphQL */ `
       showInMenu
       products {
         nextToken
+        __typename
       }
       subCategory {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -926,6 +983,7 @@ export const createProductSubCategory = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       name
       title
@@ -946,6 +1004,7 @@ export const createProductSubCategory = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       slug
       isFeatured
@@ -956,9 +1015,11 @@ export const createProductSubCategory = /* GraphQL */ `
       showInMenu
       products {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -982,6 +1043,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       name
       title
@@ -1002,6 +1064,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       slug
       isFeatured
@@ -1012,9 +1075,11 @@ export const updateProductSubCategory = /* GraphQL */ `
       showInMenu
       products {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1038,6 +1103,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       name
       title
@@ -1058,6 +1124,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       slug
       isFeatured
@@ -1068,9 +1135,11 @@ export const deleteProductSubCategory = /* GraphQL */ `
       showInMenu
       products {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1092,6 +1161,7 @@ export const createStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        __typename
       }
       announcements
       socialLinks {
@@ -1100,9 +1170,11 @@ export const createStore = /* GraphQL */ `
         twitter
         youtube
         pinterest
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1124,6 +1196,7 @@ export const updateStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        __typename
       }
       announcements
       socialLinks {
@@ -1132,9 +1205,11 @@ export const updateStore = /* GraphQL */ `
         twitter
         youtube
         pinterest
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1156,6 +1231,7 @@ export const deleteStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        __typename
       }
       announcements
       socialLinks {
@@ -1164,9 +1240,11 @@ export const deleteStore = /* GraphQL */ `
         twitter
         youtube
         pinterest
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1190,6 +1268,7 @@ export const createWarehouse = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       facilityCode
       name
@@ -1201,9 +1280,11 @@ export const createWarehouse = /* GraphQL */ `
       imageUrl
       productInventory {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1227,6 +1308,7 @@ export const updateWarehouse = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       facilityCode
       name
@@ -1238,9 +1320,11 @@ export const updateWarehouse = /* GraphQL */ `
       imageUrl
       productInventory {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1264,6 +1348,7 @@ export const deleteWarehouse = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       facilityCode
       name
@@ -1275,9 +1360,11 @@ export const deleteWarehouse = /* GraphQL */ `
       imageUrl
       productInventory {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1326,6 +1413,7 @@ export const createProductInventory = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -1338,10 +1426,12 @@ export const createProductInventory = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       currentQuantity
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1390,6 +1480,7 @@ export const updateProductInventory = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -1402,10 +1493,12 @@ export const updateProductInventory = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       currentQuantity
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1454,6 +1547,7 @@ export const deleteProductInventory = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -1466,10 +1560,12 @@ export const deleteProductInventory = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       currentQuantity
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1493,6 +1589,7 @@ export const createShippingTier = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       paymentType
       amount
@@ -1500,6 +1597,7 @@ export const createShippingTier = /* GraphQL */ `
       maxOrderValue
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1523,6 +1621,7 @@ export const updateShippingTier = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       paymentType
       amount
@@ -1530,6 +1629,7 @@ export const updateShippingTier = /* GraphQL */ `
       maxOrderValue
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1553,6 +1653,7 @@ export const deleteShippingTier = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       paymentType
       amount
@@ -1560,6 +1661,7 @@ export const deleteShippingTier = /* GraphQL */ `
       maxOrderValue
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1587,12 +1689,14 @@ export const createCollection = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       showInMenu
       priority
       imageUrl
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1620,12 +1724,14 @@ export const updateCollection = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       showInMenu
       priority
       imageUrl
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1653,12 +1759,14 @@ export const deleteCollection = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       showInMenu
       priority
       imageUrl
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -1689,6 +1797,7 @@ export const createProduct = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       subCategoryId
       subCategory {
@@ -1707,6 +1816,7 @@ export const createProduct = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       storeId
       store {
@@ -1721,6 +1831,7 @@ export const createProduct = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       bulkActionId
       isFeatured
@@ -1749,6 +1860,7 @@ export const createProduct = /* GraphQL */ `
       benefits
       weight
       weightUnit
+      minimumOrderQuantity
       inventory
       blockedInventory
       continueSellingOutOfStock
@@ -1758,6 +1870,7 @@ export const createProduct = /* GraphQL */ `
       additionalInfo {
         label
         value
+        __typename
       }
       thumbImages
       isTaxEnabled
@@ -1767,16 +1880,21 @@ export const createProduct = /* GraphQL */ `
       hasFaq
       variants {
         nextToken
+        __typename
       }
       images {
         nextToken
+        __typename
       }
       reviews {
         nextToken
+        __typename
       }
       linkedProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -1807,6 +1925,7 @@ export const updateProduct = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       subCategoryId
       subCategory {
@@ -1825,6 +1944,7 @@ export const updateProduct = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       storeId
       store {
@@ -1839,6 +1959,7 @@ export const updateProduct = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       bulkActionId
       isFeatured
@@ -1867,6 +1988,7 @@ export const updateProduct = /* GraphQL */ `
       benefits
       weight
       weightUnit
+      minimumOrderQuantity
       inventory
       blockedInventory
       continueSellingOutOfStock
@@ -1876,6 +1998,7 @@ export const updateProduct = /* GraphQL */ `
       additionalInfo {
         label
         value
+        __typename
       }
       thumbImages
       isTaxEnabled
@@ -1885,16 +2008,21 @@ export const updateProduct = /* GraphQL */ `
       hasFaq
       variants {
         nextToken
+        __typename
       }
       images {
         nextToken
+        __typename
       }
       reviews {
         nextToken
+        __typename
       }
       linkedProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -1925,6 +2053,7 @@ export const deleteProduct = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       subCategoryId
       subCategory {
@@ -1943,6 +2072,7 @@ export const deleteProduct = /* GraphQL */ `
         showInMenu
         createdAt
         updatedAt
+        __typename
       }
       storeId
       store {
@@ -1957,6 +2087,7 @@ export const deleteProduct = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       bulkActionId
       isFeatured
@@ -1985,6 +2116,7 @@ export const deleteProduct = /* GraphQL */ `
       benefits
       weight
       weightUnit
+      minimumOrderQuantity
       inventory
       blockedInventory
       continueSellingOutOfStock
@@ -1994,6 +2126,7 @@ export const deleteProduct = /* GraphQL */ `
       additionalInfo {
         label
         value
+        __typename
       }
       thumbImages
       isTaxEnabled
@@ -2003,16 +2136,21 @@ export const deleteProduct = /* GraphQL */ `
       hasFaq
       variants {
         nextToken
+        __typename
       }
       images {
         nextToken
+        __typename
       }
       reviews {
         nextToken
+        __typename
       }
       linkedProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -2061,6 +2199,7 @@ export const createLinkedProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -2073,9 +2212,11 @@ export const createLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2124,6 +2265,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -2136,9 +2278,11 @@ export const updateLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2187,6 +2331,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -2199,9 +2344,11 @@ export const deleteLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2231,8 +2378,10 @@ export const createVariant = /* GraphQL */ `
       imageUrl
       weight
       weightUnit
+      minimumOrderQuantity
       inventory
       blockedInventory
+      __typename
     }
   }
 `;
@@ -2262,8 +2411,10 @@ export const updateVariant = /* GraphQL */ `
       imageUrl
       weight
       weightUnit
+      minimumOrderQuantity
       inventory
       blockedInventory
+      __typename
     }
   }
 `;
@@ -2293,8 +2444,10 @@ export const deleteVariant = /* GraphQL */ `
       imageUrl
       weight
       weightUnit
+      minimumOrderQuantity
       inventory
       blockedInventory
+      __typename
     }
   }
 `;
@@ -2314,6 +2467,7 @@ export const createProductImage = /* GraphQL */ `
       height
       imageKey
       isThumb
+      __typename
     }
   }
 `;
@@ -2333,6 +2487,7 @@ export const updateProductImage = /* GraphQL */ `
       height
       imageKey
       isThumb
+      __typename
     }
   }
 `;
@@ -2352,6 +2507,7 @@ export const deleteProductImage = /* GraphQL */ `
       height
       imageKey
       isThumb
+      __typename
     }
   }
 `;
@@ -2388,10 +2544,12 @@ export const createProductLog = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       comment
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2428,10 +2586,12 @@ export const updateProductLog = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       comment
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2468,10 +2628,12 @@ export const deleteProductLog = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       comment
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2496,6 +2658,7 @@ export const createOrder = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -2522,6 +2685,7 @@ export const createOrder = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       channelName
       shippingAddress {
@@ -2536,6 +2700,7 @@ export const createOrder = /* GraphQL */ `
         address
         location
         area
+        __typename
       }
       billingAddress {
         name
@@ -2549,6 +2714,7 @@ export const createOrder = /* GraphQL */ `
         address
         location
         area
+        __typename
       }
       totalStoreCredit
       couponCodeId
@@ -2574,8 +2740,10 @@ export const createOrder = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       totalAmount
       totalCashOnDeliveryCharges
@@ -2594,12 +2762,15 @@ export const createOrder = /* GraphQL */ `
       status
       products {
         nextToken
+        __typename
       }
       payments {
         nextToken
+        __typename
       }
       comments {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
@@ -2612,6 +2783,7 @@ export const createOrder = /* GraphQL */ `
       referrer
       landingPage
       confirmedViaWebhook
+      __typename
     }
   }
 `;
@@ -2636,6 +2808,7 @@ export const updateOrder = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -2662,6 +2835,7 @@ export const updateOrder = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       channelName
       shippingAddress {
@@ -2676,6 +2850,7 @@ export const updateOrder = /* GraphQL */ `
         address
         location
         area
+        __typename
       }
       billingAddress {
         name
@@ -2689,6 +2864,7 @@ export const updateOrder = /* GraphQL */ `
         address
         location
         area
+        __typename
       }
       totalStoreCredit
       couponCodeId
@@ -2714,8 +2890,10 @@ export const updateOrder = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       totalAmount
       totalCashOnDeliveryCharges
@@ -2734,12 +2912,15 @@ export const updateOrder = /* GraphQL */ `
       status
       products {
         nextToken
+        __typename
       }
       payments {
         nextToken
+        __typename
       }
       comments {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
@@ -2752,6 +2933,7 @@ export const updateOrder = /* GraphQL */ `
       referrer
       landingPage
       confirmedViaWebhook
+      __typename
     }
   }
 `;
@@ -2788,10 +2970,12 @@ export const createOrderComment = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       comment
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2828,10 +3012,12 @@ export const deleteOrderComment = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       comment
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -2880,6 +3066,7 @@ export const createOrderProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -2892,6 +3079,7 @@ export const createOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -2915,8 +3103,10 @@ export const createOrderProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       sku
       returnReason
@@ -2954,6 +3144,7 @@ export const createOrderProduct = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3002,6 +3193,7 @@ export const updateOrderProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3014,6 +3206,7 @@ export const updateOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -3037,8 +3230,10 @@ export const updateOrderProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       sku
       returnReason
@@ -3076,6 +3271,7 @@ export const updateOrderProduct = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3099,6 +3295,7 @@ export const createPayment = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -3125,6 +3322,7 @@ export const createPayment = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       orderId
       method
@@ -3133,6 +3331,7 @@ export const createPayment = /* GraphQL */ `
       paymentDate
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3156,6 +3355,7 @@ export const updatePayment = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -3182,6 +3382,7 @@ export const updatePayment = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       orderId
       method
@@ -3190,6 +3391,7 @@ export const updatePayment = /* GraphQL */ `
       paymentDate
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3226,10 +3428,12 @@ export const createReview = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       reviewer {
         name
         email
+        __typename
       }
       flagged
       productId
@@ -3269,6 +3473,7 @@ export const createReview = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3281,6 +3486,7 @@ export const createReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       rating
       comment
@@ -3290,6 +3496,7 @@ export const createReview = /* GraphQL */ `
       verified
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3326,10 +3533,12 @@ export const updateReview = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       reviewer {
         name
         email
+        __typename
       }
       flagged
       productId
@@ -3369,6 +3578,7 @@ export const updateReview = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3381,6 +3591,7 @@ export const updateReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       rating
       comment
@@ -3390,6 +3601,7 @@ export const updateReview = /* GraphQL */ `
       verified
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3426,10 +3638,12 @@ export const deleteReview = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       reviewer {
         name
         email
+        __typename
       }
       flagged
       productId
@@ -3469,6 +3683,7 @@ export const deleteReview = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3481,6 +3696,7 @@ export const deleteReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       rating
       comment
@@ -3490,6 +3706,7 @@ export const deleteReview = /* GraphQL */ `
       verified
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3513,13 +3730,16 @@ export const createWishlist = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       wishlistProducts {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3543,13 +3763,16 @@ export const updateWishlist = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       wishlistProducts {
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3598,6 +3821,7 @@ export const createWishlistProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3610,6 +3834,7 @@ export const createWishlistProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -3633,11 +3858,14 @@ export const createWishlistProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3686,6 +3914,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3698,6 +3927,7 @@ export const updateWishlistProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -3721,11 +3951,14 @@ export const updateWishlistProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3774,6 +4007,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -3786,6 +4020,7 @@ export const deleteWishlistProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -3809,11 +4044,14 @@ export const deleteWishlistProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -3837,6 +4075,7 @@ export const createShoppingCart = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -3863,6 +4102,7 @@ export const createShoppingCart = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponCodeId
       coupon {
@@ -3887,8 +4127,10 @@ export const createShoppingCart = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       utmSource
       utmContent
@@ -3902,7 +4144,9 @@ export const createShoppingCart = /* GraphQL */ `
       updatedAt
       shoppingcartProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -3926,6 +4170,7 @@ export const updateShoppingCart = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -3952,6 +4197,7 @@ export const updateShoppingCart = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponCodeId
       coupon {
@@ -3976,8 +4222,10 @@ export const updateShoppingCart = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       utmSource
       utmContent
@@ -3991,7 +4239,9 @@ export const updateShoppingCart = /* GraphQL */ `
       updatedAt
       shoppingcartProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -4015,6 +4265,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -4041,6 +4292,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponCodeId
       coupon {
@@ -4065,8 +4317,10 @@ export const deleteShoppingCart = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       utmSource
       utmContent
@@ -4080,7 +4334,9 @@ export const deleteShoppingCart = /* GraphQL */ `
       updatedAt
       shoppingcartProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -4129,6 +4385,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -4141,6 +4398,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -4164,12 +4422,15 @@ export const createShoppingCartProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       quantity
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4218,6 +4479,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -4230,6 +4492,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -4253,12 +4516,15 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       quantity
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4307,6 +4573,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -4319,6 +4586,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       variantId
       variant {
@@ -4342,12 +4610,15 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         imageUrl
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
+        __typename
       }
       quantity
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4374,6 +4645,7 @@ export const createCoupon = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -4400,6 +4672,7 @@ export const createCoupon = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponType
       buyXQuantity
@@ -4443,6 +4716,7 @@ export const createCoupon = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -4455,6 +4729,7 @@ export const createCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       minOrderValue
       maxDiscount
@@ -4465,8 +4740,15 @@ export const createCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+      abandonCart
+      abandonCartTemplate {
+        sms
+        whatsapp
+        __typename
+      }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4493,6 +4775,7 @@ export const updateCoupon = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -4519,6 +4802,7 @@ export const updateCoupon = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponType
       buyXQuantity
@@ -4562,6 +4846,7 @@ export const updateCoupon = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -4574,6 +4859,7 @@ export const updateCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       minOrderValue
       maxDiscount
@@ -4584,8 +4870,15 @@ export const updateCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+      abandonCart
+      abandonCartTemplate {
+        sms
+        whatsapp
+        __typename
+      }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4601,6 +4894,7 @@ export const createConfiguration = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4616,6 +4910,7 @@ export const updateConfiguration = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4631,6 +4926,7 @@ export const deleteConfiguration = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4647,6 +4943,7 @@ export const createProductFaq = /* GraphQL */ `
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4663,6 +4960,7 @@ export const updateProductFaq = /* GraphQL */ `
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4679,6 +4977,7 @@ export const deleteProductFaq = /* GraphQL */ `
       description
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4694,6 +4993,7 @@ export const createZipCode = /* GraphQL */ `
       prepaid
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4709,6 +5009,7 @@ export const updateZipCode = /* GraphQL */ `
       prepaid
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4724,6 +5025,7 @@ export const deleteZipCode = /* GraphQL */ `
       prepaid
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4745,9 +5047,11 @@ export const createBlog = /* GraphQL */ `
         pageTitle
         pageDescrption
         pageURL
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4769,9 +5073,11 @@ export const updateBlog = /* GraphQL */ `
         pageTitle
         pageDescrption
         pageURL
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4793,9 +5099,11 @@ export const deleteBlog = /* GraphQL */ `
         pageTitle
         pageDescrption
         pageURL
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4816,6 +5124,7 @@ export const createBulkAction = /* GraphQL */ `
       completedAt
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4840,10 +5149,12 @@ export const createRedirects = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       redirect
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4868,10 +5179,12 @@ export const updateRedirects = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       redirect
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -4896,20 +5209,24 @@ export const deleteRedirects = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       redirect
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
 export const checkInventory = /* GraphQL */ `
   mutation CheckInventory($input: [CheckInventoryInput!]!) {
     checkInventory(input: $input) {
+      recordKey
       productId
       variantId
       inventory
       price
+      __typename
     }
   }
 `;
@@ -4933,6 +5250,7 @@ export const applyCoupon = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -4959,6 +5277,7 @@ export const applyCoupon = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponType
       buyXQuantity
@@ -5002,6 +5321,7 @@ export const applyCoupon = /* GraphQL */ `
         benefits
         weight
         weightUnit
+        minimumOrderQuantity
         inventory
         blockedInventory
         continueSellingOutOfStock
@@ -5014,6 +5334,7 @@ export const applyCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        __typename
       }
       minOrderValue
       maxDiscount
@@ -5024,8 +5345,15 @@ export const applyCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+      abandonCart
+      abandonCartTemplate {
+        sms
+        whatsapp
+        __typename
+      }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -5034,6 +5362,7 @@ export const createTransaction = /* GraphQL */ `
     createTransaction(orderId: $orderId) {
       orderId
       amount
+      __typename
     }
   }
 `;
@@ -5045,6 +5374,7 @@ export const validateTransaction = /* GraphQL */ `
     ) {
       success
       message
+      __typename
     }
   }
 `;
@@ -5065,6 +5395,7 @@ export const createStoreShoppingCart = /* GraphQL */ `
         announcements
         createdAt
         updatedAt
+        __typename
       }
       userId
       user {
@@ -5091,6 +5422,7 @@ export const createStoreShoppingCart = /* GraphQL */ `
         walletBalance
         walletSpent
         totalStoreCredit
+        __typename
       }
       couponCodeId
       coupon {
@@ -5115,8 +5447,10 @@ export const createStoreShoppingCart = /* GraphQL */ `
         applicableCollections
         applicableProducts
         paymentMethod
+        abandonCart
         createdAt
         updatedAt
+        __typename
       }
       utmSource
       utmContent
@@ -5130,7 +5464,9 @@ export const createStoreShoppingCart = /* GraphQL */ `
       updatedAt
       shoppingcartProducts {
         nextToken
+        __typename
       }
+      __typename
     }
   }
 `;
@@ -5149,6 +5485,7 @@ export const addProductNotification = /* GraphQL */ `
     ) {
       success
       message
+      __typename
     }
   }
 `;
@@ -5157,6 +5494,7 @@ export const exportProducts = /* GraphQL */ `
     exportProducts(input: $input) {
       success
       message
+      __typename
     }
   }
 `;
@@ -5165,6 +5503,7 @@ export const exportOrders = /* GraphQL */ `
     exportOrders(input: $input) {
       success
       message
+      __typename
     }
   }
 `;

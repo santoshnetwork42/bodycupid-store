@@ -96,7 +96,11 @@
         height: 100%;
     }
 }
-
+.product-widget-wrapper {
+        .owl-stage {
+                padding-left: 0 !important;
+            }
+}
 
 .product-widget-wrapper:nth-child(odd) {
     background-color: $background-color-2;

@@ -2,10 +2,12 @@ import { useMemo } from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
+import { modalActions } from "~/store/modal";
 import { getCartTotals, toDecimal } from "~/utils";
 
 function StickyFooter(props) {
-  const { cartList, appliedCoupon, showStickyCheckout } = props;
+  const { cartList, appliedCoupon, showStickyCheckout, setCartVisibility } =
+    props;
   const { totalPrice, totalItems } = useMemo(
     () => getCartTotals(cartList, [], appliedCoupon),
     [appliedCoupon, cartList]
@@ -22,7 +24,8 @@ function StickyFooter(props) {
       </div>
 
       <ALink
-        href="/pages/cart"
+        href="#"
+        onClick={() => setCartVisibility(true)}
         className="btn btn-dark btn-rounded btn-checkout"
       >
         Go To Cart
@@ -38,4 +41,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(StickyFooter);
+export default connect(mapStateToProps, {
+  setCartVisibility: modalActions.setCartVisibility,
+})(StickyFooter);
