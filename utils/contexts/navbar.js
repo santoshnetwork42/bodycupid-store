@@ -14,7 +14,6 @@ import {
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
-import { useSelector } from "react-redux";
 
 export const NavbarContext = createContext();
 
@@ -24,7 +23,6 @@ function NavbarProvider({ children, config }) {
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
   const [configurations, setConfigurations] = useState([]);
-  const isCartOpen = useSelector((state) => state.modal.openCart || false);
 
   const getCollections = () => {
     API.graphql(
@@ -56,7 +54,7 @@ function NavbarProvider({ children, config }) {
       .then(getSortedCategoryAndSubCategory)
       .then(setCategories)
       .catch(errorHandler);
-  }; 
+  };
 
   const getShippingTiers = () => {
     API.graphql(
@@ -121,21 +119,20 @@ function NavbarProvider({ children, config }) {
     if (config?.shippingTier && !shippingTiers) {
       getShippingTiers();
     }
-
-    if(isCartOpen){
-      getCoupons();
-    }
-  }, [config?.shippingTier,isCartOpen]);
+  }, [config?.shippingTier]);
 
   useEffect(() => {
-   
     getCategories();
     getCollections();
     getConfigurations();
+    getCoupons();
   }, []);
 
   const addUserCoupon = async (coupon) => {
-    setCoupons([{ ...coupon, autoApply: true, isExternal: true }, ...coupons]);
+    setCoupons([
+      { ...coupon, autoApply: true, isExternal: true },
+      ...(coupons || []),
+    ]);
   };
 
   return (
