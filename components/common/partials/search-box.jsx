@@ -126,7 +126,7 @@ function SearchForm({ type = "input", defaultSearch = "",productSearched }) {
 
   async function onSubmitSearchForm(e) {
     e.preventDefault();
-    dispatch(eventActions.search(search,totalItem));
+    dispatch(eventActions.search(search));
     document.querySelector(".header-search")?.classList.toggle("show");
     await router.push({
       pathname: "/collections/search",
