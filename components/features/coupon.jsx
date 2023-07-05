@@ -57,7 +57,7 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
-  const showAppliedCoupon = !!(appliedCoupon && couponTotal);
+  const showAppliedCoupon = !!appliedCoupon;
 
   const bestCouponCode = useMemo(() => {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
@@ -138,13 +138,11 @@ function Coupon(props) {
 
   const onCouponRemove = (e) => {
     e.stopPropagation();
-    if (appliedCoupon?.couponType === "PRODUCT" && appliedCoupon?.getYProduct) {
-      cartList.forEach((item) => {
-        if (item.cartItemSource === "COUPON") {
-          removeFromCart(item);
-        }
-      });
-    }
+    cartList.forEach((item) => {
+      if (item.cartItemSource === "COUPON") {
+        removeFromCart(item);
+      }
+    });
 
     removeCoupon();
     logger.info("Removed coupon");
@@ -267,34 +265,33 @@ function Coupon(props) {
           </div>
           <div className="modal-overlay">
             <div className="confetti-modal">
-           <div className="modal-content ">
-              <div
-                className="close-icon"
-                title="Remove this product"
-                onClick={closeModal}
-              >
-                <CloseIcon size={24} color="grey" />
+              <div className="modal-content ">
+                <div
+                  className="close-icon"
+                  title="Remove this product"
+                  onClick={closeModal}
+                >
+                  <CloseIcon size={24} color="grey" />
+                </div>
+                <div className="modal-icon">
+                  <Discount size={35} color="#17b31b" />
+                </div>
+                <h4 className="modal-title">
+                  '{appliedCoupon.code}' coupon applied!
+                </h4>
+                {couponTotal > 0 && (
+                  <>
+                    <h3 className="modal-amount">
+                      ₹{toDecimal(couponTotal)} saved
+                    </h3>
+                    <h6 className="modal-savings">through this coupon</h6>
+                  </>
+                )}
+                <button className="close-button" onClick={closeModal}>
+                  Hurrah!
+                </button>
               </div>
-              <div className="modal-icon">
-                <Discount size={35} color="#17b31b" />
-              </div>
-              <h4 className="modal-title">
-                '{appliedCoupon.code}' coupon applied!
-              </h4>
-              {couponTotal > 0 && (
-                <>
-                  <h3 className="modal-amount">
-                    ₹{toDecimal(couponTotal)} saved
-                  </h3>
-                  <h6 className="modal-savings">through this coupon</h6>
-                </>
-              )}
-              <button className="close-button" onClick={closeModal}>
-                Hurrah!
-              </button>
             </div>
-            </div>
-
           </div>
         </div>
       )}
@@ -369,13 +366,24 @@ function Coupon(props) {
                                 {showAsterik && "*"}
                               </div>
                             </div>
-                            <button
-                              onClick={() => applyCouponCode(c.code)}
-                              className={className}
-                              disabled={!c.allowed}
-                            >
-                              Apply
-                            </button>
+                            {appliedCoupon?.code !== c.code && (
+                              <button
+                                onClick={() => applyCouponCode(c.code)}
+                                className={className}
+                                disabled={!c.allowed}
+                              >
+                                Apply
+                              </button>
+                            )}
+                            {appliedCoupon?.code === c.code && (
+                              <button
+                                onClick={onCouponRemove}
+                                className={className}
+                                disabled={!c.allowed}
+                              >
+                                Remove Coupon
+                              </button>
+                            )}
                           </div>
                           <p className="m-0">{getCouponMessage(c).message}</p>
                         </div>
