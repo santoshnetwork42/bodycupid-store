@@ -180,36 +180,29 @@ function Passwordless({
   }, [isOpen, confirmSignUp]);
 
   useEffect(() => {
-    if ("OTPCredential" in window) {
-      window.addEventListener("DOMContentLoaded", (e) => {
-        const input = document.querySelector('input[autocomplete="one-time-code"]');
-        if (!input) return;
-        const ac = new AbortController();
-        const form = input.closest("form");
-        if (form) {
-          form.addEventListener("submit", (e) => {
-            ac.abort();
+    let ac;
+    if (confirmSignUp && typeof window !== "undefined" && "OTPCredential" in window) {
+      ac = new AbortController();
+      navigator?.credentials
+        .get({
+          otp: { transport: ["sms"] },
+          signal: ac.signal,
+        })
+        .then((otp) => {
+          setState({
+            ...state,
+            confirmationCode: otp.code.split("")
           });
-        }
-        navigator.credentials
-          .get({
-            otp: { transport: ["sms"] },
-            signal: ac.signal,
-          })
-          .then((otp) => {
-            setState({
-              ...state,
-              confirmationCode: otp.code.split("")
-            });
-            // input.value = otp.code;
-            if (form) form.submit();
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
-  }, []);
+
+    return () => {
+      if (ac) ac.abort();
+    };
+  }, [confirmSignUp]);
 
   useEffect(() => {
     if (state.confirmationCode.join("").length === 6) {
