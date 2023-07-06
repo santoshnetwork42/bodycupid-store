@@ -246,6 +246,14 @@ function DetailOne(props) {
         </div>
       )} */}
 
+      {!!product?.benefits && (
+          <div className="product-benefits mb-2">
+            {product?.benefits.map((benefit) => (
+                <label key={benefit}>{benefit}</label>
+            ))}
+          </div>
+      )}
+
       <div className="product-variation-price">
         {curIndex < 0 && (
           <div className="product-price mb-0 d-flex">
@@ -285,14 +293,6 @@ function DetailOne(props) {
       </div>
 
       <p className="mb-2 lh-default text-dark">Inclusive of all taxes</p>
-
-      {!!product?.benefits && (
-            <div className="product-benefits mb-2">
-            {product?.benefits.map((benefit) => (
-                <label key={benefit}>{benefit}</label>
-            ))}
-          </div>
-      )}
 
       <div className="ratings-container">
         <div className="ratings-full mt-0 lh-1" onClick={onReviewClick}>
