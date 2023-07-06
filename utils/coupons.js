@@ -226,4 +226,11 @@ export const getCouponDiscount = (coupon, cartItems) => {
       message: discountMsg,
     };
   }
+
+  return {
+    ...coupon,
+    allowed: false,
+    discount: 0,
+    message: "Invalid Coupon",
+  };
 };

@@ -122,14 +122,17 @@ function NavbarProvider({ children, config }) {
   }, [config?.shippingTier]);
 
   useEffect(() => {
-    getCoupons();
     getCategories();
     getCollections();
     getConfigurations();
+    getCoupons();
   }, []);
 
   const addUserCoupon = async (coupon) => {
-    setCoupons([{ ...coupon, autoApply: true, isExternal: true }, ...coupons]);
+    setCoupons([
+      { ...coupon, autoApply: true, isExternal: true },
+      ...(coupons || []),
+    ]);
   };
 
   return (

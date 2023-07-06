@@ -32,6 +32,7 @@ function Coupon(props) {
     addToCart,
     removeFromCart,
     layout = "cart",
+    isSmall,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -56,8 +57,7 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
-
-  const showAppliedCoupon = !!(appliedCoupon);
+  const showAppliedCoupon = !!appliedCoupon;
 
   const bestCouponCode = useMemo(() => {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
@@ -138,13 +138,11 @@ function Coupon(props) {
 
   const onCouponRemove = (e) => {
     e.stopPropagation();
-    if (appliedCoupon?.couponType === "PRODUCT" && appliedCoupon?.getYProduct) {
-      cartList.forEach((item) => {
-        if (item.cartItemSource === "COUPON") {
-          removeFromCart(item);
-        }
-      });
-    }
+    cartList.forEach((item) => {
+      if (item.cartItemSource === "COUPON") {
+        removeFromCart(item);
+      }
+    });
 
     removeCoupon();
     logger.info("Removed coupon");
@@ -159,7 +157,7 @@ function Coupon(props) {
     <>
       {layout === "cart" && (
         <div
-          className="cart-coupon-box mb-2 pb-5 bg-white text-primary flex-row lh-default"
+          className="cart-coupon-box p-relative mb-2 pb-3 bg-white text-primary flex-row lh-default"
           onClick={() => setOpen(true)}
         >
           <span className="mt-1 sm-product-remove">
@@ -194,7 +192,7 @@ function Coupon(props) {
                   <ALink
                     key={appliedCoupon.id}
                     href="#"
-                    className="mt-1"
+                    className={isSmall ? "small-product-remove" : "mt-1"}
                     title="Remove coupon"
                     onClick={onCouponRemove}
                   >
@@ -205,18 +203,22 @@ function Coupon(props) {
 
               <div>
                 {!showAppliedCoupon && (
-                  <span className="ml-1 coupon-subtitle">
+                  <span className="ml-1 coupon-subtitle font-weight-normal">
                     Save more with coupon and offers
                   </span>
                 )}
                 {showAppliedCoupon && (
                   <>
-                   {!!couponTotal && <span className="ml-1 coupon-subtitle">
-                      You saved additional ₹{toDecimal(couponTotal)}
-                    </span>}
+                    {!!couponTotal && (
+                      <span className="ml-1 coupon-subtitle font-weight-normal">
+                        You saved additional ₹{toDecimal(couponTotal)}
+                      </span>
+                    )}
                     <span>
                       <a
-                        className="ml-1 pt-2 coupon-offer font-weight-normal d-flex align-items-center"
+                        className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${
+                          !isSmall && "ml-1 "
+                        }`}
                         type="button"
                       >
                         View more offers
@@ -262,31 +264,33 @@ function Coupon(props) {
             <Confetti />
           </div>
           <div className="modal-overlay">
-            <div className="modal-content">
-              <div
-                className="close-icon"
-                title="Remove this product"
-                onClick={closeModal}
-              >
-                <CloseIcon size={24} color="grey" />
+            <div className="confetti-modal">
+              <div className="modal-content ">
+                <div
+                  className="close-icon"
+                  title="Remove this product"
+                  onClick={closeModal}
+                >
+                  <CloseIcon size={24} color="grey" />
+                </div>
+                <div className="modal-icon">
+                  <Discount size={35} color="#17b31b" />
+                </div>
+                <h4 className="modal-title">
+                  '{appliedCoupon?.code || "Your"}' coupon applied!
+                </h4>
+                {couponTotal > 0 && (
+                  <>
+                    <h3 className="modal-amount">
+                      ₹{toDecimal(couponTotal)} saved
+                    </h3>
+                    <h6 className="modal-savings">through this coupon</h6>
+                  </>
+                )}
+                <button className="close-button" onClick={closeModal}>
+                  Hurrah!
+                </button>
               </div>
-              <div className="modal-icon">
-                <Discount size={35} color="#17b31b" />
-              </div>
-              <h4 className="modal-title">
-                '{appliedCoupon.code}' coupon applied!
-              </h4>
-              {couponTotal > 0 && (
-                <>
-                  <h3 className="modal-amount">
-                    ₹{toDecimal(couponTotal)} saved
-                  </h3>
-                  <h6 className="modal-savings">through this coupon</h6>
-                </>
-              )}
-              <button className="close-button" onClick={closeModal}>
-                Hurrah!
-              </button>
             </div>
           </div>
         </div>
@@ -362,13 +366,24 @@ function Coupon(props) {
                                 {showAsterik && "*"}
                               </div>
                             </div>
-                            <button
-                              onClick={() => applyCouponCode(c.code)}
-                              className={className}
-                              disabled={!c.allowed}
-                            >
-                              Apply
-                            </button>
+                            {appliedCoupon?.code !== c.code && (
+                              <button
+                                onClick={() => applyCouponCode(c.code)}
+                                className={className}
+                                disabled={!c.allowed}
+                              >
+                                Apply
+                              </button>
+                            )}
+                            {appliedCoupon?.code === c.code && (
+                              <button
+                                onClick={onCouponRemove}
+                                className={className}
+                                disabled={!c.allowed}
+                              >
+                                Remove Coupon
+                              </button>
+                            )}
                           </div>
                           <p className="m-0">{getCouponMessage(c).message}</p>
                         </div>

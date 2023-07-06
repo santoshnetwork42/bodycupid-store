@@ -1,4 +1,4 @@
-import { takeEvery, select } from "redux-saga/effects";
+import { takeEvery, select, call } from "redux-saga/effects";
 import { Analytics } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { v4 as uuid } from "uuid";
@@ -6,9 +6,17 @@ import vercelAnalytics from "@vercel/analytics";
 
 import storage from "~/utils/storage";
 import { actionTypes as cartActions } from "~/store/cart";
-import { itemMapper, orderMapper, userMapper } from "~/utils/events";
+import {
+  addressMapper,
+  itemMapper,
+  moEngagedOrderMapper,
+  moeEvent,
+  orderMapper,
+  userMapper,
+} from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
 import { getRecordKey } from "~/utils/helper";
+import { BASE_URL } from "~/constant";
 
 export const actionTypes = {
   VIEW_ITEM: "VIEW_ITEM",
@@ -20,6 +28,19 @@ export const actionTypes = {
   VIEW_LIST_ITEM: "VIEW_LIST_ITEM",
   OUT_OF_STOCK: "OUT_OF_STOCK",
   PROCEED_TO_CHECKOUT: "PROCEED_TO_CHECKOUT",
+  ADDRESS_ADDED: "ADDRESS_ADDED",
+  ADDRESS_SELECTED: "ADDRESS_SELECTED",
+  CATEGORY_VIEWED: "CATEGORY_VIEWED",
+  LOGIN: "LOGIN",
+  REGISTER: "REGISTER",
+  HOME_VIEWED: "HOME_VIEWED",
+  ADD_PAYMENT_INFO: "ADD_PAYMENT_INFO",
+  BANNER_CLICKED: "BANNER_CLICKED",
+  PRODUCT_SEARCHED: "PRODUCT_SEARCHED",
+  TILE_CLICKED: "TILE_CLICKED",
+  LOG_OUT: "LOG_OUT",
+  TOP_NAVBAR_CLICKED: "TOP_NAVBAR_CLICKED",
+  REMOVED_FROM_CART: "REMOVED_FROM_CART",
 };
 
 const initialState = {
@@ -35,15 +56,53 @@ export const eventActions = {
     type: actionTypes.VIEW_ITEM,
     payload: { product },
   }),
-  placeOrder: (order, products, coupon, address) => ({
+  placeOrder: (order, products, coupon, address, paymentType) => ({
     type: actionTypes.PLACE_ORDER,
-    payload: { order, products, coupon, address },
+    payload: { order, products, coupon, address, paymentType },
   }),
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action) => ({ type: actionTypes.AUTH, payload: { action } }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
+  addressAdded: (address, totalPrice) => ({
+    type: actionTypes.ADDRESS_ADDED,
+    payload: { address, totalPrice },
+  }),
+  addressSelected: (address, totalPrice) => ({
+    type: actionTypes.ADDRESS_SELECTED,
+    payload: { address, totalPrice },
+  }),
+  categoryViewed: (payload) => ({
+    type: actionTypes.CATEGORY_VIEWED,
+    payload,
+  }),
+  logout: (payload) => ({
+    type: actionTypes.LOG_OUT,
+    payload,
+  }),
+  addPaymentInfo: () => ({
+    type: actionTypes.ADD_PAYMENT_INFO,
+  }),
+  bannerClicked: (payload) => ({
+    type: actionTypes.BANNER_CLICKED,
+    payload,
+  }),
+  productSearched: (payload) => ({
+    type: actionTypes.PRODUCT_SEARCHED,
+    payload,
+  }),
+  tileClicked: (payload) => ({
+    type: actionTypes.TILE_CLICKED,
+    payload,
+  }),
+  topNavbarClicked: (payload) => ({
+    type: actionTypes.TOP_NAVBAR_CLICKED,
+    payload,
+  }),
+  homeViewed: () => ({
+    type: actionTypes.HOME_VIEWED,
+  }),
   viewList: (id, name, products) => ({
     type: actionTypes.VIEW_LIST_ITEM,
     payload: { id, name, products },
@@ -88,6 +147,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
+
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: action, eventID: uuid() });
     Analytics.record({ name: action });
@@ -97,20 +157,29 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga() {
     const userData = yield select((state) => state.user.data);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({ event: "proceed_to_checkout", eventID: uuid(), login: userData ? 1 : 0 });
-    Analytics.record({ name: "proceed_to_checkout", login: userData ? "1" : "0" });
+    dataLayer.push({
+      event: "proceed_to_checkout",
+      eventID: uuid(),
+      login: userData ? 1 : 0,
+    });
+    Analytics.record({
+      name: "proceed_to_checkout",
+      login: userData ? "1" : "0",
+    });
     vercelAnalytics.track("proceed_to_checkout", { login: userData ? 1 : 0 });
   });
 
   yield takeEvery(cartActions.ADD_TO_CART, function* saga(e) {
     const { product } = e.payload;
     const { qty } = product;
-    const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
+    const { value, pixel, vercel, pinpoint, ga, moengage } =
+      itemMapper(product);
     const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
     const userData = yield select((state) => state.user.data);
     const user = userMapper(userData);
 
+    moeEvent("Add To Cart", moengage.addToCart);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: eventName,
@@ -129,8 +198,10 @@ export function* eventsSaga() {
 
   yield takeEvery(cartActions.REMOVE_FROM_CART, function* saga(e) {
     const { product } = e.payload;
-    const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
+    const { value, pixel, vercel, pinpoint, ga, moengage } =
+      itemMapper(product);
 
+    moeEvent("Removed From Cart", moengage.removedFromCart);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "remove_from_cart",
@@ -152,7 +223,10 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
     const { product } = e.payload;
-    const { value, pixel, vercel, pinpoint, ga } = itemMapper(product);
+    const { value, pixel, vercel, pinpoint, ga, moengage } =
+      itemMapper(product);
+
+    moeEvent("Product Viewed", moengage.productViewed);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_item",
@@ -169,13 +243,22 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
-    const { order, products, coupon, address } = e.payload;
+    const { order, products, coupon, address, paymentType } = e.payload;
     const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
     const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
+    const { orderCreated } = moEngagedOrderMapper(
+      products,
+      coupon,
+      paymentType,
+      order
+    );
 
-    const userData = yield select(state => state.user.data);
+    const userData = yield select((state) => state.user.data);
     const user = userMapper(userData, address);
+
+    moeEvent("Order Created", orderCreated);
+    moeEvent("Item Purchased", orderCreated);
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
@@ -252,6 +335,9 @@ export function* eventsSaga() {
       cart: { data, coupon },
     } = yield select();
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+    const { checkoutStarted } = moEngagedOrderMapper(data, coupon);
+
+    moeEvent("Checkout Started", checkoutStarted);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "begin_checkout",
@@ -307,7 +393,9 @@ export function* eventsSaga() {
     } = yield select();
 
     const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+    const { cartViewed } = moEngagedOrderMapper(data, coupon);
 
+    moeEvent("Cart Viewed", cartViewed);
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({
       event: "view_cart",
@@ -402,6 +490,69 @@ export function* eventsSaga() {
         item_list_id: id,
         item_list_name: name,
       });
+    });
+  });
+  yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
+    const { address, totalPrice } = e.payload;
+    const { addressAdded } = addressMapper(address, totalPrice);
+
+    moeEvent("Address Added", addressAdded);
+  });
+
+  yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
+    const { address, totalPrice } = e.payload;
+    const { addressSelected } = addressMapper(address, totalPrice);
+    moeEvent("Address Selected", addressSelected);
+  });
+
+  yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
+      moeEvent("Category Viewed");
+  });
+
+  yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
+    moeEvent("Add Payment Info", {
+      URL: `${BASE_URL}/pages/checkout`,
+    });
+  });
+
+  yield takeEvery(actionTypes.BANNER_CLICKED, function* saga(e) {
+    moeEvent("Banner Clicked", {
+      ...e.payload,
+    });
+  });
+
+  yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
+    moeEvent("Category Viewed", {
+      ...e.payload,
+    });
+  });
+
+  yield takeEvery(actionTypes.TILE_CLICKED, function* saga(e) {
+    moeEvent("Tile Clicked", {
+      ...e.payload,
+    });
+  });
+  yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {
+    moeEvent("Top Navbar clicked", {
+      ...e.payload,
+    });
+  });
+
+  yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {
+    moeEvent("Product Searched", {
+      ...e.payload,
+    });
+  });
+
+  yield takeEvery(actionTypes.HOME_VIEWED, function* () {
+    moeEvent("Home Viewed", {
+      URL: BASE_URL,
+    });
+  });
+
+  yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {
+    moeEvent("Customer Logged Out", {
+      ...e.payload,
     });
   });
 }

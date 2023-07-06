@@ -10,3 +10,4 @@ export const GUEST_CHECKOUT = "GUEST_CHECKOUT";
 export const GUEST_CHECKOUT_COOKIE_EXPIRY = 48;
 export const  GEOCODING_API_URL= "https://maps.googleapis.com/maps/api/geocode/json";
 export const MAX_COD_AMOUNT = "MAX_COD_AMOUNT";
+export const BASE_URL ="https://v2.bodycupid.com"
