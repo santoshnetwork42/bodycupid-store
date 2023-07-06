@@ -11,7 +11,7 @@ export default function CartPopup(props) {
   return (
     <div className="minipopup-area">
       <div className="minipopup-box show" style={{ top: "0" }}>
-        <p className="minipopup-title">Successfully added.</p>
+        <p className="minipopup-title">Successfully added. </p>
 
         <div className="product product-purchased  product-cart mb-0">
           <figure className="product-media pure-media">

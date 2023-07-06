@@ -16,7 +16,7 @@
   (
     header: (
       font-family: $font-family,
-      letter-spacing: 0.05em,
+      letter-spacing: 0.06em,
       color: false,
       background: #fff,
       // Link's color
@@ -356,11 +356,7 @@
     @include css(color, header, _link-color);
     @include print_css(header, middle, login);
 
-    span {
-      cursor: pointer;
-      @include print_css(header, middle, login, label);
-    }
-
+   
     i {
       @include print_css(header, middle, login, icon);
     }
@@ -411,7 +407,7 @@
   }
 
   .icon-box-icon,
-  p,
+  
   .icon-box-title {
     transition: color 0.3s;
   }
@@ -431,13 +427,6 @@
     letter-spacing: 0.027em;
   }
 
-  p {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: $dark-color;
-    letter-spacing: 0.0428em;
-    line-height: 1;
-  }
 }
 
 .logo {

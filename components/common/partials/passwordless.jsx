@@ -18,6 +18,7 @@ import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 
 import { getUser } from "~/graphql/api";
+import { eventActions } from "~/store/events";
 
 const logger = new Logger("Login-without-password");
 
@@ -28,6 +29,7 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
+  login
 }) {
   const router = useRouter();
   const [state, setState] = useState({
@@ -80,6 +82,7 @@ function Passwordless({
       });
       setSeconds(30);
       setConfirmSignUp("SIGNUP");
+      // login( )
     } catch (error) {
       logger.error("error signing up:", error);
       alertToaster(error.message, "error");
@@ -147,10 +150,11 @@ function Passwordless({
         const cu = await Auth.signIn({
           username: addPhonePrefix(state.phone),
         });
-        setCurrentUser(cu);
+        setCurrentUser(cu);  addressAdded: eventActions.addressAdded,
         setConfirmSignUp("SIGNIN");
         setSeconds(30);
         setLoading(false);
+        
       } catch (error) {
         logger.error("error in signin:", error);
         if (error.code === "UserNotConfirmedException") {
@@ -178,6 +182,31 @@ function Passwordless({
       input.focus();
     }
   }, [isOpen, confirmSignUp]);
+
+  useEffect(() => {
+    let ac;
+    if (confirmSignUp && typeof window !== "undefined" && "OTPCredential" in window) {
+      ac = new AbortController();
+      navigator?.credentials
+        .get({
+          otp: { transport: ["sms"] },
+          signal: ac.signal,
+        })
+        .then((otp) => {
+          setState({
+            ...state,
+            confirmationCode: otp.code.split("")
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
+    return () => {
+      if (ac) ac.abort();
+    };
+  }, [confirmSignUp]);
 
   useEffect(() => {
     if (state.confirmationCode.join("").length === 6) {
@@ -396,4 +425,5 @@ export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
   openLogin: modalActions.openLoginModal,
   setUser: userActions.setUser,
+  login: eventActions.logIn
 })(Passwordless);
