@@ -5,6 +5,7 @@ import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import awaitGlobal from "await-global";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -50,6 +51,7 @@ const App = ({ Component, pageProps }) => {
     ...footer,
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
+    hideChatbot: !!Component.hideChatbot
   };
 
   const destroySession = useCallback(() => {
@@ -185,6 +187,17 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     setGuestCheckout();
   }, []);
+
+  useEffect(() => {
+   awaitGlobal("FB").then((fb) => {
+     if (footerProps.hideChatbot) {
+       fb.CustomerChat.hide();
+     } else {
+       fb.XFBML.parse();
+       fb.CustomerChat.show(false);
+     }
+   }).catch(() => {});
+  }, [footerProps.hideChatbot])
 
   return (
     <>

@@ -20,6 +20,7 @@ import {
 } from "~/components/icons";
 import { modalActions } from "~/store/modal";
 import { rootActions } from "~/store";
+import { eventActions } from "~/store/events";
 
 const MOBILE_TABS = [
   {
@@ -48,7 +49,7 @@ const MOBILE_TABS = [
   },
 ];
 
-function AccountsTabs({ user, store, openPasswordLess, destroySession }) {
+function AccountsTabs({ user, store, openPasswordLess,logout, destroySession }) {
   const router = useRouter();
 
   const { name } = store;
@@ -85,6 +86,10 @@ function AccountsTabs({ user, store, openPasswordLess, destroySession }) {
   }, []);
 
   const handleLogout = useCallback(async () => {
+    logout({
+      "Customer ID":user?.id,
+      URL:window.location.href
+    })
     await Auth.signOut();
     router.push("/");
     return true;
@@ -215,4 +220,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   openPasswordLess: modalActions.openPasswordlessModal,
   destroySession: rootActions.destroySession,
+  logout: eventActions.logout,
 })(AccountsTabs);

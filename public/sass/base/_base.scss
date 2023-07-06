@@ -664,7 +664,7 @@ button {
 }
 
 .overflow-ellipsis {
-  display: -webkit-box;
+  display: -webkit-box !important;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
