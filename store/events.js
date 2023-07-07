@@ -1,5 +1,5 @@
 import { takeEvery, select, call } from "redux-saga/effects";
-import { Analytics } from "aws-amplify";
+import { API, Analytics } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { v4 as uuid } from "uuid";
 import vercelAnalytics from "@vercel/analytics";
@@ -17,6 +17,7 @@ import {
 import { STORE_PREFIX } from "~/config";
 import { getRecordKey } from "~/utils/helper";
 import { BASE_URL } from "~/constant";
+import { getUser } from "~/graphql/api";
 
 export const actionTypes = {
   VIEW_ITEM: "VIEW_ITEM",
@@ -63,7 +64,10 @@ export const eventActions = {
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
-  auth: (action) => ({ type: actionTypes.AUTH, payload: { action } }),
+  auth: (action, { userId, router }) => ({
+    type: actionTypes.AUTH,
+    payload: { action, userId, router },
+  }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
     type: actionTypes.ADDRESS_ADDED,
@@ -147,6 +151,32 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
+    if (action === "login") {
+      const { userId, router } = e.payload;
+      const { utm_medium: medium, utm_source: source } = router?.query;
+      if (userId) {
+        const {
+          data: { getUser: getUserResponse },
+        } = yield call([API, API.graphql], {
+          query: getUser,
+          variables: { id: userId },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+        
+        const isFirstTime =
+          Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
+          300;
+
+        moeEvent("Customer Logged In", {
+          "Customer ID": userId,
+          "Mobile Number": getUserResponse?.phone,
+          "Utm Source": source,
+          "Utm Medium": medium,
+          URL: window.location.href,
+          "First Time User": isFirstTime,
+        });
+      }
+    }
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: action, eventID: uuid() });
@@ -492,6 +522,7 @@ export function* eventsSaga() {
       });
     });
   });
+
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     const { address, totalPrice } = e.payload;
     const { addressAdded } = addressMapper(address, totalPrice);
@@ -506,7 +537,7 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
-      moeEvent("Category Viewed");
+    moeEvent("Category Viewed");
   });
 
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
@@ -545,8 +576,12 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
-    moeEvent("Home Viewed", {
-      URL: BASE_URL,
+    window?.addEventListener("MOE_LIFECYCLE", function (e) {
+      if (e.detail.name === "SDK_INITIALIZED") {
+        moeEvent("Home Viewed", {
+          URL: BASE_URL,
+        });
+      }
     });
   });
 
