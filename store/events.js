@@ -64,9 +64,9 @@ export const eventActions = {
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
-  auth: (action, { userId, router }) => ({
+  auth: (action, moe) => ({
     type: actionTypes.AUTH,
-    payload: { action, userId, router },
+    payload: { action, userId: moe?.userId, router: moe?.router },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
@@ -169,13 +169,12 @@ export function* eventsSaga() {
         const Moengage = window?.Moengage;
 
         if (Moengage) {
-          
           const { firstName, lastName, email, phone } = getUserResponse;
           Moengage.add_first_name(firstName);
           Moengage.add_last_name(lastName);
           Moengage.add_email(email);
           Moengage.add_mobile(phone);
-          Moengage.add_unique_user_id(userId); 
+          Moengage.add_unique_user_id(userId);
 
           moeEvent("Customer Logged In", {
             "Customer ID": userId,
@@ -187,6 +186,9 @@ export function* eventsSaga() {
           });
         }
       }
+    } else if (action == "logout") {
+      const Moengage = window?.Moengage;
+      if (Moengage) Moengage.destroy_session();
     }
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
