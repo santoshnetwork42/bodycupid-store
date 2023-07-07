@@ -192,7 +192,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
     cartAmounts.sort((a, b) => (b > a ? 1 : -1));
   });
 
-  if (couponType === 'BUY_X_GET_Y') {
+  if (couponType === "BUY_X_GET_Y") {
     const discountedQty = getBxGyFreeQuantity(
       getYQuantity,
       buyXQuantity,
@@ -211,13 +211,10 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (couponType === "BUY_X_AT_Y") {
-    const discountedQty = getBxAyOnQuantity(
-      buyXQuantity,
-      cartList
-    );
+    const discountedQty = getBxAyOnQuantity(buyXQuantity, cartList);
     const discountedItems = cartAmounts.slice(0, discountedQty);
     const amt = discountedItems.reduce((a, b) => a + b, 0);
-    const discountedAmount = (discountedQty/buyXQuantity) * getYAmount;
+    const discountedAmount = (discountedQty / buyXQuantity) * getYAmount;
     const discount = discountedAmount < amt ? amt - discountedAmount : 0;
     return {
       ...coupon,
