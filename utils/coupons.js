@@ -1,9 +1,10 @@
 import { getCartCount, getTotalPrice } from "~/utils";
-import { getBxGyFreeQuantity } from "./helper";
+import { getBxGyFreeQuantity, getBxAyOnQuantity } from "./helper";
 import { getProductPrice } from "./products";
 
 export const getCouponMessage = ({
   couponType,
+  buyXQuantity,
   getYAmount,
   getYPercentage,
   getYQuantity,
@@ -31,6 +32,8 @@ export const getCouponMessage = ({
     discountMsg = `FREE ${getYStoreProduct?.title} ${
       !!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
     }`;
+  } else if (couponType === "BUY_X_AT_Y") {
+    discountMsg = `Buy ${buyXQuantity} @ ₹${getYAmount}`;
   }
 
   if (minOrderValue) {
@@ -74,8 +77,8 @@ export const getCouponDiscount = (coupon, cartItems) => {
   const finalGetYQty = couponType === "BUY_X_GET_Y" ? getYQuantity : 0;
 
   const cartList = cartItems.filter((c) => {
-    const isCartItem = c.cartItemSource !== "COUPON";
-    if (!isCartItem) return false;
+    const isCouponItem = c.cartItemSource === "COUPON";
+    if (isCouponItem) return false;
 
     const isProductApplicable =
       Array.isArray(applicableProducts) && applicableProducts.length
@@ -186,22 +189,45 @@ export const getCouponDiscount = (coupon, cartItems) => {
   const cartAmounts = [];
   cartList.forEach((c) => {
     cartAmounts.push(...Array(parseInt(c.qty, 10)).fill(c.price));
+    cartAmounts.sort((a, b) => (b > a ? 1 : -1));
   });
 
-  const discountedQty = getBxGyFreeQuantity(
-    getYQuantity,
-    buyXQuantity,
-    cartList
-  );
+  if (couponType === "BUY_X_GET_Y") {
+    const discountedQty = getBxGyFreeQuantity(
+      getYQuantity,
+      buyXQuantity,
+      cartList
+    );
 
-  cartAmounts.sort((a, b) => (b > a ? 1 : -1));
-  const discountedItems = cartAmounts.slice(-discountedQty);
-  const amt = discountedItems.reduce((a, b) => a + b, 0);
-  const discount = maxDiscount ? Math.min(maxDiscount, amt) : amt;
+    const discountedItems = cartAmounts.slice(-discountedQty);
+    const amt = discountedItems.reduce((a, b) => a + b, 0);
+    const discount = maxDiscount ? Math.min(maxDiscount, amt) : amt;
+    return {
+      ...coupon,
+      allowed: true,
+      discount,
+      message: discountMsg,
+    };
+  }
+
+  if (couponType === "BUY_X_AT_Y") {
+    const discountedQty = getBxAyOnQuantity(buyXQuantity, cartList);
+    const discountedItems = cartAmounts.slice(0, discountedQty);
+    const amt = discountedItems.reduce((a, b) => a + b, 0);
+    const discountedAmount = (discountedQty / buyXQuantity) * getYAmount;
+    const discount = discountedAmount < amt ? amt - discountedAmount : 0;
+    return {
+      ...coupon,
+      allowed: true,
+      discount,
+      message: discountMsg,
+    };
+  }
+
   return {
     ...coupon,
-    allowed: true,
-    discount,
-    message: discountMsg,
+    allowed: false,
+    discount: 0,
+    message: "Invalid Coupon",
   };
 };
