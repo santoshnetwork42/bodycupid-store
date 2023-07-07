@@ -162,19 +162,30 @@ export function* eventsSaga() {
           variables: { id: userId },
           authMode: "AMAZON_COGNITO_USER_POOLS",
         });
-        
+
         const isFirstTime =
           Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
           300;
+        const Moengage = window?.Moengage;
 
-        moeEvent("Customer Logged In", {
-          "Customer ID": userId,
-          "Mobile Number": getUserResponse?.phone,
-          "Utm Source": source,
-          "Utm Medium": medium,
-          URL: window.location.href,
-          "First Time User": isFirstTime,
-        });
+        if (Moengage) {
+          
+          const { firstName, lastName, email, phone } = getUserResponse;
+          Moengage.add_first_name(firstName);
+          Moengage.add_last_name(lastName);
+          Moengage.add_email(email);
+          Moengage.add_mobile(phone);
+          Moengage.add_unique_user_id(userId); 
+
+          moeEvent("Customer Logged In", {
+            "Customer ID": userId,
+            "Mobile Number": getUserResponse?.phone,
+            "Utm Source": source,
+            "Utm Medium": medium,
+            URL: window.location.href,
+            "First Time User": isFirstTime,
+          });
+        }
       }
     }
 
