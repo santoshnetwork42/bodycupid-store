@@ -151,7 +151,7 @@ function Passwordless({
           username: addPhonePrefix(state.phone),
         });
         setCurrentUser(cu);
-        addressAdded: eventActions.addressAdded, setConfirmSignUp("SIGNIN");
+        setConfirmSignUp("SIGNIN");
         setSeconds(30);
         setLoading(false);
       } catch (error) {
