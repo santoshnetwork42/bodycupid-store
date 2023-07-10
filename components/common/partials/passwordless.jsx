@@ -29,7 +29,7 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
-  login
+  login,
 }) {
   const router = useRouter();
   const [state, setState] = useState({
@@ -150,11 +150,10 @@ function Passwordless({
         const cu = await Auth.signIn({
           username: addPhonePrefix(state.phone),
         });
-        setCurrentUser(cu);  addressAdded: eventActions.addressAdded,
-        setConfirmSignUp("SIGNIN");
+        setCurrentUser(cu);
+        addressAdded: eventActions.addressAdded, setConfirmSignUp("SIGNIN");
         setSeconds(30);
         setLoading(false);
-        
       } catch (error) {
         logger.error("error in signin:", error);
         if (error.code === "UserNotConfirmedException") {
@@ -185,7 +184,11 @@ function Passwordless({
 
   useEffect(() => {
     let ac;
-    if (confirmSignUp && typeof window !== "undefined" && "OTPCredential" in window) {
+    if (
+      confirmSignUp &&
+      typeof window !== "undefined" &&
+      "OTPCredential" in window
+    ) {
       ac = new AbortController();
       navigator?.credentials
         .get({
@@ -195,7 +198,7 @@ function Passwordless({
         .then((otp) => {
           setState({
             ...state,
-            confirmationCode: otp.code.split("")
+            confirmationCode: otp.code.split(""),
           });
         })
         .catch((err) => {
@@ -396,7 +399,7 @@ function Passwordless({
                             </ALink>
                           ) : (
                             <p className="not-receive-otp-label mt-2">
-                              Did't receive it? Resend in {seconds}
+                              Didn't receive it? Resend in {seconds}
                             </p>
                           )}
                         </form>
@@ -425,5 +428,5 @@ export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
   openLogin: modalActions.openLoginModal,
   setUser: userActions.setUser,
-  login: eventActions.logIn
+  login: eventActions.logIn,
 })(Passwordless);
