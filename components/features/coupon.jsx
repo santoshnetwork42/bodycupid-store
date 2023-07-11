@@ -277,7 +277,7 @@ function Coupon(props) {
                   <Discount size={35} color="#17b31b" />
                 </div>
                 <h4 className="modal-title">
-                  '{appliedCoupon.code}' coupon applied!
+                  '{appliedCoupon?.code || "Your"}' coupon applied!
                 </h4>
                 {couponTotal > 0 && (
                   <>
