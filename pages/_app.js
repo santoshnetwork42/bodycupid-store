@@ -179,7 +179,7 @@ const App = ({ Component, pageProps }) => {
     initSession();
 
     return () => hubListenerCancelToken();
-  }, [destroySession, initSession, store]);
+  }, []);
 
   useEffect(() => {
     setMetaData();
