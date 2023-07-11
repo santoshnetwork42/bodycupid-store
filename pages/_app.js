@@ -172,7 +172,6 @@ const App = ({ Component, pageProps }) => {
       } else if (loggedInEvents.includes(event)) {
         const { sub } = data?.attributes;
         initSession();
-        console.log('### :>> ');
         store.dispatch(eventActions.auth("login", { userId: sub, router }));
       }
     });
@@ -180,7 +179,7 @@ const App = ({ Component, pageProps }) => {
     initSession();
 
     return () => hubListenerCancelToken();
-  }, [destroySession, initSession, store]);
+  }, []);
 
   useEffect(() => {
     setMetaData();
