@@ -178,7 +178,7 @@ export function* eventsSaga() {
 
           moeEvent("Customer Logged In", {
             "Customer ID": userId,
-            "Mobile Number": getUserResponse?.phone,
+            "Mobile Number": mobile,
             "Utm Source": source,
             "Utm Medium": medium,
             URL: window.location.href,

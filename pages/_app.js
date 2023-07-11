@@ -172,6 +172,7 @@ const App = ({ Component, pageProps }) => {
       } else if (loggedInEvents.includes(event)) {
         const { sub } = data?.attributes;
         initSession();
+        console.log('### :>> ');
         store.dispatch(eventActions.auth("login", { userId: sub, router }));
       }
     });
