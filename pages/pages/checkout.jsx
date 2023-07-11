@@ -68,7 +68,7 @@ function Checkout(props) {
     openAllAddressModal,
     recordOutOfStock,
     openLogin,
-    addPaymentInfo
+    addPaymentInfo,
   } = props;
 
   const { name } = store;
@@ -176,7 +176,7 @@ function Checkout(props) {
 
         razorpayMethod = new Razorpay(options);
         razorpayMethod.open();
-        addPaymentInfo()
+        addPaymentInfo();
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -1021,6 +1021,7 @@ const Component = connect(mapStateToProps, {
 
 Component.hideFooter = true;
 Component.hideChatbot = true;
+Component.hideCart = true;
 Component.navbarConfig = {
   shippingTier: true,
 };
