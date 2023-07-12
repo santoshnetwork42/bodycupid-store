@@ -1223,6 +1223,55 @@ export const findUserAddresses = /* GraphQL */ `
   }
 `;
 
+export const createUserAddress = /* GraphQL */ `
+  mutation CreateUserAddress(
+    $input: CreateUserAddressInput!
+    $condition: ModelUserAddressConditionInput
+  ) {
+    createUserAddress(input: $input, condition: $condition) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const updateUserAddress = /* GraphQL */ `
+  mutation UpdateUserAddress(
+    $input: UpdateUserAddressInput!
+    $condition: ModelUserAddressConditionInput
+  ) {
+    updateUserAddress(input: $input, condition: $condition) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const searchOrders = /* GraphQL */ `
   query SearchOrders(
     $filter: SearchableOrderFilterInput

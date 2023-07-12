@@ -78,6 +78,7 @@ export function* cartSaga() {
           data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               storeId: STORE_ID,
@@ -97,6 +98,7 @@ export function* cartSaga() {
           data: { createShoppingCartProduct: response },
         } = yield call([API, API.graphql], {
           query: createShoppingCartProduct,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               shoppingcartId: id,
@@ -261,6 +263,7 @@ export function* cartSaga() {
           data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               storeId: STORE_ID,
@@ -282,6 +285,7 @@ export function* cartSaga() {
             promise.push(
               call([API, API.graphql], {
                 query: createShoppingCartProduct,
+                authMode: "AMAZON_COGNITO_USER_POOLS",
                 variables: {
                   input: {
                     shoppingcartId: id,
