@@ -14,9 +14,9 @@ import fetchData from "~/utils/fetchData";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('All collections');
+const logger = new Logger("All collections");
 
 function AllProduct(props) {
   const { store, products, pageFilter, categories, pageMeta } = props;

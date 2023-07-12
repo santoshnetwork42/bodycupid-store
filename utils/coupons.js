@@ -188,7 +188,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
   // For couponType === BUY_X_GET_Y
   const cartAmounts = [];
   cartList.forEach((c) => {
-    cartAmounts.push(...Array(parseInt(c.qty, 10)).fill(c.price));
+    cartAmounts.push(...Array(parseInt(c.qty || 0, 10)).fill(c.price));
     cartAmounts.sort((a, b) => (b > a ? 1 : -1));
   });
 
