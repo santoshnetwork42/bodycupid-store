@@ -167,18 +167,18 @@ export function* eventsSaga() {
           Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
           300;
         const Moengage = window?.Moengage;
-
         if (Moengage) {
           const { firstName, lastName, email, phone } = getUserResponse;
+          const mobile = phone.split("+91")[1];  
           Moengage.add_first_name(firstName);
           Moengage.add_last_name(lastName);
           Moengage.add_email(email);
-          Moengage.add_mobile(phone);
-          Moengage.add_unique_user_id(userId);
+          Moengage.add_mobile(mobile);
+          Moengage.add_unique_user_id(mobile);
 
           moeEvent("Customer Logged In", {
             "Customer ID": userId,
-            "Mobile Number": getUserResponse?.phone,
+            "Mobile Number": mobile,
             "Utm Source": source,
             "Utm Medium": medium,
             URL: window.location.href,
