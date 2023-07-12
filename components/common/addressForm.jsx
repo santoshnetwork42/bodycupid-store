@@ -21,7 +21,7 @@ const AddressForm = (props) => {
     email: email || null,
     phone: phone || "",
     address: "",
-    state: "GJ",
+    state: "AN",
     city: "",
     pinCode: "",
     landmark: "",
