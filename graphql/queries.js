@@ -5360,3 +5360,32 @@ export const searchRedirects = /* GraphQL */ `
     }
   }
 `;
+export const adminGetDashboardData = /* GraphQL */ `
+  query AdminGetDashboardData(
+    $storeIds: [ID!]!
+    $startDate: String!
+    $endDate: String!
+  ) {
+    adminGetDashboardData(
+      storeIds: $storeIds
+      startDate: $startDate
+      endDate: $endDate
+    ) {
+      totalOrders
+      confimedOrders
+      unConfirmedOrders
+      totalPrepaidOrders
+      totalCodOrders
+      confirmedPrepaidOrders
+      confirmedCodOrders
+      averageOrderValue
+      ordersByStatus
+      orderByDate {
+        date
+        count
+        __typename
+      }
+      __typename
+    }
+  }
+`;
