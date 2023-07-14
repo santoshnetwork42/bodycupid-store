@@ -80,44 +80,7 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
   const freeProductIds = useMemo(
     () =>
       (coupons || [])
-        .filter((coupon) => {
-          const {
-            autoApply,
-            couponType,
-            applicableProducts,
-            applicableCollections,
-            minOrderValue,
-            buyXQuantity,
-            getYQuantity,
-            isExternal,
-          } = coupon;
-
-          if (isExternal) return false;
-          if (!total) return false;
-          if (couponType !== "PRODUCT") return false;
-          if (!autoApply) return false;
-
-          if (showNonApplicableFreeProducts) return true;
-
-          if (minOrderValue && minOrderValue > total) return false;
-          if (buyXQuantity + getYQuantity > totalItems) return false;
-
-          const hasProduct =
-            Array.isArray(applicableProducts) && applicableProducts.length
-              ? cartList.some((c) => applicableProducts.includes(c.id))
-              : true;
-
-          const hasCollection =
-            Array.isArray(applicableCollections) && applicableCollections.length
-              ? cartList.some((c) =>
-                  applicableCollections.some((ac) =>
-                    (c.collections || []).includes(ac)
-                  )
-                )
-              : true;
-
-          return hasCollection && hasProduct;
-        })
+        .filter((coupon) => coupon.couponType=="FREEBIE")
         .map((coupon) => {
           const {
             applicableProducts,

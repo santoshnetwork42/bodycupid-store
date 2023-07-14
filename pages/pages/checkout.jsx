@@ -14,6 +14,7 @@ import {
   createPayment,
   validateTransaction,
   getOrderStatus,
+  createNewOrder,
 } from "~/graphql/api";
 
 import { createUserAddress } from "~/graphql/mutations";
@@ -68,7 +69,7 @@ function Checkout(props) {
     openAllAddressModal,
     recordOutOfStock,
     openLogin,
-    addPaymentInfo
+    addPaymentInfo,
   } = props;
 
   const { name } = store;
@@ -84,6 +85,7 @@ function Checkout(props) {
     outOfStockItems,
     productWithPrice,
   } = useInventory();
+
   const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -176,7 +178,7 @@ function Checkout(props) {
 
         razorpayMethod = new Razorpay(options);
         razorpayMethod.open();
-        addPaymentInfo()
+        addPaymentInfo();
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -327,28 +329,24 @@ function Checkout(props) {
             (a, b) => a + b.price,
             0
           );
-
+          const productIds = cartList.map(({ id, variantId, qty }) => ({
+            productId: id,
+            variantId,
+            quantity: qty,
+          }));
           const payload = {
-            storeId: STORE_ID,
-            userId: user?.id,
-            status: isFirst ? "PENDING" : "CONFIRMED",
-            totalAmount: grandTotal,
-            totalDiscount: totalDiscount + freeProductTotal,
-            totalShippingCharges: shippingTotal,
-            totalCashOnDeliveryCharges: appliedCODCharges,
-            orderDate: orderDate.toISOString(),
-            sla: sla.toISOString(),
-            paymentType: payMethod,
+            products: productIds,
             shippingAddress: restAddress,
             billingAddress: restAddress,
             couponCodeId: appliedCoupon?.id,
+            storeId: STORE_ID,
+            paymentType: payMethod,
             ...metadata,
           };
-
           const {
-            data: { createOrder: order },
+            data: { createNewOrder: order },
           } = await API.graphql({
-            query: createOrder,
+            query: createNewOrder,
             variables: { input: payload },
             authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
           });
