@@ -14,14 +14,7 @@ export const useFeaturedCoupons = () => {
   const featuredCoupons = useMemo(
     () =>
       (coupons || [])
-        .filter(
-          (coupon) =>
-            !(
-              coupon.autoApply &&
-              coupon.couponType === "PRODUCT" &&
-              !coupon.isExternal
-            )
-        )
+        .filter((coupon) => coupon.couponType !== "FREEBIE")
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
