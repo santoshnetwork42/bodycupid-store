@@ -45,13 +45,14 @@ const App = ({ Component, pageProps }) => {
     hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
     couponBanner: !!Component.couponBanner,
+    hideCart: !!Component.hideCart,
   };
 
   const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
-    hideChatbot: !!Component.hideChatbot
+    hideChatbot: !!Component.hideChatbot,
   };
 
   const destroySession = useCallback(() => {
