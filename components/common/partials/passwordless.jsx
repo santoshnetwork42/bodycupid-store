@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useStore } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth, API } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -36,6 +36,8 @@ function Passwordless({
     phone: "",
     confirmationCode: new Array(6).fill(""),
   });
+
+  const store = useStore();
 
   const [confirmSignUp, setConfirmSignUp] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
@@ -152,6 +154,13 @@ function Passwordless({
         });
         setCurrentUser(cu);
         setConfirmSignUp("SIGNIN");
+        let signInUserSession;
+        while (!signInUserSession) {
+          await new Promise((resolve) => setTimeout(resolve, 50));
+          signInUserSession = cu.signInUserSession;
+        }
+        const { sub } = signInUserSession.accessToken.payload;
+        store.dispatch(eventActions.auth("login", { userId: sub, router }));
         setSeconds(30);
         setLoading(false);
       } catch (error) {

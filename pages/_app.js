@@ -51,7 +51,7 @@ const App = ({ Component, pageProps }) => {
     ...footer,
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
-    hideChatbot: !!Component.hideChatbot
+    hideChatbot: !!Component.hideChatbot,
   };
 
   const destroySession = useCallback(() => {
@@ -170,9 +170,7 @@ const App = ({ Component, pageProps }) => {
         destroySession();
         store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
-        const { sub } = data?.attributes;
         initSession();
-        store.dispatch(eventActions.auth("login", { userId: sub, router }));
       }
     });
 
