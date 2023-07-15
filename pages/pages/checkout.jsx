@@ -358,7 +358,8 @@ function Checkout(props) {
           ];
 
           const [paymentResponse] = await Promise.all(promise);
-          const [payment] = paymentResponse.data.byorderIdcreatedAtPayment;
+          const [payment] =
+            paymentResponse.data.byorderIdcreatedAtPayment.items;
 
           setOrderData({ order, paymentId: null });
           if (payment.method === "ONLINE") {
