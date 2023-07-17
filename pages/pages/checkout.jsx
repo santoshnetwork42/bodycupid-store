@@ -320,11 +320,13 @@ function Checkout(props) {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
 
-          const productIds = cartList.map(({ id, variantId, qty }) => ({
-            productId: id,
-            variantId,
-            quantity: qty,
-          }));
+          const productIds = cartList
+            .filter((p) => !p.cartItemSource)
+            .map(({ id, variantId, qty }) => ({
+              productId: id,
+              variantId,
+              quantity: qty,
+            }));
 
           const payload = {
             products: productIds,
@@ -335,6 +337,8 @@ function Checkout(props) {
             paymentType: payMethod,
             ...metadata,
           };
+
+          console.log("appsync :>> ", { input: payload });
 
           const {
             data: { createNewOrder: order },

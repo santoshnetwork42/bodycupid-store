@@ -59,7 +59,7 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
   const cartItems = useSelector((state) => state.cart.data || []);
   const appliedCoupon = useSelector((state) => state.cart.coupon);
   const [products, setProducts] = useState([]);
-
+  
   const { total, totalItems, cartList } = useMemo(() => {
     const cartItemsList = cartItems.filter(
       (item) => item.cartItemSource !== "COUPON"
