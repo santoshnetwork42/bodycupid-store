@@ -127,6 +127,9 @@ function Passwordless({
             state.confirmationCode.join("")
           );
           if (!!signInUserSession) {
+            const { sub } = signInUserSession.accessToken.payload;
+            store.dispatch(eventActions.auth("login", { userId: sub, router }));
+
             closeModal();
             if (redirect) router.push("/pages/checkout");
           } else {
@@ -154,13 +157,6 @@ function Passwordless({
         });
         setCurrentUser(cu);
         setConfirmSignUp("SIGNIN");
-        let signInUserSession;
-        while (!signInUserSession) {
-          await new Promise((resolve) => setTimeout(resolve, 50));
-          signInUserSession = cu.signInUserSession;
-        }
-        const { sub } = signInUserSession.accessToken.payload;
-        store.dispatch(eventActions.auth("login", { userId: sub, router }));
         setSeconds(30);
         setLoading(false);
       } catch (error) {
