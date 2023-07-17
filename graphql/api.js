@@ -617,12 +617,6 @@ export const getOrder = /* GraphQL */ `
       code
       storeId
       userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-      }
       channelName
       shippingAddress {
         name
