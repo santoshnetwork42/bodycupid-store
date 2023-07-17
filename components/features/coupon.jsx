@@ -61,7 +61,7 @@ function Coupon(props) {
 
   const bestCouponCode = useMemo(() => {
     if (appliedCoupon && !appliedCoupon.autoApplied && showAppliedCoupon)
-      return appliedCoupon.code;
+      return appliedCoupon.code; 
 
     const coupons = featuredCoupons.filter((f) => f.autoApply && f.allowed);
     const [bestCoupon] = coupons.sort((a, b) => b.discount - a.discount);
