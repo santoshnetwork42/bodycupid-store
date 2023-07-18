@@ -53,7 +53,7 @@ function Coupon(props) {
 
   const featuredCoupons = useFeaturedCoupons();
 
-  const { discount: couponTotal } = useMemo(
+  const { discount: couponTotal, allowed } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
@@ -172,7 +172,7 @@ function Coupon(props) {
               <div className="cart-coupon-container d-flex">
                 <div className="d-flex">
                   <p className="ml-1 coupon-title mb-0 p-0 ls-m">
-                    {showAppliedCoupon
+                    {showAppliedCoupon && !!allowed
                       ? `"${appliedCoupon.code}" applied`
                       : "Coupons and offers"}
                   </p>
