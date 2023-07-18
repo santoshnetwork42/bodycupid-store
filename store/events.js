@@ -144,7 +144,11 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: { search_term: term },
+    });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
   });
@@ -169,7 +173,7 @@ export function* eventsSaga() {
         const Moengage = window?.Moengage;
         if (Moengage) {
           const { firstName, lastName, email, phone } = getUserResponse;
-          const mobile = phone.split("+91")[1];  
+          const mobile = phone.split("+91")[1];
           Moengage.add_first_name(firstName);
           Moengage.add_last_name(lastName);
           Moengage.add_email(email);
