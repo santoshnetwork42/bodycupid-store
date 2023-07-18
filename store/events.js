@@ -16,7 +16,6 @@ import {
 } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
 import { getRecordKey } from "~/utils/helper";
-import { BASE_URL } from "~/constant";
 import { getUser } from "~/graphql/api";
 
 export const actionTypes = {
@@ -66,7 +65,7 @@ export const eventActions = {
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action, moe) => ({
     type: actionTypes.AUTH,
-    payload: { action, userId: moe?.userId, router: moe?.router },
+    payload: { action, userId: moe?.userId, query: moe?.query },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
@@ -152,8 +151,8 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
     if (action === "login") {
-      const { userId, router } = e.payload;
-      const { utm_medium: medium, utm_source: source } = router?.query;
+      const { userId, query } = e.payload;
+      const { utm_medium: medium, utm_source: source } = query;
       if (userId) {
         const {
           data: { getUser: getUserResponse },
@@ -169,7 +168,7 @@ export function* eventsSaga() {
         const Moengage = window?.Moengage;
         if (Moengage) {
           const { firstName, lastName, email, phone } = getUserResponse;
-          const mobile = phone.split("+91")[1];  
+          const mobile = phone.split("+91")[1];
           Moengage.add_first_name(firstName);
           Moengage.add_last_name(lastName);
           Moengage.add_email(email);
@@ -555,7 +554,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     moeEvent("Add Payment Info", {
-      URL: `${BASE_URL}/pages/checkout`,
+      URL: window.location.href,
     });
   });
 
@@ -592,7 +591,7 @@ export function* eventsSaga() {
     window?.addEventListener("MOE_LIFECYCLE", function (e) {
       if (e.detail.name === "SDK_INITIALIZED") {
         moeEvent("Home Viewed", {
-          URL: BASE_URL,
+          URL: window.location.href,
         });
       }
     });

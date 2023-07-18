@@ -6,10 +6,8 @@ import {
 } from "~/utils/products";
 import { addPhonePrefix } from "~/utils/helper";
 import { getPublicImageURL } from "../getPublicImageUrl";
-import { BASE_URL } from "~/constant";
-import { getCouponTotal } from "..";
+import { removePhonePrefix } from "~/utils/helper";
 import { getCouponDiscount } from "../coupons";
-import useWindowDimensions from "../getWindowDimension";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -39,6 +37,7 @@ export const itemMapper = (product, coupon) => {
     variantId = id;
   }
 
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
   const basicAttributes = {
     "Product ID": id,
     "Variant ID": variantId,
@@ -46,7 +45,7 @@ export const itemMapper = (product, coupon) => {
     "Product Title": product.title,
     "Image URL": getPublicImageURL(thumbImage?.imageKey),
     "Product Category": category?.name,
-    "Product URL": `${BASE_URL}/products/${product.slug}`,
+    "Product URL": `${currentURL}/products/${product.slug}`,
     "Vendor name": "Body Cupid",
     "Product Price": price,
     Currency: "INR",
@@ -238,11 +237,12 @@ export const moEngagedOrderMapper = (
   order
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
   const basicAttributes = {
     Currency: "INR",
     "Total Items": products?.length,
     Source: "Web",
-    "Cart URL": `${BASE_URL}/pages/cart`,
+    "Cart URL": `${currentURL}/pages/cart`,
     "Vendor name": "Body Cupid",
     "Coupon Applied": coupon?.code,
     "Total Discount": couponTotal || 0,
@@ -279,7 +279,10 @@ export const moEngagedOrderMapper = (
         "Product Price": [...Product_Price, product.price],
         "Product Quantity": [...Product_Quantity, product.qty],
         "Variant ID": [...Variant_ID, product?.variantId],
-        "Product URL": [...Product_URL, `${BASE_URL}/products/${product.slug}`],
+        "Product URL": [
+          ...Product_URL,
+          `${currentURL}/products/${product.slug}`,
+        ],
         "Total MRP": Total_MRP + valueNew,
         "Product Subcategory": [
           ...Product_Subcategory,
@@ -332,6 +335,7 @@ export const moEngagedOrderMapper = (
 
 export const addressMapper = (address, totalPrice) => {
   const { city, country, email, name, state, pinCode, phone } = address;
+  const phoneNo = removePhonePrefix(phone);
   const [firstName, lastName] = name.split(" ");
 
   const basicAttributes = {
@@ -342,7 +346,7 @@ export const addressMapper = (address, totalPrice) => {
     Email: email,
     "First Name": firstName,
     "Last Name": lastName,
-    "Mobile Number": phone,
+    "Mobile Number": phoneNo,
     Pincode: pinCode,
     State: state,
   };
