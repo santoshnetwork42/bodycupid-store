@@ -586,6 +586,15 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: {
+        search_term: e.payload["search term"],
+        item_count: e.payload["Item Count"],
+      },
+    });
     moeEvent("Product Searched", {
       ...e.payload,
     });
