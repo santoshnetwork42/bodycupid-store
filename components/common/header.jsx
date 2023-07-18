@@ -92,7 +92,7 @@ function Header({ navbar, auth, openPasswordLess }) {
                 </ALink>
               )} */}
               <span className="divider"></span>
-              <CartMenu />
+              {!navbar.hideCart && <CartMenu />}
             </div>
           </div>
         </div>

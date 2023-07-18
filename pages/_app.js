@@ -45,13 +45,14 @@ const App = ({ Component, pageProps }) => {
     hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
     couponBanner: !!Component.couponBanner,
+    hideCart: !!Component.hideCart,
   };
 
   const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
-    hideChatbot: !!Component.hideChatbot
+    hideChatbot: !!Component.hideChatbot,
   };
 
   const destroySession = useCallback(() => {
@@ -163,22 +164,23 @@ const App = ({ Component, pageProps }) => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
       const {
-        payload: { event },
+        payload: { event, data },
       } = authEvent;
       if (event === "signOut") {
         logger.info("Signing out");
         destroySession();
         store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
+        const { sub } = data?.attributes;
         initSession();
-        store.dispatch(eventActions.auth("login"));
+        store.dispatch(eventActions.auth("login", { userId: sub, router }));
       }
     });
 
     initSession();
 
     return () => hubListenerCancelToken();
-  }, [destroySession, initSession, store]);
+  }, []);
 
   useEffect(() => {
     setMetaData();
@@ -189,15 +191,17 @@ const App = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-   awaitGlobal("FB").then((fb) => {
-     if (footerProps.hideChatbot) {
-       fb.CustomerChat.hide();
-     } else {
-       fb.XFBML.parse();
-       fb.CustomerChat.show(false);
-     }
-   }).catch(() => {});
-  }, [footerProps.hideChatbot])
+    awaitGlobal("FB")
+      .then((fb) => {
+        if (footerProps.hideChatbot) {
+          fb.CustomerChat.hide();
+        } else {
+          fb.XFBML.parse();
+          fb.CustomerChat.show(false);
+        }
+      })
+      .catch(() => {});
+  }, [footerProps.hideChatbot]);
 
   return (
     <>

@@ -166,17 +166,16 @@ function CartTotal({
           </tr>
         </tbody>
       </table>
-      {isSmall && (
-        <div id="sidebar-footer" className="sidebar-footer">
-          <button
-            onClick={validateAndGoToCheckout}
-            className={`btn btn-dark btn-rounded btn-checkout w-100 font-weight-bold `}
-            disabled={!isInventoryCheckReady}
-          >
-            begin checkout
-          </button>
-        </div>
-      )}
+
+      <div id="sidebar-footer" className="sidebar-footer">
+        <button
+          onClick={validateAndGoToCheckout}
+          className={`btn btn-dark btn-rounded btn-checkout w-100 font-weight-bold `}
+          disabled={!isInventoryCheckReady}
+        >
+          begin checkout
+        </button>
+      </div>
 
       {!isSmall && (
         <div className="d-sm-show stick">
