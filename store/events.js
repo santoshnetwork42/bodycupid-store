@@ -143,7 +143,11 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: { search_term: term },
+    });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
   });
