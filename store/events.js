@@ -65,7 +65,7 @@ export const eventActions = {
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action, moe) => ({
     type: actionTypes.AUTH,
-    payload: { action, userId: moe?.userId, router: moe?.router },
+    payload: { action, userId: moe?.userId, query: moe?.query },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
@@ -151,8 +151,8 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
     if (action === "login") {
-      const { userId, router } = e.payload;
-      const { utm_medium: medium, utm_source: source } = router?.query;
+      const { userId, query } = e.payload;
+      const { utm_medium: medium, utm_source: source } = query;
       if (userId) {
         const {
           data: { getUser: getUserResponse },

@@ -32,6 +32,8 @@ function Passwordless({
   login,
 }) {
   const router = useRouter();
+  const { query } = router;
+
   const [state, setState] = useState({
     phone: "",
     confirmationCode: new Array(6).fill(""),
@@ -115,6 +117,8 @@ function Passwordless({
               variables: { id: user?.attributes?.sub },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
+            const { sub } = user?.attributes;
+            store.dispatch(eventActions.auth("login", { userId: sub, query }));
 
             await setUser(getUserResponse);
           }
@@ -128,7 +132,7 @@ function Passwordless({
           );
           if (!!signInUserSession) {
             const { sub } = signInUserSession.accessToken.payload;
-            store.dispatch(eventActions.auth("login", { userId: sub, router }));
+            store.dispatch(eventActions.auth("login", { userId: sub, query }));
 
             closeModal();
             if (redirect) router.push("/pages/checkout");
