@@ -316,7 +316,7 @@ export function* eventsSaga() {
       event: "purchase",
       eventID: uuid(),
       user,
-      attribute: { ...pixel, order_id: code, value: totalAmount },
+      attribute: { ...pixel, order_id: id, value: totalAmount },
       ecommerce: {
         transaction_id: id,
         value: totalAmount,
