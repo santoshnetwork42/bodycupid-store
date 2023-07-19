@@ -872,70 +872,6 @@ export const searchStores = /* GraphQL */ `
     }
   }
 `;
-export const getWarehouse = /* GraphQL */ `
-  query GetWarehouse($id: ID!) {
-    getWarehouse(id: $id) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      facilityCode
-      name
-      description
-      address
-      totalProducts
-      totalQuantity
-      priority
-      imageUrl
-      productInventory {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listWarehouses = /* GraphQL */ `
-  query ListWarehouses(
-    $filter: ModelWarehouseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWarehouses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        storeId
-        facilityCode
-        name
-        description
-        address
-        totalProducts
-        totalQuantity
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const bystoreIdwarehouse = /* GraphQL */ `
   query BystoreIdwarehouse(
     $storeId: ID!
@@ -1023,95 +959,6 @@ export const searchWarehouses = /* GraphQL */ `
         }
         __typename
       }
-      __typename
-    }
-  }
-`;
-export const getProductInventory = /* GraphQL */ `
-  query GetProductInventory($id: ID!) {
-    getProductInventory(id: $id) {
-      id
-      warehouseId
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      currentQuantity
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listProductInventories = /* GraphQL */ `
-  query ListProductInventories(
-    $filter: ModelProductInventoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProductInventories(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
       __typename
     }
   }
@@ -2567,6 +2414,32 @@ export const getOrder = /* GraphQL */ `
         __typename
       }
       userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        lastOrderDate
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        __typename
+      }
       channelName
       shippingAddress {
         name
@@ -3733,56 +3606,6 @@ export const searchReviews = /* GraphQL */ `
     }
   }
 `;
-export const getWishlist = /* GraphQL */ `
-  query GetWishlist($id: ID!) {
-    getWishlist(id: $id) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      userId
-      wishlistProducts {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listWishlists = /* GraphQL */ `
-  query ListWishlists(
-    $filter: ModelWishlistFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWishlists(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        storeId
-        userId
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const bystoreIdWishlist = /* GraphQL */ `
   query BystoreIdWishlist(
     $storeId: ID!
@@ -3834,121 +3657,6 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
         id
         storeId
         userId
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getWishlistProduct = /* GraphQL */ `
-  query GetWishlistProduct($id: ID!) {
-    getWishlistProduct(id: $id) {
-      id
-      wishlistId
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      variantId
-      variant {
-        id
-        productId
-        title
-        description
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        createdAt
-        updatedAt
-        taxable
-        barcode
-        imageUrl
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listWishlistProducts = /* GraphQL */ `
-  query ListWishlistProducts(
-    $filter: ModelWishlistProductFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWishlistProducts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        wishlistId
-        productId
-        variantId
         createdAt
         updatedAt
         __typename
