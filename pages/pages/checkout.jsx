@@ -14,6 +14,7 @@ import {
   createPayment,
   validateTransaction,
   getOrderStatus,
+  getOrderSuccess,
 } from "~/graphql/api";
 
 import { createUserAddress } from "~/graphql/mutations";
@@ -68,7 +69,7 @@ function Checkout(props) {
     openAllAddressModal,
     recordOutOfStock,
     openLogin,
-    addPaymentInfo
+    addPaymentInfo,
   } = props;
 
   const { name } = store;
@@ -176,7 +177,7 @@ function Checkout(props) {
 
         razorpayMethod = new Razorpay(options);
         razorpayMethod.open();
-        addPaymentInfo()
+        addPaymentInfo();
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -218,11 +219,18 @@ function Checkout(props) {
           }
 
           if (success) {
+            const successOrder = await API.graphql({
+              query: getOrderSuccess,
+              variables: { id: orderId },
+            }).then(
+              (getOrderStatusResponse) => getOrderStatusResponse.data.getOrder
+            );
+
             logger.info("Payment completion");
 
             logger.debug("Purchase event");
             onPlaceOrder(
-              orderData.order,
+              successOrder,
               [...cartList, ...freeProducts],
               appliedCoupon,
               shippingAddress,

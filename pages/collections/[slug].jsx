@@ -23,6 +23,7 @@ import fetchData from "~/utils/fetchData";
 import handleRedirect from "~/utils/handleRedirect";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { eventActions } from "~/store/events";
+import { getSource } from "~/utils/helper";
 
 const logger = new Logger("All collections");
 
@@ -38,12 +39,14 @@ function CollectionPage(props) {
     categoryViewed,
   } = props;
   const { name } = store;
+  const source = getSource();
 
   useEffect(() => {
     categoryViewed({
       URL: window.location.href,
       "Category Name": data.name,
       "Item Count": products.items.length,
+      Source: source,
     });
   }, []);
 

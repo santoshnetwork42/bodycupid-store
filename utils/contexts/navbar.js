@@ -157,9 +157,11 @@ export const useMenu = () => {
   const menu = categories.map((category) => ({
     label: category.name,
     link: `/collections/${category.slug}`,
+    slug: category.slug,
     subMenu: category?.subCategory?.items.map((subCat) => ({
       label: subCat.name,
       link: `/collections/${subCat.slug}`,
+      slug: subCat.slug,
     })),
   }));
 
@@ -167,18 +169,28 @@ export const useMenu = () => {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
       link: `/collections/${col.slug}`,
+      slug: col.slug,
     }));
 
     menu.push({
       label: "Ranges",
       link: "/collections/ranges",
       subMenu: collectionsMenu,
+      slug: "ranges",
     });
   }
 
-  menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
+  menu.push({
+    label: "Combos & Gifts",
+    link: `/collections/combos-and-gifts`,
+    slug: "combos-and-gifts",
+  });
 
-  menu.push({ label: "Clearance Sale", link: `/collections/clearance-sale` });
+  menu.push({
+    label: "Clearance Sale",
+    link: `/collections/clearance-sale`,
+    slug: "clearance-sale",
+  });
 
   return menu;
 };

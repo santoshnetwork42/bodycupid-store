@@ -726,6 +726,20 @@ export const getOrder = /* GraphQL */ `
     }
   }
 `;
+
+export const getOrderSuccess = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      code
+      totalAmount
+      totalDiscount
+      totalShippingCharges
+      totalCashOnDeliveryCharges
+    }
+  }
+`;
+
 export const getOrderStatus = /* GraphQL */ `
   query GetOrder($id: ID!) {
     getOrder(id: $id) {
@@ -1070,6 +1084,7 @@ export const createOrder = /* GraphQL */ `
   ) {
     createOrder(input: $input, condition: $condition) {
       id
+      code
       totalAmount
       totalDiscount
       totalShippingCharges
@@ -1265,6 +1280,7 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
+      totalOrders
       isActive
       authProvider
       isAdmin
