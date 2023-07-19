@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import { API, graphqlOperation } from "aws-amplify";
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch } from "react-redux";
 import { eventActions } from "~/store/events";
 import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
@@ -12,7 +12,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
 import { errorHandler } from "~/utils/errorHandler";
 
-function SearchForm({ type = "input", defaultSearch = "",productSearched }) {
+function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
   const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
@@ -37,9 +37,9 @@ function SearchForm({ type = "input", defaultSearch = "",productSearched }) {
       );
       setData(items);
       productSearched({
-       "search term":searchTerm,
-       "Item Count":items.length
-      })
+        "search term": searchTerm,
+        "Item Count": items.length,
+      });
     } catch (error) {
       errorHandler(error);
     }

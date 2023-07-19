@@ -2567,32 +2567,6 @@ export const getOrder = /* GraphQL */ `
         __typename
       }
       userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        isActive
-        authProvider
-        isAdmin
-        profilePhotoUrl
-        emailVerified
-        phoneVerified
-        isCognitoConfirmed
-        createdAt
-        updatedAt
-        totalOrders
-        totalSpent
-        lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        __typename
-      }
       channelName
       shippingAddress {
         name
