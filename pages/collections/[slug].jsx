@@ -40,12 +40,14 @@ function CollectionPage(props) {
   const { name } = store;
 
   useEffect(() => {
-    categoryViewed({
-      URL: window.location.href,
-      "Category Name": data.name,
-      "Item Count": products.items.length,
-    });
-  }, []);
+    if (data.name) {
+      categoryViewed({
+        URL: window.location.href,
+        "Category Name": data.name,
+        "Item Count": products.items.length,
+      });
+    }
+  }, [data]);
 
   return (
     <main className="main searchBar">

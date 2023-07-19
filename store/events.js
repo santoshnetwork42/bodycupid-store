@@ -552,10 +552,6 @@ export function* eventsSaga() {
     moeEvent("Address Selected", addressSelected);
   });
 
-  yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
-    moeEvent("Category Viewed");
-  });
-
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     moeEvent("Add Payment Info", {
       URL: window.location.href,
