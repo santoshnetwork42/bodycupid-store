@@ -145,7 +145,11 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: { search_term: term },
+    });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
   });
@@ -553,10 +557,6 @@ export function* eventsSaga() {
     moeEvent("Address Selected", addressSelected);
   });
 
-  yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
-    moeEvent("Category Viewed");
-  });
-
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     moeEvent("Add Payment Info", {
       URL: window.location.href,
@@ -588,6 +588,15 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: {
+        search_term: e.payload["search term"],
+        item_count: e.payload["Item Count"],
+      },
+    });
     moeEvent("Product Searched", {
       ...e.payload,
     });

@@ -42,13 +42,15 @@ function CollectionPage(props) {
   const source = getSource();
 
   useEffect(() => {
-    categoryViewed({
-      URL: window.location.href,
-      "Category Name": data.name,
-      "Item Count": products.items.length,
-      Source: source,
-    });
-  }, []);
+    if (data.name) {
+      categoryViewed({
+        URL: window.location.href,
+        "Category Name": data.name,
+        "Item Count": products.items.length,
+        Source: source,
+      });
+    }
+  }, [data]);
 
   return (
     <main className="main searchBar">

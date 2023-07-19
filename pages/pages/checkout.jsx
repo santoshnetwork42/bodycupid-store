@@ -1029,6 +1029,7 @@ const Component = connect(mapStateToProps, {
 
 Component.hideFooter = true;
 Component.hideChatbot = true;
+Component.hideCart = true;
 Component.navbarConfig = {
   shippingTier: true,
 };

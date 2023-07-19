@@ -3,7 +3,7 @@ import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
 
-import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
+import { createUserAddress, updateUserAddress } from "~/graphql/api";
 import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import { validateAddress, getProperAddress } from "~/utils/address";
