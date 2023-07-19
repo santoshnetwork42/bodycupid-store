@@ -1,4 +1,11 @@
-import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+  all,
+  call,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
 import { API } from "aws-amplify";
 
 import {
@@ -180,9 +187,9 @@ export function* cartSaga() {
       }
     } else {
       if (!cartList || !cartList.length) {
-          yield put({ type: actionTypes.REFRESH_CART });
+        yield put({ type: actionTypes.REFRESH_CART });
       }
-     }
+    }
   });
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
@@ -201,7 +208,7 @@ export function* cartSaga() {
             let pKey = cp.variantId
               ? `${cp.productId}-${cp.variantId}`
               : `${cp.productId}`;
-            
+
             if (p.cartItemSource) {
               pKey = `${pKey}-${p.cartItemSource}`;
             }

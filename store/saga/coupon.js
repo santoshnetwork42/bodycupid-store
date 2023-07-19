@@ -20,7 +20,6 @@ export function* couponSaga() {
           yield put({ type: actionTypes.REMOVE_COUPON });
         }
       }
-      
     }
   );
 }
