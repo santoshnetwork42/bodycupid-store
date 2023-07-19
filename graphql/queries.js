@@ -1278,6 +1278,37 @@ export const listShippingTiers = /* GraphQL */ `
     }
   }
 `;
+export const byStoreIdShippingTiers = /* GraphQL */ `
+  query ByStoreIdShippingTiers(
+    $storeId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelShippingTierFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byStoreIdShippingTiers(
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const searchShippingTiers = /* GraphQL */ `
   query SearchShippingTiers(
     $filter: SearchableShippingTierFilterInput
@@ -4562,6 +4593,55 @@ export const listCoupons = /* GraphQL */ `
     }
   }
 `;
+export const byCouponTypeCoupons = /* GraphQL */ `
+  query ByCouponTypeCoupons(
+    $couponType: CouponType!
+    $storeId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCouponFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byCouponTypeCoupons(
+      couponType: $couponType
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        code
+        description
+        groupId
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        abandonCart
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const searchCoupons = /* GraphQL */ `
   query SearchCoupons(
     $filter: SearchableCouponFilterInput
@@ -4648,6 +4728,35 @@ export const listConfigurations = /* GraphQL */ `
     $nextToken: String
   ) {
     listConfigurations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const byStoreIdConfigurations = /* GraphQL */ `
+  query ByStoreIdConfigurations(
+    $storeId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelConfigurationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byStoreIdConfigurations(
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         storeId

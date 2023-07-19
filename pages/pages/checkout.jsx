@@ -332,7 +332,7 @@ function Checkout(props) {
             products: productIds,
             shippingAddress: restAddress,
             billingAddress: restAddress,
-            couponCodeId: appliedCoupon?.id,
+            couponCode: appliedCoupon?.code,
             storeId: STORE_ID,
             paymentType: payMethod,
             ...metadata,
