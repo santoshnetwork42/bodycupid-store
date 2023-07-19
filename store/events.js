@@ -15,7 +15,7 @@ import {
   userMapper,
 } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
-import { getRecordKey } from "~/utils/helper";
+import { getRecordKey, getSource } from "~/utils/helper";
 import { getUser } from "~/graphql/api";
 
 export const actionTypes = {
@@ -117,6 +117,8 @@ export const eventActions = {
 };
 
 export function* eventsSaga() {
+  const eventSource = getSource();
+
   yield takeEvery(actionTypes.OUT_OF_STOCK, function* saga(e) {
     const { products, inventory } = e.payload;
     if (Array.isArray(products)) {
@@ -186,6 +188,7 @@ export function* eventsSaga() {
             "Utm Medium": medium,
             URL: window.location.href,
             "First Time User": isFirstTime,
+            Source: eventSource,
           });
         }
       }
@@ -290,18 +293,20 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     const { order, products, coupon, address, paymentType } = e.payload;
-    const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
+    const { id, code, totalShippingCharges, totalAmount, totalDiscount } =
+      order;
 
+    const userData = yield select((state) => state.user.data);
+    const user = userMapper(userData, address);
+    const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
     const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
     const { orderCreated } = moEngagedOrderMapper(
       products,
       coupon,
       paymentType,
-      order
+      order,
+      isFirstTimeUser
     );
-
-    const userData = yield select((state) => state.user.data);
-    const user = userMapper(userData, address);
 
     moeEvent("Order Created", orderCreated);
     moeEvent("Item Purchased", orderCreated);
@@ -555,6 +560,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     moeEvent("Add Payment Info", {
       URL: window.location.href,
+      Source: eventSource,
     });
   });
 
@@ -601,6 +607,7 @@ export function* eventsSaga() {
       if (e.detail.name === "SDK_INITIALIZED") {
         moeEvent("Home Viewed", {
           URL: window.location.href,
+          Source: eventSource,
         });
       }
     });
@@ -609,6 +616,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {
     moeEvent("Customer Logged Out", {
       ...e.payload,
+      Source: eventSource,
     });
   });
 }

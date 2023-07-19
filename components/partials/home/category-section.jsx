@@ -5,8 +5,11 @@ import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { eventActions } from "~/store/events";
 import { connect } from "react-redux";
+import { getSource } from "~/utils/helper";
 
-function CategorySection({ categories = [],tileClicked }) {
+function CategorySection({ categories = [], tileClicked }) {
+  const source = getSource();
+
   return (
     <section className="ellipse-section pt-6">
       <div className="container">
@@ -22,7 +25,7 @@ function CategorySection({ categories = [],tileClicked }) {
                       tileClicked({
                         banner_name: category.name,
                         item_id: category.id,
-                        Source: "Web",
+                        Source: source,
                         "Item Count": 0,
                         "Section Name": " browse our categories",
                       });

@@ -8,6 +8,7 @@ import { addPhonePrefix } from "~/utils/helper";
 import { getPublicImageURL } from "../getPublicImageUrl";
 import { removePhonePrefix } from "~/utils/helper";
 import { getCouponDiscount } from "../coupons";
+import { getSource } from "~/utils/helper";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -24,6 +25,7 @@ export const itemMapper = (product, coupon) => {
   } = product;
 
   let contentType = "product_group";
+  const source = getSource();
 
   if (!variantId) {
     variantId = getFirstVariant(product)?.id;
@@ -52,7 +54,7 @@ export const itemMapper = (product, coupon) => {
     "Total Quantity": qty,
     "Discount Amount": listingPrice - price,
     MRP: listingPrice,
-    Source: "Web",
+    Source: source,
     "Product Range": null,
   };
 
@@ -207,7 +209,8 @@ export const userMapper = (userData, address) => {
   } = address || {};
 
   if (userData) {
-    const { phone, firstName, lastName, email, gender, dob } = userData;
+    const { phone, firstName, lastName, email, gender, dob, totalOrders } =
+      userData;
     return {
       phone: addPhonePrefix(aP || phone),
       firstName: aF || firstName,
@@ -215,6 +218,7 @@ export const userMapper = (userData, address) => {
       email: aE || email,
       gender,
       dob,
+      totalOrders,
       city,
       state,
       country,
@@ -234,18 +238,21 @@ export const moEngagedOrderMapper = (
   products,
   coupon,
   paymentMethod,
-  order
+  order,
+  isFirstTimeUser
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
   let currentURL = window.location.href.split("/").slice(0, 3).join("/");
+  const source = getSource();
   const basicAttributes = {
     Currency: "INR",
     "Total Items": products?.length,
-    Source: "Web",
+    Source: source,
     "Cart URL": `${currentURL}/pages/cart`,
     "Vendor name": "Body Cupid",
     "Coupon Applied": coupon?.code,
     "Total Discount": couponTotal || 0,
+    "First Time User": isFirstTimeUser,
   };
 
   const mappings = products.reduce(
@@ -317,7 +324,7 @@ export const moEngagedOrderMapper = (
     orderCreated: {
       ...basicAttributes,
       ...mappings,
-      "Order ID": order?.id,
+      "Order ID": order?.code,
       "Order Date": new Date().toISOString(),
       "Payment Mode": paymentMethod,
       "Payment Status": null,
@@ -325,7 +332,7 @@ export const moEngagedOrderMapper = (
     cartViewed: {
       ...basicAttributes,
       ...mappings,
-      "Order ID": order?.id,
+      "Order ID": order?.code,
       "Order Date": new Date().toISOString(),
       "Payment Mode": paymentMethod,
       "Payment Status": null,

@@ -154,5 +154,9 @@ export const getBxGyFreeQuantity = (getYQuantity, buyXQuantity, cartList) => {
 
 export const getBxAyOnQuantity = (buyXQuantity, cartList) => {
   const { totalItems } = getCartTotals(cartList);
-  return (Math.floor(totalItems/buyXQuantity)) * buyXQuantity;
+  return Math.floor(totalItems / buyXQuantity) * buyXQuantity;
+};
+
+export const getSource = () => {
+  return window.innerWidth <= 575 ? "Mobile" : "Web";
 };
