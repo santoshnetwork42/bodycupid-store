@@ -11,6 +11,7 @@ import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { STORE_ID } from "~/config";
 import { errorHandler } from "~/utils/errorHandler";
+import { getSource } from "~/utils/helper";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
@@ -18,6 +19,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const [timer, setTimer] = useState(null);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const source = getSource();
 
   const searchProducts = useCallback(async (searchTerm) => {
     try {
@@ -39,6 +41,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
       productSearched({
         "search term": searchTerm,
         "Item Count": items.length,
+        Source: source,
       });
     } catch (error) {
       errorHandler(error);
