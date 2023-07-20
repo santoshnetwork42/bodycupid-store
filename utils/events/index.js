@@ -327,7 +327,7 @@ export const moEngagedOrderMapper = (
       "Order ID": order?.code,
       "Order Date": new Date().toISOString(),
       "Payment Mode": paymentMethod,
-      "Payment Status": order?.payments?.items[0].status,
+      "Payment Status": paymentMethod === "COD" ? "Unpaid" : "Paid",
     },
     cartViewed: {
       ...basicAttributes,

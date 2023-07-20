@@ -730,12 +730,6 @@ export const getOrderSuccess = /* GraphQL */ `
       totalDiscount
       totalShippingCharges
       totalCashOnDeliveryCharges
-      payments {
-        items {
-          id
-          status
-        }
-      }
     }
   }
 `;
