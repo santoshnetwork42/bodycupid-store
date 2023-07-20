@@ -87,7 +87,7 @@ function Coupon(props) {
 
       const response = await API.graphql({
         query: applyCouponMutation,
-        authMode: "API_KEY",
+        authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         variables: {
           code: couponCode,
           variantFilter: { status: { ne: "DISABLED" } },
