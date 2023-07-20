@@ -346,8 +346,6 @@ function Checkout(props) {
             ...metadata,
           };
 
-          console.log("appsync :>> ", { input: payload });
-
           const {
             data: { createNewOrder: order },
           } = await API.graphql({
