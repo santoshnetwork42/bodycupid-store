@@ -151,3 +151,8 @@ export const getBxGyFreeQuantity = (getYQuantity, buyXQuantity, cartList) => {
     ) * getYQuantity
   );
 };
+
+export const getBxAyOnQuantity = (buyXQuantity, cartList) => {
+  const { totalItems } = getCartTotals(cartList);
+  return (Math.floor(totalItems/buyXQuantity)) * buyXQuantity;
+};

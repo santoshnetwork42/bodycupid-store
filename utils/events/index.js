@@ -52,7 +52,7 @@ export const itemMapper = (product, coupon) => {
     Currency: "INR",
     "Total Quantity": qty,
     "Discount Amount": listingPrice - price,
-    MRP: price,
+    MRP: listingPrice,
     Source: "Web",
     "Product Range": null,
   };
