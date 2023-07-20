@@ -158,5 +158,7 @@ export const getBxAyOnQuantity = (buyXQuantity, cartList) => {
 };
 
 export const getSource = () => {
-  return window.innerWidth <= 575 ? "Mobile" : "Web";
+  return typeof window !== "undefined" && window?.innerWidth > 575
+    ? "Web"
+    : "Mobile";
 };

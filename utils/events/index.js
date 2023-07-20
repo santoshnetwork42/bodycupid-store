@@ -270,7 +270,6 @@ export const moEngagedOrderMapper = (
         "Total MRP": Total_MRP,
         "Product Subcategory": Product_Subcategory,
         "Product Category": Product_Category,
-        "Product Range": Product_Range,
       },
       product
     ) => {
@@ -320,6 +319,7 @@ export const moEngagedOrderMapper = (
     checkoutStarted: {
       ...basicAttributes,
       ...mappings,
+      "Cart URL": `${currentURL}/pages/checkout`,
     },
     orderCreated: {
       ...basicAttributes,

@@ -1071,40 +1071,35 @@ export const createReview = /* GraphQL */ `
   }
 `;
 
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
+export const byorderIdcreatedAtPayment = /* GraphQL */ `
+  query ByorderIdcreatedAtPayment(
+    $orderId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    createOrder(input: $input, condition: $condition) {
-      id
-      code
-      totalAmount
-      totalDiscount
-      totalShippingCharges
-      totalCashOnDeliveryCharges
-    }
-  }
-`;
-
-export const createPayment = /* GraphQL */ `
-  mutation CreatePayment(
-    $input: CreatePaymentInput!
-    $condition: ModelPaymentConditionInput
-  ) {
-    createPayment(input: $input, condition: $condition) {
-      id
-    }
-  }
-`;
-
-export const createOrderProduct = /* GraphQL */ `
-  mutation CreateOrderProduct(
-    $input: CreateOrderProductInput!
-    $condition: ModelOrderProductConditionInput
-  ) {
-    createOrderProduct(input: $input, condition: $condition) {
-      id
+    byorderIdcreatedAtPayment(
+      orderId: $orderId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        storeId
+        userId
+        orderId
+        method
+        status
+        amount
+        paymentDate
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -1801,6 +1796,35 @@ export const getCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+    }
+  }
+`;
+
+export const createNewOrder = /* GraphQL */ `
+  mutation CreateNewOrder($input: CreateNewOrderInput!) {
+    createNewOrder(input: $input) {
+      id
+      code
+      storeId
+      userId
+      channelName
+      totalStoreCredit
+      couponCodeId
+      totalAmount
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      currency
+      paymentType
+      sla
+      priority
+      orderDate
+      status
     }
   }
 `;
