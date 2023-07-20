@@ -7,11 +7,13 @@ import { introSlider } from "~/utils/data/carousel";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { connect } from "react-redux";
 import { eventActions } from "~/store/events";
+import { getSource } from "~/utils/helper";
 
 function IntroSection({ banners = [], bannerClicked, homeViewed }) {
   useEffect(() => {
     homeViewed();
   }, []);
+  const source = getSource();
 
   return (
     <div className="banner banner-fixed">
@@ -27,7 +29,7 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                 href={link || "/collections/all"}
                 onClick={() => {
                   bannerClicked({
-                    Source: link || "/collections/all",
+                    Source: source,
                     item_id: index,
                     banner_name: webKey,
                   });
@@ -46,6 +48,13 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
               </ALink>
               <ALink
                 href={link || "/collections/all"}
+                onClick={() => {
+                  bannerClicked({
+                    Source: source,
+                    item_id: index,
+                    banner_name: webKey,
+                  });
+                }}
                 className="d-none d-sm-show intro-slider-link" //for mobile size
               >
                 <Image

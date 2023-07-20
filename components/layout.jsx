@@ -122,10 +122,7 @@ function Layout({
         newestOnTop={true}
       />
 
-      {!!navbar.couponBanner && (
-        <CouponDiscountBar/>
-      )}
-      
+      {!!navbar.couponBanner && <CouponDiscountBar />}
 
       <Quickview />
       <LoginModal />

@@ -617,12 +617,6 @@ export const getOrder = /* GraphQL */ `
       code
       storeId
       userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-      }
       channelName
       shippingAddress {
         name
@@ -726,6 +720,20 @@ export const getOrder = /* GraphQL */ `
     }
   }
 `;
+
+export const getOrderSuccess = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      code
+      totalAmount
+      totalDiscount
+      totalShippingCharges
+      totalCashOnDeliveryCharges
+    }
+  }
+`;
+
 export const getOrderStatus = /* GraphQL */ `
   query GetOrder($id: ID!) {
     getOrder(id: $id) {
@@ -1063,39 +1071,35 @@ export const createReview = /* GraphQL */ `
   }
 `;
 
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
+export const byorderIdcreatedAtPayment = /* GraphQL */ `
+  query ByorderIdcreatedAtPayment(
+    $orderId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    createOrder(input: $input, condition: $condition) {
-      id
-      totalAmount
-      totalDiscount
-      totalShippingCharges
-      totalCashOnDeliveryCharges
-    }
-  }
-`;
-
-export const createPayment = /* GraphQL */ `
-  mutation CreatePayment(
-    $input: CreatePaymentInput!
-    $condition: ModelPaymentConditionInput
-  ) {
-    createPayment(input: $input, condition: $condition) {
-      id
-    }
-  }
-`;
-
-export const createOrderProduct = /* GraphQL */ `
-  mutation CreateOrderProduct(
-    $input: CreateOrderProductInput!
-    $condition: ModelOrderProductConditionInput
-  ) {
-    createOrderProduct(input: $input, condition: $condition) {
-      id
+    byorderIdcreatedAtPayment(
+      orderId: $orderId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        storeId
+        userId
+        orderId
+        method
+        status
+        amount
+        paymentDate
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -1223,6 +1227,55 @@ export const findUserAddresses = /* GraphQL */ `
   }
 `;
 
+export const createUserAddress = /* GraphQL */ `
+  mutation CreateUserAddress(
+    $input: CreateUserAddressInput!
+    $condition: ModelUserAddressConditionInput
+  ) {
+    createUserAddress(input: $input, condition: $condition) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const updateUserAddress = /* GraphQL */ `
+  mutation UpdateUserAddress(
+    $input: UpdateUserAddressInput!
+    $condition: ModelUserAddressConditionInput
+  ) {
+    updateUserAddress(input: $input, condition: $condition) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const searchOrders = /* GraphQL */ `
   query SearchOrders(
     $filter: SearchableOrderFilterInput
@@ -1265,6 +1318,7 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
+      totalOrders
       isActive
       authProvider
       isAdmin
@@ -1742,6 +1796,35 @@ export const getCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+    }
+  }
+`;
+
+export const createNewOrder = /* GraphQL */ `
+  mutation CreateNewOrder($input: CreateNewOrderInput!) {
+    createNewOrder(input: $input) {
+      id
+      code
+      storeId
+      userId
+      channelName
+      totalStoreCredit
+      couponCodeId
+      totalAmount
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      currency
+      paymentType
+      sla
+      priority
+      orderDate
+      status
     }
   }
 `;

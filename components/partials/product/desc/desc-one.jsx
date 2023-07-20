@@ -197,6 +197,7 @@ function DescOne(props) {
         const { rating, comment, name, email, images } = reviewState;
         await API.graphql({
           query: createReview,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               rating,
