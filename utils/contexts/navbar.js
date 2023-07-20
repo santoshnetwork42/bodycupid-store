@@ -75,9 +75,14 @@ function NavbarProvider({ children, config }) {
       query: getFeaturedCoupon,
       variables: {
         filter: {
-          isFeatured: { eq: true },
           isActive: { eq: true },
           storeId: { eq: STORE_ID },
+          or: [
+            { isFeatured: { eq: true } },
+            {
+              couponType: { eq: "FREEBIE" },
+            },
+          ],
         },
       },
     })

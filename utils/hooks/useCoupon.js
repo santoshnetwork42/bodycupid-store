@@ -59,7 +59,7 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
   const cartItems = useSelector((state) => state.cart.data || []);
   const appliedCoupon = useSelector((state) => state.cart.coupon);
   const [products, setProducts] = useState([]);
-  
+
   const { total, totalItems, cartList } = useMemo(() => {
     const cartItemsList = cartItems.filter(
       (item) => item.cartItemSource !== "COUPON"
@@ -75,7 +75,6 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
       (coupons || [])
         .filter((coupon) => {
           const {
-            autoApply,
             couponType,
             applicableProducts,
             applicableCollections,
@@ -88,7 +87,6 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           if (couponType !== "FREEBIE") return false;
           if (isExternal) return false;
           if (!total) return false;
-          if (!autoApply) return false;
 
           if (showNonApplicableFreeProducts) return true;
 
