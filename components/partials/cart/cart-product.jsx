@@ -8,7 +8,7 @@ import { Close } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
-import { getCartTotals, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
 
@@ -79,21 +79,6 @@ function CartProduct({
       });
       updateCart(cartData);
     } else {
-      if (appliedCoupon?.couponType === "PRODUCT") {
-        const { totalPrice } = getCartTotals(cartList, [], appliedCoupon);
-        const newCartList = cartList.filter((c) => c.id !== item.id);
-        const freeProduct = cartList.find(
-          (c) => appliedCoupon.getYProduct === c.id
-        );
-        if (
-          freeProduct &&
-          (appliedCoupon.minOrderValue > totalPrice ||
-            appliedCoupon.buyXQuantity > newCartList.length - 1)
-        ) {
-          removeFromCart(freeProduct);
-          removeCoupon();
-        }
-      }
       removeFromCart(item);
     }
   };
@@ -140,7 +125,10 @@ function CartProduct({
           </figure>
           <div className="text-left text-primary w-100 mr-1 ml-2">
             <div className="mr-6 cart-product-title " title={title}>
-              <ALink className="p-0 overflow-ellipsis font-weight-normal" href={"/products/" + slug}>
+              <ALink
+                className="p-0 overflow-ellipsis font-weight-normal"
+                href={"/products/" + slug}
+              >
                 {title}
               </ALink>
             </div>
@@ -187,7 +175,7 @@ function CartProduct({
                 <p className="m-0 outofstock-label">out of stock</p>
               </div>
             ) : (
-              <div> 
+              <div>
                 {!disableChange && (
                   <div className="product-quantity w-0 mb-1">
                     {cartItemType === "FREE_PRODUCT" ? (

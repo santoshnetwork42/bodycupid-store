@@ -17,6 +17,15 @@ export function* couponSaga() {
       if (coupon) {
         const { allowed } = getCouponDiscount(coupon, data);
         if (!allowed) {
+          const product = data.find((p) => p.cartItemSource === "COUPON");
+
+          if (product) {
+            yield put({
+              type: actionTypes.REMOVE_FROM_CART,
+              payload: { product },
+            });
+          }
+
           yield put({ type: actionTypes.REMOVE_COUPON });
         }
       }
