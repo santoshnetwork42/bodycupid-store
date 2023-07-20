@@ -74,6 +74,65 @@ body:not(.loaded) * {
   opacity: 1;
 }
 
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.chat-window {
+  width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.chat-log {
+  padding: 10px;
+}
+
+.chat-message {
+  background-color: #f1f1f1;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.chat-message.user {
+  background-color: #d3f9d8;
+  text-align: right;
+}
+
+.input-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button {
+  margin-left: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 .page-wrapper {
   opacity: 0;
   position: relative;
