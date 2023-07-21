@@ -116,14 +116,14 @@ body:not(.loaded) * {
   align-items: center;
 }
 
-.input {
+.input1 {
   flex: 1;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.button {
+.button1 {
   margin-left: 10px;
   background-color: #007bff;
   color: white;
@@ -131,6 +131,13 @@ body:not(.loaded) * {
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.avatar {
+  width: 45px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .page-wrapper {

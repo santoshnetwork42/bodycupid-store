@@ -6,9 +6,12 @@ const ChatWindow = () => {
   const [userInput, setUserInput] = useState("");
 
   const addMessage = (message, isUser = false) => {
+    const avatar = isUser
+      ? "https://banner2.cleanpng.com/20180418/xqw/kisspng-avatar-computer-icons-business-business-woman-5ad736ba3f2735.7973320115240536902587.jpg"
+      : "https://banner2.cleanpng.com/20180428/sue/kisspng-pittman-animal-hospital-user-computer-icons-avatar-5ae4937a25a0b7.9399757315249294021541.jpg";
     setMessages((prevMessages) => [
       ...prevMessages,
-      { text: message, isUser: isUser },
+      { text: message, isUser: isUser, avatar: avatar },
     ]);
   };
 
@@ -20,8 +23,6 @@ const ChatWindow = () => {
     e.preventDefault();
     if (userInput.trim() !== "") {
       addMessage(userInput, true);
-      // Call your chatbot logic here to generate a response
-      // For this example, we'll just echo back the user's input
       setTimeout(() => addMessage(userInput), 1000);
       setUserInput("");
     }
@@ -35,18 +36,22 @@ const ChatWindow = () => {
             key={index}
             message={message.text}
             isUser={message.isUser}
+            avatar={message.avatar}
           />
         ))}
       </div>
       <div className="input-container">
         <form onSubmit={handleUserSubmit}>
           <input
+            className="input1"
             type="text"
             value={userInput}
             onChange={handleUserInput}
             placeholder="Type your message..."
           />
-          <button type="submit">Send</button>
+          <button className="button1" type="submit">
+            Send
+          </button>
         </form>
       </div>
     </div>
