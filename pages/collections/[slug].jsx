@@ -97,7 +97,7 @@ export const getStaticPaths = async () => {
     fetchData(getAllSubcategoriesPath, {
       filter: { storeId: { eq: STORE_ID } },
     }),
-    fetchData(listCollectionsQuery, {
+    fetchData(searchCollectionTypes, {
       filter: { storeId: { eq: STORE_ID } },
     }),
   ]);
