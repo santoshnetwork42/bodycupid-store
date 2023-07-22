@@ -7,12 +7,11 @@ import {
   getBasicCategory,
   getAllCategoriesPath,
   getAllSubcategoriesPath,
-  listCollections as listCollectionsQuery,
   findProducts,
   getSubCategoriesByCategoryID,
   getBasicSubCategory,
-  getCollection,
   getStoreBanners,
+  searchCollectionTypes,
 } from "~/graphql/api";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
@@ -90,7 +89,7 @@ export const getStaticPaths = async () => {
   const [
     { searchProductCategories },
     { searchProductSubCategories },
-    { listCollections },
+    { searchCollectionTypes },
   ] = await Promise.all([
     fetchData(getAllCategoriesPath, {
       filter: { storeId: { eq: STORE_ID } },
@@ -106,7 +105,7 @@ export const getStaticPaths = async () => {
   const paths = [
     ...searchProductCategories.items,
     ...searchProductSubCategories.items,
-    ...listCollections.items,
+    ...searchCollectionTypes.items,
   ].map((c) => {
     return {
       params: { slug: c.slug },
@@ -261,26 +260,31 @@ export const getStaticProps = async (context) => {
       };
     }
 
-    const collection = await fetchData(getCollection, {
-      slug,
-    }).then((resp) => resp.getCollection);
+    const collection = await fetchData(searchCollectionTypes, {
+      filter: {
+        slug: { eq: slug },
+        storeId: { eq: STORE_ID },
+      },
+    }).then((resp) =>
+      resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
+    );
 
     if (collection) {
       const { title, description, imageUrl, name: collectionName } = collection;
 
-      const { listCollections } = await fetchData(listCollectionsQuery, {
+      const otherCollections = await fetchData(searchCollectionTypes, {
         filter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           slug: { ne: slug },
         },
-        sort: [{ field: "position", direction: "asc" }],
-      });
+        sort: [{ field: "priority", direction: "asc" }],
+      }).then((res) => res.searchCollectionTypes.items);
 
       const collections = [
         { name: "All", path: "/collections/ranges" },
         { name: collectionName, path: `/collections/${slug}` },
-        ...listCollections.items.map((col) => ({
+        ...otherCollections.map((col) => ({
           ...col,
           path: `/collections/${col.slug}`,
         })),
