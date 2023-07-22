@@ -12,6 +12,7 @@ import {
   getBasicSubCategory,
   getStoreBanners,
   searchCollectionTypes,
+  getAllCollectionPath,
 } from "~/graphql/api";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
@@ -89,7 +90,7 @@ export const getStaticPaths = async () => {
   const [
     { searchProductCategories },
     { searchProductSubCategories },
-    { searchCollectionTypes },
+    { searchCollectionTypes: allCollections },
   ] = await Promise.all([
     fetchData(getAllCategoriesPath, {
       filter: { storeId: { eq: STORE_ID } },
@@ -97,7 +98,7 @@ export const getStaticPaths = async () => {
     fetchData(getAllSubcategoriesPath, {
       filter: { storeId: { eq: STORE_ID } },
     }),
-    fetchData(searchCollectionTypes, {
+    fetchData(getAllCollectionPath, {
       filter: { storeId: { eq: STORE_ID } },
     }),
   ]);
@@ -105,7 +106,7 @@ export const getStaticPaths = async () => {
   const paths = [
     ...searchProductCategories.items,
     ...searchProductSubCategories.items,
-    ...searchCollectionTypes.items,
+    ...allCollections.items,
   ].map((c) => {
     return {
       params: { slug: c.slug },

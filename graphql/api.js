@@ -143,6 +143,30 @@ export const getAllCategoriesPath = /* GraphQL */ `
   }
 `;
 
+export const getAllCollectionPath = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
 export const getHomePageProducts = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
