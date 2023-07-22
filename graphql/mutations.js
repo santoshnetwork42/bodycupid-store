@@ -411,156 +411,6 @@ export const deleteProductLog = /* GraphQL */ `
     }
   }
 `;
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
-  ) {
-    createOrder(input: $input, condition: $condition) {
-      id
-      code
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        isActive
-        authProvider
-        isAdmin
-        profilePhotoUrl
-        emailVerified
-        phoneVerified
-        isCognitoConfirmed
-        createdAt
-        updatedAt
-        totalOrders
-        totalSpent
-        lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        __typename
-      }
-      channelName
-      shippingAddress {
-        name
-        phone
-        email
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
-        __typename
-      }
-      billingAddress {
-        name
-        phone
-        email
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
-        __typename
-      }
-      totalStoreCredit
-      couponCodeId
-      coupon {
-        id
-        code
-        description
-        groupId
-        storeId
-        userId
-        couponType
-        buyXQuantity
-        getYAmount
-        getYPercentage
-        getYQuantity
-        getYProduct
-        minOrderValue
-        maxDiscount
-        expirationDate
-        isActive
-        isFeatured
-        autoApply
-        applicableCollections
-        applicableProducts
-        paymentMethod
-        abandonCart
-        createdAt
-        updatedAt
-        __typename
-      }
-      totalAmount
-      totalCashOnDeliveryCharges
-      totalDiscount
-      totalGiftCharges
-      totalPrepaidAmount
-      totalShippingCharges
-      taxExempted
-      cFormProvided
-      thirdPartyShipping
-      currency
-      paymentType
-      sla
-      priority
-      orderDate
-      status
-      products {
-        nextToken
-        __typename
-      }
-      payments {
-        nextToken
-        __typename
-      }
-      comments {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      utmSource
-      utmContent
-      utmMedium
-      utmCampaign
-      utmTerm
-      source
-      referrer
-      landingPage
-      confirmedViaWebhook
-      __typename
-    }
-  }
-`;
 export const deleteOrder = /* GraphQL */ `
   mutation DeleteOrder(
     $input: DeleteOrderInput!
@@ -795,133 +645,6 @@ export const deleteOrderComment = /* GraphQL */ `
     }
   }
 `;
-export const createOrderProduct = /* GraphQL */ `
-  mutation CreateOrderProduct(
-    $input: CreateOrderProductInput!
-    $condition: ModelOrderProductConditionInput
-  ) {
-    createOrderProduct(input: $input, condition: $condition) {
-      id
-      orderId
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      variantId
-      variant {
-        id
-        productId
-        title
-        description
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        createdAt
-        updatedAt
-        taxable
-        barcode
-        imageUrl
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        __typename
-      }
-      sku
-      returnReason
-      returnDate
-      returnAWB
-      returnShippingProvider
-      title
-      shippingMethodCode
-      cashOnDeliveryCharges
-      sellingPrice
-      shippingCharges
-      discount
-      totalPrice
-      currency
-      onHold
-      facilityCode
-      gstin
-      additionalInfo
-      centralGstPercentage
-      compensationCessPercentage
-      integratedGstPercentage
-      stateGstPercentage
-      taxRate
-      unionTerritoryGstPercentage
-      deliveryPartner
-      shippingCourier
-      dispatchDate
-      invoiceDate
-      invoiceNumber
-      tentativeDeliveryDate
-      trackingId
-      cancelledQuantity
-      quantity
-      price
-      status
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const deleteOrderProduct = /* GraphQL */ `
   mutation DeleteOrderProduct(
     $input: DeleteOrderProductInput!
@@ -1043,66 +766,6 @@ export const deleteOrderProduct = /* GraphQL */ `
       quantity
       price
       status
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createPayment = /* GraphQL */ `
-  mutation CreatePayment(
-    $input: CreatePaymentInput!
-    $condition: ModelPaymentConditionInput
-  ) {
-    createPayment(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        isActive
-        authProvider
-        isAdmin
-        profilePhotoUrl
-        emailVerified
-        phoneVerified
-        isCognitoConfirmed
-        createdAt
-        updatedAt
-        totalOrders
-        totalSpent
-        lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        __typename
-      }
-      orderId
-      method
-      status
-      amount
-      paymentDate
       createdAt
       updatedAt
       __typename
@@ -1992,12 +1655,13 @@ export const deleteShippingTier = /* GraphQL */ `
     }
   }
 `;
-export const createCollection = /* GraphQL */ `
-  mutation CreateCollection(
-    $input: CreateCollectionInput!
-    $condition: ModelCollectionConditionInput
+export const createCollectionType = /* GraphQL */ `
+  mutation CreateCollectionType(
+    $input: CreateCollectionTypeInput!
+    $condition: ModelCollectionTypeConditionInput
   ) {
-    createCollection(input: $input, condition: $condition) {
+    createCollectionType(input: $input, condition: $condition) {
+      id
       slug
       parent
       name
@@ -2027,12 +1691,13 @@ export const createCollection = /* GraphQL */ `
     }
   }
 `;
-export const updateCollection = /* GraphQL */ `
-  mutation UpdateCollection(
-    $input: UpdateCollectionInput!
-    $condition: ModelCollectionConditionInput
+export const updateCollectionType = /* GraphQL */ `
+  mutation UpdateCollectionType(
+    $input: UpdateCollectionTypeInput!
+    $condition: ModelCollectionTypeConditionInput
   ) {
-    updateCollection(input: $input, condition: $condition) {
+    updateCollectionType(input: $input, condition: $condition) {
+      id
       slug
       parent
       name
@@ -2062,12 +1727,13 @@ export const updateCollection = /* GraphQL */ `
     }
   }
 `;
-export const deleteCollection = /* GraphQL */ `
-  mutation DeleteCollection(
-    $input: DeleteCollectionInput!
-    $condition: ModelCollectionConditionInput
+export const deleteCollectionType = /* GraphQL */ `
+  mutation DeleteCollectionType(
+    $input: DeleteCollectionTypeInput!
+    $condition: ModelCollectionTypeConditionInput
   ) {
-    deleteCollection(input: $input, condition: $condition) {
+    deleteCollectionType(input: $input, condition: $condition) {
+      id
       slug
       parent
       name
@@ -2761,6 +2427,156 @@ export const updateProductLog = /* GraphQL */ `
     }
   }
 `;
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    createOrder(input: $input, condition: $condition) {
+      id
+      code
+      storeId
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+        __typename
+      }
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        lastOrderDate
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        __typename
+      }
+      channelName
+      shippingAddress {
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        __typename
+      }
+      billingAddress {
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        __typename
+      }
+      totalStoreCredit
+      couponCodeId
+      coupon {
+        id
+        code
+        description
+        groupId
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        abandonCart
+        createdAt
+        updatedAt
+        __typename
+      }
+      totalAmount
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      currency
+      paymentType
+      sla
+      priority
+      orderDate
+      status
+      products {
+        nextToken
+        __typename
+      }
+      payments {
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
+      confirmedViaWebhook
+      __typename
+    }
+  }
+`;
 export const updateOrder = /* GraphQL */ `
   mutation UpdateOrder(
     $input: UpdateOrderInput!
@@ -2953,6 +2769,133 @@ export const createOrderComment = /* GraphQL */ `
     }
   }
 `;
+export const createOrderProduct = /* GraphQL */ `
+  mutation CreateOrderProduct(
+    $input: CreateOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    createOrderProduct(input: $input, condition: $condition) {
+      id
+      orderId
+      productId
+      product {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        pageTitle
+        productDescription
+        longDescription
+        manufacturer
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+        __typename
+      }
+      variantId
+      variant {
+        id
+        productId
+        title
+        description
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
+        taxable
+        barcode
+        imageUrl
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        __typename
+      }
+      sku
+      returnReason
+      returnDate
+      returnAWB
+      returnShippingProvider
+      title
+      shippingMethodCode
+      cashOnDeliveryCharges
+      sellingPrice
+      shippingCharges
+      discount
+      totalPrice
+      currency
+      onHold
+      facilityCode
+      gstin
+      additionalInfo
+      centralGstPercentage
+      compensationCessPercentage
+      integratedGstPercentage
+      stateGstPercentage
+      taxRate
+      unionTerritoryGstPercentage
+      deliveryPartner
+      shippingCourier
+      dispatchDate
+      invoiceDate
+      invoiceNumber
+      tentativeDeliveryDate
+      trackingId
+      cancelledQuantity
+      quantity
+      price
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const updateOrderProduct = /* GraphQL */ `
   mutation UpdateOrderProduct(
     $input: UpdateOrderProductInput!
@@ -3074,6 +3017,66 @@ export const updateOrderProduct = /* GraphQL */ `
       quantity
       price
       status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createPayment = /* GraphQL */ `
+  mutation CreatePayment(
+    $input: CreatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    createPayment(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+        __typename
+      }
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        lastOrderDate
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        __typename
+      }
+      orderId
+      method
+      status
+      amount
+      paymentDate
       createdAt
       updatedAt
       __typename
