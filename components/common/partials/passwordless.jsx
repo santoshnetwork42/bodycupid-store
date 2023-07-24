@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useStore } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth, API } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -29,13 +29,17 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
-  login
+  login,
 }) {
   const router = useRouter();
+  const { query } = router;
+
   const [state, setState] = useState({
     phone: "",
     confirmationCode: new Array(6).fill(""),
   });
+
+  const store = useStore();
 
   const [confirmSignUp, setConfirmSignUp] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
@@ -113,6 +117,8 @@ function Passwordless({
               variables: { id: user?.attributes?.sub },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
+            const { sub } = user?.attributes;
+            store.dispatch(eventActions.auth("login", { userId: sub, query }));
 
             await setUser(getUserResponse);
           }
@@ -125,6 +131,9 @@ function Passwordless({
             state.confirmationCode.join("")
           );
           if (!!signInUserSession) {
+            const { sub } = signInUserSession.accessToken.payload;
+            store.dispatch(eventActions.auth("login", { userId: sub, query }));
+
             closeModal();
             if (redirect) router.push("/pages/checkout");
           } else {
@@ -150,11 +159,10 @@ function Passwordless({
         const cu = await Auth.signIn({
           username: addPhonePrefix(state.phone),
         });
-        setCurrentUser(cu);  addressAdded: eventActions.addressAdded,
+        setCurrentUser(cu);
         setConfirmSignUp("SIGNIN");
         setSeconds(30);
         setLoading(false);
-        
       } catch (error) {
         logger.error("error in signin:", error);
         if (error.code === "UserNotConfirmedException") {
@@ -185,7 +193,11 @@ function Passwordless({
 
   useEffect(() => {
     let ac;
-    if (confirmSignUp && typeof window !== "undefined" && "OTPCredential" in window) {
+    if (
+      confirmSignUp &&
+      typeof window !== "undefined" &&
+      "OTPCredential" in window
+    ) {
       ac = new AbortController();
       navigator?.credentials
         .get({
@@ -195,7 +207,7 @@ function Passwordless({
         .then((otp) => {
           setState({
             ...state,
-            confirmationCode: otp.code.split("")
+            confirmationCode: otp.code.split(""),
           });
         })
         .catch((err) => {
@@ -396,7 +408,7 @@ function Passwordless({
                             </ALink>
                           ) : (
                             <p className="not-receive-otp-label mt-2">
-                              Did't receive it? Resend in {seconds}
+                              Didn't receive it? Resend in {seconds}
                             </p>
                           )}
                         </form>
@@ -425,5 +437,5 @@ export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
   openLogin: modalActions.openLoginModal,
   setUser: userActions.setUser,
-  login: eventActions.logIn
+  login: eventActions.logIn,
 })(Passwordless);

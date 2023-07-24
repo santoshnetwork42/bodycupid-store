@@ -11,7 +11,7 @@ import { modalActions } from "~/store/modal";
 import { useMenu } from "~/utils/contexts/navbar";
 import { eventActions } from "~/store/events";
 
-function MobileMenu({ user,logout, openPasswordLess, topNavbarClicked }) {
+function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
   const router = useRouter();
   const menu = useMenu();
 
@@ -52,9 +52,9 @@ function MobileMenu({ user,logout, openPasswordLess, topNavbarClicked }) {
 
   const handleLogout = useCallback(async () => {
     logout({
-      "Customer ID":user?.id,
-      URL:window.location.href
-    })
+      "Customer ID": user?.id,
+      URL: window.location.href,
+    });
     await Auth.signOut();
     router.push("/");
   }, []);
@@ -110,7 +110,7 @@ function MobileMenu({ user,logout, openPasswordLess, topNavbarClicked }) {
                             hideMobileMenu(e);
                             topNavbarClicked({
                               banner_name: subItem.label,
-                              item_id: subItem.id,
+                              item_id: subItem.slug,
                               Source: "Web",
                               "Section Name": "Top Navbar",
                             });

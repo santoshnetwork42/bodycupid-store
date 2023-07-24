@@ -5,7 +5,7 @@ import Cookie from "js-cookie";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import {
   getMenuCategories,
-  listCollections,
+  searchCollectionTypes,
   searchShippingTiers,
   getFeaturedCoupon,
   searchConfigurations,
@@ -26,14 +26,14 @@ function NavbarProvider({ children, config }) {
 
   const getCollections = () => {
     API.graphql(
-      graphqlOperation(listCollections, {
+      graphqlOperation(searchCollectionTypes, {
         filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
       .then(
         (listCollectionsResponse) =>
-          listCollectionsResponse.data.listCollections.items
+          listCollectionsResponse.data.searchCollectionTypes.items
       )
       .then(setCollections)
       .catch(errorHandler);
@@ -75,9 +75,14 @@ function NavbarProvider({ children, config }) {
       query: getFeaturedCoupon,
       variables: {
         filter: {
-          isFeatured: { eq: true },
           isActive: { eq: true },
           storeId: { eq: STORE_ID },
+          or: [
+            { isFeatured: { eq: true } },
+            {
+              couponType: { eq: "FREEBIE" },
+            },
+          ],
         },
       },
     })
@@ -157,9 +162,11 @@ export const useMenu = () => {
   const menu = categories.map((category) => ({
     label: category.name,
     link: `/collections/${category.slug}`,
+    slug: category.slug,
     subMenu: category?.subCategory?.items.map((subCat) => ({
       label: subCat.name,
       link: `/collections/${subCat.slug}`,
+      slug: subCat.slug,
     })),
   }));
 
@@ -167,18 +174,22 @@ export const useMenu = () => {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
       link: `/collections/${col.slug}`,
+      slug: col.slug,
     }));
 
     menu.push({
       label: "Ranges",
       link: "/collections/ranges",
       subMenu: collectionsMenu,
+      slug: "ranges",
     });
   }
 
-  menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
-
-  menu.push({ label: "Clearance Sale", link: `/collections/clearance-sale` });
+  menu.push({
+    label: "Combos & Gifts",
+    link: `/collections/combos-and-gifts`,
+    slug: "combos-and-gifts",
+  });
 
   return menu;
 };
