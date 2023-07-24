@@ -293,8 +293,7 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     const { order, products, coupon, address, paymentType } = e.payload;
-    const { id, code, totalShippingCharges, totalAmount, totalDiscount } =
-      order;
+    const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
     const userData = yield select((state) => state.user.data);
     const user = userMapper(userData, address);

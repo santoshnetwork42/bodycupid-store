@@ -143,6 +143,30 @@ export const getAllCategoriesPath = /* GraphQL */ `
   }
 `;
 
+export const getAllCollectionPath = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
 export const getHomePageProducts = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
@@ -730,12 +754,6 @@ export const getOrderSuccess = /* GraphQL */ `
       totalDiscount
       totalShippingCharges
       totalCashOnDeliveryCharges
-      payments {
-        items {
-          id
-          status
-        }
-      }
     }
   }
 `;
@@ -1647,41 +1665,33 @@ export const getHomePageBlogs = /* GraphQL */ `
   }
 `;
 
-export const listCollections = /* GraphQL */ `
-  query ListCollections(
-    $slug: ID
-    $filter: ModelCollectionFilterInput
+export const searchCollectionTypes = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
   ) {
-    listCollections(
-      slug: $slug
+    searchCollectionTypes(
       filter: $filter
+      sort: $sort
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
+      from: $from
+      aggregates: $aggregates
     ) {
       items {
-        name
+        id
         slug
+        name
+        title
+        description
+        showInMenu
+        priority
+        imageUrl
       }
-      nextToken
-    }
-  }
-`;
-
-export const getCollection = /* GraphQL */ `
-  query GetCollection($slug: ID!) {
-    getCollection(slug: $slug) {
-      slug
-      parent
-      name
-      title
-      description
-      showInMenu
-      priority
-      imageUrl
     }
   }
 `;

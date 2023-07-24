@@ -5,7 +5,7 @@ import Cookie from "js-cookie";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import {
   getMenuCategories,
-  listCollections,
+  searchCollectionTypes,
   searchShippingTiers,
   getFeaturedCoupon,
   searchConfigurations,
@@ -26,14 +26,14 @@ function NavbarProvider({ children, config }) {
 
   const getCollections = () => {
     API.graphql(
-      graphqlOperation(listCollections, {
+      graphqlOperation(searchCollectionTypes, {
         filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
       .then(
         (listCollectionsResponse) =>
-          listCollectionsResponse.data.listCollections.items
+          listCollectionsResponse.data.searchCollectionTypes.items
       )
       .then(setCollections)
       .catch(errorHandler);
@@ -189,12 +189,6 @@ export const useMenu = () => {
     label: "Combos & Gifts",
     link: `/collections/combos-and-gifts`,
     slug: "combos-and-gifts",
-  });
-
-  menu.push({
-    label: "Clearance Sale",
-    link: `/collections/clearance-sale`,
-    slug: "clearance-sale",
   });
 
   return menu;

@@ -1,6 +1,95 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const searchCollections = /* GraphQL */ `
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
+  ) {
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+              __typename
+            }
+          }
+        }
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+export const bystoreIdCollections = /* GraphQL */ `
+  query BystoreIdCollections(
+    $storeId: ID!
+    $priority: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bystoreIdCollections(
+      storeId: $storeId
+      priority: $priority
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -1206,9 +1295,10 @@ export const searchShippingTiers = /* GraphQL */ `
     }
   }
 `;
-export const getCollection = /* GraphQL */ `
-  query GetCollection($slug: ID!) {
-    getCollection(slug: $slug) {
+export const getCollectionType = /* GraphQL */ `
+  query GetCollectionType($id: ID!) {
+    getCollectionType(id: $id) {
+      id
       slug
       parent
       name
@@ -1238,22 +1328,15 @@ export const getCollection = /* GraphQL */ `
     }
   }
 `;
-export const listCollections = /* GraphQL */ `
-  query ListCollections(
-    $slug: ID
-    $filter: ModelCollectionFilterInput
+export const listCollectionTypes = /* GraphQL */ `
+  query ListCollectionTypes(
+    $filter: ModelCollectionTypeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listCollections(
-      slug: $slug
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listCollectionTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         slug
         parent
         name
@@ -1272,16 +1355,16 @@ export const listCollections = /* GraphQL */ `
     }
   }
 `;
-export const bystoreIdCollections = /* GraphQL */ `
-  query BystoreIdCollections(
+export const bystoreIdAllCollections = /* GraphQL */ `
+  query BystoreIdAllCollections(
     $storeId: ID!
     $priority: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelCollectionFilterInput
+    $filter: ModelCollectionTypeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    bystoreIdCollections(
+    bystoreIdAllCollections(
       storeId: $storeId
       priority: $priority
       sortDirection: $sortDirection
@@ -1290,6 +1373,7 @@ export const bystoreIdCollections = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
+        id
         slug
         parent
         name
@@ -1308,16 +1392,16 @@ export const bystoreIdCollections = /* GraphQL */ `
     }
   }
 `;
-export const searchCollections = /* GraphQL */ `
-  query SearchCollections(
-    $filter: SearchableCollectionFilterInput
-    $sort: [SearchableCollectionSortInput]
+export const searchCollectionTypes = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableCollectionAggregationInput]
+    $aggregates: [SearchableCollectionTypeAggregationInput]
   ) {
-    searchCollections(
+    searchCollectionTypes(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -1326,6 +1410,7 @@ export const searchCollections = /* GraphQL */ `
       aggregates: $aggregates
     ) {
       items {
+        id
         slug
         parent
         name
