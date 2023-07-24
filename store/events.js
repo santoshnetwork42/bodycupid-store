@@ -308,6 +308,16 @@ export function* eventsSaga() {
     );
 
     moeEvent("Order Created", orderCreated);
+    const Moengage = window?.Moengage;
+    if (Moengage) {
+      const { firstName, lastName, email, phone } = user;
+      const mobile = phone.split("+91")[1];
+      Moengage.add_first_name(firstName);
+      Moengage.add_last_name(lastName);
+      Moengage.add_email(email);
+      Moengage.add_mobile(mobile);
+      Moengage.add_unique_user_id(mobile);
+    }
     moeEvent("Item Purchased", orderCreated);
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
@@ -545,7 +555,18 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     const { address, totalPrice } = e.payload;
+
     const { addressAdded } = addressMapper(address, totalPrice);
+    const Moengage = window?.Moengage;
+    if (Moengage) {
+      const { name, email, phone } = address;
+      const mobile = phone.split("+91")[1];
+      Moengage.add_first_name(name.split(" ")[0]);
+      Moengage.add_last_name(name.split(" ")[1]);
+      Moengage.add_email(email);
+      Moengage.add_mobile(mobile);
+      Moengage.add_unique_user_id(mobile);
+    }
 
     moeEvent("Address Added", addressAdded);
   });
@@ -553,6 +574,17 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
     const { address, totalPrice } = e.payload;
     const { addressSelected } = addressMapper(address, totalPrice);
+
+    const Moengage = window?.Moengage;
+    if (Moengage) {
+      const { name, email, phone } = address;
+      const mobile = phone.split("+91")[1];
+      Moengage.add_first_name(name.split(" ")[0]);
+      Moengage.add_last_name(name.split(" ")[1]);
+      Moengage.add_email(email);
+      Moengage.add_mobile(mobile);
+      Moengage.add_unique_user_id(mobile);
+    }
     moeEvent("Address Selected", addressSelected);
   });
 
