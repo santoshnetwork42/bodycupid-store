@@ -191,12 +191,6 @@ export const useMenu = () => {
     slug: "combos-and-gifts",
   });
 
-  menu.push({
-    label: "Clearance Sale",
-    link: `/collections/clearance-sale`,
-    slug: "clearance-sale",
-  });
-
   return menu;
 };
 
