@@ -15,7 +15,11 @@ import {
   userMapper,
 } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
-import { getRecordKey, getSource } from "~/utils/helper";
+import {
+  getRecordKey,
+  getSource,
+  initializeMoengageAndAddInfo,
+} from "~/utils/helper";
 import { getUser } from "~/graphql/api";
 
 export const actionTypes = {
@@ -171,26 +175,24 @@ export function* eventsSaga() {
         const isFirstTime =
           Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
           300;
-        const Moengage = window?.Moengage;
-        if (Moengage) {
-          const { firstName, lastName, email, phone } = getUserResponse;
-          const mobile = phone.split("+91")[1];
-          Moengage.add_first_name(firstName);
-          Moengage.add_last_name(lastName);
-          Moengage.add_email(email);
-          Moengage.add_mobile(mobile);
-          Moengage.add_unique_user_id(mobile);
+        const { firstName, lastName, email, phone } = getUserResponse;
+        initializeMoengageAndAddInfo({
+          firstName,
+          lastName,
+          email,
+          phone,
+        });
+        const mobile = user.phone.split("+91")[1];
 
-          moeEvent("Customer Logged In", {
-            "Customer ID": userId,
-            "Mobile Number": mobile,
-            "Utm Source": source,
-            "Utm Medium": medium,
-            URL: window.location.href,
-            "First Time User": isFirstTime,
-            Source: eventSource,
-          });
-        }
+        moeEvent("Customer Logged In", {
+          "Customer ID": userId,
+          "Mobile Number": mobile,
+          "Utm Source": source,
+          "Utm Medium": medium,
+          URL: window.location.href,
+          "First Time User": isFirstTime,
+          Source: eventSource,
+        });
       }
     } else if (action == "logout") {
       const Moengage = window?.Moengage;
@@ -307,17 +309,14 @@ export function* eventsSaga() {
       isFirstTimeUser
     );
 
+    const { firstName, lastName, email, phone } = user;
+    initializeMoengageAndAddInfo({
+      firstName,
+      lastName,
+      email,
+      phone,
+    });
     moeEvent("Order Created", orderCreated);
-    const Moengage = window?.Moengage;
-    if (Moengage) {
-      const { firstName, lastName, email, phone } = user;
-      const mobile = phone.split("+91")[1];
-      Moengage.add_first_name(firstName);
-      Moengage.add_last_name(lastName);
-      Moengage.add_email(email);
-      Moengage.add_mobile(mobile);
-      Moengage.add_unique_user_id(mobile);
-    }
     moeEvent("Item Purchased", orderCreated);
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
@@ -556,17 +555,14 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     const { address, totalPrice } = e.payload;
 
+    const { name, email, phone } = address;
+    initializeMoengageAndAddInfo({
+      firstName: name.split(" ")[0],
+      lastName: name.split(" ")[1],
+      email,
+      phone,
+    });
     const { addressAdded } = addressMapper(address, totalPrice);
-    const Moengage = window?.Moengage;
-    if (Moengage) {
-      const { name, email, phone } = address;
-      const mobile = phone.split("+91")[1];
-      Moengage.add_first_name(name.split(" ")[0]);
-      Moengage.add_last_name(name.split(" ")[1]);
-      Moengage.add_email(email);
-      Moengage.add_mobile(mobile);
-      Moengage.add_unique_user_id(mobile);
-    }
 
     moeEvent("Address Added", addressAdded);
   });
@@ -575,16 +571,14 @@ export function* eventsSaga() {
     const { address, totalPrice } = e.payload;
     const { addressSelected } = addressMapper(address, totalPrice);
 
-    const Moengage = window?.Moengage;
-    if (Moengage) {
-      const { name, email, phone } = address;
-      const mobile = phone.split("+91")[1];
-      Moengage.add_first_name(name.split(" ")[0]);
-      Moengage.add_last_name(name.split(" ")[1]);
-      Moengage.add_email(email);
-      Moengage.add_mobile(mobile);
-      Moengage.add_unique_user_id(mobile);
-    }
+    const { name, email, phone } = address;
+    initializeMoengageAndAddInfo({
+      firstName: name.split(" ")[0],
+      lastName: name.split(" ")[1],
+      email,
+      phone,
+    });
+
     moeEvent("Address Selected", addressSelected);
   });
 

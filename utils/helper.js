@@ -162,3 +162,20 @@ export const getSource = () => {
     ? "Web"
     : "Mobile";
 };
+
+export function initializeMoengageAndAddInfo({
+  firstName,
+  lastName,
+  email,
+  phone,
+}) {
+  const Moengage = window?.Moengage;
+  if (Moengage) {
+    const mobile = phone.split("+91")[1];
+    Moengage.add_first_name(firstName);
+    Moengage.add_last_name(lastName);
+    Moengage.add_email(email);
+    Moengage.add_mobile(mobile);
+    Moengage.add_unique_user_id(mobile);
+  }
+}
