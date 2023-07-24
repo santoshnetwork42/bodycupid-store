@@ -10,6 +10,7 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import { useRouter } from "next/router";
+import CouponDiscountBar from "../couponDiscountBar";
 
 const logger = new Logger("Cart");
 
@@ -168,6 +169,9 @@ function CartTotal({
       </table>
 
       <div id="sidebar-footer" className="sidebar-footer">
+        <div className="sidebar-footer bar">
+          <CouponDiscountBar />
+        </div>
         <button
           onClick={validateAndGoToCheckout}
           className={`btn btn-dark btn-rounded btn-checkout w-100 font-weight-bold `}

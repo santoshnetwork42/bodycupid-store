@@ -232,6 +232,5 @@ const Component = connect(mapStateToProps, {
 })(ProductDefault);
 
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;
