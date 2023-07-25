@@ -1,18 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
-import { API, graphqlOperation } from "aws-amplify";
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch } from "react-redux";
 import { eventActions } from "~/store/events";
 import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
-import { searchProductsBasic } from "~/graphql/api";
 import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { STORE_ID } from "~/config";
 import { errorHandler } from "~/utils/errorHandler";
 
-function SearchForm({ type = "input", defaultSearch = "",productSearched }) {
+function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
   const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
@@ -21,25 +17,24 @@ function SearchForm({ type = "input", defaultSearch = "",productSearched }) {
 
   const searchProducts = useCallback(async (searchTerm) => {
     try {
-      const {
-        data: {
-          searchProducts: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(searchProductsBasic, {
-          filter: {
-            storeId: { eq: STORE_ID },
-            status: { eq: "ENABLED" },
-            title: { matchPhrasePrefix: searchTerm },
-          },
-          imageLimit: 1,
+      let items;
+      const response = await fetch(
+        `https://d1pnavmgsqoqas.cloudfront.net/search?query=query=${searchTerm}&threshold=0.7`
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
         })
-      );
-      setData(items);
-      productSearched({
-       "search term":searchTerm,
-       "Item Count":items.length
-      })
+        .then((data) => {
+          items = data.results;
+          setData(items);
+          productSearched({
+            "search term": searchTerm,
+            "Item Count": items.length,
+          });
+        });
     } catch (error) {
       errorHandler(error);
     }
@@ -190,14 +185,18 @@ function SearchForm({ type = "input", defaultSearch = "",productSearched }) {
 
               const thumbImage = images.find((i) => i.isThumb) ||
                 images[0] || { imageKey: product.imageUrl };
+              const slug = product.link.match(
+                /products\/(.*?)\??variantId/
+              )?.[1];
+
               return (
                 <ALink
-                  href={`/products/${product.slug}`}
+                  href={`/products/${slug}`}
                   className="autocomplete-suggestion"
                   key={`search-result-${index}`}
                 >
                   <NextImage
-                    src={getPublicImageURL(thumbImage.imageKey)}
+                    src={thumbImage.imageKey}
                     width={40}
                     height={40}
                     alt={thumbImage.alt}
