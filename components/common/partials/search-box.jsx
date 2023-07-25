@@ -21,7 +21,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
     try {
       let items;
       const response = await fetch(
-        `https://d1pnavmgsqoqas.cloudfront.net/search?query=${searchTerm}`
+        `https://d1pnavmgsqoqas.cloudfront.net/search?query=${searchTerm}&threshold=0.7`
       )
         .then((response) => {
           if (!response.ok) {
