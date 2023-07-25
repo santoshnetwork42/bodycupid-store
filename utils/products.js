@@ -22,6 +22,7 @@ export const getProductMeta = (product) => {
   const { variants = {}, images = {} } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
+  let variantImage;
 
   const sortedImages = Array.isArray(allImages)
     ? allImages.sort((a, b) => a.position - b.position)
@@ -45,6 +46,7 @@ export const getProductMeta = (product) => {
             firstVariant.listingPrice
         )
       : 0;
+    variantImage = firstVariant.imageUrl;
   }
 
   return {
@@ -52,6 +54,7 @@ export const getProductMeta = (product) => {
     secondaryImage,
     discount,
     firstVariant,
+    variantImage,
   };
 };
 

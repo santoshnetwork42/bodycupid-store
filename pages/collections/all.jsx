@@ -94,7 +94,7 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
         },
       },
-      revalidate: 60,
+      revalidate: 120,
     };
   } catch (error) {
     logger.error(error);

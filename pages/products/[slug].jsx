@@ -209,6 +209,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(thumbImage?.imageKey),
           },
         },
+        revalidate: 600
       };
     }
 
