@@ -31,7 +31,7 @@ function ProductDefault(props) {
   const { product, pageMeta, viewItem, slug } = props;
 
   const router = useRouter();
-  const { query, isReady } = router;
+  const { query } = router;
   const { variantId } = query;
 
   const [selectedVariant, setVariant] = useState(variantId);
@@ -114,7 +114,7 @@ function ProductDefault(props) {
                   <MediaOne
                     key={`media-${product.id}`}
                     product={product}
-                    variantId={selectedVariant}
+                    variantId={selectedVariant || defaultVariantId}
                   />
                 </div>
 
@@ -209,6 +209,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(thumbImage?.imageKey),
           },
         },
+        revalidate: 600,
       };
     }
 
@@ -232,6 +233,5 @@ const Component = connect(mapStateToProps, {
 })(ProductDefault);
 
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;

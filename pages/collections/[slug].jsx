@@ -189,6 +189,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
+        revalidate: 120,
       };
     }
 
@@ -258,6 +259,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
+        revalidate: 120,
       };
     }
 
@@ -324,6 +326,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
+        revalidate: 120,
       };
     }
 
@@ -347,6 +350,5 @@ const Component = connect(mapStateToProps, {
 })(CollectionPage);
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;

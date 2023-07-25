@@ -9,9 +9,9 @@ import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import SearchBox from "~/components/common/partials/search-box";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('search');
+const logger = new Logger("search");
 
 function AllProduct(props) {
   const { store, products, pageFilter } = props;
@@ -89,6 +89,5 @@ const Component = connect(mapStateToProps)(React.memo(AllProduct));
 Component.showStickyCheckout = true;
 Component.hideSearch = true;
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;
