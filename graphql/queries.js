@@ -1,6 +1,95 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const searchCollections = /* GraphQL */ `
+  query SearchCollections(
+    $filter: SearchableCollectionFilterInput
+    $sort: [SearchableCollectionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionAggregationInput]
+  ) {
+    searchCollections(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+              __typename
+            }
+          }
+        }
+        __typename
+      }
+      __typename
+    }
+  }
+`;
+export const bystoreIdCollections = /* GraphQL */ `
+  query BystoreIdCollections(
+    $storeId: ID!
+    $priority: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bystoreIdCollections(
+      storeId: $storeId
+      priority: $priority
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -872,70 +961,6 @@ export const searchStores = /* GraphQL */ `
     }
   }
 `;
-export const getWarehouse = /* GraphQL */ `
-  query GetWarehouse($id: ID!) {
-    getWarehouse(id: $id) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      facilityCode
-      name
-      description
-      address
-      totalProducts
-      totalQuantity
-      priority
-      imageUrl
-      productInventory {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listWarehouses = /* GraphQL */ `
-  query ListWarehouses(
-    $filter: ModelWarehouseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWarehouses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        storeId
-        facilityCode
-        name
-        description
-        address
-        totalProducts
-        totalQuantity
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const bystoreIdwarehouse = /* GraphQL */ `
   query BystoreIdwarehouse(
     $storeId: ID!
@@ -1023,95 +1048,6 @@ export const searchWarehouses = /* GraphQL */ `
         }
         __typename
       }
-      __typename
-    }
-  }
-`;
-export const getProductInventory = /* GraphQL */ `
-  query GetProductInventory($id: ID!) {
-    getProductInventory(id: $id) {
-      id
-      warehouseId
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      currentQuantity
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listProductInventories = /* GraphQL */ `
-  query ListProductInventories(
-    $filter: ModelProductInventoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProductInventories(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
       __typename
     }
   }
@@ -1278,6 +1214,37 @@ export const listShippingTiers = /* GraphQL */ `
     }
   }
 `;
+export const byStoreIdShippingTiers = /* GraphQL */ `
+  query ByStoreIdShippingTiers(
+    $storeId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelShippingTierFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byStoreIdShippingTiers(
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const searchShippingTiers = /* GraphQL */ `
   query SearchShippingTiers(
     $filter: SearchableShippingTierFilterInput
@@ -1328,9 +1295,10 @@ export const searchShippingTiers = /* GraphQL */ `
     }
   }
 `;
-export const getCollection = /* GraphQL */ `
-  query GetCollection($slug: ID!) {
-    getCollection(slug: $slug) {
+export const getCollectionType = /* GraphQL */ `
+  query GetCollectionType($id: ID!) {
+    getCollectionType(id: $id) {
+      id
       slug
       parent
       name
@@ -1360,22 +1328,15 @@ export const getCollection = /* GraphQL */ `
     }
   }
 `;
-export const listCollections = /* GraphQL */ `
-  query ListCollections(
-    $slug: ID
-    $filter: ModelCollectionFilterInput
+export const listCollectionTypes = /* GraphQL */ `
+  query ListCollectionTypes(
+    $filter: ModelCollectionTypeFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listCollections(
-      slug: $slug
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listCollectionTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         slug
         parent
         name
@@ -1394,16 +1355,16 @@ export const listCollections = /* GraphQL */ `
     }
   }
 `;
-export const bystoreIdCollections = /* GraphQL */ `
-  query BystoreIdCollections(
+export const bystoreIdAllCollections = /* GraphQL */ `
+  query BystoreIdAllCollections(
     $storeId: ID!
     $priority: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelCollectionFilterInput
+    $filter: ModelCollectionTypeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    bystoreIdCollections(
+    bystoreIdAllCollections(
       storeId: $storeId
       priority: $priority
       sortDirection: $sortDirection
@@ -1412,6 +1373,7 @@ export const bystoreIdCollections = /* GraphQL */ `
       nextToken: $nextToken
     ) {
       items {
+        id
         slug
         parent
         name
@@ -1430,16 +1392,16 @@ export const bystoreIdCollections = /* GraphQL */ `
     }
   }
 `;
-export const searchCollections = /* GraphQL */ `
-  query SearchCollections(
-    $filter: SearchableCollectionFilterInput
-    $sort: [SearchableCollectionSortInput]
+export const searchCollectionTypes = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
     $limit: Int
     $nextToken: String
     $from: Int
-    $aggregates: [SearchableCollectionAggregationInput]
+    $aggregates: [SearchableCollectionTypeAggregationInput]
   ) {
-    searchCollections(
+    searchCollectionTypes(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -1448,6 +1410,7 @@ export const searchCollections = /* GraphQL */ `
       aggregates: $aggregates
     ) {
       items {
+        id
         slug
         parent
         name
@@ -3728,56 +3691,6 @@ export const searchReviews = /* GraphQL */ `
     }
   }
 `;
-export const getWishlist = /* GraphQL */ `
-  query GetWishlist($id: ID!) {
-    getWishlist(id: $id) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      userId
-      wishlistProducts {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listWishlists = /* GraphQL */ `
-  query ListWishlists(
-    $filter: ModelWishlistFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWishlists(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        storeId
-        userId
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const bystoreIdWishlist = /* GraphQL */ `
   query BystoreIdWishlist(
     $storeId: ID!
@@ -3829,121 +3742,6 @@ export const byuserIdcreatedAtWishlist = /* GraphQL */ `
         id
         storeId
         userId
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getWishlistProduct = /* GraphQL */ `
-  query GetWishlistProduct($id: ID!) {
-    getWishlistProduct(id: $id) {
-      id
-      wishlistId
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      variantId
-      variant {
-        id
-        productId
-        title
-        description
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        createdAt
-        updatedAt
-        taxable
-        barcode
-        imageUrl
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listWishlistProducts = /* GraphQL */ `
-  query ListWishlistProducts(
-    $filter: ModelWishlistProductFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWishlistProducts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        wishlistId
-        productId
-        variantId
         createdAt
         updatedAt
         __typename
@@ -4562,6 +4360,55 @@ export const listCoupons = /* GraphQL */ `
     }
   }
 `;
+export const byCouponTypeCoupons = /* GraphQL */ `
+  query ByCouponTypeCoupons(
+    $couponType: CouponType!
+    $storeId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCouponFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byCouponTypeCoupons(
+      couponType: $couponType
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        code
+        description
+        groupId
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        abandonCart
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const searchCoupons = /* GraphQL */ `
   query SearchCoupons(
     $filter: SearchableCouponFilterInput
@@ -4648,6 +4495,35 @@ export const listConfigurations = /* GraphQL */ `
     $nextToken: String
   ) {
     listConfigurations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const byStoreIdConfigurations = /* GraphQL */ `
+  query ByStoreIdConfigurations(
+    $storeId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelConfigurationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byStoreIdConfigurations(
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         storeId

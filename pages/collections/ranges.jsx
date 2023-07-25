@@ -2,23 +2,27 @@ import React from "react";
 import { connect } from "react-redux";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
-import { findProducts, getStoreBanners, listCollections } from "~/graphql/api";
+import {
+  findProducts,
+  getStoreBanners,
+  searchCollectionTypes,
+} from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('Ranges collection');
+const logger = new Logger("Ranges collection");
 
 function AllCollection(props) {
-  const { store, products, pageFilter, collections ,pageMeta} = props;
+  const { store, products, pageFilter, collections, pageMeta } = props;
   const { name } = store;
 
   return (
     <main className="main">
-          <NextHead {...pageMeta} />
+      <NextHead {...pageMeta} />
       <h1 className="d-none">{name} - All Products</h1>
       <div className="page-content pb-3">
         <div className="container">
@@ -51,10 +55,10 @@ export const getStaticProps = async () => {
     const { title, name, description, webUrl, imageUrl } = getStore;
 
     const {
-      listCollections: { items: collectionsRes },
-    } = await fetchData(listCollections, {
+      searchCollectionTypes: { items: collectionsRes },
+    } = await fetchData(searchCollectionTypes, {
       filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
-      sort: [{ field: "position", direction: "asc" }],
+      sort: [{ field: "priority", direction: "asc" }],
     });
 
     const collections = [
@@ -107,6 +111,5 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps)(React.memo(AllCollection));
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;

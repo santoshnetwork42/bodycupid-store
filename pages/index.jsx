@@ -71,5 +71,4 @@ function HomePage({
 
 HomePage.showStickyCheckout = true;
 HomePage.showTopRunner = true;
-HomePage.couponBanner = true;
 export default HomePage;

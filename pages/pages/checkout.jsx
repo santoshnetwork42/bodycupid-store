@@ -8,12 +8,12 @@ import { Collapse } from "react-bootstrap";
 
 import ALink from "~/components/features/custom-link";
 import {
-  createOrder,
-  createOrderProduct,
   createTransaction,
-  createPayment,
   validateTransaction,
   getOrderStatus,
+  createNewOrder,
+  byorderIdcreatedAtPayment,
+  getOrderSuccess,
 } from "~/graphql/api";
 
 import { createUserAddress } from "~/graphql/mutations";
@@ -68,7 +68,7 @@ function Checkout(props) {
     openAllAddressModal,
     recordOutOfStock,
     openLogin,
-    addPaymentInfo
+    addPaymentInfo,
   } = props;
 
   const { name } = store;
@@ -84,6 +84,7 @@ function Checkout(props) {
     outOfStockItems,
     productWithPrice,
   } = useInventory();
+
   const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -176,7 +177,7 @@ function Checkout(props) {
 
         razorpayMethod = new Razorpay(options);
         razorpayMethod.open();
-        addPaymentInfo()
+        addPaymentInfo();
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -218,11 +219,18 @@ function Checkout(props) {
           }
 
           if (success) {
+            const successOrder = await API.graphql({
+              query: getOrderSuccess,
+              variables: { id: orderId },
+            }).then(
+              (getOrderStatusResponse) => getOrderStatusResponse.data.getOrder
+            );
+
             logger.info("Payment completion");
 
             logger.debug("Purchase event");
             onPlaceOrder(
-              orderData.order,
+              successOrder,
               [...cartList, ...freeProducts],
               appliedCoupon,
               shippingAddress,
@@ -319,141 +327,52 @@ function Checkout(props) {
         try {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
-          const orderDate = new Date();
-          const sla = new Date();
-          sla.setDate(sla.getDate() + 2);
 
-          const freeProductTotal = freeProducts.reduce(
-            (a, b) => a + b.price,
-            0
-          );
+          const productIds = cartList
+            .filter((p) => !p.cartItemSource)
+            .map(({ id, variantId, qty }) => ({
+              productId: id,
+              variantId,
+              quantity: qty,
+            }));
 
           const payload = {
-            storeId: STORE_ID,
-            userId: user?.id,
-            status: isFirst ? "PENDING" : "CONFIRMED",
-            totalAmount: grandTotal,
-            totalDiscount: totalDiscount + freeProductTotal,
-            totalShippingCharges: shippingTotal,
-            totalCashOnDeliveryCharges: appliedCODCharges,
-            orderDate: orderDate.toISOString(),
-            sla: sla.toISOString(),
-            paymentType: payMethod,
+            products: productIds,
             shippingAddress: restAddress,
             billingAddress: restAddress,
-            couponCodeId: appliedCoupon?.id,
+            couponCode: appliedCoupon?.code,
+            storeId: STORE_ID,
+            paymentType: payMethod,
             ...metadata,
           };
 
           const {
-            data: { createOrder: order },
+            data: { createNewOrder: order },
           } = await API.graphql({
-            query: createOrder,
+            query: createNewOrder,
             variables: { input: payload },
             authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
           });
-          logger.debug("Created order:", order);
 
-          const { id: orderId } = order;
+          logger.debug("Created order:", order);
 
           const promise = [
             API.graphql({
-              query: createPayment,
+              query: byorderIdcreatedAtPayment,
               variables: {
-                input: {
-                  userId: user?.id,
-                  storeId: STORE_ID,
-                  orderId,
-                  method: isFirst ? "ONLINE" : "COD",
-                  amount: grandTotal,
-                },
+                orderId: order.id,
               },
               authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
             }),
-            ...cartList.map((p) => {
-              const itemtotal = parseInt(p.qty) * parseInt(p.price);
-
-              const itemDiscount =
-                ((totalDiscount + freeProductTotal) * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const itemShippingCharges =
-                (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
-
-              const itemCodCharges =
-                (appliedCODCharges * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const finalItemPrice =
-                itemtotal + itemShippingCharges + itemCodCharges - itemDiscount;
-
-              return API.graphql({
-                query: createOrderProduct,
-                variables: {
-                  input: {
-                    orderId,
-                    productId: p.id,
-                    variantId: p.variantId,
-                    quantity: p.qty,
-                    price: p.price,
-                    title: p.title,
-                    discount: itemDiscount,
-                    shippingCharges: itemShippingCharges,
-                    cashOnDeliveryCharges: itemCodCharges,
-                    totalPrice: finalItemPrice,
-                    sku: p.sku,
-                  },
-                },
-                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-              });
-            }),
-
-            ...freeProducts.map((p) => {
-              const itemtotal = 1 * parseInt(p.price);
-
-              const itemDiscount =
-                ((totalDiscount + freeProductTotal) * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const itemShippingCharges =
-                (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
-
-              const itemCodCharges =
-                (appliedCODCharges * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const finalItemPrice =
-                itemtotal + itemShippingCharges + itemCodCharges - itemDiscount;
-
-              return API.graphql({
-                query: createOrderProduct,
-                variables: {
-                  input: {
-                    orderId,
-                    productId: p.id,
-                    variantId: p.variantId,
-                    quantity: 1,
-                    price: p.price,
-                    title: p.title,
-                    discount: itemDiscount,
-                    shippingCharges: itemShippingCharges,
-                    cashOnDeliveryCharges: itemCodCharges,
-                    totalPrice: finalItemPrice,
-                    sku: p.sku,
-                  },
-                },
-                authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-              });
-            }),
-
             addUserAddress(),
           ];
 
           const [paymentResponse] = await Promise.all(promise);
-          const payment = paymentResponse.data.createPayment;
+          const [payment] =
+            paymentResponse.data.byorderIdcreatedAtPayment.items;
 
           setOrderData({ order, paymentId: null });
-          if (isFirst) {
+          if (payment.method === "ONLINE") {
             handlePayment({
               order,
               paymentId: payment.id,
@@ -1021,6 +940,7 @@ const Component = connect(mapStateToProps, {
 
 Component.hideFooter = true;
 Component.hideChatbot = true;
+Component.hideCart = true;
 Component.navbarConfig = {
   shippingTier: true,
 };

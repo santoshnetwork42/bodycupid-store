@@ -6,10 +6,9 @@ import {
 } from "~/utils/products";
 import { addPhonePrefix } from "~/utils/helper";
 import { getPublicImageURL } from "../getPublicImageUrl";
-import { BASE_URL } from "~/constant";
-import { getCouponTotal } from "..";
+import { removePhonePrefix } from "~/utils/helper";
 import { getCouponDiscount } from "../coupons";
-import useWindowDimensions from "../getWindowDimension";
+import { getSource } from "~/utils/helper";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -26,6 +25,7 @@ export const itemMapper = (product, coupon) => {
   } = product;
 
   let contentType = "product_group";
+  const source = getSource();
 
   if (!variantId) {
     variantId = getFirstVariant(product)?.id;
@@ -39,6 +39,7 @@ export const itemMapper = (product, coupon) => {
     variantId = id;
   }
 
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
   const basicAttributes = {
     "Product ID": id,
     "Variant ID": variantId,
@@ -46,14 +47,14 @@ export const itemMapper = (product, coupon) => {
     "Product Title": product.title,
     "Image URL": getPublicImageURL(thumbImage?.imageKey),
     "Product Category": category?.name,
-    "Product URL": `${BASE_URL}/products/${product.slug}`,
+    "Product URL": `${currentURL}/products/${product.slug}`,
     "Vendor name": "Body Cupid",
     "Product Price": price,
     Currency: "INR",
     "Total Quantity": qty,
     "Discount Amount": listingPrice - price,
     MRP: listingPrice,
-    Source: "Web",
+    Source: source,
     "Product Range": null,
   };
 
@@ -208,7 +209,8 @@ export const userMapper = (userData, address) => {
   } = address || {};
 
   if (userData) {
-    const { phone, firstName, lastName, email, gender, dob } = userData;
+    const { phone, firstName, lastName, email, gender, dob, totalOrders } =
+      userData;
     return {
       phone: addPhonePrefix(aP || phone),
       firstName: aF || firstName,
@@ -216,6 +218,7 @@ export const userMapper = (userData, address) => {
       email: aE || email,
       gender,
       dob,
+      totalOrders,
       city,
       state,
       country,
@@ -235,17 +238,21 @@ export const moEngagedOrderMapper = (
   products,
   coupon,
   paymentMethod,
-  order
+  order,
+  isFirstTimeUser
 ) => {
   const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
+  const source = getSource();
   const basicAttributes = {
     Currency: "INR",
     "Total Items": products?.length,
-    Source: "Web",
-    "Cart URL": `${BASE_URL}/pages/cart`,
+    Source: source,
+    "Cart URL": `${currentURL}/pages/cart`,
     "Vendor name": "Body Cupid",
     "Coupon Applied": coupon?.code,
     "Total Discount": couponTotal || 0,
+    "First Time User": isFirstTimeUser,
   };
 
   const mappings = products.reduce(
@@ -263,7 +270,6 @@ export const moEngagedOrderMapper = (
         "Total MRP": Total_MRP,
         "Product Subcategory": Product_Subcategory,
         "Product Category": Product_Category,
-        "Product Range": Product_Range,
       },
       product
     ) => {
@@ -279,7 +285,10 @@ export const moEngagedOrderMapper = (
         "Product Price": [...Product_Price, product.price],
         "Product Quantity": [...Product_Quantity, product.qty],
         "Variant ID": [...Variant_ID, product?.variantId],
-        "Product URL": [...Product_URL, `${BASE_URL}/products/${product.slug}`],
+        "Product URL": [
+          ...Product_URL,
+          `${currentURL}/products/${product.slug}`,
+        ],
         "Total MRP": Total_MRP + valueNew,
         "Product Subcategory": [
           ...Product_Subcategory,
@@ -310,19 +319,20 @@ export const moEngagedOrderMapper = (
     checkoutStarted: {
       ...basicAttributes,
       ...mappings,
+      "Cart URL": `${currentURL}/pages/checkout`,
     },
     orderCreated: {
       ...basicAttributes,
       ...mappings,
-      "Order ID": order?.id,
+      "Order ID": order?.code,
       "Order Date": new Date().toISOString(),
       "Payment Mode": paymentMethod,
-      "Payment Status": null,
+      "Payment Status": paymentMethod === "COD" ? "Unpaid" : "Paid",
     },
     cartViewed: {
       ...basicAttributes,
       ...mappings,
-      "Order ID": order?.id,
+      "Order ID": order?.code,
       "Order Date": new Date().toISOString(),
       "Payment Mode": paymentMethod,
       "Payment Status": null,
@@ -332,6 +342,7 @@ export const moEngagedOrderMapper = (
 
 export const addressMapper = (address, totalPrice) => {
   const { city, country, email, name, state, pinCode, phone } = address;
+  const phoneNo = removePhonePrefix(phone);
   const [firstName, lastName] = name.split(" ");
 
   const basicAttributes = {
@@ -342,7 +353,7 @@ export const addressMapper = (address, totalPrice) => {
     Email: email,
     "First Name": firstName,
     "Last Name": lastName,
-    "Mobile Number": phone,
+    "Mobile Number": phoneNo,
     Pincode: pinCode,
     State: state,
   };

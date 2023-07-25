@@ -185,6 +185,16 @@ export const getCouponDiscount = (coupon, cartItems) => {
     };
   }
 
+  if (couponType === "FREEBIE") {
+    const { price } = getProductPrice(getYStoreProduct);
+    return {
+      ...coupon,
+      allowed: !!getYStoreProduct?.title,
+      discount: price,
+      message: getCouponMessage(coupon).discountMsg,
+    };
+  }
+
   // For couponType === BUY_X_GET_Y
   const cartAmounts = [];
   cartList.forEach((c) => {

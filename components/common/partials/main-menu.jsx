@@ -54,7 +54,7 @@ function MainMenu({ topNavbarClicked }) {
                           onClick={() => {
                             topNavbarClicked({
                               banner_name: subItem.label,
-                              item_id: subItem.id,
+                              item_id: subItem.slug,
                               Source: "Web",
                               "Section Name": "Top Navbar",
                             });

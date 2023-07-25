@@ -7,6 +7,7 @@ import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
+import { getSource } from "~/utils/helper";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
@@ -14,6 +15,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const [timer, setTimer] = useState(null);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const source = getSource();
 
   const searchProducts = useCallback(async (searchTerm) => {
     try {
