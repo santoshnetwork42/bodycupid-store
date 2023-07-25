@@ -73,7 +73,7 @@ function ProductTwo(props) {
     return cartList.find((cl) => cl.recordKey === recordKey);
   }, [cartList]);
 
-  const { thumbImage, discount, variantImage } = getProductMeta(product);
+  const { thumbImage, discount } = getProductMeta(product);
 
   function changeQty(qty) {
     if (cartItem) {
@@ -101,7 +101,7 @@ function ProductTwo(props) {
       {/* <figure className="product-media"> */}
       <ALink href={`/products/${slug}`}>
         <Image
-          src={getPublicImageURL(variantImage ? variantImage : thumbImage?.imageKey)}
+          src={getPublicImageURL(thumbImage?.imageKey)}
           alt={title}
           height={280}
           width={280}

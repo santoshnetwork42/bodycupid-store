@@ -22,12 +22,12 @@ export const getProductMeta = (product) => {
   const { variants = {}, images = {} } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
-  let variantImage;
 
   const sortedImages = Array.isArray(allImages)
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
-  const thumbImage =
+
+  let thumbImage =
     sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
   const [, secondaryImage] = sortedImages;
 
@@ -46,7 +46,10 @@ export const getProductMeta = (product) => {
             firstVariant.listingPrice
         )
       : 0;
-    variantImage = firstVariant.imageUrl;
+
+    if (firstVariant.imageUrl) {
+      thumbImage = { imageKey: firstVariant.imageUrl };
+    }
   }
 
   return {
@@ -54,7 +57,6 @@ export const getProductMeta = (product) => {
     secondaryImage,
     discount,
     firstVariant,
-    variantImage,
   };
 };
 
