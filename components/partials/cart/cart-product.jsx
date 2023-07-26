@@ -103,11 +103,12 @@ function CartProduct({
   );
 
   const image = useMemo(() => {
-    if (variantId && variants && variants.items.length) {
-      return variants.items.find(v => v.id === variantId).imageUrl;
-    } else {
-      return images?.items[0].imageKey;
+    if (Array.isArray(variants?.items) && variantId) {
+      const currVariant =  variants.items.find(v => v.id === variantId);
+      if (currVariant?.imageUrl) return currVariant?.imageUrl;
     }
+
+    return images?.items[0]?.imageKey;
   }, [variantId, variants, images])
 
   const outOfStock = qty > inventory;
