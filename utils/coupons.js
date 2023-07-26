@@ -87,6 +87,15 @@ export const getCouponDiscount = (coupon, cartItems) => {
 
     if (!isProductApplicable) return false;
 
+    if (
+      couponType === "BUY_X_AT_Y" &&
+      c.variants &&
+      c.variants.items?.length &&
+      c.variantId !== c.variants.items[0].id
+    ) {
+      return false;
+    }
+
     const isCollectionApplicable =
       Array.isArray(applicableCollections) && applicableCollections.length
         ? applicableCollections.some((ac) => (c.collections || []).includes(ac))
