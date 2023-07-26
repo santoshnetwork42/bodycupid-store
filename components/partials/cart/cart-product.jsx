@@ -67,7 +67,6 @@ function CartProduct({
         price: variant.price,
         variantId: e.target.value,
       });
-      images.items[0].imageKey = variant.imageUrl;
       updateCart(updatedCart);
     }
   };
@@ -103,11 +102,15 @@ function CartProduct({
     [cartItemType]
   );
 
-  const outOfStock = qty > inventory;
+  const image = useMemo(() => {
+    if (variantId && variants && variants.items.length) {
+      return variants.items.find(v => v.id === variantId).imageUrl;
+    } else {
+      return images?.items[0].imageKey;
+    }
+  }, [variantId, variants, images])
 
-  if (variantId && variants && variants.items.length) {
-    images.items[0].imageKey = variants.items.find(v => v.id === variantId).imageUrl;
-  }
+  const outOfStock = qty > inventory;
 
   if (isSmall)
     return (
@@ -121,7 +124,7 @@ function CartProduct({
           <figure>
             <ALink href={"/products/" + slug} className="p-0 border-2">
               <img
-                src={getPublicImageURL(images?.items[0]?.imageKey)}
+                src={getPublicImageURL(image)}
                 width="80"
                 height="80"
                 alt={images?.items[0]?.alt}
