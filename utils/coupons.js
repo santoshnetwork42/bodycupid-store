@@ -13,8 +13,7 @@ export const getCouponMessage = ({
   minOrderValue,
   maxDiscount,
 }) => {
-  let discountMsg =
-    "Lowest value item in the cart will be discounted off on the item total";
+  let discountMsg = "Lowest value item in the cart will be discounted off on the item total";
 
   if (couponType === "FIXED") {
     discountMsg = `₹${getYAmount} off from total`;
@@ -86,6 +85,15 @@ export const getCouponDiscount = (coupon, cartItems) => {
         : true;
 
     if (!isProductApplicable) return false;
+
+    if (
+      couponType === "BUY_X_AT_Y" &&
+      c.variants &&
+      c.variants.items?.length &&
+      c.variantId !== c.variants.items[0].id
+    ) {
+      return false;
+    }
 
     const isCollectionApplicable =
       Array.isArray(applicableCollections) && applicableCollections.length
