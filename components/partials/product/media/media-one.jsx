@@ -44,7 +44,7 @@ export default function MediaOne(props) {
         setIndex(i);
       }
     }
-  }, [variantId]);
+  }, [variantId, lgImages]);
 
   useEffect(() => {
     if (mediaRef !== null && mediaRef.current !== null && index >= 0) {

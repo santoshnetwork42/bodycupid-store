@@ -27,7 +27,7 @@ const couponDiscountBar = ({ cartList }) => {
   );
 
   const bxayCoupon = featuredCoupons.find(
-      (coupon) => coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+    (coupon) => coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
   );
 
   const [freeProduct] = freeProductsResponse;
@@ -43,10 +43,10 @@ const couponDiscountBar = ({ cartList }) => {
       );
     } else if (bxayCoupon) {
       const couponText = bxayCoupon?.allowed
-          ? `Congrats, your 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' has been applied!`
-          : `Add more items to unlock 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer'`;
+        ? `Congrats, your 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' has been applied!`
+        : `Add more items to unlock 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer'`;
       return (
-          <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
+        <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
       );
     } else if (freeProduct?.allowed) {
       return (
