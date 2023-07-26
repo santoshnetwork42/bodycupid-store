@@ -67,6 +67,7 @@ function CartProduct({
         price: variant.price,
         variantId: e.target.value,
       });
+      images.items[0].imageKey = variant.imageUrl;
       updateCart(updatedCart);
     }
   };
@@ -104,6 +105,10 @@ function CartProduct({
 
   const outOfStock = qty > inventory;
 
+  if (variantId && variants && variants.items.length) {
+    images.items[0].imageKey = variants.items.find(v => v.id === variantId).imageUrl;
+  }
+
   if (isSmall)
     return (
       <div className="m-0 p-0 border-no">
@@ -116,10 +121,10 @@ function CartProduct({
           <figure>
             <ALink href={"/products/" + slug} className="p-0 border-2">
               <img
-                src={getPublicImageURL(images.items[0]?.imageKey)}
+                src={getPublicImageURL(images?.items[0]?.imageKey)}
                 width="80"
                 height="80"
-                alt={images.items[0]?.alt}
+                alt={images?.items[0]?.alt}
               />
             </ALink>
           </figure>
