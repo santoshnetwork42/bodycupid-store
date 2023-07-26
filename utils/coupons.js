@@ -13,8 +13,7 @@ export const getCouponMessage = ({
   minOrderValue,
   maxDiscount,
 }) => {
-  let discountMsg =
-    "Lowest value item in the cart will be discounted off on the item total";
+  let discountMsg = "Lowest value item in the cart will be discounted off on the item total";
 
   if (couponType === "FIXED") {
     discountMsg = `₹${getYAmount} off from total`;
