@@ -69,6 +69,7 @@ function Checkout(props) {
     recordOutOfStock,
     openLogin,
     addPaymentInfo,
+    priceMismatch,
   } = props;
 
   const { name } = store;
@@ -316,6 +317,7 @@ function Checkout(props) {
       if (!priceVerified) {
         alertToaster("Price updated. Add products again", "error");
         logger.error("Price updated. Add products again");
+        priceMismatch();
         setLoading(false);
         return;
       }
@@ -936,6 +938,7 @@ const Component = connect(mapStateToProps, {
   recordOutOfStock: eventActions.outOfStock,
   orderCreated: eventActions.orderCreated,
   addPaymentInfo: eventActions.addPaymentInfo,
+  priceMismatch: eventActions.priceMismatch,
 })(Checkout);
 
 Component.hideFooter = true;
