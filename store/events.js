@@ -182,7 +182,7 @@ export function* eventsSaga() {
           email,
           phone,
         });
-        const mobile = user.phone.split("+91")[1];
+        const mobile = phone.split("+91")[1];
 
         moeEvent("Customer Logged In", {
           "Customer ID": userId,
