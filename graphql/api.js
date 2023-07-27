@@ -414,6 +414,7 @@ export const getProductBySlug = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         isFeatured
         categoryId
         subCategoryId
