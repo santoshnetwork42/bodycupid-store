@@ -8,7 +8,7 @@ import { Close } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
-import { getCartTotals, toDecimal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
 
@@ -79,21 +79,6 @@ function CartProduct({
       });
       updateCart(cartData);
     } else {
-      if (appliedCoupon?.couponType === "PRODUCT") {
-        const { totalPrice } = getCartTotals(cartList, [], appliedCoupon);
-        const newCartList = cartList.filter((c) => c.id !== item.id);
-        const freeProduct = cartList.find(
-          (c) => appliedCoupon.getYProduct === c.id
-        );
-        if (
-          freeProduct &&
-          (appliedCoupon.minOrderValue > totalPrice ||
-            appliedCoupon.buyXQuantity > newCartList.length - 1)
-        ) {
-          removeFromCart(freeProduct);
-          removeCoupon();
-        }
-      }
       removeFromCart(item);
     }
   };
@@ -117,6 +102,15 @@ function CartProduct({
     [cartItemType]
   );
 
+  const image = useMemo(() => {
+    if (Array.isArray(variants?.items) && variantId) {
+      const currVariant =  variants.items.find(v => v.id === variantId);
+      if (currVariant?.imageUrl) return currVariant?.imageUrl;
+    }
+
+    return images?.items[0]?.imageKey;
+  }, [variantId, variants, images])
+
   const outOfStock = qty > inventory;
 
   if (isSmall)
@@ -131,16 +125,19 @@ function CartProduct({
           <figure>
             <ALink href={"/products/" + slug} className="p-0 border-2">
               <img
-                src={getPublicImageURL(images.items[0]?.imageKey)}
+                src={getPublicImageURL(image)}
                 width="80"
                 height="80"
-                alt={images.items[0]?.alt}
+                alt={images?.items[0]?.alt}
               />
             </ALink>
           </figure>
           <div className="text-left text-primary w-100 mr-1 ml-2">
             <div className="mr-6 cart-product-title " title={title}>
-              <ALink className="p-0 overflow-ellipsis font-weight-normal" href={"/products/" + slug}>
+              <ALink
+                className="p-0 overflow-ellipsis font-weight-normal"
+                href={"/products/" + slug}
+              >
                 {title}
               </ALink>
             </div>
@@ -187,7 +184,7 @@ function CartProduct({
                 <p className="m-0 outofstock-label">out of stock</p>
               </div>
             ) : (
-              <div> 
+              <div>
                 {!disableChange && (
                   <div className="product-quantity w-0 mb-1">
                     {cartItemType === "FREE_PRODUCT" ? (

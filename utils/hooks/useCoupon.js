@@ -14,14 +14,7 @@ export const useFeaturedCoupons = () => {
   const featuredCoupons = useMemo(
     () =>
       (coupons || [])
-        .filter(
-          (coupon) =>
-            !(
-              coupon.autoApply &&
-              coupon.couponType === "PRODUCT" &&
-              !coupon.isExternal
-            )
-        )
+        .filter((coupon) => coupon.couponType !== "FREEBIE")
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
@@ -82,7 +75,6 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
       (coupons || [])
         .filter((coupon) => {
           const {
-            autoApply,
             couponType,
             applicableProducts,
             applicableCollections,
@@ -92,10 +84,9 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
             isExternal,
           } = coupon;
 
+          if (couponType !== "FREEBIE") return false;
           if (isExternal) return false;
           if (!total) return false;
-          if (couponType !== "PRODUCT") return false;
-          if (!autoApply) return false;
 
           if (showNonApplicableFreeProducts) return true;
 

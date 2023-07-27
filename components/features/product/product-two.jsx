@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import Image from "next/image";
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { Star, Eye } from "~/components/icons";
 import { cartActions } from "~/store/cart";
@@ -14,7 +14,7 @@ import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 import { useProductPrice } from "~/utils/hooks/useProduct";
 import { PRODUCT_TAG_LIST } from "~/constant";
 
-const logger = new Logger('Product-details')
+const logger = new Logger("Product-details");
 
 function ProductTwo(props) {
   const {
@@ -37,7 +37,7 @@ function ProductTwo(props) {
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
-    logger.verbose('Opened quick view for product:', slug);
+    logger.verbose("Opened quick view for product:", slug);
   };
 
   const { hasInventory, currentInventory } = useMemo(
@@ -58,14 +58,14 @@ function ProductTwo(props) {
   }, [collections]);
 
   const addToCartHandler = () => {
-    setCartVisibility(true)
+    setCartVisibility(true);
     addToCart({
       ...product,
       section,
       qty: 1,
     });
-    logger.verbose('Added product to cart');
-    logger.debug('Added product to cart:', product);
+    logger.verbose("Added product to cart");
+    logger.debug("Added product to cart:", product);
   };
 
   const cartItem = useMemo(() => {
@@ -81,12 +81,17 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
-        logger.verbose('Updated product quantity in cart');
-        logger.debug('Updated product quantity in cart:', product, 'New quantity:', qty);
+        logger.verbose("Updated product quantity in cart");
+        logger.debug(
+          "Updated product quantity in cart:",
+          product,
+          "New quantity:",
+          qty
+        );
       } else {
         removeFromCart({ ...cartItem });
-        logger.verbose('Removed product from cart');
-        logger.debug('Removed product from cart:', cartItem);
+        logger.verbose("Removed product from cart");
+        logger.debug("Removed product from cart:", cartItem);
       }
     }
   }
@@ -107,12 +112,15 @@ function ProductTwo(props) {
       </ALink>
 
       <div className="product-label-group">
-        {discount > 0 &&
-          (product.variants?.items?.length < 2 ? (
+        {
+          discount > 0 && (
+            // (product.variants?.items?.length < 2 ? (
             <label className="product-label label-sale">-{discount}%</label>
-          ) : (
-            <label className="product-label label-sale">Sale</label>
-          ))}
+          )
+          // ) : (
+          //   <label className="product-label label-sale">Sale</label>
+          // ))
+        }
       </div>
 
       {!!tag && (

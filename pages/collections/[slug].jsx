@@ -7,12 +7,12 @@ import {
   getBasicCategory,
   getAllCategoriesPath,
   getAllSubcategoriesPath,
-  listCollections as listCollectionsQuery,
   findProducts,
   getSubCategoriesByCategoryID,
   getBasicSubCategory,
-  getCollection,
   getStoreBanners,
+  searchCollectionTypes,
+  getAllCollectionPath,
 } from "~/graphql/api";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
@@ -23,6 +23,7 @@ import fetchData from "~/utils/fetchData";
 import handleRedirect from "~/utils/handleRedirect";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { eventActions } from "~/store/events";
+import { getSource } from "~/utils/helper";
 
 const logger = new Logger("All collections");
 
@@ -38,14 +39,18 @@ function CollectionPage(props) {
     categoryViewed,
   } = props;
   const { name } = store;
+  const source = getSource();
 
   useEffect(() => {
-    categoryViewed({
-      URL: window.location.href,
-      "Category Name": data.name,
-      "Item Count": products.items.length,
-    });
-  }, []);
+    if (data.name) {
+      categoryViewed({
+        URL: window.location.href,
+        "Category Name": data.name,
+        "Item Count": products.items.length,
+        Source: source,
+      });
+    }
+  }, [data]);
 
   return (
     <main className="main searchBar">
@@ -85,7 +90,7 @@ export const getStaticPaths = async () => {
   const [
     { searchProductCategories },
     { searchProductSubCategories },
-    { listCollections },
+    { searchCollectionTypes: allCollections },
   ] = await Promise.all([
     fetchData(getAllCategoriesPath, {
       filter: { storeId: { eq: STORE_ID } },
@@ -93,7 +98,7 @@ export const getStaticPaths = async () => {
     fetchData(getAllSubcategoriesPath, {
       filter: { storeId: { eq: STORE_ID } },
     }),
-    fetchData(listCollectionsQuery, {
+    fetchData(getAllCollectionPath, {
       filter: { storeId: { eq: STORE_ID } },
     }),
   ]);
@@ -101,7 +106,7 @@ export const getStaticPaths = async () => {
   const paths = [
     ...searchProductCategories.items,
     ...searchProductSubCategories.items,
-    ...listCollections.items,
+    ...allCollections.items,
   ].map((c) => {
     return {
       params: { slug: c.slug },
@@ -184,6 +189,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
+        revalidate: 120,
       };
     }
 
@@ -253,29 +259,35 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
+        revalidate: 120,
       };
     }
 
-    const collection = await fetchData(getCollection, {
-      slug,
-    }).then((resp) => resp.getCollection);
+    const collection = await fetchData(searchCollectionTypes, {
+      filter: {
+        slug: { eq: slug },
+        storeId: { eq: STORE_ID },
+      },
+    }).then((resp) =>
+      resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
+    );
 
     if (collection) {
       const { title, description, imageUrl, name: collectionName } = collection;
 
-      const { listCollections } = await fetchData(listCollectionsQuery, {
+      const otherCollections = await fetchData(searchCollectionTypes, {
         filter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           slug: { ne: slug },
         },
-        sort: [{ field: "position", direction: "asc" }],
-      });
+        sort: [{ field: "priority", direction: "asc" }],
+      }).then((res) => res.searchCollectionTypes.items);
 
       const collections = [
         { name: "All", path: "/collections/ranges" },
         { name: collectionName, path: `/collections/${slug}` },
-        ...listCollections.items.map((col) => ({
+        ...otherCollections.map((col) => ({
           ...col,
           path: `/collections/${col.slug}`,
         })),
@@ -314,6 +326,7 @@ export const getStaticProps = async (context) => {
             image: getPublicImageURL(imageUrl),
           },
         },
+        revalidate: 120,
       };
     }
 
@@ -337,6 +350,5 @@ const Component = connect(mapStateToProps, {
 })(CollectionPage);
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;

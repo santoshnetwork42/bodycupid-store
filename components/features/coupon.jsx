@@ -53,7 +53,7 @@ function Coupon(props) {
 
   const featuredCoupons = useFeaturedCoupons();
 
-  const { discount: couponTotal } = useMemo(
+  const { discount: couponTotal, allowed } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
@@ -87,12 +87,12 @@ function Coupon(props) {
 
       const response = await API.graphql({
         query: applyCouponMutation,
+        authMode: "API_KEY",
         variables: {
           code: couponCode,
           variantFilter: { status: { ne: "DISABLED" } },
-          imageLmit: 1,
+          imageLimit: 1,
         },
-        authMode: user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       })
         .then((data) => data.data.applyCoupon)
         .catch(errorHandler);
@@ -172,7 +172,7 @@ function Coupon(props) {
               <div className="cart-coupon-container d-flex">
                 <div className="d-flex">
                   <p className="ml-1 coupon-title mb-0 p-0 ls-m">
-                    {showAppliedCoupon
+                    {showAppliedCoupon && !!allowed
                       ? `"${appliedCoupon.code}" applied`
                       : "Coupons and offers"}
                   </p>
@@ -277,7 +277,7 @@ function Coupon(props) {
                   <Discount size={35} color="#17b31b" />
                 </div>
                 <h4 className="modal-title">
-                  '{appliedCoupon.code}' coupon applied!
+                  '{appliedCoupon?.code || "Your"}' coupon applied!
                 </h4>
                 {couponTotal > 0 && (
                   <>

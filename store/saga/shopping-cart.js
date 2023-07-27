@@ -1,4 +1,11 @@
-import { all, call, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import {
+  all,
+  call,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from "redux-saga/effects";
 import { API } from "aws-amplify";
 
 import {
@@ -78,6 +85,7 @@ export function* cartSaga() {
           data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               storeId: STORE_ID,
@@ -97,6 +105,7 @@ export function* cartSaga() {
           data: { createShoppingCartProduct: response },
         } = yield call([API, API.graphql], {
           query: createShoppingCartProduct,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               shoppingcartId: id,
@@ -178,9 +187,9 @@ export function* cartSaga() {
       }
     } else {
       if (!cartList || !cartList.length) {
-          yield put({ type: actionTypes.REFRESH_CART });
+        yield put({ type: actionTypes.REFRESH_CART });
       }
-     }
+    }
   });
 
   yield takeEvery(actionTypes.UPDATE_CART, function* saga(e) {
@@ -196,9 +205,14 @@ export function* cartSaga() {
         const promise = [];
         const updatedProducts = currProducts.map((p) => {
           const product = products.find((cp) => {
-            const pKey = cp.variantId
+            let pKey = cp.variantId
               ? `${cp.productId}-${cp.variantId}`
               : `${cp.productId}`;
+
+            if (p.cartItemSource) {
+              pKey = `${pKey}-${p.cartItemSource}`;
+            }
+
             return pKey === p.recordKey;
           });
 
@@ -217,12 +231,14 @@ export function* cartSaga() {
               })
             );
           }
+
           return product;
         });
+
         yield all(promise);
         yield put({
           type: actionTypes.SET_CART,
-          payload: { products: updatedProducts },
+          payload: { products: updatedProducts.filter(Boolean) },
         });
       }
     }
@@ -261,6 +277,7 @@ export function* cartSaga() {
           data: { createShoppingCart: cartResponse },
         } = yield call([API, API.graphql], {
           query: createShoppingCart,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
           variables: {
             input: {
               storeId: STORE_ID,
@@ -282,6 +299,7 @@ export function* cartSaga() {
             promise.push(
               call([API, API.graphql], {
                 query: createShoppingCartProduct,
+                authMode: "AMAZON_COGNITO_USER_POOLS",
                 variables: {
                   input: {
                     shoppingcartId: id,

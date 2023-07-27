@@ -1,5 +1,5 @@
 import { takeEvery, select, call } from "redux-saga/effects";
-import { Analytics } from "aws-amplify";
+import { API, Analytics } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { v4 as uuid } from "uuid";
 import vercelAnalytics from "@vercel/analytics";
@@ -15,8 +15,12 @@ import {
   userMapper,
 } from "~/utils/events";
 import { STORE_PREFIX } from "~/config";
-import { getRecordKey } from "~/utils/helper";
-import { BASE_URL } from "~/constant";
+import {
+  getRecordKey,
+  getSource,
+  initializeMoengageAndAddInfo,
+} from "~/utils/helper";
+import { getUser } from "~/graphql/api";
 
 export const actionTypes = {
   VIEW_ITEM: "VIEW_ITEM",
@@ -63,7 +67,10 @@ export const eventActions = {
   startCheckout: () => ({ type: actionTypes.CHECKOUT_STARTED }),
   viewCart: () => ({ type: actionTypes.VIEW_CART }),
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
-  auth: (action) => ({ type: actionTypes.AUTH, payload: { action } }),
+  auth: (action, moe) => ({
+    type: actionTypes.AUTH,
+    payload: { action, userId: moe?.userId, query: moe?.query },
+  }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
     type: actionTypes.ADDRESS_ADDED,
@@ -114,6 +121,8 @@ export const eventActions = {
 };
 
 export function* eventsSaga() {
+  const eventSource = getSource();
+
   yield takeEvery(actionTypes.OUT_OF_STOCK, function* saga(e) {
     const { products, inventory } = e.payload;
     if (Array.isArray(products)) {
@@ -140,13 +149,55 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     const { term } = e.payload;
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({ event: "search", eventID: uuid(), search_term: term });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: { search_term: term },
+    });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
   });
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     const { action } = e.payload;
+    if (action === "login") {
+      const { userId, query } = e.payload;
+      const { utm_medium: medium, utm_source: source } = query;
+      if (userId) {
+        const {
+          data: { getUser: getUserResponse },
+        } = yield call([API, API.graphql], {
+          query: getUser,
+          variables: { id: userId },
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+
+        const isFirstTime =
+          Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
+          300;
+        const { firstName, lastName, email, phone } = getUserResponse;
+        initializeMoengageAndAddInfo({
+          firstName,
+          lastName,
+          email,
+          phone,
+        });
+        const mobile = user.phone.split("+91")[1];
+
+        moeEvent("Customer Logged In", {
+          "Customer ID": userId,
+          "Mobile Number": mobile,
+          "Utm Source": source,
+          "Utm Medium": medium,
+          URL: window.location.href,
+          "First Time User": isFirstTime,
+          Source: eventSource,
+        });
+      }
+    } else if (action == "logout") {
+      const Moengage = window?.Moengage;
+      if (Moengage) Moengage.destroy_session();
+    }
 
     dataLayer.push({ ecommerce: null, attribute: null, user: null });
     dataLayer.push({ event: action, eventID: uuid() });
@@ -246,17 +297,25 @@ export function* eventsSaga() {
     const { order, products, coupon, address, paymentType } = e.payload;
     const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
 
+    const userData = yield select((state) => state.user.data);
+    const user = userMapper(userData, address);
+    const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
     const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
     const { orderCreated } = moEngagedOrderMapper(
       products,
       coupon,
       paymentType,
-      order
+      order,
+      isFirstTimeUser
     );
 
-    const userData = yield select((state) => state.user.data);
-    const user = userMapper(userData, address);
-
+    const { firstName, lastName, email, phone } = user;
+    initializeMoengageAndAddInfo({
+      firstName,
+      lastName,
+      email,
+      phone,
+    });
     moeEvent("Order Created", orderCreated);
     moeEvent("Item Purchased", orderCreated);
 
@@ -492,8 +551,17 @@ export function* eventsSaga() {
       });
     });
   });
+
   yield takeEvery(actionTypes.ADDRESS_ADDED, function* saga(e) {
     const { address, totalPrice } = e.payload;
+
+    const { name, email, phone } = address;
+    initializeMoengageAndAddInfo({
+      firstName: name.split(" ")[0],
+      lastName: name.split(" ")[1],
+      email,
+      phone,
+    });
     const { addressAdded } = addressMapper(address, totalPrice);
 
     moeEvent("Address Added", addressAdded);
@@ -502,16 +570,22 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
     const { address, totalPrice } = e.payload;
     const { addressSelected } = addressMapper(address, totalPrice);
-    moeEvent("Address Selected", addressSelected);
-  });
 
-  yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
-      moeEvent("Category Viewed");
+    const { name, email, phone } = address;
+    initializeMoengageAndAddInfo({
+      firstName: name.split(" ")[0],
+      lastName: name.split(" ")[1],
+      email,
+      phone,
+    });
+
+    moeEvent("Address Selected", addressSelected);
   });
 
   yield takeEvery(actionTypes.ADD_PAYMENT_INFO, function* saga(e) {
     moeEvent("Add Payment Info", {
-      URL: `${BASE_URL}/pages/checkout`,
+      URL: window.location.href,
+      Source: eventSource,
     });
   });
 
@@ -539,20 +613,35 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {
+    dataLayer.push({ ecommerce: null, attribute: null, user: null });
+    dataLayer.push({
+      event: "search",
+      eventID: uuid(),
+      attribute: {
+        search_term: e.payload["search term"],
+        item_count: e.payload["Item Count"],
+      },
+    });
     moeEvent("Product Searched", {
       ...e.payload,
     });
   });
 
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
-    moeEvent("Home Viewed", {
-      URL: BASE_URL,
+    window?.addEventListener("MOE_LIFECYCLE", function (e) {
+      if (e.detail.name === "SDK_INITIALIZED") {
+        moeEvent("Home Viewed", {
+          URL: window.location.href,
+          Source: eventSource,
+        });
+      }
     });
   });
 
   yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {
     moeEvent("Customer Logged Out", {
       ...e.payload,
+      Source: eventSource,
     });
   });
 }

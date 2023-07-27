@@ -5,11 +5,11 @@ export const getFirstVariant = (product, variantId) => {
 
     let variant;
     if (variantId) {
-      variant = items.find(v => v.id === variantId);
+      variant = items.find((v) => v.id === variantId);
     }
 
     if (!variant) {
-      ([variant] = items);
+      [variant] = items;
     }
 
     return variant;
@@ -26,17 +26,31 @@ export const getProductMeta = (product) => {
   const sortedImages = Array.isArray(allImages)
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
-  const thumbImage =
+
+  let thumbImage =
     sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
   const [, secondaryImage] = sortedImages;
 
-  const discount = !!(product.listingPrice && product.price)
+  const [firstVariant] = items.sort((a, b) => a.position - b.position);
+
+  let discount = !!(product.listingPrice && product.price)
     ? Math.round(
-      ((product.listingPrice - product.price) * 100) / product.listingPrice
-    )
+        ((product.listingPrice - product.price) * 100) / product.listingPrice
+      )
     : 0;
 
-  const [firstVariant] = items.sort((a, b) => a.position - b.position);
+  if (firstVariant) {
+    discount = !!(firstVariant.listingPrice && firstVariant.price)
+      ? Math.round(
+          ((firstVariant.listingPrice - firstVariant.price) * 100) /
+            firstVariant.listingPrice
+        )
+      : 0;
+
+    if (firstVariant.imageUrl) {
+      thumbImage = { imageKey: firstVariant.imageUrl };
+    }
+  }
 
   return {
     thumbImage,
@@ -94,7 +108,7 @@ export const getProductPrice = (product, variantId) => {
 
   if (Array.isArray(items) && items.length) {
     if (variantId) {
-      const currentVariant = items.find(i => i.id === variantId);
+      const currentVariant = items.find((i) => i.id === variantId);
       if (currentVariant) {
         const { price, listingPrice } = currentVariant;
         return { price, listingPrice };
@@ -107,4 +121,3 @@ export const getProductPrice = (product, variantId) => {
 
   return { price: p, listingPrice: lp };
 };
-
