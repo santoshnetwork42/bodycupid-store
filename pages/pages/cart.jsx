@@ -21,7 +21,7 @@ function Cart(props) {
   const { name } = store;
   const cartItems = useCartItems();
   const { inventoryMapping } = useInventory();
-
+  
   useEffect(() => {
     viewCart();
     logger.verbose("View Cart");

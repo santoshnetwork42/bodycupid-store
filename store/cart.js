@@ -96,8 +96,7 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.VALIDATE_CART:
       const { payload } = action;
-
-      state.data.map((item) => {
+      const data = state.data.map((item) => {
         if (payload[item.recordKey]) {
           return {
             ...item,
@@ -106,9 +105,9 @@ function cartReducer(state = initialState, action) {
         }
         return item;
       });
-      alertToaster("cart price is updated");
 
-      return state;
+      alertToaster("cart price is updated");
+      return { ...state, data };
 
     default:
       return state;

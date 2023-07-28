@@ -164,8 +164,6 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga(e) {
-    const { coupon, address, paymentType } = e.payload;
-    console.log("payload", e.payload);
     const userData = yield select((state) => state.user.data);
     const cartdata = yield select((state) => state.cart.data);
     console.log(userData);
@@ -180,11 +178,6 @@ export function* eventsSaga() {
     vercelAnalytics.track("price_mismatch", {
       userId: userData.id,
       userNo: userData.phone,
-      userName: address.firstName + " " + address.lastName,
-      address: address.address,
-      city: address.city,
-      coupon: coupon?.code || "",
-      paymentType: paymentType,
     });
   });
 
