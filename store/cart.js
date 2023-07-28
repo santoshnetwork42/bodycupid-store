@@ -2,6 +2,7 @@ import { persistReducer } from "redux-persist";
 import { getFirstVariant } from "~/utils/products";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
+import { alertToaster } from "~/utils/popupHelper";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -13,6 +14,7 @@ export const actionTypes = {
   SET_CART: "SET_CART",
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
+  VALIDATE_CART: "VALIDATE_CART",
 };
 
 const initialState = {
@@ -92,6 +94,21 @@ function cartReducer(state = initialState, action) {
     case actionTypes.REMOVE_COUPON:
       return { ...state, coupon: null };
 
+    case actionTypes.VALIDATE_CART:
+      const { payload } = action;
+      const data = state.data.map((item) => {
+        if (payload[item.recordKey]) {
+          return {
+            ...item,
+            price: payload[item.recordKey],
+          };
+        }
+        return item;
+      });
+
+      alertToaster("Cart price is updated");
+      return { ...state, data };
+
     default:
       return state;
   }
@@ -113,6 +130,10 @@ export const cartActions = {
   applyCoupon: (coupon) => ({
     type: actionTypes.APPLY_COUPONS,
     payload: { coupon },
+  }),
+  validateCart: (payload) => ({
+    type: actionTypes.VALIDATE_CART,
+    payload,
   }),
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
