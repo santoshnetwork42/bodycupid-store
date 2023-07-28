@@ -5,7 +5,6 @@ const useVerifyCart = () => {
   const dispatch = useDispatch();
   const { productWithPrice } = useInventory();
 
-  console.log("productWithPrice", productWithPrice);
   const cartList = useSelector((state) => state.cart.data || []);
 
   dispatch(cartActions.validateCart(productWithPrice));
