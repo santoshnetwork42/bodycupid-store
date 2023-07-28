@@ -92,8 +92,15 @@ export const useInventory = () => {
     : {};
 
   useEffect(() => {
-    if (isPriceMismatched) dispatch(cartActions.validateCart(productWithPrice));
-  }, [isPriceMismatched]);
+    if (cartListMapping) {
+      const isMismatch = cartList.some(
+        (item) =>
+          cartListMapping[item.recordKey] &&
+          cartListMapping[item.recordKey].price !== item.price
+      );
+      if (isMismatch) dispatch(cartActions.validateCart(productWithPrice));
+    }
+  }, [cartListMapping]);
 
   return {
     ready: !!cartListMapping,

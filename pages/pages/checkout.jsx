@@ -49,7 +49,6 @@ import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import { useConfiguration } from "~/utils/contexts/navbar";
 import { MAX_COD_AMOUNT } from "~/constant";
-import useVerifyCart from "~/utils/hooks/useVerifyCart";
 
 const logger = new Logger("Checkout");
 
@@ -295,12 +294,6 @@ function Checkout(props) {
     return false;
   }, [productWithPrice, cartList]);
 
-  const mismatchedPrices = cartList.map((c) => productWithPrice[c.recordKey]);
-
-  const mismatchedProductDetails = cartList
-    .filter((c) => c.price !== productWithPrice[c.recordKey])
-    .map((c) => `${c.slug} - ${c.price} - ${productWithPrice[c.recordKey]}`);
-
   const placeOrder = useCallback(
     async (e) => {
       e.preventDefault();
@@ -322,7 +315,7 @@ function Checkout(props) {
       }
 
       if (!priceVerified) {
-        //alertToaster("Price updated. Add products again", "error");
+        alertToaster("Price updated. Add products again", "error");
         logger.error("Price updated. Add products again");
         priceMismatch(
           [...cartList, ...freeProducts],
@@ -332,7 +325,7 @@ function Checkout(props) {
           mismatchedProductDetails
         );
         setLoading(false);
-        //return;
+        return;
       }
 
       const formErrors = await validateAddress(shippingAddress, payMethod);
