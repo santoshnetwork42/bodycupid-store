@@ -9,7 +9,6 @@ import { cartActions } from "~/store/cart";
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
   const [cartListMapping, setCartListMapping] = useState(null);
-  const [isPriceMismatched, setPriceMismatched] = useState(false);
   const dispatch = useDispatch();
 
   const inventoryPayload = useMemo(
@@ -43,13 +42,6 @@ export const useInventory = () => {
           );
 
           setCartListMapping(mapping);
-          setPriceMismatched(
-            !cartList.every((c) =>
-              response.find(
-                (r) => r.recordKey === c.recordKey && r.price === c.price
-              )
-            )
-          );
         } else {
           setCartListMapping({});
         }
