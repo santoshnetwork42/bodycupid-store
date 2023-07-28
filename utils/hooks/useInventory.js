@@ -1,13 +1,15 @@
 import { useEffect, useState, useMemo } from "react";
 import { API } from "aws-amplify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { errorHandler } from "../errorHandler";
 import { checkInventory } from "~/graphql/api";
+import { cartActions } from "~/store/cart";
 
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
   const [cartListMapping, setCartListMapping] = useState(null);
+  const dispatch = useDispatch();
 
   const inventoryPayload = useMemo(
     () =>
@@ -18,7 +20,6 @@ export const useInventory = () => {
       })),
     [cartList]
   );
-
   useEffect(() => {
     const callGetInventory = async () => {
       try {
@@ -39,6 +40,7 @@ export const useInventory = () => {
             }),
             {}
           );
+
           setCartListMapping(mapping);
         } else {
           setCartListMapping({});
@@ -80,6 +82,17 @@ export const useInventory = () => {
         {}
       )
     : {};
+
+  useEffect(() => {
+    if (cartListMapping) {
+      const isMismatch = cartList.some(
+        (item) =>
+          cartListMapping[item.recordKey] &&
+          cartListMapping[item.recordKey].price !== item.price
+      );
+      if (isMismatch) dispatch(cartActions.validateCart(productWithPrice));
+    }
+  }, [cartListMapping]);
 
   return {
     ready: !!cartListMapping,
