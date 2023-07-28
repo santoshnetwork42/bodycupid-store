@@ -119,9 +119,21 @@ export const eventActions = {
     type: actionTypes.OUT_OF_STOCK,
     payload: { products, inventory },
   }),
-  priceMismatch: (order, products, coupon, address, paymentType) => ({
+  priceMismatch: (
+    products,
+    coupon,
+    paymentType,
+    mismatchedPrices,
+    mismatchedProductDetails
+  ) => ({
     type: actionTypes.PRICE_MISMATCH,
-    payload: { order, products, coupon, address, paymentType },
+    payload: {
+      products,
+      coupon,
+      paymentType,
+      mismatchedPrices,
+      mismatchedProductDetails,
+    },
   }),
 };
 
@@ -164,20 +176,28 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga(e) {
+    const {
+      products,
+      coupon,
+      paymentType,
+      mismatchedPrices,
+      mismatchedProductDetails,
+    } = e.payload;
     const userData = yield select((state) => state.user.data);
-    const cartdata = yield select((state) => state.cart.data);
-    console.log(userData);
-    console.log("cart", cartdata);
+    const cartData = yield select((state) => state.cart.data);
+    const productPrices = products.map((product) => product.price);
+    const product = products.map((product) => product.slug);
 
-    dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({
-      event: "price_mismatch",
-      eventID: uuid(),
-      attribute: {},
-    });
     vercelAnalytics.track("price_mismatch", {
       userId: userData.id,
       userNo: userData.phone,
+      cartLength: cartData.length,
+      coupon: coupon?.code || "",
+      paymentType: paymentType,
+      product: JSON.stringify(product),
+      productCartPrice: JSON.stringify(productPrices),
+      productActualPrice: JSON.stringify(mismatchedPrices),
+      productWithConflictingPrice: JSON.stringify(mismatchedProductDetails),
     });
   });
 

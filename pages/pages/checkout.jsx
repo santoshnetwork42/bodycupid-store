@@ -295,12 +295,11 @@ function Checkout(props) {
     return false;
   }, [productWithPrice, cartList]);
 
-  const mismatchedProduct = useMemo(() => {
-    if (productWithPrice) {
-      return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
-    }
-    return false;
-  }, [productWithPrice, cartList]);
+  const mismatchedPrices = cartList.map((c) => productWithPrice[c.recordKey]);
+
+  const mismatchedProductDetails = cartList
+    .filter((c) => c.price !== productWithPrice[c.recordKey])
+    .map((c) => `${c.slug} - ${c.price} - ${productWithPrice[c.recordKey]}`);
 
   const placeOrder = useCallback(
     async (e) => {
@@ -325,7 +324,13 @@ function Checkout(props) {
       if (!priceVerified) {
         //alertToaster("Price updated. Add products again", "error");
         logger.error("Price updated. Add products again");
-        priceMismatch();
+        priceMismatch(
+          [...cartList, ...freeProducts],
+          appliedCoupon,
+          payMethod,
+          mismatchedPrices,
+          mismatchedProductDetails
+        );
         setLoading(false);
         //return;
       }
