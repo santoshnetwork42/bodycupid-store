@@ -8,6 +8,7 @@ import { checkInventory } from "~/graphql/api";
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
   const [cartListMapping, setCartListMapping] = useState(null);
+  const [ispriceValid, setpriceValid] = useState(null);
 
   const inventoryPayload = useMemo(
     () =>
@@ -18,7 +19,6 @@ export const useInventory = () => {
       })),
     [cartList]
   );
-
   useEffect(() => {
     const callGetInventory = async () => {
       try {
@@ -39,7 +39,12 @@ export const useInventory = () => {
             }),
             {}
           );
+
           setCartListMapping(mapping);
+          ispriceValid = cartList.every(
+            (c) => c.price === productWithPrice[c.recordKey]
+          );
+          console.log("ispricevalid", ispriceValid);
         } else {
           setCartListMapping({});
         }

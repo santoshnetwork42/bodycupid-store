@@ -287,7 +287,16 @@ function Checkout(props) {
     return Promise.resolve(null);
   }, [shippingAddress, user]);
 
+  console.log("shhjhjs", priceValid);
+
   const priceVerified = useMemo(() => {
+    if (productWithPrice) {
+      return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
+    }
+    return false;
+  }, [productWithPrice, cartList]);
+
+  const mismatchedProduct = useMemo(() => {
     if (productWithPrice) {
       return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
     }
