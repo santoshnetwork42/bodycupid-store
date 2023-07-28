@@ -206,7 +206,7 @@ function Checkout(props) {
               variables: { orderId, razorpayPaymentId: paymentId },
             }).then(
               (validateTransactionResponse) =>
-                validateTransactionResponse.data.validateTransaction.success
+              validateTransactionResponse.data.validateTransaction.success
             );
           } else {
             success = await API.graphql({
