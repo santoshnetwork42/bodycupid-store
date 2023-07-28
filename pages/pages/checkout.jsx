@@ -125,11 +125,6 @@ function Checkout(props) {
 
   const cartItems = useCartItems(false);
 
-  const cartItemsMapped = cartItems?.map((item) => ({
-    ...item,
-    'image': item.variantId && item.variants && item.variants.items.length ? item.variants.items.find(v => v.id === item.variantId).imageUrl : item.images.items[0]?.imageKey
-  }));
-
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
       const { id: orderId } = order;
@@ -548,7 +543,7 @@ function Checkout(props) {
                               </tr>
                             </thead>
                             <tbody>
-                              {cartItemsMapped.map((item) => (
+                              {cartItems.map((item) => (
                                 <tr
                                   className="m-0 p-0 border-no"
                                   key={item.itemKey}
@@ -557,7 +552,7 @@ function Checkout(props) {
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
                                         <img
-                                          src={getPublicImageURL(item?.image)}
+                                          src={getPublicImageURL(item?.thumbImage)}
                                           width="100"
                                           height="100"
                                           alt={item.images.items[0]?.alt}

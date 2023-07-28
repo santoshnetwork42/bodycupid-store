@@ -106,6 +106,14 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
     }
   };
 
+  order?.products?.items.forEach((item) => {
+    if (item.variantId && item.variant && item.variant.imageUrl) {
+        item['thumbImage'] = item?.variant.imageUrl;
+    } else {
+      item['thumbImage'] = item.product.images?.items[0]?.imageKey;
+    }
+  });
+
   return (
     <main className="main order">
       <Head>
@@ -219,7 +227,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                           >
                             <img
                               src={getPublicImageURL(
-                                item.product.images?.items[0]?.imageKey
+                                item.thumbImage
                               )}
                               alt={item.product?.images.items[0]?.alt}
                               width="80"
