@@ -175,30 +175,8 @@ export function* eventsSaga() {
     vercelAnalytics.track("search", { searchTerm: term });
   });
 
-  yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga(e) {
-    const {
-      products,
-      coupon,
-      paymentType,
-      mismatchedPrices,
-      mismatchedProductDetails,
-    } = e.payload;
-    const userData = yield select((state) => state.user.data);
-    const cartData = yield select((state) => state.cart.data);
-    const productPrices = products.map((product) => product.price);
-    const product = products.map((product) => product.slug);
-
-    vercelAnalytics.track("price_mismatch", {
-      userId: userData.id,
-      userNo: userData.phone,
-      cartLength: cartData.length,
-      coupon: coupon?.code || "",
-      paymentType: paymentType,
-      product: JSON.stringify(product),
-      productCartPrice: JSON.stringify(productPrices),
-      productActualPrice: JSON.stringify(mismatchedPrices),
-      productWithConflictingPrice: JSON.stringify(mismatchedProductDetails),
-    });
+  yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga() {
+    vercelAnalytics.track("price_mismatch");
   });
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {

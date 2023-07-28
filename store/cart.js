@@ -106,7 +106,7 @@ function cartReducer(state = initialState, action) {
         return item;
       });
 
-      alertToaster("cart price is updated");
+      alertToaster("Cart price is updated");
       return { ...state, data };
 
     default:

@@ -206,7 +206,7 @@ function Checkout(props) {
               variables: { orderId, razorpayPaymentId: paymentId },
             }).then(
               (validateTransactionResponse) =>
-              validateTransactionResponse.data.validateTransaction.success
+                validateTransactionResponse.data.validateTransaction.success
             );
           } else {
             success = await API.graphql({
@@ -317,13 +317,7 @@ function Checkout(props) {
       if (!priceVerified) {
         alertToaster("Price updated. Add products again", "error");
         logger.error("Price updated. Add products again");
-        priceMismatch(
-          [...cartList, ...freeProducts],
-          appliedCoupon,
-          payMethod,
-          mismatchedPrices,
-          mismatchedProductDetails
-        );
+        priceMismatch();
         setLoading(false);
         return;
       }
