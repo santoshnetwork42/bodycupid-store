@@ -552,9 +552,7 @@ function Checkout(props) {
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
                                         <img
-                                          src={getPublicImageURL(
-                                            item.images.items[0]?.imageKey
-                                          )}
+                                          src={getPublicImageURL(item?.thumbImage)}
                                           width="100"
                                           height="100"
                                           alt={item.images.items[0]?.alt}

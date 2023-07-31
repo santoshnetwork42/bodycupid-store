@@ -31,6 +31,7 @@ function CartProduct({
     qty,
     slug,
     images,
+    thumbImage,
     title,
     price,
     listingPrice,
@@ -102,15 +103,6 @@ function CartProduct({
     [cartItemType]
   );
 
-  const image = useMemo(() => {
-    if (Array.isArray(variants?.items) && variantId) {
-      const currVariant =  variants.items.find(v => v.id === variantId);
-      if (currVariant?.imageUrl) return currVariant?.imageUrl;
-    }
-
-    return images?.items[0]?.imageKey;
-  }, [variantId, variants, images])
-
   const outOfStock = qty > inventory;
 
   if (isSmall)
@@ -125,7 +117,7 @@ function CartProduct({
           <figure>
             <ALink href={"/products/" + slug} className="p-0 border-2">
               <img
-                src={getPublicImageURL(image)}
+                src={getPublicImageURL(thumbImage)}
                 width="80"
                 height="80"
                 alt={images?.items[0]?.alt}

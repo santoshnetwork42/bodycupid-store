@@ -1403,8 +1403,17 @@ export const getStore = /* GraphQL */ `
     getStore(id: $id) {
       id
       name
+      title
+      description
+      isActive
+      webUrl
       imageUrl
       darkImageUrl
+      banners {
+        webKey
+        mobileKey
+        link
+      }
       announcements {
         label
         link
