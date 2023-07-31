@@ -45,6 +45,7 @@ export const actionTypes = {
   LOG_OUT: "LOG_OUT",
   TOP_NAVBAR_CLICKED: "TOP_NAVBAR_CLICKED",
   REMOVED_FROM_CART: "REMOVED_FROM_CART",
+  PRICE_MISMATCH: "PRICE_MISMATCH",
 };
 
 const initialState = {
@@ -118,6 +119,22 @@ export const eventActions = {
     type: actionTypes.OUT_OF_STOCK,
     payload: { products, inventory },
   }),
+  priceMismatch: (
+    products,
+    coupon,
+    paymentType,
+    mismatchedPrices,
+    mismatchedProductDetails
+  ) => ({
+    type: actionTypes.PRICE_MISMATCH,
+    payload: {
+      products,
+      coupon,
+      paymentType,
+      mismatchedPrices,
+      mismatchedProductDetails,
+    },
+  }),
 };
 
 export function* eventsSaga() {
@@ -156,6 +173,10 @@ export function* eventsSaga() {
     });
     Analytics.record({ name: "search", attributes: { search_term: term } });
     vercelAnalytics.track("search", { searchTerm: term });
+  });
+
+  yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga() {
+    vercelAnalytics.track("price_mismatch");
   });
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
