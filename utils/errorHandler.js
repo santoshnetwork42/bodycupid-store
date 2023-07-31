@@ -6,6 +6,7 @@ export const errorHandler = (error) => {
     alertToaster(error?.message, "error");
     Sentry.captureException(error?.message || error);
   } else {
+    console.error("error :>> ", error);
     alertToaster("Something went wrong!", "error");
     Sentry.captureException(JSON.stringify(error));
   }
