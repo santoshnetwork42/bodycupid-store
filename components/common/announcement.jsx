@@ -27,12 +27,16 @@ const Announcement = ({ store, showTopRunner }) => {
                   <p className="announcement-text font-weight-semi-bold pt-1 pb-1 m-0">
                     {announcement.label}
                   </p>
-                  <span className="ml-1 mr-1">|</span>
-                  <ALink href={announcement.link}>
-                    <p className="announcement-text announcement-text-hover font-weight-semi-bold pt-1 pb-1 m-0">
-                      Shop now
-                    </p>
-                  </ALink>
+                  {!!announcement.link && (
+                    <>
+                      <span className="ml-1 mr-1">|</span>
+                      <ALink href={announcement.link}>
+                        <p className="announcement-text announcement-text-hover font-weight-semi-bold pt-1 pb-1 m-0">
+                          Shop now
+                        </p>
+                      </ALink>
+                    </>
+                  )}
                 </div>
               );
             })}
