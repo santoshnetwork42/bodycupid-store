@@ -12,7 +12,7 @@ export function* couponSaga() {
         actionTypes.UPDATE_CART,
         actionTypes.REMOVE_FROM_CART,
       ],
-      function* saga(e) {
+      function* saga() {
         const { cart: state } = yield select();
         const { data, coupon } = state || {};
 

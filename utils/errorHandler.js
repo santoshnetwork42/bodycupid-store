@@ -3,7 +3,7 @@ import { alertToaster } from "./popupHelper";
 
 export const errorHandler = (error) => {
   if (typeof error === "string" || error?.message) {
-    alertToaster(error?.message, "error");
+    alertToaster(error?.message || error, "error");
     Sentry.captureException(error?.message || error);
   } else {
     console.error("error :>> ", error);
