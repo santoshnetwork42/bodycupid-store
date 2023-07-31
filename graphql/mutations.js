@@ -85,7 +85,6 @@ export const deleteProductCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -130,7 +129,6 @@ export const deleteProductSubCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -193,7 +191,11 @@ export const deleteStore = /* GraphQL */ `
         link
         __typename
       }
-      announcements
+      announcements {
+        label
+        link
+        __typename
+      }
       socialLinks {
         instagram
         facebook
@@ -266,7 +268,6 @@ export const deleteProduct = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -432,7 +433,6 @@ export const createOrder = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -582,7 +582,6 @@ export const deleteOrder = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1075,7 +1074,6 @@ export const createPayment = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1135,7 +1133,6 @@ export const updatePayment = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1195,7 +1192,6 @@ export const deletePayment = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1258,7 +1254,6 @@ export const deleteCoupon = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1539,7 +1534,6 @@ export const createProductCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1585,7 +1579,6 @@ export const updateProductCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1630,7 +1623,6 @@ export const createProductSubCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1690,7 +1682,6 @@ export const updateProductSubCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1753,7 +1744,11 @@ export const createStore = /* GraphQL */ `
         link
         __typename
       }
-      announcements
+      announcements {
+        label
+        link
+        __typename
+      }
       socialLinks {
         instagram
         facebook
@@ -1788,7 +1783,11 @@ export const updateStore = /* GraphQL */ `
         link
         __typename
       }
-      announcements
+      announcements {
+        label
+        link
+        __typename
+      }
       socialLinks {
         instagram
         facebook
@@ -1820,7 +1819,6 @@ export const createShippingTier = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1852,7 +1850,6 @@ export const updateShippingTier = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1884,7 +1881,6 @@ export const deleteShippingTier = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1921,7 +1917,6 @@ export const createCollectionType = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1957,7 +1952,6 @@ export const updateCollectionType = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1993,7 +1987,6 @@ export const deleteCollectionType = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -2065,7 +2058,6 @@ export const createProduct = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -2196,7 +2188,6 @@ export const updateProduct = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -2704,7 +2695,6 @@ export const updateOrder = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -3349,7 +3339,6 @@ export const createShoppingCart = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -3444,7 +3433,6 @@ export const updateShoppingCart = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -3539,7 +3527,6 @@ export const deleteShoppingCart = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -3928,7 +3915,6 @@ export const createCoupon = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4061,7 +4047,6 @@ export const updateCoupon = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4438,7 +4423,6 @@ export const createRedirects = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4468,7 +4452,6 @@ export const updateRedirects = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4498,7 +4481,6 @@ export const deleteRedirects = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4537,7 +4519,6 @@ export const createNewOrder = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4686,7 +4667,6 @@ export const applyCoupon = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4834,7 +4814,6 @@ export const createStoreShoppingCart = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
