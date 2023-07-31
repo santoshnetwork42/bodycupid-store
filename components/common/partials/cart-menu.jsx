@@ -32,7 +32,7 @@ function CartMenu(props) {
 
   useEffect(() => {
     if (isCartOpen) {
-      document.body.classList.add('overflow-hidden');
+      document.body.classList.add("overflow-hidden");
       viewCart();
       if (!document.querySelector(".side-bar").classList.contains("opened"))
         document.querySelector(".side-bar").classList.add("opened");
@@ -40,9 +40,9 @@ function CartMenu(props) {
       if (document.querySelector(".side-bar").classList.contains("opened"))
         document.querySelector(".side-bar").classList.remove("opened");
     }
-    return ()=> {
-      document.body.classList.remove('overflow-hidden');
-    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
   }, [isCartOpen]);
 
   useEffect(() => {

@@ -119,8 +119,21 @@ export const eventActions = {
     type: actionTypes.OUT_OF_STOCK,
     payload: { products, inventory },
   }),
-  priceMismatch: () => ({
+  priceMismatch: (
+    products,
+    coupon,
+    paymentType,
+    mismatchedPrices,
+    mismatchedProductDetails
+  ) => ({
     type: actionTypes.PRICE_MISMATCH,
+    payload: {
+      products,
+      coupon,
+      paymentType,
+      mismatchedPrices,
+      mismatchedProductDetails,
+    },
   }),
 };
 
@@ -162,14 +175,8 @@ export function* eventsSaga() {
     vercelAnalytics.track("search", { searchTerm: term });
   });
 
-  yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga(e) {
-    dataLayer.push({ ecommerce: null, attribute: null, user: null });
-    dataLayer.push({
-      event: "price_mismatch",
-      eventID: uuid(),
-      attribute: {},
-    });
-    vercelAnalytics.track("price_mismatch", {});
+  yield takeEvery(actionTypes.PRICE_MISMATCH, function* saga() {
+    vercelAnalytics.track("price_mismatch");
   });
 
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
