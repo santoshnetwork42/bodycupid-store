@@ -1,95 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const searchCollections = /* GraphQL */ `
-  query SearchCollections(
-    $filter: SearchableCollectionFilterInput
-    $sort: [SearchableCollectionSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableCollectionAggregationInput]
-  ) {
-    searchCollections(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-              __typename
-            }
-          }
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`;
-export const bystoreIdCollections = /* GraphQL */ `
-  query BystoreIdCollections(
-    $storeId: ID!
-    $priority: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCollectionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdCollections(
-      storeId: $storeId
-      priority: $priority
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -252,46 +163,6 @@ export const listUserAddresses = /* GraphQL */ `
     $nextToken: String
   ) {
     listUserAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userID
-        name
-        phone
-        email
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const byuserIDUserAddress = /* GraphQL */ `
-  query ByuserIDUserAddress(
-    $userID: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserAddressFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byuserIDUserAddress(
-      userID: $userID
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
       items {
         id
         userID
@@ -961,207 +832,6 @@ export const searchStores = /* GraphQL */ `
     }
   }
 `;
-export const bystoreIdwarehouse = /* GraphQL */ `
-  query BystoreIdwarehouse(
-    $storeId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelwarehouseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdwarehouse(
-      storeId: $storeId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        storeId
-        facilityCode
-        name
-        description
-        address
-        totalProducts
-        totalQuantity
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const searchWarehouses = /* GraphQL */ `
-  query SearchWarehouses(
-    $filter: SearchablewarehouseFilterInput
-    $sort: [SearchablewarehouseSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchablewarehouseAggregationInput]
-  ) {
-    searchWarehouses(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        storeId
-        facilityCode
-        name
-        description
-        address
-        totalProducts
-        totalQuantity
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-              __typename
-            }
-          }
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`;
-export const bywarehouseIdProductInventory = /* GraphQL */ `
-  query BywarehouseIdProductInventory(
-    $warehouseId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductInventoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bywarehouseIdProductInventory(
-      warehouseId: $warehouseId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const byproductIdProductInventory = /* GraphQL */ `
-  query ByproductIdProductInventory(
-    $productId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductInventoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byproductIdProductInventory(
-      productId: $productId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const searchProductInventories = /* GraphQL */ `
-  query SearchProductInventories(
-    $filter: SearchableProductInventoryFilterInput
-    $sort: [SearchableProductInventorySortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableProductInventoryAggregationInput]
-  ) {
-    searchProductInventories(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-              __typename
-            }
-          }
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`;
 export const getShippingTier = /* GraphQL */ `
   query GetShippingTier($id: ID!) {
     getShippingTier(id: $id) {
@@ -1355,43 +1025,6 @@ export const listCollectionTypes = /* GraphQL */ `
     }
   }
 `;
-export const bystoreIdAllCollections = /* GraphQL */ `
-  query BystoreIdAllCollections(
-    $storeId: ID!
-    $priority: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCollectionTypeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdAllCollections(
-      storeId: $storeId
-      priority: $priority
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const searchCollectionTypes = /* GraphQL */ `
   query SearchCollectionTypes(
     $filter: SearchableCollectionTypeFilterInput
@@ -1559,6 +1192,9 @@ export const getProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      recommended
+      recommendPriority
+      recommendPrice
       reviews {
         nextToken
         __typename
@@ -1627,6 +1263,9 @@ export const listProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1700,6 +1339,9 @@ export const bycategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1773,6 +1415,9 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1846,6 +1491,9 @@ export const bystoreIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1919,6 +1567,9 @@ export const byslugProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1992,6 +1643,9 @@ export const searchProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -2071,6 +1725,9 @@ export const getLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       createdAt
@@ -3010,6 +2667,9 @@ export const getOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -3556,6 +3216,9 @@ export const getReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       rating
@@ -4092,6 +3755,9 @@ export const getShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -4290,6 +3956,9 @@ export const getCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       minOrderValue

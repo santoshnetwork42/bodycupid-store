@@ -324,6 +324,9 @@ export const deleteProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      recommended
+      recommendPriority
+      recommendPrice
       reviews {
         nextToken
         __typename
@@ -407,6 +410,156 @@ export const deleteProductLog = /* GraphQL */ `
       comment
       createdAt
       updatedAt
+      __typename
+    }
+  }
+`;
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
+  ) {
+    createOrder(input: $input, condition: $condition) {
+      id
+      code
+      storeId
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+        __typename
+      }
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        lastOrderDate
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        __typename
+      }
+      channelName
+      shippingAddress {
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        __typename
+      }
+      billingAddress {
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        __typename
+      }
+      totalStoreCredit
+      couponCodeId
+      coupon {
+        id
+        code
+        description
+        groupId
+        storeId
+        userId
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        minOrderValue
+        maxDiscount
+        expirationDate
+        isActive
+        isFeatured
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+        abandonCart
+        createdAt
+        updatedAt
+        __typename
+      }
+      totalAmount
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      currency
+      paymentType
+      sla
+      priority
+      orderDate
+      status
+      products {
+        nextToken
+        __typename
+      }
+      payments {
+        nextToken
+        __typename
+      }
+      comments {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      utmSource
+      utmContent
+      utmMedium
+      utmCampaign
+      utmTerm
+      source
+      referrer
+      landingPage
+      confirmedViaWebhook
       __typename
     }
   }
@@ -645,12 +798,12 @@ export const deleteOrderComment = /* GraphQL */ `
     }
   }
 `;
-export const deleteOrderProduct = /* GraphQL */ `
-  mutation DeleteOrderProduct(
-    $input: DeleteOrderProductInput!
+export const createOrderProduct = /* GraphQL */ `
+  mutation CreateOrderProduct(
+    $input: CreateOrderProductInput!
     $condition: ModelOrderProductConditionInput
   ) {
-    deleteOrderProduct(input: $input, condition: $condition) {
+    createOrderProduct(input: $input, condition: $condition) {
       id
       orderId
       productId
@@ -703,6 +856,9 @@ export const deleteOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -766,6 +922,196 @@ export const deleteOrderProduct = /* GraphQL */ `
       quantity
       price
       status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteOrderProduct = /* GraphQL */ `
+  mutation DeleteOrderProduct(
+    $input: DeleteOrderProductInput!
+    $condition: ModelOrderProductConditionInput
+  ) {
+    deleteOrderProduct(input: $input, condition: $condition) {
+      id
+      orderId
+      productId
+      product {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        pageTitle
+        productDescription
+        longDescription
+        manufacturer
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
+        __typename
+      }
+      variantId
+      variant {
+        id
+        productId
+        title
+        description
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        createdAt
+        updatedAt
+        taxable
+        barcode
+        imageUrl
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        __typename
+      }
+      sku
+      returnReason
+      returnDate
+      returnAWB
+      returnShippingProvider
+      title
+      shippingMethodCode
+      cashOnDeliveryCharges
+      sellingPrice
+      shippingCharges
+      discount
+      totalPrice
+      currency
+      onHold
+      facilityCode
+      gstin
+      additionalInfo
+      centralGstPercentage
+      compensationCessPercentage
+      integratedGstPercentage
+      stateGstPercentage
+      taxRate
+      unionTerritoryGstPercentage
+      deliveryPartner
+      shippingCourier
+      dispatchDate
+      invoiceDate
+      invoiceNumber
+      tentativeDeliveryDate
+      trackingId
+      cancelledQuantity
+      quantity
+      price
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createPayment = /* GraphQL */ `
+  mutation CreatePayment(
+    $input: CreatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    createPayment(input: $input, condition: $condition) {
+      id
+      storeId
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        imageUrl
+        darkImageUrl
+        announcements
+        createdAt
+        updatedAt
+        __typename
+      }
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        lastOrderDate
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        __typename
+      }
+      orderId
+      method
+      status
+      amount
+      paymentDate
       createdAt
       updatedAt
       __typename
@@ -892,111 +1238,6 @@ export const deletePayment = /* GraphQL */ `
     }
   }
 `;
-export const deleteReview = /* GraphQL */ `
-  mutation DeleteReview(
-    $input: DeleteReviewInput!
-    $condition: ModelReviewConditionInput
-  ) {
-    deleteReview(input: $input, condition: $condition) {
-      id
-      bulkActionId
-      userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        isActive
-        authProvider
-        isAdmin
-        profilePhotoUrl
-        emailVerified
-        phoneVerified
-        isCognitoConfirmed
-        createdAt
-        updatedAt
-        totalOrders
-        totalSpent
-        lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        __typename
-      }
-      reviewer {
-        name
-        email
-        __typename
-      }
-      flagged
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      rating
-      comment
-      title
-      source
-      images
-      verified
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const deleteCoupon = /* GraphQL */ `
   mutation DeleteCoupon(
     $input: DeleteCouponInput!
@@ -1104,6 +1345,9 @@ export const deleteCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       minOrderValue
@@ -1879,6 +2123,9 @@ export const createProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      recommended
+      recommendPriority
+      recommendPrice
       reviews {
         nextToken
         __typename
@@ -2007,6 +2254,9 @@ export const updateProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      recommended
+      recommendPriority
+      recommendPrice
       reviews {
         nextToken
         __typename
@@ -2077,6 +2327,9 @@ export const createLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       createdAt
@@ -2143,6 +2396,9 @@ export const updateLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       createdAt
@@ -2209,6 +2465,9 @@ export const deleteLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       createdAt
@@ -2427,156 +2686,6 @@ export const updateProductLog = /* GraphQL */ `
     }
   }
 `;
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
-  ) {
-    createOrder(input: $input, condition: $condition) {
-      id
-      code
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        isActive
-        authProvider
-        isAdmin
-        profilePhotoUrl
-        emailVerified
-        phoneVerified
-        isCognitoConfirmed
-        createdAt
-        updatedAt
-        totalOrders
-        totalSpent
-        lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        __typename
-      }
-      channelName
-      shippingAddress {
-        name
-        phone
-        email
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
-        __typename
-      }
-      billingAddress {
-        name
-        phone
-        email
-        country
-        state
-        city
-        pinCode
-        landmark
-        address
-        location
-        area
-        __typename
-      }
-      totalStoreCredit
-      couponCodeId
-      coupon {
-        id
-        code
-        description
-        groupId
-        storeId
-        userId
-        couponType
-        buyXQuantity
-        getYAmount
-        getYPercentage
-        getYQuantity
-        getYProduct
-        minOrderValue
-        maxDiscount
-        expirationDate
-        isActive
-        isFeatured
-        autoApply
-        applicableCollections
-        applicableProducts
-        paymentMethod
-        abandonCart
-        createdAt
-        updatedAt
-        __typename
-      }
-      totalAmount
-      totalCashOnDeliveryCharges
-      totalDiscount
-      totalGiftCharges
-      totalPrepaidAmount
-      totalShippingCharges
-      taxExempted
-      cFormProvided
-      thirdPartyShipping
-      currency
-      paymentType
-      sla
-      priority
-      orderDate
-      status
-      products {
-        nextToken
-        __typename
-      }
-      payments {
-        nextToken
-        __typename
-      }
-      comments {
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      utmSource
-      utmContent
-      utmMedium
-      utmCampaign
-      utmTerm
-      source
-      referrer
-      landingPage
-      confirmedViaWebhook
-      __typename
-    }
-  }
-`;
 export const updateOrder = /* GraphQL */ `
   mutation UpdateOrder(
     $input: UpdateOrderInput!
@@ -2769,133 +2878,6 @@ export const createOrderComment = /* GraphQL */ `
     }
   }
 `;
-export const createOrderProduct = /* GraphQL */ `
-  mutation CreateOrderProduct(
-    $input: CreateOrderProductInput!
-    $condition: ModelOrderProductConditionInput
-  ) {
-    createOrderProduct(input: $input, condition: $condition) {
-      id
-      orderId
-      productId
-      product {
-        id
-        title
-        brand
-        vendor
-        collections
-        categoryId
-        subCategoryId
-        storeId
-        bulkActionId
-        isFeatured
-        productType
-        createdAt
-        slug
-        pageTitle
-        productDescription
-        longDescription
-        manufacturer
-        updatedAt
-        isPublished
-        publishedAt
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        taxable
-        barcode
-        tags
-        benefits
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        continueSellingOutOfStock
-        rating
-        totalRatings
-        totalOrders
-        thumbImages
-        isTaxEnabled
-        isInventoryEnabled
-        googleCategory
-        hasVarient
-        hasFaq
-        __typename
-      }
-      variantId
-      variant {
-        id
-        productId
-        title
-        description
-        price
-        sku
-        size
-        color
-        status
-        position
-        currency
-        costPrice
-        listingPrice
-        createdAt
-        updatedAt
-        taxable
-        barcode
-        imageUrl
-        weight
-        weightUnit
-        minimumOrderQuantity
-        inventory
-        blockedInventory
-        __typename
-      }
-      sku
-      returnReason
-      returnDate
-      returnAWB
-      returnShippingProvider
-      title
-      shippingMethodCode
-      cashOnDeliveryCharges
-      sellingPrice
-      shippingCharges
-      discount
-      totalPrice
-      currency
-      onHold
-      facilityCode
-      gstin
-      additionalInfo
-      centralGstPercentage
-      compensationCessPercentage
-      integratedGstPercentage
-      stateGstPercentage
-      taxRate
-      unionTerritoryGstPercentage
-      deliveryPartner
-      shippingCourier
-      dispatchDate
-      invoiceDate
-      invoiceNumber
-      tentativeDeliveryDate
-      trackingId
-      cancelledQuantity
-      quantity
-      price
-      status
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
 export const updateOrderProduct = /* GraphQL */ `
   mutation UpdateOrderProduct(
     $input: UpdateOrderProductInput!
@@ -2954,6 +2936,9 @@ export const updateOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -3017,66 +3002,6 @@ export const updateOrderProduct = /* GraphQL */ `
       quantity
       price
       status
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const createPayment = /* GraphQL */ `
-  mutation CreatePayment(
-    $input: CreatePaymentInput!
-    $condition: ModelPaymentConditionInput
-  ) {
-    createPayment(input: $input, condition: $condition) {
-      id
-      storeId
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        imageUrl
-        darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-        email
-        phone
-        gender
-        dob
-        isActive
-        authProvider
-        isAdmin
-        profilePhotoUrl
-        emailVerified
-        phoneVerified
-        isCognitoConfirmed
-        createdAt
-        updatedAt
-        totalOrders
-        totalSpent
-        lastOrderDate
-        walletBalance
-        walletSpent
-        totalStoreCredit
-        __typename
-      }
-      orderId
-      method
-      status
-      amount
-      paymentDate
       createdAt
       updatedAt
       __typename
@@ -3174,6 +3099,9 @@ export const createReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       rating
@@ -3279,6 +3207,117 @@ export const updateReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
+        __typename
+      }
+      rating
+      comment
+      title
+      source
+      images
+      verified
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteReview = /* GraphQL */ `
+  mutation DeleteReview(
+    $input: DeleteReviewInput!
+    $condition: ModelReviewConditionInput
+  ) {
+    deleteReview(input: $input, condition: $condition) {
+      id
+      bulkActionId
+      userId
+      user {
+        id
+        owner
+        firstName
+        lastName
+        email
+        phone
+        gender
+        dob
+        isActive
+        authProvider
+        isAdmin
+        profilePhotoUrl
+        emailVerified
+        phoneVerified
+        isCognitoConfirmed
+        createdAt
+        updatedAt
+        totalOrders
+        totalSpent
+        lastOrderDate
+        walletBalance
+        walletSpent
+        totalStoreCredit
+        __typename
+      }
+      reviewer {
+        name
+        email
+        __typename
+      }
+      flagged
+      productId
+      product {
+        id
+        title
+        brand
+        vendor
+        collections
+        categoryId
+        subCategoryId
+        storeId
+        bulkActionId
+        isFeatured
+        productType
+        createdAt
+        slug
+        pageTitle
+        productDescription
+        longDescription
+        manufacturer
+        updatedAt
+        isPublished
+        publishedAt
+        price
+        sku
+        size
+        color
+        status
+        position
+        currency
+        costPrice
+        listingPrice
+        taxable
+        barcode
+        tags
+        benefits
+        weight
+        weightUnit
+        minimumOrderQuantity
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        totalOrders
+        thumbImages
+        isTaxEnabled
+        isInventoryEnabled
+        googleCategory
+        hasVarient
+        hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       rating
@@ -3636,6 +3675,9 @@ export const createShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -3730,6 +3772,9 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -3824,6 +3869,9 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -3967,6 +4015,9 @@ export const createCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       minOrderValue
@@ -4097,6 +4148,9 @@ export const updateCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       minOrderValue
@@ -4719,6 +4773,9 @@ export const applyCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       minOrderValue
