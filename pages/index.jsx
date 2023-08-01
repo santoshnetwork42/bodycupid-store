@@ -25,6 +25,7 @@ export { getStaticProps } from "~/utils/page";
 function HomePage({
   hero,
   bestSellerProducts,
+  bestSellersPersonalized,
   featuredProducts,
   categories,
   // storyCategories,
@@ -49,6 +50,14 @@ function HomePage({
         <ProductCollection
           products={bestSellerProducts}
           title="Best sellers"
+          disableCarousel={isSmallSize}
+          slug="best-seller"
+          redirectTo="/collections/best-seller"
+        />
+
+        <ProductCollection
+          products={bestSellersPersonalized}
+          title="Best sellers Personalized"
           disableCarousel={isSmallSize}
           slug="best-seller"
           redirectTo="/collections/best-seller"

@@ -19,7 +19,7 @@ export const getFirstVariant = (product, variantId) => {
 
 export const getProductMeta = (product) => {
   if (!product) return {};
-  const { variants = {}, images = {} } = product;
+  const { variants = {}, images = {}, image } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
 
@@ -50,6 +50,10 @@ export const getProductMeta = (product) => {
     if (firstVariant.imageUrl) {
       thumbImage = { imageKey: firstVariant.imageUrl };
     }
+  }
+
+  if (image) {
+    thumbImage = { imageKey: image };
   }
 
   return {

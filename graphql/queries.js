@@ -4926,3 +4926,22 @@ export const adminGetDashboardData = /* GraphQL */ `
     }
   }
 `;
+
+export const getRecommendation = /* GraphQL */ `
+  query GetRecommendation($input: RecommendationInput!) {
+    getRecommendation(input: $input) {
+      id
+      title
+      price
+      listingPrice
+      image
+      inventory
+      sku
+      rating
+      totalRatings
+      isInventoryEnabled
+      slug
+      __typename
+    }
+  }
+`;

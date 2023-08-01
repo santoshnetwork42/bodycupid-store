@@ -1414,10 +1414,7 @@ export const getStore = /* GraphQL */ `
         mobileKey
         link
       }
-      announcements {
-        label
-        link
-      }
+      announcements
       socialLinks {
         instagram
         facebook
@@ -1854,6 +1851,24 @@ export const createNewOrder = /* GraphQL */ `
       priority
       orderDate
       status
+    }
+  }
+`;
+
+export const getRecommendation = /* GraphQL */ `
+  query GetRecommendation($input: RecommendationInput!) {
+    getRecommendation(input: $input) {
+      id
+      title
+      price
+      listingPrice
+      image
+      inventory
+      sku
+      rating
+      totalRatings
+      isInventoryEnabled
+      slug
     }
   }
 `;

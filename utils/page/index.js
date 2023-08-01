@@ -6,6 +6,7 @@ import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
+  getRecommendation,
 } from "~/graphql/api";
 
 export const getStaticProps = async () => {
@@ -33,13 +34,22 @@ export const getStaticProps = async () => {
 
     const getStoreData = fetchData(getStoreBanners, { id: STORE_ID });
 
+    const getBestSellersPersonalized = fetchData(getRecommendation, {
+      input: {
+        storeId: STORE_ID,
+        recommenderType: "BEST_SELLER",
+      },
+    });
+
     const [
       { searchProducts: searchBestSellerProducts },
+      { getRecommendation: bestSellersPersonalized },
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }),
+      getBestSellersPersonalized,
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
@@ -83,6 +93,7 @@ export const getStaticProps = async () => {
       props: {
         hero: { banners },
         bestSellerProducts,
+        bestSellersPersonalized,
         featuredProducts,
         categories,
         // storyCategories,
