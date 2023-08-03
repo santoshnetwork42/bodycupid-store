@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect, useMemo} from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { modalActions } from "~/store/modal";
-import { createReview, getReviews, getReviewsAnalytics } from "~/graphql/api";
+import { createReview, getReviews, getReviewsAnalytics, updateReview } from "~/graphql/api";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
@@ -26,6 +26,7 @@ const reviewDefault = {
   name: "",
   email: "",
   images: [],
+  reviewId: ""
 };
 
 const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
@@ -59,7 +60,7 @@ const getManufacturerInformation = (product) => [
 ];
 
 function DescOne(props) {
-  const { product, user } = props;
+  const { product, user, openPasswordlessModal, } = props;
   const { id, totalRatings, longDescription, additionalInfo, rating } = product;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -71,6 +72,7 @@ function DescOne(props) {
   const [loading, setLoading] = useState(false);
   const [reviewAnalytics, setReviewAnalytics] = useState([]);
   const [reviewLoading, setReviewLoading] = useState(true);
+  const [canEditReview, setCanEditReview] = useState(false);
 
   const getStarAnalytics = async () => {
     try {
@@ -84,6 +86,7 @@ function DescOne(props) {
         graphqlOperation(getReviewsAnalytics, {
           filter: {
             productId: { eq: id },
+            verified: {eq: true}
           },
           aggregates: [
             {
@@ -124,6 +127,18 @@ function DescOne(props) {
     }
   };
 
+  const setUserReview = (response) => {
+    const verifiedResponse = response.filter(res => res.verified)
+    const userReviewIndex = verifiedResponse.findIndex(res => res.userId === user.id)
+    if (userReviewIndex > -1) {
+      const [userReview] = verifiedResponse.slice(userReviewIndex, userReviewIndex+1)
+      userReview.canEdit = true;
+      verifiedResponse.splice(userReviewIndex, 1)
+      verifiedResponse.unshift(userReview)
+    }
+    setReviews(verifiedResponse);
+  }
+
   const getProductReviews = useCallback(
     (reset = true) => {
       setLoading(true);
@@ -145,9 +160,22 @@ function DescOne(props) {
             },
           }) => {
             if (reset) {
-              setReviews(response);
+              if (user) {
+                const userReview = response.filter(res => res.userId === user?.id);
+                if (userReview && userReview.length) {
+                  setUserReview(response);
+                  setCanEditReview(true);
+                } else {
+                  setReviews(response);
+                  setCanEditReview(false);
+                }
+              } else {
+                const verifiedResponse = response.filter(res => res.verified)
+                setReviews(verifiedResponse);
+              }
             } else {
-              setReviews([...reviews, ...response]);
+              const verifiedResponse = response.filter(res => res.verified)
+              setReviews([...reviews, ...verifiedResponse]);
             }
             setToken(nextToken);
             setTotal(total);
@@ -162,6 +190,12 @@ function DescOne(props) {
     },
     [product, token]
   );
+
+  useMemo(() => {
+    if (user !== null) {
+      getProductReviews(true);
+    }
+  }, [user]);
 
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
@@ -194,43 +228,53 @@ function DescOne(props) {
     async (e) => {
       e.preventDefault();
       try {
-        const { rating, comment, name, email, images } = reviewState;
-        await API.graphql({
-          query: createReview,
-          authMode: "AMAZON_COGNITO_USER_POOLS",
-          variables: {
-            input: {
-              rating,
-              comment,
-              reviewer: {
-                name,
-                email,
+        const { reviewId, rating, comment, name, email, images } = reviewState;
+
+        if (reviewId) {
+          await API.graphql({
+            query: updateReview,
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+            variables: {
+              input: {
+                id: reviewId,
+                rating,
+                comment,
+                reviewer: {
+                  name,
+                  email,
+                },
+                userId: user?.id,
+                productId: id,
+                images,
               },
-              userId: user?.id,
-              productId: id,
-              images,
             },
-          },
-        });
+          });
+        } else {
+          await API.graphql({
+            query: createReview,
+            authMode: "AMAZON_COGNITO_USER_POOLS",
+            variables: {
+              input: {
+                rating,
+                comment,
+                reviewer: {
+                  name,
+                  email,
+                },
+                userId: user?.id,
+                productId: id,
+                images,
+                verified: false
+              },
+            },
+          });
+        }
         setReview({ ...reviewDefault });
-        setReviews([
-          {
-            id: new Date().toUTCString(),
-            reviewer: {
-              name,
-              email,
-            },
-            productId: id,
-            rating,
-            comment,
-            images,
-            updatedAt: new Date().toUTCString(),
-          },
-          ...reviews,
-        ]);
-        setShowReview(!showReview);
-        getStarAnalytics();
-        alertToaster("Review submitted successfully", "success");
+        setShowReview(!showReview);   
+        getStarAnalytics(); 
+        getProductReviews();
+        setCanEditReview(true);
+        alertToaster("Your reviews has been submitted. Will be live in 24 hrs", "success");
       } catch (error) {
         errorHandler(error);
       }
@@ -372,14 +416,13 @@ function DescOne(props) {
                       <div className="w-100 d-flex align-items-center justify-content-end">
                         <div className="buttons   mr-1 ">
                           <div className="justify-content-end w-100">
-                            <button
+                              {!canEditReview && (<button
                               className="btn w-100  btn-rounded mb-2"
-                              onClick={() => {
-                                setShowReview(!showReview);
+                              onClick={() => {user ? setShowReview(!showReview) : openPasswordlessModal(false)
                               }}
                             >
                               Write a review
-                            </button>
+                            </button>)}
                           </div>
                         </div>
                       </div>
@@ -528,7 +571,7 @@ function DescOne(props) {
                 <div className="comments mb-8 pt-2 pb-2 border-no">
                   <ul>
                     {reviews.map((review, id) => (
-                      <Review key={id} review={review} />
+                      <Review key={id} review={review} setReview = {(value) => setReview(value)} setShowReview = {(value) => {setShowReview(value)}}/>
                     ))}
                   </ul>
                 </div>
@@ -618,6 +661,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { openModal: modalActions.openModal })(
+export default connect(mapStateToProps, { openModal: modalActions.openModal, 
+    openPasswordlessModal: modalActions.openPasswordlessModal, })(
   DescOne
 );
