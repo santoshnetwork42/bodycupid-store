@@ -6,7 +6,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { Star } from "~/components/icons";
 import ReadMore from "~/components/layouts/read-more";
 
-export default function Review({ review = {} }) {
+export default function Review({ review = {}, ...props }) {
   return (
     <li key={review.id}>
       <div className="comment">
@@ -36,6 +36,18 @@ export default function Review({ review = {} }) {
 
           <div className="comment-content">
             <ReadMore content={review.comment} />
+          {review.canEdit && (<button className="btn-primary btn-rounded btn btn-sm btn-primary btn-rounded d-flex justify-content-center align-items-center review-edit" onClick={ () => {
+            props.setReview({
+              comment: review.comment,
+              rating: review.rating,
+              name: review.reviewer.name,
+              email: review.reviewer.email,
+              images: review.images,
+              reviewId: review.id
+            }) 
+            props.setShowReview(true)}}>
+               Edit
+           </button>)}
           </div>
         </div>
       </div>
