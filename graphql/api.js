@@ -414,6 +414,7 @@ export const getProductBySlug = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         isFeatured
         categoryId
         subCategoryId
@@ -1402,9 +1403,21 @@ export const getStore = /* GraphQL */ `
     getStore(id: $id) {
       id
       name
+      title
+      description
+      isActive
+      webUrl
       imageUrl
       darkImageUrl
-      announcements
+      banners {
+        webKey
+        mobileKey
+        link
+      }
+      announcements {
+        label
+        link
+      }
       socialLinks {
         instagram
         facebook

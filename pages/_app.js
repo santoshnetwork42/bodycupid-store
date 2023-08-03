@@ -19,7 +19,7 @@ import { eventActions } from "~/store/events";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 import awsconfig from "~/aws-exports";
-import { getUser, getStore } from "~/graphql/api";
+import { getUser, getStore } from "~/graphql/api.js";
 import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
@@ -230,6 +230,7 @@ App.getInitialProps = async ({ Component, ctx }) => {
   }
   if (!!ctx.req) {
     pageProps = pageProps || {};
+
     const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
     pageProps.store = store;
   }

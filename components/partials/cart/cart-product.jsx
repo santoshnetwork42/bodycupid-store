@@ -31,6 +31,7 @@ function CartProduct({
     qty,
     slug,
     images,
+    thumbImage,
     title,
     price,
     listingPrice,
@@ -116,10 +117,10 @@ function CartProduct({
           <figure>
             <ALink href={"/products/" + slug} className="p-0 border-2">
               <img
-                src={getPublicImageURL(images.items[0]?.imageKey)}
+                src={getPublicImageURL(thumbImage)}
                 width="80"
                 height="80"
-                alt={images.items[0]?.alt}
+                alt={images?.items[0]?.alt}
               />
             </ALink>
           </figure>

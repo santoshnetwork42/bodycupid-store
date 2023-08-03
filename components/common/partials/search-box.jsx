@@ -29,7 +29,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
           }
           return response.json();
         })
-        .then((data) => {
+         .then((data) => {
           items = data.results;
           setData(items);
           productSearched({

@@ -26,7 +26,8 @@ export const getProductMeta = (product) => {
   const sortedImages = Array.isArray(allImages)
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
-  const thumbImage =
+
+  let thumbImage =
     sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
   const [, secondaryImage] = sortedImages;
 
@@ -45,6 +46,10 @@ export const getProductMeta = (product) => {
             firstVariant.listingPrice
         )
       : 0;
+
+    if (firstVariant.imageUrl) {
+      thumbImage = { imageKey: firstVariant.imageUrl };
+    }
   }
 
   return {
