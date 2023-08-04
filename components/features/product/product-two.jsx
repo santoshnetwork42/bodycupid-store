@@ -29,7 +29,6 @@ function ProductTwo(props) {
     slug: tagSlug,
     section,
     priority,
-    search,
   } = props;
 
   const { title, slug, rating, totalRatings, collections } = product || {};
@@ -102,9 +101,7 @@ function ProductTwo(props) {
       {/* <figure className="product-media"> */}
       <ALink href={`/products/${slug}`}>
         <Image
-          src={
-            search ? product?.imageUrl : getPublicImageURL(thumbImage?.imageKey)
-          }
+          src={getPublicImageURL(thumbImage?.imageKey)}
           alt={title}
           height={280}
           width={280}

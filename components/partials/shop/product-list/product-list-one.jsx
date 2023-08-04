@@ -137,11 +137,13 @@ function ProductListOne(props) {
           setTotal(total);
           setLoading(false);
         } else {
-          let items;
           fetchSearchItems(search).then((fetchedItems) => {
-            items = fetchedItems;
-            setProducts(items);
-            setTotal(items.length);
+            fetchedItems.forEach((item) => {
+              item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+            });
+
+            setProducts(fetchedItems);
+            setTotal(fetchedItems.length);
             setLoading(false);
           });
         }
@@ -219,7 +221,6 @@ function ProductListOne(props) {
                   id: sectionId,
                   name: "PLP",
                 }}
-                search={search ? true : false}
               />
             </div>
           ))}

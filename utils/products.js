@@ -19,7 +19,7 @@ export const getFirstVariant = (product, variantId) => {
 
 export const getProductMeta = (product) => {
   if (!product) return {};
-  const { variants = {}, images = {} } = product;
+  const { variants = {}, images = {}, imageUrl } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
 
@@ -27,8 +27,8 @@ export const getProductMeta = (product) => {
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
 
-  let thumbImage =
-    sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
+  let thumbImage = sortedImages.find((i) => i.isThumb) ||
+    sortedImages[0] || { imageKey: imageUrl };
   const [, secondaryImage] = sortedImages;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);

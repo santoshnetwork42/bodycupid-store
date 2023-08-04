@@ -19,7 +19,7 @@ import { eventActions } from "~/store/events";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import fetchData from "~/utils/fetchData";
 import awsconfig from "~/aws-exports";
-import { getUser, getStore } from "~/graphql/api.js";
+import { getUser, getStore } from "~/graphql/api";
 import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";

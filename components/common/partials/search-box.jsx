@@ -20,13 +20,11 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
 
   const searchProducts = useCallback(async (searchTerm) => {
     try {
-      let items;
       fetchSearchItems(searchTerm).then((fetchedItems) => {
-        items = fetchedItems;
-        setData(items);
+        setData(fetchedItems);
         productSearched({
           "search term": searchTerm,
-          "Item Count": items?.length,
+          "Item Count": fetchedItems?.length,
           source: source,
         });
       });
