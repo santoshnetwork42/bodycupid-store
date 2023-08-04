@@ -1,10 +1,15 @@
-import React, { useCallback, useState, useEffect, useMemo} from "react";
+import React, { useCallback, useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
 
 import { modalActions } from "~/store/modal";
-import { createReview, getReviews, getReviewsAnalytics, updateReview } from "~/graphql/api";
+import {
+  createReview,
+  getReviews,
+  getReviewsAnalytics,
+  updateReview,
+} from "~/graphql/api";
 import RatingStar from "../rating-star";
 import Review from "../review";
 import TokenPagination from "~/components/features/token-pagination";
@@ -26,7 +31,7 @@ const reviewDefault = {
   name: "",
   email: "",
   images: [],
-  reviewId: ""
+  reviewId: "",
 };
 
 const reviewColor = ["#F17A54", "#FBB851", "#F6D757", "#B7EA83", "#76DB98"];
@@ -60,7 +65,7 @@ const getManufacturerInformation = (product) => [
 ];
 
 function DescOne(props) {
-  const { product, user, openPasswordlessModal, } = props;
+  const { product, user, openPasswordlessModal } = props;
   const { id, totalRatings, longDescription, additionalInfo, rating } = product;
 
   const { isSmallSize: isMobile } = useWindowDimensions();
@@ -72,7 +77,7 @@ function DescOne(props) {
   const [loading, setLoading] = useState(false);
   const [reviewAnalytics, setReviewAnalytics] = useState([]);
   const [reviewLoading, setReviewLoading] = useState(true);
-  const [canEditReview, setCanEditReview] = useState(false);
+  const [hasUserReview, setHasUserReview] = useState(null); //If user has already reviewed or not
 
   const getStarAnalytics = async () => {
     try {
@@ -86,7 +91,7 @@ function DescOne(props) {
         graphqlOperation(getReviewsAnalytics, {
           filter: {
             productId: { eq: id },
-            verified: {eq: true}
+            verified: { eq: true },
           },
           aggregates: [
             {
@@ -127,55 +132,34 @@ function DescOne(props) {
     }
   };
 
-  const setUserReview = (response) => {
-    const verifiedResponse = response.filter(res => res.verified)
-    const userReviewIndex = verifiedResponse.findIndex(res => res.userId === user.id)
-    if (userReviewIndex > -1) {
-      const [userReview] = verifiedResponse.slice(userReviewIndex, userReviewIndex+1)
-      userReview.canEdit = true;
-      verifiedResponse.splice(userReviewIndex, 1)
-      verifiedResponse.unshift(userReview)
-    }
-    setReviews(verifiedResponse);
-  }
-
   const getProductReviews = useCallback(
     (reset = true) => {
       setLoading(true);
       setReviewLoading(true);
+
+      const filter = { productId: { eq: id }, verified: { eq: true } };
+      if (user) {
+        filter.userId = { ne: user.id };
+      }
+
       API.graphql(
         graphqlOperation(getReviews, {
-          filter: {
-            productId: { eq: id },
-          },
+          filter,
           sort: [{ field: "createdAt", direction: "desc" }],
           nextToken: reset ? null : token,
           limit: 10,
         })
       )
         .then(
-          ({
+          async ({
             data: {
               searchReviews: { items: response, total, nextToken },
             },
           }) => {
             if (reset) {
-              if (user) {
-                const userReview = response.filter(res => res.userId === user?.id);
-                if (userReview && userReview.length) {
-                  setUserReview(response);
-                  setCanEditReview(true);
-                } else {
-                  setReviews(response);
-                  setCanEditReview(false);
-                }
-              } else {
-                const verifiedResponse = response.filter(res => res.verified)
-                setReviews(verifiedResponse);
-              }
+              setReviews(response);
             } else {
-              const verifiedResponse = response.filter(res => res.verified)
-              setReviews([...reviews, ...verifiedResponse]);
+              setReviews([...reviews, ...response]);
             }
             setToken(nextToken);
             setTotal(total);
@@ -188,14 +172,27 @@ function DescOne(props) {
           setLoading(false);
         });
     },
-    [product, token]
+    [product, token, user, reviews]
   );
 
-  useMemo(() => {
-    if (user !== null) {
-      getProductReviews(true);
+  useEffect(() => {
+    if (user) {
+      API.graphql(
+        graphqlOperation(getReviews, {
+          filter: {
+            productId: { eq: id },
+            userId: { eq: user.id },
+          },
+          limit: 1,
+        })
+      )
+        .then((resp) => resp.data.searchReviews.items[0])
+        .then(setHasUserReview)
+        .catch((err) => {
+          errorHandler(err);
+        });
     }
-  }, [user]);
+  }, [!!user]);
 
   const getPer = (total, allReview) => {
     if (total && allReview) return Math.round((allReview * 100) / total);
@@ -248,7 +245,17 @@ function DescOne(props) {
                 images,
               },
             },
-          });
+          })
+            .then((resp) => resp.data.updateReview)
+            .then((res) =>
+              setHasUserReview({
+                ...res,
+                rating,
+                comment,
+                reviewer: { name: name, email: email },
+                images,
+              })
+            );
         } else {
           await API.graphql({
             query: createReview,
@@ -264,17 +271,17 @@ function DescOne(props) {
                 userId: user?.id,
                 productId: id,
                 images,
-                verified: false
               },
             },
-          });
+          })
+            .then((resp) => resp.data.createReview)
+            .then(setHasUserReview);
         }
         setReview({ ...reviewDefault });
-        setShowReview(!showReview);   
-        getStarAnalytics(); 
+        setShowReview(!showReview);
+        getStarAnalytics();
         getProductReviews();
-        setCanEditReview(true);
-        alertToaster("Your reviews has been submitted. Will be live in 24 hrs", "success");
+        alertToaster("Your review has been submitted.", "success");
       } catch (error) {
         errorHandler(error);
       }
@@ -358,7 +365,9 @@ function DescOne(props) {
 
         <Card
           title={`CUSTOMER REVIEWS  ${
-            (product?.totalRatings || total) ? `(${total || product?.totalRatings})` : ""
+            product?.totalRatings || total
+              ? `(${total || product?.totalRatings})`
+              : ""
           }`}
           id="product-review"
           noDisplayStyle
@@ -376,9 +385,9 @@ function DescOne(props) {
           )}
           {!reviewLoading && (
             <div className="product-tab-reviews">
-              <div className="reply mb-8">
+              <div className="reply">
                 <div className="title-wrapper text-left">
-                  {!!reviews.length && (
+                  {(!!reviews.length || !!hasUserReview) && (
                     <div className="review-section">
                       <div className="total-review mb-2 w-100">
                         <div>
@@ -386,7 +395,8 @@ function DescOne(props) {
                             <h2 className="mb-1 lh-1">{rating.toFixed(1)}</h2>
                             {!!(product?.totalRatings || total) && (
                               <span className="mt-2 mb-1 ml-1">
-                                Based on {total || product?.totalRatings} reviews
+                                Based on {total || product?.totalRatings}{" "}
+                                reviews
                               </span>
                             )}
                           </div>
@@ -412,19 +422,6 @@ function DescOne(props) {
                             <div className="ml-1 percent">{r.percentage}%</div>
                           </div>
                         ))}
-                      </div>
-                      <div className="w-100 d-flex align-items-center justify-content-end">
-                        <div className="buttons   mr-1 ">
-                          <div className="justify-content-end w-100">
-                              {!canEditReview && (<button
-                              className="btn w-100  btn-rounded mb-2"
-                              onClick={() => {user ? setShowReview(!showReview) : openPasswordlessModal(false)
-                              }}
-                            >
-                              Write a review
-                            </button>)}
-                          </div>
-                        </div>
                       </div>
                     </div>
                   )}
@@ -562,16 +559,50 @@ function DescOne(props) {
                   </form>
                 )}
               </div>
-              <hr className="product-divider"></hr>
-              {reviews.length === 0 ? (
+              <div className="d-flex justify-content-between align-items-center">
                 <div className="comments mb-2 pt-2 pb-2 border-no">
-                  There are no reviews yet.
+                  {!reviews.length &&
+                    !hasUserReview &&
+                    "There are no reviews yet."}
                 </div>
-              ) : (
+                {!showReview && !hasUserReview && (
+                  <div className="d-flex align-items-center justify-content-end">
+                    <div className="buttons mr-1 ">
+                      <div className="justify-content-end w-100">
+                        {/* {!hasUserReview && ( */}
+                        <button
+                          className="btn w-100  btn-rounded mb-2"
+                          onClick={() => {
+                            user
+                              ? setShowReview(!showReview)
+                              : openPasswordlessModal(false);
+                          }}
+                        >
+                          Write a review
+                        </button>
+                        {/* )} */}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {(!!reviews.length || !!hasUserReview) && (
                 <div className="comments mb-8 pt-2 pb-2 border-no">
                   <ul>
+                    {!!hasUserReview && (
+                      <Review
+                        key={hasUserReview.id}
+                        review={hasUserReview}
+                        onUpdate={(userReview) => {
+                          setReview(userReview);
+                          setShowReview(true);
+                        }}
+                      />
+                    )}
+
                     {reviews.map((review, id) => (
-                      <Review key={id} review={review} setReview = {(value) => setReview(value)} setShowReview = {(value) => {setShowReview(value)}}/>
+                      <Review key={id} review={review} />
                     ))}
                   </ul>
                 </div>
@@ -661,7 +692,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { openModal: modalActions.openModal, 
-    openPasswordlessModal: modalActions.openPasswordlessModal, })(
-  DescOne
-);
+export default connect(mapStateToProps, {
+  openModal: modalActions.openModal,
+  openPasswordlessModal: modalActions.openPasswordlessModal,
+})(DescOne);

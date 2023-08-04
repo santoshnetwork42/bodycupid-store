@@ -6,10 +6,10 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { Star } from "~/components/icons";
 import ReadMore from "~/components/layouts/read-more";
 
-export default function Review({ review = {}, ...props }) {
+export default function Review({ review = {}, onUpdate }) {
   return (
     <li key={review.id}>
-      <div className="comment">
+      <div className="comment align-items-center">
         <div className="comment-body">
           <div className="comment-rating ratings-container mb-0"></div>
           <div className="comment-user">
@@ -31,25 +31,30 @@ export default function Review({ review = {}, ...props }) {
                 );
               })}
             </div>
-            <div className="mt-1 ml-2">{formateDate(review.createdAt)}</div>{" "}
+            <div className="mt-1 ml-2">{formateDate(review.updatedAt)}</div>{" "}
           </div>
 
-          <div className="comment-content">
+          <div className="d-flex justify-content-between">
             <ReadMore content={review.comment} />
-          {review.canEdit && (<button className="btn-primary btn-rounded btn btn-sm btn-primary btn-rounded d-flex justify-content-center align-items-center review-edit" onClick={ () => {
-            props.setReview({
-              comment: review.comment,
-              rating: review.rating,
-              name: review.reviewer.name,
-              email: review.reviewer.email,
-              images: review.images,
-              reviewId: review.id
-            }) 
-            props.setShowReview(true)}}>
-               Edit
-           </button>)}
           </div>
         </div>
+        {!!onUpdate && (
+          <button
+            className="btn-primary btn-rounded btn btn-sm btn-primary btn-rounded d-flex justify-content-center align-items-center review-edit"
+            onClick={() => {
+              onUpdate({
+                comment: review.comment,
+                rating: review.rating,
+                name: review.reviewer.name,
+                email: review.reviewer.email,
+                images: review.images,
+                reviewId: review.id,
+              });
+            }}
+          >
+            Edit
+          </button>
+        )}
       </div>
       {review?.images && (
         <div className="comment-media d-flex flex-wrap ">
