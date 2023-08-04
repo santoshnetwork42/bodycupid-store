@@ -192,6 +192,9 @@ export async function fetchSearchItems(search) {
 
     const data = await response.json();
     const items = data.results;
+    items.forEach((item) => {
+      item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+    });
     return items;
   } catch (error) {
     console.error("Error fetching items:", error);

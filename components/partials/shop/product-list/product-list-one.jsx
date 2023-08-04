@@ -138,10 +138,6 @@ function ProductListOne(props) {
           setLoading(false);
         } else {
           fetchSearchItems(search).then((fetchedItems) => {
-            fetchedItems.forEach((item) => {
-              item.imageUrl = item.imageUrl.split("/public/")[1] || "";
-            });
-
             setProducts(fetchedItems);
             setTotal(fetchedItems.length);
             setLoading(false);

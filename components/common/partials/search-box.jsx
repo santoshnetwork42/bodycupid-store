@@ -22,9 +22,6 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const searchProducts = useCallback(async (searchTerm) => {
     try {
       fetchSearchItems(searchTerm).then((fetchedItems) => {
-        fetchedItems.forEach((item) => {
-          item.imageUrl = item.imageUrl.split("/public/")[1] || "";
-        });
         setData(fetchedItems);
         productSearched({
           "search term": searchTerm,
