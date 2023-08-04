@@ -5,7 +5,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
-import ChatWindow from "~/components/chatbot/chatWindow";
 // import StorySection from "~/components/partials/home/story-section";
 
 const CategorySection = dynamic(() =>

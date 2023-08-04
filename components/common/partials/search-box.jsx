@@ -8,6 +8,7 @@ import { MagnifyingGlass, Search } from "~/components/icons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { getSource } from "~/utils/helper";
+import { fetchSearchItems } from "~/utils/helper";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
@@ -20,23 +21,15 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const searchProducts = useCallback(async (searchTerm) => {
     try {
       let items;
-      const response = await fetch(
-        `https://d1pnavmgsqoqas.cloudfront.net/search?query=${searchTerm}&threshold=0.7`
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-         .then((data) => {
-          items = data.results;
-          setData(items);
-          productSearched({
-            "search term": searchTerm,
-            "Item Count": items.length,
-          });
+      fetchSearchItems(searchTerm).then((fetchedItems) => {
+        items = fetchedItems;
+        setData(items);
+        productSearched({
+          "search term": searchTerm,
+          "Item Count": items?.length,
+          source: source,
         });
+      });
     } catch (error) {
       errorHandler(error);
     }
@@ -180,7 +173,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
 
         <div className="live-search-list bg-white scrollable">
           {search.length > 2 &&
-            data.map((product, index) => {
+            data?.map((product, index) => {
               const images =
                 product.images?.items.sort((a, b) => a.position - b.position) ||
                 [];

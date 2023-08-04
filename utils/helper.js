@@ -179,3 +179,22 @@ export function initializeMoengageAndAddInfo({
     Moengage.add_unique_user_id(mobile);
   }
 }
+
+export async function fetchSearchItems(search) {
+  try {
+    const response = await fetch(
+      `https://d1pnavmgsqoqas.cloudfront.net/search?query=${search}&threshold=0.68`
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    const items = data.results;
+    return items;
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return [];
+  }
+}
