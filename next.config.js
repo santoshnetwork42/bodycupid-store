@@ -56,12 +56,6 @@ const nextConfig = withBundleAnalyzer({
         // port: '',
         pathname: "/public/**",
       },
-      {
-        protocol: "https",
-        hostname: "media.bodycupid.com",
-        // port: '',
-        pathname: "/public/**",
-      },
     ],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },

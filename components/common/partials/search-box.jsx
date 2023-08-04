@@ -9,6 +9,7 @@ import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { getSource } from "~/utils/helper";
 import { fetchSearchItems } from "~/utils/helper";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
@@ -21,6 +22,9 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const searchProducts = useCallback(async (searchTerm) => {
     try {
       fetchSearchItems(searchTerm).then((fetchedItems) => {
+        fetchedItems.forEach((item) => {
+          item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+        });
         setData(fetchedItems);
         productSearched({
           "search term": searchTerm,
@@ -189,7 +193,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
                   key={`search-result-${index}`}
                 >
                   <NextImage
-                    src={thumbImage.imageKey}
+                    src={getPublicImageURL(thumbImage?.imageKey)}
                     width={40}
                     height={40}
                     alt={thumbImage.alt}
