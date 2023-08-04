@@ -57,10 +57,10 @@ function HomePage({
 
         <ProductCollection
           products={bestSellersPersonalized}
-          title="Best sellers Personalized"
+          title="Top product"
           disableCarousel={isSmallSize}
-          slug="best-seller"
-          redirectTo="/collections/best-seller"
+          slug="top-product"
+          redirectTo="/collections/top-product"
         />
 
         <ProductCollection

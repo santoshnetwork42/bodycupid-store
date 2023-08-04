@@ -145,16 +145,23 @@ function ProductListOne(props) {
   );
 
   useEffect(() => {
-    const { items, nextToken, total } = initialData || {};
-    setProducts(items);
-    setToken(nextToken);
-    setTotal(total);
-    viewList(sectionId, "PLP", items);
+    if (sectionId === "top-product") {
+      setProducts(initialData)
+      setTotal(initialData.length);
+    } else {
+      const { items, nextToken, total } = initialData || {};
+      setProducts(items);
+      setToken(nextToken);
+      setTotal(total);
+      viewList(sectionId, "PLP", items);
+    }
   }, [sectionId]);
 
   useEffect(() => {
+    if (sectionId !== "top-product") {
     getProducts(true);
     resetFilter(true);
+    }
   }, [filters]);
 
   if (loading) {
@@ -194,11 +201,11 @@ function ProductListOne(props) {
           getProducts(false);
         }}
         style={{ overflow: "visible" }}
-        hasMore={products.length < total}
+        hasMore={products?.length < total}
         loader={<Loader loading small />}
       >
         <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
-          {products.map((item, index) => (
+          {products?.map((item, index) => (
             <div className="product-wrap" key={"shop-" + item.id}>
               <ProductTwo
                 priority={index < 8}

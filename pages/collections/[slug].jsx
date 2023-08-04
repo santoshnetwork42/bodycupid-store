@@ -42,7 +42,7 @@ function CollectionPage(props) {
   const source = getSource();
 
   useEffect(() => {
-    if (data.name) {
+    if (data?.name) {
       categoryViewed({
         URL: window.location.href,
         "Category Name": data.name,
@@ -57,7 +57,7 @@ function CollectionPage(props) {
       <NextHead {...pageMeta} />
 
       <h1 className="d-none">
-        {name} - {data.name}
+        {name} - {data?.name}
       </h1>
 
       <div className="page-content  pb-3">
@@ -124,6 +124,11 @@ export const getStaticProps = async (context) => {
     const { params } = context;
     const { slug } = params;
 
+  if (slug === "top-product") {
+    await router.push({
+      pathname: "/collections/top-product"
+    });
+  }
     const filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },

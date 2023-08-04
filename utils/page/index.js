@@ -38,6 +38,7 @@ export const getStaticProps = async () => {
       input: {
         storeId: STORE_ID,
         recommenderType: "BEST_SELLER",
+        limit: 8,
       },
     });
 

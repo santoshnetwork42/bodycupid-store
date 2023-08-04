@@ -1862,13 +1862,16 @@ export const getRecommendation = /* GraphQL */ `
       title
       price
       listingPrice
-      image
+      thumbImage {
+        imageKey
+      }
       inventory
       sku
       rating
       totalRatings
       isInventoryEnabled
       slug
+      continueSellingOutOfStock
     }
   }
 `;

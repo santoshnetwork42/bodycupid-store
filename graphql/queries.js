@@ -4934,13 +4934,17 @@ export const getRecommendation = /* GraphQL */ `
       title
       price
       listingPrice
-      image
+      thumbImage {
+        imageKey
+        __typename
+      }
       inventory
       sku
       rating
       totalRatings
       isInventoryEnabled
       slug
+      continueSellingOutOfStock
       __typename
     }
   }

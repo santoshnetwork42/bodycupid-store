@@ -54,7 +54,7 @@ function ProductCollection({
           adClass="owl-theme owl-nav-full"
           options={!large ? productSlider : productSliderLarge}
         >
-          {products.map((item) => (
+          {products?.map((item) => (
             <ProductTwo
               adClass="mb-4 text-center"
               slug={slug}
