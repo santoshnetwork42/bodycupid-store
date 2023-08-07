@@ -1414,7 +1414,10 @@ export const getStore = /* GraphQL */ `
         mobileKey
         link
       }
-      announcements
+      announcements {
+        label
+        link
+      }
       socialLinks {
         instagram
         facebook
