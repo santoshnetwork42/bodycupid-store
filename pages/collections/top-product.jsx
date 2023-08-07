@@ -17,8 +17,8 @@ function AllProduct(props) {
   const { name } = store;
   const data = {
     name: "Top Products",
-    description: ""
-  }
+    description: "",
+  };
 
   return (
     <main className="main">
@@ -31,7 +31,7 @@ function AllProduct(props) {
       <div className="page-content pb-3">
         <div className="container">
           <CategoryHeader {...data} />
-          <div className="row main-content-wrap gutter-lg">
+          <div className="pt-3 row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
                 sectionId={"top-product"}
@@ -48,7 +48,6 @@ function AllProduct(props) {
 
 export const getStaticProps = async () => {
   try {
-
     // Get all Recommended Products from Best Seller Recommender
     const response = await fetchData(getRecommendation, {
       input: {
