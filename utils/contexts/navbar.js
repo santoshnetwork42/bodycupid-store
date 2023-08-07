@@ -192,7 +192,7 @@ export const useMenu = () => {
   });
 
   menu.push({
-    label: "Rakhi",
+    label: "Rakhi Gifts",
     link: `/collections/raksha-bandhan-gifts`,
     slug: "raksha-bandhan-gifts",
   });
