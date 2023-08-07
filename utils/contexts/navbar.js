@@ -192,6 +192,12 @@ export const useMenu = () => {
   });
 
   menu.push({
+    label: "Rakhi",
+    link: `/collections/raksha-bandhan-gifts`,
+    slug: "raksha-bandhan-gifts",
+  });
+
+  menu.push({
     label: "Clearance Sale",
     link: `/collections/clearance-sale`,
     slug: "clearance-sale",
