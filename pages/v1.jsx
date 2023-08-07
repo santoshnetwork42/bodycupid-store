@@ -68,5 +68,4 @@ function V1Page({
 
 V1Page.showStickyCheckout = true;
 V1Page.showTopRunner = true;
-V1Page.couponBanner = true;
 export default V1Page;

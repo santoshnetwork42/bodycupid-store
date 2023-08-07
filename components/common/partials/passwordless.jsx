@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useStore } from "react-redux";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { Auth, API } from "aws-amplify";
 import { useRouter } from "next/router";
@@ -18,6 +18,7 @@ import Modal from "~/components/common/modal";
 import ALink from "~/components/features/custom-link";
 
 import { getUser } from "~/graphql/api";
+import { eventActions } from "~/store/events";
 
 const logger = new Logger("Login-without-password");
 
@@ -28,12 +29,17 @@ function Passwordless({
   forceOpen,
   redirect,
   setUser,
+  login,
 }) {
   const router = useRouter();
+  const { query } = router;
+
   const [state, setState] = useState({
     phone: "",
     confirmationCode: new Array(6).fill(""),
   });
+
+  const store = useStore();
 
   const [confirmSignUp, setConfirmSignUp] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
@@ -80,6 +86,7 @@ function Passwordless({
       });
       setSeconds(30);
       setConfirmSignUp("SIGNUP");
+      // login( )
     } catch (error) {
       logger.error("error signing up:", error);
       alertToaster(error.message, "error");
@@ -110,6 +117,8 @@ function Passwordless({
               variables: { id: user?.attributes?.sub },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
+            const { sub } = user?.attributes;
+            store.dispatch(eventActions.auth("login", { userId: sub, query }));
 
             await setUser(getUserResponse);
           }
@@ -122,6 +131,9 @@ function Passwordless({
             state.confirmationCode.join("")
           );
           if (!!signInUserSession) {
+            const { sub } = signInUserSession.accessToken.payload;
+            store.dispatch(eventActions.auth("login", { userId: sub, query }));
+
             closeModal();
             if (redirect) router.push("/pages/checkout");
           } else {
@@ -178,6 +190,35 @@ function Passwordless({
       input.focus();
     }
   }, [isOpen, confirmSignUp]);
+
+  useEffect(() => {
+    let ac;
+    if (
+      confirmSignUp &&
+      typeof window !== "undefined" &&
+      "OTPCredential" in window
+    ) {
+      ac = new AbortController();
+      navigator?.credentials
+        .get({
+          otp: { transport: ["sms"] },
+          signal: ac.signal,
+        })
+        .then((otp) => {
+          setState({
+            ...state,
+            confirmationCode: otp.code.split(""),
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
+    return () => {
+      if (ac) ac.abort();
+    };
+  }, [confirmSignUp]);
 
   useEffect(() => {
     if (state.confirmationCode.join("").length === 6) {
@@ -367,7 +408,7 @@ function Passwordless({
                             </ALink>
                           ) : (
                             <p className="not-receive-otp-label mt-2">
-                              Did't receive it? Resend in {seconds}
+                              Didn't receive it? Resend in {seconds}
                             </p>
                           )}
                         </form>
@@ -396,4 +437,5 @@ export default connect(mapStateToProps, {
   closeModal: modalActions.closePasswordlessModal,
   openLogin: modalActions.openLoginModal,
   setUser: userActions.setUser,
+  login: eventActions.logIn,
 })(Passwordless);

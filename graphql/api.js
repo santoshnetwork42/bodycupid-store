@@ -143,6 +143,30 @@ export const getAllCategoriesPath = /* GraphQL */ `
   }
 `;
 
+export const getAllCollectionPath = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        slug
+      }
+    }
+  }
+`;
+
 export const getHomePageProducts = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
@@ -390,6 +414,7 @@ export const getProductBySlug = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         isFeatured
         categoryId
         subCategoryId
@@ -617,12 +642,6 @@ export const getOrder = /* GraphQL */ `
       code
       storeId
       userId
-      user {
-        id
-        owner
-        firstName
-        lastName
-      }
       channelName
       shippingAddress {
         name
@@ -726,6 +745,20 @@ export const getOrder = /* GraphQL */ `
     }
   }
 `;
+
+export const getOrderSuccess = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      code
+      totalAmount
+      totalDiscount
+      totalShippingCharges
+      totalCashOnDeliveryCharges
+    }
+  }
+`;
+
 export const getOrderStatus = /* GraphQL */ `
   query GetOrder($id: ID!) {
     getOrder(id: $id) {
@@ -1063,39 +1096,35 @@ export const createReview = /* GraphQL */ `
   }
 `;
 
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
+export const byorderIdcreatedAtPayment = /* GraphQL */ `
+  query ByorderIdcreatedAtPayment(
+    $orderId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
   ) {
-    createOrder(input: $input, condition: $condition) {
-      id
-      totalAmount
-      totalDiscount
-      totalShippingCharges
-      totalCashOnDeliveryCharges
-    }
-  }
-`;
-
-export const createPayment = /* GraphQL */ `
-  mutation CreatePayment(
-    $input: CreatePaymentInput!
-    $condition: ModelPaymentConditionInput
-  ) {
-    createPayment(input: $input, condition: $condition) {
-      id
-    }
-  }
-`;
-
-export const createOrderProduct = /* GraphQL */ `
-  mutation CreateOrderProduct(
-    $input: CreateOrderProductInput!
-    $condition: ModelOrderProductConditionInput
-  ) {
-    createOrderProduct(input: $input, condition: $condition) {
-      id
+    byorderIdcreatedAtPayment(
+      orderId: $orderId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        storeId
+        userId
+        orderId
+        method
+        status
+        amount
+        paymentDate
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -1223,6 +1252,55 @@ export const findUserAddresses = /* GraphQL */ `
   }
 `;
 
+export const createUserAddress = /* GraphQL */ `
+  mutation CreateUserAddress(
+    $input: CreateUserAddressInput!
+    $condition: ModelUserAddressConditionInput
+  ) {
+    createUserAddress(input: $input, condition: $condition) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const updateUserAddress = /* GraphQL */ `
+  mutation UpdateUserAddress(
+    $input: UpdateUserAddressInput!
+    $condition: ModelUserAddressConditionInput
+  ) {
+    updateUserAddress(input: $input, condition: $condition) {
+      id
+      userID
+      name
+      phone
+      email
+      country
+      state
+      city
+      pinCode
+      landmark
+      address
+      location
+      area
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const searchOrders = /* GraphQL */ `
   query SearchOrders(
     $filter: SearchableOrderFilterInput
@@ -1265,6 +1343,7 @@ export const getUser = /* GraphQL */ `
       phone
       gender
       dob
+      totalOrders
       isActive
       authProvider
       isAdmin
@@ -1324,9 +1403,21 @@ export const getStore = /* GraphQL */ `
     getStore(id: $id) {
       id
       name
+      title
+      description
+      isActive
+      webUrl
       imageUrl
       darkImageUrl
-      announcements
+      banners {
+        webKey
+        mobileKey
+        link
+      }
+      announcements {
+        label
+        link
+      }
       socialLinks {
         instagram
         facebook
@@ -1587,41 +1678,33 @@ export const getHomePageBlogs = /* GraphQL */ `
   }
 `;
 
-export const listCollections = /* GraphQL */ `
-  query ListCollections(
-    $slug: ID
-    $filter: ModelCollectionFilterInput
+export const searchCollectionTypes = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
   ) {
-    listCollections(
-      slug: $slug
+    searchCollectionTypes(
       filter: $filter
+      sort: $sort
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
+      from: $from
+      aggregates: $aggregates
     ) {
       items {
-        name
+        id
         slug
+        name
+        title
+        description
+        showInMenu
+        priority
+        imageUrl
       }
-      nextToken
-    }
-  }
-`;
-
-export const getCollection = /* GraphQL */ `
-  query GetCollection($slug: ID!) {
-    getCollection(slug: $slug) {
-      slug
-      parent
-      name
-      title
-      description
-      showInMenu
-      priority
-      imageUrl
     }
   }
 `;
@@ -1742,6 +1825,35 @@ export const getCoupon = /* GraphQL */ `
       applicableCollections
       applicableProducts
       paymentMethod
+    }
+  }
+`;
+
+export const createNewOrder = /* GraphQL */ `
+  mutation CreateNewOrder($input: CreateNewOrderInput!) {
+    createNewOrder(input: $input) {
+      id
+      code
+      storeId
+      userId
+      channelName
+      totalStoreCredit
+      couponCodeId
+      totalAmount
+      totalCashOnDeliveryCharges
+      totalDiscount
+      totalGiftCharges
+      totalPrepaidAmount
+      totalShippingCharges
+      taxExempted
+      cFormProvided
+      thirdPartyShipping
+      currency
+      paymentType
+      sla
+      priority
+      orderDate
+      status
     }
   }
 `;

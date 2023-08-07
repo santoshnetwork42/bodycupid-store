@@ -1,73 +1,62 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { Bag, Cross } from "~/components/icons";
-import Quantity from "~/components/features/quantity";
+import Coupons from "~/components/features/coupon";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
+import { eventActions } from "~/store/events";
 
-import { getTotalPrice, getCartCount, toDecimal, getCartTotals } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-
-const logger = new Logger("CartMenu");
+import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
+import { useCartItems } from "~/utils/hooks/useCart";
+import CartProduct from "~/components/partials/cart/cart-product";
+import { useInventory } from "~/utils/hooks/useInventory";
+import CartTotal from "~/components/common/partials/cart-totals";
+import { Logger } from "aws-amplify";
 
 function CartMenu(props) {
-  const { cartList, removeFromCart, updateCart, user, openLogin } = props;
+  const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
+    props;
   const router = useRouter();
-
-  const { totalPrice } = useMemo(() => getCartTotals(cartList), [cartList]);
+  const cartItems = useCartItems();
+  const { inventoryMapping } = useInventory();
+  const logger = new Logger("Cart");
 
   useEffect(() => {
-    hideCartMenu();
+    viewCart();
+    logger.verbose("View Cart");
+  }, []);
+
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.classList.add("overflow-hidden");
+      viewCart();
+      if (!document.querySelector(".side-bar").classList.contains("opened"))
+        document.querySelector(".side-bar").classList.add("opened");
+    } else {
+      if (document.querySelector(".side-bar").classList.contains("opened"))
+        document.querySelector(".side-bar").classList.remove("opened");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isCartOpen]);
+
+  useEffect(() => {
+    setCartVisibility(false);
   }, [router.asPath]);
 
-  const showCartMenu = (e) => {
-    e.preventDefault();
-    e.currentTarget.closest(".cart-dropdown").classList.add("opened");
-  };
-  const hideCartMenu = () => {
-    if (document.querySelector(".cart-dropdown").classList.contains("opened"))
-      document.querySelector(".cart-dropdown").classList.remove("opened");
-  };
-
-  const removeCart = (item) => {
-    removeFromCart(item);
-    logger.verbose("Item removed from cart:", item);
-  };
-  const onChangeQty = (item, qty) => {
-    if (qty) {
-      const { id, variantId } = item;
-      updateCart(
-        cartList.map((item) => {
-          return item.id === id && (!variantId || variantId === item.variantId)
-            ? { ...item, qty: qty }
-            : item;
-        })
-      );
-      logger.debug("Cart item quantity updated:", item, "New quantity:", qty);
-    } else {
-      removeCart(item);
-    }
-  };
-
-  const checkAuth = () => {
-    hideCartMenu();
-    if (user) return true;
-    openLogin(true);
-    logger.info("User authentication required");
-    return false;
-  };
-
   return (
-    <div className="dropdown cart-dropdown type2 cart-offcanvas d-flex align-items-center p-unset mr-0 mr-lg-2">
+    <div className=" side-bar  d-flex align-items-center p-unset mr-0 mr-lg-2">
       <ALink
-        href="/pages/cart"
+        href="#"
         className="cart-toggle label-block link p-relative"
-        //  onClick={showCartMenu}
+        onClick={() => {
+          setCartVisibility(true);
+        }}
       >
         <div className="cart-label d-lg-show">
           <span className="cart-name">Shopping Cart:</span>
@@ -78,104 +67,74 @@ function CartMenu(props) {
         <Bag />
         <span className="cart-count">{getCartCount(cartList)}</span>
       </ALink>
-      <div className="cart-overlay" onClick={hideCartMenu}></div>
-      <div className="dropdown-box">
-        <div className="cart-header">
-          <h4 className="cart-title">Shopping Cart</h4>
+      <div
+        className="sidebar-overlay"
+        onClick={() => {
+          setCartVisibility(false);
+        }}
+      ></div>
+      <div className="sidebar-box pl-0 pr-0 ">
+        <div className="sidebar-header pt-3">
+          <h4 className="cart-title ml-1">Shopping Cart</h4>
           <ALink
             href="#"
-            className="btn btn-dark btn-link btn-icon-right btn-close"
-            onClick={hideCartMenu}
+            className=" mb-0 "
+            onClick={() => {
+              setCartVisibility(false);
+            }}
           >
-            close<i className="d-icon-arrow-right"></i>
-            <span className="sr-only">Cart</span>
+            <Cross size={18} />
           </ALink>
         </div>
-
-        {cartList.length > 0 ? (
-          <>
-            <div className="products scrollable">
-              {cartList.map((item, index) => (
-                <div key={"cart-menu-product-" + index}>
-                  <div className="product product-cart">
-                    <figure className="product-media pure-media">
-                      <ALink href={"/products/" + item.slug}>
-                        <img
-                          src={getPublicImageURL(
-                            item.images.items[0]?.imageKey
-                          )}
-                          alt={item.images.items[0]?.alt}
-                          width="80"
-                          height="88"
-                        />
-                      </ALink>
-                      <button
-                        className="btn btn-link btn-close"
-                        onClick={() => {
-                          removeCart(item);
-                        }}
-                      >
-                        <i>
-                          <Cross size={12} color="currentColor" />
-                        </i>
-                      </button>
-                    </figure>
-                    <div className="product-detail">
-                      <ALink
-                        href={"/products/" + item.slug}
-                        className="product-name"
-                      >
-                        {item.title}
-                      </ALink>
-                      <div className="price-box">
-                        <span className="product-quantity">{item.qty}</span>
-                        <span className="product-price">
-                          ₹{toDecimal(item.price)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-full text-center">
-                    <Quantity
-                      product={item}
-                      qty={item.qty}
-                      max={item.inventory}
-                      onChangeQty={(qty) => {
-                        onChangeQty(item, qty);
-                      }}
-                    />
+        <div className="sidebar-products p-relative">
+          {cartItems.length > 0 ? (
+            <>
+              <div className=" ">
+                <div className="shop-table cart-table lh-default ">
+                  <div key={appliedCoupon?.id}>
+                    {cartItems.map((item) => (
+                      <CartProduct
+                        isSmall
+                        key={`${item.itemKey}-${item.extraQty}`}
+                        item={item}
+                        inventory={(inventoryMapping || {})[item.recordKey]}
+                      />
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="cart-total">
-              <label>Subtotal:</label>
-              <span className="price">₹{totalPrice}</span>
-            </div>
-
-            <div className="cart-action">
-              <ALink
-                href="/pages/cart"
-                className="btn btn-dark btn-link"
-                onClick={hideCartMenu}
+              <aside
+                id="cart-details "
+                className="text-primary sticky-sidebar-wrapper"
               >
-                View Cart
-              </ALink>
-              <ALink
-                href={user ? "/pages/checkout" : "#"}
-                className="btn btn-dark"
-                onClick={checkAuth}
-              >
-                <span>Go To Checkout</span>
-              </ALink>
+                <div
+                  className="sticky-sidebar"
+                  data-sticky-options="{'bottom': 20}"
+                >
+                  <Coupons isSmall />
+                  <CartTotal isSmall />
+                </div>
+              </aside>
+            </>
+          ) : (
+            <div className="empty-cart text-center">
+              <p className="mt-2">Your cart is currently empty.</p>
+              <i className="cart-empty d-icon-bag"></i>
+              <p className="return-to-shop mr-3 ml-3  mb-0">
+                <ALink
+                  className="button wc-backward d-flex justify-content-center btn btn-dark btn-md"
+                  href="/collections/all"
+                  onClick={() => {
+                    setCartVisibility(false);
+                  }}
+                >
+                  Return to shop
+                </ALink>
+              </p>
             </div>
-          </>
-        ) : (
-          <p className="mt-4 text-center font-weight-semi-bold ls-normal text-body">
-            No products in the cart.
-          </p>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
@@ -185,6 +144,8 @@ function mapStateToProps(state) {
   return {
     cartList: state.cart.data || [],
     user: state.user.data,
+    appliedCoupon: state.cart.coupon,
+    isCartOpen: state.modal.openCart,
   };
 }
 
@@ -192,4 +153,6 @@ export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
   openLogin: modalActions.openPasswordlessModal,
+  setCartVisibility: modalActions.setCartVisibility,
+  viewCart: eventActions.viewCart,
 })(CartMenu);

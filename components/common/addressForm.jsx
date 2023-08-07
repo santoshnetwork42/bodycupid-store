@@ -3,15 +3,17 @@ import { useSetState } from "react-use";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
 
-import { createUserAddress, updateUserAddress } from "~/graphql/mutations";
+import { createUserAddress, updateUserAddress } from "~/graphql/api";
 import { removePhonePrefix } from "~/utils/helper";
 import States from "~/lib/states.json";
 import { validateAddress, getProperAddress } from "~/utils/address";
 import { errorHandler } from "~/utils/errorHandler";
 import { fetchCityAndState } from "~/utils/addAddress";
+import { eventActions } from "~/store/events";
+import { useCartTotal } from "~/utils/hooks/useCart";
 
 const AddressForm = (props) => {
-  const { defaultAddress, user, onAddress, onSubmit } = props;
+  const { defaultAddress, user, onAddress, onSubmit, addressAdded } = props;
   const { firstName, lastName, email, phone } = user || {};
   const [address, setAddress] = useSetState({
     firstName: firstName || "",
@@ -25,6 +27,8 @@ const AddressForm = (props) => {
     landmark: "",
     area: "",
   });
+
+  const { totalPrice } = useCartTotal();
 
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -72,6 +76,9 @@ const AddressForm = (props) => {
               variables: { input: { ...tempAddress, userID: user.id } },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
+            if (!address.id) {
+              addressAdded(tempAddress, totalPrice);
+            }
             onSubmit(response);
           } else {
             onSubmit(tempAddress);
@@ -274,4 +281,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AddressForm);
+export default connect(mapStateToProps, {
+  addressAdded: eventActions.addressAdded,
+})(AddressForm);

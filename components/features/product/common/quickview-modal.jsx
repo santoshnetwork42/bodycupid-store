@@ -84,14 +84,17 @@ function Quickview(props) {
         <div className="col-md-6">
           <div className="product-gallery mb-md-0 pb-0">
             <div className="product-label-group">
-              {discount > 0 &&
-                (product?.variants.items.length === 0 ? (
+              {
+                discount > 0 && (
+                  // (product?.variants.items.length === 0 ? (
                   <label className="product-label label-sale">
                     {discount}% OFF
                   </label>
-                ) : (
-                  <label className="product-label label-sale">Sale</label>
-                ))}
+                )
+                // ) : (
+                //   <label className="product-label label-sale">Sale</label>
+                // ))
+              }
             </div>
 
             <OwlCarousel

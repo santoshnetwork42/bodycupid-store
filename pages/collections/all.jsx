@@ -14,9 +14,9 @@ import fetchData from "~/utils/fetchData";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('All collections');
+const logger = new Logger("All collections");
 
 function AllProduct(props) {
   const { store, products, pageFilter, categories, pageMeta } = props;
@@ -94,7 +94,7 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
         },
       },
-      revalidate: 60,
+      revalidate: 120,
     };
   } catch (error) {
     logger.error(error);
@@ -113,6 +113,5 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps)(React.memo(AllProduct));
 Component.showStickyCheckout = true;
 Component.showTopRunner = true;
-Component.couponBanner = true;
 
 export default Component;

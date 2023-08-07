@@ -3,7 +3,6 @@
 ---------------------------------------------- */
 
 .cart {
-
   // .title {
   //     margin-bottom: 1.8rem;
   //     font-size: 1.6rem;
@@ -20,7 +19,7 @@
   }
 
   .card-header {
-    >a {
+    > a {
       padding-left: 2px;
     }
 
@@ -176,7 +175,7 @@
     }
 
     &.visited {
-      ~.active {
+      ~ .active {
         &::before {
           color: $dark-color;
         }
@@ -409,10 +408,7 @@
     padding: 2rem 0 3rem;
   }
 
-
-
   .cart .shop-table {
-
     .product-subtotal,
     .product-thumbnail {
       margin-bottom: 0.5rem;
@@ -447,7 +443,6 @@
 
 .shipping-address,
 .checkout {
-
   input.form-control,
   .select-box {
     background: #fff;
@@ -571,14 +566,24 @@
       width: 80px;
       height: 110px;
       overflow: hidden;
-      top: -8px;
+      top: -5px;
       left: -6px;
 
-      >small {
+      > small {
         background-size: 100%;
-        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5cb85c), color-stop(100%, #3d8b3d));
+        background-image: -webkit-gradient(
+          linear,
+          50% 0%,
+          50% 100%,
+          color-stop(0%, #5cb85c),
+          color-stop(100%, #3d8b3d)
+        );
         background-image: -moz-linear-gradient(top, #5cb85c 0%, #3d8b3d 100%);
-        background-image: -webkit-linear-gradient(top, #5cb85c 0%, #3d8b3d 100%);
+        background-image: -webkit-linear-gradient(
+          top,
+          #5cb85c 0%,
+          #3d8b3d 100%
+        );
         background-image: linear-gradient(to bottom, #5cb85c 0%, #3d8b3d 100%);
         position: absolute;
         width: 100%;
@@ -620,13 +625,17 @@
     }
   }
 }
+.small-product-remove {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
 
 .product-subtotal {
   color: $dark-color;
 }
 
 .input-group {
-
   button,
   input {
     border-color: $border-color-light;

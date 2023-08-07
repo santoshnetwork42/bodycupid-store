@@ -1,13 +1,13 @@
 import NextImage from "next/image";
 import Head from "next/head";
+import { Logger } from "aws-amplify";
+
 import ALink from "~/components/features/custom-link";
 import { getBlog } from "~/graphql/queries";
 import fetchData from "~/utils/fetchData";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-import { Logger } from 'aws-amplify';
-
-const logger = new Logger('All Blogs');
+const logger = new Logger("All Blogs");
 
 function PostSingle({ blog: post }) {
   const { seo, featuredImage, createdAt, title, content } = post;

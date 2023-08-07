@@ -5,7 +5,7 @@ import Cookie from "js-cookie";
 import { STORE_ID, STORE_PREFIX } from "~/config";
 import {
   getMenuCategories,
-  listCollections,
+  searchCollectionTypes,
   searchShippingTiers,
   getFeaturedCoupon,
   searchConfigurations,
@@ -26,14 +26,14 @@ function NavbarProvider({ children, config }) {
 
   const getCollections = () => {
     API.graphql(
-      graphqlOperation(listCollections, {
+      graphqlOperation(searchCollectionTypes, {
         filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
       .then(
         (listCollectionsResponse) =>
-          listCollectionsResponse.data.listCollections.items
+          listCollectionsResponse.data.searchCollectionTypes.items
       )
       .then(setCollections)
       .catch(errorHandler);
@@ -75,9 +75,14 @@ function NavbarProvider({ children, config }) {
       query: getFeaturedCoupon,
       variables: {
         filter: {
-          isFeatured: { eq: true },
           isActive: { eq: true },
           storeId: { eq: STORE_ID },
+          or: [
+            { isFeatured: { eq: true } },
+            {
+              couponType: { eq: "FREEBIE" },
+            },
+          ],
         },
       },
     })
@@ -122,14 +127,17 @@ function NavbarProvider({ children, config }) {
   }, [config?.shippingTier]);
 
   useEffect(() => {
-    getCoupons();
     getCategories();
     getCollections();
     getConfigurations();
+    getCoupons();
   }, []);
 
   const addUserCoupon = async (coupon) => {
-    setCoupons([{ ...coupon, autoApply: true, isExternal: true }, ...coupons]);
+    setCoupons([
+      { ...coupon, autoApply: true, isExternal: true },
+      ...(coupons || []),
+    ]);
   };
 
   return (
@@ -154,9 +162,11 @@ export const useMenu = () => {
   const menu = categories.map((category) => ({
     label: category.name,
     link: `/collections/${category.slug}`,
+    slug: category.slug,
     subMenu: category?.subCategory?.items.map((subCat) => ({
       label: subCat.name,
       link: `/collections/${subCat.slug}`,
+      slug: subCat.slug,
     })),
   }));
 
@@ -164,18 +174,34 @@ export const useMenu = () => {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
       link: `/collections/${col.slug}`,
+      slug: col.slug,
     }));
 
     menu.push({
       label: "Ranges",
       link: "/collections/ranges",
       subMenu: collectionsMenu,
+      slug: "ranges",
     });
   }
 
-  menu.push({ label: "Combos & Gifts", link: `/collections/combos-and-gifts` });
+  menu.push({
+    label: "Combos & Gifts",
+    link: `/collections/combos-and-gifts`,
+    slug: "combos-and-gifts",
+  });
 
-  menu.push({ label: "Clearance Sale", link: `/collections/clearance-sale` });
+  menu.push({
+    label: "Buy 3 @ 599",
+    link: `/collections/special-bundle-offer`,
+    slug: "special-bundle-offer",
+  });
+
+  menu.push({
+    label: "Buy 3 @ 1099",
+    link: `/collections/fragrance-bundle-offer`,
+    slug: "fragrance-bundle-offer",
+  });
 
   return menu;
 };

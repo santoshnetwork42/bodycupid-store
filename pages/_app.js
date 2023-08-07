@@ -5,6 +5,7 @@ import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import awaitGlobal from "await-global";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -44,12 +45,14 @@ const App = ({ Component, pageProps }) => {
     hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
     couponBanner: !!Component.couponBanner,
+    hideCart: !!Component.hideCart,
   };
 
   const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
+    hideChatbot: !!Component.hideChatbot,
   };
 
   const destroySession = useCallback(() => {
@@ -161,7 +164,7 @@ const App = ({ Component, pageProps }) => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
       const {
-        payload: { event },
+        payload: { event, data },
       } = authEvent;
       if (event === "signOut") {
         logger.info("Signing out");
@@ -169,14 +172,13 @@ const App = ({ Component, pageProps }) => {
         store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
         initSession();
-        store.dispatch(eventActions.auth("login"));
       }
     });
 
     initSession();
 
     return () => hubListenerCancelToken();
-  }, [destroySession, initSession, store]);
+  }, []);
 
   useEffect(() => {
     setMetaData();
@@ -185,6 +187,19 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     setGuestCheckout();
   }, []);
+
+  useEffect(() => {
+    awaitGlobal("FB")
+      .then((fb) => {
+        if (footerProps.hideChatbot) {
+          fb.CustomerChat.hide();
+        } else {
+          fb.XFBML.parse();
+          fb.CustomerChat.show(false);
+        }
+      })
+      .catch(() => {});
+  }, [footerProps.hideChatbot]);
 
   return (
     <>

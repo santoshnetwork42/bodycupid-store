@@ -14,7 +14,13 @@ import { modalActions } from "~/store/modal";
 import { getProductMeta } from "~/utils/products";
 import { errorHandler } from "~/utils/errorHandler";
 
-function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
+function LinkedProducts({
+  product,
+  addToCart,
+  cartList,
+  openQuickview,
+  setCartVisibility,
+}) {
   const [linkedProduct, setLinkedProduct] = useState([]);
   const router = useRouter();
 
@@ -142,7 +148,7 @@ function LinkedProducts({ product, addToCart, cartList, openQuickview }) {
               <button
                 className="btn btn-primary  btn-rounded mb-2 "
                 onClick={() => {
-                  router.push("/pages/cart");
+                  setCartVisibility(true);
                 }}
               >
                 View cart
@@ -199,4 +205,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   addToCart: cartActions.addToCart,
   openQuickview: modalActions.openQuickview,
+  setCartVisibility: modalActions.setCartVisibility,
 })(LinkedProducts);

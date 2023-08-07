@@ -1,97 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useCallback, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Head from "next/head";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
-import { cartActions } from "~/store/cart";
-import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
-import { toDecimal } from "~/utils";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
-import { useCartTotal, useCartItems } from "~/utils/hooks/useCart";
-import { alertToaster } from "~/utils/popupHelper";
 import { Logger } from "aws-amplify";
-import { useGuestCheckout } from "~/utils/contexts/navbar";
+import CartTotal from "~/components/common/partials/cart-totals";
+import { useCartItems } from "~/utils/hooks/useCart";
 
 const logger = new Logger("Cart");
 
 function Cart(props) {
-  const {
-    store,
-    cartList,
-    appliedCoupon,
-    user,
-    openLogin,
-    viewCart,
-    recordOutOfStock,
-    onProceedToCheckout,
-  } = props;
+  const { store, appliedCoupon, viewCart } = props;
 
   const { name } = store;
-  const router = useRouter();
   const cartItems = useCartItems();
-  const {
-    ready: isInventoryCheckReady,
-    success: isInventoryCheckSuccess,
-    inventoryMapping,
-    outOfStockItems,
-  } = useInventory();
-
-  const guestCheckout = useGuestCheckout();
+  const { inventoryMapping } = useInventory();
 
   useEffect(() => {
     viewCart();
     logger.verbose("View Cart");
   }, []);
-
-  const {
-    totalItems,
-    totalListingPrice,
-    totalPrice,
-    shippingTotal,
-    couponTotal,
-    cartGrandTotal,
-    cartAmountSaved: totalSaved,
-  } = useCartTotal();
-
-  const validateAndGoToCheckout = useCallback(() => {
-    onProceedToCheckout();
-
-    if (!isInventoryCheckSuccess) {
-      recordOutOfStock(outOfStockItems, inventoryMapping);
-      alertToaster("Please remove out of stock product from cart", "error");
-      logger.error("Out of stock product found in cart");
-      return false;
-    }
-
-    if (user || guestCheckout) {
-      router.push("/pages/checkout");
-      logger.verbose("Redirecting to checkout page");
-      return true;
-    }
-
-    openLogin(true);
-    logger.verbose("Opening login modal");
-    return false;
-  }, [
-    user,
-    guestCheckout,
-    isInventoryCheckSuccess,
-    appliedCoupon,
-    cartList,
-    outOfStockItems,
-    inventoryMapping,
-  ]);
-
-  // const appliedCouponStatus = useMemo(
-  //   () => getCouponDiscount(appliedCoupon, cartList),
-  //   [appliedCoupon, cartList]
-  // );
 
   return (
     <main className="main cart">
@@ -148,140 +82,7 @@ function Cart(props) {
                   >
                     <div id="bccartoffers"></div>
                     <Coupons />
-                    <div className="summary bg-white mb-9">
-                      <h3 className="summary-title text-left d-sm-none">
-                        Cart Totals
-                      </h3>
-                      <table className="shipping">
-                        <tbody>
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle lh-1">
-                                Subtotal
-                              </h4>
-                            </td>
-                            <td>
-                              <p className="summary-subtotal-price">
-                                {totalPrice < totalListingPrice && (
-                                  <del className="summary-subtotal-listingprice mr-2">
-                                    ₹{toDecimal(totalListingPrice)}
-                                  </del>
-                                )}
-                                ₹{toDecimal(totalPrice)}
-                              </p>
-                            </td>
-                          </tr>
-
-                          {!!appliedCoupon && !!couponTotal && (
-                            <>
-                              <tr className="summary-subtotal">
-                                <td className="d-flex align-items-center no-wrap">
-                                  <h4 className="summary-subtitle lh-1 ">
-                                    Discounts
-                                    <span> ({appliedCoupon.code})</span>
-                                  </h4>
-                                </td>
-                                <td>
-                                  <p className="summary-subtotal-price discount-price-color">
-                                    -{`₹${toDecimal(couponTotal)}`}
-                                  </p>
-                                </td>
-                              </tr>
-                            </>
-                          )}
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle lh-1">
-                                Shipping
-                              </h4>
-                            </td>
-                            <td>
-                              <p
-                                className={`summary-subtotal-price ${
-                                  !shippingTotal && "discount-price-color"
-                                }`}
-                              >
-                                {shippingTotal < 50 && (
-                                  <del className="summary-subtotal-listingprice mr-2">
-                                    ₹{toDecimal(50)}
-                                  </del>
-                                )}
-                                {!!shippingTotal
-                                  ? `₹${toDecimal(shippingTotal)}`
-                                  : "FREE"}
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table className="total">
-                        <tbody>
-                          <tr className="summary-subtotal">
-                            <td>
-                              <h4 className="summary-subtitle font-weight-semi-bold  lh-1">
-                                Total{" "}
-                                <p className="m-0">Inclusive of all taxes</p>
-                              </h4>
-                            </td>
-                            <td>
-                              <p className="summary-total-price font-weight-semi-bold  ls-s">
-                                ₹{toDecimal(cartGrandTotal)}
-                              </p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colSpan={2}>
-                              <div
-                                className={
-                                  "avg-delivery-lable-container mt-3 mb-2"
-                                }
-                              >
-                                <p className="m-0">
-                                  Average delivery time: <span>3-5 days</span>
-                                </p>
-                              </div>
-                              {!!totalSaved && (
-                                <div className="summary-saving-lable-container mb-4">
-                                  <p className="saving-lable">
-                                    <span>{`₹${toDecimal(totalSaved)} `}</span>
-                                    saved so far on this order
-                                  </p>
-                                </div>
-                              )}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <button
-                        onClick={validateAndGoToCheckout}
-                        className="btn btn-dark d-sm-none btn-rounded btn-checkout w-100"
-                        disabled={!isInventoryCheckReady}
-                      >
-                        Proceed to checkout
-                      </button>
-                      <div className="d-sm-show stick">
-                        <div className=" d-sm-show stick-bottom-button">
-                          <div className="lh-default">
-                            <span>
-                              {totalItems > 1
-                                ? `${totalItems} Items`
-                                : "1 Item"}
-                            </span>
-                            <p className="summary-total-price text-left ls-s">
-                              ₹{toDecimal(cartGrandTotal)}
-                            </p>
-                          </div>
-
-                          <button
-                            onClick={validateAndGoToCheckout}
-                            className="btn btn-dark btn-rounded  btn-checkout"
-                            disabled={!isInventoryCheckReady}
-                          >
-                            Proceed to checkout
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    <CartTotal />
                   </div>
                 </aside>
               </>
@@ -309,24 +110,15 @@ function Cart(props) {
 function mapStateToProps(state) {
   return {
     store: state.system.store,
-    cartList: state.cart.data ? state.cart.data : [],
-    user: state.user.data,
     appliedCoupon: state.cart.coupon,
-    featuredCoupons: state.system.featuredCoupon || [],
   };
 }
 const Component = connect(mapStateToProps, {
-  removeCoupon: cartActions.removeCoupon,
-  removeFromCart: cartActions.removeFromCart,
-  updateCart: cartActions.updateCart,
-  openLogin: modalActions.openPasswordlessModal,
   viewCart: eventActions.viewCart,
-  recordOutOfStock: eventActions.outOfStock,
-  onProceedToCheckout: eventActions.proceedToCheckout,
 })(Cart);
 
 Component.hideFooter = true;
-Component.navbarConfig = { shippingTier: true, coupons: true };
-Component.couponBanner = true;
+Component.navbarConfig = { shippingTier: true };
+Component.hideChatbot = true;
 
 export default Component;

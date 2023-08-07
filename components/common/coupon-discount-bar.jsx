@@ -25,16 +25,28 @@ const couponDiscountBar = ({ cartList }) => {
   const bxgyCoupon = featuredCoupons.find(
     (coupon) => coupon.couponType === "BUY_X_GET_Y" && coupon.autoApply
   );
+
+  const bxayCoupon = featuredCoupons.find(
+    (coupon) => coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+  );
+
   const [freeProduct] = freeProductsResponse;
   const hasCartItems = cartList?.length > 0;
 
   if (hasCartItems) {
     if (bxgyCoupon) {
-      const couponText = bxgyCoupon.allowed
+      const couponText = bxgyCoupon?.allowed
         ? `Congrats, your free product is added to cart!`
         : `Add more items to unlock 'Buy ${bxgyCoupon.buyXQuantity} get ${bxgyCoupon.getYQuantity} Offer'`;
       return (
         <CouponBanner message={couponText} animate={!!bxgyCoupon.allowed} />
+      );
+    } else if (bxayCoupon) {
+      const couponText = bxayCoupon?.allowed
+        ? `Congrats, your 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' has been applied!`
+        : `Add more items to unlock 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer'`;
+      return (
+        <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
       );
     } else if (freeProduct?.allowed) {
       return (
