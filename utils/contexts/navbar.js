@@ -192,15 +192,9 @@ export const useMenu = () => {
   });
 
   menu.push({
-    label: "Buy 3 @ 599",
-    link: `/collections/special-bundle-offer`,
-    slug: "special-bundle-offer",
-  });
-
-  menu.push({
-    label: "Buy 3 @ 1099",
-    link: `/collections/fragrance-bundle-offer`,
-    slug: "fragrance-bundle-offer",
+    label: "Clearance Sale",
+    link: `/collections/clearance-sale`,
+    slug: "clearance-sale",
   });
 
   return menu;
