@@ -1092,6 +1092,41 @@ export const createReview = /* GraphQL */ `
   ) {
     createReview(input: $input, condition: $condition) {
       id
+      userId
+      verified
+      reviewer {
+        name
+        email
+      }
+      productId
+      rating
+      comment
+      title
+      images
+      createdAt
+    }
+  }
+`;
+
+export const updateReview = /* GraphQL */ `
+  mutation UpdateReview(
+    $input: UpdateReviewInput!
+    $condition: ModelReviewConditionInput
+  ) {
+    updateReview(input: $input, condition: $condition) {
+      id
+      userId
+      verified
+      reviewer {
+        name
+        email
+      }
+      productId
+      rating
+      comment
+      title
+      images
+      createdAt
     }
   }
 `;
@@ -1492,8 +1527,10 @@ export const getReviews = /* GraphQL */ `
       items {
         id
         userId
+        verified
         reviewer {
           name
+          email
         }
         productId
         rating
