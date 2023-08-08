@@ -1,6 +1,7 @@
 import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
+import { SEMANTIC_SEARCH_API_URL, SEMANTIC_SEARCH_THRESHOLD } from "~/constant";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -177,5 +178,27 @@ export function initializeMoengageAndAddInfo({
     Moengage.add_email(email);
     Moengage.add_mobile(mobile);
     Moengage.add_unique_user_id(mobile);
+  }
+}
+
+export async function fetchSearchItems(search) {
+  try {
+    const response = await fetch(
+      `${SEMANTIC_SEARCH_API_URL}?query=${search}&threshold=${SEMANTIC_SEARCH_THRESHOLD}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    const items = data.results;
+    items.forEach((item) => {
+      item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+    });
+    return items;
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return [];
   }
 }
