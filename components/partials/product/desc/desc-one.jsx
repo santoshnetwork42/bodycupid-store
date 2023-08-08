@@ -77,7 +77,7 @@ function DescOne(props) {
   const [loading, setLoading] = useState(false);
   const [reviewAnalytics, setReviewAnalytics] = useState([]);
   const [reviewLoading, setReviewLoading] = useState(true);
-  const [hasUserReview, setHasUserReview] = useState(null); //If user has already reviewed or not
+  const [userReview, setUserReview] = useState(null); //If user has already reviewed or not
 
   const getStarAnalytics = async () => {
     try {
@@ -104,7 +104,7 @@ function DescOne(props) {
       );
       if (item) {
         const data = item.result?.buckets.sort((a, b) => +a.key - +b.key);
-        const total = data.reduce((a, b) => (a = a + b.doc_count), 0);
+        const totalDocCount = data.reduce((a, b) => (a = a + b.doc_count), 0);
 
         const final = Array(5)
           .fill({ key: "", doc_count: 0 })
@@ -120,7 +120,7 @@ function DescOne(props) {
 
         const analytics = final.map((d) => ({
           ...d,
-          percentage: getPer(total, +d.doc_count),
+          percentage: getPer(totalDocCount, +d.doc_count),
         }));
 
         setReviewAnalytics(analytics);
@@ -153,7 +153,7 @@ function DescOne(props) {
         .then(
           async ({
             data: {
-              searchReviews: { items: response, total, nextToken },
+              searchReviews: { items: response, total: totalCount, nextToken },
             },
           }) => {
             if (reset) {
@@ -162,7 +162,7 @@ function DescOne(props) {
               setReviews([...reviews, ...response]);
             }
             setToken(nextToken);
-            setTotal(total);
+            setTotal(totalCount);
             setLoading(false);
             setReviewLoading(false);
           }
@@ -187,15 +187,16 @@ function DescOne(props) {
         })
       )
         .then((resp) => resp.data.searchReviews.items[0])
-        .then(setHasUserReview)
+        .then(setUserReview)
         .catch((err) => {
           errorHandler(err);
         });
     }
   }, [!!user]);
 
-  const getPer = (total, allReview) => {
-    if (total && allReview) return Math.round((allReview * 100) / total);
+  const getPer = (totalCount, allReview) => {
+    if (totalCount && allReview)
+      return Math.round((allReview * 100) / totalCount);
     return 0;
   };
 
@@ -214,6 +215,14 @@ function DescOne(props) {
       });
     }
   };
+
+  const totalRating = useMemo(() => {
+    if (total) {
+      if (userReview?.verified) return total + 1;
+      return total;
+    }
+    return product?.totalRatings ?? 0;
+  }, [total, product?.totalRatings, userReview]);
 
   // const showVideoModalHandler = (e) => {
   //   e.preventDefault();
@@ -248,7 +257,7 @@ function DescOne(props) {
           })
             .then((resp) => resp.data.updateReview)
             .then((res) =>
-              setHasUserReview({
+              setUserReview({
                 ...res,
                 rating,
                 comment,
@@ -275,7 +284,7 @@ function DescOne(props) {
             },
           })
             .then((resp) => resp.data.createReview)
-            .then(setHasUserReview);
+            .then(setUserReview);
         }
         setReview({ ...reviewDefault });
         setShowReview(!showReview);
@@ -364,11 +373,7 @@ function DescOne(props) {
         </Card>
 
         <Card
-          title={`CUSTOMER REVIEWS  ${
-            product?.totalRatings || total
-              ? `(${total || product?.totalRatings})`
-              : ""
-          }`}
+          title={`CUSTOMER REVIEWS  ${totalRating ? `(${totalRating})` : ""}`}
           id="product-review"
           noDisplayStyle
           onExpanded={() => {
@@ -387,16 +392,15 @@ function DescOne(props) {
             <div className="product-tab-reviews">
               <div className="reply">
                 <div className="title-wrapper text-left">
-                  {(!!reviews.length || !!hasUserReview) && (
+                  {(!!reviews.length || !!userReview) && (
                     <div className="review-section">
                       <div className="total-review mb-2 w-100">
                         <div>
                           <div className="d-flex align-items-end">
                             <h2 className="mb-1 lh-1">{rating.toFixed(1)}</h2>
-                            {!!(product?.totalRatings || total) && (
+                            {!!totalRating && (
                               <span className="mt-2 mb-1 ml-1">
-                                Based on {total || product?.totalRatings}{" "}
-                                reviews
+                                Based on {totalRating} reviews
                               </span>
                             )}
                           </div>
@@ -562,14 +566,14 @@ function DescOne(props) {
               <div className="d-flex justify-content-between align-items-center">
                 <div className="comments mb-2 pt-2 pb-2 border-no">
                   {!reviews.length &&
-                    !hasUserReview &&
+                    !userReview &&
                     "There are no reviews yet."}
                 </div>
-                {!showReview && !hasUserReview && (
+                {!showReview && !userReview && (
                   <div className="d-flex align-items-center justify-content-end">
                     <div className="buttons mr-1 ">
                       <div className="justify-content-end w-100">
-                        {/* {!hasUserReview && ( */}
+                        {/* {!userReview && ( */}
                         <button
                           className="btn w-100  btn-rounded mb-2"
                           onClick={() => {
@@ -587,13 +591,13 @@ function DescOne(props) {
                 )}
               </div>
 
-              {(!!reviews.length || !!hasUserReview) && (
+              {(!!reviews.length || !!userReview) && (
                 <div className="comments mb-8 pt-2 pb-2 border-no">
                   <ul>
-                    {!!hasUserReview && (
+                    {!!userReview && (
                       <Review
-                        key={hasUserReview.id}
-                        review={hasUserReview}
+                        key={userReview.id}
+                        review={userReview}
                         onUpdate={(userReview) => {
                           setReview(userReview);
                           setShowReview(true);
