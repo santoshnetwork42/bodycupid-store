@@ -19,8 +19,7 @@ export const getFirstVariant = (product, variantId) => {
 
 export const getProductMeta = (product) => {
   if (!product) return {};
-  const { variants = {}, images = {} } = product;
-  let { thumbImage } = product;
+  const { variants = {}, images = {}, imageUrl } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
 
@@ -28,11 +27,8 @@ export const getProductMeta = (product) => {
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
 
-  thumbImage =
-    thumbImage ||
-    sortedImages.find((i) => i.isThumb) ||
-    sortedImages[0] ||
-    null;
+  let thumbImage = sortedImages.find((i) => i.isThumb) ||
+    sortedImages[0] || { imageKey: imageUrl };
   const [, secondaryImage] = sortedImages;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);
@@ -70,6 +66,7 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     isInventoryEnabled,
     inventory = 0,
     variants = {},
+    availability,
   } = product;
   const { items = [] } = variants;
 
@@ -101,8 +98,8 @@ export const getProductInventory = (product, selectedVariantId = null) => {
   }
 
   return {
-    hasInventory: true,
-    currentInventory: 1000,
+    hasInventory: availability === "in stock",
+    currentInventory: 99,
   };
 };
 

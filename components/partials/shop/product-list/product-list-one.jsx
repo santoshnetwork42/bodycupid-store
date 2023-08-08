@@ -146,7 +146,7 @@ function ProductListOne(props) {
 
   useEffect(() => {
     if (sectionId === "top-product") {
-      setProducts(initialData)
+      setProducts(initialData);
       setTotal(initialData.length);
     } else {
       const { items, nextToken, total } = initialData || {};
@@ -159,8 +159,8 @@ function ProductListOne(props) {
 
   useEffect(() => {
     if (sectionId !== "top-product") {
-    getProducts(true);
-    resetFilter(true);
+      getProducts(true);
+      resetFilter(true);
     }
   }, [filters]);
 
