@@ -1,6 +1,7 @@
 import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
+import { SEMANTIC_SEARCH_API_URL, SEMANTIC_SEARCH_THRESHOLD } from "~/constant";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -183,7 +184,7 @@ export function initializeMoengageAndAddInfo({
 export async function fetchSearchItems(search) {
   try {
     const response = await fetch(
-      `https://d1pnavmgsqoqas.cloudfront.net/search?query=${search}&threshold=0.68`
+      `${SEMANTIC_SEARCH_API_URL}?query=${search}&threshold=${SEMANTIC_SEARCH_THRESHOLD}`
     );
 
     if (!response.ok) {
