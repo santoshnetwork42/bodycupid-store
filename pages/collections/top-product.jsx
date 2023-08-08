@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import CategoryHeader from "~/components/common/category-header";
-import { getProductRecommendation, getProductById } from "~/graphql/api";
+import { getRecommendation } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 
@@ -49,45 +49,17 @@ function AllProduct(props) {
 export const getStaticProps = async () => {
   try {
     // Get all Recommended Products from Best Seller Recommender
-    const bestSellersPersonalizedIds = await fetchData(
-      getProductRecommendation,
-      {
-        input: {
-          storeId: STORE_ID,
-          recommenderType: "BEST_SELLER",
-          limit: 25,
-        },
-      }
-    );
-
-    const bestSellersPersonalized = await Promise.all(
-      bestSellersPersonalizedIds.getProductRecommendation.map(
-        async ({ productId, variantId }) => {
-          return await fetchData(getProductById, {
-            id: productId,
-          })
-            .then((res) => res.getProduct)
-            .then((res) => {
-              if (res.variants && res.variants.items) {
-                res.variants.items = res.variants.items.filter(
-                  (variant) => variant.status === "ENABLED"
-                );
-              }
-              return res;
-            })
-            .then((res) => {
-              if (variantId) {
-                res.variantId = variantId;
-              }
-              return res;
-            });
-        }
-      )
-    );
+    const response = await fetchData(getRecommendation, {
+      input: {
+        storeId: STORE_ID,
+        recommenderType: "BEST_SELLER",
+        limit: 25,
+      },
+    });
 
     return {
       props: {
-        products: bestSellersPersonalized,
+        products: response.getRecommendation,
       },
     };
   } catch (error) {
