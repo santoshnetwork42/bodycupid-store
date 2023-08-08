@@ -6,7 +6,8 @@ import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
-  getRecommendation,
+  getProductRecommendation,
+  getProductById,
 } from "~/graphql/api";
 
 export const getStaticProps = async () => {
@@ -34,7 +35,7 @@ export const getStaticProps = async () => {
 
     const getStoreData = fetchData(getStoreBanners, { id: STORE_ID });
 
-    const getBestSellersPersonalized = fetchData(getRecommendation, {
+    const getBestSellersPersonalized = fetchData(getProductRecommendation, {
       input: {
         storeId: STORE_ID,
         recommenderType: "BEST_SELLER",
@@ -44,7 +45,7 @@ export const getStaticProps = async () => {
 
     const [
       { searchProducts: searchBestSellerProducts },
-      { getRecommendation: bestSellersPersonalized },
+      { getProductRecommendation: bestSellersPersonalizedIds },
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
@@ -55,6 +56,29 @@ export const getStaticProps = async () => {
       getSearchProductSubCategories,
       getStoreData,
     ]);
+
+    const bestSellersPersonalized = await Promise.all(
+      bestSellersPersonalizedIds.map(async ({ productId, variantId }) => {
+        return await fetchData(getProductById, {
+          id: productId,
+        })
+          .then((res) => res.getProduct)
+          .then((res) => {
+            if (res.variants && res.variants.items) {
+              res.variants.items = res.variants.items.filter(
+                (variant) => variant.status === "ENABLED"
+              );
+            }
+            return res;
+          })
+          .then((res) => {
+            if (variantId) {
+              res.variantId = variantId;
+            }
+            return res;
+          });
+      })
+    );
 
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;

@@ -4927,24 +4927,11 @@ export const adminGetDashboardData = /* GraphQL */ `
   }
 `;
 
-export const getRecommendation = /* GraphQL */ `
-  query GetRecommendation($input: RecommendationInput!) {
-    getRecommendation(input: $input) {
-      id
-      title
-      price
-      listingPrice
-      thumbImage {
-        imageKey
-        __typename
-      }
-      inventory
-      sku
-      rating
-      totalRatings
-      isInventoryEnabled
-      slug
-      continueSellingOutOfStock
+export const getProductRecommendation = /* GraphQL */ `
+  query GetProductRecommendation($input: ProductRecommendationInput!) {
+    getProductRecommendation(input: $input) {
+      productId
+      variantId
       __typename
     }
   }
