@@ -61,7 +61,7 @@ export const getStaticProps = async () => {
       sort: [{ field: "position", direction: "asc" }],
       variantFilter: { status: { eq: "ENABLED" } },
       imageLimit: 1,
-      limit: 16,
+      limit: 4,
     });
 
     return {
@@ -69,7 +69,6 @@ export const getStaticProps = async () => {
         products: searchProducts,
         pageFilter: filter,
       },
-      revalidate: 60,
     };
   } catch (error) {
     logger.error("Error while searching a product", error);

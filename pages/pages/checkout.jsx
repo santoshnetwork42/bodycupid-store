@@ -555,7 +555,7 @@ function Checkout(props) {
                                           src={getPublicImageURL(item?.thumbImage)}
                                           width="100"
                                           height="100"
-                                          alt={item.images.items[0]?.alt}
+                                          alt={item?.images?.items[0]?.alt}
                                         />
                                       </figure>
                                       <div className="text-left text-primary w-100 mr-5 ml-2">

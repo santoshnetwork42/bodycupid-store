@@ -961,8 +961,13 @@ export const findProducts = /* GraphQL */ `
   }
 `;
 
-export const getProductById = /* GraphQL */ `
-  query GetProduct($id: ID!) {
+export const getRecommendedProductById = /* GraphQL */ `
+  query GetProduct(
+    $id: ID!
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
+  ) {
     getProduct(id: $id) {
       id
       title
@@ -991,7 +996,7 @@ export const getProductById = /* GraphQL */ `
       thumbImages
       isInventoryEnabled
       totalOrders
-      variants {
+      variants(filter: $variantFilter, limit: $variantLimit) {
         items {
           id
           title
@@ -1003,7 +1008,7 @@ export const getProductById = /* GraphQL */ `
           blockedInventory
         }
       }
-      images {
+      images(limit: $imageLimit) {
         items {
           id
           position
@@ -1092,6 +1097,41 @@ export const createReview = /* GraphQL */ `
   ) {
     createReview(input: $input, condition: $condition) {
       id
+      userId
+      verified
+      reviewer {
+        name
+        email
+      }
+      productId
+      rating
+      comment
+      title
+      images
+      createdAt
+    }
+  }
+`;
+
+export const updateReview = /* GraphQL */ `
+  mutation UpdateReview(
+    $input: UpdateReviewInput!
+    $condition: ModelReviewConditionInput
+  ) {
+    updateReview(input: $input, condition: $condition) {
+      id
+      userId
+      verified
+      reviewer {
+        name
+        email
+      }
+      productId
+      rating
+      comment
+      title
+      images
+      createdAt
     }
   }
 `;
@@ -1492,8 +1532,10 @@ export const getReviews = /* GraphQL */ `
       items {
         id
         userId
+        verified
         reviewer {
           name
+          email
         }
         productId
         rating
@@ -1854,6 +1896,14 @@ export const createNewOrder = /* GraphQL */ `
       priority
       orderDate
       status
+    }
+  }
+`;
+export const getProductRecommendation = /* GraphQL */ `
+  query GetProductRecommendation($input: ProductRecommendationInput!) {
+    getProductRecommendation(input: $input) {
+      productId
+      variantId
     }
   }
 `;

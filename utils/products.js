@@ -66,6 +66,7 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     isInventoryEnabled,
     inventory = 0,
     variants = {},
+    availability,
   } = product;
   const { items = [] } = variants;
 
@@ -97,8 +98,8 @@ export const getProductInventory = (product, selectedVariantId = null) => {
   }
 
   return {
-    hasInventory: true,
-    currentInventory: 1000,
+    hasInventory: !availability || availability === "in stock",
+    currentInventory: 99,
   };
 };
 

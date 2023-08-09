@@ -522,6 +522,8 @@ export const createOrder = /* GraphQL */ `
         updatedAt
         __typename
       }
+      couponDiscount
+      prepaidDiscount
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
@@ -671,6 +673,8 @@ export const deleteOrder = /* GraphQL */ `
         updatedAt
         __typename
       }
+      couponDiscount
+      prepaidDiscount
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
@@ -917,6 +921,7 @@ export const createOrderProduct = /* GraphQL */ `
       invoiceNumber
       tentativeDeliveryDate
       trackingId
+      freeQuantity
       cancelledQuantity
       quantity
       price
@@ -1047,6 +1052,7 @@ export const deleteOrderProduct = /* GraphQL */ `
       invoiceNumber
       tentativeDeliveryDate
       trackingId
+      freeQuantity
       cancelledQuantity
       quantity
       price
@@ -2784,6 +2790,8 @@ export const updateOrder = /* GraphQL */ `
         updatedAt
         __typename
       }
+      couponDiscount
+      prepaidDiscount
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
@@ -2988,6 +2996,7 @@ export const updateOrderProduct = /* GraphQL */ `
       invoiceNumber
       tentativeDeliveryDate
       trackingId
+      freeQuantity
       cancelledQuantity
       quantity
       price
@@ -4608,6 +4617,8 @@ export const createNewOrder = /* GraphQL */ `
         updatedAt
         __typename
       }
+      couponDiscount
+      prepaidDiscount
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount

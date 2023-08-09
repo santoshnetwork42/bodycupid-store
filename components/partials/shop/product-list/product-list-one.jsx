@@ -160,8 +160,10 @@ function ProductListOne(props) {
   }, [sectionId]);
 
   useEffect(() => {
-    getProducts(true);
-    resetFilter(true);
+    if (sectionId !== "top-product") {
+      getProducts(true);
+      resetFilter(true);
+    }
   }, [filters]);
 
   if (loading) {
@@ -203,7 +205,7 @@ function ProductListOne(props) {
           getProducts(false);
         }}
         style={{ overflow: "visible" }}
-        hasMore={products.length < total}
+        hasMore={products?.length < total}
         loader={<Loader loading small />}
       >
         <div className={`row product-wrapper ${gridClasses[itemsPerRow]} pt-5`}>
