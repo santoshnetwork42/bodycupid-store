@@ -8,6 +8,7 @@ export const PRODUCT_TAG_LIST = [
   "trending",
   "top-product",
 ];
+
 export const COD_CHARGES = "COD";
 export const MAX_PREPAID_DISCOUNT = "MAX_PREPAID_DISCOUNT";
 export const PREPAID_DISCOUNT = "PREPAID_DISCOUNT";

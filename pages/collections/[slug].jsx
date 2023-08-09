@@ -124,11 +124,6 @@ export const getStaticProps = async (context) => {
     const { params } = context;
     const { slug } = params;
 
-  if (slug === "top-product") {
-    await router.push({
-      pathname: "/collections/top-product"
-    });
-  }
     const filter = {
       status: { eq: "ENABLED" },
       storeId: { eq: STORE_ID },

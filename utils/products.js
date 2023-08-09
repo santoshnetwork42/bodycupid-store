@@ -98,7 +98,7 @@ export const getProductInventory = (product, selectedVariantId = null) => {
   }
 
   return {
-    hasInventory: availability === "in stock",
+    hasInventory: !availability || availability === "in stock",
     currentInventory: 99,
   };
 };

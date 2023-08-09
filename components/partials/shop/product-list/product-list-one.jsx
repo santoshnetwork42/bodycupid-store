@@ -152,16 +152,11 @@ function ProductListOne(props) {
   );
 
   useEffect(() => {
-    if (sectionId === "top-product") {
-      setProducts(initialData);
-      setTotal(initialData.length);
-    } else {
-      const { items, nextToken, total } = initialData || {};
-      setProducts(items);
-      setToken(nextToken);
-      setTotal(total);
-      viewList(sectionId, "PLP", items);
-    }
+    const { items, nextToken, total } = initialData || {};
+    setProducts(items);
+    setToken(nextToken);
+    setTotal(total);
+    viewList(sectionId, "PLP", items);
   }, [sectionId]);
 
   useEffect(() => {

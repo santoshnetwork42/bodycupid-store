@@ -961,8 +961,13 @@ export const findProducts = /* GraphQL */ `
   }
 `;
 
-export const getProductById = /* GraphQL */ `
-  query GetProduct($id: ID!) {
+export const getRecommendedProductById = /* GraphQL */ `
+  query GetProduct(
+    $id: ID!
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
+  ) {
     getProduct(id: $id) {
       id
       title
@@ -991,8 +996,7 @@ export const getProductById = /* GraphQL */ `
       thumbImages
       isInventoryEnabled
       totalOrders
-      hasVarient
-      variants {
+      variants(filter: $variantFilter, limit: $variantLimit) {
         items {
           id
           title
@@ -1002,10 +1006,9 @@ export const getProductById = /* GraphQL */ `
           imageUrl
           inventory
           blockedInventory
-          status
         }
       }
-      images {
+      images(limit: $imageLimit) {
         items {
           id
           position
