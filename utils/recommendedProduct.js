@@ -19,8 +19,8 @@ const getRecommededProducts = async ({
     },
   }).then((response) => response.getProductRecommendation);
 
-  return await Promise.all(
-    bestSellersPersonalizedIds.map(async ({ productId, variantId }) => {
+  const products = await Promise.all(
+    (bestSellersPersonalizedIds || []).map(async ({ productId, variantId }) => {
       return await fetchData(getRecommendedProductById, {
         id: productId,
         variantFilter: { status: { eq: "ENABLED" } },
@@ -29,6 +29,7 @@ const getRecommededProducts = async ({
       })
         .then((res) => res.getProduct)
         .then((res) => {
+          if (!res) return null;
           let [variant] = res.variants.items;
 
           if (variantId) {
@@ -49,6 +50,8 @@ const getRecommededProducts = async ({
         });
     })
   );
+
+  return products.filter(Boolean);
 };
 
 export default getRecommededProducts;
