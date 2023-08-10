@@ -5,7 +5,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
-// import StorySection from "~/components/partials/home/story-section";
 
 const CategorySection = dynamic(() =>
   import("~/components/partials/home/category-section")
@@ -25,9 +24,9 @@ export { getStaticProps } from "~/utils/page";
 function HomePage({
   hero,
   bestSellerProducts,
+  recommededProducts,
   featuredProducts,
   categories,
-  // storyCategories,
   brands,
   store,
   pageMeta,
@@ -42,7 +41,6 @@ function HomePage({
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
         <div className="intro-section">
-          {/* <StorySection categories={storyCategories} /> */}
           <IntroSection {...hero} />
         </div>
 
@@ -52,6 +50,14 @@ function HomePage({
           disableCarousel={isSmallSize}
           slug="best-seller"
           redirectTo="/collections/best-seller"
+        />
+
+        <ProductCollection
+          products={recommededProducts}
+          title="Top products"
+          disableCarousel={isSmallSize}
+          slug="top-product"
+          redirectTo="/collections/top-products"
         />
 
         <ProductCollection

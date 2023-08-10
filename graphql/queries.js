@@ -2236,6 +2236,8 @@ export const getOrder = /* GraphQL */ `
         updatedAt
         __typename
       }
+      couponDiscount
+      prepaidDiscount
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
@@ -2293,6 +2295,8 @@ export const listOrders = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2351,6 +2355,8 @@ export const bystoreIdOrder = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2409,6 +2415,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2467,6 +2475,8 @@ export const searchOrders = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2725,6 +2735,7 @@ export const getOrderProduct = /* GraphQL */ `
       invoiceNumber
       tentativeDeliveryDate
       trackingId
+      freeQuantity
       cancelledQuantity
       quantity
       price
@@ -2777,6 +2788,7 @@ export const listOrderProducts = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        freeQuantity
         cancelledQuantity
         quantity
         price
@@ -2842,6 +2854,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        freeQuantity
         cancelledQuantity
         quantity
         price
@@ -2907,6 +2920,7 @@ export const searchOrderProducts = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        freeQuantity
         cancelledQuantity
         quantity
         price
@@ -4922,6 +4936,16 @@ export const adminGetDashboardData = /* GraphQL */ `
         count
         __typename
       }
+      __typename
+    }
+  }
+`;
+
+export const getProductRecommendation = /* GraphQL */ `
+  query GetProductRecommendation($input: ProductRecommendationInput!) {
+    getProductRecommendation(input: $input) {
+      productId
+      variantId
       __typename
     }
   }
