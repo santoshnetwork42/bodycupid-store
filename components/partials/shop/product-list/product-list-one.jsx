@@ -138,8 +138,7 @@ function ProductListOne(props) {
           setLoading(false);
         } else {
           fetchSearchItems(search).then((fetchedItems) => {
-            const transformedData = transformSearchQueryData(fetchedItems);
-            setProducts(transformedData);
+            setProducts(fetchedItems);
             setTotal(fetchedItems.length);
             setLoading(false);
           });
@@ -220,6 +219,7 @@ function ProductListOne(props) {
                   id: sectionId,
                   name: "PLP",
                 }}
+                isSearch={search ? true : false}
               />
             </div>
           ))}
