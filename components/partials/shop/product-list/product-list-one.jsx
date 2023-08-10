@@ -10,7 +10,7 @@ import { findProducts } from "~/graphql/api";
 import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { eventActions } from "~/store/events";
-import { fetchSearchItems, transformSearchQueryData } from "~/utils/helper";
+import { fetchSearchItems } from "~/utils/helper";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
