@@ -47,8 +47,6 @@ export const getStaticProps = async () => {
       getRecommededProducts(),
     ]);
 
-    console.log(recommededProducts);
-
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categories } = searchProductSubCategories;

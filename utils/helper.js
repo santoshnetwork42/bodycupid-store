@@ -194,11 +194,52 @@ export async function fetchSearchItems(search) {
     const data = await response.json();
     const items = data.results;
     items.forEach((item) => {
+      const [, slug] = item.link.match(/products\/([^?]+)/);
       item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+      item.slug = slug;
     });
     return items;
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];
   }
+}
+
+export function transformSearchQueryData(searchQueryData) {
+  return searchQueryData.map((item) => {
+    return {
+      id: item.id,
+      title: item.title,
+      availability: item.availability || "",
+      description: item.description,
+      imageUrl: item.imageUrl,
+      price: parseFloat(item.price) || 0,
+      rating: parseFloat(item.rating) || 0,
+      sale_price: parseFloat(item.sale_price) || 0,
+      slug: item.slug,
+      totalRatings: item.totalRatings,
+      blockedInventory: item.blockedInventory || 0,
+      category: {
+        name: item.category?.name || "",
+        slug: item.category?.slug || "",
+      },
+      collections: item.collections || [],
+      continueSellingOutOfStock: item.continueSellingOutOfStock || false,
+      inventory: item.inventory || 0,
+      isFeatured: item.isFeatured || false,
+      isInventoryEnabled: item.isInventoryEnabled || false,
+      listingPrice: parseFloat(item.price) || 0,
+      position: item.position || 0,
+      sku: item.id || "",
+      subCategory: {
+        name: item.subCategory?.name || "",
+        slug: item.subCategory?.slug || "",
+      },
+      tags: item.tags || "",
+      variantId: item.variantId,
+      totalOrders: item.totalOrders || 0,
+      variants: { items: item.variants || [] },
+      vendor: item.vendor || "",
+    };
+  });
 }
