@@ -186,6 +186,46 @@ export const listUserAddresses = /* GraphQL */ `
     }
   }
 `;
+export const byUserIdAddress = /* GraphQL */ `
+  query ByUserIdAddress(
+    $userID: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserAddressFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byUserIdAddress(
+      userID: $userID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        name
+        phone
+        email
+        country
+        state
+        city
+        pinCode
+        landmark
+        address
+        location
+        area
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const searchUserAddresses = /* GraphQL */ `
   query SearchUserAddresses(
     $filter: SearchableUserAddressFilterInput
@@ -4940,7 +4980,6 @@ export const adminGetDashboardData = /* GraphQL */ `
     }
   }
 `;
-
 export const getProductRecommendation = /* GraphQL */ `
   query GetProductRecommendation($input: ProductRecommendationInput!) {
     getProductRecommendation(input: $input) {

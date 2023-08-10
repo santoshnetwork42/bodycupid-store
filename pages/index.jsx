@@ -34,6 +34,7 @@ function HomePage({
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
 
+  console.log(recommededProducts);
   return (
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
@@ -52,13 +53,15 @@ function HomePage({
           redirectTo="/collections/best-seller"
         />
 
-        <ProductCollection
-          products={recommededProducts}
-          title="Top products"
-          disableCarousel={isSmallSize}
-          slug="top-product"
-          redirectTo="/collections/top-products"
-        />
+        {!!recommededProducts?.length && (
+          <ProductCollection
+            products={recommededProducts}
+            title="Top products"
+            disableCarousel={isSmallSize}
+            slug="top-product"
+            redirectTo="/collections/top-products"
+          />
+        )}
 
         <ProductCollection
           products={featuredProducts}
