@@ -67,7 +67,7 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
     }
     return {
       ...item,
-      thumbImage: item.images?.items[0]?.imageKey || item.imageUrl,
+      thumbImage: item.images?.items[0]?.imageKey,
     };
   });
 
