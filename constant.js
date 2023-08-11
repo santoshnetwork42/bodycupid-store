@@ -20,4 +20,4 @@ export const MAX_COD_AMOUNT = "MAX_COD_AMOUNT";
 
 export const SEMANTIC_SEARCH_API_URL =
   "https://d1pnavmgsqoqas.cloudfront.net/search";
-export const SEMANTIC_SEARCH_THRESHOLD = 0.69;
+export const SEMANTIC_SEARCH_THRESHOLD = 0.7;
