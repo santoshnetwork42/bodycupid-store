@@ -6,9 +6,11 @@ export default function Quantity({ qty = 1, ...props }) {
   const {
     isProductList = false,
     adClass = `${
-      isProductList ? "quntity-container d-flex" : "mr-2 input-group"
+      isProductList ? "quntity-container d-flex" : "mr-2 input-group bg-white"
     }`,
     product,
+    isCart = false,
+    isV2 = false,
   } = props;
 
   const [quantity, setQuantity] = useState(parseInt(qty));
@@ -57,13 +59,17 @@ export default function Quantity({ qty = 1, ...props }) {
   return (
     <div className={adClass}>
       <button
-        className="quantity-minus d-flex justify-content-center w-100 align-items-center"
+        className={`quantity-minus d-flex justify-content-center w-100 align-items-center
+          ${isV2 && isCart ? "button-cart-v2 " : ""}
+        `}
         onClick={minusQuantity}
       >
         <Minus size={12} color="currentColor" />
       </button>
       <input
-        className="quantity-cart w-100"
+        className={`quantity-cart w-100 ${
+          isV2 && isCart ? "quantity-cart-v2" : ""
+        }`}
         type="number"
         min="1"
         max={props.max}
@@ -72,7 +78,9 @@ export default function Quantity({ qty = 1, ...props }) {
         onBlur={handleBlur}
       />
       <button
-        className="quantity-plus w-100 d-flex justify-content-center align-items-center"
+        className={`quantity-minus d-flex justify-content-center w-100 align-items-center
+          ${isV2 && isCart ? "button-cart-v2 " : ""}
+        `}
         onClick={plusQuantity}
       >
         <Plus size={12} color="currentColor" />

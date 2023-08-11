@@ -332,10 +332,11 @@ function Checkout(props) {
 
           const productIds = cartList
             .filter((p) => !p.cartItemSource)
-            .map(({ id, variantId, qty }) => ({
+            .map(({ id, variantId, qty, source }) => ({
               productId: id,
               variantId,
               quantity: qty,
+              source,
             }));
 
           const payload = {
@@ -552,7 +553,9 @@ function Checkout(props) {
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
                                         <img
-                                          src={getPublicImageURL(item?.thumbImage)}
+                                          src={getPublicImageURL(
+                                            item?.thumbImage
+                                          )}
                                           width="100"
                                           height="100"
                                           alt={item?.images?.items[0]?.alt}

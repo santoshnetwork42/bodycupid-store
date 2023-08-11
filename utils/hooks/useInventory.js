@@ -17,6 +17,7 @@ export const useInventory = () => {
         recordKey: product.recordKey,
         productId: product.id,
         variantId: product.variantId,
+        source: product.source,
       })),
     [cartList]
   );
@@ -90,7 +91,10 @@ export const useInventory = () => {
           cartListMapping[item.recordKey] &&
           cartListMapping[item.recordKey].price !== item.price
       );
-      if (isMismatch) dispatch(cartActions.validateCart(productWithPrice));
+
+      if (isMismatch) {
+        dispatch(cartActions.validateCart(productWithPrice));
+      }
     }
   }, [cartListMapping]);
 

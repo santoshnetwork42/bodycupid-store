@@ -54,7 +54,6 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
   const { data: cartListItems, coupon: appliedCoupon } = useSelector(
     (state) => state.cart
   );
-
   const freeProducts = useFreeProducts(showNonApplicableFreeProducts);
 
   const cartList = cartListItems.map((item) => {
@@ -97,7 +96,6 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
                 couponApplicableCartList: [...acc.couponApplicableCartList, c],
               };
             }
-
             return {
               ...acc,
               couponNonApplicableCartList: [
@@ -184,13 +182,13 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
         })),
       ];
     }
-
     return [
       ...cartList.map((p) => ({
         ...p,
         itemKey: p.recordKey,
         cartItemType:
-          p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null,
+          p.cartItemType ||
+          (p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null),
       })),
       ...freeProducts.map(({ product: p, allowed, message }) => ({
         ...p,
