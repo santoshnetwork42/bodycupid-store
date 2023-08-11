@@ -8,6 +8,7 @@ import { findProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import SearchBox from "~/components/common/partials/search-box";
+import CategoryHeader from "~/components/common/category-header";
 
 import { Logger } from "aws-amplify";
 
@@ -30,6 +31,7 @@ function AllProduct(props) {
 
       <div className="page-content pb-3">
         <div className="container">
+          <CategoryHeader name={`Results Of ${search}`} />
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 mn-4 d-sm-show">
               <SearchBox defaultSearch={search} />
