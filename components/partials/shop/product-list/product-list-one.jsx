@@ -11,6 +11,7 @@ import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { eventActions } from "~/store/events";
 import { fetchSearchItems } from "~/utils/helper";
+import { getProductInventory } from "~/utils/products";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -111,55 +112,19 @@ function ProductListOne(props) {
   const setSoldOutLast = (items) => {
     let soldOutProducts = [];
     const products = items.reduce((acc, prod) => {
-      if (!("currInventory" in prod)) {
-        if (!prod.isInventoryEnabled) {
-          return [
-            ...acc,
-            {
-              ...prod,
-              currInventory: true,
-            },
-          ];
-        }
-
-        if (prod.variants && prod.variants.items.length) {
-          if (prod.variants.items[0].inventory !== 0) {
-            return [
-              ...acc,
-              {
-                ...prod,
-                currInventory: true,
-              },
-            ];
-          } else {
-            soldOutProducts.push({ ...prod, currInventory: false });
-            return acc;
-          }
+      if (!("hasInventory" in prod)) {
+        const { hasInventory } = getProductInventory(prod);
+        if (hasInventory) {
+          return [...acc, { ...prod, hasInventory }];
         } else {
-          if (prod.inventory !== 0) {
-            return [
-              ...acc,
-              {
-                ...prod,
-                currInventory: true,
-              },
-            ];
-          } else {
-            soldOutProducts.push({ ...prod, currInventory: false });
-            return acc;
-          }
+          soldOutProducts.push({ ...prod, hasInventory });
+          return acc;
         }
       } else {
-        if (prod.currInventory) {
-          return [
-            ...acc,
-            {
-              ...prod,
-              currInventory: true,
-            },
-          ];
+        if (prod.hasInventory) {
+          return [...acc, prod];
         } else {
-          soldOutProducts.push({ ...prod, currInventory: false });
+          soldOutProducts.push(prod);
           return acc;
         }
       }
