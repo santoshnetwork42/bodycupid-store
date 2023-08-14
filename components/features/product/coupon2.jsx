@@ -379,7 +379,10 @@ function Coupon2(props) {
                         {appliedCoupon?.code !== c.code && (
                           <div className="d-flex flex-column justify-content-end">
                             <button
-                              onClick={() => applyCouponCode(c.code)}
+                              onClick={() => {
+                                applyCouponCode(c.code);
+                                closeSlider;
+                              }}
                               className={`btn btn-primary coupon-apply-button${
                                 !c.allowed ? " disabled-coupon" : ""
                               }`}

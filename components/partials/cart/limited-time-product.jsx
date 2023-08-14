@@ -22,6 +22,9 @@ const LimitedTimeProduct = ({
   const [showLTOProduct, setShowLTOProduct] = useState(true);
   const [ltoProductRemoved, setltoProductRemoved] = useState(false);
 
+  console.log("showLTOProduct", showLTOProduct);
+  console.log("ltoProductRemoved", ltoProductRemoved);
+
   const { thumbImage } = getProductMeta(product);
 
   const handleAddToCart = () => {
@@ -57,7 +60,7 @@ const LimitedTimeProduct = ({
             </span>
           </div>
           <div className="limited-time-product">
-            <div className="mobile-specific-cart-product-container mobile-specific-card mb-2 d-flex p-relative pt-8 pr-1 pl-4 pb-2 limited-time-deal-card ">
+            <div className="mobile-specific-cart-product-container cart-product-contaimer mobile-specific-card mb-2 d-flex p-relative pt-8 pr-1 pl-4 pb-2 limited-time-deal-card ">
               <div className="image-container">
                 <div className="svg-overlay">
                   <LimitedTimeDiscount discountAmount={60} />
