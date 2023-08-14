@@ -108,6 +108,18 @@ function ProductListOne(props) {
     };
   }, [perPage, maxprice, minprice, search, sortby]);
 
+  const setSoldOutLast = (products) => {
+    const soldOutProducts = products.filter(
+      (prod) => prod.isInventoryEnabled && prod.inventory === 0
+    );
+    soldOutProducts.map((prod) => {
+      const index = products.findIndex((product) => prod.id === product.id);
+      const item = products.splice(index, 1);
+      products.push(...item);
+    });
+    return products;
+  };
+
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -128,10 +140,12 @@ function ProductListOne(props) {
           );
 
           if (reset) {
-            setProducts(response);
+            const productsMapped = setSoldOutLast(response);
+            setProducts(productsMapped);
           } else {
             viewList(sectionId, "PLP", response);
-            setProducts([...products, ...response]);
+            const productsMapped = setSoldOutLast([...products, ...response]);
+            setProducts(productsMapped);
           }
           setToken(nextToken);
           setTotal(total);
@@ -153,7 +167,8 @@ function ProductListOne(props) {
 
   useEffect(() => {
     const { items, nextToken, total } = initialData || {};
-    setProducts(items);
+    const productsMapped = setSoldOutLast(items);
+    setProducts(productsMapped);
     setToken(nextToken);
     setTotal(total);
     viewList(sectionId, "PLP", items);
