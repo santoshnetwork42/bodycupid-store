@@ -108,16 +108,63 @@ function ProductListOne(props) {
     };
   }, [perPage, maxprice, minprice, search, sortby]);
 
-  const setSoldOutLast = (products) => {
-    const soldOutProducts = products.filter(
-      (prod) => prod.isInventoryEnabled && prod.inventory === 0
-    );
-    soldOutProducts.map((prod) => {
-      const index = products.findIndex((product) => prod.id === product.id);
-      const item = products.splice(index, 1);
-      products.push(...item);
-    });
-    return products;
+  const setSoldOutLast = (items) => {
+    let soldOutProducts = [];
+    const products = items.reduce((acc, prod) => {
+      if (!("currInventory" in prod)) {
+        if (!prod.isInventoryEnabled) {
+          return [
+            ...acc,
+            {
+              ...prod,
+              currInventory: true,
+            },
+          ];
+        }
+
+        if (prod.variants && prod.variants.items.length) {
+          if (prod.variants.items[0].inventory !== 0) {
+            return [
+              ...acc,
+              {
+                ...prod,
+                currInventory: true,
+              },
+            ];
+          } else {
+            soldOutProducts.push({ ...prod, currInventory: false });
+            return acc;
+          }
+        } else {
+          if (prod.inventory !== 0) {
+            return [
+              ...acc,
+              {
+                ...prod,
+                currInventory: true,
+              },
+            ];
+          } else {
+            soldOutProducts.push({ ...prod, currInventory: false });
+            return acc;
+          }
+        }
+      } else {
+        if (prod.currInventory) {
+          return [
+            ...acc,
+            {
+              ...prod,
+              currInventory: true,
+            },
+          ];
+        } else {
+          soldOutProducts.push({ ...prod, currInventory: false });
+          return acc;
+        }
+      }
+    }, []);
+    return [...products, ...soldOutProducts];
   };
 
   const getProducts = useCallback(
@@ -152,7 +199,8 @@ function ProductListOne(props) {
           setLoading(false);
         } else {
           fetchSearchItems(search).then((fetchedItems) => {
-            setProducts(fetchedItems);
+            const productsMapped = setSoldOutLast(response);
+            setProducts(productsMapped);
             setTotal(fetchedItems.length);
             setLoading(false);
           });
