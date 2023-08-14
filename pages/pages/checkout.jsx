@@ -69,6 +69,7 @@ function Checkout(props) {
     recordOutOfStock,
     openLogin,
     addPaymentInfo,
+    priceMismatch,
   } = props;
 
   const { name } = store;
@@ -316,6 +317,7 @@ function Checkout(props) {
       if (!priceVerified) {
         alertToaster("Price updated. Add products again", "error");
         logger.error("Price updated. Add products again");
+        priceMismatch();
         setLoading(false);
         return;
       }
@@ -550,12 +552,10 @@ function Checkout(props) {
                                     <div className="mobile-specific-cart-product-container border-regular bg-white mb-2 d-flex p-relative">
                                       <figure>
                                         <img
-                                          src={getPublicImageURL(
-                                            item.images.items[0]?.imageKey
-                                          )}
+                                          src={getPublicImageURL(item?.thumbImage)}
                                           width="100"
                                           height="100"
-                                          alt={item.images.items[0]?.alt}
+                                          alt={item?.images?.items[0]?.alt}
                                         />
                                       </figure>
                                       <div className="text-left text-primary w-100 mr-5 ml-2">
@@ -936,6 +936,7 @@ const Component = connect(mapStateToProps, {
   recordOutOfStock: eventActions.outOfStock,
   orderCreated: eventActions.orderCreated,
   addPaymentInfo: eventActions.addPaymentInfo,
+  priceMismatch: eventActions.priceMismatch,
 })(Checkout);
 
 Component.hideFooter = true;

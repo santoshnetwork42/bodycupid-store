@@ -51,11 +51,25 @@ export const useCartTotal = (
 };
 
 export const useCartItems = (showNonApplicableFreeProducts = true) => {
-  const { data: cartList, coupon: appliedCoupon } = useSelector(
+  const { data: cartListItems, coupon: appliedCoupon } = useSelector(
     (state) => state.cart
   );
 
   const freeProducts = useFreeProducts(showNonApplicableFreeProducts);
+
+  const cartList = cartListItems.map((item) => {
+    if (Array.isArray(item.variants?.items) && item.variantId) {
+      const currVariant = item.variants.items.find(
+        (v) => v.id === item.variantId
+      );
+      if (currVariant?.imageUrl)
+        return { ...item, thumbImage: currVariant?.imageUrl };
+    }
+    return {
+      ...item,
+      thumbImage: item.images?.items[0]?.imageKey,
+    };
+  });
 
   const cartItems = useMemo(() => {
     const { allowed } = getCouponDiscount(appliedCoupon, cartList);

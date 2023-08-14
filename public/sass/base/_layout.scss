@@ -36,9 +36,13 @@
     background-color: #17B31B;
     justify-content: center;
     position: fixed;
-    bottom: 0;
+    bottom: 65px;
     z-index: 1000;
     width: 100%;
+
+    @media (min-width: 575px) {
+       max-width: 50rem !important;
+    }
 }
 
 .animate {
@@ -57,9 +61,9 @@
     }
   }
 
-@media (max-width: 576px) {
+@media (min-width: 480px) {
     .coupon-discount-bar {
-        bottom: 58px; 
+      bottom: 72px !important;
     }
 }
 

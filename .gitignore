@@ -7,7 +7,7 @@
 .idea
 .vscode
 
-# testing
+# testing 
 /coverage
 
 # next.js
@@ -70,3 +70,4 @@ next.config.original.js
 
 # Analyzer
 analyze
+.readme

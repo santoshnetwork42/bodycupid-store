@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { DownAngle, UpAngle } from "~/components/icons";
 
 export default function ReadMore({
-  content,
+  content = "",
   maxCharacterCount = 300,
   position = "center",
 }) {

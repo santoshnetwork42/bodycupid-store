@@ -29,6 +29,7 @@ function ProductTwo(props) {
     slug: tagSlug,
     section,
     priority,
+    isSearch,
   } = props;
 
   const { title, slug, rating, totalRatings, collections } = product || {};
@@ -58,14 +59,18 @@ function ProductTwo(props) {
   }, [collections]);
 
   const addToCartHandler = () => {
-    setCartVisibility(true);
-    addToCart({
-      ...product,
-      section,
-      qty: 1,
-    });
-    logger.verbose("Added product to cart");
-    logger.debug("Added product to cart:", product);
+    if (isSearch) {
+      showQuickviewHandler();
+    } else {
+      setCartVisibility(true);
+      addToCart({
+        ...product,
+        section,
+        qty: 1,
+      });
+      logger.verbose("Added product to cart");
+      logger.debug("Added product to cart:", product);
+    }
   };
 
   const cartItem = useMemo(() => {

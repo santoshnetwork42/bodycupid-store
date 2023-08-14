@@ -1,15 +1,16 @@
 import React, { useCallback } from "react";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
+import { useRouter } from "next/router";
 
 import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
 import { useCartTotal } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
-import { Logger } from "aws-amplify";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
-import { useRouter } from "next/router";
+import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 
 const logger = new Logger("Cart");
 
@@ -168,6 +169,9 @@ function CartTotal({
       </table>
 
       <div id="sidebar-footer" className="sidebar-footer">
+        <div className="sidebar-footer bar">
+          <CouponDiscountBar />
+        </div>
         <button
           onClick={validateAndGoToCheckout}
           className={`btn btn-dark btn-rounded btn-checkout w-100 font-weight-bold `}

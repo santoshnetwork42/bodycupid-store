@@ -1,95 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const searchCollections = /* GraphQL */ `
-  query SearchCollections(
-    $filter: SearchableCollectionFilterInput
-    $sort: [SearchableCollectionSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableCollectionAggregationInput]
-  ) {
-    searchCollections(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-              __typename
-            }
-          }
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`;
-export const bystoreIdCollections = /* GraphQL */ `
-  query BystoreIdCollections(
-    $storeId: ID!
-    $priority: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCollectionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdCollections(
-      storeId: $storeId
-      priority: $priority
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -275,8 +186,8 @@ export const listUserAddresses = /* GraphQL */ `
     }
   }
 `;
-export const byuserIDUserAddress = /* GraphQL */ `
-  query ByuserIDUserAddress(
+export const byUserIdAddress = /* GraphQL */ `
+  query ByUserIdAddress(
     $userID: ID!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -284,7 +195,7 @@ export const byuserIDUserAddress = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    byuserIDUserAddress(
+    byUserIdAddress(
       userID: $userID
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -387,7 +298,6 @@ export const getProductCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -596,7 +506,6 @@ export const getProductSubCategory = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -867,7 +776,11 @@ export const getStore = /* GraphQL */ `
         link
         __typename
       }
-      announcements
+      announcements {
+        label
+        link
+        __typename
+      }
       socialLinks {
         instagram
         facebook
@@ -898,7 +811,6 @@ export const listStores = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -934,208 +846,6 @@ export const searchStores = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-              __typename
-            }
-          }
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`;
-export const bystoreIdwarehouse = /* GraphQL */ `
-  query BystoreIdwarehouse(
-    $storeId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelwarehouseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdwarehouse(
-      storeId: $storeId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        storeId
-        facilityCode
-        name
-        description
-        address
-        totalProducts
-        totalQuantity
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const searchWarehouses = /* GraphQL */ `
-  query SearchWarehouses(
-    $filter: SearchablewarehouseFilterInput
-    $sort: [SearchablewarehouseSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchablewarehouseAggregationInput]
-  ) {
-    searchWarehouses(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        storeId
-        facilityCode
-        name
-        description
-        address
-        totalProducts
-        totalQuantity
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-              __typename
-            }
-          }
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`;
-export const bywarehouseIdProductInventory = /* GraphQL */ `
-  query BywarehouseIdProductInventory(
-    $warehouseId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductInventoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bywarehouseIdProductInventory(
-      warehouseId: $warehouseId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const byproductIdProductInventory = /* GraphQL */ `
-  query ByproductIdProductInventory(
-    $productId: ID!
-    $createdAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelProductInventoryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byproductIdProductInventory(
-      productId: $productId
-      createdAt: $createdAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const searchProductInventories = /* GraphQL */ `
-  query SearchProductInventories(
-    $filter: SearchableProductInventoryFilterInput
-    $sort: [SearchableProductInventorySortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableProductInventoryAggregationInput]
-  ) {
-    searchProductInventories(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        warehouseId
-        productId
-        currentQuantity
         createdAt
         updatedAt
         __typename
@@ -1176,7 +886,6 @@ export const getShippingTier = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1314,7 +1023,6 @@ export const getCollectionType = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1335,43 +1043,6 @@ export const listCollectionTypes = /* GraphQL */ `
     $nextToken: String
   ) {
     listCollectionTypes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const bystoreIdAllCollections = /* GraphQL */ `
-  query BystoreIdAllCollections(
-    $storeId: ID!
-    $priority: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCollectionTypeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bystoreIdAllCollections(
-      storeId: $storeId
-      priority: $priority
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
       items {
         id
         slug
@@ -1501,7 +1172,6 @@ export const getProduct = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -1559,6 +1229,9 @@ export const getProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      recommended
+      recommendPriority
+      recommendPrice
       reviews {
         nextToken
         __typename
@@ -1627,6 +1300,9 @@ export const listProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1700,6 +1376,9 @@ export const bycategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1773,6 +1452,9 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1846,6 +1528,9 @@ export const bystoreIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1919,6 +1604,9 @@ export const byslugProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -1992,6 +1680,9 @@ export const searchProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       nextToken
@@ -2071,6 +1762,9 @@ export const getLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       createdAt
@@ -2493,7 +2187,6 @@ export const getOrder = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -2583,6 +2276,8 @@ export const getOrder = /* GraphQL */ `
         updatedAt
         __typename
       }
+      couponDiscount
+      prepaidDiscount
       totalAmount
       totalCashOnDeliveryCharges
       totalDiscount
@@ -2640,6 +2335,8 @@ export const listOrders = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2698,6 +2395,8 @@ export const bystoreIdOrder = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2756,6 +2455,8 @@ export const byuserIdcreatedAtOrder = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -2814,6 +2515,8 @@ export const searchOrders = /* GraphQL */ `
         channelName
         totalStoreCredit
         couponCodeId
+        couponDiscount
+        prepaidDiscount
         totalAmount
         totalCashOnDeliveryCharges
         totalDiscount
@@ -3010,6 +2713,9 @@ export const getOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -3069,6 +2775,7 @@ export const getOrderProduct = /* GraphQL */ `
       invoiceNumber
       tentativeDeliveryDate
       trackingId
+      freeQuantity
       cancelledQuantity
       quantity
       price
@@ -3121,6 +2828,7 @@ export const listOrderProducts = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        freeQuantity
         cancelledQuantity
         quantity
         price
@@ -3186,6 +2894,7 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        freeQuantity
         cancelledQuantity
         quantity
         price
@@ -3251,6 +2960,7 @@ export const searchOrderProducts = /* GraphQL */ `
         invoiceNumber
         tentativeDeliveryDate
         trackingId
+        freeQuantity
         cancelledQuantity
         quantity
         price
@@ -3295,7 +3005,6 @@ export const getPayment = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -3556,6 +3265,9 @@ export const getReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       rating
@@ -3796,7 +3508,6 @@ export const getShoppingCart = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4092,6 +3803,9 @@ export const getShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       variantId
@@ -4203,7 +3917,6 @@ export const getCoupon = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -4290,6 +4003,9 @@ export const getCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        recommended
+        recommendPriority
+        recommendPrice
         __typename
       }
       minOrderValue
@@ -5145,7 +4861,6 @@ export const getRedirects = /* GraphQL */ `
         webUrl
         imageUrl
         darkImageUrl
-        announcements
         createdAt
         updatedAt
         __typename
@@ -5261,6 +4976,15 @@ export const adminGetDashboardData = /* GraphQL */ `
         count
         __typename
       }
+      __typename
+    }
+  }
+`;
+export const getProductRecommendation = /* GraphQL */ `
+  query GetProductRecommendation($input: ProductRecommendationInput!) {
+    getProductRecommendation(input: $input) {
+      productId
+      variantId
       __typename
     }
   }

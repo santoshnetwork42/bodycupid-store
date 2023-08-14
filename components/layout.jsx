@@ -22,9 +22,9 @@ import {
   resizeHandler,
 } from "~/utils";
 import { removeHoverEffect } from "~/utils/helper";
-import Announcement from "./common/announcement";
-import StickyCheckout from "./common/sticky-checkout";
-import CouponDiscountBar from "./common/couponDiscountBar";
+import Announcement from "~/components/common/announcement";
+import StickyCheckout from "~/components/common/sticky-checkout";
+import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 
 function Layout({
   children,
