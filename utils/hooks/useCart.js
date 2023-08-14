@@ -64,7 +64,10 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
       if (currVariant?.imageUrl)
         return { ...item, thumbImage: currVariant?.imageUrl };
     }
-    return { ...item, thumbImage: item.images?.items[0]?.imageKey };
+    return {
+      ...item,
+      thumbImage: item.images?.items[0]?.imageKey,
+    };
   });
 
   const cartItems = useMemo(() => {

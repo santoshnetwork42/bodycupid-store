@@ -219,6 +219,7 @@ function ProductListOne(props) {
                   id: sectionId,
                   name: "PLP",
                 }}
+                isSearch={!!search}
               />
             </div>
           ))}

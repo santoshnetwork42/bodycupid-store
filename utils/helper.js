@@ -192,11 +192,13 @@ export async function fetchSearchItems(search) {
     }
 
     const data = await response.json();
-    const items = data.results;
-    items.forEach((item) => {
+    return data.results.map((item) => {
+      const [, slug] = item.link.match(/products\/([^?]+)/);
       item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+      item.slug = slug;
+      item.price = Number(item.price.split(" ")[0]);
+      return item;
     });
-    return items;
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];

@@ -179,13 +179,10 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
 
               const thumbImage = images.find((i) => i.isThumb) ||
                 images[0] || { imageKey: product.imageUrl };
-              const slug = product.link.match(
-                /products\/(.*?)\??variantId/
-              )?.[1];
 
               return (
                 <ALink
-                  href={`/products/${slug}`}
+                  href={`/products/${product.slug}`}
                   className="autocomplete-suggestion"
                   key={`search-result-${index}`}
                 >
