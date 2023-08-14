@@ -1,6 +1,6 @@
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import fetchData from "~/utils/fetchData";
-import { STORE_ID } from "~/config";
+import { STORE_ID, GOOGLE_VERIFICATION_TAG } from "~/config";
 import {
   getHomePageCategories,
   findProducts,
@@ -80,6 +80,7 @@ export const getStaticProps = async () => {
           description,
           canonical: webUrl,
           image: getPublicImageURL(imageUrl),
+          googleVerificationTag: GOOGLE_VERIFICATION_TAG,
         },
       },
       revalidate: 60,
