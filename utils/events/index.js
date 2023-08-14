@@ -60,6 +60,7 @@ export const itemMapper = (product, coupon) => {
 
   return {
     value: price * qty,
+    mrpValue: listingPrice * qty,
     vercel: {
       content_category: category?.name,
       content_subcategory: subCategory?.name,
@@ -273,7 +274,7 @@ export const moEngagedOrderMapper = (
       },
       product
     ) => {
-      const { value: valueNew } = itemMapper(product, coupon);
+      const { value: valueNew, mrpValue } = itemMapper(product, coupon);
       const { thumbImage } = getProductMeta(product);
       const url = getPublicImageURL(thumbImage?.imageKey);
       return {
@@ -289,7 +290,7 @@ export const moEngagedOrderMapper = (
           ...Product_URL,
           `${currentURL}/products/${product.slug}`,
         ],
-        "Total MRP": Total_MRP + valueNew,
+        "Total MRP": Total_MRP + mrpValue,
         "Product Subcategory": [
           ...Product_Subcategory,
           product?.subCategory?.name,

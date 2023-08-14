@@ -21,7 +21,7 @@ function Addresses({
   isAddressesModal,
   openAllAddressModal,
   closeAllAddressModal,
-  addressSelected
+  addressSelected,
 }) {
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [loading, setLoading] = useState(!!user);
@@ -75,6 +75,7 @@ function Addresses({
       const remainingAddress = addresses.filter((a) => a.id !== id);
       setAddresses(remainingAddress);
       setSelected(remainingAddress[0]);
+      console.log("selected add 2", selected);
       setDefaultAddress(null);
     },
     [addresses]
@@ -82,6 +83,8 @@ function Addresses({
 
   const onAddress = (response) => {
     if (defaultAddress?.id) {
+      console.log("selected add 1", defaultAddress);
+
       setAddresses(
         addresses.map((a) => (a.id === defaultAddress.id ? response : a))
       );
@@ -397,5 +400,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   openAllAddressModal: modalActions.openAllAddressModal,
   closeAllAddressModal: modalActions.closeAllAddressModal,
-  addressSelected:eventActions.addressSelected
+  addressSelected: eventActions.addressSelected,
 })(Addresses);
