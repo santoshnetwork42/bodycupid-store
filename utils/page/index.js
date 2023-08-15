@@ -80,7 +80,7 @@ export const getStaticProps = async () => {
           description,
           canonical: webUrl,
           image: getPublicImageURL(imageUrl),
-          googleVerificationTag: GOOGLE_VERIFICATION_TAG,
+          googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
         },
       },
       revalidate: 60,
