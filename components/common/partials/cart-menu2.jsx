@@ -163,10 +163,8 @@ function CartMenu2(props) {
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
-                    <Coupon2 isSmall />
-
                     <CartTotal2 isSmall />
-                    <div className="summary-title summary-title2 product-carousal-heading">
+                    {/* <div className="summary-title summary-title2 product-carousal-heading">
                       You May Also Like
                     </div>
                     {cartProducts.length !== 0 && (
@@ -177,7 +175,7 @@ function CartMenu2(props) {
                         isCart={true}
                         isV2={isV2}
                       />
-                    )}
+                    )} */}
                   </div>
                 </aside>
               </>

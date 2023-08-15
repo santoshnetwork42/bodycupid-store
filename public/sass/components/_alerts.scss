@@ -340,6 +340,10 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+
+  @media (max-width: 500px) {
+    font-size: 16px !important;
+  }
 }
 
 .slider-header {

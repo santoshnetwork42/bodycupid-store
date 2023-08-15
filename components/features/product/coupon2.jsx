@@ -5,7 +5,6 @@ import { API } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import Modal from "~/components/common/modal";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
@@ -19,8 +18,7 @@ import {
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
-
-import CouponSlider from "~/components/features/coupon-slider";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Coupon");
 
@@ -42,7 +40,8 @@ function Coupon2(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
-  const [isSliderOpen, setSliderOpen] = useState(false); // State to control slider visibility
+  const [isSliderOpen, setSliderOpen] = useState(false);
+  const { isSmallSize } = useWindowDimensions();
 
   const openSlider = () => {
     setSliderOpen(true);
@@ -169,7 +168,7 @@ function Coupon2(props) {
       {layout === "cart" && (
         <div>
           {!!appliedCoupon && (
-            <div className="d-flex justify-content-between mt-5">
+            <div className="d-flex justify-content-between mt-1">
               <h4 className="coupon-heading">Coupons and Offers</h4>
               <div className="cart-product-size">
                 <ALink
@@ -182,7 +181,7 @@ function Coupon2(props) {
               </div>
             </div>
           )}
-          <div className={`mb-3 ${!appliedCoupon ? "mt-5" : "mt-0"}`}>
+          <div className={`mb-3 ${!appliedCoupon ? "mt-1" : "mt-0"}`}>
             <div className="coupon-container">
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
@@ -201,14 +200,14 @@ function Coupon2(props) {
                 ) : (
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
-                      <CouponTag />
+                      <CouponTag size={isSmallSize ? 20 : 24} />
                       <div className="apply-coupon-button ml-3">
                         Apply Coupon
                       </div>
                     </div>
                     <div>
                       <ALink href="#" onClick={openSlider}>
-                        <RightAngle size={24} />
+                        <RightAngle size={isSmallSize ? 20 : 24} />
                       </ALink>
                     </div>
                   </div>
@@ -216,7 +215,9 @@ function Coupon2(props) {
               </div>
             </div>
             {couponTotal > 0 && (
-              <p className="mb-3">You have saved additional ₹{couponTotal}</p>
+              <p className="mb-3 paragraph-font">
+                You have saved additional ₹{couponTotal}
+              </p>
             )}
           </div>
         </div>
@@ -276,133 +277,133 @@ function Coupon2(props) {
         </div>
       )}
 
-      <CouponSlider isOpen={isSliderOpen} onClose={closeSlider}>
-        <div className={`coupon-slider ${isSliderOpen ? "open" : ""}`}>
-          <div className="slider-header p-0 coupon-heading">
-            <div className="d-flex lh-1 align-items-center">
-              <ALink href="#" onClick={closeSlider}>
-                <LeftAngle />
-              </ALink>
-              <div className="cart-title-2 ml-2">
-                COUPONS AND OFFERS ({featuredCoupons.length})
-              </div>
+      <div className={`coupon-slider ${isSliderOpen ? "open" : ""}`}>
+        <div className="slider-header p-0 coupon-heading">
+          <div className="d-flex lh-1 align-items-center">
+            <ALink href="#" onClick={closeSlider}>
+              <LeftAngle />
+            </ALink>
+            <div className="cart-title-2 ml-2">
+              COUPONS AND OFFERS ({featuredCoupons.length})
             </div>
-          </div>
-          <div className="slider-content">
-            <div
-              className={`coupons-input-wrapper d-flex align-items-center justify-content-between mb-2 coupon-input`}
-            >
-              <input
-                className={`form-control form-control-v2 mr-2 ${
-                  !!error && "coupon-error-box-border"
-                } border-none`}
-                type="text"
-                name="coupon_code"
-                placeholder="Enter coupon code here"
-                value={coupon}
-                onChange={(e) => setCoupon(e.target.value)}
-              />
-              <button
-                className="apply-button d-flex justify-content-center align-items-center"
-                disabled={loading}
-                onClick={() => !!coupon && applyCouponCode()}
-              >
-                <span className=" mr-1">Apply</span>
-
-                {loading && <div className="spin-loader" />}
-              </button>
-            </div>
-            {!!featuredCoupons?.length && (
-              <div className="mt-3 all-coupons-container">
-                {featuredCoupons.map((c) => {
-                  let className = "btn btn-link ml-2 btn-apply";
-                  if (!c.allowed) {
-                    className = `${className} btn-disabled`;
-                  }
-
-                  const showAsterik = !!(
-                    c.applicableProducts?.length ||
-                    c.applicableCollections?.length
-                  );
-
-                  return (
-                    <div
-                      key={c.id}
-                      className={`${
-                        appliedCoupon?.code !== c.code
-                          ? "featured-coupon-slider"
-                          : "featured-coupon-slider-applied"
-                      } mb-3`}
-                    >
-                      <div className="featured-coupon-text-content mr-0">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <div className="d-flex align-items-center">
-                            <div
-                              className={`${
-                                appliedCoupon?.code === c.code
-                                  ? "applied-coupon-tag"
-                                  : "coupon-tag2"
-                              }`}
-                            >
-                              <strong>{c.code}</strong>
-                            </div>
-                            {appliedCoupon?.code === c.code && (
-                              <span className="ml-2 coupon-applied-text">
-                                Applied
-                              </span>
-                            )}
-                          </div>
-                          {appliedCoupon?.code === c.code && (
-                            <ALink
-                              onClick={onCouponRemove}
-                              href="#"
-                              className=""
-                              disabled={!c.allowed}
-                            >
-                              Remove
-                            </ALink>
-                          )}
-                        </div>
-                        <div
-                          className={`coupon-tagline2 ${
-                            !c.allowed && "text-secondary"
-                          }`}
-                        >
-                          {c.message}
-                          {showAsterik && "*"}
-                        </div>
-                      </div>
-                      <div className="d-flex justify-content-between ">
-                        <p className="m-0 coupon-message">
-                          {getCouponMessage(c).message}
-                        </p>
-                        {appliedCoupon?.code !== c.code && (
-                          <div className="d-flex flex-column justify-content-end">
-                            <button
-                              onClick={() => {
-                                applyCouponCode(c.code);
-                                closeSlider;
-                              }}
-                              className={`btn btn-primary coupon-apply-button${
-                                !c.allowed ? " disabled-coupon" : ""
-                              }`}
-                              disabled={!c.allowed}
-                            >
-                              Apply
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            <p className="text-black">*Applicable on certain products</p>
           </div>
         </div>
-      </CouponSlider>
+        <div className="slider-content">
+          <div
+            className={`coupons-input-wrapper d-flex align-items-center justify-content-between mb-2 coupon-input`}
+          >
+            <input
+              className={`form-control form-control-v2 mr-2 ${
+                !!error && "coupon-error-box-border"
+              } border-none`}
+              type="text"
+              name="coupon_code"
+              placeholder="Enter coupon code here"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+            />
+            <button
+              className="apply-button d-flex justify-content-center align-items-center"
+              disabled={loading}
+              onClick={() => {
+                !!coupon && applyCouponCode(), closeSlider();
+              }}
+            >
+              <span className=" mr-1">Apply</span>
+
+              {loading && <div className="spin-loader" />}
+            </button>
+          </div>
+          {!!featuredCoupons?.length && (
+            <div className="mt-3 all-coupons-container">
+              {featuredCoupons.map((c) => {
+                let className = "btn btn-link ml-2 btn-apply";
+                if (!c.allowed) {
+                  className = `${className} btn-disabled`;
+                }
+
+                const showAsterik = !!(
+                  c.applicableProducts?.length ||
+                  c.applicableCollections?.length
+                );
+
+                return (
+                  <div
+                    key={c.id}
+                    className={`${
+                      appliedCoupon?.code !== c.code
+                        ? "featured-coupon-slider"
+                        : "featured-coupon-slider-applied"
+                    } mb-3`}
+                  >
+                    <div className="featured-coupon-text-content mr-0">
+                      <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center">
+                          <div
+                            className={`${
+                              appliedCoupon?.code === c.code
+                                ? "applied-coupon-tag"
+                                : "coupon-tag2"
+                            }`}
+                          >
+                            <strong>{c.code}</strong>
+                          </div>
+                          {appliedCoupon?.code === c.code && (
+                            <span className="ml-2 coupon-applied-text">
+                              Applied
+                            </span>
+                          )}
+                        </div>
+                        {appliedCoupon?.code === c.code && (
+                          <ALink
+                            onClick={onCouponRemove}
+                            href="#"
+                            className=""
+                            disabled={!c.allowed}
+                          >
+                            Remove
+                          </ALink>
+                        )}
+                      </div>
+                      <div
+                        className={`coupon-tagline2 ${
+                          !c.allowed && "text-secondary"
+                        }`}
+                      >
+                        {c.message}
+                        {showAsterik && "*"}
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between ">
+                      <p className="m-0 coupon-message">
+                        {getCouponMessage(c).message}
+                      </p>
+                      {appliedCoupon?.code !== c.code && (
+                        <div className="d-flex flex-column justify-content-end">
+                          <button
+                            onClick={() => {
+                              applyCouponCode(c.code);
+                              closeSlider();
+                            }}
+                            className={`btn btn-primary coupon-apply-button${
+                              !c.allowed ? " disabled-coupon" : ""
+                            }`}
+                            disabled={!c.allowed}
+                          >
+                            Apply
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <p className="text-black">*Applicable on certain products</p>
+        </div>
+      </div>
     </>
   );
 }

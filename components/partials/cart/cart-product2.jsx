@@ -8,11 +8,13 @@ import { Close, Delete, Free } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
+import { getProductInventory } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
 import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
 import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Cart-products");
 
@@ -50,6 +52,7 @@ function CartProduct2({
   } = item;
 
   const [showMatchingLTOProduct, setShowMatchingLTOProduct] = useState(false);
+  const { isSmallSize } = useWindowDimensions();
 
   useEffect(() => {
     const matchingLTOProduct = ltoProducts.find(
@@ -144,6 +147,11 @@ function CartProduct2({
     (product) => product.id === ltoProduct
   );
 
+  const { hasInventory, currentInventory } = useMemo(
+    () => getProductInventory(item, variantId),
+    [variantId, slug]
+  );
+
   if (isSmall)
     return (
       <div className="m-0 p-0 border-no">
@@ -152,7 +160,7 @@ function CartProduct2({
             showMatchingLTOProduct ? "cart-product-padding" : "pb-0"
           }`}
         >
-          <div className="mobile-specific-cart-product-container mobile-specific-cart mb-2 d-flex p-relative">
+          <div className="mobile-specific-cart-product-container mobile-specific-cart d-flex p-relative">
             <div className="image-container">
               {isFreeProduct && (
                 <div className="svg-overlay">
@@ -169,14 +177,18 @@ function CartProduct2({
                   <img
                     className="img2"
                     src={getPublicImageURL(thumbImage)}
-                    width="147"
-                    height="147"
+                    width={isSmallSize ? "80" : "147"}
+                    height={isSmallSize ? "80" : "147"}
                     alt={images?.items[0]?.alt}
                   />
                 </ALink>
               </figure>
             </div>
-            <div className="cart-item-container">
+            <div
+              className={`cart-item-container ${
+                isSmallSize ? "small-size" : ""
+              }`}
+            >
               <div className="text-left text-primary w-100 mr-1 ml-2">
                 <div
                   className="cart-product-title cart-product-size"
@@ -236,13 +248,21 @@ function CartProduct2({
                         : toDecimal(savingPerProduct)}
                     </div>
                   )}
+                {hasInventory && currentInventory < 10 && (
+                  <>
+                    <div className="text-secondary font-weight-semi-bold pt-1">
+                      Only {currentInventory} left!
+                    </div>
+                  </>
+                )}
+
                 {cartItemType === "AUTO_FREE_PRODUCT_DISABLED" && (
                   <div className="mt-1 d-flex mb-1 align-items-center text-alert">
                     {couponMessage}
                   </div>
                 )}
               </div>
-              {!outOfStock && (
+              {!outOfStock && !isSmallSize && (
                 <div className="cart-item-quantity">
                   {!!item?.variants?.items.length && !disableChange && (
                     <div className="card-margin-bottom ml-2">
@@ -388,6 +408,48 @@ function CartProduct2({
               </div>
             )}
           </div>
+          {isSmallSize && (
+            <div className="d-flex justify-content-between mr-1">
+              <div>
+                {!!item?.variants?.items.length && !disableChange && (
+                  <div className="card-margin-bottom ml-2">
+                    <select
+                      name={`${recordKey}`}
+                      className="form-control variant-selection-form-small p-0"
+                      value={variantId}
+                      onChange={(e) => {
+                        changeVariant(e);
+                      }}
+                    >
+                      {variants.items.map((v) => (
+                        <option key={v.id} value={v.id}>
+                          {v.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+              {!disableChange && (
+                <div className="product-quantity w-0">
+                  {cartItemType === "FREE_PRODUCT" ? (
+                    <>
+                      {!!qty && (
+                        <p className="text-grey mb-2 lh-1">Qty:{qty}</p>
+                      )}
+                    </>
+                  ) : (
+                    <Quantity
+                      product={item}
+                      qty={qty}
+                      max={inventory}
+                      onChangeQty={onChangeQty}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+          )}
           {matchingLTOProduct && showMatchingLTOProduct && (
             <LimitedTimeProduct product={matchingLTOProduct} />
           )}

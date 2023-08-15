@@ -269,6 +269,10 @@
   padding-bottom: 10px !important;
   text-transform: none !important;
   font-size: 20px;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+  }
 }
 
 .cart-product-padding {
@@ -278,6 +282,17 @@
 .button-padding {
   width: 80px !important;
   padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-size: 16px !important;
+
+  @media (max-width: 500px) {
+    width: max-content !important;
+    padding: 12px 32px !important;
+  }
+}
+
+.section-padding {
+  padding: 0px 12px 12px 14px !important;
 }
 
 .overlay1 {
@@ -290,7 +305,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1; /* Ensure the overlay appears above the image */
+  z-index: 1;
+  max-width: 147px;
+  max-height: 147px;
+
+  @media (max-width: 500px) {
+    max-width: 80px;
+    max-height: 80px;
+  }
 }
 
 .overlay-text1 {
@@ -299,6 +321,10 @@
   font-weight: bold;
   text-align: center;
   padding: 25px;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+  }
 }
 
 .coupon-container {
@@ -313,15 +339,27 @@
 .coupon-heading {
   font-size: 18px;
   margin-bottom: 10px;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+  }
 }
 
 .apply-coupon-button {
   font-size: 20px;
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+  }
 }
 
 .view-offers-link {
   color: #17b31b;
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    font-size: 12px !important;
+  }
 }
 
 .applied-coupons-container {
@@ -395,6 +433,22 @@
   margin-bottom: 0;
   font-family: $font-family;
   font-size: 2rem;
+}
+
+.paragraph-font {
+  font-size: 12px !important;
+}
+
+.summary-total-price-2 {
+  letter-spacing: 0.025em;
+  font-weight: 700;
+  color: $dark-color;
+  // padding: 10px 0;
+  text-align: right;
+  line-height: 1;
+  margin-bottom: 0;
+  font-family: $font-family;
+  font-size: 14px;
 }
 
 .total .summary-subtitle {
@@ -625,6 +679,10 @@
 
   .mobile-specific-cart {
     padding: 20px 20px 20px 20px !important;
+
+    @media (max-width: 500px) {
+      padding: 12px 12px 12px 12px !important;
+    }
   }
 
   .mobile-specific-cart-product-container {
@@ -693,6 +751,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
+      color: #000 !important;
       transform: translate(-50%, -50%);
       font-size: 16px;
       font-weight: bold;
@@ -767,6 +826,12 @@
   position: absolute;
   right: 1.5rem;
   top: 1.5rem;
+}
+
+.small-product-remove.limited-deal {
+  top: 22px;
+
+  right: 8px !important;
 }
 
 .product-subtotal {
@@ -1046,6 +1111,22 @@
   width: 90%;
 }
 
+.variant-selection-form-small {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 8px 12px !important;
+  font-size: 10px !important;
+  min-height: 35px !important;
+}
+
+.table-margin {
+  margin-bottom: 100px;
+}
+
+.table-margin-applied {
+  margin-bottom: 155px;
+}
+
 .limited-time-product {
   background-color: #fff7ce;
   margin-left: 11px;
@@ -1055,14 +1136,12 @@
 .limited-time-added-product {
   border: 1px solid #9b9b9b;
   border-radius: 6px;
-  margin-left: 15px;
-  width: 95%;
 }
 
 .limited-time-deal-tag {
   position: absolute;
   top: 1px;
-  right: 10px;
+  right: 1px;
   background-color: #ffe257;
   color: #222;
   padding: 5px 10px;
@@ -1084,6 +1163,28 @@
 
 .limited-time-product-card {
   position: relative;
+
+  margin-left: 8px;
+  width: 98%;
+
+  @media (max-width: 500px) {
+    margin-left: 1px;
+
+    width: 98.5%;
+  }
+}
+
+.limited-time-product-card-2 {
+  position: relative;
+
+  margin-left: 18px;
+  width: 93%;
+
+  @media (max-width: 500px) {
+    margin-left: 12px;
+
+    width: 93.5%;
+  }
 }
 
 .font-success {
@@ -1102,9 +1203,21 @@
   background-color: #ffe257;
   border-radius: 6px;
   z-index: 1;
+
+  @media (max-width: 500px) {
+    height: 40px;
+  }
 }
 
 .limited-time-text {
   padding: 5px 1px 5px 5px;
   font-size: 12px;
+}
+.limited-time-text.align-left {
+  text-align: left !important;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
 }

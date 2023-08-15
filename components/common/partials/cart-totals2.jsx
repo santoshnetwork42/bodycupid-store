@@ -11,6 +11,7 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import CouponDiscountBar from "~/components/common/coupon-discount-bar";
+import Coupon2 from "~/components/features/product/coupon2";
 
 const logger = new Logger("Cart");
 
@@ -80,105 +81,110 @@ function CartTotal2({
 
   return (
     <div className="bg-white border-none">
-      <h3 className="summary-title summary-title2 text-left d-sm-none font-weight-bold">
+      <h3 className="summary-title summary-title2 text-left font-weight-bold">
         Payment Summary
       </h3>
-      <div className=" summary summary2">
-        <table className="shipping">
-          <tbody>
-            <tr className="summary-subtotal">
-              <td>
-                <h4 className="summary-subtitle lh-1">Cart MRP</h4>
-              </td>
-              <td>
-                <p className="summary-subtotal-price">
-                  {totalPrice < totalListingPrice && (
-                    <del className="summary-subtotal-listingprice mr-2">
-                      ₹{toDecimal(totalListingPrice)}
-                    </del>
-                  )}
-                  ₹{toDecimal(totalPrice)}
-                </p>
-              </td>
-            </tr>
+      <div
+        className={`${appliedCoupon ? "table-margin-applied" : "table-margin"}`}
+      >
+        <div className="summary summary2">
+          <table className="shipping">
+            <tbody>
+              <tr className="summary-subtotal">
+                <td>
+                  <h4 className="summary-subtitle lh-1">Cart MRP</h4>
+                </td>
+                <td>
+                  <p className="summary-subtotal-price">
+                    {totalPrice < totalListingPrice && (
+                      <del className="summary-subtotal-listingprice mr-2">
+                        ₹{toDecimal(totalListingPrice)}
+                      </del>
+                    )}
+                    ₹{toDecimal(totalPrice)}
+                  </p>
+                </td>
+              </tr>
 
-            {!!appliedCoupon && !!couponTotal && (
-              <>
-                <tr className="summary-subtotal">
-                  <td className="d-flex align-items-center no-wrap">
-                    <h4 className="summary-subtitle lh-1 ">
-                      Discounts
-                      <span> ({appliedCoupon.code})</span>
-                    </h4>
-                  </td>
-                  <td>
-                    <p className="summary-subtotal-price discount-price-color">
-                      -{`₹${toDecimal(couponTotal)}`}
-                    </p>
-                  </td>
-                </tr>
-              </>
-            )}
-            <tr className="summary-subtotal">
-              <td>
-                <h4 className="summary-subtitle lh-1">Shipping</h4>
-              </td>
-              <td>
-                <p
-                  className={`summary-subtotal-price ${
-                    !shippingTotal && "discount-price-color"
-                  }`}
-                >
-                  {shippingTotal < 50 && (
-                    <del className="summary-subtotal-listingprice mr-2">
-                      ₹{toDecimal(50)}
-                    </del>
-                  )}
-                  {!!shippingTotal ? `₹${toDecimal(shippingTotal)}` : "FREE"}
-                </p>
-              </td>
-            </tr>
-            <tr className="summary-subtotal">
-              <td>
-                <h4 className="summary-subtitle lh-1">
-                  {prepaidDiscountPercent}% Online Payment Discount
-                </h4>
-              </td>
-              <td>
-                <p className="summary-subtotal-price discount-price-color">
-                  -{`₹${toDecimal(prepaidDiscount)}`}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table className="total">
-          <tbody>
-            <tr className="summary-subtotal border-bottom-none">
-              <td>
-                <h4 className="summary-subtitle font-weight-bold  lh-1">
-                  Total <p className="m-0">Inclusive of all taxes</p>
-                </h4>
-              </td>
-              <td>
-                <p className="summary-total-price font-weight-semi-bold  ls-s">
-                  ₹{toDecimal(prepaidGrandTotal)}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div className={"mt-3 mb-3"}>
-        <p className="m-0">
-          Average delivery time: <span>3-5 days</span>
-        </p>
+              {!!appliedCoupon && !!couponTotal && (
+                <>
+                  <tr className="summary-subtotal">
+                    <td className="d-flex align-items-center no-wrap">
+                      <h4 className="summary-subtitle lh-1 ">
+                        Discounts
+                        <span> ({appliedCoupon.code})</span>
+                      </h4>
+                    </td>
+                    <td>
+                      <p className="summary-subtotal-price discount-price-color">
+                        -{`₹${toDecimal(couponTotal)}`}
+                      </p>
+                    </td>
+                  </tr>
+                </>
+              )}
+              <tr className="summary-subtotal">
+                <td>
+                  <h4 className="summary-subtitle lh-1">Shipping</h4>
+                </td>
+                <td>
+                  <p
+                    className={`summary-subtotal-price ${
+                      !shippingTotal && "discount-price-color"
+                    }`}
+                  >
+                    {shippingTotal < 50 && (
+                      <del className="summary-subtotal-listingprice mr-2">
+                        ₹{toDecimal(50)}
+                      </del>
+                    )}
+                    {!!shippingTotal ? `₹${toDecimal(shippingTotal)}` : "FREE"}
+                  </p>
+                </td>
+              </tr>
+              <tr className="summary-subtotal">
+                <td>
+                  <h4 className="summary-subtitle lh-1">
+                    {prepaidDiscountPercent}% Online Payment Discount
+                  </h4>
+                </td>
+                <td>
+                  <p className="summary-subtotal-price discount-price-color">
+                    -{`₹${toDecimal(prepaidDiscount)}`}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table className="total">
+            <tbody>
+              <tr className="summary-subtotal border-bottom-none">
+                <td>
+                  <h4 className="summary-subtitle font-weight-bold  lh-1">
+                    Total <p className="m-0">Inclusive of all taxes</p>
+                  </h4>
+                </td>
+                <td>
+                  <p className="summary-total-price-2 font-weight-semi-bold  ls-s">
+                    ₹{toDecimal(prepaidGrandTotal)}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className={"mt-3 mb-3"}>
+          <p className="m-0">
+            Average delivery time: <span>3-5 days</span>
+          </p>
+        </div>
       </div>
 
       <div id="sidebar-footer" className="sidebar-footer">
         <div className="sidebar-footer bar">
           <CouponDiscountBar />
         </div>
+        <Coupon2 isSmall />
         <div className="d-flex">
           <div className="flex-40">
             <div className="cart-totals"> ₹{toDecimal(prepaidGrandTotal)}</div>

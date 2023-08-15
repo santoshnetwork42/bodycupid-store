@@ -7,10 +7,11 @@ import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/products";
 import { toDecimal } from "~/utils";
-import { Check, Delete, LimitedTimeDiscount } from "~/components/icons";
+import { Check, Clock, Delete, LimitedTimeDiscount } from "~/components/icons";
 import CircularTimer from "~/components/partials/cart/circular-timer";
 import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
 import { getRecordKey } from "~/utils/helper";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const LimitedTimeProduct = ({
   product,
@@ -21,9 +22,7 @@ const LimitedTimeProduct = ({
   const { slug, images, title, listingPrice, recommendPrice } = product;
   const [showLTOProduct, setShowLTOProduct] = useState(true);
   const [ltoProductRemoved, setltoProductRemoved] = useState(false);
-
-  console.log("showLTOProduct", showLTOProduct);
-  console.log("ltoProductRemoved", ltoProductRemoved);
+  const { isSmallSize } = useWindowDimensions();
 
   const { thumbImage } = getProductMeta(product);
 
@@ -50,17 +49,26 @@ const LimitedTimeProduct = ({
   return (
     <>
       {showLTOProduct ? (
-        <div className="limited-time-product-card">
-          <div className="limited-time-deal-overlay d-flex justify-content-between">
-            <div className="limited-time-text">
-              Add to your cart now to avail this limited time deal!
+        <div className="limited-time-product-card mt-4">
+          <div
+            className={`limited-time-deal-overlay ${
+              isSmallSize ? "grid-container" : "d-flex justify-content-between"
+            }`}
+          >
+            <div className="limited-time-text align-left">
+              Add to your cart now to avail limited time deal!
             </div>
             <span className="limited-time-text font-weight-bolder">
               Limited Time Deal
             </span>
           </div>
+
           <div className="limited-time-product">
-            <div className="mobile-specific-cart-product-container cart-product-contaimer mobile-specific-card mb-2 d-flex p-relative pt-8 pr-1 pl-4 pb-2 limited-time-deal-card ">
+            <div
+              className={`mobile-specific-cart-product-container cart-product-contaimer mobile-specific-card d-flex p-relative pt-8 pr-1 pb-2 limited-time-deal-card ${
+                isSmallSize ? "mb-0 pl-3" : "mb-2 pl-4"
+              }`}
+            >
               <div className="image-container">
                 <div className="svg-overlay">
                   <LimitedTimeDiscount discountAmount={60} />
@@ -70,14 +78,18 @@ const LimitedTimeProduct = ({
                     <img
                       className="img2"
                       src={getPublicImageURL(thumbImage.imageKey)}
-                      width="100"
-                      height="100"
+                      width={isSmallSize ? "80" : "100"}
+                      height={isSmallSize ? "80" : "100"}
                       alt={images?.items[0]?.alt}
                     />
                   </ALink>
                 </figure>
               </div>
-              <div className="cart-item-container">
+              <div
+                className={`cart-item-container ${
+                  isSmallSize ? "small-size" : ""
+                }`}
+              >
                 <div className="text-left text-primary w-100 mr-1 ml-2">
                   <div
                     className="cart-product-title cart-product-size"
@@ -104,31 +116,54 @@ const LimitedTimeProduct = ({
                     You saved ₹{listingPrice - recommendPrice}
                   </div>
                 </div>
-                <div className="cart-item-quantity">
-                  <div className="mb-1">
-                    <div className="ml-8">
-                      <CircularTimer
-                        duration={LIMITED_TIME_DEAL_DURATION * 60}
-                      />
-                    </div>
-                    <div className="ml-8">
-                      <button
-                        onClick={handleAddToCart}
-                        className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60 button-padding`}
-                      >
-                        Add
-                      </button>
+                {!isSmallSize && (
+                  <div className="cart-item-quantity">
+                    <div className="mb-1">
+                      <div className="ml-8">
+                        <CircularTimer
+                          duration={LIMITED_TIME_DEAL_DURATION * 60}
+                        />
+                      </div>
+                      <div className="ml-8">
+                        <button
+                          onClick={handleAddToCart}
+                          className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60 button-padding`}
+                        >
+                          Add
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
+            {isSmallSize && (
+              <div className="d-flex justify-content-between section-padding">
+                <div className="timer-container">
+                  <div className="icon-container">
+                    <Clock size={16} color={"white"} />
+                  </div>
+                  <div className="timer-content">
+                    <CircularTimer duration={LIMITED_TIME_DEAL_DURATION * 60} />
+                  </div>
+                </div>
+
+                <div className="ml-8">
+                  <button
+                    onClick={handleAddToCart}
+                    className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60 button-padding`}
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       ) : (
         <>
           {!ltoProductRemoved && (
-            <div className="limited-time-product-card">
+            <div className="limited-time-product-card-2">
               <div className="limited-time-deal-tag">Limited Time Deal</div>
               <div className="limited-time-added-product mb-2 pt-3">
                 <div className="mobile-specific-cart-product-container d-flex p-relative pr-1 pl-4 mt-0">
@@ -141,14 +176,18 @@ const LimitedTimeProduct = ({
                         <img
                           className="img2"
                           src={getPublicImageURL(thumbImage.imageKey)}
-                          width="100"
-                          height="100"
+                          width={isSmallSize ? "80" : "100"}
+                          height={isSmallSize ? "80" : "100"}
                           alt={images?.items[0]?.alt}
                         />
                       </ALink>
                     </figure>
                   </div>
-                  <div className="cart-item-container">
+                  <div
+                    className={`cart-item-container ${
+                      isSmallSize ? "small-size" : ""
+                    }`}
+                  >
                     <div className="text-left text-primary w-100 mr-1 ml-2">
                       <div
                         className="cart-product-title cart-product-size"
@@ -175,18 +214,25 @@ const LimitedTimeProduct = ({
                         You saved ₹{listingPrice - recommendPrice}
                       </div>
                     </div>
-                    <div className="cart-added-item">
-                      <div className="font-success">
-                        {" "}
-                        <Check />
-                      </div>
-                      <div className="font-success"> Added successfully</div>
-                    </div>
+                    {!isSmallSize && (
+                      <>
+                        <div className="cart-added-item">
+                          <div className="font-success">
+                            {" "}
+                            <Check />
+                          </div>
+                          <div className="font-success">
+                            {" "}
+                            Added successfully
+                          </div>
+                        </div>
+                      </>
+                    )}
                     <div className="product-close">
                       <ALink
                         href="#"
                         onClick={removeItemFromCart}
-                        className="small-product-remove"
+                        className="small-product-remove limited-deal"
                         title="Remove this product"
                       >
                         <Delete />

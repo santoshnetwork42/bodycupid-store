@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const CircularTimer = ({ duration, onComplete }) => {
   const radius = 38;
@@ -7,6 +8,7 @@ const CircularTimer = ({ duration, onComplete }) => {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progress, setProgress] = useState(100);
   const [circleColor, setCircleColor] = useState("#00cc00");
+  const { isSmallSize } = useWindowDimensions();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -38,23 +40,29 @@ const CircularTimer = ({ duration, onComplete }) => {
 
   return (
     <div className="circular-timer">
-      <svg className="timer-svg" width={radius * 2.1} height={radius * 2.1}>
-        <circle
-          className="timer-circle"
-          r={radius - 2}
-          cx={radius}
-          cy={radius}
-          stroke={circleColor}
-          strokeWidth="4"
-          fill="transparent"
-          style={{
-            strokeDasharray: circumference,
-            strokeDashoffset: (circumference * (100 - progress)) / 100,
-            transition: "stroke-dashoffset 1s linear",
-          }}
-        />
-      </svg>
-      <div className="timer-text">{formatTime(timeLeft)}</div>
+      {!isSmallSize ? (
+        <>
+          <svg className="timer-svg" width={radius * 2.1} height={radius * 2.1}>
+            <circle
+              className="timer-circle"
+              r={radius - 2}
+              cx={radius}
+              cy={radius}
+              stroke={circleColor}
+              strokeWidth="4"
+              fill="transparent"
+              style={{
+                strokeDasharray: circumference,
+                strokeDashoffset: (circumference * (100 - progress)) / 100,
+                transition: "stroke-dashoffset 1s linear",
+              }}
+            />
+          </svg>
+          <div className="timer-text">{formatTime(timeLeft)}</div>
+        </>
+      ) : (
+        <div className="timer-text">{formatTime(timeLeft)}</div>
+      )}
     </div>
   );
 };
