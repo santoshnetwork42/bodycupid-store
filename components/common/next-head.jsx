@@ -1,7 +1,14 @@
 import React from "react";
 import Head from "next/head";
 
-function NextHead({ siteName, title, description, image, canonical }) {
+function NextHead({
+  siteName,
+  title,
+  description,
+  image,
+  canonical,
+  googleVerificationTag,
+}) {
   return (
     <Head>
       <meta charSet="UTF-8" />
@@ -11,6 +18,10 @@ function NextHead({ siteName, title, description, image, canonical }) {
         content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
       />
       <meta name="HandheldFriendly" content="true" />
+      {!!googleVerificationTag && (
+        <meta name="google-site-verification" content={googleVerificationTag} />
+      )}
+
       <link rel="canonical" id="canonical" href={canonical} />
       <title>{title}</title>
       <meta name="title" content={title} />
