@@ -1,4 +1,4 @@
-import { React, useState, useMemo } from "react";
+import { React, useState, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { cartActions } from "~/store/cart";
@@ -15,16 +15,35 @@ import useWindowDimensions from "~/utils/getWindowDimension";
 
 const LimitedTimeProduct = ({
   product,
+  addedAt,
   addToCart,
   removeFromCart,
   cartList,
 }) => {
   const { slug, images, title, listingPrice, recommendPrice } = product;
   const [showLTOProduct, setShowLTOProduct] = useState(true);
-  const [ltoProductRemoved, setltoProductRemoved] = useState(false);
+  const [ltoProductAdded, setltoProductAdded] = useState(false);
   const { isSmallSize } = useWindowDimensions();
 
   const { thumbImage } = getProductMeta(product);
+
+  useEffect(() => {
+    const addedAtTimestamp = new Date(addedAt).getTime();
+    const nowTimestamp = Date.now();
+    const timeDifference = nowTimestamp - addedAtTimestamp;
+
+    if (timeDifference <= 2 * 60 * 1000) {
+      setShowLTOProduct(true);
+
+      const timeoutId = setTimeout(() => {
+        setShowLTOProduct(false);
+      }, LIMITED_TIME_DEAL_DURATION * 60 * 1000 - timeDifference);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [product]);
 
   const handleAddToCart = () => {
     addToCart({
@@ -34,6 +53,7 @@ const LimitedTimeProduct = ({
       source: "LIMITED_TIME_DEAL",
     });
     setShowLTOProduct(false);
+    setltoProductAdded(true);
   };
 
   const cartItem = useMemo(() => {
@@ -43,7 +63,7 @@ const LimitedTimeProduct = ({
 
   const removeItemFromCart = () => {
     removeFromCart({ ...cartItem });
-    setltoProductRemoved(true);
+    setltoProductAdded(false);
   };
 
   return (
@@ -162,7 +182,7 @@ const LimitedTimeProduct = ({
         </div>
       ) : (
         <>
-          {!ltoProductRemoved && (
+          {ltoProductAdded && (
             <div className="limited-time-product-card-2">
               <div className="limited-time-deal-tag">Limited Time Deal</div>
               <div className="limited-time-added-product mb-2 pt-3">

@@ -51,34 +51,7 @@ function CartProduct2({
     addedAt,
   } = item;
 
-  const [showMatchingLTOProduct, setShowMatchingLTOProduct] = useState(false);
   const { isSmallSize } = useWindowDimensions();
-
-  useEffect(() => {
-    const matchingLTOProduct = ltoProducts.find(
-      (product) => product.id === item.ltoProduct
-    );
-
-    if (matchingLTOProduct) {
-      const addedAtTimestamp = new Date(item.addedAt).getTime();
-      const nowTimestamp = Date.now();
-      const timeDifference = nowTimestamp - addedAtTimestamp;
-
-      if (timeDifference <= 2 * 60 * 1000) {
-        setShowMatchingLTOProduct(true);
-
-        const timeoutId = setTimeout(() => {
-          setShowMatchingLTOProduct(false);
-        }, LIMITED_TIME_DEAL_DURATION * 60 * 1000 - timeDifference);
-
-        return () => {
-          clearTimeout(timeoutId);
-        };
-      }
-    }
-
-    setShowMatchingLTOProduct(false);
-  }, [item, ltoProducts]);
 
   const productDiscountPercentage = ({ price, listingPrice }) => {
     return Math.round(((listingPrice - price) / listingPrice) * 100);
@@ -157,7 +130,7 @@ function CartProduct2({
       <div className="m-0 p-0 border-no">
         <div
           className={`cart-product-card mb-2 ${
-            showMatchingLTOProduct ? "cart-product-padding" : "pb-0"
+            matchingLTOProduct ? "cart-product-padding" : "pb-0"
           }`}
         >
           <div className="mobile-specific-cart-product-container mobile-specific-cart d-flex p-relative">
@@ -450,8 +423,11 @@ function CartProduct2({
               )}
             </div>
           )}
-          {matchingLTOProduct && showMatchingLTOProduct && (
-            <LimitedTimeProduct product={matchingLTOProduct} />
+          {matchingLTOProduct && (
+            <LimitedTimeProduct
+              product={matchingLTOProduct}
+              addedAt={item.addedAt}
+            />
           )}
         </div>
       </div>

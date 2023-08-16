@@ -48,7 +48,6 @@ function cartReducer(state = initialState, action) {
       }
 
       if (tmpProduct.cartItemType === "Limited_Time_Offer") {
-        recordKey = `${recordKey}-lto`;
         tmpProduct.price = tmpProduct.recommendPrice;
       }
 
