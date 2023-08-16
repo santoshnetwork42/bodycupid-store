@@ -52,6 +52,11 @@ const LimitedTimeProductDeal = ({
     });
   };
 
+  const discountAmount = parseInt(
+    ((listingPrice - recommendPrice) / listingPrice) * 100,
+    10
+  );
+
   return (
     <>
       {showLTOProduct && (
@@ -77,7 +82,7 @@ const LimitedTimeProductDeal = ({
             >
               <div className="image-container">
                 <div className="svg-overlay">
-                  <LimitedTimeDiscount discountAmount={60} />
+                  <LimitedTimeDiscount discountAmount={discountAmount} />
                 </div>
                 <figure>
                   <ALink href={"/products/" + slug} className="p-0 border-2">
@@ -128,6 +133,7 @@ const LimitedTimeProductDeal = ({
                       <div className="ml-8">
                         <CircularTimer
                           duration={LIMITED_TIME_DEAL_DURATION * 60}
+                          starTime={new Date(addedAt).valueOf()}
                         />
                       </div>
                       <div className="ml-8">

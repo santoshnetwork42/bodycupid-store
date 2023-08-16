@@ -96,12 +96,7 @@ function cartReducer(state = initialState, action) {
               }
               return p;
             }),
-            {
-              ...tmpProduct,
-              recordKey,
-              ltoProduct: {},
-              addedAt: new Date().toISOString(),
-            },
+            currentATC,
           ],
         };
       }
@@ -191,7 +186,6 @@ const persistConfig = {
   keyPrefix: `${STORE_PREFIX}-`,
   key: "cart",
   storage,
-  blacklist: ["ltoProducts"],
 };
 
 export default persistReducer(persistConfig, cartReducer);

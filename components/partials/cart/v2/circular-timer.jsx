@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import useWindowDimensions from "~/utils/getWindowDimension";
 
-const CircularTimer = ({ duration, onComplete }) => {
+const CircularTimer = ({ starTime, duration, onComplete }) => {
   const radius = 38;
   const circumference = 2 * Math.PI * radius;
 
-  const [timeLeft, setTimeLeft] = useState(duration);
+  const initialTime =
+    duration - parseInt((new Date().valueOf() - starTime) / 1000, 10);
+
+  const [timeLeft, setTimeLeft] = useState(initialTime);
   const [progress, setProgress] = useState(100);
   const [circleColor, setCircleColor] = useState("#00cc00");
   const { isSmallSize } = useWindowDimensions();
@@ -24,6 +27,7 @@ const CircularTimer = ({ duration, onComplete }) => {
         }
       } else {
         clearInterval(timer);
+        setProgress(0);
       }
     }, 1000);
 
