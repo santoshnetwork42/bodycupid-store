@@ -129,7 +129,7 @@ function CartProduct({
     <div className="m-0 p-0 border-no">
       <div
         className={`cart-product-card mb-2 ${
-          matchingLTOProduct ? "cart-product-padding" : "pb-0"
+          matchingLTOProduct || ltoDealProduct ? "cart-product-padding" : "pb-0"
         }`}
       >
         <div className="mobile-specific-cart-product-container mobile-specific-cart d-flex p-relative">
@@ -259,7 +259,9 @@ function CartProduct({
                     {cartItemType === "FREE_PRODUCT" ? (
                       <>
                         {!!qty && (
-                          <p className="text-grey mb-2 lh-1">Qty:{qty}</p>
+                          <p className="text-grey mb-2 lh-1 text-alignment">
+                            Qty:{qty}
+                          </p>
                         )}
                       </>
                     ) : (
@@ -315,7 +317,11 @@ function CartProduct({
               <div className="product-quantity w-0">
                 {cartItemType === "FREE_PRODUCT" ? (
                   <>
-                    {!!qty && <p className="text-grey mb-2 lh-1">Qty:{qty}</p>}
+                    {!!qty && (
+                      <p className="text-grey mb-2 lh-1 text-alignment">
+                        Qty:{qty}
+                      </p>
+                    )}
                   </>
                 ) : (
                   <Quantity

@@ -310,13 +310,14 @@
 .coupon-slider {
   position: fixed;
   top: 0;
-  right: -100%; /* Start outside the viewport */
+  right: -100%;
   width: 80%;
   height: 100%;
   background-color: white;
-  transition: right 0.3s ease-in-out; /* Use transition for animation */
+  transition: right 0.3s ease-in-out;
   z-index: 1000;
   width: 100vw;
+  overflow-y: auto;
 
   @media (min-width: 575px) {
     max-width: 50rem !important;
