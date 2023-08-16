@@ -16,7 +16,6 @@ export const actionTypes = {
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
   CREATE_LTO: "CREATE_LTO",
-  GET_LTO_BY_ID: "GET_LTO_BY_ID",
 };
 
 const initialState = {
@@ -141,12 +140,6 @@ function cartReducer(state = initialState, action) {
     case actionTypes.CREATE_LTO:
       return { ...state, ltoProducts: action.payload.ltoProducts };
 
-    case actionTypes.GET_LTO_BY_ID:
-      const idToSearch = action.payload;
-      const foundProduct = state.ltoProducts.find(
-        (product) => product.id === idToSearch
-      );
-      return { ...state, foundProduct };
     default:
       return state;
   }
@@ -182,10 +175,6 @@ export const cartActions = {
     payload: {
       ltoProducts: data,
     },
-  }),
-  addedLTOProduct: () => ({
-    type: actionTypes.GET_LTO_BY_ID,
-    payload: {},
   }),
 };
 

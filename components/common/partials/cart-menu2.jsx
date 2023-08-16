@@ -15,9 +15,7 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal2 from "~/components/common/partials/cart-totals2";
 import { Logger } from "aws-amplify";
 import CartProduct2 from "~/components/partials/cart/cart-product2";
-import Coupon2 from "~/components/features/product/coupon2";
 import getRecommededProducts from "~/utils/recommendedProduct";
-import ProductCollection from "~/components/partials/home/product-collection";
 
 function CartMenu2(props) {
   const {
@@ -26,40 +24,18 @@ function CartMenu2(props) {
     isCartOpen,
     setCartVisibility,
     viewCart,
-    isV2 = true,
     emptyCart,
   } = props;
-  const [cartProducts, setCartProducts] = useState([]);
 
   const router = useRouter();
   const cartItems = useCartItems();
   const { inventoryMapping } = useInventory();
   const logger = new Logger("Cart");
 
-  const getCartRecommendation = async () => {
-    const cartItemsId = cartItems.map((item) => ({
-      productId: item.id,
-      variantId: item.variantId,
-    }));
-
-    const products = await getRecommededProducts({
-      items: cartItemsId,
-      recommenderType: "FREQUENTLY_BOUGHT_TOGETHER",
-    });
-
-    setCartProducts(products);
-  };
-
   useEffect(() => {
     viewCart();
     logger.verbose("View Cart");
   }, []);
-
-  useEffect(() => {
-    if (isV2) {
-      getCartRecommendation();
-    }
-  }, [cartList]);
 
   useEffect(() => {
     if (isCartOpen) {
@@ -164,18 +140,6 @@ function CartMenu2(props) {
                     data-sticky-options="{'bottom': 20}"
                   >
                     <CartTotal2 isSmall />
-                    {/* <div className="summary-title summary-title2 product-carousal-heading">
-                      You May Also Like
-                    </div>
-                    {cartProducts.length !== 0 && (
-                      <ProductCollection
-                        products={cartProducts}
-                        slug="isCartUpsellProduct"
-                        addClass="cart-products d-block"
-                        isCart={true}
-                        isV2={isV2}
-                      />
-                    )} */}
                   </div>
                 </aside>
               </>
