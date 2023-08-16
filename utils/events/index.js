@@ -250,7 +250,6 @@ export const moEngagedOrderMapper = (
     "Total Items": products?.length,
     Source: source,
     "Cart URL": `${currentURL}/pages/cart`,
-    "Vendor name": "Body Cupid",
     "Coupon Applied": coupon?.code,
     "Total Discount": couponTotal || 0,
     "First Time User": isFirstTimeUser,
@@ -260,6 +259,7 @@ export const moEngagedOrderMapper = (
     (
       {
         "Total Price": Total_Price,
+        "Vendor Name": Vendor_Name,
         "Product Title": Product_Title,
         "Image URL": Image_URL,
         "Product ID": Product_ID,
@@ -283,6 +283,7 @@ export const moEngagedOrderMapper = (
         "Image URL": [...Image_URL, url],
         "Total Quantity": Total_Quantity + (product?.qty || 0),
         "Product ID": [...Product_ID, product?.id],
+        "Vendor Name": [...Vendor_Name, product?.vendor],
         "Product Price": [...Product_Price, product.price],
         "Product Quantity": [...Product_Quantity, product.qty],
         "Variant ID": [...Variant_ID, product?.variantId],
@@ -302,6 +303,7 @@ export const moEngagedOrderMapper = (
     {
       "Total Price": 0,
       "Product Title": [],
+      "Vendor Name": [],
       "Image URL": [],
       "Total Quantity": 0,
       "Product ID": [],
