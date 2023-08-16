@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
 import { User, Hamburger } from "~/components/icons";
 import CartMenu from "~/components/common/partials/cart-menu";
-import CartMenu2 from "~/components/common/partials/cart-menu2";
+import CartMenu2 from "~/components/common/partials/v2/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";

@@ -12,10 +12,9 @@ import { eventActions } from "~/store/events";
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { useCartItems } from "~/utils/hooks/useCart";
 import { useInventory } from "~/utils/hooks/useInventory";
-import CartTotal2 from "~/components/common/partials/cart-totals2";
+import CartTotal2 from "~/components/common/partials/v2/cart-totals";
 import { Logger } from "aws-amplify";
-import CartProduct2 from "~/components/partials/cart/cart-product2";
-import getRecommededProducts from "~/utils/recommendedProduct";
+import CartProduct2 from "~/components/partials/cart/v2/cart-product";
 
 function CartMenu2(props) {
   const {

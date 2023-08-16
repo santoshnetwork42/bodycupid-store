@@ -12,8 +12,7 @@ import { getProductInventory } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
-import LimitedTimeProduct from "~/components/partials/cart/limited-time-product";
-import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
+import LimitedTimeProduct from "~/components/partials/cart/v2/limited-time-product";
 import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Cart-products");
@@ -48,7 +47,6 @@ function CartProduct2({
     cartItemSource,
     couponMessage,
     ltoProduct,
-    addedAt,
   } = item;
 
   const { isSmallSize } = useWindowDimensions();

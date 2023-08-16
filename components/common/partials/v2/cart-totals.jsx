@@ -11,7 +11,7 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import CouponDiscountBar from "~/components/common/coupon-discount-bar";
-import Coupon2 from "~/components/features/product/coupon2";
+import Coupon2 from "~/components/features/product/v2/coupon2";
 
 const logger = new Logger("Cart");
 

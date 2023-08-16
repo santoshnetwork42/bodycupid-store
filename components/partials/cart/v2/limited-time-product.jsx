@@ -8,7 +8,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { Check, Clock, Delete, LimitedTimeDiscount } from "~/components/icons";
-import CircularTimer from "~/components/partials/cart/circular-timer";
+import CircularTimer from "~/components/partials/cart/v2/circular-timer";
 import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
 import { getRecordKey } from "~/utils/helper";
 import useWindowDimensions from "~/utils/getWindowDimension";
