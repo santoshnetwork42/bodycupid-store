@@ -123,7 +123,7 @@ function Checkout(props) {
     prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
-  const cartItems = useCartItems(false);
+  const cartItems = useCartItems(false, true);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {

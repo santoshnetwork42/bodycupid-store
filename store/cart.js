@@ -103,12 +103,22 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.REMOVE_FROM_CART:
       tmpProduct = { ...action.payload.product };
-      let cart = state.data.reduce((cartAcc, product) => {
-        if (tmpProduct.recordKey !== product.recordKey) {
-          cartAcc.push(product);
-        }
-        return cartAcc;
-      }, []);
+      let { cart, ltoRecordKey } = state.data.reduce(
+        (cartAcc, product) => {
+          if (tmpProduct.recordKey !== product.recordKey) {
+            cartAcc.cart.push(product);
+          } else {
+            cartAcc.ltoRecordKey = product.ltoRecordKey;
+          }
+          return cartAcc;
+        },
+        { cart: [], ltoRecordKey: null }
+      );
+
+      if (ltoRecordKey) {
+        cart = cart.filter((c) => c.recordKey !== ltoRecordKey);
+      }
+
       return { ...state, data: cart };
 
     case actionTypes.UPDATE_CART:

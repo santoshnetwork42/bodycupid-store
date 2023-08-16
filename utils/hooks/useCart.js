@@ -50,7 +50,10 @@ export const useCartTotal = (
   return cartTotals;
 };
 
-export const useCartItems = (showNonApplicableFreeProducts = true) => {
+export const useCartItems = (
+  showNonApplicableFreeProducts = true,
+  showLTOProducts = false
+) => {
   const { data: cartListItems, coupon: appliedCoupon } = useSelector(
     (state) => state.cart
   );
@@ -170,7 +173,9 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
       return [
         ...updatedCartItems,
         ...couponNonApplicableCartList
-          .filter((p) => p.cartItemSource !== "LIMITED_TIME_DEAL")
+          .filter(
+            (p) => showLTOProducts || p.cartItemSource !== "LIMITED_TIME_DEAL"
+          )
           .map((p) => ({
             ...p,
             itemKey: `${p.recordKey}-coupon-non-applicable`,
@@ -190,7 +195,9 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
 
     return [
       ...cartList
-        .filter((p) => p.cartItemSource !== "LIMITED_TIME_DEAL")
+        .filter(
+          (p) => showLTOProducts || p.cartItemSource !== "LIMITED_TIME_DEAL"
+        )
         .map((p) => {
           let cartItemType =
             p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null;
