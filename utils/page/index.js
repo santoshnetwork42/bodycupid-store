@@ -6,7 +6,8 @@ import {
   findProducts,
   getStoreBanners,
 } from "~/graphql/api";
-import getRecommededProducts from "../recommendedProduct";
+import getRecommendedProducts from "../recommendedProduct";
+import { setSoldOutLast } from "~/utils/products";
 
 const getSearchProducts = (filter) =>
   fetchData(findProducts, {
@@ -38,13 +39,13 @@ export const getStaticProps = async () => {
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
-      recommededProducts,
+      recommendedProducts,
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }),
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
-      getRecommededProducts(),
+      getRecommendedProducts(),
     ]);
 
     const { items: bestSellerItems } = searchBestSellerProducts;
@@ -52,8 +53,9 @@ export const getStaticProps = async () => {
     const { items: categories } = searchProductSubCategories;
     const { banners } = store;
 
-    const bestSellerProducts = bestSellerItems;
-    const featuredProducts = featuredItems;
+    const bestSellerProducts = setSoldOutLast(bestSellerItems);
+    const featuredProducts = setSoldOutLast(featuredItems);
+    const topProducts = setSoldOutLast(recommendedProducts);
 
     const brands = [
       "/images/brands/1.png",
@@ -70,7 +72,7 @@ export const getStaticProps = async () => {
       props: {
         hero: { banners },
         bestSellerProducts,
-        recommededProducts,
+        topProducts,
         featuredProducts,
         categories,
         brands,

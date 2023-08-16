@@ -24,7 +24,7 @@ export { getStaticProps } from "~/utils/page";
 function HomePage({
   hero,
   bestSellerProducts,
-  recommededProducts,
+  topProducts,
   featuredProducts,
   categories,
   brands,
@@ -34,7 +34,6 @@ function HomePage({
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
 
-  console.log(recommededProducts);
   return (
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
@@ -53,9 +52,9 @@ function HomePage({
           redirectTo="/collections/best-seller"
         />
 
-        {!!recommededProducts?.length && (
+        {!!topProducts?.length && (
           <ProductCollection
-            products={recommededProducts}
+            products={topProducts}
             title="Top products"
             disableCarousel={isSmallSize}
             slug="top-product"
