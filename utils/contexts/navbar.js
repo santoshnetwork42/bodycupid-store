@@ -108,7 +108,7 @@ function NavbarProvider({ children, config }) {
       .catch(errorHandler);
   };
 
-  const getCartRecommendations = async () => {
+  const getLTOProducts = async () => {
     try {
       API.graphql(
         graphqlOperation(findProducts, {
@@ -118,7 +118,7 @@ function NavbarProvider({ children, config }) {
       )
         .then((res) => res.data.searchProducts.items)
         .then((res) => {
-          dispatch(cartActions.createLTO(res));
+          dispatch(cartActions.initialLTO(res));
         });
     } catch (error) {
       errorHandler(error);
@@ -152,7 +152,7 @@ function NavbarProvider({ children, config }) {
     getCollections();
     getConfigurations();
     getCoupons();
-    getCartRecommendations();
+    getLTOProducts();
   }, []);
 
   const addUserCoupon = async (coupon) => {

@@ -78,7 +78,7 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
       const { couponApplicableCartList, couponNonApplicableCartList } =
         cartList.reduce(
           (acc, c) => {
-            const isCartItem = c.cartItemSource !== "COUPON";
+            const isCartItem = !c.cartItemSource;
 
             const isProductApplicable =
               Array.isArray(applicableProducts) && applicableProducts.length
@@ -169,10 +169,12 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
 
       return [
         ...updatedCartItems,
-        ...couponNonApplicableCartList.map((p) => ({
-          ...p,
-          itemKey: `${p.recordKey}-cooupon-non-applicable`,
-        })),
+        ...couponNonApplicableCartList
+          .filter((p) => p.cartItemSource !== "LIMITED_TIME_DEAL")
+          .map((p) => ({
+            ...p,
+            itemKey: `${p.recordKey}-coupon-non-applicable`,
+          })),
         ...freeProducts.map(({ product: p, allowed, message }) => ({
           ...p,
           itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,
@@ -185,14 +187,21 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
         })),
       ];
     }
+
     return [
-      ...cartList.map((p) => ({
-        ...p,
-        itemKey: p.recordKey,
-        cartItemType:
-          p.cartItemType ||
-          (p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null),
-      })),
+      ...cartList
+        .filter((p) => p.cartItemSource !== "LIMITED_TIME_DEAL")
+        .map((p) => {
+          let cartItemType =
+            p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null;
+          if (p.cartItemSource !== "COUPON") cartItemType = p.cartItemSource;
+
+          return {
+            ...p,
+            itemKey: p.recordKey,
+            cartItemType,
+          };
+        }),
       ...freeProducts.map(({ product: p, allowed, message }) => ({
         ...p,
         itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,

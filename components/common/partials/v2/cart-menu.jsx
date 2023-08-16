@@ -14,9 +14,9 @@ import { useCartItems } from "~/utils/hooks/useCart";
 import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal2 from "~/components/common/partials/v2/cart-totals";
 import { Logger } from "aws-amplify";
-import CartProduct2 from "~/components/partials/cart/v2/cart-product";
+import CartProduct from "~/components/partials/cart/v2/cart-product";
 
-function CartMenu2(props) {
+function CartMenu(props) {
   const {
     cartList,
     appliedCoupon,
@@ -113,19 +113,14 @@ function CartMenu2(props) {
                       </ALink>
                     </div>
                     <div key={appliedCoupon?.id}>
-                      {cartItems.map(
-                        (item) =>
-                          item.cartItemType !== "Limited_Time_Offer" && (
-                            <CartProduct2
-                              isSmall
-                              key={`${item.itemKey}-${item.extraQty}`}
-                              item={item}
-                              inventory={
-                                (inventoryMapping || {})[item.recordKey]
-                              }
-                            />
-                          )
-                      )}
+                      {cartItems.map((item) => (
+                        <CartProduct
+                          isSmall
+                          key={`${item.itemKey}-${item.extraQty}`}
+                          item={item}
+                          inventory={(inventoryMapping || {})[item.recordKey]}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -182,4 +177,4 @@ export default connect(mapStateToProps, {
   openLogin: modalActions.openPasswordlessModal,
   setCartVisibility: modalActions.setCartVisibility,
   viewCart: eventActions.viewCart,
-})(CartMenu2);
+})(CartMenu);

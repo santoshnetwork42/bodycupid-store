@@ -11,19 +11,16 @@ export const useInventory = () => {
   const [cartListMapping, setCartListMapping] = useState(null);
   const dispatch = useDispatch();
 
-  const inventoryPayload = useMemo(
-    () =>
-      cartList.map((product) => ({
-        recordKey: product.recordKey,
-        productId: product.id,
-        variantId: product.variantId,
-        source: product.source,
-      })),
-    [cartList]
-  );
   useEffect(() => {
     const callGetInventory = async () => {
       try {
+        const inventoryPayload = cartList?.map((product) => ({
+          recordKey: product.recordKey,
+          productId: product.id,
+          variantId: product.variantId,
+          source: product.cartItemSource || null,
+        }));
+
         if (inventoryPayload.length) {
           const {
             data: { checkInventory: response },
@@ -52,7 +49,7 @@ export const useInventory = () => {
     };
 
     callGetInventory();
-  }, [inventoryPayload]);
+  }, [cartList]);
 
   const outOfStockItems = useMemo(
     () =>

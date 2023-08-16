@@ -15,7 +15,7 @@ export const actionTypes = {
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
-  CREATE_LTO: "CREATE_LTO",
+  INITIALIZE_LTO: "INITIALIZE_LTO",
 };
 
 const initialState = {
@@ -24,10 +24,6 @@ const initialState = {
   coupon: null,
   ltoProducts: [],
 };
-let ltoproductsIndex = 0;
-function getCurrentTime() {
-  return new Date().toISOString();
-}
 
 function cartReducer(state = initialState, action) {
   let tmpProduct, recordKey;
@@ -46,13 +42,14 @@ function cartReducer(state = initialState, action) {
         recordKey = `${tmpProduct.id}-${tmpProduct.variantId}`;
       }
 
-      if (tmpProduct.cartItemType === "Limited_Time_Offer") {
-        tmpProduct.price = tmpProduct.recommendPrice;
-      }
-
       if (tmpProduct.cartItemSource) {
         recordKey = `${recordKey}-${tmpProduct.cartItemSource}`;
         tmpProduct.listingPrice = tmpProduct.price;
+      }
+
+      // Always at last
+      if (tmpProduct.cartItemSource === "LIMITED_TIME_DEAL") {
+        tmpProduct.price = tmpProduct.recommendPrice;
       }
 
       if (state.data.some((item) => item.recordKey === recordKey)) {
@@ -72,26 +69,38 @@ function cartReducer(state = initialState, action) {
 
         return { ...state, data: tmpData };
       } else {
-        const ltoproductId = state.ltoProducts[ltoproductsIndex]?.id;
-        ltoproductsIndex++;
-        if (ltoproductsIndex >= state.ltoProducts.length) {
-          ltoproductsIndex = 0;
+        const selfProductsLength =
+          state.data?.filter((p) => !p.cartItemSource)?.length || 0;
+        const ltoProductLength = state.ltoProducts?.length || 0;
+        const ltoIndex =
+          selfProductsLength > ltoProductLength ? -1 : selfProductsLength;
+
+        const currentATC = {
+          ...tmpProduct,
+          recordKey,
+          ltoProduct: null,
+          addedAt: new Date().toISOString(),
+        };
+
+        if (!tmpProduct.cartItemSource && ltoIndex > -1) {
+          currentATC.ltoProduct = state.ltoProducts[ltoIndex]?.id || null;
         }
 
         return {
           ...state,
           data: [
-            ...state.data,
+            ...state.data.map((p) => {
+              if (p.recordKey === tmpProduct.parentRecordKey) {
+                p.ltoProduct = null;
+                p.ltoRecordKey = recordKey;
+              }
+              return p;
+            }),
             {
               ...tmpProduct,
               recordKey,
-              ltoProduct:
-                tmpProduct.cartItemType !== "Limited_Time_Offer"
-                  ? tmpProduct.cartItemSource !== "COUPON"
-                    ? ltoproductId
-                    : null
-                  : null,
-              addedAt: getCurrentTime(),
+              ltoProduct: {},
+              addedAt: new Date().toISOString(),
             },
           ],
         };
@@ -137,7 +146,7 @@ function cartReducer(state = initialState, action) {
       alertToaster("Cart price is updated");
       return { ...state, data };
 
-    case actionTypes.CREATE_LTO:
+    case actionTypes.INITIALIZE_LTO:
       return { ...state, ltoProducts: action.payload.ltoProducts };
 
     default:
@@ -170,8 +179,8 @@ export const cartActions = {
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
   setCart: (cart) => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
-  createLTO: (data) => ({
-    type: actionTypes.CREATE_LTO,
+  initialLTO: (data) => ({
+    type: actionTypes.INITIALIZE_LTO,
     payload: {
       ltoProducts: data,
     },
@@ -182,6 +191,7 @@ const persistConfig = {
   keyPrefix: `${STORE_PREFIX}-`,
   key: "cart",
   storage,
+  blacklist: ["ltoProducts"],
 };
 
 export default persistReducer(persistConfig, cartReducer);

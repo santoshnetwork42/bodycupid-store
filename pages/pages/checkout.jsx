@@ -331,8 +331,8 @@ function Checkout(props) {
           const { id: ignoreId, ...restAddress } = tempAddress;
 
           const productIds = cartList
-            .filter((p) => !p.cartItemSource)
-            .map(({ id, variantId, qty, source }) => ({
+            .filter((p) => p.cartItemSource !== "COUPON")
+            .map(({ id, variantId, qty, cartItemSource: source = null }) => ({
               productId: id,
               variantId,
               quantity: qty,
