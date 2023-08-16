@@ -76,7 +76,6 @@ function Addresses({
       const remainingAddress = addresses.filter((a) => a.id !== id);
       setAddresses(remainingAddress);
       setSelected(remainingAddress[0]);
-      console.log("selected add 2", selected);
       setDefaultAddress(null);
     },
     [addresses]
@@ -84,8 +83,6 @@ function Addresses({
 
   const onAddress = (response) => {
     if (defaultAddress?.id) {
-      console.log("selected add 1", defaultAddress);
-
       setAddresses(
         addresses.map((a) => (a.id === defaultAddress.id ? response : a))
       );
