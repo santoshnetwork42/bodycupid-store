@@ -47,6 +47,7 @@ function Addresses({
       setAddresses(userAddresses.items);
       setLoading(false);
       setSelected(userAddresses.items[0]);
+      addressSelected(userAddresses.items[0], totalPrice);
       return userAddresses.items;
     } catch (error) {
       errorHandler(error);
