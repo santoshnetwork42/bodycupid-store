@@ -11,6 +11,7 @@ import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { eventActions } from "~/store/events";
 import { fetchSearchItems } from "~/utils/helper";
+import { getProductInventory } from "~/utils/products";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -108,6 +109,29 @@ function ProductListOne(props) {
     };
   }, [perPage, maxprice, minprice, search, sortby]);
 
+  const setSoldOutLast = (items) => {
+    let soldOutProducts = [];
+    const products = items.reduce((acc, prod) => {
+      if (!("hasInventory" in prod)) {
+        const { hasInventory } = getProductInventory(prod);
+        if (hasInventory) {
+          return [...acc, { ...prod, hasInventory }];
+        } else {
+          soldOutProducts.push({ ...prod, hasInventory });
+          return acc;
+        }
+      } else {
+        if (prod.hasInventory) {
+          return [...acc, prod];
+        } else {
+          soldOutProducts.push(prod);
+          return acc;
+        }
+      }
+    }, []);
+    return [...products, ...soldOutProducts];
+  };
+
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -128,17 +152,20 @@ function ProductListOne(props) {
           );
 
           if (reset) {
-            setProducts(response);
+            const productsMapped = setSoldOutLast(response);
+            setProducts(productsMapped);
           } else {
             viewList(sectionId, "PLP", response);
-            setProducts([...products, ...response]);
+            const productsMapped = setSoldOutLast([...products, ...response]);
+            setProducts(productsMapped);
           }
           setToken(nextToken);
           setTotal(total);
           setLoading(false);
         } else {
           fetchSearchItems(search).then((fetchedItems) => {
-            setProducts(fetchedItems);
+            const productsMapped = setSoldOutLast(response);
+            setProducts(productsMapped);
             setTotal(fetchedItems.length);
             setLoading(false);
           });
@@ -153,7 +180,8 @@ function ProductListOne(props) {
 
   useEffect(() => {
     const { items, nextToken, total } = initialData || {};
-    setProducts(items);
+    const productsMapped = setSoldOutLast(items);
+    setProducts(productsMapped);
     setToken(nextToken);
     setTotal(total);
     viewList(sectionId, "PLP", items);

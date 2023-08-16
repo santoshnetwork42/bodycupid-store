@@ -34,7 +34,6 @@ function HomePage({
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
 
-  console.log(recommededProducts);
   return (
     <main className="main home searchBar">
       <NextHead {...pageMeta} />
