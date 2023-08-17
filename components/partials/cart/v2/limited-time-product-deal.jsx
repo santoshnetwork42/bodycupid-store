@@ -5,7 +5,7 @@ import { cartActions } from "~/store/cart";
 
 import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta } from "~/utils/products";
+import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { Clock, LimitedTimeDiscount } from "~/components/icons";
 import CircularTimer from "~/components/partials/cart/v2/circular-timer";
@@ -52,10 +52,10 @@ const LimitedTimeProductDeal = ({
     });
   };
 
-  const discountAmount = parseInt(
-    ((listingPrice - recommendPrice) / listingPrice) * 100,
-    10
-  );
+  const discountAmount = productDiscountPercentage({
+    price: recommendPrice,
+    listingPrice: listingPrice,
+  });
 
   return (
     <>
