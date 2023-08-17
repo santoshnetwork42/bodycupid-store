@@ -197,6 +197,12 @@ export const useMenu = () => {
     slug: "raksha-bandhan-gifts",
   });
 
+  menu.push({
+    label: "Flash Sale",
+    link: `/collections/shower-gel-offer`,
+    slug: "shower-gel-offer",
+  });
+
   return menu;
 };
 
