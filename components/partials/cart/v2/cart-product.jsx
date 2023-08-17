@@ -157,7 +157,9 @@ function CartProduct({
             </figure>
           </div>
           <div
-            className={`cart-item-container ${isSmallSize ? "small-size" : ""}`}
+            className={`cart-item-container ${
+              isSmallSize ? "small-size" : ""
+            } ${isFreeProduct ? "free-product" : ""}`}
           >
             <div className="text-left text-primary w-100 mr-1 ml-2">
               <div
@@ -234,7 +236,7 @@ function CartProduct({
                 </div>
               )}
             </div>
-            {!outOfStock && !isSmallSize && (
+            {!outOfStock && !isSmallSize && !isFreeProduct && (
               <div className="cart-item-quantity">
                 {!!item?.variants?.items.length && !disableChange && (
                   <div className="card-margin-bottom ml-2">
@@ -291,7 +293,7 @@ function CartProduct({
             </div>
           )}
         </div>
-        {isSmallSize && (
+        {isSmallSize && !isFreeProduct && !outOfStock && (
           <div className="d-flex justify-content-between mr-1">
             <div>
               {!!item?.variants?.items.length && !disableChange && (
