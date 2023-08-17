@@ -77,7 +77,8 @@ export const getCouponDiscount = (coupon, cartItems) => {
   const finalGetYQty = couponType === "BUY_X_GET_Y" ? getYQuantity : 0;
 
   const cartList = cartItems.filter((c) => {
-    const isCouponItem = c.cartItemSource === "COUPON";
+    const isCouponItem =
+      c.cartItemSource === "COUPON" || c.cartItemSource === "LIMITED_TIME_DEAL";
     if (isCouponItem) return false;
 
     const isProductApplicable =
