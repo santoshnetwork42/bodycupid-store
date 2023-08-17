@@ -403,14 +403,15 @@ export const getCartTotals = (
 
   const shippingAmountSaved = Math.max(0, 50 - shippingTotal);
 
-  const totalAmountSaved =
+  const totalAmountSaved = Math.round(
     paymentType === "PREPAID"
       ? totalListingPrice -
-        totalPrice +
-        totalDiscount +
-        shippingAmountSaved +
-        codCharges
-      : totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved;
+          totalPrice +
+          totalDiscount +
+          shippingAmountSaved +
+          codCharges
+      : totalListingPrice - totalPrice + totalDiscount + shippingAmountSaved
+  );
 
   const prepaidGrandTotal =
     totalPrice + prepaidShippingCharge - totalPrepaidDiscount;
