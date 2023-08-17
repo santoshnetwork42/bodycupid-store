@@ -307,6 +307,18 @@
   background-color: #d9d9d9 !important;
 }
 
+.coupon-block-width {
+  width: 100% !important;
+}
+
+.coupon-error-lable {
+  color: $alert-color;
+}
+
+.coupon-error-box-border {
+  border: 1px solid $alert-color;
+}
+
 .coupon-slider {
   position: fixed;
   top: 0;

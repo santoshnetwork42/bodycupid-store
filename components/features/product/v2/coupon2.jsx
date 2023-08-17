@@ -199,19 +199,24 @@ function Coupon2(props) {
                     </ALink>
                   </div>
                 ) : (
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center">
-                      <CouponTag size={isSmallSize ? 20 : 24} />
-                      <div className="apply-coupon-button ml-3">
-                        Apply Coupon
+                  <ALink
+                    href="#"
+                    onClick={() => {
+                      openSlider(), setError("");
+                    }}
+                  >
+                    <div className="d-flex justify-content-between align-items-center coupon-block-width">
+                      <div className="d-flex align-items-center">
+                        <CouponTag size={isSmallSize ? 20 : 24} />
+                        <div className="apply-coupon-button ml-3">
+                          Apply Coupon
+                        </div>
+                      </div>
+                      <div>
+                        <RightAngle size={isSmallSize ? 20 : 24} />
                       </div>
                     </div>
-                    <div>
-                      <ALink href="#" onClick={openSlider}>
-                        <RightAngle size={isSmallSize ? 20 : 24} />
-                      </ALink>
-                    </div>
-                  </div>
+                  </ALink>
                 )}
               </div>
             </div>
@@ -308,7 +313,7 @@ function Coupon2(props) {
               className="apply-button d-flex justify-content-center align-items-center"
               disabled={loading}
               onClick={() => {
-                !!coupon && applyCouponCode(), closeSlider();
+                !!coupon && applyCouponCode();
               }}
             >
               <span className=" mr-1">Apply</span>
@@ -316,6 +321,8 @@ function Coupon2(props) {
               {loading && <div className="spin-loader" />}
             </button>
           </div>
+          <span className="coupon-error-lable">{error}</span>
+
           {!!featuredCoupons?.length && (
             <div className="mt-3 all-coupons-container">
               {featuredCoupons.map((c) => {
