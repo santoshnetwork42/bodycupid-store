@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useWindowDimensions from "~/utils/getWindowDimension";
 
 const CircularTimer = ({ starTime, duration, onComplete }) => {
-  const radius = 38;
+  const radius = 32;
   const circumference = 2 * Math.PI * radius;
 
   const initialTime =

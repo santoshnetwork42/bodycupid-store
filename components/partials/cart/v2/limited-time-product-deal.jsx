@@ -60,10 +60,12 @@ const LimitedTimeProductDeal = ({
   return (
     <>
       {showLTOProduct && (
-        <div className="limited-time-product-card mt-4">
+        <div className="limited-time-product-card mt-3 mb-2">
           <div
             className={`limited-time-deal-overlay ${
-              isSmallSize ? "grid-container" : "d-flex justify-content-between"
+              isSmallSize
+                ? "grid-container"
+                : "d-flex justify-content-between text-align-center"
             }`}
           >
             <div className="limited-time-text align-left">
@@ -133,13 +135,13 @@ const LimitedTimeProductDeal = ({
                 {!isSmallSize && (
                   <div className="cart-item-quantity">
                     <div className="mb-1">
-                      <div className="ml-8">
+                      <div className="ml-7 mb-2">
                         <CircularTimer
                           duration={LIMITED_TIME_DEAL_DURATION * 60}
                           starTime={new Date(addedAt).valueOf()}
                         />
                       </div>
-                      <div className="ml-8">
+                      <div className="ml-3">
                         <button
                           onClick={handleAddToCart}
                           className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60 button-padding`}
