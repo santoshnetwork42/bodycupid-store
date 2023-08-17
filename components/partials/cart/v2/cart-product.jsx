@@ -205,7 +205,7 @@ function CartProduct({
 
                         {productDiscountPercentage(item) > 0 && (
                           <span
-                            className={`discount-percentage discount-card ml-1`}
+                            className={`discount-percentage discount-card ml-1 pl-1 pr-1 font-weight-bolder`}
                           >
                             {productDiscountPercentage(item)}% off
                           </span>
@@ -261,7 +261,7 @@ function CartProduct({
                   </div>
                 )}
                 {!disableChange && (
-                  <div className="product-quantity w-0">
+                  <div className="product-quantity mb-0">
                     {cartItemType === "FREE_PRODUCT" ? (
                       <>
                         {!!qty && (
@@ -304,7 +304,7 @@ function CartProduct({
                 <div className="card-margin-bottom ml-2">
                   <select
                     name={`${recordKey}`}
-                    className="form-control variant-selection-form-small p-0"
+                    className="form-control-2 variant-selection-form-small p-0"
                     value={variantId}
                     onChange={(e) => {
                       changeVariant(e);

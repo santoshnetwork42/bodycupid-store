@@ -80,7 +80,7 @@ function CartTotal2({
 
   return (
     <div className="bg-white border-none">
-      <h3 className="summary-title summary-title2 text-left font-weight-bold">
+      <h3 className="summary-title summary-title2 text-left font-weight-bold pt-2">
         Payment Summary
       </h3>
       <div
@@ -163,8 +163,8 @@ function CartTotal2({
                     Total <p className="m-0">Inclusive of all taxes</p>
                   </h4>
                 </td>
-                <td>
-                  <p className="summary-total-price-2 font-weight-semi-bold  ls-s">
+                <td className="td-alignment">
+                  <p className="summary-total-price-2 font-weight-bold  ls-s">
                     ₹{toDecimal(prepaidGrandTotal)}
                   </p>
                 </td>
@@ -173,7 +173,7 @@ function CartTotal2({
           </table>
         </div>
         <div className={"mt-3 mb-3"}>
-          <p className="m-0">
+          <p className="m-0 font-weight-bold">
             Average delivery time: <span>3-5 days</span>
           </p>
         </div>
@@ -181,48 +181,53 @@ function CartTotal2({
 
       <div id="sidebar-footer" className="sidebar-footer">
         <Coupon2 isSmall />
-        <div className="d-flex">
-          <div className="flex-40">
-            <div className="cart-totals"> ₹{toDecimal(prepaidGrandTotal)}</div>
-            {!!totalSaved && (
-              <div className="summary-saving-lable-container m-0 p-0">
-                <p className="saving-lable">
-                  You saved
-                  <span> {`₹${toDecimal(totalSaved)} `}</span>
-                </p>
+        <div className="cart-sticky-checkout pt-2 pl-0 pr-0">
+          <div className="d-flex">
+            <div className="flex-40">
+              <div className="cart-totals">
+                {" "}
+                ₹{toDecimal(prepaidGrandTotal)}
               </div>
-            )}
-          </div>
-          <button
-            onClick={validateAndGoToCheckout}
-            className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60`}
-            disabled={!isInventoryCheckReady}
-          >
-            begin checkout
-          </button>
-        </div>
-      </div>
-
-      {!isSmall && (
-        <div className="d-sm-show stick">
-          <div className=" d-sm-show stick-bottom-button">
-            <div className="lh-default">
-              <span>{totalItems > 1 ? `${totalItems} Items` : "1 Item"}</span>
-              <p className="summary-total-price text-left ls-s">
-                ₹{toDecimal(cartGrandTotal)}
-              </p>
+              {!!totalSaved && (
+                <div className="summary-saving-lable-container m-0 p-0">
+                  <p className="saving-lable">
+                    You saved
+                    <span> {`₹${toDecimal(totalSaved)} `}</span>
+                  </p>
+                </div>
+              )}
             </div>
-
             <button
               onClick={validateAndGoToCheckout}
-              className="btn btn-dark btn-rounded font-weight-bold btn-checkout"
+              className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60`}
               disabled={!isInventoryCheckReady}
             >
               begin checkout
             </button>
           </div>
         </div>
-      )}
+
+        {!isSmall && (
+          <div className="d-sm-show stick">
+            <div className=" d-sm-show stick-bottom-button">
+              <div className="lh-default">
+                <span>{totalItems > 1 ? `${totalItems} Items` : "1 Item"}</span>
+                <p className="summary-total-price text-left ls-s">
+                  ₹{toDecimal(cartGrandTotal)}
+                </p>
+              </div>
+
+              <button
+                onClick={validateAndGoToCheckout}
+                className="btn btn-dark btn-rounded font-weight-bold btn-checkout"
+                disabled={!isInventoryCheckReady}
+              >
+                begin checkout
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

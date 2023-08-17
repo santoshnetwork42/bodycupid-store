@@ -113,7 +113,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       allowed: false,
       message: `Add product worth ₹${
         minOrderValue - totalAmount
-      } more to the cart.`,
+      } more to the cart to avail this free product`,
     };
   }
 
@@ -124,7 +124,7 @@ export const getCouponDiscount = (coupon, cartItems) => {
       allowed: false,
       message: `Add ${
         buyXQuantity + getYQuantity - totalItems
-      } more items to the cart.`,
+      } more items to the cart to avail this free product`,
     };
   }
 

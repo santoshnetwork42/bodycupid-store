@@ -207,13 +207,13 @@ function Coupon2(props) {
                   >
                     <div className="d-flex justify-content-between align-items-center coupon-block-width">
                       <div className="d-flex align-items-center">
-                        <CouponTag size={isSmallSize ? 20 : 24} />
+                        <CouponTag size={isSmallSize ? 18 : 20} />
                         <div className="apply-coupon-button ml-3">
                           Apply Coupon
                         </div>
                       </div>
                       <div>
-                        <RightAngle size={isSmallSize ? 20 : 24} />
+                        <RightAngle size={isSmallSize ? 18 : 20} />
                       </div>
                     </div>
                   </ALink>

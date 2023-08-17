@@ -317,51 +317,60 @@
 
 .overlay-text1 {
   color: white;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   text-align: center;
   padding: 25px;
 
   @media (max-width: 500px) {
-    font-size: 16px;
+    font-size: 12px;
   }
+}
+
+.cart-sticky-checkout {
+}
+
+.td-alignment {
+  vertical-align: top;
+  padding-top: 15px;
 }
 
 .coupon-container {
   display: flex;
   flex-direction: column;
   background-color: #f8f8f8;
-  padding: 18px;
+  padding: 12px;
 }
 .product-carousal-heading {
   padding-bottom: 0 !important;
 }
 .coupon-heading {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
   position:sticky;
   top: 0;
   background: white;
 
   @media (max-width: 500px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
 .apply-coupon-button {
-  font-size: 20px;
+  font-size: 16px;
 
   @media (max-width: 500px) {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
 .view-offers-link {
   color: #17b31b;
   cursor: pointer;
+  font-size: 12px !important;
 
   @media (max-width: 500px) {
-    font-size: 12px !important;
+    font-size: 10px !important;
   }
 }
 
@@ -832,7 +841,11 @@
 .small-product-remove {
   position: absolute;
   right: 1.5rem;
-  top: 1.3rem;
+  top: 2rem;
+
+  @media (max-width: 500px) {
+    top: 1.4rem;
+  }
 }
 
 .small-product-remove.limited-deal {
