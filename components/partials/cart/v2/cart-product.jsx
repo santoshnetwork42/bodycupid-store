@@ -159,7 +159,11 @@ function CartProduct({
           <div
             className={`cart-item-container ${
               isSmallSize ? "small-size" : ""
-            } ${isFreeProduct ? "free-product" : ""}`}
+            } ${
+              isFreeProduct || cartItemType === "AUTO_FREE_PRODUCT_DISABLED"
+                ? "free-product"
+                : ""
+            }`}
           >
             <div className="text-left text-primary w-100 mr-1 ml-2">
               <div
