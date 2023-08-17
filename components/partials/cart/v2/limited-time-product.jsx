@@ -24,7 +24,7 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
     <div className="limited-time-product-card-2">
       <div className="limited-time-deal-tag">Limited Time Deal</div>
       <div className="limited-time-added-product mb-2 pt-3">
-        <div className="mobile-specific-cart-product-container d-flex p-relative pr-1 pl-4 mt-0">
+        <div className="mobile-specific-cart-product-container d-flex p-relative pr-1 pl-2 mt-0">
           <div className="image-container">
             <figure>
               <ALink href={"/products/" + slug} className="p-0 border-2">
