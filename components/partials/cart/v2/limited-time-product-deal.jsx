@@ -156,7 +156,10 @@ const LimitedTimeProductDeal = ({
                     <Clock size={16} color={"white"} />
                   </div>
                   <div className="timer-content">
-                    <CircularTimer duration={LIMITED_TIME_DEAL_DURATION * 60} />
+                    <CircularTimer
+                      duration={LIMITED_TIME_DEAL_DURATION * 60}
+                      starTime={new Date(addedAt).valueOf()}
+                    />
                   </div>
                 </div>
 
