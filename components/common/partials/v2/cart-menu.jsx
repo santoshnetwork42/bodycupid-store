@@ -127,7 +127,7 @@ function CartMenu(props) {
 
                 <aside
                   id="cart-details "
-                  className="text-primary sticky-sidebar-wrapper"
+                  className="text-primary sticky-sidebar-wrapper pb-6"
                 >
                   <div
                     className="sticky-sidebar"

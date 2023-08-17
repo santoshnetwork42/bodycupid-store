@@ -11,6 +11,7 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import Coupon2 from "~/components/features/product/v2/coupon2";
+import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 const logger = new Logger("Cart");
 
@@ -25,6 +26,7 @@ function CartTotal2({
   setCartVisibility,
 }) {
   const router = useRouter();
+  const { isSmallSize } = useWindowDimensions();
 
   const {
     totalItems,
@@ -179,18 +181,22 @@ function CartTotal2({
         </div>
       </div>
 
-      <div id="sidebar-footer" className="sidebar-footer">
+      <div id="sidebar-footer" className="sidebar-footer p-0 box-shadow-coupon">
         <Coupon2 isSmall />
-        <div className="cart-sticky-checkout pt-2 pl-0 pr-0">
+        <div className="cart-sticky-checkout">
           <div className="d-flex">
-            <div className="flex-40">
+            <div className="flex-45">
               <div className="cart-totals">
                 {" "}
                 ₹{toDecimal(prepaidGrandTotal)}
               </div>
               {!!totalSaved && (
                 <div className="summary-saving-lable-container m-0 p-0">
-                  <p className="saving-lable">
+                  <p
+                    className={`saving-lable ${
+                      isSmallSize ? "label-size" : ""
+                    }`}
+                  >
                     You saved
                     <span> {`₹${toDecimal(totalSaved)} `}</span>
                   </p>

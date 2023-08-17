@@ -271,7 +271,7 @@
 }
 
 .coupon-tag2 {
-  background-color: #eaeaea;
+  background: white;
   width: fit-content;
   padding: 0.5rem 1.5rem;
   border: 1px dashed #8d8d8d;
@@ -316,7 +316,7 @@
 }
 
 .coupon-error-lable {
-  color: $alert-color;
+  color: #E50B20 !important;
 }
 
 .coupon-error-box-border {
@@ -341,7 +341,7 @@
 }
 
 .coupon-input {
-  background-color: #f8f8f8;
+  background-color: #eaeaea;
   border: none !important;
   border-radius: 6px !important;
 }
@@ -392,4 +392,8 @@
 
 .coupon-remove2 {
   font-size: 16px;
+}
+
+.label-size {
+  font-size: 1.3rem;
 }

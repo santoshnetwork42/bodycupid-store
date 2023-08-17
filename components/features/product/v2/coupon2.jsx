@@ -169,8 +169,8 @@ function Coupon2(props) {
       {layout === "cart" && (
         <div>
           {!!appliedCoupon && (
-            <div className="d-flex justify-content-between mt-1">
-              <h4 className="coupon-heading">Coupons and Offers</h4>
+            <div className="d-flex justify-content-between padding-coupon-heading">
+              <h4 className="coupon-heading">Coupons</h4>
               <div className="cart-product-size">
                 <ALink
                   href="#"
@@ -182,8 +182,12 @@ function Coupon2(props) {
               </div>
             </div>
           )}
-          <div className={`mb-2 ${!appliedCoupon ? "mt-1" : "mt-0"}`}>
-            <div className="coupon-container">
+          <div
+            className={`padding-coupon-container ${
+              appliedCoupon ? "pt-0" : ""
+            }`}
+          >
+            <div className="coupon-container coupon-container2">
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">
@@ -220,11 +224,6 @@ function Coupon2(props) {
                 )}
               </div>
             </div>
-            {couponTotal > 0 && (
-              <p className="mb-2 paragraph-font">
-                You have saved additional ₹{couponTotal}
-              </p>
-            )}
             {/* <CouponDiscountBar2 /> */}
           </div>
         </div>

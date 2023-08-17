@@ -144,7 +144,7 @@ const LimitedTimeProductDeal = ({
                       <div className="ml-3">
                         <button
                           onClick={handleAddToCart}
-                          className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60 button-padding`}
+                          className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bolder flex-60 button-padding`}
                         >
                           Add
                         </button>
@@ -171,7 +171,7 @@ const LimitedTimeProductDeal = ({
                 <div className="ml-8">
                   <button
                     onClick={handleAddToCart}
-                    className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60 button-padding`}
+                    className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bolder flex-60 button-padding`}
                   >
                     Add
                   </button>
