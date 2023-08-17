@@ -136,7 +136,7 @@ function CartProduct({
           <div className="image-container">
             {isFreeProduct && (
               <div className="svg-overlay">
-                <Free />
+                <Free size={isSmallSize ? 40 : 48} />
               </div>
             )}
             {outOfStock && (

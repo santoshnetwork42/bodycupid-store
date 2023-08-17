@@ -1212,11 +1212,11 @@ export const Delete = () => {
   );
 };
 
-export const LimitedTimeDiscount = ({ discountAmount }) => {
+export const LimitedTimeDiscount = ({ discountAmount, size }) => {
   return (
     <svg
-      width="48"
-      height="48"
+      width={size}
+      height={size}
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1276,11 +1276,11 @@ export const Check = () => {
   );
 };
 
-export const Free = () => {
+export const Free = ({ size }) => {
   return (
     <svg
-      width="48"
-      height="48"
+      width={size}
+      height={size}
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

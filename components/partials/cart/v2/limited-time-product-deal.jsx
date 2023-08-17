@@ -82,7 +82,10 @@ const LimitedTimeProductDeal = ({
             >
               <div className="image-container">
                 <div className="svg-overlay">
-                  <LimitedTimeDiscount discountAmount={discountAmount} />
+                  <LimitedTimeDiscount
+                    discountAmount={discountAmount}
+                    size={isSmallSize ? 40 : 48}
+                  />
                 </div>
                 <figure>
                   <ALink href={"/products/" + slug} className="p-0 border-2">
