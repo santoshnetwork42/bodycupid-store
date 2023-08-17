@@ -122,3 +122,7 @@ export const getProductPrice = (product, variantId) => {
 
   return { price: p, listingPrice: lp };
 };
+
+export const productDiscountPercentage = ({ price, listingPrice }) => {
+  return Math.round(((listingPrice - price) / listingPrice) * 100);
+};

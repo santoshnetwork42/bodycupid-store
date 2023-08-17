@@ -8,7 +8,10 @@ import { Delete, Free } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 
-import { getProductInventory } from "~/utils/products";
+import {
+  getProductInventory,
+  productDiscountPercentage,
+} from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
@@ -52,9 +55,6 @@ function CartProduct({
 
   const { isSmallSize } = useWindowDimensions();
 
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
-  };
   const savingPerProduct =
     cartItemSource === "COUPON" ? listingPrice : listingPrice - price;
 

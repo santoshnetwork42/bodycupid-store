@@ -225,7 +225,7 @@ function Coupon2(props) {
                 You have saved additional ₹{couponTotal}
               </p>
             )}
-            <CouponDiscountBar2 />
+            {/* <CouponDiscountBar2 /> */}
           </div>
         </div>
       )}

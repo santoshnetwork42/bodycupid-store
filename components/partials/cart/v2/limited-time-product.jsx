@@ -5,7 +5,7 @@ import { cartActions } from "~/store/cart";
 
 import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { getProductMeta } from "~/utils/products";
+import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { Check, Delete } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
@@ -62,6 +62,18 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
                 <span className="sm-product-amount mr-1 font-weight-semi-bold">
                   ₹{toDecimal(recommendPrice)}
                 </span>
+                {productDiscountPercentage({
+                  price: recommendPrice,
+                  listingPrice: listingPrice,
+                }) > 0 && (
+                  <span className={`discount-percentage discount-card ml-1`}>
+                    {productDiscountPercentage({
+                      price: recommendPrice,
+                      listingPrice: listingPrice,
+                    })}
+                    % off
+                  </span>
+                )}
               </div>
               <div className="product-savings">
                 You saved ₹{listingPrice - recommendPrice}
