@@ -290,12 +290,16 @@
 
 .coupon-message {
   color: #969696;
-  font-size: 12px;
+  font-size: 1.05rem;
+  width: 78%;
+  line-height: normal;
+  padding-top: 0.7rem;
 }
 
 .coupon-apply-button {
-  padding: 4px 15px !important;
-  font-size: 12px !important;
+  padding: 6px 15px !important;
+  font-size: 14px !important;
+  font-weight: bolder !important;
 }
 
 .coupon-applied-text {
@@ -339,10 +343,11 @@
 .coupon-input {
   background-color: #f8f8f8;
   border: none !important;
+  border-radius: 6px !important;
 }
 
 .coupon-slider.open {
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   right: 0;
 }
 
@@ -360,7 +365,7 @@
 }
 
 .slider-header {
-  padding: 0px 0px 14px !important;
+  padding: 14px 0px 14px !important;
   border-bottom: 1px solid #969696;
   font-size: 20px;
 }
@@ -376,4 +381,15 @@
     margin: 0rem 0 0 2.7rem;
     list-style-type: disc;
   }
+}
+
+.coupon-tagline2 {
+  color: #222;
+  font-weight: bolder;
+  width: 78%;
+  line-height: normal;
+}
+
+.coupon-remove2 {
+  font-size: 16px;
 }

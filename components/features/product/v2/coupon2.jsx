@@ -291,7 +291,7 @@ function Coupon2(props) {
               <LeftAngle />
             </ALink>
             <div className="cart-title-2 ml-2">
-              COUPONS AND OFFERS ({featuredCoupons.length})
+              COUPONS ({featuredCoupons.length})
             </div>
           </div>
         </div>
@@ -316,7 +316,7 @@ function Coupon2(props) {
                 !!coupon && applyCouponCode();
               }}
             >
-              <span className=" mr-1">Apply</span>
+              <span className=" mr-2">Apply</span>
 
               {loading && <div className="spin-loader" />}
             </button>
@@ -367,7 +367,7 @@ function Coupon2(props) {
                           <ALink
                             onClick={onCouponRemove}
                             href="#"
-                            className=""
+                            className="coupon-remove2"
                             disabled={!c.allowed}
                           >
                             Remove

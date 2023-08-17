@@ -62,6 +62,10 @@
   border: none !important;
 }
 
+.form-control-v2::placeholder {
+  font-size: 13px;
+}
+
 .select-dropdown {
   display: block;
   width: 100%;
