@@ -10,7 +10,6 @@ import { alertToaster } from "~/utils/popupHelper";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
-import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 import Coupon2 from "~/components/features/product/v2/coupon2";
 
 const logger = new Logger("Cart");
@@ -181,9 +180,6 @@ function CartTotal2({
       </div>
 
       <div id="sidebar-footer" className="sidebar-footer">
-        <div className="sidebar-footer bar">
-          <CouponDiscountBar />
-        </div>
         <Coupon2 isSmall />
         <div className="d-flex">
           <div className="flex-40">

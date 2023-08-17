@@ -19,6 +19,7 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import CouponDiscountBar2 from "~/components/common/partials/v2/coupon-discount-bar";
 
 const logger = new Logger("Coupon");
 
@@ -181,7 +182,7 @@ function Coupon2(props) {
               </div>
             </div>
           )}
-          <div className={`mb-3 ${!appliedCoupon ? "mt-1" : "mt-0"}`}>
+          <div className={`mb-2 ${!appliedCoupon ? "mt-1" : "mt-0"}`}>
             <div className="coupon-container">
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
@@ -215,10 +216,11 @@ function Coupon2(props) {
               </div>
             </div>
             {couponTotal > 0 && (
-              <p className="mb-3 paragraph-font">
+              <p className="mb-2 paragraph-font">
                 You have saved additional ₹{couponTotal}
               </p>
             )}
+            <CouponDiscountBar2 />
           </div>
         </div>
       )}

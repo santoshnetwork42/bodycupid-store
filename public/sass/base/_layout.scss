@@ -45,6 +45,17 @@
   }
 }
 
+.coupon-discount-bar-2 {
+  background-color: #17b31b;
+  justify-content: center;
+  z-index: 1000;
+  width: 100%;
+
+  @media (min-width: 575px) {
+    max-width: 50rem !important;
+  }
+}
+
 .animate {
   animation-name: slideIn;
   animation-duration: 1s;
