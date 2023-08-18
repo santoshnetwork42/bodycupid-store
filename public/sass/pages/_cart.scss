@@ -1151,11 +1151,18 @@
 }
 
 .table-margin {
-  margin-bottom: 125px;
+  margin-bottom: 98px;
+  @media (max-width: 500px) {
+    margin-bottom: 100px;
+  }
 }
 
 .table-margin-applied {
-  margin-bottom: 180px;
+  margin-bottom: 135px;
+
+  @media (max-width: 500px) {
+    margin-bottom: 190px;
+  }
 }
 
 .limited-time-product {
@@ -1235,10 +1242,6 @@
   border-radius: 6px;
   z-index: 1;
   align-items: center;
-
-  @media (max-width: 500px) {
-    height: 40px;
-  }
 }
 
 .limited-time-text {
