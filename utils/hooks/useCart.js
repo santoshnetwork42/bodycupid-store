@@ -50,11 +50,13 @@ export const useCartTotal = (
   return cartTotals;
 };
 
-export const useCartItems = (showNonApplicableFreeProducts = true) => {
+export const useCartItems = (
+  showNonApplicableFreeProducts = true,
+  showLTOProducts = false
+) => {
   const { data: cartListItems, coupon: appliedCoupon } = useSelector(
     (state) => state.cart
   );
-
   const freeProducts = useFreeProducts(showNonApplicableFreeProducts);
 
   const cartList = cartListItems.map((item) => {
@@ -79,7 +81,7 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
       const { couponApplicableCartList, couponNonApplicableCartList } =
         cartList.reduce(
           (acc, c) => {
-            const isCartItem = c.cartItemSource !== "COUPON";
+            const isCartItem = !c.cartItemSource;
 
             const isProductApplicable =
               Array.isArray(applicableProducts) && applicableProducts.length
@@ -100,7 +102,6 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
                 couponApplicableCartList: [...acc.couponApplicableCartList, c],
               };
             }
-
             return {
               ...acc,
               couponNonApplicableCartList: [
@@ -171,10 +172,14 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
 
       return [
         ...updatedCartItems,
-        ...couponNonApplicableCartList.map((p) => ({
-          ...p,
-          itemKey: `${p.recordKey}-cooupon-non-applicable`,
-        })),
+        ...couponNonApplicableCartList
+          .filter(
+            (p) => showLTOProducts || p.cartItemSource !== "LIMITED_TIME_DEAL"
+          )
+          .map((p) => ({
+            ...p,
+            itemKey: `${p.recordKey}-coupon-non-applicable`,
+          })),
         ...freeProducts.map(({ product: p, allowed, message }) => ({
           ...p,
           itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,
@@ -189,12 +194,21 @@ export const useCartItems = (showNonApplicableFreeProducts = true) => {
     }
 
     return [
-      ...cartList.map((p) => ({
-        ...p,
-        itemKey: p.recordKey,
-        cartItemType:
-          p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null,
-      })),
+      ...cartList
+        .filter(
+          (p) => showLTOProducts || p.cartItemSource !== "LIMITED_TIME_DEAL"
+        )
+        .map((p) => {
+          let cartItemType =
+            p.cartItemSource === "COUPON" && allowed ? "FREE_PRODUCT" : null;
+          if (p.cartItemSource !== "COUPON") cartItemType = p.cartItemSource;
+
+          return {
+            ...p,
+            itemKey: p.recordKey,
+            cartItemType,
+          };
+        }),
       ...freeProducts.map(({ product: p, allowed, message }) => ({
         ...p,
         itemKey: allowed ? `${p.id}-free` : `${p.id}-not-free`,

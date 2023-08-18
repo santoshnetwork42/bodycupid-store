@@ -11,18 +11,16 @@ export const useInventory = () => {
   const [cartListMapping, setCartListMapping] = useState(null);
   const dispatch = useDispatch();
 
-  const inventoryPayload = useMemo(
-    () =>
-      cartList.map((product) => ({
-        recordKey: product.recordKey,
-        productId: product.id,
-        variantId: product.variantId,
-      })),
-    [cartList]
-  );
   useEffect(() => {
     const callGetInventory = async () => {
       try {
+        const inventoryPayload = cartList?.map((product) => ({
+          recordKey: product.recordKey,
+          productId: product.id,
+          variantId: product.variantId,
+          source: product.cartItemSource || null,
+        }));
+
         if (inventoryPayload.length) {
           const {
             data: { checkInventory: response },
@@ -51,7 +49,7 @@ export const useInventory = () => {
     };
 
     callGetInventory();
-  }, [inventoryPayload]);
+  }, [cartList]);
 
   const outOfStockItems = useMemo(
     () =>
@@ -90,7 +88,10 @@ export const useInventory = () => {
           cartListMapping[item.recordKey] &&
           cartListMapping[item.recordKey].price !== item.price
       );
-      if (isMismatch) dispatch(cartActions.validateCart(productWithPrice));
+
+      if (isMismatch) {
+        dispatch(cartActions.validateCart(productWithPrice));
+      }
     }
   }, [cartListMapping]);
 

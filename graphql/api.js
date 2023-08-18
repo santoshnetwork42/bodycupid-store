@@ -931,6 +931,9 @@ export const findProducts = /* GraphQL */ `
         thumbImages
         isInventoryEnabled
         totalOrders
+        recommended
+        recommendPriority
+        recommendPrice
         variants(filter: $variantFilter, limit: $variantLimit) {
           items {
             id
