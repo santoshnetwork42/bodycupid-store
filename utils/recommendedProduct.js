@@ -5,7 +5,7 @@ import {
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 
-const getRecommededProducts = async ({
+const getRecommendedProducts = async ({
   items = [],
   limit = 8,
   recommenderType = "BEST_SELLER",
@@ -54,4 +54,4 @@ const getRecommededProducts = async ({
   return products.filter(Boolean);
 };
 
-export default getRecommededProducts;
+export default getRecommendedProducts;
