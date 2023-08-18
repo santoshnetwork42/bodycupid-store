@@ -351,14 +351,14 @@ function CartProduct({
 
         {!cartItemType && (
           <>
-            {!!matchingLTOProduct && (
+            {!!matchingLTOProduct && !outOfStock && (
               <LimitedTimeProductDeal
                 parentRecordKey={recordKey}
                 product={matchingLTOProduct}
                 addedAt={item.addedAt}
               />
             )}
-            {!!ltoDealProduct && (
+            {!!ltoDealProduct && !outOfStock && (
               <LimitedTimeProduct product={ltoDealProduct} />
             )}
           </>
