@@ -19,7 +19,6 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
-import CouponDiscountBar2 from "~/components/common/partials/v2/coupon-discount-bar";
 
 const logger = new Logger("Coupon");
 
@@ -224,7 +223,6 @@ function Coupon2(props) {
                 )}
               </div>
             </div>
-            {/* <CouponDiscountBar2 /> */}
           </div>
         </div>
       )}

@@ -47,7 +47,7 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
                 title={title}
               >
                 <ALink
-                  className="p-0 overflow-ellipsis font-weight-normal"
+                  className="p-0 overflow-ellipsis font-weight-bolder"
                   href={"/products/" + slug}
                 >
                   {title}
