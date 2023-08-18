@@ -1239,6 +1239,7 @@
 .limited-time-text {
   padding: 5px 8px 5px 8px;
   font-size: 12px;
+  text-align: right;
 }
 .limited-time-text.align-left {
   font-size: 10px !important;
@@ -1251,7 +1252,7 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 4fr 5fr;
 }
 
 .padding-coupon-container {
