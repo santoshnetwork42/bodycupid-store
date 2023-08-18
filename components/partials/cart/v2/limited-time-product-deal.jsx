@@ -19,7 +19,7 @@ const LimitedTimeProductDeal = ({
   addToCart,
 }) => {
   const { slug, images, title, listingPrice, recommendPrice } = product;
-  const [showLTOProduct, setShowLTOProduct] = useState(true);
+  const [showLTOProduct, setShowLTOProduct] = useState(false);
   const { isSmallSize } = useWindowDimensions();
 
   const { thumbImage } = getProductMeta(product);
