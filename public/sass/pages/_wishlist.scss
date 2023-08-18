@@ -236,6 +236,16 @@
 
 .card-margin-bottom {
   margin-bottom: 12px !important;
+  .form-control-drop-down{
+    height: 3.5rem;
+    border: 1px solid #ccc;
+    border-radius: .3rem;
+    color: #000;
+    padding: 0px 10px !important;
+    background-color: #fff;
+    font-size: 1rem;
+    margin-left: 5px;
+  }
 }
 
 .cart-item-container {
