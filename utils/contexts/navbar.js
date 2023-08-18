@@ -192,9 +192,9 @@ export const useMenu = () => {
   });
 
   menu.push({
-    label: "Clearance Sale",
-    link: `/collections/clearance-sale`,
-    slug: "clearance-sale",
+    label: "Rakhi Gifts",
+    link: `/collections/raksha-bandhan-gifts`,
+    slug: "raksha-bandhan-gifts",
   });
 
   return menu;
