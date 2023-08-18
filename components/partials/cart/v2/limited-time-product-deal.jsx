@@ -128,9 +128,6 @@ const LimitedTimeProductDeal = ({
                       ₹{toDecimal(recommendPrice)}
                     </span>
                   </div>
-                  <div className="product-savings">
-                    You saved ₹{listingPrice - recommendPrice}
-                  </div>
                 </div>
                 {!isSmallSize && (
                   <div className="cart-item-quantity">

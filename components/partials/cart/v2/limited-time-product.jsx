@@ -77,9 +77,6 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
                   </span>
                 )}
               </div>
-              <div className="product-savings">
-                You saved ₹{listingPrice - recommendPrice}
-              </div>
             </div>
             {!isSmallSize && (
               <>

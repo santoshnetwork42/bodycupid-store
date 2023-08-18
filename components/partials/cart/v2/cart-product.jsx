@@ -221,16 +221,6 @@ function CartProduct({
                 </>
               )}
 
-              {savingPerProduct > 0 &&
-                cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
-                  <div className="product-savings">
-                    You saved ₹
-                    {isFreeProduct
-                      ? toDecimal(price)
-                      : toDecimal(savingPerProduct)}
-                  </div>
-                )}
-
               {hasInventory && currentInventory < 10 && (
                 <>
                   <div className="text-secondary font-weight-semi-bold pt-1">
