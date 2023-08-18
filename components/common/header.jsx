@@ -11,9 +11,12 @@ import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
+import { useCartAB } from "~/utils/contexts/ab";
 
 function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
+  const cartAB = useCartAB();
+
   useEffect(() => {
     let header = document.querySelector("header");
     if (header) {
@@ -93,7 +96,12 @@ function Header({ navbar, auth, openPasswordLess }) {
                 </ALink>
               )} */}
               <span className="divider"></span>
-              {!navbar.hideCart && <CartMenu2 />}
+              {!navbar.hideCart && (
+                <>
+                  {!!cartAB && <CartMenu2 />}
+                  {!cartAB && <CartMenu />}
+                </>
+              )}
             </div>
           </div>
         </div>
