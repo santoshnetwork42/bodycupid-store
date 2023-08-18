@@ -15,16 +15,11 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal2 from "~/components/common/partials/v2/cart-totals";
 import { Logger } from "aws-amplify";
 import CartProduct from "~/components/partials/cart/v2/cart-product";
+import CouponDiscountBar2 from "~/components/common/partials/v2/coupon-discount-bar";
 
 function CartMenu(props) {
-  const {
-    cartList,
-    appliedCoupon,
-    isCartOpen,
-    setCartVisibility,
-    viewCart,
-    emptyCart,
-  } = props;
+  const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
+    props;
 
   const router = useRouter();
   const cartItems = useCartItems();
@@ -79,7 +74,7 @@ function CartMenu(props) {
           setCartVisibility(false);
         }}
       ></div>
-      <div className="sidebar-box sidebar-padding-v2">
+      <div className="sidebar-box">
         <div className="sidebar-header sidebar-header-v2 wrapper">
           <div className="d-flex align-items-center">
             <Cart />
@@ -102,16 +97,8 @@ function CartMenu(props) {
             {cartItems.length > 0 ? (
               <>
                 <div className=" ">
-                  <div className="shop-table cart-table lh-default ">
-                    <div className="font-weight-bold clear-cart text-right cart-product-size">
-                      <ALink
-                        className="justify-content-end font-weight-bold"
-                        href="#"
-                        onClick={emptyCart}
-                      >
-                        Clear Cart
-                      </ALink>
-                    </div>
+                  <CouponDiscountBar2 />
+                  <div className="shop-table cart-table lh-default sidebar-padding-v2 mt-4">
                     <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
                         <CartProduct
@@ -126,8 +113,8 @@ function CartMenu(props) {
                 </div>
 
                 <aside
-                  id="cart-details "
-                  className="text-primary sticky-sidebar-wrapper pb-6"
+                  id="cart-details"
+                  className="text-primary sticky-sidebar-wrapper pb-6 sidebar-padding-v2"
                 >
                   <div
                     className="sticky-sidebar"
@@ -173,7 +160,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   updateCart: cartActions.updateCart,
-  emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   setCartVisibility: modalActions.setCartVisibility,
   viewCart: eventActions.viewCart,

@@ -5,7 +5,7 @@ import { useFeaturedCoupons, useFreeProducts } from "~/utils/hooks/useCoupon";
 import { GiftBox } from "~/components/icons";
 
 const CouponBanner = ({ message, animate }) => (
-  <div className="coupon-discount-bar-2 mt-2">
+  <div className="coupon-discount-bar-2">
     <div className="coupon-discount">
       <p
         className={`coupon-discount-text font-weight-semi-bold pt-1 pb-1 m-0 ${
