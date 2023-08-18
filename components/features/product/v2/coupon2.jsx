@@ -135,6 +135,7 @@ function Coupon2(props) {
             });
           }
           logger.info("Applied coupon:", response);
+          isSliderOpen && closeSlider();
         } else {
           setError(message);
           logger.error("Failed to apply coupon:", message);
@@ -309,7 +310,9 @@ function Coupon2(props) {
               onChange={(e) => setCoupon(e.target.value)}
             />
             <button
-              className="apply-button d-flex justify-content-center align-items-center"
+              className={`apply-button d-flex justify-content-center align-items-center ${
+                coupon ? "text-dark" : ""
+              }`}
               disabled={loading}
               onClick={() => {
                 !!coupon && applyCouponCode();
@@ -351,7 +354,7 @@ function Coupon2(props) {
                             className={`${
                               appliedCoupon?.code === c.code
                                 ? "applied-coupon-tag"
-                                : "coupon-tag2"
+                                : "coupon-tag2 coupon-modal-tag-color"
                             }`}
                           >
                             <strong>{c.code}</strong>
@@ -391,7 +394,6 @@ function Coupon2(props) {
                           <button
                             onClick={() => {
                               applyCouponCode(c.code);
-                              closeSlider();
                             }}
                             className={`btn btn-primary coupon-apply-button${
                               !c.allowed ? " disabled-coupon" : ""
