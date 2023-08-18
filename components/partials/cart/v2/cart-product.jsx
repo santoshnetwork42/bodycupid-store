@@ -241,7 +241,7 @@ function CartProduct({
                   <div className="card-margin-bottom ml-2">
                     <select
                       name={`${recordKey}`}
-                      className="form-control variant-selection-form p-0"
+                      className="form-control-drop-down"
                       value={variantId}
                       onChange={(e) => {
                         changeVariant(e);
@@ -299,7 +299,7 @@ function CartProduct({
                 <div className="card-margin-bottom ml-2">
                   <select
                     name={`${recordKey}`}
-                    className="form-control-2 variant-selection-form-small p-0"
+                    className="form-control-drop-down"
                     value={variantId}
                     onChange={(e) => {
                       changeVariant(e);
