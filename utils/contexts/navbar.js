@@ -10,14 +10,18 @@ import {
   getFeaturedCoupon,
   searchConfigurations,
   getCoupon,
+  findProducts,
 } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
+import { useDispatch } from "react-redux";
+import { cartActions } from "~/store/cart";
 
 export const NavbarContext = createContext();
 
 function NavbarProvider({ children, config }) {
+  const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
@@ -104,6 +108,23 @@ function NavbarProvider({ children, config }) {
       .catch(errorHandler);
   };
 
+  const getLTOProducts = async () => {
+    try {
+      API.graphql(
+        graphqlOperation(findProducts, {
+          filter: { storeId: { eq: STORE_ID }, recommended: { eq: true } },
+          sort: [{ field: "recommendPriority", direction: "asc" }],
+        })
+      )
+        .then((res) => res.data.searchProducts.items)
+        .then((res) => {
+          dispatch(cartActions.initialLTO(res));
+        });
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   const getConfigurations = async () => {
     try {
       API.graphql(
@@ -131,6 +152,7 @@ function NavbarProvider({ children, config }) {
     getCollections();
     getConfigurations();
     getCoupons();
+    getLTOProducts();
   }, []);
 
   const addUserCoupon = async (coupon) => {

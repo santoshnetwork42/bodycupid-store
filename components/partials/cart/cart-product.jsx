@@ -11,6 +11,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
+import { productDiscountPercentage } from "~/utils/products";
 
 const logger = new Logger("Cart-products");
 
@@ -43,10 +44,6 @@ function CartProduct({
     cartItemSource,
     couponMessage,
   } = item;
-
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
-  };
 
   const changeVariant = (e) => {
     const variant = variants.items.find((c) => c.id === e.target.value);
