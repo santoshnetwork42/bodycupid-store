@@ -103,7 +103,7 @@ const LimitedTimeProductDeal = ({
                     title={title}
                   >
                     <ALink
-                      className="p-0 overflow-ellipsis font-weight-bolder"
+                      className="p-0 overflow-ellipsis2 font-weight-bolder"
                       href={"/products/" + slug}
                     >
                       {title}

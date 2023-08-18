@@ -115,7 +115,10 @@ function CartTotal2({
                     <td className="d-flex align-items-center no-wrap">
                       <h4 className="summary-subtitle lh-1 ">
                         Discounts
-                        <span> ({appliedCoupon.code})</span>
+                        <span className="font-weight-bold">
+                          {" "}
+                          ({appliedCoupon.code})
+                        </span>
                       </h4>
                     </td>
                     <td>

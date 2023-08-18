@@ -685,6 +685,11 @@ button {
   text-overflow: ellipsis;
 }
 
+.overflow-ellipsis2 {
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 //border
 .border-regular {
   border: 1px solid #e1e1e1;

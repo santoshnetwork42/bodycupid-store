@@ -170,7 +170,7 @@ function CartProduct({
                 title={title}
               >
                 <ALink
-                  className="p-0 overflow-ellipsis "
+                  className="p-0 overflow-ellipsis2"
                   href={"/products/" + slug}
                 >
                   {title}

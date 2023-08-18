@@ -124,7 +124,7 @@ function CartProduct({
           <div className="text-left text-primary w-100 mr-1 ml-2">
             <div className="mr-6 cart-product-title " title={title}>
               <ALink
-                className="p-0 overflow-ellipsis font-weight-normal"
+                className="p-0 overflow-ellipsis2 font-weight-normal"
                 href={"/products/" + slug}
               >
                 {title}
