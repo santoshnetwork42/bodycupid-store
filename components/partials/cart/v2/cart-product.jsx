@@ -7,7 +7,6 @@ import Quantity from "~/components/features/quantity";
 import { Delete, Free } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
-
 import {
   getProductInventory,
   productDiscountPercentage,
@@ -214,6 +213,12 @@ function CartProduct({
                     </>
                   )}
                 </div>
+              )}
+
+              {cartItemType === "FREE_PRODUCT" && (
+                <>
+                  {!!qty && <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>}
+                </>
               )}
 
               {hasInventory && currentInventory < 10 && (
