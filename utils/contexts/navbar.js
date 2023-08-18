@@ -175,7 +175,7 @@ export const useMenu = () => {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
       link: `/collections/${col.slug}?sortby=${
-        DEFAULT_SORTING[col.defaultSorting]
+        DEFAULT_SORTING[col.defaultSorting ? col.defaultSorting : "RECOMMENDED"]
       }`,
       slug: col.slug,
     }));

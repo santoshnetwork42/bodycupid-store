@@ -5,10 +5,11 @@ import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
-  searchCollectionTypes,
+  getCollectionType,
 } from "~/graphql/api";
 import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
+import { DEFAULT_SORTING } from "~/constant";
 
 const getSearchProducts = (filter) =>
   fetchData(findProducts, {
@@ -25,9 +26,12 @@ const getSearchProducts = (filter) =>
     imageLimit: 1,
   });
 
-const getCollectionBySlug = (filter) => {
-  return fetchData(searchCollectionTypes, {
-    filter,
+const getCollectionBySlug = (slug) => {
+  return fetchData(getCollectionType, {
+    filter: {
+      storeId: { eq: STORE_ID },
+      slug: { eq: slug },
+    },
   });
 };
 
@@ -55,8 +59,8 @@ export const getStaticProps = async () => {
       getSearchProductSubCategories,
       getStoreData,
       getRecommendedProducts(),
-      getCollectionBySlug({ slug: { eq: "best-seller" } }),
-      getCollectionBySlug({ slug: { eq: "featured" } }),
+      getCollectionBySlug("best-seller"),
+      getCollectionBySlug("featured"),
     ]);
 
     const { items: bestSellerItems } = searchBestSellerProducts;
@@ -73,6 +77,20 @@ export const getStaticProps = async () => {
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
     const featuredProducts = setSoldOutLast(featuredItems);
     const topProducts = setSoldOutLast(recommendedProducts);
+
+    const bestSellerDefaultSorting =
+      DEFAULT_SORTING[
+        bestSellerCollection.defaultSorting
+          ? bestSellerCollection.defaultSorting
+          : "RECOMMENDED"
+      ];
+
+    const featuredDefaultSorting =
+      DEFAULT_SORTING[
+        featuredCollection.defaultSorting
+          ? featuredCollection.defaultSorting
+          : "RECOMMENDED"
+      ];
 
     const brands = [
       "/images/brands/1.png",
@@ -101,8 +119,8 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
           googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
         },
-        bestSellerCollection,
-        featuredCollection,
+        bestSellerDefaultSorting,
+        featuredDefaultSorting,
       },
       revalidate: 60,
     };

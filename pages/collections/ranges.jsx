@@ -67,7 +67,11 @@ export const getStaticProps = async () => {
       { name: "Ranges", path: "/collections/ranges" },
       ...collectionsRes.map((col) => ({
         ...col,
-        path: `/collections/${col.slug}?${DEFAULT_SORTING[col.defaultSorting]}`,
+        path: `/collections/${col.slug}?sortby=${
+          DEFAULT_SORTING[
+            col.defaultSorting ? col.defaultSorting : "RECOMMENDED"
+          ]
+        }`,
       })),
       { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];

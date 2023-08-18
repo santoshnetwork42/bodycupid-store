@@ -1967,21 +1967,27 @@ export const getProductRecommendation = /* GraphQL */ `
 `;
 
 export const getCollectionType = /* GraphQL */ `
-  query GetCollectionType($id: ID!) {
-    getCollectionType(id: $id) {
-      id
-      slug
-      parent
-      name
-      title
-      description
-      storeId
-      showInMenu
-      priority
-      imageUrl
-      defaultSorting
-      createdAt
-      updatedAt
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        defaultSorting
+      }
     }
   }
 `;
