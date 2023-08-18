@@ -155,13 +155,6 @@ function CartProduct({
                 />
               </ALink>
             </figure>
-            {hasInventory && currentInventory < 10 && isSmallSize && (
-              <>
-                <div className="text-secondary font-weight-semi-bold pt-1">
-                  Only {currentInventory} left!
-                </div>
-              </>
-            )}
           </div>
           <div
             className={`cart-item-container ${
@@ -223,17 +216,7 @@ function CartProduct({
                 </div>
               )}
 
-              {savingPerProduct > 0 &&
-                cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
-                  <div className="product-savings">
-                    You saved ₹
-                    {isFreeProduct
-                      ? toDecimal(price)
-                      : toDecimal(savingPerProduct)}
-                  </div>
-                )}
-
-              {hasInventory && currentInventory < 10 && !isSmallSize && (
+              {hasInventory && currentInventory < 10 && (
                 <>
                   <div className="text-secondary font-weight-semi-bold pt-1">
                     Only {currentInventory} left!

@@ -41,6 +41,8 @@ function CartTotal2({
     cartAmountSaved: totalSaved,
   } = useCartTotal();
 
+  const totalSavings = Math.round(totalSaved + prepaidDiscount);
+
   const guestCheckout = useGuestCheckout();
 
   const {
@@ -190,7 +192,7 @@ function CartTotal2({
                 {" "}
                 ₹{toDecimal(prepaidGrandTotal)}
               </div>
-              {!!totalSaved && (
+              {!!totalSavings && (
                 <div className="summary-saving-lable-container m-0 p-0">
                   <p
                     className={`saving-lable ${
@@ -198,14 +200,14 @@ function CartTotal2({
                     }`}
                   >
                     You saved
-                    <span> {`₹${toDecimal(totalSaved)} `}</span>
+                    <span> {`₹${toDecimal(totalSavings)} `}</span>
                   </p>
                 </div>
               )}
             </div>
             <button
               onClick={validateAndGoToCheckout}
-              className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bold flex-60`}
+              className={`btn btn-product btn-primary btn-rounded btn-checkout w-100 font-weight-bolder flex-60`}
               disabled={!isInventoryCheckReady}
             >
               begin checkout

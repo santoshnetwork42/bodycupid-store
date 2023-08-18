@@ -43,7 +43,7 @@ const couponDiscountBar2 = ({ cartList }) => {
       );
     } else if (bxayCoupon) {
       const couponText = bxayCoupon?.allowed
-        ? `Congrats,'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' has been applied!`
+        ? `Congrats,'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' has been availed!`
         : `Add more items to unlock 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer'`;
       return (
         <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
