@@ -164,7 +164,7 @@ function CartProduct({
                 : ""
             }`}
           >
-            <div className="text-left text-primary w-100 mr-1 ml-2">
+            <div className="text-left text-primary w-100 pr-2 ml-2">
               <div
                 className="cart-product-title cart-product-size"
                 title={title}
