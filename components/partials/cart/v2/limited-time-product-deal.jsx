@@ -61,24 +61,15 @@ const LimitedTimeProductDeal = ({
     <>
       {showLTOProduct && (
         <div className="limited-time-product-card mt-3 mb-2">
-          <div
-            className={`limited-time-deal-overlay ${
-              isSmallSize
-                ? "grid-container"
-                : "d-flex justify-content-between text-align-center"
-            }`}
-          >
-            <div className="limited-time-text align-left">
-              Add to your cart now to avail limited time deal!
-            </div>
-            <span className="limited-time-text font-weight-bolder">
+          <div className="limited-time-deal-overlay">
+            <div className="limited-time-text font-weight-bolder">
               Limited Time Deal
-            </span>
+            </div>
           </div>
 
           <div className="limited-time-product">
             <div
-              className={`mobile-specific-cart-product-container cart-product-contaimer mobile-specific-card d-flex p-relative pt-8 pr-1 pb-2 limited-time-deal-card ${
+              className={`mobile-specific-cart-product-container cart-product-contaimer mobile-specific-card d-flex p-relative pt-6 pr-1 pb-2 limited-time-deal-card ${
                 isSmallSize ? "mb-0 pl-3" : "mb-2 pl-4"
               }`}
             >
