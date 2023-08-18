@@ -20,10 +20,10 @@ const CircularTimer = ({ starTime, duration, onComplete }) => {
         setTimeLeft((prevTime) => prevTime - 1);
         setProgress(((timeLeft - 1) / duration) * 100);
 
-        if ((timeLeft - 1) / duration <= 0.4) {
-          setCircleColor("#FFD613");
+        if ((timeLeft - 1) / duration <= 0.42) {
+          setCircleColor("#FFE500");
         }
-        if ((timeLeft - 1) / duration <= 0.2) {
+        if ((timeLeft - 1) / duration <= 0.17) {
           setCircleColor("#E50B20");
         }
       } else {
