@@ -193,7 +193,7 @@ function Coupon2(props) {
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">
-                    <div className="coupon-tag2 mb-0">
+                    <div className="applied-coupon-tag">
                       <span className="coupon-code">{appliedCoupon.code}</span>
                     </div>
                     <ALink

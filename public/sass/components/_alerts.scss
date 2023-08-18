@@ -284,12 +284,13 @@
 }
 
 .applied-coupon-tag {
-  background-color: rgba(23, 179, 27, 0.24);
+  background-color: white;
   width: fit-content;
   padding: 0.5rem 1.5rem;
   border: 1px dashed #17b31b;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
+  color: #17b31b ;
 }
 
 .coupon-message {
@@ -400,4 +401,9 @@
 
 .label-size {
   font-size: 1.3rem;
+}
+
+.background-coupon-white {
+  background: white;
+  color: green
 }
