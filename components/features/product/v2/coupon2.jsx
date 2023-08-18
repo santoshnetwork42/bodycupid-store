@@ -133,8 +133,8 @@ function Coupon2(props) {
               cartItemSource: "COUPON",
             });
           }
-          logger.info("Applied coupon:", response);
           isSliderOpen && closeSlider();
+          logger.info("Applied coupon:", response);
         } else {
           setError(message);
           logger.error("Failed to apply coupon:", message);
@@ -170,7 +170,9 @@ function Coupon2(props) {
         <div>
           {!!appliedCoupon && (
             <div className="d-flex justify-content-between padding-coupon-heading">
-              <h4 className="coupon-heading">Coupons</h4>
+              <div>
+                <h4 className="coupon-heading">Coupons</h4>
+              </div>
               <div className="cart-product-size">
                 <ALink
                   href="#"
@@ -392,6 +394,7 @@ function Coupon2(props) {
                           <button
                             onClick={() => {
                               applyCouponCode(c.code);
+                              closeSlider();
                             }}
                             className={`btn btn-primary coupon-apply-button${
                               !c.allowed ? " disabled-coupon" : ""
