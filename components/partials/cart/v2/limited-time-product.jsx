@@ -66,7 +66,9 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
                   price: recommendPrice,
                   listingPrice: listingPrice,
                 }) > 0 && (
-                  <span className={`discount-percentage discount-card ml-1`}>
+                  <span
+                    className={`discount-percentage ml-1 discount-card pl-1 pr-1`}
+                  >
                     {productDiscountPercentage({
                       price: recommendPrice,
                       listingPrice: listingPrice,
