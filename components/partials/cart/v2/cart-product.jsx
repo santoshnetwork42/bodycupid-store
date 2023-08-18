@@ -7,7 +7,6 @@ import Quantity from "~/components/features/quantity";
 import { Delete, Free } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
-
 import {
   getProductInventory,
   productDiscountPercentage,
@@ -155,13 +154,6 @@ function CartProduct({
                 />
               </ALink>
             </figure>
-            {hasInventory && currentInventory < 10 && isSmallSize && (
-              <>
-                <div className="text-secondary font-weight-semi-bold pt-1">
-                  Only {currentInventory} left!
-                </div>
-              </>
-            )}
           </div>
           <div
             className={`cart-item-container ${
@@ -223,6 +215,12 @@ function CartProduct({
                 </div>
               )}
 
+              {cartItemType === "FREE_PRODUCT" && (
+                <>
+                  {!!qty && <p className="text-grey mb-2 lh-1 ">Qty:{qty}</p>}
+                </>
+              )}
+
               {savingPerProduct > 0 &&
                 cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
                   <div className="product-savings">
@@ -233,7 +231,7 @@ function CartProduct({
                   </div>
                 )}
 
-              {hasInventory && currentInventory < 10 && !isSmallSize && (
+              {hasInventory && currentInventory < 10 && (
                 <>
                   <div className="text-secondary font-weight-semi-bold pt-1">
                     Only {currentInventory} left!
