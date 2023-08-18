@@ -7,7 +7,7 @@ import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 import { toDecimal } from "~/utils";
-import { Clock, LimitedTimeDiscount } from "~/components/icons";
+import { LimitedTimeDiscount } from "~/components/icons";
 import CircularTimer from "~/components/partials/cart/v2/circular-timer";
 import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
 import useWindowDimensions from "~/utils/getWindowDimension";
@@ -156,17 +156,10 @@ const LimitedTimeProductDeal = ({
             </div>
             {isSmallSize && (
               <div className="d-flex justify-content-between section-padding">
-                <div className="timer-container">
-                  <div className="icon-container">
-                    <Clock size={16} color={"white"} />
-                  </div>
-                  <div className="timer-content">
-                    <CircularTimer
-                      duration={LIMITED_TIME_DEAL_DURATION * 60}
-                      starTime={new Date(addedAt).valueOf()}
-                    />
-                  </div>
-                </div>
+                <CircularTimer
+                  duration={LIMITED_TIME_DEAL_DURATION * 60}
+                  starTime={new Date(addedAt).valueOf()}
+                />
 
                 <div className="ml-8">
                   <button

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import { Clock } from "~/components/icons";
 
 const CircularTimer = ({ starTime, duration, onComplete }) => {
   const radius = 32;
@@ -65,7 +66,14 @@ const CircularTimer = ({ starTime, duration, onComplete }) => {
           <div className="timer-text">{formatTime(timeLeft)}</div>
         </>
       ) : (
-        <div className="timer-text">{formatTime(timeLeft)}</div>
+        <div className="timer-container">
+          <div className="icon-container">
+            <Clock size={16} color={"white"} />
+          </div>
+          <div className="timer-content">
+            <div className="timer-text">{formatTime(timeLeft)}</div>
+          </div>
+        </div>
       )}
     </div>
   );
