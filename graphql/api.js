@@ -1803,6 +1803,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
       }
     }
   }
@@ -1961,6 +1962,26 @@ export const getProductRecommendation = /* GraphQL */ `
     getProductRecommendation(input: $input) {
       productId
       variantId
+    }
+  }
+`;
+
+export const getCollectionType = /* GraphQL */ `
+  query GetCollectionType($id: ID!) {
+    getCollectionType(id: $id) {
+      id
+      slug
+      parent
+      name
+      title
+      description
+      storeId
+      showInMenu
+      priority
+      imageUrl
+      defaultSorting
+      createdAt
+      updatedAt
     }
   }
 `;

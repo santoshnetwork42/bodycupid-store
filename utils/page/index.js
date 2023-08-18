@@ -5,6 +5,7 @@ import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
+  searchCollectionTypes,
 } from "~/graphql/api";
 import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
@@ -24,6 +25,12 @@ const getSearchProducts = (filter) =>
     imageLimit: 1,
   });
 
+const getCollectionBySlug = (filter) => {
+  return fetchData(searchCollectionTypes, {
+    filter,
+  });
+};
+
 export const getStaticProps = async () => {
   try {
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
@@ -40,17 +47,27 @@ export const getStaticProps = async () => {
       { searchProductSubCategories },
       { getStore: store },
       recommendedProducts,
+      { searchCollectionTypes: bestSellerCollectionItem },
+      { searchCollectionTypes: featuredCollectionItem },
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }),
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
       getRecommendedProducts(),
+      getCollectionBySlug({ slug: { eq: "best-seller" } }),
+      getCollectionBySlug({ slug: { eq: "featured" } }),
     ]);
 
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categories } = searchProductSubCategories;
+    const {
+      items: [bestSellerCollection],
+    } = bestSellerCollectionItem;
+    const {
+      items: [featuredCollection],
+    } = featuredCollectionItem;
     const { banners } = store;
 
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
@@ -84,6 +101,8 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
           googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
         },
+        bestSellerCollection,
+        featuredCollection,
       },
       revalidate: 60,
     };

@@ -1030,6 +1030,7 @@ export const getCollectionType = /* GraphQL */ `
       showInMenu
       priority
       imageUrl
+      defaultSorting
       createdAt
       updatedAt
       __typename
@@ -1054,6 +1055,7 @@ export const listCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
         createdAt
         updatedAt
         __typename
@@ -1091,6 +1093,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
         createdAt
         updatedAt
         __typename

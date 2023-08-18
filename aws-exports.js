@@ -3,32 +3,31 @@
 
 const awsmobile = {
   aws_project_region: "ap-south-1",
-  aws_mobile_analytics_app_id: "11e4faa463bf4ad4a4724fd406e71168",
+  aws_mobile_analytics_app_id: "1f8e0f53f968488b98d45c7508db4ff2",
   aws_mobile_analytics_app_region: "ap-south-1",
   Analytics: {
     AWSPinpoint: {
-      appId: "11e4faa463bf4ad4a4724fd406e71168",
+      appId: "1f8e0f53f968488b98d45c7508db4ff2",
       region: "ap-south-1",
     },
   },
   aws_appsync_graphqlEndpoint:
-    "https://pogjt6ntkvdb7gjbhfxfqkxidu.appsync-api.ap-south-1.amazonaws.com/graphql",
+    "https://qboywcwv3rhflfk3on3syqk2ly.appsync-api.ap-south-1.amazonaws.com/graphql",
   aws_appsync_region: "ap-south-1",
   aws_appsync_authenticationType: "API_KEY",
-  aws_appsync_apiKey: "da2-t3l3ygaho5erlaypt27r6vjz5u",
+  aws_appsync_apiKey: "da2-aqfa5haxpbenxdbabfopqs47me",
   aws_cloud_logic_custom: [
     {
       name: "healthrestapi",
-      endpoint:
-        "https://g7hlrlv1wh.execute-api.ap-south-1.amazonaws.com/develop",
+      endpoint: "https://o4cz1lygt3.execute-api.ap-south-1.amazonaws.com/qa",
       region: "ap-south-1",
     },
   ],
   aws_cognito_identity_pool_id:
-    "ap-south-1:549647da-4eae-43fd-a7b7-b659b69be666",
+    "ap-south-1:0ff990d5-816d-4a47-ad47-05d124c0a7e7",
   aws_cognito_region: "ap-south-1",
-  aws_user_pools_id: "ap-south-1_MakqxH3dS",
-  aws_user_pools_web_client_id: "2uiusjlk3da9sperajkkscvqk4",
+  aws_user_pools_id: "ap-south-1_lQ73iGRbS",
+  aws_user_pools_web_client_id: "3ntpud8le0cdtd8j52m6vopje2",
   oauth: {},
   aws_cognito_username_attributes: ["PHONE_NUMBER"],
   aws_cognito_social_providers: [],
@@ -40,7 +39,7 @@ const awsmobile = {
     passwordPolicyCharacters: [],
   },
   aws_cognito_verification_mechanisms: ["PHONE_NUMBER"],
-  aws_user_files_s3_bucket: "healthstaticbucket92130-develop",
+  aws_user_files_s3_bucket: "healthstaticbucket204138-qa",
   aws_user_files_s3_bucket_region: "ap-south-1",
 };
 

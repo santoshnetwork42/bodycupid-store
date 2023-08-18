@@ -11,6 +11,7 @@ import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { DEFAULT_SORTING } from "~/constant";
 
 import { Logger } from "aws-amplify";
 
@@ -66,7 +67,7 @@ export const getStaticProps = async () => {
       { name: "Ranges", path: "/collections/ranges" },
       ...collectionsRes.map((col) => ({
         ...col,
-        path: `/collections/${col.slug}`,
+        path: `/collections/${col.slug}?${DEFAULT_SORTING[col.defaultSorting]}`,
       })),
       { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];

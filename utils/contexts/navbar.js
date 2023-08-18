@@ -14,6 +14,7 @@ import {
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
+import { DEFAULT_SORTING } from "~/constant";
 
 export const NavbarContext = createContext();
 
@@ -173,7 +174,9 @@ export const useMenu = () => {
   if (collections.length) {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
-      link: `/collections/${col.slug}`,
+      link: `/collections/${col.slug}?sortby=${
+        DEFAULT_SORTING[col.defaultSorting]
+      }`,
       slug: col.slug,
     }));
 

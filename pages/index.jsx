@@ -20,6 +20,7 @@ const ProductCollection = dynamic(() =>
 );
 
 export { getStaticProps } from "~/utils/page";
+import { DEFAULT_SORTING } from "~/constant";
 
 function HomePage({
   hero,
@@ -30,6 +31,8 @@ function HomePage({
   brands,
   store,
   pageMeta,
+  bestSellerCollection,
+  featuredCollection,
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
@@ -49,7 +52,9 @@ function HomePage({
           title="Best sellers"
           disableCarousel={isSmallSize}
           slug="best-seller"
-          redirectTo="/collections/best-seller"
+          redirectTo={`/collections/best-seller?sortby=${
+            DEFAULT_SORTING[bestSellerCollection.defaultSorting]
+          }`}
         />
 
         {!!topProducts?.length && (
@@ -66,7 +71,9 @@ function HomePage({
           products={featuredProducts}
           title="Our featured"
           slug="featured"
-          redirectTo="/collections/featured"
+          redirectTo={`/collections/featured?sortby=${
+            DEFAULT_SORTING[featuredCollection.defaultSorting]
+          }`}
         />
         <CategorySection categories={categories} />
         <ReviewSection />
