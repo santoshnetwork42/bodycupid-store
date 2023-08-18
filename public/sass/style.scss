@@ -11,6 +11,14 @@
 8. demo
 */
 
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-Medium.ttf") format("truetype");
+  font-weight: 900; /* Bold */
+  font-style: normal;
+  font-display: swap;
+}
+
 /* 1. config */
 @import "config/variables";
 
