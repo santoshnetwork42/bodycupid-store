@@ -9,6 +9,7 @@ import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { LimitedTimeDiscount } from "~/components/icons";
 import CircularTimer from "~/components/partials/cart/v2/circular-timer";
+import { useConfiguration } from "~/utils/contexts/navbar";
 import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
 import useWindowDimensions from "~/utils/getWindowDimension";
 
@@ -23,6 +24,7 @@ const LimitedTimeProductDeal = ({
   const { isSmallSize } = useWindowDimensions();
 
   const { thumbImage } = getProductMeta(product);
+  const limitedTimeDuration = useConfiguration(LIMITED_TIME_DEAL_DURATION, 0);
 
   useEffect(() => {
     const addedAtTimestamp = new Date(addedAt).valueOf();
@@ -30,12 +32,12 @@ const LimitedTimeProductDeal = ({
     const timeDifference = nowTimestamp - addedAtTimestamp;
 
     let timeoutId;
-    if (timeDifference <= LIMITED_TIME_DEAL_DURATION * 60 * 1000) {
+    if (timeDifference <= limitedTimeDuration * 60 * 1000) {
       setShowLTOProduct(true);
 
       timeoutId = setTimeout(() => {
         setShowLTOProduct(false);
-      }, LIMITED_TIME_DEAL_DURATION * 60 * 1000 - timeDifference);
+      }, limitedTimeDuration * 60 * 1000 - timeDifference);
     }
 
     return () => {
@@ -137,7 +139,7 @@ const LimitedTimeProductDeal = ({
                     <div className="mb-1">
                       <div className="ml-7 mb-2">
                         <CircularTimer
-                          duration={LIMITED_TIME_DEAL_DURATION * 60}
+                          duration={limitedTimeDuration * 60}
                           starTime={new Date(addedAt).valueOf()}
                         />
                       </div>
@@ -157,7 +159,7 @@ const LimitedTimeProductDeal = ({
             {isSmallSize && (
               <div className="d-flex justify-content-between section-padding">
                 <CircularTimer
-                  duration={LIMITED_TIME_DEAL_DURATION * 60}
+                  duration={limitedTimeDuration * 60}
                   starTime={new Date(addedAt).valueOf()}
                 />
 
