@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import { Clock } from "~/components/icons";
 
 const CircularTimer = ({ starTime, duration, onComplete }) => {
   const radius = 32;
@@ -10,7 +11,7 @@ const CircularTimer = ({ starTime, duration, onComplete }) => {
 
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [progress, setProgress] = useState(100);
-  const [circleColor, setCircleColor] = useState("#00cc00");
+  const [circleColor, setCircleColor] = useState("#17B31B");
   const { isSmallSize } = useWindowDimensions();
 
   useEffect(() => {
@@ -19,11 +20,11 @@ const CircularTimer = ({ starTime, duration, onComplete }) => {
         setTimeLeft((prevTime) => prevTime - 1);
         setProgress(((timeLeft - 1) / duration) * 100);
 
-        if ((timeLeft - 1) / duration <= 0.35) {
-          setCircleColor("#ff9900");
+        if ((timeLeft - 1) / duration <= 0.4) {
+          setCircleColor("#FFD613");
         }
-        if ((timeLeft - 1) / duration <= 0.15) {
-          setCircleColor("#ff0000");
+        if ((timeLeft - 1) / duration <= 0.2) {
+          setCircleColor("#E50B20");
         }
       } else {
         clearInterval(timer);
@@ -65,7 +66,17 @@ const CircularTimer = ({ starTime, duration, onComplete }) => {
           <div className="timer-text">{formatTime(timeLeft)}</div>
         </>
       ) : (
-        <div className="timer-text">{formatTime(timeLeft)}</div>
+        <div
+          className="timer-container"
+          style={{ backgroundColor: circleColor }}
+        >
+          <div className="icon-container">
+            <Clock size={16} color={"white"} />
+          </div>
+          <div className="timer-content">
+            <div className="timer-text">{formatTime(timeLeft)}</div>
+          </div>
+        </div>
       )}
     </div>
   );

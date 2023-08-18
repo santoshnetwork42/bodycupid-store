@@ -155,6 +155,13 @@ function CartProduct({
                 />
               </ALink>
             </figure>
+            {hasInventory && currentInventory < 10 && isSmallSize && (
+              <>
+                <div className="text-secondary font-weight-semi-bold pt-1">
+                  Only {currentInventory} left!
+                </div>
+              </>
+            )}
           </div>
           <div
             className={`cart-item-container ${
@@ -226,7 +233,7 @@ function CartProduct({
                   </div>
                 )}
 
-              {hasInventory && currentInventory < 10 && (
+              {hasInventory && currentInventory < 10 && !isSmallSize && (
                 <>
                   <div className="text-secondary font-weight-semi-bold pt-1">
                     Only {currentInventory} left!
@@ -344,14 +351,14 @@ function CartProduct({
 
         {!cartItemType && (
           <>
-            {!!matchingLTOProduct && (
+            {!!matchingLTOProduct && !outOfStock && (
               <LimitedTimeProductDeal
                 parentRecordKey={recordKey}
                 product={matchingLTOProduct}
                 addedAt={item.addedAt}
               />
             )}
-            {!!ltoDealProduct && (
+            {!!ltoDealProduct && !outOfStock && (
               <LimitedTimeProduct product={ltoDealProduct} />
             )}
           </>

@@ -328,8 +328,8 @@
 }
 
 .cart-sticky-checkout {
-  padding: 16px;
-  border-top: 1px solid #ededed;
+  padding: 12px 16px;
+  border-top: 1px solid #EDEDED;
 }
 
 .td-alignment {
@@ -1239,6 +1239,7 @@
 .limited-time-text {
   padding: 5px 8px 5px 8px;
   font-size: 12px;
+  text-align: right;
 }
 .limited-time-text.align-left {
   font-size: 10px !important;
@@ -1251,11 +1252,11 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 4fr 5fr;
 }
 
 .padding-coupon-container {
-  padding: 16px 16px 24px 16px;
+  padding: 12px 16px;
 }
 
 .box-shadow-coupon {
