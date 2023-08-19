@@ -5,7 +5,6 @@ import { useWindowDimensions } from "~/utils/getWindowDimension";
 
 import NextHead from "~/components/common/next-head";
 import IntroSection from "~/components/partials/home/intro-section";
-// import StorySection from "~/components/partials/home/story-section";
 
 const CategorySection = dynamic(() =>
   import("~/components/partials/home/category-section")
@@ -25,12 +24,14 @@ export { getStaticProps } from "~/utils/page";
 function HomePage({
   hero,
   bestSellerProducts,
+  topProducts,
   featuredProducts,
   categories,
-  // storyCategories,
   brands,
   store,
   pageMeta,
+  bestSellerDefaultSorting,
+  featuredDefaultSorting,
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
@@ -42,7 +43,6 @@ function HomePage({
       <h1 className="d-none">{name} - Homepage</h1>
       <div className="page-content page-content-wrapper">
         <div className="intro-section">
-          {/* <StorySection categories={storyCategories} /> */}
           <IntroSection {...hero} />
         </div>
 
@@ -51,14 +51,24 @@ function HomePage({
           title="Best sellers"
           disableCarousel={isSmallSize}
           slug="best-seller"
-          redirectTo="/collections/best-seller"
+          redirectTo={`/collections/best-seller?sortby=${bestSellerDefaultSorting}`}
         />
+
+        {!!topProducts?.length && (
+          <ProductCollection
+            products={topProducts}
+            title="Top products"
+            disableCarousel={isSmallSize}
+            slug="top-product"
+            redirectTo="/collections/top-products"
+          />
+        )}
 
         <ProductCollection
           products={featuredProducts}
           title="Our featured"
           slug="featured"
-          redirectTo="/collections/featured"
+          redirectTo={`/collections/featured?sortby=${featuredDefaultSorting}`}
         />
         <CategorySection categories={categories} />
         <ReviewSection />

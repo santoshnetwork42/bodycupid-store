@@ -2,6 +2,7 @@ import { persistReducer } from "redux-persist";
 import { getFirstVariant } from "~/utils/products";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
+import { alertToaster } from "~/utils/popupHelper";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -13,12 +14,15 @@ export const actionTypes = {
   SET_CART: "SET_CART",
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
+  VALIDATE_CART: "VALIDATE_CART",
+  INITIALIZE_LTO: "INITIALIZE_LTO",
 };
 
 const initialState = {
   cart: null,
   data: [],
   coupon: null,
+  ltoProducts: [],
 };
 
 function cartReducer(state = initialState, action) {
@@ -43,6 +47,11 @@ function cartReducer(state = initialState, action) {
         tmpProduct.listingPrice = tmpProduct.price;
       }
 
+      // Always at last
+      if (tmpProduct.cartItemSource === "LIMITED_TIME_DEAL") {
+        tmpProduct.price = tmpProduct.recommendPrice;
+      }
+
       if (state.data.some((item) => item.recordKey === recordKey)) {
         let tmpData = state.data.reduce((acc, cur) => {
           if (cur.recordKey === recordKey) {
@@ -60,20 +69,55 @@ function cartReducer(state = initialState, action) {
 
         return { ...state, data: tmpData };
       } else {
+        const selfProductsLength =
+          state.data?.filter((p) => !p.cartItemSource)?.length || 0;
+        const ltoProductLength = state.ltoProducts?.length || 0;
+        const ltoIndex =
+          selfProductsLength > ltoProductLength ? -1 : selfProductsLength;
+
+        const currentATC = {
+          ...tmpProduct,
+          recordKey,
+          ltoProduct: null,
+          addedAt: new Date().toISOString(),
+        };
+
+        if (!tmpProduct.cartItemSource && ltoIndex > -1) {
+          currentATC.ltoProduct = state.ltoProducts[ltoIndex]?.id || null;
+        }
+
         return {
           ...state,
-          data: [...state.data, { ...tmpProduct, recordKey }],
+          data: [
+            ...state.data.map((p) => {
+              if (p.recordKey === tmpProduct.parentRecordKey) {
+                p.ltoProduct = null;
+                p.ltoRecordKey = recordKey;
+              }
+              return p;
+            }),
+            currentATC,
+          ],
         };
       }
 
     case actionTypes.REMOVE_FROM_CART:
       tmpProduct = { ...action.payload.product };
-      let cart = state.data.reduce((cartAcc, product) => {
-        if (tmpProduct.recordKey !== product.recordKey) {
-          cartAcc.push(product);
-        }
-        return cartAcc;
-      }, []);
+      let { cart, ltoRecordKey } = state.data.reduce(
+        (cartAcc, product) => {
+          if (tmpProduct.recordKey !== product.recordKey) {
+            cartAcc.cart.push(product);
+          } else {
+            cartAcc.ltoRecordKey = product.ltoRecordKey;
+          }
+          return cartAcc;
+        },
+        { cart: [], ltoRecordKey: null }
+      );
+
+      if (ltoRecordKey) {
+        cart = cart.filter((c) => c.recordKey !== ltoRecordKey);
+      }
 
       return { ...state, data: cart };
 
@@ -81,7 +125,7 @@ function cartReducer(state = initialState, action) {
       return { ...state, data: action.payload.products || [] };
 
     case actionTypes.REFRESH_CART:
-      return initialState;
+      return { ...initialState, ltoProducts: state.ltoProducts };
 
     case actionTypes.SET_CART:
       return { ...state, cart: { ...state.cart, ...action.payload } };
@@ -91,6 +135,24 @@ function cartReducer(state = initialState, action) {
 
     case actionTypes.REMOVE_COUPON:
       return { ...state, coupon: null };
+
+    case actionTypes.VALIDATE_CART:
+      const { payload } = action;
+      const data = state.data.map((item) => {
+        if (payload[item.recordKey]) {
+          return {
+            ...item,
+            price: payload[item.recordKey],
+          };
+        }
+        return item;
+      });
+
+      alertToaster("Cart price is updated");
+      return { ...state, data };
+
+    case actionTypes.INITIALIZE_LTO:
+      return { ...state, ltoProducts: action.payload.ltoProducts };
 
     default:
       return state;
@@ -114,10 +176,20 @@ export const cartActions = {
     type: actionTypes.APPLY_COUPONS,
     payload: { coupon },
   }),
+  validateCart: (payload) => ({
+    type: actionTypes.VALIDATE_CART,
+    payload,
+  }),
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
   setCart: (cart) => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
+  initialLTO: (data) => ({
+    type: actionTypes.INITIALIZE_LTO,
+    payload: {
+      ltoProducts: data,
+    },
+  }),
 };
 
 const persistConfig = {

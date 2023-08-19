@@ -3,240 +3,249 @@
 ---------------------------------------------- */
 .container,
 .container-fluid {
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @include mq(xs, max) {
-    .container,
-    .container-fluid {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
+  .container,
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 .container-fluid {
-    @include css(max-width, base, _container-fluid-width);
+  @include css(max-width, base, _container-fluid-width);
 }
 .container {
-    @include css(max-width, base, _container-width);
+  @include css(max-width, base, _container-width);
 }
 .divider {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 1.5rem;
-    height: 2.5rem;
-    width: 1px;
-    background-color: $border-color;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 1.5rem;
+  height: 2.5rem;
+  width: 1px;
+  background-color: $border-color;
 }
 
 .coupon-discount-bar {
-    background-color: #17B31B;
-    justify-content: center;
-    position: fixed;
-    bottom: 65px;
-    z-index: 1000;
-    width: 100%;
+  background-color: #17b31b;
+  justify-content: center;
+  position: fixed;
+  bottom: 65px;
+  z-index: 1000;
+  width: 100%;
 
-    @media (min-width: 575px) {
-       max-width: 50rem !important;
-    }
+  @media (min-width: 575px) {
+    max-width: 50rem !important;
+  }
+}
+
+.coupon-discount-bar-2 {
+  background-color: #17b31b;
+  justify-content: center;
+  z-index: 1000;
+  width: 100%;
+
+  @media (min-width: 575px) {
+    max-width: 50rem !important;
+  }
 }
 
 .animate {
-    animation-name: slideIn;
-    animation-duration: 1s;
+  animation-name: slideIn;
+  animation-duration: 1s;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  
-  @keyframes slideIn {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
+}
 
 @media (min-width: 480px) {
-    .coupon-discount-bar {
-      bottom: 72px !important;
-    }
+  .coupon-discount-bar {
+    bottom: 72px !important;
+  }
 }
 
 .coupon-discount {
-    .coupon-discount-text {
-        letter-spacing: 1.5px;
-        font-weight: 400;
-        color: white;
-        text-align: center; 
-    }
+  .coupon-discount-text {
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    font-size: 12px !important;
+  }
 }
 
 .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  text-align: center;
+  position: relative;
+  padding: 16px;
+}
+
+.close-button {
+  width: 100%;
+  background-color: #ff5f5f;
+  border: none;
+  border-top: 1px solid #dddddd;
+  padding: 10px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.modal-title {
+  color: #333333;
+  font-size: 15px;
+  margin-top: -2px;
+}
+
+.modal-amount {
+  color: #17b31b;
+  font-size: 32px;
+  margin-top: -12px;
+}
+
+.modal-savings {
+  color: #555555;
+  font-size: 15px;
+  margin-top: -15px !important;
+}
+
+.close-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  cursor: pointer;
+}
+
+$yellow: #ffd300;
+$blue: #17d3ff;
+$pink: #ff4e91;
+
+$duration: 1000;
+
+@function randomNum($min, $max) {
+  $rand: random();
+  $randomNum: $min + floor($rand * (($max - $min) + 1));
+
+  @return $randomNum;
+}
+
+.confetti {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  z-index: 1000000;
+
+  @media (max-width: 768px) {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 9999;
+    height: 300px;
+    left: 50%;
   }
-  
-  .modal-content {
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 300px;
-    max-width: 90%;
-    max-height: 90%;
-    overflow: auto;
-    text-align: center;
-    position: relative;
-    padding: 16px;
-  }
-  
-  .close-button {
-    width: 100%;
-    background-color: #ff5f5f;
-    border: none;
-    border-top: 1px solid #dddddd;
-    padding: 10px;
-    color: #ffffff;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 15px;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 16px;
+  background: $yellow;
+  top: 0;
+  opacity: 0;
+
+  @for $i from 1 through 18 {
+    &:nth-child(#{$i}) {
+      left: $i * 7%;
+      transform: rotate(#{randomNum(-80, 80)}deg);
+      animation: makeItRain $duration * 1ms infinite ease-out;
+      animation-delay: #{randomNum(0, $duration * 0.5)}ms;
+      animation-duration: #{randomNum($duration * 0.7, $duration * 1.2)}ms;
+    }
   }
 
-  .modal-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
+  &:nth-child(odd) {
+    background: $blue;
   }
-  
-  .modal-title {
-    color: #333333;
-    font-size: 15px;
-    margin-top: -2px;
-  }
-  
-  .modal-amount {
-    color: #17b31b;
-    font-size: 32px;
-    margin-top: -12px;
-  }
-  
-  .modal-savings {
-    color: #555555;
-    font-size: 15px;
-    margin-top: -15px !important;
-  }
-  
-  .close-icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    border: none;
-    cursor: pointer;
-  }
-  
-    $yellow: #ffd300;
-    $blue: #17d3ff;
-    $pink: #ff4e91;
-  
-    $duration: 1000;
-  
-    @function randomNum($min, $max) {
-      $rand: random();
-      $randomNum: $min +floor($rand * (($max - $min) + 1));
-  
-      @return $randomNum;
-    }
 
-  
-    .confetti {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      top: 50%;
-      left: -50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 600px;
-      overflow: hidden;
-      z-index: 1000000;
+  &:nth-child(even) {
+    z-index: 1;
+  }
 
-      @media (max-width: 768px) {
-          position: fixed;
-          height: 300px;
-          left: 50%;
-        }
-    }
-  
-    .confetti-piece {
-      position: absolute;
-      width: 8px;
-      height: 16px;
-      background: $yellow;
-      top: 0;
-      opacity: 0;
-  
-      @for $i from 1 through 18 {
-        &:nth-child(#{$i}) {
-          left: $i * 7%;
-          transform: rotate(#{randomNum(-80, 80)}deg);
-          animation: makeItRain $duration * 1ms infinite ease-out;
-          animation-delay: #{randomNum(0, $duration * .5)}ms;
-          animation-duration: #{randomNum($duration * .7, $duration * 1.2)}ms
-        }
-      }
-  
-      &:nth-child(odd) {
-        background: $blue;
-      }
-  
-      &:nth-child(even) {
-        z-index: 1;
-      }
-  
-      &:nth-child(4n) {
-        width: 5px;
-        height: 12px;
-        animation-duration: $duration * 2ms;
-      }
-  
-      &:nth-child(3n) {
-        width: 3px;
-        height: 10px;
-        animation-duration: $duration * 2.5ms;
-        animation-delay: $duration * 1ms;
-      }
-  
-      &:nth-child(4n-7) {
-        background: $pink;
-      }
-    }
-  
-    @keyframes makeItRain {
-      from {
-        opacity: 0;
-      }
-  
-      50% {
-        opacity: 1;
-      }
-  
-      to {
-        transform: translateY(200px);
-      }
-    }
-  
-    
+  &:nth-child(4n) {
+    width: 5px;
+    height: 12px;
+    animation-duration: $duration * 2ms;
+  }
+
+  &:nth-child(3n) {
+    width: 3px;
+    height: 10px;
+    animation-duration: $duration * 2.5ms;
+    animation-delay: $duration * 1ms;
+  }
+
+  &:nth-child(4n-7) {
+    background: $pink;
+  }
+}
+
+@keyframes makeItRain {
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(200px);
+  }
+}

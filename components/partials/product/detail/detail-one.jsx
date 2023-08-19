@@ -24,15 +24,12 @@ import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import { useProductCoupons } from "~/utils/hooks/useCoupon";
 import { modalActions } from "~/store/modal";
-// import { useCartTotal } from "~/utils/hooks/useCart";
 
 function DetailOne(props) {
   const router = useRouter();
   const {
     query: { review },
   } = router;
-
-  // const { cartAmountSaved: totalSaved } = useCartTotal();
 
   const {
     cartList,
@@ -46,6 +43,7 @@ function DetailOne(props) {
     setVariant = () => {},
     addToCart,
     removeFromCart,
+    closeQuickview,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
@@ -141,6 +139,7 @@ function DetailOne(props) {
 
   const addToCartHandler = () => {
     setCartVisibility(true);
+    closeQuickview();
     if (hasInventory) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
@@ -250,11 +249,11 @@ function DetailOne(props) {
       )} */}
 
       {!!product?.benefits && (
-          <div className="product-benefits mb-2">
-            {product?.benefits.map((benefit) => (
-                <label key={benefit}>{benefit}</label>
-            ))}
-          </div>
+        <div className="product-benefits mb-2">
+          {product?.benefits.map((benefit) => (
+            <label key={benefit}>{benefit}</label>
+          ))}
+        </div>
       )}
 
       <div className="product-variation-price">
@@ -511,7 +510,8 @@ function DetailOne(props) {
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
-                            setCartVisibility(true)                          }}
+                            setCartVisibility(true);
+                          }}
                         >
                           <i>
                             <Bag color="currentColor" size={20} />
@@ -569,4 +569,5 @@ export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   getFeaturedCoupons: systemActions.getFeaturedCoupon,
   setCartVisibility: modalActions.setCartVisibility,
+  closeQuickview: modalActions.closeQuickview,
 })(DetailOne);

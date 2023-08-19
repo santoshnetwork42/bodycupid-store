@@ -15,7 +15,7 @@ function CategorySection({ categories = [], tileClicked }) {
       <div className="container">
         <h2 className="title capitalize-title">Browse Our Categories</h2>
         <div className="row elements">
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             return (
               <div key={category.id} className="col-3">
                 <div className="category category-spacing category-ellipse text-uppercase">
@@ -24,7 +24,7 @@ function CategorySection({ categories = [], tileClicked }) {
                     onClick={() => {
                       tileClicked({
                         banner_name: category.name,
-                        item_id: category.id,
+                        item_id: index + 1,
                         Source: source,
                         "Item Count": 0,
                         "Section Name": " browse our categories",

@@ -21,7 +21,7 @@ function Addresses({
   isAddressesModal,
   openAllAddressModal,
   closeAllAddressModal,
-  addressSelected
+  addressSelected,
 }) {
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [loading, setLoading] = useState(!!user);
@@ -47,6 +47,7 @@ function Addresses({
       setAddresses(userAddresses.items);
       setLoading(false);
       setSelected(userAddresses.items[0]);
+      addressSelected(userAddresses.items[0], totalPrice);
       return userAddresses.items;
     } catch (error) {
       errorHandler(error);
@@ -397,5 +398,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   openAllAddressModal: modalActions.openAllAddressModal,
   closeAllAddressModal: modalActions.closeAllAddressModal,
-  addressSelected:eventActions.addressSelected
+  addressSelected: eventActions.addressSelected,
 })(Addresses);
