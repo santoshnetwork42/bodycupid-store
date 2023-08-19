@@ -9,7 +9,7 @@ import {
 } from "~/graphql/api";
 import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
-import { DEFAULT_SORTING } from "~/constant";
+import { getDefaultSorting } from "..";
 
 const getSearchProducts = (filter) =>
   fetchData(findProducts, {
@@ -78,20 +78,6 @@ export const getStaticProps = async () => {
     const featuredProducts = setSoldOutLast(featuredItems);
     const topProducts = setSoldOutLast(recommendedProducts);
 
-    const bestSellerDefaultSorting =
-      DEFAULT_SORTING[
-        bestSellerCollection.defaultSorting
-          ? bestSellerCollection.defaultSorting
-          : "RECOMMENDED"
-      ];
-
-    const featuredDefaultSorting =
-      DEFAULT_SORTING[
-        featuredCollection.defaultSorting
-          ? featuredCollection.defaultSorting
-          : "RECOMMENDED"
-      ];
-
     const brands = [
       "/images/brands/1.png",
       "/images/brands/2.png",
@@ -119,8 +105,12 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
           googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
         },
-        bestSellerDefaultSorting,
-        featuredDefaultSorting,
+        bestSellerDefaultSorting: getDefaultSorting(
+          bestSellerCollection.defaultSorting
+        ),
+        featuredDefaultSorting: getDefaultSorting(
+          featuredCollection.defaultSorting
+        ),
       },
       revalidate: 60,
     };

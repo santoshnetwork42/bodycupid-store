@@ -17,7 +17,7 @@ import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
 import { useDispatch } from "react-redux";
 import { cartActions } from "~/store/cart";
-import { DEFAULT_SORTING } from "~/constant";
+import { getDefaultSorting } from "..";
 
 export const NavbarContext = createContext();
 
@@ -196,9 +196,9 @@ export const useMenu = () => {
   if (collections.length) {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
-      link: `/collections/${col.slug}?sortby=${
-        DEFAULT_SORTING[col.defaultSorting ? col.defaultSorting : "RECOMMENDED"]
-      }`,
+      link: `/collections/${col.slug}?sortby=${getDefaultSorting(
+        col.defaultSorting
+      )}`,
       slug: col.slug,
     }));
 
