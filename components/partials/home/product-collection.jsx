@@ -15,6 +15,7 @@ function ProductCollection({
   redirectTo,
   disableCarousel,
   large,
+  addClass,
 }) {
   useEffect(() => {
     const ele = document.getElementById(`product-carousel-${slug}`);
@@ -35,7 +36,7 @@ function ProductCollection({
       delay={300}
       duration={1200}
       triggerOnce
-      className="product-widget-wrapper"
+      className={`product-widget-wrapper ${addClass}`}
     >
       <section
         className={`product-wrapper product-collection container pt-6 pb-3`}

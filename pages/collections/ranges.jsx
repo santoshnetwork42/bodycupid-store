@@ -13,6 +13,7 @@ import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 import { Logger } from "aws-amplify";
+import { getDefaultSorting } from "~/utils";
 
 const logger = new Logger("Ranges collection");
 
@@ -66,7 +67,9 @@ export const getStaticProps = async () => {
       { name: "Ranges", path: "/collections/ranges" },
       ...collectionsRes.map((col) => ({
         ...col,
-        path: `/collections/${col.slug}`,
+        path: `/collections/${col.slug}?sortby=${getDefaultSorting(
+          col.defaultSorting
+        )}`,
       })),
       { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];

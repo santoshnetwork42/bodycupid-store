@@ -11,6 +11,7 @@ import { cartActions } from "~/store/cart";
 import { toDecimal } from "~/utils";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getUpdatedCart } from "~/utils/helper";
+import { productDiscountPercentage } from "~/utils/products";
 
 const logger = new Logger("Cart-products");
 
@@ -31,6 +32,7 @@ function CartProduct({
     qty,
     slug,
     images,
+    thumbImage,
     title,
     price,
     listingPrice,
@@ -42,10 +44,6 @@ function CartProduct({
     cartItemSource,
     couponMessage,
   } = item;
-
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
-  };
 
   const changeVariant = (e) => {
     const variant = variants.items.find((c) => c.id === e.target.value);
@@ -102,15 +100,6 @@ function CartProduct({
     [cartItemType]
   );
 
-  const image = useMemo(() => {
-    if (Array.isArray(variants?.items) && variantId) {
-      const currVariant =  variants.items.find(v => v.id === variantId);
-      if (currVariant?.imageUrl) return currVariant?.imageUrl;
-    }
-
-    return images?.items[0]?.imageKey;
-  }, [variantId, variants, images])
-
   const outOfStock = qty > inventory;
 
   if (isSmall)
@@ -125,7 +114,7 @@ function CartProduct({
           <figure>
             <ALink href={"/products/" + slug} className="p-0 border-2">
               <img
-                src={getPublicImageURL(image)}
+                src={getPublicImageURL(thumbImage)}
                 width="80"
                 height="80"
                 alt={images?.items[0]?.alt}
@@ -135,7 +124,7 @@ function CartProduct({
           <div className="text-left text-primary w-100 mr-1 ml-2">
             <div className="mr-6 cart-product-title " title={title}>
               <ALink
-                className="p-0 overflow-ellipsis font-weight-normal"
+                className="p-0 overflow-ellipsis2 font-weight-normal"
                 href={"/products/" + slug}
               >
                 {title}

@@ -219,7 +219,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                           >
                             <img
                               src={getPublicImageURL(
-                                item.product.images?.items[0]?.imageKey
+                                item.thumbImage
                               )}
                               alt={item.product?.images.items[0]?.alt}
                               width="80"
@@ -360,9 +360,18 @@ Order.getInitialProps = async (context) => {
       id: orderId,
     });
 
+    const products = response?.products?.items.map((item) => {
+      if (item.variant?.imageUrl) {
+          item.thumbImage = item?.variant.imageUrl;
+      } else {
+        item.thumbImage = item.product.images?.items[0]?.imageKey;
+      }
+      return item;
+    });
+
     if (response?.storeId === STORE_ID && response?.status !== "PENDING") {
       return {
-        order: response,
+        order: {...response, products: { ...response.products, items: products }},
         paymentId,
         orderId: orderId,
       };

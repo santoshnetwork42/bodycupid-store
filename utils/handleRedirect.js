@@ -18,7 +18,6 @@ const handleRedirect = async (path, defaultRedirect = "/collections/all") => {
     storeId: STORE_ID,
   }).then((resp) => resp.getRedirects);
 
-
   logger.verbose("handleRedirect > pageRedirect", pageRedirect);
   logger.info("handleRedirect > should redirect", !!pageRedirect?.redirect);
   if (!!pageRedirect?.redirect && pageRedirect.redirect !== path) {
