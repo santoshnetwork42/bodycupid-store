@@ -49,6 +49,10 @@ const LimitedTimeProductDeal = ({
       qty: 1,
       cartItemSource: "LIMITED_TIME_DEAL",
       parentRecordKey,
+      section: {
+        id: "LIMITED_TIME_DEAL".toLowerCase().replace(/\ /g, "-"),
+        name: "LIMITED_TIME_DEAL",
+      },
     });
   };
 
