@@ -28,6 +28,7 @@ const getRecommendedProducts = async ({
         imageLimit: 1,
       })
         .then((res) => res.getProduct)
+        .then((res) => (res.status === "ENABLED" ? res : null))
         .then((res) => {
           if (!res) return null;
           let [variant] = res.variants.items;

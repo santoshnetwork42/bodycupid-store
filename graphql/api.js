@@ -1045,6 +1045,7 @@ export const getRecommendedProductById = /* GraphQL */ `
       slug
       price
       sku
+      status
       position
       listingPrice
       tags
