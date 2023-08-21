@@ -414,6 +414,7 @@ export const getProductBySlug = /* GraphQL */ `
         title
         brand
         vendor
+        collections
         isFeatured
         categoryId
         subCategoryId
@@ -930,6 +931,9 @@ export const findProducts = /* GraphQL */ `
         thumbImages
         isInventoryEnabled
         totalOrders
+        recommended
+        recommendPriority
+        recommendPrice
         variants(filter: $variantFilter, limit: $variantLimit) {
           items {
             id
@@ -1003,6 +1007,69 @@ export const getProductById = /* GraphQL */ `
         }
       }
       images {
+        items {
+          id
+          position
+          alt
+          width
+          height
+          imageKey
+          isThumb
+        }
+      }
+    }
+  }
+`;
+
+export const getRecommendedProductById = /* GraphQL */ `
+  query GetProduct(
+    $id: ID!
+    $variantFilter: ModelVariantFilterInput
+    $variantLimit: Int
+    $imageLimit: Int
+  ) {
+    getProduct(id: $id) {
+      id
+      title
+      collections
+      vendor
+      subCategory {
+        name
+        slug
+      }
+      isFeatured
+      category {
+        name
+        slug
+      }
+      slug
+      price
+      sku
+      status
+      position
+      listingPrice
+      tags
+      inventory
+      blockedInventory
+      continueSellingOutOfStock
+      rating
+      totalRatings
+      thumbImages
+      isInventoryEnabled
+      totalOrders
+      variants(filter: $variantFilter, limit: $variantLimit) {
+        items {
+          id
+          title
+          price
+          position
+          listingPrice
+          imageUrl
+          inventory
+          blockedInventory
+        }
+      }
+      images(limit: $imageLimit) {
         items {
           id
           position
@@ -1091,6 +1158,41 @@ export const createReview = /* GraphQL */ `
   ) {
     createReview(input: $input, condition: $condition) {
       id
+      userId
+      verified
+      reviewer {
+        name
+        email
+      }
+      productId
+      rating
+      comment
+      title
+      images
+      createdAt
+    }
+  }
+`;
+
+export const updateReview = /* GraphQL */ `
+  mutation UpdateReview(
+    $input: UpdateReviewInput!
+    $condition: ModelReviewConditionInput
+  ) {
+    updateReview(input: $input, condition: $condition) {
+      id
+      userId
+      verified
+      reviewer {
+        name
+        email
+      }
+      productId
+      rating
+      comment
+      title
+      images
+      createdAt
     }
   }
 `;
@@ -1402,9 +1504,21 @@ export const getStore = /* GraphQL */ `
     getStore(id: $id) {
       id
       name
+      title
+      description
+      isActive
+      webUrl
       imageUrl
       darkImageUrl
-      announcements
+      banners {
+        webKey
+        mobileKey
+        link
+      }
+      announcements {
+        label
+        link
+      }
       socialLinks {
         instagram
         facebook
@@ -1479,8 +1593,10 @@ export const getReviews = /* GraphQL */ `
       items {
         id
         userId
+        verified
         reviewer {
           name
+          email
         }
         productId
         rating
@@ -1691,6 +1807,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
       }
     }
   }
@@ -1841,6 +1958,40 @@ export const createNewOrder = /* GraphQL */ `
       priority
       orderDate
       status
+    }
+  }
+`;
+export const getProductRecommendation = /* GraphQL */ `
+  query GetProductRecommendation($input: ProductRecommendationInput!) {
+    getProductRecommendation(input: $input) {
+      productId
+      variantId
+    }
+  }
+`;
+
+export const getCollectionType = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        defaultSorting
+      }
     }
   }
 `;

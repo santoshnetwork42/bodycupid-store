@@ -1,3 +1,4 @@
+import { DEFAULT_SORTING } from "~/constant";
 import { getCouponDiscount } from "~/utils/coupons";
 
 /**
@@ -550,4 +551,11 @@ export const getFreeProductTotal = (cartList) => {
     (a, b) => (a += b.price * (parseInt(b?.qty, 10) || 1)),
     0
   );
+};
+
+export const getDefaultSorting = (defaultSorting) => {
+  if (defaultSorting && DEFAULT_SORTING[defaultSorting])
+    return DEFAULT_SORTING[defaultSorting];
+
+  return DEFAULT_SORTING.RECOMMENDED;
 };

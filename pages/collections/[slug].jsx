@@ -42,7 +42,7 @@ function CollectionPage(props) {
   const source = getSource();
 
   useEffect(() => {
-    if (data.name) {
+    if (data?.name) {
       categoryViewed({
         URL: window.location.href,
         "Category Name": data.name,
@@ -57,7 +57,7 @@ function CollectionPage(props) {
       <NextHead {...pageMeta} />
 
       <h1 className="d-none">
-        {name} - {data.name}
+        {name} - {data?.name}
       </h1>
 
       <div className="page-content  pb-3">

@@ -1,27 +1,26 @@
 import { useEffect, useState, useMemo } from "react";
 import { API } from "aws-amplify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { errorHandler } from "../errorHandler";
 import { checkInventory } from "~/graphql/api";
+import { cartActions } from "~/store/cart";
 
 export const useInventory = () => {
   const cartList = useSelector((state) => state.cart.data || []);
   const [cartListMapping, setCartListMapping] = useState(null);
-
-  const inventoryPayload = useMemo(
-    () =>
-      cartList.map((product) => ({
-        recordKey: product.recordKey,
-        productId: product.id,
-        variantId: product.variantId,
-      })),
-    [cartList]
-  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const callGetInventory = async () => {
       try {
+        const inventoryPayload = cartList?.map((product) => ({
+          recordKey: product.recordKey,
+          productId: product.id,
+          variantId: product.variantId,
+          source: product.cartItemSource || null,
+        }));
+
         if (inventoryPayload.length) {
           const {
             data: { checkInventory: response },
@@ -39,6 +38,7 @@ export const useInventory = () => {
             }),
             {}
           );
+
           setCartListMapping(mapping);
         } else {
           setCartListMapping({});
@@ -49,7 +49,7 @@ export const useInventory = () => {
     };
 
     callGetInventory();
-  }, [inventoryPayload]);
+  }, [cartList]);
 
   const outOfStockItems = useMemo(
     () =>
@@ -80,6 +80,20 @@ export const useInventory = () => {
         {}
       )
     : {};
+
+  useEffect(() => {
+    if (cartListMapping) {
+      const isMismatch = cartList.some(
+        (item) =>
+          cartListMapping[item.recordKey] &&
+          cartListMapping[item.recordKey].price !== item.price
+      );
+
+      if (isMismatch) {
+        dispatch(cartActions.validateCart(productWithPrice));
+      }
+    }
+  }, [cartListMapping]);
 
   return {
     ready: !!cartListMapping,

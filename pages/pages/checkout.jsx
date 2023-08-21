@@ -49,6 +49,7 @@ import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import { useConfiguration } from "~/utils/contexts/navbar";
 import { MAX_COD_AMOUNT } from "~/constant";
+import { productDiscountPercentage } from "~/utils/products";
 
 const logger = new Logger("Checkout");
 
@@ -69,6 +70,7 @@ function Checkout(props) {
     recordOutOfStock,
     openLogin,
     addPaymentInfo,
+    priceMismatch,
   } = props;
 
   const { name } = store;
@@ -122,7 +124,7 @@ function Checkout(props) {
     prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
-  const cartItems = useCartItems(false);
+  const cartItems = useCartItems(false, true);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -316,6 +318,7 @@ function Checkout(props) {
       if (!priceVerified) {
         alertToaster("Price updated. Add products again", "error");
         logger.error("Price updated. Add products again");
+        priceMismatch();
         setLoading(false);
         return;
       }
@@ -329,11 +332,12 @@ function Checkout(props) {
           const { id: ignoreId, ...restAddress } = tempAddress;
 
           const productIds = cartList
-            .filter((p) => !p.cartItemSource)
-            .map(({ id, variantId, qty }) => ({
+            .filter((p) => p.cartItemSource !== "COUPON")
+            .map(({ id, variantId, qty, cartItemSource: source = null }) => ({
               productId: id,
               variantId,
               quantity: qty,
+              source,
             }));
 
           const payload = {
@@ -420,10 +424,6 @@ function Checkout(props) {
   }, [appliedCoupon]);
 
   const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
-
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
-  };
 
   return (
     <main className="main checkout">
@@ -551,11 +551,11 @@ function Checkout(props) {
                                       <figure>
                                         <img
                                           src={getPublicImageURL(
-                                            item.images.items[0]?.imageKey
+                                            item?.thumbImage
                                           )}
                                           width="100"
                                           height="100"
-                                          alt={item.images.items[0]?.alt}
+                                          alt={item?.images?.items[0]?.alt}
                                         />
                                       </figure>
                                       <div className="text-left text-primary w-100 mr-5 ml-2">
@@ -936,6 +936,7 @@ const Component = connect(mapStateToProps, {
   recordOutOfStock: eventActions.outOfStock,
   orderCreated: eventActions.orderCreated,
   addPaymentInfo: eventActions.addPaymentInfo,
+  priceMismatch: eventActions.priceMismatch,
 })(Checkout);
 
 Component.hideFooter = true;
