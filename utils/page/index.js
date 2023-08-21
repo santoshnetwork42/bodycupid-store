@@ -39,7 +39,11 @@ export const getStaticProps = async () => {
   try {
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
       limit: 8,
-      filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
+      filter: {
+        isFeatured: { eq: true },
+        storeId: { eq: STORE_ID },
+        isArchive: { ne: true },
+      },
       sort: [{ field: "priority", direction: "asc" }],
     });
 
