@@ -931,6 +931,9 @@ export const findProducts = /* GraphQL */ `
         thumbImages
         isInventoryEnabled
         totalOrders
+        recommended
+        recommendPriority
+        recommendPrice
         variants(filter: $variantFilter, limit: $variantLimit) {
           items {
             id
@@ -1042,6 +1045,7 @@ export const getRecommendedProductById = /* GraphQL */ `
       slug
       price
       sku
+      status
       position
       listingPrice
       tags
@@ -1803,6 +1807,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
       }
     }
   }
@@ -1961,6 +1966,32 @@ export const getProductRecommendation = /* GraphQL */ `
     getProductRecommendation(input: $input) {
       productId
       variantId
+    }
+  }
+`;
+
+export const getCollectionType = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        defaultSorting
+      }
     }
   }
 `;

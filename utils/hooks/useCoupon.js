@@ -156,7 +156,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           }).then(({ data }) => ({
             allowed,
             message,
-            product: data.getProduct,
+            product: {
+              ...data.getProduct,
+              thumbImage: data.getProduct?.images?.items[0]?.imageKey,
+            },
           }))
         )
       );

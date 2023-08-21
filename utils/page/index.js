@@ -5,8 +5,11 @@ import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
+  getCollectionType,
 } from "~/graphql/api";
-import getRecommededProducts from "../recommendedProduct";
+import getRecommendedProducts from "../recommendedProduct";
+import { setSoldOutLast } from "~/utils/products";
+import { getDefaultSorting } from "..";
 
 const getSearchProducts = (filter) =>
   fetchData(findProducts, {
@@ -23,6 +26,15 @@ const getSearchProducts = (filter) =>
     imageLimit: 1,
   });
 
+const getCollectionBySlug = (slug) => {
+  return fetchData(getCollectionType, {
+    filter: {
+      storeId: { eq: STORE_ID },
+      slug: { eq: slug },
+    },
+  });
+};
+
 export const getStaticProps = async () => {
   try {
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
@@ -38,22 +50,33 @@ export const getStaticProps = async () => {
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
-      recommededProducts,
+      recommendedProducts,
+      { searchCollectionTypes: bestSellerCollectionItem },
+      { searchCollectionTypes: featuredCollectionItem },
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }),
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
-      getRecommededProducts(),
+      getRecommendedProducts(),
+      getCollectionBySlug("best-seller"),
+      getCollectionBySlug("featured"),
     ]);
 
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categories } = searchProductSubCategories;
+    const {
+      items: [bestSellerCollection],
+    } = bestSellerCollectionItem;
+    const {
+      items: [featuredCollection],
+    } = featuredCollectionItem;
     const { banners } = store;
 
-    const bestSellerProducts = bestSellerItems;
-    const featuredProducts = featuredItems;
+    const bestSellerProducts = setSoldOutLast(bestSellerItems);
+    const featuredProducts = setSoldOutLast(featuredItems);
+    const topProducts = setSoldOutLast(recommendedProducts);
 
     const brands = [
       "/images/brands/1.png",
@@ -70,7 +93,7 @@ export const getStaticProps = async () => {
       props: {
         hero: { banners },
         bestSellerProducts,
-        recommededProducts,
+        topProducts,
         featuredProducts,
         categories,
         brands,
@@ -82,6 +105,12 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
           googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
         },
+        bestSellerDefaultSorting: getDefaultSorting(
+          bestSellerCollection.defaultSorting
+        ),
+        featuredDefaultSorting: getDefaultSorting(
+          featuredCollection.defaultSorting
+        ),
       },
       revalidate: 60,
     };

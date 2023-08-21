@@ -31,8 +31,8 @@ const Announcement = ({ store, showTopRunner }) => {
                     <>
                       <span className="ml-1 mr-1">|</span>
                       <ALink href={announcement.link}>
-                        <p className="announcement-text announcement-text-hover font-weight-semi-bold pt-1 pb-1 m-0">
-                          Shop now
+                        <p className="announcement-text announcement-text-hover font-weight-semi-bold pt-1 pb-1 m-0 announcement-text-decoration">
+                          Shop Now
                         </p>
                       </ALink>
                     </>

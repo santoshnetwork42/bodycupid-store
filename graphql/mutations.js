@@ -1930,6 +1930,7 @@ export const createCollectionType = /* GraphQL */ `
       showInMenu
       priority
       imageUrl
+      defaultSorting
       createdAt
       updatedAt
       __typename
@@ -1965,6 +1966,7 @@ export const updateCollectionType = /* GraphQL */ `
       showInMenu
       priority
       imageUrl
+      defaultSorting
       createdAt
       updatedAt
       __typename
@@ -2000,6 +2002,7 @@ export const deleteCollectionType = /* GraphQL */ `
       showInMenu
       priority
       imageUrl
+      defaultSorting
       createdAt
       updatedAt
       __typename

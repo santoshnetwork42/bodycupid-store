@@ -122,3 +122,30 @@ export const getProductPrice = (product, variantId) => {
 
   return { price: p, listingPrice: lp };
 };
+
+export const productDiscountPercentage = ({ price, listingPrice }) => {
+  return Math.round(((listingPrice - price) / listingPrice) * 100);
+};
+
+export const setSoldOutLast = (items) => {
+  let soldOutProducts = [];
+  const products = items.reduce((acc, prod) => {
+    if (!("hasInventory" in prod)) {
+      const { hasInventory } = getProductInventory(prod);
+      if (hasInventory) {
+        return [...acc, { ...prod, hasInventory }];
+      } else {
+        soldOutProducts.push({ ...prod, hasInventory });
+        return acc;
+      }
+    } else {
+      if (prod.hasInventory) {
+        return [...acc, prod];
+      } else {
+        soldOutProducts.push(prod);
+        return acc;
+      }
+    }
+  }, []);
+  return [...products, ...soldOutProducts];
+};

@@ -11,7 +11,7 @@ import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { eventActions } from "~/store/events";
 import { fetchSearchItems } from "~/utils/helper";
-import { getProductInventory } from "~/utils/products";
+import { setSoldOutLast } from "~/utils/products";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -109,29 +109,6 @@ function ProductListOne(props) {
     };
   }, [perPage, maxprice, minprice, search, sortby]);
 
-  const setSoldOutLast = (items) => {
-    let soldOutProducts = [];
-    const products = items.reduce((acc, prod) => {
-      if (!("hasInventory" in prod)) {
-        const { hasInventory } = getProductInventory(prod);
-        if (hasInventory) {
-          return [...acc, { ...prod, hasInventory }];
-        } else {
-          soldOutProducts.push({ ...prod, hasInventory });
-          return acc;
-        }
-      } else {
-        if (prod.hasInventory) {
-          return [...acc, prod];
-        } else {
-          soldOutProducts.push(prod);
-          return acc;
-        }
-      }
-    }, []);
-    return [...products, ...soldOutProducts];
-  };
-
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -164,7 +141,7 @@ function ProductListOne(props) {
           setLoading(false);
         } else {
           fetchSearchItems(search).then((fetchedItems) => {
-            const productsMapped = setSoldOutLast(response);
+            const productsMapped = setSoldOutLast(fetchedItems);
             setProducts(productsMapped);
             setTotal(fetchedItems.length);
             setLoading(false);

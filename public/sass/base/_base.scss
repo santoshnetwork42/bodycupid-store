@@ -685,6 +685,11 @@ button {
   text-overflow: ellipsis;
 }
 
+.overflow-ellipsis2 {
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 //border
 .border-regular {
   border: 1px solid #e1e1e1;
@@ -697,4 +702,13 @@ button {
 
 .text-align-start {
   text-align: start !important;
+}
+
+.cart-product-size {
+  font-size: 14px !important;
+  font-weight: bolder !important;
+
+  @media (max-width: 500px) {
+    font-size: 12px !important;
+  }
 }

@@ -24,12 +24,14 @@ export { getStaticProps } from "~/utils/page";
 function HomePage({
   hero,
   bestSellerProducts,
-  recommededProducts,
+  topProducts,
   featuredProducts,
   categories,
   brands,
   store,
   pageMeta,
+  bestSellerDefaultSorting,
+  featuredDefaultSorting,
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
@@ -49,12 +51,12 @@ function HomePage({
           title="Best sellers"
           disableCarousel={isSmallSize}
           slug="best-seller"
-          redirectTo="/collections/best-seller"
+          redirectTo={`/collections/best-seller?sortby=${bestSellerDefaultSorting}`}
         />
 
-        {!!recommededProducts?.length && (
+        {!!topProducts?.length && (
           <ProductCollection
-            products={recommededProducts}
+            products={topProducts}
             title="Top products"
             disableCarousel={isSmallSize}
             slug="top-product"
@@ -66,7 +68,7 @@ function HomePage({
           products={featuredProducts}
           title="Our featured"
           slug="featured"
-          redirectTo="/collections/featured"
+          redirectTo={`/collections/featured?sortby=${featuredDefaultSorting}`}
         />
         <CategorySection categories={categories} />
         <ReviewSection />
