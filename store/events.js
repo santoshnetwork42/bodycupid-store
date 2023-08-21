@@ -10,7 +10,6 @@ import {
   addressMapper,
   itemMapper,
   moEngagedOrderMapper,
-  moEngageItemPurchasedMapper,
   moeEvent,
   orderMapper,
   userMapper,
@@ -220,15 +219,26 @@ export function* eventsSaga() {
           });
           const mobile = phone.split("+91")[1];
 
-          moeEvent("Customer Logged In", {
-            "Customer ID": userId,
-            "Mobile Number": mobile,
-            "Utm Source": source,
-            "Utm Medium": medium,
-            URL: window.location.href,
-            "First Time User": isFirstTime,
-            Source: eventSource,
-          });
+          if (isFirstTime) {
+            moeEvent("Customer Registered", {
+              "Customer ID": userId,
+              "Mobile Number": mobile,
+              "Utm Source": source,
+              "Utm Medium": medium,
+              URL: window.location.href,
+              Source: eventSource,
+            });
+          } else {
+            moeEvent("Customer Logged In", {
+              "Customer ID": userId,
+              "Mobile Number": mobile,
+              "Utm Source": source,
+              "Utm Medium": medium,
+              URL: window.location.href,
+              "First Time User": isFirstTime,
+              Source: eventSource,
+            });
+          }
         }
       } else if (action == "logout") {
         const Moengage = window?.Moengage;
@@ -365,14 +375,6 @@ export function* eventsSaga() {
         isFirstTimeUser
       );
 
-      const itemPurchasedEvents = moEngageItemPurchasedMapper(
-        products,
-        coupon,
-        paymentType,
-        order,
-        isFirstTimeUser
-      );
-
       const { firstName, lastName, email, phone } = user;
       initializeMoengageAndAddInfo({
         firstName,
@@ -381,9 +383,7 @@ export function* eventsSaga() {
         phone,
       });
       moeEvent("Order Created", orderCreated);
-      itemPurchasedEvents.forEach((itemPurchased) => {
-        moeEvent("Item Purchased", itemPurchased);
-      });
+      moeEvent("Item Purchased", orderCreated);
 
       dataLayer.push({ ecommerce: null, attribute: null, user: null });
       dataLayer.push({
