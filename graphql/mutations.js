@@ -189,6 +189,7 @@ export const deleteStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
@@ -1748,6 +1749,7 @@ export const createStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
@@ -1787,6 +1789,7 @@ export const updateStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
