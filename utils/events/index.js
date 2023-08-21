@@ -343,6 +343,61 @@ export const moEngagedOrderMapper = (
   };
 };
 
+export const moEngageItemPurchasedMapper = (
+  products,
+  coupon,
+  paymentMethod,
+  order,
+  isFirstTimeUser
+) => {
+  const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
+  const source = getSource();
+
+  const basicAttributes = {
+    Currency: "INR",
+    Source: source,
+    "Cart URL": `${currentURL}/pages/cart`,
+    "Coupon Applied": coupon?.code,
+    "Total Discount": couponTotal || 0,
+    "First Time User": isFirstTimeUser,
+  };
+
+  const events = products.map((product) => {
+    const { value: valueNew, mrpValue } = itemMapper(product, coupon);
+    const { thumbImage } = getProductMeta(product);
+    const url = getPublicImageURL(thumbImage?.imageKey);
+
+    const eventAttributes = {
+      ...basicAttributes,
+      "Total Price": valueNew,
+      "Vendor Name": product.vendor,
+      "Product Title": product.title,
+      "Image URL": url,
+      "Total Quantity": product.qty || 0,
+      "Product ID": product.id,
+      "Product Price": product.price,
+      "Product Quantity": product.qty,
+      "Variant ID": product.variantId,
+      "Product URL": `${currentURL}/products/${product.slug}`,
+      "Total MRP": mrpValue,
+      "Product Subcategory": product.subCategory?.name,
+      "Product Category": product.category?.name,
+      "Product Range": null,
+    };
+
+    return {
+      ...eventAttributes,
+      "Order ID": null,
+      "Order Date": null,
+      "Payment Mode": null,
+      "Payment Status": null,
+    };
+  });
+
+  return events;
+};
+
 export const addressMapper = (address, totalPrice) => {
   const { city, country, email, name, state, pinCode, phone } = address;
   const phoneNo = removePhonePrefix(phone);

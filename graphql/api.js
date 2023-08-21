@@ -1514,6 +1514,7 @@ export const getStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
       }
       announcements {
         label
@@ -1544,6 +1545,7 @@ export const getStoreBanners = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
       }
     }
   }
