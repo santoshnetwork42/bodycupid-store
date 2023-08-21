@@ -22,6 +22,7 @@ export const itemMapper = (product, coupon) => {
     vendor,
     sku,
     variants,
+    cartItemSource,
   } = product;
 
   let contentType = "product_group";
@@ -69,6 +70,7 @@ export const itemMapper = (product, coupon) => {
       content_type: contentType,
       currency: "INR",
       num_items: 1,
+      source: cartItemSource ? cartItemSource : null,
       value: price,
     },
     moengage: {
