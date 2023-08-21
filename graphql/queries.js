@@ -774,6 +774,7 @@ export const getStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
