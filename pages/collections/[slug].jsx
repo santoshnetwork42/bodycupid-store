@@ -93,13 +93,13 @@ export const getStaticPaths = async () => {
     { searchCollectionTypes: allCollections },
   ] = await Promise.all([
     fetchData(getAllCategoriesPath, {
-      filter: { storeId: { eq: STORE_ID }, isArchive: { ne: true } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
     fetchData(getAllSubcategoriesPath, {
-      filter: { storeId: { eq: STORE_ID }, isArchive: { ne: true } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
     fetchData(getAllCollectionPath, {
-      filter: { storeId: { eq: STORE_ID }, isArchive: { ne: true } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
   ]);
 
@@ -135,7 +135,7 @@ export const getStaticProps = async (context) => {
     // Category By Slug
     const [category] = await fetchData(getBasicCategory, {
       slug,
-      filter: { storeId: { eq: STORE_ID }, isArchive: { ne: true } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }).then((resp) => resp.byslugProductCategory.items);
 
     if (category) {
@@ -196,7 +196,7 @@ export const getStaticProps = async (context) => {
     // Sub Category By Slug
     const [subCategory] = await fetchData(getBasicSubCategory, {
       slug,
-      filter: { storeId: { eq: STORE_ID }, isArchive: { ne: true } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }).then((resp) => resp.byslugProductSubCategory.items);
 
     if (subCategory) {
@@ -267,7 +267,7 @@ export const getStaticProps = async (context) => {
       filter: {
         slug: { eq: slug },
         storeId: { eq: STORE_ID },
-        isArchive: { ne: true },
+        isArchive: { eq: false },
       },
     }).then((resp) =>
       resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
@@ -281,7 +281,7 @@ export const getStaticProps = async (context) => {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           slug: { ne: slug },
-          isArchive: { ne: true },
+          isArchive: { eq: false },
         },
         sort: [{ field: "priority", direction: "asc" }],
       }).then((res) => res.searchCollectionTypes.items);

@@ -59,7 +59,7 @@ export const getStaticProps = async () => {
       filter: {
         storeId: { eq: STORE_ID },
         showInMenu: { eq: true },
-        isArchive: { ne: true },
+        isArchive: { eq: false },
       },
       sort: [{ field: "priority", direction: "asc" }],
     });

@@ -54,11 +54,11 @@ function NavbarProvider({ children, config }) {
         filter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
-          isArchive: { ne: true },
+          isArchive: { eq: false },
         },
         subCategoryFilter: {
           showInMenu: { eq: true },
-          isArchive: { ne: true },
+          isArchive: { eq: false },
         },
         sort: [{ field: "priority", direction: "asc" }],
       })

@@ -216,7 +216,7 @@ const App = ({ Component, pageProps }) => {
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Component {...pageProps} />
                 <VercelAnalytics />
-                <CustomerGlu />
+                {/* <CustomerGlu /> */}
               </Layout>
             </NavbarProvider>
           </ABProvider>
