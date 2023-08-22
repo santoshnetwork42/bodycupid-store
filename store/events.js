@@ -10,6 +10,7 @@ import {
   addressMapper,
   itemMapper,
   moEngagedOrderMapper,
+  moEngageItemPurchasedMapper,
   moeEvent,
   orderMapper,
   userMapper,
@@ -375,6 +376,14 @@ export function* eventsSaga() {
         isFirstTimeUser
       );
 
+      const itemPurchasedEvents = moEngageItemPurchasedMapper(
+        products,
+        coupon,
+        paymentType,
+        order,
+        isFirstTimeUser
+      );
+
       const { firstName, lastName, email, phone } = user;
       initializeMoengageAndAddInfo({
         firstName,
@@ -383,7 +392,9 @@ export function* eventsSaga() {
         phone,
       });
       moeEvent("Order Created", orderCreated);
-      moeEvent("Item Purchased", orderCreated);
+      itemPurchasedEvents.forEach((itemPurchased) => {
+        moeEvent("Item Purchased", itemPurchased);
+      });
 
       dataLayer.push({ ecommerce: null, attribute: null, user: null });
       dataLayer.push({
