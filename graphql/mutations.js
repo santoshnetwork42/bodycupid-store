@@ -106,6 +106,7 @@ export const deleteProductCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -150,6 +151,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -165,6 +167,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -189,6 +192,7 @@ export const deleteStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
@@ -235,6 +239,7 @@ export const deleteProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -254,6 +259,7 @@ export const deleteProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -1561,6 +1567,7 @@ export const createProductCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -1606,6 +1613,7 @@ export const updateProductCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -1650,6 +1658,7 @@ export const createProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -1665,6 +1674,7 @@ export const createProductSubCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -1709,6 +1719,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -1724,6 +1735,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -1748,6 +1760,7 @@ export const createStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
@@ -1787,6 +1800,7 @@ export const updateStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
@@ -1931,6 +1945,7 @@ export const createCollectionType = /* GraphQL */ `
       priority
       imageUrl
       defaultSorting
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -1967,6 +1982,7 @@ export const updateCollectionType = /* GraphQL */ `
       priority
       imageUrl
       defaultSorting
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -2003,6 +2019,7 @@ export const deleteCollectionType = /* GraphQL */ `
       priority
       imageUrl
       defaultSorting
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -2034,6 +2051,7 @@ export const createProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -2053,6 +2071,7 @@ export const createProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -2164,6 +2183,7 @@ export const updateProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -2183,6 +2203,7 @@ export const updateProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename

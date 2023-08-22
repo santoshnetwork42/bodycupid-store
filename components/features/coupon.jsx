@@ -121,6 +121,10 @@ function Coupon(props) {
               qty: 1,
               disableChange: true,
               cartItemSource: "COUPON",
+              section: {
+                id: "COUPON".toLowerCase().replace(/\ /g, "-"),
+                name: "COUPON",
+              },
             });
           }
           logger.info("Applied coupon:", response);
