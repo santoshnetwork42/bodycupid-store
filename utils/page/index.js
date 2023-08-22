@@ -42,7 +42,7 @@ export const getStaticProps = async () => {
       filter: {
         isFeatured: { eq: true },
         storeId: { eq: STORE_ID },
-        isArchive: { ne: true },
+        isArchive: { eq: false },
       },
       sort: [{ field: "priority", direction: "asc" }],
     });
