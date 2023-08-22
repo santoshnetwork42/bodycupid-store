@@ -233,6 +233,12 @@ export const useMenu = () => {
     slug: "raksha-bandhan-gifts",
   });
 
+  menu.push({
+    label: "Cupid Wednesday",
+    link: `/collections/clearance-sale`,
+    slug: "clearance-sale",
+  });
+
   return menu;
 };
 
