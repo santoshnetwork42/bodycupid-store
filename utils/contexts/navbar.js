@@ -233,29 +233,6 @@ export const useMenu = () => {
     slug: "raksha-bandhan-gifts",
   });
 
-  menu.push({
-    label: "Cupid Wednesday",
-    link: `/collections/clearance-sale`,
-    slug: "clearance-sale",
-  });
-
-  // menu.push({
-  //   label: "Offers",
-  //   link: "",
-  //   slug: "offers",
-  //   subMenu: [
-  //     {
-  //       label: "BUY 3 @ 599",
-  //       link: "/collections/special-bundle-offer",
-  //       slug: "special-bundle-offer",
-  //     },
-  //     {
-  //       label: "BUY 3 @ 1099",
-  //       link: "/collections/fragrance-bundle-offer",
-  //       slug: "fragrance-bundle-offer",
-  //     },
-  //   ],
-  // });
   return menu;
 };
 
