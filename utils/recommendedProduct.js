@@ -5,12 +5,12 @@ import {
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 
-const getRecommendedProducts = async ({
+export const getRecommendedProductIds = async ({
   items = [],
   limit = 8,
   recommenderType = "BEST_SELLER",
 } = {}) => {
-  const bestSellersPersonalizedIds = await fetchData(getProductRecommendation, {
+  return await fetchData(getProductRecommendation, {
     input: {
       items,
       storeId: STORE_ID,
@@ -18,7 +18,9 @@ const getRecommendedProducts = async ({
       limit,
     },
   }).then((response) => response.getProductRecommendation);
+};
 
+export const getRecommendedProducts = async (bestSellersPersonalizedIds) => {
   const products = await Promise.all(
     (bestSellersPersonalizedIds || []).map(async ({ productId, variantId }) => {
       return await fetchData(getRecommendedProductById, {
@@ -54,5 +56,3 @@ const getRecommendedProducts = async ({
 
   return products.filter(Boolean);
 };
-
-export default getRecommendedProducts;

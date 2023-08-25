@@ -5,7 +5,10 @@ import { Logger } from "aws-amplify";
 
 import ProductListOne from "~/components/partials/shop/product-list/product-list-one";
 import CategoryHeader from "~/components/common/category-header";
-import getRecommendedProducts from "~/utils/recommendedProduct";
+import {
+  getRecommendedProductIds,
+  getRecommendedProducts,
+} from "~/utils/recommendedProduct";
 
 const logger = new Logger("search");
 
@@ -42,7 +45,8 @@ function TopProducts(props) {
 export const getStaticProps = async () => {
   try {
     // Get all Recommended Products from Best Seller Recommender
-    const products = await getRecommendedProducts({ limit: 25 });
+    const productIds = await getRecommendedProductIds({ limit: 25 });
+    const products = await getRecommendedProducts(productIds);
 
     return {
       props: {
