@@ -69,6 +69,7 @@ export const itemMapper = (product, coupon) => {
       content_type: contentType,
       currency: "INR",
       num_items: 1,
+      source: section ? section.name : null,
       value: price,
     },
     moengage: {
