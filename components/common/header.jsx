@@ -6,16 +6,13 @@ import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
 import { User, Hamburger } from "~/components/icons";
 import CartMenu from "~/components/common/partials/cart-menu";
-import CartMenu2 from "~/components/common/partials/v2/cart-menu";
 import MainMenu from "~/components/common/partials/main-menu";
 import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
-import { useCartAB } from "~/utils/contexts/ab";
 
 function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
-  const cartAB = useCartAB();
 
   useEffect(() => {
     let header = document.querySelector("header");
@@ -98,8 +95,7 @@ function Header({ navbar, auth, openPasswordLess }) {
               <span className="divider"></span>
               {!navbar.hideCart && (
                 <>
-                  {!!cartAB && <CartMenu2 />}
-                  {!cartAB && <CartMenu />}
+                  <CartMenu />
                 </>
               )}
             </div>

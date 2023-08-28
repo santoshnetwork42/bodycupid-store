@@ -8,7 +8,7 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, productDiscountPercentage } from "~/utils/products";
 import { toDecimal } from "~/utils";
 import { LimitedTimeDiscount } from "~/components/icons";
-import CircularTimer from "~/components/partials/cart/v2/circular-timer";
+import CircularTimer from "~/components/partials/cart/circular-timer";
 import { LIMITED_TIME_DEAL_DURATION } from "~/constant";
 import useWindowDimensions from "~/utils/getWindowDimension";
 
@@ -49,6 +49,10 @@ const LimitedTimeProductDeal = ({
       qty: 1,
       cartItemSource: "LIMITED_TIME_DEAL",
       parentRecordKey,
+      section: {
+        id: "LIMITED_TIME_DEAL".toLowerCase().replace(/\ /g, "-"),
+        name: "LIMITED_TIME_DEAL",
+      },
     });
   };
 
