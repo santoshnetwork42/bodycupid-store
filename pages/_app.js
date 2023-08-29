@@ -27,7 +27,6 @@ import Loader from "~/components/common/partials/loader";
 import CustomerGlu from "~/components/scripts/cutomer-glu";
 
 import NavbarProvider from "~/utils/contexts/navbar";
-import ABProvider from "~/utils/contexts/ab";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
@@ -211,15 +210,13 @@ const App = ({ Component, pageProps }) => {
           loading={<Loader loading={true} />}
         >
           <Scripts />
-          <ABProvider>
-            <NavbarProvider config={Component.navbarConfig}>
-              <Layout navbar={navbarProps} footer={footerProps}>
-                <Component {...pageProps} />
-                <VercelAnalytics />
-                <CustomerGlu />
-              </Layout>
-            </NavbarProvider>
-          </ABProvider>
+          <NavbarProvider config={Component.navbarConfig}>
+            <Layout navbar={navbarProps} footer={footerProps}>
+              <Component {...pageProps} />
+              <VercelAnalytics />
+              {/* <CustomerGlu /> */}
+            </Layout>
+          </NavbarProvider>
         </PersistGate>
       </Provider>
     </>

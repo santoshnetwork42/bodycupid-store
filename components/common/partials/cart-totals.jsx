@@ -171,7 +171,7 @@ function CartTotal({
                   </h4>
                 </td>
                 <td className="td-alignment">
-                  <p className="summary-total-price-2 font-weight-bold  ls-s">
+                  <p className="summary-total-price summary-total-price-2 font-weight-bold  ls-s">
                     ₹{toDecimal(prepaidGrandTotal)}
                   </p>
                 </td>

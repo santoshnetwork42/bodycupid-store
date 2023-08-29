@@ -15,7 +15,7 @@ import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { Logger } from "aws-amplify";
 import CartProduct from "~/components/partials/cart/cart-product";
-import CouponDiscountBar2 from "~/components/common/coupon-discount-bar";
+import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 
 function CartMenu(props) {
   const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
@@ -75,10 +75,10 @@ function CartMenu(props) {
         }}
       ></div>
       <div className="sidebar-box">
-        <div className="sidebar-header sidebar-header-v2 wrapper">
+        <div className="sidebar-header wrapper">
           <div className="d-flex align-items-center">
             <Cart />
-            <h4 className="cart-title-2 ml-2">
+            <h4 className="cart-title ml-2">
               Shopping Cart ({getCartCount(cartList)})
             </h4>
           </div>
@@ -97,8 +97,8 @@ function CartMenu(props) {
             {cartItems.length > 0 ? (
               <>
                 <div className=" ">
-                  <CouponDiscountBar2 />
-                  <div className="shop-table cart-table lh-default sidebar-padding-v2 mt-4">
+                  <CouponDiscountBar />
+                  <div className="shop-table cart-table lh-default sidebar-padding mt-4">
                     <div key={appliedCoupon?.id}>
                       {cartItems.map((item) => (
                         <CartProduct
@@ -114,7 +114,7 @@ function CartMenu(props) {
 
                 <aside
                   id="cart-details"
-                  className="text-primary sticky-sidebar-wrapper pb-6 sidebar-padding-v2"
+                  className="text-primary sticky-sidebar-wrapper pb-6 sidebar-padding"
                 >
                   <div
                     className="sticky-sidebar"

@@ -32,19 +32,6 @@
   background-color: $border-color;
 }
 
-.coupon-discount-bar {
-  background-color: #17b31b;
-  justify-content: center;
-  position: fixed;
-  bottom: 65px;
-  z-index: 1000;
-  width: 100%;
-
-  @media (min-width: 575px) {
-    max-width: 50rem !important;
-  }
-}
-
 .coupon-discount-bar-2 {
   background-color: #17b31b;
   justify-content: center;

@@ -18,7 +18,7 @@ const CouponBanner = ({ message, animate }) => (
   </div>
 );
 
-const couponDiscountBar2 = ({ cartList }) => {
+const couponDiscountBar = ({ cartList, appliedCoupon }) => {
   const featuredCoupons = useFeaturedCoupons();
   const freeProductsResponse = useFreeProducts(false);
 
@@ -34,16 +34,22 @@ const couponDiscountBar2 = ({ cartList }) => {
   const hasCartItems = cartList?.length > 0;
 
   if (hasCartItems) {
-    if (bxgyCoupon) {
+    if (
+      bxgyCoupon &&
+      (!appliedCoupon || appliedCoupon.code === bxgyCoupon.code)
+    ) {
       const couponText = bxgyCoupon?.allowed
         ? `Congrats, your free product is added to cart!`
         : `Add more items to unlock 'Buy ${bxgyCoupon.buyXQuantity} get ${bxgyCoupon.getYQuantity} Offer'`;
       return (
         <CouponBanner message={couponText} animate={!!bxgyCoupon.allowed} />
       );
-    } else if (bxayCoupon) {
+    } else if (
+      bxayCoupon &&
+      (!appliedCoupon || appliedCoupon.code === bxayCoupon.code)
+    ) {
       const couponText = bxayCoupon?.allowed
-        ? `Congrats,'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' can be availed!`
+        ? `Congrats, 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' can be availed!`
         : `Add more items to unlock 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer'`;
       return (
         <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
@@ -71,4 +77,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(couponDiscountBar2);
+export default connect(mapStateToProps)(couponDiscountBar);

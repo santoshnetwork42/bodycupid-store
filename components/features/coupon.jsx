@@ -290,7 +290,7 @@ function Coupon(props) {
             <ALink href="#" onClick={closeSlider}>
               <LeftAngle />
             </ALink>
-            <div className="cart-title-2 ml-2">
+            <div className="cart-title ml-2">
               COUPONS ({featuredCoupons.length})
             </div>
           </div>
@@ -369,7 +369,7 @@ function Coupon(props) {
                           <ALink
                             onClick={onCouponRemove}
                             href="#"
-                            className="coupon-remove2"
+                            className="coupon-remove"
                             disabled={!c.allowed}
                           >
                             Remove
