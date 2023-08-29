@@ -1293,6 +1293,7 @@ export const createShoppingCart = /* GraphQL */ `
       couponCodeId
       createdAt
       updatedAt
+      expiresAt
     }
   }
 `;
@@ -1306,6 +1307,7 @@ export const updateShoppingCart = /* GraphQL */ `
       storeId
       userId
       couponCodeId
+      expiresAt
     }
   }
 `;

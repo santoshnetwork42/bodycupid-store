@@ -3441,6 +3441,7 @@ export const createShoppingCart = /* GraphQL */ `
       landingPage
       createdAt
       updatedAt
+      expiresAt
       shoppingcartProducts {
         nextToken
         __typename
@@ -3535,6 +3536,7 @@ export const updateShoppingCart = /* GraphQL */ `
       landingPage
       createdAt
       updatedAt
+      expiresAt
       shoppingcartProducts {
         nextToken
         __typename
@@ -3629,6 +3631,7 @@ export const deleteShoppingCart = /* GraphQL */ `
       landingPage
       createdAt
       updatedAt
+      expiresAt
       shoppingcartProducts {
         nextToken
         __typename
