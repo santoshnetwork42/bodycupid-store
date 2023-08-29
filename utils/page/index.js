@@ -7,10 +7,7 @@ import {
   getStoreBanners,
   getCollectionType,
 } from "~/graphql/api";
-import {
-  getRecommendedProductIds,
-  getRecommendedProducts,
-} from "~/utils/recommendedProduct";
+import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
 import { getDefaultSorting } from "..";
 
@@ -57,7 +54,6 @@ export const getStaticProps = async () => {
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
-      recommendedProductIds,
       { searchCollectionTypes: bestSellerCollectionItem },
       { searchCollectionTypes: featuredCollectionItem },
     ] = await Promise.all([
@@ -65,7 +61,6 @@ export const getStaticProps = async () => {
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
-      getRecommendedProductIds(),
       getCollectionBySlug("best-seller"),
       getCollectionBySlug("featured"),
     ]);
@@ -81,13 +76,9 @@ export const getStaticProps = async () => {
     } = featuredCollectionItem;
     const { banners } = store;
 
-    const filteredRecommendedProductIds = recommendedProductIds.filter(
-      (rIds) => !bestSellerItems.find((item) => rIds.productId === item.id)
-    );
-
-    const recommendedProducts = await getRecommendedProducts(
-      filteredRecommendedProductIds
-    );
+    const recommendedProducts = await getRecommendedProducts({
+      excludeItems: bestSellerItems,
+    });
 
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
     const featuredProducts = setSoldOutLast(featuredItems);

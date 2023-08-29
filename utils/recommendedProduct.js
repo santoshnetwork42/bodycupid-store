@@ -5,12 +5,13 @@ import {
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 
-export const getRecommendedProductIds = async ({
+const getRecommendedProducts = async ({
   items = [],
   limit = 8,
   recommenderType = "BEST_SELLER",
+  excludeItems = [],
 } = {}) => {
-  return await fetchData(getProductRecommendation, {
+  const bestSellersPersonalizedIds = await fetchData(getProductRecommendation, {
     input: {
       items,
       storeId: STORE_ID,
@@ -18,41 +19,50 @@ export const getRecommendedProductIds = async ({
       limit,
     },
   }).then((response) => response.getProductRecommendation);
-};
 
-export const getRecommendedProducts = async (bestSellersPersonalizedIds) => {
+  const filteredRecommendedProductIds =
+    bestSellersPersonalizedIds.length && excludeItems.length
+      ? bestSellersPersonalizedIds.filter(
+          (rIds) => !excludeItems.find((item) => rIds.productId === item.id)
+        )
+      : null;
+
   const products = await Promise.all(
-    (bestSellersPersonalizedIds || []).map(async ({ productId, variantId }) => {
-      return await fetchData(getRecommendedProductById, {
-        id: productId,
-        variantFilter: { status: { eq: "ENABLED" } },
-        variantLimit: variantId ? 10 : 1,
-        imageLimit: 1,
-      })
-        .then((res) => res.getProduct)
-        .then((res) => (res?.status === "ENABLED" ? res : null))
-        .then((res) => {
-          if (!res) return null;
-          let [variant] = res.variants.items;
+    (filteredRecommendedProductIds || bestSellersPersonalizedIds || []).map(
+      async ({ productId, variantId }) => {
+        return await fetchData(getRecommendedProductById, {
+          id: productId,
+          variantFilter: { status: { eq: "ENABLED" } },
+          variantLimit: variantId ? 10 : 1,
+          imageLimit: 1,
+        })
+          .then((res) => res.getProduct)
+          .then((res) => (res?.status === "ENABLED" ? res : null))
+          .then((res) => {
+            if (!res) return null;
+            let [variant] = res.variants.items;
 
-          if (variantId) {
-            const currVariant = res.variants.items.find(
-              (v) => v.id === variantId
-            );
+            if (variantId) {
+              const currVariant = res.variants.items.find(
+                (v) => v.id === variantId
+              );
 
-            if (currVariant) {
-              variant = currVariant;
+              if (currVariant) {
+                variant = currVariant;
+              }
             }
-          }
 
-          if (variant) {
-            res.variants.items = [variant];
-          }
+            if (variant) {
+              res.variants.items = [variant];
+            }
 
-          return res;
-        });
-    })
+            return res;
+          });
+      }
+    )
   );
 
   return products.filter(Boolean);
 };
+
+export default getRecommendedProducts;
