@@ -41,13 +41,19 @@ const AddressForm = (props) => {
   }, []);
 
   useEffect(() => {
-    if (address.pinCode.length === 6) {
+    const isEditMode = !!defaultAddress?.name;
+    if (
+      address.pinCode.length === 6 &&
+      (!isEditMode ||
+        defaultAddress?.pinCode !== address.pinCode ||
+        defaultAddress?.city !== address.city)
+    ) {
       fetchCityAndStateData(address.pinCode);
     }
   }, [address.pinCode]);
 
   useEffect(() => {
-    if (defaultAddress && defaultAddress.name) {
+    if (defaultAddress?.name) {
       setAddress({
         ...defaultAddress,
         firstName: defaultAddress.name.split(" ")[0] || "",
