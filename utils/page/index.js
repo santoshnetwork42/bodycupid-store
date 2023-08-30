@@ -77,7 +77,8 @@ export const getStaticProps = async () => {
     const { banners } = store;
 
     const recommendedProducts = await getRecommendedProducts({
-      excludeItems: bestSellerItems,
+      limit: bestSellerItems.length + 4,
+      excludeItems: bestSellerItems.map((b) => b.id),
     });
 
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
