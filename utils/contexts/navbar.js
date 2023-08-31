@@ -228,26 +228,9 @@ export const useMenu = () => {
   });
 
   menu.push({
-    label: "Rakhi Offers",
-    link: `/collections/raksha-bandhan-gifts`,
-    slug: "raksha-bandhan-gifts",
-    subMenu: [
-      {
-        label: "Rakhi Gifts",
-        link: "/collections/raksha-bandhan-gifts",
-        slug: "raksha-bandhan-gifts",
-      },
-      {
-        label: "BUY 3 @ 599",
-        link: "/collections/special-bundle-offer",
-        slug: "special-bundle-offer",
-      },
-      {
-        label: "BUY 3 @ 1099",
-        link: "/collections/fragrance-bundle-offer",
-        slug: "fragrance-bundle-offer",
-      },
-    ],
+    label: "Clearance Sale",
+    link: `/collections/clearance-sale`,
+    slug: "clearance-sale",
   });
 
   return menu;
