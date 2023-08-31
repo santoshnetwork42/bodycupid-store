@@ -125,16 +125,20 @@ function NavbarProvider({ children, config }) {
     try {
       API.graphql(
         graphqlOperation(findProducts, {
-          filter: { storeId: { eq: STORE_ID }, recommended: { eq: true } },
+          filter: {
+            storeId: { eq: STORE_ID },
+            recommended: { eq: true },
+            status: { eq: "ENABLED" },
+          },
           sort: [{ field: "recommendPriority", direction: "asc" }],
         })
       )
         .then((res) => res.data.searchProducts.items)
         .then((res) => {
           const response = res.filter((lto) => {
-            const status = lto.variants
+            const status = lto.variants?.items.length
               ? lto.variants?.items[0].status === "ENABLED"
-              : lto.status === "ENABLED";
+              : true;
             const { hasInventory } = getProductInventory(lto);
             return hasInventory && status;
           });
