@@ -17,6 +17,7 @@ import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
 import { useDispatch } from "react-redux";
 import { cartActions } from "~/store/cart";
+import { getProductInventory } from "../products";
 
 export const NavbarContext = createContext();
 
@@ -118,7 +119,11 @@ function NavbarProvider({ children, config }) {
       )
         .then((res) => res.data.searchProducts.items)
         .then((res) => {
-          dispatch(cartActions.initialLTO(res));
+          const response = res.filter((lto) => {
+            const { hasInventory } = getProductInventory(lto);
+            return hasInventory;
+          });
+          dispatch(cartActions.initialLTO(response));
         });
     } catch (error) {
       errorHandler(error);
