@@ -34,7 +34,7 @@ export const getMenuCategories = /* GraphQL */ `
       }
     }
   }
-`;
+`; 
 
 export const getSubCategoriesByCategoryID = /* GraphQL */ `
   query SearchProductSubCategories(
