@@ -21,12 +21,14 @@ export const getMenuCategories = /* GraphQL */ `
         name
         slug
         priority
+        isArchive
         subCategory(filter: $subCategoryFilter) {
           items {
             id
             name
             slug
             priority
+            isArchive
           }
         }
       }
@@ -107,11 +109,13 @@ export const getSideBarFilterCategories = /* GraphQL */ `
         id
         name
         slug
+        isArchive
         subCategory {
           items {
             id
             name
             slug
+            isArchive
           }
         }
       }
@@ -276,6 +280,7 @@ export const getHomePageCategories = /* GraphQL */ `
         slug
         imageUrl
         priority
+        isArchive
         category {
           slug
         }
@@ -788,7 +793,6 @@ export const searchProductSubCategories = /* GraphQL */ `
       items {
         id
         name
-
         categoryID
         category {
           id
@@ -812,6 +816,7 @@ export const searchProductSubCategories = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        isArchive
         slug
       }
       nextToken
@@ -846,6 +851,7 @@ export const getBasicSubCategory = /* GraphQL */ `
         bannerUrl
         categoryID
         imageUrl
+        isArchive
         category {
           slug
         }
@@ -878,6 +884,7 @@ export const getBasicCategory = /* GraphQL */ `
         description
         slug
         imageUrl
+        isArchive
       }
     }
   }
@@ -1045,6 +1052,7 @@ export const getRecommendedProductById = /* GraphQL */ `
       slug
       price
       sku
+      status
       position
       listingPrice
       tags
@@ -1513,6 +1521,7 @@ export const getStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
       }
       announcements {
         label
@@ -1543,6 +1552,7 @@ export const getStoreBanners = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
       }
     }
   }
@@ -1806,6 +1816,8 @@ export const searchCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
+        isArchive
       }
     }
   }
@@ -1964,6 +1976,33 @@ export const getProductRecommendation = /* GraphQL */ `
     getProductRecommendation(input: $input) {
       productId
       variantId
+    }
+  }
+`;
+
+export const getCollectionType = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $sort: [SearchableCollectionTypeSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableCollectionTypeAggregationInput]
+  ) {
+    searchCollectionTypes(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        slug
+        defaultSorting
+        isArchive
+      }
     }
   }
 `;

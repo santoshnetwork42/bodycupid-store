@@ -30,6 +30,8 @@ function HomePage({
   brands,
   store,
   pageMeta,
+  bestSellerDefaultSorting,
+  featuredDefaultSorting,
 }) {
   const { name } = store || {};
   const { isSmallSize } = useWindowDimensions();
@@ -49,7 +51,7 @@ function HomePage({
           title="Best sellers"
           disableCarousel={isSmallSize}
           slug="best-seller"
-          redirectTo="/collections/best-seller"
+          redirectTo={`/collections/best-seller?sortby=${bestSellerDefaultSorting}`}
         />
 
         {!!topProducts?.length && (
@@ -66,7 +68,7 @@ function HomePage({
           products={featuredProducts}
           title="Our featured"
           slug="featured"
-          redirectTo="/collections/featured"
+          redirectTo={`/collections/featured?sortby=${featuredDefaultSorting}`}
         />
         <CategorySection categories={categories} />
         <ReviewSection />

@@ -17,6 +17,7 @@ import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
 import { useDispatch } from "react-redux";
 import { cartActions } from "~/store/cart";
+import { getDefaultSorting } from "..";
 import { getProductInventory } from "../products";
 
 export const NavbarContext = createContext();
@@ -32,7 +33,11 @@ function NavbarProvider({ children, config }) {
   const getCollections = () => {
     API.graphql(
       graphqlOperation(searchCollectionTypes, {
-        filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
+        filter: {
+          storeId: { eq: STORE_ID },
+          showInMenu: { eq: true },
+          isArchive: { eq: false },
+        },
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
@@ -47,8 +52,15 @@ function NavbarProvider({ children, config }) {
   const getCategories = () => {
     API.graphql(
       graphqlOperation(getMenuCategories, {
-        filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
-        subCategoryFilter: { showInMenu: { eq: true } },
+        filter: {
+          storeId: { eq: STORE_ID },
+          showInMenu: { eq: true },
+          isArchive: { eq: false },
+        },
+        subCategoryFilter: {
+          showInMenu: { eq: true },
+          isArchive: { eq: false },
+        },
         sort: [{ field: "priority", direction: "asc" }],
       })
     )
@@ -200,7 +212,9 @@ export const useMenu = () => {
   if (collections.length) {
     const collectionsMenu = collections.map((col) => ({
       label: col.name,
-      link: `/collections/${col.slug}`,
+      link: `/collections/${col.slug}?sortby=${getDefaultSorting(
+        col.defaultSorting
+      )}`,
       slug: col.slug,
     }));
 
@@ -222,6 +236,12 @@ export const useMenu = () => {
     label: "Rakhi Gifts",
     link: `/collections/raksha-bandhan-gifts`,
     slug: "raksha-bandhan-gifts",
+  });
+
+  menu.push({
+    label: "Cupid Wednesday",
+    link: `/collections/clearance-sale`,
+    slug: "clearance-sale",
   });
 
   return menu;

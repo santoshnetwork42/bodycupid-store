@@ -319,6 +319,7 @@ export const getProductCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -349,6 +350,7 @@ export const listProductCategories = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -388,6 +390,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -427,6 +430,7 @@ export const byslugProductCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -466,6 +470,7 @@ export const searchProductCategories = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -527,6 +532,7 @@ export const getProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -542,6 +548,7 @@ export const getProductSubCategory = /* GraphQL */ `
         nextToken
         __typename
       }
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -573,6 +580,7 @@ export const listProductSubCategories = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -613,6 +621,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -653,6 +662,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -693,6 +703,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -733,6 +744,7 @@ export const searchProductSubCategories = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -774,6 +786,7 @@ export const getStore = /* GraphQL */ `
         webKey
         mobileKey
         link
+        name
         __typename
       }
       announcements {
@@ -1030,6 +1043,8 @@ export const getCollectionType = /* GraphQL */ `
       showInMenu
       priority
       imageUrl
+      defaultSorting
+      isArchive
       createdAt
       updatedAt
       __typename
@@ -1054,6 +1069,8 @@ export const listCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -1091,6 +1108,8 @@ export const searchCollectionTypes = /* GraphQL */ `
         showInMenu
         priority
         imageUrl
+        defaultSorting
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -1139,6 +1158,7 @@ export const getProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename
@@ -1158,6 +1178,7 @@ export const getProduct = /* GraphQL */ `
         imageUrl
         bannerUrl
         showInMenu
+        isArchive
         createdAt
         updatedAt
         __typename

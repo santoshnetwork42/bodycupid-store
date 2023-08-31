@@ -5,9 +5,11 @@ import {
   getHomePageCategories,
   findProducts,
   getStoreBanners,
+  getCollectionType,
 } from "~/graphql/api";
 import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
+import { getDefaultSorting } from "..";
 
 const getSearchProducts = (filter) =>
   fetchData(findProducts, {
@@ -24,11 +26,24 @@ const getSearchProducts = (filter) =>
     imageLimit: 1,
   });
 
+const getCollectionBySlug = (slug) => {
+  return fetchData(getCollectionType, {
+    filter: {
+      storeId: { eq: STORE_ID },
+      slug: { eq: slug },
+    },
+  });
+};
+
 export const getStaticProps = async () => {
   try {
     const getSearchProductSubCategories = fetchData(getHomePageCategories, {
       limit: 8,
-      filter: { isFeatured: { eq: true }, storeId: { eq: STORE_ID } },
+      filter: {
+        isFeatured: { eq: true },
+        storeId: { eq: STORE_ID },
+        isArchive: { eq: false },
+      },
       sort: [{ field: "priority", direction: "asc" }],
     });
 
@@ -39,19 +54,32 @@ export const getStaticProps = async () => {
       { searchProducts: searchFeaturedProducts },
       { searchProductSubCategories },
       { getStore: store },
-      recommendedProducts,
+      { searchCollectionTypes: bestSellerCollectionItem },
+      { searchCollectionTypes: featuredCollectionItem },
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }),
       getSearchProducts({ collections: { eq: "featured" } }),
       getSearchProductSubCategories,
       getStoreData,
-      getRecommendedProducts(),
+      getCollectionBySlug("best-seller"),
+      getCollectionBySlug("featured"),
     ]);
 
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categories } = searchProductSubCategories;
+    const {
+      items: [bestSellerCollection],
+    } = bestSellerCollectionItem;
+    const {
+      items: [featuredCollection],
+    } = featuredCollectionItem;
     const { banners } = store;
+
+    const recommendedProducts = await getRecommendedProducts({
+      limit: bestSellerItems.length + 4,
+      excludeItems: bestSellerItems.map((b) => b.id),
+    });
 
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
     const featuredProducts = setSoldOutLast(featuredItems);
@@ -84,6 +112,12 @@ export const getStaticProps = async () => {
           image: getPublicImageURL(imageUrl),
           googleVerificationTag: GOOGLE_VERIFICATION_TAG ?? null,
         },
+        bestSellerDefaultSorting: getDefaultSorting(
+          bestSellerCollection.defaultSorting
+        ),
+        featuredDefaultSorting: getDefaultSorting(
+          featuredCollection.defaultSorting
+        ),
       },
       revalidate: 60,
     };
