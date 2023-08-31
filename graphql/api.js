@@ -915,6 +915,7 @@ export const findProducts = /* GraphQL */ `
         title
         collections
         vendor
+        status
         subCategory {
           name
           slug
@@ -951,6 +952,7 @@ export const findProducts = /* GraphQL */ `
             imageUrl
             inventory
             blockedInventory
+            status
           }
         }
         images(limit: $imageLimit) {

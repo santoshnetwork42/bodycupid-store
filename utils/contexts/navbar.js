@@ -132,8 +132,11 @@ function NavbarProvider({ children, config }) {
         .then((res) => res.data.searchProducts.items)
         .then((res) => {
           const response = res.filter((lto) => {
+            const status = lto.variants
+              ? lto.variants?.items[0].status === "ENABLED"
+              : lto.status === "ENABLED";
             const { hasInventory } = getProductInventory(lto);
-            return hasInventory;
+            return hasInventory && status;
           });
           dispatch(cartActions.initialLTO(response));
         });
