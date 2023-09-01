@@ -225,6 +225,24 @@ export const deleteProduct = /* GraphQL */ `
       brand
       vendor
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
       categoryId
       category {
         id
@@ -1946,6 +1964,7 @@ export const createCollectionType = /* GraphQL */ `
       imageUrl
       defaultSorting
       isArchive
+      label
       createdAt
       updatedAt
       __typename
@@ -1983,6 +2002,7 @@ export const updateCollectionType = /* GraphQL */ `
       imageUrl
       defaultSorting
       isArchive
+      label
       createdAt
       updatedAt
       __typename
@@ -2020,6 +2040,7 @@ export const deleteCollectionType = /* GraphQL */ `
       imageUrl
       defaultSorting
       isArchive
+      label
       createdAt
       updatedAt
       __typename
@@ -2037,6 +2058,24 @@ export const createProduct = /* GraphQL */ `
       brand
       vendor
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
       categoryId
       category {
         id
@@ -2169,6 +2208,24 @@ export const updateProduct = /* GraphQL */ `
       brand
       vendor
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
       categoryId
       category {
         id
@@ -3445,6 +3502,7 @@ export const createShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3539,6 +3597,7 @@ export const updateShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3633,6 +3692,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -4922,6 +4982,7 @@ export const createStoreShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }

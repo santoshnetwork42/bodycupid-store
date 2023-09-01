@@ -1045,6 +1045,7 @@ export const getCollectionType = /* GraphQL */ `
       imageUrl
       defaultSorting
       isArchive
+      label
       createdAt
       updatedAt
       __typename
@@ -1071,6 +1072,45 @@ export const listCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const bySlugCollectionType = /* GraphQL */ `
+  query BySlugCollectionType(
+    $slug: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionTypeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bySlugCollectionType(
+      slug: $slug
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
         createdAt
         updatedAt
         __typename
@@ -1110,6 +1150,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
         createdAt
         updatedAt
         __typename
@@ -1144,6 +1185,24 @@ export const getProduct = /* GraphQL */ `
       brand
       vendor
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
       categoryId
       category {
         id
@@ -3602,6 +3661,7 @@ export const getShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3628,6 +3688,7 @@ export const listShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3667,6 +3728,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3706,6 +3768,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3745,6 +3808,7 @@ export const searchShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken

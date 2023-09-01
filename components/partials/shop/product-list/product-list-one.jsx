@@ -124,6 +124,7 @@ function ProductListOne(props) {
             graphqlOperation(findProducts, {
               ...filters,
               filter: { ...filters.filter, ...pageFilter },
+              collectionFilter: { hasLabel: true },
               nextToken: reset ? null : token,
             })
           );

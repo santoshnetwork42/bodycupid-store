@@ -147,6 +147,7 @@ export const getStaticProps = async (context) => {
         filter,
         sort: [{ field: "position", direction: "asc" }],
         variantFilter: { status: { eq: "ENABLED" } },
+        collectionFilter: { hasLabel: true },
         imageLimit: 1,
       });
 
@@ -215,6 +216,7 @@ export const getStaticProps = async (context) => {
         filter,
         sort: [{ field: "position", direction: "asc" }],
         variantFilter: { status: { eq: "ENABLED" } },
+        collectionFilter: { hasLabel: true },
         imageLimit: 1,
       });
 
@@ -308,6 +310,7 @@ export const getStaticProps = async (context) => {
         filter,
         sort: [{ field: "position", direction: "asc" }],
         variantFilter: { status: { eq: "ENABLED" } },
+        collectionFilter: { hasLabel: true },
         imageLimit: 1,
       });
 

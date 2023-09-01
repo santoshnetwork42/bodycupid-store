@@ -893,6 +893,7 @@ export const getBasicCategory = /* GraphQL */ `
 export const findProducts = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
+    $collectionFilter: CollectionsListFilterInput
     $sort: [SearchableProductSortInput]
     $limit: Int
     $nextToken: String
@@ -914,6 +915,9 @@ export const findProducts = /* GraphQL */ `
         id
         title
         collections
+        collectionsList(filter: $collectionFilter) {
+          label
+        }
         vendor
         subCategory {
           name
@@ -977,6 +981,24 @@ export const getProductById = /* GraphQL */ `
       id
       title
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        showLabel
+        createdAt
+        updatedAt
+      }
       vendor
       subCategory {
         name
@@ -1818,6 +1840,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
       }
     }
   }
@@ -2002,6 +2025,45 @@ export const getCollectionType = /* GraphQL */ `
         slug
         defaultSorting
         isArchive
+        showLabel
+        label
+      }
+    }
+  }
+`;
+
+export const bySlugStoreIdCollectionType = /* GraphQL */ `
+  query BySlugStoreIdCollectionType(
+    $slug: ID!
+    $storeId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionTypeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bySlugStoreIdCollectionType(
+      slug: $slug
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        showLabel
+        label
       }
     }
   }
