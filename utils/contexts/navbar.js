@@ -3,7 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import Cookie from "js-cookie";
 
 import { STORE_ID, STORE_PREFIX } from "~/config";
-import { getCoupon, searchDashboardData } from "~/graphql/api";
+import { getCoupon, getInitialData } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
@@ -14,7 +14,7 @@ import { getProductInventory } from "../products";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children, config }) {
+function NavbarProvider({ children }) {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
@@ -24,7 +24,7 @@ function NavbarProvider({ children, config }) {
 
   const getDashboardData = () => {
     API.graphql(
-      graphqlOperation(searchDashboardData, {
+      graphqlOperation(getInitialData, {
         //Category
         menuCategoryFilter: {
           storeId: { eq: STORE_ID },
@@ -103,7 +103,7 @@ function NavbarProvider({ children, config }) {
         //LtoProduct
         const ltoProductsResponse = response.data.searchProducts.items;
         const ltoProducts = ltoProductsResponse.filter((lto) => {
-          const status = lto.variants
+          const status = lto.variants?.items?.length
             ? lto.variants?.items[0].status === "ENABLED"
             : lto.status === "ENABLED";
           const { hasInventory } = getProductInventory(lto);

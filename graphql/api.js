@@ -34,7 +34,7 @@ export const getMenuCategories = /* GraphQL */ `
       }
     }
   }
-`; 
+`;
 
 export const getSubCategoriesByCategoryID = /* GraphQL */ `
   query SearchProductSubCategories(
@@ -2007,8 +2007,9 @@ export const getCollectionType = /* GraphQL */ `
   }
 `;
 
-export const searchDashboardData = /* GraphQL */ `
-  query searchDashboardData(
+export const getInitialData = /* GraphQL */ `
+  query getInitialData(
+    // Menu
     $menuCategoryFilter: SearchableProductCategoryFilterInput
     $menuCategorySort: [SearchableProductCategorySortInput]
     $menuCategoryLimit: Int
@@ -2016,24 +2017,32 @@ export const searchDashboardData = /* GraphQL */ `
     $menuCategoryFrom: Int
     $menuCategoryAggregates: [SearchableProductCategoryAggregationInput]
     $menuCategorySubCategoryFilter: ModelProductSubCategoryFilterInput
+
+    // Collections
     $collectionFilter: SearchableCollectionTypeFilterInput
     $collectionSort: [SearchableCollectionTypeSortInput]
     $collectionLimit: Int
     $collectionNextToken: String
     $collectionFrom: Int
     $collectionAggregates: [SearchableCollectionTypeAggregationInput]
+
+    // Configurations
     $configurationFilter: SearchableConfigurationFilterInput
     $configurationSort: [SearchableConfigurationSortInput]
     $configurationLimit: Int
     $configurationNextToken: String
     $configurationFrom: Int
     $configurationAggregates: [SearchableConfigurationAggregationInput]
+
+    // Coupons
     $couponFilter: SearchableCouponFilterInput
     $couponSort: [SearchableCouponSortInput]
     $couponLimit: Int
     $couponNextToken: String
     $couponFrom: Int
     $couponAggregates: [SearchableCouponAggregationInput]
+
+    // LTO
     $ltoProductFilter: SearchableProductFilterInput
     $ltoProductSort: [SearchableProductSortInput]
     $ltoProductLimit: Int
@@ -2043,6 +2052,8 @@ export const searchDashboardData = /* GraphQL */ `
     $ltoProductVariantFilter: ModelVariantFilterInput
     $ltoProductVariantLimit: Int
     $ltoProductImageLimit: Int
+
+    // Shipping Tier
     $shippingFilter: SearchableShippingTierFilterInput
     $shippingSort: [SearchableShippingTierSortInput]
     $shippingLimit: Int

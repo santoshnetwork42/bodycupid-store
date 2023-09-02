@@ -212,7 +212,7 @@ const App = ({ Component, pageProps }) => {
         >
           <Scripts />
           <ABProvider>
-            <NavbarProvider config={Component.navbarConfig}>
+            <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Component {...pageProps} />
                 <VercelAnalytics />
