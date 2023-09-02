@@ -70,7 +70,6 @@ function ProductDefault(props) {
             variantFilter: { status: { eq: "ENABLED" } },
             imageLimit: 1,
             limit: 4,
-            collectionFilter: { hasLabel: true },
           })
         );
         if (items.length) {

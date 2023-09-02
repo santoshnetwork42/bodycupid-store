@@ -893,7 +893,6 @@ export const getBasicCategory = /* GraphQL */ `
 export const findProducts = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
-    $collectionFilter: CollectionsListFilterInput
     $sort: [SearchableProductSortInput]
     $limit: Int
     $nextToken: String
@@ -915,7 +914,7 @@ export const findProducts = /* GraphQL */ `
         id
         title
         collections
-        collectionsList(filter: $collectionFilter) {
+        collectionsList {
           label
         }
         vendor
@@ -995,7 +994,6 @@ export const getProductById = /* GraphQL */ `
         defaultSorting
         isArchive
         label
-        showLabel
         createdAt
         updatedAt
       }
@@ -2025,7 +2023,6 @@ export const getCollectionType = /* GraphQL */ `
         slug
         defaultSorting
         isArchive
-        showLabel
         label
       }
     }
@@ -2062,7 +2059,6 @@ export const bySlugStoreIdCollectionType = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
-        showLabel
         label
       }
     }

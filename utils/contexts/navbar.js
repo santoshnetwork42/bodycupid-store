@@ -126,7 +126,6 @@ function NavbarProvider({ children, config }) {
         graphqlOperation(findProducts, {
           filter: { storeId: { eq: STORE_ID }, recommended: { eq: true } },
           sort: [{ field: "recommendPriority", direction: "asc" }],
-          collectionFilter: { hasLabel: true },
         })
       )
         .then((res) => res.data.searchProducts.items)

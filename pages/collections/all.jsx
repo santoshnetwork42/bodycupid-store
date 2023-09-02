@@ -80,7 +80,6 @@ export const getStaticProps = async () => {
     // Get all Product
     const { searchProducts } = await fetchData(findProducts, {
       filter,
-      collectionFilter: { hasLabel: true },
       sort: [{ field: "position", direction: "asc" }],
       variantFilter: { status: { eq: "ENABLED" } },
       imageLimit: 1,

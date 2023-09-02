@@ -18,7 +18,6 @@ const getSearchProducts = (filter) =>
       status: { eq: "ENABLED" },
       ...filter,
     },
-    collectionFilter: { hasLabel: true },
     limit: 8,
     sort: [{ field: "position", direction: "asc" }],
     variantFilter: {
