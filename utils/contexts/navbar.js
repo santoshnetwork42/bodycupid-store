@@ -3,15 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import Cookie from "js-cookie";
 
 import { STORE_ID, STORE_PREFIX } from "~/config";
-import {
-  getMenuCategories,
-  searchCollectionTypes,
-  searchShippingTiers,
-  getFeaturedCoupon,
-  searchConfigurations,
-  getCoupon,
-  findProducts,
-} from "~/graphql/api";
+import { getCoupon, getInitialData } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
@@ -22,7 +14,7 @@ import { getProductInventory } from "../products";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children, config }) {
+function NavbarProvider({ children }) {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
@@ -30,68 +22,36 @@ function NavbarProvider({ children, config }) {
   const [coupons, setCoupons] = useState(null);
   const [configurations, setConfigurations] = useState([]);
 
-  const getCollections = () => {
+  const getDashboardData = () => {
     API.graphql(
-      graphqlOperation(searchCollectionTypes, {
-        filter: {
+      graphqlOperation(getInitialData, {
+        //Category
+        menuCategoryFilter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           isArchive: { eq: false },
         },
-        sort: [{ field: "priority", direction: "asc" }],
-      })
-    )
-      .then(
-        (listCollectionsResponse) =>
-          listCollectionsResponse.data.searchCollectionTypes.items
-      )
-      .then(setCollections)
-      .catch(errorHandler);
-  };
-
-  const getCategories = () => {
-    API.graphql(
-      graphqlOperation(getMenuCategories, {
-        filter: {
+        menuCategorySubCategoryFilter: {
+          showInMenu: { eq: true },
+          isArchive: { eq: false },
+        },
+        menuCategorySort: [{ field: "priority", direction: "asc" }],
+        collectionFilter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           isArchive: { eq: false },
         },
-        subCategoryFilter: {
-          showInMenu: { eq: true },
-          isArchive: { eq: false },
+
+        //Collection
+        collectionSort: [{ field: "priority", direction: "asc" }],
+
+        //Configuration
+        configurationFilter: {
+          storeId: { eq: STORE_ID },
         },
-        sort: [{ field: "priority", direction: "asc" }],
-      })
-    )
-      .then(
-        (getCategoriesResponse) =>
-          getCategoriesResponse.data.searchProductCategories.items
-      )
-      .then(getSortedCategoryAndSubCategory)
-      .then(setCategories)
-      .catch(errorHandler);
-  };
 
-  const getShippingTiers = () => {
-    API.graphql(
-      graphqlOperation(searchShippingTiers, {
-        filter: { storeId: { eq: STORE_ID } },
-      })
-    )
-      .then(
-        (getShippingTiersResponse) =>
-          getShippingTiersResponse.data.searchShippingTiers.items
-      )
-      .then(setShippingTiers)
-      .catch(errorHandler);
-  };
-
-  const getCoupons = () => {
-    API.graphql({
-      query: getFeaturedCoupon,
-      variables: {
-        filter: {
+        //Coupon
+        couponFilter: {
           isActive: { eq: true },
           storeId: { eq: STORE_ID },
           or: [
@@ -101,15 +61,37 @@ function NavbarProvider({ children, config }) {
             },
           ],
         },
-      },
-    })
-      .then(
-        (getFeaturedCouponResponse) =>
-          getFeaturedCouponResponse.data.searchCoupons.items
-      )
-      .then((items) => {
+
+        //LtoProduct
+        ltoProductFilter: {
+          storeId: { eq: STORE_ID },
+          recommended: { eq: true },
+        },
+        ltoProductSort: [{ field: "recommendPriority", direction: "asc" }],
+
+        //Shipping
+        shippingFilter: { storeId: { eq: STORE_ID } },
+      })
+    )
+      .then((response) => {
+        //Category
+        const categoryResponse = response.data.searchProductCategories.items;
+        const sortedCategoryAndSubCategory =
+          getSortedCategoryAndSubCategory(categoryResponse);
+        setCategories(sortedCategoryAndSubCategory);
+
+        //Collection
+        const collectionResponse = response.data.searchCollectionTypes.items;
+        setCollections(collectionResponse);
+
+        //Configuration
+        const configurationResponse = response.data.searchCollectionTypes.items;
+        setConfigurations(configurationResponse);
+
+        //Coupon
+        const couponResponse = response.data.searchCoupons.items;
         setCoupons(
-          items.filter((coupon) => {
+          couponResponse.filter((coupon) => {
             const { expirationDate } = coupon;
             return (
               !expirationDate ||
@@ -117,66 +99,27 @@ function NavbarProvider({ children, config }) {
             );
           })
         );
+
+        //LtoProduct
+        const ltoProductsResponse = response.data.searchProducts.items;
+        const ltoProducts = ltoProductsResponse.filter((lto) => {
+          const status = lto.variants?.items?.length
+            ? lto.variants?.items[0].status === "ENABLED"
+            : lto.status === "ENABLED";
+          const { hasInventory } = getProductInventory(lto);
+          return hasInventory && status;
+        });
+        dispatch(cartActions.initialLTO(ltoProducts));
+
+        //ShippingTier
+        const shippingTierResponse = response.data.searchShippingTiers.items;
+        setShippingTiers(shippingTierResponse);
       })
       .catch(errorHandler);
   };
 
-  const getLTOProducts = async () => {
-    try {
-      API.graphql(
-        graphqlOperation(findProducts, {
-          filter: {
-            storeId: { eq: STORE_ID },
-            recommended: { eq: true },
-            status: { eq: "ENABLED" },
-          },
-          sort: [{ field: "recommendPriority", direction: "asc" }],
-        })
-      )
-        .then((res) => res.data.searchProducts.items)
-        .then((res) => {
-          const response = res.filter((lto) => {
-            const status = lto.variants?.items.length
-              ? lto.variants?.items[0].status === "ENABLED"
-              : true;
-            const { hasInventory } = getProductInventory(lto);
-            return hasInventory && status;
-          });
-          dispatch(cartActions.initialLTO(response));
-        });
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
-
-  const getConfigurations = async () => {
-    try {
-      API.graphql(
-        graphqlOperation(searchConfigurations, {
-          filter: {
-            storeId: { eq: STORE_ID },
-          },
-        })
-      )
-        .then((res) => res.data.searchConfigurations.items)
-        .then(setConfigurations);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
-
   useEffect(() => {
-    if (config?.shippingTier && !shippingTiers) {
-      getShippingTiers();
-    }
-  }, [config?.shippingTier]);
-
-  useEffect(() => {
-    getCategories();
-    getCollections();
-    getConfigurations();
-    getCoupons();
-    getLTOProducts();
+    getDashboardData();
   }, []);
 
   const addUserCoupon = async (coupon) => {

@@ -2008,3 +2008,250 @@ export const getCollectionType = /* GraphQL */ `
     }
   }
 `;
+
+export const getInitialData = /* GraphQL */ `
+  query getInitialData(
+    // Menu
+    $menuCategoryFilter: SearchableProductCategoryFilterInput
+    $menuCategorySort: [SearchableProductCategorySortInput]
+    $menuCategoryLimit: Int
+    $menuCategoryNextToken: String
+    $menuCategoryFrom: Int
+    $menuCategoryAggregates: [SearchableProductCategoryAggregationInput]
+    $menuCategorySubCategoryFilter: ModelProductSubCategoryFilterInput
+
+    // Collections
+    $collectionFilter: SearchableCollectionTypeFilterInput
+    $collectionSort: [SearchableCollectionTypeSortInput]
+    $collectionLimit: Int
+    $collectionNextToken: String
+    $collectionFrom: Int
+    $collectionAggregates: [SearchableCollectionTypeAggregationInput]
+
+    // Configurations
+    $configurationFilter: SearchableConfigurationFilterInput
+    $configurationSort: [SearchableConfigurationSortInput]
+    $configurationLimit: Int
+    $configurationNextToken: String
+    $configurationFrom: Int
+    $configurationAggregates: [SearchableConfigurationAggregationInput]
+
+    // Coupons
+    $couponFilter: SearchableCouponFilterInput
+    $couponSort: [SearchableCouponSortInput]
+    $couponLimit: Int
+    $couponNextToken: String
+    $couponFrom: Int
+    $couponAggregates: [SearchableCouponAggregationInput]
+
+    // LTO
+    $ltoProductFilter: SearchableProductFilterInput
+    $ltoProductSort: [SearchableProductSortInput]
+    $ltoProductLimit: Int
+    $ltoProductNextToken: String
+    $ltoProductFrom: Int
+    $ltoProductAggregates: [SearchableProductAggregationInput]
+    $ltoProductVariantFilter: ModelVariantFilterInput
+    $ltoProductVariantLimit: Int
+    $ltoProductImageLimit: Int
+
+    // Shipping Tier
+    $shippingFilter: SearchableShippingTierFilterInput
+    $shippingSort: [SearchableShippingTierSortInput]
+    $shippingLimit: Int
+    $shippingNextToken: String
+    $shippingFrom: Int
+    $shippingAggregates: [SearchableShippingTierAggregationInput]
+  ) {
+    searchProductCategories(
+      filter: $menuCategoryFilter
+      sort: $menuCategorySort
+      limit: $menuCategoryLimit
+      nextToken: $menuCategoryNextToken
+      from: $menuCategoryFrom
+      aggregates: $menuCategoryAggregates
+    ) {
+      items {
+        id
+        name
+        slug
+        priority
+        isArchive
+        subCategory(filter: $menuCategorySubCategoryFilter) {
+          items {
+            id
+            name
+            slug
+            priority
+            isArchive
+          }
+        }
+      }
+    }
+
+    searchCollectionTypes(
+      filter: $collectionFilter
+      sort: $collectionSort
+      limit: $collectionLimit
+      nextToken: $collectionNextToken
+      from: $collectionFrom
+      aggregates: $collectionAggregates
+    ) {
+      items {
+        id
+        slug
+        name
+        title
+        description
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+      }
+    }
+
+    searchConfigurations(
+      filter: $configurationFilter
+      sort: $configurationSort
+      limit: $configurationLimit
+      nextToken: $configurationNextToken
+      from: $configurationFrom
+      aggregates: $configurationAggregates
+    ) {
+      items {
+        id
+        storeId
+        key
+        value
+        createdAt
+        updatedAt
+      }
+    }
+
+    searchCoupons(
+      filter: $couponFilter
+      sort: $couponSort
+      limit: $couponLimit
+      nextToken: $couponNextToken
+      from: $couponFrom
+      aggregates: $couponAggregates
+    ) {
+      items {
+        id
+        description
+        code
+        couponType
+        buyXQuantity
+        getYAmount
+        getYPercentage
+        getYQuantity
+        getYProduct
+        getYStoreProduct {
+          id
+          title
+          price
+        }
+        minOrderValue
+        maxDiscount
+        expirationDate
+        autoApply
+        applicableCollections
+        applicableProducts
+        paymentMethod
+      }
+    }
+
+    searchProducts(
+      filter: $ltoProductFilter
+      sort: $ltoProductSort
+      limit: $ltoProductLimit
+      nextToken: $ltoProductNextToken
+      from: $ltoProductFrom
+      aggregates: $ltoProductAggregates
+    ) {
+      items {
+        id
+        title
+        collections
+        vendor
+        status
+        subCategory {
+          name
+          slug
+        }
+        isFeatured
+        category {
+          name
+          slug
+        }
+        slug
+        price
+        sku
+        position
+        listingPrice
+        tags
+        inventory
+        blockedInventory
+        continueSellingOutOfStock
+        rating
+        totalRatings
+        thumbImages
+        isInventoryEnabled
+        totalOrders
+        recommended
+        recommendPriority
+        recommendPrice
+        variants(
+          filter: $ltoProductVariantFilter
+          limit: $ltoProductVariantLimit
+        ) {
+          items {
+            id
+            title
+            price
+            position
+            listingPrice
+            imageUrl
+            inventory
+            blockedInventory
+            status
+          }
+        }
+        images(limit: $ltoProductImageLimit) {
+          items {
+            id
+            position
+            alt
+            width
+            height
+            imageKey
+            isThumb
+          }
+        }
+      }
+      nextToken
+      total
+    }
+
+    searchShippingTiers(
+      filter: $shippingFilter
+      sort: $shippingSort
+      limit: $shippingLimit
+      nextToken: $shippingNextToken
+      from: $shippingFrom
+      aggregates: $shippingAggregates
+    ) {
+      items {
+        id
+        storeId
+        paymentType
+        amount
+        minOrderValue
+        maxOrderValue
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
