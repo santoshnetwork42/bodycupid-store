@@ -68,13 +68,10 @@ export const getStaticProps = async () => {
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: categories } = searchProductSubCategories;
-    const {
-      items: [bestSellerCollection],
-    } = bestSellerCollectionItem;
-    const {
-      items: [featuredCollection],
-    } = featuredCollectionItem;
-    const { banners } = store;
+    const [bestSellerCollection] = bestSellerCollectionItem.items;
+    const [featuredCollection] = featuredCollectionItem.items;
+
+    const { title, name, description, webUrl, imageUrl, banners } = store;
 
     const recommendedProducts = await getRecommendedProducts({
       limit: bestSellerItems.length + 4,
@@ -93,8 +90,6 @@ export const getStaticProps = async () => {
       "/images/brands/8.png",
       "/images/brands/9.png",
     ];
-
-    const { title, name, description, webUrl, imageUrl } = store;
 
     return {
       props: {

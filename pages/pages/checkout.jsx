@@ -73,7 +73,7 @@ function Checkout(props) {
     priceMismatch,
   } = props;
 
-  const { name } = store;
+  const { name } = store || {};
 
   const guestCheckout = useGuestCheckout();
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
@@ -144,13 +144,13 @@ function Checkout(props) {
         }),
       ]);
 
-      if (rzpEnabled && transaction) {
+      if (rzpEnabled && transaction && store) {
         const options = {
           key: RAZORPAY_KEY,
           amount: transaction.amount,
           currency: "INR",
-          name: store.name,
-          image: getPublicImageURL(store.imageUrl),
+          name: store?.name,
+          image: getPublicImageURL(store?.imageUrl),
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
             setOrderData({ order, paymentId: razorpay_payment_id });
@@ -161,7 +161,7 @@ function Checkout(props) {
             contact: address.phone,
           },
           notes: {
-            storeId: store.id,
+            storeId: store?.id,
             orderId,
             paymentId,
           },

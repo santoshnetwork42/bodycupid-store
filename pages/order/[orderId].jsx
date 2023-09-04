@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { getOrder, validateTransaction } from "~/graphql/api";
@@ -14,16 +15,16 @@ import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
-import { alertToaster } from "../../utils/popupHelper";
+import { alertToaster } from "~/utils/popupHelper";
 import Checkmark from "~/components/icons";
 
-import { Logger } from "aws-amplify";
-
 const logger = new Logger("Orders");
+
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
-  const { name } = store;
+  const { name } = store || {};
   const [timer, setTimer] = useState(null);
+
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
@@ -218,9 +219,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                             href={"/products/" + item.product.slug}
                           >
                             <img
-                              src={getPublicImageURL(
-                                item.thumbImage
-                              )}
+                              src={getPublicImageURL(item.thumbImage)}
                               alt={item.product?.images.items[0]?.alt}
                               width="80"
                               height="88"
@@ -362,7 +361,7 @@ Order.getInitialProps = async (context) => {
 
     const products = response?.products?.items.map((item) => {
       if (item.variant?.imageUrl) {
-          item.thumbImage = item?.variant.imageUrl;
+        item.thumbImage = item?.variant.imageUrl;
       } else {
         item.thumbImage = item.product.images?.items[0]?.imageKey;
       }
@@ -371,7 +370,10 @@ Order.getInitialProps = async (context) => {
 
     if (response?.storeId === STORE_ID && response?.status !== "PENDING") {
       return {
-        order: {...response, products: { ...response.products, items: products }},
+        order: {
+          ...response,
+          products: { ...response.products, items: products },
+        },
         paymentId,
         orderId: orderId,
       };
