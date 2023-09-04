@@ -76,23 +76,23 @@ function NavbarProvider({ children }) {
     )
       .then((response) => {
         //Category
-        const categoryResponse = response.data.searchProductCategories.items;
-        const sortedCategoryAndSubCategory =
-          getSortedCategoryAndSubCategory(categoryResponse);
+        const sortedCategoryAndSubCategory = getSortedCategoryAndSubCategory(
+          response.data.searchProductCategories.items
+        );
         setCategories(sortedCategoryAndSubCategory);
 
         //Collection
-        const collectionResponse = response.data.searchCollectionTypes.items;
-        setCollections(collectionResponse);
+        setCollections(response.data.searchCollectionTypes.items);
 
         //Configuration
-        const configurationResponse = response.data.searchCollectionTypes.items;
-        setConfigurations(configurationResponse);
+        setConfigurations(response.data.searchConfigurations.items);
+
+        //ShippingTier
+        setShippingTiers(response.data.searchShippingTiers.items);
 
         //Coupon
-        const couponResponse = response.data.searchCoupons.items;
         setCoupons(
-          couponResponse.filter((coupon) => {
+          response.data.searchCoupons.items.filter((coupon) => {
             const { expirationDate } = coupon;
             return (
               !expirationDate ||
@@ -102,8 +102,7 @@ function NavbarProvider({ children }) {
         );
 
         //LtoProduct
-        const ltoProductsResponse = response.data.searchProducts.items;
-        const ltoProducts = ltoProductsResponse.filter((lto) => {
+        const ltoProducts = response.data.searchProducts.items.filter((lto) => {
           const status = lto.variants?.items?.length
             ? lto.variants?.items[0].status === "ENABLED"
             : lto.status === "ENABLED";
@@ -111,10 +110,6 @@ function NavbarProvider({ children }) {
           return hasInventory && status;
         });
         dispatch(cartActions.initialLTO(ltoProducts));
-
-        //ShippingTier
-        const shippingTierResponse = response.data.searchShippingTiers.items;
-        setShippingTiers(shippingTierResponse);
       })
       .catch(errorHandler);
   };

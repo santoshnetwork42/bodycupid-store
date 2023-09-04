@@ -210,13 +210,13 @@ const App = ({ Component, pageProps }) => {
           persistor={store.__persistor}
           loading={<Loader loading={true} />}
         >
+          <Scripts />
           <ABProvider>
             <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Component {...pageProps} />
                 <VercelAnalytics />
                 <CustomerGlu />
-                <Scripts />
               </Layout>
             </NavbarProvider>
           </ABProvider>
@@ -231,12 +231,11 @@ App.getInitialProps = async ({ Component, ctx }) => {
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
+
   if (!!ctx.req) {
     pageProps = pageProps || {};
-
-    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
-    pageProps.store = store;
   }
+
   return { pageProps };
 };
 
