@@ -119,7 +119,18 @@ function NavbarProvider({ children }) {
   };
 
   useEffect(() => {
-    getDashboardData();
+    const handleMouseMovement = () => {
+      getDashboardData();
+      // Remove the event listener after APIs are called
+      window.removeEventListener("mousemove", handleMouseMovement);
+    };
+
+    window.addEventListener("mousemove", handleMouseMovement);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMovement);
+    };
   }, []);
 
   const addUserCoupon = async (coupon) => {
@@ -176,23 +187,25 @@ export const useMenu = () => {
     });
   }
 
-  menu.push({
-    label: "Combos & Gifts",
-    link: `/collections/combos-and-gifts`,
-    slug: "combos-and-gifts",
-  });
+  if (menu.length) {
+    menu.push({
+      label: "Combos & Gifts",
+      link: `/collections/combos-and-gifts`,
+      slug: "combos-and-gifts",
+    });
 
-  menu.push({
-    label: "Rakhi Gifts",
-    link: `/collections/raksha-bandhan-gifts`,
-    slug: "raksha-bandhan-gifts",
-  });
+    menu.push({
+      label: "Rakhi Gifts",
+      link: `/collections/raksha-bandhan-gifts`,
+      slug: "raksha-bandhan-gifts",
+    });
 
-  menu.push({
-    label: "Cupid Wednesday",
-    link: `/collections/clearance-sale`,
-    slug: "clearance-sale",
-  });
+    menu.push({
+      label: "Cupid Wednesday",
+      link: `/collections/clearance-sale`,
+      slug: "clearance-sale",
+    });
+  }
 
   return menu;
 };

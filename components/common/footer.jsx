@@ -29,6 +29,7 @@ function Footer({ footer, store }) {
                   width="100"
                   height="100"
                   objectFit="contain"
+                  loading="lazy"
                 />
               </ALink>
             </div>
@@ -64,7 +65,12 @@ function Footer({ footer, store }) {
                     <ALink href="/pages/contact-us">Contact Us</ALink>
                   </li>
                   <li>
-                    <ALink href="https://bodycupid.clickpost.in/" target="_blank">Track your Order</ALink>
+                    <ALink
+                      href="https://bodycupid.clickpost.in/"
+                      target="_blank"
+                    >
+                      Track your Order
+                    </ALink>
                   </li>
                 </ul>
               </div>

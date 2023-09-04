@@ -108,9 +108,9 @@ function ProductTwo(props) {
         <Image
           src={getPublicImageURL(thumbImage?.imageKey)}
           alt={title}
-          height={280}
-          width={280}
-          quality={95}
+          height={275}
+          width={275}
+          quality={85}
           objectFit="contain"
           priority={!!priority}
         />
