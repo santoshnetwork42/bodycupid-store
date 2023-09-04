@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Reveal from "react-awesome-reveal";
 
 import ALink from "~/components/features/custom-link";
-
 import OwlCarousel from "~/components/features/owl-carousel";
 import ProductTwo from "~/components/features/product/product-two";
 import { productSlider, productSliderLarge } from "~/utils/data/carousel";

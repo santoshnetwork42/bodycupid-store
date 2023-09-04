@@ -529,6 +529,7 @@ export function* eventsSaga() {
       const { cartViewed } = moEngagedOrderMapper(data, coupon);
 
       moeEvent("Cart Viewed", cartViewed);
+
       dataLayer.push({ ecommerce: null, attribute: null, user: null });
       dataLayer.push({
         event: "view_cart",

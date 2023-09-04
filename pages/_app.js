@@ -234,6 +234,9 @@ App.getInitialProps = async ({ Component, ctx }) => {
 
   if (!!ctx.req) {
     pageProps = pageProps || {};
+
+    const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
+    pageProps.store = store;
   }
 
   return { pageProps };
