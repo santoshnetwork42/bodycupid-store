@@ -210,13 +210,13 @@ const App = ({ Component, pageProps }) => {
           persistor={store.__persistor}
           loading={<Loader loading={true} />}
         >
-          <Scripts />
           <ABProvider>
             <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Component {...pageProps} />
                 <VercelAnalytics />
                 <CustomerGlu />
+                <Scripts />
               </Layout>
             </NavbarProvider>
           </ABProvider>

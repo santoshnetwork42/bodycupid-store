@@ -16,6 +16,7 @@ export const NavbarContext = createContext();
 
 function NavbarProvider({ children }) {
   const dispatch = useDispatch();
+  const [isInteractive, setIsInteractive] = useState(false);
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
@@ -119,8 +120,14 @@ function NavbarProvider({ children }) {
   };
 
   useEffect(() => {
-    const handleMouseMovement = () => {
+    if (isInteractive) {
       getDashboardData();
+    }
+  }, [isInteractive]);
+
+  useEffect(() => {
+    const handleMouseMovement = () => {
+      setIsInteractive(true);
       // Remove the event listener after APIs are called
       window.removeEventListener("mousemove", handleMouseMovement);
     };
@@ -143,6 +150,7 @@ function NavbarProvider({ children }) {
   return (
     <NavbarContext.Provider
       value={{
+        isInteractive,
         categories,
         collections,
         shippingTiers,
@@ -155,6 +163,11 @@ function NavbarProvider({ children }) {
     </NavbarContext.Provider>
   );
 }
+
+export const useIsInteractive = () => {
+  const { isInteractive } = useContext(NavbarContext);
+  return !!isInteractive;
+};
 
 export const useMenu = () => {
   const { categories, collections } = useContext(NavbarContext);

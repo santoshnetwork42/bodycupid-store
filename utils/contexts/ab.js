@@ -13,7 +13,7 @@ function ABProvider({ children }) {
 
   // const { query } = router;
 
-  return <ABContext.Provider>{children}</ABContext.Provider>;
+  return <ABContext.Provider value={{}}>{children}</ABContext.Provider>;
 }
 
 // export const useCartAB = () => {

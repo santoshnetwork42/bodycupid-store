@@ -5,10 +5,11 @@ import awaitGlobal from "await-global";
 
 import { CUSTOMER_GLU_KEY } from "~/config";
 import { modalActions } from "~/store/modal";
-import { useUpdateUserCoupon } from "~/utils/contexts/navbar";
+import { useUpdateUserCoupon, useIsInteractive } from "~/utils/contexts/navbar";
 
 function CustomerGlu({ user, openLogin }) {
   const [, updateCoupon] = useUpdateUserCoupon();
+  const isInteractive = useIsInteractive();
 
   useEffect(() => {
     let isScriptLoaded = false;
@@ -46,7 +47,7 @@ function CustomerGlu({ user, openLogin }) {
     const intervalId = setInterval(() => {
       if (!isScriptLoaded) trigger();
       else clearInterval(intervalId);
-    }, 500);
+    }, 2000);
 
     return () => {
       if (intervalId) clearInterval(intervalId);
@@ -54,6 +55,10 @@ function CustomerGlu({ user, openLogin }) {
   }, [user]);
 
   if (!CUSTOMER_GLU_KEY) {
+    return <></>;
+  }
+
+  if (!isInteractive) {
     return <></>;
   }
 
