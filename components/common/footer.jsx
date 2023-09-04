@@ -39,33 +39,41 @@ function Footer({ footer, store }) {
                 {/* <h4 className="widget-title">Contact Info</h4> */}
                 <ul className="widget-body">
                   <li>
-                    <ALink href="/pages/about-us">About Us</ALink>
+                    <ALink prefetch={false} href="/pages/about-us">
+                      About Us
+                    </ALink>
                   </li>
                   <li>
-                    <ALink href="/policies/refund-policy">
+                    <ALink prefetch={false} href="/policies/refund-policy">
                       Return / Refund / Cancellation Policy
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/policies/terms-of-service">
+                    <ALink prefetch={false} href="/policies/terms-of-service">
                       Terms Of Service
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/policies/privacy-policy">
+                    <ALink prefetch={false} href="/policies/privacy-policy">
                       Privacy Policy
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/shipping-and-delivery-policy">
+                    <ALink
+                      prefetch={false}
+                      href="/pages/shipping-and-delivery-policy"
+                    >
                       Shipping and Delivery Policy
                     </ALink>
                   </li>
                   <li>
-                    <ALink href="/pages/contact-us">Contact Us</ALink>
+                    <ALink prefetch={false} href="/pages/contact-us">
+                      Contact Us
+                    </ALink>
                   </li>
                   <li>
                     <ALink
+                      prefetch={false}
                       href="https://bodycupid.clickpost.in/"
                       target="_blank"
                     >
