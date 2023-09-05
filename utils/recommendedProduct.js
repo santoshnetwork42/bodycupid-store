@@ -9,6 +9,7 @@ const getRecommendedProducts = async ({
   items = [],
   limit = 8,
   recommenderType = "BEST_SELLER",
+  excludeItems = [],
 } = {}) => {
   const bestSellersPersonalizedIds = await fetchData(getProductRecommendation, {
     input: {
@@ -17,10 +18,14 @@ const getRecommendedProducts = async ({
       recommenderType,
       limit,
     },
-  }).then((response) => response.getProductRecommendation);
+  })
+    .then((response) => response.getProductRecommendation || [])
+    .then((products) =>
+      products.filter(({ productId }) => !excludeItems.includes(productId))
+    );
 
   const products = await Promise.all(
-    (bestSellersPersonalizedIds || []).map(async ({ productId, variantId }) => {
+    bestSellersPersonalizedIds.map(async ({ productId, variantId }) => {
       return await fetchData(getRecommendedProductById, {
         id: productId,
         variantFilter: { status: { eq: "ENABLED" } },

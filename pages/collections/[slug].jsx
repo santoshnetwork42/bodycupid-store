@@ -38,7 +38,7 @@ function CollectionPage(props) {
     pageMeta,
     categoryViewed,
   } = props;
-  const { name } = store;
+  const { name } = store || {};
   const source = getSource();
 
   useEffect(() => {

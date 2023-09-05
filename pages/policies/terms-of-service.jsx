@@ -3,7 +3,7 @@ import Head from "next/head";
 import { connect } from "react-redux";
 
 function Terms({ store }) {
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main about-us">

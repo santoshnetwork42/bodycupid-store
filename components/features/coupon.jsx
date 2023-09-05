@@ -5,20 +5,20 @@ import { API } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import Modal from "~/components/common/modal";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import {
-  CheckBadge,
-  Close,
   CloseIcon,
   Discount,
-  RightAngle,
   Confetti,
+  RightAngle,
+  CouponTag,
 } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
+import { LeftAngle } from "~/components/icons";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Coupon");
 
@@ -40,6 +40,16 @@ function Coupon(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isCouponModalOpen, setIsCouponModalOpen] = useState(false);
+  const [isSliderOpen, setSliderOpen] = useState(false);
+  const { isSmallSize } = useWindowDimensions();
+
+  const openSlider = () => {
+    setSliderOpen(true);
+  };
+
+  const closeSlider = () => {
+    setSliderOpen(false);
+  };
 
   const openModal = () => {
     setTimeout(() => {
@@ -127,6 +137,7 @@ function Coupon(props) {
               },
             });
           }
+          isSliderOpen && closeSlider();
           logger.info("Applied coupon:", response);
         } else {
           setError(message);
@@ -160,86 +171,63 @@ function Coupon(props) {
   return (
     <>
       {layout === "cart" && (
-        <div
-          className="cart-coupon-box p-relative mb-2 pb-3 bg-white text-primary flex-row lh-default"
-          onClick={() => setOpen(true)}
-        >
-          <span className="mt-1 sm-product-remove">
-            {showAppliedCoupon ? (
-              <CheckBadge color="#17b31b" size={22} />
-            ) : (
-              <Discount color="#17b31b" size={22} />
-            )}
-          </span>{" "}
-          <div className="w-100">
-            <div>
-              <div className="cart-coupon-container d-flex">
-                <div className="d-flex">
-                  <p className="ml-1 coupon-title mb-0 p-0 ls-m">
-                    {showAppliedCoupon && !!allowed
-                      ? `"${appliedCoupon.code}" applied`
-                      : "Coupons and offers"}
-                  </p>
-                </div>
-
-                {!showAppliedCoupon && (
-                  <a
-                    className="coupon-offer d-flex align-items-center"
-                    type="button"
-                  >
-                    {!!featuredCoupons.length &&
-                      `${featuredCoupons.length} Offers`}
-                    <RightAngle size={14} />
-                  </a>
-                )}
-                {showAppliedCoupon && (
+        <div>
+          {!!appliedCoupon && (
+            <div className="d-flex justify-content-between padding-coupon-heading">
+              <div>
+                <h4 className="coupon-heading">Coupons</h4>
+              </div>
+              <div className="cart-product-size">
+                <ALink
+                  href="#"
+                  className="view-offers-link"
+                  onClick={openSlider}
+                >
+                  View More Offers +
+                </ALink>
+              </div>
+            </div>
+          )}
+          <div
+            className={`padding-coupon-container ${
+              appliedCoupon ? "pt-0" : ""
+            }`}
+          >
+            <div className="coupon-container coupon-container2">
+              <div className="applied-coupons-container">
+                {showAppliedCoupon ? (
+                  <div className="d-flex justify-content-between">
+                    <div className="applied-coupon-tag">
+                      <span className="coupon-code">{appliedCoupon.code}</span>
+                    </div>
+                    <ALink
+                      href="#"
+                      className="view-offers-link"
+                      onClick={onCouponRemove}
+                    >
+                      <CloseIcon />
+                    </ALink>
+                  </div>
+                ) : (
                   <ALink
-                    key={appliedCoupon.id}
                     href="#"
-                    className={isSmall ? "small-product-remove" : "mt-1"}
-                    title="Remove coupon"
-                    onClick={onCouponRemove}
+                    onClick={() => {
+                      openSlider(), setError("");
+                    }}
                   >
-                    <Close color="grey" size={18} />
+                    <div className="d-flex justify-content-between align-items-center coupon-block-width">
+                      <div className="d-flex align-items-center">
+                        <CouponTag size={isSmallSize ? 18 : 20} />
+                        <div className="apply-coupon-button ml-3">
+                          Apply Coupon
+                        </div>
+                      </div>
+                      <div>
+                        <RightAngle size={isSmallSize ? 18 : 20} />
+                      </div>
+                    </div>
                   </ALink>
                 )}
-              </div>
-
-              <div>
-                {!showAppliedCoupon && (
-                  <span className="ml-1 coupon-subtitle font-weight-normal">
-                    Save more with coupon and offers
-                  </span>
-                )}
-                {showAppliedCoupon && (
-                  <>
-                    {!!couponTotal && (
-                      <span className="ml-1 coupon-subtitle font-weight-normal">
-                        You saved additional ₹{toDecimal(couponTotal)}
-                      </span>
-                    )}
-                    <span>
-                      <a
-                        className={` pt-2 coupon-offer font-weight-normal d-flex align-items-center ${
-                          !isSmall && "ml-1 "
-                        }`}
-                        type="button"
-                      >
-                        View more offers
-                        <RightAngle size={14} />
-                      </a>
-                    </span>
-                  </>
-                )}
-                {/* {!!appliedCoupon && !showAppliedCoupon && (
-              <div className="mt-1">
-                <AlertPopup
-                  message={couponMessage}
-                  status="warning"
-                  onClick={onCouponRemove}
-                />
-              </div>
-            )} */}
               </div>
             </div>
           </div>
@@ -300,110 +288,137 @@ function Coupon(props) {
         </div>
       )}
 
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={() => {
-          setOpen(false);
-          setError("");
-        }}
-        shouldReturnFocusAfterClose={false}
-        overlayClassName="auth-modal-overlay coupon-modal-container"
-        className="auth-popup bg-img"
-      >
-        <main className="main ">
-          <div className="page-content mt-6 pb-2 bg-white text-primary mb-2">
-            <div className="container">
-              <div className="cart-coupon-modal m-8 lh-default">
-                <h5 className="title coupon-title text-uppercase ls-m">
-                  Coupons and offers
-                </h5>
-                <div
-                  className={`coupons-input-wrapper d-flex align-items-center justify-content-between mb-2`}
-                >
-                  <input
-                    className={`form-control mr-2 ${
-                      !!error && "coupon-error-box-border"
-                    }`}
-                    type="text"
-                    name="coupon_code"
-                    placeholder="Enter coupon code here..."
-                    value={coupon}
-                    onChange={(e) => setCoupon(e.target.value)}
-                  />
-                  <button
-                    className="btn btn-primary coupon-apply-btn d-flex justify-content-center align-items-center"
-                    disabled={loading}
-                    onClick={() => !!coupon && applyCouponCode()}
-                  >
-                    <span className=" mr-1">Apply</span>
-
-                    {loading && <div className="spin-loader" />}
-                  </button>
-                </div>
-                <span className="coupon-error-lable">{error}</span>
-                {!!featuredCoupons?.length && (
-                  <div className="mt-8 all-coupons-container">
-                    {featuredCoupons.map((c) => {
-                      let className = "btn btn-link ml-2 btn-apply";
-                      if (!c.allowed) {
-                        className = `${className} btn-disabled`;
-                      }
-
-                      const showAsterik = !!(
-                        c.applicableProducts?.length ||
-                        c.applicableCollections?.length
-                      );
-
-                      return (
-                        <div key={c.id} className="featured-coupon">
-                          <div className="d-flex justify-content-between ">
-                            <div className="featured-coupon-text-content">
-                              <div className="coupon-tag">
-                                <strong>{c.code}</strong>
-                              </div>
-                              <div
-                                className={`coupon-tagline ${
-                                  !c.allowed && "text-secondary"
-                                }`}
-                              >
-                                {c.message}
-                                {showAsterik && "*"}
-                              </div>
-                            </div>
-                            {appliedCoupon?.code !== c.code && (
-                              <button
-                                onClick={() => applyCouponCode(c.code)}
-                                className={className}
-                                disabled={!c.allowed}
-                              >
-                                Apply
-                              </button>
-                            )}
-                            {appliedCoupon?.code === c.code && (
-                              <button
-                                onClick={onCouponRemove}
-                                className={className}
-                                disabled={!c.allowed}
-                              >
-                                Remove Coupon
-                              </button>
-                            )}
-                          </div>
-                          <p className="m-0">{getCouponMessage(c).message}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-
-                <p className="font-italic text-grey">
-                  *Applicable on certain products
-                </p>
-              </div>
+      <div className={`coupon-slider ${isSliderOpen ? "open" : ""}`}>
+        <div className="slider-header p-0 coupon-heading">
+          <div className="d-flex lh-1 align-items-center">
+            <ALink href="#" onClick={closeSlider}>
+              <LeftAngle />
+            </ALink>
+            <div className="cart-title ml-2">
+              COUPONS ({featuredCoupons.length})
             </div>
           </div>
-        </main>
-      </Modal>
+        </div>
+        <div className="slider-content">
+          <div
+            className={`coupons-input-wrapper d-flex align-items-center justify-content-between mb-2 coupon-input`}
+          >
+            <input
+              className={`form-control form-control-v2 mr-2 ${
+                !!error && "coupon-error-box-border"
+              } border-none`}
+              type="text"
+              name="coupon_code"
+              placeholder="Enter coupon code here"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+            />
+            <button
+              className={`apply-button d-flex justify-content-center align-items-center ${
+                coupon ? "text-dark" : ""
+              }`}
+              disabled={loading}
+              onClick={() => {
+                !!coupon && applyCouponCode();
+              }}
+            >
+              <span className=" mr-2">Apply</span>
+
+              {loading && <div className="spin-loader" />}
+            </button>
+          </div>
+          <span className="coupon-error-lable">{error}</span>
+
+          {!!featuredCoupons?.length && (
+            <div className="mt-3 all-coupons-container">
+              {featuredCoupons.map((c) => {
+                let className = "btn btn-link ml-2 btn-apply";
+                if (!c.allowed) {
+                  className = `${className} btn-disabled`;
+                }
+
+                const showAsterik = !!(
+                  c.applicableProducts?.length ||
+                  c.applicableCollections?.length
+                );
+
+                return (
+                  <div
+                    key={c.id}
+                    className={`${
+                      appliedCoupon?.code !== c.code
+                        ? "featured-coupon-slider"
+                        : "featured-coupon-slider-applied"
+                    } mb-3`}
+                  >
+                    <div className="featured-coupon-text-content mr-0">
+                      <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center">
+                          <div
+                            className={`${
+                              appliedCoupon?.code === c.code
+                                ? "applied-coupon-tag"
+                                : "coupon-tag2 coupon-modal-tag-color"
+                            }`}
+                          >
+                            <strong>{c.code}</strong>
+                          </div>
+                          {appliedCoupon?.code === c.code && (
+                            <span className="ml-2 coupon-applied-text">
+                              Applied
+                            </span>
+                          )}
+                        </div>
+                        {appliedCoupon?.code === c.code && (
+                          <ALink
+                            onClick={onCouponRemove}
+                            href="#"
+                            className="coupon-remove"
+                            disabled={!c.allowed}
+                          >
+                            Remove
+                          </ALink>
+                        )}
+                      </div>
+                      <div
+                        className={`coupon-tagline2 ${
+                          !c.allowed && "text-secondary"
+                        }`}
+                      >
+                        {c.message}
+                        {showAsterik && "*"}
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between ">
+                      <p className="m-0 coupon-message">
+                        {getCouponMessage(c).message}
+                      </p>
+                      {appliedCoupon?.code !== c.code && (
+                        <div className="d-flex flex-column justify-content-end">
+                          <button
+                            onClick={() => {
+                              applyCouponCode(c.code);
+                              closeSlider();
+                            }}
+                            className={`btn btn-primary coupon-apply-button${
+                              !c.allowed ? " disabled-coupon" : ""
+                            }`}
+                            disabled={!c.allowed}
+                          >
+                            Apply
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <p className="text-black">*Applicable on certain products</p>
+        </div>
+      </div>
     </>
   );
 }

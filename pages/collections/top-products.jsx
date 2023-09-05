@@ -11,7 +11,7 @@ const logger = new Logger("search");
 
 function TopProducts(props) {
   const { store, products } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main">

@@ -49,10 +49,16 @@ const MOBILE_TABS = [
   },
 ];
 
-function AccountsTabs({ user, store, openPasswordLess,logout, destroySession }) {
+function AccountsTabs({
+  user,
+  store,
+  openPasswordLess,
+  logout,
+  destroySession,
+}) {
   const router = useRouter();
 
-  const { name } = store;
+  const { name } = store || {};
   const { pathname } = router;
 
   // const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
@@ -87,9 +93,9 @@ function AccountsTabs({ user, store, openPasswordLess,logout, destroySession }) 
 
   const handleLogout = useCallback(async () => {
     logout({
-      "Customer ID":user?.id,
-      URL:window.location.href
-    })
+      "Customer ID": user?.id,
+      URL: window.location.href,
+    });
     await Auth.signOut();
     router.push("/");
     return true;

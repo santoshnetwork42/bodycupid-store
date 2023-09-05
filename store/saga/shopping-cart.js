@@ -196,7 +196,12 @@ export function* cartSaga() {
             const pKey = p.variantId
               ? `${p.productId}-${p.variantId}`
               : `${p.productId}`;
-            return pKey === recordKey;
+
+            const key = curProduct.cartItemSource
+              ? `${pKey}-${curProduct.cartItemSource}`
+              : pKey;
+
+            return key === recordKey;
           });
 
           if (product) {

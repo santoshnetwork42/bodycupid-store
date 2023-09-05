@@ -268,13 +268,6 @@
     border-bottom: 1px solid #e1e1e1;
     padding-bottom: 1.3rem;
   }
-  .cart-title {
-    margin-bottom: 0;
-    font-size: 1.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
 
   .btn-close {
     font-size: 12px;
@@ -803,9 +796,6 @@
       opacity: 1;
       right: 0 !important;
       visibility: visible;
-    }
-
-    .sidebar-header-v2 {
       padding: 24px 24px 20px !important;
       border-bottom: 1px solid #e1e1e1 !important;
     }
@@ -822,7 +812,7 @@
     transition: opacity 0.3s;
   }
 
-  .sidebar-padding-v2 {
+  .sidebar-padding {
     padding: 0px 18px 18px 18px !important;
   }
 
@@ -851,14 +841,6 @@
     .wrapper {
       border-bottom: none !important;
       padding: 24px 24px 20px !important;
-    }
-
-    .cart-title {
-      margin-bottom: 0;
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
   }
 

@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { connect } from "react-redux";
 
 import ALink from "~/components/features/custom-link";
-import { Bag, Cross } from "~/components/icons";
-import Coupons from "~/components/features/coupon";
+import { Bag, Cart, Cross } from "~/components/icons";
 
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
@@ -12,14 +11,16 @@ import { eventActions } from "~/store/events";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
 import { useCartItems } from "~/utils/hooks/useCart";
-import CartProduct from "~/components/partials/cart/cart-product";
 import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { Logger } from "aws-amplify";
+import CartProduct from "~/components/partials/cart/cart-product";
+import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 
 function CartMenu(props) {
   const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
     props;
+
   const router = useRouter();
   const cartItems = useCartItems();
   const { inventoryMapping } = useInventory();
@@ -73,9 +74,14 @@ function CartMenu(props) {
           setCartVisibility(false);
         }}
       ></div>
-      <div className="sidebar-box pl-0 pr-0 ">
-        <div className="sidebar-header pt-3">
-          <h4 className="cart-title ml-1">Shopping Cart</h4>
+      <div className="sidebar-box">
+        <div className="sidebar-header wrapper">
+          <div className="d-flex align-items-center">
+            <Cart />
+            <h4 className="cart-title ml-2">
+              Shopping Cart ({getCartCount(cartList)})
+            </h4>
+          </div>
           <ALink
             href="#"
             className=" mb-0 "
@@ -83,57 +89,59 @@ function CartMenu(props) {
               setCartVisibility(false);
             }}
           >
-            <Cross size={18} />
+            <Cross size={24} />
           </ALink>
         </div>
-        <div className="sidebar-products p-relative">
-          {cartItems.length > 0 ? (
-            <>
-              <div className=" ">
-                <div className="shop-table cart-table lh-default ">
-                  <div key={appliedCoupon?.id}>
-                    {cartItems.map((item) => (
-                      <CartProduct
-                        isSmall
-                        key={`${item.itemKey}-${item.extraQty}`}
-                        item={item}
-                        inventory={(inventoryMapping || {})[item.recordKey]}
-                      />
-                    ))}
+        <div className="">
+          <div className="sidebar-products p-relative">
+            {cartItems.length > 0 ? (
+              <>
+                <div className=" ">
+                  <CouponDiscountBar />
+                  <div className="shop-table cart-table lh-default sidebar-padding mt-4">
+                    <div key={appliedCoupon?.id}>
+                      {cartItems.map((item) => (
+                        <CartProduct
+                          isSmall
+                          key={`${item.itemKey}-${item.extraQty}`}
+                          item={item}
+                          inventory={(inventoryMapping || {})[item.recordKey]}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <aside
-                id="cart-details "
-                className="text-primary sticky-sidebar-wrapper"
-              >
-                <div
-                  className="sticky-sidebar"
-                  data-sticky-options="{'bottom': 20}"
+                <aside
+                  id="cart-details"
+                  className="text-primary sticky-sidebar-wrapper pb-6 sidebar-padding"
                 >
-                  <Coupons isSmall />
-                  <CartTotal isSmall />
-                </div>
-              </aside>
-            </>
-          ) : (
-            <div className="empty-cart text-center">
-              <p className="mt-2">Your cart is currently empty.</p>
-              <i className="cart-empty d-icon-bag"></i>
-              <p className="return-to-shop mr-3 ml-3  mb-0">
-                <ALink
-                  className="button wc-backward d-flex justify-content-center btn btn-dark btn-md"
-                  href="/collections/all"
-                  onClick={() => {
-                    setCartVisibility(false);
-                  }}
-                >
-                  Return to shop
-                </ALink>
-              </p>
-            </div>
-          )}
+                  <div
+                    className="sticky-sidebar"
+                    data-sticky-options="{'bottom': 20}"
+                  >
+                    <CartTotal isSmall />
+                  </div>
+                </aside>
+              </>
+            ) : (
+              <div className="empty-cart text-center">
+                <p className="mt-2">Your cart is currently empty.</p>
+                <i className="cart-empty d-icon-bag"></i>
+                <p className="return-to-shop mr-3 ml-3  mb-0">
+                  <ALink
+                    className="button wc-backward d-flex justify-content-center btn btn-dark btn-md"
+                    href="/collections/all"
+                    onClick={() => {
+                      setCartVisibility(false);
+                    }}
+                  >
+                    Return to shop
+                  </ALink>
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

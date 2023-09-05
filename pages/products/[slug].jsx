@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
@@ -23,9 +24,8 @@ import { errorHandler } from "~/utils/errorHandler";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/products";
 import NextHead from "~/components/common/next-head";
-import { Logger } from "aws-amplify";
 
-const logger = new Logger("products slug page");
+const logger = new Logger("Products");
 
 function ProductDefault(props) {
   const { product, pageMeta, viewItem, slug } = props;
@@ -222,10 +222,8 @@ export const getStaticProps = async (context) => {
   };
 };
 
-function mapStateToProps(state) {
-  return {
-    store: state.system.store,
-  };
+function mapStateToProps() {
+  return {};
 }
 
 const Component = connect(mapStateToProps, {
