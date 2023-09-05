@@ -980,23 +980,6 @@ export const getProductById = /* GraphQL */ `
       id
       title
       collections
-      collectionsList {
-        id
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        defaultSorting
-        isArchive
-        label
-        createdAt
-        updatedAt
-      }
       vendor
       subCategory {
         name
@@ -1838,7 +1821,6 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
-        label
       }
     }
   }
@@ -2023,43 +2005,6 @@ export const getCollectionType = /* GraphQL */ `
         slug
         defaultSorting
         isArchive
-        label
-      }
-    }
-  }
-`;
-
-export const bySlugStoreIdCollectionType = /* GraphQL */ `
-  query BySlugStoreIdCollectionType(
-    $slug: ID!
-    $storeId: ModelIDKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelCollectionTypeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    bySlugStoreIdCollectionType(
-      slug: $slug
-      storeId: $storeId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        slug
-        parent
-        name
-        title
-        description
-        storeId
-        showInMenu
-        priority
-        imageUrl
-        defaultSorting
-        isArchive
-        label
       }
     }
   }

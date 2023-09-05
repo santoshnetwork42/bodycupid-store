@@ -3502,7 +3502,6 @@ export const createShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
-      expiresAt
       __typename
     }
   }
@@ -3597,7 +3596,6 @@ export const updateShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
-      expiresAt
       __typename
     }
   }
@@ -3692,7 +3690,6 @@ export const deleteShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
-      expiresAt
       __typename
     }
   }
@@ -4982,7 +4979,6 @@ export const createStoreShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
-      expiresAt
       __typename
     }
   }

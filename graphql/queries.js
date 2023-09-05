@@ -1082,16 +1082,18 @@ export const listCollectionTypes = /* GraphQL */ `
     }
   }
 `;
-export const bySlugCollectionType = /* GraphQL */ `
-  query BySlugCollectionType(
+export const bySlugStoreIdCollectionType = /* GraphQL */ `
+  query BySlugStoreIdCollectionType(
     $slug: ID!
+    $storeId: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelCollectionTypeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    bySlugCollectionType(
+    bySlugStoreIdCollectionType(
       slug: $slug
+      storeId: $storeId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -3661,7 +3663,6 @@ export const getShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
-      expiresAt
       __typename
     }
   }
@@ -3688,7 +3689,6 @@ export const listShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
-        expiresAt
         __typename
       }
       nextToken
@@ -3728,7 +3728,6 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
-        expiresAt
         __typename
       }
       nextToken
@@ -3768,7 +3767,6 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
-        expiresAt
         __typename
       }
       nextToken
@@ -3808,7 +3806,6 @@ export const searchShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
-        expiresAt
         __typename
       }
       nextToken
