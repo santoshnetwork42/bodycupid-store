@@ -109,17 +109,6 @@ function ProductListOne(props) {
     };
   }, [perPage, maxprice, minprice, search, sortby]);
 
-  const filterCollections = (products) => {
-    const mappedProducts = products.map((p) => {
-      const collectionsList = p.collectionsList.filter((c) => c.label !== null);
-      return {
-        ...p,
-        collectionsList,
-      };
-    });
-    return mappedProducts;
-  };
-
   const getProducts = useCallback(
     async (reset) => {
       try {
@@ -129,7 +118,7 @@ function ProductListOne(props) {
         if (!searchTerm) {
           const {
             data: {
-              searchProducts: { items: res, total, nextToken },
+              searchProducts: { items: response, total, nextToken },
             },
           } = await API.graphql(
             graphqlOperation(findProducts, {
@@ -138,8 +127,6 @@ function ProductListOne(props) {
               nextToken: reset ? null : token,
             })
           );
-
-          const response = filterCollections(res);
 
           if (reset) {
             const productsMapped = setSoldOutLast(response);
@@ -170,8 +157,7 @@ function ProductListOne(props) {
 
   useEffect(() => {
     const { items, nextToken, total } = initialData || {};
-    const filteredProducts = filterCollections(items);
-    const productsMapped = setSoldOutLast(filteredProducts);
+    const productsMapped = setSoldOutLast(items);
     setProducts(productsMapped);
     setToken(nextToken);
     setTotal(total);

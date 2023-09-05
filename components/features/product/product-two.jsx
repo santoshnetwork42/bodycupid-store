@@ -47,7 +47,7 @@ function ProductTwo(props) {
   );
 
   const label = product.collectionsList?.length
-    ? product.collectionsList[0].label
+    ? product.collectionsList?.find((col) => !!col.label)?.label
     : null;
 
   const tag = useMemo(() => {
