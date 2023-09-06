@@ -19,6 +19,7 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import Image from "next/image";
 
 const logger = new Logger("Coupon");
 
@@ -202,6 +203,14 @@ function Coupon(props) {
                         <span className="coupon-code">{appliedCoupon.code}</span>
                       </div>
                       <div className="coupon-status-applied">Applied</div>
+                      <div>
+                      <Image 
+                        src="/images/applied.gif"
+                        alt="Applied Gif"
+                        height={30}
+                        width={40}
+                      />
+                      </div>
                     </div>
                     <ALink
                       href="#"
