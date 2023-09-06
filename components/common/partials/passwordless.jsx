@@ -118,7 +118,9 @@ function Passwordless({
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
             const { sub } = user?.attributes;
-            store.dispatch(eventActions.auth("login", { userId: sub, query }));
+            store.dispatch(
+              eventActions.auth("signup", { userId: sub, phone: state.phone })
+            );
 
             await setUser(getUserResponse);
           }
@@ -132,7 +134,7 @@ function Passwordless({
           );
           if (!!signInUserSession) {
             const { sub } = signInUserSession.accessToken.payload;
-            store.dispatch(eventActions.auth("login", { userId: sub, query }));
+            store.dispatch(eventActions.auth("login", { userId: sub }));
 
             closeModal();
             if (redirect) router.push("/pages/checkout");

@@ -196,9 +196,33 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     try {
       const { action } = e.payload;
+      const { userId } = e.payload;
+      const utmData = yield select((state) => state.system.meta);
+      const { utmMedium: medium, utmSource: source } = utmData;
+
+      if (action === "signup") {
+        const { phone } = e.payload;
+        const mobile = phone.split("+91")[1];
+
+        initializeMoengageAndAddInfo({
+          firstName: null,
+          lastName: null,
+          email: null,
+          phone,
+        });
+
+        moeEvent("Customer Registered", {
+          "Customer ID": userId,
+          "Mobile Number": mobile,
+          "Utm Source": source,
+          "Utm Medium": medium,
+          URL: window.location.href,
+          Source: eventSource,
+        });
+      }
+
       if (action === "login") {
-        const { userId, query } = e.payload;
-        const { utm_medium: medium, utm_source: source } = query;
+        console.log("userid", userId);
         if (userId) {
           const {
             data: { getUser: getUserResponse },
@@ -212,34 +236,25 @@ export function* eventsSaga() {
             Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
             300;
           const { firstName, lastName, email, phone } = getUserResponse;
+          console.log("getuser", getUserResponse);
           initializeMoengageAndAddInfo({
             firstName,
             lastName,
             email,
             phone,
           });
-          const mobile = phone.split("+91")[1];
+          console.log("phone", phone);
+          const mobile = phone?.split("+91")[1];
 
-          if (isFirstTime) {
-            moeEvent("Customer Registered", {
-              "Customer ID": userId,
-              "Mobile Number": mobile,
-              "Utm Source": source,
-              "Utm Medium": medium,
-              URL: window.location.href,
-              Source: eventSource,
-            });
-          } else {
-            moeEvent("Customer Logged In", {
-              "Customer ID": userId,
-              "Mobile Number": mobile,
-              "Utm Source": source,
-              "Utm Medium": medium,
-              URL: window.location.href,
-              "First Time User": isFirstTime,
-              Source: eventSource,
-            });
-          }
+          moeEvent("Customer Logged In", {
+            "Customer ID": userId,
+            "Mobile Number": mobile,
+            "Utm Source": source,
+            "Utm Medium": medium,
+            URL: window.location.href,
+            "First Time User": isFirstTime,
+            Source: eventSource,
+          });
         }
       } else if (action == "logout") {
         const Moengage = window?.Moengage;
