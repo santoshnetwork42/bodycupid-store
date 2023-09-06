@@ -1045,6 +1045,7 @@ export const getCollectionType = /* GraphQL */ `
       imageUrl
       defaultSorting
       isArchive
+      label
       createdAt
       updatedAt
       __typename
@@ -1071,6 +1072,47 @@ export const listCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const bySlugStoreIdCollectionType = /* GraphQL */ `
+  query BySlugStoreIdCollectionType(
+    $slug: ID!
+    $storeId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionTypeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bySlugStoreIdCollectionType(
+      slug: $slug
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
         createdAt
         updatedAt
         __typename
@@ -1110,6 +1152,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
         createdAt
         updatedAt
         __typename
@@ -1144,6 +1187,24 @@ export const getProduct = /* GraphQL */ `
       brand
       vendor
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
       categoryId
       category {
         id

@@ -46,6 +46,10 @@ function ProductTwo(props) {
     [product]
   );
 
+  const label = product.collectionsList?.length
+    ? product.collectionsList?.find((col) => !!col.label)?.label
+    : null;
+
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
       return tagSlug.replace("-", " ").toUpperCase();
@@ -116,21 +120,17 @@ function ProductTwo(props) {
         />
       </ALink>
 
-      <div className="product-label-group">
-        {
-          discount > 0 && (
-            // (product.variants?.items?.length < 2 ? (
-            <label className="product-label label-sale">-{discount}%</label>
-          )
-          // ) : (
-          //   <label className="product-label label-sale">Sale</label>
-          // ))
-        }
-      </div>
-
       {!!tag && (
         <div className="product-tags-group">
           <label className="product-label label-best-seller">{tag}</label>
+        </div>
+      )}
+
+      {!!label && (
+        <div className="label-tag-group">
+          <label className="product-label label-tag">
+            {label.toUpperCase()}
+          </label>
         </div>
       )}
 
@@ -178,6 +178,16 @@ function ProductTwo(props) {
             </span>
           )}
         </div>
+        <div className="mb-2 lh-1">
+          <label
+            className={`discount-label ${
+              discount > 0 ? "discount-label-color" : ""
+            }`}
+          >
+            {`${discount ? "-" + discount + "%" : ""}`}
+          </label>
+        </div>
+
         <div className="product-action">
           {!!hasInventory ? (
             <>

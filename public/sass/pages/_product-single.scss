@@ -1124,6 +1124,20 @@ aside {
   }
 }
 
+.discount-label {
+  border-radius: 3px;
+  padding: 2px 10px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.discount-label-color {
+  background: #E50B20;
+}
+
 @include mq(xs, max) {
   .product-tab-size-guide .size-table tbody tr > *,
   .card-sizeguide .size-table tbody tr > * {
