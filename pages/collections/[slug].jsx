@@ -24,6 +24,7 @@ import handleRedirect from "~/utils/handleRedirect";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { eventActions } from "~/store/events";
 import { getSource } from "~/utils/helper";
+import Image from "next/image";
 
 const logger = new Logger("All collections");
 
@@ -38,6 +39,7 @@ function CollectionPage(props) {
     pageMeta,
     categoryViewed,
   } = props;
+  console.log("props birju: ", props);
   const { name } = store || {};
   const source = getSource();
 
@@ -63,6 +65,15 @@ function CollectionPage(props) {
       <div className="page-content  pb-3">
         <div className="container">
           <CategoryHeader {...data} />
+          {data?.imageUrl &&
+            <div className="text-center pt-4" >
+              <Image
+                src={getPublicImageURL(data.imageUrl)}
+                alt="Category Image"
+                width={1200}
+                height={305}
+              />
+            </div>}
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
