@@ -39,7 +39,6 @@ function CollectionPage(props) {
     pageMeta,
     categoryViewed,
   } = props;
-  console.log("props birju: ", props);
   const { name } = store || {};
   const source = getSource();
 
