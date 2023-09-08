@@ -19,7 +19,6 @@ export function* cartSaga() {
     ],
     function* saga() {
       try {
-        console.log("====saga");
         const { user, cart } = yield select();
         let { coupon, data: cartResponse } = cart;
         const { data: userData } = user;
