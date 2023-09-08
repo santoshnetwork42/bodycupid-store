@@ -50,7 +50,7 @@ export function* cartSaga() {
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
 
-          if (!response) {
+          if (!response.status) {
             yield put({ type: actionTypes.REFRESH_CART });
           }
         }
