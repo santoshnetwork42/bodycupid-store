@@ -914,6 +914,9 @@ export const findProducts = /* GraphQL */ `
         id
         title
         collections
+        collectionsList {
+          label
+        }
         vendor
         status
         subCategory {
