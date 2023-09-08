@@ -28,14 +28,7 @@ export function* cartSaga() {
           const { id: couponId } = coupon || {};
 
           const data = cartResponse.map(
-            ({
-              id,
-              variantId,
-              qty,
-              shoppingCartProductId,
-              cartItemSource,
-            }) => ({
-              shoppingCartProductId,
+            ({ id, variantId, qty, cartItemSource }) => ({
               productId: id,
               variantId,
               quantity: qty,
