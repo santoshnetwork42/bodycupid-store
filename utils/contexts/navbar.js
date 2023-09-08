@@ -202,18 +202,11 @@ export const useMenu = () => {
       slug: "combos-and-gifts",
     });
 
-    menu.push({
-      label: "Rakhi Gifts",
-      link: `/collections/raksha-bandhan-gifts`,
-      slug: "raksha-bandhan-gifts",
-    });
-
-    menu.push({
-      label: "Cupid Wednesday",
-      link: `/collections/clearance-sale`,
-      slug: "clearance-sale",
-    });
-  }
+  menu.push({
+    label: "Clearance Sale",
+    link: `/collections/clearance-sale`,
+    slug: "clearance-sale",
+  });
 
   return menu;
 };
