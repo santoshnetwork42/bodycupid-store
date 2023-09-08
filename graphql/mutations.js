@@ -3785,6 +3785,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         __typename
       }
       quantity
+      source
       createdAt
       updatedAt
       __typename
@@ -3882,6 +3883,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         __typename
       }
       quantity
+      source
       createdAt
       updatedAt
       __typename
@@ -3979,6 +3981,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         __typename
       }
       quantity
+      source
       createdAt
       updatedAt
       __typename
@@ -4892,9 +4895,9 @@ export const validateTransaction = /* GraphQL */ `
     }
   }
 `;
-export const createStoreShoppingCart = /* GraphQL */ `
-  mutation CreateStoreShoppingCart($storeId: ID!) {
-    createStoreShoppingCart(storeId: $storeId) {
+export const handleStoreShoppingCart = /* GraphQL */ `
+  mutation HandleStoreShoppingCart($input: HandleStoreShoppingCartInput!) {
+    handleStoreShoppingCart(input: $input) {
       id
       storeId
       store {

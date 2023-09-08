@@ -2247,3 +2247,23 @@ export const getInitialData = /* GraphQL */ `
     }
   }
 `;
+
+export const handleStoreShoppingCart = /* GraphQL */ `
+  mutation HandleStoreShoppingCart($input: HandleStoreShoppingCartInput!) {
+    handleStoreShoppingCart(input: $input) {
+      id
+      storeId
+      userId
+      couponCodeId
+      shoppingcartProducts {
+        items {
+          id
+          shoppingcartId
+          productId
+          variantId
+          quantity
+        }
+      }
+    }
+  }
+`;

@@ -3663,6 +3663,7 @@ export const getShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3689,6 +3690,7 @@ export const listShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3728,6 +3730,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3767,6 +3770,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3806,6 +3810,7 @@ export const searchShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3918,6 +3923,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         __typename
       }
       quantity
+      source
       createdAt
       updatedAt
       __typename
@@ -3941,6 +3947,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
         productId
         variantId
         quantity
+        source
         createdAt
         updatedAt
         __typename
@@ -3973,6 +3980,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
         productId
         variantId
         quantity
+        source
         createdAt
         updatedAt
         __typename

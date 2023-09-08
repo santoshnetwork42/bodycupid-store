@@ -128,7 +128,7 @@ function cartReducer(state = initialState, action) {
       return { ...initialState, ltoProducts: state.ltoProducts };
 
     case actionTypes.SET_CART:
-      return { ...state, cart: { ...state.cart, ...action.payload } };
+      return { ...state, data: action.payload.products || [] };
 
     case actionTypes.APPLY_COUPONS:
       return { ...state, coupon: action.payload.coupon };
@@ -182,7 +182,10 @@ export const cartActions = {
   }),
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
-  setCart: (cart) => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
+  setCart: (products) => ({
+    type: actionTypes.SET_CART,
+    payload: { products },
+  }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
   initialLTO: (data) => ({
     type: actionTypes.INITIALIZE_LTO,
