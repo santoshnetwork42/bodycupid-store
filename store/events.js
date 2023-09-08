@@ -351,7 +351,8 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.PLACE_ORDER, function* saga(e) {
     try {
       const { order, products, coupon, address, paymentType } = e.payload;
-      const { id, totalShippingCharges, totalAmount, totalDiscount } = order;
+      const { id, totalShippingCharges, totalAmount, totalDiscount, code } =
+        order;
 
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData, address);
@@ -393,6 +394,7 @@ export function* eventsSaga() {
         attribute: { ...pixel, order_id: id, value: totalAmount },
         ecommerce: {
           transaction_id: id,
+          order_code: code,
           value: totalAmount,
           tax: 0,
           discount: totalDiscount,
