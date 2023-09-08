@@ -73,7 +73,8 @@ export function* cartSaga() {
             yield put({ type: actionTypes.REFRESH_CART });
           }
         }
-      } catch (e) {
+      } 
+      catch (e) {
         errorHandler(e);
       }
     }
