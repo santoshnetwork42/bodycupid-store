@@ -15,6 +15,7 @@ export function* cartSaga() {
       actionTypes.APPLY_COUPONS,
       actionTypes.REMOVE_COUPON,
       actionTypes.UPDATE_CART,
+      actionTypes.EMPTY_CART,
       userActionTypes.SET_USER,
     ],
     function* saga() {
@@ -56,19 +57,7 @@ export function* cartSaga() {
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
 
-          if (response) {
-            const { shoppingcartProducts, ...cart } = response;
-            const products = cartResponse.map((obj, index) => ({
-              ...obj,
-              shoppingCartProductId: shoppingcartProducts.items[index].id,
-            }));
-            yield put({
-              type: actionTypes.SET_CART,
-              payload: {
-                products,
-              },
-            });
-          } else {
+          if (!response) {
             yield put({ type: actionTypes.REFRESH_CART });
           }
         }
@@ -77,28 +66,4 @@ export function* cartSaga() {
       }
     }
   );
-
-  yield takeEvery(actionTypes.EMPTY_CART, function* saga() {
-    try {
-      const { user } = yield select() || {};
-      const { data: userResponse } = user;
-
-      if (userResponse) {
-        yield call([API, API.graphql], {
-          query: handleStoreShoppingCart,
-          variables: {
-            input: {
-              actionType: actionTypes.EMPTY_CART,
-              storeId: STORE_ID,
-            },
-          },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
-        });
-      }
-
-      yield put({ type: actionTypes.REFRESH_CART });
-    } catch (e) {
-      errorHandler(e);
-    }
-  });
 }

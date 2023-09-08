@@ -11,7 +11,6 @@ export const actionTypes = {
   REFRESH_CART: "REFRESH_CART",
   APPLY_COUPONS: "APPLY_COUPONS",
   REMOVE_COUPON: "REMOVE_COUPON",
-  SET_CART: "SET_CART",
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
@@ -126,9 +125,6 @@ function cartReducer(state = initialState, action) {
     case actionTypes.REFRESH_CART:
       return { ...initialState, ltoProducts: state.ltoProducts };
 
-    case actionTypes.SET_CART:
-      return { ...state, data: action.payload.products || [] };
-
     case actionTypes.APPLY_COUPONS:
       return { ...state, coupon: action.payload.coupon };
 
@@ -181,10 +177,6 @@ export const cartActions = {
   }),
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
-  setCart: (products) => ({
-    type: actionTypes.SET_CART,
-    payload: { products },
-  }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
   initialLTO: (data) => ({
     type: actionTypes.INITIALIZE_LTO,
