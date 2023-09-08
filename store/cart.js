@@ -17,7 +17,6 @@ export const actionTypes = {
   VALIDATE_CART: "VALIDATE_CART",
   INITIALIZE_LTO: "INITIALIZE_LTO",
 };
-
 const initialState = {
   cart: null,
   data: [],
