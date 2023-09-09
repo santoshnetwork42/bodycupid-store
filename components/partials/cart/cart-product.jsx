@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 
@@ -26,8 +26,6 @@ function CartProduct({
   cartList,
   removeFromCart,
   updateCart,
-  appliedCoupon,
-  removeCoupon,
   ltoProducts,
 }) {
   const {
@@ -46,16 +44,12 @@ function CartProduct({
     extraQty = 0,
     disableChange = false,
     hideRemove = false,
-    cartItemSource,
     couponMessage,
     ltoProduct,
     ltoRecordKey,
   } = item;
 
   const { isSmallSize } = useWindowDimensions();
-
-  const savingPerProduct =
-    cartItemSource === "COUPON" ? listingPrice : listingPrice - price;
 
   const changeVariant = (e) => {
     const variant = variants.items.find((c) => c.id === e.target.value);
@@ -95,16 +89,7 @@ function CartProduct({
 
   const onRemove = () => {
     onChangeQty(0);
-    if (cartItemSource === "COUPON" && appliedCoupon?.getYProduct === id) {
-      removeCoupon();
-    }
   };
-
-  useEffect(() => {
-    logger.verbose("Rendering CartProduct");
-    logger.debug("Item:", item);
-    logger.debug("CartList:", cartList);
-  }, []);
 
   const isFreeProduct =
     cartItemType === "FREE_PRODUCT" || cartItemType === "AUTO_FREE_PRODUCT";
@@ -367,5 +352,4 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,
-  removeCoupon: cartActions.removeCoupon,
 })(CartProduct);

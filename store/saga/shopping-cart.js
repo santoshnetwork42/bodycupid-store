@@ -1,4 +1,4 @@
-import { all, call, put, select, takeEvery } from "redux-saga/effects";
+import { call, select, takeEvery } from "redux-saga/effects";
 import { API } from "aws-amplify";
 
 import { handleStoreShoppingCart } from "~/graphql/api";
@@ -21,13 +21,13 @@ export function* cartSaga() {
     function* saga() {
       try {
         const { user, cart } = yield select();
-        let { coupon, data: cartResponse } = cart;
+        let { coupon, data: products } = cart;
         const { data: userData } = user;
 
         if (userData) {
-          const { id: couponId } = coupon || {};
+          const { id: couponCode } = coupon || {};
 
-          const data = cartResponse.map(
+          const data = products.map(
             ({ id, variantId, qty, cartItemSource }) => ({
               productId: id,
               variantId,
@@ -36,23 +36,17 @@ export function* cartSaga() {
             })
           );
 
-          const {
-            data: { handleStoreShoppingCart: response },
-          } = yield call([API, API.graphql], {
+          yield call([API, API.graphql], {
             query: handleStoreShoppingCart,
             variables: {
               input: {
-                couponCodeId: couponId || null,
+                couponCodeId: couponCode || null,
                 storeId: STORE_ID,
                 data,
               },
             },
             authMode: "AMAZON_COGNITO_USER_POOLS",
           });
-
-          if (!response.status) {
-            yield put({ type: actionTypes.REFRESH_CART });
-          }
         }
       } catch (e) {
         errorHandler(e);

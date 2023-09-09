@@ -67,6 +67,7 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
+
   const showAppliedCoupon = !!appliedCoupon;
 
   const bestCouponCode = useMemo(() => {
@@ -83,7 +84,7 @@ function Coupon(props) {
       removeCoupon();
     } else if (
       bestCouponCode &&
-      (!appliedCoupon || appliedCoupon.autoApplied || !showAppliedCoupon)
+      (!appliedCoupon || appliedCoupon.autoApplied)
     ) {
       if (appliedCoupon?.code !== bestCouponCode) {
         applyCouponCode(bestCouponCode, true);

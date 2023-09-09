@@ -1311,6 +1311,12 @@ export const getProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      howToUseImage
+      ingredients {
+        label
+        description
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -1382,6 +1388,7 @@ export const listProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1458,6 +1465,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1534,6 +1542,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1610,6 +1619,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1686,6 +1696,7 @@ export const byslugProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1762,6 +1773,7 @@ export const searchProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1844,6 +1856,7 @@ export const getLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -2795,6 +2808,7 @@ export const getOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3347,6 +3361,7 @@ export const getReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3890,6 +3905,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4093,6 +4109,7 @@ export const getCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4344,16 +4361,18 @@ export const byStoreIdConfigurations = /* GraphQL */ `
     }
   }
 `;
-export const configurationByKey = /* GraphQL */ `
-  query ConfigurationByKey(
+export const byKeyStoreIdConfiguration = /* GraphQL */ `
+  query ByKeyStoreIdConfiguration(
     $key: String!
+    $storeId: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelConfigurationFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    configurationByKey(
+    byKeyStoreIdConfiguration(
       key: $key
+      storeId: $storeId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

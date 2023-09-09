@@ -349,6 +349,12 @@ export const deleteProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      howToUseImage
+      ingredients {
+        label
+        description
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -883,6 +889,7 @@ export const createOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1014,6 +1021,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1370,6 +1378,7 @@ export const deleteCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -2182,6 +2191,12 @@ export const createProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      howToUseImage
+      ingredients {
+        label
+        description
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -2332,6 +2347,12 @@ export const updateProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      howToUseImage
+      ingredients {
+        label
+        description
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -2405,6 +2426,7 @@ export const createLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -2474,6 +2496,7 @@ export const updateLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -2543,6 +2566,7 @@ export const deleteLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3015,6 +3039,7 @@ export const updateOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3179,6 +3204,7 @@ export const createReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3287,6 +3313,7 @@ export const updateReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3395,6 +3422,7 @@ export const deleteReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3502,6 +3530,7 @@ export const createShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3596,6 +3625,7 @@ export const updateShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3690,6 +3720,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3752,6 +3783,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3850,6 +3882,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3948,6 +3981,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4094,6 +4128,7 @@ export const createCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4226,6 +4261,7 @@ export const updateCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4848,6 +4884,7 @@ export const applyCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4898,8 +4935,9 @@ export const validateTransaction = /* GraphQL */ `
 export const handleStoreShoppingCart = /* GraphQL */ `
   mutation HandleStoreShoppingCart($input: HandleStoreShoppingCartInput!) {
     handleStoreShoppingCart(input: $input) {
-      status
+      success
       message
+      __typename
     }
   }
 `;

@@ -3,6 +3,7 @@ import { getFirstVariant } from "~/utils/products";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
 import { alertToaster } from "~/utils/popupHelper";
+import { getCouponDiscount } from "~/utils/coupons";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
@@ -17,7 +18,6 @@ export const actionTypes = {
   INITIALIZE_LTO: "INITIALIZE_LTO",
 };
 const initialState = {
-  cart: null,
   data: [],
   coupon: null,
   ltoProducts: [],
@@ -120,7 +120,18 @@ function cartReducer(state = initialState, action) {
       return { ...state, data: cart };
 
     case actionTypes.UPDATE_CART:
-      return { ...state, data: action.payload.products || [] };
+      let products = action.payload.products || [];
+      const { allowed } = getCouponDiscount(state.coupon, products);
+      if (!allowed) {
+        products = (action.payload.products || []).filter(
+          (p) => p.cartItemSource !== "COUPON"
+        );
+      }
+      return {
+        ...state,
+        data: products,
+        coupon: allowed ? state.coupon : null,
+      };
 
     case actionTypes.REFRESH_CART:
       return { ...initialState, ltoProducts: state.ltoProducts };

@@ -929,7 +929,6 @@ const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
   setCartVisibility: modalActions.setCartVisibility,
-  removeCoupon: cartActions.removeCoupon,
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,
   openAllAddressModal: modalActions.openAllAddressModal,
