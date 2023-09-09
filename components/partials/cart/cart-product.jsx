@@ -177,7 +177,7 @@ function CartProduct({
                 </ALink>
               </div>
               {cartItemType !== "AUTO_FREE_PRODUCT_DISABLED" && (
-                <div className="mt-1 d-flex mb-1 align-items-center">
+                <div className="mt-1 d-flex align-items-center">
                   {cartItemType === "FREE_PRODUCT" ||
                   cartItemType === "AUTO_FREE_PRODUCT" ? (
                     <>
@@ -201,13 +201,14 @@ function CartProduct({
                         <span className="sm-product-amount font-weight-semi-bold">
                           ₹{toDecimal(price)}
                         </span>
-
                         {productDiscountPercentage(item) > 0 && (
-                          <span
-                            className={`discount-percentage discount-card ml-1 pl-1 pr-1 font-weight-bolder`}
-                          >
-                            {productDiscountPercentage(item)}% off
-                          </span>
+                          <div>
+                            <span
+                              className={`discount-percentage discount-card pl-1 pr-1 font-weight-bolder`}
+                            >
+                              {productDiscountPercentage(item)}% off
+                            </span>
+                          </div>
                         )}
                       </p>
                     </>
