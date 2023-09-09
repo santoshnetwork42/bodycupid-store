@@ -2247,3 +2247,12 @@ export const getInitialData = /* GraphQL */ `
     }
   }
 `;
+
+export const handleStoreShoppingCart = /* GraphQL */ `
+  mutation HandleStoreShoppingCart($input: HandleStoreShoppingCartInput!) {
+    handleStoreShoppingCart(input: $input) {
+      success
+      message
+    }
+  }
+`;
