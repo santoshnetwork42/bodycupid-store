@@ -9,7 +9,6 @@ export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   UPDATE_CART: "UPDATE_CART",
-  REFRESH_CART: "REFRESH_CART",
   APPLY_COUPONS: "APPLY_COUPONS",
   REMOVE_COUPON: "REMOVE_COUPON",
   EMPTY_CART: "EMPTY_CART",
@@ -133,7 +132,7 @@ function cartReducer(state = initialState, action) {
         coupon: allowed ? state.coupon : null,
       };
 
-    case actionTypes.REFRESH_CART:
+    case actionTypes.EMPTY_CART:
       return { ...initialState, ltoProducts: state.ltoProducts };
 
     case actionTypes.APPLY_COUPONS:
