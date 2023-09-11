@@ -299,8 +299,15 @@
 
 .product-tags-group {
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 4px;
+  top: 4px;
+  max-width: 10rem;
+}
+
+.label-tag-group {
+  position: absolute;
+  right: 4px;
+  top: 4px;
   max-width: 10rem;
 }
 
@@ -308,10 +315,9 @@
   display: block;
   text-align: center;
   padding: 0.5rem 0.7rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 0.5px;
   line-height: 1;
-  color: #fff;
 
   &.label-new {
     @include print_css(product, label, new);
@@ -324,9 +330,17 @@
   }
 
   &.label-best-seller {
-    border-top-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    @include print_css(product, label, bestseller);
+    border-radius: 40px;
+    background: #eee;
+    color: #000;
+    font-weight: 600;
+  }
+
+  &.label-tag {
+    border-radius: 40px;
+    background: #17B31B;
+    color: #fff;
+    font-weight: 600;
   }
 
   &.label-sale {

@@ -53,29 +53,31 @@ const LimitedTimeProduct = ({ product, removeFromCart }) => {
                   {title}
                 </ALink>
               </div>
-              <div className="mt-1 d-flex mb-1 align-items-center">
+              <div className="mt-1 d-flex align-items-center">
                 <p className="m-0 product-discount-listing">
                   <del className="summary-subtotal-listingprice mr-1">
                     ₹{toDecimal(listingPrice)}
                   </del>
-                </p>
-                <span className="sm-product-amount mr-1 font-weight-semi-bold">
-                  ₹{toDecimal(recommendPrice)}
-                </span>
-                {productDiscountPercentage({
-                  price: recommendPrice,
-                  listingPrice: listingPrice,
-                }) > 0 && (
-                  <span
-                    className={`discount-percentage ml-1 discount-card pl-1 pr-1`}
-                  >
-                    {productDiscountPercentage({
-                      price: recommendPrice,
-                      listingPrice: listingPrice,
-                    })}
-                    % off
+                  <span className="sm-product-amount mr-1 font-weight-semi-bold">
+                    ₹{toDecimal(recommendPrice)}
                   </span>
-                )}
+                  {productDiscountPercentage({
+                    price: recommendPrice,
+                    listingPrice: listingPrice,
+                  }) > 0 && (
+                    <div>
+                      <span
+                        className={`discount-percentage discount-card pl-1 pr-1 font-weight-bolder`}
+                      >
+                        {productDiscountPercentage({
+                          price: recommendPrice,
+                          listingPrice: listingPrice,
+                        })}
+                        % off
+                      </span>
+                    </div>
+                  )}
+                </p>
               </div>
             </div>
             {!isSmallSize && (
