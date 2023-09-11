@@ -53,6 +53,10 @@ function CollectionPage(props) {
     }
   }, [data]);
 
+  const imageUrl = data.hasOwnProperty("bannerUrl")
+    ? data.bannerUrl
+    : data.imageUrl;
+
   return (
     <main className="main searchBar">
       <NextHead {...pageMeta} />
@@ -64,15 +68,16 @@ function CollectionPage(props) {
       <div className="page-content  pb-3">
         <div className="container">
           <CategoryHeader {...data} />
-          {data?.imageUrl &&
-            <div className="text-center pt-4" >
+          {imageUrl && (
+            <div className="text-center pt-4">
               <Image
-                src={getPublicImageURL(data.imageUrl)}
+                src={getPublicImageURL(imageUrl)}
                 alt="Category Image"
                 width={1200}
                 height={305}
               />
-            </div>}
+            </div>
+          )}
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
