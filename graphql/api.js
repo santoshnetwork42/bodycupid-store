@@ -885,6 +885,7 @@ export const getBasicCategory = /* GraphQL */ `
         slug
         imageUrl
         isArchive
+        bannerUrl
       }
     }
   }
