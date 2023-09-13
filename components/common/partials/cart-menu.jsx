@@ -17,14 +17,17 @@ import { Logger } from "aws-amplify";
 import CartProduct from "~/components/partials/cart/cart-product";
 import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 
+const logger = new Logger("Cart");
+
 function CartMenu(props) {
   const { cartList, appliedCoupon, isCartOpen, setCartVisibility, viewCart } =
     props;
 
   const router = useRouter();
   const cartItems = useCartItems();
-  const { inventoryMapping } = useInventory();
-  const logger = new Logger("Cart");
+  const inventory = useInventory();
+
+  const { inventoryMapping } = inventory;
 
   useEffect(() => {
     viewCart();
@@ -120,7 +123,7 @@ function CartMenu(props) {
                     className="sticky-sidebar"
                     data-sticky-options="{'bottom': 20}"
                   >
-                    <CartTotal isSmall />
+                    <CartTotal isSmall inventory={inventory} />
                   </div>
                 </aside>
               </>
