@@ -224,7 +224,7 @@ function ProductTwo(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data || [],
+    cartList: state.cart.data || [], 
   };
 }
 
