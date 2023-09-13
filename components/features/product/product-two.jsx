@@ -112,25 +112,29 @@ function ProductTwo(props) {
         <Image
           src={getPublicImageURL(thumbImage?.imageKey)}
           alt={title}
-          height={275}
-          width={275}
-          quality={85}
+          height={280}
+          width={280}
+          quality={95}
           objectFit="contain"
           priority={!!priority}
         />
       </ALink>
 
+      <div className="product-label-group">
+        {
+          discount > 0 && (
+            // (product.variants?.items?.length < 2 ? (
+            <label className="product-label label-sale">-{discount}%</label>
+          )
+          // ) : (
+          //   <label className="product-label label-sale">Sale</label>
+          // ))
+        }
+      </div>
+
       {!!tag && (
         <div className="product-tags-group">
           <label className="product-label label-best-seller">{tag}</label>
-        </div>
-      )}
-
-      {!!label && (
-        <div className="label-tag-group">
-          <label className="product-label label-tag">
-            {label.toUpperCase()}
-          </label>
         </div>
       )}
 
@@ -178,16 +182,6 @@ function ProductTwo(props) {
             </span>
           )}
         </div>
-        <div className="mb-2 lh-1">
-          <label
-            className={`discount-label ${
-              discount > 0 ? "discount-label-color" : ""
-            }`}
-          >
-            {`${discount ? "-" + discount + "%" : ""}`}
-          </label>
-        </div>
-
         <div className="product-action">
           {!!hasInventory ? (
             <>
@@ -230,7 +224,7 @@ function ProductTwo(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data || [],
+    cartList: state.cart.data || [], 
   };
 }
 
