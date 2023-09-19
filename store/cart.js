@@ -143,7 +143,7 @@ function cartReducer(state = initialState, action) {
     case actionTypes.VALIDATE_CART:
       const { payload } = action;
       const data = state.data.map((item) => {
-        if (payload[item.recordKey]) {
+        if (typeof payload[item.recordKey] === "number") {
           return {
             ...item,
             price: payload[item.recordKey],
