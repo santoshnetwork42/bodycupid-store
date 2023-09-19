@@ -2,7 +2,6 @@ import { persistReducer } from "redux-persist";
 import { getFirstVariant } from "~/utils/products";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
-import { alertToaster } from "~/utils/popupHelper";
 import { getCouponDiscount } from "~/utils/coupons";
 
 export const actionTypes = {
@@ -153,7 +152,6 @@ function cartReducer(state = initialState, action) {
         return item;
       });
 
-      alertToaster("Cart price is updated");
       return { ...state, data };
 
     case actionTypes.INITIALIZE_LTO:
