@@ -19,6 +19,7 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import Image from "next/image";
 
 const logger = new Logger("Coupon");
 
@@ -198,8 +199,19 @@ function Coupon(props) {
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">
-                    <div className="applied-coupon-tag">
-                      <span className="coupon-code">{appliedCoupon.code}</span>
+                    <div className="d-flex justify-content-start">
+                      <div className="applied-coupon-tag">
+                        <span className="coupon-code">{appliedCoupon.code}</span>
+                      </div>
+                      <div className="coupon-status-applied">Applied</div>
+                      {/* <div className="coupon-applied-confetii">
+                      <Image 
+                        src="/images/applied.gif"
+                        alt="Applied Gif"
+                        height={50}
+                        width={60}
+                      />
+                      </div> */}
                     </div>
                     <ALink
                       href="#"
