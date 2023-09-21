@@ -10,15 +10,14 @@ import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import {
   CloseIcon,
-  Discount,
-  Confetti,
   RightAngle,
-  CouponTag,
+  CouponTag
 } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
+import Modal from "~/components/common/modal";
 import Image from "next/image";
 
 const logger = new Logger("Coupon");
@@ -33,7 +32,6 @@ function Coupon(props) {
     addToCart,
     removeFromCart,
     layout = "cart",
-    isSmall,
   } = props;
 
   const [coupon, setCoupon] = useState("");
@@ -193,7 +191,7 @@ function Coupon(props) {
           <div
             className={`padding-coupon-container ${
               appliedCoupon ? "pt-0" : ""
-            }`}
+              }`}
           >
             <div className="coupon-container coupon-container2">
               <div className="applied-coupons-container">
@@ -262,44 +260,54 @@ function Coupon(props) {
           </div>
         </div>
       )}
+      <Modal
+        isOpen={isCouponModalOpen}
+        isCloseIcon={false}
+        onRequestClose={closeModal}
+        shouldReturnFocusAfterClose={false}
+        overlayClassName="auth-modal-overlay login-modal-container"
+        className="applied-coupon-modal"
+      >
 
-      {isCouponModalOpen && (
-        <div onClick={closeModal}>
-          <div>
-            <Confetti />
+        <div className="applied-coupon-modal-container">
+          <div
+            className="close-icon"
+            title="Remove this product"
+            onClick={closeModal}
+          >
+            <CloseIcon size={36} color="gray" />
           </div>
-          <div className="modal-overlay">
-            <div className="confetti-modal">
-              <div className="modal-content ">
-                <div
-                  className="close-icon"
-                  title="Remove this product"
-                  onClick={closeModal}
-                >
-                  <CloseIcon size={24} color="grey" />
-                </div>
-                <div className="modal-icon">
-                  <Discount size={35} color="#17b31b" />
-                </div>
-                <h4 className="modal-title">
-                  '{appliedCoupon?.code || "Your"}' coupon applied!
-                </h4>
-                {couponTotal > 0 && (
-                  <>
-                    <h3 className="modal-amount">
-                      ₹{toDecimal(couponTotal)} saved
-                    </h3>
-                    <h6 className="modal-savings">through this coupon</h6>
-                  </>
-                )}
-                <button className="close-button" onClick={closeModal}>
-                  Hurrah!
-                </button>
-              </div>
+
+          <div className="applied-coupon-modal-image">
+            <Image
+              src="/images/applied-coupon.gif"
+              alt="Applied Coupon Gif"
+              height={450}
+              width={500}
+            />
+          </div>
+          <div className="applied-coupon-modal-ticket">
+            <Image
+              src="/images/coupon-circle-with-ticket.svg"
+              alt="Applied Coupon Gif"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="applied-coupon-modal-info">
+            <div className="modal-title">
+              "{appliedCoupon?.code || "Your"}" applied!
+              {couponTotal > 0 && (
+                <>
+                  <div className="modal-amount">
+                    ₹{toDecimal(couponTotal)} saved
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
-      )}
+      </Modal>
 
       <div className={`coupon-slider ${isSliderOpen ? "open" : ""}`}>
         <div className="slider-header p-0 coupon-heading">
@@ -319,7 +327,7 @@ function Coupon(props) {
             <input
               className={`form-control form-control-v2 mr-2 ${
                 !!error && "coupon-error-box-border"
-              } border-none`}
+                } border-none`}
               type="text"
               name="coupon_code"
               placeholder="Enter coupon code here"
@@ -329,7 +337,7 @@ function Coupon(props) {
             <button
               className={`apply-button d-flex justify-content-center align-items-center ${
                 coupon ? "text-dark" : ""
-              }`}
+                }`}
               disabled={loading}
               onClick={() => {
                 !!coupon && applyCouponCode();
@@ -360,9 +368,9 @@ function Coupon(props) {
                     key={c.id}
                     className={`${
                       appliedCoupon?.code !== c.code
-                        ? "featured-coupon-slider"
-                        : "featured-coupon-slider-applied"
-                    } mb-3`}
+                      ? "featured-coupon-slider"
+                      : "featured-coupon-slider-applied"
+                      } mb-3`}
                   >
                     <div className="featured-coupon-text-content mr-0">
                       <div className="d-flex align-items-center justify-content-between">
@@ -370,9 +378,9 @@ function Coupon(props) {
                           <div
                             className={`${
                               appliedCoupon?.code === c.code
-                                ? "applied-coupon-tag"
-                                : "coupon-tag2 coupon-modal-tag-color"
-                            }`}
+                              ? "applied-coupon-tag"
+                              : "coupon-tag2 coupon-modal-tag-color"
+                              }`}
                           >
                             <strong>{c.code}</strong>
                           </div>
@@ -396,7 +404,7 @@ function Coupon(props) {
                       <div
                         className={`coupon-tagline2 ${
                           !c.allowed && "text-secondary"
-                        }`}
+                          }`}
                       >
                         {c.message}
                         {showAsterik && "*"}
@@ -415,7 +423,7 @@ function Coupon(props) {
                             }}
                             className={`btn btn-primary coupon-apply-button${
                               !c.allowed ? " disabled-coupon" : ""
-                            }`}
+                              }`}
                             disabled={!c.allowed}
                           >
                             Apply
