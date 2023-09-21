@@ -259,7 +259,7 @@ function Coupon(props) {
 
         <div className="applied-coupon-modal-container">
           <div
-            className="close-icon m-3"
+            className="close-icon"
             title="Remove this product"
             onClick={closeModal}
           >
