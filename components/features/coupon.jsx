@@ -259,7 +259,7 @@ function Coupon(props) {
 
         <div className="applied-coupon-modal-container">
           <div
-            className="close-icon"
+            className="close-icon m-3"
             title="Remove this product"
             onClick={closeModal}
           >
@@ -270,8 +270,8 @@ function Coupon(props) {
             <Image
               src="/images/applied-coupon.gif"
               alt="Applied Coupon Gif"
-              height={300}
-              width={300}
+              height={450}
+              width={500}
             />
           </div>
           <div className="applied-coupon-modal-ticket">
