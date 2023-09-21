@@ -2,24 +2,20 @@ import { persistReducer } from "redux-persist";
 import { getFirstVariant } from "~/utils/products";
 import { STORE_PREFIX } from "~/config";
 import storage from "~/utils/storage";
-import { alertToaster } from "~/utils/popupHelper";
+import { getCouponDiscount } from "~/utils/coupons";
 
 export const actionTypes = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   UPDATE_CART: "UPDATE_CART",
-  REFRESH_CART: "REFRESH_CART",
   APPLY_COUPONS: "APPLY_COUPONS",
   REMOVE_COUPON: "REMOVE_COUPON",
-  SET_CART: "SET_CART",
   EMPTY_CART: "EMPTY_CART",
   CREATE_CART: "CREATE_CART",
   VALIDATE_CART: "VALIDATE_CART",
   INITIALIZE_LTO: "INITIALIZE_LTO",
 };
-
 const initialState = {
-  cart: null,
   data: [],
   coupon: null,
   ltoProducts: [],
@@ -122,13 +118,21 @@ function cartReducer(state = initialState, action) {
       return { ...state, data: cart };
 
     case actionTypes.UPDATE_CART:
-      return { ...state, data: action.payload.products || [] };
+      let products = action.payload.products || [];
+      const { allowed } = getCouponDiscount(state.coupon, products);
+      if (!allowed) {
+        products = (action.payload.products || []).filter(
+          (p) => p.cartItemSource !== "COUPON"
+        );
+      }
+      return {
+        ...state,
+        data: products,
+        coupon: allowed ? state.coupon : null,
+      };
 
-    case actionTypes.REFRESH_CART:
+    case actionTypes.EMPTY_CART:
       return { ...initialState, ltoProducts: state.ltoProducts };
-
-    case actionTypes.SET_CART:
-      return { ...state, cart: { ...state.cart, ...action.payload } };
 
     case actionTypes.APPLY_COUPONS:
       return { ...state, coupon: action.payload.coupon };
@@ -139,7 +143,7 @@ function cartReducer(state = initialState, action) {
     case actionTypes.VALIDATE_CART:
       const { payload } = action;
       const data = state.data.map((item) => {
-        if (payload[item.recordKey]) {
+        if (typeof payload[item.recordKey] === "number") {
           return {
             ...item,
             price: payload[item.recordKey],
@@ -148,7 +152,6 @@ function cartReducer(state = initialState, action) {
         return item;
       });
 
-      alertToaster("Cart price is updated");
       return { ...state, data };
 
     case actionTypes.INITIALIZE_LTO:
@@ -182,7 +185,6 @@ export const cartActions = {
   }),
   removeCoupon: () => ({ type: actionTypes.REMOVE_COUPON, payload: {} }),
   emptyCart: () => ({ type: actionTypes.EMPTY_CART }),
-  setCart: (cart) => ({ type: actionTypes.SET_CART, payload: { ...cart } }),
   createCart: (user) => ({ type: actionTypes.CREATE_CART, payload: { user } }),
   initialLTO: (data) => ({
     type: actionTypes.INITIALIZE_LTO,

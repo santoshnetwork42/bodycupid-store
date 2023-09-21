@@ -17,7 +17,10 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
+<<<<<<< HEAD
 import Modal from "~/components/common/modal";
+=======
+>>>>>>> 9f5d7b7d8031459ac6e81c3663f6d1d54877a7ba
 import Image from "next/image";
 
 const logger = new Logger("Coupon");
@@ -66,6 +69,7 @@ function Coupon(props) {
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );
+
   const showAppliedCoupon = !!appliedCoupon;
 
   const bestCouponCode = useMemo(() => {
@@ -82,7 +86,7 @@ function Coupon(props) {
       removeCoupon();
     } else if (
       bestCouponCode &&
-      (!appliedCoupon || appliedCoupon.autoApplied || !showAppliedCoupon)
+      (!appliedCoupon || appliedCoupon.autoApplied)
     ) {
       if (appliedCoupon?.code !== bestCouponCode) {
         applyCouponCode(bestCouponCode, true);
@@ -196,8 +200,19 @@ function Coupon(props) {
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">
-                    <div className="applied-coupon-tag">
-                      <span className="coupon-code">{appliedCoupon.code}</span>
+                    <div className="d-flex justify-content-start">
+                      <div className="applied-coupon-tag">
+                        <span className="coupon-code">{appliedCoupon.code}</span>
+                      </div>
+                      <div className="coupon-status-applied">Applied</div>
+                      {/* <div className="coupon-applied-confetii">
+                      <Image 
+                        src="/images/applied.gif"
+                        alt="Applied Gif"
+                        height={50}
+                        width={60}
+                      />
+                      </div> */}
                     </div>
                     <ALink
                       href="#"

@@ -52,7 +52,7 @@ export const getStaticProps = async () => {
           total: products.length,
         },
       },
-      revalidate: 60 * 60 * 24,
+      revalidate: 120,
     };
   } catch (error) {
     logger.error("Error while searching a product", error);

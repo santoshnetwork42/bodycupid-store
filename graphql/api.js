@@ -885,6 +885,7 @@ export const getBasicCategory = /* GraphQL */ `
         slug
         imageUrl
         isArchive
+        bannerUrl
       }
     }
   }
@@ -914,6 +915,9 @@ export const findProducts = /* GraphQL */ `
         id
         title
         collections
+        collectionsList {
+          label
+        }
         vendor
         status
         subCategory {
@@ -2241,6 +2245,15 @@ export const getInitialData = /* GraphQL */ `
         createdAt
         updatedAt
       }
+    }
+  }
+`;
+
+export const handleStoreShoppingCart = /* GraphQL */ `
+  mutation HandleStoreShoppingCart($input: HandleStoreShoppingCartInput!) {
+    handleStoreShoppingCart(input: $input) {
+      success
+      message
     }
   }
 `;

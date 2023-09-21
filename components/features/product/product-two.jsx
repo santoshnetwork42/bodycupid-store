@@ -46,6 +46,10 @@ function ProductTwo(props) {
     [product]
   );
 
+  const label = product.collectionsList?.length
+    ? product.collectionsList?.find((col) => !!col.label)?.label
+    : null;
+
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
       return tagSlug.replace("-", " ").toUpperCase();
@@ -108,9 +112,9 @@ function ProductTwo(props) {
         <Image
           src={getPublicImageURL(thumbImage?.imageKey)}
           alt={title}
-          height={275}
-          width={275}
-          quality={85}
+          height={280}
+          width={280}
+          quality={95}
           objectFit="contain"
           priority={!!priority}
         />
@@ -220,7 +224,7 @@ function ProductTwo(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data || [],
+    cartList: state.cart.data || [], 
   };
 }
 

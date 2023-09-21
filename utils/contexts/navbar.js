@@ -203,13 +203,7 @@ export const useMenu = () => {
     });
 
     menu.push({
-      label: "Rakhi Gifts",
-      link: `/collections/raksha-bandhan-gifts`,
-      slug: "raksha-bandhan-gifts",
-    });
-
-    menu.push({
-      label: "Cupid Wednesday",
+      label: "Clearance Sale",
       link: `/collections/clearance-sale`,
       slug: "clearance-sale",
     });

@@ -7,7 +7,6 @@ import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
 import { useCartTotal } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
-import { useInventory } from "~/utils/hooks/useInventory";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import Coupon from "~/components/features/coupon";
@@ -24,6 +23,7 @@ function CartTotal({
   cartList,
   isSmall,
   setCartVisibility,
+  inventory,
 }) {
   const router = useRouter();
   const { isSmallSize } = useWindowDimensions();
@@ -50,7 +50,7 @@ function CartTotal({
     success: isInventoryCheckSuccess,
     inventoryMapping,
     outOfStockItems,
-  } = useInventory();
+  } = inventory || {};
 
   const validateAndGoToCheckout = useCallback(() => {
     setCartVisibility(false);
