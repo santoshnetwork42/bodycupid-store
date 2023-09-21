@@ -203,12 +203,12 @@ function Coupon(props) {
                         <span className="coupon-code">{appliedCoupon.code}</span>
                       </div>
                       <div className="coupon-status-applied">Applied</div>
-                      <div>
+                      <div className="coupon-applied-confetii">
                       <Image 
                         src="/images/applied.gif"
                         alt="Applied Gif"
-                        height={30}
-                        width={40}
+                        height={50}
+                        width={60}
                       />
                       </div>
                     </div>
