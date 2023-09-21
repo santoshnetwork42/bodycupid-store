@@ -17,10 +17,7 @@ import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
-<<<<<<< HEAD
 import Modal from "~/components/common/modal";
-=======
->>>>>>> 9f5d7b7d8031459ac6e81c3663f6d1d54877a7ba
 import Image from "next/image";
 
 const logger = new Logger("Coupon");
