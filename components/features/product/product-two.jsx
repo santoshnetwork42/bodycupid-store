@@ -158,6 +158,9 @@ function ProductTwo(props) {
           {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
+          <div className="product-coupon">
+            {label}
+          </div>
           <div className="ratings-container mb-0">
             <div className="ratings-full d-flex rating-product-list mr-1">
               <Star size={20} color={"#FAB73B"} />
@@ -173,14 +176,14 @@ function ProductTwo(props) {
               ({totalRatings || 0} reviews)
             </ALink>
           </div>
-        </div>
-        <div className="product-price product-sm mt-2 mb-2 lh-1">
-          <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
-          {price < listingPrice && listingPrice && (
-            <span className="old-price ml-1 ">
-              <del>₹{toDecimal(listingPrice || 0)}</del>
-            </span>
-          )}
+          <div className="product-price product-sm mt-2 mb-2 lh-1">
+            <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
+            {price < listingPrice && listingPrice && (
+              <span className="old-price ml-1 ">
+                <del>₹{toDecimal(listingPrice || 0)}</del>
+              </span>
+            )}
+          </div>
         </div>
         <div className="product-action">
           {!!hasInventory ? (
