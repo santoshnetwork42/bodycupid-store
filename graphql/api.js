@@ -1059,6 +1059,9 @@ export const getRecommendedProductById = /* GraphQL */ `
       price
       sku
       status
+      collectionsList {
+          label
+      }
       position
       listingPrice
       tags
