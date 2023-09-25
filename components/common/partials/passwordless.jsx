@@ -117,9 +117,9 @@ function Passwordless({
               variables: { id: user?.attributes?.sub },
               authMode: "AMAZON_COGNITO_USER_POOLS",
             });
-            const { sub } = user?.attributes;
+            const { sub, phone_number } = user?.attributes;
             store.dispatch(
-              eventActions.auth("signup", { userId: sub, phone: state.phone })
+              eventActions.auth("signup", { userId: sub, phone: phone_number })
             );
 
             await setUser(getUserResponse);

@@ -72,7 +72,12 @@ export const eventActions = {
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action, moe) => ({
     type: actionTypes.AUTH,
-    payload: { action, userId: moe?.userId, query: moe?.query },
+    payload: {
+      action,
+      userId: moe?.userId,
+      query: moe?.query,
+      phone: moe?.phone,
+    },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
@@ -202,15 +207,13 @@ export function* eventsSaga() {
 
       if (action === "signup") {
         const { phone } = e.payload;
-        const mobile = phone.split("+91")[1];
-
+        const mobile = phone?.split("+91")[1];
         initializeMoengageAndAddInfo({
           firstName: null,
           lastName: null,
           email: null,
           phone,
         });
-
         moeEvent("Customer Registered", {
           "Customer ID": userId,
           "Mobile Number": mobile,
@@ -222,7 +225,6 @@ export function* eventsSaga() {
       }
 
       if (action === "login") {
-        console.log("userid", userId);
         if (userId) {
           const {
             data: { getUser: getUserResponse },
@@ -236,14 +238,12 @@ export function* eventsSaga() {
             Math.abs(new Date(getUserResponse?.createdAt) - new Date() / 1000) <
             300;
           const { firstName, lastName, email, phone } = getUserResponse;
-          console.log("getuser", getUserResponse);
           initializeMoengageAndAddInfo({
             firstName,
             lastName,
             email,
             phone,
           });
-          console.log("phone", phone);
           const mobile = phone?.split("+91")[1];
 
           moeEvent("Customer Logged In", {
