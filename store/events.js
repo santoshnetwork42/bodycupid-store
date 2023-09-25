@@ -72,7 +72,12 @@ export const eventActions = {
   proceedToCheckout: () => ({ type: actionTypes.PROCEED_TO_CHECKOUT }),
   auth: (action, moe) => ({
     type: actionTypes.AUTH,
-    payload: { action, userId: moe?.userId, query: moe?.query },
+    payload: {
+      action,
+      userId: moe?.userId,
+      query: moe?.query,
+      phone: moe?.phone,
+    },
   }),
   search: (term) => ({ type: actionTypes.SEARCH, payload: { term } }),
   addressAdded: (address, totalPrice) => ({
@@ -196,9 +201,30 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.AUTH, function* saga(e) {
     try {
       const { action } = e.payload;
+      const { userId } = e.payload;
+      const utmData = yield select((state) => state.system.meta);
+      const { utmMedium: medium, utmSource: source } = utmData;
+
+      if (action === "signup") {
+        const { phone } = e.payload;
+        const mobile = phone?.split("+91")[1];
+        initializeMoengageAndAddInfo({
+          firstName: null,
+          lastName: null,
+          email: null,
+          phone,
+        });
+        moeEvent("Customer Registered", {
+          "Customer ID": userId,
+          "Mobile Number": mobile,
+          "Utm Source": source,
+          "Utm Medium": medium,
+          URL: window.location.href,
+          Source: eventSource,
+        });
+      }
+
       if (action === "login") {
-        const { userId, query } = e.payload;
-        const { utm_medium: medium, utm_source: source } = query;
         if (userId) {
           const {
             data: { getUser: getUserResponse },
@@ -218,7 +244,7 @@ export function* eventsSaga() {
             email,
             phone,
           });
-          const mobile = phone.split("+91")[1];
+          const mobile = phone?.split("+91")[1];
 
           moeEvent("Customer Logged In", {
             "Customer ID": userId,

@@ -41,6 +41,14 @@ function Quickview(props) {
     }
   }, [slug, isOpen]);
 
+  // useEffect(() => {
+  //   document.body.classList.add("overflow-hidden");
+
+  //   return () => {
+  //     document.body.classList.remove("overflow-hidden");
+  //   };
+  // }, [isOpen]);
+
   const closeQuick = () => {
     document.querySelector(".ReactModal__Overlay").classList.add("removed");
     document.querySelector(".quickview-modal").classList.add("removed");
@@ -121,10 +129,11 @@ function Quickview(props) {
           {product && (
             <DetailOne
               data={product}
-              adClass="scrollable"
+              adClass="scrollable mb-10 wrapper-btn"
               isNav={false}
               variantId={variant}
               setVariant={setVariant}
+              isQuickView={true}
             />
           )}
         </div>

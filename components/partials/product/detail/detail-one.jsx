@@ -44,6 +44,7 @@ function DetailOne(props) {
     addToCart,
     removeFromCart,
     closeQuickview,
+    isQuickView,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
@@ -523,7 +524,9 @@ function DetailOne(props) {
                   )}
 
                   {!cartItem && (
-                    <div className="product-form-group p-0 m-0 cart-button-wrapper">
+                    <div
+                      className={`product-form-group p-0 m-0 cart-button-wrapper ${adClass}`}
+                    >
                       <button
                         className={`btn-product pb-6 pt-6 btn-cart ls-normal font-weight-semi-bold m-0 btn-cart-width${
                           cartActive ? "" : "disabled"
