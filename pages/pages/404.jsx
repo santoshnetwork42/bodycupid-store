@@ -7,7 +7,7 @@ import ALink from "~/components/features/custom-link";
 import { parallaxHandler } from "~/utils";
 
 function Error404({ store }) {
-  const { name } = store;
+  const { name } = store || {};
   useEffect(() => {
     window.addEventListener("scroll", parallaxHandler, { passive: true });
 

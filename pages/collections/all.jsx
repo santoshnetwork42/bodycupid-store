@@ -20,7 +20,7 @@ const logger = new Logger("All collections");
 
 function AllProduct(props) {
   const { store, products, pageFilter, categories, pageMeta } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main">

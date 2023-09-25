@@ -11,7 +11,7 @@ const logger = new Logger("search");
 
 function TopProducts(props) {
   const { store, products } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main">
@@ -52,7 +52,7 @@ export const getStaticProps = async () => {
           total: products.length,
         },
       },
-      revalidate: 60 * 60 * 24,
+      revalidate: 120,
     };
   } catch (error) {
     logger.error("Error while searching a product", error);

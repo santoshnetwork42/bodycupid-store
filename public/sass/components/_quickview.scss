@@ -109,17 +109,6 @@
 }
 
 @include mq(sm, "max") {
-  .confetti-modal {
-    width: 90vw;
-    max-width: 38rem;
-    position: fixed;
-    right: 0;
-    .modal-content {
-      max-width: 300px;
-      right: 0;
-      padding-right: 10px;
-    }
-  }
   .coupon-modal-container {
     padding-right: 0;
     padding-left: 0;

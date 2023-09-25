@@ -19,7 +19,7 @@ const logger = new Logger("Ranges collection");
 
 function AllCollection(props) {
   const { store, products, pageFilter, collections, pageMeta } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main">

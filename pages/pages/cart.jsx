@@ -18,9 +18,11 @@ const logger = new Logger("Cart");
 function Cart(props) {
   const { store, appliedCoupon, viewCart } = props;
 
-  const { name } = store;
+  const { name } = store || {};
   const cartItems = useCartItems();
-  const { inventoryMapping } = useInventory();
+  const inventory = useInventory();
+
+  const { inventoryMapping } = inventory;
 
   useEffect(() => {
     viewCart();
@@ -82,7 +84,7 @@ function Cart(props) {
                   >
                     <div id="bccartoffers"></div>
                     <Coupons />
-                    <CartTotal />
+                    <CartTotal inventory={inventory} />
                   </div>
                 </aside>
               </>

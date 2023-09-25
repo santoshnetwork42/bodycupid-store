@@ -261,15 +261,6 @@
   }
 }
 
-.coupon-tag {
-  background-color: rgba(255, 214, 19, 0.3);
-  width: fit-content;
-  padding: 0.5rem 1.5rem;
-  border: 1px dashed $primary-button-color;
-  border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .coupon-tag2 {
   background: white;
   width: fit-content;
@@ -289,8 +280,25 @@
   padding: 0.5rem 1.5rem;
   border: 1px dashed #17b31b;
   border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
-  color: #17b31b ;
+  color: #17b31b;
+  display: flex;
+  align-items: center;
+}
+
+.coupon-status-applied {
+  color: #17B31B;
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.coupon-applied-confetii{
+    margin: -15px auto
 }
 
 .coupon-message {
@@ -356,7 +364,7 @@
   right: 0;
 }
 
-.cart-title-2 {
+.cart-title {
   margin-bottom: 0;
   font-size: 20px !important;
   line-height: 28px !important;
@@ -395,7 +403,7 @@
   line-height: normal;
 }
 
-.coupon-remove2 {
+.coupon-remove {
   font-size: 16px;
 }
 

@@ -212,7 +212,7 @@ const App = ({ Component, pageProps }) => {
         >
           <Scripts />
           <ABProvider>
-            <NavbarProvider config={Component.navbarConfig}>
+            <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Component {...pageProps} />
                 <VercelAnalytics />
@@ -231,12 +231,14 @@ App.getInitialProps = async ({ Component, ctx }) => {
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
+
   if (!!ctx.req) {
     pageProps = pageProps || {};
 
     const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
     pageProps.store = store;
   }
+
   return { pageProps };
 };
 

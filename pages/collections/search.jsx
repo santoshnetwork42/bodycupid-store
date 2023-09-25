@@ -16,7 +16,7 @@ const logger = new Logger("search");
 
 function AllProduct(props) {
   const { store, products, pageFilter } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   const { query } = useRouter();
   const { search } = query;

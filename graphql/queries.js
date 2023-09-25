@@ -1045,6 +1045,7 @@ export const getCollectionType = /* GraphQL */ `
       imageUrl
       defaultSorting
       isArchive
+      label
       createdAt
       updatedAt
       __typename
@@ -1071,6 +1072,47 @@ export const listCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const bySlugStoreIdCollectionType = /* GraphQL */ `
+  query BySlugStoreIdCollectionType(
+    $slug: ID!
+    $storeId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCollectionTypeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bySlugStoreIdCollectionType(
+      slug: $slug
+      storeId: $storeId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
         createdAt
         updatedAt
         __typename
@@ -1110,6 +1152,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        label
         createdAt
         updatedAt
         __typename
@@ -1144,6 +1187,24 @@ export const getProduct = /* GraphQL */ `
       brand
       vendor
       collections
+      collectionsList {
+        id
+        slug
+        parent
+        name
+        title
+        description
+        storeId
+        showInMenu
+        priority
+        imageUrl
+        defaultSorting
+        isArchive
+        label
+        createdAt
+        updatedAt
+        __typename
+      }
       categoryId
       category {
         id
@@ -1250,6 +1311,12 @@ export const getProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      howToUseImage
+      ingredients {
+        label
+        description
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -1321,6 +1388,7 @@ export const listProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1397,6 +1465,7 @@ export const bycategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1473,6 +1542,7 @@ export const bysubCategoryIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1549,6 +1619,7 @@ export const bystoreIdProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1625,6 +1696,7 @@ export const byslugProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1701,6 +1773,7 @@ export const searchProducts = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -1783,6 +1856,7 @@ export const getLinkedProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -2734,6 +2808,7 @@ export const getOrderProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3286,6 +3361,7 @@ export const getReview = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3602,6 +3678,7 @@ export const getShoppingCart = /* GraphQL */ `
         nextToken
         __typename
       }
+      expiresAt
       __typename
     }
   }
@@ -3628,6 +3705,7 @@ export const listShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3667,6 +3745,7 @@ export const bystoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3706,6 +3785,7 @@ export const byuserIdSoreIdShoppingCart = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3745,6 +3825,7 @@ export const searchShoppingCarts = /* GraphQL */ `
         landingPage
         createdAt
         updatedAt
+        expiresAt
         __typename
       }
       nextToken
@@ -3824,6 +3905,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -3857,6 +3939,7 @@ export const getShoppingCartProduct = /* GraphQL */ `
         __typename
       }
       quantity
+      source
       createdAt
       updatedAt
       __typename
@@ -3880,6 +3963,7 @@ export const listShoppingCartProducts = /* GraphQL */ `
         productId
         variantId
         quantity
+        source
         createdAt
         updatedAt
         __typename
@@ -3912,6 +3996,7 @@ export const byshoppingcartIdcreatedAtShoppingCartProduct = /* GraphQL */ `
         productId
         variantId
         quantity
+        source
         createdAt
         updatedAt
         __typename
@@ -4024,6 +4109,7 @@ export const getCoupon = /* GraphQL */ `
         googleCategory
         hasVarient
         hasFaq
+        howToUseImage
         recommended
         recommendPriority
         recommendPrice
@@ -4275,16 +4361,18 @@ export const byStoreIdConfigurations = /* GraphQL */ `
     }
   }
 `;
-export const configurationByKey = /* GraphQL */ `
-  query ConfigurationByKey(
+export const byKeyStoreIdConfiguration = /* GraphQL */ `
+  query ByKeyStoreIdConfiguration(
     $key: String!
+    $storeId: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelConfigurationFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    configurationByKey(
+    byKeyStoreIdConfiguration(
       key: $key
+      storeId: $storeId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

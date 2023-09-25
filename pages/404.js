@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ALink from "~/components/features/custom-link";
 
 function Error404({ store }) {
-  const { name } = store;
+  const { name } = store || {};
 
   useEffect(() => {
     document.querySelector("header").classList.remove("header-border");

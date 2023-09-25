@@ -3,94 +3,56 @@ import { API, graphqlOperation } from "aws-amplify";
 import Cookie from "js-cookie";
 
 import { STORE_ID, STORE_PREFIX } from "~/config";
-import {
-  getMenuCategories,
-  searchCollectionTypes,
-  searchShippingTiers,
-  getFeaturedCoupon,
-  searchConfigurations,
-  getCoupon,
-  findProducts,
-} from "~/graphql/api";
+import { getCoupon, getInitialData } from "~/graphql/api";
 import { getSortedCategoryAndSubCategory } from "../helper";
 import { errorHandler } from "../errorHandler";
 import { GUEST_CHECKOUT } from "~/constant";
 import { useDispatch } from "react-redux";
 import { cartActions } from "~/store/cart";
 import { getDefaultSorting } from "..";
+import { getProductInventory } from "../products";
 
 export const NavbarContext = createContext();
 
-function NavbarProvider({ children, config }) {
+function NavbarProvider({ children }) {
   const dispatch = useDispatch();
+  const [isInteractive, setIsInteractive] = useState(false);
   const [categories, setCategories] = useState([]);
   const [collections, setCollections] = useState([]);
   const [shippingTiers, setShippingTiers] = useState(null);
   const [coupons, setCoupons] = useState(null);
   const [configurations, setConfigurations] = useState([]);
 
-  const getCollections = () => {
+  const getDashboardData = () => {
     API.graphql(
-      graphqlOperation(searchCollectionTypes, {
-        filter: {
+      graphqlOperation(getInitialData, {
+        //Category
+        menuCategoryFilter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           isArchive: { eq: false },
         },
-        sort: [{ field: "priority", direction: "asc" }],
-      })
-    )
-      .then(
-        (listCollectionsResponse) =>
-          listCollectionsResponse.data.searchCollectionTypes.items
-      )
-      .then(setCollections)
-      .catch(errorHandler);
-  };
-
-  const getCategories = () => {
-    API.graphql(
-      graphqlOperation(getMenuCategories, {
-        filter: {
+        menuCategorySubCategoryFilter: {
+          showInMenu: { eq: true },
+          isArchive: { eq: false },
+        },
+        menuCategorySort: [{ field: "priority", direction: "asc" }],
+        collectionFilter: {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           isArchive: { eq: false },
         },
-        subCategoryFilter: {
-          showInMenu: { eq: true },
-          isArchive: { eq: false },
+
+        //Collection
+        collectionSort: [{ field: "priority", direction: "asc" }],
+
+        //Configuration
+        configurationFilter: {
+          storeId: { eq: STORE_ID },
         },
-        sort: [{ field: "priority", direction: "asc" }],
-      })
-    )
-      .then(
-        (getCategoriesResponse) =>
-          getCategoriesResponse.data.searchProductCategories.items
-      )
-      .then(getSortedCategoryAndSubCategory)
-      .then(setCategories)
-      .catch(errorHandler);
-  };
 
-  const getShippingTiers = () => {
-    API.graphql(
-      graphqlOperation(searchShippingTiers, {
-        filter: { storeId: { eq: STORE_ID } },
-      })
-    )
-      .then(
-        (getShippingTiersResponse) =>
-          getShippingTiersResponse.data.searchShippingTiers.items
-      )
-      .then(setShippingTiers)
-      .catch(errorHandler);
-  };
-
-  const getCoupons = () => {
-    API.graphql({
-      query: getFeaturedCoupon,
-      variables: {
-        filter: {
+        //Coupon
+        couponFilter: {
           isActive: { eq: true },
           storeId: { eq: STORE_ID },
           or: [
@@ -100,15 +62,37 @@ function NavbarProvider({ children, config }) {
             },
           ],
         },
-      },
-    })
-      .then(
-        (getFeaturedCouponResponse) =>
-          getFeaturedCouponResponse.data.searchCoupons.items
-      )
-      .then((items) => {
+
+        //LtoProduct
+        ltoProductFilter: {
+          storeId: { eq: STORE_ID },
+          recommended: { eq: true },
+        },
+        ltoProductSort: [{ field: "recommendPriority", direction: "asc" }],
+
+        //Shipping
+        shippingFilter: { storeId: { eq: STORE_ID } },
+      })
+    )
+      .then((response) => {
+        //Category
+        const sortedCategoryAndSubCategory = getSortedCategoryAndSubCategory(
+          response.data.searchProductCategories.items
+        );
+        setCategories(sortedCategoryAndSubCategory);
+
+        //Collection
+        setCollections(response.data.searchCollectionTypes.items);
+
+        //Configuration
+        setConfigurations(response.data.searchConfigurations.items);
+
+        //ShippingTier
+        setShippingTiers(response.data.searchShippingTiers.items);
+
+        //Coupon
         setCoupons(
-          items.filter((coupon) => {
+          response.data.searchCoupons.items.filter((coupon) => {
             const { expirationDate } = coupon;
             return (
               !expirationDate ||
@@ -116,55 +100,39 @@ function NavbarProvider({ children, config }) {
             );
           })
         );
+
+        //LtoProduct
+        const ltoProducts = response.data.searchProducts.items.filter((lto) => {
+          const status = lto.variants?.items?.length
+            ? lto.variants?.items[0].status === "ENABLED"
+            : lto.status === "ENABLED";
+          const { hasInventory } = getProductInventory(lto);
+          return hasInventory && status;
+        });
+        dispatch(cartActions.initialLTO(ltoProducts));
       })
       .catch(errorHandler);
   };
 
-  const getLTOProducts = async () => {
-    try {
-      API.graphql(
-        graphqlOperation(findProducts, {
-          filter: { storeId: { eq: STORE_ID }, recommended: { eq: true } },
-          sort: [{ field: "recommendPriority", direction: "asc" }],
-        })
-      )
-        .then((res) => res.data.searchProducts.items)
-        .then((res) => {
-          dispatch(cartActions.initialLTO(res));
-        });
-    } catch (error) {
-      errorHandler(error);
+  useEffect(() => {
+    if (isInteractive) {
+      getDashboardData();
     }
-  };
-
-  const getConfigurations = async () => {
-    try {
-      API.graphql(
-        graphqlOperation(searchConfigurations, {
-          filter: {
-            storeId: { eq: STORE_ID },
-          },
-        })
-      )
-        .then((res) => res.data.searchConfigurations.items)
-        .then(setConfigurations);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  }, [isInteractive]);
 
   useEffect(() => {
-    if (config?.shippingTier && !shippingTiers) {
-      getShippingTiers();
-    }
-  }, [config?.shippingTier]);
+    const handleMouseMovement = () => {
+      setIsInteractive(true);
+      // Remove the event listener after APIs are called
+      window.removeEventListener("mousemove", handleMouseMovement);
+    };
 
-  useEffect(() => {
-    getCategories();
-    getCollections();
-    getConfigurations();
-    getCoupons();
-    getLTOProducts();
+    window.addEventListener("mousemove", handleMouseMovement);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMovement);
+    };
   }, []);
 
   const addUserCoupon = async (coupon) => {
@@ -177,6 +145,7 @@ function NavbarProvider({ children, config }) {
   return (
     <NavbarContext.Provider
       value={{
+        isInteractive,
         categories,
         collections,
         shippingTiers,
@@ -189,6 +158,11 @@ function NavbarProvider({ children, config }) {
     </NavbarContext.Provider>
   );
 }
+
+export const useIsInteractive = () => {
+  const { isInteractive } = useContext(NavbarContext);
+  return !!isInteractive;
+};
 
 export const useMenu = () => {
   const { categories, collections } = useContext(NavbarContext);
@@ -221,23 +195,13 @@ export const useMenu = () => {
     });
   }
 
-  menu.push({
-    label: "Combos & Gifts",
-    link: `/collections/combos-and-gifts`,
-    slug: "combos-and-gifts",
-  });
-
-  menu.push({
-    label: "Rakhi Gifts",
-    link: `/collections/raksha-bandhan-gifts`,
-    slug: "raksha-bandhan-gifts",
-  });
-
-  menu.push({
-    label: "Cupid Wednesday",
-    link: `/collections/clearance-sale`,
-    slug: "clearance-sale",
-  });
+  if (menu.length) {
+    menu.push({
+      label: "Combos & Gifts",
+      link: `/collections/combos-and-gifts`,
+      slug: "combos-and-gifts",
+    });
+  }
 
   return menu;
 };
