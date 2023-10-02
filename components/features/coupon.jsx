@@ -313,7 +313,7 @@ function Coupon(props) {
         <div className="slider-header p-0 coupon-heading">
           <div className="d-flex lh-1 align-items-center">
             <ALink href="#" onClick={closeSlider}>
-              <LeftAngle />
+              <LeftAngle  />
             </ALink>
             <div className="cart-title ml-2">
               COUPONS ({featuredCoupons.length})
