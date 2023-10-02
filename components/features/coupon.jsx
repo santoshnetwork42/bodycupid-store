@@ -358,7 +358,7 @@ function Coupon(props) {
                   className = `${className} btn-disabled`;
                 }
 
-                const showAsterik = !!(
+                const showAsterik = !! (
                   c.applicableProducts?.length ||
                   c.applicableCollections?.length
                 );
