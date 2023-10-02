@@ -193,7 +193,7 @@ function Coupon(props) {
               appliedCoupon ? "pt-0" : ""
               }`}
           >
-            <div className="coupon-container coupon-container2">
+            <div className={`coupon-container coupon-container2 ${showAppliedCoupon ? "coupon-container2-applied-background" : "coupon-container2-nocoupon-background"}`}>
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">

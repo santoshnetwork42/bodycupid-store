@@ -1257,10 +1257,16 @@
 }
 
 .coupon-container2 {
-  background-color: #ededed;
   font-weight: bolder;
   padding: 14px;
   border-radius: 6px;
+}
+
+.coupon-container2-nocoupon-background {
+  background: rgba(237, 237, 237, 1);
+}
+
+.coupon-container2-applied-background {
   background: rgba(23, 179, 27, 0.08);
 }
 
