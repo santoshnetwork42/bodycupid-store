@@ -1464,6 +1464,7 @@
   .product-details {
     .cart-button-wrapper {
       width: 100vw;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1472,8 +1473,8 @@
       left: 0;
       background: #fff;
       z-index: 99;
-      padding-top: 13px;
-      padding-bottom: 8px;
+      padding-top: 10px;
+      padding-bottom: 10px;
       box-shadow: 0 0 10px 1px rgb(0 0 0 / 10%);
       font-weight: bolder;
 

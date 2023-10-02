@@ -539,10 +539,10 @@ function DetailOne(props) {
 
                   {!cartItem && (
                     <div
-                      className={`product-form-group p-0 m-0 cart-button-wrapper ${adClass}`}
+                      className={`cart-button-wrapper ${adClass}`}
                     >
                       <button
-                        className={`btn-product pb-6 pt-6 btn-cart ls-normal font-weight-semi-bold btn-cart-width ${
+                        className={`btn-product btn-cart ls-normal font-weight-semi-bold btn-cart-width ${
                           cartActive ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
