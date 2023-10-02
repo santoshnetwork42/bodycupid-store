@@ -49,6 +49,7 @@ function DetailOne(props) {
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
+  const [isSticky, setIsSticky] = useState(isStickyCart)
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -81,6 +82,19 @@ function DetailOne(props) {
   //   () => wishlist.some((i) => i.id === product?.id),
   //   [wishlist, product?.id]
   // );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = 600;
+      if (scrollY < threshold) setIsSticky(true);
+      else setIsSticky(false);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -376,7 +390,7 @@ function DetailOne(props) {
             </div>
           )}
 
-          {isStickyCart ? (
+          {isSticky ? (
             <>
               {!!hasInventory ? (
                 <div className="sticky-content fix-top product-sticky-content">
@@ -442,7 +456,7 @@ function DetailOne(props) {
 
                         {cartItem && (
                           <button
-                            className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                            className={`btn-product btn-cart dark text-normal ls-normal font-weight-semi-bold ${
                               cartActive ? "" : "disabled"
                             }`}
                             onClick={() => {
@@ -528,7 +542,7 @@ function DetailOne(props) {
                       className={`product-form-group p-0 m-0 cart-button-wrapper ${adClass}`}
                     >
                       <button
-                        className={`btn-product pb-6 pt-6 btn-cart ls-normal font-weight-semi-bold m-0 btn-cart-width${
+                        className={`btn-product pb-6 pt-6 btn-cart ls-normal font-weight-semi-bold m-0 btn-cart-width ${
                           cartActive ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
