@@ -172,14 +172,17 @@
         .product-benefits {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
 
             label {
-                padding: .6rem 1.3rem;
-                border-radius: .5rem;
-                background-color: $border-color;
-                color: $body-color;
+                padding: 4px 16px;
+                border-radius: 20px;
+                background: rgba(255, 214, 19, 0.50);
                 text-transform: capitalize;
+                font-family: "Manrope";
+                color: #000;
+                font-size: 12px;
+                font-weight: 500;
             }
         }
     }
