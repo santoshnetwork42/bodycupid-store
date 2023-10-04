@@ -76,7 +76,7 @@ export const getStaticProps = async () => {
       { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];
 
-    // Get all Product
+    // Get all Products
     const { searchProducts } = await fetchData(findProducts, {
       filter,
       sort: [{ field: "position", direction: "asc" }],
