@@ -27,6 +27,7 @@ function CartProduct({
   removeFromCart,
   updateCart,
   ltoProducts,
+  removeCoupon
 }) {
   const {
     id,
@@ -77,12 +78,13 @@ function CartProduct({
 
   const onChangeQty = (newQty) => {
     const finalQty = newQty + extraQty;
-    if (finalQty) {
-      const cartData = getUpdatedCart(cartList, recordKey, {
+
+    const cartData = getUpdatedCart(cartList, recordKey, {
         qty: finalQty,
       });
-      updateCart(cartData);
-    } else {
+    updateCart(cartData);
+    if (!finalQty) {
+      if(item.cartItemSource === "COUPON") removeCoupon()
       removeFromCart(item);
     }
   };
@@ -353,4 +355,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,
+  removeCoupon: cartActions.removeCoupon
 })(CartProduct);
