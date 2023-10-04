@@ -78,7 +78,6 @@ function CartProduct({
 
   const onChangeQty = (newQty) => {
     const finalQty = newQty + extraQty;
-
     const cartData = getUpdatedCart(cartList, recordKey, {
         qty: finalQty,
       });
