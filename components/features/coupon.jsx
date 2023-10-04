@@ -193,7 +193,7 @@ function Coupon(props) {
               appliedCoupon ? "pt-0" : ""
               }`}
           >
-            <div className="coupon-container coupon-container2">
+            <div className={`coupon-container coupon-container2 ${showAppliedCoupon ? "coupon-container2-applied-background" : "coupon-container2-nocoupon-background"}`}>
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">
@@ -313,7 +313,7 @@ function Coupon(props) {
         <div className="slider-header p-0 coupon-heading">
           <div className="d-flex lh-1 align-items-center">
             <ALink href="#" onClick={closeSlider}>
-              <LeftAngle />
+              <LeftAngle  />
             </ALink>
             <div className="cart-title ml-2">
               COUPONS ({featuredCoupons.length})
@@ -358,7 +358,7 @@ function Coupon(props) {
                   className = `${className} btn-disabled`;
                 }
 
-                const showAsterik = !!(
+                const showAsterik = !! (
                   c.applicableProducts?.length ||
                   c.applicableCollections?.length
                 );
