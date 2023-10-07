@@ -24,6 +24,7 @@ import handleRedirect from "~/utils/handleRedirect";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { eventActions } from "~/store/events";
 import { getSource } from "~/utils/helper";
+import Image from "next/image";
 
 const logger = new Logger("All collections");
 
@@ -38,11 +39,11 @@ function CollectionPage(props) {
     pageMeta,
     categoryViewed,
   } = props;
-  const { name } = store;
+  const { name } = store || {};
   const source = getSource();
 
   useEffect(() => {
-    if (data.name) {
+    if (data?.name) {
       categoryViewed({
         URL: window.location.href,
         "Category Name": data.name,
@@ -52,17 +53,31 @@ function CollectionPage(props) {
     }
   }, [data]);
 
+  const imageUrl = data.hasOwnProperty("bannerUrl")
+    ? data.bannerUrl
+    : data.imageUrl;
+
   return (
     <main className="main searchBar">
       <NextHead {...pageMeta} />
 
       <h1 className="d-none">
-        {name} - {data.name}
+        {name} - {data?.name}
       </h1>
 
       <div className="page-content  pb-3">
         <div className="container">
           <CategoryHeader {...data} />
+          {imageUrl && (
+            <div className="text-center pt-4">
+              <Image
+                src={getPublicImageURL(imageUrl)}
+                alt="Category Image"
+                width={1200}
+                height={305}
+              />
+            </div>
+          )}
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 main-content">
               <ProductListOne
@@ -93,13 +108,13 @@ export const getStaticPaths = async () => {
     { searchCollectionTypes: allCollections },
   ] = await Promise.all([
     fetchData(getAllCategoriesPath, {
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
     fetchData(getAllSubcategoriesPath, {
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
     fetchData(getAllCollectionPath, {
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }),
   ]);
 
@@ -135,7 +150,7 @@ export const getStaticProps = async (context) => {
     // Category By Slug
     const [category] = await fetchData(getBasicCategory, {
       slug,
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }).then((resp) => resp.byslugProductCategory.items);
 
     if (category) {
@@ -196,7 +211,7 @@ export const getStaticProps = async (context) => {
     // Sub Category By Slug
     const [subCategory] = await fetchData(getBasicSubCategory, {
       slug,
-      filter: { storeId: { eq: STORE_ID } },
+      filter: { storeId: { eq: STORE_ID }, isArchive: { eq: false } },
     }).then((resp) => resp.byslugProductSubCategory.items);
 
     if (subCategory) {
@@ -267,6 +282,7 @@ export const getStaticProps = async (context) => {
       filter: {
         slug: { eq: slug },
         storeId: { eq: STORE_ID },
+        isArchive: { eq: false },
       },
     }).then((resp) =>
       resp?.searchCollectionTypes.items.find((item) => item.slug === slug)
@@ -280,6 +296,7 @@ export const getStaticProps = async (context) => {
           storeId: { eq: STORE_ID },
           showInMenu: { eq: true },
           slug: { ne: slug },
+          isArchive: { eq: false },
         },
         sort: [{ field: "priority", direction: "asc" }],
       }).then((res) => res.searchCollectionTypes.items);

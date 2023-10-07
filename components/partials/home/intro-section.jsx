@@ -22,7 +22,7 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
         options={introSlider}
       >
         {banners.map((banner, index) => {
-          const { webKey, mobileKey, link } = banner;
+          const { webKey, mobileKey, link, name } = banner;
           return (
             <div className="intro-slide2" key={webKey}>
               <ALink
@@ -31,7 +31,7 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                   bannerClicked({
                     Source: source,
                     item_id: index,
-                    banner_name: webKey,
+                    banner_name: name,
                   });
                 }}
                 className={`d-sm-none intro-slider-link`} //for desktop size
@@ -52,7 +52,7 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
                   bannerClicked({
                     Source: source,
                     item_id: index,
-                    banner_name: webKey,
+                    banner_name: name,
                   });
                 }}
                 className="d-none d-sm-show intro-slider-link" //for mobile size

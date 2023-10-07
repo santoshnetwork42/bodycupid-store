@@ -6,7 +6,7 @@ export default function Quantity({ qty = 1, ...props }) {
   const {
     isProductList = false,
     adClass = `${
-      isProductList ? "quntity-container d-flex" : "mr-2 input-group"
+      isProductList ? "quntity-container d-flex" : "mr-2 input-group bg-white"
     }`,
     product,
   } = props;

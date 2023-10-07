@@ -5,6 +5,7 @@ import ALink from "~/components/features/custom-link";
 
 import SidebarFilterThree from "~/components/partials/shop/sidebar/sidebar-filter-three";
 import { cleanQuery } from "~/utils/helper";
+import { getDefaultSorting } from "~/utils";
 
 export default function ToolBox(props) {
   const { type = "left", filterItems } = props;
@@ -137,6 +138,7 @@ export default function ToolBox(props) {
                     }`}
                     href={{
                       pathname: item.path,
+                      query: "sortby=" + getDefaultSorting(item.defaultSorting),
                     }}
                   >
                     <p className="m-0">{item.name}</p>

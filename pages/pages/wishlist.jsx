@@ -19,7 +19,7 @@ function Wishlist(props) {
   const router = useRouter();
   const { query } = router;
   const { page = 1 } = query;
-  const { name } = store;
+  const { name } = store || {};
 
   const moveToCart = (e, item) => {
     e.preventDefault();

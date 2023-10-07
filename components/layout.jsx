@@ -81,22 +81,12 @@ function Layout({
         <link
           href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap"
           rel="stylesheet"
-        ></link>
+        />
         {/* <link
           rel="stylesheet"
           type="text/css"
-          href="/vendor/riode-fonts/riode-fonts.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="/vendor/fontawesome-free/css/all.min.css"
-        /> */}
-        <link
-          rel="stylesheet"
-          type="text/css"
           href="/vendor/owl-carousel/owl.carousel.min.css"
-        />
+        /> */}
       </Head>
       <div className="page-wrapper">
         <Announcement showTopRunner={navbar.showTopRunner} />

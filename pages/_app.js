@@ -27,6 +27,7 @@ import Loader from "~/components/common/partials/loader";
 import CustomerGlu from "~/components/scripts/cutomer-glu";
 
 import NavbarProvider from "~/utils/contexts/navbar";
+import ABProvider from "~/utils/contexts/ab";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
@@ -210,13 +211,15 @@ const App = ({ Component, pageProps }) => {
           loading={<Loader loading={true} />}
         >
           <Scripts />
-          <NavbarProvider config={Component.navbarConfig}>
-            <Layout navbar={navbarProps} footer={footerProps}>
-              <Component {...pageProps} />
-              <VercelAnalytics />
-              <CustomerGlu />
-            </Layout>
-          </NavbarProvider>
+          <ABProvider>
+            <NavbarProvider>
+              <Layout navbar={navbarProps} footer={footerProps}>
+                <Component {...pageProps} />
+                <VercelAnalytics />
+                <CustomerGlu />
+              </Layout>
+            </NavbarProvider>
+          </ABProvider>
         </PersistGate>
       </Provider>
     </>
@@ -228,11 +231,14 @@ App.getInitialProps = async ({ Component, ctx }) => {
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
+
   if (!!ctx.req) {
     pageProps = pageProps || {};
+
     const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
     pageProps.store = store;
   }
+
   return { pageProps };
 };
 

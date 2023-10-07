@@ -15,7 +15,7 @@ function MainMenu({ topNavbarClicked }) {
   return (
     <nav className="main-nav">
       <ul className="menu">
-        {menu.map((item) => (
+        {menu.map((item, index) => (
           <li
             key={item.link}
             className={`${pathname.includes(item.link) ? "active" : ""} ${
@@ -28,7 +28,7 @@ function MainMenu({ topNavbarClicked }) {
               onClick={() => {
                 topNavbarClicked({
                   banner_name: item.label,
-                  item_id: item.slug,
+                  item_id: index + 1,
                   Source: "Web",
                   "Section Name": "Top Navbar",
                 });
@@ -54,7 +54,7 @@ function MainMenu({ topNavbarClicked }) {
                           onClick={() => {
                             topNavbarClicked({
                               banner_name: subItem.label,
-                              item_id: subItem.slug,
+                              item_id: null,
                               Source: "Web",
                               "Section Name": "Top Navbar",
                             });

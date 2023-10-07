@@ -84,7 +84,7 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
         </div>
         <ul className="mobile-menu mmenu-anim">
           <li>
-            {menu.map((item) => (
+            {menu.map((item, index) => (
               <div key={item?.label}>
                 <Card
                   title={item.label}
@@ -93,7 +93,7 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
                     hideMobileMenu(e);
                     topNavbarClicked({
                       banner_name: item.label,
-                      item_id: item.slug,
+                      item_id: index + 1,
                       Source: "Mobile",
                       "Section Name": "Mobile Navbar",
                     });
@@ -110,7 +110,7 @@ function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {
                             hideMobileMenu(e);
                             topNavbarClicked({
                               banner_name: subItem.label,
-                              item_id: subItem.slug,
+                              item_id: null,
                               Source: "Web",
                               "Section Name": "Top Navbar",
                             });

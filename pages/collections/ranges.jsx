@@ -13,12 +13,13 @@ import NextHead from "~/components/common/next-head";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
 import { Logger } from "aws-amplify";
+import { getDefaultSorting } from "~/utils";
 
 const logger = new Logger("Ranges collection");
 
 function AllCollection(props) {
   const { store, products, pageFilter, collections, pageMeta } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main">
@@ -57,7 +58,11 @@ export const getStaticProps = async () => {
     const {
       searchCollectionTypes: { items: collectionsRes },
     } = await fetchData(searchCollectionTypes, {
-      filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
+      filter: {
+        storeId: { eq: STORE_ID },
+        showInMenu: { eq: true },
+        isArchive: { eq: false },
+      },
       sort: [{ field: "priority", direction: "asc" }],
     });
 
@@ -71,7 +76,7 @@ export const getStaticProps = async () => {
       { name: "Combos & Gifts", path: "/collections/combos-and-gifts" },
     ];
 
-    // Get all Product
+    // Get all Products
     const { searchProducts } = await fetchData(findProducts, {
       filter,
       sort: [{ field: "position", direction: "asc" }],
