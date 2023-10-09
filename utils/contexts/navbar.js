@@ -201,12 +201,6 @@ export const useMenu = () => {
       link: `/collections/combos-and-gifts`,
       slug: "combos-and-gifts",
     });
-
-    menu.push({
-      label: "Buy 3 @ 599",
-      link: `/collections/special-bundle-offer`,
-      slug: "special-bundle-offer",
-    });
   }
 
   return menu;
