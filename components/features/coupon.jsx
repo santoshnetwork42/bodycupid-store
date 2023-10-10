@@ -8,11 +8,7 @@ import { cartActions } from "~/store/cart";
 import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
-import {
-  CloseIcon,
-  RightAngle,
-  CouponTag
-} from "~/components/icons";
+import { CloseIcon, RightAngle, CouponTag } from "~/components/icons";
 import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
@@ -191,15 +187,23 @@ function Coupon(props) {
           <div
             className={`padding-coupon-container ${
               appliedCoupon ? "pt-0" : ""
-              }`}
+            }`}
           >
-            <div className="coupon-container coupon-container2">
+            <div
+              className={`coupon-container coupon-container2 ${
+                showAppliedCoupon
+                  ? "coupon-container2-applied-background"
+                  : "coupon-container2-nocoupon-background"
+              }`}
+            >
               <div className="applied-coupons-container">
                 {showAppliedCoupon ? (
                   <div className="d-flex justify-content-between">
                     <div className="d-flex justify-content-start">
                       <div className="applied-coupon-tag">
-                        <span className="coupon-code">{appliedCoupon.code}</span>
+                        <span className="coupon-code">
+                          {appliedCoupon.code}
+                        </span>
                       </div>
                       <div className="coupon-status-applied">Applied</div>
                       {/* <div className="coupon-applied-confetii">
@@ -268,7 +272,6 @@ function Coupon(props) {
         overlayClassName="auth-modal-overlay login-modal-container"
         className="applied-coupon-modal"
       >
-
         <div className="applied-coupon-modal-container">
           <div
             className="close-icon"
@@ -327,7 +330,7 @@ function Coupon(props) {
             <input
               className={`form-control form-control-v2 mr-2 ${
                 !!error && "coupon-error-box-border"
-                } border-none`}
+              } border-none`}
               type="text"
               name="coupon_code"
               placeholder="Enter coupon code here"
@@ -337,7 +340,7 @@ function Coupon(props) {
             <button
               className={`apply-button d-flex justify-content-center align-items-center ${
                 coupon ? "text-dark" : ""
-                }`}
+              }`}
               disabled={loading}
               onClick={() => {
                 !!coupon && applyCouponCode();
@@ -368,9 +371,9 @@ function Coupon(props) {
                     key={c.id}
                     className={`${
                       appliedCoupon?.code !== c.code
-                      ? "featured-coupon-slider"
-                      : "featured-coupon-slider-applied"
-                      } mb-3`}
+                        ? "featured-coupon-slider"
+                        : "featured-coupon-slider-applied"
+                    } mb-3`}
                   >
                     <div className="featured-coupon-text-content mr-0">
                       <div className="d-flex align-items-center justify-content-between">
@@ -378,9 +381,9 @@ function Coupon(props) {
                           <div
                             className={`${
                               appliedCoupon?.code === c.code
-                              ? "applied-coupon-tag"
-                              : "coupon-tag2 coupon-modal-tag-color"
-                              }`}
+                                ? "applied-coupon-tag"
+                                : "coupon-tag2 coupon-modal-tag-color"
+                            }`}
                           >
                             <strong>{c.code}</strong>
                           </div>
@@ -404,7 +407,7 @@ function Coupon(props) {
                       <div
                         className={`coupon-tagline2 ${
                           !c.allowed && "text-secondary"
-                          }`}
+                        }`}
                       >
                         {c.message}
                         {showAsterik && "*"}
@@ -423,7 +426,7 @@ function Coupon(props) {
                             }}
                             className={`btn btn-primary coupon-apply-button${
                               !c.allowed ? " disabled-coupon" : ""
-                              }`}
+                            }`}
                             disabled={!c.allowed}
                           >
                             Apply
