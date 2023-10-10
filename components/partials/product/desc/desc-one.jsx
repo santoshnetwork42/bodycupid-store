@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { useSetState } from "react-use";
 import { API, graphqlOperation } from "aws-amplify";
+import { STORE_ID } from "~/config";
 
 import { modalActions } from "~/store/modal";
 import {
@@ -251,6 +252,7 @@ function DescOne(props) {
                 },
                 userId: user?.id,
                 productId: id,
+                storeId: STORE_ID,
                 images,
               },
             },
@@ -279,6 +281,7 @@ function DescOne(props) {
                 },
                 userId: user?.id,
                 productId: id,
+                storeId: STORE_ID,
                 images,
               },
             },
