@@ -684,17 +684,19 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.ADDRESS_SELECTED, function* saga(e) {
     try {
       const { address, totalPrice } = e.payload;
-      const { addressSelected } = addressMapper(address, totalPrice);
+      if (address) {
+        const { addressSelected } = addressMapper(address, totalPrice);
 
-      const { name, email, phone } = address;
-      initializeMoengageAndAddInfo({
-        firstName: name.split(" ")[0],
-        lastName: name.split(" ")[1],
-        email,
-        phone,
-      });
+        const { name, email, phone } = address;
+        initializeMoengageAndAddInfo({
+          firstName: name.split(" ")[0],
+          lastName: name.split(" ")[1],
+          email,
+          phone,
+        });
 
-      moeEvent("Address Selected", addressSelected);
+        moeEvent("Address Selected", addressSelected);
+      }
     } catch (e) {
       errorHandler(e);
     }
