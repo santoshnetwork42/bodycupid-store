@@ -19,6 +19,7 @@ import ALink from "~/components/features/custom-link";
 
 import { getUser } from "~/graphql/api";
 import { eventActions } from "~/store/events";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 const logger = new Logger("Login-without-password");
 
@@ -33,6 +34,7 @@ function Passwordless({
 }) {
   const router = useRouter();
   const { query } = router;
+  const { isSmallSize: isMobile } = useWindowDimensions();
 
   const [state, setState] = useState({
     phone: "",
@@ -336,22 +338,25 @@ function Passwordless({
                               Get OTP
                               {loading && <div className="spin-loader ml-2" />}
                             </button>
-                            <p>
-                              By clicking Submit, you agree to our{" "}
-                              <ALink
-                                href="/policies/terms-of-service"
-                                className="link-text"
-                              >
-                                Terms and Conditions
-                              </ALink>{" "}
-                              and{" "}
-                              <ALink
-                                href="/policies/privacy-policy"
-                                className="link-text"
-                              >
-                                Privacy Policy
-                              </ALink>
-                            </p>
+                            {!isMobile && (
+                              <p>
+                                By Proceeding you are opting for promotional SMS
+                                & agree to our{" "}
+                                <ALink
+                                  href="/policies/terms-of-service"
+                                  className="link-text"
+                                >
+                                  Terms and Conditions
+                                </ALink>{" "}
+                                and{" "}
+                                <ALink
+                                  href="/policies/privacy-policy"
+                                  className="link-text"
+                                >
+                                  Privacy Policy
+                                </ALink>
+                              </p>
+                            )}
                           </form>
                         )}
                         {/* <div className="form-choice text-center">
