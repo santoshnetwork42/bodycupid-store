@@ -20,7 +20,7 @@ const logger = new Logger("All collections");
 
 function AllProduct(props) {
   const { store, products, pageFilter, categories, pageMeta } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main">
@@ -56,7 +56,11 @@ export const getStaticProps = async () => {
 
     //get all categories
     const { searchProductCategories } = await fetchData(getMenuCategories, {
-      filter: { storeId: { eq: STORE_ID }, showInMenu: { eq: true } },
+      filter: {
+        storeId: { eq: STORE_ID },
+        showInMenu: { eq: true },
+        isArchive: { eq: false },
+      },
       sort: [{ field: "priority", direction: "asc" }],
     });
 

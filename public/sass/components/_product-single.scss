@@ -31,7 +31,7 @@
             variation: (width: 3rem,
                 height: 3rem,
             ),
-            btn-cart: (max-width: 20.7rem,
+            btn-cart: (
                 height: 4.5rem,
             ),
             rating: (color: $secondary-color,
@@ -172,14 +172,17 @@
         .product-benefits {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
 
             label {
-                padding: .6rem 1.3rem;
-                border-radius: .5rem;
-                background-color: $border-color;
-                color: $body-color;
+                padding: 4px 16px;
+                border-radius: 20px;
+                background: rgba(255, 214, 19, 0.35);
                 text-transform: capitalize;
+                font-family: "Manrope";
+                color: #000;
+                font-size: 12px;
+                font-weight: 500;
             }
         }
     }
@@ -588,9 +591,13 @@
         cursor: pointer;
         display: flex;
         align-items: center;
+        max-width: 20.7rem;
         @include css(max-width, product-single, btn-cart, max-width);
         @include css(height, product-single, btn-cart, height);
 
+        @media (max-width: 575px) {
+            max-width: inherit;
+        }
         &.disabled {
             background-color: #e4eaec;
             cursor: not-allowed;

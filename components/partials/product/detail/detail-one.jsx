@@ -24,15 +24,13 @@ import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import { useProductCoupons } from "~/utils/hooks/useCoupon";
 import { modalActions } from "~/store/modal";
-// import { useCartTotal } from "~/utils/hooks/useCart";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 function DetailOne(props) {
   const router = useRouter();
   const {
     query: { review },
   } = router;
-
-  // const { cartAmountSaved: totalSaved } = useCartTotal();
 
   const {
     cartList,
@@ -46,10 +44,13 @@ function DetailOne(props) {
     setVariant = () => {},
     addToCart,
     removeFromCart,
+    closeQuickview,
+    isQuickView,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
+  const [isSticky, setIsSticky] = useState(isStickyCart);
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -61,6 +62,7 @@ function DetailOne(props) {
   }, [cartList, selectedVariant]);
 
   const bestCoupon = useProductCoupons(product, selectedVariant);
+  const { isSmallSize: isMobile } = useWindowDimensions();
 
   const today = new Date();
 
@@ -82,6 +84,19 @@ function DetailOne(props) {
   //   () => wishlist.some((i) => i.id === product?.id),
   //   [wishlist, product?.id]
   // );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = 900;
+      if (scrollY < threshold) setIsSticky(false);
+      else setIsSticky(true);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -141,6 +156,7 @@ function DetailOne(props) {
 
   const addToCartHandler = () => {
     setCartVisibility(true);
+    closeQuickview();
     if (hasInventory) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
@@ -250,11 +266,11 @@ function DetailOne(props) {
       )} */}
 
       {!!product?.benefits && (
-          <div className="product-benefits mb-2">
-            {product?.benefits.map((benefit) => (
-                <label key={benefit}>{benefit}</label>
-            ))}
-          </div>
+        <div className="product-benefits mb-2">
+          {product?.benefits.map((benefit) => (
+            <label key={benefit}>{benefit}</label>
+          ))}
+        </div>
       )}
 
       <div className="product-variation-price">
@@ -376,110 +392,104 @@ function DetailOne(props) {
             </div>
           )}
 
-          {isStickyCart ? (
-            <>
-              {!!hasInventory ? (
-                <div className="sticky-content fix-top product-sticky-content">
-                  <div className="container">
-                    <div className="sticky-product-details">
-                      <figure className="product-image">
-                        <ALink href={"/products/" + product.slug}>
-                          <img
-                            src={getPublicImageURL(
-                              product.images.items[0]?.imageKey
-                            )}
-                            width="90"
-                            height="90"
-                            alt={product.images.items[0]?.alt}
-                          />
-                        </ALink>
-                      </figure>
-                      <div>
-                        <h4 className="product-title">
-                          <ALink href={"/products/" + product.slug}>
-                            {product.title}
-                          </ALink>
-                        </h4>
-                        <div className="product-info">
-                          <div className="product-price mb-0">
-                            <ins className="new-price">
-                              ₹{toDecimal(product.price || 0)}
-                            </ins>
-                          </div>
-
-                          <div className="ratings-container mb-0">
-                            <div className="ratings-full">
-                              <span
-                                className="ratings"
-                                style={{
-                                  width:
-                                    Math.min(20 * product.rating, 100) + "%",
-                                }}
-                              ></span>
-                              <span className="tooltiptext tooltip-top">
-                                {toDecimal(product.ratings)}
-                              </span>
-                            </div>
-
-                            <ALink href="#" className="rating-reviews">
-                              ( {product?.reviews?.items.length} reviews )
-                            </ALink>
-                          </div>
-                        </div>
+          {!!hasInventory ? (
+            <div className="sticky-content fix-top product-sticky-content">
+              <div className="container">
+                <div className="sticky-product-details">
+                  <figure className="product-image">
+                    <ALink href={"/products/" + product.slug}>
+                      <img
+                        src={getPublicImageURL(
+                          product.images.items[0]?.imageKey
+                        )}
+                        width="90"
+                        height="90"
+                        alt={product.images.items[0]?.alt}
+                      />
+                    </ALink>
+                  </figure>
+                  <div>
+                    <h4 className="product-title">
+                      <ALink href={"/products/" + product.slug}>
+                        {product.title}
+                      </ALink>
+                    </h4>
+                    <div className="product-info">
+                      <div className="product-price mb-0">
+                        <ins className="new-price">
+                          ₹{toDecimal(product.price || 0)}
+                        </ins>
                       </div>
-                    </div>
-                    <div className="product-form product-qty pb-0">
-                      <label className="d-none">QTY:</label>
-                      <div className="product-form-group ">
-                        {!!cartItem && (
-                          <Quantity
-                            max={currentInventory}
-                            qty={cartItem?.qty}
-                            product={product}
-                            onChangeQty={changeQty}
-                          />
-                        )}
 
-                        {cartItem && (
-                          <button
-                            className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                              cartActive ? "" : "disabled"
-                            }`}
-                            onClick={() => {
-                              setCartVisibility(true);
+                      <div className="ratings-container mb-0">
+                        <div className="ratings-full">
+                          <span
+                            className="ratings"
+                            style={{
+                              width: Math.min(20 * product.rating, 100) + "%",
                             }}
-                          >
-                            <i>
-                              <Bag color="currentColor" size={20} />
-                            </i>
-                            Go To Cart
-                          </button>
-                        )}
-                        {!cartItem && (
-                          <button
-                            className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
-                              cartActive ? "" : "disabled"
-                            }`}
-                            onClick={addToCartHandler}
-                          >
-                            <i>
-                              <Bag color="currentColor" size={20} />
-                            </i>
-                            Add to cart
-                          </button>
-                        )}
+                          ></span>
+                          <span className="tooltiptext tooltip-top">
+                            {toDecimal(product.ratings)}
+                          </span>
+                        </div>
+
+                        <ALink href="#" className="rating-reviews">
+                          ( {product?.reviews?.items.length} reviews )
+                        </ALink>
                       </div>
                     </div>
                   </div>
                 </div>
-              ) : (
-                <ProductNotify
-                  productId={product.id}
-                  variantId={selectedVariant}
-                />
-              )}
-            </>
+                <div className="product-form product-qty pb-0">
+                  <label className="d-none">QTY:</label>
+                  <div className="product-form-group ">
+                    {!!cartItem && (
+                      <Quantity
+                        max={currentInventory}
+                        qty={cartItem?.qty}
+                        product={product}
+                        onChangeQty={changeQty}
+                      />
+                    )}
+
+                    {cartItem && (
+                      <button
+                        className={`btn-product btn-cart dark text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={() => {
+                          setCartVisibility(true);
+                        }}
+                      >
+                        <i>
+                          <Bag color="currentColor" size={20} />
+                        </i>
+                        Go To Cart
+                      </button>
+                    )}
+                    {!cartItem && (
+                      <button
+                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={addToCartHandler}
+                      >
+                        <i>
+                          <Bag color="currentColor" size={20} />
+                        </i>
+                        Add to cart
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : (
+            <ProductNotify productId={product.id} variantId={selectedVariant} />
+          )}
+
+          {isMobile && isSticky && (
             <>
               {!!hasInventory ? (
                 <div className="product-form product-qty pb-0">
@@ -511,7 +521,8 @@ function DetailOne(props) {
                           }`}
                           onClick={(e) => {
                             e.preventDefault();
-                            setCartVisibility(true)                          }}
+                            setCartVisibility(true);
+                          }}
                         >
                           <i>
                             <Bag color="currentColor" size={20} />
@@ -523,9 +534,9 @@ function DetailOne(props) {
                   )}
 
                   {!cartItem && (
-                    <div className="product-form-group p-0 m-0 cart-button-wrapper">
+                    <div className={`cart-button-wrapper ${adClass}`}>
                       <button
-                        className={`btn-product pb-6 pt-6 btn-cart ls-normal font-weight-semi-bold m-0 btn-cart-width${
+                        className={`btn-product btn-cart ls-normal font-weight-semi-bold btn-cart-width ${
                           cartActive ? "" : "disabled"
                         }`}
                         onClick={addToCartHandler}
@@ -569,4 +580,5 @@ export default connect(mapStateToProps, {
   removeFromCart: cartActions.removeFromCart,
   getFeaturedCoupons: systemActions.getFeaturedCoupon,
   setCartVisibility: modalActions.setCartVisibility,
+  closeQuickview: modalActions.closeQuickview,
 })(DetailOne);

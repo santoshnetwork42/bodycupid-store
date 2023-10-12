@@ -13,6 +13,7 @@ import { modalActions } from "~/store/modal";
 
 function Header({ navbar, auth, openPasswordLess }) {
   const router = useRouter();
+
   useEffect(() => {
     let header = document.querySelector("header");
     if (header) {

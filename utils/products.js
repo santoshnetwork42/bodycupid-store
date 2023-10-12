@@ -19,7 +19,7 @@ export const getFirstVariant = (product, variantId) => {
 
 export const getProductMeta = (product) => {
   if (!product) return {};
-  const { variants = {}, images = {} } = product;
+  const { variants = {}, images = {}, imageUrl } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
 
@@ -27,8 +27,8 @@ export const getProductMeta = (product) => {
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
 
-  let thumbImage =
-    sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
+  let thumbImage = sortedImages.find((i) => i.isThumb) ||
+    sortedImages[0] || { imageKey: imageUrl };
   const [, secondaryImage] = sortedImages;
 
   const [firstVariant] = items.sort((a, b) => a.position - b.position);
@@ -66,6 +66,7 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     isInventoryEnabled,
     inventory = 0,
     variants = {},
+    availability,
   } = product;
   const { items = [] } = variants;
 
@@ -97,8 +98,8 @@ export const getProductInventory = (product, selectedVariantId = null) => {
   }
 
   return {
-    hasInventory: true,
-    currentInventory: 1000,
+    hasInventory: !availability || availability === "in stock",
+    currentInventory: 99,
   };
 };
 
@@ -120,4 +121,31 @@ export const getProductPrice = (product, variantId) => {
   }
 
   return { price: p, listingPrice: lp };
+};
+
+export const productDiscountPercentage = ({ price, listingPrice }) => {
+  return Math.round(((listingPrice - price) / listingPrice) * 100);
+};
+
+export const setSoldOutLast = (items) => {
+  let soldOutProducts = [];
+  const products = items.reduce((acc, prod) => {
+    if (!("hasInventory" in prod)) {
+      const { hasInventory } = getProductInventory(prod);
+      if (hasInventory) {
+        return [...acc, { ...prod, hasInventory }];
+      } else {
+        soldOutProducts.push({ ...prod, hasInventory });
+        return acc;
+      }
+    } else {
+      if (prod.hasInventory) {
+        return [...acc, prod];
+      } else {
+        soldOutProducts.push(prod);
+        return acc;
+      }
+    }
+  }, []);
+  return [...products, ...soldOutProducts];
 };
