@@ -101,6 +101,10 @@ body:not(.loaded) * {
   min-height: 100vh;
 }
 
+.link-text {
+  color: cadetblue;
+}
+
 .page-content {
   color: $text-color-1;
 }

@@ -400,30 +400,33 @@ export const moEngageItemPurchasedMapper = (
 };
 
 export const addressMapper = (address, totalPrice) => {
-  const { city, country, email, name, state, pinCode, phone } = address;
-  const phoneNo = removePhonePrefix(phone);
-  const [firstName, lastName] = name.split(" ");
+  if (address) {
+    const { city, country, email, name, state, pinCode, phone } = address;
+    const phoneNo = removePhonePrefix(phone);
+    const [firstName, lastName] = name.split(" ");
 
-  const basicAttributes = {
-    "Cart Total Price": totalPrice,
-    City: city,
-    Country: country,
-    Currency: "INR",
-    Email: email,
-    "First Name": firstName,
-    "Last Name": lastName,
-    "Mobile Number": phoneNo,
-    Pincode: pinCode,
-    State: state,
-  };
-  return {
-    addressAdded: {
-      ...basicAttributes,
-    },
-    addressSelected: {
-      ...basicAttributes,
-    },
-  };
+    const basicAttributes = {
+      "Cart Total Price": totalPrice,
+      City: city,
+      Country: country,
+      Currency: "INR",
+      Email: email,
+      "First Name": firstName,
+      "Last Name": lastName,
+      "Mobile Number": phoneNo,
+      Pincode: pinCode,
+      State: state,
+    };
+
+    return {
+      addressAdded: {
+        ...basicAttributes,
+      },
+      addressSelected: {
+        ...basicAttributes,
+      },
+    };
+  }
 };
 
 export const moeEvent = (title, payload) => {
