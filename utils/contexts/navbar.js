@@ -203,11 +203,11 @@ export const useMenu = () => {
     });
   }
 
-  menu.push({
-    label: "Buy 3 @ 599",
-    link: `/collections/special-bundle-offer`,
-    slug: "special-bundle-offer",
-  });
+  // menu.push({
+  //   label: "Buy 3 @ 599",
+  //   link: `/collections/special-bundle-offer`,
+  //   slug: "special-bundle-offer",
+  // });
 
   return menu;
 };
