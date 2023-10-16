@@ -534,14 +534,14 @@ export function* eventsSaga() {
         });
       });
 
-      vercel.forEach((attr) => {
-        vercelAnalytics.track("begin_chekout_item", {
-          ...attr,
-          value,
-          currency: "INR",
-          coupon: coupon?.code || "",
-        });
-      });
+      // vercel.forEach((attr) => {
+      //   vercelAnalytics.track("begin_chekout_item", {
+      //     ...attr,
+      //     value,
+      //     currency: "INR",
+      //     coupon: coupon?.code || "",
+      //   });
+      // });
     } catch (e) {
       errorHandler(e);
     }
@@ -597,14 +597,14 @@ export function* eventsSaga() {
         });
       });
 
-      vercel.forEach((attr) => {
-        vercelAnalytics.track("view_cart_item", {
-          ...attr,
-          value,
-          currency: "INR",
-          coupon: coupon?.code || "",
-        });
-      });
+      // vercel.forEach((attr) => {
+      //   vercelAnalytics.track("view_cart_item", {
+      //     ...attr,
+      //     value,
+      //     currency: "INR",
+      //     coupon: coupon?.code || "",
+      //   });
+      // });
     } catch (e) {
       errorHandler(e);
     }
@@ -650,13 +650,13 @@ export function* eventsSaga() {
         });
       });
 
-      vercel.forEach((attr) => {
-        vercelAnalytics.track("view_item_list_item", {
-          ...attr,
-          item_list_id: id,
-          item_list_name: name,
-        });
-      });
+      // vercel.forEach((attr) => {
+      //   vercelAnalytics.track("view_item_list_item", {
+      //     ...attr,
+      //     item_list_id: id,
+      //     item_list_name: name,
+      //   });
+      // });
     } catch (e) {
       errorHandler(e);
     }
