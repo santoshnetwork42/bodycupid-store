@@ -172,6 +172,7 @@ export const getStaticProps = async (context) => {
           filter: {
             storeId: { eq: STORE_ID },
             categoryID: { eq: category.id },
+            isArchive: { eq: false },
           },
         }
       );
@@ -241,6 +242,7 @@ export const getStaticProps = async (context) => {
             storeId: { eq: STORE_ID },
             categoryID: { eq: subCategory.categoryID },
             slug: { ne: slug },
+            isArchive: { eq: false },
           },
         }
       );
