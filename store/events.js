@@ -400,7 +400,7 @@ export function* eventsSaga() {
         isFirstTimeUser
       );
 
-      const { firstName, lastName, email, phone, city, pinCode } = user;
+      const { firstName, lastName, email, phone } = user;
       initializeMoengageAndAddInfo({
         firstName,
         lastName,
@@ -417,17 +417,7 @@ export function* eventsSaga() {
         event: "purchase",
         eventID: uuid(),
         user,
-        attribute: {
-          ...pixel,
-          order_id: id,
-          value: totalAmount,
-          firstName,
-          lastName,
-          email,
-          phone,
-          city,
-          pinCode,
-        },
+        attribute: { ...pixel, order_id: id, value: totalAmount },
         ecommerce: {
           transaction_id: id,
           order_code: code,
