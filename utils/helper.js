@@ -197,6 +197,7 @@ export async function fetchSearchItems(search) {
       item.imageUrl = item.imageUrl.split("/public/")[1] || "";
       item.slug = slug;
       item.price = Number(item.price.split(" ")[0]);
+      item.listingPrice = Number(item.listingPrice.split(" ")[0]);
       return item;
     });
   } catch (error) {
