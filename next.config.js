@@ -27,6 +27,11 @@ const nextConfig = withBundleAnalyzer({
         permanent: true,
       },
       {
+        source: "/pages/cart",
+        destination: "/?cart=1",
+        permanent: false,
+      },
+      {
         source: "/shop",
         destination: "/collections/all",
         permanent: true,
