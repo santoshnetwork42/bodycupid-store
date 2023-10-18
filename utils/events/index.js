@@ -56,6 +56,7 @@ export const itemMapper = (product, coupon) => {
     MRP: listingPrice,
     Source: source,
     "Product Range": null,
+    "ATC Source": section?.name || null,
   };
 
   return {
