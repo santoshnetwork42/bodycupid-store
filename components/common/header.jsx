@@ -11,8 +11,9 @@ import SearchBox from "~/components/common/partials/search-box";
 import { headerBorderRemoveList } from "~/utils/data/menu";
 import { modalActions } from "~/store/modal";
 
-function Header({ navbar, auth, openPasswordLess }) {
+function Header({ navbar, auth, openPasswordLess, setCartVisibility }) {
   const router = useRouter();
+  const { cart } = router.query;
 
   useEffect(() => {
     let header = document.querySelector("header");
@@ -30,6 +31,12 @@ function Header({ navbar, auth, openPasswordLess }) {
   const showMobileMenu = () => {
     document.querySelector("body").classList.add("mmenu-active");
   };
+
+  useEffect(() => {
+    if (cart === "1") {
+      setCartVisibility(true);
+    }
+  }, [cart]);
 
   return (
     <header className="header header-border">
@@ -119,4 +126,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   openPasswordLess: modalActions.openPasswordlessModal,
+  setCartVisibility: modalActions.setCartVisibility,
 })(Header);
