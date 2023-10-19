@@ -36,7 +36,7 @@ function Quickview(props) {
           })
         );
         setProduct(response);
-        setVariant(response.variants.items[0]?.id);
+        setVariant(response?.variants?.items[0]?.id);
       })();
     }
   }, [slug, isOpen]);
