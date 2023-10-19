@@ -158,9 +158,7 @@ function ProductTwo(props) {
           {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
-          <div className="product-coupon">
-            {label}
-          </div>
+          <div className="product-coupon">{label}</div>
           <div className="ratings-container mb-0">
             <div className="ratings-full d-flex rating-product-list mr-1">
               <Star size={20} color={"#FAB73B"} />
@@ -186,38 +184,52 @@ function ProductTwo(props) {
           </div>
         </div>
         <div className="product-action">
-          {!!hasInventory ? (
+          {isSearch ? (
+            <ALink
+              href="#"
+              className={`btn-product btn-primary btn-quickview m-0`}
+              title="Add to cart"
+              onClick={price > 0 ? addToCartHandler : undefined}
+              style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
+            >
+              View product{" "}
+            </ALink>
+          ) : (
             <>
-              {!!cartItem ? (
-                <Quantity
-                  isProductList={true}
-                  qty={cartItem.qty}
-                  max={currentInventory}
-                  product={product}
-                  onChangeQty={changeQty}
-                />
+              {!!hasInventory ? (
+                <>
+                  {!!cartItem ? (
+                    <Quantity
+                      isProductList={true}
+                      qty={cartItem.qty}
+                      max={currentInventory}
+                      product={product}
+                      onChangeQty={changeQty}
+                    />
+                  ) : (
+                    <ALink
+                      href="#"
+                      className={`btn-product btn-primary btn-quickview m-0 ${
+                        price <= 0 ? "disabled" : ""
+                      }`}
+                      title="Add to cart"
+                      onClick={price > 0 ? addToCartHandler : undefined}
+                      style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
+                    >
+                      Add to cart
+                    </ALink>
+                  )}
+                </>
               ) : (
                 <ALink
                   href="#"
-                  className={`btn-product btn-primary btn-quickview m-0 ${
-                    price <= 0 ? "disabled" : ""
-                  }`}
-                  title="Add to cart"
-                  onClick={price > 0 ? addToCartHandler : undefined}
-                  style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
+                  className="btn-product btn-sold-out m-0"
+                  title="Sold Out"
                 >
-                  Add to cart
+                  Sold Out
                 </ALink>
               )}
             </>
-          ) : (
-            <ALink
-              href="#"
-              className="btn-product btn-sold-out m-0"
-              title="Sold Out"
-            >
-              Sold Out
-            </ALink>
           )}
         </div>
       </div>
@@ -227,7 +239,7 @@ function ProductTwo(props) {
 
 function mapStateToProps(state) {
   return {
-    cartList: state.cart.data || [], 
+    cartList: state.cart.data || [],
   };
 }
 
