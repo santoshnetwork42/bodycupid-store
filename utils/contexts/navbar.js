@@ -203,6 +203,24 @@ export const useMenu = () => {
     });
   }
 
+  menu.push({
+    label: "Festive Offers",
+    link: "",
+    slug: "festive-offers",
+    subMenu: [
+      {
+        label: "3 Perfumes @ 1099",
+        link: "/collections/fragrance-bundle-offer",
+        slug: "fragrance-bundle-offer",
+      },
+      {
+        label: "Perfume Kits @ 499",
+        link: "/collections/perfumes",
+        slug: "perfumes",
+      },
+    ],
+  });
+
   // menu.push({
   //   label: "Buy 3 @ 599",
   //   link: `/collections/special-bundle-offer`,
