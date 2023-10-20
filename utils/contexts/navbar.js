@@ -218,6 +218,11 @@ export const useMenu = () => {
         link: "/collections/perfumes",
         slug: "perfumes",
       },
+      {
+        label: "BUY 3 @ 599",
+        link: "/collections/special-bundle-offer",
+        slug: "special-bundle-offer",
+      },
     ],
   });
 
