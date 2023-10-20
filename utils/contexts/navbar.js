@@ -29,11 +29,11 @@ function NavbarProvider({ children }) {
         //Category
         menuCategoryFilter: {
           storeId: { eq: STORE_ID },
-          showInMenu: { eq: true },
+          isFeatured: { eq: true },
           isArchive: { eq: false },
         },
         menuCategorySubCategoryFilter: {
-          showInMenu: { eq: true },
+          isFeatured: { eq: true },
           isArchive: { eq: false },
         },
         menuCategorySort: [{ field: "priority", direction: "asc" }],

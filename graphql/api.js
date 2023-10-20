@@ -21,6 +21,7 @@ export const getMenuCategories = /* GraphQL */ `
         name
         slug
         priority
+        isFeatured
         isArchive
         subCategory(filter: $subCategoryFilter) {
           items {
@@ -29,6 +30,7 @@ export const getMenuCategories = /* GraphQL */ `
             slug
             priority
             isArchive
+            isFeatured
           }
         }
       }
@@ -57,6 +59,7 @@ export const getSubCategoriesByCategoryID = /* GraphQL */ `
         id
         name
         slug
+        isFeatured
       }
       nextToken
       total
@@ -1060,7 +1063,7 @@ export const getRecommendedProductById = /* GraphQL */ `
       sku
       status
       collectionsList {
-          label
+        label
       }
       position
       listingPrice
