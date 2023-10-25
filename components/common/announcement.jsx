@@ -12,17 +12,23 @@ const Announcement = ({ store, showTopRunner }) => {
   const { isReady } = router;
 
   return (
-    <div className="announcement-bar sticky-header">
+    <div className="sticky-header">
       {!!showTopRunner &&
         isReady &&
         Array.isArray(announcements) &&
         !!announcements.length && (
           <OwlCarousel adClass="owl-nav-bottom" options={announcementSlider}>
             {announcements.map((announcement) => {
+              const announcementStyle = {
+                backgroundColor: announcement.color,
+                color: announcement.textColor,
+              };
+
               return (
                 <div
                   key={announcement.label}
-                  className="announcement d-flex justify-content-center align-items-center"
+                  className="announcement d-flex justify-content-center align-items-center w-full"
+                  style={announcementStyle}
                 >
                   <p className="announcement-text font-weight-semi-bold pt-1 pb-1 m-0">
                     {announcement.label}
