@@ -83,6 +83,7 @@ export const deleteProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -128,6 +129,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -186,6 +188,7 @@ export const deleteStore = /* GraphQL */ `
       description
       isActive
       webUrl
+      trackingUrl
       imageUrl
       darkImageUrl
       banners {
@@ -193,11 +196,15 @@ export const deleteStore = /* GraphQL */ `
         mobileKey
         link
         name
+        isArchive
+        priority
         __typename
       }
       announcements {
         label
         link
+        color
+        textColor
         __typename
       }
       socialLinks {
@@ -239,6 +246,7 @@ export const deleteProduct = /* GraphQL */ `
         defaultSorting
         isArchive
         label
+        isRegimeCollection
         createdAt
         updatedAt
         __typename
@@ -290,6 +298,7 @@ export const deleteProduct = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -355,6 +364,13 @@ export const deleteProduct = /* GraphQL */ `
         description
         __typename
       }
+      metadata {
+        title
+        description
+        keywords
+        image
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -370,6 +386,26 @@ export const deleteProduct = /* GraphQL */ `
     }
   }
 `;
+export const deleteProductMeta = /* GraphQL */ `
+  mutation DeleteProductMeta(
+    $input: DeleteProductMetaInput!
+    $condition: ModelProductMetaConditionInput
+  ) {
+    deleteProductMeta(input: $input, condition: $condition) {
+      id
+      steppers {
+        imageUrl
+        title
+        description
+        priority
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const deleteVariant = /* GraphQL */ `
   mutation DeleteVariant(
     $input: DeleteVariantInput!
@@ -379,6 +415,7 @@ export const deleteVariant = /* GraphQL */ `
       id
       productId
       title
+      storeId
       description
       price
       sku
@@ -461,6 +498,7 @@ export const createOrder = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -612,6 +650,7 @@ export const deleteOrder = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -839,6 +878,7 @@ export const createOrderProduct = /* GraphQL */ `
     createOrderProduct(input: $input, condition: $condition) {
       id
       orderId
+      storeId
       productId
       product {
         id
@@ -900,6 +940,7 @@ export const createOrderProduct = /* GraphQL */ `
         id
         productId
         title
+        storeId
         description
         price
         sku
@@ -971,6 +1012,7 @@ export const deleteOrderProduct = /* GraphQL */ `
     deleteOrderProduct(input: $input, condition: $condition) {
       id
       orderId
+      storeId
       productId
       product {
         id
@@ -1032,6 +1074,7 @@ export const deleteOrderProduct = /* GraphQL */ `
         id
         productId
         title
+        storeId
         description
         price
         sku
@@ -1110,6 +1153,7 @@ export const createPayment = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1169,6 +1213,7 @@ export const updatePayment = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1228,6 +1273,7 @@ export const deletePayment = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1290,6 +1336,7 @@ export const deleteCoupon = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1571,6 +1618,7 @@ export const createProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1617,6 +1665,7 @@ export const updateProductCategory = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1662,6 +1711,7 @@ export const createProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1723,6 +1773,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1769,6 +1820,153 @@ export const updateProductSubCategory = /* GraphQL */ `
     }
   }
 `;
+export const createStoreSetting = /* GraphQL */ `
+  mutation CreateStoreSetting(
+    $input: CreateStoreSettingInput!
+    $condition: ModelStoreSettingConditionInput
+  ) {
+    createStoreSetting(input: $input, condition: $condition) {
+      id
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        trackingUrl
+        imageUrl
+        darkImageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      clientId
+      constants {
+        ORDER_CODE_PREFIX
+        DOMAIN
+        __typename
+      }
+      messageSettings {
+        fromAddress
+        __typename
+      }
+      razorpaySettings {
+        encryptionWebhookSecret
+        keyId
+        keySecret
+        __typename
+      }
+      gupshupSettings {
+        message
+        smsAccountId
+        smsAccountPassword
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateStoreSetting = /* GraphQL */ `
+  mutation UpdateStoreSetting(
+    $input: UpdateStoreSettingInput!
+    $condition: ModelStoreSettingConditionInput
+  ) {
+    updateStoreSetting(input: $input, condition: $condition) {
+      id
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        trackingUrl
+        imageUrl
+        darkImageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      clientId
+      constants {
+        ORDER_CODE_PREFIX
+        DOMAIN
+        __typename
+      }
+      messageSettings {
+        fromAddress
+        __typename
+      }
+      razorpaySettings {
+        encryptionWebhookSecret
+        keyId
+        keySecret
+        __typename
+      }
+      gupshupSettings {
+        message
+        smsAccountId
+        smsAccountPassword
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteStoreSetting = /* GraphQL */ `
+  mutation DeleteStoreSetting(
+    $input: DeleteStoreSettingInput!
+    $condition: ModelStoreSettingConditionInput
+  ) {
+    deleteStoreSetting(input: $input, condition: $condition) {
+      id
+      store {
+        id
+        name
+        title
+        description
+        isActive
+        webUrl
+        trackingUrl
+        imageUrl
+        darkImageUrl
+        createdAt
+        updatedAt
+        __typename
+      }
+      clientId
+      constants {
+        ORDER_CODE_PREFIX
+        DOMAIN
+        __typename
+      }
+      messageSettings {
+        fromAddress
+        __typename
+      }
+      razorpaySettings {
+        encryptionWebhookSecret
+        keyId
+        keySecret
+        __typename
+      }
+      gupshupSettings {
+        message
+        smsAccountId
+        smsAccountPassword
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const createStore = /* GraphQL */ `
   mutation CreateStore(
     $input: CreateStoreInput!
@@ -1781,6 +1979,7 @@ export const createStore = /* GraphQL */ `
       description
       isActive
       webUrl
+      trackingUrl
       imageUrl
       darkImageUrl
       banners {
@@ -1788,11 +1987,15 @@ export const createStore = /* GraphQL */ `
         mobileKey
         link
         name
+        isArchive
+        priority
         __typename
       }
       announcements {
         label
         link
+        color
+        textColor
         __typename
       }
       socialLinks {
@@ -1821,6 +2024,7 @@ export const updateStore = /* GraphQL */ `
       description
       isActive
       webUrl
+      trackingUrl
       imageUrl
       darkImageUrl
       banners {
@@ -1828,11 +2032,15 @@ export const updateStore = /* GraphQL */ `
         mobileKey
         link
         name
+        isArchive
+        priority
         __typename
       }
       announcements {
         label
         link
+        color
+        textColor
         __typename
       }
       socialLinks {
@@ -1864,6 +2072,7 @@ export const createShippingTier = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1895,6 +2104,7 @@ export const updateShippingTier = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1926,6 +2136,7 @@ export const deleteShippingTier = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1962,6 +2173,7 @@ export const createCollectionType = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -1974,6 +2186,7 @@ export const createCollectionType = /* GraphQL */ `
       defaultSorting
       isArchive
       label
+      isRegimeCollection
       createdAt
       updatedAt
       __typename
@@ -2000,6 +2213,7 @@ export const updateCollectionType = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -2012,6 +2226,7 @@ export const updateCollectionType = /* GraphQL */ `
       defaultSorting
       isArchive
       label
+      isRegimeCollection
       createdAt
       updatedAt
       __typename
@@ -2038,6 +2253,7 @@ export const deleteCollectionType = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -2050,6 +2266,7 @@ export const deleteCollectionType = /* GraphQL */ `
       defaultSorting
       isArchive
       label
+      isRegimeCollection
       createdAt
       updatedAt
       __typename
@@ -2081,6 +2298,7 @@ export const createProduct = /* GraphQL */ `
         defaultSorting
         isArchive
         label
+        isRegimeCollection
         createdAt
         updatedAt
         __typename
@@ -2132,6 +2350,7 @@ export const createProduct = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -2195,6 +2414,13 @@ export const createProduct = /* GraphQL */ `
       ingredients {
         label
         description
+        __typename
+      }
+      metadata {
+        title
+        description
+        keywords
+        image
         __typename
       }
       recommended
@@ -2237,6 +2463,7 @@ export const updateProduct = /* GraphQL */ `
         defaultSorting
         isArchive
         label
+        isRegimeCollection
         createdAt
         updatedAt
         __typename
@@ -2288,6 +2515,7 @@ export const updateProduct = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -2353,6 +2581,13 @@ export const updateProduct = /* GraphQL */ `
         description
         __typename
       }
+      metadata {
+        title
+        description
+        keywords
+        image
+        __typename
+      }
       recommended
       recommendPriority
       recommendPrice
@@ -2364,6 +2599,46 @@ export const updateProduct = /* GraphQL */ `
         nextToken
         __typename
       }
+      __typename
+    }
+  }
+`;
+export const createProductMeta = /* GraphQL */ `
+  mutation CreateProductMeta(
+    $input: CreateProductMetaInput!
+    $condition: ModelProductMetaConditionInput
+  ) {
+    createProductMeta(input: $input, condition: $condition) {
+      id
+      steppers {
+        imageUrl
+        title
+        description
+        priority
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateProductMeta = /* GraphQL */ `
+  mutation UpdateProductMeta(
+    $input: UpdateProductMetaInput!
+    $condition: ModelProductMetaConditionInput
+  ) {
+    updateProductMeta(input: $input, condition: $condition) {
+      id
+      steppers {
+        imageUrl
+        title
+        description
+        priority
+        __typename
+      }
+      createdAt
+      updatedAt
       __typename
     }
   }
@@ -2587,6 +2862,7 @@ export const createVariant = /* GraphQL */ `
       id
       productId
       title
+      storeId
       description
       price
       sku
@@ -2620,6 +2896,7 @@ export const updateVariant = /* GraphQL */ `
       id
       productId
       title
+      storeId
       description
       price
       sku
@@ -2652,6 +2929,7 @@ export const createProductImage = /* GraphQL */ `
     createProductImage(input: $input, condition: $condition) {
       id
       productId
+      storeId
       position
       createdAt
       updatedAt
@@ -2672,6 +2950,7 @@ export const updateProductImage = /* GraphQL */ `
     updateProductImage(input: $input, condition: $condition) {
       id
       productId
+      storeId
       position
       createdAt
       updatedAt
@@ -2692,6 +2971,7 @@ export const deleteProductImage = /* GraphQL */ `
     deleteProductImage(input: $input, condition: $condition) {
       id
       productId
+      storeId
       position
       createdAt
       updatedAt
@@ -2804,6 +3084,7 @@ export const updateOrder = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -2989,6 +3270,7 @@ export const updateOrderProduct = /* GraphQL */ `
     updateOrderProduct(input: $input, condition: $condition) {
       id
       orderId
+      storeId
       productId
       product {
         id
@@ -3050,6 +3332,7 @@ export const updateOrderProduct = /* GraphQL */ `
         id
         productId
         title
+        storeId
         description
         price
         sku
@@ -3212,6 +3495,7 @@ export const createReview = /* GraphQL */ `
       }
       rating
       comment
+      storeId
       title
       source
       images
@@ -3321,6 +3605,7 @@ export const updateReview = /* GraphQL */ `
       }
       rating
       comment
+      storeId
       title
       source
       images
@@ -3430,6 +3715,7 @@ export const deleteReview = /* GraphQL */ `
       }
       rating
       comment
+      storeId
       title
       source
       images
@@ -3455,6 +3741,7 @@ export const createShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -3550,6 +3837,7 @@ export const updateShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -3645,6 +3933,7 @@ export const deleteShoppingCart = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -3734,6 +4023,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
       id
       shoppingcartId
       productId
+      storeId
       product {
         id
         title
@@ -3794,6 +4084,7 @@ export const createShoppingCartProduct = /* GraphQL */ `
         id
         productId
         title
+        storeId
         description
         price
         sku
@@ -3833,6 +4124,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
       id
       shoppingcartId
       productId
+      storeId
       product {
         id
         title
@@ -3893,6 +4185,7 @@ export const updateShoppingCartProduct = /* GraphQL */ `
         id
         productId
         title
+        storeId
         description
         price
         sku
@@ -3932,6 +4225,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
       id
       shoppingcartId
       productId
+      storeId
       product {
         id
         title
@@ -3992,6 +4286,7 @@ export const deleteShoppingCartProduct = /* GraphQL */ `
         id
         productId
         title
+        storeId
         description
         price
         sku
@@ -4040,6 +4335,7 @@ export const createCoupon = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -4173,6 +4469,7 @@ export const updateCoupon = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -4550,6 +4847,7 @@ export const createRedirects = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -4579,6 +4877,7 @@ export const updateRedirects = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -4608,6 +4907,7 @@ export const deleteRedirects = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -4646,6 +4946,7 @@ export const createNewOrder = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt
@@ -4796,6 +5097,7 @@ export const applyCoupon = /* GraphQL */ `
         description
         isActive
         webUrl
+        trackingUrl
         imageUrl
         darkImageUrl
         createdAt

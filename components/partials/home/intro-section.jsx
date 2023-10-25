@@ -15,13 +15,16 @@ function IntroSection({ banners = [], bannerClicked, homeViewed }) {
   }, []);
   const source = getSource();
 
+  const filteredBanners = banners.filter((banner) => !banner.isArchive);
+  filteredBanners.sort((a, b) => a.priority - b.priority);
+
   return (
     <div className="banner banner-fixed">
       <OwlCarousel
         adClass="owl-theme owl-dot-inner owl-dot-white intro-slider animation-slider intro-slider-container"
         options={introSlider}
       >
-        {banners.map((banner, index) => {
+        {filteredBanners.map((banner, index) => {
           const { webKey, mobileKey, link, name } = banner;
           return (
             <div className="intro-slide2" key={webKey}>
