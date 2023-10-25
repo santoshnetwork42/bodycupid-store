@@ -28,6 +28,6 @@ export const GEOCODING_API_URL =
 export const MAX_COD_AMOUNT = "MAX_COD_AMOUNT";
 
 export const SEMANTIC_SEARCH_API_URL =
-  "https://d2p5r3k8patcc0.cloudfront.net/api/bodycupid/search";
+  "https://d1pnavmgsqoqas.cloudfront.net/api/naturederma/search";
 export const SEMANTIC_SEARCH_THRESHOLD = 0.69;
 export const LIMITED_TIME_DEAL_DURATION = 2;
