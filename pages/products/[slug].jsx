@@ -194,7 +194,7 @@ export const getStaticProps = async (context) => {
     });
 
     if (product) {
-      const { id, pageTitle, productDescription, title } = product;
+      const { id, pageTitle, productDescription, title, metadata } = product;
       const { thumbImage } = getProductMeta(product);
 
       return {
@@ -203,8 +203,9 @@ export const getStaticProps = async (context) => {
           product,
           pageMeta: {
             siteName: name,
-            title: pageTitle || title,
-            description: productDescription,
+            title: metadata?.title || title || pageTitle,
+            description: metadata?.description || productDescription,
+            keywords: metadata?.keywords || [],
             canonical: `${webUrl}/products/${slug}`,
             image: getPublicImageURL(thumbImage?.imageKey),
           },
