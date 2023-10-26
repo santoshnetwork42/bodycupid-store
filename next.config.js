@@ -11,6 +11,29 @@ const nextConfig = withBundleAnalyzer({
   // basePath: '/react/riode/demo-1',
   // distDir: 'build',
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: "/robots.txt",
+        destination: "/api/robots",
+      },
+      {
+        source: "/robots.txt",
+        destination: "/api/robots",
+      },
+      { source: "/sitemap.xml", destination: "/api/feed/site-map" },
+      {
+        source: "/sitemap_products.xml",
+        destination: "/api/feed/sitemap-products",
+      },
+      { source: "/sitemap_pages.xml", destination: "/api/feed/sitemap-pages" },
+      {
+        source: "/sitemap_collections.xml",
+        destination: "/api/feed/sitemap-collections",
+      },
+      { source: "/sitemap_blogs.xml", destination: "/api/feed/sitemap-blogs" },
+    ];
+  },
   async redirects() {
     return [
       {
@@ -43,26 +66,6 @@ const nextConfig = withBundleAnalyzer({
         destination: "/",
         permanent: true,
       },
-    ];
-  },
-
-  rewrites() {
-    return [
-      {
-        source: "/robots.txt",
-        destination: "/api/robots",
-      },
-      { source: "/sitemap.xml", destination: "/api/feed/site-map" },
-      {
-        source: "/sitemap_products.xml",
-        destination: "/api/feed/sitemap-products",
-      },
-      { source: "/sitemap_pages.xml", destination: "/api/feed/sitemap-pages" },
-      {
-        source: "/sitemap_collections.xml",
-        destination: "/api/feed/sitemap-collections",
-      },
-      { source: "/sitemap_blogs.xml", destination: "/api/feed/sitemap-blogs" },
     ];
   },
   images: {
