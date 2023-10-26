@@ -1534,10 +1534,14 @@ export const getStore = /* GraphQL */ `
         mobileKey
         link
         name
+        isArchive
+        priority
       }
       announcements {
         label
         link
+        color
+        textColor
       }
       socialLinks {
         instagram
@@ -1565,6 +1569,8 @@ export const getStoreBanners = /* GraphQL */ `
         mobileKey
         link
         name
+        isArchive
+        priority
       }
     }
   }
