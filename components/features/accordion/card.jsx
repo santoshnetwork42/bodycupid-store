@@ -55,6 +55,9 @@ export default function Card(props) {
             className={`parse-content ${toggleState.toLowerCase()}`}
             onClick={(e) => {
               onToggle();
+              if (onLinkClick) {
+                onLinkClick();
+              }
             }}
           ></ALink>
 

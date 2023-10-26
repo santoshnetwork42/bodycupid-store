@@ -4,18 +4,20 @@ import Head from "next/head";
 import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
+import { Collapse } from "react-bootstrap";
 
 import ALink from "~/components/features/custom-link";
 import {
-  createOrder,
-  createOrderProduct,
   createTransaction,
-  createPayment,
   validateTransaction,
   getOrderStatus,
+  createNewOrder,
+  byorderIdcreatedAtPayment,
+  getOrderSuccess,
 } from "~/graphql/api";
+
 import { createUserAddress } from "~/graphql/mutations";
-import { toDecimal, getFreeProductTotal } from "~/utils";
+import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
@@ -37,15 +39,21 @@ import {
   ShoppingCart,
   UpAngle,
 } from "~/components/icons";
-import { Collapse } from "react-bootstrap";
+import Card from "~/components/features/accordion/card";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
 import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
 import { useFreeProducts } from "~/utils/hooks/useCoupon";
+import { useGuestCheckout } from "~/utils/contexts/navbar";
+import { useConfiguration } from "~/utils/contexts/navbar";
+import { MAX_COD_AMOUNT } from "~/constant";
+import { productDiscountPercentage } from "~/utils/products";
 
 const logger = new Logger("Checkout");
+
+let razorpayMethod;
 
 function Checkout(props) {
   const {
@@ -53,15 +61,22 @@ function Checkout(props) {
     user,
     emptyCart,
     appliedCoupon,
+    setCartVisibility,
     store,
     metadata,
     placeOrder: onPlaceOrder,
     startCheckout,
     openAllAddressModal,
     recordOutOfStock,
+    openLogin,
+    addPaymentInfo,
+    priceMismatch,
   } = props;
 
-  const { name } = store;
+  const { name } = store || {};
+
+  const guestCheckout = useGuestCheckout();
+  const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
   const {
@@ -69,7 +84,9 @@ function Checkout(props) {
     success: isInventoryCheckSuccess,
     inventoryMapping,
     outOfStockItems,
+    productWithPrice,
   } = useInventory();
+
   const freeProductsResponse = useFreeProducts(false);
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
@@ -107,7 +124,7 @@ function Checkout(props) {
     prepaidDiscountPercent,
   } = useCartTotal(payMethod);
 
-  const cartItems = useCartItems(false);
+  const cartItems = useCartItems(false, true);
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {
@@ -123,17 +140,17 @@ function Checkout(props) {
         API.graphql({
           query: createTransaction,
           variables: { orderId },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         }),
       ]);
 
-      if (rzpEnabled && transaction) {
+      if (rzpEnabled && transaction && store) {
         const options = {
           key: RAZORPAY_KEY,
           amount: transaction.amount,
           currency: "INR",
-          name: store.name,
-          image: getPublicImageURL(store.imageUrl),
+          name: store?.name,
+          image: getPublicImageURL(store?.imageUrl),
           order_id: transaction.orderId,
           handler: async function ({ razorpay_payment_id }) {
             setOrderData({ order, paymentId: razorpay_payment_id });
@@ -144,7 +161,7 @@ function Checkout(props) {
             contact: address.phone,
           },
           notes: {
-            storeId: store.id,
+            storeId: store?.id,
             orderId,
             paymentId,
           },
@@ -153,12 +170,16 @@ function Checkout(props) {
           },
           modal: {
             ondismiss: function () {
+              razorpayMethod = null;
               setLoading(false);
+              setOrderData(null);
             },
           },
         };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
+
+        razorpayMethod = new Razorpay(options);
+        razorpayMethod.open();
+        addPaymentInfo();
         logger.verbose("Razorpay initialization");
       } else {
         setLoading(false);
@@ -170,19 +191,16 @@ function Checkout(props) {
   );
 
   useEffect(() => {
-    let intervalId;
+    let intervalId = null,
+      success = false;
+
     if (!!orderData && orderData.order) {
-      onPlaceOrder(
-        orderData.order,
-        [...cartList, ...freeProducts],
-        appliedCoupon,
-        shippingAddress
-      );
       const { order, paymentId } = orderData;
       const { id: orderId } = order;
       intervalId = setInterval(async () => {
         try {
-          let success;
+          if (success) return;
+
           if (paymentId) {
             success = await API.graphql({
               query: validateTransaction,
@@ -197,12 +215,39 @@ function Checkout(props) {
               variables: { id: orderId },
             }).then(
               (getOrderStatusResponse) =>
-                !!getOrderStatusResponse.data.getOrder.code
+                !!getOrderStatusResponse.data.getOrder.code &&
+                getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
             );
           }
 
           if (success) {
+            const successOrder = await API.graphql({
+              query: getOrderSuccess,
+              variables: { id: orderId },
+            }).then(
+              (getOrderStatusResponse) => getOrderStatusResponse.data.getOrder
+            );
+
             logger.info("Payment completion");
+
+            logger.debug("Purchase event");
+            onPlaceOrder(
+              successOrder,
+              [...cartList, ...freeProducts],
+              appliedCoupon,
+              shippingAddress,
+              payMethod
+            );
+
+            logger.debug("Purchase event done");
+            logger.debug("Redirecting to success page");
+
+            if (razorpayMethod) {
+              logger.debug("Closing razorpay modal");
+
+              razorpayMethod.close();
+            }
+
             const orderUrl = paymentId
               ? `/order/${orderId}?paymentId=${paymentId}`
               : `/order/${orderId}`;
@@ -214,12 +259,15 @@ function Checkout(props) {
           logger.error("Error while validating transaction", error);
         }
       }, 2000);
+    } else if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
     }
 
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [!!orderData]);
+  }, [orderData?.order, orderData?.paymentId]);
 
   const addUserAddress = useCallback(async () => {
     const tempAddress = getProperAddress(shippingAddress);
@@ -228,8 +276,8 @@ function Checkout(props) {
       try {
         await API.graphql({
           query: createUserAddress,
-          variables: { input: { ...restAddress, userID: user.id } },
-          authMode: "AMAZON_COGNITO_USER_POOLS",
+          variables: { input: { ...restAddress, userID: user?.id } },
+          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
         });
       } catch (error) {
         errorHandler(error);
@@ -239,6 +287,13 @@ function Checkout(props) {
 
     return Promise.resolve(null);
   }, [shippingAddress, user]);
+
+  const priceVerified = useMemo(() => {
+    if (productWithPrice) {
+      return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
+    }
+    return false;
+  }, [productWithPrice, cartList]);
 
   const placeOrder = useCallback(
     async (e) => {
@@ -260,6 +315,14 @@ function Checkout(props) {
         return;
       }
 
+      if (!priceVerified) {
+        alertToaster("Price updated. Add products again", "error");
+        logger.error("Price updated. Add products again");
+        priceMismatch();
+        setLoading(false);
+        return;
+      }
+
       const formErrors = await validateAddress(shippingAddress, payMethod);
       setFormErorr(formErrors);
 
@@ -267,147 +330,58 @@ function Checkout(props) {
         try {
           const tempAddress = getProperAddress(shippingAddress);
           const { id: ignoreId, ...restAddress } = tempAddress;
-          const orderDate = new Date();
-          const sla = new Date();
-          sla.setDate(sla.getDate() + 2);
 
-          const freeProductTotal = freeProducts.reduce(
-            (a, b) => a + b.price,
-            0
-          );
+          const productIds = cartList
+            .filter((p) => p.cartItemSource !== "COUPON")
+            .map(({ id, variantId, qty, cartItemSource: source = null }) => ({
+              productId: id,
+              variantId,
+              quantity: qty,
+              source,
+            }));
 
           const payload = {
-            storeId: STORE_ID,
-            userId: user?.id,
-            status: isFirst ? "PENDING" : "CONFIRMED",
-            totalAmount: grandTotal,
-            totalDiscount: totalDiscount + freeProductTotal,
-            totalShippingCharges: shippingTotal,
-            totalCashOnDeliveryCharges: appliedCODCharges,
-            orderDate: orderDate.toISOString(),
-            sla: sla.toISOString(),
-            paymentType: payMethod,
+            products: productIds,
             shippingAddress: restAddress,
             billingAddress: restAddress,
-            couponCodeId: appliedCoupon?.id,
+            couponCode: appliedCoupon?.code,
+            storeId: STORE_ID,
+            paymentType: payMethod,
             ...metadata,
           };
 
           const {
-            data: { createOrder: order },
+            data: { createNewOrder: order },
           } = await API.graphql({
-            query: createOrder,
+            query: createNewOrder,
             variables: { input: payload },
-            authMode: "AMAZON_COGNITO_USER_POOLS",
+            authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
           });
-          logger.debug("Created order:", order);
 
-          const { id: orderId } = order;
+          logger.debug("Created order:", order);
 
           const promise = [
             API.graphql({
-              query: createPayment,
+              query: byorderIdcreatedAtPayment,
               variables: {
-                input: {
-                  userId: user?.id,
-                  storeId: STORE_ID,
-                  orderId,
-                  method: isFirst ? "ONLINE" : "COD",
-                  amount: grandTotal,
-                },
+                orderId: order.id,
               },
-              authMode: "AMAZON_COGNITO_USER_POOLS",
+              authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
             }),
-            ...cartList.map((p) => {
-              const itemtotal = parseInt(p.qty) * parseInt(p.price);
-
-              const itemDiscount =
-                ((totalDiscount + freeProductTotal) * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const itemShippingCharges =
-                (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
-
-              const itemCodCharges =
-                (appliedCODCharges * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const finalItemPrice =
-                itemtotal + itemShippingCharges + itemCodCharges - itemDiscount;
-
-              return API.graphql({
-                query: createOrderProduct,
-                variables: {
-                  input: {
-                    orderId,
-                    productId: p.id,
-                    variantId: p.variantId,
-                    quantity: p.qty,
-                    price: p.price,
-                    title: p.title,
-                    discount: itemDiscount,
-                    shippingCharges: itemShippingCharges,
-                    cashOnDeliveryCharges: itemCodCharges,
-                    totalPrice: finalItemPrice,
-                    sku: p.sku,
-                  },
-                },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
-              });
-            }),
-
-            ...freeProducts.map((p) => {
-              const itemtotal = 1 * parseInt(p.price);
-
-              const itemDiscount =
-                ((totalDiscount + freeProductTotal) * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const itemShippingCharges =
-                (shippingTotal * itemtotal) / (totalPrice + freeProductTotal);
-
-              const itemCodCharges =
-                (appliedCODCharges * itemtotal) /
-                (totalPrice + freeProductTotal);
-
-              const finalItemPrice =
-                itemtotal + itemShippingCharges + itemCodCharges - itemDiscount;
-
-              return API.graphql({
-                query: createOrderProduct,
-                variables: {
-                  input: {
-                    orderId,
-                    productId: p.id,
-                    variantId: p.variantId,
-                    quantity: 1,
-                    price: p.price,
-                    title: p.title,
-                    discount: itemDiscount,
-                    shippingCharges: itemShippingCharges,
-                    cashOnDeliveryCharges: itemCodCharges,
-                    totalPrice: finalItemPrice,
-                    sku: p.sku,
-                  },
-                },
-                authMode: "AMAZON_COGNITO_USER_POOLS",
-              });
-            }),
-
             addUserAddress(),
           ];
 
           const [paymentResponse] = await Promise.all(promise);
-          const payment = paymentResponse.data.createPayment;
+          const [payment] =
+            paymentResponse.data.byorderIdcreatedAtPayment.items;
 
-          if (isFirst) {
+          setOrderData({ order, paymentId: null });
+          if (payment.method === "ONLINE") {
             handlePayment({
               order,
               paymentId: payment.id,
               address: restAddress,
             });
-          } else {
-            setOrderData({ order, paymentId: null });
           }
         } catch (error) {
           setLoading(false);
@@ -425,6 +399,7 @@ function Checkout(props) {
       cartList,
       createUserAddress,
       handlePayment,
+      priceVerified,
       grandTotal,
       shippingTotal,
       couponTotal,
@@ -441,20 +416,14 @@ function Checkout(props) {
     ]
   );
 
-  const { codDisabled, onlineDisabled } = useMemo(() => {
+  const { codCouponDisabled, onlineDisabled } = useMemo(() => {
     return {
-      codDisabled: appliedCoupon?.paymentMethod === "ONLINE",
+      codCouponDisabled: appliedCoupon?.paymentMethod === "ONLINE",
       onlineDisabled: appliedCoupon?.paymentMethod === "COD",
     };
   }, [appliedCoupon]);
 
-  const productDiscountPercentage = ({ price, listingPrice }) => {
-    return Math.round(((listingPrice - price) / listingPrice) * 100);
-  };
-
-  if (!!orderData) {
-    return <PaymentLoader loading />;
-  }
+  const isMaxCODDisabled = maxCOD > -1 ? codGrandTotal > maxCOD : false;
 
   return (
     <main className="main checkout">
@@ -464,12 +433,21 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!user && <Passwordless forceOpen redirect={false} />}
+      {!!orderData && <PaymentLoader loading />}
+
+      {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
       <div className={`checkout-page-content page-content pb-10`}>
         <div className="step-by pr-4 pl-4 d-sm-none pb-5 pt-7">
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/cart">1. Shopping Cart</ALink>
+            <ALink
+              href="#"
+              onClick={() => {
+                setCartVisibility(true);
+              }}
+            >
+              1. Shopping Cart
+            </ALink>
             <i>
               <RightAngle size={18} color="currentColor" />
             </i>
@@ -482,9 +460,28 @@ function Checkout(props) {
           </h3>
           <h3 className="title title-simple title-step">3. Order Complete</h3>
         </div>
+
         <div className={"container mt-0 md-7"}>
-          {cartList.length > 0 ? (
+          {cartList.length > 0 && totalListingPrice > 0 ? (
             <>
+              {!user && (
+                <div className="row">
+                  <div className="card accordion col-lg-12">
+                    <Card
+                      type="parse"
+                      title="<div class='alert alert-light alert-primary alert-icon mb-4 card-header'>
+                                <i class='fas fa-exclamation-circle'></i> <span class='text-body'>Returning customer?</span> <a href='#' class='text-primary collapse'>Click here to login</a>
+                            </div>"
+                      onLinkClick={() => openLogin(false)}
+                    >
+                      <div className="alert-body collapsed">
+                        <Passwordless redirect={false} />
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              )}
+
               {/* <form className="form" onSubmit={placeOrder}> */}
               <div className="row">
                 {!isMobile && (
@@ -554,11 +551,11 @@ function Checkout(props) {
                                       <figure>
                                         <img
                                           src={getPublicImageURL(
-                                            item.images.items[0]?.imageKey
+                                            item?.thumbImage
                                           )}
                                           width="100"
                                           height="100"
-                                          alt={item.images.items[0]?.alt}
+                                          alt={item?.images?.items[0]?.alt}
                                         />
                                       </figure>
                                       <div className="text-left text-primary w-100 mr-5 ml-2">
@@ -820,15 +817,24 @@ function Checkout(props) {
 
                           <PaymentMethods
                             title="Cash On Delivery"
+                            tagVariant="danger"
+                            showUpdateCoupon={codCouponDisabled}
+                            tag={
+                              !!codCharges && `₹${toDecimal(codCharges)} EXTRA`
+                            }
                             isSelected={payMethod === "COD"}
                             description={
-                              codDisabled
-                                ? `COD payment disabled for you coupon "${appliedCoupon?.code}"`
+                              codCouponDisabled
+                                ? `COD payment disabled for your coupon "${appliedCoupon?.code}"`
+                                : isMaxCODDisabled
+                                ? `COD payment is not allowed for orders above ₹${maxCOD}.`
                                 : `Pay using Cash on Delivery.`
                             }
-                            disabled={codDisabled}
+                            disabled={codCouponDisabled || isMaxCODDisabled}
                             onClick={() => {
-                              !codDisabled && setFirst("COD");
+                              !codCouponDisabled &&
+                                !isMaxCODDisabled &&
+                                setFirst("COD");
                             }}
                             amount={codGrandTotal}
                           />
@@ -848,7 +854,9 @@ function Checkout(props) {
                       )}
                       <div
                         className={`d-flex justify-content-center ${
-                          isMobile ? "stick-bottom-button" : ""
+                          isMobile
+                            ? "stick-bottom-button stick-bottom-button-order"
+                            : ""
                         }`}
                       >
                         {!isValidAddress(shippingAddress) && !!isMobile && (
@@ -871,7 +879,7 @@ function Checkout(props) {
                               !isInventoryCheckReady ||
                               loading
                             }
-                            className={`btn d-flex justify-content-center align-items-center btn-order ${
+                            className={`btn pb-4 pt-4 m-0 d-flex justify-content-center align-items-center btn-order ${
                               !!isValidAddress(shippingAddress)
                                 ? "btn-primary"
                                 : "btn-disabled"
@@ -920,17 +928,21 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps, {
   emptyCart: cartActions.emptyCart,
   openLogin: modalActions.openPasswordlessModal,
-  removeCoupon: cartActions.removeCoupon,
+  setCartVisibility: modalActions.setCartVisibility,
   placeOrder: eventActions.placeOrder,
   startCheckout: eventActions.startCheckout,
   openAllAddressModal: modalActions.openAllAddressModal,
   recordOutOfStock: eventActions.outOfStock,
+  orderCreated: eventActions.orderCreated,
+  addPaymentInfo: eventActions.addPaymentInfo,
+  priceMismatch: eventActions.priceMismatch,
 })(Checkout);
 
 Component.hideFooter = true;
+Component.hideChatbot = true;
+Component.hideCart = true;
 Component.navbarConfig = {
   shippingTier: true,
-  coupons: true,
 };
 
 export default Component;

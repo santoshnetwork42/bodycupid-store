@@ -1,6 +1,7 @@
 import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
+import { SEMANTIC_SEARCH_API_URL, SEMANTIC_SEARCH_THRESHOLD } from "~/constant";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -151,3 +152,56 @@ export const getBxGyFreeQuantity = (getYQuantity, buyXQuantity, cartList) => {
     ) * getYQuantity
   );
 };
+
+export const getBxAyOnQuantity = (buyXQuantity, cartList) => {
+  const { totalItems } = getCartTotals(cartList);
+  return Math.floor(totalItems / buyXQuantity) * buyXQuantity;
+};
+
+export const getSource = () => {
+  return typeof window !== "undefined" && window?.innerWidth > 575
+    ? "Web"
+    : "Mobile";
+};
+
+export function initializeMoengageAndAddInfo({
+  firstName,
+  lastName,
+  email,
+  phone,
+}) {
+  const Moengage = window?.Moengage;
+  if (Moengage) {
+    const mobile = phone.split("+91")[1];
+    Moengage.add_first_name(firstName);
+    Moengage.add_last_name(lastName);
+    Moengage.add_email(email);
+    Moengage.add_mobile(mobile);
+    Moengage.add_unique_user_id(mobile);
+  }
+}
+
+export async function fetchSearchItems(search) {
+  try {
+    const response = await fetch(
+      `${SEMANTIC_SEARCH_API_URL}?query=${search}&threshold=${SEMANTIC_SEARCH_THRESHOLD}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+    return data.results.map((item) => {
+      const [, slug] = item.link.match(/products\/([^?]+)/);
+      item.imageUrl = item.imageUrl.split("/public/")[1] || "";
+      item.slug = slug;
+      item.price = Number(item.price.split(" ")[0]);
+      item.listingPrice = Number(item.listingPrice.split(" ")[0]);
+      return item;
+    });
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return [];
+  }
+}

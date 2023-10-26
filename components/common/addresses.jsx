@@ -11,6 +11,8 @@ import { Cricle, CricleDot, Plus } from "../icons";
 import { errorHandler } from "~/utils/errorHandler";
 import { modalActions } from "~/store/modal";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
+import { useCartTotal } from "~/utils/hooks/useCart";
+import { eventActions } from "~/store/events";
 
 function Addresses({
   user,
@@ -19,6 +21,7 @@ function Addresses({
   isAddressesModal,
   openAllAddressModal,
   closeAllAddressModal,
+  addressSelected,
 }) {
   const { isSmallSize: isMobile } = useWindowDimensions();
   const [loading, setLoading] = useState(!!user);
@@ -27,6 +30,8 @@ function Addresses({
   const [isOpen, setOpen] = useState(false);
   const [defaultAddress, setDefaultAddress] = useState({});
   const [isAddressFormVisible, setIsAddressFormVisible] = useState(false);
+
+  const { totalPrice } = useCartTotal();
 
   const getUserAddress = useCallback(async () => {
     try {
@@ -39,23 +44,26 @@ function Addresses({
         },
         authMode: "AMAZON_COGNITO_USER_POOLS",
       });
-
-      if (!userAddresses.items.length && isMobile) {
-        openAllAddressModal();
-      }
-
       setAddresses(userAddresses.items);
       setLoading(false);
       setSelected(userAddresses.items[0]);
+      addressSelected(userAddresses.items[0], totalPrice);
+      return userAddresses.items;
     } catch (error) {
       errorHandler(error);
     }
+    return [];
   }, [user]);
 
   useEffect(() => {
-    if (user) {
-      getUserAddress();
-    }
+    (async function () {
+      if (user) {
+        const userAddresses = await getUserAddress();
+        if (!userAddresses.length && isMobile) {
+          openAllAddressModal();
+        }
+      }
+    })();
   }, [user]);
 
   const removeAddress = useCallback(
@@ -129,7 +137,10 @@ function Addresses({
                   className={`col-sm-6 mb-4 accordion-border ${
                     variant === "CHECKOUT" && "d-sm-none"
                   }`}
-                  onClick={() => setSelected(adr)}
+                  onClick={() => {
+                    setSelected(adr);
+                    addressSelected(adr, totalPrice);
+                  }}
                 >
                   <div className={`card card-address w-100`}>
                     <div className="card-body pr-4 pl-3 pt-2 pb-2 cursor-pointer bg-white">
@@ -225,7 +236,7 @@ function Addresses({
       )}
 
       {!!selected && variant === "CHECKOUT" && (
-        <div className="d-sm-show p-0">
+        <div className="row d-sm-show p-0">
           <div className="bg-white mobile-checkout-address d-flex">
             <div className="mobile-address-heading">
               <p className="m-0 lh-default">
@@ -234,9 +245,11 @@ function Addresses({
                   {selected.name}, {selected?.pinCode}
                 </span>
               </p>
-              <span className="mobile-address-label">
-                {selected?.address && <span>{selected?.address} &nbsp;</span>}
-              </span>
+              {selected?.address && (
+                <span className="mobile-address-label">
+                  {selected?.address} &nbsp;
+                </span>
+              )}
             </div>
             <button
               onClick={() => {
@@ -244,14 +257,14 @@ function Addresses({
               }}
               className="btn btn-primary btn-change"
             >
-              change
+              Change
             </button>
           </div>
         </div>
       )}
 
       {!selected && variant === "CHECKOUT" && (
-        <div className="d-sm-show">
+        <div className="row d-sm-show">
           <div
             className={`bg-white border-regular d-flex checkout-add-address-btn`}
             onClick={() => {
@@ -265,7 +278,7 @@ function Addresses({
       )}
 
       {!addresses.length && (
-        <div className={`${variant === "CHECKOUT" && "d-sm-none"}`}>
+        <div className={`${variant === "CHECKOUT" && "row d-sm-none"}`}>
           <AddressForm onSubmit={onAddress} onAddress={onAddressChange} />
         </div>
       )}
@@ -385,4 +398,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   openAllAddressModal: modalActions.openAllAddressModal,
   closeAllAddressModal: modalActions.closeAllAddressModal,
+  addressSelected: eventActions.addressSelected,
 })(Addresses);

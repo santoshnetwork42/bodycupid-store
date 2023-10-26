@@ -5,15 +5,17 @@ import ALink from "~/components/features/custom-link";
 import { DownAngle } from "~/components/icons";
 
 import { useMenu } from "~/utils/contexts/navbar";
+import { connect } from "react-redux";
+import { eventActions } from "~/store/events";
 
-function MainMenu() {
+function MainMenu({ topNavbarClicked }) {
   const { pathname } = useRouter();
 
   const menu = useMenu();
   return (
     <nav className="main-nav">
       <ul className="menu">
-        {menu.map((item) => (
+        {menu.map((item, index) => (
           <li
             key={item.link}
             className={`${pathname.includes(item.link) ? "active" : ""} ${
@@ -21,7 +23,18 @@ function MainMenu() {
             }
             `}
           >
-            <ALink className="text-uppercase" href={item.link}>
+            <ALink
+              className="text-uppercase"
+              onClick={() => {
+                topNavbarClicked({
+                  banner_name: item.label,
+                  item_id: index + 1,
+                  Source: "Web",
+                  "Section Name": "Top Navbar",
+                });
+              }}
+              href={item.link}
+            >
               {item.label}
               {!!item?.subMenu?.length && (
                 <i>
@@ -36,7 +49,18 @@ function MainMenu() {
                   <ul>
                     {item?.subMenu.map((subItem) => (
                       <li key={`sub-categories-${subItem.link}`}>
-                        <ALink className="cat-name" href={subItem.link}>
+                        <ALink
+                          className="cat-name"
+                          onClick={() => {
+                            topNavbarClicked({
+                              banner_name: subItem.label,
+                              item_id: null,
+                              Source: "Web",
+                              "Section Name": "Top Navbar",
+                            });
+                          }}
+                          href={subItem.link}
+                        >
                           {subItem.label}
                         </ALink>
                       </li>
@@ -52,4 +76,6 @@ function MainMenu() {
   );
 }
 
-export default React.memo(MainMenu);
+export default connect(null, {
+  topNavbarClicked: eventActions.topNavbarClicked,
+})(React.memo(MainMenu));

@@ -446,6 +446,97 @@ export const Close = ({ size = defaultIconSize, color = defaultIconColor }) => {
     </svg>
   );
 };
+
+export const GiftBox = () => {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ transform: "translate(-5px, 2px)", marginRight: "3px" }}
+    >
+      <path
+        d="M6 9C6 7.34315 7.34315 6 9 6H24H39C40.6569 6 42 7.34315 42 9V24V39C42 40.6569 40.6569 42 39 42H24H9C7.34315 42 6 40.6569 6 39V24V9Z"
+        fill="none"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4 24H44"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M24 44V4"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 30V18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M42 30V18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M30 42H18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M30 6H18"
+        stroke="white"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M24.0001 23.9999C24.0001 23.9999 31.8972 20.4542 33.0988 19.2526C34.3004 18.051 34.3004 16.1028 33.0988 14.9012C31.8972 13.6996 29.9489 13.6996 28.7473 14.9012C27.5457 16.1028 24.0001 23.9999 24.0001 23.9999ZM24.0001 23.9999C24.0001 23.9999 16.1027 20.4542 14.901 19.2526M24.0001 23.9999C24.0001 23.9999 20.4541 16.1028 19.2525 14.9012M24.0001 23.9999C24.0001 23.9999 31.897 27.5458 33.0986 28.7474M24.0001 23.9999C24.0001 23.9999 27.5455 31.8972 28.7472 33.0988M24.0001 23.9999C24.0001 23.9999 16.1028 27.5458 14.9012 28.7474C13.6996 29.949 13.6996 31.8972 14.9012 33.0988C16.1028 34.3004 18.0511 34.3004 19.2527 33.0988C20.4543 31.8972 24.0001 23.9999 24.0001 23.9999Z"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const CloseIcon = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path
+        fill={color}
+        d="M353.7 158.3l-22.4-22.4-75.8 75.8-75.8-75.8-22.4 22.4 75.8 75.8-75.8 75.8 22.4 22.4 75.8-75.8 75.8 75.8 22.4-22.4-75.8-75.8 75.8-75.8z"
+      />
+    </svg>
+  );
+};
+
 export const Clock = ({ size = defaultIconSize, color = defaultIconColor }) => {
   return (
     <svg
@@ -465,7 +556,6 @@ export const Clock = ({ size = defaultIconSize, color = defaultIconColor }) => {
 export default function Checkmark() {
   return (
     <div>
-      
       <svg
         className="checkmark"
         xmlns="http://www.w3.org/2000/svg"
@@ -495,7 +585,7 @@ export const Discount = ({
 }) => {
   return (
     <svg
-    {...rest}
+      {...rest}
       width={size}
       height={size}
       xmlns="http://www.w3.org/2000/svg"
@@ -508,6 +598,114 @@ export const Discount = ({
     </svg>
   );
 };
+
+export const FreeTag = ({
+  size = defaultIconSize,
+  color = defaultIconColor,
+}) => {
+  return (
+    <svg
+      id="Layer_10"
+      data-name="Layer 10"
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 192 192"
+    >
+      <path
+        className="cls-1"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        d="M166.23,87.61c2.85,2.59,5.16,5.3,5.16,8.39,0,7.45-13.44,12.69-15.63,19.42-2.26,7,5.45,19.09,1.23,24.9s-18.21,2.25-24.07,6.51-6.65,18.62-13.62,20.88c-6.73,2.19-15.85-8.89-23.3-8.89s-16.57,11.08-23.3,8.89c-7-2.26-7.82-16.66-13.62-20.88s-19.81-.65-24.07-6.51,3.49-17.93,1.23-24.9c-2.19-6.73-15.63-12-15.63-19.42S34.05,83.31,36.24,76.58c2.26-7-5.45-19.09-1.23-24.9s18.21-2.25,24.07-6.51S65.73,26.55,72.7,24.29c6.73-2.19,15.85,8.89,23.3,8.89s16.57-11.08,23.3-8.89c7,2.26,7.82,16.66,13.62,20.88s19.81.65,24.07,6.51c2.53,3.48.77,9.24-.55,14.79"
+      ></path>
+      <polyline
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        points="49.1 107.66 49.1 84.34 64.48 84.34"
+      ></polyline>
+      <line
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        x1="62.35"
+        y1="96.4"
+        x2="49.26"
+        y2="96.4"
+      ></line>
+      <polyline
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        points="117.19 84.34 101.81 84.34 101.81 107.66 117.19 107.66"
+      ></polyline>
+      <line
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        className="cls-2"
+        x1="115.05"
+        y1="96.4"
+        x2="101.96"
+        y2="96.4"
+      ></line>
+      <polyline
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        points="142.9 84.34 127.52 84.34 127.52 107.66 142.9 107.66"
+      ></polyline>
+      <line
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        x1="140.76"
+        y1="96.4"
+        x2="127.68"
+        y2="96.4"
+      ></line>
+      <path
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        d="M75.05,96.4h8.86a5.74,5.74,0,0,1,5.74,5.73v5.53"
+      ></path>
+      <path
+        className="cls-2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={7}
+        stroke={color}
+        d="M74.14,96.4h10a6,6,0,0,0,6-6h0a6,6,0,0,0-6-6H74v23.32"
+      ></path>
+    </svg>
+  );
+};
+
 export const CheckBadge = ({
   size = defaultIconSize,
   color = defaultIconColor,
@@ -562,10 +760,7 @@ export const RightAngle = ({
   );
 };
 
-export const LeftAngle = ({
-  size = defaultIconSize,
-  color = defaultIconColor,
-}) => {
+export const LeftAngle = ({ size = 22, color = 22 }) => {
   return (
     <svg
       width={size}
@@ -577,6 +772,33 @@ export const LeftAngle = ({
         fill={color}
         d="M206.7 464.6L23.6 273.5c-5.38-6.4-7.6-12.4-7.6-17.5s2.219-11.97 6.688-16.59l183.1-191.1c9.152-9.594 24.34-9.906 33.9-.719 9.625 9.125 9.938 24.37.719 33.91L73.24 256l168 175.4c9.219 9.5 8.906 24.78-.719 33.91-9.521 9.19-24.721 8.89-33.821-.71z"
       ></path>
+    </svg>
+  );
+};
+
+export const CouponTag = ({ size }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M20.59 13.41L13.42 20.58C13.2343 20.766 13.0137 20.9135 12.7709 21.0141C12.5281 21.1148 12.2678 21.1666 12.005 21.1666C11.7422 21.1666 11.4819 21.1148 11.2391 21.0141C10.9963 20.9135 10.7757 20.766 10.59 20.58L2 12V2H12L20.59 10.59C20.9625 10.9647 21.1716 11.4716 21.1716 12C21.1716 12.5284 20.9625 13.0353 20.59 13.41Z"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M7 7H7.01"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </svg>
   );
 };
@@ -718,6 +940,28 @@ export const Cash = ({ size = defaultIconSize, color = defaultIconColor }) => {
         d="M325.1 115.9l55.37-81.13c3.75-7.5 3.375-16.25-1-23.38C375.1 4.375 368.2 0 359.1 0h-208c-8.375 0-16 4.25-20.38 11.38s-4.02 15.87-.22 23.37l55.5 81.13C-9.918 235.6.083 392 .083 412c0 55.25 49.14 100 109.6 100h292.5c60.62 0 109.7-44.75 109.7-100 .017-19.6 8.817-177-186.783-296.1zM314.2 48l-38.25 56h-40L197.7 48h116.5zm88 416H109.7c-34 0-61.63-23.38-61.63-52-.86-81 32.64-175.5 170.03-260h74.13c137.5 84.13 171.5 178.9 170.9 260-.03 28.6-26.93 52-60.93 52zm-75.1-104.2c-4.139 23.88-21.77 40.01-47 45.74V416c0 13.25-10.75 24-24 24s-24-10.75-24-24v-11.4c-9.527-2.219-18.95-5.254-27.44-8.316l-4.656-1.656c-12.47-4.438-19.03-18.16-14.59-30.64s18.12-19 30.66-14.61l4.844 1.75c8.812 3.172 18.78 6.766 26.5 7.922 16.97 2.719 31.19-.61 32.38-7.391.813-4.703 1.312-7.547-30.38-16.61l-6.5-1.875c-18.19-5.359-66.44-19.55-57.91-69.02C189.1 240.3 206.8 224.2 232.1 218.5V208c0-13.25 10.75-24 24-24s24 10.75 24 24v11.25c5.916 1.365 12.23 3.096 19.81 5.732 12.53 4.344 19.16 18.02 14.81 30.55-4.375 12.52-18.12 19.19-30.56 14.8-8.219-2.859-14.62-4.625-19.59-5.406-16.97-2.626-31.07.574-32.27 7.374-.7 4.1-1.3 7.3 24.1 14.8l6.188 1.797C288.1 296.2 335.7 309.8 327.1 359.8z"
       ></path>
     </svg>
+  );
+};
+
+export const Confetti = ({}) => {
+  return (
+    <div>
+      <div className="confetti">
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+        <div className="confetti-piece"></div>
+      </div>
+    </div>
   );
 };
 
@@ -888,6 +1132,166 @@ export const ShoppingCart = ({
       <path
         fill={color}
         d="M175.1 416c-26.51 0-47.1 21.49-47.1 48S149.5 512 175.1 512s47.1-21.49 47.1-48S202.5 416 175.1 416zM463.1 416c-26.51 0-47.1 21.49-47.1 48s21.49 48 47.1 48s47.1-21.49 47.1-48S490.5 416 463.1 416zM569.5 44.73c-6.109-8.094-15.42-12.73-25.56-12.73H121.1L119.6 19.51C117.4 8.189 107.5 0 96 0H23.1C10.75 0 0 10.74 0 23.1C0 37.25 10.75 48 23.1 48h52.14l60.28 316.5C138.6 375.8 148.5 384 160 384H488c13.25 0 24-10.75 24-23.1C512 346.7 501.3 336 488 336H179.9L170.7 288h318.4c14.28 0 26.84-9.479 30.77-23.21l54.86-191.1C577.5 63.05 575.6 52.83 569.5 44.73zM477 240H161.6l-30.47-160h391.7L477 240z"
+      />
+    </svg>
+  );
+};
+
+export const Cart = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M3 6H21"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const Delete = () => {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2.5 5.00037H4.16667H17.5"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M15.8334 5.00033V16.667C15.8334 17.109 15.6578 17.5329 15.3453 17.8455C15.0327 18.1581 14.6088 18.3337 14.1667 18.3337H5.83341C5.39139 18.3337 4.96746 18.1581 4.6549 17.8455C4.34234 17.5329 4.16675 17.109 4.16675 16.667V5.00033M6.66675 5.00033V3.33366C6.66675 2.89163 6.84234 2.46771 7.1549 2.15515C7.46746 1.84259 7.89139 1.66699 8.33341 1.66699H11.6667C12.1088 1.66699 12.5327 1.84259 12.8453 2.15515C13.1578 2.46771 13.3334 2.89163 13.3334 3.33366V5.00033"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8.33325 9.16699V14.167"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11.6667 9.16699V14.167"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const LimitedTimeDiscount = ({ discountAmount, size }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M45.1867 29.6667C45.68 27.8333 48 25.9 48 24C48 22.1 45.68 20.1667 45.1867 18.3333C44.6933 16.5 45.74 13.6467 44.7933 12C43.84 10.3533 40.8467 9.84667 39.5 8.5C38.1533 7.15333 37.6467 4.16 36 3.20667C34.3533 2.25333 31.5 3.3 29.6667 2.81333C27.8333 2.32667 25.9 0 24 0C22.1 0 20.1667 2.32 18.3333 2.81333C16.5 3.30667 13.6467 2.26 12 3.20667C10.3533 4.15333 9.84667 7.15333 8.5 8.5C7.15333 9.84667 4.16 10.3533 3.20667 12C2.25333 13.6467 3.3 16.5 2.81333 18.3333C2.32667 20.1667 0 22.1 0 24C0 25.9 2.32 27.8333 2.81333 29.6667C3.30667 31.5 2.26 34.3533 3.20667 36C4.16 37.6467 7.15333 38.1533 8.5 39.5C9.84667 40.8467 10.3533 43.84 12 44.7933C13.6467 45.7467 16.5 44.7 18.3333 45.1867C20.1667 45.68 22.1 48 24 48C25.9 48 27.8333 45.68 29.6667 45.1867C31.5 44.6933 34.3533 45.74 36 44.7933C37.6467 43.84 38.1533 40.8467 39.5 39.5C40.8467 38.1533 43.84 37.6467 44.7933 36C45.7467 34.3533 44.7 31.5 45.1867 29.6667Z"
+        fill="#CB0518"
+      />
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        fill="white"
+        fontSize="12"
+        fontWeight="bold"
+      >
+        {discountAmount}%
+      </text>
+      <text
+        x="50%"
+        y="78%"
+        textAnchor="middle"
+        fill="white"
+        fontSize="12"
+        fontWeight="bold"
+      >
+        OFF
+      </text>
+    </svg>
+  );
+};
+
+export const Check = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M22 11.0799V11.9999C21.9988 14.1563 21.3005 16.2545 20.0093 17.9817C18.7182 19.7088 16.9033 20.9723 14.8354 21.5838C12.7674 22.1952 10.5573 22.1218 8.53447 21.3744C6.51168 20.6271 4.78465 19.246 3.61096 17.4369C2.43727 15.6279 1.87979 13.4879 2.02168 11.3362C2.16356 9.18443 2.99721 7.13619 4.39828 5.49694C5.79935 3.85768 7.69279 2.71525 9.79619 2.24001C11.8996 1.76477 14.1003 1.9822 16.07 2.85986"
+        stroke="#17B31B"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M22 4L12 14.01L9 11.01"
+        stroke="#17B31B"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const Free = ({ size }) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M45.1867 29.6667C45.68 27.8333 48 25.9 48 24C48 22.1 45.68 20.1667 45.1867 18.3333C44.6933 16.5 45.74 13.6467 44.7933 12C43.84 10.3533 40.8467 9.84667 39.5 8.5C38.1533 7.15333 37.6467 4.16 36 3.20667C34.3533 2.25333 31.5 3.3 29.6667 2.81333C27.8333 2.32667 25.9 0 24 0C22.1 0 20.1667 2.32 18.3333 2.81333C16.5 3.30667 13.6467 2.26 12 3.20667C10.3533 4.15333 9.84667 7.15333 8.5 8.5C7.15333 9.84667 4.16 10.3533 3.20667 12C2.25333 13.6467 3.3 16.5 2.81333 18.3333C2.32667 20.1667 0 22.1 0 24C0 25.9 2.32 27.8333 2.81333 29.6667C3.30667 31.5 2.26 34.3533 3.20667 36C4.16 37.6467 7.15333 38.1533 8.5 39.5C9.84667 40.8467 10.3533 43.84 12 44.7933C13.6467 45.7467 16.5 44.7 18.3333 45.1867C20.1667 45.68 22.1 48 24 48C25.9 48 27.8333 45.68 29.6667 45.1867C31.5 44.6933 34.3533 45.74 36 44.7933C37.6467 43.84 38.1533 40.8467 39.5 39.5C40.8467 38.1533 43.84 37.6467 44.7933 36C45.7467 34.3533 44.7 31.5 45.1867 29.6667Z"
+        fill="#17B31B"
+      />
+      <path
+        d="M11.0607 29V20.36H16.3407V21.992H12.6927V23.864H15.6207V25.496H12.6927V29H11.0607ZM17.424 29V20.36H21.072C21.156 20.36 21.268 20.364 21.408 20.372C21.552 20.376 21.68 20.388 21.792 20.408C22.308 20.488 22.73 20.658 23.058 20.918C23.39 21.178 23.634 21.506 23.79 21.902C23.946 22.294 24.024 22.732 24.024 23.216C24.024 23.94 23.844 24.56 23.484 25.076C23.124 25.588 22.56 25.904 21.792 26.024L21.072 26.072H19.056V29H17.424ZM22.296 29L20.592 25.484L22.272 25.16L24.144 29H22.296ZM19.056 24.548H21C21.084 24.548 21.176 24.544 21.276 24.536C21.376 24.528 21.468 24.512 21.552 24.488C21.772 24.428 21.942 24.328 22.062 24.188C22.182 24.044 22.264 23.886 22.308 23.714C22.356 23.538 22.38 23.372 22.38 23.216C22.38 23.06 22.356 22.896 22.308 22.724C22.264 22.548 22.182 22.39 22.062 22.25C21.942 22.106 21.772 22.004 21.552 21.944C21.468 21.92 21.376 21.904 21.276 21.896C21.176 21.888 21.084 21.884 21 21.884H19.056V24.548ZM25.463 29V20.36H31.103V21.884H27.095V23.732H30.383V25.256H27.095V27.476H31.103V29H25.463ZM32.5412 29V20.36H38.1812V21.884H34.1732V23.732H37.4612V25.256H34.1732V27.476H38.1812V29H32.5412Z"
+        fill="white"
       />
     </svg>
   );

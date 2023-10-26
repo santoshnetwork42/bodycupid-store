@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { API, graphqlOperation } from "aws-amplify";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
@@ -23,15 +24,14 @@ import { errorHandler } from "~/utils/errorHandler";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta } from "~/utils/products";
 import NextHead from "~/components/common/next-head";
-import { Logger } from "aws-amplify";
 
-const logger = new Logger("products slug page");
+const logger = new Logger("Products");
 
 function ProductDefault(props) {
   const { product, pageMeta, viewItem, slug } = props;
 
   const router = useRouter();
-  const { query, isReady } = router;
+  const { query } = router;
   const { variantId } = query;
 
   const [selectedVariant, setVariant] = useState(variantId);
@@ -42,9 +42,7 @@ function ProductDefault(props) {
       ...product,
       section: { id: "product-detail", name: "Product Detail" },
     });
-    if (!!isReady) {
-      getRelatedProducts();
-    }
+    getRelatedProducts();
   }, [slug]);
 
   const getRelatedProducts = useCallback(async () => {
@@ -116,7 +114,7 @@ function ProductDefault(props) {
                   <MediaOne
                     key={`media-${product.id}`}
                     product={product}
-                    variantId={selectedVariant}
+                    variantId={selectedVariant || defaultVariantId}
                   />
                 </div>
 
@@ -196,7 +194,7 @@ export const getStaticProps = async (context) => {
     });
 
     if (product) {
-      const { id, pageTitle, productDescription, title } = product;
+      const { id, pageTitle, productDescription, title, metadata } = product;
       const { thumbImage } = getProductMeta(product);
 
       return {
@@ -205,12 +203,14 @@ export const getStaticProps = async (context) => {
           product,
           pageMeta: {
             siteName: name,
-            title: pageTitle || title,
-            description: productDescription,
+            title: metadata?.title || title || pageTitle,
+            description: metadata?.description || productDescription,
+            keywords: metadata?.keywords || [],
             canonical: `${webUrl}/products/${slug}`,
             image: getPublicImageURL(thumbImage?.imageKey),
           },
         },
+        revalidate: 600,
       };
     }
 
@@ -223,16 +223,14 @@ export const getStaticProps = async (context) => {
   };
 };
 
-function mapStateToProps(state) {
-  return {
-    store: state.system.store,
-  };
+function mapStateToProps() {
+  return {};
 }
 
 const Component = connect(mapStateToProps, {
   viewItem: eventActions.viewItem,
 })(ProductDefault);
 
-Component.navbarConfig = { coupons: true };
+Component.showTopRunner = true;
 
 export default Component;

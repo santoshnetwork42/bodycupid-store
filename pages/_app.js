@@ -5,6 +5,7 @@ import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import awaitGlobal from "await-global";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -23,8 +24,11 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
+import CustomerGlu from "~/components/scripts/cutomer-glu";
 
 import NavbarProvider from "~/utils/contexts/navbar";
+import ABProvider from "~/utils/contexts/ab";
+import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 
@@ -41,12 +45,15 @@ const App = ({ Component, pageProps }) => {
     ...navbar,
     hideSearch: !!Component.hideSearch,
     showTopRunner: !!Component.showTopRunner,
+    couponBanner: !!Component.couponBanner,
+    hideCart: !!Component.hideCart,
   };
 
   const footerProps = {
     ...footer,
     hideFooter: !!Component.hideFooter,
     showStickyCheckout: !!Component.showStickyCheckout,
+    hideChatbot: !!Component.hideChatbot,
   };
 
   const destroySession = useCallback(() => {
@@ -136,6 +143,19 @@ const App = ({ Component, pageProps }) => {
     store.dispatch(systemActions.setMeta(metadata));
   }, [store, query]);
 
+  const setGuestCheckout = useCallback(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestParam = urlParams.get("guest");
+    if (guestParam === "1") {
+      const expiryDate = new Date();
+      expiryDate.setTime(
+        expiryDate.getTime() + GUEST_CHECKOUT_COOKIE_EXPIRY * 60 * 60 * 1000
+      );
+      const cookieOptions = { expires: expiryDate };
+      Cookie.set(`${STORE_PREFIX}_guest`, "1", cookieOptions);
+    }
+  }, []);
+
   const initSession = useCallback(async () => {
     setStore();
     setUser();
@@ -145,7 +165,7 @@ const App = ({ Component, pageProps }) => {
     const loggedInEvents = ["signIn", "confirmSignUp", "autoSignIn"];
     const hubListenerCancelToken = Hub.listen("auth", async (authEvent) => {
       const {
-        payload: { event },
+        payload: { event, data },
       } = authEvent;
       if (event === "signOut") {
         logger.info("Signing out");
@@ -153,18 +173,34 @@ const App = ({ Component, pageProps }) => {
         store.dispatch(eventActions.auth("logout"));
       } else if (loggedInEvents.includes(event)) {
         initSession();
-        store.dispatch(eventActions.auth("login"));
       }
     });
 
     initSession();
 
     return () => hubListenerCancelToken();
-  }, [destroySession, initSession, store]);
+  }, []);
 
   useEffect(() => {
     setMetaData();
   }, [query, setMetaData]);
+
+  useEffect(() => {
+    setGuestCheckout();
+  }, []);
+
+  useEffect(() => {
+    awaitGlobal("FB")
+      .then((fb) => {
+        if (footerProps.hideChatbot) {
+          fb.CustomerChat.hide();
+        } else {
+          fb.XFBML.parse();
+          fb.CustomerChat.show(false);
+        }
+      })
+      .catch(() => {});
+  }, [footerProps.hideChatbot]);
 
   return (
     <>
@@ -175,12 +211,15 @@ const App = ({ Component, pageProps }) => {
           loading={<Loader loading={true} />}
         >
           <Scripts />
-          <NavbarProvider config={Component.navbarConfig}>
-            <Layout navbar={navbarProps} footer={footerProps}>
-              <Component {...pageProps} />
-              <VercelAnalytics />
-            </Layout>
-          </NavbarProvider>
+          <ABProvider>
+            <NavbarProvider>
+              <Layout navbar={navbarProps} footer={footerProps}>
+                <Component {...pageProps} />
+                <VercelAnalytics />
+                <CustomerGlu />
+              </Layout>
+            </NavbarProvider>
+          </ABProvider>
         </PersistGate>
       </Provider>
     </>
@@ -192,11 +231,14 @@ App.getInitialProps = async ({ Component, ctx }) => {
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
+
   if (!!ctx.req) {
     pageProps = pageProps || {};
+
     const { getStore: store } = await fetchData(getStore, { id: STORE_ID });
     pageProps.store = store;
   }
+
   return { pageProps };
 };
 

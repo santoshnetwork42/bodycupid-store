@@ -23,6 +23,8 @@ import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
 import { useProductCoupons } from "~/utils/hooks/useCoupon";
+import { modalActions } from "~/store/modal";
+import useWindowDimensions from "~/utils/getWindowDimension";
 
 function DetailOne(props) {
   const router = useRouter();
@@ -33,6 +35,7 @@ function DetailOne(props) {
   const {
     cartList,
     updateCart,
+    setCartVisibility,
     data: product,
     isStickyCart = false,
     adClass = "",
@@ -41,10 +44,13 @@ function DetailOne(props) {
     setVariant = () => {},
     addToCart,
     removeFromCart,
+    closeQuickview,
+    isQuickView,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);
   const [cartActive, setCartActive] = useState(false);
+  const [isSticky, setIsSticky] = useState(isStickyCart);
 
   const cartItem = useMemo(() => {
     if (cartList.length) {
@@ -55,10 +61,8 @@ function DetailOne(props) {
     return null;
   }, [cartList, selectedVariant]);
 
-  const { productCoupons, bestCoupon } = useProductCoupons(
-    product,
-    selectedVariant
-  );
+  const bestCoupon = useProductCoupons(product, selectedVariant);
+  const { isSmallSize: isMobile } = useWindowDimensions();
 
   const today = new Date();
 
@@ -80,6 +84,19 @@ function DetailOne(props) {
   //   () => wishlist.some((i) => i.id === product?.id),
   //   [wishlist, product?.id]
   // );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = 900;
+      if (scrollY < threshold) setIsSticky(false);
+      else setIsSticky(true);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -108,10 +125,6 @@ function DetailOne(props) {
       }
     } else {
       setCartActive(true);
-    }
-
-    if (product.isInventoryEnabled && !product.inventory) {
-      setCartActive(false);
     }
   }, [selectedVariant, product]);
 
@@ -142,10 +155,13 @@ function DetailOne(props) {
   };
 
   const addToCartHandler = () => {
-    if ((!product.isInventoryEnabled || product.inventory > 0) && cartActive) {
+    setCartVisibility(true);
+    closeQuickview();
+    if (hasInventory) {
       if (product.variants.items.length > 0) {
         let tmpName = product.title,
           tmpPrice;
+
         if (selectedVariant) {
           const variant = product.variants.items.find(
             (i) => i.id === selectedVariant
@@ -342,47 +358,40 @@ function DetailOne(props) {
       </div>
 
       {price > 0 && (
-  <>
-
-      {!!hasInventory && !!bestCoupon && (
-        <ProductBestPrice
-          {...bestCoupon}
-          price={price}
-          couponList={productCoupons}
-        />
-      )}
-
-      {sizes.length > 1 && (
         <>
-          <div className="product-form product-variations product-size mb-1 mt-3">
-            <div className="product-form-group overflow-auto">
-              <div className="d-flex">
-                {sizes.map((item) => (
-                  <div key={item.id}>
-                    <ProductVariant
-                      onSelect={setVariantHandler}
-                      selected={selectedVariant}
-                      item={item}
-                    />
+          {!!hasInventory && !!bestCoupon && (
+            <ProductBestPrice {...bestCoupon} price={price} />
+          )}
+
+          {sizes.length > 1 && (
+            <>
+              <div className="product-form product-variations product-size mb-1 mt-3">
+                <div className="product-form-group overflow-auto">
+                  <div className="d-flex">
+                    {sizes.map((item) => (
+                      <div key={item.id}>
+                        <ProductVariant
+                          onSelect={setVariantHandler}
+                          selected={selectedVariant}
+                          item={item}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
+            </>
+          )}
+
+          {today.getHours() > 8 && today.getHours() < 15 && (
+            <div className="d-flex mb-3">
+              <Clock size={16} />
+              <p className="text-primary ml-2 mb-0 lh-1">
+                For Fastest delivery, order within {deliveryRemainingTime()}
+              </p>
             </div>
-          </div>
-        </>
-      )}
+          )}
 
-      {today.getHours() > 8 && today.getHours() < 15 && (
-        <div className="d-flex mb-3">
-          <Clock size={16} />
-          <p className="text-primary ml-2 mb-0 lh-1">
-            For Fastest delivery, order within {deliveryRemainingTime()}
-          </p>
-        </div>
-      )}
-
-      {isStickyCart ? (
-        <>
           {!!hasInventory ? (
             <div className="sticky-content fix-top product-sticky-content">
               <div className="container">
@@ -446,11 +455,11 @@ function DetailOne(props) {
 
                     {cartItem && (
                       <button
-                        className={`btn-product btn-cart text-normal ls-normal font-weight-semi-bold ${
+                        className={`btn-product btn-cart dark text-normal ls-normal font-weight-semi-bold ${
                           cartActive ? "" : "disabled"
                         }`}
                         onClick={() => {
-                          router.push("/pages/cart");
+                          setCartVisibility(true);
                         }}
                       >
                         <i>
@@ -479,60 +488,76 @@ function DetailOne(props) {
           ) : (
             <ProductNotify productId={product.id} variantId={selectedVariant} />
           )}
-        </>
-      ) : (
-        <>
-          {!!hasInventory ? (
-            <div className="product-form product-qty pb-0">
-              <label className="d-none">QTY:</label>
-              <div className="product-form-group cart-button-wrapper">
-                {!!cartItem && (
-                  <div className="m-0">
-                    <Quantity
-                      qty={cartItem?.qty}
-                      max={currentInventory}
-                      product={product}
-                      onChangeQty={changeQty}
-                    />
-                  </div>
-                )}
-                {!!cartItem && (
-                  <button
-                    className={`btn-product btn-cart dark text-uppercase ls-normal font-weight-semi-bold m-0 ${
-                      cartActive ? "" : "disabled"
-                    }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push("/pages/cart");
-                    }}
-                  >
-                    <i>
-                      <Bag color="currentColor" size={20} />
-                    </i>
-                    Go To Cart
-                  </button>
-                )}
-                {!cartItem && (
-                  <button
-                    className={`btn-product btn-cart ls-normal font-weight-semi-bold m-0 btn-cart-width${
-                      cartActive ? "" : "disabled"
-                    }`}
-                    onClick={addToCartHandler}
-                  >
-                    <i>
-                      <Bag color="currentColor" size={20} />
-                    </i>
-                    Add to cart
-                  </button>
-                )}
-              </div>
-            </div>
-          ) : (
-            <ProductNotify productId={product.id} variantId={selectedVariant} />
+
+          {isMobile && isSticky && (
+            <>
+              {!!hasInventory ? (
+                <div className="product-form product-qty pb-0">
+                  <label className="d-none">QTY:</label>
+
+                  {!!cartItem && (
+                    <div className="product-form-group cart-button-wrapper flex-column">
+                      {/* <div className="d-flex product-saved-price-container align-items-center lh-1">
+                        <Clock size={12} color={"green"} height={8} />
+                        <div className="summary-saving-lable-container  mb-0 mt-0 p-0 no-margin ml-1">
+                          <p className="saving-lable lh-1">
+                            <span>{`₹${toDecimal(totalSaved)} `}</span>
+                            saved so far on this order
+                          </p>
+                        </div>
+                      </div> */}
+                      <div className="d-flex m-0 w-100 sm-around w-full">
+                        <div className="m-0">
+                          <Quantity
+                            qty={cartItem?.qty}
+                            max={currentInventory}
+                            product={product}
+                            onChangeQty={changeQty}
+                          />
+                        </div>
+                        <button
+                          className={`btn-product btn-cart dark text-uppercase ls-normal font-weight-semi-bold m-0 ${
+                            cartActive ? "" : "disabled"
+                          }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setCartVisibility(true);
+                          }}
+                        >
+                          <i>
+                            <Bag color="currentColor" size={20} />
+                          </i>
+                          Go To Cart
+                        </button>
+                      </div>{" "}
+                    </div>
+                  )}
+
+                  {!cartItem && (
+                    <div className={`cart-button-wrapper ${adClass}`}>
+                      <button
+                        className={`btn-product btn-cart ls-normal font-weight-semi-bold btn-cart-width ${
+                          cartActive ? "" : "disabled"
+                        }`}
+                        onClick={addToCartHandler}
+                      >
+                        <i>
+                          <Bag color="currentColor" size={20} />
+                        </i>
+                        Add to cart
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <ProductNotify
+                  productId={product.id}
+                  variantId={selectedVariant}
+                />
+              )}
+            </>
           )}
         </>
-      )}
-      </>
       )}
     </div>
   );
@@ -554,4 +579,6 @@ export default connect(mapStateToProps, {
   updateCart: cartActions.updateCart,
   removeFromCart: cartActions.removeFromCart,
   getFeaturedCoupons: systemActions.getFeaturedCoupon,
+  setCartVisibility: modalActions.setCartVisibility,
+  closeQuickview: modalActions.closeQuickview,
 })(DetailOne);

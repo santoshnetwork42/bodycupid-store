@@ -8,14 +8,15 @@ import { findProducts } from "~/graphql/api";
 import { STORE_ID } from "~/config";
 import fetchData from "~/utils/fetchData";
 import SearchBox from "~/components/common/partials/search-box";
+import CategoryHeader from "~/components/common/category-header";
 
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 
-const logger = new Logger('search');
+const logger = new Logger("search");
 
 function AllProduct(props) {
   const { store, products, pageFilter } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   const { query } = useRouter();
   const { search } = query;
@@ -30,6 +31,7 @@ function AllProduct(props) {
 
       <div className="page-content pb-3">
         <div className="container">
+          <CategoryHeader name={`Results Of ${search}`} />
           <div className="row main-content-wrap gutter-lg">
             <div className="col-lg-12 mn-4 d-sm-show">
               <SearchBox defaultSearch={search} />
@@ -61,7 +63,7 @@ export const getStaticProps = async () => {
       sort: [{ field: "position", direction: "asc" }],
       variantFilter: { status: { eq: "ENABLED" } },
       imageLimit: 1,
-      limit: 16,
+      limit: 4,
     });
 
     return {
@@ -69,7 +71,6 @@ export const getStaticProps = async () => {
         products: searchProducts,
         pageFilter: filter,
       },
-      revalidate: 60,
     };
   } catch (error) {
     logger.error("Error while searching a product", error);
@@ -88,5 +89,6 @@ function mapStateToProps(state) {
 const Component = connect(mapStateToProps)(React.memo(AllProduct));
 Component.showStickyCheckout = true;
 Component.hideSearch = true;
+Component.showTopRunner = true;
 
 export default Component;

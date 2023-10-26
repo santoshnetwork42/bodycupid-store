@@ -3,36 +3,45 @@
 ---------------------------------------------- */
 
 .faq {
-    .breadcrumb { padding: 1.2rem 0 1.1rem; }
-
-    .page-header { height: 30.3rem; }
-
-    .page-subtitle { 
-        margin-bottom: .3rem; 
-        font-size: 3rem; 
+    .breadcrumb {
+        padding: 1.2rem 0 1.1rem;
     }
 
-    .page-title { 
+    .page-header {
+        height: 30.3rem;
+    }
+
+    .page-subtitle {
+        margin-bottom: .3rem;
+        font-size: 3rem;
+    }
+
+    .page-title {
         margin-bottom: .2rem;
         font-size: 5rem;
     }
 
-    section { padding-top: 4.1rem; }
+    section {
+        padding-top: 4.1rem;
+    }
 
     .card {
         border-width: 1px 0 0 0;
         border-color: #ebebeb;
+
         &:last-child {
             border-color: #ebebeb;
         }
     }
 
-    .card-header { 
-        font-size: 1.6rem; 
+    .card-header {
+        font-size: 1.6rem;
         text-transform: none;
         letter-spacing: .025em;
+
         a {
-            padding: 1.7rem 1rem; 
+            padding: 1.7rem 1rem;
+
             &::after {
                 font-size: 1.5rem;
                 right: 1.3rem;
@@ -41,5 +50,7 @@
         }
     }
 
-    .card-body { padding: 0.2rem 1rem; }
+    .card-body {
+        padding: 0.2rem 1rem;
+    }
 }

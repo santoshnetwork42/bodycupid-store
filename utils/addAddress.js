@@ -1,9 +1,14 @@
+import { Logger } from "aws-amplify";
+
 import { GOOGLE_MAPS_API_KEY } from "~/config";
+import { GEOCODING_API_URL } from "~/constant";
+
+const logger = new Logger("Geocoding API");
 
 export const fetchCityAndState = async (pinCode) => {
     try {
       const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${pinCode}|country:IN&key=${GOOGLE_MAPS_API_KEY}`
+        `${GEOCODING_API_URL}?components=postal_code:${pinCode}|country:IN&key=${GOOGLE_MAPS_API_KEY}`
       );
       const { results } = await response.json();
       if (results.length > 0) {
@@ -19,7 +24,7 @@ export const fetchCityAndState = async (pinCode) => {
         return { city: city || "", state: state || "" };
       }
     } catch (error) {
-      console.error("Error fetching city and state:", error);
+      logger.error("Error fetching city and state:", error);
     }
   };
   

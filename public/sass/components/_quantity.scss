@@ -1,48 +1,56 @@
 .quntity-container {
-    width: 100%;
-    justify-content: center;
-    .quantity-cart {
-        flex: 1 !important;
-        text-align: center !important;
-        border-top: 1px solid $dark-color;
-        border-bottom: 1px solid $dark-color;
-        font-weight: 600;
-        font-size: 16px !important;
-    }
-    button {
-        flex: 1;
-        padding:1.7rem 0;
-        border: 1px solid $dark-color;
-        font-size: 1.4rem;
-        color: #222;
-        background-color: transparent;
-        cursor: pointer;
-        font-weight: 700;
-        line-height: 1.2;
-    }
+  width: 100%;
+  justify-content: center;
+  .quantity-cart {
+    flex: 1 !important;
+    text-align: center !important;
+    border-top: 1px solid $dark-color;
+    border-bottom: 1px solid $dark-color;
+    font-weight: 600;
+    font-size: 16px !important;
+  }
+  button {
+    flex: 1;
+    padding: 1.7rem 0;
+    border: 1px solid $dark-color;
+    font-size: 1.4rem;
+    color: #222;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .quantity-cart-v2 {
+    background: rgba(248, 248, 248, 0.988235);
+  }
+  .button-cart-v2 {
+    padding: 1.1rem 0;
+  }
 }
 
 .input-group {
-    .quantity-cart {
-        text-align: center !important;
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        border-radius: 0 !important;
-        font-weight: 600;
-    }
+  .quantity-cart {
+    text-align: center !important;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0 !important;
+    font-weight: 600;
+  }
 }
 
-@include mq(sm,'max'){
-    .quntity-container {
-        button,input {
-            padding:1.2rem 0;
-            border-radius: 0 !important;
-            font-size: 1rem;
-        }
+@include mq(sm, "max") {
+  .quntity-container {
+    button,
+    input {
+      padding: 1.2rem 0;
+      border-radius: 0 !important;
+      font-size: 1rem;
     }
-    .quntity-container {
-        .quantity-cart {
-            font-size: 1rem !important;
-        }
+  }
+  .quntity-container {
+    .quantity-cart {
+      font-size: 1rem !important;
     }
+  }
 }

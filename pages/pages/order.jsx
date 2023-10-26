@@ -7,7 +7,7 @@ import { toDecimal, getTotalPrice } from "~/utils";
 
 function Order(props) {
   const { cartList, store } = props;
-  const { name } = store;
+  const { name } = store || {};
 
   return (
     <main className="main order">
@@ -20,7 +20,9 @@ function Order(props) {
       <div className="page-content pt-7 pb-10 mb-10">
         <div className="step-by pr-4 pl-4">
           <h3 className="title title-simple title-step">
-            <ALink href="/pages/cart">1. Shopping Cart</ALink>
+            <ALink href="#" onClick={() => {}}>
+              1. Shopping Cart
+            </ALink>
           </h3>
           <h3 className="title title-simple title-step">
             <ALink href="/pages/checkout">2. Checkout</ALink>

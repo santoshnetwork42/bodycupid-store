@@ -3,18 +3,34 @@ import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
+import { eventActions } from "~/store/events";
+import { connect } from "react-redux";
+import { getSource } from "~/utils/helper";
 
-function CategorySection({ categories = [] }) {
+function CategorySection({ categories = [], tileClicked }) {
+  const source = getSource();
+
   return (
     <section className="ellipse-section pt-6">
       <div className="container">
         <h2 className="title capitalize-title">Browse Our Categories</h2>
         <div className="row elements">
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             return (
               <div key={category.id} className="col-3">
                 <div className="category category-spacing category-ellipse text-uppercase">
-                  <ALink href={`/collections/${category.slug}`}>
+                  <ALink
+                    href={`/collections/${category.slug}`}
+                    onClick={() => {
+                      tileClicked({
+                        banner_name: category.name,
+                        item_id: index + 1,
+                        Source: source,
+                        "Item Count": 0,
+                        "Section Name": " browse our categories",
+                      });
+                    }}
+                  >
                     <Image
                       src={getPublicImageURL(category.imageUrl)}
                       alt={category.name}
@@ -41,4 +57,6 @@ function CategorySection({ categories = [] }) {
   );
 }
 
-export default React.memo(CategorySection);
+export default connect(null, {
+  tileClicked: eventActions.tileClicked,
+})(React.memo(CategorySection));

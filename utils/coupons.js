@@ -1,8 +1,10 @@
 import { getCartCount, getTotalPrice } from "~/utils";
-import { getBxGyFreeQuantity } from "./helper";
+import { getBxGyFreeQuantity, getBxAyOnQuantity } from "./helper";
+import { getProductPrice } from "./products";
 
 export const getCouponMessage = ({
   couponType,
+  buyXQuantity,
   getYAmount,
   getYPercentage,
   getYQuantity,
@@ -27,8 +29,11 @@ export const getCouponMessage = ({
       discountMsg = `${discountMsg} upto ₹${maxDiscount}`;
     }
   } else if (couponType === "PRODUCT") {
-    discountMsg = `FREE ${getYStoreProduct?.title} ${!!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
-      }`;
+    discountMsg = `FREE ${getYStoreProduct?.title} ${
+      !!getYStoreProduct?.price ? `WORTH ₹${getYStoreProduct?.price}` : ""
+    }`;
+  } else if (couponType === "BUY_X_AT_Y") {
+    discountMsg = `Buy ${buyXQuantity} @ ₹${getYAmount}`;
   }
 
   if (minOrderValue) {
@@ -69,9 +74,12 @@ export const getCouponDiscount = (coupon, cartItems) => {
     getYStoreProduct,
   } = coupon;
 
+  const finalGetYQty = couponType === "BUY_X_GET_Y" ? getYQuantity : 0;
+
   const cartList = cartItems.filter((c) => {
-    const isCartItem = c.cartItemSource !== "COUPON";
-    if (!isCartItem) return false;
+    const isCouponItem =
+      c.cartItemSource === "COUPON" || c.cartItemSource === "LIMITED_TIME_DEAL";
+    if (isCouponItem) return false;
 
     const isProductApplicable =
       Array.isArray(applicableProducts) && applicableProducts.length
@@ -79,6 +87,15 @@ export const getCouponDiscount = (coupon, cartItems) => {
         : true;
 
     if (!isProductApplicable) return false;
+
+    if (
+      couponType === "BUY_X_AT_Y" &&
+      c.variants &&
+      c.variants.items?.length &&
+      c.variantId !== c.variants.items[0].id
+    ) {
+      return false;
+    }
 
     const isCollectionApplicable =
       Array.isArray(applicableCollections) && applicableCollections.length
@@ -94,18 +111,20 @@ export const getCouponDiscount = (coupon, cartItems) => {
     return {
       ...coupon,
       allowed: false,
-      message: `Add product worth ₹${minOrderValue - totalAmount
-        } more to the cart.`,
+      message: `Add product worth ₹${
+        minOrderValue - totalAmount
+      } more to the cart to avail this free product`,
     };
   }
 
   const totalItems = getCartCount(cartList);
-  if (buyXQuantity + getYQuantity > totalItems) {
+  if (buyXQuantity + finalGetYQty > totalItems) {
     return {
       ...coupon,
       allowed: false,
-      message: `Add ${buyXQuantity + getYQuantity - totalItems
-        } more items to the cart.`,
+      message: `Add ${
+        buyXQuantity + getYQuantity - totalItems
+      } more items to the cart to avail this free product`,
     };
   }
 
@@ -167,10 +186,21 @@ export const getCouponDiscount = (coupon, cartItems) => {
   }
 
   if (couponType === "PRODUCT") {
+    const { price } = getProductPrice(getYStoreProduct);
     return {
       ...coupon,
       allowed: !!getYStoreProduct?.title,
-      discount: getYStoreProduct?.price,
+      discount: price,
+      message: getCouponMessage(coupon).discountMsg,
+    };
+  }
+
+  if (couponType === "FREEBIE") {
+    const { price } = getProductPrice(getYStoreProduct);
+    return {
+      ...coupon,
+      allowed: !!getYStoreProduct?.title,
+      discount: price,
       message: getCouponMessage(coupon).discountMsg,
     };
   }
@@ -178,23 +208,46 @@ export const getCouponDiscount = (coupon, cartItems) => {
   // For couponType === BUY_X_GET_Y
   const cartAmounts = [];
   cartList.forEach((c) => {
-    cartAmounts.push(...Array(parseInt(c.qty, 10)).fill(c.price));
+    cartAmounts.push(...Array(parseInt(c.qty || 0, 10)).fill(c.price));
+    cartAmounts.sort((a, b) => (b > a ? 1 : -1));
   });
 
-  const discountedQty = getBxGyFreeQuantity(
-    getYQuantity,
-    buyXQuantity,
-    cartList
-  );
+  if (couponType === "BUY_X_GET_Y") {
+    const discountedQty = getBxGyFreeQuantity(
+      getYQuantity,
+      buyXQuantity,
+      cartList
+    );
 
-  cartAmounts.sort((a, b) => (b > a ? 1 : -1));
-  const discountedItems = cartAmounts.slice(-discountedQty);
-  const amt = discountedItems.reduce((a, b) => a + b, 0);
-  const discount = maxDiscount ? Math.min(maxDiscount, amt) : amt;
+    const discountedItems = cartAmounts.slice(-discountedQty);
+    const amt = discountedItems.reduce((a, b) => a + b, 0);
+    const discount = maxDiscount ? Math.min(maxDiscount, amt) : amt;
+    return {
+      ...coupon,
+      allowed: true,
+      discount,
+      message: discountMsg,
+    };
+  }
+
+  if (couponType === "BUY_X_AT_Y") {
+    const discountedQty = getBxAyOnQuantity(buyXQuantity, cartList);
+    const discountedItems = cartAmounts.slice(0, discountedQty);
+    const amt = discountedItems.reduce((a, b) => a + b, 0);
+    const discountedAmount = (discountedQty / buyXQuantity) * getYAmount;
+    const discount = discountedAmount < amt ? amt - discountedAmount : 0;
+    return {
+      ...coupon,
+      allowed: true,
+      discount,
+      message: discountMsg,
+    };
+  }
+
   return {
     ...coupon,
-    allowed: true,
-    discount,
-    message: discountMsg,
+    allowed: false,
+    discount: 0,
+    message: "Invalid Coupon",
   };
 };

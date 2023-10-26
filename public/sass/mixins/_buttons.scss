@@ -1,20 +1,23 @@
 // Button Variant Mixin
-@mixin button-variant( $color ) {
+@mixin button-variant($color ) {
     color: $primary-color;
     border-color: $color;
     background-color: $color;
     border-radius: 4px;
+
     &:hover,
     &:active,
     &:focus {
         color: $primary-color;
-        border-color: lighten( $color , 7% );
-        background-color: lighten( $color , 7% );
+        border-color: lighten($color , 7%);
+        background-color: lighten($color , 7%);
     }
+
     &.btn-solid {
         color: $color;
         border-color: #fff;
         background-color: #fff;
+
         &:hover,
         &:active,
         &:focus {
@@ -23,10 +26,12 @@
             color: #fff;
         }
     }
+
     &.btn-outline {
         color: $color;
         border-color: $color;
         background-color: transparent;
+
         &:hover,
         &:active,
         &:focus {
@@ -34,23 +39,28 @@
             color: #fff;
         }
     }
+
     &.btn-link {
         background-color: transparent;
         color: $color;
+
         &:hover,
         &:active,
         &:focus {
             color: #222;
         }
     }
+
     &.btn-underline {
+
         &:hover,
         &:active,
         &:focus {
             color: $color;
         }
     }
+
     &.btn-link-black {
-        color:$primary-color;
+        color: $primary-color;
     }
 }

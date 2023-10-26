@@ -1,41 +1,34 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
-import { API, graphqlOperation } from "aws-amplify";
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from "react-redux";
 import { eventActions } from "~/store/events";
 import ALink from "~/components/features/custom-link";
 import { MagnifyingGlass, Search } from "~/components/icons";
-import { searchProductsBasic } from "~/graphql/api";
 import { toDecimal } from "~/utils";
-import { getPublicImageURL } from "~/utils/getPublicImageUrl";
-import { STORE_ID } from "~/config";
 import { errorHandler } from "~/utils/errorHandler";
+import { getSource } from "~/utils/helper";
+import { fetchSearchItems } from "~/utils/helper";
+import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 
-function SearchForm({ type = "input", defaultSearch = "" }) {
+function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
   const router = useRouter();
   const [search, setSearch] = useState(defaultSearch);
   const [timer, setTimer] = useState(null);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const source = getSource();
 
   const searchProducts = useCallback(async (searchTerm) => {
     try {
-      const {
-        data: {
-          searchProducts: { items },
-        },
-      } = await API.graphql(
-        graphqlOperation(searchProductsBasic, {
-          filter: {
-            storeId: { eq: STORE_ID },
-            status: { eq: "ENABLED" },
-            title: { matchPhrasePrefix: searchTerm },
-          },
-          imageLimit: 1,
-        })
-      );
-      setData(items);
+      fetchSearchItems(searchTerm).then((fetchedItems) => {
+        setData(fetchedItems);
+        productSearched({
+          "search term": searchTerm,
+          "Item Count": fetchedItems?.length,
+          source: source,
+        });
+      });
     } catch (error) {
       errorHandler(error);
     }
@@ -179,13 +172,14 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
 
         <div className="live-search-list bg-white scrollable">
           {search.length > 2 &&
-            data.map((product, index) => {
+            data?.map((product, index) => {
               const images =
                 product.images?.items.sort((a, b) => a.position - b.position) ||
                 [];
 
               const thumbImage = images.find((i) => i.isThumb) ||
                 images[0] || { imageKey: product.imageUrl };
+
               return (
                 <ALink
                   href={`/products/${product.slug}`}
@@ -193,7 +187,7 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
                   key={`search-result-${index}`}
                 >
                   <NextImage
-                    src={getPublicImageURL(thumbImage.imageKey)}
+                    src={getPublicImageURL(thumbImage?.imageKey)}
                     width={40}
                     height={40}
                     alt={thumbImage.alt}
@@ -220,4 +214,6 @@ function SearchForm({ type = "input", defaultSearch = "" }) {
   );
 }
 
-export default SearchForm;
+export default connect(null, {
+  productSearched: eventActions.productSearched,
+})(React.memo(SearchForm));

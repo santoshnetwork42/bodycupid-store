@@ -4,12 +4,8 @@ import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import "react-toastify/dist/ReactToastify.min.css";
-//import "react-image-lightbox/style.css";
 import "react-input-range/lib/css/index.css";
 
-import ALink from "~/components/features/custom-link";
-
-import { UpArrow } from "~/components/icons";
 import Header from "~/components/common/header";
 import Footer from "~/components/common/footer";
 import Passwordless from "~/components/common/partials/passwordless";
@@ -26,8 +22,9 @@ import {
   resizeHandler,
 } from "~/utils";
 import { removeHoverEffect } from "~/utils/helper";
-import Announcement from "./common/announcement";
-import StickyCheckout from "./common/sticky-checkout";
+import Announcement from "~/components/common/announcement";
+import StickyCheckout from "~/components/common/sticky-checkout";
+import CouponDiscountBar from "~/components/common/coupon-discount-bar";
 
 function Layout({
   children,
@@ -77,7 +74,6 @@ function Layout({
       document.querySelector("body").classList.add("loaded");
     }, 50);
   }, [router.pathname]);
-
   return (
     <>
       <Head>
@@ -85,22 +81,12 @@ function Layout({
         <link
           href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap"
           rel="stylesheet"
-        ></link>
+        />
         {/* <link
           rel="stylesheet"
           type="text/css"
-          href="/vendor/riode-fonts/riode-fonts.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="/vendor/fontawesome-free/css/all.min.css"
-        /> */}
-        <link
-          rel="stylesheet"
-          type="text/css"
           href="/vendor/owl-carousel/owl.carousel.min.css"
-        />
+        /> */}
       </Head>
       <div className="page-wrapper">
         <Announcement showTopRunner={navbar.showTopRunner} />
@@ -125,6 +111,8 @@ function Layout({
         hideProgressBar={true}
         newestOnTop={true}
       />
+
+      {!!navbar.couponBanner && <CouponDiscountBar />}
 
       <Quickview />
       <LoginModal />

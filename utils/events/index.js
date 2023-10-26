@@ -1,5 +1,14 @@
-import { getFirstVariant, getProductPrice } from "~/utils/products";
+import {
+  getFirstVariant,
+  getProductInventory,
+  getProductMeta,
+  getProductPrice,
+} from "~/utils/products";
 import { addPhonePrefix } from "~/utils/helper";
+import { getPublicImageURL } from "../getPublicImageUrl";
+import { removePhonePrefix } from "~/utils/helper";
+import { getCouponDiscount } from "../coupons";
+import { getSource } from "~/utils/helper";
 
 export const itemMapper = (product, coupon) => {
   let {
@@ -12,23 +21,47 @@ export const itemMapper = (product, coupon) => {
     qty = 1,
     vendor,
     sku,
+    variants,
   } = product;
 
   let contentType = "product_group";
+  const source = getSource();
 
   if (!variantId) {
     variantId = getFirstVariant(product)?.id;
   }
 
   const { price, listingPrice } = getProductPrice(product, variantId);
-
+  const { thumbImage } = getProductMeta(product);
+  const { hasInventory } = getProductInventory(product);
   if (!variantId) {
     contentType = "product";
     variantId = id;
   }
 
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
+  const basicAttributes = {
+    "Product ID": id,
+    "Variant ID": variantId,
+    "Product Subcategory": subCategory?.name,
+    "Product Title": product.title,
+    "Image URL": getPublicImageURL(thumbImage?.imageKey),
+    "Product Category": category?.name,
+    "Product URL": `${currentURL}/products/${product.slug}`,
+    "Vendor name": "Body Cupid",
+    "Product Price": price,
+    Currency: "INR",
+    "Total Quantity": qty,
+    "Discount Amount": listingPrice - price,
+    MRP: listingPrice,
+    Source: source,
+    "Product Range": null,
+    "ATC Source": section?.name || null,
+  };
+
   return {
     value: price * qty,
+    mrpValue: listingPrice * qty,
     vercel: {
       content_category: category?.name,
       content_subcategory: subCategory?.name,
@@ -37,7 +70,27 @@ export const itemMapper = (product, coupon) => {
       content_type: contentType,
       currency: "INR",
       num_items: 1,
+      source: section ? section.name : null,
       value: price,
+    },
+    moengage: {
+      addToCart: {
+        ...basicAttributes,
+      },
+      productViewed: {
+        ...basicAttributes,
+        "Total variants": variants?.items?.length,
+        "Product Title": title,
+        Availability: hasInventory,
+        Ratings: product?.rating,
+      },
+      removedFromCart: {
+        ...basicAttributes,
+        "Total variants": variants?.items?.length,
+        "Product Title": title,
+        Availability: hasInventory,
+        Ratings: product?.rating,
+      },
     },
     pixel: {
       content_category: category?.name,
@@ -105,7 +158,7 @@ export const orderMapper = (products, coupon) => {
         pinpoint: pinpointNew,
         value: valueNew,
         pixel: pixelNew,
-        vercel: vercelNew
+        vercel: vercelNew,
       } = itemMapper(product, coupon);
 
       return {
@@ -147,10 +200,20 @@ export const orderMapper = (products, coupon) => {
 };
 
 export const userMapper = (userData, address) => {
-  const { city, state, country, pinCode, phone: aP, firstName: aF, lastName: aL, email: aE } = address || {};
+  const {
+    city,
+    state,
+    country,
+    pinCode,
+    phone: aP,
+    firstName: aF,
+    lastName: aL,
+    email: aE,
+  } = address || {};
 
   if (userData) {
-    const { phone, firstName, lastName, email, gender, dob } = userData;
+    const { phone, firstName, lastName, email, gender, dob, totalOrders } =
+      userData;
     return {
       phone: addPhonePrefix(aP || phone),
       firstName: aF || firstName,
@@ -158,10 +221,11 @@ export const userMapper = (userData, address) => {
       email: aE || email,
       gender,
       dob,
+      totalOrders,
       city,
       state,
       country,
-      pinCode
+      pinCode,
     };
   }
 
@@ -169,6 +233,206 @@ export const userMapper = (userData, address) => {
     city,
     state,
     country,
-    pinCode
+    pinCode,
   };
+};
+
+export const moEngagedOrderMapper = (
+  products,
+  coupon,
+  paymentMethod,
+  order,
+  isFirstTimeUser
+) => {
+  const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
+  const source = getSource();
+  const basicAttributes = {
+    Currency: "INR",
+    "Total Items": products?.length,
+    Source: source,
+    "Cart URL": `${currentURL}/pages/cart`,
+    "Coupon Applied": coupon?.code,
+    "Total Discount": couponTotal || 0,
+    "First Time User": isFirstTimeUser,
+  };
+
+  const mappings = products.reduce(
+    (
+      {
+        "Total Price": Total_Price,
+        "Vendor Name": Vendor_Name,
+        "Product Title": Product_Title,
+        "Image URL": Image_URL,
+        "Product ID": Product_ID,
+        "Total Quantity": Total_Quantity,
+        "Product Price": Product_Price,
+        "Product Quantity": Product_Quantity,
+        "Variant ID": Variant_ID,
+        "Product URL": Product_URL,
+        "Total MRP": Total_MRP,
+        "Product Subcategory": Product_Subcategory,
+        "Product Category": Product_Category,
+      },
+      product
+    ) => {
+      const { value: valueNew, mrpValue } = itemMapper(product, coupon);
+      const { thumbImage } = getProductMeta(product);
+      const url = getPublicImageURL(thumbImage?.imageKey);
+      return {
+        "Total Price": Total_Price + valueNew,
+        "Product Title": [...Product_Title, product.title],
+        "Image URL": [...Image_URL, url],
+        "Total Quantity": Total_Quantity + (product?.qty || 0),
+        "Product ID": [...Product_ID, product?.id],
+        "Vendor Name": [...Vendor_Name, product?.vendor],
+        "Product Price": [...Product_Price, product.price],
+        "Product Quantity": [...Product_Quantity, product.qty],
+        "Variant ID": [...Variant_ID, product?.variantId],
+        "Product URL": [
+          ...Product_URL,
+          `${currentURL}/products/${product.slug}`,
+        ],
+        "Total MRP": Total_MRP + mrpValue,
+        "Product Subcategory": [
+          ...Product_Subcategory,
+          product?.subCategory?.name,
+        ],
+        "Product Category": [...Product_Category, product?.category?.name],
+        "Product Range": null,
+      };
+    },
+    {
+      "Total Price": 0,
+      "Product Title": [],
+      "Vendor Name": [],
+      "Image URL": [],
+      "Total Quantity": 0,
+      "Product ID": [],
+      "Product Price": [],
+      "Product Quantity": [],
+      "Variant ID": [],
+      "Product URL": [],
+      "Total MRP": 0,
+      "Product Subcategory": [],
+      "Product Category": [],
+      "Product Range": null,
+    }
+  );
+
+  return {
+    checkoutStarted: {
+      ...basicAttributes,
+      ...mappings,
+      "Cart URL": `${currentURL}/pages/checkout`,
+    },
+    orderCreated: {
+      ...basicAttributes,
+      ...mappings,
+      "Order ID": order?.code,
+      "Order Date": new Date().toISOString(),
+      "Payment Mode": paymentMethod,
+      "Payment Status": paymentMethod === "COD" ? "Unpaid" : "Paid",
+    },
+    cartViewed: {
+      ...basicAttributes,
+      ...mappings,
+      "Order ID": order?.code,
+      "Order Date": new Date().toISOString(),
+      "Payment Mode": paymentMethod,
+      "Payment Status": null,
+    },
+  };
+};
+
+export const moEngageItemPurchasedMapper = (
+  products,
+  coupon,
+  paymentMethod,
+  order,
+  isFirstTimeUser
+) => {
+  const { discount: couponTotal } = getCouponDiscount(coupon, products) || {};
+  let currentURL = window.location.href.split("/").slice(0, 3).join("/");
+  const source = getSource();
+
+  const basicAttributes = {
+    Currency: "INR",
+    Source: source,
+    "Cart URL": `${currentURL}/pages/cart`,
+    "Coupon Applied": coupon?.code,
+    "Total Discount": couponTotal || 0,
+    "First Time User": isFirstTimeUser,
+  };
+
+  const events = products.map((product) => {
+    const { value: valueNew, mrpValue } = itemMapper(product, coupon);
+    const { thumbImage } = getProductMeta(product);
+    const url = getPublicImageURL(thumbImage?.imageKey);
+
+    const eventAttributes = {
+      ...basicAttributes,
+      "Total Price": valueNew,
+      "Vendor Name": product.vendor,
+      "Product Title": product.title,
+      "Image URL": url,
+      "Total Quantity": product.qty || 0,
+      "Product ID": product.id,
+      "Product Price": product.price,
+      "Product Quantity": product.qty,
+      "Variant ID": product.variantId,
+      "Product URL": `${currentURL}/products/${product.slug}`,
+      "Total MRP": mrpValue,
+      "Product Subcategory": product.subCategory?.name,
+      "Product Category": product.category?.name,
+      "Product Range": null,
+    };
+
+    return {
+      ...eventAttributes,
+      "Order ID": null,
+      "Order Date": null,
+      "Payment Mode": null,
+      "Payment Status": null,
+    };
+  });
+
+  return events;
+};
+
+export const addressMapper = (address, totalPrice) => {
+  if (address) {
+    const { city, country, email, name, state, pinCode, phone } = address;
+    const phoneNo = removePhonePrefix(phone);
+    const [firstName, lastName] = name.split(" ");
+
+    const basicAttributes = {
+      "Cart Total Price": totalPrice,
+      City: city,
+      Country: country,
+      Currency: "INR",
+      Email: email,
+      "First Name": firstName,
+      "Last Name": lastName,
+      "Mobile Number": phoneNo,
+      Pincode: pinCode,
+      State: state,
+    };
+
+    return {
+      addressAdded: {
+        ...basicAttributes,
+      },
+      addressSelected: {
+        ...basicAttributes,
+      },
+    };
+  }
+};
+
+export const moeEvent = (title, payload) => {
+  const moe = window?.Moengage;
+  if (moe) {
+    moe.track_event(title, payload);
+  }
 };

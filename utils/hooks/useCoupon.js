@@ -14,9 +14,7 @@ export const useFeaturedCoupons = () => {
   const featuredCoupons = useMemo(
     () =>
       (coupons || [])
-        .filter(
-          (coupon) => !(coupon.autoApply && coupon.couponType === "PRODUCT")
-        )
+        .filter((coupon) => coupon.couponType !== "FREEBIE")
         .map((coupon) => getCouponDiscount(coupon, cartList)),
     [coupons, cartList]
   );
@@ -41,15 +39,19 @@ export const useProductCoupons = (product, variant) => {
   const productCoupons = useMemo(
     () =>
       (coupons || [])
-        .filter((coupon) => coupon.couponType !== "BUY_X_GET_Y")
+        .filter(
+          (coupon) =>
+            coupon.couponType !== "BUY_X_GET_Y" &&
+            coupon.couponType !== "PRODUCT"
+        )
         .map((coupon) => getCouponDiscount(coupon, [currentProductItem]))
         .filter((coupon) => coupon.allowed)
         .sort((a, b) => (a.discount > b.discount ? -1 : 1)),
     [coupons, currentProductItem]
   );
 
-  const [bestCoupon, ...restCoupons] = productCoupons;
-  return { productCoupons: restCoupons, bestCoupon };
+  const [bestCoupon] = productCoupons;
+  return bestCoupon;
 };
 
 export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
@@ -73,18 +75,18 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
       (coupons || [])
         .filter((coupon) => {
           const {
-            autoApply,
             couponType,
             applicableProducts,
             applicableCollections,
             minOrderValue,
             buyXQuantity,
             getYQuantity,
+            isExternal,
           } = coupon;
 
+          if (couponType !== "FREEBIE") return false;
+          if (isExternal) return false;
           if (!total) return false;
-          if (couponType !== "PRODUCT") return false;
-          if (!autoApply) return false;
 
           if (showNonApplicableFreeProducts) return true;
 
@@ -138,7 +140,9 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           allowed = allowed && hasCollection && hasProduct;
           const { message } = getCouponDiscount(coupon, cartList);
           return { allowed, message, productId: getYProduct };
-        }),
+        })
+        .sort((a, b) => (a.discount > b.discount ? 1 : -1))
+        .sort((a) => (a.allowed ? -1 : 1)),
     [coupons, total, totalItems, cartList]
   );
 
@@ -152,7 +156,10 @@ export const useFreeProducts = (showNonApplicableFreeProducts = true) => {
           }).then(({ data }) => ({
             allowed,
             message,
-            product: data.getProduct,
+            product: {
+              ...data.getProduct,
+              thumbImage: data.getProduct?.images?.items[0]?.imageKey,
+            },
           }))
         )
       );

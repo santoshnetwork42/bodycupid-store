@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { API } from "aws-amplify";
 import { connect } from "react-redux";
+import { Logger } from "aws-amplify";
 
 import ALink from "~/components/features/custom-link";
 import { getOrder, validateTransaction } from "~/graphql/api";
@@ -14,16 +15,16 @@ import { STORE_ID } from "~/config";
 import Tag from "~/components/common/tag";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { errorHandler } from "~/utils/errorHandler";
-import { alertToaster } from "../../utils/popupHelper";
+import { alertToaster } from "~/utils/popupHelper";
 import Checkmark from "~/components/icons";
 
-import { Logger } from "aws-amplify";
-
 const logger = new Logger("Orders");
+
 function Order({ order: orderItem, paymentId, orderId, store }) {
   const [order, setOrder] = useState(orderItem);
-  const { name } = store;
+  const { name } = store || {};
   const [timer, setTimer] = useState(null);
+
   const allStatus = ["CANCELLED", "DISPATCHED", "COURIER_RETURN", "DELIVERED"];
 
   const router = useRouter();
@@ -218,9 +219,7 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                             href={"/products/" + item.product.slug}
                           >
                             <img
-                              src={getPublicImageURL(
-                                item.product.images?.items[0]?.imageKey
-                              )}
+                              src={getPublicImageURL(item.thumbImage)}
                               alt={item.product?.images.items[0]?.alt}
                               width="80"
                               height="88"
@@ -248,15 +247,13 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
                                 <div className="text-grey mb-1">
                                   <label>
                                     <span>Tracking Id: </span>
-                                    {item.trackingId ? item.trackingId : "-"}
+                                    {item.trackingId || "-"}
                                   </label>
                                 </div>
                                 <div className="text-grey">
                                   <label>
                                     <span>Delivery Partner: </span>
-                                    {item.deliveryPartner
-                                      ? item.deliveryPartner
-                                      : "-"}
+                                    {item.shippingCourier || "-"}
                                   </label>
                                 </div>
                               </div>
@@ -322,19 +319,29 @@ function Order({ order: orderItem, paymentId, orderId, store }) {
               </tbody>
             </table>
           </div>
-          <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
-            <ALink
-              href="/pages/orders"
-              className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
-            >
-              Your Orders
-            </ALink>
-            <ALink
-              href="/pages/contact-us"
-              className="btn btn-icon-left btn btn-back btn-rounded btn-md"
-            >
-              Contact us
-            </ALink>
+          <div className="d-lg-flex justify-content-between ">
+            <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
+              <ALink
+                href="/pages/orders"
+                className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md  "
+              >
+                Your Orders
+              </ALink>
+              <ALink
+                href="/pages/contact-us"
+                className="btn btn-icon-left btn btn-back btn-rounded btn-md"
+              >
+                Contact us
+              </ALink>
+            </div>
+            <div className="d-flex mt-4 mb-4 align-items-center justify-content-center w-full">
+              <ALink
+                className="btn btn-icon-left btn-dark mr-2 btn-back btn-rounded btn-md"
+                href="/collections/all"
+              >
+                Return to shop
+              </ALink>
+            </div>
           </div>
 
           <PaymentLoader loading={isPaymentProcessing} />
@@ -352,9 +359,21 @@ Order.getInitialProps = async (context) => {
       id: orderId,
     });
 
+    const products = response?.products?.items.map((item) => {
+      if (item.variant?.imageUrl) {
+        item.thumbImage = item?.variant.imageUrl;
+      } else {
+        item.thumbImage = item.product.images?.items[0]?.imageKey;
+      }
+      return item;
+    });
+
     if (response?.storeId === STORE_ID && response?.status !== "PENDING") {
       return {
-        order: response,
+        order: {
+          ...response,
+          products: { ...response.products, items: products },
+        },
         paymentId,
         orderId: orderId,
       };

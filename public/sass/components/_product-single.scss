@@ -31,7 +31,7 @@
             variation: (width: 3rem,
                 height: 3rem,
             ),
-            btn-cart: (max-width: 20.7rem,
+            btn-cart: (
                 height: 4.5rem,
             ),
             rating: (color: $secondary-color,
@@ -110,6 +110,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    margin: 5px 0;
 }
 
 .product-thumbs {
@@ -139,7 +140,6 @@
 
 .product-thumb {
     position: relative;
-    margin: 0 .5rem;
     cursor: pointer;
 
     &::before {
@@ -172,14 +172,17 @@
         .product-benefits {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
 
-            lable {
-                padding: .6rem 1.3rem;
-                border-radius: .5rem;
-                background-color: $border-color;
-                color: $body-color;
+            label {
+                padding: 4px 16px;
+                border-radius: 20px;
+                background: rgba(255, 214, 19, 0.35);
                 text-transform: capitalize;
+                font-family: "Manrope";
+                color: #000;
+                font-size: 12px;
+                font-weight: 500;
             }
         }
     }
@@ -196,7 +199,7 @@
     .detail-product-name {
         @include print_css(product-single, name);
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        // -webkit-line-clamp: 2;
         overflow: hidden;
         -webkit-box-orient: vertical;
     }
@@ -481,6 +484,7 @@
 
         .notify-btn {
             padding: 1.2rem 0px;
+            background-color: #e4eaec !important; 
         }
 
         .check-mark {
@@ -559,20 +563,24 @@
 
     .quantity-minus {
         font-size: 22px;
+        border: 1px solid #ccc;
     }
 
     .quantity-plus {
         font-size: 22px;
+        border: 1px solid #ccc;
     }
 
     .input-group {
         margin-right: 1rem;
     }
+
     .btn-cart {
-        &.dark{
+        &.dark {
             background-color: $primary-color !important;
             color: white !important;
         }
+
         border: 0;
         flex: 1;
         min-width: 13rem;
@@ -583,9 +591,13 @@
         cursor: pointer;
         display: flex;
         align-items: center;
+        max-width: 20.7rem;
         @include css(max-width, product-single, btn-cart, max-width);
         @include css(height, product-single, btn-cart, height);
 
+        @media (max-width: 575px) {
+            max-width: inherit;
+        }
         &.disabled {
             background-color: #e4eaec;
             cursor: not-allowed;
@@ -697,10 +709,6 @@
             bottom: 0;
         }
 
-        .product-thumb {
-            margin: 0 0 .9rem;
-        }
-
         .thumb-up,
         .thumb-down {
             display: flex;
@@ -771,7 +779,6 @@
 
     .product-top-content {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         margin: 0;
 
@@ -842,7 +849,7 @@
         }
     }
 
-    
+
 
 }
 

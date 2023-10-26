@@ -36,10 +36,18 @@ function Quickview(props) {
           })
         );
         setProduct(response);
-        setVariant(response.variants.items[0]?.id);
+        setVariant(response?.variants?.items[0]?.id);
       })();
     }
   }, [slug, isOpen]);
+
+  // useEffect(() => {
+  //   document.body.classList.add("overflow-hidden");
+
+  //   return () => {
+  //     document.body.classList.remove("overflow-hidden");
+  //   };
+  // }, [isOpen]);
 
   const closeQuick = () => {
     document.querySelector(".ReactModal__Overlay").classList.add("removed");
@@ -84,14 +92,17 @@ function Quickview(props) {
         <div className="col-md-6">
           <div className="product-gallery mb-md-0 pb-0">
             <div className="product-label-group">
-              {discount > 0 &&
-                (product?.variants.items.length === 0 ? (
+              {
+                discount > 0 && (
+                  // (product?.variants.items.length === 0 ? (
                   <label className="product-label label-sale">
                     {discount}% OFF
                   </label>
-                ) : (
-                  <label className="product-label label-sale">Sale</label>
-                ))}
+                )
+                // ) : (
+                //   <label className="product-label label-sale">Sale</label>
+                // ))
+              }
             </div>
 
             <OwlCarousel
@@ -118,10 +129,11 @@ function Quickview(props) {
           {product && (
             <DetailOne
               data={product}
-              adClass="scrollable"
+              adClass="scrollable mb-10 wrapper-btn"
               isNav={false}
               variantId={variant}
               setVariant={setVariant}
+              isQuickView={true}
             />
           )}
         </div>

@@ -8,17 +8,20 @@
 	display: inline-block;
 	color: #fff;
 	width: 1.7rem;
+
 	&::before,
 	&::after {
 		display: block;
 		content: '';
 		width: 100%;
 	}
+
 	&::before {
 		height: 6px;
 		border-top: 2px solid;
 		border-bottom: 2px solid;
 	}
+
 	&::after {
 		height: 4px;
 		border-bottom: 2px solid;

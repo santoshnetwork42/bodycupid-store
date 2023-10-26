@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import Image from "next/image";
-import { Logger } from 'aws-amplify';
+import { Logger } from "aws-amplify";
 import ALink from "~/components/features/custom-link";
 import { Star, Eye } from "~/components/icons";
 import { cartActions } from "~/store/cart";
@@ -14,10 +14,11 @@ import { getRecordKey, getUpdatedCart } from "~/utils/helper";
 import { useProductPrice } from "~/utils/hooks/useProduct";
 import { PRODUCT_TAG_LIST } from "~/constant";
 
-const logger = new Logger('Product-details')
+const logger = new Logger("Product-details");
 
 function ProductTwo(props) {
   const {
+    setCartVisibility,
     cartList,
     product,
     adClass = "text-center",
@@ -28,6 +29,7 @@ function ProductTwo(props) {
     slug: tagSlug,
     section,
     priority,
+    isSearch,
   } = props;
 
   const { title, slug, rating, totalRatings, collections } = product || {};
@@ -36,13 +38,17 @@ function ProductTwo(props) {
 
   const showQuickviewHandler = () => {
     openQuickview(slug);
-    logger.verbose('Opened quick view for product:', slug);
+    logger.verbose("Opened quick view for product:", slug);
   };
 
   const { hasInventory, currentInventory } = useMemo(
     () => getProductInventory(product),
     [product]
   );
+
+  const label = product.collectionsList?.length
+    ? product.collectionsList?.find((col) => !!col.label)?.label
+    : null;
 
   const tag = useMemo(() => {
     if (PRODUCT_TAG_LIST.includes(tagSlug)) {
@@ -57,13 +63,18 @@ function ProductTwo(props) {
   }, [collections]);
 
   const addToCartHandler = () => {
-    addToCart({
-      ...product,
-      section,
-      qty: 1,
-    });
-    logger.verbose('Added product to cart');
-    logger.debug('Added product to cart:', product);
+    if (isSearch) {
+      showQuickviewHandler();
+    } else {
+      setCartVisibility(true);
+      addToCart({
+        ...product,
+        section,
+        qty: 1,
+      });
+      logger.verbose("Added product to cart");
+      logger.debug("Added product to cart:", product);
+    }
   };
 
   const cartItem = useMemo(() => {
@@ -79,12 +90,17 @@ function ProductTwo(props) {
         const recordKey = getRecordKey(product);
         const cartData = getUpdatedCart(cartList, recordKey, { qty });
         updateCart(cartData);
-        logger.verbose('Updated product quantity in cart');
-        logger.debug('Updated product quantity in cart:', product, 'New quantity:', qty);
+        logger.verbose("Updated product quantity in cart");
+        logger.debug(
+          "Updated product quantity in cart:",
+          product,
+          "New quantity:",
+          qty
+        );
       } else {
         removeFromCart({ ...cartItem });
-        logger.verbose('Removed product from cart');
-        logger.debug('Removed product from cart:', cartItem);
+        logger.verbose("Removed product from cart");
+        logger.debug("Removed product from cart:", cartItem);
       }
     }
   }
@@ -105,12 +121,15 @@ function ProductTwo(props) {
       </ALink>
 
       <div className="product-label-group">
-        {discount > 0 &&
-          (product.variants?.items?.length < 2 ? (
+        {
+          discount > 0 && (
+            // (product.variants?.items?.length < 2 ? (
             <label className="product-label label-sale">-{discount}%</label>
-          ) : (
-            <label className="product-label label-sale">Sale</label>
-          ))}
+          )
+          // ) : (
+          //   <label className="product-label label-sale">Sale</label>
+          // ))
+        }
       </div>
 
       {!!tag && (
@@ -139,6 +158,7 @@ function ProductTwo(props) {
           {/* <div className="product-tags lh-default">
             {product?.tags?.split(",").join(" | ") || <>&nbsp;</>}
           </div> */}
+          <div className="product-coupon">{label}</div>
           <div className="ratings-container mb-0">
             <div className="ratings-full d-flex rating-product-list mr-1">
               <Star size={20} color={"#FAB73B"} />
@@ -154,48 +174,62 @@ function ProductTwo(props) {
               ({totalRatings || 0} reviews)
             </ALink>
           </div>
-        </div>
-        <div className="product-price product-sm mt-2 mb-2 lh-1">
-          <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
-          {price < listingPrice && listingPrice && (
-            <span className="old-price ml-1 ">
-              <del>₹{toDecimal(listingPrice || 0)}</del>
-            </span>
-          )}
+          <div className="product-price product-sm mt-2 mb-2 lh-1">
+            <ins className="new-price ">₹{toDecimal(price || 0)}</ins>
+            {price < listingPrice && listingPrice && (
+              <span className="old-price ml-1 ">
+                <del>₹{toDecimal(listingPrice || 0)}</del>
+              </span>
+            )}
+          </div>
         </div>
         <div className="product-action">
-          {!!hasInventory ? (
+          {isSearch ? (
+            <ALink
+              href="#"
+              className={`btn-product btn-primary btn-quickview m-0`}
+              title="Add to cart"
+              onClick={price > 0 ? addToCartHandler : undefined}
+              style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
+            >
+              View product{" "}
+            </ALink>
+          ) : (
             <>
-              {!!cartItem ? (
-                <Quantity
-                  isProductList={true}
-                  qty={cartItem.qty}
-                  max={currentInventory}
-                  product={product}
-                  onChangeQty={changeQty}
-                />
+              {!!hasInventory ? (
+                <>
+                  {!!cartItem ? (
+                    <Quantity
+                      isProductList={true}
+                      qty={cartItem.qty}
+                      max={currentInventory}
+                      product={product}
+                      onChangeQty={changeQty}
+                    />
+                  ) : (
+                    <ALink
+                      href="#"
+                      className={`btn-product btn-primary btn-quickview m-0 ${
+                        price <= 0 ? "disabled" : ""
+                      }`}
+                      title="Add to cart"
+                      onClick={price > 0 ? addToCartHandler : undefined}
+                      style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
+                    >
+                      Add to cart
+                    </ALink>
+                  )}
+                </>
               ) : (
                 <ALink
                   href="#"
-                  className={`btn-product btn-primary btn-quickview m-0 ${
-                    price <= 0 ? "disabled" : ""
-                  }`}
-                  title="Add to cart"
-                  onClick={price > 0 ? addToCartHandler : undefined}
-                  style={{ backgroundColor: price <= 0 ? "#ccc" : "" }}
+                  className="btn-product btn-sold-out m-0"
+                  title="Sold Out"
                 >
-                  Add to cart
+                  Sold Out
                 </ALink>
               )}
             </>
-          ) : (
-            <ALink
-              href="#"
-              className="btn-product btn-sold-out m-0"
-              title="Sold Out"
-            >
-              Sold Out
-            </ALink>
           )}
         </div>
       </div>

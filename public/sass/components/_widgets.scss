@@ -2,11 +2,7 @@
 	Widget 
 ------------------------------------------- */
 
-@include set-default(
-    (
-        widget: (
-            title: (
-                margin-bottom: 2rem,
+@include set-default((widget: (title: (margin-bottom: 2rem,
                 padding: 1.1rem 0,
                 font-size: 1.6rem,
                 font-weight: 700,
@@ -14,12 +10,10 @@
                 line-height: 1.2,
                 border-bottom: 1px solid $border-color,
                 letter-spacing: .025em,
-            )
-        )
-    )
-);
+            ))));
+
 .widget-title {
-    @include print_css( widget, title );
+    @include print_css(widget, title);
 }
 
 .widget-products {

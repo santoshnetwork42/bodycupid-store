@@ -8,9 +8,11 @@ const PaymentMethods = ({
   description,
   isSelected,
   tag,
+  tagVariant = "success",
   onClick,
   amount,
   disabled,
+  showUpdateCoupon,
 }) => {
   return (
     <div
@@ -25,7 +27,7 @@ const PaymentMethods = ({
           <span className="text-body text-normal ls-m ml-2 mr-2 checkout-payment-labels lh-default">
             {title}
           </span>
-          {!!tag && <p className="extra-lable m-0">{tag}</p>}
+          {!!tag && <p className={`extra-lable m-0 ${tagVariant}`}>{tag}</p>}
         </div>
 
         <div
@@ -35,7 +37,7 @@ const PaymentMethods = ({
         >
           <p>
             {description}
-            {disabled && (
+            {showUpdateCoupon && (
               <ALink href={"/pages/cart"} className="lh-1">
                 Update coupon
               </ALink>

@@ -5,11 +5,11 @@ export const getFirstVariant = (product, variantId) => {
 
     let variant;
     if (variantId) {
-      variant = items.find(v => v.id === variantId);
+      variant = items.find((v) => v.id === variantId);
     }
 
     if (!variant) {
-      ([variant] = items);
+      [variant] = items;
     }
 
     return variant;
@@ -19,24 +19,38 @@ export const getFirstVariant = (product, variantId) => {
 
 export const getProductMeta = (product) => {
   if (!product) return {};
-  const { variants = {}, images = {} } = product;
+  const { variants = {}, images = {}, imageUrl } = product;
   const { items = [] } = variants;
   const { items: allImages = [] } = images;
 
   const sortedImages = Array.isArray(allImages)
     ? allImages.sort((a, b) => a.position - b.position)
     : [];
-  const thumbImage =
-    sortedImages.find((i) => i.isThumb) || sortedImages[0] || null;
+
+  let thumbImage = sortedImages.find((i) => i.isThumb) ||
+    sortedImages[0] || { imageKey: imageUrl };
   const [, secondaryImage] = sortedImages;
 
-  const discount = !!(product.listingPrice && product.price)
+  const [firstVariant] = items.sort((a, b) => a.position - b.position);
+
+  let discount = !!(product.listingPrice && product.price)
     ? Math.round(
-      ((product.listingPrice - product.price) * 100) / product.listingPrice
-    )
+        ((product.listingPrice - product.price) * 100) / product.listingPrice
+      )
     : 0;
 
-  const [firstVariant] = items.sort((a, b) => a.position - b.position);
+  if (firstVariant) {
+    discount = !!(firstVariant.listingPrice && firstVariant.price)
+      ? Math.round(
+          ((firstVariant.listingPrice - firstVariant.price) * 100) /
+            firstVariant.listingPrice
+        )
+      : 0;
+
+    if (firstVariant.imageUrl) {
+      thumbImage = { imageKey: firstVariant.imageUrl };
+    }
+  }
 
   return {
     thumbImage,
@@ -52,6 +66,7 @@ export const getProductInventory = (product, selectedVariantId = null) => {
     isInventoryEnabled,
     inventory = 0,
     variants = {},
+    availability,
   } = product;
   const { items = [] } = variants;
 
@@ -83,8 +98,8 @@ export const getProductInventory = (product, selectedVariantId = null) => {
   }
 
   return {
-    hasInventory: true,
-    currentInventory: 1000,
+    hasInventory: !availability || availability === "in stock",
+    currentInventory: 99,
   };
 };
 
@@ -94,7 +109,7 @@ export const getProductPrice = (product, variantId) => {
 
   if (Array.isArray(items) && items.length) {
     if (variantId) {
-      const currentVariant = items.find(i => i.id === variantId);
+      const currentVariant = items.find((i) => i.id === variantId);
       if (currentVariant) {
         const { price, listingPrice } = currentVariant;
         return { price, listingPrice };
@@ -108,3 +123,29 @@ export const getProductPrice = (product, variantId) => {
   return { price: p, listingPrice: lp };
 };
 
+export const productDiscountPercentage = ({ price, listingPrice }) => {
+  return Math.round(((listingPrice - price) / listingPrice) * 100);
+};
+
+export const setSoldOutLast = (items) => {
+  let soldOutProducts = [];
+  const products = items.reduce((acc, prod) => {
+    if (!("hasInventory" in prod)) {
+      const { hasInventory } = getProductInventory(prod);
+      if (hasInventory) {
+        return [...acc, { ...prod, hasInventory }];
+      } else {
+        soldOutProducts.push({ ...prod, hasInventory });
+        return acc;
+      }
+    } else {
+      if (prod.hasInventory) {
+        return [...acc, prod];
+      } else {
+        soldOutProducts.push(prod);
+        return acc;
+      }
+    }
+  }, []);
+  return [...products, ...soldOutProducts];
+};

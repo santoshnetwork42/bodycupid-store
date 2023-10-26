@@ -14,6 +14,16 @@ const nextConfig = withBundleAnalyzer({
   async redirects() {
     return [
       {
+        source: "/pages/login",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/pages/cart",
+        destination: "/?cart=1",
+        permanent: false,
+      },
+      {
         source: "/shop",
         destination: "/collections/all",
         permanent: true,
@@ -35,7 +45,7 @@ const nextConfig = withBundleAnalyzer({
       },
     ];
   },
-  
+
   rewrites() {
     return [
       {

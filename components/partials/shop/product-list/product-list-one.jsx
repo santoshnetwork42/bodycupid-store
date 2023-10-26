@@ -10,6 +10,8 @@ import { findProducts } from "~/graphql/api";
 import Loader from "~/components/common/partials/loader";
 import { errorHandler } from "~/utils/errorHandler";
 import { eventActions } from "~/store/events";
+import { fetchSearchItems } from "~/utils/helper";
+import { setSoldOutLast } from "~/utils/products";
 
 const gridClasses = {
   3: "cols-2 cols-sm-3",
@@ -64,9 +66,6 @@ function ProductListOne(props) {
   const filters = useMemo(() => {
     const sortBy = [];
     const filter = {};
-    if (!!search?.trim()) {
-      filter.title = { matchPhrasePrefix: search };
-    }
 
     if (
       !Number.isNaN(Number(minprice)) &&
@@ -115,27 +114,39 @@ function ProductListOne(props) {
       try {
         if (!applyFilters) return;
         if (reset) setLoading(true);
-        const {
-          data: {
-            searchProducts: { items: response, total, nextToken },
-          },
-        } = await API.graphql(
-          graphqlOperation(findProducts, {
-            ...filters,
-            filter: { ...filters.filter, ...pageFilter },
-            nextToken: reset ? null : token,
-          })
-        );
+        const searchTerm = search?.trim();
+        if (!searchTerm) {
+          const {
+            data: {
+              searchProducts: { items: response, total, nextToken },
+            },
+          } = await API.graphql(
+            graphqlOperation(findProducts, {
+              ...filters,
+              filter: { ...filters.filter, ...pageFilter },
+              nextToken: reset ? null : token,
+            })
+          );
 
-        if (reset) {
-          setProducts(response);
+          if (reset) {
+            const productsMapped = setSoldOutLast(response);
+            setProducts(productsMapped);
+          } else {
+            viewList(sectionId, "PLP", response);
+            const productsMapped = setSoldOutLast([...products, ...response]);
+            setProducts(productsMapped);
+          }
+          setToken(nextToken);
+          setTotal(total);
+          setLoading(false);
         } else {
-          viewList(sectionId, "PLP", response);
-          setProducts([...products, ...response]);
+          fetchSearchItems(search).then((fetchedItems) => {
+            const productsMapped = setSoldOutLast(fetchedItems);
+            setProducts(productsMapped);
+            setTotal(fetchedItems.length);
+            setLoading(false);
+          });
         }
-        setToken(nextToken);
-        setTotal(total);
-        setLoading(false);
       } catch (error) {
         setLoading(false);
         errorHandler(error);
@@ -146,15 +157,18 @@ function ProductListOne(props) {
 
   useEffect(() => {
     const { items, nextToken, total } = initialData || {};
-    setProducts(items);
+    const productsMapped = setSoldOutLast(items);
+    setProducts(productsMapped);
     setToken(nextToken);
     setTotal(total);
     viewList(sectionId, "PLP", items);
   }, [sectionId]);
 
   useEffect(() => {
-    getProducts(true);
-    resetFilter(true);
+    if (sectionId !== "top-product") {
+      getProducts(true);
+      resetFilter(true);
+    }
   }, [filters]);
 
   if (loading) {
@@ -186,7 +200,9 @@ function ProductListOne(props) {
 
   return (
     <>
-      {isToolbox && <ToolBox type={type} filterItems={filterItems} />}
+      {isToolbox && !search && (
+        <ToolBox type={type} filterItems={filterItems} />
+      )}
 
       <InfiniteScroll
         dataLength={products ? products.length : 0}
@@ -194,10 +210,10 @@ function ProductListOne(props) {
           getProducts(false);
         }}
         style={{ overflow: "visible" }}
-        hasMore={products.length < total}
+        hasMore={products?.length < total}
         loader={<Loader loading small />}
       >
-        <div className={`row product-wrapper ${gridClasses[itemsPerRow]}`}>
+        <div className={`row product-wrapper ${gridClasses[itemsPerRow]} pt-5`}>
           {products.map((item, index) => (
             <div className="product-wrap" key={"shop-" + item.id}>
               <ProductTwo
@@ -208,6 +224,7 @@ function ProductListOne(props) {
                   id: sectionId,
                   name: "PLP",
                 }}
+                isSearch={!!search}
               />
             </div>
           ))}

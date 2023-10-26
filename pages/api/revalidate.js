@@ -19,4 +19,4 @@ export default async function Revalidate(req, res) {
   } catch (err) {
     return res.status(500).send("Error revalidating");
   }
-};
+}

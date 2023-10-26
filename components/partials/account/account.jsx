@@ -16,9 +16,11 @@ import {
   LocationDot,
   RightAngle,
   User,
+  Discount,
 } from "~/components/icons";
 import { modalActions } from "~/store/modal";
 import { rootActions } from "~/store";
+import { eventActions } from "~/store/events";
 
 const MOBILE_TABS = [
   {
@@ -39,12 +41,24 @@ const MOBILE_TABS = [
     href: "/pages/account-details",
     activeTab: 2,
   },
+  {
+    tabName: "My rewards",
+    svg: <Discount size={16} />,
+    href: "/pages/rewards",
+    activeTab: 3,
+  },
 ];
 
-function AccountsTabs({ user, store, openPasswordLess, destroySession }) {
+function AccountsTabs({
+  user,
+  store,
+  openPasswordLess,
+  logout,
+  destroySession,
+}) {
   const router = useRouter();
 
-  const { name } = store;
+  const { name } = store || {};
   const { pathname } = router;
 
   // const [activeTab, setActiveTab] = useState(parseInt(activeTabIndex) || 0);
@@ -78,6 +92,10 @@ function AccountsTabs({ user, store, openPasswordLess, destroySession }) {
   }, []);
 
   const handleLogout = useCallback(async () => {
+    logout({
+      "Customer ID": user?.id,
+      URL: window.location.href,
+    });
     await Auth.signOut();
     router.push("/");
     return true;
@@ -208,4 +226,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   openPasswordLess: modalActions.openPasswordlessModal,
   destroySession: rootActions.destroySession,
+  logout: eventActions.logout,
 })(AccountsTabs);
