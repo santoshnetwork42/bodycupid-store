@@ -473,6 +473,11 @@ export const getProductBySlug = /* GraphQL */ `
         thumbImages
         isTaxEnabled
         isInventoryEnabled
+        metadata {
+          title
+          description
+          keywords
+        }
         continueSellingOutOfStock
         hasVarient
         hasFaq
@@ -941,6 +946,11 @@ export const findProducts = /* GraphQL */ `
         inventory
         blockedInventory
         continueSellingOutOfStock
+        metadata {
+          title
+          description
+          keywords
+        }
         rating
         totalRatings
         thumbImages
