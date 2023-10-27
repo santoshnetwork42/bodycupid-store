@@ -60,7 +60,7 @@ function HomePage({
             title="Top products"
             disableCarousel={isSmallSize}
             slug="top-product"
-            redirectTo="/collections/top-products"
+            redirectTo="/collections/top-product"
           />
         )}
 

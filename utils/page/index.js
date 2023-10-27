@@ -7,7 +7,6 @@ import {
   getStoreBanners,
   getCollectionType,
 } from "~/graphql/api";
-import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
 import { getDefaultSorting } from "..";
 
@@ -52,6 +51,7 @@ export const getStaticProps = async () => {
     const [
       { searchProducts: searchBestSellerProducts },
       { searchProducts: searchFeaturedProducts },
+      { searchProducts: searchTopProducts },
       { searchProductSubCategories },
       { getStore: store },
       { searchCollectionTypes: bestSellerCollectionItem },
@@ -59,6 +59,7 @@ export const getStaticProps = async () => {
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }),
       getSearchProducts({ collections: { eq: "featured" } }),
+      getSearchProducts({ collections: { eq: "top-product" } }),
       getSearchProductSubCategories,
       getStoreData,
       getCollectionBySlug("best-seller"),
@@ -67,20 +68,16 @@ export const getStaticProps = async () => {
 
     const { items: bestSellerItems } = searchBestSellerProducts;
     const { items: featuredItems } = searchFeaturedProducts;
+    const { items: recommendedTopProducts } = searchTopProducts;
     const { items: categories } = searchProductSubCategories;
     const [bestSellerCollection] = bestSellerCollectionItem.items;
     const [featuredCollection] = featuredCollectionItem.items;
 
     const { title, name, description, webUrl, imageUrl, banners } = store;
 
-    const recommendedProducts = await getRecommendedProducts({
-      limit: bestSellerItems.length + 4,
-      excludeItems: bestSellerItems.map((b) => b.id),
-    });
-
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
     const featuredProducts = setSoldOutLast(featuredItems);
-    const topProducts = setSoldOutLast(recommendedProducts);
+    const topProducts = setSoldOutLast(recommendedTopProducts);
 
     const brands = [
       "/images/brands/1.png",
