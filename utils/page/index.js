@@ -7,7 +7,6 @@ import {
   getStoreBanners,
   getCollectionType,
 } from "~/graphql/api";
-import getRecommendedProducts from "../recommendedProduct";
 import { setSoldOutLast } from "~/utils/products";
 import { getDefaultSorting } from "..";
 
