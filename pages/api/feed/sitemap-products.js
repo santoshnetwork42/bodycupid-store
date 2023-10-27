@@ -23,7 +23,7 @@ export default async function Revalidate(req, res) {
         ...items.map((product) => ({
           loc: `https://bodycupid.com/product/${product.slug}`,
           lastmod: product.updatedAt,
-          changefreq: 'weekly',
+          changefreq: "weekly",
         }))
       );
 

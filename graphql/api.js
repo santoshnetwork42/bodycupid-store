@@ -1848,6 +1848,7 @@ export const searchCollectionTypes = /* GraphQL */ `
         imageUrl
         defaultSorting
         isArchive
+        updatedAt
       }
     }
   }

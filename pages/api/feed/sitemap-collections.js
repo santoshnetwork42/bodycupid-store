@@ -1,4 +1,4 @@
-import { searchCollections } from "~/graphql/api";
+import { searchCollectionTypes } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
@@ -10,21 +10,19 @@ export default async function Revalidate(req, res) {
     let collectionUrls = [];
 
     const fetchCollectionData = async (token) => {
-      const response = await fetchData(searchCollections, {
+      const response = await fetchData(searchCollectionTypes, {
         filter: {
-          status: { eq: "ENABLED" },
           storeId: { eq: STORE_ID },
         },
         nextToken: token,
       });
 
-      const { items, nextToken: newToken } = response.searchCollections;
-      console.log("item", items)
+      const { items, nextToken: newToken } = response.searchCollectionTypes;
       collectionUrls.push(
         ...items.map((collection) => ({
           loc: `https://bodycupid.com/collection/${collection.slug}`,
-          lastmod: "",
-          changefreq: 'weekly',
+          lastmod: collection.updatedAt,
+          changefreq: "weekly",
         }))
       );
 
