@@ -10,14 +10,14 @@ import {
 import { setSoldOutLast } from "~/utils/products";
 import { getDefaultSorting } from "..";
 
-const getSearchProducts = (filter) =>
+const getSearchProducts = (filter, limit) =>
   fetchData(findProducts, {
     filter: {
       storeId: { eq: STORE_ID },
       status: { eq: "ENABLED" },
       ...filter,
     },
-    limit: 8,
+    limit: limit,
     sort: [{ field: "position", direction: "asc" }],
     variantFilter: {
       status: { eq: "ENABLED" },
@@ -57,9 +57,9 @@ export const getStaticProps = async () => {
       { searchCollectionTypes: bestSellerCollectionItem },
       { searchCollectionTypes: featuredCollectionItem },
     ] = await Promise.all([
-      getSearchProducts({ collections: { eq: "best-seller" } }),
-      getSearchProducts({ collections: { eq: "featured" } }),
-      getSearchProducts({ collections: { eq: "top-product" } }),
+      getSearchProducts({ collections: { eq: "best-seller" } }, 8),
+      getSearchProducts({ collections: { eq: "featured" } }, 8),
+      getSearchProducts({ collections: { eq: "top-products" } }, 12),
       getSearchProductSubCategories,
       getStoreData,
       getCollectionBySlug("best-seller"),
@@ -75,9 +75,14 @@ export const getStaticProps = async () => {
 
     const { title, name, description, webUrl, imageUrl, banners } = store;
 
+    const excludeItems = bestSellerItems.map((b) => b.id);
+    const filteredTopProducts = recommendedTopProducts.filter(
+      ({ id }) => !excludeItems.includes(id)
+    );
+
     const bestSellerProducts = setSoldOutLast(bestSellerItems);
     const featuredProducts = setSoldOutLast(featuredItems);
-    const topProducts = setSoldOutLast(recommendedTopProducts);
+    const topProducts = setSoldOutLast(filteredTopProducts);
 
     const brands = [
       "/images/brands/1.png",
