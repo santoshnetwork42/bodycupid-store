@@ -70,7 +70,7 @@ export const getStaticProps = async () => {
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: recommendedTopProducts } = searchTopProducts;
     const { items: categories } = searchProductSubCategories;
-    const [bestSellerCollection] = bestSellerCollectionItem.items;
+    const [bestSellerCollection] = bestSellerCollectionItem.items; 
     const [featuredCollection] = featuredCollectionItem.items;
 
     const { title, name, description, webUrl, imageUrl, banners } = store;
