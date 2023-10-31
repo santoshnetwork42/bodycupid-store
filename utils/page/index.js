@@ -59,7 +59,7 @@ export const getStaticProps = async () => {
     ] = await Promise.all([
       getSearchProducts({ collections: { eq: "best-seller" } }, 8),
       getSearchProducts({ collections: { eq: "featured" } }, 8),
-      getSearchProducts({ collections: { eq: "top-products" } }, 12),
+      getSearchProducts({ collections: { eq: "top-products" } }, 16),
       getSearchProductSubCategories,
       getStoreData,
       getCollectionBySlug("best-seller"),
@@ -70,7 +70,7 @@ export const getStaticProps = async () => {
     const { items: featuredItems } = searchFeaturedProducts;
     const { items: recommendedTopProducts } = searchTopProducts;
     const { items: categories } = searchProductSubCategories;
-    const [bestSellerCollection] = bestSellerCollectionItem.items; 
+    const [bestSellerCollection] = bestSellerCollectionItem.items;
     const [featuredCollection] = featuredCollectionItem.items;
 
     const { title, name, description, webUrl, imageUrl, banners } = store;
