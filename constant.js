@@ -5,8 +5,7 @@ export const EMAIl_REGEX =
 export const PRODUCT_TAG_LIST = [
   "best-seller",
   "featured",
-  "trending",
-  "top-product",
+  "trending"
 ];
 
 export const DEFAULT_SORTING = {

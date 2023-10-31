@@ -165,7 +165,7 @@ function ProductListOne(props) {
   }, [sectionId]);
 
   useEffect(() => {
-    if (sectionId !== "top-product") {
+    if (sectionId !== "top-products") {
       getProducts(true);
       resetFilter(true);
     }
