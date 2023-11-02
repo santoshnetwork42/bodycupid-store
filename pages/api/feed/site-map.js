@@ -81,9 +81,9 @@ export default async function Revalidate(req, res) {
     };
 
     await Promise.all([
-      fetchAndPushData(searchProductsBasic, "storeId"),
-      fetchAndPushData(searchCollectionTypes, "storeId"),
-      fetchAndPushData(getHomePageBlogs, "storeId"),
+      fetchProductData(),
+      fetchCollectionData(),
+      fetchBlogData(),
     ]);
 
     const siteMapLinks = [
