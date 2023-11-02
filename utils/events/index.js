@@ -101,6 +101,7 @@ export const itemMapper = (product, coupon) => {
       currency: "INR",
       num_items: 1,
       value: price,
+      price: price,
     },
     pinpoint: {
       item_id: id,

@@ -1047,71 +1047,71 @@ export const getProductById = /* GraphQL */ `
   }
 `;
 
-export const getRecommendedProductById = /* GraphQL */ `
-  query GetProduct(
-    $id: ID!
-    $variantFilter: ModelVariantFilterInput
-    $variantLimit: Int
-    $imageLimit: Int
-  ) {
-    getProduct(id: $id) {
-      id
-      title
-      collections
-      vendor
-      subCategory {
-        name
-        slug
-      }
-      isFeatured
-      category {
-        name
-        slug
-      }
-      slug
-      price
-      sku
-      status
-      collectionsList {
-        label
-      }
-      position
-      listingPrice
-      tags
-      inventory
-      blockedInventory
-      continueSellingOutOfStock
-      rating
-      totalRatings
-      thumbImages
-      isInventoryEnabled
-      totalOrders
-      variants(filter: $variantFilter, limit: $variantLimit) {
-        items {
-          id
-          title
-          price
-          position
-          listingPrice
-          imageUrl
-          inventory
-          blockedInventory
-        }
-      }
-      images(limit: $imageLimit) {
-        items {
-          id
-          position
-          alt
-          width
-          height
-          imageKey
-          isThumb
-        }
-      }
-    }
-  }
-`;
+// export const getRecommendedProductById = /* GraphQL */ `
+//   query GetProduct(
+//     $id: ID!
+//     $variantFilter: ModelVariantFilterInput
+//     $variantLimit: Int
+//     $imageLimit: Int
+//   ) {
+//     getProduct(id: $id) {
+//       id
+//       title
+//       collections
+//       vendor
+//       subCategory {
+//         name
+//         slug
+//       }
+//       isFeatured
+//       category {
+//         name
+//         slug
+//       }
+//       slug
+//       price
+//       sku
+//       status
+//       collectionsList {
+//         label
+//       }
+//       position
+//       listingPrice
+//       tags
+//       inventory
+//       blockedInventory
+//       continueSellingOutOfStock
+//       rating
+//       totalRatings
+//       thumbImages
+//       isInventoryEnabled
+//       totalOrders
+//       variants(filter: $variantFilter, limit: $variantLimit) {
+//         items {
+//           id
+//           title
+//           price
+//           position
+//           listingPrice
+//           imageUrl
+//           inventory
+//           blockedInventory
+//         }
+//       }
+//       images(limit: $imageLimit) {
+//         items {
+//           id
+//           position
+//           alt
+//           width
+//           height
+//           imageKey
+//           isThumb
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export const getProductSlug = /* GraphQL */ `
   query SearchProducts(
