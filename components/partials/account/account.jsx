@@ -41,12 +41,12 @@ const MOBILE_TABS = [
     href: "/pages/account-details",
     activeTab: 2,
   },
-  {
-    tabName: "My rewards",
-    svg: <Discount size={16} />,
-    href: "/pages/rewards",
-    activeTab: 3,
-  },
+  // {
+  //   tabName: "My rewards",
+  //   svg: <Discount size={16} />,
+  //   href: "/pages/rewards",
+  //   activeTab: 3,
+  // },
 ];
 
 function AccountsTabs({
