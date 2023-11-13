@@ -1,7 +1,6 @@
 import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
-import { SEMANTIC_SEARCH_API_URL, SEMANTIC_SEARCH_THRESHOLD } from "~/constant";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -183,23 +182,19 @@ export function initializeMoengageAndAddInfo({
 
 export async function fetchSearchItems(search) {
   try {
-    const response = await fetch(
-      `${SEMANTIC_SEARCH_API_URL}?query=${search}&threshold=${SEMANTIC_SEARCH_THRESHOLD}`
-    );
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
+    const response = await fetch(`/api/search?search=${search}`);
     const data = await response.json();
-    return data.results.map((item) => {
-      const [, slug] = item.link.match(/products\/([^?]+)/);
-      item.imageUrl = item.imageUrl.split("/public/")[1] || "";
-      item.slug = slug;
-      item.price = Number(item.price.split(" ")[0]);
-      item.listingPrice = Number(item.listingPrice.split(" ")[0]);
-      return item;
-    });
+    return data.results.map(
+      ({ productId, price, sale_price, image_link, ...item }) => {
+        const [, slug] = item.link.match(/products\/([^?]+)/);
+        item.id = productId;
+        item.slug = slug;
+        item.imageUrl = image_link.split("/public/")[1] || "";
+        item.price = Number(sale_price.split(" ")[0]);
+        item.listingPrice = Number(price.split(" ")[0]);
+        return item;
+      }
+    );
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];

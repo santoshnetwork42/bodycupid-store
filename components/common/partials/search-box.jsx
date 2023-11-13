@@ -52,7 +52,7 @@ function SearchForm({ type = "input", defaultSearch = "", productSearched }) {
       let timerId = setTimeout(() => {
         searchProducts(search);
         setTimer(null);
-      }, 500);
+      }, 800);
 
       setTimer(timerId);
     }
