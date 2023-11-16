@@ -184,17 +184,12 @@ export async function fetchSearchItems(search) {
   try {
     const response = await fetch(`/api/search?search=${search}`);
     const data = await response.json();
-    return data.results.map(
-      ({ productId, price, sale_price, image_link, ...item }) => {
-        const [, slug] = item.link.match(/products\/([^?]+)/);
-        item.id = productId;
-        item.slug = slug;
-        item.imageUrl = image_link.split("/public/")[1] || "";
-        item.price = Number(sale_price.split(" ")[0]);
-        item.listingPrice = Number(price.split(" ")[0]);
-        return item;
-      }
-    );
+    return data.results.map(({ imageUrl, ...item }) => {
+      const [, slug] = item.link.match(/products\/([^?]+)/);
+      item.slug = slug;
+      item.imageUrl = imageUrl.split("/public/")[1] || "";
+      return item;
+    });
   } catch (error) {
     console.error("Error fetching items:", error);
     return [];

@@ -1,4 +1,7 @@
-const { TTM_CLIENT, TTM_API_KEY } = process.env;
+const TTM_CLIENT_URL = process.env.TTM_CLIENT_URL;
+const TTM_CLIENT_API_KEY = process.env.TTM_CLIENT_API_KEY;
+const TTM_CLIENT = process.env.TTM_CLIENT;
+const TTM_CLIENT_THRESHOLD = process.env.TTM_CLIENT_THRESHOLD;
 
 export default async function Search(req, res) {
   if (!req.query.search) {
@@ -10,10 +13,10 @@ export default async function Search(req, res) {
   }
 
   const response = await fetch(
-    `https://dev.devxtechnology.com/${TTM_CLIENT}/search?query=${req.query.search}&threshold=0.687`,
+    `${TTM_CLIENT_URL}/search?query=${req.query.search}&threshold=${TTM_CLIENT_THRESHOLD}`,
     {
       headers: {
-        Authorization: `Bearer ${TTM_API_KEY}`,
+        Authorization: `Bearer ${TTM_CLIENT_API_KEY}`,
       },
     }
   ).then((resp) => resp.json());
