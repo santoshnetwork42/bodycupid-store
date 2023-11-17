@@ -1,6 +1,5 @@
 const TTM_CLIENT_URL = process.env.TTM_CLIENT_URL;
 const TTM_CLIENT_API_KEY = process.env.TTM_CLIENT_API_KEY;
-const TTM_CLIENT = process.env.TTM_CLIENT;
 const TTM_CLIENT_THRESHOLD = process.env.TTM_CLIENT_THRESHOLD;
 
 export default async function Search(req, res) {
@@ -20,5 +19,6 @@ export default async function Search(req, res) {
       },
     }
   ).then((resp) => resp.json());
+
   res.json(response);
 }

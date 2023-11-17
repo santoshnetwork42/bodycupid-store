@@ -12,6 +12,3 @@ export const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 export const CUSTOMER_GLU_KEY = process.env.NEXT_PUBLIC_CUSTOMER_GLU_KEY;
 export const GOOGLE_VERIFICATION_TAG =
   process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_TAG;
-// export const TTM_CLIENT_URL = process.env.TTM_CLIENT_URL;
-// export const TTM_CLIENT_API_KEY = process.env.TTM_CLIENT_API_KEY;
-// export const TTM_CLIENT_THRESHOLD = process.env.TTM_CLIENT_THRESHOLD;
