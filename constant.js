@@ -2,11 +2,7 @@ export const PHONE_REGEX = /^\d{10}$/;
 export const EMAIl_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-export const PRODUCT_TAG_LIST = [
-  "best-seller",
-  "featured",
-  "trending"
-];
+export const PRODUCT_TAG_LIST = ["best-seller", "featured", "trending"];
 
 export const DEFAULT_SORTING = {
   RECOMMENDED: "default",
@@ -26,7 +22,4 @@ export const GEOCODING_API_URL =
   "https://maps.googleapis.com/maps/api/geocode/json";
 export const MAX_COD_AMOUNT = "MAX_COD_AMOUNT";
 
-export const SEMANTIC_SEARCH_API_URL =
-  "https://d1pnavmgsqoqas.cloudfront.net/api/bodycupid/search";
-export const SEMANTIC_SEARCH_THRESHOLD = 0.69;
 export const LIMITED_TIME_DEAL_DURATION = 2;
