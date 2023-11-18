@@ -400,7 +400,8 @@ export function* eventsSaga() {
         isFirstTimeUser
       );
 
-      const { firstName, lastName, email, phone, city, pinCode } = user;
+      const { firstName, lastName, email, phone, city, pinCode } = address;
+
       initializeMoengageAndAddInfo({
         firstName,
         lastName,
