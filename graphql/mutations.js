@@ -108,6 +108,7 @@ export const deleteProductCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -154,6 +155,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -170,6 +172,7 @@ export const deleteProductSubCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -266,6 +269,7 @@ export const deleteProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -286,6 +290,7 @@ export const deleteProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -1318,6 +1323,42 @@ export const deletePayment = /* GraphQL */ `
     }
   }
 `;
+export const deleteSurvey = /* GraphQL */ `
+  mutation DeleteSurvey(
+    $input: DeleteSurveyInput!
+    $condition: ModelSurveyConditionInput
+  ) {
+    deleteSurvey(input: $input, condition: $condition) {
+      id
+      title
+      type
+      name
+      options
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteUserSurvey = /* GraphQL */ `
+  mutation DeleteUserSurvey(
+    $input: DeleteUserSurveyInput!
+    $condition: ModelUserSurveyConditionInput
+  ) {
+    deleteUserSurvey(input: $input, condition: $condition) {
+      id
+      surveyId
+      userId
+      orderId
+      suveryTitle
+      response
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const deleteCoupon = /* GraphQL */ `
   mutation DeleteCoupon(
     $input: DeleteCouponInput!
@@ -1643,6 +1684,7 @@ export const createProductCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -1690,6 +1732,7 @@ export const updateProductCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -1736,6 +1779,7 @@ export const createProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -1752,6 +1796,7 @@ export const createProductSubCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -1798,6 +1843,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -1814,6 +1860,7 @@ export const updateProductSubCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -1827,40 +1874,29 @@ export const createStoreSetting = /* GraphQL */ `
   ) {
     createStoreSetting(input: $input, condition: $condition) {
       id
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        trackingUrl
-        imageUrl
-        darkImageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
       clientId
       constants {
         ORDER_CODE_PREFIX
         DOMAIN
+        EMAIL_FROM_ADDRESS
         __typename
       }
-      messageSettings {
-        fromAddress
-        __typename
-      }
-      razorpaySettings {
+      razorpay {
         encryptionWebhookSecret
         keyId
         keySecret
         __typename
       }
-      gupshupSettings {
-        message
-        smsAccountId
-        smsAccountPassword
+      email {
+        __typename
+      }
+      sms {
+        __typename
+      }
+      gupshup {
+        id
+        accountId
+        accountPassword
         __typename
       }
       createdAt
@@ -1876,40 +1912,29 @@ export const updateStoreSetting = /* GraphQL */ `
   ) {
     updateStoreSetting(input: $input, condition: $condition) {
       id
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        trackingUrl
-        imageUrl
-        darkImageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
       clientId
       constants {
         ORDER_CODE_PREFIX
         DOMAIN
+        EMAIL_FROM_ADDRESS
         __typename
       }
-      messageSettings {
-        fromAddress
-        __typename
-      }
-      razorpaySettings {
+      razorpay {
         encryptionWebhookSecret
         keyId
         keySecret
         __typename
       }
-      gupshupSettings {
-        message
-        smsAccountId
-        smsAccountPassword
+      email {
+        __typename
+      }
+      sms {
+        __typename
+      }
+      gupshup {
+        id
+        accountId
+        accountPassword
         __typename
       }
       createdAt
@@ -1925,40 +1950,29 @@ export const deleteStoreSetting = /* GraphQL */ `
   ) {
     deleteStoreSetting(input: $input, condition: $condition) {
       id
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        trackingUrl
-        imageUrl
-        darkImageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
       clientId
       constants {
         ORDER_CODE_PREFIX
         DOMAIN
+        EMAIL_FROM_ADDRESS
         __typename
       }
-      messageSettings {
-        fromAddress
-        __typename
-      }
-      razorpaySettings {
+      razorpay {
         encryptionWebhookSecret
         keyId
         keySecret
         __typename
       }
-      gupshupSettings {
-        message
-        smsAccountId
-        smsAccountPassword
+      email {
+        __typename
+      }
+      sms {
+        __typename
+      }
+      gupshup {
+        id
+        accountId
+        accountPassword
         __typename
       }
       createdAt
@@ -2318,6 +2332,7 @@ export const createProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -2338,6 +2353,7 @@ export const createProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -2483,6 +2499,7 @@ export const updateProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -2503,6 +2520,7 @@ export const updateProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -3390,6 +3408,78 @@ export const updateOrderProduct = /* GraphQL */ `
       quantity
       price
       status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createSurvey = /* GraphQL */ `
+  mutation CreateSurvey(
+    $input: CreateSurveyInput!
+    $condition: ModelSurveyConditionInput
+  ) {
+    createSurvey(input: $input, condition: $condition) {
+      id
+      title
+      type
+      name
+      options
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateSurvey = /* GraphQL */ `
+  mutation UpdateSurvey(
+    $input: UpdateSurveyInput!
+    $condition: ModelSurveyConditionInput
+  ) {
+    updateSurvey(input: $input, condition: $condition) {
+      id
+      title
+      type
+      name
+      options
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createUserSurvey = /* GraphQL */ `
+  mutation CreateUserSurvey(
+    $input: CreateUserSurveyInput!
+    $condition: ModelUserSurveyConditionInput
+  ) {
+    createUserSurvey(input: $input, condition: $condition) {
+      id
+      surveyId
+      userId
+      orderId
+      suveryTitle
+      response
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateUserSurvey = /* GraphQL */ `
+  mutation UpdateUserSurvey(
+    $input: UpdateUserSurveyInput!
+    $condition: ModelUserSurveyConditionInput
+  ) {
+    updateUserSurvey(input: $input, condition: $condition) {
+      id
+      surveyId
+      userId
+      orderId
+      suveryTitle
+      response
       createdAt
       updatedAt
       __typename
@@ -5274,6 +5364,15 @@ export const exportProducts = /* GraphQL */ `
 export const exportOrders = /* GraphQL */ `
   mutation ExportOrders($input: ExportOrderInput!) {
     exportOrders(input: $input) {
+      success
+      message
+      __typename
+    }
+  }
+`;
+export const recordUserSurvey = /* GraphQL */ `
+  mutation RecordUserSurvey($input: [RecordUserSurveyInput!]!) {
+    recordUserSurvey(input: $input) {
       success
       message
       __typename
