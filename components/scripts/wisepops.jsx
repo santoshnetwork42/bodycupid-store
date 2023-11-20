@@ -79,13 +79,11 @@ function Wisepops({ user, openLogin, showTopRunner }) {
 
   return (
     <>
-      {!!showTopRunner && (
-        <Script
-          data-cfasync="false"
-          src={`https://wisepops.net/loader.js?v=2&h=${WISEPOPS_KEY}`}
-          strategy="afterInteractive"
-        />
-      )}
+      <Script
+        data-cfasync="false"
+        src={`https://wisepops.net/loader.js?v=2&h=${WISEPOPS_KEY}`}
+        strategy="afterInteractive"
+      />
     </>
   );
 }
