@@ -11,7 +11,6 @@ import { errorHandler } from "~/utils/errorHandler";
 import { fetchCityAndState } from "~/utils/addAddress";
 import { eventActions } from "~/store/events";
 import { useCartTotal } from "~/utils/hooks/useCart";
-import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 const AddressForm = (props) => {
   const { defaultAddress, user, onAddress, onSubmit, addressAdded } = props;
