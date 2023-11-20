@@ -10,5 +10,6 @@ export const HOTJAR_SNIPPET_VERSION =
 export const OPTIMONK_ID = process.env.NEXT_PUBLIC_OPTIMONK_ID;
 export const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 export const CUSTOMER_GLU_KEY = process.env.NEXT_PUBLIC_CUSTOMER_GLU_KEY;
+export const WISEPOPS_KEY = process.env.WISEPOPS_KEY;
 export const GOOGLE_VERIFICATION_TAG =
   process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_TAG;
