@@ -171,7 +171,7 @@ export function initializeMoengageAndAddInfo({
 }) {
   const Moengage = window?.Moengage;
   if (Moengage) {
-    const mobile = phone.split("+91")[1];
+    const mobile = phone?.split("+91")[1];
     Moengage.add_first_name(firstName);
     Moengage.add_last_name(lastName);
     Moengage.add_email(email);
