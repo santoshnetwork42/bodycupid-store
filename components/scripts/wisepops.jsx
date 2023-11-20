@@ -7,7 +7,7 @@ import { WISEPOPS_KEY } from "~/config";
 import { modalActions } from "~/store/modal";
 import { useUpdateUserCoupon } from "~/utils/contexts/navbar";
 
-function Wisepops({ user, openLogin, showTopRunner }) {
+function Wisepops({ user, openLogin }) {
   const [isBeforeFormSubmitListenerAdded, setIsBeforeFormSubmitListenerAdded] =
     useState(false);
   const [isAfterFormSubmitListenerAdded, setIsAfterFormSubmitListenerAdded] =
@@ -79,13 +79,11 @@ function Wisepops({ user, openLogin, showTopRunner }) {
 
   return (
     <>
-      {!!showTopRunner && (
-        <Script
-          data-cfasync="false"
-          src={`https://wisepops.net/loader.js?v=2&h=${WISEPOPS_KEY}`}
-          strategy="afterInteractive"
-        />
-      )}
+      <Script
+        data-cfasync="false"
+        src={`https://wisepops.net/loader.js?v=2&h=${WISEPOPS_KEY}`}
+        strategy="afterInteractive"
+      />
     </>
   );
 }
