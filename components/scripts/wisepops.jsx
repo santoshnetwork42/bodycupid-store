@@ -69,6 +69,7 @@ function Wisepops({ user, openLogin, showTopRunner }) {
         beforeFormSubmitHandler
       );
       setIsBeforeFormSubmitListenerAdded(false);
+
       window.removeEventListener(
         "wisepops.after-form-submit",
         afterFormSubmitHandler
