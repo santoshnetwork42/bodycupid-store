@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Script from "next/script";
 import { connect } from "react-redux";
 import { alertToaster } from "~/utils/popupHelper";
 import { WISEPOPS_KEY } from "~/config";
 
-import { modalActions } from "~/store/modal";
 import { useUpdateUserCoupon } from "~/utils/contexts/navbar";
 
-function Wisepops({ user, openLogin, showTopRunner }) {
+function Wisepops({ user }) {
   const [isBeforeFormSubmitListenerAdded, setIsBeforeFormSubmitListenerAdded] =
     useState(false);
   const [isAfterFormSubmitListenerAdded, setIsAfterFormSubmitListenerAdded] =
@@ -15,23 +14,9 @@ function Wisepops({ user, openLogin, showTopRunner }) {
 
   const [, updateCoupon] = useUpdateUserCoupon();
 
-  const beforeFormSubmitHandler = useCallback(
-    (event) => {
-      if (!user) {
-        event.detail.popup
-          .getElement("wisepops-close")
-          .querySelector("button.wisepops-close")
-          .click();
-        event.detail.target
-          .querySelector("button")
-          .setCustomValidity("Please login");
-        openLogin(false);
-      } else {
-        event.detail.target.querySelector("button").setCustomValidity("");
-      }
-    },
-    [user]
-  );
+  const beforeFormSubmitHandler = useCallback((event) => {
+    event.detail.target.querySelector("button").setCustomValidity("");
+  }, []);
 
   const afterFormSubmitHandler = (event) => {
     if (
@@ -94,6 +79,4 @@ function mapStateToProps(state) {
     user: state.user.data,
   };
 }
-export default connect(mapStateToProps, {
-  openLogin: modalActions.openPasswordlessModal,
-})(Wisepops);
+export default connect(mapStateToProps, {})(Wisepops);
