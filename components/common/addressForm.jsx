@@ -40,8 +40,9 @@ const AddressForm = (props) => {
     }
   }, []);
 
+  const isEditMode = !!defaultAddress?.name;
+
   useEffect(() => {
-    const isEditMode = !!defaultAddress?.name;
     if (
       address.pinCode.length === 6 &&
       (!isEditMode ||
@@ -273,7 +274,7 @@ const AddressForm = (props) => {
           type="submit"
           disabled={loading}
         >
-          {address.id ? "Save Address" : "Add Address"}
+          {address.id || isEditMode ? "Save Address" : "Add Address"}
           {loading && <div className="spin-loader ml-2" />}
         </button>
       </form>

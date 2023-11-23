@@ -321,6 +321,7 @@ export const getProductCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -352,6 +353,7 @@ export const listProductCategories = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -392,6 +394,7 @@ export const bystoreIdProductCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -432,6 +435,7 @@ export const byslugProductCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -472,6 +476,7 @@ export const searchProductCategories = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -535,6 +540,7 @@ export const getProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -551,6 +557,7 @@ export const getProductSubCategory = /* GraphQL */ `
         __typename
       }
       isArchive
+      longDescription
       createdAt
       updatedAt
       __typename
@@ -583,6 +590,7 @@ export const listProductSubCategories = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -624,6 +632,7 @@ export const bystoreIdProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -665,6 +674,7 @@ export const bycategoryIDProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -706,6 +716,7 @@ export const byslugProductSubCategory = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -747,6 +758,7 @@ export const searchProductSubCategories = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -777,40 +789,29 @@ export const getStoreSetting = /* GraphQL */ `
   query GetStoreSetting($id: ID!) {
     getStoreSetting(id: $id) {
       id
-      store {
-        id
-        name
-        title
-        description
-        isActive
-        webUrl
-        trackingUrl
-        imageUrl
-        darkImageUrl
-        createdAt
-        updatedAt
-        __typename
-      }
       clientId
       constants {
         ORDER_CODE_PREFIX
         DOMAIN
+        EMAIL_FROM_ADDRESS
         __typename
       }
-      messageSettings {
-        fromAddress
-        __typename
-      }
-      razorpaySettings {
+      razorpay {
         encryptionWebhookSecret
         keyId
         keySecret
         __typename
       }
-      gupshupSettings {
-        message
-        smsAccountId
-        smsAccountPassword
+      email {
+        __typename
+      }
+      sms {
+        __typename
+      }
+      gupshup {
+        id
+        accountId
+        accountPassword
         __typename
       }
       createdAt
@@ -838,15 +839,15 @@ export const listStoreSettings = /* GraphQL */ `
     }
   }
 `;
-export const byClientIdStore = /* GraphQL */ `
-  query ByClientIdStore(
+export const byClientIdStoreSetting = /* GraphQL */ `
+  query ByClientIdStoreSetting(
     $clientId: String!
     $sortDirection: ModelSortDirection
     $filter: ModelStoreSettingFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    byClientIdStore(
+    byClientIdStoreSetting(
       clientId: $clientId
       sortDirection: $sortDirection
       filter: $filter
@@ -1328,6 +1329,7 @@ export const getProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -1348,6 +1350,7 @@ export const getProduct = /* GraphQL */ `
         bannerUrl
         showInMenu
         isArchive
+        longDescription
         createdAt
         updatedAt
         __typename
@@ -3167,6 +3170,73 @@ export const byorderIdcreatedAtOrderProduct = /* GraphQL */ `
     }
   }
 `;
+export const byproductIdcreatedAtOrderProduct = /* GraphQL */ `
+  query ByproductIdcreatedAtOrderProduct(
+    $productId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byproductIdcreatedAtOrderProduct(
+      productId: $productId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        orderId
+        storeId
+        productId
+        variantId
+        sku
+        returnReason
+        returnDate
+        returnAWB
+        returnShippingProvider
+        title
+        shippingMethodCode
+        cashOnDeliveryCharges
+        sellingPrice
+        shippingCharges
+        discount
+        totalPrice
+        currency
+        onHold
+        facilityCode
+        gstin
+        additionalInfo
+        centralGstPercentage
+        compensationCessPercentage
+        integratedGstPercentage
+        stateGstPercentage
+        taxRate
+        unionTerritoryGstPercentage
+        deliveryPartner
+        shippingCourier
+        dispatchDate
+        invoiceDate
+        invoiceNumber
+        tentativeDeliveryDate
+        trackingId
+        freeQuantity
+        cancelledQuantity
+        quantity
+        price
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const searchOrderProducts = /* GraphQL */ `
   query SearchOrderProducts(
     $filter: SearchableOrderProductFilterInput
@@ -3429,6 +3499,115 @@ export const byorderIdcreatedAtPayment = /* GraphQL */ `
         status
         amount
         paymentDate
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getSurvey = /* GraphQL */ `
+  query GetSurvey($id: ID!) {
+    getSurvey(id: $id) {
+      id
+      title
+      type
+      name
+      options
+      status
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listSurveys = /* GraphQL */ `
+  query ListSurveys(
+    $filter: ModelSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSurveys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        type
+        name
+        options
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getUserSurvey = /* GraphQL */ `
+  query GetUserSurvey($id: ID!) {
+    getUserSurvey(id: $id) {
+      id
+      surveyId
+      userId
+      orderId
+      suveryTitle
+      response
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listUserSurveys = /* GraphQL */ `
+  query ListUserSurveys(
+    $filter: ModelUserSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserSurveys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        surveyId
+        userId
+        orderId
+        suveryTitle
+        response
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const byUserIdUserSurvey = /* GraphQL */ `
+  query ByUserIdUserSurvey(
+    $userId: ID!
+    $surveyId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserSurveyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byUserIdUserSurvey(
+      userId: $userId
+      surveyId: $surveyId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        surveyId
+        userId
+        orderId
+        suveryTitle
+        response
         createdAt
         updatedAt
         __typename
@@ -5265,15 +5444,6 @@ export const adminGetDashboardData = /* GraphQL */ `
         count
         __typename
       }
-      __typename
-    }
-  }
-`;
-export const getProductRecommendation = /* GraphQL */ `
-  query GetProductRecommendation($input: ProductRecommendationInput!) {
-    getProductRecommendation(input: $input) {
-      productId
-      variantId
       __typename
     }
   }

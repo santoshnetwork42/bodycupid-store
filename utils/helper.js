@@ -1,7 +1,6 @@
 import { getCartTotals } from "utils";
 import { alertToaster } from "./popupHelper";
 import { getFirstVariant } from "./products";
-import { SEMANTIC_SEARCH_API_URL, SEMANTIC_SEARCH_THRESHOLD } from "~/constant";
 
 export const addPhonePrefix = (number) => {
   if (number && !number.includes("+91")) return "+91" + number;
@@ -172,7 +171,7 @@ export function initializeMoengageAndAddInfo({
 }) {
   const Moengage = window?.Moengage;
   if (Moengage) {
-    const mobile = phone.split("+91")[1];
+    const mobile = phone?.split("+91")[1];
     Moengage.add_first_name(firstName);
     Moengage.add_last_name(lastName);
     Moengage.add_email(email);
@@ -183,21 +182,12 @@ export function initializeMoengageAndAddInfo({
 
 export async function fetchSearchItems(search) {
   try {
-    const response = await fetch(
-      `${SEMANTIC_SEARCH_API_URL}?query=${search}&threshold=${SEMANTIC_SEARCH_THRESHOLD}`
-    );
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
+    const response = await fetch(`/api/search?search=${search}`);
     const data = await response.json();
-    return data.results.map((item) => {
+    return data.results.map(({ imageUrl, ...item }) => {
       const [, slug] = item.link.match(/products\/([^?]+)/);
-      item.imageUrl = item.imageUrl.split("/public/")[1] || "";
       item.slug = slug;
-      item.price = Number(item.price.split(" ")[0]);
-      item.listingPrice = Number(item.listingPrice.split(" ")[0]);
+      item.imageUrl = imageUrl.split("/public/")[1] || "";
       return item;
     });
   } catch (error) {

@@ -13,6 +13,7 @@ import { modalActions } from "~/store/modal";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useCartTotal } from "~/utils/hooks/useCart";
 import { eventActions } from "~/store/events";
+import { useGuestCheckout } from "~/utils/contexts/navbar";
 
 function Addresses({
   user,
@@ -32,6 +33,7 @@ function Addresses({
   const [isAddressFormVisible, setIsAddressFormVisible] = useState(false);
 
   const { totalPrice } = useCartTotal();
+  const guestCheckout = useGuestCheckout();
 
   const getUserAddress = useCallback(async () => {
     try {
@@ -86,6 +88,8 @@ function Addresses({
       setAddresses(
         addresses.map((a) => (a.id === defaultAddress.id ? response : a))
       );
+    } else if (!user && defaultAddress?.name) {
+      setAddresses([response]);
     } else {
       setAddresses([...addresses, response]);
     }
@@ -205,13 +209,15 @@ function Addresses({
                             >
                               Edit <i className="far fa-edit"></i>
                             </ALink>
-                            <ALink
-                              href="#"
-                              className="btn btn-link btn-secondary btn-underline ml-3"
-                              onClick={() => removeAddress(adr.id)}
-                            >
-                              Delete <i className="far fa-trash-alt"></i>
-                            </ALink>
+                            {user && (
+                              <ALink
+                                href="#"
+                                className="btn btn-link btn-secondary btn-underline ml-3"
+                                onClick={() => removeAddress(adr.id)}
+                              >
+                                Delete <i className="far fa-trash-alt"></i>
+                              </ALink>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -221,17 +227,21 @@ function Addresses({
               </Fragment>
             ))}
           </div>
-          <button
-            onClick={() => {
-              setOpen(true);
-              setDefaultAddress(null);
-            }}
-            className={`btn btn-primary w-50 ${
-              variant === "CHECKOUT" && "d-sm-none"
-            }`}
-          >
-            ADD NEW ADDRESS
-          </button>
+          {!user && !!guestCheckout && addresses.length > 0 ? (
+            <></>
+          ) : (
+            <button
+              onClick={() => {
+                setOpen(true);
+                setDefaultAddress(null);
+              }}
+              className={`btn btn-primary w-50 ${
+                variant === "CHECKOUT" && "d-sm-none"
+              }`}
+            >
+              ADD NEW ADDRESS
+            </button>
+          )}
         </>
       )}
 
@@ -350,26 +360,32 @@ function Addresses({
                     >
                       Edit <i className="far fa-edit"></i>
                     </ALink>
-                    <ALink
-                      href="#"
-                      className="btn btn-link btn-secondary btn-underline ml-3"
-                      onClick={() => removeAddress(adr.id)}
-                    >
-                      Delete <i className="far fa-trash-alt"></i>
-                    </ALink>
+                    {user && (
+                      <ALink
+                        href="#"
+                        className="btn btn-link btn-secondary btn-underline ml-3"
+                        onClick={() => removeAddress(adr.id)}
+                      >
+                        Delete <i className="far fa-trash-alt"></i>
+                      </ALink>
+                    )}
                   </div>
                 </div>
               ))}
-              <div className="d-flex justify-content-center">
-                <button
-                  onClick={() => {
-                    setIsAddressFormVisible(true);
-                  }}
-                  className={`btn btn-primary `}
-                >
-                  ADD NEW ADDRESS
-                </button>
-              </div>
+              {!user && !!guestCheckout && addresses.length > 0 ? (
+                <></>
+              ) : (
+                <div className="d-flex justify-content-center">
+                  <button
+                    onClick={() => {
+                      setIsAddressFormVisible(true);
+                    }}
+                    className={`btn btn-primary `}
+                  >
+                    ADD NEW ADDRESS
+                  </button>
+                </div>
+              )}
             </>
           ) : (
             <AddressForm
