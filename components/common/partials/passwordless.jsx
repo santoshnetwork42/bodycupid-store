@@ -338,25 +338,6 @@ function Passwordless({
                               Get OTP
                               {loading && <div className="spin-loader ml-2" />}
                             </button>
-                            {!isMobile && (
-                              <p>
-                                By Proceeding you are opting for promotional SMS
-                                & agree to our{" "}
-                                <ALink
-                                  href="/policies/terms-of-service"
-                                  className="link-text"
-                                >
-                                  Terms and Conditions
-                                </ALink>{" "}
-                                and{" "}
-                                <ALink
-                                  href="/policies/privacy-policy"
-                                  className="link-text"
-                                >
-                                  Privacy Policy
-                                </ALink>
-                              </p>
-                            )}
                           </form>
                         )}
                         {/* <div className="form-choice text-center">
