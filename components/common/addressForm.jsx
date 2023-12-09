@@ -28,6 +28,15 @@ const AddressForm = (props) => {
     area: "",
   });
 
+  useEffect(() => {
+    if (user) {
+      setAddress((prevState) => ({
+        ...prevState,
+        phone: user.phone || "",
+      }));
+    }
+  }, [user]);
+
   const { totalPrice } = useCartTotal();
 
   const [errors, setErrors] = useState(null);
