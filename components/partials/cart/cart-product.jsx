@@ -85,7 +85,7 @@ function CartProduct({
     updateCart(cartData);
     if (!finalQty) {
       if (item.cartItemSource === "COUPON") removeCoupon();
-      removeFromCart(item);
+      removeFromCart(item); 
     }
   };
 
