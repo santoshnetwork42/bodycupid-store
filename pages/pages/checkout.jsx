@@ -10,6 +10,7 @@ import {
   useCartTotal,
   useConfiguration,
   useFreeProducts,
+  useInventory,
 } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
@@ -49,7 +50,6 @@ import Card from "~/components/features/accordion/card";
 import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
-import { useInventory } from "~/utils/hooks/useInventory";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
 import { MAX_COD_AMOUNT } from "~/constant";
 import { productDiscountPercentage } from "~/utils/products";
@@ -74,6 +74,7 @@ function Checkout(props) {
     openLogin,
     addPaymentInfo,
     priceMismatch,
+    validateCart,
   } = props;
 
   const { name } = store || {};
@@ -88,7 +89,7 @@ function Checkout(props) {
     inventoryMapping,
     outOfStockItems,
     productWithPrice,
-  } = useInventory();
+  } = useInventory({ validateCart });
 
   const freeProductsResponse = useFreeProducts({
     showNonApplicableFreeProducts: false,
@@ -947,6 +948,7 @@ const Component = connect(mapStateToProps, {
   orderCreated: eventActions.orderCreated,
   addPaymentInfo: eventActions.addPaymentInfo,
   priceMismatch: eventActions.priceMismatch,
+  validateCart: cartActions.validateCart,
 })(Checkout);
 
 Component.hideFooter = true;

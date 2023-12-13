@@ -45,7 +45,6 @@ function DetailOne(props) {
     addToCart,
     removeFromCart,
     closeQuickview,
-    isQuickView,
   } = props;
 
   const [curIndex, setCurIndex] = useState(-1);

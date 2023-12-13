@@ -2,21 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import Head from "next/head";
-import { useCartItems } from "@wow-star/utils";
+import { useCartItems, useInventory } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import Coupons from "~/components/features/coupon";
 import { eventActions } from "~/store/events";
 import { RightAngle } from "~/components/icons";
 import CartProduct from "~/components/partials/cart/cart-product";
-import { useInventory } from "~/utils/hooks/useInventory";
 import { Logger } from "aws-amplify";
 import CartTotal from "~/components/common/partials/cart-totals";
+import { cartActions } from "~/store/cart";
 
 const logger = new Logger("Cart");
 
 function Cart(props) {
-  const { store, appliedCoupon, viewCart } = props;
+  const { store, appliedCoupon, viewCart, validateCart } = props;
   const { name } = store || {};
 
   const lineItems = useCartItems({
@@ -24,7 +24,7 @@ function Cart(props) {
     showNonApplicableFreeProducts: true,
   });
 
-  const inventory = useInventory();
+  const inventory = useInventory({ validateCart });
 
   const { inventoryMapping } = inventory;
 
@@ -121,6 +121,7 @@ function mapStateToProps(state) {
 }
 const Component = connect(mapStateToProps, {
   viewCart: eventActions.viewCart,
+  validateCart: cartActions.validateCart,
 })(Cart);
 
 Component.hideFooter = true;

@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import Image from "next/image";
 import { Logger } from "aws-amplify";
+import { useProductPrice } from "@wow-star/utils";
+
 import ALink from "~/components/features/custom-link";
 import { Star, Eye } from "~/components/icons";
 import { cartActions } from "~/store/cart";
@@ -11,7 +13,6 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { getProductMeta, getProductInventory } from "~/utils/products";
 import Quantity from "~/components/features/quantity";
 import { getRecordKey, getUpdatedCart } from "~/utils/helper";
-import { useProductPrice } from "~/utils/hooks/useProduct";
 import { PRODUCT_TAG_LIST } from "~/constant";
 
 const logger = new Logger("Product-details");
