@@ -5,6 +5,12 @@ import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
 import { Collapse } from "react-bootstrap";
+import {
+  useCartItems,
+  useCartTotal,
+  useConfiguration,
+  useFreeProducts,
+} from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import {
@@ -44,10 +50,7 @@ import PaymentMethods from "~/components/features/payment-radio";
 import { alertToaster } from "~/utils/popupHelper";
 import { useWindowDimensions } from "~/utils/getWindowDimension";
 import { useInventory } from "~/utils/hooks/useInventory";
-import { useCartItems, useCartTotal } from "~/utils/hooks/useCart";
-import { useFreeProducts } from "~/utils/hooks/useCoupon";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
-import { useConfiguration } from "~/utils/contexts/navbar";
 import { MAX_COD_AMOUNT } from "~/constant";
 import { productDiscountPercentage } from "~/utils/products";
 
@@ -87,7 +90,10 @@ function Checkout(props) {
     productWithPrice,
   } = useInventory();
 
-  const freeProductsResponse = useFreeProducts(false);
+  const freeProductsResponse = useFreeProducts({
+    showNonApplicableFreeProducts: false,
+  });
+
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
@@ -122,9 +128,14 @@ function Checkout(props) {
     codCharges,
     appliedCODCharges,
     prepaidDiscountPercent,
-  } = useCartTotal(payMethod);
+  } = useCartTotal({
+    paymentType: payMethod,
+  });
 
-  const cartItems = useCartItems(false, true);
+  const cartItems = useCartItems({
+    showLTOProducts: true,
+    showNonApplicableFreeProducts: false,
+  });
 
   const handlePayment = useCallback(
     async ({ order, paymentId, address }) => {

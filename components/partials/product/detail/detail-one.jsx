@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Collapse from "react-bootstrap/Collapse";
+import { useProductCoupons } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { Star, Bag, BigDot, Clock } from "~/components/icons";
@@ -22,7 +23,6 @@ import { getProductInventory } from "~/utils/products";
 import ProductBestPrice from "~/components/partials/product/product-best-price";
 import { systemActions } from "~/store/system";
 import ProductBreadcrumbs from "~/components/common/partials/product-breadcrumbs";
-import { useProductCoupons } from "~/utils/hooks/useCoupon";
 import { modalActions } from "~/store/modal";
 import useWindowDimensions from "~/utils/getWindowDimension";
 

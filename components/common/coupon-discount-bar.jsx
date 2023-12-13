@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useFeaturedCoupons, useFreeProducts } from "@wow-star/utils";
 
-import { useFeaturedCoupons, useFreeProducts } from "~/utils/hooks/useCoupon";
 import { GiftBox } from "~/components/icons";
 
 const CouponBanner = ({ message, animate }) => (

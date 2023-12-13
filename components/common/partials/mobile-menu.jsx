@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import { connect } from "react-redux";
 import NextImage from "next/image";
+import { useMenu } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { Cross } from "~/components/icons";
 import Card from "~/components/features/accordion/card";
 import { modalActions } from "~/store/modal";
-import { useMenu } from "~/utils/contexts/navbar";
 import { eventActions } from "~/store/events";
 
 function MobileMenu({ user, logout, openPasswordLess, topNavbarClicked }) {

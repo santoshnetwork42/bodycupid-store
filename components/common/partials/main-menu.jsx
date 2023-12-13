@@ -1,10 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { useMenu } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { DownAngle } from "~/components/icons";
 
-import { useMenu } from "~/utils/contexts/navbar";
 import { connect } from "react-redux";
 import { eventActions } from "~/store/events";
 

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import Script from "next/script";
 import { connect } from "react-redux";
 import awaitGlobal from "await-global";
+import { useUpdateUserCoupon } from "@wow-star/utils";
 
 import { CUSTOMER_GLU_KEY } from "~/config";
 import { modalActions } from "~/store/modal";
-import { useUpdateUserCoupon, useIsInteractive } from "~/utils/contexts/navbar";
+import { useIsInteractive } from "~/utils/contexts/navbar";
 
 function CustomerGlu({ user, openLogin }) {
   const [, updateCoupon] = useUpdateUserCoupon();

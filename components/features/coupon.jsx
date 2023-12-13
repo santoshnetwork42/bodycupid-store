@@ -1,15 +1,15 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import { API } from "aws-amplify";
+import { useFeaturedCoupons, getCouponDiscount } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { applyCoupon as applyCouponMutation } from "~/graphql/api";
 import { cartActions } from "~/store/cart";
-import { getCouponMessage, getCouponDiscount } from "~/utils/coupons";
+import { getCouponMessage } from "~/utils/coupons";
 import { toDecimal } from "~/utils";
 import { errorHandler } from "~/utils/errorHandler";
 import { CloseIcon, RightAngle, CouponTag } from "~/components/icons";
-import { useFeaturedCoupons } from "~/utils/hooks/useCoupon";
 import { Logger } from "aws-amplify";
 import { LeftAngle } from "~/components/icons";
 import useWindowDimensions from "~/utils/getWindowDimension";
@@ -58,7 +58,7 @@ function Coupon(props) {
 
   const featuredCoupons = useFeaturedCoupons();
 
-  const { discount: couponTotal, allowed } = useMemo(
+  const { discount: couponTotal } = useMemo(
     () => getCouponDiscount(appliedCoupon, cartList),
     [appliedCoupon, cartList]
   );

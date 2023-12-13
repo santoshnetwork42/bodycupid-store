@@ -2,10 +2,10 @@ import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { Logger } from "aws-amplify";
 import { useRouter } from "next/router";
+import { useCartTotal } from "@wow-star/utils";
 
 import { eventActions } from "~/store/events";
 import { toDecimal } from "~/utils";
-import { useCartTotal } from "~/utils/hooks/useCart";
 import { alertToaster } from "~/utils/popupHelper";
 import { modalActions } from "~/store/modal";
 import { useGuestCheckout } from "~/utils/contexts/navbar";
@@ -39,7 +39,9 @@ function CartTotal({
     prepaidDiscountPercent,
     prepaidGrandTotal,
     cartAmountSaved: totalSaved,
-  } = useCartTotal();
+  } = useCartTotal({
+    paymentType: "PREPAID",
+  });
 
   const totalSavings = Math.round(totalSaved + prepaidDiscount);
 

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
+import { useCartItems } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
 import { Bag, Cart, Cross } from "~/components/icons";
@@ -10,7 +11,6 @@ import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
 
 import { getTotalPrice, getCartCount, toDecimal } from "~/utils";
-import { useCartItems } from "~/utils/hooks/useCart";
 import { useInventory } from "~/utils/hooks/useInventory";
 import CartTotal from "~/components/common/partials/cart-totals";
 import { Logger } from "aws-amplify";
@@ -24,7 +24,10 @@ function CartMenu(props) {
     props;
 
   const router = useRouter();
-  const cartItems = useCartItems();
+  const cartItems = useCartItems({
+    showLTOProducts: false,
+    showNonApplicableFreeProducts: true,
+  });
   const inventory = useInventory();
 
   const { inventoryMapping } = inventory;
