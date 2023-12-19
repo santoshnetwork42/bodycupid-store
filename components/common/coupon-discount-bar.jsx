@@ -20,37 +20,40 @@ const CouponBanner = ({ message, animate }) => (
 
 const couponDiscountBar = ({ cartList, appliedCoupon }) => {
   const featuredCoupons = useFeaturedCoupons();
-  const freeProductsResponse = useFreeProducts(false);
+  const [freeProduct] = useFreeProducts({
+    showNonApplicableFreeProducts: false,
+  });
 
   const bxgyCoupon = featuredCoupons.find(
-    (coupon) => coupon.couponType === "BUY_X_GET_Y" && coupon.autoApply
+    ({ coupon }) =>
+      coupon && coupon.couponType === "BUY_X_GET_Y" && coupon.autoApply
   );
 
   const bxayCoupon = featuredCoupons.find(
-    (coupon) => coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
+    ({ coupon }) =>
+      coupon && coupon.couponType === "BUY_X_AT_Y" && coupon.autoApply
   );
 
-  const [freeProduct] = freeProductsResponse;
   const hasCartItems = cartList?.length > 0;
 
   if (hasCartItems) {
     if (
       bxgyCoupon &&
-      (!appliedCoupon || appliedCoupon.code === bxgyCoupon.code)
+      (!appliedCoupon || appliedCoupon.code === bxgyCoupon.coupon.code)
     ) {
       const couponText = bxgyCoupon?.allowed
         ? `Congrats, your free product is added to cart!`
-        : `Add more items to unlock 'Buy ${bxgyCoupon.buyXQuantity} get ${bxgyCoupon.getYQuantity} Offer'`;
+        : `Add more items to unlock 'Buy ${bxgyCoupon.coupon.buyXQuantity} get ${bxgyCoupon.coupon.getYQuantity} Offer'`;
       return (
         <CouponBanner message={couponText} animate={!!bxgyCoupon.allowed} />
       );
     } else if (
       bxayCoupon &&
-      (!appliedCoupon || appliedCoupon.code === bxayCoupon.code)
+      (!appliedCoupon || appliedCoupon.code === bxayCoupon.coupon.code)
     ) {
       const couponText = bxayCoupon?.allowed
-        ? `Congrats, 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer' can be availed!`
-        : `Add more items to unlock 'Buy ${bxayCoupon.buyXQuantity} @ ₹${bxayCoupon.getYAmount} Offer'`;
+        ? `Congrats, 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Offer' can be availed!`
+        : `Add more items to unlock 'Buy ${bxayCoupon.coupon.buyXQuantity} @ ₹${bxayCoupon.coupon.getYAmount} Offer'`;
       return (
         <CouponBanner message={couponText} animate={!!bxayCoupon.allowed} />
       );
