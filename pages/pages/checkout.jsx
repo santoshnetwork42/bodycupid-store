@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import Head from "next/head";
-import { API } from "aws-amplify";
 import { useRouter } from "next/router";
 import { Logger } from "aws-amplify";
 import { Collapse } from "react-bootstrap";
@@ -11,35 +10,22 @@ import {
   useConfiguration,
   useFreeProducts,
   useInventory,
+  useOrders,
 } from "@wow-star/utils";
 
 import ALink from "~/components/features/custom-link";
-import {
-  createTransaction,
-  validateTransaction,
-  getOrderStatus,
-  createNewOrder,
-  byorderIdcreatedAtPayment,
-  getOrderSuccess,
-} from "~/graphql/api";
 
-import { createUserAddress } from "~/graphql/mutations";
 import { toDecimal } from "~/utils";
 import { cartActions } from "~/store/cart";
 import { modalActions } from "~/store/modal";
 import { eventActions } from "~/store/events";
 import Addresses from "~/components/common/addresses";
 import loadScript from "~/utils/loadScript";
-import { STORE_ID, RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
+import { RAZORPAY_SCRIPT, RAZORPAY_KEY } from "~/config";
 import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import Passwordless from "~/components/common/partials/passwordless";
-import {
-  validateAddress,
-  getProperAddress,
-  isValidAddress,
-} from "~/utils/address";
+import { isValidAddress } from "~/utils/address";
 import PaymentLoader from "~/components/common/partials/payment-loader";
-import { errorHandler } from "~/utils/errorHandler";
 import {
   DownAngle,
   RightAngle,
@@ -70,10 +56,8 @@ function Checkout(props) {
     placeOrder: onPlaceOrder,
     startCheckout,
     openAllAddressModal,
-    recordOutOfStock,
     openLogin,
     addPaymentInfo,
-    priceMismatch,
     validateCart,
   } = props;
 
@@ -83,13 +67,9 @@ function Checkout(props) {
   const maxCOD = useConfiguration(MAX_COD_AMOUNT, -1);
 
   const { isSmallSize: isMobile } = useWindowDimensions();
-  const {
-    ready: isInventoryCheckReady,
-    success: isInventoryCheckSuccess,
-    inventoryMapping,
-    outOfStockItems,
-    productWithPrice,
-  } = useInventory({ validateCart });
+  const { ready: isInventoryCheckReady, inventoryMapping } = useInventory({
+    validateCart,
+  });
 
   const freeProductsResponse = useFreeProducts({
     showNonApplicableFreeProducts: false,
@@ -98,10 +78,14 @@ function Checkout(props) {
   const router = useRouter();
   const [payMethod, setFirst] = useState("PREPAID");
   const [shippingAddress, setAddress] = useState(null);
-  const [loading, setLoading] = useState(null);
   const [formErorr, setFormErorr] = useState(null);
-  const [orderData, setOrderData] = useState(null);
   const [isCollapse, setIsCollapse] = useState(false);
+
+  const [
+    { isConfirmed, order: finalOrder, loading },
+    placeOrderV1,
+    orderHelper,
+  ] = useOrders();
 
   const freeProducts = useMemo(
     () => freeProductsResponse.map((f) => f.product),
@@ -123,7 +107,6 @@ function Checkout(props) {
     couponTotal,
     grandTotal,
     prepaidDiscount,
-    totalDiscount,
     codGrandTotal,
     prepaidGrandTotal,
     codCharges,
@@ -138,295 +121,103 @@ function Checkout(props) {
     showNonApplicableFreeProducts: false,
   });
 
-  const handlePayment = useCallback(
-    async ({ order, paymentId, address }) => {
-      const { id: orderId } = order;
+  const afterOrderConfirm = async () => {
+    if (isConfirmed && finalOrder) {
+      onPlaceOrder(
+        finalOrder,
+        [...cartList, ...freeProducts],
+        appliedCoupon,
+        shippingAddress,
+        payMethod
+      );
 
-      const [
-        rzpEnabled,
-        {
-          data: { createTransaction: transaction },
-        },
-      ] = await Promise.all([
-        loadScript(RAZORPAY_SCRIPT),
-        API.graphql({
-          query: createTransaction,
-          variables: { orderId },
-          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-        }),
-      ]);
+      logger.debug("Purchase event done");
+      logger.debug("Redirecting to success page");
 
-      if (rzpEnabled && transaction && store) {
-        const options = {
-          key: RAZORPAY_KEY,
-          amount: transaction.amount,
-          currency: "INR",
-          name: store?.name,
-          image: getPublicImageURL(store?.imageUrl),
-          order_id: transaction.orderId,
-          handler: async function ({ razorpay_payment_id }) {
-            setOrderData({ order, paymentId: razorpay_payment_id });
-          },
-          prefill: {
-            name: address.name,
-            email: address.email,
-            contact: address.phone,
-          },
-          notes: {
-            storeId: store?.id,
-            orderId,
-            paymentId,
-          },
-          theme: {
-            color: "#3399cc",
-          },
-          modal: {
-            ondismiss: function () {
-              razorpayMethod = null;
-              setLoading(false);
-              setOrderData(null);
-            },
-          },
-        };
-
-        razorpayMethod = new Razorpay(options);
-        razorpayMethod.open();
-        addPaymentInfo();
-        logger.verbose("Razorpay initialization");
-      } else {
-        setLoading(false);
-        alertToaster("Something went wrong. Try Again!", "error");
-        logger.error("Something went wrong with Razorpay initialization");
+      if (razorpayMethod) {
+        logger.debug("Closing razorpay modal");
+        razorpayMethod.close();
       }
-    },
-    [store, user, cartList]
-  );
+
+      await router.push(`/order/${finalOrder.id}`);
+      await emptyCart();
+    }
+  };
 
   useEffect(() => {
-    let intervalId = null,
-      success = false;
-
-    if (!!orderData && orderData.order) {
-      const { order, paymentId } = orderData;
-      const { id: orderId } = order;
-      intervalId = setInterval(async () => {
-        try {
-          if (success) return;
-
-          if (paymentId) {
-            success = await API.graphql({
-              query: validateTransaction,
-              variables: { orderId, razorpayPaymentId: paymentId },
-            }).then(
-              (validateTransactionResponse) =>
-                validateTransactionResponse.data.validateTransaction.success
-            );
-          } else {
-            success = await API.graphql({
-              query: getOrderStatus,
-              variables: { id: orderId },
-            }).then(
-              (getOrderStatusResponse) =>
-                !!getOrderStatusResponse.data.getOrder.code &&
-                getOrderStatusResponse.data.getOrder.status === "CONFIRMED"
-            );
-          }
-
-          if (success) {
-            const successOrder = await API.graphql({
-              query: getOrderSuccess,
-              variables: { id: orderId },
-            }).then(
-              (getOrderStatusResponse) => getOrderStatusResponse.data.getOrder
-            );
-
-            logger.info("Payment completion");
-
-            logger.debug("Purchase event");
-            onPlaceOrder(
-              successOrder,
-              [...cartList, ...freeProducts],
-              appliedCoupon,
-              shippingAddress,
-              payMethod
-            );
-
-            logger.debug("Purchase event done");
-            logger.debug("Redirecting to success page");
-
-            if (razorpayMethod) {
-              logger.debug("Closing razorpay modal");
-
-              razorpayMethod.close();
-            }
-
-            const orderUrl = paymentId
-              ? `/order/${orderId}?paymentId=${paymentId}`
-              : `/order/${orderId}`;
-            await router.push(orderUrl);
-            await emptyCart();
-          }
-        } catch (error) {
-          errorHandler(error);
-          logger.error("Error while validating transaction", error);
-        }
-      }, 2000);
-    } else if (intervalId) {
-      clearInterval(intervalId);
-      intervalId = null;
+    if (isConfirmed) {
+      afterOrderConfirm();
     }
+  }, [isConfirmed]);
 
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [orderData?.order, orderData?.paymentId]);
+  const placeOrder = async (e) => {
+    e.preventDefault();
+    const [
+      { success, code, formError, order, payment, transaction },
+      rzpEnabled,
+    ] = await Promise.all([
+      placeOrderV1({
+        paymentMethod: payMethod,
+        address: shippingAddress,
+        metadata,
+      }),
+      loadScript(RAZORPAY_SCRIPT),
+    ]);
 
-  const addUserAddress = useCallback(async () => {
-    const tempAddress = getProperAddress(shippingAddress);
-    const { id: ignoreId, ...restAddress } = tempAddress;
-    if (user && !ignoreId) {
-      try {
-        await API.graphql({
-          query: createUserAddress,
-          variables: { input: { ...restAddress, userID: user?.id } },
-          authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-        });
-      } catch (error) {
-        errorHandler(error);
-        logger.error("Error while adding user address", error);
+    if (!success) {
+      alertToaster("Something went wrong. Try Again!");
+      if (code === "INVALID_ADDRESS") {
+        setFormErorr(formError);
       }
     }
 
-    return Promise.resolve(null);
-  }, [shippingAddress, user]);
-
-  const priceVerified = useMemo(() => {
-    if (productWithPrice) {
-      return cartList.every((c) => c.price === productWithPrice[c.recordKey]);
-    }
-    return false;
-  }, [productWithPrice, cartList]);
-
-  const placeOrder = useCallback(
-    async (e) => {
-      e.preventDefault();
-      setLoading(true);
-
-      if (!isInventoryCheckSuccess) {
-        recordOutOfStock(outOfStockItems, inventoryMapping);
-        alertToaster("Please remove out of stock product from cart", "error");
-        logger.error("Out of stock product added in cart", error);
-        setLoading(false);
-        return;
-      }
-
-      if (payMethod === "NONE") {
-        alertToaster("Please select payment method", "error");
-        logger.error("No payment method selected by user");
-        setLoading(false);
-        return;
-      }
-
-      if (!priceVerified) {
-        alertToaster("Price updated. Add products again", "error");
-        logger.error("Price updated. Add products again");
-        priceMismatch();
-        setLoading(false);
-        return;
-      }
-
-      const formErrors = await validateAddress(shippingAddress, payMethod);
-      setFormErorr(formErrors);
-
-      if (!formErrors) {
-        try {
-          const tempAddress = getProperAddress(shippingAddress);
-          const { id: ignoreId, ...restAddress } = tempAddress;
-
-          const productIds = cartList
-            .filter((p) => p.cartItemSource !== "COUPON")
-            .map(({ id, variantId, qty, cartItemSource: source = null }) => ({
-              productId: id,
-              variantId,
-              quantity: qty,
-              source,
-            }));
-
-          const payload = {
-            products: productIds,
-            shippingAddress: restAddress,
-            billingAddress: restAddress,
-            couponCode: appliedCoupon?.code,
-            storeId: STORE_ID,
-            paymentType: payMethod,
-            ...metadata,
+    if (success) {
+      if (payMethod === "PREPAID") {
+        if (rzpEnabled && store && transaction && order) {
+          const options = {
+            key: RAZORPAY_KEY,
+            amount: transaction.amount,
+            currency: "INR",
+            name: store.name,
+            image: getPublicImageURL(store.imageUrl),
+            order_id: transaction.orderId,
+            handler: async function ({ razorpay_payment_id }) {
+              orderHelper.fetchTransactionStatus(order.id, razorpay_payment_id);
+            },
+            prefill: {
+              name: shippingAddress.name,
+              email: shippingAddress.email,
+              contact: shippingAddress.phone,
+            },
+            notes: {
+              storeId: store.id,
+              orderId: order.id,
+              paymentId: payment.id,
+            },
+            theme: {
+              color: "#3399cc",
+            },
+            modal: {
+              ondismiss: function () {
+                orderHelper.reset();
+                razorpayMethod = null;
+              },
+            },
           };
 
-          const {
-            data: { createNewOrder: order },
-          } = await API.graphql({
-            query: createNewOrder,
-            variables: { input: payload },
-            authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-          });
-
-          logger.debug("Created order:", order);
-
-          const promise = [
-            API.graphql({
-              query: byorderIdcreatedAtPayment,
-              variables: {
-                orderId: order.id,
-              },
-              authMode: !!user ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
-            }),
-            addUserAddress(),
-          ];
-
-          const [paymentResponse] = await Promise.all(promise);
-          const [payment] =
-            paymentResponse.data.byorderIdcreatedAtPayment.items;
-
-          setOrderData({ order, paymentId: null });
-          if (payment.method === "ONLINE") {
-            handlePayment({
-              order,
-              paymentId: payment.id,
-              address: restAddress,
-            });
-          }
-        } catch (error) {
-          setLoading(false);
-          errorHandler(error);
+          razorpayMethod = new Razorpay(options);
+          razorpayMethod.open();
+          addPaymentInfo();
+          logger.verbose("Razorpay initialization");
+        } else {
+          alertToaster("Something went wrong. Try Again!", "error");
+          logger.error("Something went wrong with Razorpay initialization");
         }
       }
+    }
 
-      return false;
-    },
-    [
-      user,
-      isFirst,
-      appliedCoupon,
-      shippingAddress,
-      cartList,
-      createUserAddress,
-      handlePayment,
-      priceVerified,
-      grandTotal,
-      shippingTotal,
-      couponTotal,
-      prepaidDiscount,
-      metadata,
-      totalDiscount,
-      totalPrice,
-      payMethod,
-      freeProducts,
-      isInventoryCheckSuccess,
-      outOfStockItems,
-      inventoryMapping,
-      appliedCODCharges,
-    ]
-  );
+    return Promise.resolve();
+  };
 
   const { codCouponDisabled, onlineDisabled } = useMemo(() => {
     return {
@@ -445,7 +236,7 @@ function Checkout(props) {
 
       <h1 className="d-none">{name} - Checkout</h1>
 
-      {!!orderData && <PaymentLoader loading />}
+      {!!finalOrder && loading && <PaymentLoader loading />}
 
       {!user && !guestCheckout && <Passwordless forceOpen redirect={false} />}
 
