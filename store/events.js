@@ -355,7 +355,16 @@ export function* eventsSaga() {
       const { value, pixel, vercel, pinpoint, ga, moengage } =
         itemMapper(product);
 
-      moeEvent("Product Viewed", moengage.productViewed);
+      if (window?.Moengage) {
+        moeEvent("Product Viewed", moengage.productViewed);
+      } else {
+        window?.addEventListener("MOE_LIFECYCLE", function (e) {
+          if (e.detail.name === "SDK_INITIALIZED") {
+            moeEvent("Product Viewed", moengage.productViewed);
+          }
+        });
+      }
+
       dataLayer.push({ ecommerce: null, attribute: null, user: null });
       dataLayer.push({
         event: "view_item",
@@ -735,9 +744,19 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.CATEGORY_VIEWED, function* saga(e) {
-    moeEvent("Category Viewed", {
-      ...e.payload,
-    });
+    if (window?.Moengage) {
+      moeEvent("Category Viewed", {
+        ...e.payload,
+      });
+    } else {
+      window?.addEventListener("MOE_LIFECYCLE", function (e) {
+        if (e.detail.name === "SDK_INITIALIZED") {
+          moeEvent("Category Viewed", {
+            ...e.payload,
+          });
+        }
+      });
+    }
   });
 
   yield takeEvery(actionTypes.TILE_CLICKED, function* saga(e) {
@@ -745,6 +764,7 @@ export function* eventsSaga() {
       ...e.payload,
     });
   });
+
   yield takeEvery(actionTypes.TOP_NAVBAR_CLICKED, function* saga(e) {
     moeEvent("Top Navbar clicked", {
       ...e.payload,
@@ -771,14 +791,21 @@ export function* eventsSaga() {
   });
 
   yield takeEvery(actionTypes.HOME_VIEWED, function* () {
-    window?.addEventListener("MOE_LIFECYCLE", function (e) {
-      if (e.detail.name === "SDK_INITIALIZED") {
-        moeEvent("Home Viewed", {
-          URL: window.location.href,
-          Source: eventSource,
-        });
-      }
-    });
+    if (window?.Moengage) {
+      moeEvent("Home Viewed", {
+        URL: window.location.href,
+        Source: eventSource,
+      });
+    } else {
+      window?.addEventListener("MOE_LIFECYCLE", function (e) {
+        if (e.detail.name === "SDK_INITIALIZED") {
+          moeEvent("Home Viewed", {
+            URL: window.location.href,
+            Source: eventSource,
+          });
+        }
+      });
+    }
   });
 
   yield takeEvery(actionTypes.LOG_OUT, function* saga(e) {
