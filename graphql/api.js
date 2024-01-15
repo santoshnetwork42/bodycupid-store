@@ -1137,6 +1137,22 @@ export const getProductSlug = /* GraphQL */ `
   }
 `;
 
+export const searchProductsForSitemap = /* GraphQL */ `
+  query SearchProducts(
+    $filter: SearchableProductFilterInput
+    $nextToken: String
+  ) {
+    searchProducts(filter: $filter, nextToken: $nextToken) {
+      nextToken
+      items {
+        id
+        slug
+        updatedAt
+      }
+    }
+  }
+`;
+
 export const searchProductsBasic = /* GraphQL */ `
   query SearchProducts(
     $filter: SearchableProductFilterInput
@@ -1814,6 +1830,21 @@ export const getHomePageBlogs = /* GraphQL */ `
           pageURL
         }
         createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+
+export const searchCollectionTypesForSitemap = /* GraphQL */ `
+  query SearchCollectionTypes(
+    $filter: SearchableCollectionTypeFilterInput
+    $nextToken: String
+  ) {
+    searchCollectionTypes(filter: $filter, nextToken: $nextToken) {
+      items {
+        id
+        slug
         updatedAt
       }
     }

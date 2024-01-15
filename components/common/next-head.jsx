@@ -13,7 +13,6 @@ function NextHead({
     <Head>
       <meta charSet="UTF-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"

@@ -1,20 +1,19 @@
 import {
-  searchProductsBasic,
-  searchCollectionTypes,
-  getHomePageBlogs,
+  searchProductsForSitemap,
+  searchCollectionTypesForSitemap,
 } from "~/graphql/api";
 import fetchData from "~/utils/fetchData";
 import { STORE_ID } from "~/config";
 
-const { STORE_ENV } = process.env;
+const { STORE_ENV, NEXT_PUBLIC_SITE_URL } = process.env;
 
 export default async function Revalidate(req, res) {
   try {
-    let nextToken = null;
-    let sitemapEntries = [];
+    const productSitemapEntries = [];
+    const collSitemapEntries = [];
 
     const fetchProductData = async (token) => {
-      const response = await fetchData(searchProductsBasic, {
+      const response = await fetchData(searchProductsForSitemap, {
         filter: {
           status: { eq: "ENABLED" },
           storeId: { eq: STORE_ID },
@@ -23,9 +22,9 @@ export default async function Revalidate(req, res) {
       });
 
       const { items, nextToken: newToken } = response.searchProducts;
-      sitemapEntries.push(
+      productSitemapEntries.push(
         ...items.map((product) => ({
-          loc: `https://bodycupid.com/product/${product.slug}`,
+          loc: `${NEXT_PUBLIC_SITE_URL}/products/${product.slug}`,
           lastmod: product.updatedAt,
           changefreq: "weekly",
         }))
@@ -37,7 +36,7 @@ export default async function Revalidate(req, res) {
     };
 
     const fetchCollectionData = async (token) => {
-      const response = await fetchData(searchCollectionTypes, {
+      const response = await fetchData(searchCollectionTypesForSitemap, {
         filter: {
           storeId: { eq: STORE_ID },
         },
@@ -45,9 +44,9 @@ export default async function Revalidate(req, res) {
       });
 
       const { items, nextToken: newToken } = response.searchCollectionTypes;
-      sitemapEntries.push(
+      collSitemapEntries.push(
         ...items.map((collection) => ({
-          loc: `https://bodycupid.com/collection/${collection.slug}`,
+          loc: `${NEXT_PUBLIC_SITE_URL}/collections/${collection.slug}`,
           lastmod: collection.updatedAt,
           changefreq: "weekly",
         }))
@@ -58,50 +57,22 @@ export default async function Revalidate(req, res) {
       }
     };
 
-    const fetchBlogData = async (token) => {
-      const response = await fetchData(getHomePageBlogs, {
-        filter: {
-          storeId: { eq: STORE_ID },
-        },
-        nextToken: token,
-      });
-
-      const { items, nextToken: newToken } = response.searchBlogs;
-      sitemapEntries.push(
-        ...items.map((blog) => ({
-          loc: blog.title,
-          lastmod: blog.updatedAt,
-          changefreq: "weekly",
-        }))
-      );
-
-      if (newToken) {
-        await fetchBlogData(newToken);
-      }
-    };
-
-    await Promise.all([
-      fetchProductData(),
-      fetchCollectionData(),
-      fetchBlogData(),
-    ]);
+    if (STORE_ENV === "production") {
+      await Promise.all([fetchProductData(), fetchCollectionData()]);
+    }
 
     const siteMapLinks = [
       {
-        loc: "https://bodycupid.com/sitemap.xml",
+        loc: `${NEXT_PUBLIC_SITE_URL}/sitemap.xml`,
       },
-      ...sitemapEntries,
+      ...productSitemapEntries,
+      ...collSitemapEntries,
     ];
 
-    if (STORE_ENV !== "production" && false) {
-      const content = ["User-agent: *", "Disallow: /"].join("\n");
-      res.send(content);
-    } else {
-      const sitemapContent = buildSitemapXml(siteMapLinks);
-      res.setHeader("Content-Type", "application/xml");
-      res.write(sitemapContent);
-      res.end();
-    }
+    const sitemapContent = buildSitemapXml(siteMapLinks);
+    res.setHeader("Content-Type", "application/xml");
+    res.write(sitemapContent);
+    res.end();
   } catch (error) {
     console.log("Error fetching data:", error);
     res.status(500).send("Error fetching data");
