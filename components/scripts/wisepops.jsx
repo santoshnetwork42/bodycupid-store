@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { alertToaster } from "~/utils/popupHelper";
 import { WISEPOPS_KEY } from "~/config";
 
-import { useIsInteractive, useUpdateUserCoupon } from "~/utils/contexts/navbar";
+import { useUpdateUserCoupon } from "~/utils/contexts/navbar";
 
 function Wisepops({ user }) {
-  const isInteractive = useIsInteractive();
   const [isBeforeFormSubmitListenerAdded, setIsBeforeFormSubmitListenerAdded] =
     useState(false);
   const [isAfterFormSubmitListenerAdded, setIsAfterFormSubmitListenerAdded] =
@@ -62,8 +61,6 @@ function Wisepops({ user }) {
       setIsAfterFormSubmitListenerAdded(false);
     };
   }, [user]);
-
-  if (!isInteractive) return <></>;
 
   return (
     <>
