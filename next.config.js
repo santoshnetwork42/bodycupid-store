@@ -17,8 +17,10 @@ const nextConfig = withBundleAnalyzer({
         source: "/robots.txt",
         destination: "/api/robots",
       },
+      { source: "/sitemap.xml", destination: "/api/sitemap" },
     ];
   },
+
   async redirects() {
     return [
       {
