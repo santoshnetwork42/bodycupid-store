@@ -146,6 +146,7 @@ export const eventActions = {
 
 export function* eventsSaga() {
   const eventSource = getSource();
+  window.dataLayer = window.dataLayer || [];
 
   yield takeEvery(actionTypes.OUT_OF_STOCK, function* saga(e) {
     try {

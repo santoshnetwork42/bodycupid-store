@@ -210,10 +210,10 @@ const App = ({ Component, pageProps }) => {
           persistor={store.__persistor}
           loading={<Loader loading={true} />}
         >
-          <Scripts />
           <ABProvider>
             <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
+                <Scripts />
                 <Component {...pageProps} />
                 <VercelAnalytics />
                 <Wisepops />
