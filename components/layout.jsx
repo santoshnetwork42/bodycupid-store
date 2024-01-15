@@ -11,7 +11,6 @@ import Footer from "~/components/common/footer";
 import Passwordless from "~/components/common/partials/passwordless";
 import Quickview from "~/components/features/product/common/quickview-modal";
 import LoginModal from "~/components/features/modals/login-modal";
-import VideoModal from "~/components/features/modals/video-modal";
 import MobileMenu from "~/components/common/partials/mobile-menu";
 
 import { modalActions } from "~/store/modal";
@@ -116,7 +115,6 @@ function Layout({
 
       <Quickview />
       <LoginModal />
-      <VideoModal />
       <Passwordless />
     </>
   );

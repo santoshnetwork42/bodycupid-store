@@ -245,12 +245,6 @@ function DetailOne(props) {
 
   return (
     <div className={`product-details ${adClass}`}>
-      {/* {isNav && (
-        <div className="product-navigation">
-          <ProductNav product={product} />
-        </div>
-      )} */}
-
       <div className="mb-3 mt-3 d-sm-none">
         <ProductBreadcrumbs {...product} />
       </div>
