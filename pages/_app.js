@@ -4,7 +4,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
-import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import awaitGlobal from "await-global";
 
 import "~/public/sass/style.scss";
@@ -24,7 +23,6 @@ import { errorHandler } from "~/utils/errorHandler";
 import Scripts from "~/components/scripts";
 import NextHead from "~/components/common/next-head";
 import Loader from "~/components/common/partials/loader";
-import Wisepops from "~/components/scripts/wisepops.jsx";
 
 import NavbarProvider from "~/utils/contexts/navbar";
 import ABProvider from "~/utils/contexts/ab";
@@ -215,8 +213,6 @@ const App = ({ Component, pageProps }) => {
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Scripts />
                 <Component {...pageProps} />
-                <VercelAnalytics />
-                <Wisepops />
               </Layout>
             </NavbarProvider>
           </ABProvider>
