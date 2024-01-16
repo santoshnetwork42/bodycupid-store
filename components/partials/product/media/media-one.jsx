@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-// import { Magnifier } from "react-image-magnifiers";
 import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";

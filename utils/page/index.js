@@ -116,7 +116,7 @@ export const getStaticProps = async () => {
           featuredCollection.defaultSorting
         ),
       },
-      revalidate: 60,
+      revalidate: 1800,
     };
   } catch (error) {
     console.log(error);
