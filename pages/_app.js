@@ -29,6 +29,7 @@ import ABProvider from "~/utils/contexts/ab";
 import { GUEST_CHECKOUT_COOKIE_EXPIRY } from "~/constant.js";
 
 Amplify.configure({ ...awsconfig, ssr: true });
+Analytics.disable();
 
 const logger = new Logger("App");
 
@@ -74,16 +75,16 @@ const App = ({ Component, pageProps }) => {
           });
 
           store.dispatch(userActions.setUser(getUserResponse));
-          await Analytics.updateEndpoint({
-            userId: getUserResponse.id,
-            userAttributes: {
-              username: [getUserResponse.id],
-              email: [getUserResponse.email || null],
-              phone: [getUserResponse.phone || null],
-              firstName: [getUserResponse.firstName || null],
-              lastName: [getUserResponse.lastName || null],
-            },
-          }).catch(() => null);
+          // await Analytics.updateEndpoint({
+          //   userId: getUserResponse.id,
+          //   userAttributes: {
+          //     username: [getUserResponse.id],
+          //     email: [getUserResponse.email || null],
+          //     phone: [getUserResponse.phone || null],
+          //     firstName: [getUserResponse.firstName || null],
+          //     lastName: [getUserResponse.lastName || null],
+          //   },
+          // }).catch(() => null);
         }
       }
     } catch (error) {

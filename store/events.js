@@ -1,5 +1,5 @@
 import { takeEvery, select, call } from "redux-saga/effects";
-import { API, Analytics } from "aws-amplify";
+import { API } from "aws-amplify";
 import { persistReducer } from "redux-persist";
 import { v4 as uuid } from "uuid";
 import vercelAnalytics from "@vercel/analytics";
@@ -167,7 +167,7 @@ export function* eventsSaga() {
               ...payload,
             });
           }
-          Analytics.record({ name: "out_of_stock", attributes: payload });
+          // Analytics.record({ name: "out_of_stock", attributes: payload });
           vercelAnalytics.track("out_of_stock", payload);
         });
       }
@@ -187,7 +187,7 @@ export function* eventsSaga() {
           attribute: { search_term: term },
         });
       }
-      Analytics.record({ name: "search", attributes: { search_term: term } });
+      // Analytics.record({ name: "search", attributes: { search_term: term } });
       vercelAnalytics.track("search", { searchTerm: term });
     } catch (e) {
       errorHandler(e);
@@ -268,7 +268,7 @@ export function* eventsSaga() {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
         window.dataLayer.push({ event: action, eventID: uuid() });
       }
-      Analytics.record({ name: action });
+      // Analytics.record({ name: action });
       vercelAnalytics.track(action);
     } catch (e) {
       errorHandler(e);
@@ -286,10 +286,10 @@ export function* eventsSaga() {
           login: userData ? 1 : 0,
         });
       }
-      Analytics.record({
-        name: "proceed_to_checkout",
-        login: userData ? "1" : "0",
-      });
+      // Analytics.record({
+      //   name: "proceed_to_checkout",
+      //   login: userData ? "1" : "0",
+      // });
       vercelAnalytics.track("proceed_to_checkout", { login: userData ? 1 : 0 });
     } catch (e) {
       errorHandler(e);
@@ -300,8 +300,7 @@ export function* eventsSaga() {
     try {
       const { product } = e.payload;
       const { qty } = product;
-      const { value, pixel, vercel, pinpoint, ga, moengage } =
-        itemMapper(product);
+      const { value, pixel, vercel, ga, moengage } = itemMapper(product);
       const eventName = qty > 0 ? "add_to_cart" : "remove_from_cart";
 
       const userData = yield select((state) => state.user.data);
@@ -322,7 +321,7 @@ export function* eventsSaga() {
           },
         });
       }
-      Analytics.record({ name: eventName, pinpoint, metrics: { value } });
+      // Analytics.record({ name: eventName, pinpoint, metrics: { value } });
       vercelAnalytics.track(eventName, vercel);
     } catch (e) {
       errorHandler(e);
@@ -332,8 +331,7 @@ export function* eventsSaga() {
   yield takeEvery(cartActions.REMOVE_FROM_CART, function* saga(e) {
     try {
       const { product } = e.payload;
-      const { value, pixel, vercel, pinpoint, ga, moengage } =
-        itemMapper(product);
+      const { value, pixel, vercel, ga, moengage } = itemMapper(product);
 
       trackEvent("Removed From Cart", moengage.removedFromCart);
       if (window && window.dataLayer) {
@@ -349,11 +347,11 @@ export function* eventsSaga() {
           },
         });
       }
-      Analytics.record({
-        name: "remove_from_cart",
-        pinpoint,
-        metrics: { value },
-      });
+      // Analytics.record({
+      //   name: "remove_from_cart",
+      //   pinpoint,
+      //   metrics: { value },
+      // });
       vercelAnalytics.track("remove_from_cart", vercel);
     } catch (e) {
       errorHandler(e);
@@ -363,8 +361,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_ITEM, function* saga(e) {
     try {
       const { product } = e.payload;
-      const { value, pixel, vercel, pinpoint, ga, moengage } =
-        itemMapper(product);
+      const { value, pixel, vercel, ga, moengage } = itemMapper(product);
 
       trackEvent("Product Viewed", moengage.productViewed);
 
@@ -381,7 +378,7 @@ export function* eventsSaga() {
           },
         });
       }
-      Analytics.record({ name: "view_item", pinpoint, metrics: { value } });
+      // Analytics.record({ name: "view_item", pinpoint, metrics: { value } });
       vercelAnalytics.track("view_item", vercel);
     } catch (e) {
       errorHandler(e);
@@ -397,7 +394,7 @@ export function* eventsSaga() {
       const userData = yield select((state) => state.user.data);
       const user = userMapper(userData, address);
       const isFirstTimeUser = user?.totalOrders > 0 ? false : true;
-      const { pinpoint, ga, pixel, vercel } = orderMapper(products, coupon);
+      const { ga, pixel, vercel } = orderMapper(products, coupon);
       const { orderCreated } = moEngagedOrderMapper(
         products,
         coupon,
@@ -457,19 +454,19 @@ export function* eventsSaga() {
         });
       }
 
-      Analytics.record({
-        name: "purchase",
-        attributes: {
-          transaction_id: id,
-          value: totalAmount.toString(),
-          tax: "0",
-          discount: totalDiscount.toString(),
-          shipping: totalShippingCharges.toString(),
-          currency: "INR",
-          coupon: coupon?.code || "",
-        },
-        metrics: { value: totalAmount },
-      });
+      // Analytics.record({
+      //   name: "purchase",
+      //   attributes: {
+      //     transaction_id: id,
+      //     value: totalAmount.toString(),
+      //     tax: "0",
+      //     discount: totalDiscount.toString(),
+      //     shipping: totalShippingCharges.toString(),
+      //     currency: "INR",
+      //     coupon: coupon?.code || "",
+      //   },
+      //   metrics: { value: totalAmount },
+      // });
 
       vercelAnalytics.track("purchase", {
         transaction_id: id,
@@ -481,20 +478,20 @@ export function* eventsSaga() {
         coupon: coupon?.code || "",
       });
 
-      pinpoint.forEach((attr) => {
-        Analytics.record({
-          name: "purchase_item",
-          attributes: {
-            ...attr,
-            transaction_id: id,
-            value: totalAmount.toString(),
-            tax: "0",
-            shipping: totalShippingCharges.toString(),
-            currency: "INR",
-            coupon: coupon?.code || "",
-          },
-        });
-      });
+      // pinpoint.forEach((attr) => {
+      //   Analytics.record({
+      //     name: "purchase_item",
+      //     attributes: {
+      //       ...attr,
+      //       transaction_id: id,
+      //       value: totalAmount.toString(),
+      //       tax: "0",
+      //       shipping: totalShippingCharges.toString(),
+      //       currency: "INR",
+      //       coupon: coupon?.code || "",
+      //     },
+      //   });
+      // });
 
       vercel.forEach((attr) => {
         vercelAnalytics.track("purchase_item", {
@@ -536,31 +533,31 @@ export function* eventsSaga() {
         });
       }
 
-      Analytics.record({
-        name: "begin_checkout",
-        attributes: {
-          currency: "INR",
-          coupon: coupon?.code || "",
-        },
-        metrics: { value },
-      });
+      // Analytics.record({
+      //   name: "begin_checkout",
+      //   attributes: {
+      //     currency: "INR",
+      //     coupon: coupon?.code || "",
+      //   },
+      //   metrics: { value },
+      // });
 
       vercelAnalytics.track("begin_checkout", {
         currency: "INR",
         coupon: coupon?.code || "",
       });
 
-      pinpoint.forEach((attr) => {
-        Analytics.record({
-          name: "begin_chekout_item",
-          attributes: {
-            ...attr,
-            value: value.toString(),
-            currency: "INR",
-            coupon: coupon?.code || "",
-          },
-        });
-      });
+      // pinpoint.forEach((attr) => {
+      //   Analytics.record({
+      //     name: "begin_chekout_item",
+      //     attributes: {
+      //       ...attr,
+      //       value: value.toString(),
+      //       currency: "INR",
+      //       coupon: coupon?.code || "",
+      //     },
+      //   });
+      // });
 
       // vercel.forEach((attr) => {
       //   vercelAnalytics.track("begin_chekout_item", {
@@ -581,7 +578,7 @@ export function* eventsSaga() {
         cart: { data, coupon },
       } = yield select();
 
-      const { pinpoint, ga, value, pixel } = orderMapper(data, coupon);
+      const { ga, value, pixel } = orderMapper(data, coupon);
       const { cartViewed } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Cart Viewed", cartViewed);
@@ -601,31 +598,31 @@ export function* eventsSaga() {
         });
       }
 
-      Analytics.record({
-        name: "view_cart",
-        attributes: {
-          currency: "INR",
-          coupon: coupon?.code || "",
-        },
-        metrics: { value },
-      });
+      // Analytics.record({
+      //   name: "view_cart",
+      //   attributes: {
+      //     currency: "INR",
+      //     coupon: coupon?.code || "",
+      //   },
+      //   metrics: { value },
+      // });
 
       vercelAnalytics.track("view_cart", {
         currency: "INR",
         coupon: coupon?.code || "",
       });
 
-      pinpoint.forEach((attr) => {
-        Analytics.record({
-          name: "view_cart_item",
-          attributes: {
-            ...attr,
-            value: value.toString(),
-            currency: "INR",
-            coupon: coupon?.code || "",
-          },
-        });
-      });
+      // pinpoint.forEach((attr) => {
+      //   Analytics.record({
+      //     name: "view_cart_item",
+      //     attributes: {
+      //       ...attr,
+      //       value: value.toString(),
+      //       currency: "INR",
+      //       coupon: coupon?.code || "",
+      //     },
+      //   });
+      // });
 
       // vercel.forEach((attr) => {
       //   vercelAnalytics.track("view_cart_item", {
@@ -643,7 +640,7 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.VIEW_LIST_ITEM, function* saga(e) {
     try {
       const { id, name, products } = e.payload;
-      const { pinpoint, ga, pixel, vercel } = orderMapper(products);
+      const { ga, pixel } = orderMapper(products);
       if (window && window.dataLayer) {
         window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
         window.dataLayer.push({
@@ -658,29 +655,29 @@ export function* eventsSaga() {
         });
       }
 
-      Analytics.record({
-        name: "view_item_list",
-        attributes: {
-          item_list_id: id,
-          item_list_name: name,
-        },
-      });
+      // Analytics.record({
+      //   name: "view_item_list",
+      //   attributes: {
+      //     item_list_id: id,
+      //     item_list_name: name,
+      //   },
+      // });
 
       vercelAnalytics.track("view_item_list", {
         item_list_id: id,
         item_list_name: name,
       });
 
-      pinpoint.forEach((attr) => {
-        Analytics.record({
-          name: "view_item_list_item",
-          attributes: {
-            ...attr,
-            item_list_id: id,
-            item_list_name: name,
-          },
-        });
-      });
+      // pinpoint.forEach((attr) => {
+      //   Analytics.record({
+      //     name: "view_item_list_item",
+      //     attributes: {
+      //       ...attr,
+      //       item_list_id: id,
+      //       item_list_name: name,
+      //     },
+      //   });
+      // });
 
       // vercel.forEach((attr) => {
       //   vercelAnalytics.track("view_item_list_item", {
