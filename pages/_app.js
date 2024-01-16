@@ -5,7 +5,6 @@ import { Amplify, Hub, Auth, API, Analytics, Logger } from "aws-amplify";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import awaitGlobal from "await-global";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import "~/public/sass/style.scss";
 import "react-owl-carousel2/lib/styles.css";
@@ -214,7 +213,6 @@ const App = ({ Component, pageProps }) => {
               <Layout navbar={navbarProps} footer={footerProps}>
                 <Scripts />
                 <Component {...pageProps} />
-                <SpeedInsights route={router.pathname} />;
               </Layout>
             </NavbarProvider>
           </ABProvider>
