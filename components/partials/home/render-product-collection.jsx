@@ -1,0 +1,121 @@
+import { API, graphqlOperation } from "aws-amplify";
+import React, { useEffect, useState } from "react";
+import Reveal from "react-awesome-reveal";
+
+import ALink from "~/components/features/custom-link";
+import OwlCarousel from "~/components/features/owl-carousel";
+import ProductTwo from "~/components/features/product/product-two";
+import { STORE_ID } from "~/config";
+import { findProducts, getCollectionType } from "~/graphql/api";
+import { getDefaultSorting } from "~/utils";
+import { useIsInteractive } from "~/utils/contexts/navbar";
+import { productSlider, productSliderLarge } from "~/utils/data/carousel";
+import { fadeIn } from "~/utils/data/keyframes";
+import { setSoldOutLast } from "~/utils/products";
+
+function RenderProductCollection({
+  title = "",
+  slug,
+  disableCarousel,
+  large,
+  addClass,
+}) {
+  const isInteractive = useIsInteractive();
+  const [collection, setCollection] = useState(null);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    if (isInteractive) {
+      API.graphql(
+        graphqlOperation(findProducts, {
+          filter: {
+            storeId: { eq: STORE_ID },
+            status: { eq: "ENABLED" },
+            collections: { eq: slug },
+          },
+          limit: 8,
+          sort: [{ field: "position", direction: "asc" }],
+          variantFilter: {
+            status: { eq: "ENABLED" },
+          },
+          imageLimit: 1,
+        })
+      )
+        .then((res) => res.data.searchProducts.items)
+        .then(setSoldOutLast)
+        .then(setProducts);
+
+      API.graphql(
+        graphqlOperation(getCollectionType, {
+          filter: {
+            storeId: { eq: STORE_ID },
+            slug: { eq: slug },
+          },
+        })
+      )
+        .then((res) => res.data.searchCollectionTypes.items[0])
+        .then(setCollection);
+    }
+  }, [isInteractive]);
+
+  useEffect(() => {
+    const ele = document.getElementById(`product-carousel-${slug}`);
+    if (ele) {
+      if (disableCarousel) {
+        ele.classList.remove("owl-carousel");
+        ele.classList.add("remove-carousel");
+      } else {
+        ele.classList.add("owl-carousel");
+        ele.classList.remove("remove-carousel");
+      }
+    }
+  }, [disableCarousel]);
+
+  return (
+    <Reveal
+      keyframes={fadeIn}
+      delay={300}
+      duration={1200}
+      triggerOnce
+      className={`product-widget-wrapper ${addClass}`}
+    >
+      <section
+        className={`product-wrapper product-collection container pt-6 pb-3`}
+      >
+        <div className="d-flex justify-content-between collection-title mb-4">
+          <h2 className="capitalize-title m-0">{title}</h2>
+          {!!collection && (
+            <ALink
+              href={`/collections/${slug}?sortby=${getDefaultSorting(
+                collection.defaultSorting
+              )}`}
+            >
+              <p className="view-all  text-underline m-0">VIEW ALL</p>
+            </ALink>
+          )}
+        </div>
+
+        <OwlCarousel
+          id={`product-carousel-${slug}`}
+          adClass="owl-theme owl-nav-full"
+          options={!large ? productSlider : productSliderLarge}
+        >
+          {products.map((item) => (
+            <ProductTwo
+              adClass="mb-4 text-center"
+              slug={slug}
+              product={item}
+              key={`${slug}-${item.id}`}
+              section={{
+                id: title.toLowerCase().replace(/\ /g, "-"),
+                name: title,
+              }}
+            />
+          ))}
+        </OwlCarousel>
+      </section>
+    </Reveal>
+  );
+}
+
+export default React.memo(RenderProductCollection);
