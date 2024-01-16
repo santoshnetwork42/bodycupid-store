@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import ALink from "~/components/features/custom-link";
@@ -6,9 +6,33 @@ import { getPublicImageURL } from "~/utils/getPublicImageUrl";
 import { eventActions } from "~/store/events";
 import { connect } from "react-redux";
 import { getSource } from "~/utils/helper";
+import { useIsInteractive } from "~/utils/contexts/navbar";
+import { API, graphqlOperation } from "aws-amplify";
+import { getHomePageCategories } from "~/graphql/api";
+import { STORE_ID } from "~/config";
 
-function CategorySection({ categories = [], tileClicked }) {
+function CategorySection({ tileClicked }) {
   const source = getSource();
+  const isInteractive = useIsInteractive();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    if (isInteractive) {
+      API.graphql(
+        graphqlOperation(getHomePageCategories, {
+          limit: 8,
+          filter: {
+            isFeatured: { eq: true },
+            storeId: { eq: STORE_ID },
+            isArchive: { eq: false },
+          },
+          sort: [{ field: "priority", direction: "asc" }],
+        })
+      )
+        .then((res) => res.data.searchProductSubCategories.items)
+        .then(setCategories);
+    }
+  }, [isInteractive]);
 
   return (
     <section className="ellipse-section pt-6">

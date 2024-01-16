@@ -146,7 +146,6 @@ export const eventActions = {
 
 export function* eventsSaga() {
   const eventSource = getSource();
-  window.dataLayer = window.dataLayer || [];
 
   yield takeEvery(actionTypes.OUT_OF_STOCK, function* saga(e) {
     try {
@@ -161,11 +160,13 @@ export function* eventsSaga() {
             inventoryQty: inventory[recordKey],
           };
 
-          dataLayer.push({
-            event: "out_of_stock",
-            eventID: uuid(),
-            ...payload,
-          });
+          if (window && window.dataLayer) {
+            window.dataLayer.push({
+              event: "out_of_stock",
+              eventID: uuid(),
+              ...payload,
+            });
+          }
           Analytics.record({ name: "out_of_stock", attributes: payload });
           vercelAnalytics.track("out_of_stock", payload);
         });
@@ -178,12 +179,14 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     try {
       const { term } = e.payload;
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "search",
-        eventID: uuid(),
-        attribute: { search_term: term },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "search",
+          eventID: uuid(),
+          attribute: { search_term: term },
+        });
+      }
       Analytics.record({ name: "search", attributes: { search_term: term } });
       vercelAnalytics.track("search", { searchTerm: term });
     } catch (e) {
@@ -261,9 +264,10 @@ export function* eventsSaga() {
         const Moengage = window?.Moengage;
         if (Moengage) Moengage.destroy_session();
       }
-
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({ event: action, eventID: uuid() });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({ event: action, eventID: uuid() });
+      }
       Analytics.record({ name: action });
       vercelAnalytics.track(action);
     } catch (e) {
@@ -274,12 +278,14 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga() {
     try {
       const userData = yield select((state) => state.user.data);
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "proceed_to_checkout",
-        eventID: uuid(),
-        login: userData ? 1 : 0,
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "proceed_to_checkout",
+          eventID: uuid(),
+          login: userData ? 1 : 0,
+        });
+      }
       Analytics.record({
         name: "proceed_to_checkout",
         login: userData ? "1" : "0",
@@ -302,18 +308,20 @@ export function* eventsSaga() {
       const user = userMapper(userData);
 
       trackEvent("Add To Cart", moengage.addToCart);
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: eventName,
-        eventID: uuid(),
-        attribute: pixel,
-        user,
-        ecommerce: {
-          currency: "INR",
-          value,
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: eventName,
+          eventID: uuid(),
+          attribute: pixel,
+          user,
+          ecommerce: {
+            currency: "INR",
+            value,
+            items: ga,
+          },
+        });
+      }
       Analytics.record({ name: eventName, pinpoint, metrics: { value } });
       vercelAnalytics.track(eventName, vercel);
     } catch (e) {
@@ -328,17 +336,19 @@ export function* eventsSaga() {
         itemMapper(product);
 
       trackEvent("Removed From Cart", moengage.removedFromCart);
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "remove_from_cart",
-        eventID: uuid(),
-        attribute: pixel,
-        ecommerce: {
-          currency: "INR",
-          value,
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "remove_from_cart",
+          eventID: uuid(),
+          attribute: pixel,
+          ecommerce: {
+            currency: "INR",
+            value,
+            items: ga,
+          },
+        });
+      }
       Analytics.record({
         name: "remove_from_cart",
         pinpoint,
@@ -358,17 +368,19 @@ export function* eventsSaga() {
 
       trackEvent("Product Viewed", moengage.productViewed);
 
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "view_item",
-        eventID: uuid(),
-        attribute: pixel,
-        ecommerce: {
-          currency: "INR",
-          value,
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "view_item",
+          eventID: uuid(),
+          attribute: pixel,
+          ecommerce: {
+            currency: "INR",
+            value,
+            items: ga,
+          },
+        });
+      }
       Analytics.record({ name: "view_item", pinpoint, metrics: { value } });
       vercelAnalytics.track("view_item", vercel);
     } catch (e) {
@@ -414,35 +426,36 @@ export function* eventsSaga() {
       itemPurchasedEvents.forEach((itemPurchased) => {
         trackEvent("Item Purchased", itemPurchased);
       });
-
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "purchase",
-        eventID: uuid(),
-        user,
-        attribute: {
-          ...pixel,
-          order_id: id,
-          value: totalAmount,
-          fn: firstName,
-          ln: lastName,
-          em: email,
-          ph: phone,
-          city,
-          postal_code: pinCode,
-        },
-        ecommerce: {
-          transaction_id: id,
-          order_code: code,
-          value: totalAmount,
-          tax: 0,
-          discount: totalDiscount,
-          shipping: totalShippingCharges,
-          currency: "INR",
-          coupon: coupon?.code || "",
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "purchase",
+          eventID: uuid(),
+          user,
+          attribute: {
+            ...pixel,
+            order_id: id,
+            value: totalAmount,
+            fn: firstName,
+            ln: lastName,
+            em: email,
+            ph: phone,
+            city,
+            postal_code: pinCode,
+          },
+          ecommerce: {
+            transaction_id: id,
+            order_code: code,
+            value: totalAmount,
+            tax: 0,
+            discount: totalDiscount,
+            shipping: totalShippingCharges,
+            currency: "INR",
+            coupon: coupon?.code || "",
+            items: ga,
+          },
+        });
+      }
 
       Analytics.record({
         name: "purchase",
@@ -508,18 +521,20 @@ export function* eventsSaga() {
       const { checkoutStarted } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Checkout Started", checkoutStarted);
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "begin_checkout",
-        eventID: uuid(),
-        attribute: pixel,
-        ecommerce: {
-          value,
-          currency: "INR",
-          coupon: coupon?.code || "",
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "begin_checkout",
+          eventID: uuid(),
+          attribute: pixel,
+          ecommerce: {
+            value,
+            currency: "INR",
+            coupon: coupon?.code || "",
+            items: ga,
+          },
+        });
+      }
 
       Analytics.record({
         name: "begin_checkout",
@@ -566,23 +581,25 @@ export function* eventsSaga() {
         cart: { data, coupon },
       } = yield select();
 
-      const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+      const { pinpoint, ga, value, pixel } = orderMapper(data, coupon);
       const { cartViewed } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Cart Viewed", cartViewed);
 
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "view_cart",
-        eventID: uuid(),
-        attribute: pixel,
-        ecommerce: {
-          value,
-          currency: "INR",
-          coupon: coupon?.code || "",
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "view_cart",
+          eventID: uuid(),
+          attribute: pixel,
+          ecommerce: {
+            value,
+            currency: "INR",
+            coupon: coupon?.code || "",
+            items: ga,
+          },
+        });
+      }
 
       Analytics.record({
         name: "view_cart",
@@ -627,17 +644,19 @@ export function* eventsSaga() {
     try {
       const { id, name, products } = e.payload;
       const { pinpoint, ga, pixel, vercel } = orderMapper(products);
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "view_item_list",
-        eventID: uuid(),
-        attribute: pixel,
-        ecommerce: {
-          item_list_id: id,
-          item_list_name: name,
-          items: ga,
-        },
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "view_item_list",
+          eventID: uuid(),
+          attribute: pixel,
+          ecommerce: {
+            item_list_id: id,
+            item_list_name: name,
+            items: ga,
+          },
+        });
+      }
 
       Analytics.record({
         name: "view_item_list",
@@ -756,18 +775,21 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {
     try {
-      dataLayer.push({ ecommerce: null, attribute: null, user: null });
-      dataLayer.push({
-        event: "search",
-        eventID: uuid(),
-        attribute: {
-          search_term: e.payload["search term"],
-          item_count: e.payload["Item Count"],
-        },
-      });
-      trackEvent("Product Searched", {
-        ...e.payload,
-      });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
+          event: "search",
+          eventID: uuid(),
+          attribute: {
+            search_term: e.payload["search term"],
+            item_count: e.payload["Item Count"],
+          },
+        });
+
+        trackEvent("Product Searched", {
+          ...e.payload,
+        });
+      }
     } catch (e) {
       errorHandler(e);
     }
