@@ -160,8 +160,8 @@ export function* eventsSaga() {
             inventoryQty: inventory[recordKey],
           };
 
-          if (dataLayer) {
-            dataLayer.push({
+          if (window && window.dataLayer) {
+            window.dataLayer.push({
               event: "out_of_stock",
               eventID: uuid(),
               ...payload,
@@ -179,9 +179,9 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.SEARCH, function* saga(e) {
     try {
       const { term } = e.payload;
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "search",
           eventID: uuid(),
           attribute: { search_term: term },
@@ -264,9 +264,9 @@ export function* eventsSaga() {
         const Moengage = window?.Moengage;
         if (Moengage) Moengage.destroy_session();
       }
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({ event: action, eventID: uuid() });
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({ event: action, eventID: uuid() });
       }
       Analytics.record({ name: action });
       vercelAnalytics.track(action);
@@ -278,9 +278,9 @@ export function* eventsSaga() {
   yield takeEvery(actionTypes.PROCEED_TO_CHECKOUT, function* saga() {
     try {
       const userData = yield select((state) => state.user.data);
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "proceed_to_checkout",
           eventID: uuid(),
           login: userData ? 1 : 0,
@@ -308,9 +308,9 @@ export function* eventsSaga() {
       const user = userMapper(userData);
 
       trackEvent("Add To Cart", moengage.addToCart);
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: eventName,
           eventID: uuid(),
           attribute: pixel,
@@ -336,9 +336,9 @@ export function* eventsSaga() {
         itemMapper(product);
 
       trackEvent("Removed From Cart", moengage.removedFromCart);
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "remove_from_cart",
           eventID: uuid(),
           attribute: pixel,
@@ -368,9 +368,9 @@ export function* eventsSaga() {
 
       trackEvent("Product Viewed", moengage.productViewed);
 
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "view_item",
           eventID: uuid(),
           attribute: pixel,
@@ -426,9 +426,9 @@ export function* eventsSaga() {
       itemPurchasedEvents.forEach((itemPurchased) => {
         trackEvent("Item Purchased", itemPurchased);
       });
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "purchase",
           eventID: uuid(),
           user,
@@ -521,9 +521,9 @@ export function* eventsSaga() {
       const { checkoutStarted } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Checkout Started", checkoutStarted);
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "begin_checkout",
           eventID: uuid(),
           attribute: pixel,
@@ -581,14 +581,14 @@ export function* eventsSaga() {
         cart: { data, coupon },
       } = yield select();
 
-      const { pinpoint, ga, value, pixel, vercel } = orderMapper(data, coupon);
+      const { pinpoint, ga, value, pixel } = orderMapper(data, coupon);
       const { cartViewed } = moEngagedOrderMapper(data, coupon);
 
       trackEvent("Cart Viewed", cartViewed);
 
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "view_cart",
           eventID: uuid(),
           attribute: pixel,
@@ -644,9 +644,9 @@ export function* eventsSaga() {
     try {
       const { id, name, products } = e.payload;
       const { pinpoint, ga, pixel, vercel } = orderMapper(products);
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "view_item_list",
           eventID: uuid(),
           attribute: pixel,
@@ -775,9 +775,9 @@ export function* eventsSaga() {
 
   yield takeEvery(actionTypes.PRODUCT_SEARCHED, function* saga(e) {
     try {
-      if (dataLayer) {
-        dataLayer.push({ ecommerce: null, attribute: null, user: null });
-        dataLayer.push({
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ ecommerce: null, attribute: null, user: null });
+        window.dataLayer.push({
           event: "search",
           eventID: uuid(),
           attribute: {
