@@ -204,10 +204,7 @@ const App = ({ Component, pageProps }) => {
     <>
       {!!pageMeta && <NextHead {...pageMeta} />}
       <Provider store={store}>
-        <PersistGate
-          persistor={store.__persistor}
-          loading={<Loader loading={true} />}
-        >
+        <PersistGate persistor={store.__persistor} loading={<Loader loading />}>
           <ABProvider>
             <NavbarProvider>
               <Layout navbar={navbarProps} footer={footerProps}>
