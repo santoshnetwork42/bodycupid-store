@@ -125,13 +125,16 @@ function NavbarProvider({ children }) {
       setIsInteractive(true);
       // Remove the event listener after APIs are called
       window.removeEventListener("mousemove", handleMouseMovement);
+      window.removeEventListener("scroll", handleMouseMovement);
     };
 
     window.addEventListener("mousemove", handleMouseMovement);
+    window.addEventListener("scroll", handleMouseMovement);
 
     // Cleanup event listener on unmount
     return () => {
       window.removeEventListener("mousemove", handleMouseMovement);
+      window.removeEventListener("scroll", handleMouseMovement);
     };
   }, []);
 

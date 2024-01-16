@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import ALink from "~/components/features/custom-link";
 
-import filterData from "~/utils/data/shop";
+// import filterData from "~/utils/data/shop";
 import { scrollTopHandler } from "~/utils";
 
 function SidebarFilterThree() {
@@ -109,7 +109,7 @@ function SidebarFilterThree() {
       </ALink>
 
       <div className="sidebar-content toolbox-left">
-        <div className="toolbox-item select-menu">
+        {/* <div className="toolbox-item select-menu">
           <a
             className="select-menu-toggle"
             href="#"
@@ -144,8 +144,8 @@ function SidebarFilterThree() {
               </li>
             ))}
           </ul>
-        </div>
-
+        </div> */}
+        {/* 
         <div className="toolbox-item select-menu">
           <a
             className="select-menu-toggle"
@@ -181,7 +181,7 @@ function SidebarFilterThree() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         <div className="toolbox-item select-menu price-with-count">
           <a
